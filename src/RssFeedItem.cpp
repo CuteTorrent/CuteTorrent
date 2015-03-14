@@ -7,7 +7,7 @@ RssFeedItem::RssFeedItem(feed_item feed)
 
 QString RssFeedItem::Title()
 {
-	return QString::fromStdString(m_feedItem.title);
+	return QString::fromUtf8(m_feedItem.title.c_str());
 }
 
 QString RssFeedItem::Description()

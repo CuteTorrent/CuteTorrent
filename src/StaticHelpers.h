@@ -45,6 +45,7 @@ public:
 	static QString filePriorityToString(int priority);
 	static QString SchedulerTypeToString(SchedulerTask::TaskType type);
 	static QString GetBaseSuffix(const libtorrent::file_storage& storrage);
+	static QString CombinePathes(QString path, QString suffix);
 	template <typename T> static QList<T> reversed(const QList<T>& in);
 };
 

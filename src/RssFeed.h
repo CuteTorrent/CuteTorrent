@@ -13,6 +13,11 @@ public:
 	{}
 	RssFeed(libtorrent::feed_handle rssFeed);
 	void Update();
+	QString title();
+	QString error();
+	QString url();
+	int next_update();
+	bool isUpdating();
 	RssFeedItemList GetFeedItems();
 	libtorrent::feed_settings GetSettings();
 	void SetSettinfs(libtorrent::feed_settings);

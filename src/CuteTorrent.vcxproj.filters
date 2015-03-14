@@ -526,6 +526,12 @@
     <ClCompile Include="RssFeedItemTreeItem.cpp">
       <Filter>DataModels</Filter>
     </ClCompile>
+    <ClCompile Include="FaviconDownloader.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_FaviconDownloader.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="http\httpcookie.h">
@@ -663,6 +669,9 @@
     </ClInclude>
     <ClInclude Include="RssFeedItemTreeItem.h">
       <Filter>DataModels</Filter>
+    </ClInclude>
+    <ClInclude Include="FaviconDownloader.h">
+      <Filter>Service</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

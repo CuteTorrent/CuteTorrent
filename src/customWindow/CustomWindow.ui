@@ -345,7 +345,7 @@
             <enum>QTabWidget::North</enum>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="elideMode">
             <enum>Qt::ElideMiddle</enum>
@@ -838,41 +838,13 @@
          <number>0</number>
         </property>
         <widget class="QToolBar" name="m_pTorrentToolBar">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <kerning>true</kerning>
-          </font>
-         </property>
-         <property name="contextMenuPolicy">
-          <enum>Qt::NoContextMenu</enum>
-         </property>
-         <property name="windowTitle">
-          <string>toolBar</string>
-         </property>
          <property name="styleSheet">
-          <string notr="true">
-               QToolBar {
+          <string notr="true"> QToolBar {
                border-bottom: none;
                border-top: none;
                spacing:3px;
                padding-right:2px;
-               }
-             </string>
-         </property>
-         <property name="movable">
-          <bool>false</bool>
-         </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonIconOnly</enum>
+               }</string>
          </property>
          <addaction name="ACTION_TOOLBAR_START"/>
          <addaction name="ACTION_TOOLBAR_PAUSE"/>
@@ -880,44 +852,30 @@
          <addaction name="ACTION_TOOLBAR_SETTINGS"/>
         </widget>
         <widget class="QToolBar" name="m_pSearchToolBar">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <kerning>true</kerning>
-          </font>
-         </property>
-         <property name="contextMenuPolicy">
-          <enum>Qt::NoContextMenu</enum>
-         </property>
-         <property name="windowTitle">
-          <string>toolBar</string>
-         </property>
          <property name="styleSheet">
-          <string notr="true">
-               QToolBar {
+          <string notr="true"> QToolBar {
                border-bottom: none;
                border-top: none;
                spacing:3px;
                padding-right:2px;
-               }
-             </string>
-         </property>
-         <property name="movable">
-          <bool>false</bool>
-         </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonIconOnly</enum>
+               }</string>
          </property>
          <addaction name="ACTION_TOOLBAR_DOWNLOAD"/>
          <addaction name="ACTION_TOOLBAR_OPEN_URL"/>
+         <addaction name="ACTION_TOOLBAR_SETTINGS"/>
+        </widget>
+        <widget class="QToolBar" name="m_pRssToolBar">
+         <property name="styleSheet">
+          <string notr="true"> QToolBar {
+               border-bottom: none;
+               border-top: none;
+               spacing:3px;
+               padding-right:2px;
+               }</string>
+         </property>
+         <addaction name="ACTION_TOOLBAR_RSS_ADD"/>
+         <addaction name="ACTION_TOOLBAR_RSS_REMOVE"/>
+         <addaction name="ACTION_TOOLBAR_RSS_EDIT"/>
          <addaction name="ACTION_TOOLBAR_SETTINGS"/>
         </widget>
        </widget>
@@ -1048,6 +1006,24 @@
   <action name="ACTION_MENU_BACKUP">
    <property name="text">
     <string>TOOLS_BACKUP</string>
+   </property>
+  </action>
+  <action name="ACTION_TOOLBAR_RSS_ADD">
+   <property name="text">
+    <string>ACTION_RSS_ADD</string>
+   </property>
+   <property name="toolTip">
+    <string>ACTION_RSS_ADD</string>
+   </property>
+  </action>
+  <action name="ACTION_TOOLBAR_RSS_REMOVE">
+   <property name="text">
+    <string>ACTION_RSS_REMOVE</string>
+   </property>
+  </action>
+  <action name="ACTION_TOOLBAR_RSS_EDIT">
+   <property name="text">
+    <string>ACTION_RSS_EDIT</string>
    </property>
   </action>
  </widget>
@@ -1264,6 +1240,54 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>ACTION_TOOLBAR_RSS_ADD</sender>
+   <signal>triggered()</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>addRssFeed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ACTION_TOOLBAR_RSS_EDIT</sender>
+   <signal>triggered()</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>editRssFeed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ACTION_TOOLBAR_RSS_REMOVE</sender>
+   <signal>triggered()</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>removeRssFeed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>FillTorrentDetails(Torrent*)</signal>
@@ -1281,5 +1305,8 @@
   <slot>startBackUpWizard()</slot>
   <slot>startDownloadTorrent()</slot>
   <slot>openSearchItemDescribtion()</slot>
+  <slot>addRssFeed()</slot>
+  <slot>removeRssFeed()</slot>
+  <slot>editRssFeed()</slot>
  </slots>
 </ui>

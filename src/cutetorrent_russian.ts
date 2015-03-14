@@ -430,10 +430,6 @@
         <translation></translation>
     </message>
     <message>
-        <source>toolBar</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Ctrl+O</source>
         <translation></translation>
     </message>
@@ -464,6 +460,18 @@
     <message>
         <source>PEER_SPEED</source>
         <translation>Скорость пира</translation>
+    </message>
+    <message>
+        <source>ACTION_RSS_ADD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ACTION_RSS_REMOVE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ACTION_RSS_EDIT</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -684,6 +692,14 @@
     <message>
         <source>HTTP_SEED_URL:</source>
         <translation>Web сид</translation>
+    </message>
+    <message>
+        <source>RSS_FEED_ADD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RSS_FEED_URL:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1520,6 +1536,21 @@
         <source>CT_CONNECTED %1 CT_FROM %2</source>
         <oldsource>CT_CONNECTED %1 ?? %2</oldsource>
         <translation>Подключено %1 из %2</translation>
+    </message>
+</context>
+<context>
+    <name>QRssItemDelegate</name>
+    <message>
+        <source>STATUS_UPDATING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>STATUS_OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SIZE_UNKNOWN</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

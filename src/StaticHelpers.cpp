@@ -419,4 +419,9 @@ QString StaticHelpers::translateLibTorrentError(boost::system::error_code const&
 	return qApp->translate("ErrorMsg", msgs[code]);
 }
 
+QString StaticHelpers::CombinePathes(QString path, QString suffix)
+{
+	return QDir::toNativeSeparators(QDir::cleanPath(path + QDir::separator() + suffix));
+}
+
 

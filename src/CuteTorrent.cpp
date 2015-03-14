@@ -40,6 +40,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "QSearchItemDelegate.h"
 #include "QTorrentDisplayModel.h"
 #include "QTorrentItemDelegat.h"
+#include "QRssDisplayModel.h"
+#include "QRssItemDelegate.h"
 #include "Scheduller.h"
 #include "SearchEngine.h"
 #include "SettingsDialog.h"
@@ -78,6 +80,8 @@ CuteTorrent::CuteTorrent(QWidget* parent)
 	m_pSearchDisplayModel = new QSearchDisplayModel(m_pSearchEngine, m_pTorrentListView);
 	m_pSearchItemDelegate = new QSearchItemDelegate();
 	m_pTorrentManager = TorrentManager::getInstance();
+	m_pRssDisplayModel = new QRssDisplayModel(m_pTorrentListView, this);
+	m_pRssItemDelegate = new QRssItemDelegate();
 	m_pUpdateNotifier = new UpdateNotifier();
 	mayShowNotifies = false;
 	setAcceptDrops(true);
@@ -239,6 +243,9 @@ void CuteTorrent::initToolbarIcons()
 	ACTION_TOOLBAR_SETTINGS->setIcon(m_pStyleEngine->getIcon("toolbar_settings"));
 	ACTION_TOOLBAR_DOWNLOAD->setIcon(m_pStyleEngine->getIcon("toolbar_download"));
 	ACTION_TOOLBAR_OPEN_URL->setIcon(m_pStyleEngine->getIcon("toolbar_open_url"));
+	ACTION_TOOLBAR_RSS_ADD->setIcon(m_pStyleEngine->getIcon("toolbar_add_rss"));
+	ACTION_TOOLBAR_RSS_REMOVE->setIcon(m_pStyleEngine->getIcon("toolbar_remove"));
+	ACTION_TOOLBAR_RSS_EDIT->setIcon(m_pStyleEngine->getIcon("toolbar_edit_rss"));
 }
 
 void CuteTorrent::setupToolBar()
@@ -1328,7 +1335,10 @@ void CuteTorrent::ChnageTorrentFilter()
 		}
 
 		case RSS_FEED:
+		{
+			switchToRssModel();
 			break;
+		}
 
 		case TORRENT:
 		{
@@ -1564,6 +1574,14 @@ void CuteTorrent::switchToSearchModel()
 
 void CuteTorrent::switchToRssModel()
 {
+	if (m_pTorrentListView->model() != m_pRssDisplayModel)
+	{
+		QObject::disconnect(m_pTorrentListView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
+			m_pTorrentDisplayModel, SLOT(UpdateSelectedIndex(const QItemSelection&)));
+		m_pTorrentListView->setModel(m_pRssDisplayModel);
+		m_pTorrentListView->setItemDelegate(m_pRssItemDelegate);
+		m_pToolBarsContainer->setCurrentIndex(2);
+	}
 }
 
 void CuteTorrent::openSearchItemDescribtion()
@@ -1659,5 +1677,41 @@ void CuteTorrent::AddWebSeed()
 		{
 			torrent->addWebSeed(webSeedUrl);
 		}
+	}
+}
+
+void CuteTorrent::addRssFeed()
+{
+	if (m_pTorrentListView->model() == m_pRssDisplayModel)
+	{
+		bool ok;
+		QString newFeedUrl = QInputDialog::getText(this, tr("RSS_FEED_ADD"), tr("RSS_FEED_URL:"), QLineEdit::Normal, "", &ok);
+
+		if (ok && !newFeedUrl.isEmpty() && newFeedUrl.startsWith("http"))
+		{
+			m_pTorrentManager->AddRssFeed(newFeedUrl);
+		}
+	}
+}
+
+void CuteTorrent::removeRssFeed()
+{
+	if (m_pTorrentListView->model() == m_pRssDisplayModel)
+	{
+		
+		QList<RssFeed*> selectedItems = m_pRssDisplayModel->SelectedItems();
+		for each (RssFeed* feed in selectedItems)
+		{
+			m_pTorrentManager->RemoveFeed(feed);
+		}
+	}
+}
+
+void CuteTorrent::editRssFeed()
+{
+	if (m_pTorrentListView->model() == m_pRssDisplayModel)
+	{
+		RssFeed* selecteFeed = m_pRssDisplayModel->SelectedItem();
+		//ToDo Show rss_settings dialog filled with feed info.
 	}
 }

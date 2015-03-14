@@ -1438,6 +1438,7 @@ RssFeed* TorrentManager::AddRssFeed(QString url)
 {
 	feed_settings s;
 	s.url = url.toStdString();
+	s.auto_download = false;
 	feed_handle hFeed =  m_pTorrentSession->add_feed(s);
 	RssFeed* feed = new RssFeed(hFeed);
 	emit OnNewFeed();

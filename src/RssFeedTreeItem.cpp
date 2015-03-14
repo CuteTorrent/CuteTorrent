@@ -6,6 +6,8 @@ RssFeedTreeItem::RssFeedTreeItem(RssFeed* pFeed)
 {
 	m_type = RssBaseTreeItem::Feed;
 	m_pFeed = pFeed;
+	m_children.clear();
+	BuildChildren();
 }
 
 
@@ -37,9 +39,5 @@ void RssFeedTreeItem::BuildChildren()
 
 QList<RssFeedItemTreeItem*> RssFeedTreeItem::Children()
 {
-	if (!m_children.isEmpty())
-	{
-		BuildChildren();
-	}
 	return m_children;
 }

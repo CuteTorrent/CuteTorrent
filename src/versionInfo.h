@@ -32,7 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VERSION_REVISION         REVISION_INCREMENT
 #define VERSION_BUILD            BUILD_INCREMENT
 
-#define VER_FILE_DESCRIPTION_STR "BitTorrent client."
+#define VER_FILE_DESCRIPTION_STR "BitTorrent client CuteTorrent"
 #define VER_FILE_VERSION         VERSION_MAJOR, VERSION_MINOR, VERSION_REVISION, VERSION_BUILD
 #define VER_FILE_VERSION_STR     STRINGIZE(VERSION_MAJOR)     \
                                     "." STRINGIZE(VERSION_MINOR) \

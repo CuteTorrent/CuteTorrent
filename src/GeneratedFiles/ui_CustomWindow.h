@@ -50,6 +50,9 @@ public:
     QAction *ACTION_MENU_CHECK_UPDATE;
     QAction *ACTION_TOOLBAR_SETTINGS;
     QAction *ACTION_MENU_BACKUP;
+    QAction *ACTION_TOOLBAR_RSS_ADD;
+    QAction *ACTION_TOOLBAR_RSS_REMOVE;
+    QAction *ACTION_TOOLBAR_RSS_EDIT;
     QVBoxLayout *verticalLayout;
     QWidget *titleBar;
     QHBoxLayout *horizontalLayout;
@@ -109,6 +112,7 @@ public:
     QStackedWidget *m_pToolBarsContainer;
     QToolBar *m_pTorrentToolBar;
     QToolBar *m_pSearchToolBar;
+    QToolBar *m_pRssToolBar;
 
     void setupUi(QWidget *CustomWindow)
     {
@@ -151,6 +155,12 @@ public:
         ACTION_TOOLBAR_SETTINGS->setObjectName(QString::fromUtf8("ACTION_TOOLBAR_SETTINGS"));
         ACTION_MENU_BACKUP = new QAction(CustomWindow);
         ACTION_MENU_BACKUP->setObjectName(QString::fromUtf8("ACTION_MENU_BACKUP"));
+        ACTION_TOOLBAR_RSS_ADD = new QAction(CustomWindow);
+        ACTION_TOOLBAR_RSS_ADD->setObjectName(QString::fromUtf8("ACTION_TOOLBAR_RSS_ADD"));
+        ACTION_TOOLBAR_RSS_REMOVE = new QAction(CustomWindow);
+        ACTION_TOOLBAR_RSS_REMOVE->setObjectName(QString::fromUtf8("ACTION_TOOLBAR_RSS_REMOVE"));
+        ACTION_TOOLBAR_RSS_EDIT = new QAction(CustomWindow);
+        ACTION_TOOLBAR_RSS_EDIT->setObjectName(QString::fromUtf8("ACTION_TOOLBAR_RSS_EDIT"));
         verticalLayout = new QVBoxLayout(CustomWindow);
         verticalLayout->setSpacing(0);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -542,40 +552,31 @@ public:
         m_pToolBarsContainer->setMouseTracking(true);
         m_pTorrentToolBar = new QToolBar();
         m_pTorrentToolBar->setObjectName(QString::fromUtf8("m_pTorrentToolBar"));
-        m_pTorrentToolBar->setEnabled(true);
-        m_pTorrentToolBar->setMaximumSize(QSize(16777215, 16777215));
-        QFont font;
-        font.setKerning(true);
-        m_pTorrentToolBar->setFont(font);
-        m_pTorrentToolBar->setContextMenuPolicy(Qt::NoContextMenu);
-        m_pTorrentToolBar->setStyleSheet(QString::fromUtf8("\n"
-"               QToolBar {\n"
+        m_pTorrentToolBar->setStyleSheet(QString::fromUtf8(" QToolBar {\n"
 "               border-bottom: none;\n"
 "               border-top: none;\n"
 "               spacing:3px;\n"
 "               padding-right:2px;\n"
-"               }\n"
-"             "));
-        m_pTorrentToolBar->setMovable(false);
-        m_pTorrentToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+"               }"));
         m_pToolBarsContainer->addWidget(m_pTorrentToolBar);
         m_pSearchToolBar = new QToolBar();
         m_pSearchToolBar->setObjectName(QString::fromUtf8("m_pSearchToolBar"));
-        m_pSearchToolBar->setEnabled(true);
-        m_pSearchToolBar->setMaximumSize(QSize(16777215, 16777215));
-        m_pSearchToolBar->setFont(font);
-        m_pSearchToolBar->setContextMenuPolicy(Qt::NoContextMenu);
-        m_pSearchToolBar->setStyleSheet(QString::fromUtf8("\n"
-"               QToolBar {\n"
+        m_pSearchToolBar->setStyleSheet(QString::fromUtf8(" QToolBar {\n"
 "               border-bottom: none;\n"
 "               border-top: none;\n"
 "               spacing:3px;\n"
 "               padding-right:2px;\n"
-"               }\n"
-"             "));
-        m_pSearchToolBar->setMovable(false);
-        m_pSearchToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+"               }"));
         m_pToolBarsContainer->addWidget(m_pSearchToolBar);
+        m_pRssToolBar = new QToolBar();
+        m_pRssToolBar->setObjectName(QString::fromUtf8("m_pRssToolBar"));
+        m_pRssToolBar->setStyleSheet(QString::fromUtf8(" QToolBar {\n"
+"               border-bottom: none;\n"
+"               border-top: none;\n"
+"               spacing:3px;\n"
+"               padding-right:2px;\n"
+"               }"));
+        m_pToolBarsContainer->addWidget(m_pRssToolBar);
 
         gridLayout_3->addWidget(m_pToolBarsContainer, 3, 0, 1, 1);
 
@@ -604,6 +605,10 @@ public:
         m_pSearchToolBar->addAction(ACTION_TOOLBAR_DOWNLOAD);
         m_pSearchToolBar->addAction(ACTION_TOOLBAR_OPEN_URL);
         m_pSearchToolBar->addAction(ACTION_TOOLBAR_SETTINGS);
+        m_pRssToolBar->addAction(ACTION_TOOLBAR_RSS_ADD);
+        m_pRssToolBar->addAction(ACTION_TOOLBAR_RSS_REMOVE);
+        m_pRssToolBar->addAction(ACTION_TOOLBAR_RSS_EDIT);
+        m_pRssToolBar->addAction(ACTION_TOOLBAR_SETTINGS);
 
         retranslateUi(CustomWindow);
         QObject::connect(ACTION_MENU_CREATE, SIGNAL(triggered()), CustomWindow, SLOT(ShowCreateTorrentDialog()));
@@ -619,8 +624,11 @@ public:
         QObject::connect(ACTION_MENU_BACKUP, SIGNAL(triggered()), CustomWindow, SLOT(startBackUpWizard()));
         QObject::connect(ACTION_TOOLBAR_DOWNLOAD, SIGNAL(triggered()), CustomWindow, SLOT(startDownloadTorrent()));
         QObject::connect(ACTION_TOOLBAR_OPEN_URL, SIGNAL(triggered()), CustomWindow, SLOT(openSearchItemDescribtion()));
+        QObject::connect(ACTION_TOOLBAR_RSS_ADD, SIGNAL(triggered()), CustomWindow, SLOT(addRssFeed()));
+        QObject::connect(ACTION_TOOLBAR_RSS_EDIT, SIGNAL(triggered()), CustomWindow, SLOT(editRssFeed()));
+        QObject::connect(ACTION_TOOLBAR_RSS_REMOVE, SIGNAL(triggered()), CustomWindow, SLOT(removeRssFeed()));
 
-        m_pTabWidget->setCurrentIndex(1);
+        m_pTabWidget->setCurrentIndex(0);
         m_pToolBarsContainer->setCurrentIndex(0);
 
 
@@ -659,6 +667,12 @@ public:
         ACTION_MENU_CHECK_UPDATE->setShortcut(QApplication::translate("CustomWindow", "Ctrl+U", 0, QApplication::UnicodeUTF8));
         ACTION_TOOLBAR_SETTINGS->setText(QApplication::translate("CustomWindow", "STR_SETTINGS", 0, QApplication::UnicodeUTF8));
         ACTION_MENU_BACKUP->setText(QApplication::translate("CustomWindow", "TOOLS_BACKUP", 0, QApplication::UnicodeUTF8));
+        ACTION_TOOLBAR_RSS_ADD->setText(QApplication::translate("CustomWindow", "ACTION_RSS_ADD", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        ACTION_TOOLBAR_RSS_ADD->setToolTip(QApplication::translate("CustomWindow", "ACTION_RSS_ADD", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+        ACTION_TOOLBAR_RSS_REMOVE->setText(QApplication::translate("CustomWindow", "ACTION_RSS_REMOVE", 0, QApplication::UnicodeUTF8));
+        ACTION_TOOLBAR_RSS_EDIT->setText(QApplication::translate("CustomWindow", "ACTION_RSS_EDIT", 0, QApplication::UnicodeUTF8));
         tbMenu->setText(QString());
         LTitle->setText(QApplication::translate("CustomWindow", "CuteTorrent", 0, QApplication::UnicodeUTF8));
         label_11->setText(QApplication::translate("CustomWindow", "INFO_PEER_COUNT", 0, QApplication::UnicodeUTF8));
@@ -715,8 +729,6 @@ public:
         menu_2->setTitle(QApplication::translate("CustomWindow", "MENU_SETTINGS", 0, QApplication::UnicodeUTF8));
         menu_CuteTorrent->setTitle(QApplication::translate("CustomWindow", "MENU_HELP", 0, QApplication::UnicodeUTF8));
         menuMENU_TOOLS->setTitle(QApplication::translate("CustomWindow", "MENU_TOOLS", 0, QApplication::UnicodeUTF8));
-        m_pTorrentToolBar->setWindowTitle(QApplication::translate("CustomWindow", "toolBar", 0, QApplication::UnicodeUTF8));
-        m_pSearchToolBar->setWindowTitle(QApplication::translate("CustomWindow", "toolBar", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

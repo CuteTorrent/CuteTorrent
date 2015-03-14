@@ -65,6 +65,8 @@ class QApplicationSettings;
 class QSearchDisplayModel;
 class QSearchItemDelegate;
 class QTorrentDisplayModel;
+class QRssDisplayModel;
+class QRssItemDelegate;
 class RconWebService;
 class SearchEngine;
 class StyleEngene;
@@ -118,6 +120,8 @@ private:
 	QLabel* upLabelText, *upLabel, *title, *dhtNodesLabel;
 	QLabel* uploadLimit, *downloadLimit;
 	QLabel* downLabelText, *downLabel;
+	QRssDisplayModel* m_pRssDisplayModel;
+	QRssItemDelegate* m_pRssItemDelegate;
 	QTorrentDisplayModel* m_pTorrentDisplayModel;
 	QTorrentItemDelegat* m_pTorrentItemDelegate;
 	QSearchDisplayModel* m_pSearchDisplayModel;
@@ -202,6 +206,9 @@ public slots:
 	void minimizeBtnClicked();
 	void startDownloadTorrent();
 	void openSearchItemDescribtion();
+	void addRssFeed();
+	void removeRssFeed();
+	void editRssFeed();
 
 };
 

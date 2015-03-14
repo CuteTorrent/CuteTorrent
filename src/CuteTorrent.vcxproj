@@ -87,7 +87,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtNetwork;$(QT_DIR)\include\QtGui;$(QT_DIR)\include\phonon;$(QT_DIR)\include;qtsingleapplication\src;..\ThirdParties\boost_1_55_0;..\ThirdParties\libtorrent\include;.\GeneratedFiles;.;.\GeneratedFiles\Release;$(QT_DIR)\include\ActiveQt;$(QT_DIR)\include\phonon_compat;GeneratedFiles;$(QT_DIR)\mkspecs\win32-msvc2010;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtNetwork;$(QT_DIR)\include\QtGui;$(QT_DIR)\include\phonon;$(QT_DIR)\include;qtsingleapplication\src;..\ThirdParties\boost_1_55_0;E:\src\CuteTorrent\ThirdParties\libtorrent\include;.\GeneratedFiles;.;.\GeneratedFiles\Release;$(QT_DIR)\include\ActiveQt;$(QT_DIR)\include\phonon_compat;GeneratedFiles;$(QT_DIR)\mkspecs\win32-msvc2010;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>Release\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -105,8 +105,8 @@
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>../ThirdParties/libtorrent-rasterbar-1.0.2/lib.x86\libtorrent.lib;qtmain.lib;phonon4.lib;QtGui4.lib;QtNetwork4.lib;QtCore4.lib;libeay32MD.lib;ssleay32MD.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\OpenSSL-Win32\lib\VC\;$(QT_DIR)\lib;../ThirdParties/libtorrent-rasterbar-1.0.2/lib.x86;../ThirdParties/boost_1_55_0/stage/lib.x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libtorrent.lib;qtmain.lib;phonon4.lib;QtGui4.lib;QtNetwork4.lib;QtCore4.lib;libeay32MD.lib;ssleay32MD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\OpenSSL-Win32\lib\VC\;$(QT_DIR)\lib;../ThirdParties/libtorrent/lib;../ThirdParties/boost_1_55_0/stage/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <IgnoreImportLibrary>true</IgnoreImportLibrary>
@@ -257,9 +257,11 @@
     <ClCompile Include=".\GeneratedFiles\Release\moc_ISerachProvider.cpp" />
     <ClCompile Include=".\GeneratedFiles\Release\moc_KickassSearchProvider.cpp" />
     <ClCompile Include="ExtratorrentSearchProvider.cpp" />
+    <ClCompile Include="FaviconDownloader.cpp" />
     <ClCompile Include="FileViewSortProxyModel.cpp" />
     <ClCompile Include="FileViewTreeItem.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_ExtratorrentSearchProvider.cpp" />
+    <ClCompile Include="GeneratedFiles\Release\moc_FaviconDownloader.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_PriorityItemDelegate.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_QRssDisplayModel.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_QRssItemDelegate.cpp" />
@@ -369,6 +371,12 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:\Qt\4.8.6\bin\moc.exe;customwindow.h;%(AdditionalInputs)</AdditionalInputs>
     </ClInclude>
     <CustomBuild Include="ExtratorrentSearchProvider.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:\Qt\4.8.6\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PHONON_LIB -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"E:\Qt\4.8.6\include\QtCore" -I"E:\Qt\4.8.6\include\QtNetwork" -I"E:\Qt\4.8.6\include\QtGui" -I"E:\Qt\4.8.6\include\phonon" -I"E:\Qt\4.8.6\include" -I"qtsingleapplication\src" -I"..\ThirdParties\boost_1_55_0" -I"..\ThirdParties\libtorrent-rasterbar-1.0.2\include" -I".\GeneratedFiles" -I"." -I".\GeneratedFiles\Release" -I"E:\Qt\4.8.6\include\ActiveQt" -I"E:\Qt\4.8.6\include\phonon_compat" -I".\GeneratedFiles\Release" -I"GeneratedFiles" -IE:\Qt\4.8.6\mkspecs\win32-msvc2010 -D_MSC_VER=1600 -DWIN32 %(Filename).h -o .\GeneratedFiles\Release\moc_%(Filename).cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC %(Filename).h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\Release\moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:\Qt\4.8.6\bin\moc.exe;%(Filename).h;%(AdditionalInputs)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="FaviconDownloader.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:\Qt\4.8.6\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PHONON_LIB -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"E:\Qt\4.8.6\include\QtCore" -I"E:\Qt\4.8.6\include\QtNetwork" -I"E:\Qt\4.8.6\include\QtGui" -I"E:\Qt\4.8.6\include\phonon" -I"E:\Qt\4.8.6\include" -I"qtsingleapplication\src" -I"..\ThirdParties\boost_1_55_0" -I"..\ThirdParties\libtorrent-rasterbar-1.0.2\include" -I".\GeneratedFiles" -I"." -I".\GeneratedFiles\Release" -I"E:\Qt\4.8.6\include\ActiveQt" -I"E:\Qt\4.8.6\include\phonon_compat" -I".\GeneratedFiles\Release" -I"GeneratedFiles" -IE:\Qt\4.8.6\mkspecs\win32-msvc2010 -D_MSC_VER=1600 -DWIN32 %(Filename).h -o .\GeneratedFiles\Release\moc_%(Filename).cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC %(Filename).h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\Release\moc_%(Filename).cpp;%(Outputs)</Outputs>
