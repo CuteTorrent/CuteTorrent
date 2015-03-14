@@ -1,0 +1,594 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CreateTorrentDialog</class>
+ <widget class="QDialog" name="CreateTorrentDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>406</width>
+    <height>564</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>406</width>
+    <height>564</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>DIALOG_TORRENT_CREATION</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="ltorrent.qrc">
+    <normaloff>:/icons/app.ico</normaloff>:/icons/app.ico</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>1</number>
+   </property>
+   <property name="topMargin">
+    <number>1</number>
+   </property>
+   <property name="rightMargin">
+    <number>1</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QWidget" name="titleBar" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>4</number>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>1</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="tbMenu">
+        <property name="maximumSize">
+         <size>
+          <width>15</width>
+          <height>15</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="ltorrent.qrc">:/icons/app.ico</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="LTitle">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>8</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <stylestrategy>PreferDefault</stylestrategy>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>DIALOG_TORRENT_CREATION</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::AutoText</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbClose">
+        <property name="minimumSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="m_centralWidget" native="true">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <property name="leftMargin">
+       <number>9</number>
+      </property>
+      <property name="topMargin">
+       <number>6</number>
+      </property>
+      <property name="rightMargin">
+       <number>9</number>
+      </property>
+      <property name="bottomMargin">
+       <number>9</number>
+      </property>
+      <property name="horizontalSpacing">
+       <number>0</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>2</number>
+      </property>
+      <item row="5" column="0">
+       <widget class="QPushButton" name="createButton">
+        <property name="text">
+         <string>CREATE_TORRENT_CREATE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>226</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="5" column="2">
+       <widget class="QPushButton" name="cancelButton">
+        <property name="text">
+         <string>CREATE_TORRENT_CANCEL</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="3">
+       <widget class="QProgressBar" name="progressBar">
+        <property name="styleSheet">
+         <string notr="true">QProgressBar { border: 1px solid #909090; ; }
+QProgressBar::chunk { background-color: #51D331; width: 20px; }</string>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+        <property name="textVisible">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="3">
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="title">
+         <string>CREATE_TORRENT_ADV_SETTINGS</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="startSeedCheckBox">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>CREATE_TORRENT_START_SEEDING</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>90</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="2">
+          <widget class="QCheckBox" name="privateCheckBox">
+           <property name="text">
+            <string>CREATE_TORRENT_PIVATE_TORRENT</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>158</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="0" colspan="2">
+          <widget class="QCheckBox" name="saveOrderCheckBox">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>CREATE_TORRENT_SAVE_FILE_ORDER</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="3">
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="title">
+         <string>CREATE_TORRENT_SETTINGS</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="5" column="2">
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>171</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="5" column="3">
+          <widget class="QComboBox" name="piceSizeComboBox">
+           <item>
+            <property name="text">
+             <string>PIECE_SIZE_AUTODETECT</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>16Mb</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>8Mb</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>4Mb</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>2Mb</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>1Mb</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>512Kb</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>256Kb</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>128Kb</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>64Kb</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>32Kb</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>16Kb</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>8Kb</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="5" column="0" colspan="2">
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>CREATE_TORRENT_PIECE_SIZE</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>CREATE_TORRENT_TRACKERS</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1" colspan="3">
+          <widget class="QLineEdit" name="discribtionEdit"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>CREATE_TORRENT_WEBSEEDS</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" rowspan="2" colspan="3">
+          <widget class="QTextEdit" name="trackerEdit">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>65</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="2" column="1" rowspan="2" colspan="3">
+          <widget class="QTextEdit" name="webSeedEdit">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>66</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>CREATE_TORRENT_DESCRIBTION</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="3">
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>CREATE_TORRENT_SOURCE</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="1" column="0" colspan="2">
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>206</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="browseFileButton">
+           <property name="text">
+            <string>CREATE_TORRENT_FILE</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QPushButton" name="browseDirButton">
+           <property name="text">
+            <string>CREATE_TORRENT_FOLDER</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>CREATE_TORRENT_EXCLUDE</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1" colspan="3">
+          <widget class="QLineEdit" name="filterEdit"/>
+         </item>
+         <item row="0" column="0" colspan="4">
+          <widget class="QLineEdit" name="pathEdit"/>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+  <action name="actionClose">
+   <property name="text">
+    <string>close</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="ltorrent.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>browseDirButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CreateTorrentDialog</receiver>
+   <slot>BrowseDir()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>349</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>202</x>
+     <y>252</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>browseFileButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CreateTorrentDialog</receiver>
+   <slot>BrowseFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>268</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>202</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>createButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CreateTorrentDialog</receiver>
+   <slot>BeginCreate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>46</x>
+     <y>543</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>202</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cancelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CreateTorrentDialog</receiver>
+   <slot>Cancel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>359</x>
+     <y>543</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>202</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>BrowseDir()</slot>
+  <slot>BrowseFile()</slot>
+  <slot>BeginCreate()</slot>
+  <slot>Cancel()</slot>
+ </slots>
+</ui>

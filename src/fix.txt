@@ -1,0 +1,29 @@
+﻿In file included from Torrent.cpp:19:
+In file included from ./Torrent.h:21:
+./TorrentManager.h:21:10: fatal error: 'QMap' file not found
+#include <QMap>
+         ^
+
+Torrent.h should add these lines:
+
+Torrent.h should remove these lines:
+- #include "StaticHelpers.h"  // lines 22-22
+- #include "StyleEngene.h"  // lines 29-29
+- #include "TorrentManager.h"  // lines 21-21
+- class StaticHelpers;  // lines 32-32
+- class TorrentManager;  // lines 31-31
+
+The full include-list for Torrent.h:
+#include "defs.h"                       // for files_info
+---
+
+Torrent.cpp should add these lines:
+#include "TorrentManager.h"             // for for, TorrentManager
+
+Torrent.cpp should remove these lines:
+- #include <vector>  // lines 25-25
+
+The full include-list for Torrent.cpp:
+#include "Torrent.h"
+#include "TorrentManager.h"             // for for, TorrentManager
+---

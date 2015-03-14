@@ -1,0 +1,564 @@
+<html>
+	<head>
+		<title>CuteTorrent WebUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Bootstrap -->
+		<script src="http://code.jquery.com/jquery.min.js"></script>
+		<script type="text/javascript" src="js/underscore.min.js"></script>
+		<script type="text/javascript" src="js/backbone.min.js"></script>
+		<script src="js/jsrender.min.js" type="text/javascript" charset="utf-8"></script>
+		<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+		<link href="css/docs.css" rel="stylesheet" media="screen">
+		<link href="css/bootstrap-glyphicons.css" rel="stylesheet" media="screen">
+		<link href="css/jquery.fileupload-ui.css" rel="stylesheet" media="screen">
+	</head>
+	<body>
+		<script type="text/x-jsrender" id="pagination-template" data-jsv-tmpl="_1">
+			{{if (page_active > 1) { }}
+				<li><a href="{{= link }}{{= page_active-1 }}">&larr;</a></li>
+			{{ } }}
+			{{for (var i = nav_begin; i <= nav_end; i++) { }}
+			<li {{ if (page_active == i) print('class="active"') }} ><a href="{{= link }}{{= i }}">{{= i }}</a></li>
+			{{ } }}
+			{{if (page_active < page_count) { }}
+				<li><a  href="{{= link }}{{= page_active+1 }}">&rarr;</a></li>
+			{{ } }}
+		</script>
+		<script type="text/x-jsrender" id="alert-view">
+			<div id="aleert{{>id}}" class="alert alert-danger fade in">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<strong>{{>message}}</strong>.
+			   </div>
+		</script>
+		<script type="text/x-jsrender" id="filtering-group-view" data-jsv-tmpl="_1">
+			<a href="#group{{:#index+1}}" id="group{{:#index+1}}" class="list-group-item">
+				{{>name}}
+			</a>
+		</script>
+		<script type="text/x-jsrender" id="file-tabel-view"></script>
+		<script type="text/x-jsrender" id="torentTmpl" data-jsv-tmpl="_2">
+			<div id="torrent{{>id}}" class="accordion-group">
+			<a data-toggle="collapse"  data-parent="#TorrentList" href="#detailedTorrentInfo{{>id}}" class="accordion-toggle">
+				<div   class="row panel {{if hasError }} panel-danger {{else torrentStatus == 3|| isPaused}} panel-warning {{else progress == 100 }} panel-success  {{else}} panel-info {{/if}}">
+					<div class="panel-heading">
+						{{>torrentName}}<br/>&nbsp;{{if dlSpeed }} &darr; {{>dlSpeed}} {{/if}}&nbsp;{{if ulSpeed }} &uarr; {{>ulSpeed}} {{/if}}
+						<div class="pull-right">
+						{{if isPaused }}
+							Paused
+						{{else}}
+							{{if torrentStatus == 0}}
+								Cheacking files (q)
+							{{else torrentStatus == 1}}
+								Cheacking files
+							{{else torrentStatus == 2}}
+								Downloading
+							{{else torrentStatus == 3}}
+								Downloading
+							{{else torrentStatus == 4}}
+								Seeding
+							{{else torrentStatus == 5}}
+								Seeding
+							{{else torrentStatus == 6}}
+								Prepearing
+							{{else torrentStatus == 7}}
+								Cheacking files (r)
+							{{/if}}
+						{{/if}}
+						</div>
+						<div class="col-4 {{>torrentType}} torrent_icon thumbnail"></div>  
+						<div class="progress progress-striped {{if torrentStatus<3}}active{{/if}}">
+							<div class="progress-bar {{if hasError }} progress-bar-danger {{else torrentStatus == 3 || isPaused}} progress-bar-warning {{else progress == 100}} progress-bar-success{{else}} progress-bar-info {{/if}}" style="width: {{>progress}}%">
+							</div>
+						</div>  
+						{{if hasError}}
+							{{>errorMessage}}
+						{{else}}
+						{{>progress}}% - {{>dlSize}} Uploaded: {{>ulSize}}
+						{{/if}}
+					</div>  
+				</div> 
+			</a>
+				<div id="detailedTorrentInfo{{>id}}" class="accordion-body collapse">
+					<ul class="nav nav-tabs" id="torrentData{{>id}}">
+					<li>
+						<a href="#torrentInfo{{>id}}">
+							Torrent info
+						</a>
+					</li>
+					<li>
+						<a href="#peers{{>id}}">
+							Peers
+						</a>
+					</li>
+					<li>
+						<a href="#trackers{{>id}}">
+							Trackers
+						</a>
+					</li>
+					<li>
+						<a href="#files{{>id}}">
+							Files
+						</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane" id="torrentInfo{{>id}}">
+						<div class="row">
+							<div class="col-6">
+								<div class="form-group">
+									<label for="inputEmail2" class="col-6 control-label">Escaped time</label>
+									<div class="col-6">
+									  <p class="form-control-static">{{:escapedTime}}</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="form-group">
+									<label for="inputEmail2" class="col-6 control-label">Remaining time</label>
+									<div class="col-6">
+									  <p class="form-control-static">{{:remainingTime}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-6">
+								<div class="form-group">
+									<label for="inputEmail2" class="col-6 control-label">Downloaded</label>
+									<div class="col-6">
+									  <p class="form-control-static">{{>dlSize}}</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="form-group">
+									<label for="inputEmail2" class="col-6 control-label">Uploaded</label>
+									<div class="col-6">
+									  <p class="form-control-static">{{>ulSize}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<div class="form-group">
+									<label for="inputEmail2" class="col-6 control-label">Description</label>
+									<div class="col-6">
+									  <p class="form-control-static">{{>describtion}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-6">
+								<div class="form-group">
+									<label for="inputEmail2" class="col-6 control-label">Size</label>
+									<div class="col-6">
+									  <p class="form-control-static">{{>torrentSize}}</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="form-group">
+									<label for="inputEmail2" class="col-6 control-label">Save path</label>
+									<div class="col-6">
+									  <p class="form-control-static">{{>savePath}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-6">
+								<div class="form-group">
+									<label for="inputEmail2" class="col-6 control-label">Seeds</label>
+									<div class="col-6">
+									  <p class="form-control-static">{{>seedStr}}</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="form-group">
+									<label for="inputEmail2" class="col-6 control-label">Peers</label>
+									<div class="col-6">
+									  <p class="form-control-static">{{>peerStr}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane" id="peers{{>id}}">
+						<table class="table table-striped">
+							<thead>
+							  <tr>
+								<th>#</th>
+								<th>IP</th>
+								<th>Client</th>
+								<th>%</th>
+								<th>DL Spped</th>
+								<th>UL Spped</th>
+								<th>DL</th>
+								<th>UL</th>
+							  </tr>
+							</thead>
+							<tbody>
+							{{for peers}}
+								<tr>
+									<td>{{:#index+1}}</td>
+									<td>{{>ip}}</td>
+									<td>{{>client}}</td>
+									<td>{{>percent}}</td>
+									<td>{{>peerDlSpeed}}</td>
+									<td>{{>peerUlSpeed}}</td>
+									<td>{{>dlSize}}</td>
+									<td>{{>ulSize}}</td>
+								</tr>
+							{{/for}}
+							</tbody>
+						</table>
+					</div>
+					<div class="tab-pane" id="trackers{{>id}}">
+						<table class="table table-striped">
+								<thead>
+								  <tr>
+									<th>#</th>
+									<th>URL</th>
+									<th>State</th>
+								  </tr>
+								</thead>
+								<tbody>
+								{{for trackers}}
+									<tr>
+										<td>{{:#index+1}}</td>
+										<td>{{>url}}</td>
+										<td>{{>state}}</td>									
+									</tr>
+								{{/for}}
+								</tbody>
+						</table>
+					</div>
+					<div class="tab-pane" id="files{{>id}}">
+						<table class="table table-striped">
+							{{if !files}}
+								<tr><h2><img src="/img/loader.gif" />Loading...</h2></tr>
+							{{else}}
+							<thead>
+							  <tr>
+								<th>#</th>
+								<th>Path</th>
+								<th>Size</th>
+								<th>%</th>
+								<th>Priority</th>
+							  </tr>
+							</thead>
+							<tbody id="filesContent{{>id}}">
+							{{for files}}
+							<tr>
+								<td>{{:#index+1}}</td>
+								<td>{{>path}}</td>
+								<td>{{>size}}</td>
+								<td>{{>percent}}</td>
+								<td>{{>priority}}</td>
+							</tr>
+							{{/for}}
+							</tbody>
+							{{/if}}
+						</table>
+					</div>
+				</div>
+				</div>
+				</div>
+		</script>
+		<script type="text/x-jsrender" id="settingsTmpl" data-jsv-tmpl="_0">
+			<ul class="nav nav-tabs" id="prefernciestab">
+				<li>
+					<a href="#torrent">
+						Torrent
+					</a>
+				</li>
+				<li>
+					<a href="#hdd">
+						Hard disk
+					</a>
+				</li>
+				<li>
+					<a href="#torFiltering">
+						Torrent Filtering
+					</a>
+				</li>
+				<li>
+					<a href="#schedule">
+						Schedule
+					</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="torrent">
+					<div class="row">
+						<div class="col-6 input-group">
+							<span class="input-group-addon">Port</span>
+							<input name="listen_port" type="text" class="form-control" placeholder="Port" value="{{>listen_port}}">
+						</div>
+						<div class="col-6 input-group">
+							<span class="input-group-addon">Active downloads</span>
+							<input name="active_downloads" type="text" class="form-control" placeholder="" value="{{>active_downloads}}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6 input-group">
+							<span class="input-group-addon">DL Limit</span>
+							<input name="download_rate_limit" type="text" class="form-control" placeholder="in Kb/s" value="{{>download_rate_limit}}">
+							<span class="input-group-addon">Kb\s</span>
+						</div>
+						<div class="col-6 input-group">
+							<span class="input-group-addon">Active torrents</span>
+							<input name="active_limit" type="text" class="form-control" placeholder="" value="{{>active_limit}}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6 input-group">
+							<span class="input-group-addon">UL Limit</span>
+							<input name="upload_rate_limit" type="text" class="form-control" placeholder="in Kb/s" value="{{>upload_rate_limit}}">
+							<span class="input-group-addon">Kb\s</span>
+						</div>
+						<div class="input-group col-6">
+							<span class="input-group-addon">Active uploads</span>
+							<input name="active_seeds" type="text" class="form-control" placeholder="" value="{{>active_seeds}}">
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="hdd">
+					<div class="row">
+						<div class="form-group">
+							<label class="col-4 control-label">
+							Cache mode
+							</label>	
+							<div class="col-5">
+								<select class="form-control" name="disk_io_read_mode">
+									<option value="0">Use OS cache</option>
+									<option value="1">Use OS cache for alligned files</option>
+									<option value="2">Not Use OS cache</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+							<label class="col-4 control-label">Cache size</label>
+							<div class="col-5 input-group">
+								<input name="cache_size" type="text" class="form-control " placeholder="Cache size" value="{{>cache_size}}">
+								<span class="input-group-addon">Kb</span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4 checkbox">	
+							<label>
+							<input name="use_disk_read_ahead" type="checkbox" {{if use_disk_read_ahead}}checked {{/if}}>
+							Use Read-ahead.
+							</label>
+						</div>
+						<div class="col-4 checkbox">	
+							<label>
+							<input name="allow_reordered_disk_operations" type="checkbox" {{if allow_reordered_disk_operations}}checked {{/if}} ">
+							Allow reordered disk operations.
+							</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4 checkbox">	
+							<label>
+							<input name="lock_files" type="checkbox" {{if lock_files}}checked {{/if}}>
+							Block files.
+							</label>
+						</div>
+						<div class="col-4 checkbox">	
+							<label>
+							<input name="low_prio_disk" type="checkbox" {{if low_prio_disk}}checked {{/if}}>
+							Low I/O priority.
+							</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4 checkbox">	
+							<label>
+							<input name="use_read_cache" type="checkbox" {{if use_read_cache}} checked {{/if}}>
+							Use read cache.
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="torFiltering">
+					<div class="row">
+						<div id="groupsContainer" class="list-group col-4">
+							{{for filteringGroups tmpl='#filtering-group-view'}}
+								{{>name}}
+							{{/for}}
+						</div>
+						<div class="col-7 input-group">
+							<span class="input-group-addon">Group</span>
+							<input id="groupName" name="Group-name" type="text" class="form-control " placeholder="Group-name">
+						</div>
+						<div class="col-7 input-group">
+							<span class="input-group-addon">Extentions</span>
+							<textarea id="extentions" class="form-control" rows="3"></textarea>
+						</div>
+						<div class="col-7 input-group">
+							<span class="input-group-addon">Save Path</span>
+							<input id="savePath" name="SavePath" type="text" class="form-control " placeholder="Save Path">
+						</div>
+						<button id="groupUpdate" type="button" class="btn btn-info" >Save/Add Group</button>
+					</div>
+				</div>
+			<div class="tab-pane" id="schedule">
+				test
+			</div>
+			</div>
+		</script>
+		<div class="panel" id="content" style="background-color: #eeeeee;">
+			<div class="navbar navbar-fixed-top navbar-inverse container">
+				<ul class="nav navbar-nav">
+					<li data-toggle="tooltip" title="" data-original-title="Add Torrent">
+						<a data-toggle="modal" href="#torrentOpen"><i class="glyphicon glyphicon-plus"></i></a>
+					</li>
+					<li data-toggle="tooltip" title="" data-original-title="Add magnet-link">
+						<a data-toggle="modal" href="#magnetLinkOpen"><i class="glyphicon glyphicon-magnet"></i></a>
+					</li>
+					<li data-toggle="tooltip" title="" data-original-title="Start Torrent">
+						<a id="startTorrent" href="#startTorrent"><i class="glyphicon glyphicon-play"></i></a>
+					</li>
+					<li data-toggle="tooltip" title="" data-original-title="Pause Torrent">
+						<a id="pauseTorrent" href="#pauseTorrent"><i class="glyphicon glyphicon-pause"></i></a>
+					</li>
+					<li data-toggle="tooltip" title="" data-original-title="Remove Torrent">
+						<a id="removeTorrent" href="#removeTorrent"><i class="glyphicon glyphicon-remove"></i></a>
+					</li>
+					<li data-toggle="tooltip" title="" data-original-title="Preferences">
+						<a data-toggle="modal" href="#preferenciesDialog"><i class="glyphicon glyphicon-wrench"></i></a>
+					</li>
+				</ul>
+				<div class="navbar-form pull-right">
+					<input type="search" id="search" class="form-control col-8" placeholder="Search...">
+				</div>
+			</div>
+			<div id="ajax_loading" style="display: none;">
+				<img src="/img/ajax_loading.gif" alt="Загрузка">
+			</div>
+			<div class="container" style="padding-top:50px;padding-left:20px;padding-right:20px">
+				<div id="alertAria" class="container">
+				</div>
+				<div id="TorrentList" class="accordion container" style="margin-top: 20px;">
+					<h2><img src="/img/loader.gif"/>Loading...</h2>
+				</div>
+				<div class="text-center navbar-fixed-bottom">
+					<ul id="pages" class "pagination" n" style="margin-bottom:0px;"/>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal -->
+		<div class="modal fade" id="magnetLinkOpen">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Opening magnet-link</h4>
+					</div>
+					<form id="magnetLink">
+						<div class="modal-body">
+							<div class="input-group">
+								<span class="input-group-addon">Magnet-link</span>
+								<input id="magnet-link" name="magnet-link" type="text" class="form-control">
+							</div>
+							<div class="input-group pull-right">
+								<span class="input-group-addon">Save Path</span>
+								<input id="save-path" name="save-path" type="text" class="form-control">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<input type="submit" class="btn btn-primary" value="Open">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		<div class="modal fade" id="torrentOpen">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Open Torrent</h4>
+					</div>
+					<!-- <form  action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data" id="torrentSave">-->
+					<div class="modal-body" id="TorrentUploadContainer">
+						<div class="input-group pull-right">
+							<span class="input-group-addon">Save Path</span>
+							<input id="torrent-save-path" name="torrent-save-path" type="text" class="form-control">
+						</div>
+						<br/>
+						<div id="progress" class="progress progress-striped">
+							<div class="progress-bar progress-bar-success">
+							</div>
+						</div>
+						<div id="files" class="files">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<span class="btn btn-success fileinput-button">
+						<i class="glyphicon glyphicon-plus"></i>
+						<span>Add files...</span>
+						<input id="fileupload" type="file" name="files[]" multiple="">
+						</span>
+						<input type="submit" class="btn btn-primary" value="Open">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+					<!--				   </form> -->
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<div class="modal fade" id="preferenciesDialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Preferencies</h4>
+					</div>
+					<form method="POST" enctype="multipart/form-data" id="settingsSave">
+						<div class="modal-body" id="SettingsConteiner">
+						</div>
+						<div class="modal-footer">
+							<input type="submit" class="btn btn-primary" value="Open">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		<div id="result">
+		</div>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/models/Torrent.min.js"></script>
+		<script src="js/models/Settings.min.js"></script>
+		<script src="js/collections/TorrentCollection.min.js"></script>
+		<script src="js/views/PaginationView.min.js"></script>
+		<script src="js/views/TorrentView.min.js"></script>
+		<script src="js/views/TorrentListView.min.js"></script>
+		<script src="js/views/SettingsView.min.js"></script>
+		<script src="js/controller/PaginationController.min.js"></script>
+		<script src="js/vendor/jquery.ui.widget.min.js"></script>
+		<script src="js/jquery.iframe-transport.min.js"></script>
+		<script src="js/jquery.fileupload.min.js"></script>
+		<script src="js/jquery.fileupload-process.min.js"></script>
+		<script src="js/jquery.fileupload-validate.min.js"></script>
+		<script src="js/jquery.idle.min.js"></script>
+		<script src="js/json-serializer.min.js"></script>
+		<script src="js/ui.min.js"></script>
+	</body>
+</html>

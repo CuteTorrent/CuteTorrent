@@ -1,0 +1,11 @@
+﻿=== Naive Include Optimizer ===
+Naive Include Optimizer by Maciej Sawitus ver 1.0
+Usage:
+  NaiveIncludeOptimizer.exe <devenv-path> <sln-path> <config> <src-dir>
+Info:
+  <devenv-path> - path to your Visual Studio devend compiler, e.g.: C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\devenv.exe
+  <sln-path>    - path to your solution, e.g. C:\my_project\my_project.sln
+  <config>      - solution configuration to be used, e.g. Debug
+  <src-dir>     - path to directory containing all source files to be optimized, e.g. C:\my_project\src
+Example command line:
+  NaiveIncludeOptimizer.exe "C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\devenv.exe" "C:\my_project\my_project.sln" "Debug" "C:\my_project\src"
