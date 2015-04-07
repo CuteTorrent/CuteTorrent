@@ -150,11 +150,11 @@ QString StaticHelpers::GetBaseSuffix(const libtorrent::file_storage& storrage)
 	QString base_suffix;
 	int maxSuffix = 0;
 	QMap<QString, int> suffixesCount;
-	libtorrent::file_storage::iterator iter = storrage.begin();
+	
 
-	for(iter; iter != storrage.end(); ++iter)
+	for(int i = 0; i < storrage.num_files(); i++)
 	{
-		QFileInfo curfile(QString::fromUtf8(storrage.file_path(*iter).c_str()));
+		QFileInfo curfile(QString::fromUtf8(storrage.file_path(i).c_str()));
 
 		if(StyleEngene::suffixes[StyleEngene::DISK].contains(curfile.suffix()))
 		{
@@ -423,5 +423,19 @@ QString StaticHelpers::CombinePathes(QString path, QString suffix)
 {
 	return QDir::toNativeSeparators(QDir::cleanPath(path + QDir::separator() + suffix));
 }
+
+QNetworkDiskCache* StaticHelpers::GetGLobalWebCache()
+{
+	if (m_pDiskCache == NULL)
+	{
+		m_pDiskCache = new QNetworkDiskCache();
+		m_pDiskCache->setCacheDirectory(QDesktopServices::storageLocation(QDesktopServices::CacheLocation) + "/WebCache");
+		m_pDiskCache->setMaximumCacheSize(50 * 1024 * 1024);
+		qDebug() << "RssManager  cache path:" << m_pDiskCache->cacheDirectory() << " max size:" << m_pDiskCache->maximumCacheSize() / 1024 / 1024 << "MB";
+	}
+	return m_pDiskCache;
+}
+
+QNetworkDiskCache* StaticHelpers::m_pDiskCache = NULL;
 
 

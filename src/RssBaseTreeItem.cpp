@@ -1,8 +1,9 @@
 #include "RssBaseTreeItem.h"
 
 
-RssBaseTreeItem::RssBaseTreeItem()
+RssBaseTreeItem::RssBaseTreeItem(ItemType type)
 {
+	m_type = type;
 }
 
 

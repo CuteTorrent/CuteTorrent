@@ -78,6 +78,7 @@ SettingsDialog::SettingsDialog(QWidget* parrent, int flags) : BaseWindow(BaseWin
 	rcon = RconWebService::getInstance();
 	tracker = TorrentTracker::getInstance();
 	FillDTTab();
+	FillRestrictionTab();
 	FillFilteringGroups();
 	FillTorrentTab();
 	FillHDDTab();
@@ -89,11 +90,10 @@ SettingsDialog::SettingsDialog(QWidget* parrent, int flags) : BaseWindow(BaseWin
 	setupCustomWindow();
 	setupWindowIcons();
 	//OS_SPECIFICK////
-	int current = 0;
 #ifdef Q_WS_WIN
 	QSettings assocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
 	QString torrentAssociation = assocSettings.value(".torrent/.").toString();
-	magnetAssociationCheckBox->setChecked(assocSettings.value("Magnet/shell/open/command/.").toString().toLower().contains("cutetorrent"));
+	magnetAssociationCheckBox->setChecked(assocSettings.value("Magnet/shell/open/command/.").toString().contains("cutetorrent", Qt::CaseInsensitive));
 	asociationCheckBox->setChecked(torrentAssociation == "CuteTorrent.file");
 	QSettings bootUpSettings(QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\") + (IsWow64() ? "Wow6432Node\\" : "") + "Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
 	QString val = bootUpSettings.value("CuteTorrent").toString();
@@ -102,7 +102,7 @@ SettingsDialog::SettingsDialog(QWidget* parrent, int flags) : BaseWindow(BaseWin
 #endif
 	//OS_SPECIFICK////
 	QString curLoc = Application::currentLocale();
-
+	int current = 0;
 	foreach(QString avail, Application::availableLanguages())
 	{
 		qDebug() << avail << QLocale(avail);
@@ -146,15 +146,16 @@ void SettingsDialog::setupWindowIcons()
 	BaseWindow::setupWindowIcons();
 	RunningLabel->setPixmap(style->getIcon("active").pixmap(32, 32));
 	listWidget->item(0)->setIcon(style->getIcon("settings_torrent"));
-	listWidget->item(1)->setIcon(style->getIcon("settings_network"));
-	listWidget->item(2)->setIcon(style->getIcon("settings_hdd"));
-	listWidget->item(3)->setIcon(style->getIcon("settings_filter"));
-	listWidget->item(4)->setIcon(style->getIcon("settings_dt"));
-	listWidget->item(5)->setIcon(style->getIcon("settings_scheduler"));
-	listWidget->item(6)->setIcon(style->getIcon("settings_web_controll"));
-	listWidget->item(7)->setIcon(style->getIcon("settings_rss"));
-	listWidget->item(8)->setIcon(style->getIcon("settings_search"));
-	listWidget->item(9)->setIcon(style->getIcon("settings_hotkeys"));
+	listWidget->item(1)->setIcon(style->getIcon("settings_limits"));
+	listWidget->item(2)->setIcon(style->getIcon("settings_network"));
+	listWidget->item(3)->setIcon(style->getIcon("settings_hdd"));
+	listWidget->item(4)->setIcon(style->getIcon("settings_filter"));
+	listWidget->item(5)->setIcon(style->getIcon("settings_dt"));
+	listWidget->item(6)->setIcon(style->getIcon("settings_scheduler"));
+	listWidget->item(7)->setIcon(style->getIcon("settings_web_controll"));
+	listWidget->item(8)->setIcon(style->getIcon("settings_rss"));
+	listWidget->item(9)->setIcon(style->getIcon("settings_search"));
+	listWidget->item(10)->setIcon(style->getIcon("settings_hotkeys"));
 	QToolButton* prevMonthBtn = calendarWidget->findChild<QToolButton*> ("qt_calendar_prevmonth");
 
 	if(prevMonthBtn != NULL)
@@ -187,12 +188,9 @@ void SettingsDialog::FillTorrentTab()
 	portEdit->setValidator(new QIntValidator());
 	uploadLimitEdit->setValue(settings->valueInt("Torrent", "upload_rate_limit") / 1024.0);
 	downloadLimitEdit->setValue(settings->valueInt("Torrent", "download_rate_limit") / 1024.0);
-	activeLimitEdit->setText(settings->valueString("Torrent", "active_limit"));
-	activeLimitEdit->setValidator(new QIntValidator());
-	activeSeedLimitEdit->setText(settings->valueString("Torrent", "active_seeds"));
-	activeSeedLimitEdit->setValidator(new QIntValidator());
-	activeDownloadLimitEdit->setText(settings->valueString("Torrent", "active_downloads"));
-	activeDownloadLimitEdit->setValidator(new QIntValidator());
+	activeLimitEdit->setValue(settings->valueInt("Torrent", "active_limit"));
+	activeSeedLimitEdit->setValue(settings->valueInt("Torrent", "active_seeds"));
+	activeDownloadLimitEdit->setValue(settings->valueInt("Torrent", "active_downloads"));
 	bool useProxy = settings->valueBool("Torrent", "useProxy");
 	proxyGroupBox->setChecked(useProxy);
 
@@ -209,8 +207,6 @@ void SettingsDialog::FillTorrentTab()
 	useDHTCheckBox->setChecked(settings->valueBool("Torrent", "use_dht", true));
 	useLSDCheckBox->setChecked(settings->valueBool("Torrent", "use_lsd", true));
 	usePExCheckBox->setChecked(settings->valueBool("Torrent", "use_pex", true));
-	useDifDhtPorrtGroupBox->setChecked(settings->valueBool("Torrent", "use_special_dht_port", false));
-	specDhtPortEdit->setText(settings->valueString("Torrent", "special_dht_port", "6881"));
 	StyleEngene* styleEngine = StyleEngene::getInstance();
 	QList<StyleInfo> styleInfos = styleEngine->getAvaliableStyles();
 	StyleInfo currentStyle = styleEngine->getCuurentStyle();
@@ -294,18 +290,16 @@ SettingsDialog::~SettingsDialog()
 void SettingsDialog::ApplySettings()
 {
 	settings->setValue("Torrent", "listen_port",				qVariantFromValue(portEdit->text().toInt()));
-	settings->setValue("Torrent", "active_limit",				qVariantFromValue(activeLimitEdit->text().toInt()));
-	settings->setValue("Torrent", "active_downloads",			qVariantFromValue(activeDownloadLimitEdit->text().toInt()));
-	settings->setValue("Torrent", "active_seeds",				qVariantFromValue(activeSeedLimitEdit->text().toInt()));
+	settings->setValue("Torrent", "active_limit",				qVariantFromValue(activeLimitEdit->value()));
+	settings->setValue("Torrent", "active_downloads",			qVariantFromValue(activeDownloadLimitEdit->value()));
+	settings->setValue("Torrent", "active_seeds",				qVariantFromValue(activeSeedLimitEdit->value()));
 	settings->setValue("Torrent", "upload_rate_limit",			qVariantFromValue(uploadLimitEdit->value() * 1024));
 	settings->setValue("Torrent", "download_rate_limit",		qVariantFromValue(downloadLimitEdit->value() * 1024));
 	settings->setValue("Torrent", "useProxy",					qVariantFromValue(proxyGroupBox->isChecked()));
 	settings->setValue("Torrent", "use_dht",					qVariantFromValue(useDHTCheckBox->isChecked()));
 	settings->setValue("Torrent", "use_lsd",					qVariantFromValue(useLSDCheckBox->isChecked()));
 	settings->setValue("Torrent", "use_pex",					qVariantFromValue(usePExCheckBox->isChecked()));
-	settings->setValue("Torrent", "use_special_dht_port",		qVariantFromValue(useDifDhtPorrtGroupBox->isChecked()));
-	settings->setValue("Torrent", "special_dht_port",			qVariantFromValue(specDhtPortEdit->text().toInt()));
-
+	
 	if(proxyGroupBox->isChecked())
 	{
 		QStringList iport = proxyHostEdit->text().split(':');
@@ -475,9 +469,9 @@ void SettingsDialog::ApplySettingsToSession()
 {
 	TorrentManager* manager = TorrentManager::getInstance();
 	libtorrent::session_settings current = manager->readSettings();
-	current.active_limit		= activeLimitEdit->text().toInt();
-	current.active_downloads	= activeDownloadLimitEdit->text().toInt();
-	current.active_seeds		= activeSeedLimitEdit->text().toInt();
+	current.active_limit		= activeLimitEdit->value();
+	current.active_downloads	= activeDownloadLimitEdit->value();
+	current.active_seeds		= activeSeedLimitEdit->value();
 	current.cache_size			= casheSizeLineEdit->value() / 16 ;
 	current.use_read_cache		= useReadCasheCheckBox->isChecked();
 	current.lock_files			= lockFilesCheckBox->isChecked();
@@ -977,4 +971,9 @@ QLabel* SettingsDialog::getTitleLabel()
 QLabel* SettingsDialog::getTitleIcon()
 {
 	return tbMenu;
+}
+
+void SettingsDialog::FillRestrictionTab()
+{
+	
 }

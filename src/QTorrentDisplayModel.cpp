@@ -35,17 +35,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "TorrentStorrage.h"
 #include "VideoPlayer\VideoPlayerWindow.h"
 #include "messagebox.h"
-
-QTorrentDisplayModel::QTorrentDisplayModel( QTreeView* _parrent, QObject* __parrent) : QAbstractListModel(__parrent)
+#include "QTorrentFilterProxyModel.h"
+QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterProxyModel* pProxyFilterModel, QObject* __parrent) : QAbstractListModel(__parrent)
 {
 	m_pTorrentListView = _parrent;
 	m_pTorrentManager = TorrentManager::getInstance();
-	torrents = TorrentStorrage::getInstance();
+	m_pTorrentStorrage = TorrentStorrage::getInstance();
+	m_pProxyFilterModel = pProxyFilterModel;
 	selectedRow = -1;
 	setupContextMenu();
 	locker = new QMutex();
 	timer = new QTimer(this);
-	QObject::connect(m_pTorrentManager, SIGNAL(TorrentRemove(QString)), this, SLOT(onTorrentRemove(QString)));
+	QObject::connect(m_pTorrentManager, SIGNAL(AddTorrentGui(Torrent*)), SLOT(OnAddTorrent()));
+	QObject::connect(m_pTorrentManager, SIGNAL(TorrentRemove(QString)), SLOT(Update()));
 	QObject::connect(timer, SIGNAL(timeout()), this, SLOT(updateVisibleTorrents()));
 	timer->start(1000);
 }
@@ -108,32 +110,29 @@ void QTorrentDisplayModel::MountDT()
 }
 void QTorrentDisplayModel::updateVisibleTorrents()
 {
-	locker->lock();
+	QMutexLocker lockMutex(locker);
 
 	try
 	{
 		m_pTorrentManager->PostTorrentUpdate();
 
-		if (!m_pTorrentListView->isVisible() || m_pTorrentListView->model() != this)
+		if (!m_pTorrentListView->isVisible() || m_pTorrentListView->model() != m_pProxyFilterModel)
 		{
-			locker->unlock();
 			return;
 		}
 
-		QModelIndex top(index(0, 0)), bot(index(torrents->count(), 0));
-		emit dataChanged(top, bot);
+	/*	QModelIndex top(index(0, 0)), bot(index(m_pTorrentStorrage->count(), 0));
+		emit dataChanged(top, bot);*/
 		emit updateTabSender(-1);
 	}
 	catch(...)
 	{
 		qDebug() << "Exception in QTorrentDisplayModel::updateVisibleTorrents";
 	}
-
-	locker->unlock();
 }
 void QTorrentDisplayModel::OpenDirSelected()
 {
-	if (m_pTorrentListView->model() != this)
+	if (m_pTorrentListView->model() != m_pProxyFilterModel)
 	{
 		return;
 	}
@@ -165,7 +164,7 @@ void QTorrentDisplayModel::OpenDirSelected()
 
 void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 {
-	if (m_pTorrentListView->model() != this)
+	if (m_pTorrentListView->model() != m_pProxyFilterModel)
 	{
 		return;
 	}
@@ -222,6 +221,7 @@ void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 	}
 	else
 	{
+		QMutexLocker lockMutex(locker);
 		m_pTorrentListView->selectionModel()->reset();
 		selectedRow = -1;
 	}
@@ -232,6 +232,10 @@ void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 
 void QTorrentDisplayModel::UpdateSelectedIndex(const QItemSelection& selection)
 {
+	if (m_pTorrentListView->model() != m_pProxyFilterModel)
+	{
+		return;
+	}
 	try
 	{
 		QModelIndexList indexes = selection.indexes();
@@ -239,7 +243,7 @@ void QTorrentDisplayModel::UpdateSelectedIndex(const QItemSelection& selection)
 		if(indexes.count() == 1)
 		{
 			selectedRow = indexes[0].row();
-			CurrentTorrent = torrents->at(selectedRow);
+			CurrentTorrent = m_pTorrentStorrage->at(selectedRow);
 		}
 		else
 		{
@@ -260,7 +264,7 @@ int QTorrentDisplayModel::rowCount(const QModelIndex& parent) const
 {
 	try
 	{
-		return torrents->count();
+		return m_pTorrentStorrage->count();
 	}
 	catch(std::exception e)
 	{
@@ -466,12 +470,12 @@ QVariant QTorrentDisplayModel::data(const QModelIndex& index, int role) const
 	QVariant var;
 	const int row = index.row();
 
-	if(row < 0 || row >= torrents->count())
+	if(row < 0 || row >= m_pTorrentStorrage->count())
 	{
 		return QVariant();
 	}
 
-	Torrent* t = torrents->at(row);
+	Torrent* t = m_pTorrentStorrage->at(row);
 
 	switch(role)
 	{
@@ -496,7 +500,7 @@ QVariant QTorrentDisplayModel::data(const QModelIndex& index, int role) const
 
 bool QTorrentDisplayModel::removeRow(int row, bool delFiles)
 {
-	if((row > torrents->count()) || (row < 0))
+	if((row > m_pTorrentStorrage->count()) || (row < 0))
 	{
 		return false;
 	}
@@ -505,24 +509,22 @@ bool QTorrentDisplayModel::removeRow(int row, bool delFiles)
 	{
 		return false;
 	}
-
 	m_pTorrentListView->selectionModel()->reset();
-	locker->lock();
+	
 	beginRemoveRows(QModelIndex(), row, row);
-	if(torrents->at(row) == CurrentTorrent)
+	if(m_pTorrentStorrage->at(row) == CurrentTorrent)
 	{
 		CurrentTorrent = NULL;
 	}
 
-	torrents->at(row)->RemoveTorrent(delFiles);
+	m_pTorrentStorrage->at(row)->RemoveTorrent(delFiles);
 	endRemoveRows();
-	locker->unlock();
 	return true;
 }
 
 bool QTorrentDisplayModel::removeRows(int row, int count, const QModelIndex& parent)
 {
-	if((row + count > torrents->count()) || (row < 0))
+	if((row + count > m_pTorrentStorrage->count()) || (row < 0))
 	{
 		return false;
 	}
@@ -538,7 +540,7 @@ bool QTorrentDisplayModel::removeRows(int row, int count, const QModelIndex& par
 
 	for(int i = row; i < row + count; i++)
 	{
-		torrents->at(i)->RemoveTorrent(m_pTorrentManager);
+		m_pTorrentStorrage->at(i)->RemoveTorrent(m_pTorrentManager);
 	}
 
 	endRemoveRows();
@@ -685,24 +687,14 @@ void QTorrentDisplayModel::SetSuperSeed()
 
 void QTorrentDisplayModel::initSessionFinished()
 {
-	torrents->sort();
+	m_pTorrentStorrage->sort();
 	QTimer::singleShot(3000, this, SIGNAL(initCompleted()));
-}
-
-
-
-void QTorrentDisplayModel::onTorrentRemove(QString InfoHash)
-{
-	torrents->remove(InfoHash);
-	reset();
 }
 
 void QTorrentDisplayModel::generateMagnetLink()
 {
 	ActionOnSelectedItem(generate_magmet);
 }
-
-
 
 void QTorrentDisplayModel::changeGroup()
 {
@@ -728,6 +720,20 @@ void QTorrentDisplayModel::changeGroup()
 	{
 		qDebug() << "Exception in QTorrentDisplayModel::changeGroup";
 	}
+}
+
+void QTorrentDisplayModel::Update()
+{
+	QMutexLocker lockMutex(locker);
+	reset();
+	m_pTorrentListView->updateGeometry();
+}
+
+void QTorrentDisplayModel::OnAddTorrent()
+{
+	Update();
+	m_pTorrentListView->scrollToBottom();
+	m_pTorrentListView->setCurrentIndex(index(m_pTorrentStorrage->count() - 1));
 }
 
 

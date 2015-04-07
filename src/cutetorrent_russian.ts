@@ -463,15 +463,23 @@
     </message>
     <message>
         <source>ACTION_RSS_ADD</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить Rss-ленту</translation>
     </message>
     <message>
         <source>ACTION_RSS_REMOVE</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить Rss-ленту</translation>
     </message>
     <message>
         <source>ACTION_RSS_EDIT</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить Rss-ленту</translation>
+    </message>
+    <message>
+        <source>RSS_FFED_ITEM_DESCRIBTION</source>
+        <translation>Описание</translation>
+    </message>
+    <message>
+        <source>RSS_FEED_ITEM_COMMENT</source>
+        <translation>Коментарий</translation>
     </message>
 </context>
 <context>
@@ -695,11 +703,15 @@
     </message>
     <message>
         <source>RSS_FEED_ADD</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавление Rss-ленты</translation>
     </message>
     <message>
         <source>RSS_FEED_URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ссылка на Rss-ленту</translation>
+    </message>
+    <message>
+        <source>TRACKER_UPDATING</source>
+        <translation>Обновляется...</translation>
     </message>
 </context>
 <context>
@@ -1542,15 +1554,19 @@
     <name>QRssItemDelegate</name>
     <message>
         <source>STATUS_UPDATING</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновляется</translation>
     </message>
     <message>
         <source>STATUS_OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ок</translation>
     </message>
     <message>
         <source>SIZE_UNKNOWN</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестно</translation>
+    </message>
+    <message>
+        <source>CATEGORY_UNKNOWN</source>
+        <translation>Неизвестно</translation>
     </message>
 </context>
 <context>
@@ -1655,6 +1671,13 @@
     </message>
 </context>
 <context>
+    <name>RssParser</name>
+    <message>
+        <source>No valid rss fields found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RssSettings</name>
     <message>
         <source>RSS_SETTINGS</source>
@@ -1690,7 +1713,7 @@
     </message>
     <message>
         <source> MINUTES</source>
-        <translation>минут</translation>
+        <translation> минут</translation>
     </message>
     <message>
         <source>RSS_FEED_SETTINGS</source>
@@ -1698,11 +1721,11 @@
     </message>
     <message>
         <source>DOWNLOAD_IF_CONTAINS</source>
-        <translation>Загрузить если содержит</translation>
+        <translation type="obsolete">Загрузить если содержит</translation>
     </message>
     <message>
         <source>CONTAINTAINS_IN_TIITLE_OR_DESC</source>
-        <translation>В заголовке или описании</translation>
+        <translation type="obsolete">В заголовке или описании</translation>
     </message>
 </context>
 <context>
@@ -1748,11 +1771,11 @@
     </message>
     <message>
         <source>RESTRICTIONS</source>
-        <translation>Ограничения</translation>
+        <translation type="obsolete">Ограничения</translation>
     </message>
     <message>
         <source>UPLOAD_SPEED_LIMIT(Kb/s)</source>
-        <translation>Отдача</translation>
+        <translation type="obsolete">Отдача</translation>
     </message>
     <message>
         <source>ACTIVE_TORRENTS_LIMIT</source>
@@ -1760,7 +1783,7 @@
     </message>
     <message>
         <source>DOWNLOAD_SPEED_LIMIT(Kb/s)</source>
-        <translation>Загрузка</translation>
+        <translation type="obsolete">Загрузка</translation>
     </message>
     <message>
         <source>ACTIVE_SEEDS_LIMIT</source>
@@ -2512,11 +2535,11 @@
     </message>
     <message>
         <source>USE_DIF_DHT_PORT</source>
-        <translation>Использовать разный порт для DHT и BitTorrent</translation>
+        <translation type="obsolete">Использовать разный порт для DHT и BitTorrent</translation>
     </message>
     <message>
         <source>DHT_PORT</source>
-        <translation>DHT порт</translation>
+        <translation type="obsolete">DHT порт</translation>
     </message>
     <message>
         <source>USE_PEX</source>
@@ -2549,6 +2572,106 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>TAB_RSS</source>
         <translation>Rss</translation>
+    </message>
+    <message>
+        <source>TAB_RESTRICTIONS</source>
+        <translation>Ограничения</translation>
+    </message>
+    <message>
+        <source>USE_NOTIFICATIONS</source>
+        <translation>Использовать уведомления</translation>
+    </message>
+    <message>
+        <source>USE_NATIVE_OS_TRAY_NOTIFICATIONS</source>
+        <translation>Использовать стандартные для вашей ОС уведомления</translation>
+    </message>
+    <message>
+        <source>SPEED_RESRICTIONS</source>
+        <translation>Ограниченя скорости</translation>
+    </message>
+    <message>
+        <source>UPLOAD_SPEED_LIMIT</source>
+        <translation>Ограничение отдача</translation>
+    </message>
+    <message>
+        <source>DOWNLOAD_SPEED_LIMIT</source>
+        <translation>Ограничение загрузки</translation>
+    </message>
+    <message>
+        <source>DHT_RATE_LIMIT</source>
+        <translation>Ограничение скорости DHT</translation>
+    </message>
+    <message>
+        <source>USE_LIMITS_IN_LOCAL_NETWORK</source>
+        <translation>Ограничивать локальные соединения</translation>
+    </message>
+    <message>
+        <source>LOCAL_UPLOAD_LIMIT</source>
+        <translation>Ограничение локальной отдачи</translation>
+    </message>
+    <message>
+        <source>Kb\s</source>
+        <translation>Кб\с</translation>
+    </message>
+    <message>
+        <source>LOCAL_DOWNLOAD_LIMIT</source>
+        <translation>Ограничение локальной загрузки</translation>
+    </message>
+    <message>
+        <source>APPLY_LIMITS_TO_uTP</source>
+        <translation>Применять ограниченя к uTP соединениям</translation>
+    </message>
+    <message>
+        <source>ACTIVITY_RESTRICTIONS</source>
+        <translation>Ограничения активности</translation>
+    </message>
+    <message>
+        <source>ACTIVE_UPLOADS_LIMIT</source>
+        <translation>Колличество торрентов которые одновременно могут раздавать</translation>
+    </message>
+    <message>
+        <source>HH:mm:ss</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>SEED_TIME_LIMIT</source>
+        <translation>Не раздовать по истечении</translation>
+    </message>
+    <message>
+        <source>USE_PORT_FRWARDING</source>
+        <translation>Использовать проброс портов(UPNP)</translation>
+    </message>
+    <message>
+        <source>USE_CUSTOM_NOTIFICATIONS</source>
+        <translation>Использовать нестандартные уведомления</translation>
+    </message>
+    <message>
+        <source>SEED_GLOBAL_RATIO_LIMIT</source>
+        <translation>Раздавать до ратио</translation>
+    </message>
+    <message>
+        <source>TAB_GENERAL</source>
+        <translation>Общие</translation>
+    </message>
+    <message>
+        <source>ENABLE_NOTIFICATIONS</source>
+        <translation>Включить уведомления</translation>
+    </message>
+    <message>
+        <source>NOTIFY_ERRORS</source>
+        <translation>Уведомлять об ошибках</translation>
+    </message>
+    <message>
+        <source>NOTIFY_TRACKER_ERRORS</source>
+        <translation>Уведомлять об ошибках трекеров</translation>
+    </message>
+    <message>
+        <source>NOTIFY_IO_ERRORS</source>
+        <translation>Уведомлять об ошибках диска</translation>
+    </message>
+    <message>
+        <source>NOTIFY_RSS_ERRORS</source>
+        <translation>Уведомлять об ошибках RSS</translation>
     </message>
 </context>
 <context>

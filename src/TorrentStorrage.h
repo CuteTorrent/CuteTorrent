@@ -13,7 +13,7 @@ class TorrentStorrage :
 	Q_OBJECT
 
 public:
-	enum TorrentFilterType
+	/*enum TorrentFilterType
 	{
 		ACTIVE,
 		NOT_ACTIVE,
@@ -21,11 +21,11 @@ public:
 		DOWNLOADING,
 		COMPLETED,
 		NONE
-	};
+	};*/
 
 
-	void setTorrentFilter(TorrentFilterType filter);
-	void setGroupFilter(QString filter);
+	/*void setTorrentFilter(TorrentFilterType filter);
+	void setGroupFilter(QString filter);*/
 	static TorrentStorrage* getInstance();
 	static void freeInstance();
 	QList<Torrent*>::iterator begin();
@@ -53,12 +53,12 @@ private:
 	QVector<QMap<QString, Torrent*>::Iterator> m_filteredTorrents;
 	QMutex* locker;
 	FilterType m_filterType;
-	TorrentFilterType m_torrentFilter;
+	//TorrentFilterType m_torrentFilter;
 	QString m_groupFilter;
 	QTimer* timer;
-	void filterByGroup();
+//	void filterByGroup();
 private slots:
-	void filterData();
+//	void filterData();
 };
 
-Q_DECLARE_METATYPE(TorrentStorrage::TorrentFilterType)
+//Q_DECLARE_METATYPE(TorrentStorrage::TorrentFilterType)

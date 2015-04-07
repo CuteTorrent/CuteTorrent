@@ -30,13 +30,19 @@ QApplicationSettings::QApplicationSettings()
 {
 	try
 	{
-		QString dataDir;
-#ifdef Q_WS_MAC
-		dataDir = "/Library/CuteTorrent/";
-#else
-		dataDir = QApplication::applicationDirPath() + QDir::separator();
-#endif
-		settings = new QSettings(dataDir + "CuteTorrent.ini", QSettings::IniFormat);
+		QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+
+		QString oldStylePath = StaticHelpers::CombinePathes(QApplication::applicationDirPath(), "CuteTorrent.ini");
+		QString newStylePath = StaticHelpers::CombinePathes(dataDir, "settings.ini");
+		QFile oldFile(oldStylePath);
+		if (oldFile.exists())
+		{
+			if (!oldFile.rename(newStylePath))
+			{
+				MyMessageBox::warning(NULL, "Move file failed", QString("Failed to move %1 to %2!").arg(oldStylePath, newStylePath));
+			}
+		}
+		settings = new QSettings(newStylePath, QSettings::IniFormat);
 		locker = new QMutex();
 		ReedSettings();
 	}
@@ -241,13 +247,8 @@ QList<SchedulerTask> QApplicationSettings::GetSchedullerQueue()
 {
 	QList<SchedulerTask> res;
 	res.clear();
-	QString dataDir;
-#ifdef Q_WS_MAC
-	dataDir = "/Library/CuteTorrent/";
-#else
-	dataDir = QApplication::applicationDirPath() + QDir::separator();
-#endif
-	QFile file(dataDir + "CT_DATA/schedulertasks.xml");
+	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QFile file(StaticHelpers::CombinePathes(dataDir, "BtSessionData/schedulertasks.xml"));
 
 	if(!file.open(QFile::ReadOnly))
 	{
@@ -382,13 +383,8 @@ void QApplicationSettings::setSearchSources(QList<SearchItem> searchSources)
 
 void QApplicationSettings::SaveSchedullerQueue(QList<SchedulerTask>& tasks)
 {
-	QString dataDir;
-#ifdef Q_WS_MAC
-	dataDir = "/Library/CuteTorrent/";
-#else
-	dataDir = QApplication::applicationDirPath() + QDir::separator();
-#endif
-	QFile file(dataDir + "CT_DATA/schedulertasks.xml");
+	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QFile file(StaticHelpers::CombinePathes(dataDir, "BtSessionData/schedulertasks.xml"));
 
 	if(!file.open(QFile::WriteOnly))
 	{

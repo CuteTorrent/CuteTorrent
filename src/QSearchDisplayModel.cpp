@@ -14,7 +14,6 @@ QSearchDisplayModel::QSearchDisplayModel(SearchEngine* pSearchEngine, QTreeView*
 	QObject::connect(m_pSearchEngine, SIGNAL(GotResults()), this, SLOT(OnNewSearchResults()));
 	SearchItemsStorrage* pItems = m_pSearchEngine->GetResults();
 	QObject::connect(pItems, SIGNAL(reset()), this, SLOT(OnNewSearchResults()));
-	setupContextMenu();
 }
 
 
@@ -112,33 +111,6 @@ void QSearchDisplayModel::OnNewSearchResults()
 	reset();
 }
 
-void QSearchDisplayModel::contextualMenu(const QPoint& point)
-{
-	if (m_pTorrentListView->model() != this)
-	{
-		return;
-	}
-
-	QModelIndex modelIndex = m_pTorrentListView->indexAt(point);
-
-	if (modelIndex.isValid())
-	{
-		m_pContextMenu->exec(m_pTorrentListView->mapToGlobal(point));
-	}
-}
-
-void QSearchDisplayModel::setupContextMenu()
-{
-	m_pContextMenu = new QMenu(m_pTorrentListView);
-	QAction* act1 = new QAction("Act1", m_pContextMenu);
-	m_pContextMenu->addAction(act1);
-	QAction* act2 = new QAction("Act2", m_pContextMenu);
-	m_pContextMenu->addAction(act2);
-}
-
-void QSearchDisplayModel::retranslate()
-{
-}
 
 
 

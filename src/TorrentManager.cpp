@@ -143,13 +143,24 @@ TorrentManager::TorrentManager()
 	{
 		m_pTorrentStorrage = TorrentStorrage::getInstance();
 		m_pTorrentSessionSettings = QApplicationSettings::getInstance();
-		m_pTorrentSession = new session(fingerprint("CuT", VERSION_MAJOR , VERSION_MINOR, VERSION_REVISION , VERSION_BUILD)
+		m_pTorrentSession = new session(fingerprint("cT", VERSION_MAJOR , VERSION_MINOR, VERSION_REVISION , VERSION_BUILD)
 		                                , 0
 		                                , alert::error_notification);
 		error_code ec;
 		std::vector<char> in;
-
-		if(load_file("CT_DATA/actual.state", in, ec) == 0)
+		QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+		QString oldStyleDirPath = StaticHelpers::CombinePathes(QApplication::applicationDirPath(), "CT_DATA");
+		QDir oldStyleDir(oldStyleDirPath);
+		if (oldStyleDir.exists())
+		{
+			QString newStyleDirPath = StaticHelpers::CombinePathes(dataDir, "BtSessionData");
+			if (!oldStyleDir.rename(oldStyleDirPath, newStyleDirPath))
+			{
+				MyMessageBox::warning(NULL, "Move dir failed", QString("Failed to move %1 to %2!").arg(oldStyleDirPath,newStyleDirPath));
+			}
+		}
+		
+		if (load_file(StaticHelpers::CombinePathes(dataDir, "BtSessionData/actual.state").toStdString(), in, ec) == 0)
 		{
 			lazy_entry e;
 
@@ -170,14 +181,8 @@ TorrentManager::TorrentManager()
 			m_pTorrentSession->add_extension(&libtorrent::create_ut_pex_plugin);
 		}
 
-		m_pTorrentSession->add_extension(&libtorrent::create_metadata_plugin);
-		QString dataDir;
-#ifdef Q_WS_MAC
-		dataDir = "/Library/CuteTorrent/";
-#else
-		dataDir = QApplication::applicationDirPath() + QDir::separator();
-#endif
-		create_directory(dataDir.toStdString() + "CT_DATA", ec);
+//		m_pTorrentSession->add_extension(&libtorrent::create_metadata_plugin);
+		create_directory(StaticHelpers::CombinePathes(dataDir , "BtSessionData").toStdString(), ec);
 		RefreshExternalPeerSettings();
 		m_pTorrentSession->listen_on(std::make_pair(listen_port, listen_port + 20)
 		                             , ec);
@@ -198,21 +203,16 @@ TorrentManager::TorrentManager()
 	//QTimer::singleShot(10,this,SLOT(initSession()));
 }
 
-void TorrentManager::initSession()
+void TorrentManager::InitSession()
 {
-	QString dataDir;
-#ifdef Q_WS_MAC
-	dataDir = "/Library/CuteTorrent/";
-#else
-	dataDir = QApplication::applicationDirPath() + QDir::separator();
-#endif
-	QDir dir(dataDir + "CT_DATA");
+	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QDir dir(StaticHelpers::CombinePathes(dataDir ,"BtSessionData"));
 	QStringList filter;
 	filter << "*.torrent";
 	QStringList torrentFiles = dir.entryList(filter);
 	//QMessageBox::warning(NULL,QApplication::applicationDirPath(),QApplication::applicationDirPath());
 	QMap<QString, QPair<QString, QString>> save_path_data;
-	QString pathResumeFile = dataDir + "CT_DATA/path.resume";
+	QString pathResumeFile = StaticHelpers::CombinePathes(dataDir, "BtSessionData/path.resume");
 	QFile path_infohashFile(pathResumeFile);
 
 	if(path_infohashFile.open(QFile::ReadOnly))
@@ -295,12 +295,7 @@ std::vector<torrent_status> TorrentManager::GetTorrents()
 }
 void TorrentManager::handle_alert(alert* a)
 {
-	QString dataDir;
-#ifdef Q_WS_MAC
-	dataDir = "/Library/CuteTorrent/";
-#else
-	dataDir = QApplication::applicationDirPath() + QDir::separator();
-#endif
+	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 
 	switch(a->type())
 	{
@@ -317,12 +312,22 @@ void TorrentManager::handle_alert(alert* a)
 			break;
 		}
 
+		case file_error_alert::alert_type:
+		{
+			file_error_alert* p = alert_cast<file_error_alert>(a);
+			QString message = StaticHelpers::translateLibTorrentError(p->error);
+			message.append(QString::fromUtf8(p->message().c_str()));
+			emit TorrentError("", message);
+			break;
+		}
+
 		case torrent_finished_alert::alert_type:
 		{
 			torrent_finished_alert* p = alert_cast<torrent_finished_alert> (a);
 			p->handle.set_max_connections(max_connections_per_torrent / 2);
 			torrent_handle h = p->handle;
-			emit TorrentCompleted(h.name().c_str(), h.save_path().c_str());
+			h.set_share_mode(true);
+			emit TorrentCompleted(h.status(torrent_handle::query_name).name.c_str(), h.status(torrent_handle::query_save_path).save_path.c_str());
 			h.save_resume_data();
 			break;
 		}
@@ -347,7 +352,7 @@ void TorrentManager::handle_alert(alert* a)
 
 				qDebug() << "Saving resume data" << QString::fromStdString(e.to_string());
 				bencode(std::back_inserter(out), e);
-				save_file(combine_path((dataDir + "CT_DATA").toStdString(), to_hex(h.info_hash().to_string()) + ".resume"), out);
+				save_file(combine_path(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString(), to_hex(h.info_hash().to_string()) + ".resume"), out);
 			}
 
 			break;
@@ -356,18 +361,24 @@ void TorrentManager::handle_alert(alert* a)
 		case tracker_error_alert::alert_type:
 		{
 			tracker_error_alert* p = alert_cast<tracker_error_alert> (a);
-			std::string message = p->message();
-
-			if(strstr(message.c_str(), "-") == NULL && strstr(message.c_str(), "200") == NULL)
-			{
-				emit TorrentError("", message.c_str());
-			}
+		
+			QString message = StaticHelpers::translateLibTorrentError(p->error);
+			message.append(QString::fromLocal8Bit(p->message().c_str()));
+			emit TorrentError("", message);
+			
 
 			break;
 		}
 		case rss_item_alert::alert_type:
 		{
 			rss_item_alert* p = alert_cast<rss_item_alert> (a);
+			qDebug() << "New RssFeedItem:";
+			qDebug() << qPrintable(p->item.title.c_str());
+			qDebug() << qPrintable(p->item.description.c_str());
+			qDebug() << qPrintable(p->item.category.c_str());
+			qDebug() << qPrintable(p->item.comment.c_str());
+			qDebug() << qPrintable(p->item.url.c_str());
+			qDebug() << qPrintable(p->item.uuid.c_str());
 			emit OnNewFeedItem();
 			break;
 		}
@@ -388,7 +399,7 @@ void TorrentManager::handle_alert(alert* a)
 				h.resume();
 			}
 
-			emit TorrentInfo(QString::fromStdString(h.name()), tr("MOVE_STORRAGE_COMPLETED_TO:\n%1").arg(QString::fromStdString(h.save_path())));
+			emit TorrentInfo(QString::fromStdString(h.status(torrent_handle::query_name).name), tr("MOVE_STORRAGE_COMPLETED_TO:\n%1").arg(QString::fromStdString(h.status(torrent_handle::query_save_path).save_path)));
 			break;
 		}
 
@@ -411,10 +422,14 @@ void TorrentManager::handle_alert(alert* a)
 			{
 				try
 				{
-					torrent_info const& ti = h.get_torrent_info();
-					create_torrent ct(ti);
-					std::ofstream out(complete(combine_path((dataDir + "CT_DATA").toStdString(), to_hex(ti.info_hash().to_string()) + ".torrent")).c_str(), std::ios_base::binary);
-					bencode(std::ostream_iterator<char> (out), ct.generate());
+					boost::intrusive_ptr<torrent_info const> ti = h.torrent_file();
+					if (ti != NULL)
+					{
+						create_torrent ct(*ti.get());
+						std::ofstream out(complete(combine_path(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString(), to_hex(ti->info_hash().to_string()) + ".torrent")).c_str(), std::ios_base::binary);
+						bencode(std::ostream_iterator<char>(out), ct.generate());
+					}
+					
 				}
 				catch(...)
 				{
@@ -567,13 +582,8 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 	}
 
 	add_torrent_params p;
-	QString dataDir;
-#ifdef Q_WS_MAC
-	dataDir = "/Library/CuteTorrent/";
-#else
-	dataDir = QApplication::applicationDirPath() + QDir::separator();
-#endif
-	std::string filename = combine_path((dataDir + "CT_DATA").toStdString(), to_hex(t->info_hash().to_string()) + ".resume");
+	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	std::string filename = combine_path(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString(), to_hex(t->info_hash().to_string()) + ".resume");
 	std::vector<char> buf;
 
 	if(load_file(filename.c_str(), buf, ec) == 0)
@@ -654,11 +664,11 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 	m_pTorrentStorrage->append(current);
 	emit AddTorrentGui(current);
 	h.set_max_connections(max_connections_per_torrent);
-	QFile::copy(path, combine_path((dataDir).toLatin1().data(), combine_path("CT_DATA", (to_hex(t->info_hash().to_string()) + ".torrent").c_str()).c_str()).c_str());
+	QFile::copy(path, combine_path(dataDir.toStdString(), combine_path("BtSessionData", (to_hex(t->info_hash().to_string()) + ".torrent").c_str()).c_str()).c_str());
 
-	if(QFile::exists(combine_path((dataDir + "CT_DATA").toLatin1().data(), ((t->name()) + ".torrent").c_str()).c_str()))
+	if(QFile::exists(combine_path(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString(), ((t->name()) + ".torrent").c_str()).c_str()))
 	{
-		QFile::remove(combine_path((dataDir + "CT_DATA").toLatin1().data(), ((t->name()) + ".torrent").c_str()).c_str());
+		QFile::remove(combine_path(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString(), ((t->name()) + ".torrent").c_str()).c_str());
 	}
 
 	/*
@@ -677,22 +687,7 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 session_settings TorrentManager::readSettings()
 {
 	session_settings s_settings = m_pTorrentSession->settings();
-	QString dataDir;
-#ifdef Q_WS_MAC
-	dataDir = "/Library/CuteTorrent/";
-#else
-	dataDir = QApplication::applicationDirPath() + QDir::separator();
-#endif
-	QString baseDir = m_pTorrentSessionSettings->valueString("System", "BaseDir");
-
-	if(baseDir.isEmpty())
-	{
-		baseDir = dataDir;
-		m_pTorrentSessionSettings->setValue("System", "BaseDir", baseDir);
-	}
-
-	QDir::setCurrent(QDir::toNativeSeparators(baseDir));
-	//s_settings.p
+	
 	s_settings.half_open_limit = m_pTorrentSessionSettings->valueInt("Torrent", "half_open_limit", 0x7fffffff);
 	s_settings.allow_multiple_connections_per_ip = m_pTorrentSessionSettings->valueBool("Torrent", "allow_multiple_connections_per_ip", true);
 	listen_port = m_pTorrentSessionSettings->valueInt("Torrent", "listen_port", 6103);
@@ -700,6 +695,7 @@ session_settings TorrentManager::readSettings()
 	s_settings.disable_hash_checks = m_pTorrentSessionSettings->valueBool("Torrent", "disable_hash_checks", false);
 	s_settings.peer_timeout = m_pTorrentSessionSettings->valueInt("Torrent", "peer_timeout", 120);
 	s_settings.announce_to_all_tiers = m_pTorrentSessionSettings->valueBool("Torrent", "announce_to_all_tiers", true);
+	s_settings.announce_to_all_trackers = m_pTorrentSessionSettings->valueBool("Torrent", "announce_to_all_trackers", true);
 	s_settings.download_rate_limit = m_pTorrentSessionSettings->valueInt("Torrent", "download_rate_limit", 0);
 	s_settings.upload_rate_limit = m_pTorrentSessionSettings->valueInt("Torrent", "upload_rate_limit", 0);
 	s_settings.torrent_connect_boost = 15;
@@ -830,7 +826,7 @@ void TorrentManager::writeSettings()
 	m_pTorrentSessionSettings->setValue("Torrent", "allowed_enc_level", enc_settings.allowed_enc_level - 1);
 	m_pTorrentSessionSettings->setValue("Torrent", "prefer_rc4", enc_settings.prefer_rc4);
 }
-void TorrentManager::onClose()
+void TorrentManager::SaveSession()
 {
 	writeSettings();
 	int num_outstanding_resume_data = 0;
@@ -864,35 +860,17 @@ void TorrentManager::onClose()
 	}
 
 	qDebug() << "waiting for resume data " << num_outstanding_resume_data << "\n";
-	QString dataDir;
-#ifdef Q_WS_MAC
-	dataDir = "/Library/CuteTorrent/";
-#else
-	dataDir = QApplication::applicationDirPath() + QDir::separator();
-#endif
+	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 
 	while(num_outstanding_resume_data > 0)
 	{
-		alert const* a = m_pTorrentSession->wait_for_alert(seconds(10));
-
-		if(a == 0)
-		{
-			continue;
-		}
-
 		std::deque<alert*> alerts;
 		m_pTorrentSession->pop_alerts(&alerts);
-
+		
 		for(std::deque<alert*>::iterator i = alerts.begin()
 		                                     , end(alerts.end()); i != end; ++i)
 		{
 			std::auto_ptr<alert> a(*i);
-			torrent_paused_alert const* tp = alert_cast<torrent_paused_alert> (*i);
-
-			if(tp)
-			{
-				continue;
-			}
 
 			if(alert_cast<save_resume_data_failed_alert> (*i))
 			{
@@ -927,7 +905,7 @@ void TorrentManager::onClose()
 			}
 
 			bencode(std::back_inserter(out), e);
-			save_file(combine_path((dataDir + "CT_DATA").toStdString(), info_hash + ".resume"), out);
+			save_file(combine_path(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString(), info_hash + ".resume"), out);
 		}
 	}
 
@@ -936,7 +914,8 @@ void TorrentManager::onClose()
 		m_pTorrentSession->save_state(session_state);
 		std::vector<char> out;
 		bencode(std::back_inserter(out), session_state);
-		save_file((dataDir + "CT_DATA").toStdString() + "/actual.state", out);
+		qDebug() << "saving state" << QString::fromStdString(session_state.to_string());
+		save_file(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString() + "/actual.state", out);
 	}
 
 	/*UpdatePathResumeAndLinks();*/
@@ -1003,7 +982,7 @@ void TorrentManager::UpdatePathResumeAndLinks()
 
 TorrentManager::~TorrentManager()
 {
-	onClose();
+	SaveSession();
 	TorrentStorrage::freeInstance();
 	QApplicationSettings::FreeInstance();
 }
@@ -1058,13 +1037,13 @@ openmagnet_info* TorrentManager::GetTorrentInfo(const torrent_handle& handle)
 {
 	if (handle.is_valid())
 	{
-		torrent_info ti = handle.get_torrent_info();
+		boost::intrusive_ptr<torrent_info const>  ti = handle.torrent_file();
 		openmagnet_info* info = new openmagnet_info;
 		info->handle = handle;
-		info->size = ti.total_size();
-		info->name = QString::fromUtf8(ti.name().c_str());
-		info->describtion = QString::fromUtf8(ti.comment().c_str());
-		info->files = ti.files();
+		info->size = ti->total_size();
+		info->name = QString::fromUtf8(ti->name().c_str());
+		info->describtion = QString::fromUtf8(ti->comment().c_str());
+		info->files = ti->files();
 		info->base_suffix = StaticHelpers::GetBaseSuffix(info->files);
 		return info;
 	}
@@ -1076,24 +1055,12 @@ void TorrentManager::RemoveTorrent(torrent_handle h, bool delFiles)
 {
 	std::string info_hash = to_hex(h.info_hash().to_string());
 	QString infoHash = QString::fromStdString(info_hash);
+	m_pTorrentStorrage->remove(infoHash);
 	emit TorrentRemove(infoHash);
-	/*	for (int i=0;i<torrents->count();i++)
-	{
-	    if (torrents->at(i)->GetInfoHash()==infoHash)
-	    {
-	        torrents->remove(infoHash);
-	        break;
-	    }
-	}*/
-	QString dataDir;
-#ifdef Q_WS_MAC
-	dataDir = "/Library/CuteTorrent/";
-#else
-	dataDir = QApplication::applicationDirPath() + QDir::separator();
-#endif
-	QString resume_path = dataDir + QString::fromStdString(combine_path("CT_DATA", info_hash + ".resume"));
-	QString torrent_path = dataDir + QString::fromStdString(combine_path("CT_DATA", h.name() + ".torrent"));
-	QString magnet_path = dataDir + QString::fromStdString(combine_path("CT_DATA", info_hash + ".torrent"));
+	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString resume_path = StaticHelpers::CombinePathes(dataDir, QString::fromStdString(combine_path("BtSessionData", info_hash + ".resume")));
+	QString torrent_path = StaticHelpers::CombinePathes(dataDir, QString::fromStdString(combine_path("BtSessionData", h.status(torrent_handle::query_name).name + ".torrent")));
+	QString magnet_path = StaticHelpers::CombinePathes(dataDir, QString::fromStdString(combine_path("BtSessionData", info_hash + ".torrent")));
 
 	if(QFile::exists(magnet_path))
 	{
@@ -1184,13 +1151,8 @@ torrent_handle TorrentManager::ProcessMagnetLink(QString link, error_code& ec)
 	}
 
 	lazy_entry resume_data;
-	QString dataDir;
-#ifdef Q_WS_MAC
-	dataDir = "/Library/CuteTorrent/";
-#else
-	dataDir = QApplication::applicationDirPath() + QDir::separator();
-#endif
-	std::string filename = (dataDir).toStdString() + combine_path("CT_DATA", to_hex(add_info.info_hash.to_string()) + ".resume");
+	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	std::string filename = (dataDir).toStdString() + combine_path("BtSessionData", to_hex(add_info.info_hash.to_string()) + ".resume");
 	std::vector<char> buf;
 
 	if(load_file(filename.c_str(), buf, ec) == 0)
@@ -1207,7 +1169,7 @@ torrent_handle TorrentManager::ProcessMagnetLink(QString link, error_code& ec)
 		return h;
 	}
 
-	while(!h.has_metadata())
+	while(!h.status().has_metadata)
 	{
 		sleep(1000);
 	}
@@ -1227,13 +1189,8 @@ void TorrentManager::CancelMagnetLink(QString link)
 		return;
 	}
 	torrent_handle h = m_pTorrentSession->find_torrent(add_info.info_hash);
-	QString dataDir;
-#ifdef Q_WS_MAC
-	dataDir = "/Library/CuteTorrent/";
-#else
-	dataDir = QApplication::applicationDirPath() + QDir::separator();
-#endif
-	QString magnet_path = dataDir + QString::fromStdString(combine_path("CT_DATA", to_hex(h.info_hash().to_string()) + ".torrent"));
+	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString magnet_path = StaticHelpers::CombinePathes(dataDir, QString::fromStdString(combine_path("BtSessionData", to_hex(h.info_hash().to_string()) + ".torrent")));
 
 	if(QFile::exists(magnet_path))
 	{
@@ -1251,13 +1208,13 @@ bool TorrentManager::AddMagnet(torrent_handle h, QString SavePath, QString group
 	if(!filePriorities.isEmpty())
 	{
 		std::vector<int> filepriorities;
-		file_storage storrage = h.get_torrent_info().files();
+		file_storage storrage = h.torrent_file()->files();
 
-		for(file_storage::iterator i = storrage.begin(); i != storrage.end(); ++i)
+		for(int i = 0; i < storrage.num_files(); i++)
 		{
-			if(filePriorities.contains(QDir::toNativeSeparators(storrage.file_path(*i).c_str())))
+			if(filePriorities.contains(QDir::toNativeSeparators(storrage.file_path(i).c_str())))
 			{
-				filepriorities.push_back(filePriorities[storrage.file_path(*i).c_str()]);
+				filepriorities.push_back(filePriorities[storrage.file_path(i).c_str()]);
 			}
 			else
 			{
@@ -1269,7 +1226,7 @@ bool TorrentManager::AddMagnet(torrent_handle h, QString SavePath, QString group
 		filePriorities.~QMap();
 	}
 
-	if(SavePath != QString::fromStdString(h.save_path()))
+	if(SavePath != QString::fromStdString(h.status(torrent_handle::query_save_path).save_path))
 	{
 		h.move_storage(SavePath.toStdString());
 	}
@@ -1307,7 +1264,7 @@ void TorrentManager::StartAllTorrents()
 	{
 		torrent_handle hTor = torrent_handels.at(i);
 
-		if(hTor.is_valid() && hTor.is_paused())
+		if(hTor.is_valid() && hTor.status().paused)
 		{
 			hTor.resume();
 		}
@@ -1322,7 +1279,7 @@ void TorrentManager::PauseAllTorrents()
 	{
 		torrent_handle tHandle = torrent_handels.at(i);
 
-		if(tHandle.is_valid() && !tHandle.is_paused())
+		if(tHandle.is_valid() && !tHandle.status().paused)
 		{
 			tHandle.auto_managed(false);
 			tHandle.pause();
@@ -1333,27 +1290,41 @@ void TorrentManager::PauseAllTorrents()
 QString TorrentManager::GetSessionDHTstate()
 {
 	session_status ses_state = m_pTorrentSession->status();
-	return QString::number(ses_state.dht_nodes);
+	if (m_pTorrentSession->is_dht_running())
+	{
+		return QString::number(ses_state.dht_nodes);
+	}
+	else
+	{
+		return "Disabled";
+	}
+	
 }
 
 void TorrentManager::SetUlLimit(int val)
 {
-	m_pTorrentSession->set_upload_rate_limit(val);
+	session_settings settings = m_pTorrentSession->settings();
+	settings.upload_rate_limit = val;
+	m_pTorrentSession->set_settings(settings);
 }
 
 void TorrentManager::SetDlLimit(int val)
 {
-	m_pTorrentSession->set_download_rate_limit(val);
+	session_settings settings = m_pTorrentSession->settings();
+	settings.download_rate_limit = val;
+	m_pTorrentSession->set_settings(settings);
 }
 
 int TorrentManager::GetDownloadLimit()
 {
-	return m_pTorrentSession->download_rate_limit();
+	session_settings settings = m_pTorrentSession->settings();
+	return settings.download_rate_limit;
 }
 
 int TorrentManager::GetUploadLimit()
 {
-	return m_pTorrentSession->upload_rate_limit();
+	session_settings settings = m_pTorrentSession->settings();
+	return settings.upload_rate_limit;
 }
 
 Torrent* TorrentManager::GetTorrentByInfoHash(const sha1_hash& hash)
@@ -1406,12 +1377,12 @@ void TorrentManager::RefreshExternalPeerSettings()
 		m_pTorrentSession->add_dht_router(std::make_pair(
 		                                      std::string("dht.aelitis.com"), 6881));
 
-		if (m_pTorrentSessionSettings->valueBool("Torrent", "use_special_dht_port", false))
+		/*if (m_pTorrentSessionSettings->valueBool("Torrent", "use_special_dht_port", false))
 		{
 			dht_settings defaultSettings;
 			defaultSettings.service_port = m_pTorrentSessionSettings->valueInt("Torrent", "special_dht_port", 6881);
 			m_pTorrentSession->set_dht_settings(defaultSettings);;
-		}
+		}*/
 
 		m_pTorrentSession->start_dht();
 	}
@@ -1419,36 +1390,6 @@ void TorrentManager::RefreshExternalPeerSettings()
 	{
 		m_pTorrentSession->stop_dht();
 	}
-}
-
-RssFeedList TorrentManager::GetRssFeedList()
-{
-	RssFeedList feedList;
-	std::vector<feed_handle> feeds;
-	m_pTorrentSession->get_feeds(feeds);
-	std::vector<feed_handle>::iterator i = feeds.begin();
-	for (i; i != feeds.end(); i++)
-	{
-		feedList.append(new RssFeed(*i));
-	}
-	return feedList;
-}
-
-RssFeed* TorrentManager::AddRssFeed(QString url)
-{
-	feed_settings s;
-	s.url = url.toStdString();
-	s.auto_download = false;
-	feed_handle hFeed =  m_pTorrentSession->add_feed(s);
-	RssFeed* feed = new RssFeed(hFeed);
-	emit OnNewFeed();
-	return feed;
-}
-
-void TorrentManager::RemoveFeed(RssFeed* feed)
-{
-	m_pTorrentSession->remove_feed(feed->m_hRssFeed);
-	emit OnFeedDeleted();
 }
 
 

@@ -90,11 +90,11 @@ void TorrentApiController::service(HttpRequest& request, HttpResponse& response)
 						files_info fileinfo = curret->GetFileDownloadInfo();
 						int counter = 0;
 
-						for(file_storage::iterator j = fileinfo.storrage.begin(); j != fileinfo.storrage.end(); ++j)
+						for (int j = 0; j < fileinfo.storrage.num_files(); ++j)
 						{
 							QtJson::JsonObject file;
-							file["path"] = QString::fromStdString(fileinfo.storrage.file_path(*j));
-							file["size"] = StaticHelpers::toKbMbGb(fileinfo.storrage.file_size(*j)) ;
+							file["path"] = QString::fromStdString(fileinfo.storrage.file_path(j));
+							file["size"] = StaticHelpers::toKbMbGb(fileinfo.storrage.file_size(j)) ;
 							file["percent"] = QString::number(fileinfo.progresses[counter] * 100.0f, 'f', 0) + " %";
 							file["priority"] = StaticHelpers::filePriorityToString(fileinfo.priorities[counter]);
 							counter++;

@@ -37,12 +37,13 @@ along with this program.  If not, see .
 class CuteTorrent;
 class Torrent;
 class TorrentManager;
+class QTorrentFilterProxyModel;
 
 class QTorrentDisplayModel: public QAbstractListModel
 {
 	Q_OBJECT
 private:
-	TorrentStorrage* torrents;
+	TorrentStorrage* m_pTorrentStorrage;
 	int auto_id;
 	QTreeView* m_pTorrentListView;
 	int selectedRow;
@@ -63,9 +64,9 @@ private:
 	Torrent* CurrentTorrent;
 	QTimer* timer;
 	QMutex* locker;
-
+	QTorrentFilterProxyModel* m_pProxyFilterModel;
 public:
-	QTorrentDisplayModel( QTreeView*, QObject*);
+	QTorrentDisplayModel(QTreeView*, QTorrentFilterProxyModel*, QObject*);
 	~QTorrentDisplayModel();
 	enum action { stop, pause, resume, remove, remove_all, move_storrage,
 	              set_sequntial, set_superseed, generate_magmet, update_trackers,
@@ -85,12 +86,12 @@ public:
 	                        const QModelIndex& parent = QModelIndex());
 	enum Role { TorrentRole = Qt::UserRole };
 	Torrent* GetSelectedTorrent();
+	
 signals:
 	void initCompleted();
 	void updateTabSender(int);
 public slots:
-	//void AddTorrent(Torrent *);
-	void onTorrentRemove(QString);
+	void Update();
 	void UpdateSelectedIndex(const QItemSelection&);
 	/*	void TorrentErrorProxy(const QString &);
 	void TorrentCompletedProxy(const QString);*/
@@ -110,7 +111,7 @@ public slots:
 	void generateMagnetLink();
 	void changeGroup();
 	void setupContextMenu();
-
+	void OnAddTorrent();
 
 
 };

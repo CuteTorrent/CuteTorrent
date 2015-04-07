@@ -7,14 +7,14 @@ class FaviconDownloader : QObject
 public:
 	FaviconDownloader(QObject* parent = NULL);
 	~FaviconDownloader();
-	QIcon getFavicon(QString url);
+	QPixmap getFavicon(QString url);
 private:
 	StyleEngene* m_pStyleEngine;
 	QNetworkAccessManager* m_pNatworkManager;
-	bool hasCached(QUrl url);
-	QIcon getFromCache(QUrl url);
-	QIcon getFromWeb(QUrl url);
-	static QMap<QString, QString> downloadingList;
+	QNetworkDiskCache* m_pDiskCache;
+	QPixmap getFromWeb(QUrl url);
+	QList<QString> downloadingList;
+	QHash<QString, QString> redirectionMap;
 private slots:
 	void replyReady(QNetworkReply *);
 	

@@ -65,6 +65,7 @@ quint64 CreateTorrentDialog::listFolder(QString pathToList)
 
 CreateTorrentDialog::~CreateTorrentDialog()
 {
+	TorrentManager::freeInstance();
 	QApplicationSettings::FreeInstance();
 	creator->deleteLater();
 }

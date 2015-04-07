@@ -92,6 +92,7 @@ signals:
 	void removeSearchItem();
 	void setupWindowIcons();
 	void OpenWebUI();
+	void FillRestrictionTab();
 };
 
 #endif // !_SETTINGS_DLG_H

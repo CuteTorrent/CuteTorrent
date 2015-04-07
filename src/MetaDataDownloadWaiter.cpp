@@ -35,7 +35,7 @@ void MetaDataDownloadWaiter::run()
 	}
 	else
 	{
-		m_pTorrentManager->AddMagnet(h, QString::fromStdString(h.save_path()), "", QMap<QString, qint8>());
+		m_pTorrentManager->AddMagnet(h, QString::fromStdString(h.status(torrent_handle::query_save_path).save_path), "", QMap<QString, qint8>());
 	}
 
 	//this->deleteLater();

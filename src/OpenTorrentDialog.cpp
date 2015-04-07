@@ -95,22 +95,11 @@ void OpenTorrentDialog::SetData(QString filename)
 			QString elidedText = metrics.elidedText(info->describtion, Qt::ElideRight, labelComentData->width());
 			labelComentData->setText(elidedText);
 			labelSizeData->setText(StaticHelpers::toKbMbGb(info->size));
-			QStringList files;
-
-			for(libtorrent::file_storage::iterator i = info->files.begin();
-			        i != info->files.end();
-			        ++i)
-			{
-				files << QString::fromUtf8(info->files.file_path(*i).c_str()) + "|" + StaticHelpers::toKbMbGb(info->files.file_size(*i));
-			}
-
-			files.sort();
 			m_pFileTreeModel = new FileTreeModel();
 
-			for(int i = 0; i < files.count(); i++)
+			for (int i = 0; i < info->files.num_files(); i++)
 			{
-				QStringList parts = files.at(i).split('|');
-				m_pFileTreeModel->addPath(parts.at(0), parts.at(1));
+				m_pFileTreeModel->addPath(QString::fromUtf8(info->files.file_path(i).c_str()), StaticHelpers::toKbMbGb(info->files.file_size(i)));
 			}
 
 			torrentFilesTreeView->setModel(m_pFileTreeModel);
@@ -234,26 +223,11 @@ void OpenTorrentDialog::DownloadMetadataCompleted(openmagnet_info info)
 	QString elidedText = metrics.elidedText(info.describtion, Qt::ElideRight, labelComentData->width());
 	labelComentData->setText(elidedText);
 	labelSizeData->setText(StaticHelpers::toKbMbGb(info.size));
-	QStringList files;
-
-	for(libtorrent::file_storage::iterator i = info.files.begin();
-	        i != info.files.end();
-	        ++i)
-	{
-		files << QString::fromUtf8(info.files.file_path(*i).c_str()) + "|" + StaticHelpers::toKbMbGb(info.files.file_size(*i));
-	}
-
-	files.sort();
 	m_pFileTreeModel = new FileTreeModel();
 
-	for(int i = 0; i < files.count(); i++)
+	for (int i = 0; i < info.files.num_files(); i++)
 	{
-		QStringList parts = files.at(i).split('|');
-
-		if(parts.count() >= 1)
-		{
-			m_pFileTreeModel->addPath(parts.at(0), parts.at(1));
-		}
+		m_pFileTreeModel->addPath(QString::fromUtf8(info.files.file_path(i).c_str()), StaticHelpers::toKbMbGb(info.files.file_size(i)));
 	}
 
 	torrentFilesTreeView->setModel(m_pFileTreeModel);

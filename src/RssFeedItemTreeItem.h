@@ -1,17 +1,17 @@
 #pragma once
-#include <RssFeedItem.h>
+
 #include "RssBaseTreeItem.h"
-using namespace libtorrent;
+#include "RssFeed.h"
 class RssFeedTreeItem;
 class RssFeedItemTreeItem : public RssBaseTreeItem
 {
 public:
-	RssFeedItemTreeItem(RssFeedTreeItem* parent, RssFeedItem pFeedItem);
+	RssFeedItemTreeItem(RssFeedTreeItem* parent, QString guid);
 	~RssFeedItemTreeItem();
-	RssFeedItem FeedItem();
+	RssItem FeedItem();
 	RssFeedTreeItem* Parent();
 private:
-	RssFeedItem m_pFeedItem;
+	QString m_guid;
 	RssFeedTreeItem* m_pParent;
 };
 

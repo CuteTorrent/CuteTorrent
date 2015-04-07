@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>RssSettings</class>
  <widget class="QWidget" name="RssSettings">
@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>417</width>
-    <height>294</height>
+    <height>235</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -158,10 +158,14 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="m_pRssUrlEdit">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
       <item row="1" column="0" colspan="2">
-       <widget class="QGroupBox" name="groupBox">
+       <widget class="QGroupBox" name="m_pRssAutoDownloadGroupBox">
         <property name="title">
          <string>RSS_AUTO_DOWNLOAD</string>
         </property>
@@ -172,8 +176,15 @@
          <bool>false</bool>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
+         <item row="1" column="0" colspan="2">
+          <widget class="QCheckBox" name="m_pUseGroupsCheckBox">
+           <property name="text">
+            <string>USE_GROUPS_FOR_FILTERING</string>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="0" colspan="2">
-          <widget class="QGroupBox" name="groupBox_2">
+          <widget class="QGroupBox" name="m_pUseSavePathGroupBox">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -198,44 +209,12 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="lineEdit_2"/>
+             <widget class="QLineEdit" name="m_pSavePathEdit"/>
             </item>
             <item row="0" column="2">
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="m_pBrowseButton">
               <property name="text">
                <string>BROWSE</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item row="1" column="0" colspan="2">
-          <widget class="QCheckBox" name="checkBox">
-           <property name="text">
-            <string>USE_GROUPS_FOR_FILTERING</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0" colspan="2">
-          <widget class="QGroupBox" name="groupBox_3">
-           <property name="title">
-            <string>DOWNLOAD_IF_CONTAINS</string>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_4">
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="lineEdit_3"/>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_4">
-              <property name="text">
-               <string>CONTAINTAINS_IN_TIITLE_OR_DESC</string>
               </property>
              </widget>
             </item>
@@ -260,7 +239,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QSpinBox" name="spinBox">
+       <widget class="QSpinBox" name="m_pRefreshRateSpinBox">
         <property name="suffix">
          <string> MINUTES</string>
         </property>

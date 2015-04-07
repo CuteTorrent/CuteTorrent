@@ -1,6 +1,5 @@
 ﻿#include "QRssItemDelegate.h"
 #include "RssFeed.h"
-#include "RssFeedItem.h"
 #include "RssFeedTreeItem.h"
 #include "RssFeedItemTreeItem.h"
 #include "StaticHelpers.h"
@@ -98,10 +97,9 @@ void QRssItemDelegate::drawFeed(QPainter * painter, const QStyleOptionViewItem &
 	QFont nameFont(option.font);
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
-	//ToDo get favicon and save to web cache folder
-	const QIcon favicon = m_pFaviconDownloader->getFavicon(pFeed->GetFeed()->url());
+	const QPixmap favicon = m_pFaviconDownloader->getFavicon(pFeed->GetFeed()->url().toString());
 
-	QString nameStr(pFeed->GetFeed()->title());
+	QString nameStr = QString("%1 - %2").arg(pFeed->GetFeed()->title(), pFeed->GetFeed()->description());
 	QSize nameSize(nameFM.size(0, nameStr));
 
 	QFont statusFont(option.font);
@@ -155,7 +153,8 @@ void QRssItemDelegate::drawFeed(QPainter * painter, const QStyleOptionViewItem &
 	statusArea.setHeight(nameSize.height());
 
 	painter->setPen(opt.palette.color(cg, cr));
-	favicon.paint(painter, iconArea, Qt::AlignCenter, im, qs);
+	//favicon.paint(painter, iconArea, Qt::AlignCenter, im, qs);
+	painter->drawPixmap(iconArea, favicon);
 	painter->setFont(nameFont);
 	nameStr = nameFM.elidedText(nameStr, Qt::ElideRight, nameArea.width());
 	style->drawItemText(painter, nameArea, Qt::AlignLeft, opt.palette, option.state & QStyle::State_Enabled, nameStr);
@@ -181,18 +180,24 @@ void QRssItemDelegate::drawFeedItem(QPainter * painter, const QStyleOptionViewIt
 	{
 		style = QApplication::style();
 	}
-	RssFeedItem pFeedItem = pFeedTreeItem->FeedItem();
+	RssItem pFeedItem = pFeedTreeItem->FeedItem();
 
 	QFont nameFont(option.font);
-	nameFont.setWeight(QFont::Bold);
+	if (pFeedItem["unread"].toBool() == true)
+	{
+		nameFont.setWeight(QFont::Bold);
+	}
 	const QFontMetrics nameFM(nameFont);
-	QString nameStr(pFeedItem.Title());
+	QString nameStr(pFeedItem["title"].toString());
 	QSize nameSize(nameFM.size(0, nameStr));
 
 	QFont sizeFont(option.font);
-	sizeFont.setWeight(QFont::Bold);
+	if (pFeedItem["unread"].toBool() == true)
+	{
+		sizeFont.setWeight(QFont::Bold);
+	}
 	const QFontMetrics sizeFM(sizeFont);
-	qint64 size = pFeedItem.Size();
+	qint64 size = pFeedItem["size"].toULongLong();
 	QString sizeStr;
 	if (size > 0)
 	{
@@ -200,17 +205,20 @@ void QRssItemDelegate::drawFeedItem(QPainter * painter, const QStyleOptionViewIt
 	}
 	else
 	{
-		sizeStr = tr("SIZE_UNKNOWN");
+		sizeStr = tr("- Mb");
 	}
 	QSize sizeSize(sizeFM.size(0, sizeStr));
 
 	QFont categoryFont(option.font);
-	categoryFont.setWeight(QFont::Bold);
+	if (pFeedItem["unread"].toBool() == true)
+	{
+		categoryFont.setWeight(QFont::Bold);
+	}
 	const QFontMetrics categoryFM(categoryFont);
-	QString categoryStr(pFeedItem.Category());
+	QString categoryStr(pFeedItem["category"].toString());
 	if (categoryStr.isEmpty())
 	{
-		categoryStr = tr("CATEGORY_UNKNOWN");
+		categoryStr = "-";
 	}
 	QSize categorySize(categoryFM.size(0, categoryStr));
 
@@ -299,24 +307,24 @@ QSize QRssItemDelegate::feedItemSizeHint(const QStyleOptionViewItemV4 & opt, Rss
 	{
 		style = QApplication::style();
 	}
-	RssFeedItem pFeedItem = pFeedTreeItem->FeedItem();
+	RssItem pFeedItem = pFeedTreeItem->FeedItem();
 
 	QFont nameFont(opt.font);
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
-	QString nameStr(pFeedItem.Title());
+	QString nameStr(pFeedItem["title"].toString());
 	QSize nameSize(nameFM.size(0, nameStr));
 
 	QFont sizeFont(opt.font);
 	sizeFont.setWeight(QFont::Bold);
 	const QFontMetrics sizeFM(sizeFont);
-	QString sizeStr(StaticHelpers::toKbMbGb(pFeedItem.Size()));
+	QString sizeStr(StaticHelpers::toKbMbGb(pFeedItem["size"].toULongLong()));
 	QSize sizeSize(sizeFM.size(0, sizeStr));
 
 	QFont categoryFont(opt.font);
 	categoryFont.setWeight(QFont::Bold);
 	const QFontMetrics categoryFM(categoryFont);
-	QString categoryStr(pFeedItem.Category());
+	QString categoryStr(pFeedItem["category"].toString());
 	QSize categorySize(categoryFM.size(0, categoryStr));
 
 	const QSize m(margin(*style));

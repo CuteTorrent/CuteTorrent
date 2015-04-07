@@ -24,8 +24,5 @@ private:
 private slots:
 	void OnNewSearchResults();
 public slots:
-	void contextualMenu(const QPoint&);
-	void setupContextMenu();
-	void retranslate();
 };
 

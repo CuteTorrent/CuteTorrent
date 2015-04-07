@@ -2,10 +2,8 @@
 #include "RssFeed.h"
 #include "RssFeedItemTreeItem.h"
 
-RssFeedTreeItem::RssFeedTreeItem(RssFeed* pFeed)
+RssFeedTreeItem::RssFeedTreeItem(RssFeed* pFeed) : RssBaseTreeItem(RssBaseTreeItem::Feed), m_pFeed(pFeed)
 {
-	m_type = RssBaseTreeItem::Feed;
-	m_pFeed = pFeed;
 	m_children.clear();
 	BuildChildren();
 }
@@ -30,10 +28,10 @@ void RssFeedTreeItem::BuildChildren()
 		m_children.clear();
 	}
 	
-	RssFeedItemList feedItems = m_pFeed->GetFeedItems();
-	for each (RssFeedItem item in feedItems)
+	QList<RssItem> feedItems = m_pFeed->GetFeedItems();
+	for each (RssItem item in feedItems)
 	{
-		m_children.append(new RssFeedItemTreeItem(this, item));
+		m_children.append(new RssFeedItemTreeItem(this, item["guid"].toString()));
 	}
 }
 

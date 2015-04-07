@@ -1,19 +1,22 @@
-﻿
-#include "QRssDisplayModel.h"
-#include "TorrentManager.h"
+﻿#include "QRssDisplayModel.h"
+#include "RssFeed.h"
+#include "RssFeedTreeItem.h"
 #include "RssFeedTreeItem.h"
 #include "RssFeedItemTreeItem.h"
-QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent) : QAbstractItemModel(parrent), m_pTorrentsManager(TorrentManager::getInstance())
+#include <RssManager.h>
+QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent) : QAbstractItemModel(parrent), m_pRssManager(RssManager::getInstance())
 {
 	m_pItemsView = pItemsView;
 	m_pUdpateTimer = new QTimer(this);
 	UpdateModel();
-	QObject::connect(m_pTorrentsManager, SIGNAL(OnNewFeed()), this, SLOT(UpdateModel()));
+	QObject::connect(m_pRssManager.get(), SIGNAL(FeedChanged(QUuid)), this, SLOT(UpdateModel()));
+	/*QObject::connect(m_pTorrentsManager, SIGNAL(OnNewFeed()), this, SLOT(UpdateModel()));
 	QObject::connect(m_pTorrentsManager, SIGNAL(OnFeedDeleted()), this, SLOT(UpdateModel()));
 	QObject::connect(m_pTorrentsManager, SIGNAL(OnNewFeedItem()), this, SLOT(UpdateModel()));
-	QObject::connect(m_pTorrentsManager, SIGNAL(OnFeedChanged()), this, SLOT(UpdateModel()));
+	QObject::connect(m_pTorrentsManager, SIGNAL(OnFeedChanged()), this, SLOT(UpdateModel()));*/
 	QObject::connect(m_pUdpateTimer, SIGNAL(timeout()), this, SLOT(UpdateVisibleData()));
 	m_pUdpateTimer->start(1000);
+	setupMenu();
 }
 
 int QRssDisplayModel::columnCount(const QModelIndex &parent /*= QModelIndex()*/) const
@@ -23,13 +26,9 @@ int QRssDisplayModel::columnCount(const QModelIndex &parent /*= QModelIndex()*/)
 
 QVariant QRssDisplayModel::data(const QModelIndex &index, int role /*= Qt::DisplayRole*/) const
 {
-	if (role == RssFeedItemRole && index.row() < m_feeds.count())
+	if (role == RssFeedItemRole && index.row() < m_pRssManager->feeds().count())
 	{
-		return qVariantFromValue(m_feeds.at(index.row()));
-	}
-	if (role == Qt::DisplayRole)
-	{
-		return "DisplayText";
+		return qVariantFromValue(m_pRssManager->feeds().at(index.row()));
 	}
 	return QVariant();
 }
@@ -114,13 +113,11 @@ QModelIndex QRssDisplayModel::parent(const QModelIndex &child) const
 
 void QRssDisplayModel::UpdateModel()
 {
-	qDeleteAll(m_feeds);
-	m_feeds.clear();
 	qDeleteAll(m_rootItems);
 	m_rootItems.clear();
-	m_feeds = m_pTorrentsManager->GetRssFeedList();
-	qDebug() << "m_feeds" << m_feeds.count();
-	for each (RssFeed* var in m_feeds)
+	QList<RssFeed*> feeds = m_pRssManager->feeds();
+	qDebug() << "m_feeds" << feeds.count();
+	for each (RssFeed* var in feeds)
 	{
 		m_rootItems.append(new RssFeedTreeItem(var));
 	}
@@ -133,15 +130,17 @@ void QRssDisplayModel::UpdateVisibleData()
 	emit dataChanged(top, bot);
 }
 
-QList<RssFeed*> QRssDisplayModel::SelectedItems()
+QList<RssFeed*> QRssDisplayModel::SelectedFeeds()
 {
 	QSet<RssFeed*> res;
 	QModelIndexList selectedIndexes = m_pItemsView->selectionModel()->selectedIndexes();
 	for each (QModelIndex selectedIndex in selectedIndexes)
 	{
-		RssBaseTreeItem* pBaseItem = static_cast<RssBaseTreeItem*>(selectedIndex.internalPointer());
-		switch (pBaseItem->GetType())
+		if (selectedIndex.isValid())
 		{
+			RssBaseTreeItem* pBaseItem = static_cast<RssBaseTreeItem*>(selectedIndex.internalPointer());
+			switch (pBaseItem->GetType())
+			{
 			case RssBaseTreeItem::Feed:
 			{
 				RssFeedTreeItem* pFeedTreeItem = reinterpret_cast<RssFeedTreeItem*>(pBaseItem);
@@ -159,38 +158,107 @@ QList<RssFeed*> QRssDisplayModel::SelectedItems()
 				qDebug() << "Unknown item type";
 				break;
 			}
-			
+
+			}
 		}
 	}
 	return res.toList();
 }
-
-RssFeed* QRssDisplayModel::SelectedItem()
+RssItem QRssDisplayModel::SelectedFeedItem()
 {
-	RssFeed* res;
+	RssItem res;
 	QModelIndex selectedIndex = m_pItemsView->selectionModel()->currentIndex();
-	RssBaseTreeItem* pBaseItem = static_cast<RssBaseTreeItem*>(selectedIndex.internalPointer());
-	switch (pBaseItem->GetType())
+	if (selectedIndex.isValid())
 	{
-		case RssBaseTreeItem::Feed:
+		RssBaseTreeItem* pBaseItem = static_cast<RssBaseTreeItem*>(selectedIndex.internalPointer());
+		switch (pBaseItem->GetType())
 		{
-			RssFeedTreeItem* pFeedTreeItem = reinterpret_cast<RssFeedTreeItem*>(pBaseItem);
-			res = pFeedTreeItem->GetFeed();
-			break;
+			case RssBaseTreeItem::FeedItem:
+			{
+				RssFeedItemTreeItem* pFeedTreeItem = reinterpret_cast<RssFeedItemTreeItem*>(pBaseItem);
+				res = pFeedTreeItem->FeedItem();
+				pFeedTreeItem->Parent()->GetFeed()->setItemUnread(false, res["guid"].toString());
+				break;
+			}
+			default:
+			{
+				qDebug() << "Unknown item type";
+				break;
+			}
 		}
-		case RssBaseTreeItem::FeedItem:
-		{
-			RssFeedItemTreeItem* pFeedTreeItem = reinterpret_cast<RssFeedItemTreeItem*>(pBaseItem);
-			res = pFeedTreeItem->Parent()->GetFeed();
-			break;
-		}
-		default:
-		{
-			qDebug() << "Unknown item type";
-			break;
-		}
-
 	}
 	return res;
+}
+RssFeed* QRssDisplayModel::SelectedIFeed()
+{
+	RssFeed* res = NULL;
+	QModelIndex selectedIndex = m_pItemsView->selectionModel()->currentIndex();
+	if (selectedIndex.isValid())
+	{
+		RssBaseTreeItem* pBaseItem = static_cast<RssBaseTreeItem*>(selectedIndex.internalPointer());
+		switch (pBaseItem->GetType())
+		{
+			case RssBaseTreeItem::Feed:
+			{
+				RssFeedTreeItem* pFeedTreeItem = reinterpret_cast<RssFeedTreeItem*>(pBaseItem);
+				res = pFeedTreeItem->GetFeed();
+				break;
+			}
+			case RssBaseTreeItem::FeedItem:
+			{
+				RssFeedItemTreeItem* pFeedTreeItem = reinterpret_cast<RssFeedItemTreeItem*>(pBaseItem);
+				res = pFeedTreeItem->Parent()->GetFeed();
+				break;
+			}
+			default:
+			{
+				qDebug() << "Unknown item type";
+				break;
+			}
+		}
+	}
+	return res;
+}
+
+QRssDisplayModel::~QRssDisplayModel()
+{
+	qDeleteAll(m_rootItems);
+	m_rootItems.clear();
+}
+
+void QRssDisplayModel::retranslate()
+{
+	
+}
+
+void QRssDisplayModel::contextualMenu(const QPoint& point)
+{
+	if (m_pItemsView->model() != this)
+	{
+		return;
+	}
+	QModelIndex index = m_pItemsView->indexAt(point);
+	if (index.isValid())
+	{
+		m_pMenu->exec(m_pItemsView->mapToGlobal(point));
+	}
+}
+
+void QRssDisplayModel::setupMenu()
+{
+	m_pMenu = new QMenu(m_pItemsView);
+	QAction* updateAction = new QAction(tr("UPDATE_FEED_ITEM"), m_pMenu);
+	updateAction->setObjectName("ACTION_RSSLIST_UPDATE");
+	QObject::connect(updateAction, SIGNAL(triggered()), SLOT(onFeedUpdate()));
+	m_pMenu->addAction(updateAction);
+}
+
+void QRssDisplayModel::onFeedUpdate()
+{
+	RssFeed* current = SelectedIFeed();
+	if (current != NULL)
+	{
+		current->Update();
+	}
 }
 

@@ -209,7 +209,7 @@ void BaseWindow<T>::setupCustomWindow()
 	}
 
 	connect(getCloseBtn(), SIGNAL(clicked()), this, SLOT(close()));
-	//Per poder rebre les dades del ratol� sense haver de clicar cap bot�
+	
 	moveWidget = false;
 	inResizeZone = false;
 	allowToResize = false;

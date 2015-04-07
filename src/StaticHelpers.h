@@ -29,13 +29,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QInputDialog>
 #include <QObject>
-
+#include <QNetworkDiskCache>
 #include <QStyle>
 #include "TorrentManager.h"
 #include "SchedulerTask.h"
 #include "defs.h"
 class StaticHelpers
 {
+private:
+	static QNetworkDiskCache* m_pDiskCache;
 public:
 
 	static QString toKbMbGb(libtorrent::size_type size);
@@ -46,6 +48,7 @@ public:
 	static QString SchedulerTypeToString(SchedulerTask::TaskType type);
 	static QString GetBaseSuffix(const libtorrent::file_storage& storrage);
 	static QString CombinePathes(QString path, QString suffix);
+	static QNetworkDiskCache* GetGLobalWebCache();
 	template <typename T> static QList<T> reversed(const QList<T>& in);
 };
 

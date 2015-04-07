@@ -96,6 +96,9 @@
     <Filter Include="VideoPlayer">
       <UniqueIdentifier>{7fc09131-c01d-42cc-9d1e-bd8fbe3b2606}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rss">
+      <UniqueIdentifier>{26069f37-d7d5-42c8-bc39-7fccf4ea7bf8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include=".\GeneratedFiles\Release\moc_ISerachProvider.cpp">
@@ -499,22 +502,10 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QRssItemDelegate.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="RssFeed.cpp">
-      <Filter>DataModels</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_PriorityItemDelegate.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="RssDownloadManager.cpp">
-      <Filter>Service</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_RssDownloadManager.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="RssDownloadRule.cpp">
-      <Filter>DataModels</Filter>
-    </ClCompile>
-    <ClCompile Include="RssFeedItem.cpp">
       <Filter>DataModels</Filter>
     </ClCompile>
     <ClCompile Include="RssBaseTreeItem.cpp">
@@ -530,6 +521,39 @@
       <Filter>Service</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_FaviconDownloader.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RssFeedSettingsDialog.cpp">
+      <Filter>Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RssFeedSettingsDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QTorrentFilterProxyModel.cpp">
+      <Filter>ViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QTorrentFilterProxyModel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HtmlView.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_HtmlView.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RssManager.cpp">
+      <Filter>Rss</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RssManager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RssFeed.cpp">
+      <Filter>Rss</Filter>
+    </ClCompile>
+    <ClCompile Include="RssParser.cpp">
+      <Filter>Rss</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RssFeed.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -648,9 +672,6 @@
     <ClInclude Include="defs.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="versionInfo.h" />
-    <ClInclude Include="RssFeed.h">
-      <Filter>DataModels</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_RssFeedSettingsDialog.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -658,9 +679,6 @@
       <Filter>DataModels</Filter>
     </ClInclude>
     <ClInclude Include="Build_Increment.h" />
-    <ClInclude Include="RssFeedItem.h">
-      <Filter>DataModels</Filter>
-    </ClInclude>
     <ClInclude Include="RssBaseTreeItem.h">
       <Filter>DataModels</Filter>
     </ClInclude>
@@ -670,8 +688,11 @@
     <ClInclude Include="RssFeedItemTreeItem.h">
       <Filter>DataModels</Filter>
     </ClInclude>
-    <ClInclude Include="FaviconDownloader.h">
-      <Filter>Service</Filter>
+    <ClInclude Include="RssParser.h">
+      <Filter>Rss</Filter>
+    </ClInclude>
+    <ClInclude Include="RssCommon.h">
+      <Filter>Rss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -784,8 +805,23 @@
     <CustomBuild Include="RssFeedSettingsDialog.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="RssDownloadManager.h">
+    <CustomBuild Include="RssFeedSettingsDialog.h">
+      <Filter>Dialog</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QTorrentFilterProxyModel.h">
+      <Filter>ViewModel</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FaviconDownloader.h">
       <Filter>Service</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HtmlView.h">
+      <Filter>Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RssManager.h">
+      <Filter>Rss</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RssFeed.h">
+      <Filter>Rss</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

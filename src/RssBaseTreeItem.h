@@ -3,7 +3,7 @@ class RssBaseTreeItem
 {
 public:
 	enum ItemType {Feed,FeedItem};
-	RssBaseTreeItem();
+	RssBaseTreeItem(ItemType type);
 	~RssBaseTreeItem();
 	ItemType GetType();
 private:

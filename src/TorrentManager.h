@@ -141,11 +141,12 @@ private:
 	bool useProxy;
 	libtorrent::proxy_settings ps;
 //settingsData end
-	void onClose();
+	
 
 public:
+	void SaveSession();
 	void RefreshExternalPeerSettings();
-	void initSession();
+	void InitSession();
 	libtorrent::session_settings readSettings();
 	libtorrent::pe_settings readEncSettings();
 	void updateEncSettings(const libtorrent::pe_settings& settings);
@@ -174,9 +175,6 @@ public:
 	void SetDlLimit(int val);
 	int GetDownloadLimit();
 	int GetUploadLimit();
-	RssFeedList GetRssFeedList();
-	RssFeed* AddRssFeed(QString url);
-	void RemoveFeed(RssFeed* feed);
 	Torrent* GetTorrentByInfoHash(const sha1_hash& hash);
 	Torrent* GetTorrentByInfoHash(QString hash);
 };

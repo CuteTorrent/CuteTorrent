@@ -65,6 +65,7 @@ class QApplicationSettings;
 class QSearchDisplayModel;
 class QSearchItemDelegate;
 class QTorrentDisplayModel;
+class QTorrentFilterProxyModel;
 class QRssDisplayModel;
 class QRssItemDelegate;
 class RconWebService;
@@ -74,7 +75,7 @@ class TorrentManager;
 class TorrentStorrage;
 class TorrentTracker;
 class UpdateNotifier;
-
+class HtmlView;
 class CuteTorrent : public BaseWindow<QWidget> , private Ui::CustomWindow
 {
 	Q_OBJECT
@@ -107,6 +108,8 @@ private:
 	QApplicationSettings* m_pSettings;
 	RconWebService* m_pRcon;
 	UpdateNotifier* m_pUpdateNotifier;
+	HtmlView* m_pFeedItemDescribtionEdit;
+	QLabel* m_pFeedItemCommentEdit;
 	bool mayShowNotifies;
 	QSystemTrayIcon* m_pTrayIcon;
 	QSpinBox* ul, *dl;
@@ -122,6 +125,7 @@ private:
 	QLabel* downLabelText, *downLabel;
 	QRssDisplayModel* m_pRssDisplayModel;
 	QRssItemDelegate* m_pRssItemDelegate;
+	QTorrentFilterProxyModel* m_pTorrentFilterProxyModel;
 	QTorrentDisplayModel* m_pTorrentDisplayModel;
 	QTorrentItemDelegat* m_pTorrentItemDelegate;
 	QSearchDisplayModel* m_pSearchDisplayModel;
@@ -147,6 +151,7 @@ private:
 	void setupListView();
 	void setupTabelWidgets();
 	void setupStatusBar();
+	void setupRssInfoTab();
 	void setupFileTabel();
 	void setupGroupTreeWidget();
 	void fillPieceDisplay(QSize);
@@ -209,7 +214,8 @@ public slots:
 	void addRssFeed();
 	void removeRssFeed();
 	void editRssFeed();
-
+	void OnQuit();
+	void UpdateRssInfo(const QItemSelection&);
 };
 
 Q_DECLARE_METATYPE(QHostAddress)

@@ -42,7 +42,7 @@ void TorrentStorrage::append(Torrent* torrent)
 	QMap<QString, Torrent*>::Iterator it = m_torrentsMap.insert(infoHash, torrent);
 	m_torrents.append(it);
 
-	switch(m_torrentFilter)
+/*	switch(m_torrentFilter)
 	{
 		case ACTIVE:
 		{
@@ -91,7 +91,7 @@ void TorrentStorrage::append(Torrent* torrent)
 			break;
 		}
 	}
-
+	*/
 	locker->unlock();
 }
 
@@ -152,7 +152,7 @@ Torrent* TorrentStorrage::at(int index)
 {
 	if(index < m_torrentsMap.size())
 	{
-		return m_filteredTorrents.at(index).value();
+		return m_torrents.at(index).value();
 	}
 	else
 	{
@@ -179,17 +179,17 @@ void TorrentStorrage::clear()
 
 int TorrentStorrage::count()
 {
-	return m_filteredTorrents.count();
+	return m_torrents.count();
 }
 
 TorrentStorrage::TorrentStorrage(QObject* parrent/*=NULL*/) : QObject(parrent)
 {
 	locker = new QMutex();
-	m_torrentFilter = NONE;
+	//m_torrentFilter = NONE;
 	timer = new QTimer();
 	timer->setInterval(1000);
-	QObject::connect(timer, SIGNAL(timeout()), this, SLOT(filterData()));
-	timer->start();
+	/*QObject::connect(timer, SIGNAL(timeout()), this, SLOT(filterData()));
+	timer->start();*/
 }
 
 Torrent* TorrentStorrage::operator[](int index)
@@ -206,7 +206,7 @@ void TorrentStorrage::sort()
 {
 	qSort(m_torrents.begin(), m_torrents.end(), LessThan);
 }
-
+/*
 void TorrentStorrage::setTorrentFilter(TorrentFilterType filter)
 {
 	libtorrent::get_libtorrent_category();
@@ -339,7 +339,7 @@ void TorrentStorrage::filterByGroup()
 			}
 		}
 	}
-}
+}*/
 
 
 

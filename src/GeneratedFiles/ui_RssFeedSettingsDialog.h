@@ -40,28 +40,24 @@ public:
     QWidget *m_centralWidget;
     QGridLayout *gridLayout;
     QDialogButtonBox *buttonBox;
-    QLineEdit *lineEdit;
-    QGroupBox *groupBox;
+    QLineEdit *m_pRssUrlEdit;
+    QGroupBox *m_pRssAutoDownloadGroupBox;
     QGridLayout *gridLayout_2;
-    QGroupBox *groupBox_2;
+    QCheckBox *m_pUseGroupsCheckBox;
+    QGroupBox *m_pUseSavePathGroupBox;
     QGridLayout *gridLayout_3;
     QLabel *label_2;
-    QLineEdit *lineEdit_2;
-    QPushButton *pushButton;
-    QCheckBox *checkBox;
-    QGroupBox *groupBox_3;
-    QGridLayout *gridLayout_4;
-    QLineEdit *lineEdit_3;
-    QLabel *label_4;
+    QLineEdit *m_pSavePathEdit;
+    QPushButton *m_pBrowseButton;
     QLabel *label;
     QLabel *label_3;
-    QSpinBox *spinBox;
+    QSpinBox *m_pRefreshRateSpinBox;
 
     void setupUi(QWidget *RssSettings)
     {
         if (RssSettings->objectName().isEmpty())
             RssSettings->setObjectName(QString::fromUtf8("RssSettings"));
-        RssSettings->resize(417, 294);
+        RssSettings->resize(417, 235);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
         RssSettings->setWindowIcon(icon);
@@ -124,72 +120,54 @@ public:
 
         gridLayout->addWidget(buttonBox, 4, 0, 1, 3);
 
-        lineEdit = new QLineEdit(m_centralWidget);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        m_pRssUrlEdit = new QLineEdit(m_centralWidget);
+        m_pRssUrlEdit->setObjectName(QString::fromUtf8("m_pRssUrlEdit"));
+        m_pRssUrlEdit->setEnabled(false);
 
-        gridLayout->addWidget(lineEdit, 0, 1, 1, 1);
+        gridLayout->addWidget(m_pRssUrlEdit, 0, 1, 1, 1);
 
-        groupBox = new QGroupBox(m_centralWidget);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setCheckable(true);
-        groupBox->setChecked(false);
-        gridLayout_2 = new QGridLayout(groupBox);
+        m_pRssAutoDownloadGroupBox = new QGroupBox(m_centralWidget);
+        m_pRssAutoDownloadGroupBox->setObjectName(QString::fromUtf8("m_pRssAutoDownloadGroupBox"));
+        m_pRssAutoDownloadGroupBox->setCheckable(true);
+        m_pRssAutoDownloadGroupBox->setChecked(false);
+        gridLayout_2 = new QGridLayout(m_pRssAutoDownloadGroupBox);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        groupBox_2 = new QGroupBox(groupBox);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        m_pUseGroupsCheckBox = new QCheckBox(m_pRssAutoDownloadGroupBox);
+        m_pUseGroupsCheckBox->setObjectName(QString::fromUtf8("m_pUseGroupsCheckBox"));
+
+        gridLayout_2->addWidget(m_pUseGroupsCheckBox, 1, 0, 1, 2);
+
+        m_pUseSavePathGroupBox = new QGroupBox(m_pRssAutoDownloadGroupBox);
+        m_pUseSavePathGroupBox->setObjectName(QString::fromUtf8("m_pUseSavePathGroupBox"));
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(groupBox_2->sizePolicy().hasHeightForWidth());
-        groupBox_2->setSizePolicy(sizePolicy);
-        groupBox_2->setCheckable(true);
-        groupBox_2->setChecked(false);
-        gridLayout_3 = new QGridLayout(groupBox_2);
+        sizePolicy.setHeightForWidth(m_pUseSavePathGroupBox->sizePolicy().hasHeightForWidth());
+        m_pUseSavePathGroupBox->setSizePolicy(sizePolicy);
+        m_pUseSavePathGroupBox->setCheckable(true);
+        m_pUseSavePathGroupBox->setChecked(false);
+        gridLayout_3 = new QGridLayout(m_pUseSavePathGroupBox);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        label_2 = new QLabel(groupBox_2);
+        label_2 = new QLabel(m_pUseSavePathGroupBox);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
         gridLayout_3->addWidget(label_2, 0, 0, 1, 1);
 
-        lineEdit_2 = new QLineEdit(groupBox_2);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
+        m_pSavePathEdit = new QLineEdit(m_pUseSavePathGroupBox);
+        m_pSavePathEdit->setObjectName(QString::fromUtf8("m_pSavePathEdit"));
 
-        gridLayout_3->addWidget(lineEdit_2, 0, 1, 1, 1);
+        gridLayout_3->addWidget(m_pSavePathEdit, 0, 1, 1, 1);
 
-        pushButton = new QPushButton(groupBox_2);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        m_pBrowseButton = new QPushButton(m_pUseSavePathGroupBox);
+        m_pBrowseButton->setObjectName(QString::fromUtf8("m_pBrowseButton"));
 
-        gridLayout_3->addWidget(pushButton, 0, 2, 1, 1);
-
-
-        gridLayout_2->addWidget(groupBox_2, 0, 0, 1, 2);
-
-        checkBox = new QCheckBox(groupBox);
-        checkBox->setObjectName(QString::fromUtf8("checkBox"));
-
-        gridLayout_2->addWidget(checkBox, 1, 0, 1, 2);
-
-        groupBox_3 = new QGroupBox(groupBox);
-        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        groupBox_3->setCheckable(true);
-        groupBox_3->setChecked(false);
-        gridLayout_4 = new QGridLayout(groupBox_3);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        lineEdit_3 = new QLineEdit(groupBox_3);
-        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
-
-        gridLayout_4->addWidget(lineEdit_3, 0, 1, 1, 1);
-
-        label_4 = new QLabel(groupBox_3);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-
-        gridLayout_4->addWidget(label_4, 0, 0, 1, 1);
+        gridLayout_3->addWidget(m_pBrowseButton, 0, 2, 1, 1);
 
 
-        gridLayout_2->addWidget(groupBox_3, 2, 0, 1, 2);
+        gridLayout_2->addWidget(m_pUseSavePathGroupBox, 0, 0, 1, 2);
 
 
-        gridLayout->addWidget(groupBox, 1, 0, 1, 2);
+        gridLayout->addWidget(m_pRssAutoDownloadGroupBox, 1, 0, 1, 2);
 
         label = new QLabel(m_centralWidget);
         label->setObjectName(QString::fromUtf8("label"));
@@ -201,11 +179,11 @@ public:
 
         gridLayout->addWidget(label_3, 2, 0, 1, 1);
 
-        spinBox = new QSpinBox(m_centralWidget);
-        spinBox->setObjectName(QString::fromUtf8("spinBox"));
-        spinBox->setMaximum(300);
+        m_pRefreshRateSpinBox = new QSpinBox(m_centralWidget);
+        m_pRefreshRateSpinBox->setObjectName(QString::fromUtf8("m_pRefreshRateSpinBox"));
+        m_pRefreshRateSpinBox->setMaximum(300);
 
-        gridLayout->addWidget(spinBox, 2, 1, 1, 1);
+        gridLayout->addWidget(m_pRefreshRateSpinBox, 2, 1, 1, 1);
 
 
         verticalLayout->addWidget(m_centralWidget);
@@ -221,16 +199,14 @@ public:
         RssSettings->setWindowTitle(QApplication::translate("RssSettings", "RSS_FEED_SETTINGS", 0, QApplication::UnicodeUTF8));
         tbMenu->setText(QString());
         LTitle->setText(QApplication::translate("RssSettings", "RSS_SETTINGS", 0, QApplication::UnicodeUTF8));
-        groupBox->setTitle(QApplication::translate("RssSettings", "RSS_AUTO_DOWNLOAD", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("RssSettings", "USE_SAVE_PATH", 0, QApplication::UnicodeUTF8));
+        m_pRssAutoDownloadGroupBox->setTitle(QApplication::translate("RssSettings", "RSS_AUTO_DOWNLOAD", 0, QApplication::UnicodeUTF8));
+        m_pUseGroupsCheckBox->setText(QApplication::translate("RssSettings", "USE_GROUPS_FOR_FILTERING", 0, QApplication::UnicodeUTF8));
+        m_pUseSavePathGroupBox->setTitle(QApplication::translate("RssSettings", "USE_SAVE_PATH", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("RssSettings", "SAVE_PATH", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("RssSettings", "BROWSE", 0, QApplication::UnicodeUTF8));
-        checkBox->setText(QApplication::translate("RssSettings", "USE_GROUPS_FOR_FILTERING", 0, QApplication::UnicodeUTF8));
-        groupBox_3->setTitle(QApplication::translate("RssSettings", "DOWNLOAD_IF_CONTAINS", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("RssSettings", "CONTAINTAINS_IN_TIITLE_OR_DESC", 0, QApplication::UnicodeUTF8));
+        m_pBrowseButton->setText(QApplication::translate("RssSettings", "BROWSE", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("RssSettings", "RSS_URL", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("RssSettings", "RSS_REFRASH_RATE", 0, QApplication::UnicodeUTF8));
-        spinBox->setSuffix(QApplication::translate("RssSettings", " MINUTES", 0, QApplication::UnicodeUTF8));
+        m_pRefreshRateSpinBox->setSuffix(QApplication::translate("RssSettings", " MINUTES", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
