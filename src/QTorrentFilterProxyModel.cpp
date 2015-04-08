@@ -2,40 +2,54 @@
 #include "QTorrentDisplayModel.h"
 #include <QtCore>
 QTorrentFilterProxyModel::QTorrentFilterProxyModel(QObject* parent) : QSortFilterProxyModel(parent), m_torrentFilter(EMPTY), m_currentFilterType(TORRENT), m_pUpdateLocker()
-{}
+{
+	m_pUpdateTimer = new QTimer(this);
+	m_pUpdateTimer->setInterval(1000);
+	QObject::connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(Update()));
+	m_pUpdateTimer->start();
+}
 
 bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const
 {
 	QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
-	switch (m_currentFilterType)
+	if (index.isValid())
 	{
-		case QTorrentFilterProxyModel::GROUP:
-			return index.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>()->GetGroup().compare(m_groupFilter) == 0;
-		case QTorrentFilterProxyModel::TORRENT:
+		Torrent* pTorrent = index.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>();
+		if (pTorrent != NULL)
 		{
-			Torrent* pTorrent = index.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>();
-			switch (m_torrentFilter)
+			switch (m_currentFilterType)
 			{
-			case ACTIVE:
-				return pTorrent->isActive();
-			case NOT_ACTIVE:
-				return !pTorrent->isActive();
-			case SEEDING:
-				return pTorrent->isSeeding();
-			case DOWNLOADING:
-				return pTorrent->isDownloading();
-			case COMPLETED:
-				return pTorrent->GetProgress() == 100;
-			case EMPTY:
-				return true;
-			default:
-				break;
+				case QTorrentFilterProxyModel::GROUP:
+					return pTorrent->GetGroup().compare(m_groupFilter) == 0;
+				case QTorrentFilterProxyModel::TORRENT:
+				{
+
+					switch (m_torrentFilter)
+					{
+					case ACTIVE:
+						return pTorrent->isActive();
+					case NOT_ACTIVE:
+						return !pTorrent->isActive();
+					case SEEDING:
+						return pTorrent->isSeeding();
+					case DOWNLOADING:
+						return pTorrent->isDownloading();
+					case COMPLETED:
+						return pTorrent->GetProgress() == 100;
+					case EMPTY:
+						return true;
+					default:
+						break;
+					}
+					break;
+				}
+				default:
+					break;
 			}
-			break;
 		}
-	default:
-		break;
+		
 	}
+	
 	return true;
 }
 

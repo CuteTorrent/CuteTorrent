@@ -127,7 +127,7 @@ public:
     {
         if (CustomWindow->objectName().isEmpty())
             CustomWindow->setObjectName(QString::fromUtf8("CustomWindow"));
-        CustomWindow->setWindowModality(Qt::ApplicationModal);
+        CustomWindow->setWindowModality(Qt::NonModal);
         CustomWindow->resize(532, 620);
         CustomWindow->setMouseTracking(true);
         CustomWindow->setStyleSheet(QString::fromUtf8(""));
@@ -678,7 +678,7 @@ public:
         QObject::connect(ACTION_TOOLBAR_RSS_EDIT, SIGNAL(triggered()), CustomWindow, SLOT(editRssFeed()));
         QObject::connect(ACTION_TOOLBAR_RSS_REMOVE, SIGNAL(triggered()), CustomWindow, SLOT(removeRssFeed()));
 
-        m_pInfoPlaneContainer->setCurrentIndex(1);
+        m_pInfoPlaneContainer->setCurrentIndex(0);
         m_pTabWidget->setCurrentIndex(0);
         m_pToolBarsContainer->setCurrentIndex(0);
 

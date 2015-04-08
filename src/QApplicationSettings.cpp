@@ -363,24 +363,6 @@ QList<SearchItem> QApplicationSettings::GetSearchSources()
 	return res;
 }
 
-void QApplicationSettings::setSearchSources(QList<SearchItem> searchSources)
-{
-	settings->beginGroup("Search");
-	settings->setValue("size", searchSources.size());
-	settings->endGroup();
-	settings->beginWriteArray("Search");
-
-	for(int i = 0; i < searchSources.size(); i++)
-	{
-		settings->setArrayIndex(i);
-		SearchItem item = searchSources[i];
-		settings->setValue("name", item.getName());
-		settings->setValue("pattern", item.getPattern());
-	}
-
-	settings->endArray();
-}
-
 void QApplicationSettings::SaveSchedullerQueue(QList<SchedulerTask>& tasks)
 {
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
@@ -388,7 +370,7 @@ void QApplicationSettings::SaveSchedullerQueue(QList<SchedulerTask>& tasks)
 
 	if(!file.open(QFile::WriteOnly))
 	{
-		MyMessageBox::warning(NULL, "", "Error open for writing CT_DATA/schedulertasks.xml");
+		MyMessageBox::warning(NULL, "", "Error open for writing BtSessionData/schedulertasks.xml");
 		return;
 	}
 

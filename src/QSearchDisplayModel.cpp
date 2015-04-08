@@ -2,7 +2,7 @@
 #include "QSearchDisplayModel.h"
 #include "StaticHelpers.h"
 
-QSearchDisplayModel::QSearchDisplayModel(SearchEngine* pSearchEngine, QTreeView* pTorrentListView) : QAbstractListModel()
+QSearchDisplayModel::QSearchDisplayModel(SearchEngine* pSearchEngine, QTreeView* pTorrentListView, QObject* parent) : QAbstractListModel(parent)
 {
 	if(pSearchEngine == NULL)
 	{

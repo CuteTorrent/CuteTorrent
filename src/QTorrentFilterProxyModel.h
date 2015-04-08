@@ -18,6 +18,7 @@ public:
 	QTorrentFilterProxyModel(QObject *parent = 0);
 	void setGroupFilter(QString groupName);
 	void setTorrentFilter(TorrentFilterType activityFilter);
+private slots:
 	void Update();
 private:
 	enum InternalFilterType
@@ -25,6 +26,7 @@ private:
 		GROUP,
 		TORRENT
 	};
+	QTimer* m_pUpdateTimer;
 	QMutex* m_pUpdateLocker;
 	InternalFilterType m_currentFilterType;
 	QString m_groupFilter;

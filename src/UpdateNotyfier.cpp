@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QUrl>
 #include <QStringList>
 #include "QBaloon.h"
-UpdateNotifier::UpdateNotifier()
+UpdateNotifier::UpdateNotifier(QObject* parent) : QObject(parent)
 {
 	m_manager = new QNetworkAccessManager(this);
 	connect(m_manager, SIGNAL(finished(QNetworkReply*)),

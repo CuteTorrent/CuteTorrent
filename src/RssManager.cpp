@@ -13,11 +13,7 @@ RssManager::RssManager(QObject* parent) : QObject(parent)
 {
 	
 	m_pSettings = QApplicationSettings::getInstance();
-	
-	
-	
-	LoadFeeds();
-	
+	QTimer::singleShot(1000, this, SLOT(LoadFeeds()));
 }
 
 RssFeed* RssManager::addFeed(QUrl url, bool& isNew)
@@ -97,9 +93,29 @@ void RssManager::LoadFeeds()
 			dataStream >> *tempFeed;
 			m_pFeeds.append(tempFeed);
 			tempFeed->Update();
+			connect(tempFeed, SIGNAL(FeedChanged(QUuid)), SIGNAL(FeedChanged(QUuid)));
 		}
 		feedsDat.close();
 	}
+}
+
+void RssManager::removeFeed(QUuid uid)
+{
+	int index = 0;
+	foreach(RssFeed* pFeed, m_pFeeds)
+	{
+		if (pFeed->uid() == uid)
+		{
+			break;
+		}
+		index++;
+	}
+	RssFeed* pFeed2Remove = m_pFeeds.at(index);
+	m_pFeeds.removeAt(index);
+	disconnect(pFeed2Remove, SIGNAL(FeedChanged(QUuid)), this, SIGNAL(FeedChanged(QUuid)));
+	pFeed2Remove->deleteLater();
+	pFeed2Remove = NULL;
+	emit FeedChanged(uid);
 }
 
 boost::weak_ptr<RssManager> RssManager::m_sInstrance;

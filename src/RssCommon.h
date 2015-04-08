@@ -9,3 +9,6 @@ class RssFeed;
 
 class RssParser;
 typedef boost::shared_ptr<RssParser> RssParserPtr;
+
+class RssDownloader;
+typedef boost::shared_ptr<RssDownloader> RssDownloaderPtr;

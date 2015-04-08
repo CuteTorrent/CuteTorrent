@@ -55,8 +55,8 @@ bool Torrent::hasError() const
 bool Torrent::isActive() const
 {
 	torrent_status status = m_hTorrent.status();
-	return (status.download_rate > 2 * 1024 ||
-	        status.upload_rate > 2 * 1024 ||
+	return (status.download_rate > 2 * KbInt ||
+	        status.upload_rate > 2 * KbInt ||
 	        status.state == torrent_status::checking_files);
 }
 std::vector<peer_info> Torrent::GetPeerInfo()
@@ -184,7 +184,7 @@ QStringList& Torrent::GetImageFiles()
 	return imageFiles;
 }
 Torrent::Torrent(libtorrent::torrent_handle torrentStatus, QString group)
-	: QObject(0), mountable(false) , m_hasMedia(false) , m_hTorrent(torrentStatus) , size(0)
+	: QObject(0), mountable(false), m_hasMedia(false), m_hTorrent(torrentStatus), size(0), m_isPrevSeed(false)
 {
 	file_storage storrgae = m_hTorrent.torrent_file()->files();
 	this->group = group;
@@ -220,45 +220,6 @@ Torrent::Torrent(libtorrent::torrent_handle torrentStatus, QString group)
 	else
 	{
 		icon = QIcon(":/icons/my-folder.ico");
-		type = "folder";
-	}
-}
-
-Torrent::Torrent(const Torrent& other)
-{
-	m_hTorrent = other.m_hTorrent;
-	file_storage storrgae = m_hTorrent.torrent_file()->files();
-	
-	for (int i = 0; i < storrgae.num_files(); ++i)
-	{
-		QFileInfo curfile(QString::fromUtf8(storrgae.file_path(i).c_str()));
-		QString currentSuffix = curfile.suffix().toLower();
-
-		if(m_hTorrent.file_priority(i) > 0 && StyleEngene::suffixes[StyleEngene::DISK].contains(currentSuffix))
-		{
-			imageFiles << QString::fromUtf8(m_hTorrent.status(torrent_handle::query_save_path).save_path.c_str()) + QString::fromUtf8(storrgae.file_path(i).c_str());
-		}
-
-		if(m_hTorrent.file_priority(i) > 0)
-		{
-			if(StyleEngene::suffixes[StyleEngene::VIDEO].contains(currentSuffix) || StyleEngene::suffixes[StyleEngene::AUDIO].contains(currentSuffix))
-			{
-				m_hasMedia = true;
-			}
-
-			size += storrgae.file_size(i);
-		}
-	}
-
-	base_suffix = StaticHelpers::GetBaseSuffix(storrgae);
-
-	if(!base_suffix.isEmpty())
-	{
-		icon = StyleEngene::getInstance()->guessMimeIcon(base_suffix, type);
-	}
-	else
-	{
-		icon = StyleEngene::getInstance()->getIcon("folder");
 		type = "folder";
 	}
 }
@@ -322,7 +283,7 @@ QString Torrent::GetDwonloadSpeed()
 {
 	if(m_hTorrent.is_valid())
 	{
-		return (m_hTorrent.status().download_rate > 2 * 1024) ? StaticHelpers::toKbMbGb(m_hTorrent.status().download_rate) + "\\s" : "";
+		return (m_hTorrent.status().download_rate > 2 * KbInt) ? StaticHelpers::toKbMbGb(m_hTorrent.status().download_rate) + "\\s" : "";
 	}
 
 	return "";
@@ -331,7 +292,7 @@ QString Torrent::GetDwonloadSpeed() const
 {
 	if(m_hTorrent.is_valid())
 	{
-		return (m_hTorrent.status().download_rate > 2 * 1024) ? StaticHelpers::toKbMbGb(m_hTorrent.status().download_rate) + "\\s" : "";
+		return (m_hTorrent.status().download_rate > 2 * KbInt) ? StaticHelpers::toKbMbGb(m_hTorrent.status().download_rate) + "\\s" : "";
 	}
 
 	return "";
@@ -340,7 +301,7 @@ QString Torrent::GetUploadSpeed()
 {
 	if(m_hTorrent.is_valid())
 	{
-		return (m_hTorrent.status().upload_rate > 2 * 1024) ? StaticHelpers::toKbMbGb(m_hTorrent.status().upload_rate) + "\\s" : "";
+		return (m_hTorrent.status().upload_rate > 2 * KbInt) ? StaticHelpers::toKbMbGb(m_hTorrent.status().upload_rate) + "\\s" : "";
 	}
 
 	return "";
@@ -350,7 +311,7 @@ QString Torrent::GetUploadSpeed() const
 {
 	if(m_hTorrent.is_valid())
 	{
-		return (m_hTorrent.status().upload_rate > 2 * 1024) ? StaticHelpers::toKbMbGb(m_hTorrent.status().upload_rate) + "\\s" : "";
+		return (m_hTorrent.status().upload_rate > 2 * KbInt) ? StaticHelpers::toKbMbGb(m_hTorrent.status().upload_rate) + "\\s" : "";
 	}
 
 	return "";
@@ -504,7 +465,7 @@ QString Torrent::GetRemainingTime()
 
 		torrent_status status = m_hTorrent.status(torrent_handle::query_accurate_download_counters);
 
-		if(status.download_rate < 1024 * 10)
+		if(status.download_rate < KbInt * 10)
 		{
 			res.append(QChar(8734));
 		}

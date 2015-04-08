@@ -1,6 +1,7 @@
 #include <QtCore>
 #include <QtNetwork>
 class StyleEngene;
+class NetworkDiskCache;
 class FaviconDownloader : QObject
 {
 	Q_OBJECT
@@ -9,9 +10,10 @@ public:
 	~FaviconDownloader();
 	QPixmap getFavicon(QString url);
 private:
+	QMutex* m_pSynkMutex;
 	StyleEngene* m_pStyleEngine;
 	QNetworkAccessManager* m_pNatworkManager;
-	QNetworkDiskCache* m_pDiskCache;
+	NetworkDiskCache* m_pDiskCache;
 	QPixmap getFromWeb(QUrl url);
 	QList<QString> downloadingList;
 	QHash<QString, QString> redirectionMap;

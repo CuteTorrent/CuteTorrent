@@ -9,7 +9,7 @@ class QRssItemDelegate :
 {
 	Q_OBJECT
 public:
-	QRssItemDelegate();
+	QRssItemDelegate(QObject* parent = 0);
 	~QRssItemDelegate();
 	QSize margin(const QStyle& style) const;
 	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;

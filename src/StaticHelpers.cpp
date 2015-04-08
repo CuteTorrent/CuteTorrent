@@ -27,10 +27,10 @@ QString StaticHelpers::toKbMbGb(libtorrent::size_type size)
 	int i = 0;
 	float dblSByte = val;
 
-	if(size > 1024)
-		for(i ; (libtorrent::size_type)(val / 1024) > 0; i++, val /= 1024)
+	if(size > KbInt)
+		for(i ; (libtorrent::size_type)(val / KbInt) > 0; i++, val /= KbInt)
 		{
-			dblSByte = val / 1024.f;
+			dblSByte = val / KbFloat;
 		}
 
 	QString str = QString::number(dblSByte, 'f', i == 0 ? 0 : 2);
@@ -52,33 +52,32 @@ void StaticHelpers::dellDir(QString dirName)
 }
 QString StaticHelpers::filePriorityToString(int priority)
 {
-	static char* priority_str[] = { QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_ZERO"), 
-									QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_LOW"), 
-									QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_MEDIUM"), 
-									QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_HIGH") };
+	static char* priority_str[] = { QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_ZERO"),
+		QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_LOW"),
+		QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_MEDIUM"),
+		QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_HIGH") };
 
-	if(priority > 0)
+
+	if (priority == 0)
 	{
-		if(priority == 0)
-		{
-			return qApp->translate("FileViewModel", priority_str[0]);
-		}
-
-		if(priority < 3)
-		{
-			return qApp->translate("FileViewModel", priority_str[1]);
-		}
-
-		if(priority >= 3 && priority < 6)
-		{
-			return qApp->translate("FileViewModel", priority_str[2]);
-		}
-
-		if(priority >= 6)
-		{
-			return qApp->translate("FileViewModel", priority_str[3]);
-		}
+		return qApp->translate("FileViewModel", priority_str[0]);
 	}
+
+	if (priority < 3)
+	{
+		return qApp->translate("FileViewModel", priority_str[1]);
+	}
+
+	if (priority >= 3 && priority < 6)
+	{
+		return qApp->translate("FileViewModel", priority_str[2]);
+	}
+
+	if (priority >= 6)
+	{
+		return qApp->translate("FileViewModel", priority_str[3]);
+	}
+
 
 	return "";
 }
@@ -424,18 +423,18 @@ QString StaticHelpers::CombinePathes(QString path, QString suffix)
 	return QDir::toNativeSeparators(QDir::cleanPath(path + QDir::separator() + suffix));
 }
 
-QNetworkDiskCache* StaticHelpers::GetGLobalWebCache()
+NetworkDiskCache* StaticHelpers::GetGLobalWebCache()
 {
 	if (m_pDiskCache == NULL)
 	{
-		m_pDiskCache = new QNetworkDiskCache();
+		m_pDiskCache = new NetworkDiskCache();
 		m_pDiskCache->setCacheDirectory(QDesktopServices::storageLocation(QDesktopServices::CacheLocation) + "/WebCache");
-		m_pDiskCache->setMaximumCacheSize(50 * 1024 * 1024);
-		qDebug() << "RssManager  cache path:" << m_pDiskCache->cacheDirectory() << " max size:" << m_pDiskCache->maximumCacheSize() / 1024 / 1024 << "MB";
+		m_pDiskCache->setMaximumCacheSize(50 * KbInt * KbInt);
+		qDebug() << "RssManager  cache path:" << m_pDiskCache->cacheDirectory() << " max size:" << m_pDiskCache->maximumCacheSize() / KbInt / KbInt << "MB";
 	}
 	return m_pDiskCache;
 }
 
-QNetworkDiskCache* StaticHelpers::m_pDiskCache = NULL;
+NetworkDiskCache* StaticHelpers::m_pDiskCache = NULL;
 
 

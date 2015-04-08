@@ -1,5 +1,5 @@
 ﻿#include "RutorSearchProvider.h"
-
+#include "defs.h"
 QString RutorSearchProvider::Name()
 {
 	return "Rutor";
@@ -166,19 +166,19 @@ void RutorSearchProvider::ParseTableBody(QSgmlTag::QSgmlTaglist tableBody, QSgml
 							switch (parts1[1][0].toLower().toLatin1())
 							{
 								case 'k':
-									size *= 1024.0;
+									size *= KbFloat;
 									break;
 
 								case 'm':
-									size *= 1024 * 1024.0;
+									size *= KbInt * KbFloat;
 									break;
 
 								case 'g':
-									size *= 1024 * 1024 * 1024.0;
+									size *= KbInt * KbInt * KbFloat;
 									break;
 
 								case 't':
-									size *= 1024 * 1024 * 1024 * 1024.0;
+									size *= KbInt * KbInt * KbInt * KbFloat;
 									break;
 
 								case 'b':

@@ -19,7 +19,7 @@ int MAX3(int a, int b, int c)
 }
 }
 int QSearchItemDelegate::max_width = 0;
-QSearchItemDelegate::QSearchItemDelegate() : QStyledItemDelegate(), m_pStyleEngine(StyleEngene::getInstance())
+QSearchItemDelegate::QSearchItemDelegate(QObject* parent) : QStyledItemDelegate(parent), m_pStyleEngine(StyleEngene::getInstance())
 {
 }
 

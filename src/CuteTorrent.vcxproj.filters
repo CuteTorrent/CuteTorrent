@@ -556,6 +556,21 @@
     <ClCompile Include="GeneratedFiles\Release\moc_RssFeed.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="torrentdownloader.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_torrentdownloader.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NotificationSystem.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_NotificationSystem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_NetworkDiskCache.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="http\httpcookie.h">
@@ -694,6 +709,9 @@
     <ClInclude Include="RssCommon.h">
       <Filter>Rss</Filter>
     </ClInclude>
+    <ClInclude Include="ServiceCommon.h">
+      <Filter>Service</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Release\CuteTorrent.res">
@@ -822,6 +840,15 @@
     </CustomBuild>
     <CustomBuild Include="RssFeed.h">
       <Filter>Rss</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrentdownloader.h">
+      <Filter>Service</Filter>
+    </CustomBuild>
+    <CustomBuild Include="NotificationSystem.h">
+      <Filter>Service</Filter>
+    </CustomBuild>
+    <CustomBuild Include="NetworkDiskCache.h">
+      <Filter>Service</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

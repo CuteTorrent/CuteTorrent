@@ -91,7 +91,7 @@ using namespace libtorrent;
 #include "TorrentStorrage.h"
 #include "defs.h"
 #include "RssFeed.h"
-
+#include "ServiceCommon.h"
 class QApplicationSettings;
 class QTorrentDisplayModel;
 class Torrent;
@@ -110,9 +110,7 @@ class TorrentManager : public QObject
 	Q_OBJECT
 signals:
 	void AddTorrentGui(Torrent*);
-	void TorrentError(const QString&, const QString&);
-	void TorrentCompleted(const QString&, const QString&);
-	void TorrentInfo(const QString&, const QString&);
+	void Notify(int, QString, QVariant);
 	void initCompleted();
 	void TorrentRemove(QString);
 	void OnNewFeed();
@@ -133,14 +131,13 @@ private:
 	libtorrent::session* m_pTorrentSession;
 	QApplicationSettings* m_pTorrentSessionSettings;
 	int save_file(std::string const& filename, std::vector<char>& v);
-//settingsData TODO implement a container
 	QString DTInstallPath;
 	int max_connections_per_torrent;
 	int listen_port;
 	QString ipFilterFileName;
 	bool useProxy;
 	libtorrent::proxy_settings ps;
-//settingsData end
+	NotificationSystemPtr m_pNotificationSys;
 	
 
 public:
@@ -177,6 +174,7 @@ public:
 	int GetUploadLimit();
 	Torrent* GetTorrentByInfoHash(const sha1_hash& hash);
 	Torrent* GetTorrentByInfoHash(QString hash);
+	void RereshPortForwardingSettings();
 };
 Q_DECLARE_METATYPE(opentorrent_info);
 

@@ -7,6 +7,7 @@ FaviconDownloader::FaviconDownloader(QObject* parent) : QObject(parent), m_pStyl
 	m_pNatworkManager = new QNetworkAccessManager(this);
 	m_pDiskCache = StaticHelpers::GetGLobalWebCache();
 	m_pNatworkManager->setCache(m_pDiskCache);
+	m_pSynkMutex = new QMutex();
 	QObject::connect(m_pNatworkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyReady(QNetworkReply*)));
 }
 
@@ -20,14 +21,16 @@ QPixmap FaviconDownloader::getFavicon(QString urlStr)
 {
 	QUrl url(urlStr);
 	
-	QString faviconUrl = QString("%1://%2/favicon.ico").arg(url.scheme(), url.host());
-	boost::scoped_ptr<QIODevice> pData(m_pDiskCache->data(faviconUrl));
+	QString faviconUrlStr = QString("%1://%2/favicon.ico").arg(url.scheme(), url.host());
+	QUrl faviconUrl(faviconUrlStr);
+	QIODevice* pData = m_pDiskCache->data(faviconUrl);
 	if (pData != NULL)
 	{
 		qDebug() << "Found icon in cache " << faviconUrl;
 		QByteArray iconData = pData->readAll();
 		QPixmap pixmap;
 		pixmap.loadFromData(iconData);
+		delete pData;
 		return pixmap;
 	}
 	return getFromWeb(faviconUrl);

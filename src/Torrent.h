@@ -41,6 +41,7 @@ class Torrent : public QObject
 private:
 	QMap<QString, int> trackerPeerCountMap;
 	bool m_hasMedia;
+	bool m_isPrevSeed;
 	torrent_handle m_hTorrent;
 	libtorrent::size_type size;
 	QIcon icon;
@@ -50,17 +51,18 @@ private:
 	QString type;
 	QString group;
 	QStringList imageFiles;
+	
 //	bool prevHaserror,prevIsCompleted;
 public :
 
-	Torrent(const Torrent& other);
+	Torrent(torrent_handle torrentStatus, QString group);
 	~Torrent() {};
 	void SetFilePriority(int index, int prioryty);
 	QString GetRemainingTime();
 	QStringList& GetImageFiles();
 	QString GetSuffix();
 	QString GetErrorMessage() const;
-	Torrent(torrent_handle torrentStatus, QString group);
+	
 	QString GetGroup();
 	QString GetDwonloadSpeed();
 	QString GetUploadSpeed();
@@ -83,6 +85,8 @@ public :
 	QIcon GetMimeTypeIcon() const;
 	QIcon GetMimeTypeIcon();
 	files_info GetFileDownloadInfo();
+	bool isPrevioslySeeded() const { return m_isPrevSeed;  }
+	void setIsPrevioslySeeded(bool value) { m_isPrevSeed = value; }
 	bool isPaused() const;
 	bool isSeeding() const;
 	bool isStoped() const;

@@ -48,7 +48,6 @@ protected:
 	virtual QLabel* getTitleIcon() override;
 private:
 	QApplicationSettings* settings;
-	QList<SearchItem> searchSources;
 	QList<GroupForFileFiltering> filterGroups;
 	QList<SchedulerTask> tasks;
 	QDateTimeEdit* previousFocuse;
@@ -56,7 +55,7 @@ private:
 	RconWebService* rcon;
 
 	void FillFilteringGroups();
-	void FillTorrentTab();
+	void FillGeneralTab();
 	void FillHDDTab();
 	void FillDTTab();
 	void FillWebUITab();
@@ -64,6 +63,8 @@ private:
 	void SetupSchedullerTab();
 	void FillSearchTab();
 	void FillNetworkTab();
+	void FillRestrictionTab();
+	void NeverCallMe();
 public:
 	SettingsDialog(QWidget* parent = 0, int flags = 0);
 	~SettingsDialog();
@@ -87,12 +88,8 @@ signals:
 	void UpdateSchedullerTab(int index);
 	void StartRcon();
 	void StopRcon();
-	void searchItemChanged(int index);
-	void addSearchitem();
-	void removeSearchItem();
 	void setupWindowIcons();
 	void OpenWebUI();
-	void FillRestrictionTab();
 };
 
 #endif // !_SETTINGS_DLG_H

@@ -3,7 +3,7 @@
  <class>CustomWindow</class>
  <widget class="QWidget" name="CustomWindow">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::NonModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -327,7 +327,7 @@
           </widget>
           <widget class="QStackedWidget" name="m_pInfoPlaneContainer">
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_3">
             <layout class="QGridLayout" name="gridLayout_11">

@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTimer>
 #include <QtGui/QMainWindow>
 #include <QtNetwork/QHostAddress>
-
+#include "defs.h"
 #include "CreateTorrentDialog.h"
 #include "CustomWindow.h"
 #include "FileViewModel.h"
@@ -79,6 +79,7 @@ class HtmlView;
 class CuteTorrent : public BaseWindow<QWidget> , private Ui::CustomWindow
 {
 	Q_OBJECT
+	
 public:
 	CuteTorrent(QWidget* parent = 0);
 	void ConnectMessageReceved(Application* a);
@@ -96,8 +97,8 @@ private:
 	void initToolbarIcons();
 	void initStatusBarIcons();
 	void initMainMenuIcons();
+	QTimer* m_pUpdateTimer;
 	StyleEngene* m_pStyleEngine;
-	QList<SearchItem> searchSources;
 	QComboBox* m_pTorrentSearchCategory;
 	QComboBox* m_pSearchCategory;
 	TorrentStorrage* m_pTorrents;
@@ -110,7 +111,6 @@ private:
 	UpdateNotifier* m_pUpdateNotifier;
 	HtmlView* m_pFeedItemDescribtionEdit;
 	QLabel* m_pFeedItemCommentEdit;
-	bool mayShowNotifies;
 	QSystemTrayIcon* m_pTrayIcon;
 	QSpinBox* ul, *dl;
 	QMenu* trayIconMenu;
@@ -174,13 +174,7 @@ public slots:
 	void UpdateDL(int);
 	void ShowAbout();
 	void CheckForUpdates();
-	void ShowUpdateNitify(const QString&);
-	void ShowNoUpdateNitify(const QString&);
 	void Retranslate();
-	void ShowTorrentError(const QString&, const QString&);
-	void EnableNitifyShow();
-	void ShowTorrentCompletedNotyfy(const QString&, const QString&);
-	void ShowTorrentInfoNotyfy(const QString&, const QString&);
 	void ShowCreateTorrentDialog();
 	void ShowOpenTorrentDialog();
 	void PauseSelected();
@@ -193,7 +187,9 @@ public slots:
 	void UpadteTrackerTab();
 	void OpenSettingsDialog();
 	void IconActivated(QSystemTrayIcon::ActivationReason reason);
-	void UpdateTabWidget(int);
+	void UpdateTabWidget();
+	void UpdateStatusbar();
+	void UpdateLimits();
 	void ProcessMagnet();
 	void PeformSearch();
 	void CopyDiscribtion();

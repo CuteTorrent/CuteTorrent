@@ -62,7 +62,6 @@ private:
 	QAction* GenerateMagnet;
 	TorrentManager* m_pTorrentManager;
 	Torrent* CurrentTorrent;
-	QTimer* timer;
 	QMutex* locker;
 	QTorrentFilterProxyModel* m_pProxyFilterModel;
 public:
@@ -89,12 +88,9 @@ public:
 	
 signals:
 	void initCompleted();
-	void updateTabSender(int);
 public slots:
 	void Update();
 	void UpdateSelectedIndex(const QItemSelection&);
-	/*	void TorrentErrorProxy(const QString &);
-	void TorrentCompletedProxy(const QString);*/
 	void contextualMenu(const QPoint&);
 	void OpenDirSelected();
 	void DellTorrentOnly();
@@ -105,7 +101,6 @@ public slots:
 	void playInPlayer();
 	void setSequentualDL();
 	void moveStorrage();
-	void updateVisibleTorrents();
 	void SetSuperSeed();
 	void initSessionFinished();
 	void generateMagnetLink();

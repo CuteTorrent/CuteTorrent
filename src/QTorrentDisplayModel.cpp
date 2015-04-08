@@ -45,11 +45,8 @@ QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterPr
 	selectedRow = -1;
 	setupContextMenu();
 	locker = new QMutex();
-	timer = new QTimer(this);
 	QObject::connect(m_pTorrentManager, SIGNAL(AddTorrentGui(Torrent*)), SLOT(OnAddTorrent()));
 	QObject::connect(m_pTorrentManager, SIGNAL(TorrentRemove(QString)), SLOT(Update()));
-	QObject::connect(timer, SIGNAL(timeout()), this, SLOT(updateVisibleTorrents()));
-	timer->start(1000);
 }
 void QTorrentDisplayModel::Rehash()
 {
@@ -106,28 +103,6 @@ void QTorrentDisplayModel::MountDT()
 				DT_mounter::mountImage(images.first());
 			}
 		}
-	}
-}
-void QTorrentDisplayModel::updateVisibleTorrents()
-{
-	QMutexLocker lockMutex(locker);
-
-	try
-	{
-		m_pTorrentManager->PostTorrentUpdate();
-
-		if (!m_pTorrentListView->isVisible() || m_pTorrentListView->model() != m_pProxyFilterModel)
-		{
-			return;
-		}
-
-	/*	QModelIndex top(index(0, 0)), bot(index(m_pTorrentStorrage->count(), 0));
-		emit dataChanged(top, bot);*/
-		emit updateTabSender(-1);
-	}
-	catch(...)
-	{
-		qDebug() << "Exception in QTorrentDisplayModel::updateVisibleTorrents";
 	}
 }
 void QTorrentDisplayModel::OpenDirSelected()
@@ -225,8 +200,6 @@ void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 		m_pTorrentListView->selectionModel()->reset();
 		selectedRow = -1;
 	}
-
-	emit updateTabSender(-1);
 }
 
 
@@ -240,19 +213,16 @@ void QTorrentDisplayModel::UpdateSelectedIndex(const QItemSelection& selection)
 	{
 		QModelIndexList indexes = selection.indexes();
 
-		if(indexes.count() == 1)
+		if(indexes.count() >= 1)
 		{
 			selectedRow = indexes[0].row();
-			CurrentTorrent = m_pTorrentStorrage->at(selectedRow);
+			CurrentTorrent = indexes[0].data(TorrentRole).value<Torrent*>();
 		}
 		else
 		{
-			m_pTorrentListView->selectionModel()->reset();
 			selectedRow = -1;
 			CurrentTorrent = NULL;
 		}
-
-		emit updateTabSender(-2);
 	}
 	catch(std::exception e)
 	{
@@ -304,6 +274,10 @@ Torrent* QTorrentDisplayModel::GetSelectedTorrent()
 
 void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 {
+	if (m_pTorrentListView->model() != m_pProxyFilterModel)
+	{
+		return;
+	}
 	try
 	{
 		QList<Torrent*> selectedTorrents;
@@ -312,7 +286,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 		foreach(QModelIndex index, indexes)
 		{
-			rows.append(index.row());
+			rows.append(m_pProxyFilterModel->mapToSource(index).row());
 			selectedTorrents.append(index.data(TorrentRole).value<Torrent*>());
 		}
 
@@ -358,24 +332,74 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 			case remove:
 			{
-				if(QMessageBox::Cancel != MyMessageBox::warning(m_pTorrentListView, tr("TORRENT_DELITION"), tr("TORRENT_DELITION_MSG"), QMessageBox::Ok | QMessageBox::Cancel))
-					foreach(int row, rows)
+				bool yesToAll = false;
+				foreach(int row, rows)
+				{
+					QMessageBox::StandardButton button;
+					if (!yesToAll)
+					{
+						Torrent* torrent = m_pTorrentStorrage->at(row);
+						QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No;
+						if (rows.length() > 1)
+						{
+							buttons |= QMessageBox::YesToAll;
+							buttons |= QMessageBox::NoToAll;
+						}
+						button = MyMessageBox::warning(m_pTorrentListView, tr("TORRENT_DELITION"), tr("TORRENT_DELITION_MSG").arg(torrent->GetName()), buttons);
+						if (button == QMessageBox::YesToAll)
+						{
+							yesToAll = true;
+						}
+						else if (button == QMessageBox::NoToAll)
+						{
+							break;
+						}
+					}
+					else
+					{
+						button = QMessageBox::YesToAll;
+					}
+					
+					if (QMessageBox::No != button || yesToAll)
 					{
 						removeRow(row, false);
 					}
+					
+				}
 			}
 			break;
 
 			case remove_all:
 			{
-				if(QMessageBox::Cancel != MyMessageBox::warning(m_pTorrentListView, tr("TORRENT_DELITION"), tr("TORRENT_ALL_DELITION_MSG"), QMessageBox::Ok | QMessageBox::Cancel))
+
+				bool yesToAll = false;
+				foreach(int row, rows)
 				{
-					foreach(int row, rows)
+					QMessageBox::StandardButton button;
+					if (!yesToAll)
+					{
+						Torrent* torrent = m_pTorrentStorrage->at(row);
+						button = MyMessageBox::warning(m_pTorrentListView, tr("TORRENT_DELITION"), tr("TORRENT_ALL_DELITION_MSG").arg(torrent->GetName()), QMessageBox::Yes | QMessageBox::No | QMessageBox::YesToAll | QMessageBox::NoToAll);
+						if (button == QMessageBox::YesToAll)
+						{
+							yesToAll = true;
+						}
+						else if (button == QMessageBox::NoToAll)
+						{
+							break;
+						}
+					}
+					else
+					{
+						button = QMessageBox::YesToAll;
+					}
+
+					if (QMessageBox::No != button || yesToAll)
 					{
 						removeRow(row, true);
 					}
-				}
 
+				}
 				break;
 			}
 
@@ -549,7 +573,6 @@ bool QTorrentDisplayModel::removeRows(int row, int count, const QModelIndex& par
 
 QTorrentDisplayModel::~QTorrentDisplayModel()
 {
-	timer->stop();
 	TorrentManager::freeInstance();
 	TorrentStorrage::freeInstance();
 }

@@ -8,7 +8,7 @@ class QSearchItemDelegate : public QStyledItemDelegate
 private:
 	StyleEngene* m_pStyleEngine;
 public:
-	QSearchItemDelegate();
+	QSearchItemDelegate(QObject* parent = 0);
 	~QSearchItemDelegate();
 	static int max_width;
 	virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;

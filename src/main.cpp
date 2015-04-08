@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define DEBUG
+#define Q_WS_WIN
 #include "CuteTorrent.h"
 #include <QDir>
 #include <qtsingleapplication.h>
@@ -29,7 +29,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTextCodec>
 #include "CuteTorentStyle.h"
 #include  "StyleEngene.h"
-#ifdef DEBUG
 
 void myMessageOutput(QtMsgType type, const char* msg)
 {
@@ -56,10 +55,6 @@ void myMessageOutput(QtMsgType type, const char* msg)
 
 	fflush(stdout);
 }
-
-#endif // DEBUG
-
-
 
 int main(int argc, char* argv[])
 {

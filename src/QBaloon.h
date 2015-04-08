@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QSystemTrayIcon>
 #include <QQueue>
+#include <QVariant>
 class QBalloonTip : public QWidget
 {
 

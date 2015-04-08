@@ -2,7 +2,6 @@
 #define _DEFS_H
 
 
-#define BOOST_ASIO_SEPARATE_COMPILATION
 #include "libtorrent/config.hpp"
 #include "libtorrent/file_storage.hpp"
 #include "libtorrent/torrent_handle.hpp"
@@ -20,7 +19,6 @@ struct openmagnet_info
 	libtorrent::file_storage files;
 	libtorrent::size_type size;
 };
-
 
 enum FilterType
 {
@@ -50,4 +48,6 @@ struct files_info
 	std::vector<int> priorities;
 };
 
+#define KbFloat 1024.0
+#define KbInt 1024
 #endif _DEFS_H

@@ -69,7 +69,7 @@ QBalloonTip::QBalloonTip(const QString& title, const QString& message, QBaloonTy
 	setObjectName("QBalloonTip");
 	Qt::WindowFlags flags = windowFlags();
 	setWindowFlags(flags | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-	setWindowModality(Qt::WindowModal);
+	setWindowModality(Qt::NonModal);
 	cuurentIcon = icon;
 	QLabel* titleLabel = new QLabel;
 	titleLabel->installEventFilter(this);

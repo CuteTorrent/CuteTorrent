@@ -5,7 +5,7 @@
 #include "RssCommon.h"
 #include <QTime>
 class QNetworkAccessManager;
-class QNetworkDiskCache;
+class NetworkDiskCache;
 class QNetworkReply;
 class QTimer;
 class QDataStream;
@@ -20,21 +20,25 @@ private:
 	QUuid m_uid;
 	QUrl m_url;
 	QNetworkAccessManager* m_pNetManager;
-	QNetworkDiskCache* m_pDiskCache;
 	QTime m_elapsedTime;
-	QString m_title, m_link, m_description, m_errorString;
+	QString m_title, m_link, m_description, m_errorString, m_customDisplayName;
 	bool m_isUpdating;
+	QList<RssItem> m_rssItemsByDate;
 	QHash<QString,RssItem> m_rssItems;
-	int m_ttl;
+	int m_ttl, m_unreadCount;
+	void calculateUnreadCount();
 signals:
 	void FeedChanged(QUuid);
 public:
 	RssFeed(QUrl url, QUuid uid);
+	QString displayName(bool noUnreadCount = false);
+	void setDisplayName(QString value);
 	QUrl url();
 	QUuid uid();
 	QString title();
 	QString description() const;
 	int ttl();
+	int unreadCount() const { return m_unreadCount; }
 	bool isUpdating() const { return m_isUpdating; }
 	QString error() const { return m_errorString; }
 	int next_update();
@@ -45,7 +49,6 @@ public slots:
 	void Update();
 private slots:
 	void resourceLoaded(QNetworkReply*);
-
 	
 };
 Q_DECLARE_METATYPE(RssFeed*)

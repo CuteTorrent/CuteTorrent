@@ -18,7 +18,7 @@ namespace
 	}
 }
 
-QRssItemDelegate::QRssItemDelegate()
+QRssItemDelegate::QRssItemDelegate(QObject* parent) : QStyledItemDelegate(parent)
 {
 	m_pFaviconDownloader = new FaviconDownloader();
 }
@@ -37,46 +37,62 @@ QSize QRssItemDelegate::margin(const QStyle& style) const
 
 void QRssItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-	RssBaseTreeItem* baseItem = static_cast<RssBaseTreeItem*>(index.internalPointer());
-	qDebug() << "BaseItemType" << baseItem->GetType();
-	switch (baseItem->GetType())
+	try
 	{
-		case RssBaseTreeItem::Feed:
+		RssBaseTreeItem* baseItem = static_cast<RssBaseTreeItem*>(index.internalPointer());
+		qDebug() << "BaseItemType" << baseItem->GetType();
+		switch (baseItem->GetType())
 		{
-			RssFeedTreeItem* pFeed = reinterpret_cast<RssFeedTreeItem*>(baseItem);
-			drawFeed(painter, option, index, pFeed);
-			break;
-		}
-		case RssBaseTreeItem::FeedItem:
-		{
-			RssFeedItemTreeItem* pFeedItem = reinterpret_cast<RssFeedItemTreeItem*>(baseItem);
-			drawFeedItem(painter, option, index, pFeedItem);
-			break;
+			case RssBaseTreeItem::Feed:
+			{
+				RssFeedTreeItem* pFeed = reinterpret_cast<RssFeedTreeItem*>(baseItem);
+				drawFeed(painter, option, index, pFeed);
+				break;
+			}
+			case RssBaseTreeItem::FeedItem:
+			{
+				RssFeedItemTreeItem* pFeedItem = reinterpret_cast<RssFeedItemTreeItem*>(baseItem);
+				drawFeedItem(painter, option, index, pFeedItem);
+				break;
+			}
 		}
 	}
+	catch (...)
+	{
+		
+	}
+	
 }
 
 QSize QRssItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-	RssBaseTreeItem* baseItem = static_cast<RssBaseTreeItem*>(index.internalPointer());
-	switch (baseItem->GetType())
+	try
 	{
-		case RssBaseTreeItem::Feed:
-		{
-			RssFeedTreeItem* pFeed = reinterpret_cast<RssFeedTreeItem*>(baseItem);
-			return feedSizeHint(option, pFeed);
-		}
-		case RssBaseTreeItem::FeedItem:
-		{
-			RssFeedItemTreeItem* pFeedItem = reinterpret_cast<RssFeedItemTreeItem*>(baseItem);
-			return feedItemSizeHint(option, pFeedItem);
-		}
-		default:
-		{
-			return QSize();
-		}
 
+		RssBaseTreeItem* baseItem = static_cast<RssBaseTreeItem*>(index.internalPointer());
+		switch (baseItem->GetType())
+		{
+			case RssBaseTreeItem::Feed:
+			{
+				RssFeedTreeItem* pFeed = reinterpret_cast<RssFeedTreeItem*>(baseItem);
+				return feedSizeHint(option, pFeed);
+			}
+			case RssBaseTreeItem::FeedItem:
+			{
+				RssFeedItemTreeItem* pFeedItem = reinterpret_cast<RssFeedItemTreeItem*>(baseItem);
+				return feedItemSizeHint(option, pFeedItem);
+			}
+			default:
+			{
+				return QSize();
+			}
+		}
 	}
+	catch (...)
+	{
+		
+	}
+	return QSize();
 }
 
 void QRssItemDelegate::drawFeed(QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex &index, RssFeedTreeItem* pFeed) const
@@ -84,7 +100,7 @@ void QRssItemDelegate::drawFeed(QPainter * painter, const QStyleOptionViewItem &
 	QStyleOptionViewItemV4 opt = option;
 	initStyleOption(&opt, index);
 	QStyle* style;
-
+	RssFeed* pRssFeed = pFeed->GetFeed();
 	if (opt.widget != NULL)
 	{
 		style = opt.widget->style();
@@ -97,19 +113,19 @@ void QRssItemDelegate::drawFeed(QPainter * painter, const QStyleOptionViewItem &
 	QFont nameFont(option.font);
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
-	const QPixmap favicon = m_pFaviconDownloader->getFavicon(pFeed->GetFeed()->url().toString());
+	const QPixmap favicon = m_pFaviconDownloader->getFavicon(pRssFeed->url().toString());
 
-	QString nameStr = QString("%1 - %2").arg(pFeed->GetFeed()->title(), pFeed->GetFeed()->description());
+	QString nameStr = pRssFeed->displayName();
 	QSize nameSize(nameFM.size(0, nameStr));
 
 	QFont statusFont(option.font);
 	statusFont.setPointSize(int(option.font.pointSize() * 0.9));
 	const QFontMetrics statusFM(statusFont);
 	QString statusStr;
-	QString errorStr = pFeed->GetFeed()->error();
+	QString errorStr = pRssFeed->error();
 	if (errorStr.isEmpty())
 	{
-		if (pFeed->GetFeed()->isUpdating())
+		if (pRssFeed->isUpdating())
 		{
 			statusStr = tr("STATUS_UPDATING");
 		}
@@ -125,7 +141,7 @@ void QRssItemDelegate::drawFeed(QPainter * painter, const QStyleOptionViewItem &
 
 	QFont updateTimeFont(statusFont);
 	const QFontMetrics updateTimeFM(updateTimeFont);
-	const QString updateTimeStr(StaticHelpers::toTimeString(pFeed->GetFeed()->next_update()));
+	const QString updateTimeStr(StaticHelpers::toTimeString(pRssFeed->next_update()));
 
 	painter->save();
 	painter->setRenderHint(QPainter::Antialiasing);
@@ -255,12 +271,13 @@ void QRssItemDelegate::drawFeedItem(QPainter * painter, const QStyleOptionViewIt
 
 QSize QRssItemDelegate::feedSizeHint(const QStyleOptionViewItem & option, RssFeedTreeItem* pFeed) const
 {
+	RssFeed* pRssFeed = pFeed->GetFeed();
 	const QStyle* style(QApplication::style());
 	const int iconSize(style->pixelMetric(QStyle::PM_ToolBarIconSize));
 	QFont nameFont(option.font);
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
-	const QString nameStr(pFeed->GetFeed()->title());
+	const QString nameStr(pRssFeed->title());
 	int nameWidth = nameFM.width(nameStr);
 
 	
@@ -269,10 +286,10 @@ QSize QRssItemDelegate::feedSizeHint(const QStyleOptionViewItem & option, RssFee
 	statusFont.setPointSize(int(option.font.pointSize() * 0.9));
 	const QFontMetrics statusFM(statusFont);
 	QString statusStr;
-	QString errorStr = pFeed->GetFeed()->error();
+	QString errorStr = pRssFeed->error();
 	if (errorStr.isEmpty())
 	{
-		if (pFeed->GetFeed()->isUpdating())
+		if (pRssFeed->isUpdating())
 		{
 			statusStr = tr("STATUS_UPDATING");
 		}
@@ -288,7 +305,7 @@ QSize QRssItemDelegate::feedSizeHint(const QStyleOptionViewItem & option, RssFee
 	int statusWidth = statusFM.width(statusStr);
 	QFont updateTimeFont(statusFont);
 	const QFontMetrics updateTimeFM(updateTimeFont);
-	const QString updateTimeStr(StaticHelpers::toTimeString(pFeed->GetFeed()->next_update()));
+	const QString updateTimeStr(StaticHelpers::toTimeString(pRssFeed->next_update()));
 	const int updateTimeWidth = updateTimeFM.width(updateTimeStr);
 	const QSize m(margin(*style));
 	return QSize(m.width() + iconSize + MAX3(nameWidth, statusWidth, updateTimeWidth),

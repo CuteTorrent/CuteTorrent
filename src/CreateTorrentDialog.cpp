@@ -95,64 +95,64 @@ quint64 CreateTorrentDialog::getPiceSize()
 				pieceSize = dirSize / 1000;
 			}
 
-			if(pieceSize < (32 * 1024))
+			if(pieceSize < (32 * KbInt))
 			{
 				needToSet = 32;
 			}
-			else if(pieceSize < (64 * 1024))
+			else if(pieceSize < (64 * KbInt))
 			{
 				needToSet = 64;
 			}
-			else if(pieceSize < (128 * 1024))
+			else if(pieceSize < (128 * KbInt))
 			{
 				needToSet = 128;
 			}
-			else if(pieceSize < (256 * 1024))
+			else if(pieceSize < (256 * KbInt))
 			{
 				needToSet = 256;
 			}
-			else if(pieceSize < (512 * 1024))
+			else if(pieceSize < (512 * KbInt))
 			{
 				needToSet = 512;
 			}
-			else if(pieceSize < (1024 * 1024))
+			else if(pieceSize < (KbInt * KbInt))
 			{
-				needToSet = 1024;
+				needToSet = KbInt;
 			}
-			else if(pieceSize < (2 * 1024 * 1024))
+			else if(pieceSize < (2 * KbInt * KbInt))
 			{
 				needToSet = 2048;
 			}
-			else if(pieceSize < 4 * 1024 * 1024)
+			else if(pieceSize < 4 * KbInt * KbInt)
 			{
 				needToSet = 4096;
 			}
-			else if(pieceSize < 8 * 1024 * 1024)
+			else if(pieceSize < 8 * KbInt * KbInt)
 			{
-				needToSet = 8 * 1024;
+				needToSet = 8 * KbInt;
 			}
 			else
 			{
-				needToSet = 16 * 1024;
+				needToSet = 16 * KbInt;
 			}
 
 			return needToSet;
 		}
 
 		case 1 :
-			return 16 * 1024;
+			return 16 * KbInt;
 
 		case 2:
-			return 8 * 1024;
+			return 8 * KbInt;
 
 		case 3:
-			return 4 * 1024;
+			return 4 * KbInt;
 
 		case 4:
-			return 2 * 1024;
+			return 2 * KbInt;
 
 		case 5:
-			return 1024;
+			return KbInt;
 
 		case 6:
 			return 512;
@@ -167,7 +167,7 @@ quint64 CreateTorrentDialog::getPiceSize()
 			return 64;
 
 		default:
-			return 4 * 1024;
+			return 4 * KbInt;
 	}
 }
 void CreateTorrentDialog::BrowseDir()
@@ -247,7 +247,7 @@ void CreateTorrentDialog::BeginCreate()
 		QObject::connect(creator, SIGNAL(ShowCreationSucces(QString)), this, SLOT(ShowCreationSucces(QString)));
 		QObject::connect(creator, SIGNAL(ShowCreationFailture(QString)), this, SLOT(ShowCreationFailture(QString)));
 		QObject::connect(this, SIGNAL(AbortCreation()), creator, SLOT(terminate()));
-		creator->create(pathEdit->text(), save_path, filterEdit->text(), trackers, webseeds, discribtionEdit->text(), privateCheckBox->isChecked(), getPiceSize() * 1024);
+		creator->create(pathEdit->text(), save_path, filterEdit->text(), trackers, webseeds, discribtionEdit->text(), privateCheckBox->isChecked(), getPiceSize() * KbInt);
 	}
 	else
 	{

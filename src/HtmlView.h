@@ -3,7 +3,7 @@
 #include <QHash>
 
 class QNetworkAccessManager;
-class QNetworkDiskCache;
+class NetworkDiskCache;
 class QNetworkReply;
 
 class HtmlView : public QTextBrowser
@@ -18,7 +18,7 @@ public:
 
 protected:
 	QNetworkAccessManager *m_netManager;
-	QNetworkDiskCache *m_diskCache;
+	NetworkDiskCache *m_diskCache;
 	QHash<QUrl, bool> m_activeRequests;
 
 	protected slots:

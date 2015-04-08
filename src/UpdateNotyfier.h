@@ -25,7 +25,7 @@ class UpdateNotifier : public QObject
 	Q_OBJECT
 
 public:
-	UpdateNotifier();
+	UpdateNotifier(QObject* parent = 0);
 	~UpdateNotifier();
 	void fetch();
 signals:

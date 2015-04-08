@@ -39,10 +39,6 @@ protected:
 private:
 	QSettings* settings;
 	QMutex* locker;
-
-	void WriteSettings();
-
-
 public:
 	void ReedSettings();
 	QVariant value(const QString& group, const QString& key, const QVariant& defaultVal = QVariant(QVariant::Invalid));
@@ -61,7 +57,7 @@ public:
 	void setGroupValues(QString group, QMap<QString, QVariant> values);
 	QString valueString(const QString& group, const QString& key, const QString& defalt = "");
 	bool valueBool(const QString& group, const QString& key, bool defalt = true);
-
+	void WriteSettings();
 };
 
 

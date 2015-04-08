@@ -3,20 +3,29 @@
 #include "RssFeedTreeItem.h"
 #include "RssFeedTreeItem.h"
 #include "RssFeedItemTreeItem.h"
-#include <RssManager.h>
-QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent) : QAbstractItemModel(parrent), m_pRssManager(RssManager::getInstance())
+#include "RssManager.h"
+#include "messagebox.h"
+#include "StyleEngene.h"
+#include "OpenTorrentDialog.h"
+#include "torrentdownloader.h"
+#include <QInputDialog>
+
+QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent) : QAbstractItemModel(parrent), m_pRssManager(RssManager::getInstance()), m_pTorrentDownloader(TorrentDownloader::getInstance())
 {
 	m_pItemsView = pItemsView;
 	m_pUdpateTimer = new QTimer(this);
+	setupFeedMenu();
+	setupItemMenu();
 	UpdateModel();
 	QObject::connect(m_pRssManager.get(), SIGNAL(FeedChanged(QUuid)), this, SLOT(UpdateModel()));
+	QObject::connect(m_pTorrentDownloader.get(), SIGNAL(TorrentReady(QUrl, QTemporaryFile*)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFile*)));
 	/*QObject::connect(m_pTorrentsManager, SIGNAL(OnNewFeed()), this, SLOT(UpdateModel()));
 	QObject::connect(m_pTorrentsManager, SIGNAL(OnFeedDeleted()), this, SLOT(UpdateModel()));
 	QObject::connect(m_pTorrentsManager, SIGNAL(OnNewFeedItem()), this, SLOT(UpdateModel()));
 	QObject::connect(m_pTorrentsManager, SIGNAL(OnFeedChanged()), this, SLOT(UpdateModel()));*/
 	QObject::connect(m_pUdpateTimer, SIGNAL(timeout()), this, SLOT(UpdateVisibleData()));
 	m_pUdpateTimer->start(1000);
-	setupMenu();
+	
 }
 
 int QRssDisplayModel::columnCount(const QModelIndex &parent /*= QModelIndex()*/) const
@@ -113,6 +122,7 @@ QModelIndex QRssDisplayModel::parent(const QModelIndex &child) const
 
 void QRssDisplayModel::UpdateModel()
 {
+	qDebug() << Q_FUNC_INFO;
 	qDeleteAll(m_rootItems);
 	m_rootItems.clear();
 	QList<RssFeed*> feeds = m_pRssManager->feeds();
@@ -189,7 +199,7 @@ RssItem QRssDisplayModel::SelectedFeedItem()
 	}
 	return res;
 }
-RssFeed* QRssDisplayModel::SelectedIFeed()
+RssFeed* QRssDisplayModel::SelectedFeed()
 {
 	RssFeed* res = NULL;
 	QModelIndex selectedIndex = m_pItemsView->selectionModel()->currentIndex();
@@ -228,7 +238,9 @@ QRssDisplayModel::~QRssDisplayModel()
 
 void QRssDisplayModel::retranslate()
 {
-	
+	updateAction->setText(tr("UPDATE_FEED_ITEM"));
+	renameAction->setText(tr("RENAME_FEED_ITEM"));
+	removeAction->setText(tr("REMOVE_FEED_ITEM"));
 }
 
 void QRssDisplayModel::contextualMenu(const QPoint& point)
@@ -240,25 +252,172 @@ void QRssDisplayModel::contextualMenu(const QPoint& point)
 	QModelIndex index = m_pItemsView->indexAt(point);
 	if (index.isValid())
 	{
-		m_pMenu->exec(m_pItemsView->mapToGlobal(point));
+		RssBaseTreeItem* pBaseItem = static_cast<RssBaseTreeItem*>(index.internalPointer());
+		RssBaseTreeItem::ItemType type = pBaseItem->GetType();
+		if (type == RssBaseTreeItem::Feed)
+		{
+			m_pFeedMenu->exec(m_pItemsView->mapToGlobal(point));
+		}
+		else if (type == RssBaseTreeItem::FeedItem)
+		{
+			RssFeedItemTreeItem* pFeedItemTreeItem = reinterpret_cast<RssFeedItemTreeItem*>(pBaseItem);
+			RssItem item = pFeedItemTreeItem->FeedItem();
+			downloadTorrent->setEnabled(item.contains("torrent_url"));
+			openLink->setEnabled(item.contains("link"));
+			m_pItemMenu->exec(m_pItemsView->mapToGlobal(point));
+		}
+
 	}
 }
 
-void QRssDisplayModel::setupMenu()
+void QRssDisplayModel::setupFeedMenu()
 {
-	m_pMenu = new QMenu(m_pItemsView);
-	QAction* updateAction = new QAction(tr("UPDATE_FEED_ITEM"), m_pMenu);
+	StyleEngene* pStyleEngine = StyleEngene::getInstance();
+	m_pFeedMenu = new QMenu(m_pItemsView);
+	updateAction = new QAction(pStyleEngine->getIcon("update_trackers"), tr("UPDATE_FEED_ITEM"), m_pFeedMenu);
 	updateAction->setObjectName("ACTION_RSSLIST_UPDATE");
+	updateAction->setShortcut(Qt::Key_F5);
 	QObject::connect(updateAction, SIGNAL(triggered()), SLOT(onFeedUpdate()));
-	m_pMenu->addAction(updateAction);
+	renameAction = new QAction(pStyleEngine->getIcon("move_folder"), tr("RENAME_FEED_ITEM"), m_pFeedMenu);
+	renameAction->setObjectName("ACTION_RSSLIST_RENAME");
+	renameAction->setShortcut(Qt::Key_F2);
+	QObject::connect(renameAction, SIGNAL(triggered()), SLOT(onFeedRename()));
+	removeAction = new QAction(pStyleEngine->getIcon("delete"), tr("REMOVE_FEED_ITEM"), m_pFeedMenu);
+	removeAction->setObjectName("ACTION_RSSLIST_REMOVE");
+	removeAction->setShortcut(Qt::Key_Delete);
+	QObject::connect(removeAction, SIGNAL(triggered()), SLOT(onFeedRemove()));
+	m_pFeedMenu->addAction(updateAction);
+	m_pFeedMenu->addAction(renameAction);
+	m_pFeedMenu->addAction(removeAction);
 }
 
 void QRssDisplayModel::onFeedUpdate()
 {
-	RssFeed* current = SelectedIFeed();
-	if (current != NULL)
+	if (m_pItemsView->model() == this)
 	{
-		current->Update();
+		RssFeed* current = SelectedFeed();
+		if (current != NULL)
+		{
+			current->Update();
+		}
 	}
+	
+}
+
+void QRssDisplayModel::onFeedRename()
+{
+	if (m_pItemsView->model() == this)
+	{
+		RssFeed* current = SelectedFeed();
+		if (current != NULL)
+		{
+			bool ok;
+			QString newFeedDisplayName = QInputDialog::getText(m_pItemsView, tr("RSS_FEED_RENAME"), tr("RSS_FEED_NAME:"), QLineEdit::Normal, current->displayName(true), &ok);
+			if (ok && !newFeedDisplayName.isEmpty())
+			{
+				current->setDisplayName(newFeedDisplayName);
+			}
+		}
+	}
+}
+
+void QRssDisplayModel::onFeedRemove()
+{
+	if (m_pItemsView->model() == this)
+	{
+		QList<RssFeed*> selectedItems = SelectedFeeds();
+		if (!selectedItems.isEmpty())
+		{
+			//beginResetModel();
+			RssManagerPtr pRssManager = RssManager::getInstance();
+			bool yesToAll = false;
+			foreach(RssFeed* pFeed, selectedItems)
+			{
+				QMessageBox::StandardButton button;
+				if (!yesToAll)
+				{
+					QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No;
+					if (selectedItems.length() > 1)
+					{
+						buttons |= QMessageBox::YesToAll;
+						buttons |= QMessageBox::NoToAll;
+					}
+					button = MyMessageBox::warning(m_pItemsView, tr("RSS_FEED_DELETE"), tr("RSS_FEED_DELETE_MSG").arg(pFeed->displayName()), buttons);
+					if (button == QMessageBox::YesToAll)
+					{
+						yesToAll = true;
+					}
+					else if (button == QMessageBox::NoToAll)
+					{
+						break;
+					}
+				}
+				else
+				{
+					button = QMessageBox::YesToAll;
+				}
+
+				if (QMessageBox::No != button || yesToAll)
+				{
+					pRssManager->removeFeed(pFeed->uid());
+				}
+
+			}
+			//endResetModel();
+		}
+	}
+}
+
+void QRssDisplayModel::setupItemMenu()
+{
+	StyleEngene* pStyleEngine = StyleEngene::getInstance();
+	m_pItemMenu = new QMenu(m_pItemsView);
+	downloadTorrent = new QAction(pStyleEngine->getIcon("toolbar_download"), tr("DOWNLOAD_FEED_ITEM"), m_pFeedMenu);
+	downloadTorrent->setObjectName("ACTION_RSSLIST_DOWNLOAD");
+	QObject::connect(downloadTorrent, SIGNAL(triggered()), SLOT(onItemDownload()));
+	openLink = new QAction(pStyleEngine->getIcon("open_link"), tr("OPEN_DESC_FEED_ITEM"), m_pFeedMenu);
+	openLink->setObjectName("ACTION_RSSLIST_OPEN_DESC");
+	QObject::connect(openLink, SIGNAL(triggered()), SLOT(onItemOpenDesc()));
+	m_pItemMenu->addAction(openLink);
+	m_pItemMenu->addAction(downloadTorrent);
+}
+
+void QRssDisplayModel::onItemDownload()
+{
+	if (m_pItemsView->model() == this)
+	{
+		RssItem current = SelectedFeedItem();
+		QString torrentUrl = current["torrent_url"].toString();
+		if (torrentUrl.startsWith("magnet"))
+		{
+			boost::scoped_ptr<OpenTorrentDialog> pDlg(new OpenTorrentDialog(m_pItemsView));
+			pDlg->SetData(torrentUrl);
+			pDlg->execConditional();
+		}
+		else
+		{
+			m_pTorrentDownloader->downloadTorrent(torrentUrl);
+		}
+		
+	}
+}
+
+void QRssDisplayModel::onItemOpenDesc()
+{
+	if (m_pItemsView->model() == this)
+	{
+		RssItem current = SelectedFeedItem();
+		QDesktopServices::openUrl(current["link"].toString());
+	}
+}
+
+void QRssDisplayModel::onTorrentDownloaded(QUrl url, QTemporaryFile* pfile)
+{
+	qDebug() << "Temp FileName is: " << pfile->fileName();
+	boost::scoped_ptr<OpenTorrentDialog> pDlg (new OpenTorrentDialog(m_pItemsView));
+	pDlg->SetData(pfile->fileName());
+	pDlg->execConditional();
+	pfile->setAutoRemove(true);
+	delete pfile;
 }
 

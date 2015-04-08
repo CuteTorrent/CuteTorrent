@@ -10,12 +10,6 @@
 #include "RssCommon.h"
 class QApplicationSettings;
 
-struct FeedTask 
-{
-	QUrl url;
-	QUuid uid;
-};
-
 class RssManager : public QObject
 {
 	Q_OBJECT
@@ -23,6 +17,7 @@ public:
 	
 	QList<RssFeed*> feeds();
 	RssFeed* addFeed(QUrl url, bool& isNew);
+	void removeFeed(QUuid uid);
 	~RssManager();
 	void SaveFeeds();
 	static RssManagerPtr getInstance();
@@ -30,10 +25,9 @@ private:
 	static boost::weak_ptr<RssManager> m_sInstrance;
 	RssManager(QObject* parent = NULL);
 	
-	QList<FeedTask> m_activeRequests;
 	QList<RssFeed*> m_pFeeds;
 	QApplicationSettings* m_pSettings;
-	
+private slots:	
 	void LoadFeeds();
 signals:
 	void FeedChanged(QUuid);
