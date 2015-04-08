@@ -8,16 +8,16 @@ CuteTorrent features and highlights:
 * Local Peer Discovery (aka LSD)
 * µTorrent Peer Exchange
 * UPnP and NAT-PMP
+* Full RSS support(BEP 36)
 * Proxy support
 * Web seed
 * Private Torrents
 * Global and per-torrent speed limits
 * Configurable bandwidth scheduler
-* TorrentFiltering
+* Torrent Filtering
 * Embedded VideoPlayer
 * IPv6 support
 * Sequential downloading
-* Embedded btdigg search
 * Embedded Torrent Tracker
 * Adding Peer/Tracker
 * Mounting Disk Images to DaemonTools
