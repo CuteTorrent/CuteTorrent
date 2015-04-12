@@ -2,11 +2,14 @@
 <ui version="4.0">
  <class>SettingsDialog</class>
  <widget class="QDialog" name="SettingsDialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>793</width>
     <height>360</height>
    </rect>
   </property>
@@ -181,6 +184,102 @@
         </property>
        </widget>
       </item>
+      <item row="0" column="0" rowspan="3">
+       <widget class="QListWidget" name="listWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>160</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#listWidget{
+    border-bottom:none;
+    border-left:none;
+}
+QListView::item{
+    min-height:28px;
+}
+                  </string>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="resizeMode">
+         <enum>QListView::Adjust</enum>
+        </property>
+        <property name="currentRow">
+         <number>-1</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>TAB_GENERAL</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>TAB_RESTRICTIONS</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>TAB_NETWORK</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>TAB_HDD</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>TAB_TORRENT_FILTERING</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>TAB_DAEMONTOOLS</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>TAB_SCEDULER</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>TAB_WEB_CONTROL</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>TAB_RSS</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>TAB_SEARCH</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>TAB_KEY_MAPPINGS</string>
+         </property>
+        </item>
+       </widget>
+      </item>
       <item row="0" column="2" colspan="2">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="maximumSize">
@@ -222,50 +321,13 @@
             </layout>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QComboBox" name="styleComboBox"/>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_26">
-            <property name="text">
-             <string>STYLE</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_8">
-            <property name="text">
-             <string>LANGUAGE</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QComboBox" name="localeComboBox">
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
-           </widget>
-          </item>
-          <item row="10" column="0" colspan="3">
-           <spacer name="verticalSpacer_5">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="3" column="0" colspan="2">
-           <widget class="QCheckBox" name="startMinimizedCheckBox">
+          <item row="4" column="0" colspan="2">
+           <widget class="QCheckBox" name="asociationCheckBox">
             <property name="whatsThis">
-             <string>START_MINIMIZED_WIT</string>
+             <string>TORRENT_FILES_ASSOCIATION_WIT</string>
             </property>
             <property name="text">
-             <string>START_MINIMIZED</string>
+             <string>TORRENT_FILES_ASSOCIATION</string>
             </property>
            </widget>
           </item>
@@ -279,17 +341,41 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0" colspan="2">
-           <widget class="QCheckBox" name="asociationCheckBox">
-            <property name="whatsThis">
-             <string>TORRENT_FILES_ASSOCIATION_WIT</string>
-            </property>
-            <property name="text">
-             <string>TORRENT_FILES_ASSOCIATION</string>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="localeComboBox">
+            <property name="styleSheet">
+             <string notr="true"/>
             </property>
            </widget>
           </item>
-          <item row="2" column="2" rowspan="6" colspan="2">
+          <item row="3" column="0" colspan="2">
+           <widget class="QCheckBox" name="startMinimizedCheckBox">
+            <property name="whatsThis">
+             <string>START_MINIMIZED_WIT</string>
+            </property>
+            <property name="text">
+             <string>START_MINIMIZED</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>LANGUAGE</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_26">
+            <property name="text">
+             <string>STYLE</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="styleComboBox"/>
+          </item>
+          <item row="2" column="2" rowspan="4" colspan="2">
            <widget class="QGroupBox" name="useNotificationsCheckBox">
             <property name="title">
              <string>ENABLE_NOTIFICATIONS</string>
@@ -300,55 +386,43 @@
             <property name="checked">
              <bool>false</bool>
             </property>
-            <layout class="QGridLayout" name="gridLayout_34">
+            <layout class="QGridLayout" name="gridLayout_13">
              <item row="0" column="0">
-              <widget class="QCheckBox" name="useCustomNotificationsCheckBox">
+              <widget class="QCheckBox" name="showTrackerErrorsCheckBox">
                <property name="text">
-                <string>USE_CUSTOM_NOTIFICATIONS</string>
+                <string>NOTIFY_TRACKER_ERRORS</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QGroupBox" name="notifyErrorsCheckBox">
-               <property name="title">
-                <string>NOTIFY_ERRORS</string>
+              <widget class="QCheckBox" name="showDiskErrorsCheckBox">
+               <property name="text">
+                <string>NOTIFY_IO_ERRORS</string>
                </property>
-               <property name="checkable">
-                <bool>true</bool>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="showRssErrorsCheckBox">
+               <property name="text">
+                <string>NOTIFY_RSS_ERRORS</string>
                </property>
-               <property name="checked">
-                <bool>false</bool>
-               </property>
-               <layout class="QGridLayout" name="gridLayout_35">
-                <item row="0" column="0">
-                 <widget class="QCheckBox" name="showTrackerErrorsCheckBox">
-                  <property name="text">
-                   <string>NOTIFY_TRACKER_ERRORS</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QCheckBox" name="showDiskErrorsCheckBox">
-                  <property name="text">
-                   <string>NOTIFY_IO_ERRORS</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QCheckBox" name="showRssErrorsCheckBox">
-                  <property name="text">
-                   <string>NOTIFY_RSS_ERRORS</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
               </widget>
              </item>
             </layout>
            </widget>
           </item>
-          <item row="6" column="0" colspan="2">
-           <spacer name="verticalSpacer_7">
+          <item row="5" column="0">
+           <widget class="QCheckBox" name="magnetAssociationCheckBox">
+            <property name="whatsThis">
+             <string>MAGNET_ASSOCIATION_WIT</string>
+            </property>
+            <property name="text">
+             <string>MAGNET_ASSOCIATION</string>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="0" colspan="4">
+           <spacer name="verticalSpacer_5">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
@@ -359,16 +433,6 @@
              </size>
             </property>
            </spacer>
-          </item>
-          <item row="5" column="0" colspan="2">
-           <widget class="QCheckBox" name="magnetAssociationCheckBox">
-            <property name="whatsThis">
-             <string>MAGNET_ASSOCIATION_WIT</string>
-            </property>
-            <property name="text">
-             <string>MAGNET_ASSOCIATION</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </widget>
@@ -1662,34 +1726,7 @@ p, li { white-space: pre-wrap; }
         </widget>
         <widget class="QWidget" name="page_2">
          <layout class="QGridLayout" name="gridLayout_33">
-          <item row="4" column="0">
-           <widget class="QPushButton" name="pushButton_2">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>RSS_RULES_IMPORT</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QPushButton" name="pushButton_3">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>RSS_RULES_EXPORT</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0" rowspan="3" colspan="2">
-           <widget class="QListWidget" name="listWidget_2">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2" rowspan="5">
+          <item row="0" column="4">
            <spacer name="horizontalSpacer">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1702,13 +1739,62 @@ p, li { white-space: pre-wrap; }
             </property>
            </spacer>
           </item>
-          <item row="0" column="0" colspan="2">
-           <widget class="QPushButton" name="pushButton">
+          <item row="1" column="0">
+           <widget class="QPushButton" name="addRssDLRuleButton">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>+</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="4">
+           <widget class="QListWidget" name="rssRulesListWidget">
+            <property name="contextMenuPolicy">
+             <enum>Qt::ActionsContextMenu</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="removeRssDLRuleButton">
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>-</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="pushButton_3">
             <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="text">
-             <string>ADD_RSS_DOWNLOAD_RULE</string>
+             <string>RSS_RULES_EXPORT</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>RSS_RULES_IMPORT</string>
             </property>
            </widget>
           </item>
@@ -1755,8 +1841,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>617</width>
-               <height>304</height>
+               <width>98</width>
+               <height>28</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_19"/>
@@ -1767,108 +1853,57 @@ p, li { white-space: pre-wrap; }
         </widget>
        </widget>
       </item>
-      <item row="0" column="0" rowspan="3">
-       <widget class="QListWidget" name="listWidget">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>160</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">#listWidget{
-    border-bottom:none;
-    border-left:none;
-}
-QListView::item{
-    min-height:28px;
-}
-                  </string>
-        </property>
-        <property name="editTriggers">
-         <set>QAbstractItemView::NoEditTriggers</set>
-        </property>
-        <property name="resizeMode">
-         <enum>QListView::Adjust</enum>
-        </property>
-        <property name="currentRow">
-         <number>-1</number>
-        </property>
-        <item>
-         <property name="text">
-          <string>TAB_GENERAL</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>TAB_RESTRICTIONS</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>TAB_NETWORK</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>TAB_HDD</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>TAB_TORRENT_FILTERING</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>TAB_DAEMONTOOLS</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>TAB_SCEDULER</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>TAB_WEB_CONTROL</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>TAB_RSS</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>TAB_SEARCH</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>TAB_KEY_MAPPINGS</string>
-         </property>
-        </item>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
   </layout>
  </widget>
  <tabstops>
+  <tabstop>localeComboBox</tabstop>
+  <tabstop>styleComboBox</tabstop>
+  <tabstop>runOnbootCheckBox</tabstop>
+  <tabstop>startMinimizedCheckBox</tabstop>
+  <tabstop>asociationCheckBox</tabstop>
+  <tabstop>magnetAssociationCheckBox</tabstop>
+  <tabstop>trackerGroupBox</tabstop>
+  <tabstop>trackerPortEdit</tabstop>
+  <tabstop>useNotificationsCheckBox</tabstop>
+  <tabstop>showTrackerErrorsCheckBox</tabstop>
+  <tabstop>showDiskErrorsCheckBox</tabstop>
+  <tabstop>showRssErrorsCheckBox</tabstop>
+  <tabstop>activeLimitEdit</tabstop>
+  <tabstop>activeSeedLimitEdit</tabstop>
+  <tabstop>activeDownloadLimitEdit</tabstop>
+  <tabstop>useDHTCheckBox</tabstop>
+  <tabstop>usePExCheckBox</tabstop>
+  <tabstop>useLSDCheckBox</tabstop>
+  <tabstop>seedGlobalRatioEdit</tabstop>
+  <tabstop>uploadLimitEdit</tabstop>
+  <tabstop>downloadLimitEdit</tabstop>
+  <tabstop>dhtLimitEdit</tabstop>
+  <tabstop>limitLocalConnectionCheckBox</tabstop>
+  <tabstop>localUploadLimitEdit</tabstop>
+  <tabstop>localDownloadLimitEdit</tabstop>
+  <tabstop>limitUtpCheckBox</tabstop>
+  <tabstop>seedTimeLimitEdit</tabstop>
+  <tabstop>portEdit</tabstop>
+  <tabstop>portMappingsCheckBox</tabstop>
+  <tabstop>proxyGroupBox</tabstop>
+  <tabstop>proxyHostEdit</tabstop>
+  <tabstop>proxyUsernameEdit</tabstop>
+  <tabstop>proxyPwdEdit</tabstop>
+  <tabstop>proxyTypeComboBox</tabstop>
+  <tabstop>inEncPolicyComboBox</tabstop>
+  <tabstop>outEncPolicyComboBox</tabstop>
+  <tabstop>encLevelComboBox</tabstop>
+  <tabstop>preferFullEncCheckBox</tabstop>
+  <tabstop>diskIOCasheModeComboBox</tabstop>
+  <tabstop>casheSizeLineEdit</tabstop>
+  <tabstop>useDiskReadAheadCheckBox</tabstop>
+  <tabstop>alowReorderedOpsCheckBox</tabstop>
+  <tabstop>lowPrioDiskCheckBox</tabstop>
+  <tabstop>useReadCasheCheckBox</tabstop>
+  <tabstop>lockFilesCheckBox</tabstop>
   <tabstop>GroupsListWidget</tabstop>
   <tabstop>removeGroupButton</tabstop>
   <tabstop>newGroupNameEdit</tabstop>
@@ -1879,7 +1914,41 @@ QListView::item{
   <tabstop>DTPathEdit</tabstop>
   <tabstop>browseDTPathButton</tabstop>
   <tabstop>driveNumberComboBox</tabstop>
+  <tabstop>customMoutGroupBox</tabstop>
   <tabstop>customCommandEdit</tabstop>
+  <tabstop>tasksComboBox</tabstop>
+  <tabstop>addTaskButton</tabstop>
+  <tabstop>deleteTaskButton</tabstop>
+  <tabstop>taskNameLineEdit</tabstop>
+  <tabstop>beginDateTimeEdit</tabstop>
+  <tabstop>pauseAllRadioButton</tabstop>
+  <tabstop>limitDlRadioButton</tabstop>
+  <tabstop>dlLimitEdit</tabstop>
+  <tabstop>startAllRadioButton</tabstop>
+  <tabstop>limitUlRadioButton</tabstop>
+  <tabstop>ulLimitEdit</tabstop>
+  <tabstop>webUIGroupBox</tabstop>
+  <tabstop>loginLineEdit</tabstop>
+  <tabstop>passwordLineEdit</tabstop>
+  <tabstop>webPortLineEdit</tabstop>
+  <tabstop>openWebUiButton</tabstop>
+  <tabstop>upnpCheckBox</tabstop>
+  <tabstop>startRconButton</tabstop>
+  <tabstop>stopRconButton</tabstop>
+  <tabstop>webUILogginGroupBox</tabstop>
+  <tabstop>logLineEdit</tabstop>
+  <tabstop>IPFilterGroupBox</tabstop>
+  <tabstop>ipFilterTextEdit</tabstop>
+  <tabstop>rssRulesListWidget</tabstop>
+  <tabstop>addRssDLRuleButton</tabstop>
+  <tabstop>removeRssDLRuleButton</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>calendarWidget</tabstop>
+  <tabstop>listWidget</tabstop>
+  <tabstop>pbClose</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>hotKeyScrollArea</tabstop>
  </tabstops>
  <resources>
   <include location="ltorrent.qrc"/>
@@ -2109,6 +2178,54 @@ QListView::item{
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>addRssDLRuleButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SettingsDialog</receiver>
+   <slot>addRssRule()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>216</x>
+     <y>38</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>179</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rssRulesListWidget</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>SettingsDialog</receiver>
+   <slot>onEditRssRule()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>303</x>
+     <y>177</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>179</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>removeRssDLRuleButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SettingsDialog</receiver>
+   <slot>onDeleteRssRule()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>524</x>
+     <y>310</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>396</x>
+     <y>179</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>proxySwitcher()</slot>
@@ -2129,5 +2246,8 @@ QListView::item{
   <slot>StartRcon()</slot>
   <slot>chooseAction(QAbstractButton*)</slot>
   <slot>OpenWebUI()</slot>
+  <slot>addRssRule()</slot>
+  <slot>onEditRssRule()</slot>
+  <slot>onDeleteRssRule()</slot>
  </slots>
 </ui>

@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "StyleEngene.h"
 #include "TorrentManager.h"
 
-MultipleDTDialog::MultipleDTDialog(QStringList& _files, QWidget* parrent/* =0 */, int flags/* =0 */) : BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize)
+MultipleDTDialog::MultipleDTDialog(QStringList& _files, QWidget* parent/* =0 */, int flags/* =0 */) : BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize, parent)
 {
 	setupUi(this);
 	setupCustomWindow();

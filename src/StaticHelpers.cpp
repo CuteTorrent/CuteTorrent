@@ -53,10 +53,10 @@ void StaticHelpers::dellDir(QString dirName)
 QString StaticHelpers::filePriorityToString(int priority)
 {
 	static char* priority_str[] = { QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_ZERO"),
-		QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_LOW"),
-		QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_MEDIUM"),
-		QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_HIGH") };
-
+	                                QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_LOW"),
+	                                QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_MEDIUM"),
+	                                QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_HIGH")
+	                              };
 
 	if (priority == 0)
 	{
@@ -77,7 +77,6 @@ QString StaticHelpers::filePriorityToString(int priority)
 	{
 		return qApp->translate("FileViewModel", priority_str[3]);
 	}
-
 
 	return "";
 }
@@ -149,7 +148,6 @@ QString StaticHelpers::GetBaseSuffix(const libtorrent::file_storage& storrage)
 	QString base_suffix;
 	int maxSuffix = 0;
 	QMap<QString, int> suffixesCount;
-	
 
 	for(int i = 0; i < storrage.num_files(); i++)
 	{
@@ -192,10 +190,9 @@ QString StaticHelpers::translateLibTorrentError(boost::system::error_code const&
 	{
 		return QString::fromLocal8Bit(ec.message().c_str());
 	}
+
 	// the error is a libtorrent error
-
 	int code = ec.value();
-
 	static char const* msgs[] =
 	{
 		QT_TRANSLATE_NOOP("ErrorMsg", "no error"),
@@ -388,7 +385,7 @@ QString StaticHelpers::translateLibTorrentError(boost::system::error_code const&
 		QT_TRANSLATE_NOOP("ErrorMsg", "udp tracker response packet has invalid size"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "invalid transaction id in udp tracker response"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "invalid action field in udp tracker response"),
-#ifndef TORRENT_NO_DEPRECATE
+
 		QT_TRANSLATE_NOOP("ErrorMsg", ""),
 		QT_TRANSLATE_NOOP("ErrorMsg", ""),
 		QT_TRANSLATE_NOOP("ErrorMsg", ""),
@@ -408,13 +405,14 @@ QString StaticHelpers::translateLibTorrentError(boost::system::error_code const&
 		QT_TRANSLATE_NOOP("ErrorMsg", "bencoded nesting depth exceeded"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "bencoded item count limit exceeded"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "integer overflow"),
-#endif
+
 	};
 
 	if (code < 0 || code >= sizeof(msgs) / sizeof(msgs[0]))
 	{
 		return QString::fromLocal8Bit(ec.message().c_str());
 	}
+
 	return qApp->translate("ErrorMsg", msgs[code]);
 }
 
@@ -432,6 +430,7 @@ NetworkDiskCache* StaticHelpers::GetGLobalWebCache()
 		m_pDiskCache->setMaximumCacheSize(50 * KbInt * KbInt);
 		qDebug() << "RssManager  cache path:" << m_pDiskCache->cacheDirectory() << " max size:" << m_pDiskCache->maximumCacheSize() / KbInt / KbInt << "MB";
 	}
+
 	return m_pDiskCache;
 }
 

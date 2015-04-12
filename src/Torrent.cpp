@@ -19,13 +19,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDateTime>
 #include <QDebug>
 #include <QFileInfo>
-#include <QMap>
 #include <QStringList>
 #include <QTimer>
 
 #include "Torrent.h"
 #include "TorrentManager.h"
-
+#include <libtorrent/magnet_uri.hpp>
+#include <libtorrent/peer_info.hpp>
 bool Torrent::hasError() const
 {
 	if(m_hTorrent.is_valid())
@@ -37,15 +37,6 @@ bool Torrent::hasError() const
 		{
 			hasErr = true;
 		}
-
-		/* const std::vector<announce_entry> trackers=cur_torrent.trackers();
-		 for (int i=0;i<trackers.size();i++)
-		 {
-		     if (trackers[i].message.length()>0)
-		     {
-		         hasErr=true;
-		     }
-		 }*/
 		return hasErr;
 	}
 
@@ -168,7 +159,6 @@ QStringList& Torrent::GetImageFiles()
 	if(m_hTorrent.is_valid())
 	{
 		file_storage storrgae = m_hTorrent.torrent_file()->files();
-		
 
 		for (int i = 0; i < storrgae.num_files(); ++i)
 		{
@@ -487,14 +477,15 @@ files_info Torrent::GetFileDownloadInfo()
 	if(m_hTorrent.is_valid())
 	{
 		filesInfo.storrage = m_hTorrent.torrent_file()->files();
-
 		std::vector<libtorrent::size_type> downloadedSizes;
 		m_hTorrent.file_progress(downloadedSizes);
 		filesInfo.progresses.reserve(downloadedSizes.size());
+
 		for (int i = 0; i < filesInfo.storrage.num_files(); i++)
 		{
 			filesInfo.progresses.push_back(downloadedSizes[i] * 1.0 / filesInfo.storrage.file_size(i));
 		}
+
 		filesInfo.priorities = m_hTorrent.file_priorities();
 	}
 
@@ -538,14 +529,15 @@ QVector<int> Torrent::GetDownloadedPieces()
 {
 	QVector<int> res;
 	libtorrent::bitfield data;
+
 	if(m_hTorrent.is_valid())
 	{
 		int max_num = m_hTorrent.torrent_file()->num_pieces();
 		data.resize(max_num);
 		data.clear_all();
+
 		for(int i = 0; i < max_num; i++)
 		{
-			
 			if(m_hTorrent.have_piece(i))
 			{
 				data.set_bit(i);
@@ -561,6 +553,7 @@ QVector<int> Torrent::GetDownloadingPieces()
 {
 	QVector<int> res;
 	libtorrent::bitfield data;
+
 	if(m_hTorrent.is_valid())
 	{
 		std::vector<partial_piece_info> pieces;
@@ -568,6 +561,7 @@ QVector<int> Torrent::GetDownloadingPieces()
 		int max_num = m_hTorrent.torrent_file()->num_pieces();
 		data.resize(max_num);
 		data.clear_all();
+
 		for(std::vector<partial_piece_info>::iterator i = pieces.begin(); i != pieces.end(); ++i)
 		{
 			if(i->finished + i->writing > 0)
@@ -758,6 +752,7 @@ void Torrent::RemoveTracker(QString url)
 	{
 		std::string tracker2remove = url.toStdString();
 		std::vector<announce_entry> currenttTrackers = m_hTorrent.trackers();
+
 		for (std::vector<announce_entry>::iterator i = currenttTrackers.begin(); i != currenttTrackers.end(); i++)
 		{
 			if (i->url.compare(tracker2remove) == 0)
@@ -766,6 +761,7 @@ void Torrent::RemoveTracker(QString url)
 				break;
 			}
 		}
+
 		m_hTorrent.replace_trackers(currenttTrackers);
 		m_hTorrent.force_reannounce();
 	}
@@ -776,6 +772,7 @@ void Torrent::RemoveTrackers(QStringList trackers)
 	if (m_hTorrent.is_valid())
 	{
 		std::vector<announce_entry> currenttTrackers = m_hTorrent.trackers();
+
 		for each (QString url in trackers)
 		{
 			std::string tracker2remove = url.toStdString();
@@ -789,6 +786,7 @@ void Torrent::RemoveTrackers(QStringList trackers)
 				}
 			}
 		}
+
 		m_hTorrent.replace_trackers(currenttTrackers);
 		m_hTorrent.force_reannounce();
 	}
@@ -800,6 +798,7 @@ void Torrent::ReplaceTracker(QString original, QString changed)
 	{
 		std::string tracker2remove = original.toStdString();
 		std::vector<announce_entry> currenttTrackers = m_hTorrent.trackers();
+
 		for (std::vector<announce_entry>::iterator i = currenttTrackers.begin(); i != currenttTrackers.end(); i++)
 		{
 			if (i->url.compare(tracker2remove) == 0)
@@ -808,6 +807,7 @@ void Torrent::ReplaceTracker(QString original, QString changed)
 				break;
 			}
 		}
+
 		currenttTrackers.push_back(announce_entry(changed.toStdString()));
 		m_hTorrent.replace_trackers(currenttTrackers);
 		m_hTorrent.force_reannounce();

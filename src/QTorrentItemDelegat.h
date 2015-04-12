@@ -41,9 +41,9 @@ protected:
 protected:
 
 	QSize margin(const QStyle& style) const;
-	virtual QSize sizeHint(const QStyleOptionViewItem&, const Torrent&) const;
+	QSize sizeHint(const QStyleOptionViewItem&, const Torrent&) const;
 
-	virtual void drawTorrent(QPainter* painter, const QStyleOptionViewItem& option, const Torrent&, const QModelIndex& index) const;
+	void drawTorrent(QPainter* painter, const QStyleOptionViewItem& option, const Torrent&, const QModelIndex& index) const;
 private:
 	QString GetStatusString(const Torrent& tor) const;
 	QString GetProgressString(const Torrent& tor) const;
@@ -52,7 +52,6 @@ public:
 	QTorrentItemDelegat(const QTorrentItemDelegat&);
 	static  QColor blueBrush, greenBrush;
 	static QColor blueBack,  greenBack;
-	static int max_width;
 	explicit QTorrentItemDelegat(QObject* parent);
 	virtual ~QTorrentItemDelegat();
 

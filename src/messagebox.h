@@ -5,7 +5,7 @@
 #include "CustomWindow.h"
 #include "ui_messagebox.h"
 
-class MyMessageBox : public BaseWindow<QDialog>
+class CustomMessageBox : public BaseWindow<QDialog>
 {
 	Q_OBJECT
 private:
@@ -19,11 +19,11 @@ protected:
 
 
 public:
-	explicit MyMessageBox(QWidget* parent = 0);
-	MyMessageBox(QMessageBox::Icon icon, const QString& title, const QString& text,
+	explicit CustomMessageBox(QWidget* parent = 0);
+	CustomMessageBox(QMessageBox::Icon icon, const QString& title, const QString& text,
 	             QMessageBox::StandardButtons buttons = QMessageBox::NoButton, QWidget* parent = 0,
 	             Qt::WindowFlags flags = Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
-	~MyMessageBox();
+	~CustomMessageBox();
 
 	static QMessageBox::StandardButton critical(QWidget* parent, const QString& title,
 	        const QString& text, QMessageBox::StandardButtons buttons = QMessageBox::Ok);
@@ -38,7 +38,6 @@ public:
 	        QMessageBox::Icon icon, const QString& title, const QString& text,
 	        QMessageBox::StandardButtons buttons);
 private:
-	void showDialog();
 	Ui::MessageBox* ui;
 	QPushButton* getCloseBtn() override;
 	QWidget* getTitleBar() override;
@@ -47,8 +46,8 @@ private:
 	QWidget* centralWidget() override;
 private slots:
 	void buttonClicked(QAbstractButton*);
-	void accept();
-	void reject();
+	void accept() override;
+	void reject() override;
 
 
 

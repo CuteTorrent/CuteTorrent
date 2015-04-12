@@ -571,6 +571,24 @@
     <ClCompile Include="GeneratedFiles\Release\moc_NetworkDiskCache.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="AddRssDwonloadRuleDialog.cpp">
+      <Filter>Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AddRssDwonloadRuleDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QRssFilterModel.cpp">
+      <Filter>ViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Version.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
+    <ClCompile Include="RssItem.cpp">
+      <Filter>Rss</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RssItem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="http\httpcookie.h">
@@ -712,6 +730,18 @@
     <ClInclude Include="ServiceCommon.h">
       <Filter>Service</Filter>
     </ClInclude>
+    <ClInclude Include="QBaloon.h">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_AddDownloadRuleDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QRssFilterModel.h">
+      <Filter>ViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Version.h">
+      <Filter>Service</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Release\CuteTorrent.res">
@@ -850,6 +880,15 @@
     <CustomBuild Include="NetworkDiskCache.h">
       <Filter>Service</Filter>
     </CustomBuild>
+    <CustomBuild Include="AddDownloadRuleDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="AddRssDwonloadRuleDialog.h">
+      <Filter>Dialog</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RssItem.h">
+      <Filter>Rss</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="E:\Qt\4.8.6\translations\qt_ru.qm" />
@@ -857,6 +896,7 @@
     <None Include="SerachResult.h">
       <Filter>SearchEngine</Filter>
     </None>
+    <None Include="..\UpdateInfo\version" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="CreateTorrentDialog.ui">
@@ -946,9 +986,6 @@
     </ClInclude>
     <ClInclude Include="ProgressItemDelegate.h">
       <Filter>ViewModel\ItemDelegat</Filter>
-    </ClInclude>
-    <ClInclude Include="QBaloon.h">
-      <Filter>Controls</Filter>
     </ClInclude>
     <ClInclude Include="StaticHelpers.h">
       <Filter>Helper</Filter>

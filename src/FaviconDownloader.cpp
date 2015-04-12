@@ -17,13 +17,13 @@ FaviconDownloader::~FaviconDownloader()
 	m_pNatworkManager = NULL;
 }
 
-QPixmap FaviconDownloader::getFavicon(QString urlStr)
+QIcon FaviconDownloader::getFavicon(QString urlStr)
 {
 	QUrl url(urlStr);
-	
 	QString faviconUrlStr = QString("%1://%2/favicon.ico").arg(url.scheme(), url.host());
 	QUrl faviconUrl(faviconUrlStr);
 	QIODevice* pData = m_pDiskCache->data(faviconUrl);
+
 	if (pData != NULL)
 	{
 		qDebug() << "Found icon in cache " << faviconUrl;
@@ -33,9 +33,8 @@ QPixmap FaviconDownloader::getFavicon(QString urlStr)
 		delete pData;
 		return pixmap;
 	}
+
 	return getFromWeb(faviconUrl);
-
-
 }
 
 void FaviconDownloader::replyReady(QNetworkReply* pReply)
@@ -45,40 +44,51 @@ void FaviconDownloader::replyReady(QNetworkReply* pReply)
 	qDebug() << "icon from cache?" << fromCache.toBool();
 	qDebug() << "Reply recived:" << url << " Error:" << pReply->error();
 	downloadingList.removeOne(url.host());
+
 	if (pReply->error() == QNetworkReply::NoError || pReply->error() == QNetworkReply::ContentNotFoundError)
 	{
 		QByteArray data = pReply->readAll();
 		QString str = QString::fromUtf8(data);
-		if (str.contains("<html", Qt::CaseInsensitive)) 
+
+		if (str.contains("<html", Qt::CaseInsensitive))
 		{
 			qDebug() << "reply is html";
 			QString linkFavicon;
 			QRegExp rx("<link[^>]+rel=\"shortcut icon\"[^>]+>",
-				Qt::CaseInsensitive, QRegExp::RegExp2);
+			           Qt::CaseInsensitive, QRegExp::RegExp2);
 			int pos = rx.indexIn(str);
 			qDebug() << "shortcut icon pos:" << pos;
-			if (pos == -1) 
+
+			if (pos == -1)
 			{
 				rx = QRegExp("<link[^>]+rel=\"icon\"[^>]+>",
-					Qt::CaseInsensitive, QRegExp::RegExp2);
+				             Qt::CaseInsensitive, QRegExp::RegExp2);
 				pos = rx.indexIn(str);
 				qDebug() << "icon pos:" << pos;
 			}
-			if (pos > -1) 
+
+			if (pos > -1)
 			{
 				str = rx.cap(0);
 				rx.setPattern("href=\"([^\"]+)");
 				pos = rx.indexIn(str);
 				qDebug() << "href pos:" << pos;
-				if (pos > -1) {
+
+				if (pos > -1)
+				{
 					linkFavicon = rx.cap(1);
 					QUrl urlFavicon(linkFavicon);
-					if (urlFavicon.host().isEmpty()) {
+
+					if (urlFavicon.host().isEmpty())
+					{
 						urlFavicon.setHost(url.host());
 					}
-					if (urlFavicon.scheme().isEmpty()) {
+
+					if (urlFavicon.scheme().isEmpty())
+					{
 						urlFavicon.setScheme(url.scheme());
 					}
+
 					linkFavicon = urlFavicon.toString();
 					qDebug() << "Favicon URL:" << linkFavicon;
 					redirectionMap.insert(linkFavicon, url.toString());
@@ -89,13 +99,16 @@ void FaviconDownloader::replyReady(QNetworkReply* pReply)
 		else
 		{
 			QUrl redirectionTarget = pReply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
-			if (redirectionTarget.isValid()) 
+
+			if (redirectionTarget.isValid())
 			{
 				if (redirectionTarget.host().isNull())
+				{
 					redirectionTarget.setUrl("http://" + url.host() + redirectionTarget.toString());
+				}
+
 				redirectionMap.insert(redirectionTarget.toString(), url.toString());
 				getFromWeb(redirectionTarget);
-				
 			}
 			else
 			{
@@ -112,13 +125,16 @@ void FaviconDownloader::replyReady(QNetworkReply* pReply)
 					metaData.setAttributes(atts);
 					metaData.setLastModified(QDateTime::currentDateTime());
 					metaData.setExpirationDate(QDateTime::currentDateTime().addDays(1));
-					QIODevice *dev = m_pDiskCache->prepare(metaData);
+					QIODevice* dev = m_pDiskCache->prepare(metaData);
+
 					if (!dev)
+					{
 						return;
+					}
+
 					dev->write(pReply->readAll());
 					m_pDiskCache->insert(dev);
 				}
-				
 			}
 		}
 	}
@@ -138,6 +154,20 @@ QPixmap FaviconDownloader::getFromWeb(QUrl url)
 		request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 		m_pNatworkManager->get(request);
 	}
+
 	return m_pStyleEngine->getIcon("toolbar_download").pixmap(16);
 }
+
+FaviconDownloaderPtr FaviconDownloader::getInstance()
+{
+	FaviconDownloaderPtr instance = m_pInstance.lock();
+	if (!instance)
+	{
+		instance.reset(new FaviconDownloader());
+		m_pInstance = instance;
+	}
+	return instance;
+}
+
+boost::weak_ptr<FaviconDownloader> FaviconDownloader::m_pInstance;
 

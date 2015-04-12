@@ -28,7 +28,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "StaticHelpers.h"
 #include "StyleEngene.h"
-#include "TorrentManager.h"
 #include "defs.h"
 
 class StaticHelpers;
@@ -51,7 +50,7 @@ private:
 	QString type;
 	QString group;
 	QStringList imageFiles;
-	
+
 //	bool prevHaserror,prevIsCompleted;
 public :
 
@@ -62,7 +61,7 @@ public :
 	QStringList& GetImageFiles();
 	QString GetSuffix();
 	QString GetErrorMessage() const;
-	
+
 	QString GetGroup();
 	QString GetDwonloadSpeed();
 	QString GetUploadSpeed();
@@ -85,8 +84,14 @@ public :
 	QIcon GetMimeTypeIcon() const;
 	QIcon GetMimeTypeIcon();
 	files_info GetFileDownloadInfo();
-	bool isPrevioslySeeded() const { return m_isPrevSeed;  }
-	void setIsPrevioslySeeded(bool value) { m_isPrevSeed = value; }
+	bool isPrevioslySeeded() const
+	{
+		return m_isPrevSeed;
+	}
+	void setIsPrevioslySeeded(bool value)
+	{
+		m_isPrevSeed = value;
+	}
 	bool isPaused() const;
 	bool isSeeding() const;
 	bool isStoped() const;

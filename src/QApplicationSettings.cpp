@@ -31,24 +31,25 @@ QApplicationSettings::QApplicationSettings()
 	try
 	{
 		QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-
 		QString oldStylePath = StaticHelpers::CombinePathes(QApplication::applicationDirPath(), "CuteTorrent.ini");
 		QString newStylePath = StaticHelpers::CombinePathes(dataDir, "settings.ini");
 		QFile oldFile(oldStylePath);
+
 		if (oldFile.exists())
 		{
 			if (!oldFile.rename(newStylePath))
 			{
-				MyMessageBox::warning(NULL, "Move file failed", QString("Failed to move %1 to %2!").arg(oldStylePath, newStylePath));
+				CustomMessageBox::warning(NULL, "Move file failed", QString("Failed to move %1 to %2!").arg(oldStylePath, newStylePath));
 			}
 		}
+
 		settings = new QSettings(newStylePath, QSettings::IniFormat);
 		locker = new QMutex();
 		ReedSettings();
 	}
 	catch(std::exception ex)
 	{
-		MyMessageBox::warning(0, "Error", QString("QApplicationSettings::QApplicationSettings()") + ex.what());
+		CustomMessageBox::warning(0, "Error", QString("QApplicationSettings::QApplicationSettings()") + ex.what());
 	}
 }
 QApplicationSettings::~QApplicationSettings()
@@ -370,7 +371,7 @@ void QApplicationSettings::SaveSchedullerQueue(QList<SchedulerTask>& tasks)
 
 	if(!file.open(QFile::WriteOnly))
 	{
-		MyMessageBox::warning(NULL, "", "Error open for writing BtSessionData/schedulertasks.xml");
+		CustomMessageBox::warning(NULL, "", "Error open for writing BtSessionData/schedulertasks.xml");
 		return;
 	}
 

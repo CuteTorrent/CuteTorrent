@@ -42,7 +42,7 @@ void UploadController::service(HttpRequest& request, HttpResponse& response)
 		}
 
 		error_code ec;
-		m_pTorrentManager->AddTorrent(QFileInfo(uploaded).absoluteFilePath(), save_path, "", ec, QMap<QString, qint8>());
+		m_pTorrentManager->AddTorrent(QFileInfo(uploaded).absoluteFilePath(), save_path, "", ec);
 
 		if(ec)
 		{

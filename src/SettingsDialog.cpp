@@ -43,6 +43,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "webControll/RconWebService.h"
 #include <QRegExpValidator>
 #include "NotificationSystem.h"
+#include "AddRssDwonloadRuleDialog.h"
+#include "RssManager.h"
 #ifdef Q_WS_WIN //file association for windows
 #include <tchar.h>
 #include <windows.h>
@@ -72,15 +74,13 @@ BOOL IsWow64()
 }
 
 #endif
-SettingsDialog::SettingsDialog(QWidget* parrent, int flags) : BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize)
+SettingsDialog::SettingsDialog(QWidget* parent, int flags) : BaseWindow(OnlyCloseButton, NoResize, parent), editRssRule(nullptr), deleteRssRule(nullptr)
 {
 	setupUi(this);
 	previousFocuse = NULL;
 	settings = QApplicationSettings::getInstance();
 	rcon = RconWebService::getInstance();
 	tracker = TorrentTracker::getInstance();
-	
-	
 	FillDTTab();
 	FillRestrictionTab();
 	FillFilteringGroups();
@@ -91,6 +91,7 @@ SettingsDialog::SettingsDialog(QWidget* parrent, int flags) : BaseWindow(BaseWin
 	FillSearchTab();
 	FillKeyMapTab();
 	FillNetworkTab();
+	FillRssTab();
 	setupCustomWindow();
 	setupWindowIcons();
 	//OS_SPECIFICK////
@@ -107,6 +108,7 @@ SettingsDialog::SettingsDialog(QWidget* parrent, int flags) : BaseWindow(BaseWin
 	//OS_SPECIFICK////
 	QString curLoc = Application::currentLocale();
 	int current = 0;
+
 	foreach(QString avail, Application::availableLanguages())
 	{
 		qDebug() << avail << QLocale(avail);
@@ -122,7 +124,7 @@ SettingsDialog::SettingsDialog(QWidget* parrent, int flags) : BaseWindow(BaseWin
 	}
 
 	StyleEngene* style = StyleEngene::getInstance();
-	QObject::connect(style, SIGNAL(styleChanged()), this, SLOT(setupWindowIcons()));
+	connect(style, SIGNAL(styleChanged()), this, SLOT(setupWindowIcons()));
 	//tabWidget->removeTab(5);
 }
 
@@ -206,8 +208,6 @@ void SettingsDialog::FillGeneralTab()
 	}
 
 	useNotificationsCheckBox->setChecked(settings->valueBool("Notifications", "use_notification_sys", true));
-	useCustomNotificationsCheckBox->setChecked(settings->valueBool("Notifications", "use_custom_frame", true));
-	notifyErrorsCheckBox->setChecked(settings->valueBool("Notifications", "report_errors", true));
 	showTrackerErrorsCheckBox->setChecked(settings->valueBool("Notifications", "report_tracker_errors", true));
 	showDiskErrorsCheckBox->setChecked(settings->valueBool("Notifications", "report_disk_errors", true));
 	showRssErrorsCheckBox->setChecked(settings->valueBool("Notifications", "report_rss_errors", true));
@@ -216,7 +216,7 @@ void SettingsDialog::FillGeneralTab()
 void SettingsDialog::FillFilteringGroups()
 {
 	filterGroups = settings->GetFileFilterGroups();
-
+	GroupsListWidget->clear();
 	for(int i = 0; i < filterGroups.count(); i++)
 	{
 		GroupsListWidget->addItem(filterGroups.at(i).Name());
@@ -273,6 +273,8 @@ void SettingsDialog::showSelectedGroup(int row)
 }
 SettingsDialog::~SettingsDialog()
 {
+	qDeleteAll(m_downloadRulesCopy.values());
+	m_downloadRulesCopy.clear();
 	RconWebService::freeInstance();
 	TorrentTracker::freeInstance();
 	QApplicationSettings::FreeInstance();
@@ -290,13 +292,13 @@ void SettingsDialog::ApplySettings()
 	settings->setValue("Torrent", "local_upload_rate_limit",	qVariantFromValue(localUploadLimitEdit->value() * KbInt));
 	settings->setValue("Torrent", "local_download_rate_limit",	qVariantFromValue(localDownloadLimitEdit->value() * KbInt));
 	settings->setValue("Torrent", "rate_limit_utp",				qVariantFromValue(limitUtpCheckBox->isChecked()));
-	settings->setValue("Torrent", "seed_time_limit",			qVariantFromValue(QTime(0,0).secsTo(seedTimeLimitEdit->time())));
+	settings->setValue("Torrent", "seed_time_limit",			qVariantFromValue(QTime(0, 0).secsTo(seedTimeLimitEdit->time())));
 	settings->setValue("Torrent", "share_ratio_limit",			qVariantFromValue(seedGlobalRatioEdit->value()));
 	settings->setValue("Torrent", "useProxy",					qVariantFromValue(proxyGroupBox->isChecked()));
 	settings->setValue("Torrent", "use_dht",					qVariantFromValue(useDHTCheckBox->isChecked()));
 	settings->setValue("Torrent", "use_lsd",					qVariantFromValue(useLSDCheckBox->isChecked()));
 	settings->setValue("Torrent", "use_pex",					qVariantFromValue(usePExCheckBox->isChecked()));
-	
+
 	if(proxyGroupBox->isChecked())
 	{
 		QStringList iport = proxyHostEdit->text().split(':');
@@ -310,6 +312,7 @@ void SettingsDialog::ApplySettings()
 			settings->setValue("Torrent", "proxy_username",		qVariantFromValue(proxyUsernameEdit->text()));
 		}
 	}
+
 	settings->setValue("Torrent", "use_port_forwarding",		qVariantFromValue(portMappingsCheckBox->isChecked()));
 	settings->setValue("Torrent", "lock_files",					lockFilesCheckBox->isChecked());
 	settings->setValue("Torrent", "cache_size",					casheSizeLineEdit->value() / 16);
@@ -323,9 +326,7 @@ void SettingsDialog::ApplySettings()
 	settings->setValue("Torrent", "allowed_enc_level",          encLevelComboBox->currentIndex());
 	settings->setValue("Torrent", "prefer_rc4",                 preferFullEncCheckBox->isChecked());
 	settings->setValue("Notifications", "use_notification_sys", useNotificationsCheckBox->isChecked());
-	settings->setValue("Notifications", "use_custom_frame",		useCustomNotificationsCheckBox->isChecked());
-	settings->setValue("Notifications", "report_errors",		notifyErrorsCheckBox->isChecked());
-	settings->setValue("Notifications", "report_tracker_errors",showTrackerErrorsCheckBox->isChecked());
+	settings->setValue("Notifications", "report_tracker_errors", showTrackerErrorsCheckBox->isChecked());
 	settings->setValue("Notifications", "report_disk_errors",	showDiskErrorsCheckBox->isChecked());
 	settings->setValue("Notifications", "report_rss_errors",	showRssErrorsCheckBox->isChecked());
 	ApplySettingsToSession();
@@ -349,7 +350,7 @@ void SettingsDialog::ApplySettings()
 	settings->setValue("TorrentTracker", "enabled",              trackerGroupBox->isChecked());
 	settings->setValue("TorrentTracker", "port",                 trackerPortEdit->text());
 	NotificationSystemPtr pNotifySys = NotificationSystem::getInstance();
-	pNotifySys->UpdateNotificationMask();
+	pNotifySys->UpdateNotificationSettings();
 #ifdef Q_WS_WIN //file association for windows
 	QSettings asocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
 	QString base_dir = QDir::toNativeSeparators(settings->valueString("System", "BaseDir")) + "CuteTorrent.exe";
@@ -468,11 +469,12 @@ void SettingsDialog::ApplySettings()
 	{
 		sEngine->setStyle(currentStyle);
 	}
+	ApplyRssDownloadRulles();
 }
 void SettingsDialog::ApplySettingsToSession()
 {
 	TorrentManager* manager = TorrentManager::getInstance();
-	libtorrent::session_settings current = manager->readSettings();
+	session_settings current = manager->readSettings();
 	current.active_limit		= activeLimitEdit->value();
 	current.active_downloads	= activeDownloadLimitEdit->value();
 	current.active_seeds		= activeSeedLimitEdit->value();
@@ -510,7 +512,7 @@ void SettingsDialog::addGroup()
 
 	if(name.isEmpty())
 	{
-		MyMessageBox::warning(this, tr("STR_SETTINGS"),
+		CustomMessageBox::warning(this, tr("STR_SETTINGS"),
 		                      tr("ERROR_GROUP_NAME_NOT_SET"));
 		return;
 	}
@@ -519,7 +521,7 @@ void SettingsDialog::addGroup()
 
 	if(extensions.isEmpty())
 	{
-		MyMessageBox::warning(this, tr("STR_SETTINGS"),
+		CustomMessageBox::warning(this, tr("STR_SETTINGS"),
 		                      tr("ERROR_NO_EXTENSIONS"));
 		return;
 	}
@@ -528,14 +530,14 @@ void SettingsDialog::addGroup()
 
 	if(dir.isEmpty())
 	{
-		MyMessageBox::warning(this, tr("STR_SETTINGS"),
+		CustomMessageBox::warning(this, tr("STR_SETTINGS"),
 		                      tr("ERROR_NO_PATH"));
 		return;
 	}
 
 	if(!QDir(dir).exists())
 	{
-		MyMessageBox::warning(this, tr("STR_SETTINGS"),
+		CustomMessageBox::warning(this, tr("STR_SETTINGS"),
 		                      tr("ERROR_PATH_NOT_EXISTS"));
 		return;
 	}
@@ -551,7 +553,7 @@ void SettingsDialog::addGroup()
 
 	if(foundRow >= 0)
 	{
-		if(QMessageBox::No == MyMessageBox::warning(this, tr("STR_SETTINGS"),
+		if(QMessageBox::No == CustomMessageBox::warning(this, tr("STR_SETTINGS"),
 		        tr("SHURE_IN_CHANGING_GROUP %1").arg(name),
 		        QMessageBox::No | QMessageBox::Yes))
 		{
@@ -596,7 +598,7 @@ void SettingsDialog::removeGroup()
 			}
 			else
 			{
-				MyMessageBox::warning(this, "Error", QString(tr("Unable to find %1")).arg(name));
+				CustomMessageBox::warning(this, "Error", QString(tr("Unable to find %1")).arg(name));
 			}
 		}
 	}
@@ -673,13 +675,13 @@ void SettingsDialog::AddTask()
 
 	if(SchedulerTask::UNKNOWN == type)
 	{
-		MyMessageBox::warning(this, tr("ERROR_SRT"), tr("SCHEDULLER_UNKNOWN_TYPE"));
+		CustomMessageBox::warning(this, tr("ERROR_SRT"), tr("SCHEDULLER_UNKNOWN_TYPE"));
 		return;
 	}
 
 	if(name.length() == 0)
 	{
-		MyMessageBox::warning(this, tr("ERROR_SRT"), tr("SCHEDULLER_NO_NAME"));
+		CustomMessageBox::warning(this, tr("ERROR_SRT"), tr("SCHEDULLER_NO_NAME"));
 		return;
 	}
 
@@ -692,9 +694,9 @@ void SettingsDialog::AddTask()
 
 void SettingsDialog::SetupSchedullerTab()
 {
-	QObject::connect(calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(SetDate(QDate)));
+	connect(calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(SetDate(QDate)));
 	beginDateTimeEdit->setDateTime(QDateTime::currentDateTime().addSecs(120));
-	QObject::connect(tasksComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(UpdateSchedullerTab(int)));
+	connect(tasksComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(UpdateSchedullerTab(int)));
 	tasks = settings->GetSchedullerQueue();
 
 	for(int i = 0; i < tasks.count(); i++)
@@ -703,7 +705,7 @@ void SettingsDialog::SetupSchedullerTab()
 	}
 
 	Scheduller* scheduller = Scheduller::getInstance();
-	QObject::connect(this, SIGNAL(tasksChanged()), scheduller, SLOT(UpdateTasks()));
+	connect(this, SIGNAL(tasksChanged()), scheduller, SLOT(UpdateTasks()));
 	Scheduller::freeInstance();
 }
 
@@ -713,13 +715,13 @@ void SettingsDialog::FillNetworkTab()
 	QString portRange = "(6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|[1-9]\\d{0,3})";
 	// You may want to use QRegularExpression for new code with Qt 5, however.
 	QRegExp ipRegex("^" + ipRange
-		+ "\\." + ipRange
-		+ "\\." + ipRange
-		+ "\\." + ipRange + "\\:" + portRange + "$");
-	QRegExpValidator *ipValidator = new QRegExpValidator(ipRegex, this);
+	                + "\\." + ipRange
+	                + "\\." + ipRange
+	                + "\\." + ipRange + "\\:" + portRange + "$");
+	QRegExpValidator* ipValidator = new QRegExpValidator(ipRegex, this);
 	proxyHostEdit->setValidator(ipValidator);
 	QRegExp portRegex("^" + portRange + "$");
-	QRegExpValidator *portValidator = new QRegExpValidator(portRegex, this);
+	QRegExpValidator* portValidator = new QRegExpValidator(portRegex, this);
 	portEdit->setText(settings->valueString("Torrent", "listen_port"));
 	portEdit->setValidator(portValidator);
 	bool useProxy = settings->valueBool("Torrent", "useProxy");
@@ -728,7 +730,7 @@ void SettingsDialog::FillNetworkTab()
 	if (useProxy)
 	{
 		proxyHostEdit->setText(QString("%1:%2").arg(settings->valueString("Torrent",
-			"proxy_hostname"), settings->valueString("Torrent", "proxy_port")));
+		                       "proxy_hostname"), settings->valueString("Torrent", "proxy_port")));
 		proxyUsernameEdit->setText(settings->valueString("Torrent", "proxy_username"));
 		proxyPwdEdit->setText(settings->valueString("Torrent", "proxy_password"));
 	}
@@ -749,6 +751,7 @@ void SettingsDialog::FillKeyMapTab()
 	QMap<QString, QMap<QString, QString>> grouppedKeyMap;
 	int index = 0;
 	qDebug() << "actions";
+
 	for(QMap<QString, QVariant>::iterator i = keyMappings.begin();
 	        i != keyMappings.end(); ++i, index++)
 	{
@@ -822,7 +825,6 @@ void SettingsDialog::FillKeyMapTab()
 
 void SettingsDialog::FillSearchTab()
 {
-	
 }
 
 void SettingsDialog::UpdateSchedullerTab(int index)
@@ -889,6 +891,9 @@ void SettingsDialog::changeEvent(QEvent* event)
 		FillSearchTab();
 		FillKeyMapTab();
 		FillNetworkTab();
+		FillRssTab();
+		editRssRule->setText(tr("ACTION_SETTINGS_EDIT_RSS_RULE"));
+		deleteRssRule->setText(tr("ACTION_SETTINGS_DELETE_RSS_RULE"));
 	}
 }
 
@@ -933,7 +938,7 @@ void SettingsDialog::FillRestrictionTab()
 {
 	uploadLimitEdit->setValue(settings->valueInt("Torrent", "upload_rate_limit") / KbFloat);
 	downloadLimitEdit->setValue(settings->valueInt("Torrent", "download_rate_limit") / KbFloat);
-	dhtLimitEdit->setValue(settings->valueInt("Torrent","dht_upload_rate_limit")/ KbFloat);
+	dhtLimitEdit->setValue(settings->valueInt("Torrent", "dht_upload_rate_limit") / KbFloat);
 	activeLimitEdit->setValue(settings->valueInt("Torrent", "active_limit"));
 	activeSeedLimitEdit->setValue(settings->valueInt("Torrent", "active_seeds"));
 	activeDownloadLimitEdit->setValue(settings->valueInt("Torrent", "active_downloads"));
@@ -948,9 +953,63 @@ void SettingsDialog::FillRestrictionTab()
 	seedGlobalRatioEdit->setValue(settings->valueString("Torrent", "share_ratio_limit").toFloat());
 }
 
+void SettingsDialog::updateRulesWidget(QList<RssDownloadRule*> downloadRules)
+{
+	rssRulesListWidget->clear();
+	for (int i = 0; i < downloadRules.size(); i++)
+	{
+		RssDownloadRule* rssDownloadRule = downloadRules.at(i);
+		QListWidgetItem* listWidgetItem = new QListWidgetItem(rssDownloadRule->Name());
+		listWidgetItem->setData(Qt::UserRole, qVariantFromValue(rssDownloadRule->Uid()));
+		rssRulesListWidget->addItem(listWidgetItem);
+	}
+}
+
+void SettingsDialog::FillRssTab()
+{
+	RssManagerPtr pRssManager = RssManager::getInstance();
+	QList<RssDownloadRule*> downloadRules = pRssManager->downloadRules();
+	qDeleteAll(m_downloadRulesCopy.values());
+	m_downloadRulesCopy.clear();
+	for (int i = 0; i < downloadRules.size(); i++)
+	{
+		RssDownloadRule* rssDownloadRule = downloadRules.at(i);
+		m_downloadRulesCopy.insert(rssDownloadRule->Uid(), new RssDownloadRule(*rssDownloadRule));
+	}
+	StyleEngene* pStyleEngine = StyleEngene::getInstance();
+	updateRulesWidget(downloadRules);
+	if (editRssRule == nullptr)
+	{
+		editRssRule = new QAction(pStyleEngine->getIcon("move_folder"), tr("ACTION_SETTINGS_EDIT_RSS_RULE"), this);
+		connect(editRssRule, SIGNAL(triggered()), SLOT(onEditRssRule()));
+		rssRulesListWidget->addAction(editRssRule);
+	}
+	if (deleteRssRule == nullptr)
+	{
+		deleteRssRule = new QAction(pStyleEngine->getIcon("delete"),tr("ACTION_SETTINGS_DELETE_RSS_RULE"), this);
+		connect(deleteRssRule, SIGNAL(triggered()), SLOT(onDeleteRssRule()));
+		rssRulesListWidget->addAction(deleteRssRule);
+	}
+}
+
+void SettingsDialog::ApplyRssDownloadRulles()
+{
+	RssManagerPtr pRssManager = RssManager::getInstance();
+	for (int i = 0; i < m_downloadRulesCopy.size(); i++)
+	{
+		pRssManager->updateDownloadRule(new RssDownloadRule(*m_downloadRulesCopy.values().at(i)));
+	}
+	for (int i = 0; i < m_deletedRules.size(); i++)
+	{
+		pRssManager->removeDownloadRule(m_deletedRules.at(i));
+	}
+}
+
+
 void SettingsDialog::NeverCallMe()
 {
-	char const* msgs[] = {
+	char const* msgs[] =
+	{
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_FILETAB_HIGH_PRIORITY"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_FILETAB_LOW_PRIORITY"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_FILETAB_MEDIUM_PRIORITY"),
@@ -1010,4 +1069,53 @@ void SettingsDialog::NeverCallMe()
 		QT_TRANSLATE_NOOP("SettingsDialog", "OTHER"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "FILETAB")
 	};
+}
+
+void SettingsDialog::addRssRule()
+{
+	boost::scoped_ptr<AddRssDwonloadRuleDialog> pDialog(new AddRssDwonloadRuleDialog(this));
+	if (pDialog->exec() == Accepted)
+	{
+		RssDownloadRule* rule = pDialog->getFinalRule();
+		m_downloadRulesCopy.insert(rule->Uid(), rule);
+		updateRulesWidget(m_downloadRulesCopy.values());
+	}
+}
+
+void SettingsDialog::onEditRssRule()
+{
+	if (rssRulesListWidget->currentRow() != -1)
+	{
+		QListWidgetItem* currentItem = rssRulesListWidget->currentItem();
+		QUuid uid = currentItem->data(Qt::UserRole).value<QUuid>();
+		RssDownloadRule* downloadRule = m_downloadRulesCopy[uid];
+		bool ok;
+		downloadRule->validate(ok);
+		if (ok)
+		{
+			boost::scoped_ptr<AddRssDwonloadRuleDialog> pDialog(new AddRssDwonloadRuleDialog(this));
+			pDialog->setDownloadRule(downloadRule);
+			if (pDialog->exec() == Accepted)
+			{
+				RssDownloadRule* rule = pDialog->getFinalRule();
+				RssDownloadRule* rule2del = m_downloadRulesCopy[rule->Uid()];
+				m_downloadRulesCopy.remove(rule->Uid());
+				delete rule2del;
+				m_downloadRulesCopy.insert(rule->Uid(), rule);
+				updateRulesWidget(m_downloadRulesCopy.values());
+			}
+		}
+	}
+}
+
+void SettingsDialog::onDeleteRssRule()
+{
+	if (rssRulesListWidget->currentRow() != -1)
+	{
+		QListWidgetItem* currentItem = rssRulesListWidget->currentItem();
+		QUuid uid = currentItem->data(Qt::UserRole).value<QUuid>();
+		m_downloadRulesCopy.remove(uid);
+		m_deletedRules.append(uid);
+		updateRulesWidget(m_downloadRulesCopy.values());
+	}
 }

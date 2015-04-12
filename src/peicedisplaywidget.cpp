@@ -5,7 +5,7 @@ PeiceDisplayWidget::PeiceDisplayWidget(QWidget* parent)
 	: QWidget(parent)
 {
 	this->setMinimumHeight(20);
-	piceCount = 0;
+	m_iPiceCount = 0;
 	m_cDwonloaded = QColor(0x32, 0x91, 0xD4);
 	m_cDownloading = QColor(0x52, 0xD3, 0x31);
 	m_cBorder = QColor(0x90, 0x90, 0x90);
@@ -39,9 +39,9 @@ void PeiceDisplayWidget::UpdateImage()
 	QPainter painter(&img2);
 	painter.fillRect(0, 0, width() - 1, height() - 1, m_cBackground);
 
-	if(piceCount != 0)
+	if(m_iPiceCount != 0)
 	{
-		double pieceItemWidth = width() * 1.0 / piceCount;
+		double pieceItemWidth = width() * 1.0 / m_iPiceCount;
 		double pieceItemHeight = height();
 		int i = 0;
 
@@ -63,7 +63,7 @@ void PeiceDisplayWidget::UpdateImage()
 
 void PeiceDisplayWidget::setPiceCount(int _pieceCount)
 {
-	piceCount = _pieceCount;
+	m_iPiceCount = _pieceCount;
 	UpdateImage();
 }
 

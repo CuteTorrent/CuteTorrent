@@ -74,8 +74,8 @@ void Scheduller::timerEvent(QTimerEvent* event)
 	{
 		QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::Information;
 		SchedulerTask first = tasks.first();
-		QBalloonTip::showBalloon("CuteTorrent", tr("CT_PEFORMING_TASK %1").arg(first.name()), QBalloonTip::Info, qVariantFromValue(0), icon,
-		                         5 * 1000);
+/*		QBalloonTip::showBalloon("CuteTorrent", tr("CT_PEFORMING_TASK %1").arg(first.name()), QBalloonTip::Info, qVariantFromValue(0), icon,
+		                         5 * 1000);*/
 		first.pefromTask();
 		tasks.removeFirst();
 		killTimer(cuurentTimerID);

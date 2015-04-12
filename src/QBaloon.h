@@ -29,11 +29,11 @@ private:
 	void balloon(int, bool);
 	bool isFinished();
 protected:
-	/*	void paintEvent(QPaintEvent *);*/
-	void resizeEvent(QResizeEvent*);
-	void mousePressEvent(QMouseEvent* e);
-	void timerEvent(QTimerEvent* e);
-	void closeEvent(QCloseEvent* e);
+	/*void paintEvent(QPaintEvent* e);*/
+	void timerEvent(QTimerEvent*) override;
+	void resizeEvent(QResizeEvent*) override;
+	void mousePressEvent(QMouseEvent* e) override;
+	void closeEvent(QCloseEvent* e) override;
 
 private:
 	bool finished;
@@ -41,7 +41,7 @@ private:
 	QPixmap pixmap;
 	QBaloonType currentType;
 	QVariant currentData;
-	int timerId;
+	int m_showTimerId, m_duration;
 
 };
 #endif

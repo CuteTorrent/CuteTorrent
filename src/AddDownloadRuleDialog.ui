@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddRssDownloadRuleDialog</class>
+ <widget class="QWidget" name="AddRssDownloadRuleDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>767</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ADD_RSS_DWONLOAD_RULE_DIALOG</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="ltorrent.qrc">
+    <normaloff>:/icons/app.ico</normaloff>:/icons/app.ico</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="m_windowLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>1</number>
+   </property>
+   <property name="topMargin">
+    <number>1</number>
+   </property>
+   <property name="rightMargin">
+    <number>1</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QWidget" name="titleBar" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>4</number>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>1</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="tbMenu">
+        <property name="maximumSize">
+         <size>
+          <width>15</width>
+          <height>15</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="ltorrent.qrc">:/icons/app.ico</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="LTitle">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>8</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <stylestrategy>PreferDefault</stylestrategy>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>ADD_RSS_DWONLOAD_RULE_DIALOG</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::AutoText</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbClose">
+        <property name="minimumSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="m_centralWidget" native="true">
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <widget class="QSplitter" name="splitter">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <widget class="QWidget" name="m_ruleSettingsContainer" native="true">
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>RULE_NAME</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QComboBox" name="m_pSearchTypeComboBox"/>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="m_pRuleNameEdit"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="m_pRuleTypeCombobx"/>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="m_pSearchStringEdit"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>RULE_TYPE</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>SEARCH_STRING</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>SEARCH_TYPE</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0" colspan="2">
+           <widget class="QGroupBox" name="m_pUseSavePathGroupBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="title">
+             <string>USE_SAVE_PATH</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_3">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>SAVE_PATH</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="m_pSavePathEdit"/>
+             </item>
+             <item row="0" column="2">
+              <widget class="QPushButton" name="m_pBrowseButton">
+               <property name="text">
+                <string>BROWSE</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="6" column="0" colspan="2">
+           <widget class="QCheckBox" name="m_pUseGroupsCheckBox">
+            <property name="text">
+             <string>USE_GROUPS_FOR_FILTERING</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <widget class="QLabel" name="m_pRuleTypeHintLabel">
+            <property name="text">
+             <string>RULE_HINT</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="widget_2" native="true">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="1" column="0">
+           <widget class="QListWidget" name="m_pFeedsListWidget"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>APPLY_TO_FEEDS:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="widget" native="true">
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>FEED_ITEMS_MATCHED_BY_CURRENT_RULE:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QTreeView" name="m_pFilteredFeedsView">
+            <property name="mouseTracking">
+             <bool>true</bool>
+            </property>
+            <property name="contextMenuPolicy">
+             <enum>Qt::CustomContextMenu</enum>
+            </property>
+            <property name="animated">
+             <bool>true</bool>
+            </property>
+            <property name="headerHidden">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QDialogButtonBox" name="buttonBox">
+        <property name="standardButtons">
+         <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>m_pRuleNameEdit</tabstop>
+  <tabstop>m_pRuleTypeCombobx</tabstop>
+  <tabstop>m_pSearchTypeComboBox</tabstop>
+  <tabstop>m_pSearchStringEdit</tabstop>
+  <tabstop>m_pUseSavePathGroupBox</tabstop>
+  <tabstop>m_pSavePathEdit</tabstop>
+  <tabstop>m_pBrowseButton</tabstop>
+  <tabstop>m_pUseGroupsCheckBox</tabstop>
+  <tabstop>m_pFeedsListWidget</tabstop>
+  <tabstop>m_pFilteredFeedsView</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>pbClose</tabstop>
+ </tabstops>
+ <resources>
+  <include location="ltorrent.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>AddRssDownloadRuleDialog</receiver>
+   <slot>onApplyRule()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>329</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>AddRssDownloadRuleDialog</receiver>
+   <slot>onCancel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>329</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pRuleNameEdit</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>AddRssDownloadRuleDialog</receiver>
+   <slot>onChange()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>181</x>
+     <y>42</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pRuleTypeCombobx</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>AddRssDownloadRuleDialog</receiver>
+   <slot>onChange()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>184</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pSearchTypeComboBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>AddRssDownloadRuleDialog</receiver>
+   <slot>onChange()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>184</x>
+     <y>113</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pSearchStringEdit</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>AddRssDownloadRuleDialog</receiver>
+   <slot>onChange()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>184</x>
+     <y>139</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pUseSavePathGroupBox</sender>
+   <signal>clicked()</signal>
+   <receiver>AddRssDownloadRuleDialog</receiver>
+   <slot>onChange()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>166</x>
+     <y>201</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>383</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pSavePathEdit</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>AddRssDownloadRuleDialog</receiver>
+   <slot>onChange()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>157</x>
+     <y>207</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>383</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pUseGroupsCheckBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>AddRssDownloadRuleDialog</receiver>
+   <slot>onChange()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>166</x>
+     <y>244</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>383</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pRuleTypeCombobx</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>AddRssDownloadRuleDialog</receiver>
+   <slot>onUpdateRuleTypeHint()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>211</x>
+     <y>77</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>383</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onApplyRule()</slot>
+  <slot>onCancel()</slot>
+  <slot>onChange()</slot>
+  <slot>onUpdateRuleTypeHint()</slot>
+ </slots>
+</ui>

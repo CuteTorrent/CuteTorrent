@@ -19,13 +19,14 @@ void MetaDataDownloadWaiter::run()
 
 	if (ec)
 	{
+		m_pTorrentManager->CancelMagnetLink(MetaLink);
 		emit ErrorOccured(StaticHelpers::translateLibTorrentError(ec));
 		return;
 	}
 
 	if(!_autoAdd)
 	{
-		openmagnet_info* ti = m_pTorrentManager->GetTorrentInfo(h);
+		boost::scoped_ptr<openmagnet_info> ti(m_pTorrentManager->GetTorrentInfo(h));
 
 		if (ti != NULL)
 		{

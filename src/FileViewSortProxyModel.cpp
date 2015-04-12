@@ -33,18 +33,21 @@ bool FileViewSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex
 		{
 			return rightItem->GetName().compare(lefttItem->GetName()) < 0;
 		}
+
 		case 1:
 		{
 			libtorrent::size_type szLeft = sourceModel()->data(left).toLongLong();
 			libtorrent::size_type szRight = sourceModel()->data(right).toLongLong();
 			return szLeft < szRight;
 		}
+
 		case 2:
 		{
 			float leftReady = sourceModel()->data(left).toFloat();
 			float rightReady = sourceModel()->data(right).toFloat();
 			return leftReady < rightReady;
 		}
+
 		case 3:
 		{
 			int leftPriority = sourceModel()->data(left).toInt();
@@ -52,5 +55,6 @@ bool FileViewSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex
 			return leftPriority < rightPriority;
 		}
 	}
+
 	return true;
 }

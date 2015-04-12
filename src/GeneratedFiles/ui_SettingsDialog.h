@@ -52,6 +52,7 @@ public:
     QWidget *m_centralWidget;
     QGridLayout *gridLayout_4;
     QDialogButtonBox *buttonBox;
+    QListWidget *listWidget;
     QStackedWidget *stackedWidget;
     QWidget *torrentTab;
     QGridLayout *gridLayout_22;
@@ -59,24 +60,20 @@ public:
     QGridLayout *gridLayout_2;
     QLabel *label_23;
     QLineEdit *trackerPortEdit;
-    QComboBox *styleComboBox;
-    QLabel *label_26;
-    QLabel *label_8;
-    QComboBox *localeComboBox;
-    QSpacerItem *verticalSpacer_5;
-    QCheckBox *startMinimizedCheckBox;
-    QCheckBox *runOnbootCheckBox;
     QCheckBox *asociationCheckBox;
+    QCheckBox *runOnbootCheckBox;
+    QComboBox *localeComboBox;
+    QCheckBox *startMinimizedCheckBox;
+    QLabel *label_8;
+    QLabel *label_26;
+    QComboBox *styleComboBox;
     QGroupBox *useNotificationsCheckBox;
-    QGridLayout *gridLayout_34;
-    QCheckBox *useCustomNotificationsCheckBox;
-    QGroupBox *notifyErrorsCheckBox;
-    QGridLayout *gridLayout_35;
+    QGridLayout *gridLayout_13;
     QCheckBox *showTrackerErrorsCheckBox;
     QCheckBox *showDiskErrorsCheckBox;
     QCheckBox *showRssErrorsCheckBox;
-    QSpacerItem *verticalSpacer_7;
     QCheckBox *magnetAssociationCheckBox;
+    QSpacerItem *verticalSpacer_5;
     QWidget *restrictionTab;
     QGridLayout *gridLayout_30;
     QGroupBox *groupBox_2;
@@ -228,11 +225,12 @@ public:
     QPushButton *openWebUiButton;
     QWidget *page_2;
     QGridLayout *gridLayout_33;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton_3;
-    QListWidget *listWidget_2;
     QSpacerItem *horizontalSpacer;
-    QPushButton *pushButton;
+    QPushButton *addRssDLRuleButton;
+    QListWidget *rssRulesListWidget;
+    QPushButton *removeRssDLRuleButton;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_2;
     QWidget *serchTab;
     QGridLayout *gridLayout_12;
     QSpacerItem *verticalSpacer;
@@ -241,13 +239,13 @@ public:
     QScrollArea *hotKeyScrollArea;
     QWidget *keyMapContainer;
     QGridLayout *gridLayout_19;
-    QListWidget *listWidget;
 
     void setupUi(QDialog *SettingsDialog)
     {
         if (SettingsDialog->objectName().isEmpty())
             SettingsDialog->setObjectName(QString::fromUtf8("SettingsDialog"));
-        SettingsDialog->resize(800, 360);
+        SettingsDialog->setWindowModality(Qt::WindowModal);
+        SettingsDialog->resize(793, 360);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
         SettingsDialog->setWindowIcon(icon);
@@ -310,6 +308,39 @@ public:
 
         gridLayout_4->addWidget(buttonBox, 2, 3, 1, 1);
 
+        listWidget = new QListWidget(m_centralWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        listWidget->setObjectName(QString::fromUtf8("listWidget"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(listWidget->sizePolicy().hasHeightForWidth());
+        listWidget->setSizePolicy(sizePolicy);
+        listWidget->setMinimumSize(QSize(160, 0));
+        listWidget->setMaximumSize(QSize(16777215, 16777215));
+        listWidget->setStyleSheet(QString::fromUtf8("#listWidget{\n"
+"    border-bottom:none;\n"
+"    border-left:none;\n"
+"}\n"
+"QListView::item{\n"
+"    min-height:28px;\n"
+"}\n"
+"                  "));
+        listWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        listWidget->setResizeMode(QListView::Adjust);
+
+        gridLayout_4->addWidget(listWidget, 0, 0, 3, 1);
+
         stackedWidget = new QStackedWidget(m_centralWidget);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
         stackedWidget->setMaximumSize(QSize(16777215, 16777215));
@@ -337,20 +368,15 @@ public:
 
         gridLayout_22->addWidget(trackerGroupBox, 0, 2, 2, 2);
 
-        styleComboBox = new QComboBox(torrentTab);
-        styleComboBox->setObjectName(QString::fromUtf8("styleComboBox"));
+        asociationCheckBox = new QCheckBox(torrentTab);
+        asociationCheckBox->setObjectName(QString::fromUtf8("asociationCheckBox"));
 
-        gridLayout_22->addWidget(styleComboBox, 1, 1, 1, 1);
+        gridLayout_22->addWidget(asociationCheckBox, 4, 0, 1, 2);
 
-        label_26 = new QLabel(torrentTab);
-        label_26->setObjectName(QString::fromUtf8("label_26"));
+        runOnbootCheckBox = new QCheckBox(torrentTab);
+        runOnbootCheckBox->setObjectName(QString::fromUtf8("runOnbootCheckBox"));
 
-        gridLayout_22->addWidget(label_26, 1, 0, 1, 1);
-
-        label_8 = new QLabel(torrentTab);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
-
-        gridLayout_22->addWidget(label_8, 0, 0, 1, 1);
+        gridLayout_22->addWidget(runOnbootCheckBox, 2, 0, 1, 2);
 
         localeComboBox = new QComboBox(torrentTab);
         localeComboBox->setObjectName(QString::fromUtf8("localeComboBox"));
@@ -358,71 +384,58 @@ public:
 
         gridLayout_22->addWidget(localeComboBox, 0, 1, 1, 1);
 
-        verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_22->addItem(verticalSpacer_5, 10, 0, 1, 3);
-
         startMinimizedCheckBox = new QCheckBox(torrentTab);
         startMinimizedCheckBox->setObjectName(QString::fromUtf8("startMinimizedCheckBox"));
 
         gridLayout_22->addWidget(startMinimizedCheckBox, 3, 0, 1, 2);
 
-        runOnbootCheckBox = new QCheckBox(torrentTab);
-        runOnbootCheckBox->setObjectName(QString::fromUtf8("runOnbootCheckBox"));
+        label_8 = new QLabel(torrentTab);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
 
-        gridLayout_22->addWidget(runOnbootCheckBox, 2, 0, 1, 2);
+        gridLayout_22->addWidget(label_8, 0, 0, 1, 1);
 
-        asociationCheckBox = new QCheckBox(torrentTab);
-        asociationCheckBox->setObjectName(QString::fromUtf8("asociationCheckBox"));
+        label_26 = new QLabel(torrentTab);
+        label_26->setObjectName(QString::fromUtf8("label_26"));
 
-        gridLayout_22->addWidget(asociationCheckBox, 4, 0, 1, 2);
+        gridLayout_22->addWidget(label_26, 1, 0, 1, 1);
+
+        styleComboBox = new QComboBox(torrentTab);
+        styleComboBox->setObjectName(QString::fromUtf8("styleComboBox"));
+
+        gridLayout_22->addWidget(styleComboBox, 1, 1, 1, 1);
 
         useNotificationsCheckBox = new QGroupBox(torrentTab);
         useNotificationsCheckBox->setObjectName(QString::fromUtf8("useNotificationsCheckBox"));
         useNotificationsCheckBox->setCheckable(true);
         useNotificationsCheckBox->setChecked(false);
-        gridLayout_34 = new QGridLayout(useNotificationsCheckBox);
-        gridLayout_34->setObjectName(QString::fromUtf8("gridLayout_34"));
-        useCustomNotificationsCheckBox = new QCheckBox(useNotificationsCheckBox);
-        useCustomNotificationsCheckBox->setObjectName(QString::fromUtf8("useCustomNotificationsCheckBox"));
-
-        gridLayout_34->addWidget(useCustomNotificationsCheckBox, 0, 0, 1, 1);
-
-        notifyErrorsCheckBox = new QGroupBox(useNotificationsCheckBox);
-        notifyErrorsCheckBox->setObjectName(QString::fromUtf8("notifyErrorsCheckBox"));
-        notifyErrorsCheckBox->setCheckable(true);
-        notifyErrorsCheckBox->setChecked(false);
-        gridLayout_35 = new QGridLayout(notifyErrorsCheckBox);
-        gridLayout_35->setObjectName(QString::fromUtf8("gridLayout_35"));
-        showTrackerErrorsCheckBox = new QCheckBox(notifyErrorsCheckBox);
+        gridLayout_13 = new QGridLayout(useNotificationsCheckBox);
+        gridLayout_13->setObjectName(QString::fromUtf8("gridLayout_13"));
+        showTrackerErrorsCheckBox = new QCheckBox(useNotificationsCheckBox);
         showTrackerErrorsCheckBox->setObjectName(QString::fromUtf8("showTrackerErrorsCheckBox"));
 
-        gridLayout_35->addWidget(showTrackerErrorsCheckBox, 0, 0, 1, 1);
+        gridLayout_13->addWidget(showTrackerErrorsCheckBox, 0, 0, 1, 1);
 
-        showDiskErrorsCheckBox = new QCheckBox(notifyErrorsCheckBox);
+        showDiskErrorsCheckBox = new QCheckBox(useNotificationsCheckBox);
         showDiskErrorsCheckBox->setObjectName(QString::fromUtf8("showDiskErrorsCheckBox"));
 
-        gridLayout_35->addWidget(showDiskErrorsCheckBox, 1, 0, 1, 1);
+        gridLayout_13->addWidget(showDiskErrorsCheckBox, 1, 0, 1, 1);
 
-        showRssErrorsCheckBox = new QCheckBox(notifyErrorsCheckBox);
+        showRssErrorsCheckBox = new QCheckBox(useNotificationsCheckBox);
         showRssErrorsCheckBox->setObjectName(QString::fromUtf8("showRssErrorsCheckBox"));
 
-        gridLayout_35->addWidget(showRssErrorsCheckBox, 2, 0, 1, 1);
+        gridLayout_13->addWidget(showRssErrorsCheckBox, 2, 0, 1, 1);
 
 
-        gridLayout_34->addWidget(notifyErrorsCheckBox, 1, 0, 1, 1);
-
-
-        gridLayout_22->addWidget(useNotificationsCheckBox, 2, 2, 6, 2);
-
-        verticalSpacer_7 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_22->addItem(verticalSpacer_7, 6, 0, 1, 2);
+        gridLayout_22->addWidget(useNotificationsCheckBox, 2, 2, 4, 2);
 
         magnetAssociationCheckBox = new QCheckBox(torrentTab);
         magnetAssociationCheckBox->setObjectName(QString::fromUtf8("magnetAssociationCheckBox"));
 
-        gridLayout_22->addWidget(magnetAssociationCheckBox, 5, 0, 1, 2);
+        gridLayout_22->addWidget(magnetAssociationCheckBox, 5, 0, 1, 1);
+
+        verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_22->addItem(verticalSpacer_5, 11, 0, 1, 4);
 
         stackedWidget->addWidget(torrentTab);
         restrictionTab = new QWidget();
@@ -1141,33 +1154,40 @@ public:
         page_2->setObjectName(QString::fromUtf8("page_2"));
         gridLayout_33 = new QGridLayout(page_2);
         gridLayout_33->setObjectName(QString::fromUtf8("gridLayout_33"));
-        pushButton_2 = new QPushButton(page_2);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setEnabled(false);
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_33->addWidget(pushButton_2, 4, 0, 1, 1);
+        gridLayout_33->addItem(horizontalSpacer, 0, 4, 1, 1);
+
+        addRssDLRuleButton = new QPushButton(page_2);
+        addRssDLRuleButton->setObjectName(QString::fromUtf8("addRssDLRuleButton"));
+        addRssDLRuleButton->setMinimumSize(QSize(30, 0));
+        addRssDLRuleButton->setMaximumSize(QSize(30, 16777215));
+
+        gridLayout_33->addWidget(addRssDLRuleButton, 1, 0, 1, 1);
+
+        rssRulesListWidget = new QListWidget(page_2);
+        rssRulesListWidget->setObjectName(QString::fromUtf8("rssRulesListWidget"));
+        rssRulesListWidget->setContextMenuPolicy(Qt::ActionsContextMenu);
+
+        gridLayout_33->addWidget(rssRulesListWidget, 0, 0, 1, 4);
+
+        removeRssDLRuleButton = new QPushButton(page_2);
+        removeRssDLRuleButton->setObjectName(QString::fromUtf8("removeRssDLRuleButton"));
+        removeRssDLRuleButton->setMaximumSize(QSize(30, 16777215));
+
+        gridLayout_33->addWidget(removeRssDLRuleButton, 1, 1, 1, 1);
 
         pushButton_3 = new QPushButton(page_2);
         pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
         pushButton_3->setEnabled(false);
 
-        gridLayout_33->addWidget(pushButton_3, 4, 1, 1, 1);
+        gridLayout_33->addWidget(pushButton_3, 1, 2, 1, 1);
 
-        listWidget_2 = new QListWidget(page_2);
-        listWidget_2->setObjectName(QString::fromUtf8("listWidget_2"));
-        listWidget_2->setEnabled(false);
+        pushButton_2 = new QPushButton(page_2);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setEnabled(false);
 
-        gridLayout_33->addWidget(listWidget_2, 1, 0, 3, 2);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_33->addItem(horizontalSpacer, 0, 2, 5, 1);
-
-        pushButton = new QPushButton(page_2);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setEnabled(false);
-
-        gridLayout_33->addWidget(pushButton, 0, 0, 1, 2);
+        gridLayout_33->addWidget(pushButton_2, 1, 3, 1, 1);
 
         stackedWidget->addWidget(page_2);
         serchTab = new QWidget();
@@ -1181,9 +1201,6 @@ public:
         stackedWidget->addWidget(serchTab);
         keyMappingTab = new QWidget();
         keyMappingTab->setObjectName(QString::fromUtf8("keyMappingTab"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(keyMappingTab->sizePolicy().hasHeightForWidth());
         keyMappingTab->setSizePolicy(sizePolicy);
         gridLayout_17 = new QGridLayout(keyMappingTab);
@@ -1195,7 +1212,7 @@ public:
         hotKeyScrollArea->setWidgetResizable(true);
         keyMapContainer = new QWidget();
         keyMapContainer->setObjectName(QString::fromUtf8("keyMapContainer"));
-        keyMapContainer->setGeometry(QRect(0, 0, 617, 304));
+        keyMapContainer->setGeometry(QRect(0, 0, 98, 28));
         gridLayout_19 = new QGridLayout(keyMapContainer);
         gridLayout_19->setObjectName(QString::fromUtf8("gridLayout_19"));
         hotKeyScrollArea->setWidget(keyMapContainer);
@@ -1206,39 +1223,54 @@ public:
 
         gridLayout_4->addWidget(stackedWidget, 0, 2, 1, 2);
 
-        listWidget = new QListWidget(m_centralWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        listWidget->setObjectName(QString::fromUtf8("listWidget"));
-        sizePolicy.setHeightForWidth(listWidget->sizePolicy().hasHeightForWidth());
-        listWidget->setSizePolicy(sizePolicy);
-        listWidget->setMinimumSize(QSize(160, 0));
-        listWidget->setMaximumSize(QSize(16777215, 16777215));
-        listWidget->setStyleSheet(QString::fromUtf8("#listWidget{\n"
-"    border-bottom:none;\n"
-"    border-left:none;\n"
-"}\n"
-"QListView::item{\n"
-"    min-height:28px;\n"
-"}\n"
-"                  "));
-        listWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        listWidget->setResizeMode(QListView::Adjust);
-
-        gridLayout_4->addWidget(listWidget, 0, 0, 3, 1);
-
 
         verticalLayout->addWidget(m_centralWidget);
 
+        QWidget::setTabOrder(localeComboBox, styleComboBox);
+        QWidget::setTabOrder(styleComboBox, runOnbootCheckBox);
+        QWidget::setTabOrder(runOnbootCheckBox, startMinimizedCheckBox);
+        QWidget::setTabOrder(startMinimizedCheckBox, asociationCheckBox);
+        QWidget::setTabOrder(asociationCheckBox, magnetAssociationCheckBox);
+        QWidget::setTabOrder(magnetAssociationCheckBox, trackerGroupBox);
+        QWidget::setTabOrder(trackerGroupBox, trackerPortEdit);
+        QWidget::setTabOrder(trackerPortEdit, useNotificationsCheckBox);
+        QWidget::setTabOrder(useNotificationsCheckBox, showTrackerErrorsCheckBox);
+        QWidget::setTabOrder(showTrackerErrorsCheckBox, showDiskErrorsCheckBox);
+        QWidget::setTabOrder(showDiskErrorsCheckBox, showRssErrorsCheckBox);
+        QWidget::setTabOrder(showRssErrorsCheckBox, activeLimitEdit);
+        QWidget::setTabOrder(activeLimitEdit, activeSeedLimitEdit);
+        QWidget::setTabOrder(activeSeedLimitEdit, activeDownloadLimitEdit);
+        QWidget::setTabOrder(activeDownloadLimitEdit, useDHTCheckBox);
+        QWidget::setTabOrder(useDHTCheckBox, usePExCheckBox);
+        QWidget::setTabOrder(usePExCheckBox, useLSDCheckBox);
+        QWidget::setTabOrder(useLSDCheckBox, seedGlobalRatioEdit);
+        QWidget::setTabOrder(seedGlobalRatioEdit, uploadLimitEdit);
+        QWidget::setTabOrder(uploadLimitEdit, downloadLimitEdit);
+        QWidget::setTabOrder(downloadLimitEdit, dhtLimitEdit);
+        QWidget::setTabOrder(dhtLimitEdit, limitLocalConnectionCheckBox);
+        QWidget::setTabOrder(limitLocalConnectionCheckBox, localUploadLimitEdit);
+        QWidget::setTabOrder(localUploadLimitEdit, localDownloadLimitEdit);
+        QWidget::setTabOrder(localDownloadLimitEdit, limitUtpCheckBox);
+        QWidget::setTabOrder(limitUtpCheckBox, seedTimeLimitEdit);
+        QWidget::setTabOrder(seedTimeLimitEdit, portEdit);
+        QWidget::setTabOrder(portEdit, portMappingsCheckBox);
+        QWidget::setTabOrder(portMappingsCheckBox, proxyGroupBox);
+        QWidget::setTabOrder(proxyGroupBox, proxyHostEdit);
+        QWidget::setTabOrder(proxyHostEdit, proxyUsernameEdit);
+        QWidget::setTabOrder(proxyUsernameEdit, proxyPwdEdit);
+        QWidget::setTabOrder(proxyPwdEdit, proxyTypeComboBox);
+        QWidget::setTabOrder(proxyTypeComboBox, inEncPolicyComboBox);
+        QWidget::setTabOrder(inEncPolicyComboBox, outEncPolicyComboBox);
+        QWidget::setTabOrder(outEncPolicyComboBox, encLevelComboBox);
+        QWidget::setTabOrder(encLevelComboBox, preferFullEncCheckBox);
+        QWidget::setTabOrder(preferFullEncCheckBox, diskIOCasheModeComboBox);
+        QWidget::setTabOrder(diskIOCasheModeComboBox, casheSizeLineEdit);
+        QWidget::setTabOrder(casheSizeLineEdit, useDiskReadAheadCheckBox);
+        QWidget::setTabOrder(useDiskReadAheadCheckBox, alowReorderedOpsCheckBox);
+        QWidget::setTabOrder(alowReorderedOpsCheckBox, lowPrioDiskCheckBox);
+        QWidget::setTabOrder(lowPrioDiskCheckBox, useReadCasheCheckBox);
+        QWidget::setTabOrder(useReadCasheCheckBox, lockFilesCheckBox);
+        QWidget::setTabOrder(lockFilesCheckBox, GroupsListWidget);
         QWidget::setTabOrder(GroupsListWidget, removeGroupButton);
         QWidget::setTabOrder(removeGroupButton, newGroupNameEdit);
         QWidget::setTabOrder(newGroupNameEdit, addNewGroupButton);
@@ -1248,7 +1280,41 @@ public:
         QWidget::setTabOrder(BrowseGroupSavePathButton, DTPathEdit);
         QWidget::setTabOrder(DTPathEdit, browseDTPathButton);
         QWidget::setTabOrder(browseDTPathButton, driveNumberComboBox);
-        QWidget::setTabOrder(driveNumberComboBox, customCommandEdit);
+        QWidget::setTabOrder(driveNumberComboBox, customMoutGroupBox);
+        QWidget::setTabOrder(customMoutGroupBox, customCommandEdit);
+        QWidget::setTabOrder(customCommandEdit, tasksComboBox);
+        QWidget::setTabOrder(tasksComboBox, addTaskButton);
+        QWidget::setTabOrder(addTaskButton, deleteTaskButton);
+        QWidget::setTabOrder(deleteTaskButton, taskNameLineEdit);
+        QWidget::setTabOrder(taskNameLineEdit, beginDateTimeEdit);
+        QWidget::setTabOrder(beginDateTimeEdit, pauseAllRadioButton);
+        QWidget::setTabOrder(pauseAllRadioButton, limitDlRadioButton);
+        QWidget::setTabOrder(limitDlRadioButton, dlLimitEdit);
+        QWidget::setTabOrder(dlLimitEdit, startAllRadioButton);
+        QWidget::setTabOrder(startAllRadioButton, limitUlRadioButton);
+        QWidget::setTabOrder(limitUlRadioButton, ulLimitEdit);
+        QWidget::setTabOrder(ulLimitEdit, webUIGroupBox);
+        QWidget::setTabOrder(webUIGroupBox, loginLineEdit);
+        QWidget::setTabOrder(loginLineEdit, passwordLineEdit);
+        QWidget::setTabOrder(passwordLineEdit, webPortLineEdit);
+        QWidget::setTabOrder(webPortLineEdit, openWebUiButton);
+        QWidget::setTabOrder(openWebUiButton, upnpCheckBox);
+        QWidget::setTabOrder(upnpCheckBox, startRconButton);
+        QWidget::setTabOrder(startRconButton, stopRconButton);
+        QWidget::setTabOrder(stopRconButton, webUILogginGroupBox);
+        QWidget::setTabOrder(webUILogginGroupBox, logLineEdit);
+        QWidget::setTabOrder(logLineEdit, IPFilterGroupBox);
+        QWidget::setTabOrder(IPFilterGroupBox, ipFilterTextEdit);
+        QWidget::setTabOrder(ipFilterTextEdit, rssRulesListWidget);
+        QWidget::setTabOrder(rssRulesListWidget, addRssDLRuleButton);
+        QWidget::setTabOrder(addRssDLRuleButton, removeRssDLRuleButton);
+        QWidget::setTabOrder(removeRssDLRuleButton, pushButton_3);
+        QWidget::setTabOrder(pushButton_3, pushButton_2);
+        QWidget::setTabOrder(pushButton_2, calendarWidget);
+        QWidget::setTabOrder(calendarWidget, listWidget);
+        QWidget::setTabOrder(listWidget, pbClose);
+        QWidget::setTabOrder(pbClose, buttonBox);
+        QWidget::setTabOrder(buttonBox, hotKeyScrollArea);
 
         retranslateUi(SettingsDialog);
         QObject::connect(GroupsListWidget, SIGNAL(currentRowChanged(int)), SettingsDialog, SLOT(showSelectedGroup(int)));
@@ -1265,12 +1331,15 @@ public:
         QObject::connect(limitDlRadioButton, SIGNAL(clicked()), dlLimitEdit, SLOT(setFocus()));
         QObject::connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SettingsDialog, SLOT(chooseAction(QAbstractButton*)));
         QObject::connect(openWebUiButton, SIGNAL(clicked()), SettingsDialog, SLOT(OpenWebUI()));
+        QObject::connect(addRssDLRuleButton, SIGNAL(clicked()), SettingsDialog, SLOT(addRssRule()));
+        QObject::connect(rssRulesListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), SettingsDialog, SLOT(onEditRssRule()));
+        QObject::connect(removeRssDLRuleButton, SIGNAL(clicked()), SettingsDialog, SLOT(onDeleteRssRule()));
 
+        listWidget->setCurrentRow(-1);
         stackedWidget->setCurrentIndex(0);
         inEncPolicyComboBox->setCurrentIndex(0);
         encLevelComboBox->setCurrentIndex(2);
         outEncPolicyComboBox->setCurrentIndex(0);
-        listWidget->setCurrentRow(-1);
 
 
         QMetaObject::connectSlotsByName(SettingsDialog);
@@ -1281,25 +1350,50 @@ public:
         SettingsDialog->setWindowTitle(QApplication::translate("SettingsDialog", "SETTINGS_DIALOG", 0, QApplication::UnicodeUTF8));
         tbMenu->setText(QString());
         LTitle->setText(QApplication::translate("SettingsDialog", "SETTINGS_DIALOG", 0, QApplication::UnicodeUTF8));
+
+        const bool __sortingEnabled = listWidget->isSortingEnabled();
+        listWidget->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem = listWidget->item(0);
+        ___qlistwidgetitem->setText(QApplication::translate("SettingsDialog", "TAB_GENERAL", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem1 = listWidget->item(1);
+        ___qlistwidgetitem1->setText(QApplication::translate("SettingsDialog", "TAB_RESTRICTIONS", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem2 = listWidget->item(2);
+        ___qlistwidgetitem2->setText(QApplication::translate("SettingsDialog", "TAB_NETWORK", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem3 = listWidget->item(3);
+        ___qlistwidgetitem3->setText(QApplication::translate("SettingsDialog", "TAB_HDD", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem4 = listWidget->item(4);
+        ___qlistwidgetitem4->setText(QApplication::translate("SettingsDialog", "TAB_TORRENT_FILTERING", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem5 = listWidget->item(5);
+        ___qlistwidgetitem5->setText(QApplication::translate("SettingsDialog", "TAB_DAEMONTOOLS", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem6 = listWidget->item(6);
+        ___qlistwidgetitem6->setText(QApplication::translate("SettingsDialog", "TAB_SCEDULER", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem7 = listWidget->item(7);
+        ___qlistwidgetitem7->setText(QApplication::translate("SettingsDialog", "TAB_WEB_CONTROL", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem8 = listWidget->item(8);
+        ___qlistwidgetitem8->setText(QApplication::translate("SettingsDialog", "TAB_RSS", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem9 = listWidget->item(9);
+        ___qlistwidgetitem9->setText(QApplication::translate("SettingsDialog", "TAB_SEARCH", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem10 = listWidget->item(10);
+        ___qlistwidgetitem10->setText(QApplication::translate("SettingsDialog", "TAB_KEY_MAPPINGS", 0, QApplication::UnicodeUTF8));
+        listWidget->setSortingEnabled(__sortingEnabled);
+
         trackerGroupBox->setTitle(QApplication::translate("SettingsDialog", "START_TRACKER", 0, QApplication::UnicodeUTF8));
         label_23->setText(QApplication::translate("SettingsDialog", "TRACKER_PORT", 0, QApplication::UnicodeUTF8));
-        label_26->setText(QApplication::translate("SettingsDialog", "STYLE", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("SettingsDialog", "LANGUAGE", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
-        startMinimizedCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_MINIMIZED_WIT", 0, QApplication::UnicodeUTF8));
+        asociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
-        startMinimizedCheckBox->setText(QApplication::translate("SettingsDialog", "START_MINIMIZED", 0, QApplication::UnicodeUTF8));
+        asociationCheckBox->setText(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         runOnbootCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_ON_BOOT_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         runOnbootCheckBox->setText(QApplication::translate("SettingsDialog", "START_ON_BOOT", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
-        asociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION_WIT", 0, QApplication::UnicodeUTF8));
+        startMinimizedCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_MINIMIZED_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
-        asociationCheckBox->setText(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION", 0, QApplication::UnicodeUTF8));
+        startMinimizedCheckBox->setText(QApplication::translate("SettingsDialog", "START_MINIMIZED", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("SettingsDialog", "LANGUAGE", 0, QApplication::UnicodeUTF8));
+        label_26->setText(QApplication::translate("SettingsDialog", "STYLE", 0, QApplication::UnicodeUTF8));
         useNotificationsCheckBox->setTitle(QApplication::translate("SettingsDialog", "ENABLE_NOTIFICATIONS", 0, QApplication::UnicodeUTF8));
-        useCustomNotificationsCheckBox->setText(QApplication::translate("SettingsDialog", "USE_CUSTOM_NOTIFICATIONS", 0, QApplication::UnicodeUTF8));
-        notifyErrorsCheckBox->setTitle(QApplication::translate("SettingsDialog", "NOTIFY_ERRORS", 0, QApplication::UnicodeUTF8));
         showTrackerErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_TRACKER_ERRORS", 0, QApplication::UnicodeUTF8));
         showDiskErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_IO_ERRORS", 0, QApplication::UnicodeUTF8));
         showRssErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_RSS_ERRORS", 0, QApplication::UnicodeUTF8));
@@ -1553,36 +1647,10 @@ public:
         stopRconButton->setText(QApplication::translate("SettingsDialog", "WEBUI_STOP", 0, QApplication::UnicodeUTF8));
         RunningLabel->setText(QString());
         openWebUiButton->setText(QApplication::translate("SettingsDialog", "OPEN_WEBUI", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("SettingsDialog", "RSS_RULES_IMPORT", 0, QApplication::UnicodeUTF8));
+        addRssDLRuleButton->setText(QApplication::translate("SettingsDialog", "+", 0, QApplication::UnicodeUTF8));
+        removeRssDLRuleButton->setText(QApplication::translate("SettingsDialog", "-", 0, QApplication::UnicodeUTF8));
         pushButton_3->setText(QApplication::translate("SettingsDialog", "RSS_RULES_EXPORT", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("SettingsDialog", "ADD_RSS_DOWNLOAD_RULE", 0, QApplication::UnicodeUTF8));
-
-        const bool __sortingEnabled = listWidget->isSortingEnabled();
-        listWidget->setSortingEnabled(false);
-        QListWidgetItem *___qlistwidgetitem = listWidget->item(0);
-        ___qlistwidgetitem->setText(QApplication::translate("SettingsDialog", "TAB_GENERAL", 0, QApplication::UnicodeUTF8));
-        QListWidgetItem *___qlistwidgetitem1 = listWidget->item(1);
-        ___qlistwidgetitem1->setText(QApplication::translate("SettingsDialog", "TAB_RESTRICTIONS", 0, QApplication::UnicodeUTF8));
-        QListWidgetItem *___qlistwidgetitem2 = listWidget->item(2);
-        ___qlistwidgetitem2->setText(QApplication::translate("SettingsDialog", "TAB_NETWORK", 0, QApplication::UnicodeUTF8));
-        QListWidgetItem *___qlistwidgetitem3 = listWidget->item(3);
-        ___qlistwidgetitem3->setText(QApplication::translate("SettingsDialog", "TAB_HDD", 0, QApplication::UnicodeUTF8));
-        QListWidgetItem *___qlistwidgetitem4 = listWidget->item(4);
-        ___qlistwidgetitem4->setText(QApplication::translate("SettingsDialog", "TAB_TORRENT_FILTERING", 0, QApplication::UnicodeUTF8));
-        QListWidgetItem *___qlistwidgetitem5 = listWidget->item(5);
-        ___qlistwidgetitem5->setText(QApplication::translate("SettingsDialog", "TAB_DAEMONTOOLS", 0, QApplication::UnicodeUTF8));
-        QListWidgetItem *___qlistwidgetitem6 = listWidget->item(6);
-        ___qlistwidgetitem6->setText(QApplication::translate("SettingsDialog", "TAB_SCEDULER", 0, QApplication::UnicodeUTF8));
-        QListWidgetItem *___qlistwidgetitem7 = listWidget->item(7);
-        ___qlistwidgetitem7->setText(QApplication::translate("SettingsDialog", "TAB_WEB_CONTROL", 0, QApplication::UnicodeUTF8));
-        QListWidgetItem *___qlistwidgetitem8 = listWidget->item(8);
-        ___qlistwidgetitem8->setText(QApplication::translate("SettingsDialog", "TAB_RSS", 0, QApplication::UnicodeUTF8));
-        QListWidgetItem *___qlistwidgetitem9 = listWidget->item(9);
-        ___qlistwidgetitem9->setText(QApplication::translate("SettingsDialog", "TAB_SEARCH", 0, QApplication::UnicodeUTF8));
-        QListWidgetItem *___qlistwidgetitem10 = listWidget->item(10);
-        ___qlistwidgetitem10->setText(QApplication::translate("SettingsDialog", "TAB_KEY_MAPPINGS", 0, QApplication::UnicodeUTF8));
-        listWidget->setSortingEnabled(__sortingEnabled);
-
+        pushButton_2->setText(QApplication::translate("SettingsDialog", "RSS_RULES_IMPORT", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

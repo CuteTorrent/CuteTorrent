@@ -1,4 +1,5 @@
 ﻿#include "trackerrequestmapper.h"
+#include <libtorrent/bencode.hpp>
 
 TrackerRequestHandler::TrackerRequestHandler(QObject* parent) :
 	HttpRequestHandler("TorrentTracker", parent)

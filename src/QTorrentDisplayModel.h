@@ -85,7 +85,7 @@ public:
 	                        const QModelIndex& parent = QModelIndex());
 	enum Role { TorrentRole = Qt::UserRole };
 	Torrent* GetSelectedTorrent();
-	
+
 signals:
 	void initCompleted();
 public slots:

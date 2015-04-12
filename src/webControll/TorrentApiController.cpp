@@ -1,8 +1,5 @@
 ﻿#include "TorrentApiController.h"
-
-#include "QTorrentDisplayModel.h"
-#include <QUrl>
-#include <QTextDocument>
+#include <libtorrent/peer_info.hpp>
 #include "json/json.h"
 TorrentApiController::TorrentApiController(QObject* parent/*=0*/) : HttpRequestHandler("WebControl", parent), m_pTorrentManager(TorrentManager::getInstance())
 {

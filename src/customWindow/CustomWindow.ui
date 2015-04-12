@@ -280,6 +280,12 @@
             <property name="mouseTracking">
              <bool>true</bool>
             </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="verticalScrollMode">
+             <enum>QAbstractItemView::ScrollPerPixel</enum>
+            </property>
             <property name="rootIsDecorated">
              <bool>false</bool>
             </property>
@@ -302,6 +308,9 @@
             <property name="contextMenuPolicy">
              <enum>Qt::CustomContextMenu</enum>
             </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
             <property name="dragDropMode">
              <enum>QAbstractItemView::DropOnly</enum>
             </property>
@@ -311,18 +320,15 @@
             <property name="verticalScrollMode">
              <enum>QAbstractItemView::ScrollPerPixel</enum>
             </property>
-            <property name="horizontalScrollMode">
-             <enum>QAbstractItemView::ScrollPerPixel</enum>
-            </property>
             <property name="rootIsDecorated">
              <bool>false</bool>
             </property>
             <property name="animated">
              <bool>true</bool>
             </property>
-            <attribute name="headerVisible">
-             <bool>false</bool>
-            </attribute>
+            <property name="headerHidden">
+             <bool>true</bool>
+            </property>
            </widget>
           </widget>
           <widget class="QStackedWidget" name="m_pInfoPlaneContainer">
@@ -345,26 +351,11 @@
              </property>
              <item row="0" column="0">
               <widget class="QTabWidget" name="m_pTabWidget">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
                <property name="mouseTracking">
                 <bool>true</bool>
                </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
-               <property name="tabPosition">
-                <enum>QTabWidget::North</enum>
-               </property>
                <property name="currentIndex">
                 <number>0</number>
-               </property>
-               <property name="elideMode">
-                <enum>Qt::ElideMiddle</enum>
                </property>
                <widget class="QWidget" name="tab">
                 <property name="mouseTracking">
@@ -598,9 +589,6 @@
                    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
                     <bool>true</bool>
                    </attribute>
-                   <attribute name="horizontalHeaderStretchLastSection">
-                    <bool>true</bool>
-                   </attribute>
                    <attribute name="verticalHeaderVisible">
                     <bool>false</bool>
                    </attribute>
@@ -661,17 +649,8 @@
                 <layout class="QGridLayout" name="gridLayout">
                  <item row="0" column="0">
                   <widget class="QTableWidget" name="trackerTableWidget">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
                    <property name="mouseTracking">
                     <bool>true</bool>
-                   </property>
-                   <property name="layoutDirection">
-                    <enum>Qt::LeftToRight</enum>
                    </property>
                    <property name="editTriggers">
                     <set>QAbstractItemView::NoEditTriggers</set>
@@ -682,17 +661,8 @@
                    <property name="showGrid">
                     <bool>false</bool>
                    </property>
-                   <attribute name="horizontalHeaderCascadingSectionResizes">
-                    <bool>true</bool>
-                   </attribute>
                    <attribute name="horizontalHeaderDefaultSectionSize">
                     <number>120</number>
-                   </attribute>
-                   <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-                    <bool>false</bool>
-                   </attribute>
-                   <attribute name="horizontalHeaderStretchLastSection">
-                    <bool>true</bool>
                    </attribute>
                    <attribute name="verticalHeaderVisible">
                     <bool>false</bool>
@@ -762,30 +732,19 @@
            </widget>
            <widget class="QWidget" name="page_4">
             <layout class="QGridLayout" name="m_pRssInfoLayout">
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_13">
-               <property name="text">
-                <string>RSS_FEED_ITEM_COMMENT</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-               </property>
-              </widget>
-             </item>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>2</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>2</number>
+             </property>
              <item row="0" column="0">
-              <widget class="QLabel" name="label_12">
-               <property name="text">
-                <string>RSS_FFED_ITEM_DESCRIBTION</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QWidget" name="widget_2" native="true"/>
-             </item>
-             <item row="0" column="1">
               <widget class="QWidget" name="widget_3" native="true"/>
              </item>
             </layout>
@@ -1078,6 +1037,17 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>m_pGroupTreeWidget</tabstop>
+  <tabstop>m_pTorrentListView</tabstop>
+  <tabstop>m_pTabWidget</tabstop>
+  <tabstop>peerTableWidget</tabstop>
+  <tabstop>trackerTableWidget</tabstop>
+  <tabstop>fileTableView</tabstop>
+  <tabstop>pbMin</tabstop>
+  <tabstop>pbMax</tabstop>
+  <tabstop>pbClose</tabstop>
+ </tabstops>
  <resources>
   <include location="../ltorrent.qrc"/>
  </resources>

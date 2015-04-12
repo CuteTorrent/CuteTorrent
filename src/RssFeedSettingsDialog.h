@@ -14,6 +14,7 @@ protected:
 	virtual QWidget* centralWidget() override;
 	virtual QLabel* getTitleLabel() override;
 	virtual QLabel* getTitleIcon() override;
+	void accept() override;
 public:
 	RssFeedSettingsDialog(QWidget* parent = 0, int flags = 0);
 	~RssFeedSettingsDialog();

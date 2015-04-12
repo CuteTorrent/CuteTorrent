@@ -15,7 +15,7 @@ public:
 		QMutexLocker lock(m_pInsertUpdateMutex);
 		return QNetworkDiskCache::data(url);
 	}
-	void insert(QIODevice *device) override
+	void insert(QIODevice* device) override
 	{
 		QMutexLocker lock(m_pInsertUpdateMutex);
 		return QNetworkDiskCache::insert(device);

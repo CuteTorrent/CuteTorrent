@@ -18,48 +18,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #ifndef TOR_MANAGER_H
 #define TOR_MANAGER_H
-#include <QMap>
-#include <QSettings>
-#include <QString>
-#include <QStringList>
-#include <QVector>
-#include <iterator>
 #include <vector>
 #include <xstring>
 
 #include "libtorrent/error_code.hpp"
 #include "libtorrent/session_settings.hpp"
 #include "libtorrent/torrent_handle.hpp"
-#include "versionInfo.h"
 
 #pragma warning (disable: 4005)
 #pragma warning (disable: 4100)
 #pragma warning (disable: 4267)
 
 #include <boost/bind.hpp>
-#include <boost/unordered_set.hpp>
 
 #include "libtorrent/alert_types.hpp"
-#include "libtorrent/bencode.hpp"
-#include "libtorrent/bitfield.hpp"
-#include "libtorrent/config.hpp"
-#include "libtorrent/create_torrent.hpp"
-#include "libtorrent/entry.hpp"
-#include "libtorrent/extensions/metadata_transfer.hpp"
-#include "libtorrent/extensions/smart_ban.hpp"
-#include "libtorrent/extensions/ut_metadata.hpp"
-#include "libtorrent/extensions/ut_pex.hpp"
-#include "libtorrent/file.hpp"
-#include "libtorrent/file_pool.hpp"
-#include "libtorrent/identify_client.hpp"
-#include "libtorrent/ip_filter.hpp"
-#include "libtorrent/magnet_uri.hpp"
-#include "libtorrent/peer_info.hpp"
 #include "libtorrent/session.hpp"
-#include "libtorrent/socket_io.hpp" // print_address
-#include "libtorrent/time.hpp"
-#include "libtorrent/torrent_info.hpp"
-#include "libtorrent/upnp.hpp"
 
 using boost::bind;
 using namespace libtorrent;
@@ -70,9 +43,6 @@ using namespace libtorrent;
 #if defined(_MSC_VER)
 #	define for if (false) {} else for
 #endif
-
-#include <conio.h>
-#include <windows.h>
 
 
 #else
@@ -87,22 +57,21 @@ using namespace libtorrent;
 
 
 #include "QApplicationSettings.h"
-#include "Torrent.h"
 #include "TorrentStorrage.h"
 #include "defs.h"
-#include "RssFeed.h"
 #include "ServiceCommon.h"
 class QApplicationSettings;
 class QTorrentDisplayModel;
 class Torrent;
 class TorrentStorrage;
-namespace libtorrent {
+namespace libtorrent
+{
 class alert;
 class sha1_hash;
 }  // namespace libtorrent
 struct openmagnet_info;
 struct opentorrent_info;
-class MyMessageBox;
+class MessageBox;
 
 
 class TorrentManager : public QObject
@@ -138,7 +107,7 @@ private:
 	bool useProxy;
 	libtorrent::proxy_settings ps;
 	NotificationSystemPtr m_pNotificationSys;
-	
+
 
 public:
 	void SaveSession();
@@ -156,11 +125,11 @@ public:
 	static TorrentManager* getInstance();
 	static void freeInstance();
 	std::vector<torrent_status> GetTorrents();
-	opentorrent_info* GetTorrentInfo(QString filename);
+	opentorrent_info* GetTorrentInfo(QString filename, error_code& ec);
 	openmagnet_info* GetTorrentInfo(const torrent_handle& handle);
 	void RemoveTorrent(QString InfoHash);
-	bool AddMagnet(torrent_handle h,  QString SavePath, QString group, QMap< QString, qint8>& filepriorities);
-	bool AddTorrent(QString path, QString name, QString save_path, error_code& ec, QMap<QString, qint8>& filepriorities, QString group = "", bool sequntial = false);
+	bool AddMagnet(torrent_handle h, QString SavePath, QString group = "", QMap< QString, qint8> filepriorities = QMap<QString, qint8>());
+	bool AddTorrent(QString path, QString name, QString save_path, error_code& ec, QMap<QString, qint8> filepriorities = QMap<QString, qint8>(), QString group = "", bool sequntial = false);
 	void AddPortMapping(session::protocol_type type, ushort sourcePoert, ushort destPort);
 	void PostTorrentUpdate();
 	void RemoveTorrent(torrent_handle h, bool dellfiles = false);

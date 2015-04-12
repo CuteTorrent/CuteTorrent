@@ -17,52 +17,50 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "UpdateNotyfier.h"
-#include <QDebug>
-#include "versionInfo.h"
-#include <QUrl>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include "version.h"
 #include <QStringList>
-#include "QBaloon.h"
+#include "NotificationSystem.h"
 UpdateNotifier::UpdateNotifier(QObject* parent) : QObject(parent)
 {
 	m_manager = new QNetworkAccessManager(this);
 	connect(m_manager, SIGNAL(finished(QNetworkReply*)),
 	        this, SLOT(replyFinished(QNetworkReply*)));
+	m_pNotificationSystem = NotificationSystem::getInstance();
+	connect(this, SIGNAL(Notify(int, QString, QVariant)), m_pNotificationSystem.get(), SLOT(OnNewNotification(int, QString, QVariant)));
 }
 
 void UpdateNotifier::fetch()
 {
-	m_manager->get(QNetworkRequest(QUrl("http://cutetorrent.googlecode.com/svn/trunk/CuteTorrent/UpdateInfo/version")));
+	m_manager->get(QNetworkRequest(QUrl("https://raw.githubusercontent.com/ruslanfedoseenko/CuteTorrent/master/UpdateInfo/version")));
 }
 
 void UpdateNotifier::replyFinished(QNetworkReply* pReply)
 {
 	QByteArray data = pReply->readAll();
 	QString str(data);
-	int currentVersion = 1000 * VERSION_MAJOR + 100 * VERSION_MINOR + 10 * VERSION_REVISION + VERSION_BUILD;
-	int recevedVersion = 0;
+	
 	QStringList parts = str.split('.');
 
 	if(parts.count() != 4)
 	{
-		QBalloonTip::showBalloon(tr("ERROR_STR"), tr("ERROR_GETTING_VERSION_STR"), QBalloonTip::Error, QVariant(0), QSystemTrayIcon::Critical);
+		emit Notify(NotificationSystem::UPDATE_ERROR, tr("ERROR_GETTING_VERSION_STR"), QVariant());
+		return;
 	}
 
 	if(!pReply->isFinished())
 	{
-		QBalloonTip::showBalloon(tr("ERROR_STR"), pReply->errorString(), QBalloonTip::Error, QVariant(0), QSystemTrayIcon::Critical);
+		emit Notify(NotificationSystem::UPDATE_ERROR, tr("ERROR_GETTING_VERSION_STR %1").arg(pReply->errorString()), QVariant());
+		return;
 	}
 
-	int mul = 1000;
+	Version current = Version::CurrentVersion();
+	Version recived(str);
 
-	for(int i = 0; i < parts.count(); i++)
+	if (recived > current)
 	{
-		recevedVersion += mul * parts[i].toInt();
-		mul /= 10;
-	}
-
-	if(recevedVersion > currentVersion)
-	{
-		emit showUpdateNitify(str);
+		emit Notify(NotificationSystem::UDPATE_INFO, tr("NEW_VERSION_AVALIABLE %1").arg(str), QVariant());
 	}
 }
 

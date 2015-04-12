@@ -1,5 +1,5 @@
 ﻿#include "CommandsApiController.h"
-#include "QApplicationSettings.h"
+#include "TorrentManager.h"
 CommandsApiController::CommandsApiController(QObject* parent/*=0*/) : HttpRequestHandler("WebControl", parent), m_pTorrentManager(TorrentManager::getInstance())
 {}
 

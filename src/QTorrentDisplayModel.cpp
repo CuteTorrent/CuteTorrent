@@ -209,6 +209,7 @@ void QTorrentDisplayModel::UpdateSelectedIndex(const QItemSelection& selection)
 	{
 		return;
 	}
+
 	try
 	{
 		QModelIndexList indexes = selection.indexes();
@@ -278,6 +279,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 	{
 		return;
 	}
+
 	try
 	{
 		QList<Torrent*> selectedTorrents;
@@ -333,19 +335,24 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 			case remove:
 			{
 				bool yesToAll = false;
+
 				foreach(int row, rows)
 				{
 					QMessageBox::StandardButton button;
+
 					if (!yesToAll)
 					{
 						Torrent* torrent = m_pTorrentStorrage->at(row);
 						QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No;
+
 						if (rows.length() > 1)
 						{
 							buttons |= QMessageBox::YesToAll;
 							buttons |= QMessageBox::NoToAll;
 						}
-						button = MyMessageBox::warning(m_pTorrentListView, tr("TORRENT_DELITION"), tr("TORRENT_DELITION_MSG").arg(torrent->GetName()), buttons);
+
+						button = CustomMessageBox::question(m_pTorrentListView, tr("TORRENT_DELITION"), tr("TORRENT_DELITION_MSG").arg(torrent->GetName()), buttons);
+
 						if (button == QMessageBox::YesToAll)
 						{
 							yesToAll = true;
@@ -359,27 +366,35 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 					{
 						button = QMessageBox::YesToAll;
 					}
-					
+
 					if (QMessageBox::No != button || yesToAll)
 					{
 						removeRow(row, false);
 					}
-					
 				}
 			}
 			break;
 
 			case remove_all:
 			{
-
 				bool yesToAll = false;
+
 				foreach(int row, rows)
 				{
 					QMessageBox::StandardButton button;
+
 					if (!yesToAll)
 					{
 						Torrent* torrent = m_pTorrentStorrage->at(row);
-						button = MyMessageBox::warning(m_pTorrentListView, tr("TORRENT_DELITION"), tr("TORRENT_ALL_DELITION_MSG").arg(torrent->GetName()), QMessageBox::Yes | QMessageBox::No | QMessageBox::YesToAll | QMessageBox::NoToAll);
+						QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No;
+
+						if (rows.length() > 1)
+						{
+							buttons |= QMessageBox::YesToAll;
+							buttons |= QMessageBox::NoToAll;
+						}
+						button = CustomMessageBox::question(m_pTorrentListView, tr("TORRENT_DELITION"), tr("TORRENT_ALL_DELITION_MSG").arg(torrent->GetName()), buttons);
+
 						if (button == QMessageBox::YesToAll)
 						{
 							yesToAll = true;
@@ -398,8 +413,8 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 					{
 						removeRow(row, true);
 					}
-
 				}
+
 				break;
 			}
 
@@ -533,9 +548,10 @@ bool QTorrentDisplayModel::removeRow(int row, bool delFiles)
 	{
 		return false;
 	}
+
 	m_pTorrentListView->selectionModel()->reset();
-	
 	beginRemoveRows(QModelIndex(), row, row);
+
 	if(m_pTorrentStorrage->at(row) == CurrentTorrent)
 	{
 		CurrentTorrent = NULL;

@@ -8,18 +8,18 @@
 using namespace libtorrent;
 struct opentorrent_info
 {
-	QString name, describtion, base_suffix;
+	QString name, describtion, baseSuffix, infoHash;
 	libtorrent::file_storage files;
 	libtorrent::size_type size;
 };
 struct openmagnet_info
 {
-	QString name, describtion, base_suffix, link;
+	QString name, describtion, baseSuffix, link, infoHash;
 	libtorrent::torrent_handle handle;
 	libtorrent::file_storage files;
 	libtorrent::size_type size;
 };
-
+Q_DECLARE_METATYPE(openmagnet_info);
 enum FilterType
 {
 	GROUP_FILTER_TYPE,

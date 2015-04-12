@@ -35,17 +35,22 @@ public:
     QLabel *LTitle;
     QPushButton *pbClose;
     QWidget *m_centralWidget;
-    QGridLayout *gridLayout_4;
+    QGridLayout *gridLayout;
     QDialogButtonBox *buttonBox;
-    QLabel *text;
     QLabel *icon;
+    QLabel *text;
 
     void setupUi(QDialog *MessageBox)
     {
         if (MessageBox->objectName().isEmpty())
             MessageBox->setObjectName(QString::fromUtf8("MessageBox"));
         MessageBox->setWindowModality(Qt::WindowModal);
-        MessageBox->resize(400, 129);
+        MessageBox->resize(352, 120);
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(MessageBox->sizePolicy().hasHeightForWidth());
+        MessageBox->setSizePolicy(sizePolicy);
         verticalLayout = new QVBoxLayout(MessageBox);
         verticalLayout->setSpacing(0);
         verticalLayout->setContentsMargins(1, 1, 1, 1);
@@ -98,38 +103,39 @@ public:
         m_centralWidget = new QWidget(MessageBox);
         m_centralWidget->setObjectName(QString::fromUtf8("m_centralWidget"));
         m_centralWidget->setStyleSheet(QString::fromUtf8(""));
-        gridLayout_4 = new QGridLayout(m_centralWidget);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        gridLayout_4->setHorizontalSpacing(0);
-        gridLayout_4->setVerticalSpacing(2);
-        gridLayout_4->setContentsMargins(9, 6, 9, 9);
+        gridLayout = new QGridLayout(m_centralWidget);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setSizeConstraint(QLayout::SetNoConstraint);
         buttonBox = new QDialogButtonBox(m_centralWidget);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::NoButton);
         buttonBox->setCenterButtons(true);
 
-        gridLayout_4->addWidget(buttonBox, 1, 0, 1, 2);
+        gridLayout->addWidget(buttonBox, 1, 0, 1, 2);
+
+        icon = new QLabel(m_centralWidget);
+        icon->setObjectName(QString::fromUtf8("icon"));
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(icon->sizePolicy().hasHeightForWidth());
+        icon->setSizePolicy(sizePolicy1);
+        icon->setMinimumSize(QSize(48, 48));
+        icon->setMaximumSize(QSize(48, 48));
+        icon->setAlignment(Qt::AlignCenter);
+
+        gridLayout->addWidget(icon, 0, 0, 1, 1);
 
         text = new QLabel(m_centralWidget);
         text->setObjectName(QString::fromUtf8("text"));
         text->setWordWrap(true);
-        text->setTextInteractionFlags(Qt::NoTextInteraction);
 
-        gridLayout_4->addWidget(text, 0, 1, 1, 1);
+        gridLayout->addWidget(text, 0, 1, 1, 1);
 
-        icon = new QLabel(m_centralWidget);
-        icon->setObjectName(QString::fromUtf8("icon"));
-        icon->setMaximumSize(QSize(60, 60));
-        icon->setStyleSheet(QString::fromUtf8("#icon{\n"
-"  margin-right:10px;\n"
-"  margin-top:10px;\n"
-"}"));
-        icon->setScaledContents(true);
-        icon->setTextInteractionFlags(Qt::NoTextInteraction);
-
-        gridLayout_4->addWidget(icon, 0, 0, 1, 1);
-
+        gridLayout->setRowStretch(1, 100);
+        gridLayout->setRowMinimumHeight(0, 2);
+        gridLayout->setRowMinimumHeight(1, 6);
 
         verticalLayout->addWidget(m_centralWidget);
 
@@ -146,8 +152,7 @@ public:
         MessageBox->setWindowTitle(QApplication::translate("MessageBox", "Dialog", 0, QApplication::UnicodeUTF8));
         tbMenu->setText(QString());
         LTitle->setText(QApplication::translate("MessageBox", "MB_TITLE", 0, QApplication::UnicodeUTF8));
-        text->setText(QApplication::translate("MessageBox", "TextLabel", 0, QApplication::UnicodeUTF8));
-        icon->setText(QString());
+        text->setText(QString());
     } // retranslateUi
 
 };

@@ -18,8 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #ifndef _UPDATENITYFIER_H
 #define _UPDATENITYFIER_H
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
+class QNetworkAccessManager;
+class QNetworkReply;
+#include "ServiceCommon.h"
+#include <QObject>
+#include <QVariant>
 class UpdateNotifier : public QObject
 {
 	Q_OBJECT
@@ -29,13 +32,13 @@ public:
 	~UpdateNotifier();
 	void fetch();
 signals:
-	void showUpdateNitify(const QString&);
-	void showNoUpdateNitify(const QString&);
+	void Notify(int, QString, QVariant);
 public slots:
 
 	void replyFinished(QNetworkReply*);
 
 private:
+	NotificationSystemPtr m_pNotificationSystem;
 	QNetworkAccessManager* m_manager;
 };
 #endif

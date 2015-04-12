@@ -50,7 +50,6 @@ QTorrentItemDelegat::QTorrentItemDelegat(const QTorrentItemDelegat& dlg) : QStyl
 	greenBack = dlg.greenBack;
 	blueBrush = dlg.blueBrush;
 	blueBack = dlg.blueBack;
-	max_width = dlg.max_width;
 }
 
 QTorrentItemDelegat::QTorrentItemDelegat() : QStyledItemDelegate(0) , myProgressBarStyle(new QProgressBar()) {}
@@ -60,7 +59,7 @@ QColor QTorrentItemDelegat ::greenBack = QColor("darkseagreen");
 
 QColor QTorrentItemDelegat ::blueBrush = QColor("steelblue");
 QColor QTorrentItemDelegat ::blueBack = QColor("lightgrey");
-int QTorrentItemDelegat::max_width = 0;
+
 QTorrentItemDelegat::QTorrentItemDelegat(QObject* parent) :
 	QStyledItemDelegate(parent),
 	myProgressBarStyle(new QProgressBar())
@@ -108,9 +107,9 @@ QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem& option, const Torrent&
 		const QString nameStr(tor.GetName());
 		int nameWidth = nameFM.width(nameStr);
 
-		if(nameWidth > max_width)
+		if (nameWidth + iconSize > option.rect.width())
 		{
-			nameWidth = max_width;
+			nameWidth = option.rect.width() - iconSize;
 		}
 
 		QFont statusFont(option.font);
@@ -119,9 +118,9 @@ QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem& option, const Torrent&
 		const QString statusStr(GetStatusString(tor));
 		int statusWidth = statusFM.width(statusStr);
 
-		if(statusWidth > max_width)
+		if (statusWidth  + iconSize > option.rect.width())
 		{
-			statusWidth = max_width;
+			statusWidth = option.rect.width() - iconSize;
 		}
 
 		QFont progressFont(statusFont);
@@ -254,11 +253,6 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	QString nameStr(tor.GetName());
 	QSize nameSize(nameFM.size(0, nameStr));
 
-	if(nameSize.width() > max_width)
-	{
-		nameSize.setWidth(max_width);
-	}
-
 	QFont statusFont(option.font);
 	statusFont.setPointSize(int (option.font.pointSize() * 0.9));
 	const QFontMetrics statusFM(statusFont);
@@ -333,7 +327,10 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	QRect iconArea(fillArea.x(), fillArea.y() + (fillArea.height() - iconSize) / 2, iconSize, iconSize);
 	QRect nameArea(iconArea.x() + iconArea.width() + GUI_PAD, fillArea.y(),
 	               fillArea.width() - GUI_PAD - iconArea.width(), nameSize.height());
-	//nameArea.setWidth(max_width);
+	if (nameArea.width() + nameArea.x() > opt.rect.width())
+	{
+		nameArea.setWidth(opt.rect.width() - nameArea.x());
+	}
 	QRect barArea(nameArea);
 	barArea.setHeight(BAR_HEIGHT);
 	barArea.moveTop(nameArea.y() + statusFM.lineSpacing() + GUI_PAD / 2);
@@ -346,8 +343,6 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	statusArea.setWidth(barArea.width() / 2);
 	statusArea.setHeight(nameSize.height());
 
-	//statusArea.setWidth(max_width);
-	// render
 	if(tor.hasError())
 	{
 		painter->setPen(QColor("red"));
@@ -359,7 +354,7 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 
 	mimeIcon.paint(painter, iconArea, Qt::AlignCenter, im, qs);
 	painter->setFont(nameFont);
-	//nameStr = nameFM.elidedText(nameStr, Qt::ElideRight, nameArea.width());
+	nameStr = nameFM.elidedText(nameStr, Qt::ElideRight, nameArea.width());
 	style->drawItemText(painter, nameArea, Qt::AlignLeft, opt.palette, option.state & QStyle::State_Enabled, nameStr);
 	painter->setFont(statusFont);
 	style->drawItemText(painter,  statusArea, Qt::AlignRight, opt.palette, option.state & QStyle::State_Enabled, statusStr);

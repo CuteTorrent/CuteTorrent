@@ -6,6 +6,9 @@
 #include "ServiceCommon.h"
 class QApplicationSettings;
 class QSystemTrayIcon;
+class QWaitCondition;
+class QMutex;
+class QTimerEvent;
 class NotificationSystem : public QObject
 {
 	Q_OBJECT
@@ -23,25 +26,32 @@ public:
 		TORRENT_INFO = 32,
 		TORRENT_COMPLETED = 64,
 		UDPATE_INFO = 128,
-		ALL = TRACKER_ERROR | DISK_ERROR | RSS_ERROR | TORRENT_ERROR | SYSTEM_ERROR | TORRENT_INFO | UDPATE_INFO | TORRENT_COMPLETED,
-		ERRORS = TRACKER_ERROR | DISK_ERROR | RSS_ERROR | TORRENT_ERROR | SYSTEM_ERROR
+		UPDATE_ERROR = 256,
+		ALL = TRACKER_ERROR | DISK_ERROR | RSS_ERROR | TORRENT_ERROR | SYSTEM_ERROR | TORRENT_INFO | UDPATE_INFO | UPDATE_ERROR | TORRENT_COMPLETED,
+		ERRORS = TRACKER_ERROR | DISK_ERROR | RSS_ERROR | TORRENT_ERROR | SYSTEM_ERROR | UPDATE_ERROR
 	};
-	
+
 	static NotificationSystemPtr getInstance();
 	~NotificationSystem();
 	void setTrayIcon(QSystemTrayIcon* pTrayIcon);
-	void UpdateNotificationMask();
+	void UpdateNotificationSettings();
 private:
+	struct Notification
+	{
+		int notificationType;
+		QString message;
+		QVariant data;
+	};
+	QQueue<Notification> m_notifications;
 	static boost::weak_ptr<NotificationSystem> m_pInstance;
 	NotificationSystem();
 	QSystemTrayIcon* m_pTrayIcon;
 	QBalloonTip::QBaloonType gessBaloonType(int notificationType);
 	QSystemTrayIcon::MessageIcon gessIcon(int notificationType);
-
 	QApplicationSettings* m_pSettings;
 	bool m_enabled;
-	bool m_useCustomFrame;
 	int m_notificationMask;
+	int m_defaultMessageDuration;
 protected:
 };
 #endif //_NOTIFICATION_SYSTEM_INCLUDED_ 

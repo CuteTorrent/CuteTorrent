@@ -2,6 +2,132 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="ru_RU">
 <context>
+    <name>AddRssDownloadRuleDialog</name>
+    <message>
+        <source>ADD_RSS_DWONLOAD_RULE_DIALOG</source>
+        <translation>Добавление правила для автоматической загрузки из RSS-ленты</translation>
+    </message>
+    <message>
+        <source>RULE_NAME</source>
+        <translation>Имя</translation>
+    </message>
+    <message>
+        <source>RULE_TYPE</source>
+        <translation>Тип</translation>
+    </message>
+    <message>
+        <source>SEARCH_STRING</source>
+        <translation>Строка поиска</translation>
+    </message>
+    <message>
+        <source>SEARCH_TYPE</source>
+        <translation>Тип поиска</translation>
+    </message>
+    <message>
+        <source>USE_SAVE_PATH</source>
+        <translation>Использовать путь</translation>
+    </message>
+    <message>
+        <source>SAVE_PATH</source>
+        <translation>Путь</translation>
+    </message>
+    <message>
+        <source>BROWSE</source>
+        <translation>Обзор</translation>
+    </message>
+    <message>
+        <source>USE_GROUPS_FOR_FILTERING</source>
+        <translation>Использовать фильтрацию торрентов</translation>
+    </message>
+    <message>
+        <source>RULE_HINT</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>APPLY_TO_FEEDS:</source>
+        <translation>Применять к RSS-лентам:</translation>
+    </message>
+    <message>
+        <source>FEED_ITEMS_MATCHED_BY_CURRENT_RULE:</source>
+        <translation>Элементы удовлетворяющие текужему правилу:</translation>
+    </message>
+</context>
+<context>
+    <name>AddRssDwonloadRuleDialog</name>
+    <message>
+        <source>DOWNLOAD_RULE</source>
+        <translation>Правило загрузки</translation>
+    </message>
+    <message>
+        <source>SELECT_FILE_RULE</source>
+        <translation>Правило выбора файлов</translation>
+    </message>
+    <message>
+        <source>SIMPLE_STRING</source>
+        <translation>Фиксированная строка</translation>
+    </message>
+    <message>
+        <source>WILDCARD</source>
+        <translation>Шаблон</translation>
+    </message>
+    <message>
+        <source>REGEXP</source>
+        <translation>Регулярное выражение</translation>
+    </message>
+    <message>
+        <source>EDIT_RSS_DWONLOAD_RULE_DIALOG</source>
+        <translation>Редактирование правила для автоматической загрузки из RSS-ленты</translation>
+    </message>
+    <message>
+        <source>ADD_RSS_DWONLOAD_RULE_DIALOG</source>
+        <translation>Добавление правила для автоматической загрузки из RSS-ленты</translation>
+    </message>
+    <message>
+        <source>RULE_NAME_CAN_NOT_BE_EMPTY</source>
+        <translation>Укажите имя правила</translation>
+    </message>
+    <message>
+        <source>RULE_SEARCH_STRING_CAN_NOT_BE_EMPTY</source>
+        <translation>Укажите строку поиска</translation>
+    </message>
+    <message>
+        <source>YOU_SHOULD_SELECT_ATLEAST_ONE_FEED</source>
+        <translation>Вы должны выбрать хотябы одну RSS-ленту</translation>
+    </message>
+    <message>
+        <source>RULE_TYPE_CAN_NOT_BE_EMPTY</source>
+        <translation>Укажите тип правила</translation>
+    </message>
+    <message>
+        <source>DONT_KNOW_WHERE_TO_SAVE</source>
+        <translation>Укажите способ выбора пути сохранения</translation>
+    </message>
+    <message>
+        <source>CHOSE_ONE_STATICK_SAVE_PATH_OR_GROUPS_FILTERING</source>
+        <translation>Выберете либо путь сохранения либо фльтрацию торрентов</translation>
+    </message>
+    <message>
+        <source>STATIC_SAVE_PATH_CAN_NOT_BE_EMPTY</source>
+        <translation>Укажите путь сохранения</translation>
+    </message>
+    <message>
+        <source>RULE_IS_VALID</source>
+        <translation>Правило верно</translation>
+    </message>
+    <message>
+        <source>SELECT_FILE_RULE_TYPE_HINT</source>
+        <translation>Это тип правила для выбора файлов из торрента или магнитной ссылки.</translation>
+    </message>
+    <message>
+        <source>DOWNLOAD_RULE_TYPE_HINT</source>
+        <translation>Тип правила для выбора новости которую стоит загрузить</translation>
+    </message>
+    <message>
+        <source>RULE_SEARCH_TYPE_CAN_NOT_BE_EMPTY</source>
+        <translation>Укажите тип поиска</translation>
+    </message>
+</context>
+<context>
     <name>ApplyBackupPage</name>
     <message>
         <source>BROWSE</source>
@@ -475,11 +601,11 @@
     </message>
     <message>
         <source>RSS_FFED_ITEM_DESCRIBTION</source>
-        <translation>Описание</translation>
+        <translation type="obsolete">Описание</translation>
     </message>
     <message>
         <source>RSS_FEED_ITEM_COMMENT</source>
-        <translation>Коментарий</translation>
+        <translation type="obsolete">Коментарий</translation>
     </message>
 </context>
 <context>
@@ -518,7 +644,7 @@
     </message>
     <message>
         <source>CT_HIDE_MSG</source>
-        <translation>CuteTrrent Продолжает работать. Что бы выйти используйте контекстное меню в области уведомлений.</translation>
+        <translation type="obsolete">CuteTrrent Продолжает работать. Что бы выйти используйте контекстное меню в области уведомлений.</translation>
     </message>
     <message>
         <source>ADD_TRACKER</source>
@@ -667,7 +793,7 @@
     </message>
     <message>
         <source>RSS_CHANELS</source>
-        <translation>RSS-каналы</translation>
+        <translation>RSS-ленты</translation>
     </message>
     <message>
         <source>TAB_SEARCH</source>
@@ -722,8 +848,12 @@
         <translation type="obsolete">Вы действительно хотите удалить %1?</translation>
     </message>
     <message>
-        <source>CuteTorrent </source>
-        <translation></translation>
+        <source>CuteTorrent %1
+Upload: %2
+Download: %3</source>
+        <translation>CuteTorrent %1
+Отдача: %2
+Загрузка: %3</translation>
     </message>
 </context>
 <context>
@@ -1333,7 +1463,7 @@
     </message>
     <message>
         <source>expected value (list, dict, int or string) in bencoded string</source>
-        <translation></translation>
+        <translation>Торрент файл испорчен: ожидалось значение (list, dict, int or string) в bencoded строке</translation>
     </message>
     <message>
         <source>bencoded nesting depth exceeded</source>
@@ -1472,10 +1602,6 @@
         <source>MB_TITLE</source>
         <translation></translation>
     </message>
-    <message>
-        <source>TextLabel</source>
-        <translation></translation>
-    </message>
 </context>
 <context>
     <name>OpenTorrentDialog</name>
@@ -1532,6 +1658,10 @@
         <oldsource>Open Directory</oldsource>
         <translation>Выбирите папку</translation>
     </message>
+    <message>
+        <source>OPEN_TORRENT_ERROR</source>
+        <translation>Ошибка открытия торрента</translation>
+    </message>
 </context>
 <context>
     <name>QKeyEdit</name>
@@ -1553,7 +1683,7 @@
     <message>
         <source>ERROR_OPENING_FILE
 %1</source>
-        <translation>Не удалось открыть файл
+        <translation type="obsolete">Не удалось открыть файл
 %1</translation>
     </message>
     <message>
@@ -1599,6 +1729,23 @@
     <message>
         <source>OPEN_DESC_FEED_ITEM</source>
         <translation>Открыть описание</translation>
+    </message>
+    <message>
+        <source>MARK_ALL_AS_READ</source>
+        <translatorcomment>Отметить все как прочитанные</translatorcomment>
+        <translation>Отметить все как прочитанные</translation>
+    </message>
+    <message>
+        <source>MARK_ALL_AS_UNREAD</source>
+        <translation>Отметить все как непрочитанные</translation>
+    </message>
+    <message>
+        <source>MARK_AS_UNREAD</source>
+        <translation>Отметить непрочитанным</translation>
+    </message>
+    <message>
+        <source>MARK_AS_READ</source>
+        <translation>Отметить прочитанным</translation>
     </message>
 </context>
 <context>
@@ -1726,6 +1873,25 @@
     </message>
 </context>
 <context>
+    <name>RssManager</name>
+    <message>
+        <source>RSS_ITEM_UNABLE_TO_DOWNLOAD %1 NO_URL</source>
+        <translation>Невозможно загрузить торрент из статьи %1 так как отсуствует ссылка на торренты или магнитная ссылка</translation>
+    </message>
+    <message>
+        <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1</source>
+        <translation>Ошибка во время автоматической загрузки торрента:  %1</translation>
+    </message>
+    <message>
+        <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1</source>
+        <translation>Началась загруска торрента %1 полученного из RSS-ленты</translation>
+    </message>
+    <message>
+        <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD_MAGNET: %1</source>
+        <translation>Ошибка во время автоматической загрузки торрента:  %1</translation>
+    </message>
+</context>
+<context>
     <name>RssParser</name>
     <message>
         <source>No valid rss fields found.</source>
@@ -1744,23 +1910,23 @@
     </message>
     <message>
         <source>RSS_AUTO_DOWNLOAD</source>
-        <translation>Автоматически загружать</translation>
+        <translation type="obsolete">Автоматически загружать</translation>
     </message>
     <message>
         <source>USE_SAVE_PATH</source>
-        <translation>Использовать путь</translation>
+        <translation type="obsolete">Использовать путь</translation>
     </message>
     <message>
         <source>SAVE_PATH</source>
-        <translation>Путь</translation>
+        <translation type="obsolete">Путь</translation>
     </message>
     <message>
         <source>BROWSE</source>
-        <translation>Обзор</translation>
+        <translation type="obsolete">Обзор</translation>
     </message>
     <message>
         <source>USE_GROUPS_FOR_FILTERING</source>
-        <translation>Использовать фильтрацию торрентов</translation>
+        <translation type="obsolete">Использовать фильтрацию торрентов</translation>
     </message>
     <message>
         <source>RSS_URL</source>
@@ -1791,7 +1957,7 @@
     <name>Scheduller</name>
     <message>
         <source>CT_PEFORMING_TASK %1</source>
-        <translation>Задание %1 запущено.</translation>
+        <translation type="obsolete">Задание %1 запущено.</translation>
     </message>
 </context>
 <context>
@@ -1802,7 +1968,7 @@
     </message>
     <message>
         <source>TAB_TORRENT</source>
-        <translation>Торрент</translation>
+        <translation type="obsolete">Торрент</translation>
     </message>
     <message>
         <source>USE_PROXY</source>
@@ -2250,19 +2416,19 @@
     </message>
     <message>
         <source>SEARCH_NAME</source>
-        <translation>Название</translation>
+        <translation type="obsolete">Название</translation>
     </message>
     <message>
         <source>SEARCH_PATERN</source>
-        <translation>Патерн поиска</translation>
+        <translation type="obsolete">Патерн поиска</translation>
     </message>
     <message>
         <source>REMOVE_SEARCH</source>
-        <translation>Удалить</translation>
+        <translation type="obsolete">Удалить</translation>
     </message>
     <message>
         <source>ADD_SEARCH</source>
-        <translation>Добавить</translation>
+        <translation type="obsolete">Добавить</translation>
     </message>
     <message>
         <source>driveNumberComboBox_WIT</source>
@@ -2626,7 +2792,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ADD_RSS_DOWNLOAD_RULE</source>
-        <translation>Добавить правило для автозагрузки</translation>
+        <translation type="obsolete">Добавить правило для автозагрузки</translation>
     </message>
     <message>
         <source>TAB_RSS</source>
@@ -2638,11 +2804,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>USE_NOTIFICATIONS</source>
-        <translation>Использовать уведомления</translation>
+        <translation type="obsolete">Использовать уведомления</translation>
     </message>
     <message>
         <source>USE_NATIVE_OS_TRAY_NOTIFICATIONS</source>
-        <translation>Использовать стандартные для вашей ОС уведомления</translation>
+        <translation type="obsolete">Использовать стандартные для вашей ОС уведомления</translation>
     </message>
     <message>
         <source>SPEED_RESRICTIONS</source>
@@ -2698,11 +2864,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>USE_PORT_FRWARDING</source>
-        <translation>Использовать проброс портов(UPNP)</translation>
+        <translation type="obsolete">Использовать проброс портов(UPNP)</translation>
     </message>
     <message>
         <source>USE_CUSTOM_NOTIFICATIONS</source>
-        <translation>Использовать нестандартные уведомления</translation>
+        <translation type="obsolete">Использовать нестандартные уведомления</translation>
     </message>
     <message>
         <source>SEED_GLOBAL_RATIO_LIMIT</source>
@@ -2718,7 +2884,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>NOTIFY_ERRORS</source>
-        <translation>Уведомлять об ошибках</translation>
+        <translation type="obsolete">Уведомлять об ошибках</translation>
     </message>
     <message>
         <source>NOTIFY_TRACKER_ERRORS</source>
@@ -2804,11 +2970,20 @@ p, li { white-space: pre-wrap; }
         <source>PEER</source>
         <translation>Список пиров</translation>
     </message>
-</context>
-<context>
-    <name>ToolButtons</name>
     <message>
-        <source>Form</source>
+        <source>ACTION_SETTINGS_EDIT_RSS_RULE</source>
+        <translation>Изменить правило</translation>
+    </message>
+    <message>
+        <source>ACTION_SETTINGS_DELETE_RSS_RULE</source>
+        <translation>Удалить правило</translation>
+    </message>
+    <message>
+        <source>+</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>-</source>
         <translation></translation>
     </message>
 </context>
@@ -2837,6 +3012,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>STATE_FILE_CHEACKING (r)</source>
         <translation>Проверка файлов (r)</translation>
+    </message>
+</context>
+<context>
+    <name>TorrentDownloader</name>
+    <message>
+        <source>UNABLE_TO_SAVE_DOWNLOADED_FILE</source>
+        <translation>Неудалось сохранить скачанный файл</translation>
+    </message>
+    <message>
+        <source>NETWORK_ERROR: %1</source>
+        <translation>Ошибка сети: %1</translation>
     </message>
 </context>
 <context>
@@ -2870,11 +3056,19 @@ p, li { white-space: pre-wrap; }
     <name>UpdateNotifier</name>
     <message>
         <source>ERROR_STR</source>
-        <translation>Ошибка</translation>
+        <translation type="obsolete">Ошибка</translation>
     </message>
     <message>
         <source>ERROR_GETTING_VERSION_STR</source>
         <translation>Ошибка получения информации о текущей версии</translation>
+    </message>
+    <message>
+        <source>ERROR_GETTING_VERSION_STR %1</source>
+        <translation>Ошибка получения информации о текущей версии: %1</translation>
+    </message>
+    <message>
+        <source>NEW_VERSION_AVALIABLE %1</source>
+        <translation>Досупна новая версия CuteTorrent %1</translation>
     </message>
 </context>
 <context>

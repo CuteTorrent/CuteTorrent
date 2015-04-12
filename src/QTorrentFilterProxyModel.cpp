@@ -12,44 +12,53 @@ QTorrentFilterProxyModel::QTorrentFilterProxyModel(QObject* parent) : QSortFilte
 bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const
 {
 	QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
+
 	if (index.isValid())
 	{
 		Torrent* pTorrent = index.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>();
+
 		if (pTorrent != NULL)
 		{
 			switch (m_currentFilterType)
 			{
 				case QTorrentFilterProxyModel::GROUP:
 					return pTorrent->GetGroup().compare(m_groupFilter) == 0;
+
 				case QTorrentFilterProxyModel::TORRENT:
 				{
-
 					switch (m_torrentFilter)
 					{
-					case ACTIVE:
-						return pTorrent->isActive();
-					case NOT_ACTIVE:
-						return !pTorrent->isActive();
-					case SEEDING:
-						return pTorrent->isSeeding();
-					case DOWNLOADING:
-						return pTorrent->isDownloading();
-					case COMPLETED:
-						return pTorrent->GetProgress() == 100;
-					case EMPTY:
-						return true;
-					default:
-						break;
+						case ACTIVE:
+							return pTorrent->isActive();
+
+						case NOT_ACTIVE:
+							return !pTorrent->isActive();
+
+						case SEEDING:
+							return pTorrent->isSeeding();
+
+						case DOWNLOADING:
+							return pTorrent->isDownloading();
+
+						case COMPLETED:
+							return pTorrent->GetProgress() == 100;
+
+						case EMPTY:
+							return true;
+
+						default:
+							break;
 					}
+
 					break;
 				}
+
 				default:
 					break;
 			}
 		}
-		
 	}
-	
+
 	return true;
 }
 

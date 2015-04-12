@@ -132,7 +132,7 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		w.showNormal();
+		w.show();
 	}
 
 	if(!file2open.isEmpty())

@@ -25,10 +25,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "QApplicationSettings.h"
 #include "StyleEngene.h"
 #include "TorrentManager.h"
-#include "versionInfo.h"
+#include "Version.h"
 #include "messagebox.h"
-
-CreateTorrentDialog::CreateTorrentDialog(QWidget* parent, Qt::WindowFlags flags) : BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize)
+CreateTorrentDialog::CreateTorrentDialog(QWidget* parent, Qt::WindowFlags) : BaseWindow(OnlyCloseButton, NoResize, parent)
 {
 	setupUi(this);
 	setupCustomWindow();
@@ -78,10 +77,10 @@ quint64 CreateTorrentDialog::getPiceSize()
 		{
 			QString file = pathEdit->text();
 			QFileInfo fi(file);
-			quint64 fileSize = 0;
-			quint64 dirSize = 0;
+			quint64 fileSize;
+			quint64 dirSize;
 			quint64 pieceSize = 0;
-			quint64 needToSet = 0;
+			quint64 needToSet;
 
 			if(fi.isFile())
 			{
@@ -190,7 +189,7 @@ void CreateTorrentDialog::BeginCreate()
 
 	if((QFileInfo(path).isDir() && listFolder(path) == 0) || (!QFileInfo(path).isDir() && QFileInfo(path).size() == 0))
 	{
-		MyMessageBox::warning(this, tr("ERROR_STR"),
+		CustomMessageBox::warning(this, tr("ERROR_STR"),
 		                      tr("ERROR_EMPTY_DIR"));
 		return;
 	}
@@ -201,7 +200,7 @@ void CreateTorrentDialog::BeginCreate()
 
 	if(path.length() == 0)
 	{
-		MyMessageBox::information(this, tr("ERROR_STR"),
+		CustomMessageBox::information(this, tr("ERROR_STR"),
 		                          tr("ERROR_NO_FILE_OR_FOLDER_NAME"));
 		//delete creator;
 		createButton->setEnabled(true);
@@ -218,7 +217,7 @@ void CreateTorrentDialog::BeginCreate()
 
 	if(trackers.count() == 0)
 	{
-		if(QMessageBox::No == MyMessageBox::information(this, tr("ERROR_STR"),
+		if(QMessageBox::No == CustomMessageBox::information(this, tr("ERROR_STR"),
 		        tr("ERROR_NO_TRACKERS"),
 		        QMessageBox::Yes | QMessageBox::No))
 		{
@@ -264,7 +263,7 @@ void CreateTorrentDialog::ShowCreationSucces(QString filename)
 {
 	if(!filename.isNull())
 	{
-		MyMessageBox::information(this, tr("CREATE_TORRENT_DIALOG"),
+		CustomMessageBox::information(this, tr("CREATE_TORRENT_DIALOG"),
 		                          tr("CREATE_TORRENT_SUCCES_SAVED %1").arg(filename));
 	}
 
@@ -275,7 +274,7 @@ void CreateTorrentDialog::ShowCreationSucces(QString filename)
 }
 void CreateTorrentDialog::ShowCreationFailture(QString msg)
 {
-	MyMessageBox::critical(this, tr("CREATE_TORRENT_DIALOG"),
+	CustomMessageBox::critical(this, tr("CREATE_TORRENT_DIALOG"),
 	                       tr("CREATE_TORRENT_FILE_ERROR\n %1").arg(msg));
 	progressBar->setValue(0);
 	createButton->setEnabled(true);
@@ -320,16 +319,11 @@ QLabel* CreateTorrentDialog::getTitleIcon()
 
 #include <boost/bind.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/path.hpp>
 #include <crtdbg.h>
 
 #include "libtorrent/bencode.hpp"
 #include "libtorrent/create_torrent.hpp"
-#include "libtorrent/entry.hpp"
 #include "libtorrent/file.hpp"
-#include "libtorrent/hasher.hpp"
-#include "libtorrent/storage.hpp"
 #include "libtorrent/torrent_info.hpp"
 
 void torrentCreatorThread::create(QString _input_path, QString _save_path, QString _filter, QStringList _trackers, QStringList _url_seeds, QString _comment, bool _is_private, qint64 _piece_size)
@@ -348,7 +342,7 @@ void torrentCreatorThread::create(QString _input_path, QString _save_path, QStri
 
 void sendProgressUpdateSignal(int i, int num, torrentCreatorThread* parent)
 {
-	parent->sendProgressSignal((int)(i * 100. / (float) num));
+	parent->sendProgressSignal(int(i * 100. / float(num)));
 }
 
 void torrentCreatorThread::sendProgressSignal(int progress)
@@ -381,12 +375,12 @@ std::string FileFilter::filterString = "";
 void torrentCreatorThread::run()
 {
 	emit updateProgress(0);
-	char const* creator_str = "CuteTorrent "VER_FILE_VERSION_STR;
+	std::string creator_str = "CuteTorrent ";
+	creator_str.append(Version::getVersionStr());
 
 	try
 	{
 		file_storage fs;
-		file_pool fp;
 		std::string full_path = libtorrent::complete(input_path.toStdString());
 		FileFilter::filterString = filter.toStdString();
 		add_files(fs, full_path, FileFilter::file_filter);
@@ -423,8 +417,8 @@ void torrentCreatorThread::run()
 			return;
 		}
 
-		t.set_creator(creator_str);
-		t.set_comment((const char*) comment.toLocal8Bit());
+		t.set_creator(creator_str.c_str());
+		t.set_comment(static_cast<const char*>(comment.toLocal8Bit()));
 		t.set_priv(is_private);
 
 		if(abort)

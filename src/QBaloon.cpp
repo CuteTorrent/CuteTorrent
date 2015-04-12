@@ -4,7 +4,7 @@
 #include <QPropertyAnimation>
 #include "StyleEngene.h"
 
-static QBalloonTip* theSolitaryBalloonTip = 0;
+static QBalloonTip* theSolitaryBalloonTip = nullptr;
 
 QWidget* QBalloonTip::showBalloon(const QString& title,
                                   const QString& message, QBaloonType type, const QVariant& data, const QSystemTrayIcon::MessageIcon& icon,
@@ -13,27 +13,27 @@ QWidget* QBalloonTip::showBalloon(const QString& title,
 	theSolitaryBalloonTip = new QBalloonTip(title, message, type, data, icon, parent);
 
 	//hideBalloon();
-	if(current != NULL && current->isFinished())
+	if(current != nullptr && current->isFinished())
 	{
 		//	delete current;
 		current = theSolitaryBalloonTip;
 
 		if(timeout <= 0)
 		{
-			timeout = 10000;    // �� ��������� �������� ����� 10 ������
+			timeout = 10000;   
 		}
 
 		theSolitaryBalloonTip->balloon(timeout, showArrow);
 	}
 	else
 	{
-		if(current == NULL)
+		if(current == nullptr)
 		{
 			current = theSolitaryBalloonTip;
 
 			if(timeout <= 0)
 			{
-				timeout = 10000;    // �� ��������� �������� ����� 10 ������
+				timeout = 10000;  
 			}
 
 			theSolitaryBalloonTip->balloon(timeout, showArrow);
@@ -56,13 +56,13 @@ void QBalloonTip::hideBalloon()
 
 	current->hide();
 	delete current;
-	current = 0;
+	current = nullptr;
 }
 
 
 QBalloonTip::QBalloonTip(const QString& title, const QString& message, QBaloonType type, QVariant data,
                          const QSystemTrayIcon::MessageIcon& icon, QWidget* parent)
-	: QWidget(parent, Qt::ToolTip), timerId(-1)
+	: QWidget(parent, Qt::ToolTip), m_showTimerId(-1)
 {
 	currentType = type;
 	currentData = data;
@@ -84,14 +84,16 @@ QBalloonTip::QBalloonTip(const QString& title, const QString& message, QBaloonTy
 	closeButton->setIconSize(QSize(18, 18));
 	closeButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 	closeButton->setFixedSize(18, 18);
-	QObject::connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
-	setMaximumWidth(QApplication::desktop()->geometry().width() / 4);
+	connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
+	const QRect desctopRect = QApplication::desktop()->geometry();
+	setMaximumWidth(desctopRect.width() / 8);
+	setMaximumHeight(desctopRect.height() / 8);
 	QLabel* msgLabel = new QLabel;
 	msgLabel->installEventFilter(this);
 	msgLabel->setText(message);
 	msgLabel->setTextFormat(Qt::PlainText);
 	msgLabel->setAlignment(Qt::AlignTop | Qt::AlignLeft);
-	msgLabel->setMaximumWidth(QApplication::desktop()->geometry().width() / 4);
+	msgLabel->setMaximumWidth(desctopRect.width() / 4);
 	msgLabel->setWordWrap(true);
 	QIcon si;
 
@@ -143,7 +145,7 @@ QBalloonTip::QBalloonTip(const QString& title, const QString& message, QBaloonTy
 
 QBalloonTip::~QBalloonTip()
 {
-	theSolitaryBalloonTip = 0;
+	theSolitaryBalloonTip = nullptr;
 }
 /*
 
@@ -252,17 +254,30 @@ void QBalloonTip::balloon(int msecs, bool showArrow)
 	path.lineTo(ml, mt + rc);
 	path.arcTo(QRect(ml, mt, rc * 2, rc * 2), 180, -90);
 
-	if(msecs > 0)
+	if(msecs <= 0)
 	{
-		timerId = startTimer(msecs);
+		msecs = 10000;
 	}
-
+	m_duration = msecs;
+	m_showTimerId = startTimer(msecs);
 	show();
-	QPropertyAnimation*  anim = new QPropertyAnimation(this, "windowOpacity");
-	anim->setDuration(2500);
-	anim->setStartValue(0.f);
-	anim->setEndValue(1.f);
-	anim->start();
+	QSequentialAnimationGroup* pAnimationGroup = new QSequentialAnimationGroup(this);
+	
+	QPropertyAnimation*  pShowAnimation = new QPropertyAnimation(this, "windowOpacity");
+	pShowAnimation->setDuration(msecs / 4);
+	pShowAnimation->setStartValue(0.f);
+	pShowAnimation->setEndValue(1.f);
+	
+	QPropertyAnimation*  pHideAnimation = new QPropertyAnimation(this, "windowOpacity");
+	pHideAnimation->setDuration(msecs / 4);
+	pHideAnimation->setStartValue(1.f);
+	pHideAnimation->setEndValue(0.f);
+
+	pAnimationGroup->addAnimation(pShowAnimation);
+	pAnimationGroup->addPause(m_duration / 2);
+	pAnimationGroup->addAnimation(pHideAnimation);
+	pAnimationGroup->start(QAbstractAnimation::DeleteWhenStopped);
+	m_showTimerId = startTimer(m_duration);
 }
 
 void QBalloonTip::mousePressEvent(QMouseEvent* e)
@@ -297,30 +312,30 @@ void QBalloonTip::mousePressEvent(QMouseEvent* e)
 			QDesktopServices::openUrl(QUrl("http://cutetorrent.info/downloads/"));
 			break;
 		}
+		case Error: 
+		case Info: 
+		default: break;
 	}
 
 	e->accept();
+	killTimer(m_showTimerId);
 	finished = true;
 	close();
 	return;
 }
 
-void QBalloonTip::timerEvent(QTimerEvent* e)
-{
-	if(e->timerId() == timerId)
-	{
-		killTimer(timerId);
-		finished = true;
-		close();
-		return;
-	}
-
-	QWidget::timerEvent(e);
-}
-
 bool QBalloonTip::isFinished()
 {
 	return finished;
+}
+
+void QBalloonTip::timerEvent(QTimerEvent* e)
+{
+	if (e->timerId()== m_showTimerId)
+	{
+		killTimer(m_showTimerId);
+		close();
+	}
 }
 
 void QBalloonTip::closeEvent(QCloseEvent* e)
@@ -335,6 +350,14 @@ void QBalloonTip::closeEvent(QCloseEvent* e)
 
 	e->accept();
 }
+
+/*void QBalloonTip::paintEvent(QPaintEvent* e)
+{
+	QStyleOption opt;
+	opt.init(this);
+	QPainter p(this);
+	style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+}*/
 
 QBalloonTip* QBalloonTip::current = NULL;
 

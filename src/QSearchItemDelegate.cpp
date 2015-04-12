@@ -18,7 +18,7 @@ int MAX3(int a, int b, int c)
 	return ab > c ? ab : c;
 }
 }
-int QSearchItemDelegate::max_width = 0;
+
 QSearchItemDelegate::QSearchItemDelegate(QObject* parent) : QStyledItemDelegate(parent), m_pStyleEngine(StyleEngene::getInstance())
 {
 }
@@ -57,12 +57,6 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	const QIcon mimeIcon = m_pStyleEngine->getIcon(res->Engine);
 	QString nameStr(res->Name);
 	QSize nameSize(nameFM.size(0, nameStr));
-
-	if(nameSize.width() > max_width)
-	{
-		nameSize.setWidth(max_width);
-	}
-
 	QFont statusFont(option.font);
 	statusFont.setPointSize(int (option.font.pointSize() * 0.9));
 	const QFontMetrics statusFM(statusFont);
@@ -73,16 +67,7 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	painter->save();
 	painter->setRenderHint(QPainter::Antialiasing);
 	style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
-	/* if (option.state & QStyle::State_Selected) {
-	QPalette::ColorGroup cg = option.state & QStyle::State_Enabled
-	? QPalette::Active : QPalette::Disabled;
-	if (cg == QPalette::Normal && !(option.state & QStyle::State_Active))
-	cg = QPalette::Inactive;
-
-
-	painter->fillRect(option.rect, opt.backgroundBrush);
-	}*/
-	//style->drawControl(QStyle::CE_ItemViewItem,&option,painter);
+	
 	QIcon::Mode im = QIcon::Normal;
 	QIcon::State qs = QIcon::On;
 	QPalette::ColorGroup cg = QPalette::Normal;
@@ -101,7 +86,11 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	QRect iconArea(fillArea.x(), fillArea.y() + (fillArea.height() - iconSize) / 2, iconSize, iconSize);
 	QRect nameArea(iconArea.x() + iconArea.width() + GUI_PAD, fillArea.y(),
 	               fillArea.width() - GUI_PAD - iconArea.width(), nameSize.height());
-	nameArea.setWidth(max_width);
+	if (nameArea.x() + nameArea.width() > opt.rect.width())
+	{
+		nameArea.setWidth(opt.rect.width() - nameArea.x());
+	}
+	
 	QRect progArea(nameArea);
 	progArea.moveTop(nameArea.y() + statusFM.lineSpacing() + GUI_PAD / 2);
 	progArea.setWidth(nameArea.width() / 2);
@@ -133,9 +122,9 @@ QSize QSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
 	const QString nameStr(res->Name);
 	int nameWidth = nameFM.width(nameStr);
 
-	if(nameWidth > max_width)
+	if (nameWidth + iconSize > option.rect.width())
 	{
-		nameWidth = max_width;
+		nameWidth = option.rect.width() - iconSize;
 	}
 
 	QFont statusFont(option.font);
@@ -144,9 +133,9 @@ QSize QSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
 	const QString statusStr(GetPeersStr(res));
 	int statusWidth = statusFM.width(statusStr);
 
-	if(statusWidth > max_width)
+	if (statusWidth > option.rect.width())
 	{
-		statusWidth = max_width;
+		statusWidth = option.rect.width();
 	}
 
 	QFont progressFont(statusFont);

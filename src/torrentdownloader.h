@@ -13,6 +13,7 @@ class TorrentDownloader : public QObject
 	Q_OBJECT
 signals:
 	void TorrentReady(QUrl, QTemporaryFile*);
+	void TorrentError(QUrl, QString error);
 public:
 	void downloadTorrent(QUrl url);
 	static TorrentDownloaderPtr getInstance();
@@ -20,9 +21,10 @@ public:
 private slots:
 	void replyReady(QNetworkReply* pReply);
 private:
+	QMap<QUrl/*redirection ulr*/, QUrl/*original url*/> m_redirectionMap;
 	static boost::weak_ptr<TorrentDownloader> m_pInstance;
-	TorrentDownloader(QObject *parent);
-	
+	TorrentDownloader(QObject* parent);
+
 	QNetworkAccessManager* m_pNetManager;
 };
 

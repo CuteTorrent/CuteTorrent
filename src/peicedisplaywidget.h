@@ -29,7 +29,7 @@ private:
 	void UpdateImage();
 	QImage img;
 	QColor m_cDwonloaded, m_cDownloading, m_cBorder, m_cBackground;
-	int piceCount;
+	int m_iPiceCount;
 	QVector<QPair<int, int> > dowloadingParts;
 	QVector<QPair<int, int> > dowloadedParts;
 

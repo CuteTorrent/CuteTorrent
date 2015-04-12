@@ -27,11 +27,12 @@ void RssFeedTreeItem::BuildChildren()
 		qDeleteAll(m_children);
 		m_children.clear();
 	}
-	
-	QList<RssItem> feedItems = m_pFeed->GetFeedItems();
-	for each (RssItem item in feedItems)
+
+	QList<RssItem*> feedItems = m_pFeed->GetFeedItems();
+
+	for each (RssItem* item in feedItems)
 	{
-		m_children.append(new RssFeedItemTreeItem(this, item["guid"].toString()));
+		m_children.append(new RssFeedItemTreeItem(this, item));
 	}
 }
 

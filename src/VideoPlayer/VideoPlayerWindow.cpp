@@ -66,7 +66,7 @@ VideoPlayerWindow::VideoPlayerWindow(QWidget* parent) :	QMainWindow(parent),
 	}
 	catch(...)
 	{
-		MyMessageBox::warning(this, "Exception", "VideoPlayerWindow::VideoPlayerWindow()\n");
+		CustomMessageBox::warning(this, "Exception", "VideoPlayerWindow::VideoPlayerWindow()\n");
 	}
 }
 
@@ -182,7 +182,7 @@ void VideoPlayerWindow::openFile(QString path)
 	}
 	catch(...)
 	{
-		MyMessageBox::warning(this, "ERROR", "VideoPlayerWindow::openFile()");
+		CustomMessageBox::warning(this, "ERROR", "VideoPlayerWindow::openFile()");
 	}
 }
 

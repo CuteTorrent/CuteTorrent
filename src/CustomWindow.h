@@ -9,9 +9,15 @@ class BaseWindow : public T
 public:
 	enum ResizeMode { NoResize, AllowResize};
 	enum TitleMode { FullTitle = 0, MaximizeModeOff = 1, MinimizeModeOff = 2, MaxMinOff = MaximizeModeOff | MinimizeModeOff, OnlyCloseButton = MaxMinOff, FullScreenMode = 4 };
-	BaseWindow(TitleMode titleMode, ResizeMode resizeMode);
+	BaseWindow(TitleMode titleMode, ResizeMode resizeMode, QWidget* parent = 0);
+	void showMaximized();
+	void showNormal();
+	void setGeometry(QRect geo);
+	void setTitle(QString title);
+	bool isMaximized();
 protected:
-
+	bool m_bIsMaximized;
+	QRect preMaximizeGeomentry;
 	QHBoxLayout* centralLayout;
 	/**
 	* @brief dragPosition Increment of the position movement.
@@ -103,6 +109,50 @@ public slots:
 };
 
 template <class T>
+void BaseWindow<T>::setTitle(QString title)
+{
+	if (getTitleLabel() != NULL)
+	{
+		getTitleLabel()->setText(title);
+	}
+}
+
+template <class T>
+bool BaseWindow<T>::isMaximized()
+{
+	return m_bIsMaximized;
+}
+
+template <class T>
+void BaseWindow<T>::setGeometry(QRect geo)
+{
+	if (!m_bIsMaximized)
+	{
+		preMaximizeGeomentry = geo;
+	}
+
+	T::setGeometry(geo);
+}
+
+template <class T>
+void BaseWindow<T>::showNormal()
+{
+	setGeometry(preMaximizeGeomentry);
+	T::showNormal();
+	m_bIsMaximized = false;
+}
+
+template <class T>
+void BaseWindow<T>::showMaximized()
+{
+	QDesktopWidget* desktop = QApplication::desktop();
+	preMaximizeGeomentry = geometry();
+	m_bIsMaximized = true;
+	setGeometry(desktop->availableGeometry());
+	T::showNormal();
+}
+
+template <class T>
 QLabel* BaseWindow<T>::getTitleIcon()
 {
 	return NULL;
@@ -145,7 +195,7 @@ QPushButton* BaseWindow<T>::getMinBtn()
 }
 
 template <class T>
-BaseWindow<T>::BaseWindow(TitleMode titleMode, ResizeMode resizeMode) : T()
+BaseWindow<T>::BaseWindow(TitleMode titleMode, ResizeMode resizeMode, QWidget* parent) : T(), m_bIsMaximized(false)
 {
 	m_titleMode = titleMode;
 	m_resizeMode = resizeMode;
@@ -163,7 +213,14 @@ void BaseWindow<T>::setupWindowIcons()
 
 	if((m_titleMode & BaseWindow::MaximizeModeOff) == 0 && getMaxBtn() != NULL)
 	{
-		getMaxBtn()->setIcon(style->getIcon("app_min"));
+		if (m_bIsMaximized)
+		{
+			getMaxBtn()->setIcon(style->getIcon("app_reset"));
+		}
+		else
+		{
+			getMaxBtn()->setIcon(style->getIcon("app_max"));
+		}
 	}
 
 	getCloseBtn()->setIcon(style->getIcon("app_close"));
@@ -188,7 +245,7 @@ void BaseWindow<T>::setupCustomWindow()
 		centralWidget()->setMouseTracking(true);
 	}
 
-	if((m_titleMode & BaseWindow::MinimizeModeOff) == 0 && getMinBtn() != NULL)
+	if ((m_titleMode & BaseWindow::MinimizeModeOff) == BaseWindow::MinimizeModeOff && getMinBtn() != NULL)
 	{
 		getMinBtn()->setMouseTracking(true);
 		connect(getMinBtn(), SIGNAL(clicked()), this, SLOT(minimizeBtnClicked()));
@@ -198,7 +255,7 @@ void BaseWindow<T>::setupCustomWindow()
 		getMinBtn()->hide();
 	}
 
-	if((m_titleMode & BaseWindow::MaximizeModeOff) == 0 && getMaxBtn() != NULL)
+	if ((m_titleMode & BaseWindow::MaximizeModeOff) == BaseWindow::MinimizeModeOff && getMaxBtn() != NULL)
 	{
 		getMaxBtn()->setMouseTracking(true);
 		connect(getMaxBtn(), SIGNAL(clicked()), this, SLOT(maximizeBtnClicked()));
@@ -209,7 +266,6 @@ void BaseWindow<T>::setupCustomWindow()
 	}
 
 	connect(getCloseBtn(), SIGNAL(clicked()), this, SLOT(close()));
-	
 	moveWidget = false;
 	inResizeZone = false;
 	allowToResize = false;

@@ -1,6 +1,6 @@
 #include "RssFeedItemTreeItem.h"
 #include "RssFeedTreeItem.h"
-RssFeedItemTreeItem::RssFeedItemTreeItem(RssFeedTreeItem* parent, QString guid) : RssBaseTreeItem(RssBaseTreeItem::FeedItem), m_guid(guid), m_pParent(parent)
+RssFeedItemTreeItem::RssFeedItemTreeItem(RssFeedTreeItem* parent, RssItem* pRssitem) : RssBaseTreeItem(RssBaseTreeItem::FeedItem), m_pRssitem(pRssitem), m_pParent(parent)
 {
 }
 
@@ -9,9 +9,9 @@ RssFeedItemTreeItem::~RssFeedItemTreeItem()
 {
 }
 
-RssItem RssFeedItemTreeItem::FeedItem()
+RssItem* RssFeedItemTreeItem::FeedItem()
 {
-	return m_pParent->GetFeed()->GetFeedItem(m_guid);
+	return m_pRssitem;
 }
 
 RssFeedTreeItem* RssFeedItemTreeItem::Parent()

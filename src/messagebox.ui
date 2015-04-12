@@ -9,9 +9,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>129</height>
+    <width>352</width>
+    <height>120</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
@@ -142,24 +148,9 @@
      <property name="styleSheet">
       <string notr="true"/>
      </property>
-     <layout class="QGridLayout" name="gridLayout_4">
-      <property name="leftMargin">
-       <number>9</number>
-      </property>
-      <property name="topMargin">
-       <number>6</number>
-      </property>
-      <property name="rightMargin">
-       <number>9</number>
-      </property>
-      <property name="bottomMargin">
-       <number>9</number>
-      </property>
-      <property name="horizontalSpacing">
-       <number>0</number>
-      </property>
-      <property name="verticalSpacing">
-       <number>2</number>
+     <layout class="QGridLayout" name="gridLayout" rowstretch="0,100" rowminimumheight="2,6">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
       </property>
       <item row="1" column="0" colspan="2">
        <widget class="QDialogButtonBox" name="buttonBox">
@@ -174,41 +165,38 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="text">
-        <property name="text">
-         <string>TextLabel</string>
+      <item row="0" column="0">
+       <widget class="QLabel" name="icon">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="wordWrap">
-         <bool>true</bool>
+        <property name="minimumSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
         </property>
-        <property name="textInteractionFlags">
-         <set>Qt::NoTextInteraction</set>
+        <property name="maximumSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="icon">
-        <property name="maximumSize">
-         <size>
-          <width>60</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">#icon{
-  margin-right:10px;
-  margin-top:10px;
-}</string>
-        </property>
+      <item row="0" column="1">
+       <widget class="QLabel" name="text">
         <property name="text">
          <string/>
         </property>
-        <property name="scaledContents">
+        <property name="wordWrap">
          <bool>true</bool>
-        </property>
-        <property name="textInteractionFlags">
-         <set>Qt::NoTextInteraction</set>
         </property>
        </widget>
       </item>

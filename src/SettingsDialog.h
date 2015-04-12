@@ -31,29 +31,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "tracker/torrentracker.h"
 #include "ui_SettingsDialog.h"
 #include "webControll/RconWebService.h"
+#include "RssDownloadRule.h"
 
 class QApplicationSettings;
 class RconWebService;
 class TorrentTracker;
 
-class SettingsDialog : public BaseWindow<QDialog>, private Ui::SettingsDialog
+class SettingsDialog : public BaseWindow<QDialog>, Ui::SettingsDialog
 {
 	Q_OBJECT
 protected:
-	void changeEvent(QEvent* event);
+	void changeEvent(QEvent* event) override;
 	virtual QPushButton* getCloseBtn() override;
 	virtual QWidget* getTitleBar() override;
 	virtual QWidget* centralWidget() override;
 	virtual QLabel* getTitleLabel() override;
 	virtual QLabel* getTitleIcon() override;
+	
 private:
+	QHash<QUuid, RssDownloadRule*> m_downloadRulesCopy;
+	QList<QUuid> m_deletedRules;
 	QApplicationSettings* settings;
 	QList<GroupForFileFiltering> filterGroups;
 	QList<SchedulerTask> tasks;
 	QDateTimeEdit* previousFocuse;
 	TorrentTracker* tracker;
 	RconWebService* rcon;
-
+	QAction* editRssRule, *deleteRssRule;
 	void FillFilteringGroups();
 	void FillGeneralTab();
 	void FillHDDTab();
@@ -64,16 +68,20 @@ private:
 	void FillSearchTab();
 	void FillNetworkTab();
 	void FillRestrictionTab();
+	void updateRulesWidget(QList<RssDownloadRule*> downloadRules);
+	void FillRssTab();
+	void ApplyRssDownloadRulles();
 	void NeverCallMe();
 public:
-	SettingsDialog(QWidget* parent = 0, int flags = 0);
+	SettingsDialog(QWidget* parent = nullptr, int flags = 0);
 	~SettingsDialog();
 	void ApplySettingsToSession();
-	void instance(QString currentStyle);
+	
 signals:
 	void needRetranslate();
 	void tasksChanged();
-	private slots:
+private slots:
+	void setupWindowIcons() override;
 	void chooseAction(QAbstractButton* button);
 	void ApplyAndClose();
 	void ApplySettings();
@@ -88,8 +96,10 @@ signals:
 	void UpdateSchedullerTab(int index);
 	void StartRcon();
 	void StopRcon();
-	void setupWindowIcons();
 	void OpenWebUI();
+	void addRssRule();
+	void onEditRssRule();
+	void onDeleteRssRule();
 };
 
 #endif // !_SETTINGS_DLG_H

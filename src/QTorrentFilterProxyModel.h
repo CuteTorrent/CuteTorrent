@@ -15,7 +15,7 @@ class QTorrentFilterProxyModel : public QSortFilterProxyModel
 {
 	Q_OBJECT
 public:
-	QTorrentFilterProxyModel(QObject *parent = 0);
+	QTorrentFilterProxyModel(QObject* parent = 0);
 	void setGroupFilter(QString groupName);
 	void setTorrentFilter(TorrentFilterType activityFilter);
 private slots:
@@ -32,7 +32,7 @@ private:
 	QString m_groupFilter;
 	TorrentFilterType m_torrentFilter;
 protected:
-	bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
-	
+	bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+
 
 };

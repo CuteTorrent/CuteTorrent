@@ -4,6 +4,8 @@
 #include "RssFeedItemTreeItem.h"
 #include "StaticHelpers.h"
 #include "FaviconDownloader.h"
+#include "QRssDisplayModel.h"
+#include "RssItem.h"
 enum
 {
 	GUI_PAD = 6
@@ -11,22 +13,21 @@ enum
 
 namespace
 {
-	int MAX3(int a, int b, int c)
-	{
-		const int ab(a > b ? a : b);
-		return ab > c ? ab : c;
-	}
+int MAX3(int a, int b, int c)
+{
+	const int ab(a > b ? a : b);
+	return ab > c ? ab : c;
+}
 }
 
 QRssItemDelegate::QRssItemDelegate(QObject* parent) : QStyledItemDelegate(parent)
 {
-	m_pFaviconDownloader = new FaviconDownloader();
+	m_pFaviconDownloader = FaviconDownloader::getInstance();
 }
 
 
 QRssItemDelegate::~QRssItemDelegate()
 {
-	delete m_pFaviconDownloader;
 }
 
 QSize QRssItemDelegate::margin(const QStyle& style) const
@@ -35,72 +36,62 @@ QSize QRssItemDelegate::margin(const QStyle& style) const
 	return QSize(4, 4);
 }
 
-void QRssItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void QRssItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
 	try
 	{
-		RssBaseTreeItem* baseItem = static_cast<RssBaseTreeItem*>(index.internalPointer());
-		qDebug() << "BaseItemType" << baseItem->GetType();
-		switch (baseItem->GetType())
+		QVariant data = index.data(QRssDisplayModel::RssFeedRole);
+
+		if (data.isValid())
 		{
-			case RssBaseTreeItem::Feed:
+			return drawFeed(painter,option,index, data.value<RssFeed*>());
+		}
+		else
+		{
+			data = index.data(QRssDisplayModel::RssFeedItemRole);
+			if (data.isValid())
 			{
-				RssFeedTreeItem* pFeed = reinterpret_cast<RssFeedTreeItem*>(baseItem);
-				drawFeed(painter, option, index, pFeed);
-				break;
-			}
-			case RssBaseTreeItem::FeedItem:
-			{
-				RssFeedItemTreeItem* pFeedItem = reinterpret_cast<RssFeedItemTreeItem*>(baseItem);
-				drawFeedItem(painter, option, index, pFeedItem);
-				break;
+				return drawFeedItem(painter, option, index, data.value<RssItem*>());
 			}
 		}
 	}
 	catch (...)
 	{
-		
 	}
-	
 }
 
-QSize QRssItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+QSize QRssItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
 	try
 	{
+		QVariant data = index.data(QRssDisplayModel::RssFeedRole);
 
-		RssBaseTreeItem* baseItem = static_cast<RssBaseTreeItem*>(index.internalPointer());
-		switch (baseItem->GetType())
+		if (data.isValid())
 		{
-			case RssBaseTreeItem::Feed:
+			return feedSizeHint(option, data.value<RssFeed*>());
+		}
+		else
+		{
+			data = index.data(QRssDisplayModel::RssFeedItemRole);
+			if (data.isValid())
 			{
-				RssFeedTreeItem* pFeed = reinterpret_cast<RssFeedTreeItem*>(baseItem);
-				return feedSizeHint(option, pFeed);
-			}
-			case RssBaseTreeItem::FeedItem:
-			{
-				RssFeedItemTreeItem* pFeedItem = reinterpret_cast<RssFeedItemTreeItem*>(baseItem);
-				return feedItemSizeHint(option, pFeedItem);
-			}
-			default:
-			{
-				return QSize();
+				return feedItemSizeHint(option, data.value<RssItem*>());
 			}
 		}
 	}
 	catch (...)
 	{
-		
 	}
+
 	return QSize();
 }
 
-void QRssItemDelegate::drawFeed(QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex &index, RssFeedTreeItem* pFeed) const
+void QRssItemDelegate::drawFeed(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index, RssFeed* pRssFeed) const
 {
 	QStyleOptionViewItemV4 opt = option;
 	initStyleOption(&opt, index);
 	QStyle* style;
-	RssFeed* pRssFeed = pFeed->GetFeed();
+	
 	if (opt.widget != NULL)
 	{
 		style = opt.widget->style();
@@ -109,20 +100,20 @@ void QRssItemDelegate::drawFeed(QPainter * painter, const QStyleOptionViewItem &
 	{
 		style = QApplication::style();
 	}
+
 	const int iconSize(style->pixelMetric(QStyle::PM_SmallIconSize));
 	QFont nameFont(option.font);
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
-	const QPixmap favicon = m_pFaviconDownloader->getFavicon(pRssFeed->url().toString());
-
+	const QIcon favicon = m_pFaviconDownloader->getFavicon(pRssFeed->url().toString());
 	QString nameStr = pRssFeed->displayName();
 	QSize nameSize(nameFM.size(0, nameStr));
-
 	QFont statusFont(option.font);
 	statusFont.setPointSize(int(option.font.pointSize() * 0.9));
 	const QFontMetrics statusFM(statusFont);
 	QString statusStr;
 	QString errorStr = pRssFeed->error();
+
 	if (errorStr.isEmpty())
 	{
 		if (pRssFeed->isUpdating())
@@ -142,7 +133,6 @@ void QRssItemDelegate::drawFeed(QPainter * painter, const QStyleOptionViewItem &
 	QFont updateTimeFont(statusFont);
 	const QFontMetrics updateTimeFM(updateTimeFont);
 	const QString updateTimeStr(StaticHelpers::toTimeString(pRssFeed->next_update()));
-
 	painter->save();
 	painter->setRenderHint(QPainter::Antialiasing);
 	style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
@@ -150,7 +140,6 @@ void QRssItemDelegate::drawFeed(QPainter * painter, const QStyleOptionViewItem &
 	QIcon::State qs = QIcon::On;
 	QPalette::ColorGroup cg = QPalette::Normal;
 	QPalette::ColorRole cr;
-
 	cr = QPalette::Text;
 	// layout
 	const QSize m(margin(*style));
@@ -158,19 +147,22 @@ void QRssItemDelegate::drawFeed(QPainter * painter, const QStyleOptionViewItem &
 	fillArea.adjust(m.width(), m.height(), -m.width(), -m.height());
 	QRect iconArea(fillArea.x(), fillArea.y() + (fillArea.height() - iconSize) / 2, iconSize, iconSize);
 	QRect nameArea(iconArea.x() + iconArea.width() + GUI_PAD, fillArea.y(),
-		fillArea.width() - GUI_PAD - iconArea.width(), nameSize.height());
+	               fillArea.width() - GUI_PAD - iconArea.width(), nameSize.height());
+	if (nameArea.x() + nameArea.width() > opt.rect.width())
+	{
+		nameArea.setWidth(opt.rect.width() - nameArea.x());
+	}
 	QRect updateTimeArea(nameArea);
 	updateTimeArea.moveTop(nameArea.y() + statusFM.lineSpacing() + GUI_PAD / 2);
 	updateTimeArea.setWidth(nameArea.width() / 2);
 	QRect statusArea(nameArea);
 	statusArea.moveTop(nameArea.y() + statusFM.lineSpacing() + GUI_PAD / 2);
-	statusArea.moveLeft(nameArea.width() / 2 + iconArea.width() + GUI_PAD);
+	/*statusArea.moveLeft(nameArea.width() / 2 + iconArea.width() + GUI_PAD);
 	statusArea.setWidth(nameArea.width() / 2);
 	statusArea.setHeight(nameSize.height());
-
+*/
 	painter->setPen(opt.palette.color(cg, cr));
-	//favicon.paint(painter, iconArea, Qt::AlignCenter, im, qs);
-	painter->drawPixmap(iconArea, favicon);
+	favicon.paint(painter, iconArea, Qt::AlignCenter, im, qs);
 	painter->setFont(nameFont);
 	nameStr = nameFM.elidedText(nameStr, Qt::ElideRight, nameArea.width());
 	style->drawItemText(painter, nameArea, Qt::AlignLeft, opt.palette, option.state & QStyle::State_Enabled, nameStr);
@@ -179,10 +171,9 @@ void QRssItemDelegate::drawFeed(QPainter * painter, const QStyleOptionViewItem &
 	painter->setFont(updateTimeFont);
 	style->drawItemText(painter, updateTimeArea, Qt::AlignLeft, opt.palette, option.state & QStyle::State_Enabled, updateTimeStr);
 	painter->restore();
-
 }
 
-void QRssItemDelegate::drawFeedItem(QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex &index, RssFeedItemTreeItem* pFeedTreeItem) const
+void QRssItemDelegate::drawFeedItem(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index, RssItem* pFeedItem) const
 {
 	QStyleOptionViewItemV4 opt = option;
 	initStyleOption(&opt, index);
@@ -196,25 +187,28 @@ void QRssItemDelegate::drawFeedItem(QPainter * painter, const QStyleOptionViewIt
 	{
 		style = QApplication::style();
 	}
-	RssItem pFeedItem = pFeedTreeItem->FeedItem();
 
 	QFont nameFont(option.font);
-	if (pFeedItem["unread"].toBool() == true)
+
+	if (pFeedItem->unread())
 	{
 		nameFont.setWeight(QFont::Bold);
 	}
-	const QFontMetrics nameFM(nameFont);
-	QString nameStr(pFeedItem["title"].toString());
-	QSize nameSize(nameFM.size(0, nameStr));
 
+	const QFontMetrics nameFM(nameFont);
+	QString nameStr(pFeedItem->title());
+	QSize nameSize(nameFM.size(0, nameStr));
 	QFont sizeFont(option.font);
-	if (pFeedItem["unread"].toBool() == true)
+
+	if (pFeedItem->unread())
 	{
 		sizeFont.setWeight(QFont::Bold);
 	}
+
 	const QFontMetrics sizeFM(sizeFont);
-	qint64 size = pFeedItem["size"].toULongLong();
+	qint64 size = pFeedItem->size();
 	QString sizeStr;
+
 	if (size > 0)
 	{
 		sizeStr = StaticHelpers::toKbMbGb(size);
@@ -223,41 +217,38 @@ void QRssItemDelegate::drawFeedItem(QPainter * painter, const QStyleOptionViewIt
 	{
 		sizeStr = tr("- Mb");
 	}
-	QSize sizeSize(sizeFM.size(0, sizeStr));
 
+	QSize sizeSize(sizeFM.size(0, sizeStr));
 	QFont categoryFont(option.font);
-	if (pFeedItem["unread"].toBool() == true)
+
+	if (pFeedItem->unread())
 	{
 		categoryFont.setWeight(QFont::Bold);
 	}
+
 	const QFontMetrics categoryFM(categoryFont);
-	QString categoryStr(pFeedItem["category"].toString());
+	QString categoryStr(pFeedItem->category());
+
 	if (categoryStr.isEmpty())
 	{
 		categoryStr = "-";
 	}
-	QSize categorySize(categoryFM.size(0, categoryStr));
 
+	QSize categorySize(categoryFM.size(0, categoryStr));
 	const QSize m(margin(*style));
 	QRect fillArea(option.rect);
 	fillArea.adjust(m.width(), m.height(), -m.width(), -m.height());
-
 	QRect nameArea(fillArea.x(), fillArea.y(), fillArea.width(), nameSize.height());
 
 	QRect sizeArea(fillArea.x(), fillArea.y() + sizeFM.lineSpacing() + GUI_PAD / 2, fillArea.width() / 2, nameSize.height());
-	
 	QRect categoryArea(nameArea);
 	categoryArea.moveTop(nameArea.y() + categoryFM.lineSpacing() + GUI_PAD / 2);
-
 	QPalette::ColorGroup cg = QPalette::Normal;
 	QPalette::ColorRole cr = QPalette::Text;
-	
-
 	painter->save();
 	painter->setRenderHint(QPainter::Antialiasing);
 	style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 	painter->setPen(opt.palette.color(cg, cr));
-	
 	painter->setFont(nameFont);
 	nameStr = nameFM.elidedText(nameStr, Qt::ElideRight, nameArea.width());
 	style->drawItemText(painter, nameArea, Qt::AlignLeft, opt.palette, option.state & QStyle::State_Enabled, nameStr);
@@ -266,12 +257,10 @@ void QRssItemDelegate::drawFeedItem(QPainter * painter, const QStyleOptionViewIt
 	painter->setFont(categoryFont);
 	style->drawItemText(painter, categoryArea, Qt::AlignRight, opt.palette, option.state & QStyle::State_Enabled, categoryStr);
 	painter->restore();
-
 }
 
-QSize QRssItemDelegate::feedSizeHint(const QStyleOptionViewItem & option, RssFeedTreeItem* pFeed) const
+QSize QRssItemDelegate::feedSizeHint(const QStyleOptionViewItem& option, RssFeed* pRssFeed) const
 {
-	RssFeed* pRssFeed = pFeed->GetFeed();
 	const QStyle* style(QApplication::style());
 	const int iconSize(style->pixelMetric(QStyle::PM_ToolBarIconSize));
 	QFont nameFont(option.font);
@@ -279,14 +268,12 @@ QSize QRssItemDelegate::feedSizeHint(const QStyleOptionViewItem & option, RssFee
 	const QFontMetrics nameFM(nameFont);
 	const QString nameStr(pRssFeed->title());
 	int nameWidth = nameFM.width(nameStr);
-
-	
-
 	QFont statusFont(option.font);
 	statusFont.setPointSize(int(option.font.pointSize() * 0.9));
 	const QFontMetrics statusFM(statusFont);
 	QString statusStr;
 	QString errorStr = pRssFeed->error();
+
 	if (errorStr.isEmpty())
 	{
 		if (pRssFeed->isUpdating())
@@ -302,6 +289,7 @@ QSize QRssItemDelegate::feedSizeHint(const QStyleOptionViewItem & option, RssFee
 	{
 		statusStr = errorStr;
 	}
+
 	int statusWidth = statusFM.width(statusStr);
 	QFont updateTimeFont(statusFont);
 	const QFontMetrics updateTimeFM(updateTimeFont);
@@ -309,10 +297,10 @@ QSize QRssItemDelegate::feedSizeHint(const QStyleOptionViewItem & option, RssFee
 	const int updateTimeWidth = updateTimeFM.width(updateTimeStr);
 	const QSize m(margin(*style));
 	return QSize(m.width() + iconSize + MAX3(nameWidth, statusWidth, updateTimeWidth),
-		m.height()*2 + nameFM.lineSpacing() + updateTimeFM.lineSpacing());
+	             m.height() * 2 + nameFM.lineSpacing() + updateTimeFM.lineSpacing());
 }
 
-QSize QRssItemDelegate::feedItemSizeHint(const QStyleOptionViewItemV4 & opt, RssFeedItemTreeItem* pFeedTreeItem) const
+QSize QRssItemDelegate::feedItemSizeHint(const QStyleOptionViewItemV4& opt, RssItem* pFeedItem) const
 {
 	QStyle* style;
 
@@ -324,40 +312,32 @@ QSize QRssItemDelegate::feedItemSizeHint(const QStyleOptionViewItemV4 & opt, Rss
 	{
 		style = QApplication::style();
 	}
-	RssItem pFeedItem = pFeedTreeItem->FeedItem();
 
 	QFont nameFont(opt.font);
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
-	QString nameStr(pFeedItem["title"].toString());
+	QString nameStr(pFeedItem->title());
 	QSize nameSize(nameFM.size(0, nameStr));
-
 	QFont sizeFont(opt.font);
 	sizeFont.setWeight(QFont::Bold);
 	const QFontMetrics sizeFM(sizeFont);
-	QString sizeStr(StaticHelpers::toKbMbGb(pFeedItem["size"].toULongLong()));
+	QString sizeStr(StaticHelpers::toKbMbGb(pFeedItem->size()));
 	QSize sizeSize(sizeFM.size(0, sizeStr));
-
 	QFont categoryFont(opt.font);
 	categoryFont.setWeight(QFont::Bold);
 	const QFontMetrics categoryFM(categoryFont);
-	QString categoryStr(pFeedItem["category"].toString());
+	QString categoryStr(pFeedItem->category());
 	QSize categorySize(categoryFM.size(0, categoryStr));
-
 	const QSize m(margin(*style));
 	QRect fillArea(opt.rect);
 	fillArea.adjust(m.width(), m.height(), -m.width(), -m.height());
-
 	QRect nameArea(fillArea.x(), fillArea.y(), fillArea.width(), nameSize.height());
-
 	QRect sizeArea(nameArea);
 	sizeArea.setWidth(nameArea.width() / 2);
 	sizeArea.moveRight(nameArea.width() / 2);
-
 	QRect categoryArea(nameArea);
 	categoryArea.moveTop(nameArea.y() + categoryFM.lineSpacing() + GUI_PAD / 2);
-
-	return QSize(m.width() + nameSize.width(), m.height()*2 + nameSize.height() + categorySize.height());
+	return QSize(m.width() + nameSize.width(), m.height() * 2 + nameSize.height() + categorySize.height());
 }
 
 

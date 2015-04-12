@@ -111,7 +111,7 @@ void FileViewModel::setFilePriority(int priorityToSet)
 {
 	QModelIndexList selection = m_pView->selectionModel()->selectedIndexes();
 
-	for each(QModelIndex index in selection)
+	for each (QModelIndex index in selection)
 	{
 		QModelIndex sourceIndex = m_pProxyModel->mapToSource(index);
 		FileViewTreeItem* item = static_cast<FileViewTreeItem*>(sourceIndex.internalPointer());

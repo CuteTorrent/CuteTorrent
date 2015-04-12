@@ -80,6 +80,7 @@ public:
     {
         if (CreateTorrentDialog->objectName().isEmpty())
             CreateTorrentDialog->setObjectName(QString::fromUtf8("CreateTorrentDialog"));
+        CreateTorrentDialog->setWindowModality(Qt::WindowModal);
         CreateTorrentDialog->resize(406, 564);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);

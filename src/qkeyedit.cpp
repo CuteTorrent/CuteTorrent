@@ -26,15 +26,15 @@ void QKeyEdit::keyPressEvent(QKeyEvent* keyEvent)
 	{
 		return;
 	}
+
 #ifdef Q_WS_WIN32
 
 	if (key == Qt::Key_Return)
 	{
 		key = Qt::Key_Enter;
 	}
+
 #endif // Q_WS_WIN32
-
-
 
 	if(key == Qt::Key_Escape)
 	{
@@ -42,11 +42,11 @@ void QKeyEdit::keyPressEvent(QKeyEvent* keyEvent)
 		return;
 	}
 
-	QString keyStr = QKeySequence(key| keyEvent->modifiers()).toString();
+	QString keyStr = QKeySequence(key | keyEvent->modifiers()).toString();
 	setText(keyStr);
 }
 
-void QKeyEdit::changeEvent(QEvent *event)
+void QKeyEdit::changeEvent(QEvent* event)
 {
 	if (event->type() == QEvent::LanguageChange)
 	{

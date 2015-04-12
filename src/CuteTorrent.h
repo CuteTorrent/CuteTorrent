@@ -79,7 +79,7 @@ class HtmlView;
 class CuteTorrent : public BaseWindow<QWidget> , private Ui::CustomWindow
 {
 	Q_OBJECT
-	
+
 public:
 	CuteTorrent(QWidget* parent = 0);
 	void ConnectMessageReceved(Application* a);
@@ -110,7 +110,6 @@ private:
 	RconWebService* m_pRcon;
 	UpdateNotifier* m_pUpdateNotifier;
 	HtmlView* m_pFeedItemDescribtionEdit;
-	QLabel* m_pFeedItemCommentEdit;
 	QSystemTrayIcon* m_pTrayIcon;
 	QSpinBox* ul, *dl;
 	QMenu* trayIconMenu;
@@ -161,6 +160,7 @@ private:
 	void switchToSearchModel();
 	void switchToRssModel();
 	void resizeWindow(QMouseEvent* e);
+	void saveWindowState();
 	virtual QPushButton* getMinBtn() override;
 	virtual QPushButton* getMaxBtn() override;
 	virtual QPushButton* getCloseBtn() override;

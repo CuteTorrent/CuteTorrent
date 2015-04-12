@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "http/httprequesthandler.h"
-#include "TorrentManager.h"
+class TorrentManager;
 class CommandsApiController: public HttpRequestHandler
 {
 	Q_OBJECT

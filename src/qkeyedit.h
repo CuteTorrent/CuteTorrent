@@ -10,7 +10,7 @@ public:
 	explicit QKeyEdit(QWidget* parent = 0);
 protected:
 	void keyPressEvent(QKeyEvent* event);
-	void changeEvent(QEvent *);
+	void changeEvent(QEvent*);
 signals:
 
 public slots:

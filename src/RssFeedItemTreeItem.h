@@ -1,17 +1,17 @@
 #pragma once
 
 #include "RssBaseTreeItem.h"
-#include "RssFeed.h"
 class RssFeedTreeItem;
+class RssItem;
 class RssFeedItemTreeItem : public RssBaseTreeItem
 {
 public:
-	RssFeedItemTreeItem(RssFeedTreeItem* parent, QString guid);
+	RssFeedItemTreeItem(RssFeedTreeItem* parent, RssItem* pRssitem);
 	~RssFeedItemTreeItem();
-	RssItem FeedItem();
+	RssItem* FeedItem();
 	RssFeedTreeItem* Parent();
 private:
-	QString m_guid;
+	RssItem* m_pRssitem;
 	RssFeedTreeItem* m_pParent;
 };
 

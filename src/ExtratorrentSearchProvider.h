@@ -23,6 +23,6 @@ public:
 signals:
 	void SearchReady(QList<SearchResult*> result) override;
 	void Error(QString error) override;
-	
+
 
 };

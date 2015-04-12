@@ -12,7 +12,7 @@ void DT_mounter::mountImage(QString path)
 	if(exe.isEmpty())
 	{
 		QApplicationSettings::FreeInstance();
-		MyMessageBox::warning(NULL, "DT Mounter", QTorrentDisplayModel::tr("DT_PATH_NOT_SET"));
+		CustomMessageBox::warning(NULL, "DT Mounter", QTorrentDisplayModel::tr("DT_PATH_NOT_SET"));
 		return;
 	}
 
@@ -27,7 +27,7 @@ void DT_mounter::mountImage(QString path)
 
 	if(!dt->waitForStarted(5000))
 	{
-		MyMessageBox::warning(NULL, "DT Mounter", QTorrentDisplayModel::tr("LAUNCH_ERROR") + exe);
+		CustomMessageBox::warning(NULL, "DT Mounter", QTorrentDisplayModel::tr("LAUNCH_ERROR") + exe);
 		return;
 	}
 

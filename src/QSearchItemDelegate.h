@@ -10,10 +10,8 @@ private:
 public:
 	QSearchItemDelegate(QObject* parent = 0);
 	~QSearchItemDelegate();
-	static int max_width;
-	virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
-
-	virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+	void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+	QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 	QSize margin(const QStyle& style) const;
 	QString GetPeersStr(const SearchResult* res) const;
 };

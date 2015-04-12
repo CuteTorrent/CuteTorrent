@@ -14,13 +14,13 @@ public:
 	explicit HtmlView(QWidget* parent = 0);
 	~HtmlView();
 
-	virtual QVariant loadResource(int type, const QUrl &name);
+	virtual QVariant loadResource(int type, const QUrl& name);
 
 protected:
-	QNetworkAccessManager *m_netManager;
-	NetworkDiskCache *m_diskCache;
+	QNetworkAccessManager* m_netManager;
+	NetworkDiskCache* m_diskCache;
 	QHash<QUrl, bool> m_activeRequests;
 
-	protected slots:
-	void resourceLoaded(QNetworkReply *reply);
+protected slots:
+	void resourceLoaded(QNetworkReply* reply);
 };
