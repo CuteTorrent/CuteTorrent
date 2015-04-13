@@ -4,7 +4,6 @@
 class KickassSearchProvider : public ISerachProvider
 {
 	Q_OBJECT
-	Q_INTERFACES(ISerachProvider)
 public:
 	KickassSearchProvider();
 	QString Name() override;

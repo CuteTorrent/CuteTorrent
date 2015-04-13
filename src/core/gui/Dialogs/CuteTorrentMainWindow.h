@@ -53,9 +53,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "application.h"
 #include "peicedisplaywidget.h"
 #include "searchitem.h"
-#include "tracker/torrentracker.h"
+#include "torrentracker.h"
 #include "ui_CustomWindow.h"
-#include "webControll/RconWebService.h"
+#include "RconWebService.h"
 
 class Application;
 class FileViewModel;

@@ -1,24 +1,24 @@
 ﻿<RCC>
     <qresource prefix="/icons">
-        <file alias="app.ico">Resources/app.ico</file>
+        <file alias="app.ico">app.ico</file>
     </qresource>
     <qresource prefix="/translations">
-        <file alias="cutetorrent_ru_Ru.qm">cutetorrent_russian.qm</file>
-        <file alias="cutetorrent_en_Us.qm">cutetorrent_english.qm</file>
+        <file alias="cutetorrent_ru_Ru.qm">translations/cutetorrent_russian.qm</file>
+        <file alias="cutetorrent_en_Us.qm">translations/cutetorrent_english.qm</file>
     </qresource>
     <qresource prefix="/PlayerControlImages">
-        <file alias="ControlBar.png">Resources/playerImages/ControlBar.png</file>
-        <file alias="FileButton.png">Resources/playerImages/FileButton.png</file>
-        <file alias="FullscreenButton.png">Resources/playerImages/FullscreenButton.png</file>
-        <file alias="PauseButton.png">Resources/playerImages/PauseButton.png</file>
-        <file alias="PlayButton.png">Resources/playerImages/PlayButton.png</file>
-        <file alias="RateButtonForward.png">Resources/playerImages/RateButtonForward.png</file>
-        <file alias="RateButtonReverse.png">Resources/playerImages/RateButtonReverse.png</file>
-        <file alias="UrlButton.png">Resources/playerImages/UrlButton.png</file>
-        <file alias="bg.png">Resources/playerImages/pattern.png</file>
+        <file alias="ControlBar.png">playerImages/ControlBar.png</file>
+        <file alias="FileButton.png">playerImages/FileButton.png</file>
+        <file alias="FullscreenButton.png">playerImages/FullscreenButton.png</file>
+        <file alias="PauseButton.png">playerImages/PauseButton.png</file>
+        <file alias="PlayButton.png">playerImages/PlayButton.png</file>
+        <file alias="RateButtonForward.png">playerImages/RateButtonForward.png</file>
+        <file alias="RateButtonReverse.png">playerImages/RateButtonReverse.png</file>
+        <file alias="UrlButton.png">playerImages/UrlButton.png</file>
+        <file alias="bg.png">playerImages/pattern.png</file>
     </qresource>
     <qresource prefix="/images">
-        <file alias="loader.gif">Resources/images/loader.gif</file>
+        <file alias="loader.gif">images/loader.gif</file>
     </qresource>
     <qresource prefix="/translations_qt">
         <file alias="qt_ru_Ru.qm">E:/Qt/4.8.6/translations/qt_ru.qm</file>

@@ -28,9 +28,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "GroupForFileFiltering.h"
 #include "QApplicationSettings.h"
 #include "searchitem.h"
-#include "tracker/torrentracker.h"
+#include "torrentracker.h"
 #include "ui_SettingsDialog.h"
-#include "webControll/RconWebService.h"
+#include "RconWebService.h"
 #include "RssDownloadRule.h"
 
 class QApplicationSettings;

@@ -854,7 +854,6 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="E:\Qt\4.8.6\translations\qt_ru.qm" />
     <None Include="Resources\torrentfile.ico" />
     <None Include="..\UpdateInfo\version" />
     <None Include="Resources\translations\cutetorrent_english.qm">
@@ -866,6 +865,7 @@
     <None Include="search\dataModels\SerachResult.h">
       <Filter>SearchEngine</Filter>
     </None>
+    <None Include="$(QTDIR)\translations\qt_ru.qm" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="VideoPlayer\MediaControls.ui">

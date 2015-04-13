@@ -33,7 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "Torrent.h"
 #include "TorrentManager.h"
 #include "TorrentStorrage.h"
-#include "VideoPlayer\VideoPlayerWindow.h"
+#include "VideoPlayerWindow.h"
 #include "messagebox.h"
 #include "QTorrentFilterProxyModel.h"
 QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterProxyModel* pProxyFilterModel, QObject* __parrent) : QAbstractListModel(__parrent)

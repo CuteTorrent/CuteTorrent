@@ -1,5 +1,4 @@
 ﻿#include "FileViewModel.h"
-#include "CuteTorrent.h"
 
 void FileViewModel::retranslateUI()
 {

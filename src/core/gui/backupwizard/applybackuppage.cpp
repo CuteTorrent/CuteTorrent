@@ -1,8 +1,8 @@
 ﻿#include "applybackuppage.h"
 #include "backupwizard.h"
-#include "../FileTreeModel.h"
-#include "../QApplicationSettings.h"
-#include "../TorrentManager.h"
+#include "FileTreeModel.h"
+#include "QApplicationSettings.h"
+#include "TorrentManager.h"
 //#include "patheditor.h"
 #include <algorithm>
 #include <QApplication>

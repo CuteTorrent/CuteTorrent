@@ -39,8 +39,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "TorrentManager.h"
 #include "searchitem.h"
 #include "qkeyedit.h"
-#include "tracker/torrentracker.h"
-#include "webControll/RconWebService.h"
+#include "torrentracker.h"
+#include "RconWebService.h"
 #include <QRegExpValidator>
 #include "NotificationSystem.h"
 #include "AddRssDwonloadRuleDialog.h"

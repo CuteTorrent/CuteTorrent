@@ -1,11 +1,10 @@
 ﻿#pragma once
-#include <ISerachProvider.h>
+#include "ISerachProvider.h"
 #include <QtNetwork>
 #include "SGML/QSgml.h"
 class ExtratorrentSearchProvider : public ISerachProvider
 {
 	Q_OBJECT
-	Q_INTERFACES(ISerachProvider)
 private:
 	QNetworkAccessManager* m_pNetworkManager;
 	QMap<SearchCategories, QString> m_categoryMap;

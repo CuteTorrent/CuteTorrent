@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #define Q_WS_WIN
-#include "CuteTorrent.h"
+#include "CuteTorrentMainWindow.h"
 #include <QDir>
 #include <qtsingleapplication.h>
 #include <cstdio>
@@ -27,7 +27,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDateTime>
 #include "application.h"
 #include <QTextCodec>
-#include "CuteTorentStyle.h"
 #include  "StyleEngene.h"
 
 void myMessageOutput(QtMsgType type, const char* msg)
