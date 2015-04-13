@@ -139,6 +139,7 @@ public:
 
         verticalLayout->addWidget(m_centralWidget);
 
+        QWidget::setTabOrder(buttonBox, pbClose);
 
         retranslateUi(MessageBox);
         QObject::connect(buttonBox, SIGNAL(accepted()), MessageBox, SLOT(accept()));

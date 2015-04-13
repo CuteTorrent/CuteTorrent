@@ -249,7 +249,6 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(spliiter->sizePolicy().hasHeightForWidth());
         spliiter->setSizePolicy(sizePolicy);
-        spliiter->setMinimumSize(QSize(0, 0));
         spliiter->setMouseTracking(true);
         spliiter->setOrientation(Qt::Vertical);
         spliiter->setOpaqueResize(true);

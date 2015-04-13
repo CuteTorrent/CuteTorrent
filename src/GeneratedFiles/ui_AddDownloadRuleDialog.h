@@ -180,11 +180,6 @@ public:
 
         m_pUseSavePathGroupBox = new QGroupBox(m_ruleSettingsContainer);
         m_pUseSavePathGroupBox->setObjectName(QString::fromUtf8("m_pUseSavePathGroupBox"));
-        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(m_pUseSavePathGroupBox->sizePolicy().hasHeightForWidth());
-        m_pUseSavePathGroupBox->setSizePolicy(sizePolicy);
         m_pUseSavePathGroupBox->setCheckable(true);
         m_pUseSavePathGroupBox->setChecked(false);
         gridLayout_3 = new QGridLayout(m_pUseSavePathGroupBox);
@@ -288,6 +283,7 @@ public:
         QObject::connect(m_pSavePathEdit, SIGNAL(textEdited(QString)), AddRssDownloadRuleDialog, SLOT(onChange()));
         QObject::connect(m_pUseGroupsCheckBox, SIGNAL(stateChanged(int)), AddRssDownloadRuleDialog, SLOT(onChange()));
         QObject::connect(m_pRuleTypeCombobx, SIGNAL(currentIndexChanged(int)), AddRssDownloadRuleDialog, SLOT(onUpdateRuleTypeHint()));
+        QObject::connect(m_pBrowseButton, SIGNAL(clicked()), AddRssDownloadRuleDialog, SLOT(onBrowseStaticPath()));
 
         QMetaObject::connectSlotsByName(AddRssDownloadRuleDialog);
     } // setupUi
