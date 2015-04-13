@@ -2,9 +2,6 @@
 <ui version="4.0">
  <class>SettingsDialog</class>
  <widget class="QDialog" name="SettingsDialog">
-  <property name="windowModality">
-   <enum>Qt::WindowModal</enum>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +14,7 @@
    <string>SETTINGS_DIALOG</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="ltorrent.qrc">
+   <iconset resource="../../../Resources/ltorrent.qrc">
     <normaloff>:/icons/app.ico</normaloff>:/icons/app.ico</iconset>
   </property>
   <property name="styleSheet">
@@ -1951,7 +1948,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>hotKeyScrollArea</tabstop>
  </tabstops>
  <resources>
-  <include location="ltorrent.qrc"/>
+  <include location="../../../Resources/ltorrent.qrc"/>
  </resources>
  <connections>
   <connection>

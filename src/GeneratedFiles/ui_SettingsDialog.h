@@ -244,7 +244,6 @@ public:
     {
         if (SettingsDialog->objectName().isEmpty())
             SettingsDialog->setObjectName(QString::fromUtf8("SettingsDialog"));
-        SettingsDialog->setWindowModality(Qt::WindowModal);
         SettingsDialog->resize(793, 360);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);

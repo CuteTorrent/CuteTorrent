@@ -144,9 +144,6 @@
     <ClCompile Include="core\application.cpp">
       <Filter>Helper</Filter>
     </ClCompile>
-    <ClCompile Include="core\DT_mounter.cpp">
-      <Filter>Helper</Filter>
-    </ClCompile>
     <ClCompile Include="core\FaviconDownloader.cpp">
       <Filter>Service</Filter>
     </ClCompile>
@@ -209,9 +206,6 @@
     </ClCompile>
     <ClCompile Include="scheduller\Scheduller.cpp">
       <Filter>Service</Filter>
-    </ClCompile>
-    <ClCompile Include="core\StaticHelpers.cpp">
-      <Filter>Helper</Filter>
     </ClCompile>
     <ClCompile Include="core\StyleEngene.cpp">
       <Filter>Service</Filter>
@@ -592,6 +586,15 @@
     <ClCompile Include="core\viewModel\itemDelegate\ProgressItemDelegate.cpp">
       <Filter>ViewModel\ItemDelegat</Filter>
     </ClCompile>
+    <ClCompile Include="core\helpers\DT_mounter.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="core\helpers\StaticHelpers.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="core\helpers\DiscMounter.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -608,9 +611,6 @@
     </CustomBuild>
     <ClInclude Include="rss\RssCommon.h">
       <Filter>Rss</Filter>
-    </ClInclude>
-    <ClInclude Include="core\DT_mounter.h">
-      <Filter>Helper</Filter>
     </ClInclude>
     <ClInclude Include="core\http\httpcookie.h">
       <Filter>WebBasic\HTTP</Filter>
@@ -799,11 +799,11 @@
     <CustomBuild Include="core\viewModel\itemDelegate\PriorityItemDelegate.h">
       <Filter>ViewModel\ItemDelegat</Filter>
     </CustomBuild>
+    <CustomBuild Include="Release\CuteTorrent.res">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="Release\CuteTorrent.res">
-      <Filter>Generated Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="webControll\CommandsApiController.h">
       <Filter>RemoteControl</Filter>
     </CustomBuild>
@@ -865,7 +865,9 @@
     <None Include="search\dataModels\SerachResult.h">
       <Filter>SearchEngine</Filter>
     </None>
-    <None Include="$(QTDIR)\translations\qt_ru.qm" />
+    <None Include="$(QTDIR)\translations\qt_ru.qm">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="VideoPlayer\MediaControls.ui">
@@ -928,9 +930,6 @@
     </ClInclude>
     <ClInclude Include="scheduller\SchedulerTask.h">
       <Filter>DataModels</Filter>
-    </ClInclude>
-    <ClInclude Include="core\StaticHelpers.h">
-      <Filter>Helper</Filter>
     </ClInclude>
     <ClInclude Include="core\TreeItem.h">
       <Filter>DataModels</Filter>
@@ -1013,6 +1012,15 @@
     </ClInclude>
     <ClInclude Include="core\viewModel\itemDelegate\ProgressItemDelegate.h">
       <Filter>ViewModel\ItemDelegat</Filter>
+    </ClInclude>
+    <ClInclude Include="core\helpers\DT_mounter.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="core\helpers\StaticHelpers.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="core\helpers\DiscMounter.h">
+      <Filter>Helper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

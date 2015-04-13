@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MediaControls</class>
  <widget class="QWidget" name="MediaControls">
@@ -44,7 +44,7 @@ border-color:&quot;transparent&quot;</string>
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../ltorrent.qrc">
+    <iconset resource="../Resources/ltorrent.qrc">
      <normaloff>:/PlayerControlImages/RateButtonReverse.png</normaloff>:/PlayerControlImages/RateButtonReverse.png</iconset>
    </property>
    <property name="flat">
@@ -68,7 +68,7 @@ border-color:&quot;transparent&quot;</string>
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../ltorrent.qrc">
+    <iconset resource="../Resources/ltorrent.qrc">
      <normaloff>:/PlayerControlImages/FileButton.png</normaloff>:/PlayerControlImages/FileButton.png</iconset>
    </property>
    <property name="flat">
@@ -92,7 +92,7 @@ border-color:&quot;transparent&quot;</string>
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../ltorrent.qrc">
+    <iconset resource="../Resources/ltorrent.qrc">
      <normaloff>:/PlayerControlImages/PlayButton.png</normaloff>:/PlayerControlImages/PlayButton.png</iconset>
    </property>
    <property name="flat">
@@ -116,7 +116,7 @@ border-color:&quot;transparent&quot;</string>
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../ltorrent.qrc">
+    <iconset resource="../Resources/ltorrent.qrc">
      <normaloff>:/PlayerControlImages/FullscreenButton.png</normaloff>:/PlayerControlImages/FullscreenButton.png</iconset>
    </property>
    <property name="flat">
@@ -140,7 +140,7 @@ border-color:&quot;transparent&quot;</string>
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../ltorrent.qrc">
+    <iconset resource="../Resources/ltorrent.qrc">
      <normaloff>:/PlayerControlImages/PauseButton.png</normaloff>:/PlayerControlImages/PauseButton.png</iconset>
    </property>
    <property name="flat">
@@ -164,7 +164,7 @@ border-color:&quot;transparent&quot;</string>
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../ltorrent.qrc">
+    <iconset resource="../Resources/ltorrent.qrc">
      <normaloff>:/PlayerControlImages/UrlButton.png</normaloff>:/PlayerControlImages/UrlButton.png</iconset>
    </property>
    <property name="flat">
@@ -188,7 +188,7 @@ border-color:&quot;transparent&quot;</string>
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../ltorrent.qrc">
+    <iconset resource="../Resources/ltorrent.qrc">
      <normaloff>:/PlayerControlImages/RateButtonForward.png</normaloff>:/PlayerControlImages/RateButtonForward.png</iconset>
    </property>
    <property name="flat">
@@ -491,7 +491,7 @@ border-color:&quot;transparent&quot;</string>
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../ltorrent.qrc"/>
+  <include location="../Resources/ltorrent.qrc"/>
  </resources>
  <connections/>
  <slots>

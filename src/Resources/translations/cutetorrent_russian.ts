@@ -2986,6 +2986,26 @@ p, li { white-space: pre-wrap; }
         <source>-</source>
         <translation></translation>
     </message>
+    <message>
+        <source>ACTION_RSSLIST_MARK_ALL_READ</source>
+        <translation>Отметить все как прочитанные</translation>
+    </message>
+    <message>
+        <source>ACTION_RSSLIST_MARK_ALL_UNREAD</source>
+        <translation>Отметить все как непрочитанные</translation>
+    </message>
+    <message>
+        <source>ACTION_RSSLIST_MARK_READ</source>
+        <translation type="obsolete">Отметить как прочитанные</translation>
+    </message>
+    <message>
+        <source>ACTION_RSSLIST_MARK_UNREAD</source>
+        <translation>Отметить как непрочитанные</translation>
+    </message>
+    <message>
+        <source>ACTION_RSSLIST_MARK_AS_READ</source>
+        <translation>Отметить как прочитанные</translation>
+    </message>
 </context>
 <context>
     <name>Torrent</name>

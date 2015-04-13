@@ -70,7 +70,7 @@ class SearchResult;
 Q_DECLARE_METATYPE(QList<int>)
 
 CuteTorrent::CuteTorrent(QWidget* parent)
-	: BaseWindow(FullTitle, AllowResize), m_pPieceView(nullptr)
+	: BaseWindow(FullTitle, AllowResize, parent), m_pPieceView(nullptr)
 {
 	m_pSettings = QApplicationSettings::getInstance();
 	Application::setLanguage(m_pSettings->valueString("System", "Lang", "ru_RU"));

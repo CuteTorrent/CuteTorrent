@@ -2,9 +2,6 @@
 <ui version="4.0">
  <class>CustomWindow</class>
  <widget class="QWidget" name="CustomWindow">
-  <property name="windowModality">
-   <enum>Qt::NonModal</enum>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -83,7 +80,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="../ltorrent.qrc">:/icons/app.ico</pixmap>
+         <pixmap resource="../../../Resources/ltorrent.qrc">:/icons/app.ico</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1043,7 +1040,8 @@
   <tabstop>pbClose</tabstop>
  </tabstops>
  <resources>
-  <include location="../ltorrent.qrc"/>
+  <include location="../../../Resources/ltorrent.qrc"/>
+  <include location="../../../Resources/ltorrent.qrc"/>
  </resources>
  <connections>
   <connection>

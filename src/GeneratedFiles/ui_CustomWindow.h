@@ -124,7 +124,6 @@ public:
     {
         if (CustomWindow->objectName().isEmpty())
             CustomWindow->setObjectName(QString::fromUtf8("CustomWindow"));
-        CustomWindow->setWindowModality(Qt::NonModal);
         CustomWindow->resize(532, 620);
         CustomWindow->setMouseTracking(true);
         CustomWindow->setStyleSheet(QString::fromUtf8(""));

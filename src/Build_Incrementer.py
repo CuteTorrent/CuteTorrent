@@ -1,7 +1,7 @@
 import string
 
 # Open a file
-fo = open("Build_Increment.h", "r+")
+fo = open("core/Build_Increment.h", "r+")
 print "Name of the file: ", fo.name
 line = fo.readlines()
 build = 0;

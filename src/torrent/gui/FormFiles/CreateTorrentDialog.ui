@@ -29,7 +29,7 @@
    <string>DIALOG_TORRENT_CREATION</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="ltorrent.qrc">
+   <iconset resource="../../../Resources/ltorrent.qrc">
     <normaloff>:/icons/app.ico</normaloff>:/icons/app.ico</iconset>
   </property>
   <property name="styleSheet">
@@ -96,7 +96,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="ltorrent.qrc">:/icons/app.ico</pixmap>
+         <pixmap resource="../../../Resources/ltorrent.qrc">:/icons/app.ico</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -520,6 +520,7 @@ QProgressBar::chunk { background-color: #51D331; width: 20px; }</string>
   </action>
  </widget>
  <resources>
+  <include location="../../../Resources/ltorrent.qrc"/>
   <include location="ltorrent.qrc"/>
  </resources>
  <connections>

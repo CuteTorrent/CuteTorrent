@@ -85,7 +85,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtNetwork;$(QT_DIR)\include\QtGui;$(QT_DIR)\include\phonon;$(QT_DIR)\include;qtsingleapplication\src;..\ThirdParties\boost_1_55_0;..\ThirdParties\libtorrent\include;GeneratedFiles;GeneratedFiles\Release;$(QT_DIR)\include\phonon_compat;$(QT_DIR)\mkspecs\win32-msvc2010;core;Resources;rss;scheduller;search;torrent;tracker;VideoPlayer;webControll;core\datamodels;core\gui;core\http;core\qtsingleapplication;core\viewModel;core\datamodels\json;core\datamodels\SGML;core\gui\backupwizard;core\gui\Controls;core\gui\Dialogs;core\gui\FormFiles;core\qtsingleapplication\src;core\viewModel\itemDelegate;Resources\images;Resources\playerImages;Resources\translations;rss\core;rss\datamodels;rss\gui;rss\viewmodels;rss\gui\Dialogs;rss\gui\FormFiles;rss\viewmodels\ItemDelegate;search\core;search\dataModels;search\searchproviders;search\viewmodels;search\viewmodels\ItemDelegate;torrent\core;torrent\gui;torrent\viewmodels;torrent\gui\Controls;torrent\gui\Dialogs;torrent\gui\FormFiles;torrent\viewmodels\ItemDelegate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtNetwork;$(QT_DIR)\include\QtGui;$(QT_DIR)\include\phonon;$(QT_DIR)\include;qtsingleapplication\src;..\ThirdParties\boost_1_55_0;..\ThirdParties\libtorrent\include;GeneratedFiles;GeneratedFiles\Release;$(QT_DIR)\include\phonon_compat;$(QT_DIR)\mkspecs\win32-msvc2010;core;Resources;rss;scheduller;search;torrent;tracker;VideoPlayer;webControll;core\helpers;core\datamodels;core\gui;core\http;core\qtsingleapplication;core\viewModel;core\datamodels\json;core\datamodels\SGML;core\gui\backupwizard;core\gui\Controls;core\gui\Dialogs;core\gui\FormFiles;core\qtsingleapplication\src;core\viewModel\itemDelegate;Resources\images;Resources\playerImages;Resources\translations;rss\core;rss\datamodels;rss\gui;rss\viewmodels;rss\gui\Dialogs;rss\gui\FormFiles;rss\viewmodels\ItemDelegate;search\core;search\dataModels;search\searchproviders;search\viewmodels;search\viewmodels\ItemDelegate;torrent\core;torrent\gui;torrent\viewmodels;torrent\gui\Controls;torrent\gui\Dialogs;torrent\gui\FormFiles;torrent\viewmodels\ItemDelegate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>Release\</AssemblerListingLocation>
       <ObjectFileName>Release\</ObjectFileName>
@@ -245,6 +245,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\helpers\DiscMounter.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_ISerachProvider.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_KickassSearchProvider.cpp" />
     <ClCompile Include="rss\gui\Dialogs\AddRssDwonloadRuleDialog.cpp" />
@@ -330,7 +331,7 @@
     <ClCompile Include="webControll\CommandsApiController.cpp" />
     <ClCompile Include="torrent\gui\Dialogs\CreateTorrentDialog.cpp" />
     <ClCompile Include="core\gui\Dialogs\CuteTorrentMainWindow.cpp" />
-    <ClCompile Include="core\DT_mounter.cpp" />
+    <ClCompile Include="core\helpers\DT_mounter.cpp" />
     <ClCompile Include="core\viewModel\itemDelegate\FileSizeItemDelegate.cpp" />
     <ClCompile Include="core\viewModel\FileTreeModel.cpp" />
     <ClCompile Include="core\viewModel\FileViewModel.cpp" />
@@ -352,7 +353,7 @@
     <ClCompile Include="scheduller\Scheduller.cpp" />
     <ClCompile Include="webControll\SettingsAPiController.cpp" />
     <ClCompile Include="core\gui\Dialogs\SettingsDialog.cpp" />
-    <ClCompile Include="core\StaticHelpers.cpp" />
+    <ClCompile Include="core\helpers\StaticHelpers.cpp" />
     <ClCompile Include="core\StyleEngene.cpp" />
     <ClCompile Include="torrent\core\Torrent.cpp" />
     <ClCompile Include="webControll\TorrentApiController.cpp" />
@@ -706,6 +707,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </AdditionalInputs>
     </CustomBuild>
+    <ClInclude Include="core\helpers\DiscMounter.h" />
     <ClInclude Include="GeneratedFiles\ui_AddDownloadRuleDialog.h" />
     <ClInclude Include="GeneratedFiles\ui_RssFeedSettingsDialog.h" />
     <CustomBuild Include="torrent\viewmodels\QTorrentFilterProxyModel.h">
@@ -944,7 +946,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\Release\moc_CuteTorrent.cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\Release\moc_CuteTorrent.cpp;%(Outputs).\GeneratedFiles\Release\moc_CuteTorrent.cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <ClInclude Include="core\DT_mounter.h" />
+    <ClInclude Include="core\helpers\DT_mounter.h" />
     <ClInclude Include="core\viewModel\itemDelegate\FileSizeItemDelegate.h" />
     <CustomBuild Include="core\viewModel\FileTreeModel.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;FileTreeModel.h;</AdditionalInputs>
@@ -1235,7 +1237,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\Release\moc_SettingsDialog.cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\Release\moc_SettingsDialog.cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <ClInclude Include="core\StaticHelpers.h" />
+    <ClInclude Include="core\helpers\StaticHelpers.h" />
     <CustomBuild Include="core\StyleEngene.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;StyleEngene.h;</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;StyleEngene.h;</AdditionalInputs>
@@ -1866,12 +1868,12 @@
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">lrelease english</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cutetorrent_english.qm</Outputs>
       <SubType>Designer</SubType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\lupdate.exe -recursive $(ProjectDir) -ts $(ProjectDir)cutetorrent_english.ts
-$(QTDIR)\bin\lrelease.exe -compress $(ProjectDir)cutetorrent_english.ts -qm $(ProjectDir)cutetorrent_english.qm
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\lupdate.exe -recursive $(ProjectDir) -ts %(Identity)
+$(QTDIR)\bin\lrelease.exe -compress %(Identity) -qm %(RelativeDir)%(Filename).qm
 </Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">lupdate english.ts</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)cutetorrent_english.qm</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\lupdate.exe;$(ProjectDir)cutetorrent_english.ts</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RelativeDir)%(Filename).qm</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\lupdate.exe;%(Identity)</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -1897,12 +1899,11 @@ $(QTDIR)\bin\lrelease.exe -compress $(ProjectDir)cutetorrent_english.ts -qm $(Pr
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">lrelease russian</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cutetorrent_russian.qm</Outputs>
       <SubType>Designer</SubType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\lupdate.exe -recursive $(ProjectDir) -ts $(ProjectDir)cutetorrent_russian.ts
-$(QTDIR)\bin\lrelease.exe -compress $(ProjectDir)cutetorrent_russian.ts -qm $(ProjectDir)cutetorrent_russian.qm
-</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\lupdate.exe -recursive $(ProjectDir) -ts %(Identity)
+$(QTDIR)\bin\lrelease.exe -compress %(Identity) -qm %(RelativeDir)%(Filename).qm</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">lupdate russian</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)cutetorrent_russian.qm</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\lupdate.exe;$(ProjectDir)cutetorrent_russian.ts</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RelativeDir)%(Filename).qm</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\lupdate.exe;%(Identity)</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -2095,7 +2096,7 @@ $(QTDIR)\bin\lrelease.exe -compress $(ProjectDir)cutetorrent_russian.ts -qm $(Pr
     <None Include="Resources\images\loader.gif" />
     <CustomBuild Include="Resources\ltorrent.qrc">
       <FileType>Document</FileType>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\rcc.exe;Resources\app.ico;Resources\images\loader.gif;Resources\playerImages\ControlBar.png;Resources\playerImages\FileButton.png;Resources\playerImages\FullscreenButton.png;Resources\playerImages\PauseButton.png;Resources\playerImages\PlayButton.png;Resources\playerImages\RateButtonForward.png;Resources\playerImages\RateButtonReverse.png;Resources\playerImages\UrlButton.png;Resources\playerImages\pattern.png;$(QTDIR)\translations\qt_ru.qm;cutetorrent_english.qm;cutetorrent_russian.qm;ltorrent.qrc;</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\rcc.exe;Resources\app.ico;Resources\images\loader.gif;Resources\playerImages\ControlBar.png;Resources\playerImages\FileButton.png;Resources\playerImages\FullscreenButton.png;Resources\playerImages\PauseButton.png;Resources\playerImages\PlayButton.png;Resources\playerImages\RateButtonForward.png;Resources\playerImages\RateButtonReverse.png;Resources\playerImages\UrlButton.png;Resources\playerImages\pattern.png;$(QTDIR)\translations\qt_ru.qm;Resources\translations\cutetorrent_english.qm;Resources\translations\cutetorrent_russian.qm;Resources\ltorrent.qrc</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\rcc.exe;Resources\app.ico;Resources\images\loader.gif;Resources\playerImages\ControlBar.png;Resources\playerImages\FileButton.png;Resources\playerImages\FullscreenButton.png;Resources\playerImages\PauseButton.png;Resources\playerImages\PlayButton.png;Resources\playerImages\RateButtonForward.png;Resources\playerImages\RateButtonReverse.png;Resources\playerImages\UrlButton.png;Resources\playerImages\pattern.png;$(QTDIR)\translations\qt_ru.qm;cutetorrent_english.qm;cutetorrent_russian.qm;ltorrent.qrc;</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\rcc.exe -name ltorrent %(Identity) -o GeneratedFiles\qrc_ltorrent.cpp</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\rcc.exe -name ltorrent ltorrent.qrc -o GeneratedFiles\qrc_ltorrent.cpp</Command>
