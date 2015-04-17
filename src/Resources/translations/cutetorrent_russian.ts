@@ -872,6 +872,17 @@ Download: %3</source>
     </message>
 </context>
 <context>
+    <name>DateTime</name>
+    <message>
+        <source>%1 WEEK </source>
+        <translation>%1 Недель </translation>
+    </message>
+    <message>
+        <source>%1 DAY </source>
+        <translation>%1 дней </translation>
+    </message>
+</context>
+<context>
     <name>ErrorMsg</name>
     <message>
         <source>no error</source>
@@ -1023,7 +1034,7 @@ Download: %3</source>
     </message>
     <message>
         <source>upload to upload connection</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>uninteresting upload-only peer</source>
@@ -1039,7 +1050,7 @@ Download: %3</source>
     </message>
     <message>
         <source>&apos;have&apos;-message with higher index than the number of pieces</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>bitfield of invalid size</source>
@@ -1047,435 +1058,603 @@ Download: %3</source>
     </message>
     <message>
         <source>too many piece requests while choked</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid piece packet</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>out of memory</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>torrent aborted</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>connected to ourselves</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid piece size</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>timed out: no interest</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>timed out: inactivity</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>timed out: no handshake</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>timed out: no request</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid choke message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid unchoke message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid interested message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid not-interested message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid request message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid hash list</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid hash piece message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid cancel message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid dht-port message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid suggest piece message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid have-all message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid have-none message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid reject message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid allow-fast message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid extended message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sync hash not found</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>unable to verify encryption constant</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>plaintext mode not provided</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>rc4 mode not provided</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>unsupported encryption mode</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>peer selected unsupported encryption mode</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>invalid encryption pad size</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>invalid encryption handshake</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>incoming encrypted connections disabled</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>incoming regular connections disabled</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>duplicate peer-id</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>torrent removed</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>packet too large</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>HTTP error</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>missing location header</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>invalid redirection</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>redirecting</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid HTTP range</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>missing content-length</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>banned by IP filter</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>too many connections</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>peer banned</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>stopping torrent</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>too many corrupt pieces</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>torrent is not ready to accept peers</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>peer is not properly constructed</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>optimistic disconnect</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>torrent finished</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>no router found</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>metadata too large</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid metadata request</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>invalid metadata size</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>invalid metadata offset</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>invalid metadata message</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>pex message too large</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid pex message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid lt_tracker message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pex messages sent too frequent (possible attack)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>torrent has no metadata</source>
-        <translation></translation>
+        <translation type="unfinished">\</translation>
     </message>
     <message>
         <source>invalid dont-have message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SSL connection required</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid SSL certificate</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>not an SSL torrent</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>unsupported protocol version</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>not authorized to create port map (enable NAT-PMP on your router)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>network failure</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>out of resources</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>unsupported opcode</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>missing or invalid &apos;file sizes&apos; entry</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>no files in resume data</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>missing &apos;slots&apos; and &apos;pieces&apos; entry</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>mismatching number of files</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>mismatching file size</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>mismatching file timestamp</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>not a dictionary</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid &apos;blocks per piece&apos; entry</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>missing slots list</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>file has more slots than torrent</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid entry type in slot list</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid piece index in slot list</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pieces needs to be reordered</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid HTTP header</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>missing Location header in HTTP redirect</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>failed to decompress HTTP response</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>no i2p router is set up</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>scrape not available on tracker</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid tracker response</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid peer dictionary entry</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>tracker sent a failure message</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>missing or invalid &apos;files&apos; entry</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>missing or invalid &apos;hash&apos; entry</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>missing or invalid &apos;peers&apos; and &apos;peers6&apos; entry</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>udp tracker response packet has invalid size</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid transaction id in udp tracker response</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid action field in udp tracker response</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>expected string in bencoded string</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>expected colon in bencoded string</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>unexpected end of file in bencoded string</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>expected value (list, dict, int or string) in bencoded string</source>
-        <translation>Торрент файл испорчен: ожидалось значение (list, dict, int or string) в bencoded строке</translation>
+        <translation type="unfinished">Торрент файл испорчен: ожидалось значение (list, dict, int or string) в bencoded строке</translation>
     </message>
     <message>
         <source>bencoded nesting depth exceeded</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>bencoded item count limit exceeded</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>integer overflow</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>invalid gzip header</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>inflated data too large</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>available inflate data did not terminate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>output space exhausted before completing inflate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>invalid block type (type == 3)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>stored block length did not match one&apos;s complement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dynamic block code description: too many length or distance codes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dynamic block code description: code lengths codes incomplete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dynamic block code description: repeat lengths with no first length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dynamic block code description: repeat more than specified lengths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dynamic block code description: invalid literal/length code lengths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dynamic block code description: invalid distance code lengths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>invalid literal/length or distance code in fixed or dynamic block</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>distance is too far back in fixed or dynamic block</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown gzip error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cannot reach peer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>i2p error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>invalid key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>invalid id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>timeout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>key not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>duplicated id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SOCKS no error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SOCKS unsupported version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SOCKS unsupported authentication method</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SOCKS unsupported authentication version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SOCKS authentication error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SOCKS username required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SOCKS general failure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SOCKS command not supported</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SOCKS no identd running</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SOCKS identd could not identify username</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid Arguments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Action Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The specified value does not exist in the array</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The source IP address cannot be wild-carded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The external port cannot be wild-carded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The port mapping entry specified conflicts with a mapping assigned previously to another client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal and External port values must be the same</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The NAT implementation only supports permanent lease times on port mappings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RemoteHost must be a wildcard and cannot be a specific IP address or DNS name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ExternalPort must be a wildcard and cannot be a specific port </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1674,11 +1853,11 @@ Download: %3</source>
     <name>QObject</name>
     <message>
         <source>%1 WEEK </source>
-        <translation>%1 Недель</translation>
+        <translation type="obsolete">%1 Недель</translation>
     </message>
     <message>
         <source>%1 DAY </source>
-        <translation>%1 дней </translation>
+        <translation type="obsolete">%1 дней </translation>
     </message>
     <message>
         <source>ERROR_OPENING_FILE
@@ -1951,6 +2130,34 @@ Download: %3</source>
     <message>
         <source>CONTAINTAINS_IN_TIITLE_OR_DESC</source>
         <translation type="obsolete">В заголовке или описании</translation>
+    </message>
+    <message>
+        <source>COOKIES</source>
+        <translation>Кукисы</translation>
+    </message>
+    <message>
+        <source>REMOVE_ROW</source>
+        <translation>Убрать строку</translation>
+    </message>
+    <message>
+        <source>ADD_ROW</source>
+        <translation>Добавить строку</translation>
+    </message>
+    <message utf8="true">
+        <source>Новая строка</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>COOKIE_ATTRIBUTE</source>
+        <translation>Атрибут</translation>
+    </message>
+    <message>
+        <source>COOLIE_VALUE</source>
+        <translation>Значение</translation>
+    </message>
+    <message>
+        <source>COOKIE_HINT</source>
+        <translation>Чаще всего используются следующие атрибуты: uid и pass</translation>
     </message>
 </context>
 <context>

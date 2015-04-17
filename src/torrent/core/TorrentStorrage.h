@@ -1,14 +1,9 @@
 ﻿#pragma once
-#include <QObject>
 #include "Torrent.h"
-#include <QHash>
-#include <QString>
-#include <QMutex>
-#include <QTimer>
+#include <collections/ObservableList.h>
 class Torrent;
 #include "defs.h"
-class TorrentStorrage : public QObject,
-	public QList<Torrent*>
+class TorrentStorrage : public ObservableList<Torrent*>
 {
 	Q_OBJECT
 
@@ -16,7 +11,7 @@ public:
 	static TorrentStorrage* getInstance();
 	static void freeInstance();
 	void append(Torrent*);
-	void remove(Torrent*);
+	void remove(Torrent* torrent);
 	void remove(QString);
 	void sort();
 	bool hasTorrent(Torrent*);
@@ -25,7 +20,7 @@ public:
 	void clear();
 	Torrent* operator [](QString index);
 protected:
-	TorrentStorrage(QObject* parrent = NULL);
+	TorrentStorrage(QObject* parrent = nullptr);
 	~TorrentStorrage(void);
 private:
 	static TorrentStorrage* m_pInstance;

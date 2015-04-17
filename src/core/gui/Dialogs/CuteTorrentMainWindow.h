@@ -159,7 +159,7 @@ private:
 	void switchToTorrentsModel();
 	void switchToSearchModel();
 	void switchToRssModel();
-	void resizeWindow(QMouseEvent* e);
+	void resizeWindow(QMouseEvent* e) override;
 	void saveWindowState();
 	virtual QPushButton* getMinBtn() override;
 	virtual QPushButton* getMaxBtn() override;

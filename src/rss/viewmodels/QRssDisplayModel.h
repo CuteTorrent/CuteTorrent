@@ -10,8 +10,8 @@ class QRssDisplayModel : public QAbstractItemModel
 {
 	Q_OBJECT
 public:
-	enum Role { RssFeedRole = Qt::UserRole, RssFeedItemRole = Qt::UserRole + 1 };
-	QRssDisplayModel(QTreeView* pItemsView, QObject* parrent = NULL, bool autoUpdate = true);
+	enum Role { RssFeedRole = Qt::UserRole, RssItemRole = Qt::UserRole + 1 };
+	QRssDisplayModel(QTreeView* pItemsView, QObject* parrent = nullptr, bool autoUpdate = true);
 	~QRssDisplayModel();
 	int columnCount(const QModelIndex& parent = QModelIndex()) const override;
 	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
@@ -20,10 +20,9 @@ public:
 	QModelIndex parent(const QModelIndex& child) const override;
 	QList<RssFeed*> SelectedFeeds();
 	RssFeed* SelectedFeed();
-	RssItem* SelectedFeedItem();
+	RssItem* SelectedRssItem();
 	void retranslate();
 private slots:
-	void UpdateModel();
 	void UpdateVisibleData();
 	void onItemDownload();
 	void onItemOpenDesc();
@@ -33,6 +32,7 @@ private slots:
 	void onMarkRead();
 	void onMarkUnread();
 public slots:
+	void UpdateModel();
 	void contextualMenu(const QPoint&);
 	void onFeedUpdate();
 	void onFeedRename();

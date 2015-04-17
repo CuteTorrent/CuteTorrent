@@ -6,7 +6,6 @@
 #include <QUuid>
 #include <QRunnable>
 #include <QQueue>
-#include <boost/weak_ptr.hpp>
 #include "RssCommon.h"
 #include "RssDownloadRule.h"
 #include "ServiceCommon.h"

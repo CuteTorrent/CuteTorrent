@@ -39,15 +39,21 @@ class StaticHelpers
 {
 private:
 	static NetworkDiskCache* m_pDiskCache;
+	static QString translateSessionError(error_code const& errorCode);
+	static QString translateBEncodeError(error_code const& ec);
+	static QString translateGzipError(error_code const& ec);
+	static QString translateI2PError(error_code const& ec);
+	static QString translateSocksError(error_code const& ec);
+	static QString translateUpnpError(error_code const& ec);
+	static QString translateError(error_code const& ec, char* msgs[], int msgs_len);
 public:
-
-	static QString toKbMbGb(libtorrent::size_type size);
-	static QString translateLibTorrentError(boost::system::error_code const& ec);
+	static QString toKbMbGb(size_type size);
+	static QString translateLibTorrentError(error_code const& ec);
 	static void dellDir(QString path);
 	static QString toTimeString(int seconds);
 	static QString filePriorityToString(int priority);
 	static QString SchedulerTypeToString(SchedulerTask::TaskType type);
-	static QString GetBaseSuffix(const libtorrent::file_storage& storrage);
+	static QString GetBaseSuffix(const file_storage& storrage);
 	static QString CombinePathes(QString path, QString suffix);
 	static NetworkDiskCache* GetGLobalWebCache();
 	template <typename T> static QList<T> reversed(const QList<T>& in);

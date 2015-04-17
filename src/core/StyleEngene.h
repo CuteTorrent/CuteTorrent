@@ -34,6 +34,7 @@ public:
 	QIcon getIcon(QString name);
 private:
 	void init();
+	void initFileSuffixes();
 	void initIcons();
 	void loadStyleInfo(QString path);
 	void loadStyleSheet(QString path);

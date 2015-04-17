@@ -4,6 +4,8 @@
 #include <Qurl>
 #include <QTime>
 #include <QMetaType>
+#include "../../../../../Qt/4.8.6/src/network/access/qnetworkcookie.h"
+#include <helpers/DT_mounter.h>
 class RssParser;
 class QNetworkAccessManager;
 class NetworkDiskCache;
@@ -29,7 +31,9 @@ class RssFeed : public QObject
 	bool m_isUpdating;
 	QList<RssItem*> m_rssItemsByDate;
 	QHash<QString, RssItem*> m_rssItems;
+	QHash<QString, QString> m_coookies;
 	int m_ttl, m_unreadCount, m_customTtl;
+	QList<QNetworkCookie> buildCookies() const;
 signals:
 	void FeedChanged(QUuid);
 public:
@@ -37,6 +41,8 @@ public:
 	void UpdateUnreadCount();
 	QString displayName(bool noUnreadCount = false);
 	void setDisplayName(QString value);
+	QList<QNetworkCookie> coookies() const;
+	void setCoookies(const QHash<QString, QString>& coookiesValue);
 	QUrl url();
 	QUuid uid();
 	QString title();

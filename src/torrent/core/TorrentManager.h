@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "libtorrent/error_code.hpp"
 #include "libtorrent/session_settings.hpp"
 #include "libtorrent/torrent_handle.hpp"
-
+#include <libtorrent/session_settings.hpp>
 #pragma warning (disable: 4005)
 #pragma warning (disable: 4100)
 #pragma warning (disable: 4267)
@@ -97,7 +97,7 @@ private:
 	void handle_alert(alert*);
 	void writeSettings();
 	TorrentStorrage* m_pTorrentStorrage;
-	libtorrent::session* m_pTorrentSession;
+	session* m_pTorrentSession;
 	QApplicationSettings* m_pTorrentSessionSettings;
 	int save_file(std::string const& filename, std::vector<char>& v);
 	QString DTInstallPath;
@@ -105,7 +105,7 @@ private:
 	int listen_port;
 	QString ipFilterFileName;
 	bool useProxy;
-	libtorrent::proxy_settings ps;
+	proxy_settings ps;
 	NotificationSystemPtr m_pNotificationSys;
 
 
@@ -113,10 +113,10 @@ public:
 	void SaveSession();
 	void RefreshExternalPeerSettings();
 	void InitSession();
-	libtorrent::session_settings readSettings();
-	libtorrent::pe_settings readEncSettings();
-	void updateEncSettings(const libtorrent::pe_settings& settings);
-	void updateSettings(const libtorrent::session_settings& settings);
+	session_settings readSettings();
+	pe_settings readEncSettings();
+	void updateEncSettings(const pe_settings& settings);
+	void updateSettings(const session_settings& settings);
 	QString GetSessionDownloadSpeed();
 	QString GetSessionUploadSpeed();
 	QString GetSessionDownloaded();

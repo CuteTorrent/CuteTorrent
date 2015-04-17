@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>393</width>
-    <height>130</height>
+    <width>382</width>
+    <height>246</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -150,10 +150,24 @@
    <item>
     <widget class="QWidget" name="m_centralWidget" native="true">
      <layout class="QGridLayout" name="gridLayout">
-      <item row="3" column="0" colspan="3">
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>RSS_REFRASH_RATE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="3">
        <widget class="QDialogButtonBox" name="buttonBox">
         <property name="standardButtons">
          <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="2">
+       <widget class="QLineEdit" name="m_pRssUrlEdit">
+        <property name="readOnly">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -164,20 +178,6 @@
         </property>
         <property name="maximum">
          <number>300</number>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>RSS_URL</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>RSS_REFRASH_RATE</string>
         </property>
        </widget>
       </item>
@@ -194,11 +194,88 @@
         </property>
        </spacer>
       </item>
-      <item row="0" column="1" colspan="2">
-       <widget class="QLineEdit" name="m_pRssUrlEdit">
-        <property name="readOnly">
-         <bool>true</bool>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>RSS_URL</string>
         </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="3">
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>COOKIES</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="1" column="1">
+          <widget class="QPushButton" name="removeRowButton">
+           <property name="text">
+            <string>REMOVE_ROW</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="addRowButton">
+           <property name="text">
+            <string>ADD_ROW</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" rowspan="3">
+          <widget class="QTableWidget" name="m_pCoociesTabWidget">
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <property name="columnCount">
+            <number>2</number>
+           </property>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderDefaultSectionSize">
+            <number>19</number>
+           </attribute>
+           <row>
+            <property name="text">
+             <string>Новая строка</string>
+            </property>
+           </row>
+           <column>
+            <property name="text">
+             <string>COOKIE_ATTRIBUTE</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>COOLIE_VALUE</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>COOKIE_HINT</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1" rowspan="2">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
@@ -213,6 +290,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
+  <include location="../../../Resources/ltorrent.qrc"/>
   <include location="../../../Resources/ltorrent.qrc"/>
   <include location="../../../Resources/ltorrent.qrc"/>
  </resources>
@@ -249,8 +327,41 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>addRowButton</sender>
+   <signal>clicked()</signal>
+   <receiver>RssSettings</receiver>
+   <slot>onAddRow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>321</x>
+     <y>119</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>190</x>
+     <y>122</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>removeRowButton</sender>
+   <signal>clicked()</signal>
+   <receiver>RssSettings</receiver>
+   <slot>onRemoveRow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>321</x>
+     <y>148</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>190</x>
+     <y>122</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
-  <slot>MountSelectedFILE()</slot>
+  <slot>onAddRow()</slot>
+  <slot>onRemoveRow()</slot>
  </slots>
 </ui>

@@ -28,9 +28,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPainter>
 #include <QPixmap>
 #include <QPixmapCache>
+#include <QSize>
+#include <QStyle>
+#include <QString>
 #include <QStyleOptionProgressBarV2>
 #include "QTorrentDisplayModel.h"
-#include "Torrent.h"
 #include <QDebug>
 
 
@@ -46,19 +48,11 @@ QTorrentItemDelegat::QTorrentItemDelegat(const QTorrentItemDelegat& dlg) : QStyl
 	myProgressBarStyle->setMinimum(0);
 	myProgressBarStyle->setMaximum(100);
 	myProgressBarStyle->setTextVisible(false);
-	greenBrush = dlg.greenBrush;
-	greenBack = dlg.greenBack;
-	blueBrush = dlg.blueBrush;
-	blueBack = dlg.blueBack;
+	
 }
 
 QTorrentItemDelegat::QTorrentItemDelegat() : QStyledItemDelegate(0) , myProgressBarStyle(new QProgressBar()) {}
 
-QColor QTorrentItemDelegat::greenBrush = QColor(81, 211, 49);
-QColor QTorrentItemDelegat ::greenBack = QColor("darkseagreen");
-
-QColor QTorrentItemDelegat ::blueBrush = QColor("steelblue");
-QColor QTorrentItemDelegat ::blueBack = QColor("lightgrey");
 
 QTorrentItemDelegat::QTorrentItemDelegat(QObject* parent) :
 	QStyledItemDelegate(parent),

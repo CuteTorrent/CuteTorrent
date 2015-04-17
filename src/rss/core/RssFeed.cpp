@@ -3,6 +3,7 @@
 #include "RssParser.h"
 #include <QNetworkAccessManager>
 #include <QNetworkDiskCache>
+#include <QNetworkCookie>
 #include <QNetworkReply>
 #include "StaticHelpers.h"
 #include "RssItem.h"
@@ -136,8 +137,24 @@ void RssFeed::Update()
 {
 	m_elapsedTime.restart();
 	QNetworkRequest request(m_url);
+	QList<QNetworkCookie> cookies = buildCookies();
+	m_pNetManager->cookieJar()->setCookiesFromUrl(cookies, m_url);
 	m_pNetManager->get(request);
 	m_isUpdating = true;
+}
+
+QList<QNetworkCookie> RssFeed::buildCookies() const
+{
+	QList<QNetworkCookie> res;
+	if (m_coookies.size() > 0)
+	{
+		for (QHash<QString, QString>::const_iterator i = m_coookies.constBegin(); i != m_coookies.constEnd(); ++i)
+		{
+			res << QNetworkCookie(i.key().toUtf8(), i.value().toUtf8());
+		}
+	}
+	
+	return res;
 }
 
 int RssFeed::next_update()
@@ -216,6 +233,16 @@ void RssFeed::setDisplayName(QString value)
 	m_customDisplayName = value;
 }
 
+QList<QNetworkCookie> RssFeed::coookies() const
+{
+	return buildCookies();
+}
+
+void RssFeed::setCoookies(const QHash<QString, QString>& coookiesValue)
+{
+	m_coookies = coookiesValue;
+}
+
 QString RssFeed::error() const
 {
 	return m_errorString;
@@ -241,6 +268,7 @@ QDataStream& operator<<(QDataStream& stream, const RssFeed& any)
 	stream << any.m_customDisplayName;
 	stream << any.m_link;
 	stream << any.m_customTtl;
+	stream << any.m_coookies;
 	int size = any.m_rssItems.size();
 	stream << size;
 	for (int i = 0; i < size; i++)
@@ -259,13 +287,14 @@ QDataStream& operator>>(QDataStream& stream, RssFeed& any)
 	stream >> any.m_customDisplayName;
 	stream >> any.m_link;
 	stream >> any.m_customTtl;
+	stream >> any.m_coookies;
 	int size;
 	stream >> size;
 	any.m_rssItems.reserve(size);
 	any.m_rssItemsByDate.reserve(size);
 	for (int i = 0; i < size; i++)
 	{
-		RssItem* pItem = new RssItem();
+		RssItem* pItem = new RssItem(&any);
 		stream >> *pItem;
 		any.m_rssItems.insert(pItem->guid(),pItem);
 	}

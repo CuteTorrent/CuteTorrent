@@ -29,7 +29,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTreeWidgetItem>
 #include <QUrl>
 #include <QtNetwork/QHostAddress>
-
 #include "CreateTorrentDialog.h"
 #include "CuteTorrentMainWindow.h"
 #include "OpenTorrentDialog.h"
@@ -63,6 +62,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "NotificationSystem.h"
 #include <libtorrent/peer_info.hpp>
 #include "RssItem.h"
+
 class Application;
 class ISerachProvider;
 class SearchResult;
@@ -1768,7 +1768,7 @@ void CuteTorrent::UpdateRssInfo(const QItemSelection& selection)
 		return;
 	}
 
-	RssItem* currentItem = m_pRssDisplayModel->SelectedFeedItem();
+	RssItem* currentItem = m_pRssDisplayModel->SelectedRssItem();
 	if (currentItem != nullptr)
 	{
 		m_pFeedItemDescribtionEdit->setHtml(currentItem->description());

@@ -57,7 +57,7 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 QPixmap CustomMessageBox::standardIcon(QMessageBox::Icon icon)
 {
 	QStyle *style = this->style();
-	int iconSize = style->pixelMetric(QStyle::PM_LargeIconSize, nullptr, this);
+	int iconSize = style->pixelMetric(QStyle::PM_MessageBoxIconSize, nullptr, this);
 	QIcon tmpIcon;
 
 	switch(icon)

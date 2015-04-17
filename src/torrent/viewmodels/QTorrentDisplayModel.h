@@ -42,7 +42,6 @@ class QTorrentFilterProxyModel;
 class QTorrentDisplayModel: public QAbstractListModel
 {
 	Q_OBJECT
-private:
 	TorrentStorrage* m_pTorrentStorrage;
 	int auto_id;
 	QTreeView* m_pTorrentListView;
@@ -72,17 +71,13 @@ public:
 	              rehash, change_group
 	            };
 	void ActionOnSelectedItem(action wtf);
-	//void ChangeData(int row);
-	QTorrentDisplayModel(QObject* parrent = NULL);
-	//int hasTorrent(const QString & InfoHash) const;
-	//void clear();
 	void retranslate();
 
-	virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
-	virtual QVariant data(const QModelIndex& index, int role =	Qt::DisplayRole) const;
+	int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+	QVariant data(const QModelIndex& index, int role =	Qt::DisplayRole) const override;
 	bool removeRow(int row, bool delFiles);
-	virtual bool removeRows(int row, int count,
-	                        const QModelIndex& parent = QModelIndex());
+	bool removeRows(int row, int count,
+	                        const QModelIndex& parent = QModelIndex()) override;
 	enum Role { TorrentRole = Qt::UserRole };
 	Torrent* GetSelectedTorrent();
 

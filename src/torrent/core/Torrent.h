@@ -54,12 +54,13 @@ private:
 //	bool prevHaserror,prevIsCompleted;
 public :
 
-	Torrent(torrent_handle torrentStatus, QString group);
+	Torrent(torrent_handle* torrentStatus, QString group);
 	~Torrent() {};
 	void SetFilePriority(int index, int prioryty);
 	QString GetRemainingTime();
 	QStringList& GetImageFiles();
 	QString GetSuffix();
+	void UpdateImageFiles();
 	QString GetErrorMessage() const;
 
 	QString GetGroup();

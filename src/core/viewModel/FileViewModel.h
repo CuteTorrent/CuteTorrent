@@ -1,10 +1,11 @@
 ﻿#pragma once
 #include <QtGui>
-#include "TorrentManager.h"
 #include "FileViewTreeItem.h"
 #include "FileViewSortProxyModel.h"
 #include "defs.h"
-
+#include <libtorrent/file_storage.hpp>
+#include <libtorrent/size_type.hpp>
+using namespace libtorrent;
 class FileViewModel : public QAbstractItemModel
 {
 	Q_OBJECT
@@ -55,7 +56,7 @@ private:
 	QAction* dontDownload;
 	QTreeView* m_pView;
 	FileViewSortProxyModel* m_pProxyModel;
-	std::vector<libtorrent::size_type> m_Progresses;
+	std::vector<size_type> m_Progresses;
 	static QPixmapCache iconCache;
 	FileViewTreeItem* m_pRoot;
 };

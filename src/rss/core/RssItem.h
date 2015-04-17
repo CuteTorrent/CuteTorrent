@@ -3,6 +3,7 @@
 #include <QString>
 #include <QDateTime>
 #include <QMetaType>
+class RssFeed;
 class RssItem : public QObject
 {
 	friend QDataStream& operator <<(QDataStream& out, const RssItem& any);
@@ -19,6 +20,7 @@ class RssItem : public QObject
 	QString m_downloadingTorrent;
 	QString m_author;
 	QDateTime m_pubDate;
+	RssFeed* m_pRssFeed;
 	quint64 m_size;
 	quint32 m_peers;
 	quint32 m_seeds;
@@ -26,7 +28,8 @@ class RssItem : public QObject
 public:
 
 	RssItem(const RssItem& other);;
-	RssItem() : QObject(), m_size(0), m_peers(0), m_seeds(0), m_unread(true) {}
+	RssItem(RssFeed* parent);
+	RssFeed* rssFeed() const;
 	QString title() const;
 	void setTitle(const QString& value);
 	QString description() const;

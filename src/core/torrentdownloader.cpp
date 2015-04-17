@@ -68,8 +68,12 @@ void TorrentDownloader::replyReady(QNetworkReply* pReply)
 
 }
 
-void TorrentDownloader::downloadTorrent(QUrl url)
+void TorrentDownloader::downloadTorrent(QUrl url, QList<QNetworkCookie> cookies)
 {
 	QNetworkRequest request(url);
+	if (cookies.size() > 0)
+	{
+		m_pNetManager->cookieJar()->setCookiesFromUrl(cookies, url);
+	}
 	m_pNetManager->get(request);
 }

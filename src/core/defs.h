@@ -5,6 +5,7 @@
 #include "libtorrent/config.hpp"
 #include "libtorrent/file_storage.hpp"
 #include "libtorrent/torrent_handle.hpp"
+#include <libtorrent/size_type.hpp>
 using namespace libtorrent;
 struct opentorrent_info
 {

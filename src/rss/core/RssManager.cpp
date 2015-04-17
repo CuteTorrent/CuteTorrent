@@ -298,7 +298,7 @@ void RssManager::downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRu
 		info.rssFeedId = pFeed->uid();
 		info.rssItemId = rssItem->guid();
 		m_activeTorrentDownloads.insert(torrentUrl, info);
-		m_pTorrentDownloader->downloadTorrent(torrentUrl);
+		m_pTorrentDownloader->downloadTorrent(torrentUrl, pFeed->coookies());
 	}
 	else if (!rssItem->magnetUrl().isEmpty())
 	{
@@ -323,6 +323,7 @@ void RssManager::downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRu
 
 void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 {
+
 	if (m_activeTorrentDownloads.contains(url))
 	{
 		boost::scoped_ptr<QTemporaryFile> pFile(pUnsafeFile);

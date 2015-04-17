@@ -29,6 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "MultipleDTDialog.h"
 #include "StyleEngene.h"
 #include "TorrentManager.h"
+#include <VirtualDiskMounter.h>
 
 MultipleDTDialog::MultipleDTDialog(QStringList& _files, QWidget* parent/* =0 */, int flags/* =0 */) : BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize, parent)
 {
@@ -62,7 +63,8 @@ void MultipleDTDialog::MountSelectedFILE()
 
 void MultipleDTDialog::Mount(QString filename)
 {
-	DT_mounter::mountImage(filename);
+	VirtualDiskMounterPtr pDiskMounter = VirtualDiskMounter::getInstance();
+	pDiskMounter->MountVirualDiskImage(filename);
 }
 
 void MultipleDTDialog::changeEvent(QEvent* event)

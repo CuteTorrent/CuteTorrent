@@ -12,11 +12,20 @@ RssItem::RssItem(const RssItem& other): QObject(),
                                         m_downloadingTorrent(other.m_downloadingTorrent),
                                         m_author(other.m_author),
                                         m_pubDate(other.m_pubDate),
+                                        m_pRssFeed(other.m_pRssFeed),
                                         m_size(other.m_size),
                                         m_peers(other.m_peers),
                                         m_seeds(other.m_seeds),
-                                        m_unread(other.m_unread)
+										m_unread(other.m_unread)
 {
+}
+
+RssItem::RssItem(RssFeed* parent) : QObject(), m_pRssFeed(parent), m_size(0), m_peers(0), m_seeds(0), m_unread(true)
+{}
+
+RssFeed* RssItem::rssFeed() const
+{
+	return m_pRssFeed;
 }
 
 QString RssItem::title() const

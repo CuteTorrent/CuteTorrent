@@ -8,13 +8,16 @@ class RssFeedSettingsDialog : public BaseWindow<QDialog>, private Ui::RssSetting
 {
 	Q_OBJECT
 protected:
-	void changeEvent(QEvent* event);
-	virtual QPushButton* getCloseBtn() override;
-	virtual QWidget* getTitleBar() override;
-	virtual QWidget* centralWidget() override;
-	virtual QLabel* getTitleLabel() override;
-	virtual QLabel* getTitleIcon() override;
+	void changeEvent(QEvent* event) override;
+	QPushButton* getCloseBtn() override;
+	QWidget* getTitleBar() override;
+	QWidget* centralWidget() override;
+	QLabel* getTitleLabel() override;
+	QLabel* getTitleIcon() override;
 	void accept() override;
+private slots:
+	void onAddRow();
+	void onRemoveRow();
 public:
 	RssFeedSettingsDialog(QWidget* parent = 0, int flags = 0);
 	~RssFeedSettingsDialog();

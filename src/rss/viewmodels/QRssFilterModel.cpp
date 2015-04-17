@@ -26,7 +26,7 @@ bool QRssFilterModel::filterAcceptsRow(int source_row, const QModelIndex &source
 			qDebug() << "Feed " << pFeed->displayName(true) << (res ? " accepted" : " not accepted");
 			return res;
 		}
-		data = index.data(QRssDisplayModel::RssFeedItemRole);
+		data = index.data(QRssDisplayModel::RssItemRole);
 		if (data.isValid())
 		{
 			RssItem* item = data.value<RssItem*>();

@@ -10,6 +10,7 @@
 #include "torrentdownloader.h"
 #include <QInputDialog>
 #include "RssItem.h"
+#include <QtTest/QtTest>
 QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent, bool autoUpdate) : QAbstractItemModel(parrent), m_pRssManager(RssManager::getInstance()),
 	m_pTorrentDownloader(TorrentDownloader::getInstance())
 {
@@ -20,16 +21,11 @@ QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent, bool
 	UpdateModel();
 	connect(m_pRssManager.get(), SIGNAL(FeedChanged(QUuid)), this, SLOT(UpdateModel()));
 	connect(m_pTorrentDownloader.get(), SIGNAL(TorrentReady(QUrl, QTemporaryFile*)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFile*)));
-	/*QObject::connect(m_pTorrentsManager, SIGNAL(OnNewFeed()), this, SLOT(UpdateModel()));
-	QObject::connect(m_pTorrentsManager, SIGNAL(OnFeedDeleted()), this, SLOT(UpdateModel()));
-	QObject::connect(m_pTorrentsManager, SIGNAL(OnNewFeedItem()), this, SLOT(UpdateModel()));
-	QObject::connect(m_pTorrentsManager, SIGNAL(OnFeedChanged()), this, SLOT(UpdateModel()));*/
 	connect(m_pUdpateTimer, SIGNAL(timeout()), this, SLOT(UpdateVisibleData()));
 	if (autoUpdate)
 	{
 		m_pUdpateTimer->start(1000);
 	}
-	
 }
 
 int QRssDisplayModel::columnCount(const QModelIndex& parent /*= QModelIndex()*/) const
@@ -48,7 +44,7 @@ QVariant QRssDisplayModel::data(const QModelIndex& index, int role /*= Qt::Displ
 		}
 		
 	}
-	else if (role == RssFeedItemRole)
+	else if (role == RssItemRole)
 	{
 		RssBaseTreeItem* pBaseItem = static_cast<RssBaseTreeItem*>(index.internalPointer());
 		if (pBaseItem->GetType() == RssBaseTreeItem::FeedItem)
@@ -175,59 +171,47 @@ QList<RssFeed*> QRssDisplayModel::SelectedFeeds()
 	{
 		if (selectedIndex.isValid())
 		{
-			RssBaseTreeItem* pBaseItem = static_cast<RssBaseTreeItem*>(selectedIndex.internalPointer());
+			QVariant data = selectedIndex.data(RssFeedRole);
 
-			switch (pBaseItem->GetType())
+			if (data.isValid())
 			{
-				case RssBaseTreeItem::Feed:
+				RssFeed* pFeed = data.value<RssFeed*>();
+				res.insert(pFeed);
+			}
+			else
+			{
+				data = selectedIndex.data(RssItemRole);
+				if (data.isValid())
 				{
-					RssFeedTreeItem* pFeedTreeItem = reinterpret_cast<RssFeedTreeItem*>(pBaseItem);
-					res.insert(pFeedTreeItem->GetFeed());
-					break;
-				}
-
-				case RssBaseTreeItem::FeedItem:
-				{
-					RssFeedItemTreeItem* pFeedTreeItem = reinterpret_cast<RssFeedItemTreeItem*>(pBaseItem);
-					res.insert(pFeedTreeItem->Parent()->GetFeed());
-					break;
-				}
-
-				default:
-				{
-					qDebug() << "Unknown item type";
-					break;
+					RssItem* pItem = data.value<RssItem*>();
+					res.insert(pItem->rssFeed());
 				}
 			}
+			
 		}
 	}
 
 	return res.toList();
 }
-RssItem* QRssDisplayModel::SelectedFeedItem()
+
+RssItem* QRssDisplayModel::SelectedRssItem()
 {
 	RssItem* res = nullptr;
 	QModelIndex selectedIndex = m_pItemsView->selectionModel()->currentIndex();
 
 	if (selectedIndex.isValid())
 	{
-		RssBaseTreeItem* pBaseItem = static_cast<RssBaseTreeItem*>(selectedIndex.internalPointer());
-
-		switch (pBaseItem->GetType())
+		QVariant data = selectedIndex.data(RssItemRole);
+		if (data.isValid())
 		{
-			case RssBaseTreeItem::FeedItem:
+			res = data.value<RssItem*>();
+			bool prevUnerad = res->unread();
+			if (prevUnerad)
 			{
-				RssFeedItemTreeItem* pFeedTreeItem = reinterpret_cast<RssFeedItemTreeItem*>(pBaseItem);
-				res = pFeedTreeItem->FeedItem();
-				pFeedTreeItem->Parent()->GetFeed()->setItemUnread(false, res->guid());
-				break;
+				res->setUread(false);
+				res->rssFeed()->UpdateUnreadCount();
 			}
-
-			default:
-			{
-				qDebug() << "Unknown item type";
-				break;
-			}
+			
 		}
 	}
 
@@ -240,29 +224,10 @@ RssFeed* QRssDisplayModel::SelectedFeed()
 
 	if (selectedIndex.isValid())
 	{
-		RssBaseTreeItem* pBaseItem = static_cast<RssBaseTreeItem*>(selectedIndex.internalPointer());
-
-		switch (pBaseItem->GetType())
+		QVariant data = selectedIndex.data(RssFeedRole);
+		if (data.isValid())
 		{
-			case RssBaseTreeItem::Feed:
-			{
-				RssFeedTreeItem* pFeedTreeItem = reinterpret_cast<RssFeedTreeItem*>(pBaseItem);
-				res = pFeedTreeItem->GetFeed();
-				break;
-			}
-
-			case RssBaseTreeItem::FeedItem:
-			{
-				RssFeedItemTreeItem* pFeedTreeItem = reinterpret_cast<RssFeedItemTreeItem*>(pBaseItem);
-				res = pFeedTreeItem->Parent()->GetFeed();
-				break;
-			}
-
-			default:
-			{
-				qDebug() << "Unknown item type";
-				break;
-			}
+			res = data.value<RssFeed*>();
 		}
 	}
 
@@ -313,7 +278,7 @@ void QRssDisplayModel::onMarkAllUnread()
 
 void QRssDisplayModel::setCurrentItemUnread(bool val)
 {
-	RssItem* currentItem = SelectedFeedItem();
+	RssItem* currentItem = SelectedRssItem();
 	RssFeed* currentFeed = SelectedFeed();
 	currentItem->setUread(val);
 	currentFeed->UpdateUnreadCount();
@@ -506,7 +471,7 @@ void QRssDisplayModel::onItemDownload()
 {
 	if (m_pItemsView->model() == this)
 	{
-		RssItem* current = SelectedFeedItem();
+		RssItem* current = SelectedRssItem();
 		QString torrentUrl = current->torrentUrl();
 
 		if (torrentUrl.startsWith("magnet"))
@@ -517,7 +482,7 @@ void QRssDisplayModel::onItemDownload()
 		}
 		else
 		{
-			m_pTorrentDownloader->downloadTorrent(torrentUrl);
+			m_pTorrentDownloader->downloadTorrent(torrentUrl, current->rssFeed()->coookies());
 			m_activeTorrentDownloads.append(torrentUrl);
 		}
 	}
@@ -527,7 +492,7 @@ void QRssDisplayModel::onItemOpenDesc()
 {
 	if (m_pItemsView->model() == this)
 	{
-		RssItem* current = SelectedFeedItem();
+		RssItem* current = SelectedRssItem();
 		QDesktopServices::openUrl(current->describtionLink());
 	}
 }

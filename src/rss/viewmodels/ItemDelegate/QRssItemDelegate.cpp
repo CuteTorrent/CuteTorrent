@@ -48,7 +48,7 @@ void QRssItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opti
 		}
 		else
 		{
-			data = index.data(QRssDisplayModel::RssFeedItemRole);
+			data = index.data(QRssDisplayModel::RssItemRole);
 			if (data.isValid())
 			{
 				return drawFeedItem(painter, option, index, data.value<RssItem*>());
@@ -72,7 +72,7 @@ QSize QRssItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QMode
 		}
 		else
 		{
-			data = index.data(QRssDisplayModel::RssFeedItemRole);
+			data = index.data(QRssDisplayModel::RssItemRole);
 			if (data.isValid())
 			{
 				return feedItemSizeHint(option, data.value<RssItem*>());

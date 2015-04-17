@@ -592,8 +592,11 @@
     <ClCompile Include="core\helpers\StaticHelpers.cpp">
       <Filter>Helper</Filter>
     </ClCompile>
-    <ClCompile Include="core\helpers\DiscMounter.cpp">
+    <ClCompile Include="core\helpers\VirtualDiskMounter.cpp">
       <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ObservebaleCollectionBase.cpp">
+      <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -801,6 +804,9 @@
     </CustomBuild>
     <CustomBuild Include="Release\CuteTorrent.res">
       <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\collections\ObservebaleCollectionBase.h">
+      <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1019,8 +1025,11 @@
     <ClInclude Include="core\helpers\StaticHelpers.h">
       <Filter>Helper</Filter>
     </ClInclude>
-    <ClInclude Include="core\helpers\DiscMounter.h">
+    <ClInclude Include="core\helpers\VirtualDiskMounter.h">
       <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="core\collections\ObservableList.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

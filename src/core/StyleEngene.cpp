@@ -43,9 +43,8 @@ void StyleEngene::setStyle(QString internalName)
 		qDebug() << "No style found";
 		return;
 	}
-
-	loadStyleSheet(_currentStyle.rootPath + "/style.qss");
 	initIcons();
+	loadStyleSheet(_currentStyle.rootPath + "/style.qss");
 	emit styleChanged();
 }
 
@@ -123,107 +122,114 @@ void StyleEngene::init()
 	{
 		qDebug() << "NO_STYLE_DIR_FOUND";
 	}
+	initFileSuffixes();
 }
 
-void StyleEngene::initIcons()
+void StyleEngene::initFileSuffixes()
 {
-	QString confPath = _currentStyle.rootPath + QDir::separator() + "style.ini";
-	QSettings* styleSettings = new QSettings(confPath, QSettings::IniFormat);
-	styleSettings->beginGroup("Icons");
-	iconNamesMap.clear();
-	QStringList keys = styleSettings->childKeys();
 
-	foreach(QString  key, keys)
-	{
-		iconNamesMap.insert(key, styleSettings->value(key).toString());
-	}
-
-	styleSettings->endGroup();
-	delete styleSettings;
-
-	if(iconNamesMap.isEmpty())
-	{
-		return;
-	}
-
-	fallback = getIcon("folder");
 	const char* disk_types[] =
 	{
 		"mdx", "mds", "mdf", "iso", "b5t", "b6t", "bwt", "ccd", "cdi",
 		"nrg", "pdi", "isz"
 	};
 
-	for(int i = 0, n = sizeof(disk_types) / sizeof(disk_types[0]); i < n; ++i)
+	for (int i = 0, n = sizeof(disk_types) / sizeof(disk_types[0]); i < n; ++i)
 	{
 		suffixes[DISK] << QString::fromLatin1(disk_types[i]);
 	}
 
-	fileIcons[DISK] = getIcon("iso");
+
 	const char* doc_types[] =
 	{
 		"abw", "csv", "doc", "dvi", "htm", "html", "ini", "log", "odp",
-		"ods", "odt", "pdf", "ppt", "ps",  "rtf", "tex", "txt", "xml"
+		"ods", "odt", "pdf", "ppt", "ps", "rtf", "tex", "txt", "xml"
 	};
 
-	for(int i = 0, n = sizeof(doc_types) / sizeof(doc_types[0]); i < n; ++i)
+	for (int i = 0, n = sizeof(doc_types) / sizeof(doc_types[0]); i < n; ++i)
 	{
 		suffixes[DOCUMENT] << QString::fromLatin1(doc_types[i]);
 	}
 
-	fileIcons[DOCUMENT] = getIcon("doc") ;
+
 	const char* pic_types[] =
 	{
 		"bmp", "gif", "jpg", "jpeg", "pcx", "png", "psd", "ras", "tga", "ico", "tiff"
 	};
 
-	for(int i = 0, n = sizeof(pic_types) / sizeof(pic_types[0]); i < n; ++i)
+	for (int i = 0, n = sizeof(pic_types) / sizeof(pic_types[0]); i < n; ++i)
 	{
 		suffixes[PICTURE] << QString::fromLatin1(pic_types[i]);
 	}
 
-	fileIcons[PICTURE]  = getIcon("picture") ;
+
 	const char* vid_types[] =
 	{
 		"3gp", "asf", "avi", "mov", "mpeg", "mpg", "mp4", "mkv", "mov",
-		"ogm", "ogv", "qt", "rm", "wmv" , "m2ts"
+		"ogm", "ogv", "qt", "rm", "wmv", "m2ts"
 	};
 
-	for(int i = 0, n = sizeof(vid_types) / sizeof(vid_types[0]); i < n; ++i)
+	for (int i = 0, n = sizeof(vid_types) / sizeof(vid_types[0]); i < n; ++i)
 	{
 		suffixes[VIDEO] << QString::fromLatin1(vid_types[i]);
 	}
 
-	fileIcons[VIDEO] = getIcon("movie") ;
+
 	const char* arc_types[] =
 	{
 		"7z", "ace", "bz2", "cbz", "gz", "gzip", "lzma", "rar", "sft", "tar", "zip"
 	};
 
-	for(int i = 0, n = sizeof(arc_types) / sizeof(arc_types[0]); i < n; ++i)
+	for (int i = 0, n = sizeof(arc_types) / sizeof(arc_types[0]); i < n; ++i)
 	{
 		suffixes[ARCHIVE] << QString::fromLatin1(arc_types[i]);
 	}
 
-	fileIcons[ARCHIVE]  = getIcon("archive") ;
+
 	const char* aud_types[] =
 	{
 		"aac", "ac3", "aiff", "ape", "au", "flac", "m3u", "m4a", "mid", "midi", "mp2",
 		"mp3", "mpc", "nsf", "oga", "ogg", "ra", "ram", "shn", "voc", "wav", "wma"
 	};
 
-	for(int i = 0, n = sizeof(aud_types) / sizeof(aud_types[0]); i < n; ++i)
+	for (int i = 0, n = sizeof(aud_types) / sizeof(aud_types[0]); i < n; ++i)
 	{
 		suffixes[AUDIO] << QString::fromLatin1(aud_types[i]);
 	}
 
-	fileIcons[AUDIO] = getIcon("audio") ;
 	const char* exe_types[] = { "bat", "cmd", "com", "exe" };
 
-	for(int i = 0, n = sizeof(exe_types) / sizeof(exe_types[0]); i < n; ++i)
+	for (int i = 0, n = sizeof(exe_types) / sizeof(exe_types[0]); i < n; ++i)
 	{
 		suffixes[APP] << QString::fromLatin1(exe_types[i]);
 	}
 
+
+}
+
+void StyleEngene::initIcons()
+{
+	QString confPath = _currentStyle.rootPath + QDir::separator() + "style.ini";
+	QSettings styleSettings(confPath, QSettings::IniFormat);
+	styleSettings.beginGroup("Icons");
+	iconNamesMap.clear();
+	m_iconCache.clear();
+	QStringList keys = styleSettings.childKeys();
+
+	foreach(QString  key, keys)
+	{
+		iconNamesMap.insert(key, styleSettings.value(key).toString());
+	}
+
+	styleSettings.endGroup();
+	
+	fallback = getIcon("folder");
+	fileIcons[DISK] = getIcon("iso");
+	fileIcons[DOCUMENT] = getIcon("doc");
+	fileIcons[PICTURE] = getIcon("picture");
+	fileIcons[VIDEO] = getIcon("movie");
+	fileIcons[ARCHIVE] = getIcon("archive");
+	fileIcons[AUDIO] = getIcon("audio");
 	fileIcons[APP] = QIcon::fromTheme("application-x-executable", fallback);
 }
 

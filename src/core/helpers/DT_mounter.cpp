@@ -2,7 +2,7 @@
 #include "messagebox.h"
 #include "QApplicationSettings.h"
 #include <QProcess>
-#include "QTorrentDisplayModel.h"
+
 void DT_mounter::mountImage(QString path)
 {
 #ifdef Q_WS_WIN //file association for windows
@@ -12,7 +12,7 @@ void DT_mounter::mountImage(QString path)
 	if(exe.isEmpty())
 	{
 		QApplicationSettings::FreeInstance();
-		CustomMessageBox::warning(NULL, "DT Mounter", QTorrentDisplayModel::tr("DT_PATH_NOT_SET"));
+		CustomMessageBox::warning(nullptr, "DT Mounter", qApp->translate("QTorrentDisplayModel","DT_PATH_NOT_SET"));
 		return;
 	}
 
@@ -27,7 +27,7 @@ void DT_mounter::mountImage(QString path)
 
 	if(!dt->waitForStarted(5000))
 	{
-		CustomMessageBox::warning(NULL, "DT Mounter", QTorrentDisplayModel::tr("LAUNCH_ERROR") + exe);
+		CustomMessageBox::warning(nullptr, "DT Mounter", qApp->translate("QTorrentDisplayModel", "LAUNCH_ERROR") + exe);
 		return;
 	}
 

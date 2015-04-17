@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QUrl>
 #include <exception>
 #include "MultipleDTDialog.h"
-#include "DT_mounter.h"
+#include "VirtualDiskMounter.h"
 #include "QApplicationSettings.h"
 #include "QTorrentDisplayModel.h"
 #include "StyleEngene.h"
@@ -45,8 +45,8 @@ QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterPr
 	selectedRow = -1;
 	setupContextMenu();
 	locker = new QMutex();
-	QObject::connect(m_pTorrentManager, SIGNAL(AddTorrentGui(Torrent*)), SLOT(OnAddTorrent()));
-	QObject::connect(m_pTorrentManager, SIGNAL(TorrentRemove(QString)), SLOT(Update()));
+	connect(m_pTorrentManager, SIGNAL(AddTorrentGui(Torrent*)), SLOT(OnAddTorrent()));
+	connect(m_pTorrentManager, SIGNAL(TorrentRemove(QString)), SLOT(Update()));
 }
 void QTorrentDisplayModel::Rehash()
 {
@@ -100,7 +100,8 @@ void QTorrentDisplayModel::MountDT()
 			}
 			else
 			{
-				DT_mounter::mountImage(images.first());
+				VirtualDiskMounterPtr pDiskMounter = VirtualDiskMounter::getInstance();
+				pDiskMounter->MountVirualDiskImage(images.first());
 			}
 		}
 	}
@@ -136,6 +137,8 @@ void QTorrentDisplayModel::OpenDirSelected()
 #endif
 	}
 }
+
+
 
 void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 {
@@ -235,7 +238,11 @@ int QTorrentDisplayModel::rowCount(const QModelIndex& parent) const
 {
 	try
 	{
-		return m_pTorrentStorrage->count();
+		if (!parent.isValid())
+		{
+			return m_pTorrentStorrage->count();
+		}
+		
 	}
 	catch(std::exception e)
 	{
@@ -272,7 +279,10 @@ Torrent* QTorrentDisplayModel::GetSelectedTorrent()
 
 	return NULL;
 }
-
+bool indexByRowLessThan(const QModelIndex& right, const QModelIndex& left)
+{
+	return right.row() < left.row();
+}
 void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 {
 	if (m_pTorrentListView->model() != m_pProxyFilterModel)
@@ -282,7 +292,9 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 	try
 	{
-		QModelIndexList indexes = StaticHelpers::reversed(m_pTorrentListView->selectionModel()->selectedIndexes());
+		QModelIndexList indexes = m_pProxyFilterModel->mapSelectionToSource(m_pTorrentListView->selectionModel()->selection()).indexes();
+		qSort(indexes);
+		
 
 		if(rowCount() == 0)
 		{
@@ -303,8 +315,9 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 		{
 			case stop:
 			{
-				foreach(QModelIndex index, indexes)
+				for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
+					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
 					torrent->stop();
 				}
@@ -314,8 +327,9 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 			case pause:
 			{
-				foreach(QModelIndex index, indexes)
+				for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
+					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
 					torrent->pause();
 				}
@@ -327,42 +341,47 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 			{
 				bool yesToAll = false;
 
-				foreach(QModelIndex index, indexes)
+				for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
+					QModelIndex& index = indexes[i];
+					if (index.isValid())
+					{
+						QMessageBox::StandardButton button;
+
+						if (!yesToAll)
+						{
+							Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
+							QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No;
+
+							if (indexes.length() > 1)
+							{
+								buttons |= QMessageBox::YesToAll;
+								buttons |= QMessageBox::NoToAll;
+							}
+
+							button = CustomMessageBox::question(m_pTorrentListView, tr("TORRENT_DELITION"), tr("TORRENT_DELITION_MSG").arg(torrent->GetName()), buttons);
+
+							if (button == QMessageBox::YesToAll)
+							{
+								yesToAll = true;
+							}
+							else if (button == QMessageBox::NoToAll)
+							{
+								break;
+							}
+						}
+						else
+						{
+							button = QMessageBox::YesToAll;
+						}
+
+						if (QMessageBox::No != button || yesToAll)
+						{
+							removeRow(index.row(), false);
+						}
+					}
 				
-					QMessageBox::StandardButton button;
-
-					if (!yesToAll)
-					{
-						Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
-						QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No;
-
-						if (indexes.length() > 1)
-						{
-							buttons |= QMessageBox::YesToAll;
-							buttons |= QMessageBox::NoToAll;
-						}
-
-						button = CustomMessageBox::question(m_pTorrentListView, tr("TORRENT_DELITION"), tr("TORRENT_DELITION_MSG").arg(torrent->GetName()), buttons);
-
-						if (button == QMessageBox::YesToAll)
-						{
-							yesToAll = true;
-						}
-						else if (button == QMessageBox::NoToAll)
-						{
-							break;
-						}
-					}
-					else
-					{
-						button = QMessageBox::YesToAll;
-					}
-
-					if (QMessageBox::No != button || yesToAll)
-					{
-						removeRow(m_pProxyFilterModel->mapToSource(index).row(), false);
-					}
+					
 				}
 			}
 			break;
@@ -370,9 +389,9 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 			case remove_all:
 			{
 				bool yesToAll = false;
-
-				foreach(QModelIndex index, indexes)
+				for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
+					QModelIndex& index = indexes[i];
 					QMessageBox::StandardButton button;
 
 					if (!yesToAll)
@@ -401,9 +420,10 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 						button = QMessageBox::YesToAll;
 					}
 
+
 					if (QMessageBox::No != button || yesToAll)
 					{
-						removeRow(m_pProxyFilterModel->mapToSource(index).row(), true);
+						removeRow(index.row(), true);
 					}
 				}
 
@@ -411,8 +431,9 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 			}
 
 			case resume:
-				foreach(QModelIndex index, indexes)
+				for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
+					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
 					torrent->resume();
 				}
@@ -421,8 +442,9 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 			case rehash:
 			{
-				foreach(QModelIndex index, indexes)
+				for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
+					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
 					torrent->announceRehash();
 				}
@@ -440,8 +462,9 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 				if(!path.isEmpty())
 				{
-					foreach(QModelIndex index, indexes)
+					for (int i = indexes.count() - 1; i >= 0; i -= 1)
 					{
+						QModelIndex index = indexes[i];
 						Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
 						torrent->MoveStorrage(path + QDir::separator());
 					}
@@ -452,8 +475,9 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 			case set_sequntial:
 			{
-				foreach(QModelIndex index, indexes)
+				for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
+					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
 					torrent->seqensialDownload();
 				}
@@ -463,8 +487,9 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 			case set_superseed:
 			{
-				foreach(QModelIndex index, indexes)
+				for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
+					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
 					torrent->SuperSeed();
 				}
@@ -474,8 +499,9 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 			case update_trackers:
 			{
-				foreach(QModelIndex index, indexes)
+				for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
+					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
 					torrent->updateTrackers();
 				}
@@ -487,8 +513,9 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 			{
 				QString clipboardData;
 
-				foreach(QModelIndex index, indexes)
+				for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
+					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
 					clipboardData += torrent->generateMagnetLink();
 					clipboardData += "\n";
@@ -506,6 +533,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 		qDebug() << "Exception QTorrentDisplayModel::ActionOnSelectedItem" << e.what();
 	}
 }
+
 QVariant QTorrentDisplayModel::data(const QModelIndex& index, int role) const
 {
 	QVariant var;
@@ -551,7 +579,6 @@ bool QTorrentDisplayModel::removeRow(int row, bool delFiles)
 		return false;
 	}
 
-	m_pTorrentListView->selectionModel()->reset();
 	beginRemoveRows(QModelIndex(), row, row);
 
 	if(m_pTorrentStorrage->at(row) == CurrentTorrent)
@@ -647,54 +674,54 @@ void QTorrentDisplayModel::setupContextMenu()
 	StyleEngene* style = StyleEngene::getInstance();
 	openDir = new QAction(style->getIcon("open_folder"), tr("ACTION_OPEN_FOLDER"), this);
 	openDir->setObjectName("ACTION_TORRENTLIST_OPEN_DIR");
-	QObject::connect(openDir, SIGNAL(triggered()), this, SLOT(OpenDirSelected()));
+	connect(openDir, SIGNAL(triggered()), this, SLOT(OpenDirSelected()));
 	openDir->setShortcut(Qt::Key_Enter);
 	menu->addAction(openDir);
 	menu->addSeparator();
 	DTmount = new QAction(style->getIcon("daemon_tools"), tr("ACTION_DT_MOUNT"), this);
 	DTmount->setObjectName("ACTION_TORRENTLIST_DT_MOUNT");
-	QObject::connect(DTmount, SIGNAL(triggered()), this, SLOT(MountDT()));
+	connect(DTmount, SIGNAL(triggered()), this, SLOT(MountDT()));
 	menu->addAction(DTmount);
 	PlayInPlayer = new QAction(style->getIcon("play"), tr("ACTION_PLAY_IN_PLAYER"), this);
 	PlayInPlayer->setObjectName("ACTION_TORRENTLIST_PLAY");
-	QObject::connect(PlayInPlayer, SIGNAL(triggered()), this, SLOT(playInPlayer()));
+	connect(PlayInPlayer, SIGNAL(triggered()), this, SLOT(playInPlayer()));
 	menu->addAction(PlayInPlayer);
 	MoveStorrage = new QAction(style->getIcon("move_folder"), tr("ACTION_MOVE_STORRAGE"), this);
 	MoveStorrage->setObjectName("ACTION_TORRENTLIST_MOVE_STORRAGE");
-	QObject::connect(MoveStorrage, SIGNAL(triggered()), this, SLOT(moveStorrage()));
+	connect(MoveStorrage, SIGNAL(triggered()), this, SLOT(moveStorrage()));
 	menu->addAction(MoveStorrage);
 	menu->addSeparator();
 	superSeed = new QAction(style->getIcon("super_seed"), tr("ACTION_SET_SUPERSEED"), this);
 	superSeed->setObjectName("ACTION_TORRENTLIST_SUPER_SEED");
 	superSeed->setCheckable(true);
-	QObject::connect(superSeed, SIGNAL(triggered()), this, SLOT(SetSuperSeed()));
+	connect(superSeed, SIGNAL(triggered()), this, SLOT(SetSuperSeed()));
 	menu->addAction(superSeed);
 	HashRecheck = new QAction(style->getIcon("recheck"), tr("ACTION_REHASH"), this);
 	HashRecheck->setObjectName("ACTION_TORRENTLIST_RECHECK");
-	QObject::connect(HashRecheck, SIGNAL(triggered()), this, SLOT(Rehash()));
+	connect(HashRecheck, SIGNAL(triggered()), this, SLOT(Rehash()));
 	menu->addAction(HashRecheck);
 	updateTrackers = new QAction(style->getIcon("update_trackers"), tr("ACTION_UPDATE_TRACKERS"), this);
 	updateTrackers->setObjectName("ACTION_TORRENTLIST_UPDATE_TRACKERS");
-	QObject::connect(updateTrackers, SIGNAL(triggered()), this, SLOT(UpdateTrackers()));
+	connect(updateTrackers, SIGNAL(triggered()), this, SLOT(UpdateTrackers()));
 	menu->addAction(updateTrackers);
 	setSequentual = new QAction(style->getIcon("sequential"), tr("ACTION_SET_SEQUENTIAL"), this);
 	setSequentual->setObjectName("ACTION_TORRENTLIST_SET_SEQUNTIAL");
 	setSequentual->setCheckable(true);
-	QObject::connect(setSequentual, SIGNAL(triggered()), this, SLOT(setSequentualDL()));
+	connect(setSequentual, SIGNAL(triggered()), this, SLOT(setSequentualDL()));
 	menu->addAction(setSequentual);
 	GenerateMagnet = new QAction(style->getIcon("magnet"), tr("ACTION_GENERATE_MAGNET"), this);
 	GenerateMagnet->setObjectName("ACTION_TORRENTLIST_GENERATE_MAGNET");
-	QObject::connect(GenerateMagnet, SIGNAL(triggered()), this, SLOT(generateMagnetLink()));
+	connect(GenerateMagnet, SIGNAL(triggered()), this, SLOT(generateMagnetLink()));
 	menu->addAction(GenerateMagnet);
 	menu->addSeparator();
 	DelAll = new QAction(style->getIcon("delete"), tr("ACTION_DELETE_ALL"), this);
 	DelAll->setObjectName("ACTION_TORRENTLIST_DEL_ALL");
-	QObject::connect(DelAll, SIGNAL(triggered()), this, SLOT(DellAll()));
+	connect(DelAll, SIGNAL(triggered()), this, SLOT(DellAll()));
 	DelAll->setShortcut(Qt::Key_Shift | Qt::Key_Delete);
 	menu->addAction(DelAll);
 	DelTorrentOnly = new QAction(style->getIcon("delete"), tr("ACTION_DELETE_TORRENT"), this);
 	DelTorrentOnly->setObjectName("ACTION_TORRENTLIST_DEL_TORRENT");
-	QObject::connect(DelTorrentOnly, SIGNAL(triggered()), this, SLOT(DellTorrentOnly()));
+	connect(DelTorrentOnly, SIGNAL(triggered()), this, SLOT(DellTorrentOnly()));
 	DelTorrentOnly->setShortcut(Qt::Key_Delete);
 	menu->addAction(DelTorrentOnly);
 	groupsMenu = new QMenu(tr("ACTION_CHANGE_GROUP"), menu);
@@ -707,7 +734,7 @@ void QTorrentDisplayModel::setupContextMenu()
 	{
 		QAction* changeGroupAction = new QAction(style->guessMimeIcon(filters[i].Extensions().split('|') [0], type), filters[i].Name(), groupsMenu);
 		changeGroupAction->setObjectName(filters[i].Name());
-		QObject::connect(changeGroupAction, SIGNAL(triggered()), this, SLOT(changeGroup()));
+		connect(changeGroupAction, SIGNAL(triggered()), this, SLOT(changeGroup()));
 		changeGroupAction->setCheckable(true);
 		groupsMenu->addAction(changeGroupAction);
 	}

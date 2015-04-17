@@ -18,9 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "StaticHelpers.h"
 #include <QDebug>
+#include <libtorrent/gzip.hpp>
+#include <libtorrent/upnp.hpp>
+#include <libtorrent/i2p_stream.hpp>
+#include <libtorrent/socks5_stream.hpp>
 
-
-QString StaticHelpers::toKbMbGb(libtorrent::size_type size)
+QString StaticHelpers::toKbMbGb(size_type size)
 {
 	float val = size;
 	char* Suffix[] = { " B\0", " KB\0", " MB\0", " GB\0", " TB\0", " PB\0", " EB\0" , " ZB\0" };
@@ -28,7 +31,7 @@ QString StaticHelpers::toKbMbGb(libtorrent::size_type size)
 	float dblSByte = val;
 
 	if(size > KbInt)
-		for(i ; (libtorrent::size_type)(val / KbInt) > 0; i++, val /= KbInt)
+		for(i ; (size_type)(val / KbInt) > 0; i++, val /= KbInt)
 		{
 			dblSByte = val / KbFloat;
 		}
@@ -58,27 +61,33 @@ QString StaticHelpers::filePriorityToString(int priority)
 	                                QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_HIGH")
 	                              };
 
-	if (priority == 0)
+	switch (priority)
 	{
-		return qApp->translate("FileViewModel", priority_str[0]);
+		case 0:
+		{
+			return qApp->translate("FileViewModel", priority_str[0]);
+		}
+		case 1:
+		case 2:
+		{
+			return qApp->translate("FileViewModel", priority_str[1]);
+		}
+		case 3:
+		case 4:
+		case 5:
+		{
+			return qApp->translate("FileViewModel", priority_str[2]);
+		}
+		case 6:
+		case 7:
+		{
+			return qApp->translate("FileViewModel", priority_str[3]);
+		}
+		default:
+		{
+			return "";
+		}
 	}
-
-	if (priority < 3)
-	{
-		return qApp->translate("FileViewModel", priority_str[1]);
-	}
-
-	if (priority >= 3 && priority < 6)
-	{
-		return qApp->translate("FileViewModel", priority_str[2]);
-	}
-
-	if (priority >= 6)
-	{
-		return qApp->translate("FileViewModel", priority_str[3]);
-	}
-
-	return "";
 }
 
 QString StaticHelpers::toTimeString(int seconds)
@@ -88,7 +97,7 @@ QString StaticHelpers::toTimeString(int seconds)
 		return "";
 	}
 
-	int min = 0, hour = 0, day = 0, Week = 0;
+	int min, hour, day, Week;
 	Week = seconds / (7 * 24 * 60 * 60);
 	seconds -= Week * (7 * 24 * 60 * 60);
 	day = seconds / (24 * 60 * 60);
@@ -101,12 +110,12 @@ QString StaticHelpers::toTimeString(int seconds)
 
 	if(Week > 0)
 	{
-		result.append(QObject::tr("%1 WEEK ").arg(Week));
+		result.append(qApp->translate("DateTime","%1 WEEK ").arg(Week));
 	}
 
 	if(day > 0)
 	{
-		result.append(QObject::tr("%1 DAY ").arg(day));
+		result.append(qApp->translate("DateTime", "%1 DAY ").arg(day));
 	}
 
 	if(hour >= 0)
@@ -138,12 +147,14 @@ QString StaticHelpers::SchedulerTypeToString(SchedulerTask::TaskType type)
 
 		case SchedulerTask::LIMIT_DOWNLOAD:
 			return "LIMIT_DL";
+	case SchedulerTask::UNKNOWN: break;
+	default: break;
 	}
 
 	return "";
 }
 
-QString StaticHelpers::GetBaseSuffix(const libtorrent::file_storage& storrage)
+QString StaticHelpers::GetBaseSuffix(const file_storage& storrage)
 {
 	QString base_suffix;
 	int maxSuffix = 0;
@@ -184,15 +195,37 @@ QString StaticHelpers::GetBaseSuffix(const libtorrent::file_storage& storrage)
 	return base_suffix;
 }
 
-QString StaticHelpers::translateLibTorrentError(boost::system::error_code const& ec)
+QString StaticHelpers::translateLibTorrentError(error_code const& ec)
 {
-	if (ec.category() != libtorrent::get_libtorrent_category())
+	if (ec.category() == get_libtorrent_category())
 	{
-		return QString::fromLocal8Bit(ec.message().c_str());
+		return translateSessionError(ec);
 	}
+	if (ec.category() == get_bdecode_category())
+	{
+		return translateBEncodeError(ec);
+	}
+	if (ec.category() == get_gzip_category())
+	{
+		return translateGzipError(ec);
+	}
+	if (ec.category() == get_i2p_category())
+	{
+		return translateI2PError(ec);
+	}
+	if (ec.category() == get_socks_category())
+	{
+		return translateSocksError(ec);
+	}
+	if (ec.category() == get_upnp_category())
+	{
+		return translateUpnpError(ec);
+	}
+	return QString::fromUtf8(ec.message().c_str());
+}
 
-	// the error is a libtorrent error
-	int code = ec.value();
+QString StaticHelpers::translateSessionError(error_code const& ec)
+{
 	static char const* msgs[] =
 	{
 		QT_TRANSLATE_NOOP("ErrorMsg", "no error"),
@@ -384,33 +417,138 @@ QString StaticHelpers::translateLibTorrentError(boost::system::error_code const&
 		QT_TRANSLATE_NOOP("ErrorMsg", "missing or invalid 'peers' and 'peers6' entry"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "udp tracker response packet has invalid size"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "invalid transaction id in udp tracker response"),
-		QT_TRANSLATE_NOOP("ErrorMsg", "invalid action field in udp tracker response"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "invalid action field in udp tracker response")
+	};
 
-		QT_TRANSLATE_NOOP("ErrorMsg", ""),
-		QT_TRANSLATE_NOOP("ErrorMsg", ""),
-		QT_TRANSLATE_NOOP("ErrorMsg", ""),
-		QT_TRANSLATE_NOOP("ErrorMsg", ""),
-		QT_TRANSLATE_NOOP("ErrorMsg", ""),
-		QT_TRANSLATE_NOOP("ErrorMsg", ""),
-		QT_TRANSLATE_NOOP("ErrorMsg", ""),
-		QT_TRANSLATE_NOOP("ErrorMsg", ""),
-		QT_TRANSLATE_NOOP("ErrorMsg", ""),
-		QT_TRANSLATE_NOOP("ErrorMsg", ""),
+	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
+}
 
-		// bdecode errors
+QString StaticHelpers::translateBEncodeError(error_code const& ec)
+{
+	static char const* msgs[] =
+	{ 
+		QT_TRANSLATE_NOOP("ErrorMsg", "no error"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "expected string in bencoded string"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "expected colon in bencoded string"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "unexpected end of file in bencoded string"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "expected value (list, dict, int or string) in bencoded string"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "bencoded nesting depth exceeded"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "bencoded item count limit exceeded"),
-		QT_TRANSLATE_NOOP("ErrorMsg", "integer overflow"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "integer overflow")
+	};
+
+	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
+}
+
+QString StaticHelpers::translateGzipError(error_code const& ec)
+{
+	
+	static char const* msgs[] =
+	{
+		QT_TRANSLATE_NOOP("ErrorMsg", "no error"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "invalid gzip header"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "inflated data too large"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "available inflate data did not terminate"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "output space exhausted before completing inflate"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "invalid block type (type == 3)"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "stored block length did not match one's complement"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "dynamic block code description: too many length or distance codes"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "dynamic block code description: code lengths codes incomplete"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "dynamic block code description: repeat lengths with no first length"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "dynamic block code description: repeat more than specified lengths"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "dynamic block code description: invalid literal/length code lengths"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "dynamic block code description: invalid distance code lengths"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "invalid literal/length or distance code in fixed or dynamic block"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "distance is too far back in fixed or dynamic block"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "unknown gzip error")
+	};
+
+	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
+}
+
+QString StaticHelpers::translateI2PError(error_code const& ec)
+{
+	static char const* msgs[] =
+	{
+		QT_TRANSLATE_NOOP("ErrorMsg", "no error"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "parse failed"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "cannot reach peer"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "i2p error"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "invalid key"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "invalid id"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "timeout"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "key not found"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "duplicated id")
+	};
+
+	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
+}
+
+QString StaticHelpers::translateSocksError(error_code const& ec)
+{
+	static char const* msgs[] =
+	{
+		QT_TRANSLATE_NOOP("ErrorMsg", "SOCKS no error"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "SOCKS unsupported version"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "SOCKS unsupported authentication method"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "SOCKS unsupported authentication version"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "SOCKS authentication error"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "SOCKS username required"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "SOCKS general failure"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "SOCKS command not supported"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "SOCKS no identd running"),
+		QT_TRANSLATE_NOOP("ErrorMsg", "SOCKS identd could not identify username")
 
 	};
 
-	if (code < 0 || code >= sizeof(msgs) / sizeof(msgs[0]))
+	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
+}
+struct error_code_t
+{
+	int code;
+	char const* msg;
+};
+
+error_code_t error_codes[] =
+{
+	{ 0, QT_TRANSLATE_NOOP("ErrorMsg", "no error") }
+	, { 402, QT_TRANSLATE_NOOP("ErrorMsg", "Invalid Arguments") }
+	, { 501, QT_TRANSLATE_NOOP("ErrorMsg", "Action Failed") }
+	, { 714, QT_TRANSLATE_NOOP("ErrorMsg", "The specified value does not exist in the array") }
+	, { 715, QT_TRANSLATE_NOOP("ErrorMsg", "The source IP address cannot be wild-carded") }
+	, { 716, QT_TRANSLATE_NOOP("ErrorMsg", "The external port cannot be wild-carded") }
+	, { 718, QT_TRANSLATE_NOOP("ErrorMsg", "The port mapping entry specified conflicts with "
+	"a mapping assigned previously to another client") }
+	, { 724, QT_TRANSLATE_NOOP("ErrorMsg", "Internal and External port values must be the same") }
+	, { 725, QT_TRANSLATE_NOOP("ErrorMsg", "The NAT implementation only supports permanent "
+	"lease times on port mappings") }
+	, { 726, QT_TRANSLATE_NOOP("ErrorMsg", "RemoteHost must be a wildcard and cannot be a "
+	"specific IP address or DNS name") }
+	, { 727, QT_TRANSLATE_NOOP("ErrorMsg", "ExternalPort must be a wildcard and cannot be a specific port ") }
+};
+QString StaticHelpers::translateUpnpError(error_code const& ec)
+{
+	int ev = ec.value();
+	int num_errors = sizeof(error_codes) / sizeof(error_codes[0]);
+	error_code_t* end = error_codes + num_errors;
+	error_code_t tmp = { ev, 0 };
+	error_code_t* e = std::lower_bound(error_codes, end, tmp
+		, boost::bind(&error_code_t::code, _1) < boost::bind(&error_code_t::code, _2));
+	if (e != end && e->code == ev)
 	{
-		return QString::fromLocal8Bit(ec.message().c_str());
+		return e->msg;
+	}
+	char msg[500];
+	snprintf(msg, sizeof(msg), "unknown UPnP error (%d)", ev);
+	return msg;
+}
+
+QString StaticHelpers::translateError(error_code const& ec, char* msgs[], int msgs_len)
+{
+	int code = ec.value();
+	if (code < 0 || code >= msgs_len)
+	{
+		return QString::fromUtf8(ec.message().c_str());
 	}
 
 	return qApp->translate("ErrorMsg", msgs[code]);
@@ -423,7 +561,7 @@ QString StaticHelpers::CombinePathes(QString path, QString suffix)
 
 NetworkDiskCache* StaticHelpers::GetGLobalWebCache()
 {
-	if (m_pDiskCache == NULL)
+	if (m_pDiskCache == nullptr)
 	{
 		m_pDiskCache = new NetworkDiskCache();
 		m_pDiskCache->setCacheDirectory(QDesktopServices::storageLocation(QDesktopServices::CacheLocation) + "/WebCache");
@@ -434,6 +572,6 @@ NetworkDiskCache* StaticHelpers::GetGLobalWebCache()
 	return m_pDiskCache;
 }
 
-NetworkDiskCache* StaticHelpers::m_pDiskCache = NULL;
+NetworkDiskCache* StaticHelpers::m_pDiskCache = nullptr;
 
 

@@ -34,7 +34,31 @@ void RssFeedSettingsDialog::accept()
 		return;
 	}
 	m_pFeed->setTll(m_pRefreshRateSpinBox->value());
+	QHash<QString, QString> cookies;
+	for (int i = 0; i < m_pCoociesTabWidget->rowCount(); ++i)
+	{
+		cookies.insert(m_pCoociesTabWidget->item(i, 0)->text(), m_pCoociesTabWidget->item(i, 1)->text());
+	}
+	m_pFeed->setCoookies(cookies);
 	QDialog::accept();
+}
+
+void RssFeedSettingsDialog::onAddRow()
+{
+	m_pCoociesTabWidget->insertRow(m_pCoociesTabWidget->rowCount());
+}
+
+void RssFeedSettingsDialog::onRemoveRow()
+{
+	QList<QTableWidgetSelectionRange> selectedRanges = m_pCoociesTabWidget->selectedRanges();
+	for (int i = 0; i < selectedRanges.length(); ++i)
+	{
+		QTableWidgetSelectionRange range = selectedRanges.at(i);
+		for (int j = range.topRow(); j < range.bottomRow(); ++j)
+		{
+			m_pCoociesTabWidget->removeRow(j);
+		}
+	}
 }
 
 QLabel* RssFeedSettingsDialog::getTitleLabel()

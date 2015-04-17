@@ -5,6 +5,7 @@
 #include "ServiceCommon.h"
 #include <QMap>
 #include <QUrl>
+#include <QNetworkCookie>
 class QNetworkAccessManager;
 class QNetworkReply;
 class QTemporaryFile;
@@ -15,7 +16,7 @@ signals:
 	void TorrentReady(QUrl, QTemporaryFile*);
 	void TorrentError(QUrl, QString error);
 public:
-	void downloadTorrent(QUrl url);
+	void downloadTorrent(QUrl url, QList<QNetworkCookie> cookies = QList<QNetworkCookie>());
 	static TorrentDownloaderPtr getInstance();
 	~TorrentDownloader();
 private slots:

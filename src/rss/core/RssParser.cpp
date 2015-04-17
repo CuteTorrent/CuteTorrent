@@ -364,7 +364,7 @@ void RssParser::parseRssChannel(QXmlStreamReader& reader, RssFeed* pFeed, bool& 
 
 void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok, QString& error)
 {
-	boost::scoped_ptr<RssItem> pItem(new RssItem());
+	boost::scoped_ptr<RssItem> pItem(new RssItem(pFeed));
 
 	while (!reader.atEnd())
 	{
@@ -609,7 +609,7 @@ void RssParser::parseAtomChannel(QXmlStreamReader& reader, RssFeed* pFeed, bool&
 
 void RssParser::parseAtomArticle(QXmlStreamReader& reader, QString baseURL, RssFeed* pFeed, bool& ok, QString& error)
 {
-	boost::scoped_ptr<RssItem> pItem(new RssItem);
+	boost::scoped_ptr<RssItem> pItem(new RssItem(pFeed));
 	bool double_content = false;
 
 	while (!reader.atEnd())
