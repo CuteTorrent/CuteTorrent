@@ -29,6 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QMutex>
 #include <QScrollBar>
 #include <QSpinBox>
+#include <QRegExp>
 #include <QString>
 #include <QSystemTrayIcon>
 #include <QTimer>
@@ -76,14 +77,14 @@ class TorrentStorrage;
 class TorrentTracker;
 class UpdateNotifier;
 class HtmlView;
-class CuteTorrent : public BaseWindow<QWidget> , private Ui::CustomWindow
+class CuteTorrentMainWindow : public BaseWindow<QWidget> , private Ui::CustomWindow
 {
 	Q_OBJECT
 
 public:
-	CuteTorrent(QWidget* parent = 0);
+	CuteTorrentMainWindow(QWidget* parent = 0);
 	void ConnectMessageReceved(Application* a);
-	~CuteTorrent();
+	~CuteTorrentMainWindow();
 protected:
 	bool eventFilter(QObject* obj, QEvent* event);
 	void changeEvent(QEvent* event);
@@ -97,6 +98,7 @@ private:
 	void initToolbarIcons();
 	void initStatusBarIcons();
 	void initMainMenuIcons();
+	QRegExp m_httpLinkRegexp;
 	QTimer* m_pUpdateTimer;
 	StyleEngene* m_pStyleEngine;
 	QComboBox* m_pTorrentSearchCategory;

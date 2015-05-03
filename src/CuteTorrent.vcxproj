@@ -620,6 +620,10 @@
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC %(Filename).h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\Release\moc_%(Filename).cpp;%(Outputs)</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(Filename).h;</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PHONON_LIB -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"qtsingleapplication\src" -I"..\ThirdParties\boost_1_55_0" -I"..\ThirdParties\libtorrent-rasterbar-1.0.2\include" -I".\GeneratedFiles" -I"." -I".\GeneratedFiles\Release" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I".\GeneratedFiles\Release" -I"GeneratedFiles" -I$(QTDIR)\mkspecs\win32-msvc2010 -D_MSC_VER=1600 -DWIN32 %(Identity) -o .\GeneratedFiles\Release\moc_%(Filename).cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">MOC %(Filename).h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">.\GeneratedFiles\Release\moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">$(QTDIR)\bin\moc.exe;%(Filename).h;</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="core\viewModel\FileViewSortProxyModel.h" />
     <ClInclude Include="core\datamodels\FileViewTreeItem.h" />

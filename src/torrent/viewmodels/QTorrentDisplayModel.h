@@ -34,7 +34,7 @@ along with this program.  If not, see .
 #include "Torrent.h"
 #include "TorrentManager.h"
 
-class CuteTorrent;
+class CuteTorrentMainWindow;
 class Torrent;
 class TorrentManager;
 class QTorrentFilterProxyModel;

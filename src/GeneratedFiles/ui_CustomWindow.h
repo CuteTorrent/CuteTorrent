@@ -170,7 +170,7 @@ public:
         verticalLayout->setSpacing(0);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(1, 1, 1, 2);
+        verticalLayout->setContentsMargins(2, 1, 2, 2);
         titleBar = new QWidget(CustomWindow);
         titleBar->setObjectName(QString::fromUtf8("titleBar"));
         titleBar->setMinimumSize(QSize(0, 23));
@@ -366,6 +366,7 @@ public:
         describtionLabel->setMaximumSize(QSize(16777215, 16));
         describtionLabel->setContextMenuPolicy(Qt::ActionsContextMenu);
         describtionLabel->setWordWrap(true);
+        describtionLabel->setOpenExternalLinks(true);
 
         gridLayout_4->addWidget(describtionLabel, 4, 1, 1, 4);
 

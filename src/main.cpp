@@ -120,7 +120,7 @@ int main(int argc, char* argv[])
 	a.loadTranslations(":/translations");
 	a.loadTranslationsQt(":/translations_qt");
 	a.addLibraryPath(QCoreApplication::applicationDirPath() + "/plugins");
-	CuteTorrent w;
+	CuteTorrentMainWindow w;
 	a.setActivationWindow(&w);
 	a.setActiveWindow(&w);
 	w.ConnectMessageReceved(&a);

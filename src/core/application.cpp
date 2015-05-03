@@ -133,7 +133,7 @@ bool Application::event(QEvent* event)
 	return QtSingleApplication::event(event);
 }
 
-void Application::setLanguage(QString& locale)
+void Application::setLanguage(QString locale)
 {
 	qDebug() << "Application::setLanguage" << locale;
 
@@ -158,7 +158,7 @@ void Application::setLanguage(QString& locale)
 	}
 }
 
-void Application::setLanguageQt(QString& locale)
+void Application::setLanguageQt(QString locale)
 {
 	qDebug() << "Application::setLanguageQt" << locale;
 

@@ -24,13 +24,13 @@
     <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>1</number>
+    <number>2</number>
    </property>
    <property name="topMargin">
     <number>1</number>
    </property>
    <property name="rightMargin">
-    <number>1</number>
+    <number>2</number>
    </property>
    <property name="bottomMargin">
     <number>2</number>
@@ -454,6 +454,9 @@
                     <string/>
                    </property>
                    <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                   <property name="openExternalLinks">
                     <bool>true</bool>
                    </property>
                   </widget>

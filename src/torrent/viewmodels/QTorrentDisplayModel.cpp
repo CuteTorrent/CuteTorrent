@@ -301,16 +301,6 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 			return;
 		}
 
-		if(selectedRow < 0)
-		{
-			return;
-		}
-
-		if(selectedRow >= rowCount())
-		{
-			return;
-		}
-
 		switch(wtf)
 		{
 			case stop:
@@ -383,8 +373,8 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 				
 					
 				}
+				break;
 			}
-			break;
 
 			case remove_all:
 			{
@@ -431,7 +421,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 			}
 
 			case resume:
-				for (int i = indexes.count() - 1; i >= 0; i -= 1)
+			{	for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
 					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
@@ -439,7 +429,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 				}
 
 				break;
-
+			}
 			case rehash:
 			{
 				for (int i = indexes.count() - 1; i >= 0; i -= 1)

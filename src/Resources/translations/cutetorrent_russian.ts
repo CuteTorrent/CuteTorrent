@@ -612,11 +612,11 @@
     <name>CuteTorrent</name>
     <message>
         <source>ABAUT_TITLE</source>
-        <translation>О CuteTorrent</translation>
+        <translation type="obsolete">О CuteTorrent</translation>
     </message>
     <message>
         <source>ABAUT_TEXT</source>
-        <translation>CuteTorrent %1 -бесплатный торрент клиент с поддержкой DHT, возможностью монтировани образов в DaemonTools и встроенным Аудио/Видео плеером.
+        <translation type="obsolete">CuteTorrent %1 -бесплатный торрент клиент с поддержкой DHT, возможностью монтировани образов в DaemonTools и встроенным Аудио/Видео плеером.
 
 Если вы заплатили деньги за это програмное обеспечение потребуйте возврата денег</translation>
     </message>
@@ -626,11 +626,11 @@
     </message>
     <message>
         <source>STATUS_UPLOAD</source>
-        <translation>Отдано(Отдача)</translation>
+        <translation type="obsolete">Отдано(Отдача)</translation>
     </message>
     <message>
         <source>STATUS_DWONLOAD</source>
-        <translation>Загруженно(Загрузка)</translation>
+        <translation type="obsolete">Загруженно(Загрузка)</translation>
     </message>
     <message>
         <source>CT_ERROR %1
@@ -648,11 +648,253 @@
     </message>
     <message>
         <source>ADD_TRACKER</source>
+        <translation type="obsolete">Добавить трекер</translation>
+    </message>
+    <message>
+        <source>ADD_PEER</source>
+        <translation type="obsolete">Добавить пир</translation>
+    </message>
+    <message>
+        <source>ANIME_CATEGORY</source>
+        <translation type="obsolete">Анимэ</translation>
+    </message>
+    <message>
+        <source>MUSIC_CATEGORY</source>
+        <translation type="obsolete">Музыка</translation>
+    </message>
+    <message>
+        <source>TV_CATEGORY</source>
+        <translation type="obsolete">Телевидение</translation>
+    </message>
+    <message>
+        <source>PORN_CATEGORY</source>
+        <translation type="obsolete">Видео для взрослых</translation>
+    </message>
+    <message>
+        <source>APP_CATEGORY</source>
+        <translation type="obsolete">Программы</translation>
+    </message>
+    <message>
+        <source>GAMES_CATEGORY</source>
+        <translation type="obsolete">Игры</translation>
+    </message>
+    <message>
+        <source>BOOKS_CATEGORY</source>
+        <translation type="obsolete">Книги</translation>
+    </message>
+    <message>
+        <source>FILMS_CATEGORY</source>
+        <translation type="obsolete">Фильмы</translation>
+    </message>
+    <message>
+        <source>ALL_CATEGORY</source>
+        <translation type="obsolete">Все</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="obsolete">Нет</translation>
+    </message>
+    <message>
+        <source>LIMIT_UL</source>
+        <translation type="obsolete">Отдача</translation>
+    </message>
+    <message>
+        <source>LIMIT_DL</source>
+        <translation type="obsolete">Загрузка</translation>
+    </message>
+    <message>
+        <source>ACTION_HIDE</source>
+        <translation type="obsolete">Свернуть</translation>
+    </message>
+    <message>
+        <source>ACTION_MAXIMIZE_FULLSCREEN</source>
+        <translation type="obsolete">Развернуть на весь экран</translation>
+    </message>
+    <message>
+        <source>ACTION_MAXIMIZE</source>
+        <translation type="obsolete">Развернуть</translation>
+    </message>
+    <message>
+        <source>ACTION_EXIT</source>
+        <translation type="obsolete">Выход</translation>
+    </message>
+    <message>
+        <source>ACTION_COPY</source>
+        <translation type="obsolete">Копировать</translation>
+    </message>
+    <message>
+        <source>TORRENTS_ACTIVITY</source>
+        <translation type="obsolete">Торренты</translation>
+    </message>
+    <message>
+        <source>DOWNLOADING_FLTR</source>
+        <translation type="obsolete">Загружается</translation>
+    </message>
+    <message>
+        <source>SEEDING_FLTR</source>
+        <translation type="obsolete">Раздается</translation>
+    </message>
+    <message>
+        <source>COMPLETED_FLTR</source>
+        <translation type="obsolete">Завершенные</translation>
+    </message>
+    <message>
+        <source>ACTIVE_FLTR</source>
+        <translation type="obsolete">Активные</translation>
+    </message>
+    <message>
+        <source>NOT_ACTIVE_FLTR</source>
+        <translation type="obsolete">Неактивные</translation>
+    </message>
+    <message>
+        <source>TORRENT_GROUPS</source>
+        <translation type="obsolete">Группы</translation>
+    </message>
+    <message>
+        <source>OPEN_TOORENT_DIALOG</source>
+        <translation type="obsolete">Выбирите торрент файл</translation>
+    </message>
+    <message>
+        <source>TORRENT_FILES (*.torrent);;Any File (*.*)</source>
+        <oldsource>??????? ????? (*.torrent);;Any File (*.*)</oldsource>
+        <translation type="obsolete">Торрент файлы (*.torrent);;Any File (*.*)</translation>
+    </message>
+    <message>
+        <source>MAGNET_LINK_DLG</source>
+        <translation type="obsolete">Magnet-сслыка</translation>
+    </message>
+    <message>
+        <source>MAGNET_LINK:</source>
+        <translation type="obsolete">Magnet-сслыка:</translation>
+    </message>
+    <message>
+        <source>ADD_PEER_DLG</source>
+        <translation type="obsolete">Добавление пира</translation>
+    </message>
+    <message>
+        <source>PEER:</source>
+        <translation type="obsolete">Пир:</translation>
+    </message>
+    <message>
+        <source>PEER_ERR</source>
+        <translation type="obsolete">Ошибка</translation>
+    </message>
+    <message>
+        <source>INVALID_IP_STRING</source>
+        <translation type="obsolete">ВВеден неправельный ip адрес</translation>
+    </message>
+    <message>
+        <source>ADD_TRACKER_DLG</source>
+        <translation type="obsolete">Добавление трекера</translation>
+    </message>
+    <message>
+        <source>TRACKER:</source>
+        <translation type="obsolete">Трекер:</translation>
+    </message>
+    <message>
+        <source>RSS_CHANELS</source>
+        <translation type="obsolete">RSS-ленты</translation>
+    </message>
+    <message>
+        <source>TAB_SEARCH</source>
+        <translation type="obsolete">Поиск</translation>
+    </message>
+    <message>
+        <source>DHT: %1 nodes</source>
+        <translation type="obsolete">DHT: %1 узлов</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="obsolete">Поиск</translation>
+    </message>
+    <message>
+        <source>REMOVE_TRACKER</source>
+        <translation type="obsolete">Удалить трекер</translation>
+    </message>
+    <message>
+        <source>EDIT_TRACKER</source>
+        <translation type="obsolete">Изменить трекер</translation>
+    </message>
+    <message>
+        <source>EDIT_TRACKER_DLG</source>
+        <translation type="obsolete">Редактирование трекера</translation>
+    </message>
+    <message>
+        <source>ADD_WEB_SEED</source>
+        <translation type="obsolete">Добавить WebSeed</translation>
+    </message>
+    <message>
+        <source>HTTP_SEED_URL:</source>
+        <translation type="obsolete">Web сид</translation>
+    </message>
+    <message>
+        <source>RSS_FEED_ADD</source>
+        <translation type="obsolete">Добавление Rss-ленты</translation>
+    </message>
+    <message>
+        <source>RSS_FEED_URL:</source>
+        <translation type="obsolete">Ссылка на Rss-ленту</translation>
+    </message>
+    <message>
+        <source>TRACKER_UPDATING</source>
+        <translation type="obsolete">Обновляется...</translation>
+    </message>
+    <message>
+        <source>RSS_FEED_DELETE</source>
+        <translation type="obsolete">Удаление RSS-ленты</translation>
+    </message>
+    <message>
+        <source>RSS_FEED_DELETE_MSG</source>
+        <translation type="obsolete">Вы действительно хотите удалить %1?</translation>
+    </message>
+    <message>
+        <source>CuteTorrent %1
+Upload: %2
+Download: %3</source>
+        <translation type="obsolete">CuteTorrent %1
+Отдача: %2
+Загрузка: %3</translation>
+    </message>
+</context>
+<context>
+    <name>CuteTorrentMainWindow</name>
+    <message>
+        <source>ABAUT_TITLE</source>
+        <translation>О CuteTorrent</translation>
+    </message>
+    <message>
+        <source>ABAUT_TEXT</source>
+        <translation>CuteTorrent %1 -бесплатный торрент клиент с поддержкой DHT, возможностью монтировани образов в DaemonTools и встроенным Аудио/Видео плеером.
+
+Если вы заплатили деньги за это програмное обеспечение потребуйте возврата денег</translation>
+    </message>
+    <message>
+        <source>STATUS_DWONLOAD</source>
+        <translation>Загруженно(Загрузка)</translation>
+    </message>
+    <message>
+        <source>STATUS_UPLOAD</source>
+        <translation>Отдано(Отдача)</translation>
+    </message>
+    <message>
+        <source>ADD_TRACKER</source>
         <translation>Добавить трекер</translation>
+    </message>
+    <message>
+        <source>REMOVE_TRACKER</source>
+        <translation>Удалить трекер</translation>
+    </message>
+    <message>
+        <source>EDIT_TRACKER</source>
+        <translation>Изменить трекер</translation>
     </message>
     <message>
         <source>ADD_PEER</source>
         <translation>Добавить пир</translation>
+    </message>
+    <message>
+        <source>ADD_WEB_SEED</source>
+        <translation>Добавить WebSeed</translation>
     </message>
     <message>
         <source>ANIME_CATEGORY</source>
@@ -691,8 +933,12 @@
         <translation>Все</translation>
     </message>
     <message>
+        <source>Search</source>
+        <translation>Поиск</translation>
+    </message>
+    <message>
         <source>None</source>
-        <translation>Нет</translation>
+        <translation></translation>
     </message>
     <message>
         <source>LIMIT_UL</source>
@@ -701,6 +947,18 @@
     <message>
         <source>LIMIT_DL</source>
         <translation>Загрузка</translation>
+    </message>
+    <message>
+        <source>CuteTorrent %1
+Upload: %2
+Download: %3</source>
+        <translation>CuteTorrent %1
+Отдача: %2
+Загрузка: %3</translation>
+    </message>
+    <message>
+        <source>DHT: %1 nodes</source>
+        <translation>DHT: %1 узлов</translation>
     </message>
     <message>
         <source>ACTION_HIDE</source>
@@ -756,8 +1014,11 @@
     </message>
     <message>
         <source>TORRENT_FILES (*.torrent);;Any File (*.*)</source>
-        <oldsource>??????? ????? (*.torrent);;Any File (*.*)</oldsource>
         <translation>Торрент файлы (*.torrent);;Any File (*.*)</translation>
+    </message>
+    <message>
+        <source>TRACKER_UPDATING</source>
+        <translation>Обновляется...</translation>
     </message>
     <message>
         <source>MAGNET_LINK_DLG</source>
@@ -800,28 +1061,8 @@
         <translation>Поиск</translation>
     </message>
     <message>
-        <source>DHT: %1 nodes</source>
-        <translation>DHT: %1 узлов</translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation>Поиск</translation>
-    </message>
-    <message>
-        <source>REMOVE_TRACKER</source>
-        <translation>Удалить трекер</translation>
-    </message>
-    <message>
-        <source>EDIT_TRACKER</source>
-        <translation>Изменить трекер</translation>
-    </message>
-    <message>
         <source>EDIT_TRACKER_DLG</source>
         <translation>Редактирование трекера</translation>
-    </message>
-    <message>
-        <source>ADD_WEB_SEED</source>
-        <translation>Добавить WebSeed</translation>
     </message>
     <message>
         <source>HTTP_SEED_URL:</source>
@@ -834,26 +1075,6 @@
     <message>
         <source>RSS_FEED_URL:</source>
         <translation>Ссылка на Rss-ленту</translation>
-    </message>
-    <message>
-        <source>TRACKER_UPDATING</source>
-        <translation>Обновляется...</translation>
-    </message>
-    <message>
-        <source>RSS_FEED_DELETE</source>
-        <translation type="obsolete">Удаление RSS-ленты</translation>
-    </message>
-    <message>
-        <source>RSS_FEED_DELETE_MSG</source>
-        <translation type="obsolete">Вы действительно хотите удалить %1?</translation>
-    </message>
-    <message>
-        <source>CuteTorrent %1
-Upload: %2
-Download: %3</source>
-        <translation>CuteTorrent %1
-Отдача: %2
-Загрузка: %3</translation>
     </message>
 </context>
 <context>
@@ -1034,7 +1255,7 @@ Download: %3</source>
     </message>
     <message>
         <source>upload to upload connection</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>uninteresting upload-only peer</source>
@@ -1050,7 +1271,7 @@ Download: %3</source>
     </message>
     <message>
         <source>&apos;have&apos;-message with higher index than the number of pieces</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>bitfield of invalid size</source>
@@ -1058,7 +1279,7 @@ Download: %3</source>
     </message>
     <message>
         <source>too many piece requests while choked</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>invalid piece packet</source>
@@ -2059,7 +2280,7 @@ Download: %3</source>
     </message>
     <message>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1</source>
-        <translation>Ошибка во время автоматической загрузки торрента:  %1</translation>
+        <translation type="obsolete">Ошибка во время автоматической загрузки торрента:  %1</translation>
     </message>
     <message>
         <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1</source>
@@ -2068,6 +2289,14 @@ Download: %3</source>
     <message>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD_MAGNET: %1</source>
         <translation>Ошибка во время автоматической загрузки торрента:  %1</translation>
+    </message>
+    <message>
+        <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2</source>
+        <translation>Ошибка во время автоматической загрузки торрента:  %1 %2</translation>
+    </message>
+    <message>
+        <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1 %2</source>
+        <translation>Началась загруска торрента %1 %2 полученного из RSS-ленты</translation>
     </message>
 </context>
 <context>

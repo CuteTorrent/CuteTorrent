@@ -157,7 +157,7 @@ TorrentManager::TorrentManager() : m_pNotificationSys(NotificationSystem::getIns
 		{
 			QString newStyleDirPath = StaticHelpers::CombinePathes(dataDir, "BtSessionData");
 
-			if (!oldStyleDir.rename(oldStyleDirPath, newStyleDirPath))
+			if (!MoveFiles(oldStyleDirPath, newStyleDirPath))
 			{
 				CustomMessageBox::warning(nullptr, "Move dir failed", QString("Failed to move %1 to %2!").arg(oldStyleDirPath, newStyleDirPath));
 			}
@@ -206,6 +206,22 @@ TorrentManager::TorrentManager() : m_pNotificationSys(NotificationSystem::getIns
 	}
 
 	//QTimer::singleShot(10,this,SLOT(initSession()));
+}
+
+bool TorrentManager::MoveFiles(QString oldStyleDirPath, QString newStyleDirPath)
+{
+	QDir oldDir(oldStyleDirPath);
+	QDir newDir(newStyleDirPath);
+	QStringList entryList = oldDir.entryList();
+	bool res = true;
+	for (int i = 0; i < entryList.length(); i++)
+	{
+		QString fileName = entryList[i];
+		res = QFile::copy(oldDir.absoluteFilePath(fileName), newDir.absoluteFilePath(fileName)) && res;
+		res = QFile::remove(oldDir.absoluteFilePath(fileName)) && res;
+	}
+	oldDir.rmdir(oldStyleDirPath);
+	return res;
 }
 
 void TorrentManager::InitSession()

@@ -108,8 +108,6 @@ public:
         gridLayout->setSizeConstraint(QLayout::SetNoConstraint);
         buttonBox = new QDialogButtonBox(m_centralWidget);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setOrientation(Qt::Horizontal);
-        buttonBox->setStandardButtons(QDialogButtonBox::NoButton);
         buttonBox->setCenterButtons(true);
 
         gridLayout->addWidget(buttonBox, 1, 0, 1, 2);

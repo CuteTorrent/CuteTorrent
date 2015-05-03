@@ -45,15 +45,16 @@ void UpdateNotifier::replyFinished(QNetworkReply* pReply)
 
 	if(parts.count() != 4)
 	{
+		if (pReply->error() != QNetworkReply::NoError)
+		{
+			emit Notify(NotificationSystem::UPDATE_ERROR, tr("ERROR_GETTING_VERSION_STR %1").arg(pReply->errorString()), QVariant());
+			return;
+		}
 		emit Notify(NotificationSystem::UPDATE_ERROR, tr("ERROR_GETTING_VERSION_STR"), QVariant());
 		return;
 	}
 
-	if(!pReply->isFinished())
-	{
-		emit Notify(NotificationSystem::UPDATE_ERROR, tr("ERROR_GETTING_VERSION_STR %1").arg(pReply->errorString()), QVariant());
-		return;
-	}
+	
 
 	Version current = Version::CurrentVersion();
 	Version recived(str);

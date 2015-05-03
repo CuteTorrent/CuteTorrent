@@ -326,29 +326,30 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 
 	if (m_activeTorrentDownloads.contains(url))
 	{
+		TorrentDownloadInfo info = m_activeTorrentDownloads[url];
 		boost::scoped_ptr<QTemporaryFile> pFile(pUnsafeFile);
 		QString torrentFilePath = pFile->fileName();
 		TorrentManager* pTorrentManager = TorrentManager::getInstance();
 		error_code ec;
-		
+		RssFeed* pFeed = findFeed(info.rssFeedId);
 		boost::scoped_ptr<opentorrent_info> pTorrentInfo(pTorrentManager->GetTorrentInfo(torrentFilePath, ec));
 		if (ec)
 		{
-			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1").arg(StaticHelpers::translateLibTorrentError(ec)), QVariant());
+			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), pFeed->displayName(true)), QVariant());
 			TorrentManager::freeInstance();
 			return;
 		}
-		TorrentDownloadInfo info = m_activeTorrentDownloads[url];
+		
 		QString savePath = gessSavePath(info.downloadRule, pTorrentInfo->baseSuffix);
 		QMap<QString, quint8> filePriorities = getFilePriorities(info,pTorrentInfo->files);
 		pTorrentManager->AddTorrent(torrentFilePath, savePath, "" , ec);
 		if (ec)
 		{
-			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1").arg(StaticHelpers::translateLibTorrentError(ec)), QVariant());
+			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), pFeed->displayName(true)), QVariant());
 		}
 		else
 		{
-			emit Notify(NotificationSystem::TORRENT_INFO, tr("AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1").arg(pTorrentInfo->name), QVariant());
+			emit Notify(NotificationSystem::TORRENT_INFO, tr("AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1 %2").arg(pTorrentInfo->name, pFeed->displayName(true)), QVariant());
 			RssFeed* rssFeed = findFeed(info.rssFeedId);
 			RssItem* rssItem = rssFeed->GetFeedItem(info.rssItemId);
 			rssItem->setDownloadingTorrent(pTorrentInfo->infoHash);

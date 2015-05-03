@@ -9,8 +9,8 @@ CustomMessageBox::CustomMessageBox(QWidget* /*parent*/) :
 }
 
 CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title, const QString& text,
-                           QMessageBox::StandardButtons buttons, QWidget* /*parent*/, Qt::WindowFlags /*flags*/) :
-	BaseWindow<QDialog> (OnlyCloseButton, NoResize),
+                           QMessageBox::StandardButtons buttons, QWidget* parent, Qt::WindowFlags /*flags*/) :
+	BaseWindow<QDialog>(OnlyCloseButton, NoResize, parent),
 	ui(new Ui::MessageBox)
 {
 	ui->setupUi(this);
@@ -29,7 +29,7 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 
 	clickedButton = nullptr;
 	uint mask = QMessageBox::FirstButton;
-
+	bool isFirst = true;
 	while(mask <= QMessageBox::LastButton)
 	{
 		uint sb = buttons & mask;
@@ -41,6 +41,11 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 		}
 
 		QPushButton* button = ui->buttonBox->addButton(static_cast<QDialogButtonBox::StandardButton>(sb));
+		if (isFirst)
+		{
+			isFirst = false;
+			button->setFocus();
+		}
 		QMessageBox::ButtonRole  role = static_cast<QMessageBox::ButtonRole>(ui->buttonBox->buttonRole(button));
 
 		if(role == QMessageBox::RejectRole || role == QMessageBox::NoRole)

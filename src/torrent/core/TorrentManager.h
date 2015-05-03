@@ -87,6 +87,7 @@ signals:
 	void OnNewFeedItem();
 	void OnFeedChanged();
 protected:
+	bool MoveFiles(QString oldStyleDirPath, QString newStyleDirPath);
 	TorrentManager();
 	~TorrentManager();
 	static TorrentManager* _instance;
