@@ -8,11 +8,11 @@ class TorrentApiController: public HttpRequestHandler
 	Q_DISABLE_COPY(TorrentApiController)
 private:
 	TorrentManager* m_pTorrentManager;
-	TorrentStorrage* torrents;
+	TorrentStorrage* m_pTorrentStorrage;
 public:
 
 	TorrentApiController(QObject* parent = 0);
 	~TorrentApiController();
-	void service(HttpRequest& request, HttpResponse& response);
+	void service(HttpRequest& request, HttpResponse& response) override;
 
 };

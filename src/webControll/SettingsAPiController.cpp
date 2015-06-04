@@ -15,8 +15,8 @@ void SettingsAPiController::service(HttpRequest& request, HttpResponse& response
 	{
 		return;
 	}
-
-	if(request.getMethod() == "GET")
+	QString method = request.getMethod();
+	if (method.compare("GET", Qt::CaseInsensitive) == 0)
 	{
 		QtJson::JsonObject jSettings;
 		jSettings["listen_port"] = settings->valueInt("Torrent", "listen_port");
@@ -48,7 +48,7 @@ void SettingsAPiController::service(HttpRequest& request, HttpResponse& response
 		response.setHeader("Content-Type", "application/json");
 		response.write(QtJson::serialize(jSettings));
 	}
-	else if(request.getMethod() == "PUT" || request.getMethod() == "POST")
+	else if (method.compare("PUT", Qt::CaseInsensitive) == 0 || method.compare("POST", Qt::CaseInsensitive) == 0)
 	{
 		QString jsonSettings = request.getBody();
 		bool ok;

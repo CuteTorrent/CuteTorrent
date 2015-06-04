@@ -24,6 +24,7 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QSpinBox>
+#include <QtGui/QSplitter>
 #include <QtGui/QTableWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
@@ -48,18 +49,23 @@ public:
     QSpacerItem *horizontalSpacer;
     QLabel *label;
     QGroupBox *groupBox;
+    QGridLayout *gridLayout_4;
+    QSplitter *splitter;
+    QWidget *widget;
     QGridLayout *gridLayout_2;
-    QPushButton *removeRowButton;
-    QPushButton *addRowButton;
     QTableWidget *m_pCoociesTabWidget;
     QLabel *label_2;
+    QWidget *widget_2;
+    QGridLayout *gridLayout_3;
+    QPushButton *addRowButton;
+    QPushButton *removeRowButton;
     QSpacerItem *verticalSpacer;
 
     void setupUi(QDialog *RssSettings)
     {
         if (RssSettings->objectName().isEmpty())
             RssSettings->setObjectName(QString::fromUtf8("RssSettings"));
-        RssSettings->resize(382, 246);
+        RssSettings->resize(412, 315);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
         RssSettings->setWindowIcon(icon);
@@ -150,19 +156,16 @@ public:
 
         groupBox = new QGroupBox(m_centralWidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        gridLayout_2 = new QGridLayout(groupBox);
+        gridLayout_4 = new QGridLayout(groupBox);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        splitter = new QSplitter(groupBox);
+        splitter->setObjectName(QString::fromUtf8("splitter"));
+        splitter->setOrientation(Qt::Horizontal);
+        widget = new QWidget(splitter);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        gridLayout_2 = new QGridLayout(widget);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        removeRowButton = new QPushButton(groupBox);
-        removeRowButton->setObjectName(QString::fromUtf8("removeRowButton"));
-
-        gridLayout_2->addWidget(removeRowButton, 1, 1, 1, 1);
-
-        addRowButton = new QPushButton(groupBox);
-        addRowButton->setObjectName(QString::fromUtf8("addRowButton"));
-
-        gridLayout_2->addWidget(addRowButton, 0, 1, 1, 1);
-
-        m_pCoociesTabWidget = new QTableWidget(groupBox);
+        m_pCoociesTabWidget = new QTableWidget(widget);
         if (m_pCoociesTabWidget->columnCount() < 2)
             m_pCoociesTabWidget->setColumnCount(2);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
@@ -173,23 +176,46 @@ public:
             m_pCoociesTabWidget->setRowCount(1);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
         m_pCoociesTabWidget->setVerticalHeaderItem(0, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        m_pCoociesTabWidget->setItem(0, 0, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        m_pCoociesTabWidget->setItem(0, 1, __qtablewidgetitem4);
         m_pCoociesTabWidget->setObjectName(QString::fromUtf8("m_pCoociesTabWidget"));
         m_pCoociesTabWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
         m_pCoociesTabWidget->setColumnCount(2);
         m_pCoociesTabWidget->verticalHeader()->setVisible(false);
         m_pCoociesTabWidget->verticalHeader()->setDefaultSectionSize(19);
 
-        gridLayout_2->addWidget(m_pCoociesTabWidget, 0, 0, 3, 1);
+        gridLayout_2->addWidget(m_pCoociesTabWidget, 0, 0, 1, 1);
 
-        label_2 = new QLabel(groupBox);
+        label_2 = new QLabel(widget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setWordWrap(true);
 
-        gridLayout_2->addWidget(label_2, 3, 0, 1, 1);
+        gridLayout_2->addWidget(label_2, 1, 0, 1, 1);
+
+        splitter->addWidget(widget);
+        widget_2 = new QWidget(splitter);
+        widget_2->setObjectName(QString::fromUtf8("widget_2"));
+        gridLayout_3 = new QGridLayout(widget_2);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        addRowButton = new QPushButton(widget_2);
+        addRowButton->setObjectName(QString::fromUtf8("addRowButton"));
+
+        gridLayout_3->addWidget(addRowButton, 0, 0, 1, 1);
+
+        removeRowButton = new QPushButton(widget_2);
+        removeRowButton->setObjectName(QString::fromUtf8("removeRowButton"));
+
+        gridLayout_3->addWidget(removeRowButton, 1, 0, 1, 1);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_2->addItem(verticalSpacer, 2, 1, 2, 1);
+        gridLayout_3->addItem(verticalSpacer, 2, 0, 1, 1);
+
+        splitter->addWidget(widget_2);
+
+        gridLayout_4->addWidget(splitter, 0, 0, 1, 1);
 
 
         gridLayout->addWidget(groupBox, 2, 0, 1, 3);
@@ -219,15 +245,20 @@ public:
         m_pRefreshRateSpinBox->setSuffix(QApplication::translate("RssSettings", " MINUTES", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("RssSettings", "RSS_URL", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("RssSettings", "COOKIES", 0, QApplication::UnicodeUTF8));
-        removeRowButton->setText(QApplication::translate("RssSettings", "REMOVE_ROW", 0, QApplication::UnicodeUTF8));
-        addRowButton->setText(QApplication::translate("RssSettings", "ADD_ROW", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = m_pCoociesTabWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("RssSettings", "COOKIE_ATTRIBUTE", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem1 = m_pCoociesTabWidget->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QApplication::translate("RssSettings", "COOLIE_VALUE", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem2 = m_pCoociesTabWidget->verticalHeaderItem(0);
         ___qtablewidgetitem2->setText(QApplication::translate("RssSettings", "\320\235\320\276\320\262\320\260\321\217 \321\201\321\202\321\200\320\276\320\272\320\260", 0, QApplication::UnicodeUTF8));
+
+        const bool __sortingEnabled = m_pCoociesTabWidget->isSortingEnabled();
+        m_pCoociesTabWidget->setSortingEnabled(false);
+        m_pCoociesTabWidget->setSortingEnabled(__sortingEnabled);
+
         label_2->setText(QApplication::translate("RssSettings", "COOKIE_HINT", 0, QApplication::UnicodeUTF8));
+        addRowButton->setText(QApplication::translate("RssSettings", "ADD_ROW", 0, QApplication::UnicodeUTF8));
+        removeRowButton->setText(QApplication::translate("RssSettings", "REMOVE_ROW", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

@@ -7,13 +7,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CuteTorrent", "src\CuteTorr
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Win32 = Debug|Win32
 		Release with debug symbols|Win32 = Release with debug symbols|Win32
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}.Debug|Win32.ActiveCfg = Debug|Win32
-		{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}.Debug|Win32.Build.0 = Debug|Win32
 		{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}.Release with debug symbols|Win32.ActiveCfg = Release with debug symbols|Win32
 		{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}.Release with debug symbols|Win32.Build.0 = Release with debug symbols|Win32
 		{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}.Release|Win32.ActiveCfg = Release|Win32
@@ -21,8 +18,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

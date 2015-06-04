@@ -17,7 +17,8 @@ void MagnetApiController::service(HttpRequest& request, HttpResponse& response)
 		return;
 	}
 
-	if(request.getMethod() == "POST")
+	QString method = request.getMethod();
+	if (method.compare("post", Qt::CaseInsensitive) == 0)
 	{
 		QString magnetLink = request.getParameter("magnetLink");
 		QString savePath = request.getParameter("savePath");
@@ -47,5 +48,5 @@ void MagnetApiController::service(HttpRequest& request, HttpResponse& response)
 
 void MagnetApiController::DownloadMetadataCompleted(const openmagnet_info& _info)
 {
-	m_pTorrentManager->AddMagnet(_info.handle, savePathMap[_info.link], "", QMap<QString, qint8>());
+	m_pTorrentManager->AddMagnet(_info.handle, savePathMap[_info.link]);
 }

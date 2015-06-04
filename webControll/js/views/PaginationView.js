@@ -10,9 +10,9 @@ _.templateSettings = {
     interpolate: /\{\{=(.+?)\}\}/g
 };
 window.PaginationView = Backbone.View.extend({
-    el: $("#UsersView"),
-    //tagName: "ul",
-    link: '#torrent/page/', // ссылка
+   
+   
+   
     page_count: 1, // кол-во страниц
     page_active: 1, // активная страница
     page_show: 10, // кол-во страниц в блоке видимости
@@ -22,8 +22,10 @@ window.PaginationView = Backbone.View.extend({
     
     
 
-    initialize: function () { // конструктор
+    initialize: function (options) { // конструктор
        this.template= _.template($("#pagination-template").html()); // шаблон
+	   this.link = options && options.link ? options.link : '#items/page/';
+	   this.el = $(options.el);
     },
 
     render: function () { // выдача
@@ -60,9 +62,12 @@ window.PaginationView = Backbone.View.extend({
 
             };
             
-            $('#pages').html(this.template(paginationData)); 
+            this.el.html(this.template(paginationData)); 
             
             
-        }
+        } else
+		{
+			this.el.html(''); 
+		}
     }
 });

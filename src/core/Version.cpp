@@ -41,10 +41,12 @@ QString Version::v2fhelper(QString v, QString stuff, float* version, float weigh
 {
 	float f = 0;
 	QStringList parts = v.split(stuff, QString::SkipEmptyParts);
+
 	if (2 != parts.size())
 	{
 		return v;
 	}
+
 	f = v.toFloat();
 	version[4] = weight;
 	version[5] = f;
@@ -53,13 +55,15 @@ QString Version::v2fhelper(QString v, QString stuff, float* version, float weigh
 
 float Version::versionToFloat(QString v)
 {
-	float version[] = {
+	float version[] =
+	{
 		0, 0, 0, 0, // 4-part numerical revision
-			4, // alpha, beta, rc or (default) final
-			0, // alpha, beta or RC version revision
-			1 // Pre or (default) final
+		4, // alpha, beta, rc or (default) final
+		0, // alpha, beta or RC version revision
+		1 // Pre or (default) final
 	};
 	QStringList parts = v.split( "pre" , QString::SkipEmptyParts);
+
 	if (2 == parts.size())
 	{
 		version[6] = 0;
@@ -70,16 +74,18 @@ float Version::versionToFloat(QString v)
 	v = v2fhelper(v, "b", version, 2);
 	v = v2fhelper(v, "rc", version, 3);
 	parts = v.split(".");
+
 	for (int i = 0; i < std::min(parts.size(), 4); i++)
 	{
 		bool ok;
 		float f = parts[i].toFloat(&ok);
+
 		if (ok)
 		{
 			version[i] = f;
 		}
-		
 	}
+
 	float ver = version[0];
 	ver += version[1] / 100.0f;
 	ver += version[2] / 10000.0f;

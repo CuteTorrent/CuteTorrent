@@ -37,12 +37,12 @@ RssFeed* RssManager::addFeed(QUrl url, bool& isNew)
 	RssFeed* pFeed = new RssFeed(url, QUuid::createUuid());
 	m_pFeeds.append(pFeed);
 	connect(pFeed, SIGNAL(FeedChanged(QUuid)), SIGNAL(FeedChanged(QUuid)));
+	emit FeedChanged(pFeed->uid());
 	return pFeed;
 }
 
 RssManager::~RssManager()
 {
-	qDebug() << "RssManager::~RssManager";
 	QApplicationSettings::FreeInstance();
 }
 
@@ -138,15 +138,16 @@ void RssManager::addDownloadRule(RssDownloadRule* rule)
 {
 	bool ok;
 	rule->validate(ok);
+
 	if (ok)
 	{
-		m_downloadRules.insert(rule->Uid(),rule);
+		m_downloadRules.insert(rule->Uid(), rule);
+
 		foreach(RssFeed* pFeed, m_pFeeds)
 		{
 			onFeedChanged(pFeed->uid());
 		}
 	}
-	
 }
 
 void RssManager::removeDownloadRule(const QUuid& uid)
@@ -156,7 +157,6 @@ void RssManager::removeDownloadRule(const QUuid& uid)
 
 RssDownloadRule* RssManager::findDownloadRule(const QUuid& uid)
 {
-
 	foreach(RssDownloadRule* rule, m_downloadRules.values())
 	{
 		if (rule->Uid() == uid)
@@ -164,6 +164,7 @@ RssDownloadRule* RssManager::findDownloadRule(const QUuid& uid)
 			return rule;
 		}
 	}
+
 	return nullptr;
 }
 
@@ -191,6 +192,7 @@ void RssManager::LoadDownloadRules()
 		int numDownloadRules = 0;
 		dataStream >> numDownloadRules;
 		m_downloadRules.reserve(numDownloadRules);
+
 		for (int i = 0; i < numDownloadRules; i++)
 		{
 			RssDownloadRule* rule = new RssDownloadRule();
@@ -206,6 +208,7 @@ void RssManager::LoadDownloadRules()
 QMap<QString, quint8> RssManager::getFilePriorities(TorrentDownloadInfo downloadInfo, file_storage fileStorage)
 {
 	QMap<QString, quint8> result;
+
 	foreach(RssDownloadRule* pRule, m_downloadRules)
 	{
 		if (pRule->RuleType() == RssDownloadRule::SELECT_FILE_RULE && pRule->MatchFeed(downloadInfo.rssFeedId))
@@ -213,6 +216,7 @@ QMap<QString, quint8> RssManager::getFilePriorities(TorrentDownloadInfo download
 			for (int i = 0; i < fileStorage.num_files(); i++)
 			{
 				QString fileName = QString::fromUtf8(fileStorage.file_path(i).c_str());
+
 				if (pRule->MatchFile(fileName))
 				{
 					result.insert(fileName, 1);
@@ -224,6 +228,7 @@ QMap<QString, quint8> RssManager::getFilePriorities(TorrentDownloadInfo download
 			}
 		}
 	}
+
 	return result;
 }
 
@@ -248,20 +253,22 @@ void RssManager::SaveDownloadRules()
 		rssDownloadRulesDat.flush();
 		rssDownloadRulesDat.close();
 	}
-	
 }
 
 void RssManager::onFeedChanged(QUuid uid)
 {
 	emit FeedChanged(uid);
+
 	foreach(RssDownloadRule* rule, m_downloadRules.values())
 	{
 		if (rule->MatchFeed(uid))
 		{
 			RssFeed* pFeed = findFeed(uid);
+
 			if (pFeed != nullptr)
 			{
 				QList<RssItem*> feedItems = pFeed->GetFeedItems();
+
 				foreach(RssItem* rssItem, feedItems)
 				{
 					if (rssItem->downloadingTorrent().isEmpty() && rule->Match(rssItem))
@@ -283,8 +290,8 @@ RssFeed* RssManager::findFeed(const QUuid& uid)
 			return pFeed;
 		}
 	}
-	return nullptr;
 
+	return nullptr;
 }
 
 void RssManager::downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRule* rule)
@@ -323,7 +330,6 @@ void RssManager::downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRu
 
 void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 {
-
 	if (m_activeTorrentDownloads.contains(url))
 	{
 		TorrentDownloadInfo info = m_activeTorrentDownloads[url];
@@ -333,16 +339,18 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 		error_code ec;
 		RssFeed* pFeed = findFeed(info.rssFeedId);
 		boost::scoped_ptr<opentorrent_info> pTorrentInfo(pTorrentManager->GetTorrentInfo(torrentFilePath, ec));
+
 		if (ec)
 		{
 			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), pFeed->displayName(true)), QVariant());
 			TorrentManager::freeInstance();
 			return;
 		}
-		
+
 		QString savePath = gessSavePath(info.downloadRule, pTorrentInfo->baseSuffix);
-		QMap<QString, quint8> filePriorities = getFilePriorities(info,pTorrentInfo->files);
-		pTorrentManager->AddTorrent(torrentFilePath, savePath, "" , ec);
+		QMap<QString, quint8> filePriorities = getFilePriorities(info, pTorrentInfo->files);
+		pTorrentManager->AddTorrent(torrentFilePath, savePath, "", ec, filePriorities);
+
 		if (ec)
 		{
 			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), pFeed->displayName(true)), QVariant());
@@ -360,9 +368,8 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 	}
 	else
 	{
-		qDebug() << "RssManger do not request download " << url << " but received that it was downloaded to " << pUnsafeFile->fileName();
+		qWarning() << "RssManger do not request download " << url << " but received that it was downloaded to " << pUnsafeFile->fileName();
 	}
-	
 }
 
 void RssManager::onMagnetError(QString error)
@@ -373,22 +380,23 @@ void RssManager::onMagnetError(QString error)
 void RssManager::onDownloadMetadataCompleted(openmagnet_info magnetInfo)
 {
 	TorrentManager* pTorrentManager = TorrentManager::getInstance();
-	
+
 	if (m_activeTorrentDownloads.contains(magnetInfo.link))
 	{
 		TorrentDownloadInfo info = m_activeTorrentDownloads[magnetInfo.link];
 		QString savePath = gessSavePath(info.downloadRule, magnetInfo.baseSuffix);
-
 		pTorrentManager->AddMagnet(magnetInfo.handle, savePath);
 		m_activeTorrentDownloads.remove(magnetInfo.link);
 		emit Notify(NotificationSystem::TORRENT_INFO, tr("AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1").arg(magnetInfo.name), QVariant());
 	}
+
 	TorrentManager::freeInstance();
 }
 
 QString RssManager::gessSavePath(RssDownloadRule* downloadRule, QString base_suffix)
 {
 	QApplicationSettings* pSettings = QApplicationSettings::getInstance();
+
 	if (downloadRule->UseStaticSavePath())
 	{
 		QApplicationSettings::FreeInstance();
@@ -396,8 +404,8 @@ QString RssManager::gessSavePath(RssDownloadRule* downloadRule, QString base_suf
 	}
 	else
 	{
-		
 		QList<GroupForFileFiltering> filters = pSettings->GetFileFilterGroups();
+
 		for each(GroupForFileFiltering filter in filters)
 		{
 			if (filter.Contains(base_suffix))
@@ -406,8 +414,8 @@ QString RssManager::gessSavePath(RssDownloadRule* downloadRule, QString base_suf
 				return filter.SavePath();
 			}
 		}
-		
 	}
+
 	QString lastSaveDir = pSettings->valueString("System", "LastSaveTorrentDir");
 	QApplicationSettings::FreeInstance();
 	return lastSaveDir;

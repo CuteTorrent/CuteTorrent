@@ -67,7 +67,6 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	painter->save();
 	painter->setRenderHint(QPainter::Antialiasing);
 	style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
-	
 	QIcon::Mode im = QIcon::Normal;
 	QIcon::State qs = QIcon::On;
 	QPalette::ColorGroup cg = QPalette::Normal;
@@ -86,11 +85,12 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	QRect iconArea(fillArea.x(), fillArea.y() + (fillArea.height() - iconSize) / 2, iconSize, iconSize);
 	QRect nameArea(iconArea.x() + iconArea.width() + GUI_PAD, fillArea.y(),
 	               fillArea.width() - GUI_PAD - iconArea.width(), nameSize.height());
+
 	if (nameArea.x() + nameArea.width() > opt.rect.width())
 	{
 		nameArea.setWidth(opt.rect.width() - nameArea.x());
 	}
-	
+
 	QRect progArea(nameArea);
 	progArea.moveTop(nameArea.y() + statusFM.lineSpacing() + GUI_PAD / 2);
 	progArea.setWidth(nameArea.width() / 2);

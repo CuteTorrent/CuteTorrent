@@ -120,9 +120,6 @@
       <Filter>VideoPlayer</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="webControll\CommandsApiController.cpp">
-      <Filter>RemoteControl</Filter>
-    </ClCompile>
     <ClCompile Include="webControll\MagnetApiController.cpp">
       <Filter>RemoteControl</Filter>
     </ClCompile>
@@ -598,6 +595,27 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ObservebaleCollectionBase.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="webControll\FileSystemController.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\StorrageInfo\qstorageinfo.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\StorrageInfo\qstorageinfo_win.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="webControll\RssController.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\StyledProgressBar.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="webControll\TorrentCommandsApiController.cpp">
+      <Filter>RemoteControl</Filter>
+    </ClCompile>
+    <ClCompile Include="webControll\RssCommandsApiController.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -808,11 +826,11 @@
     <CustomBuild Include="core\collections\ObservebaleCollectionBase.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="webControll\CommandsApiController.h">
+    <CustomBuild Include="webControll\TorrentCommandsApiController.h">
       <Filter>RemoteControl</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
     <CustomBuild Include="webControll\MagnetApiController.h">
       <Filter>RemoteControl</Filter>
     </CustomBuild>
@@ -1031,8 +1049,26 @@
     <ClInclude Include="core\collections\ObservableList.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="webControll\FileSystemController.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\StorrageInfo\qstorageinfo.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\StorrageInfo\qstorageinfo_p.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="webControll\RssController.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\gui\Controls\StyledProgressBar.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="webControll\RssCommandsApiController.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resources\CuteTorrent.rc" />
+    <ResourceCompile Include="Resources\CuteTorrentVS.rc" />
   </ItemGroup>
 </Project>

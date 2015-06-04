@@ -9,6 +9,6 @@ private:
 	TorrentManager* m_pTorrentManager;
 public:
 	UploadController(QObject*);
-	void service(HttpRequest& request, HttpResponse& response);
+	void service(HttpRequest& request, HttpResponse& response) override;
 	~UploadController();
 };

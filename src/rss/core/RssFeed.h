@@ -17,11 +17,11 @@ class RssItem;
 class RssFeed : public QObject
 {
 	Q_OBJECT
-	
+
 	friend RssParser;
 	friend QDataStream& operator <<(QDataStream& out, const RssFeed& any);
 	friend QDataStream& operator >>(QDataStream& out, RssFeed& any);
-	
+
 	QTimer* m_pUpdateTimer;
 	QUuid m_uid;
 	QUrl m_url;

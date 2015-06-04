@@ -16,9 +16,6 @@
   <property name="windowTitle">
    <string>CuteTorrent</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true"/>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -116,7 +113,7 @@
        <widget class="QPushButton" name="pbMin">
         <property name="minimumSize">
          <size>
-          <width>22</width>
+          <width>3</width>
           <height>22</height>
          </size>
         </property>
@@ -141,7 +138,7 @@
        <widget class="QPushButton" name="pbMax">
         <property name="minimumSize">
          <size>
-          <width>22</width>
+          <width>3</width>
           <height>22</height>
          </size>
         </property>
@@ -166,7 +163,7 @@
        <widget class="QPushButton" name="pbClose">
         <property name="minimumSize">
          <size>
-          <width>22</width>
+          <width>3</width>
           <height>22</height>
          </size>
         </property>

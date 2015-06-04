@@ -8,6 +8,7 @@
 
 #include "httprequest.h"
 #include "httpresponse.h"
+#include <QObject>
 
 /**
    The request handler generates a response for each HTTP request. Web Applications
@@ -53,8 +54,6 @@ private:
 	QString serverName;
 	void initSettings();
 	QString _generateNonce(const int len);
-	QString _getAuthentificateHeader();
-	QString _getOpaque(QString realm, QString nonce);
 	QString realm, authMethod , nonce;
 };
 

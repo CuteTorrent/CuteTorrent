@@ -79,12 +79,13 @@ public :
 	int GetStatus();
 	torrent_handle& GetInternalHandle();
 	QString GetInfoHash();
-	int GetProgress() const;
+	float GetProgress() const;
 	int GetPeerCount();
 	int GetActivePeerCount();
 	QIcon GetMimeTypeIcon() const;
 	QIcon GetMimeTypeIcon();
 	files_info GetFileDownloadInfo();
+	bool isSingleFile();
 	bool isPrevioslySeeded() const
 	{
 		return m_isPrevSeed;
@@ -111,7 +112,6 @@ public :
 	QString GetDwonloadSpeed() const;
 	QString GetUploadSpeed() const;
 	int GetPeerCountForTracker(QString url);
-	void RemoveTorrent(bool delfiles = false);
 	std::vector<peer_info> GetPeerInfo();
 	std::vector<announce_entry> GetTrackerInfo();
 	void SetTrackerPeersCnt(QString trackerUrl, int peerCount);

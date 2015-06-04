@@ -47,7 +47,7 @@ protected:
 	virtual QWidget* centralWidget() override;
 	virtual QLabel* getTitleLabel() override;
 	virtual QLabel* getTitleIcon() override;
-	
+
 private:
 	QHash<QUuid, RssDownloadRule*> m_downloadRulesCopy;
 	QList<QUuid> m_deletedRules;
@@ -76,7 +76,7 @@ public:
 	SettingsDialog(QWidget* parent = nullptr, int flags = 0);
 	~SettingsDialog();
 	void ApplySettingsToSession();
-	
+
 signals:
 	void needRetranslate();
 	void tasksChanged();

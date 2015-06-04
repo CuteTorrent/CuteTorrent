@@ -70,7 +70,7 @@ void RconWebService::parseIpFilter(QString ipFilterStr)
 				{
 					QString pattern = parts[1];
 					QString startIP = pattern.replace("*", "1").trimmed();
-					QString endIP = parts[1].replace("*", "255").trimmed();
+					QString endIP = pattern.replace("*", "255").trimmed();
 					QHostAddress start(startIP);
 					QHostAddress end(endIP);
 

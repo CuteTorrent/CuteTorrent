@@ -76,6 +76,7 @@ void OpenTorrentDialog::SetData(QString filename)
 		QMovie* movie = new QMovie(":/images/loader.gif");
 		loaderGifLabel->setMovie(movie);
 		movie->start();
+		qRegisterMetaType<openmagnet_info>("openmagnet_info");
 		MetaDataDownloadWaiter* magnetWaiter = new MetaDataDownloadWaiter(filename, this);
 		QObject::connect(magnetWaiter, SIGNAL(DownloadCompleted(openmagnet_info)), this, SLOT(DownloadMetadataCompleted(openmagnet_info)));
 		QObject::connect(magnetWaiter, SIGNAL(ErrorOccured(QString)), this, SLOT(OnError(QString)));
@@ -182,7 +183,7 @@ void OpenTorrentDialog::AccepTorrent()
 {
 	if(validTorrent)
 	{
-		QMap<QString, qint8> filePriorities = m_pFileTreeModel->getFilePiorites();
+		QMap<QString, quint8> filePriorities = m_pFileTreeModel->getFilePiorites();
 		error_code ec;
 		int groupIndex = GroupComboBox->currentIndex();
 		QString group = groupIndex >= 0 ? m_lFilters[groupIndex].Name() : "";

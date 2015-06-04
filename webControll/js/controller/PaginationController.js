@@ -1,18 +1,23 @@
 
 window.PaginationController = Backbone.Router.extend({
     routes: {
-        'torrent/page/:page': 'changePage'
-		
+        'torrent/page/:page': 'changeTorrentPage',
+		'rss/page/:page': 'changeRssPage'
     },
-	initialize: function(view){
-		this.view=view;
+	initialize: function(options){
+		this.torrentsView=options.torrentsView;
+		this.rssView=options.rssView;
 	},	
-	changePage: function(page){
-		
-			this.view.paginationView.page_active=parseInt(page);
-			this.view.paginationView.render();
-			this.view.changePage(parseInt(page));
-		
+	changeTorrentPage: function(page){
+			this.torrentsView.paginationView.page_active=parseInt(page);
+			this.torrentsView.paginationView.render();
+			this.torrentsView.changePage(parseInt(page));
+	},
+	changeRssPage: function(page){
+			this.rssView.paginationView.page_active=parseInt(page);
+			this.rssView.paginationView.render();
+			this.rssView.changePage(parseInt(page));
 	}
+
 
 });

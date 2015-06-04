@@ -18,12 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include <QClipboard>
 #include <QDebug>
-#include <QDesktopServices>
 #include <QDir>
 #include <QItemSelectionModel>
 #include <QProcess>
 #include <QThread>
-#include <QUrl>
 #include <exception>
 #include "MultipleDTDialog.h"
 #include "VirtualDiskMounter.h"
@@ -61,7 +59,7 @@ void QTorrentDisplayModel::DellAll()
 {
 	ActionOnSelectedItem(remove_all);
 }
-class MountDialogThread : private QThread
+class MountDialogThread : QThread
 {
 	MultipleDTDialog* dlg;
 public:
@@ -71,7 +69,7 @@ public:
 		start();
 	}
 protected:
-	void run()
+	void run() override
 	{
 		dlg->exec();
 		delete dlg;
@@ -82,7 +80,7 @@ void QTorrentDisplayModel::MountDT()
 {
 	Torrent* tor = GetSelectedTorrent();
 
-	if(tor != NULL)
+	if(tor != nullptr)
 	{
 		if(tor->isDaemonToolsMountable() && (tor->isSeeding() || tor->isPaused()))
 		{
@@ -115,9 +113,9 @@ void QTorrentDisplayModel::OpenDirSelected()
 
 	Torrent* tor = GetSelectedTorrent();
 
-	if(tor != NULL)
+	if(tor != nullptr)
 	{
-		QString path = QFileInfo(QDir::toNativeSeparators(tor->GetSavePath() + tor->GetName())).absoluteFilePath();
+		QString path = QFileInfo(QDir::toNativeSeparators(tor->GetSavePath() + (tor->isSingleFile() ? QString::fromUtf8(tor->GetFileDownloadInfo().storrage.file_path(0).c_str()) : tor->GetName()))).absoluteFilePath();
 #ifdef Q_WS_MAC
 		QStringList args;
 		args << "-e";
@@ -131,9 +129,7 @@ void QTorrentDisplayModel::OpenDirSelected()
 		QProcess::startDetached("osascript", args);
 #endif
 #ifdef Q_WS_WIN
-		QStringList args;
-		args << "/select," << QDir::toNativeSeparators(path);
-		QProcess::startDetached("explorer", args);
+		StaticHelpers::OpenFileInExplorer(path);
 #endif
 	}
 }
@@ -153,7 +149,7 @@ void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 	{
 		Torrent* torrent = qmi.data(TorrentRole).value<Torrent*>();
 
-		if(torrent != NULL)
+		if(torrent != nullptr)
 		{
 			if(!torrent->isDaemonToolsMountable() || !torrent->isSeeding())
 			{
@@ -225,7 +221,7 @@ void QTorrentDisplayModel::UpdateSelectedIndex(const QItemSelection& selection)
 		else
 		{
 			selectedRow = -1;
-			CurrentTorrent = NULL;
+			CurrentTorrent = nullptr;
 		}
 	}
 	catch(std::exception e)
@@ -242,7 +238,6 @@ int QTorrentDisplayModel::rowCount(const QModelIndex& parent) const
 		{
 			return m_pTorrentStorrage->count();
 		}
-		
 	}
 	catch(std::exception e)
 	{
@@ -257,17 +252,17 @@ Torrent* QTorrentDisplayModel::GetSelectedTorrent()
 	{
 		if(rowCount() == 0)
 		{
-			return NULL;
+			return nullptr;
 		}
 
 		if(selectedRow >= rowCount())
 		{
-			return NULL;
+			return nullptr;
 		}
 
 		if(selectedRow < 0)
 		{
-			return NULL;
+			return nullptr;
 		}
 
 		return CurrentTorrent;
@@ -277,7 +272,7 @@ Torrent* QTorrentDisplayModel::GetSelectedTorrent()
 		qDebug() << "Exception QTorrentDisplayModel::GetSelectedTorrent" << e.what();
 	}
 
-	return NULL;
+	return nullptr;
 }
 bool indexByRowLessThan(const QModelIndex& right, const QModelIndex& left)
 {
@@ -294,7 +289,6 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 	{
 		QModelIndexList indexes = m_pProxyFilterModel->mapSelectionToSource(m_pTorrentListView->selectionModel()->selection()).indexes();
 		qSort(indexes);
-		
 
 		if(rowCount() == 0)
 		{
@@ -334,6 +328,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 				for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
 					QModelIndex& index = indexes[i];
+
 					if (index.isValid())
 					{
 						QMessageBox::StandardButton button;
@@ -370,15 +365,15 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 							removeRow(index.row(), false);
 						}
 					}
-				
-					
 				}
+
 				break;
 			}
 
 			case remove_all:
 			{
 				bool yesToAll = false;
+
 				for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
 					QModelIndex& index = indexes[i];
@@ -394,6 +389,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 							buttons |= QMessageBox::YesToAll;
 							buttons |= QMessageBox::NoToAll;
 						}
+
 						button = CustomMessageBox::question(m_pTorrentListView, tr("TORRENT_DELITION"), tr("TORRENT_ALL_DELITION_MSG").arg(torrent->GetName()), buttons);
 
 						if (button == QMessageBox::YesToAll)
@@ -410,7 +406,6 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 						button = QMessageBox::YesToAll;
 					}
 
-
 					if (QMessageBox::No != button || yesToAll)
 					{
 						removeRow(index.row(), true);
@@ -421,7 +416,8 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 			}
 
 			case resume:
-			{	for (int i = indexes.count() - 1; i >= 0; i -= 1)
+			{
+				for (int i = indexes.count() - 1; i >= 0; i -= 1)
 				{
 					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
@@ -430,6 +426,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 				break;
 			}
+
 			case rehash:
 			{
 				for (int i = indexes.count() - 1; i >= 0; i -= 1)
@@ -446,7 +443,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 			{
 				Torrent* firstTorrent = indexes.first().data(TorrentRole).value<Torrent*>();
 				QString path = QFileDialog::getExistingDirectory(m_pTorrentListView, tr("DIALOG_OPEN_FOLDER"),
-					firstTorrent->GetSavePath(),
+				               firstTorrent->GetSavePath(),
 				               QFileDialog::ShowDirsOnly
 				               | QFileDialog::DontResolveSymlinks);
 
@@ -514,8 +511,12 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 				QApplication::clipboard()->setText(clipboardData);
 				break;
 			}
-		case change_group: break;
-		default: break;
+
+			case change_group:
+				break;
+
+			default:
+				break;
 		}
 	}
 	catch(std::exception e)
@@ -575,8 +576,7 @@ bool QTorrentDisplayModel::removeRow(int row, bool delFiles)
 	{
 		CurrentTorrent = nullptr;
 	}
-
-	m_pTorrentStorrage->at(row)->RemoveTorrent(delFiles);
+	m_pTorrentManager->RemoveTorrent(m_pTorrentStorrage->at(row)->GetInfoHash(), delFiles);
 	endRemoveRows();
 	return true;
 }
@@ -599,7 +599,7 @@ bool QTorrentDisplayModel::removeRows(int row, int count, const QModelIndex& par
 
 	for(int i = row; i < row + count; i++)
 	{
-		m_pTorrentStorrage->at(i)->RemoveTorrent(m_pTorrentManager);
+		m_pTorrentManager->RemoveTorrent(m_pTorrentStorrage->at(i)->GetInfoHash(),true);
 	}
 
 	endRemoveRows();
@@ -649,7 +649,7 @@ void QTorrentDisplayModel::playInPlayer()
 	try
 	{
 		VideoPlayerWindow* vpw = new VideoPlayerWindow(m_pTorrentListView);
-		vpw->openFile(CurrentTorrent->GetSavePath() + QString::fromStdString(CurrentTorrent->GetFileDownloadInfo().storrage.at(0).path));
+		vpw->openFile(CurrentTorrent->GetSavePath() + QString::fromUtf8(CurrentTorrent->GetFileDownloadInfo().storrage.at(0).path.c_str()));
 		vpw->show();
 	}
 	catch(...)
@@ -758,7 +758,7 @@ void QTorrentDisplayModel::changeGroup()
 {
 	try
 	{
-		QAction* senderAct = (QAction*) sender();
+		QAction* senderAct = static_cast<QAction*>(sender());
 		QString group = senderAct->text();
 		QList<QAction*> actions = groupsMenu->actions();
 

@@ -10,13 +10,14 @@ class AddRssDwonloadRuleDialog : public BaseWindow<QDialog>, Ui::AddRssDownloadR
 {
 	Q_OBJECT
 public:
-	enum DiaologMode{
+	enum DiaologMode
+	{
 		EDIT,
 		CREATE
 	};
 	AddRssDwonloadRuleDialog(QWidget* parent = nullptr, DiaologMode mode = CREATE);
 	RssDownloadRule* getFinalRule();
-	
+
 	void setDownloadRule(RssDownloadRule* rule);
 private slots:
 	void onChange(bool directCall = false);

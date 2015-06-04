@@ -126,7 +126,6 @@ public:
             CustomWindow->setObjectName(QString::fromUtf8("CustomWindow"));
         CustomWindow->resize(532, 620);
         CustomWindow->setMouseTracking(true);
-        CustomWindow->setStyleSheet(QString::fromUtf8(""));
         ACTION_MENU_OPEN_TORRENT = new QAction(CustomWindow);
         ACTION_MENU_OPEN_TORRENT->setObjectName(QString::fromUtf8("ACTION_MENU_OPEN_TORRENT"));
         ACTION_MENU_OPEN_TORRENT->setShortcutContext(Qt::WindowShortcut);
@@ -200,7 +199,7 @@ public:
 
         pbMin = new QPushButton(titleBar);
         pbMin->setObjectName(QString::fromUtf8("pbMin"));
-        pbMin->setMinimumSize(QSize(22, 22));
+        pbMin->setMinimumSize(QSize(3, 22));
         pbMin->setMaximumSize(QSize(22, 22));
         pbMin->setIconSize(QSize(22, 22));
         pbMin->setFlat(true);
@@ -209,7 +208,7 @@ public:
 
         pbMax = new QPushButton(titleBar);
         pbMax->setObjectName(QString::fromUtf8("pbMax"));
-        pbMax->setMinimumSize(QSize(22, 22));
+        pbMax->setMinimumSize(QSize(3, 22));
         pbMax->setMaximumSize(QSize(22, 22));
         pbMax->setIconSize(QSize(22, 22));
         pbMax->setFlat(true);
@@ -218,7 +217,7 @@ public:
 
         pbClose = new QPushButton(titleBar);
         pbClose->setObjectName(QString::fromUtf8("pbClose"));
-        pbClose->setMinimumSize(QSize(22, 22));
+        pbClose->setMinimumSize(QSize(3, 22));
         pbClose->setMaximumSize(QSize(22, 22));
         pbClose->setIconSize(QSize(22, 22));
         pbClose->setFlat(true);

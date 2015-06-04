@@ -3,6 +3,7 @@
 #include "QBaloon.h"
 #include <QPropertyAnimation>
 #include "StyleEngene.h"
+#include <helpers/StaticHelpers.h>
 
 static QBalloonTip* theSolitaryBalloonTip = nullptr;
 
@@ -20,7 +21,7 @@ QWidget* QBalloonTip::showBalloon(const QString& title,
 
 		if(timeout <= 0)
 		{
-			timeout = 10000;   
+			timeout = 10000;
 		}
 
 		theSolitaryBalloonTip->balloon(timeout, showArrow);
@@ -33,7 +34,7 @@ QWidget* QBalloonTip::showBalloon(const QString& title,
 
 			if(timeout <= 0)
 			{
-				timeout = 10000;  
+				timeout = 10000;
 			}
 
 			theSolitaryBalloonTip->balloon(timeout, showArrow);
@@ -258,21 +259,19 @@ void QBalloonTip::balloon(int msecs, bool showArrow)
 	{
 		msecs = 10000;
 	}
+
 	m_duration = msecs;
 	m_showTimerId = startTimer(msecs);
 	show();
 	QSequentialAnimationGroup* pAnimationGroup = new QSequentialAnimationGroup(this);
-	
 	QPropertyAnimation*  pShowAnimation = new QPropertyAnimation(this, "windowOpacity");
 	pShowAnimation->setDuration(msecs / 4);
 	pShowAnimation->setStartValue(0.f);
 	pShowAnimation->setEndValue(1.f);
-	
 	QPropertyAnimation*  pHideAnimation = new QPropertyAnimation(this, "windowOpacity");
 	pHideAnimation->setDuration(msecs / 4);
 	pHideAnimation->setStartValue(1.f);
 	pHideAnimation->setEndValue(0.f);
-
 	pAnimationGroup->addAnimation(pShowAnimation);
 	pAnimationGroup->addPause(m_duration / 2);
 	pAnimationGroup->addAnimation(pHideAnimation);
@@ -300,9 +299,7 @@ void QBalloonTip::mousePressEvent(QMouseEvent* e)
 			QProcess::startDetached("osascript", args);
 #endif
 #ifdef Q_WS_WIN
-			QStringList args;
-			args << "/select," << QDir::toNativeSeparators(path);
-			QProcess::startDetached("explorer", args);
+			StaticHelpers::OpenFileInExplorer(path);
 #endif
 			break;
 		}
@@ -312,9 +309,11 @@ void QBalloonTip::mousePressEvent(QMouseEvent* e)
 			QDesktopServices::openUrl(QUrl("http://cutetorrent.info/downloads/"));
 			break;
 		}
-		case Error: 
-		case Info: 
-		default: break;
+
+		case Error:
+		case Info:
+		default:
+			break;
 	}
 
 	e->accept();
@@ -331,7 +330,7 @@ bool QBalloonTip::isFinished()
 
 void QBalloonTip::timerEvent(QTimerEvent* e)
 {
-	if (e->timerId()== m_showTimerId)
+	if (e->timerId() == m_showTimerId)
 	{
 		killTimer(m_showTimerId);
 		close();

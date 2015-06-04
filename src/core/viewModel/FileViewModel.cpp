@@ -57,7 +57,7 @@ void FileViewModel::OpenFileSelected()
 {
 	FileViewTreeItem* pItem = static_cast<FileViewTreeItem*>(m_pProxyModel->mapToSource(m_pView->selectionModel()->currentIndex()).internalPointer());
 	std::string save_path = dataSource.status(torrent_handle::query_save_path).save_path;
-	QString path = QFileInfo(QDir::toNativeSeparators(QString::fromStdString(save_path + pItem->GetFileEntery().path))).absoluteFilePath();
+	QString path = QFileInfo(QDir::toNativeSeparators(QString::fromUtf8((save_path + pItem->GetFileEntery().path).c_str()))).absoluteFilePath();
 	QDesktopServices::openUrl(QUrl("file:///" + path));
 }
 
@@ -65,7 +65,7 @@ void FileViewModel::OpenDirSelected()
 {
 	FileViewTreeItem* pItem = static_cast<FileViewTreeItem*>(m_pProxyModel->mapToSource(m_pView->selectionModel()->currentIndex()).internalPointer());
 	std::string save_path = dataSource.status(torrent_handle::query_save_path).save_path;
-	QString path = QFileInfo(QDir::toNativeSeparators(QString::fromStdString(save_path + pItem->GetFileEntery().path))).absoluteFilePath();
+	QString path = QFileInfo(QDir::toNativeSeparators(QString::fromUtf8((save_path + pItem->GetFileEntery().path).c_str()))).absoluteFilePath();
 #ifdef Q_WS_MAC
 	QStringList args;
 	args << "-e";
@@ -79,9 +79,7 @@ void FileViewModel::OpenDirSelected()
 	QProcess::startDetached("osascript", args);
 #endif
 #ifdef Q_WS_WIN
-	QStringList args;
-	args << "/select," << QDir::toNativeSeparators(path);
-	QProcess::startDetached("explorer", args);
+	StaticHelpers::OpenFileInExplorer(path);
 #endif
 }
 
@@ -448,7 +446,6 @@ void FileViewModel::AddPath(std::string path, file_entry fe)
 
 	if(m_pRoot->GetChildrenCount() == 0)
 	{
-		qDebug() << "root item has no children appending current path";
 		FileViewTreeItem* curitem = m_pRoot;
 
 		for(int i = 0; i < nPartsCount; i++)

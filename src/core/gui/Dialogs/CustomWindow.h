@@ -312,7 +312,8 @@ void BaseWindow<T>::moveWindow(QMouseEvent* e)
 	{
 		QRect desktopGeometry = QApplication::desktop()->availableGeometry();
 		const QPoint pos = e->globalPos();
-		qDebug() << "moveWindow" << pos << desktopGeometry;
+		//qDebug() << "moveWindow" << pos << desktopGeometry;
+
 		if (abs(pos.y() - desktopGeometry.y()) <= PIXELS_TO_ACT)
 		{
 			maximizeBtnClicked();
@@ -332,13 +333,11 @@ void BaseWindow<T>::moveWindow(QMouseEvent* e)
 			m_bIsMaximized = true;
 			preMaximizeGeomentry = geometry();
 			setGeometry(halfDesctopRect);
-			
 		}
 		else
 		{
 			move(pos - dragPosition);
 		}
-
 
 		e->accept();
 	}
@@ -558,12 +557,12 @@ void BaseWindow<T>::mouseMoveEvent(QMouseEvent* e)
 	int wWidth = geometry().width();
 	int wHeight = geometry().height();
 	bool isResizeEnabled = m_resizeMode == AllowResize;
+//	qDebug() << "mouseMoveEvent" << moveWidget << xMouse << yMouse << wWidth << wHeight << allowToResize << isResizeEnabled;
 
-	qDebug() << "mouseMoveEvent" << moveWidget << xMouse << yMouse << wWidth << wHeight << allowToResize << isResizeEnabled;
 	if(moveWidget)
 	{
 		inResizeZone = false;
-		
+
 		if(isMaximized())
 		{
 			maximizeBtnClicked();

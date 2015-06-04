@@ -94,13 +94,11 @@ void QApplicationSettings::setValue(const QString& group, const QString& key, co
 	settings->beginGroup(group);
 	settings->setValue(key, value);
 	settings->endGroup();
-	qDebug() << "QApplicationSettings::setValue " << group << " " << key << " " << value;
 	WriteSettings();
 }
 
 QVariant QApplicationSettings::value(const QString& group, const QString& key, const QVariant& defaultVal)
 {
-	qDebug() << "QApplicationSettings::value " << group << " " << key << " " << defaultVal;
 	locker->lock();
 
 	if(!settings->group().isEmpty())

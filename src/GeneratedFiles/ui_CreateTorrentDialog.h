@@ -22,7 +22,6 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
-#include <QtGui/QProgressBar>
 #include <QtGui/QPushButton>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QTextEdit>
@@ -43,10 +42,6 @@ public:
     QPushButton *pbClose;
     QWidget *m_centralWidget;
     QGridLayout *gridLayout_4;
-    QPushButton *createButton;
-    QSpacerItem *horizontalSpacer;
-    QPushButton *cancelButton;
-    QProgressBar *progressBar;
     QGroupBox *groupBox_3;
     QGridLayout *gridLayout_2;
     QCheckBox *startSeedCheckBox;
@@ -54,6 +49,9 @@ public:
     QCheckBox *privateCheckBox;
     QSpacerItem *horizontalSpacer_4;
     QCheckBox *saveOrderCheckBox;
+    QPushButton *createButton;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *cancelButton;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_3;
     QSpacerItem *horizontalSpacer_2;
@@ -75,6 +73,7 @@ public:
     QLabel *label_5;
     QLineEdit *filterEdit;
     QLineEdit *pathEdit;
+    QWidget *widget;
 
     void setupUi(QDialog *CreateTorrentDialog)
     {
@@ -151,29 +150,6 @@ public:
         gridLayout_4->setHorizontalSpacing(0);
         gridLayout_4->setVerticalSpacing(2);
         gridLayout_4->setContentsMargins(9, 6, 9, 9);
-        createButton = new QPushButton(m_centralWidget);
-        createButton->setObjectName(QString::fromUtf8("createButton"));
-
-        gridLayout_4->addWidget(createButton, 5, 0, 1, 1);
-
-        horizontalSpacer = new QSpacerItem(226, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_4->addItem(horizontalSpacer, 5, 1, 1, 1);
-
-        cancelButton = new QPushButton(m_centralWidget);
-        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
-
-        gridLayout_4->addWidget(cancelButton, 5, 2, 1, 1);
-
-        progressBar = new QProgressBar(m_centralWidget);
-        progressBar->setObjectName(QString::fromUtf8("progressBar"));
-        progressBar->setStyleSheet(QString::fromUtf8("QProgressBar { border: 1px solid #909090; ; }\n"
-"QProgressBar::chunk { background-color: #51D331; width: 20px; }"));
-        progressBar->setValue(0);
-        progressBar->setTextVisible(false);
-
-        gridLayout_4->addWidget(progressBar, 3, 0, 1, 3);
-
         groupBox_3 = new QGroupBox(m_centralWidget);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
         gridLayout_2 = new QGridLayout(groupBox_3);
@@ -205,6 +181,20 @@ public:
 
 
         gridLayout_4->addWidget(groupBox_3, 2, 0, 1, 3);
+
+        createButton = new QPushButton(m_centralWidget);
+        createButton->setObjectName(QString::fromUtf8("createButton"));
+
+        gridLayout_4->addWidget(createButton, 4, 0, 1, 1);
+
+        horizontalSpacer = new QSpacerItem(226, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_4->addItem(horizontalSpacer, 4, 1, 1, 1);
+
+        cancelButton = new QPushButton(m_centralWidget);
+        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
+
+        gridLayout_4->addWidget(cancelButton, 4, 2, 1, 1);
 
         groupBox_2 = new QGroupBox(m_centralWidget);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
@@ -303,6 +293,11 @@ public:
 
         gridLayout_4->addWidget(groupBox, 0, 0, 1, 3);
 
+        widget = new QWidget(m_centralWidget);
+        widget->setObjectName(QString::fromUtf8("widget"));
+
+        gridLayout_4->addWidget(widget, 3, 0, 1, 2);
+
 
         verticalLayout->addWidget(m_centralWidget);
 
@@ -322,12 +317,12 @@ public:
         actionClose->setText(QApplication::translate("CreateTorrentDialog", "close", 0, QApplication::UnicodeUTF8));
         tbMenu->setText(QString());
         LTitle->setText(QApplication::translate("CreateTorrentDialog", "DIALOG_TORRENT_CREATION", 0, QApplication::UnicodeUTF8));
-        createButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_CREATE", 0, QApplication::UnicodeUTF8));
-        cancelButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_CANCEL", 0, QApplication::UnicodeUTF8));
         groupBox_3->setTitle(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_ADV_SETTINGS", 0, QApplication::UnicodeUTF8));
         startSeedCheckBox->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_START_SEEDING", 0, QApplication::UnicodeUTF8));
         privateCheckBox->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_PIVATE_TORRENT", 0, QApplication::UnicodeUTF8));
         saveOrderCheckBox->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_SAVE_FILE_ORDER", 0, QApplication::UnicodeUTF8));
+        createButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_CREATE", 0, QApplication::UnicodeUTF8));
+        cancelButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_CANCEL", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_SETTINGS", 0, QApplication::UnicodeUTF8));
         piceSizeComboBox->clear();
         piceSizeComboBox->insertItems(0, QStringList()

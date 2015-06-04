@@ -44,11 +44,12 @@ void QRssItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opti
 
 		if (data.isValid())
 		{
-			return drawFeed(painter,option,index, data.value<RssFeed*>());
+			return drawFeed(painter, option, index, data.value<RssFeed*>());
 		}
 		else
 		{
 			data = index.data(QRssDisplayModel::RssItemRole);
+
 			if (data.isValid())
 			{
 				return drawFeedItem(painter, option, index, data.value<RssItem*>());
@@ -73,6 +74,7 @@ QSize QRssItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QMode
 		else
 		{
 			data = index.data(QRssDisplayModel::RssItemRole);
+
 			if (data.isValid())
 			{
 				return feedItemSizeHint(option, data.value<RssItem*>());
@@ -91,7 +93,7 @@ void QRssItemDelegate::drawFeed(QPainter* painter, const QStyleOptionViewItem& o
 	QStyleOptionViewItemV4 opt = option;
 	initStyleOption(&opt, index);
 	QStyle* style;
-	
+
 	if (opt.widget != NULL)
 	{
 		style = opt.widget->style();
@@ -148,10 +150,12 @@ void QRssItemDelegate::drawFeed(QPainter* painter, const QStyleOptionViewItem& o
 	QRect iconArea(fillArea.x(), fillArea.y() + (fillArea.height() - iconSize) / 2, iconSize, iconSize);
 	QRect nameArea(iconArea.x() + iconArea.width() + GUI_PAD, fillArea.y(),
 	               fillArea.width() - GUI_PAD - iconArea.width(), nameSize.height());
+
 	if (nameArea.x() + nameArea.width() > opt.rect.width())
 	{
 		nameArea.setWidth(opt.rect.width() - nameArea.x());
 	}
+
 	QRect updateTimeArea(nameArea);
 	updateTimeArea.moveTop(nameArea.y() + statusFM.lineSpacing() + GUI_PAD / 2);
 	updateTimeArea.setWidth(nameArea.width() / 2);
@@ -160,7 +164,7 @@ void QRssItemDelegate::drawFeed(QPainter* painter, const QStyleOptionViewItem& o
 	/*statusArea.moveLeft(nameArea.width() / 2 + iconArea.width() + GUI_PAD);
 	statusArea.setWidth(nameArea.width() / 2);
 	statusArea.setHeight(nameSize.height());
-*/
+	*/
 	painter->setPen(opt.palette.color(cg, cr));
 	favicon.paint(painter, iconArea, Qt::AlignCenter, im, qs);
 	painter->setFont(nameFont);
@@ -239,7 +243,6 @@ void QRssItemDelegate::drawFeedItem(QPainter* painter, const QStyleOptionViewIte
 	QRect fillArea(option.rect);
 	fillArea.adjust(m.width(), m.height(), -m.width(), -m.height());
 	QRect nameArea(fillArea.x(), fillArea.y(), fillArea.width(), nameSize.height());
-
 	QRect sizeArea(fillArea.x(), fillArea.y() + sizeFM.lineSpacing() + GUI_PAD / 2, fillArea.width() / 2, nameSize.height());
 	QRect categoryArea(nameArea);
 	categoryArea.moveTop(nameArea.y() + categoryFM.lineSpacing() + GUI_PAD / 2);

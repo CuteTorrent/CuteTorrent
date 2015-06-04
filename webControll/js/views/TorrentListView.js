@@ -10,8 +10,7 @@ _.templateSettings = {
     interpolate: /\{\{=(.+?)\}\}/g
 };
 window.TorrentListView = Backbone.View.extend({
-    model: new window.Torrent,
-    el:'#TorrentList',
+    el:'#torrent_tab',
 	events:{
 		"paste #search" : "search",
 		"keyup #search" : "search",
@@ -22,8 +21,8 @@ window.TorrentListView = Backbone.View.extend({
 	alertId:0,
 	pauseTorrent: function () {
 		var torrentListView=this;
-		if ($('body').find(".accordion-body.in").length)
-			$('body').find(".accordion-body.in").each(function() {
+		if ($('#TorrentList').find(".accordion-body.in").length)
+			$('#TorrentList').find(".accordion-body.in").each(function() {
 				var id=$(this).attr('id').substring(19);
 				var torrentModel=torrentListView.collection.get(id);
 				$('#ajax_loading').fadeIn(400);
@@ -61,8 +60,8 @@ window.TorrentListView = Backbone.View.extend({
 	},
 	startTorrent: function () {
 	var torrentListView=this;
-	if ($('body').find(".accordion-body.in").length)
-		$('body').find(".accordion-body.in").each(function() {
+	if ($('#TorrentList').find(".accordion-body.in").length)
+		$('#TorrentList').find(".accordion-body.in").each(function() {
 			var id=$(this).attr('id').substring(19);
 			var torrentModel=torrentListView.collection.get(id);
 			$('#ajax_loading').fadeIn(400);
@@ -94,8 +93,8 @@ window.TorrentListView = Backbone.View.extend({
     },
 	removeTorrent: function () {
 	var torrentListView=this;
-	if ($('body').find(".accordion-body.in").length)
-		$('body').find(".accordion-body.in").each(function() {
+	if ($('#TorrentList').find(".accordion-body.in").length)
+		$('#TorrentList').find(".accordion-body.in").each(function() {
 			var id=$(this).attr('id').substring(19);
 			var torrentModel=torrentListView.collection.get(id);
 			//torrentModel.set('torrentStatus',2);
@@ -127,16 +126,18 @@ window.TorrentListView = Backbone.View.extend({
     },
     initialize: function () {
 		this.alertTemplate = $.templates("#alert-view");
-        this.model.view = this;
-		this.collection = new window.TorrentCollection;
-		this.paginationView = new window.PaginationView;
+        this.collection = new window.TorrentCollection;
+		this.paginationView = new window.PaginationView({link: '#torrent/page/',el:'#torrentPages'});
 		this.paginationView.view=this;
 		var torrentListView=this;
 		this.collection.fetch({
 			data:{page:1,pageSize:10},
 			success: function(collection, response, options){
-					torrentListView.paginationView.page_count=Math.floor(response[0].torrentsCount/torrentListView.paginationView.page_show);
+				if(response.length>0)
+				{
+					torrentListView.paginationView.page_count=Math.ceil(response[0].torrentsCount/torrentListView.paginationView.page_show);
 					torrentListView.paginationView.render();
+				}
 			},
 			error: function(collection, response, options)	{
 				lastId=torrentListView.alertId;
@@ -153,23 +154,32 @@ window.TorrentListView = Backbone.View.extend({
 		this.listenTo(this.collection, 'remove', this.removeOne);
     },
 	changePage: function(page) {
-		var torrentListView=this;
+		if (typeof page == undefined)
+		{
+			page = 1;
+		}
 		$('#ajax_loading').fadeIn(400);
+		var torrentListView=this;
 		this.collection.fetch({
 			data:{page:page,pageSize:10},
-			success:function(){
+			success:function(collection, response){
 				$('#ajax_loading').fadeOut(400);
+				if(response.length>0)
+				{
+					torrentListView.paginationView.page_count=Math.ceil(response[0].torrentsCount/torrentListView.paginationView.page_show);
+					torrentListView.paginationView.render();
+				}
+				torrentListView = null;
 			},
 			error: function(collection, response, options)	{
 				$('#ajax_loading').fadeOut(400);
-				lastId=torrentListView.alertId;
-				torrentListView.alertId++;
+		
 				errorData = {
-					id:lastId,
 					message:"Error while getting data from server"
 				};
 				$("#alertAria").append(torrentListView.alertTemplate.render(errorData));
 				$(".alert").alert();
+				torrentListView = null;
 			}
 		});
 	},
@@ -191,15 +201,28 @@ window.TorrentListView = Backbone.View.extend({
 			
 	    })
 	},
+	
 	updateCollection: function() {
-	var torrentListView=this;
-	$('#ajax_loading').fadeIn(400);
+		var torrentListView=this;
+		$('#ajax_loading').fadeIn(400);
 		this.collection.fetch({
 			data:{page:this.paginationView.page_active,pageSize:10},
-			success:function(){
+			success:function(collection, response){
 				$('#ajax_loading').fadeOut(400);
+				if(response.length>0)
+				{
+					torrentListView.paginationView.page_count=Math.ceil(response[0].torrentsCount/torrentListView.paginationView.page_show);
+					torrentListView.paginationView.render();
+				}
+				torrentListView.updatingJQXHR = null;
+				torrentListView = null;
 			},
 			error: function(collection, response, options)	{
+				if (options.xhr.statusText=='abort')
+				{
+					$('#ajax_loading').fadeOut(400);
+					return;
+				}				
 				$('#ajax_loading').fadeOut(400);
 				lastId=torrentListView.alertId;
 				torrentListView.alertId++;
@@ -209,6 +232,8 @@ window.TorrentListView = Backbone.View.extend({
 				};
 				$("#alertAria").append(torrentListView.alertTemplate.render(errorData));
 				$(".alert").alert();
+				torrentListView.updatingJQXHR = null;
+				torrentListView = null;
 			}
 			
 		});
@@ -238,7 +263,7 @@ window.TorrentListView = Backbone.View.extend({
     render: function () {
       
 		
-		$(this.el).html('');
+		$('#TorrentList').html('');
         return this;
 
     }

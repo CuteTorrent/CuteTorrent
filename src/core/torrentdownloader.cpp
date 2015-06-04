@@ -49,11 +49,13 @@ void TorrentDownloader::replyReady(QNetworkReply* pReply)
 			pFile->write(pReply->readAll());
 			pFile->close();
 			QUrl replyUrl = pReply->url();
+
 			while (m_redirectionMap.contains(replyUrl))
 			{
 				replyUrl = m_redirectionMap[replyUrl];
 				m_redirectionMap.remove(replyUrl);
 			}
+
 			emit TorrentReady(replyUrl, pFile);
 		}
 		else
@@ -65,15 +67,16 @@ void TorrentDownloader::replyReady(QNetworkReply* pReply)
 	{
 		emit TorrentError(pReply->url(), tr("NETWORK_ERROR: %1").arg(pReply->errorString()));
 	}
-
 }
 
 void TorrentDownloader::downloadTorrent(QUrl url, QList<QNetworkCookie> cookies)
 {
 	QNetworkRequest request(url);
+
 	if (cookies.size() > 0)
 	{
 		m_pNetManager->cookieJar()->setCookiesFromUrl(cookies, url);
 	}
+
 	m_pNetManager->get(request);
 }

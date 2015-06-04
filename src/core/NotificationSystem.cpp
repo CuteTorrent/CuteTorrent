@@ -17,7 +17,6 @@ NotificationSystemPtr NotificationSystem::getInstance()
 }
 NotificationSystem::NotificationSystem() : QObject(), m_pSettings(QApplicationSettings::getInstance()), m_pTrayIcon(NULL), m_defaultMessageDuration(5000)
 {
-	
 	UpdateNotificationSettings();
 }
 void NotificationSystem::UpdateNotificationSettings()
@@ -48,14 +47,11 @@ NotificationSystem::~NotificationSystem()
 
 void NotificationSystem::OnNewNotification(int notificationType, QString message, QVariant data)
 {
-	qDebug() << Q_FUNC_INFO << "notificationType=" << notificationType << " message=" << message << " data=" << data << " acceptedMask=" << m_notificationMask;
-
 	if (m_enabled)
 	{
 		if ((m_notificationMask & notificationType) == notificationType)
 		{
 			QSystemTrayIcon::MessageIcon icon = gessIcon(notificationType);
-
 			QBalloonTip::QBaloonType type = gessBaloonType(notificationType);
 			QBalloonTip::showBalloon("CuteTorrent", message, type, data, icon, m_defaultMessageDuration);
 		}

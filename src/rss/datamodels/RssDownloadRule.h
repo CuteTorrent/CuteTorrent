@@ -11,7 +11,8 @@ class RssDownloadRule
 	friend QDataStream& operator <<(QDataStream& out, const RssDownloadRule& any);
 	friend QDataStream& operator >>(QDataStream& out, RssDownloadRule& any);
 public:
-	enum DownloadRuleType{
+	enum DownloadRuleType
+	{
 		EMPTY = 0,
 		SELECT_FILE_RULE = 1,
 		DOWNLOAD_RULE = 2

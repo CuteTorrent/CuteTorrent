@@ -189,47 +189,6 @@
       <property name="verticalSpacing">
        <number>2</number>
       </property>
-      <item row="5" column="0">
-       <widget class="QPushButton" name="createButton">
-        <property name="text">
-         <string>CREATE_TORRENT_CREATE</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>226</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="5" column="2">
-       <widget class="QPushButton" name="cancelButton">
-        <property name="text">
-         <string>CREATE_TORRENT_CANCEL</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0" colspan="3">
-       <widget class="QProgressBar" name="progressBar">
-        <property name="styleSheet">
-         <string notr="true">QProgressBar { border: 1px solid #909090; ; }
-QProgressBar::chunk { background-color: #51D331; width: 20px; }</string>
-        </property>
-        <property name="value">
-         <number>0</number>
-        </property>
-        <property name="textVisible">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="0" colspan="3">
        <widget class="QGroupBox" name="groupBox_3">
         <property name="title">
@@ -290,6 +249,33 @@ QProgressBar::chunk { background-color: #51D331; width: 20px; }</string>
           </widget>
          </item>
         </layout>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QPushButton" name="createButton">
+        <property name="text">
+         <string>CREATE_TORRENT_CREATE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>226</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="4" column="2">
+       <widget class="QPushButton" name="cancelButton">
+        <property name="text">
+         <string>CREATE_TORRENT_CANCEL</string>
+        </property>
        </widget>
       </item>
       <item row="1" column="0" colspan="3">
@@ -509,6 +495,9 @@ QProgressBar::chunk { background-color: #51D331; width: 20px; }</string>
         </layout>
        </widget>
       </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QWidget" name="widget" native="true"/>
+      </item>
      </layout>
     </widget>
    </item>
@@ -521,7 +510,7 @@ QProgressBar::chunk { background-color: #51D331; width: 20px; }</string>
  </widget>
  <resources>
   <include location="../../../Resources/ltorrent.qrc"/>
-  <include location="ltorrent.qrc"/>
+  <include location="../../../Resources/ltorrent.qrc"/>
  </resources>
  <connections>
   <connection>

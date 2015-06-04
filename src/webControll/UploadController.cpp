@@ -26,7 +26,8 @@ void UploadController::service(HttpRequest& request, HttpResponse& response)
 			return;
 		}
 
-		QFile uploaded(QApplication::applicationDirPath() + "/uploaded/" + request.getParameter("files[]"));
+		QString filePath = QApplication::applicationDirPath() + "/uploaded/" + request.getParameter("files[]");
+		QFile uploaded(filePath);
 
 		if(uploaded.open(QFile::WriteOnly))
 		{
@@ -48,7 +49,7 @@ void UploadController::service(HttpRequest& request, HttpResponse& response)
 		{
 			response.setStatus(500, " Internal Server Error");
 			response.write("<BODY><h3>500  Internal Server Error.</h3>");
-			response.write(QString("<h3>" + QString::fromStdString(ec.message()) + "</h3></BODY>").toUtf8());
+			response.write(QString("<h3>" + StaticHelpers::translateLibTorrentError(ec) + "</h3></BODY>").toUtf8());
 			return;
 		}
 	}

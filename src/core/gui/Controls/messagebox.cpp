@@ -9,15 +9,13 @@ CustomMessageBox::CustomMessageBox(QWidget* /*parent*/) :
 }
 
 CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title, const QString& text,
-                           QMessageBox::StandardButtons buttons, QWidget* parent, Qt::WindowFlags /*flags*/) :
+                                   QMessageBox::StandardButtons buttons, QWidget* parent, Qt::WindowFlags /*flags*/) :
 	BaseWindow<QDialog>(OnlyCloseButton, NoResize, parent),
 	ui(new Ui::MessageBox)
 {
 	ui->setupUi(this);
 	setupCustomWindow();
 	setupWindowIcons();
-
-	
 	ui->icon->setPixmap(standardIcon(icon));
 	ui->LTitle->setText(title);
 	ui->text->setText(text);
@@ -30,6 +28,7 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 	clickedButton = nullptr;
 	uint mask = QMessageBox::FirstButton;
 	bool isFirst = true;
+
 	while(mask <= QMessageBox::LastButton)
 	{
 		uint sb = buttons & mask;
@@ -41,11 +40,13 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 		}
 
 		QPushButton* button = ui->buttonBox->addButton(static_cast<QDialogButtonBox::StandardButton>(sb));
+
 		if (isFirst)
 		{
 			isFirst = false;
 			button->setFocus();
 		}
+
 		QMessageBox::ButtonRole  role = static_cast<QMessageBox::ButtonRole>(ui->buttonBox->buttonRole(button));
 
 		if(role == QMessageBox::RejectRole || role == QMessageBox::NoRole)
@@ -61,7 +62,7 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 
 QPixmap CustomMessageBox::standardIcon(QMessageBox::Icon icon)
 {
-	QStyle *style = this->style();
+	QStyle* style = this->style();
 	int iconSize = style->pixelMetric(QStyle::PM_MessageBoxIconSize, nullptr, this);
 	QIcon tmpIcon;
 
@@ -82,8 +83,10 @@ QPixmap CustomMessageBox::standardIcon(QMessageBox::Icon icon)
 		case QMessageBox::Question:
 			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxQuestion, nullptr, this);
 			break;
+
 		case QMessageBox::NoIcon:
 			return ui->tbMenu->pixmap()->scaled(iconSize, iconSize);
+
 		default:
 			break;
 	}

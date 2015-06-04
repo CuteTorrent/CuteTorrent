@@ -12,9 +12,10 @@ QRssFilterModel::QRssFilterModel(QObject* parent) : QSortFilterProxyModel(parent
 }
 
 
-bool QRssFilterModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
+bool QRssFilterModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
 	QModelIndex index = sourceModel()->index(source_row, 0, source_parent);
+
 	if (index.isValid() && m_filterRule != nullptr && m_filterRule->RuleType() != RssDownloadRule::SELECT_FILE_RULE)
 	{
 		QVariant data = index.data(QRssDisplayModel::RssFeedRole);
@@ -23,18 +24,19 @@ bool QRssFilterModel::filterAcceptsRow(int source_row, const QModelIndex &source
 		{
 			RssFeed* pFeed = data.value<RssFeed*>();
 			bool res = m_filterRule->Match(pFeed);
-			qDebug() << "Feed " << pFeed->displayName(true) << (res ? " accepted" : " not accepted");
 			return res;
 		}
+
 		data = index.data(QRssDisplayModel::RssItemRole);
+
 		if (data.isValid())
 		{
 			RssItem* item = data.value<RssItem*>();
 			bool res = m_filterRule->Match(item);
-			qDebug() << "FeedItem " << item->title() << (res ? " accepted" : " not accepted");
 			return res;
 		}
 	}
+
 	return false;
 }
 
@@ -42,6 +44,5 @@ void QRssFilterModel::setRuleFilter(RssDownloadRule* rule)
 {
 	m_filterRule = rule;
 	invalidateFilter();
-
 }
 

@@ -35,9 +35,9 @@ FileTreeModel::FileTreeModel(QObject* parent)
 	QPair<QString, QString> rootData = qMakePair(tr("FILE") , tr("SIZE"));
 	rootItem = new FileTreeItem(rootData);
 }
-QMap<QString, qint8> FileTreeModel::getFilePiorites()
+QMap<QString, quint8> FileTreeModel::getFilePiorites()
 {
-	QMap<QString, qint8> res;
+	QMap<QString, quint8> res;
 	FileTreeItem* iterator = rootItem;
 	GetFilePrioritiesInternal(iterator, &res);
 	return res;
@@ -73,7 +73,7 @@ void FileTreeModel::getUnicPathes(FileTreeItem* current, QList<FileTreeItem*>& e
 		}
 	}
 }
-void FileTreeModel::GetFilePrioritiesInternal(FileTreeItem* current, QMap<QString, qint8>* priorities)
+void FileTreeModel::GetFilePrioritiesInternal(FileTreeItem* current, QMap<QString, quint8>* priorities)
 {
 	for(int i = 0; i < current->childCount(); i++)
 	{

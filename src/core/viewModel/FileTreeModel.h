@@ -18,33 +18,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #ifndef _FILETREEMODEL_H
 #define _FILETREEMODEL_H
-#include <QAbstractItemModel>
 #include "TreeItem.h"
-#include <QCheckBox>
-#include <QMap>
+#include  <QAbstractItemModel>
 class FileTreeModel : public QAbstractItemModel
 {
 	Q_OBJECT
 
 public:
-	FileTreeModel(QObject* parent = 0);
+	FileTreeModel(QObject* parent = nullptr);
 	~FileTreeModel();
-	bool setData(const QModelIndex&, const QVariant&, int role = Qt::EditRole);
+	bool setData(const QModelIndex&, const QVariant&, int role = Qt::EditRole) override;
 	QVariant data(const QModelIndex& index, int role) const;
 	Qt::ItemFlags flags(const QModelIndex& index) const;
 	QVariant headerData(int section, Qt::Orientation orientation,
-	                    int role = Qt::DisplayRole) const;
+	                    int role = Qt::DisplayRole) const override;
 	QModelIndex index(int row, int column,
-	                  const QModelIndex& parent = QModelIndex()) const;
-	QModelIndex parent(const QModelIndex& index) const;
-	int rowCount(const QModelIndex& parent = QModelIndex()) const;
-	int columnCount(const QModelIndex& parent = QModelIndex()) const;
+	                  const QModelIndex& parent = QModelIndex()) const override;
+	QModelIndex parent(const QModelIndex& index) const override;
+	int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+	int columnCount(const QModelIndex& parent = QModelIndex()) const override;
 	void addPath(QString path, QString size);
-	QMap<QString, qint8> getFilePiorites();
+	QMap<QString, quint8> getFilePiorites();
 	QStringList getUnicPathes();
 	void getUnicPathes(FileTreeItem*, QList<FileTreeItem*>&);
 private:
-	void GetFilePrioritiesInternal(FileTreeItem* current, QMap<QString, qint8>* priorities);
+	void GetFilePrioritiesInternal(FileTreeItem* current, QMap<QString, quint8>* priorities);
 
 	FileTreeItem* rootItem;
 };

@@ -16,7 +16,6 @@ window.TorrentView = Backbone.View.extend({
     initialize: function () {
         //  _.bindAll(this, this.render, 'close');
         this.listenTo(this.model, 'change', this.render);
-        this.model.view = this;
         this.template = $.templates("#torentTmpl");
     },
     updateFiles: function (response,view) {
@@ -49,13 +48,13 @@ window.TorrentView = Backbone.View.extend({
                 id = view.model.get('id');
                 detailedInfo = $('#detailedTorrentInfo' + id);
                 shouldShow = detailedInfo.hasClass('in');
-                selection = $('#torrentData' + id);
+                activTab = $('#torrentData' + id + ' li.active').index();
                 view.$el.html(view.template.render(view.model.attributes)).fadeIn(700);
                 if (shouldShow) {
                     $('#detailedTorrentInfo' + id).addClass("in");
-                    $('#torrentData' + id).html(selection.html());
-                    $('#torrentData' + id + ' .active:last a').tab('show');
-                    $('#torrentData' + id + ' a').click(function (e) {
+                  
+                    $('#torrentData' + id + ' li:eq('+ activTab +') a').tab('show');
+                    $('#torrentData' + id + ' li a').click(function (e) {
                         e.preventDefault();
                         $(this).tab('show');
                        
@@ -68,21 +67,18 @@ window.TorrentView = Backbone.View.extend({
                        
                     });
                 }
-
-
-            }, 1000);
-
-            //this.$el			
+				view = null;
+				detailedInfo = null;
+			}, 1000);
         } else {
             id = this.model.get('id');
             detailedInfo = $('#detailedTorrentInfo' + id);
             shouldShow = detailedInfo.hasClass('in');
-            selection = $('#torrentData' + id);
+            activTab = $('#torrentData' + id + ' li.active').index();
             this.$el.html(this.template.render(this.model.attributes)).fadeIn(700);
             if (shouldShow) {
                 $('#detailedTorrentInfo' + id).addClass("in");
-                $('#torrentData' + id).html(selection.html());
-                $('#torrentData' + id + ' .active:last a').tab('show');
+                $('#torrentData' + id + ' li:eq('+ activTab +') a').tab('show');
                 $('#torrentData' + id + ' a').click(function (e) {
                     e.preventDefault();
                     $(this).tab('show');
@@ -94,13 +90,9 @@ window.TorrentView = Backbone.View.extend({
                     $(this).tab('show');
                 });
             }
+			detailedInfo = null;
         }
-
-
-
-
         return this;
-
     }
 
 

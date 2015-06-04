@@ -5,14 +5,14 @@
 
 void DT_mounter::mountImage(QString path)
 {
-#ifdef Q_WS_WIN //file association for windows
+#ifdef Q_WS_WIN
 	QApplicationSettings* settings = QApplicationSettings::getInstance();
 	QString exe = settings->valueString("DT", "Executable");
 
 	if(exe.isEmpty())
 	{
 		QApplicationSettings::FreeInstance();
-		CustomMessageBox::warning(nullptr, "DT Mounter", qApp->translate("QTorrentDisplayModel","DT_PATH_NOT_SET"));
+		CustomMessageBox::warning(nullptr, "DT Mounter", qApp->translate("QTorrentDisplayModel", "DT_PATH_NOT_SET"));
 		return;
 	}
 

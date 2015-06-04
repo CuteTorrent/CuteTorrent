@@ -67,22 +67,26 @@ QString StaticHelpers::filePriorityToString(int priority)
 		{
 			return qApp->translate("FileViewModel", priority_str[0]);
 		}
+
 		case 1:
 		case 2:
 		{
 			return qApp->translate("FileViewModel", priority_str[1]);
 		}
+
 		case 3:
 		case 4:
 		case 5:
 		{
 			return qApp->translate("FileViewModel", priority_str[2]);
 		}
+
 		case 6:
 		case 7:
 		{
 			return qApp->translate("FileViewModel", priority_str[3]);
 		}
+
 		default:
 		{
 			return "";
@@ -110,7 +114,7 @@ QString StaticHelpers::toTimeString(int seconds)
 
 	if(Week > 0)
 	{
-		result.append(qApp->translate("DateTime","%1 WEEK ").arg(Week));
+		result.append(qApp->translate("DateTime", "%1 WEEK ").arg(Week));
 	}
 
 	if(day > 0)
@@ -147,8 +151,12 @@ QString StaticHelpers::SchedulerTypeToString(SchedulerTask::TaskType type)
 
 		case SchedulerTask::LIMIT_DOWNLOAD:
 			return "LIMIT_DL";
-	case SchedulerTask::UNKNOWN: break;
-	default: break;
+
+		case SchedulerTask::UNKNOWN:
+			break;
+
+		default:
+			break;
 	}
 
 	return "";
@@ -201,26 +209,32 @@ QString StaticHelpers::translateLibTorrentError(error_code const& ec)
 	{
 		return translateSessionError(ec);
 	}
+
 	if (ec.category() == get_bdecode_category())
 	{
 		return translateBEncodeError(ec);
 	}
+
 	if (ec.category() == get_gzip_category())
 	{
 		return translateGzipError(ec);
 	}
+
 	if (ec.category() == get_i2p_category())
 	{
 		return translateI2PError(ec);
 	}
+
 	if (ec.category() == get_socks_category())
 	{
 		return translateSocksError(ec);
 	}
+
 	if (ec.category() == get_upnp_category())
 	{
 		return translateUpnpError(ec);
 	}
+
 	return QString::fromUtf8(ec.message().c_str());
 }
 
@@ -419,14 +433,13 @@ QString StaticHelpers::translateSessionError(error_code const& ec)
 		QT_TRANSLATE_NOOP("ErrorMsg", "invalid transaction id in udp tracker response"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "invalid action field in udp tracker response")
 	};
-
 	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
 }
 
 QString StaticHelpers::translateBEncodeError(error_code const& ec)
 {
 	static char const* msgs[] =
-	{ 
+	{
 		QT_TRANSLATE_NOOP("ErrorMsg", "no error"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "expected string in bencoded string"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "expected colon in bencoded string"),
@@ -436,13 +449,11 @@ QString StaticHelpers::translateBEncodeError(error_code const& ec)
 		QT_TRANSLATE_NOOP("ErrorMsg", "bencoded item count limit exceeded"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "integer overflow")
 	};
-
 	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
 }
 
 QString StaticHelpers::translateGzipError(error_code const& ec)
 {
-	
 	static char const* msgs[] =
 	{
 		QT_TRANSLATE_NOOP("ErrorMsg", "no error"),
@@ -462,7 +473,6 @@ QString StaticHelpers::translateGzipError(error_code const& ec)
 		QT_TRANSLATE_NOOP("ErrorMsg", "distance is too far back in fixed or dynamic block"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "unknown gzip error")
 	};
-
 	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
 }
 
@@ -480,7 +490,6 @@ QString StaticHelpers::translateI2PError(error_code const& ec)
 		QT_TRANSLATE_NOOP("ErrorMsg", "key not found"),
 		QT_TRANSLATE_NOOP("ErrorMsg", "duplicated id")
 	};
-
 	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
 }
 
@@ -500,7 +509,6 @@ QString StaticHelpers::translateSocksError(error_code const& ec)
 		QT_TRANSLATE_NOOP("ErrorMsg", "SOCKS identd could not identify username")
 
 	};
-
 	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
 }
 struct error_code_t
@@ -517,13 +525,19 @@ error_code_t error_codes[] =
 	, { 714, QT_TRANSLATE_NOOP("ErrorMsg", "The specified value does not exist in the array") }
 	, { 715, QT_TRANSLATE_NOOP("ErrorMsg", "The source IP address cannot be wild-carded") }
 	, { 716, QT_TRANSLATE_NOOP("ErrorMsg", "The external port cannot be wild-carded") }
-	, { 718, QT_TRANSLATE_NOOP("ErrorMsg", "The port mapping entry specified conflicts with "
-	"a mapping assigned previously to another client") }
+	, {
+		718, QT_TRANSLATE_NOOP("ErrorMsg", "The port mapping entry specified conflicts with "
+		"a mapping assigned previously to another client")
+	}
 	, { 724, QT_TRANSLATE_NOOP("ErrorMsg", "Internal and External port values must be the same") }
-	, { 725, QT_TRANSLATE_NOOP("ErrorMsg", "The NAT implementation only supports permanent "
-	"lease times on port mappings") }
-	, { 726, QT_TRANSLATE_NOOP("ErrorMsg", "RemoteHost must be a wildcard and cannot be a "
-	"specific IP address or DNS name") }
+	, {
+		725, QT_TRANSLATE_NOOP("ErrorMsg", "The NAT implementation only supports permanent "
+		"lease times on port mappings")
+	}
+	, {
+		726, QT_TRANSLATE_NOOP("ErrorMsg", "RemoteHost must be a wildcard and cannot be a "
+		"specific IP address or DNS name")
+	}
 	, { 727, QT_TRANSLATE_NOOP("ErrorMsg", "ExternalPort must be a wildcard and cannot be a specific port ") }
 };
 QString StaticHelpers::translateUpnpError(error_code const& ec)
@@ -533,11 +547,13 @@ QString StaticHelpers::translateUpnpError(error_code const& ec)
 	error_code_t* end = error_codes + num_errors;
 	error_code_t tmp = { ev, 0 };
 	error_code_t* e = std::lower_bound(error_codes, end, tmp
-		, boost::bind(&error_code_t::code, _1) < boost::bind(&error_code_t::code, _2));
+	                                   , boost::bind(&error_code_t::code, _1) < boost::bind(&error_code_t::code, _2));
+
 	if (e != end && e->code == ev)
 	{
 		return e->msg;
 	}
+
 	char msg[500];
 	snprintf(msg, sizeof(msg), "unknown UPnP error (%d)", ev);
 	return msg;
@@ -546,6 +562,7 @@ QString StaticHelpers::translateUpnpError(error_code const& ec)
 QString StaticHelpers::translateError(error_code const& ec, char* msgs[], int msgs_len)
 {
 	int code = ec.value();
+
 	if (code < 0 || code >= msgs_len)
 	{
 		return QString::fromUtf8(ec.message().c_str());
@@ -553,7 +570,18 @@ QString StaticHelpers::translateError(error_code const& ec, char* msgs[], int ms
 
 	return qApp->translate("ErrorMsg", msgs[code]);
 }
-
+#ifdef Q_WS_WIN
+#include <Shlobj.h>
+void StaticHelpers::OpenFileInExplorer(QString& file)
+{
+	file = QDir::toNativeSeparators(file);
+	wchar_t wPath[MAX_PATH] = { 0 };
+	file.toWCharArray(wPath);
+	ITEMIDLIST* pItem = ILCreateFromPathW(wPath);
+	SHOpenFolderAndSelectItems(pItem, 0, nullptr, 0);
+	ILFree(pItem);
+}
+#endif
 QString StaticHelpers::CombinePathes(QString path, QString suffix)
 {
 	return QDir::toNativeSeparators(QDir::cleanPath(path + QDir::separator() + suffix));
@@ -566,7 +594,7 @@ NetworkDiskCache* StaticHelpers::GetGLobalWebCache()
 		m_pDiskCache = new NetworkDiskCache();
 		m_pDiskCache->setCacheDirectory(QDesktopServices::storageLocation(QDesktopServices::CacheLocation) + "/WebCache");
 		m_pDiskCache->setMaximumCacheSize(50 * KbInt * KbInt);
-		qDebug() << "RssManager  cache path:" << m_pDiskCache->cacheDirectory() << " max size:" << m_pDiskCache->maximumCacheSize() / KbInt / KbInt << "MB";
+		qDebug() << "NetworkDiskCache  cache path:" << m_pDiskCache->cacheDirectory() << " max size:" << m_pDiskCache->maximumCacheSize() / KbInt / KbInt << "MB";
 	}
 
 	return m_pDiskCache;

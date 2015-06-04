@@ -22,6 +22,7 @@ QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent, bool
 	connect(m_pRssManager.get(), SIGNAL(FeedChanged(QUuid)), this, SLOT(UpdateModel()));
 	connect(m_pTorrentDownloader.get(), SIGNAL(TorrentReady(QUrl, QTemporaryFile*)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFile*)));
 	connect(m_pUdpateTimer, SIGNAL(timeout()), this, SLOT(UpdateVisibleData()));
+
 	if (autoUpdate)
 	{
 		m_pUdpateTimer->start(1000);
@@ -38,15 +39,16 @@ QVariant QRssDisplayModel::data(const QModelIndex& index, int role /*= Qt::Displ
 	if (role == RssFeedRole)
 	{
 		RssBaseTreeItem* pBaseItem = static_cast<RssBaseTreeItem*>(index.internalPointer());
+
 		if (pBaseItem->GetType() == RssBaseTreeItem::Feed)
 		{
 			return qVariantFromValue(m_pRssManager->feeds().at(index.row()));
 		}
-		
 	}
 	else if (role == RssItemRole)
 	{
 		RssBaseTreeItem* pBaseItem = static_cast<RssBaseTreeItem*>(index.internalPointer());
+
 		if (pBaseItem->GetType() == RssBaseTreeItem::FeedItem)
 		{
 			RssFeedItemTreeItem* pFeedItemTreeitem = reinterpret_cast<RssFeedItemTreeItem*>(pBaseItem);
@@ -61,7 +63,6 @@ int QRssDisplayModel::rowCount(const QModelIndex& parent /*= QModelIndex()*/) co
 {
 	if (!parent.isValid())
 	{
-		qDebug() << "rowCount root_items" << m_rootItems.count();
 		return m_rootItems.count();
 	}
 
@@ -70,7 +71,6 @@ int QRssDisplayModel::rowCount(const QModelIndex& parent /*= QModelIndex()*/) co
 	if (parentBaseItem != NULL && parentBaseItem->GetType() == RssBaseTreeItem::Feed)
 	{
 		RssFeedTreeItem* pTreeFeedItem = reinterpret_cast<RssFeedTreeItem*>(parentBaseItem);
-		qDebug() << "rowCount children_items" << pTreeFeedItem->Children().count();
 		return pTreeFeedItem->Children().count();
 	}
 
@@ -142,11 +142,9 @@ QModelIndex QRssDisplayModel::parent(const QModelIndex& child) const
 
 void QRssDisplayModel::UpdateModel()
 {
-	qDebug() << Q_FUNC_INFO;
 	qDeleteAll(m_rootItems);
 	m_rootItems.clear();
 	QList<RssFeed*> feeds = m_pRssManager->feeds();
-	qDebug() << "m_feeds" << feeds.count();
 
 	for each (RssFeed * var in feeds)
 	{
@@ -181,13 +179,13 @@ QList<RssFeed*> QRssDisplayModel::SelectedFeeds()
 			else
 			{
 				data = selectedIndex.data(RssItemRole);
+
 				if (data.isValid())
 				{
 					RssItem* pItem = data.value<RssItem*>();
 					res.insert(pItem->rssFeed());
 				}
 			}
-			
 		}
 	}
 
@@ -202,16 +200,17 @@ RssItem* QRssDisplayModel::SelectedRssItem()
 	if (selectedIndex.isValid())
 	{
 		QVariant data = selectedIndex.data(RssItemRole);
+
 		if (data.isValid())
 		{
 			res = data.value<RssItem*>();
 			bool prevUnerad = res->unread();
+
 			if (prevUnerad)
 			{
 				res->setUread(false);
 				res->rssFeed()->UpdateUnreadCount();
 			}
-			
 		}
 	}
 
@@ -225,6 +224,7 @@ RssFeed* QRssDisplayModel::SelectedFeed()
 	if (selectedIndex.isValid())
 	{
 		QVariant data = selectedIndex.data(RssFeedRole);
+
 		if (data.isValid())
 		{
 			res = data.value<RssFeed*>();
@@ -260,10 +260,12 @@ void QRssDisplayModel::setCurrentFeedUnread(bool val)
 	if (current != nullptr)
 	{
 		QList<RssItem*> rssItems = current->GetFeedItems();
+
 		foreach(RssItem* pItem, rssItems)
 		{
 			pItem->setUread(val);
 		}
+
 		current->UpdateUnreadCount();
 	}
 }
@@ -348,7 +350,7 @@ void QRssDisplayModel::setupFeedMenu()
 	markAllAsReeded = new QAction(pStyleEngine->getIcon("mark_read"), tr("MARK_ALL_AS_READ"), m_pFeedMenu);
 	markAllAsReeded->setObjectName("ACTION_RSSLIST_MARK_ALL_READ");
 	connect(markAllAsReeded, SIGNAL(triggered()), SLOT(onMarkAllRead()));
-	markAllAsUnread = new QAction(pStyleEngine->getIcon("mark_unread"),tr("MARK_ALL_AS_UNREAD"), m_pFeedMenu);
+	markAllAsUnread = new QAction(pStyleEngine->getIcon("mark_unread"), tr("MARK_ALL_AS_UNREAD"), m_pFeedMenu);
 	markAllAsUnread->setObjectName("ACTION_RSSLIST_MARK_ALL_UNREAD");
 	connect(markAllAsUnread, SIGNAL(triggered()), SLOT(onMarkAllUnread()));
 	m_pFeedMenu->addAction(updateAction);
@@ -502,14 +504,12 @@ void QRssDisplayModel::onTorrentDownloaded(QUrl url, QTemporaryFile* pfile)
 	if (m_activeTorrentDownloads.contains(url))
 	{
 		QString fileName = pfile->fileName();
-		qDebug() << "Temp FileName is: " << fileName;
 		boost::scoped_ptr<OpenTorrentDialog> pDlg(new OpenTorrentDialog(m_pItemsView));
 		pDlg->SetData(fileName);
 		pDlg->execConditional();
 		pfile->setAutoRemove(true);
 		delete pfile;
 	}
-	
 }
 
 void QRssDisplayModel::onMarkAllRead()

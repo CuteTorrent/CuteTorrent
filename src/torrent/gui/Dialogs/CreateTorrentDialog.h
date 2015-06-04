@@ -27,6 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QMouseEvent>
 #include <QApplicationSettings.h>
 class CreateTorrentDialog;
+class StyledProgressBar;
 class torrentCreatorThread : public QThread
 {
 	Q_OBJECT
@@ -85,6 +86,7 @@ private:
 	torrentCreatorThread* creator;
 	TorrentManager* m_pTorrentManager;
 	QApplicationSettings* settings;
+	StyledProgressBar* progressBar;
 	quint64 getPiceSize();
 signals:
 	void AbortCreation();

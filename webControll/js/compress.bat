@@ -1,0 +1,1 @@
+for /r %%i in (*.js) do ( uglifyjs  "%%i" -o "%%~dpni.min.js" )

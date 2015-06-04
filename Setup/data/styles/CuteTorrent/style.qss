@@ -423,8 +423,18 @@ QToolBar QToolButton:checked {
     border : 1px inset gray;
 }
 QProgressBar { border: 1px solid #909090; ; }
-QProgressBar::chunk { width: 10px; margin: 0.5px; }
 
+QProgressBar[value="100"]::chunk { 
+	width: 10px; 
+	margin: 0.5px; 
+	background-color: qlineargradient(spread:reflect, x1:0.994318, y1:1, x2:1, y2:0.488636, stop:0.0397727 rgba(255, 255, 255, 255), stop:0.431818 rgba(50,145,212,255));
+}
+
+QProgressBar::chunk { 
+	width: 10px; 
+	margin: 0.5px; 
+	background-color: qlineargradient(spread:reflect, x1:0.994318, y1:1, x2:1, y2:0.488636, stop:0.0397727 rgba(255, 255, 255, 255), stop:0.431818 rgba(81,211,49,255));
+}
 QWidget#QBalloonTip	{border: 1px solid #909090;	background-color:#f0f0f0;	}
 HtmlView { margin: 0 -1px 0 -1px; }
 

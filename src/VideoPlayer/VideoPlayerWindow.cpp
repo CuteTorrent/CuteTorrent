@@ -42,7 +42,7 @@ VideoPlayerWindow::VideoPlayerWindow(QWidget* parent) :	QMainWindow(parent),
 {
 	try
 	{
-		m_pVideoWidget = new Phonon::VideoWidget();
+		m_pVideoWidget = new Phonon::VideoWidget(this);
 		setCentralWidget(m_pVideoWidget);
 		m_pVideoWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 		m_mediaControl = new MediaController(m_pVideoWidget);
@@ -136,8 +136,14 @@ bool VideoPlayerWindow::eventFilter(QObject* src, QEvent* event)
 {
 	if(src == m_pVideoWidget && event->type() == QEvent::MouseButtonDblClick)
 	{
-		goFullScreen();
-		return true;
+		QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+		if (mouseEvent->button() == Qt::LeftButton)
+		{
+			goFullScreen();
+			mouseEvent->accept();
+			return true;
+		}
+		
 	}
 
 	return false;
@@ -278,12 +284,8 @@ void VideoPlayerWindow::OnAudioChannelChosen(int index)
 
 VideoPlayerWindow::~VideoPlayerWindow()
 {
-	delete controls;
-	delete m_pMediaController;
-	delete m_mediaControl;
-	delete m_pVideoWidget;
+	m_mediaControl->pause();
 	m_windowActiveTimer->stop();
-	delete m_windowActiveTimer;
 }
 
 void VideoPlayerWindow::updateWindowActiveState()

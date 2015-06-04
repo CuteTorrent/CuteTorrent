@@ -18,9 +18,7 @@ class RssManager : public QObject
 public:
 
 	QList<RssFeed*> feeds();
-	RssFeed* addFeed(QUrl url, bool& isNew);
 	RssFeed* findFeed(const QUuid& uid);
-	void removeFeed(const QUuid& uid);
 	void addDownloadRule(RssDownloadRule* rule);
 	void removeDownloadRule(const QUuid& uid);
 	RssDownloadRule* findDownloadRule(const QUuid& uid);
@@ -31,7 +29,7 @@ public:
 	void SaveDownloadRules();
 	static RssManagerPtr getInstance();
 private:
-	struct TorrentDownloadInfo 
+	struct TorrentDownloadInfo
 	{
 		QUrl torrentUrl;
 		RssDownloadRule* downloadRule;
@@ -43,12 +41,15 @@ private:
 	TorrentDownloaderPtr m_pTorrentDownloader;
 	NotificationSystemPtr m_pNotificationSystem;
 	QList<RssFeed*> m_pFeeds;
-	QHash<QUrl,TorrentDownloadInfo> m_activeTorrentDownloads;
+	QHash<QUrl, TorrentDownloadInfo> m_activeTorrentDownloads;
 	QHash<QUuid, RssDownloadRule*> m_downloadRules;
 	QApplicationSettings* m_pSettings;
-	void downloadRssItem(RssItem* rssItem,RssFeed* pFeed, RssDownloadRule* rule);
+	void downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRule* rule);
 	QString gessSavePath(RssDownloadRule* downloadRule, QString base_suffix);
 	QMap<QString, quint8> getFilePriorities(TorrentDownloadInfo downloadInfo, file_storage fileStorage);
+public slots:
+	void removeFeed(const QUuid& uid);
+	RssFeed* addFeed(QUrl url, bool& isNew);
 private slots:
 	void onFeedChanged(QUuid);
 	void LoadFeeds();
@@ -60,8 +61,7 @@ signals:
 	void Notify(int, QString, QVariant);
 	void FeedChanged(QUuid);
 	void FeedRemoved(QUuid);
-	
-};
 
+};
 #endif
 

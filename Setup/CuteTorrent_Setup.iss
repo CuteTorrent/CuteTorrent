@@ -1,13 +1,15 @@
 ;#define x64
+#include "idp.iss"
 [Setup]
 WizardSmallImageFile=bottom.bmp
+AppId=CuteTorrent
 AppName=CuteTorrent
-AppVersion=0.9.2.8
+AppVersion=1.0.0.23
 DefaultDirName={pf}\CuteTorrent
 DefaultGroupName=CuteTorrent
 UninstallDisplayIcon={app}\CuteTorrent.exe
 OutputDir=Output
-OutputBaseFilename = CuteTorrent 0.9.2.8
+OutputBaseFilename = CuteTorrent 1.0.0.23
 SolidCompression=yes
 Compression=lzma/ultra
 WizardImageFile=Left.bmp
@@ -26,7 +28,11 @@ ArchitecturesInstallIn64BitMode=x64
 Name: DesctopIcon; Description: "Create desctop icon"; GroupDescription: Shortcuts:
 Name: TorrentAssociation; Description: "Associate ""torrent"" extension"; GroupDescription: File extensions:
 Name: MagnetAssociation; Description: "Open magnet links with CuteTorrent"; GroupDescription: File extensions:
-
+Name: InstallVcRedist; Description: "Install VC++ Redist 2010";
+Name: AddFirewallRule; Description: "Add rule to firewall";
+[Run]
+FileName: "{tmp}\vcredist_x86.exe"; Parameters: "/q"; StatusMsg: "Installing VC++ Redist 2010..."; Flags: waituntilterminated ; Check: VcRedistCheck
+Filename: "{sys}\netsh.exe"; Parameters: "firewall add allowedprogram ""{app}\CuteTorrent.exe"" ""BitTorrent client CuteTorrent"" ENABLE ALL";     StatusMsg: "Adding firewall rule..."; Flags: runhidden waituntilterminated; Check: FirewallCheck
 [Registry]
 Root: HKCR; Subkey: ".torrent"; ValueType: string; ValueName: ""; ValueData: "CuteTorrent.file"; Flags: uninsdeletevalue; Tasks: TorrentAssociation
 Root: HKCR; Subkey: "CuteTorrent.file"; ValueType: string; ValueName: ""; ValueData: "Torrent File"; Flags: uninsdeletekey; Tasks: TorrentAssociation
@@ -147,6 +153,18 @@ if CompareText(sTemp, sProcessName) = 0 then
 
 end;
 
+function VcRedistCheck() : Boolean;
+
+begin
+     Result := IsTaskSelected('InstallVcRedist');
+end;
+
+function FirewallCheck() : Boolean;
+
+begin
+     Result := IsTaskSelected('AddFirewallRule');
+end;
+
 function InitializeSetup(): Boolean;
 var
   nMsgBoxResult: Integer;
@@ -172,6 +190,13 @@ var
 
 procedure nLicenseAcceptedRadioClickCheck(Sender: TObject); forward;
 
+procedure CurPageChanged(CurPageID: Integer);
+begin
+  if  (CurPageID = wpReady) and (VcRedistCheck() = True) then
+  begin
+    idpAddFile('http://download.microsoft.com/download/5/B/C/5BC5DBB3-652D-4DCE-B14A-475AB85EEF6E/vcredist_x86.exe', expandconstant('{tmp}\vcredist_x86.exe'));
+  end
+end;
 procedure RedesignWizardForm;
 begin
   with WizardForm do
@@ -832,6 +857,10 @@ end;
 
 procedure InitializeWizard();
 begin
+  idpSetOption('DetailedMode', '1');
+  idpSetOption('DetailsButton',  '0');
+  idpSetOption('InvalidCert',    'ignore');
+  idpDownloadAfter(wpReady);
   RedesignWizardForm;
 end;
 

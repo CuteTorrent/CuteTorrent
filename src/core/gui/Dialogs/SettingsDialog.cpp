@@ -111,7 +111,6 @@ SettingsDialog::SettingsDialog(QWidget* parent, int flags) : BaseWindow(OnlyClos
 
 	foreach(QString avail, Application::availableLanguages())
 	{
-		qDebug() << avail << QLocale(avail);
 		QLocale language = QLocale(avail);
 		localeComboBox->addItem(QLocale::languageToString(language.language()), avail);
 
@@ -217,6 +216,7 @@ void SettingsDialog::FillFilteringGroups()
 {
 	filterGroups = settings->GetFileFilterGroups();
 	GroupsListWidget->clear();
+
 	for(int i = 0; i < filterGroups.count(); i++)
 	{
 		GroupsListWidget->addItem(filterGroups.at(i).Name());
@@ -353,12 +353,7 @@ void SettingsDialog::ApplySettings()
 	pNotifySys->UpdateNotificationSettings();
 #ifdef Q_WS_WIN //file association for windows
 	QSettings asocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
-	QString base_dir = QDir::toNativeSeparators(settings->valueString("System", "BaseDir")) + "CuteTorrent.exe";
-
-	if(base_dir.isEmpty())
-	{
-		base_dir = QDir::toNativeSeparators(QApplication::applicationFilePath());
-	}
+	QString base_dir = QDir::toNativeSeparators(QApplication::applicationFilePath());
 
 	if(asociationCheckBox->checkState() == Qt::Checked)
 	{
@@ -450,7 +445,6 @@ void SettingsDialog::ApplySettings()
 	}
 
 	QList<QKeyEdit*> keyEdits = keyMapContainer->findChildren<QKeyEdit*>();
-	qDebug()  << keyEdits;
 	QMap<QString, QVariant> keyMap;
 
 	foreach(QKeyEdit* keyEdit, keyEdits)
@@ -469,6 +463,7 @@ void SettingsDialog::ApplySettings()
 	{
 		sEngine->setStyle(currentStyle);
 	}
+
 	ApplyRssDownloadRulles();
 }
 void SettingsDialog::ApplySettingsToSession()
@@ -500,8 +495,6 @@ void SettingsDialog::ApplySettingsToSession()
 	enc_settings.out_enc_policy = (pe_settings::enc_policy) outEncPolicyComboBox->currentIndex();
 	enc_settings.allowed_enc_level = (pe_settings::enc_level)(encLevelComboBox->currentIndex() + 1);
 	enc_settings.prefer_rc4 = preferFullEncCheckBox->isChecked();
-	qDebug() << "saving in_enc_policy" << (int) enc_settings.in_enc_policy;
-	qDebug() << "saving out_enc_policy" << (int) enc_settings.out_enc_policy;
 	manager->updateEncSettings(enc_settings);
 	TorrentManager::freeInstance();
 }
@@ -513,7 +506,7 @@ void SettingsDialog::addGroup()
 	if(name.isEmpty())
 	{
 		CustomMessageBox::warning(this, tr("STR_SETTINGS"),
-		                      tr("ERROR_GROUP_NAME_NOT_SET"));
+		                          tr("ERROR_GROUP_NAME_NOT_SET"));
 		return;
 	}
 
@@ -522,7 +515,7 @@ void SettingsDialog::addGroup()
 	if(extensions.isEmpty())
 	{
 		CustomMessageBox::warning(this, tr("STR_SETTINGS"),
-		                      tr("ERROR_NO_EXTENSIONS"));
+		                          tr("ERROR_NO_EXTENSIONS"));
 		return;
 	}
 
@@ -531,14 +524,14 @@ void SettingsDialog::addGroup()
 	if(dir.isEmpty())
 	{
 		CustomMessageBox::warning(this, tr("STR_SETTINGS"),
-		                      tr("ERROR_NO_PATH"));
+		                          tr("ERROR_NO_PATH"));
 		return;
 	}
 
 	if(!QDir(dir).exists())
 	{
 		CustomMessageBox::warning(this, tr("STR_SETTINGS"),
-		                      tr("ERROR_PATH_NOT_EXISTS"));
+		                          tr("ERROR_PATH_NOT_EXISTS"));
 		return;
 	}
 
@@ -750,12 +743,10 @@ void SettingsDialog::FillKeyMapTab()
 	QGridLayout* layout = origLayout ? (QGridLayout*) origLayout :  new QGridLayout(keyMapContainer);
 	QMap<QString, QMap<QString, QString>> grouppedKeyMap;
 	int index = 0;
-	qDebug() << "actions";
-
+	
 	for(QMap<QString, QVariant>::iterator i = keyMappings.begin();
 	        i != keyMappings.end(); ++i, index++)
 	{
-		qDebug() << i.key();
 		QString groupName  = i.key().split('_') [1];
 		grouppedKeyMap[groupName][i.key()] = i.value().toString();
 	}
@@ -770,7 +761,6 @@ void SettingsDialog::FillKeyMapTab()
 
 	int leftColumns =  size / 2;
 	int rightIndex = 0, leftIndex = 0;
-	qDebug() << grouppedKeyMap;
 	QStringList keys = grouppedKeyMap.keys();
 
 	for(int i = 0; i < keys.length(); i++)
@@ -790,7 +780,6 @@ void SettingsDialog::FillKeyMapTab()
 	foreach(QString groupName, keys)
 	{
 		QMap<QString, QString> keyMap = grouppedKeyMap[groupName];
-		qDebug() << groupName <<  keyMap.size();
 		QGroupBox* _groupBox = new  QGroupBox(keyMapContainer);
 		_groupBox->setTitle(trUtf8(groupName.toUpper().toUtf8()));
 		QFormLayout* groupLayout = new QFormLayout(_groupBox);
@@ -956,6 +945,7 @@ void SettingsDialog::FillRestrictionTab()
 void SettingsDialog::updateRulesWidget(QList<RssDownloadRule*> downloadRules)
 {
 	rssRulesListWidget->clear();
+
 	for (int i = 0; i < downloadRules.size(); i++)
 	{
 		RssDownloadRule* rssDownloadRule = downloadRules.at(i);
@@ -971,22 +961,26 @@ void SettingsDialog::FillRssTab()
 	QList<RssDownloadRule*> downloadRules = pRssManager->downloadRules();
 	qDeleteAll(m_downloadRulesCopy.values());
 	m_downloadRulesCopy.clear();
+
 	for (int i = 0; i < downloadRules.size(); i++)
 	{
 		RssDownloadRule* rssDownloadRule = downloadRules.at(i);
 		m_downloadRulesCopy.insert(rssDownloadRule->Uid(), new RssDownloadRule(*rssDownloadRule));
 	}
+
 	StyleEngene* pStyleEngine = StyleEngene::getInstance();
 	updateRulesWidget(downloadRules);
+
 	if (editRssRule == nullptr)
 	{
 		editRssRule = new QAction(pStyleEngine->getIcon("move_folder"), tr("ACTION_SETTINGS_EDIT_RSS_RULE"), this);
 		connect(editRssRule, SIGNAL(triggered()), SLOT(onEditRssRule()));
 		rssRulesListWidget->addAction(editRssRule);
 	}
+
 	if (deleteRssRule == nullptr)
 	{
-		deleteRssRule = new QAction(pStyleEngine->getIcon("delete"),tr("ACTION_SETTINGS_DELETE_RSS_RULE"), this);
+		deleteRssRule = new QAction(pStyleEngine->getIcon("delete"), tr("ACTION_SETTINGS_DELETE_RSS_RULE"), this);
 		connect(deleteRssRule, SIGNAL(triggered()), SLOT(onDeleteRssRule()));
 		rssRulesListWidget->addAction(deleteRssRule);
 	}
@@ -995,10 +989,12 @@ void SettingsDialog::FillRssTab()
 void SettingsDialog::ApplyRssDownloadRulles()
 {
 	RssManagerPtr pRssManager = RssManager::getInstance();
+
 	for (int i = 0; i < m_downloadRulesCopy.size(); i++)
 	{
 		pRssManager->updateDownloadRule(new RssDownloadRule(*m_downloadRulesCopy.values().at(i)));
 	}
+
 	for (int i = 0; i < m_deletedRules.size(); i++)
 	{
 		pRssManager->removeDownloadRule(m_deletedRules.at(i));
@@ -1078,6 +1074,7 @@ void SettingsDialog::NeverCallMe()
 void SettingsDialog::addRssRule()
 {
 	boost::scoped_ptr<AddRssDwonloadRuleDialog> pDialog(new AddRssDwonloadRuleDialog(this));
+
 	if (pDialog->exec() == Accepted)
 	{
 		RssDownloadRule* rule = pDialog->getFinalRule();
@@ -1095,10 +1092,12 @@ void SettingsDialog::onEditRssRule()
 		RssDownloadRule* downloadRule = m_downloadRulesCopy[uid];
 		bool ok;
 		downloadRule->validate(ok);
+
 		if (ok)
 		{
 			boost::scoped_ptr<AddRssDwonloadRuleDialog> pDialog(new AddRssDwonloadRuleDialog(this, AddRssDwonloadRuleDialog::EDIT));
 			pDialog->setDownloadRule(downloadRule);
+
 			if (pDialog->exec() == Accepted)
 			{
 				RssDownloadRule* rule = pDialog->getFinalRule();

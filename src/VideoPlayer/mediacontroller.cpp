@@ -29,6 +29,8 @@ void availableAudioChannelsChanged();
 #include <QLineEdit>
 #include <QUrl>
 #include <QTimer>
+#include <VideoWidget>
+
 MediaController::MediaController(Phonon::VideoWidget* parent) :
 	QObject(parent)
 {

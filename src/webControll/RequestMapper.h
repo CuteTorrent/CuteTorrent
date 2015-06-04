@@ -1,11 +1,5 @@
 ﻿#pragma once
 #include "http/httprequesthandler.h"
-#include "http/staticfilecontroller.h"
-#include "TorrentApiController.h"
-#include "UploadController.h"
-#include "CommandsApiController.h"
-#include "SettingsAPiController.h"
-#include "MagnetApiController.h"
 class RequestMapper: public HttpRequestHandler
 {
 	Q_OBJECT
@@ -14,12 +8,8 @@ public:
 
 	RequestMapper(QObject* parent = 0);
 	~RequestMapper();
-	void service(HttpRequest& request, HttpResponse& response);
+	void service(HttpRequest& request, HttpResponse& response) override;
 private:
-	MagnetApiController* magnetController;
-	StaticFileController* staticFileController;
-	TorrentApiController* torrentController;
-	UploadController* uploadController;
-	CommandsApiController* commandsController;
-	SettingsAPiController* settingsController;
+	QMap<QString, HttpRequestHandler*> m_pRequestMap;
+
 };

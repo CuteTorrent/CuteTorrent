@@ -12,7 +12,7 @@ private:
 public:
 	MagnetApiController(QObject*);
 
-	void service(HttpRequest& request, HttpResponse& response);
+	void service(HttpRequest& request, HttpResponse& response) override;
 	~MagnetApiController(void);
 public slots:
 	void DownloadMetadataCompleted(const openmagnet_info& info);

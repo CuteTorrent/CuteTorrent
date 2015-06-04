@@ -77,7 +77,7 @@ public:
 	QVariant data(const QModelIndex& index, int role =	Qt::DisplayRole) const override;
 	bool removeRow(int row, bool delFiles);
 	bool removeRows(int row, int count,
-	                        const QModelIndex& parent = QModelIndex()) override;
+	                const QModelIndex& parent = QModelIndex()) override;
 	enum Role { TorrentRole = Qt::UserRole };
 	Torrent* GetSelectedTorrent();
 

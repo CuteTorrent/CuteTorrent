@@ -47,6 +47,7 @@ private:
 	static QString translateUpnpError(error_code const& ec);
 	static QString translateError(error_code const& ec, char* msgs[], int msgs_len);
 public:
+	static void OpenFileInExplorer(QString& file);
 	static QString toKbMbGb(size_type size);
 	static QString translateLibTorrentError(error_code const& ec);
 	static void dellDir(QString path);
@@ -63,7 +64,7 @@ template <typename T> QList<T>
 StaticHelpers::reversed(const QList<T>& in)
 {
 	QList<T> result;
-	result.reserve(in.size()); 
+	result.reserve(in.size());
 	std::reverse_copy(in.begin(), in.end(), std::back_inserter(result));
 	return result;
 }

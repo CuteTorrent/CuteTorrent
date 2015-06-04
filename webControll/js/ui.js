@@ -147,6 +147,34 @@ $(document).ready(function () {
         $('#preferenciesDialog').modal('hide')
         return false;
     });
+	$('#add-rss-feed').click(function(e){
+		$.ajax({
+			url: '/rss/api',
+			type: "PUT",
+			async:true,
+			cache: false,
+			data: {
+				feedUrl: encodeURI($('#rss-feed-url').val())
+			},
+			success: function(msg){
+				if (!msg.isNew)	{
+					 $("#alertAria").append($.templates("#alert-view").render({
+						 message: "Rss feed with this url alredy exists"
+					}));
+				}
+			}
+		})
+	});
+	var fsTorrentView = new window.FileSystemView({
+			"rootEL": $('#torrentOpen #driveList .tree'),
+			"pathEl": $('#torrent-save-path')
+	});
+	fsTorrentView.fetchData();
+	var fsMagnetView = new window.FileSystemView({
+			"rootEL": $("#magnetLinkOpen #driveList .tree"),
+			"pathEl": $('#magnet-save-path')
+	});
+	fsMagnetView.fetchData();
     $("#magnetLink").submit(function () {
 		$.ajax({
 					url: '/magnet/api',
@@ -155,7 +183,7 @@ $(document).ready(function () {
 					cache: false,
 					data : {
 						magnetLink: $('#magnet-link').val(),
-						savePath:$('#save-path').val()
+						savePath:$('#magnet-save-path').val()
 					}
 				
 				});
@@ -164,26 +192,39 @@ $(document).ready(function () {
         return false;
     });
 	var settingsView = new window.SettingsView;
+	var rssListView = new window.RssListView;
+	rssListView.render();
 	var torrentListView = new window.TorrentListView;
 	torrentListView.render();
-	var paginationController=new window.PaginationController({view:torrentListView});
+	var paginationController=new window.PaginationController({torrentsView:torrentListView, rssView: rssListView});
 	paginationController.view=torrentListView;
 	Backbone.history.start();
-    var updatingID = setInterval(function () {
-        torrentListView.updateCollection();
-    }, 10000);
+	var updateApropriateCollection = function (e) {
+		if ($('#subNav li.active').index()==0)
+		{
+			torrentListView.updateCollection();	
+		}
+		else
+		{
+			rssListView.updateCollection();	
+		}
+	};
+	var updatingID = setInterval(updateApropriateCollection, 10000);
+	
+	$('#subNav a:first').tab('show')
+	
+	$('#subNav a[data-toggle="tab"]').on('shown.bs.tab', updateApropriateCollection);
     $("#content").idle(
         function () {
             clearInterval(updatingID);
             $("#content").fadeTo("slow", .1);
         },
         function () {
-            torrentListView.updateCollection();
-            updatingID = setInterval(function () {
-                torrentListView.updateCollection();
-            }, 10000);
+            updateApropriateCollection();
+            updatingID = setInterval(updateApropriateCollection, 10000);
             $("#content").fadeTo("fast", 1);
-        }, {
+        },
+		{
             after: 30000
         }
     );

@@ -266,7 +266,6 @@ RssParserPtr RssParser::getInstance()
 void RssParser::fillFeed(QIODevice* pData, RssFeed* pFeed, bool& ok, QString& error)
 {
 	QByteArray data = pData->readAll();
-	qDebug() << "response is " << qPrintable(data);
 	QXmlStreamReader reader(data);
 	bool channelFound = false;
 
@@ -274,8 +273,6 @@ void RssParser::fillFeed(QIODevice* pData, RssFeed* pFeed, bool& ok, QString& er
 	{
 		if (reader.name().compare("rss", Qt::CaseInsensitive) == 0)
 		{
-			qDebug() << "Found rss start element. Start searching for chanels";
-
 			while (reader.readNextStartElement())
 			{
 				if (reader.name().compare("channel", Qt::CaseInsensitive) == 0)
@@ -285,7 +282,7 @@ void RssParser::fillFeed(QIODevice* pData, RssFeed* pFeed, bool& ok, QString& er
 				}
 				else
 				{
-					qDebug() << "Unexpected element found " << reader.name() << ". Skiping it.";
+					qWarning() << "Unexpected element found " << reader.name() << ". Skiping it.";
 					reader.skipCurrentElement();
 				}
 			}
@@ -347,7 +344,7 @@ void RssParser::parseRssChannel(QXmlStreamReader& reader, RssFeed* pFeed, bool& 
 
 					if (m_lastUpdateDates.value(feedUrl, "") == lastBuildDate)
 					{
-						qDebug() << "The RSS feed has not changed since last time, aborting parsing.";
+						qWarning() << "The RSS feed has not changed since last time, aborting parsing.";
 						return;
 					}
 
@@ -377,8 +374,6 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 
 		if (reader.isStartElement())
 		{
-			qDebug() << "parsing element " << reader.name();
-
 			if (reader.name().compare("title", Qt::CaseInsensitive) == 0)
 			{
 				QString title = reader.readElementText();
@@ -409,8 +404,6 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 			}
 			else if (reader.name().compare("enclosure", Qt::CaseInsensitive) == 0)
 			{
-				qDebug() << "enclosure attributes: " << reader.attributes().value("type");
-
 				if (reader.attributes().value("type") == "application/x-bittorrent")
 				{
 					pItem->setTorrentUrl(reader.attributes().value("url").toString());
@@ -438,7 +431,7 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 			}
 			else if (reader.name().compare("infohash", Qt::CaseInsensitive) == 0 ||
 			         reader.name().compare("info_hash", Qt::CaseInsensitive) == 0 ||
-					 reader.name().compare("hash", Qt::CaseInsensitive) == 0)
+			         reader.name().compare("hash", Qt::CaseInsensitive) == 0)
 			{
 				pItem->setInfoHash(reader.readElementText());
 			}
@@ -469,16 +462,16 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 		return;
 	}
 
-	//qDebug() << "Final item is: " << item;
 	if (pItem->guid().isEmpty())
 	{
 		if (pItem->describtionLink().isEmpty())
 		{
 			if (pItem->title().isEmpty())
 			{
-				qDebug() << "NO unick id skiping item";
+				qWarning() << "No unick id. Skiping item";
 				return;
 			}
+
 			pItem->setGuid(pItem->title());
 		}
 		else
@@ -486,6 +479,7 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 			pItem->setGuid(pItem->describtionLink());
 		}
 	}
+
 	if (pItem->torrentUrl().isEmpty() && !pItem->describtionLink().isEmpty())
 	{
 		pItem->setTorrentUrl(pItem->describtionLink());
@@ -493,6 +487,7 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 	else if (pItem->torrentUrl().isEmpty() && !pItem->guid().isEmpty())
 	{
 		QUrl tempUrl(pItem->guid());
+
 		if (tempUrl.isValid())
 		{
 			pItem->setTorrentUrl(pItem->guid());
@@ -500,12 +495,14 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 	}
 
 	QString guid = pItem->guid();
+
 	if (pFeed->m_rssItems.contains(guid))
 	{
 		if (pItem->pubDate().isValid())
 		{
 			QDateTime newItemDate = pItem->pubDate();
 			QDateTime oldItemDate = pFeed->m_rssItems[guid]->pubDate();
+
 			if (newItemDate > oldItemDate)
 			{
 				boost::scoped_ptr<RssItem> pOldItem(pFeed->m_rssItems[guid]);
@@ -514,12 +511,12 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 				return;
 			}
 		}
-		qDebug() << "RssItem already exists" << pItem->guid() << pItem->title();
+
+		qWarning() << "RssItem already exists" << pItem->guid() << pItem->title();
 		return;
 	}
 
-	qDebug() << "New RssItem" << pItem->guid() << pItem->title();
-	
+	qWarning() << "New RssItem" << pItem->guid() << pItem->title();
 	pFeed->m_rssItems.insert(guid, new RssItem(*pItem.get()));
 }
 
@@ -592,7 +589,7 @@ void RssParser::parseAtomChannel(QXmlStreamReader& reader, RssFeed* pFeed, bool&
 
 					if (m_lastUpdateDates.value(feedUrl) == lastBuildDate)
 					{
-						qDebug() << "The RSS feed has not changed since last time, aborting parsing.";
+						qWarning() << "The RSS feed has not changed since last time, aborting parsing.";
 						return;
 					}
 
@@ -639,8 +636,8 @@ void RssParser::parseAtomArticle(QXmlStreamReader& reader, QString baseURL, RssF
 				// take the stress of figuring article full URI from UI
 				// Assemble full URI
 				pItem->setDescribtionLink (baseURL.isEmpty() ?
-				                theLink :
-				                baseURL + theLink);
+				                           theLink :
+				                           baseURL + theLink);
 			}
 			else if (reader.name() == "summary" || reader.name() == "content")
 			{
@@ -707,7 +704,9 @@ void RssParser::parseAtomArticle(QXmlStreamReader& reader, QString baseURL, RssF
 		error = qApp->translate("RssParser", "No valid rss fields found.");
 		return;
 	}
+
 	QString guid = pItem->guid();
+
 	if (pItem->torrentUrl().isEmpty() && !pItem->describtionLink().isEmpty())
 	{
 		pItem->setTorrentUrl(pItem->describtionLink());
@@ -715,6 +714,7 @@ void RssParser::parseAtomArticle(QXmlStreamReader& reader, QString baseURL, RssF
 	else if (pItem->torrentUrl().isEmpty() && !guid.isEmpty())
 	{
 		QUrl tempUrl(guid);
+
 		if (tempUrl.isValid())
 		{
 			pItem->setTorrentUrl(guid);
@@ -727,6 +727,7 @@ void RssParser::parseAtomArticle(QXmlStreamReader& reader, QString baseURL, RssF
 		{
 			QDateTime newItemDate = pItem->pubDate();
 			QDateTime oldItemDate = pFeed->m_rssItems[guid]->pubDate();
+
 			if (newItemDate > oldItemDate)
 			{
 				boost::scoped_ptr<RssItem> pOldItem(pFeed->m_rssItems[guid]);
@@ -735,9 +736,9 @@ void RssParser::parseAtomArticle(QXmlStreamReader& reader, QString baseURL, RssF
 				return;
 			}
 		}
+
 		return;
 	}
-
 
 	pFeed->m_rssItems.insert(guid, new RssItem(*pItem.get()));
 }

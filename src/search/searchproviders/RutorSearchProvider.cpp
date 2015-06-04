@@ -71,7 +71,7 @@ void RutorSearchProvider::replyReady(QNetworkReply* pReply)
 		{
 			if (tags.count() > 1)
 			{
-				qDebug() << "More than one search result table found.";
+				qCritical() << "More than one search result table found.";
 			}
 
 			QSgmlTag* resaltsTable = tags.at(0)->Parent;
@@ -81,7 +81,6 @@ void RutorSearchProvider::replyReady(QNetworkReply* pReply)
 			for (int i = 1; i < nChildCount; i++)
 			{
 				QSgmlTag* pChild = resaltsTable->Children.at(i);
-				qDebug() << pChild->Name << pChild->Value << pChild->Attributes;
 
 				if (pChild->Name.compare("tr", Qt::CaseInsensitive) == 0)
 				{

@@ -4852,37 +4852,37 @@ td.visible-print {
 height: 48px;
 width: 48px;
 margin: 4px;
-background-image: url("../img/default.ico");
+background-image: url("../img/default.png");
      background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 .movie{
-background-image: url("../img/movie.ico");
+background-image: url("../img/movie.png");
    
 }
 .picture{
-background-image: url("../img/picture.ico");
+background-image: url("../img/picture.png");
    
 }
 .doc{
-background-image: url("../img/doc.ico");
+background-image: url("../img/doc.png");
    
 }
 .audio{
-background-image: url("../img/audio.ico");
+background-image: url("../img/audio.png");
    
 }
 .archive{
-background-image: url("../img/archive.ico");
+background-image: url("../img/archive.png");
     
 }
 .folder{
-background-image: url("../img/folder.ico");
+background-image: url("../img/folder.png");
 
 }
 .iso{
-background-image: url("../img/iso.ico");
+background-image: url("../img/iso.png");
 
 }
 #ajax_loading {

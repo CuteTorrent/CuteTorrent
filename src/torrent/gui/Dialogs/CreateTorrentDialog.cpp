@@ -27,9 +27,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "TorrentManager.h"
 #include "Version.h"
 #include "messagebox.h"
+#include <gui/Controls/StyledProgressBar.h>
+
 CreateTorrentDialog::CreateTorrentDialog(QWidget* parent, Qt::WindowFlags) : BaseWindow(OnlyCloseButton, NoResize, parent)
 {
 	setupUi(this);
+	
+	progressBar = new StyledProgressBar(m_centralWidget);
+	progressBar->setObjectName(QString::fromUtf8("progressBar"));
+	progressBar->setValue(0);
+	progressBar->setTextVisible(false);
+	gridLayout_4->addWidget(progressBar, 3, 0, 1, 3);
 	setupCustomWindow();
 	setupWindowIcons();
 	settings = QApplicationSettings::getInstance();
@@ -190,7 +198,7 @@ void CreateTorrentDialog::BeginCreate()
 	if((QFileInfo(path).isDir() && listFolder(path) == 0) || (!QFileInfo(path).isDir() && QFileInfo(path).size() == 0))
 	{
 		CustomMessageBox::warning(this, tr("ERROR_STR"),
-		                      tr("ERROR_EMPTY_DIR"));
+		                          tr("ERROR_EMPTY_DIR"));
 		return;
 	}
 
@@ -201,7 +209,7 @@ void CreateTorrentDialog::BeginCreate()
 	if(path.length() == 0)
 	{
 		CustomMessageBox::information(this, tr("ERROR_STR"),
-		                          tr("ERROR_NO_FILE_OR_FOLDER_NAME"));
+		                              tr("ERROR_NO_FILE_OR_FOLDER_NAME"));
 		//delete creator;
 		createButton->setEnabled(true);
 		return;
@@ -264,10 +272,10 @@ void CreateTorrentDialog::ShowCreationSucces(QString filename)
 	if(!filename.isNull())
 	{
 		CustomMessageBox::information(this, tr("CREATE_TORRENT_DIALOG"),
-		                          tr("CREATE_TORRENT_SUCCES_SAVED %1").arg(filename));
+		                              tr("CREATE_TORRENT_SUCCES_SAVED %1").arg(filename));
 	}
 
-	progressBar->setValue(0);
+	progressBar->setValue(100);
 	createButton->setEnabled(true);
 	//delete creator;
 	//creator = NULL;
@@ -275,8 +283,8 @@ void CreateTorrentDialog::ShowCreationSucces(QString filename)
 void CreateTorrentDialog::ShowCreationFailture(QString msg)
 {
 	CustomMessageBox::critical(this, tr("CREATE_TORRENT_DIALOG"),
-	                       tr("CREATE_TORRENT_FILE_ERROR\n %1").arg(msg));
-	progressBar->setValue(0);
+	                           tr("CREATE_TORRENT_FILE_ERROR\n %1").arg(msg));
+	//progressBar->setValue(0);
 	createButton->setEnabled(true);
 // 	delete creator;
 // 	creator = NULL;

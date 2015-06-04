@@ -8,9 +8,33 @@ window.SettingsView = Backbone.View.extend({
     el:$('#SettingsConteiner'),
 	events:{
 		"click .list-group-item":"changeGroup",
-		"click #groupUpdate":"groupUpdate"
+		"click #groupUpdate":"groupUpdate",
+		"click #groupDelete":"groupDelete"
+	},
+	groupDelete: function(e) {
+		e.preventDefault();
+		group = {
+			name:$("#groupName").val(),
+			extensions:$("#extentions").val(),
+			path:$("#savePath").val()
+		};
+		groups=this.model.get('filteringGroups');
+		found=false;
+		for(var i=0;i<groups.length;i++)
+		{
+			if (group.name == groups[i].name)
+			{
+				groups.splice(i,1);
+				break;
+			}
+		}
+		
+		this.model.set('filteringGroups',groups);
+		this.model.save();
+		this.render();
 	},
 	groupUpdate: function(e) {
+		e.preventDefault();
 		group = {
 			name:$("#groupName").val(),
 			extensions:$("#extentions").val(),
@@ -33,6 +57,7 @@ window.SettingsView = Backbone.View.extend({
 		}
 		this.model.set('filteringGroups',groups);
 		this.model.save();
+		this.render();
 	},
 	changeGroup: function(e) {
 		groups=this.model.get('filteringGroups');
@@ -50,19 +75,16 @@ window.SettingsView = Backbone.View.extend({
 	},	
     initialize: function () {
         this.listenTo(this.model, 'change', this.render);
-        this.model.view = this;
-		this.model.fetch();
+        this.model.fetch();
 		this.template=$.templates("#settingsTmpl");
     },
 	render: function () {
        $(this.el).html(this.template.render(this.model.attributes));
-	   $(function () {
-				$('#prefernciestab a:first').tab('show');
-			})
-			$('#prefernciestab a').click(function (e) {
-				e.preventDefault();
-				$(this).tab('show');
-			})
+	   $('#prefernciestab a:first').tab('show');
+		$('#prefernciestab a').click(function (e) {
+			e.preventDefault();
+			$(this).tab('show');
+		})
         return this;
 
     }

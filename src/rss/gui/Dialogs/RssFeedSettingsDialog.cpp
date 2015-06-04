@@ -33,12 +33,19 @@ void RssFeedSettingsDialog::accept()
 	{
 		return;
 	}
+
 	m_pFeed->setTll(m_pRefreshRateSpinBox->value());
 	QHash<QString, QString> cookies;
-	for (int i = 0; i < m_pCoociesTabWidget->rowCount(); ++i)
+
+	for (int i = 0; i < m_pCoociesTabWidget->rowCount(); i++)
 	{
-		cookies.insert(m_pCoociesTabWidget->item(i, 0)->text(), m_pCoociesTabWidget->item(i, 1)->text());
+		QTableWidgetItem* keyItem = m_pCoociesTabWidget->item(i, 0);
+		QString key = keyItem->text();
+		QTableWidgetItem* valueItem = m_pCoociesTabWidget->item(i, 1);
+		QString value = valueItem->text();
+		cookies.insert(key, value);
 	}
+
 	m_pFeed->setCoookies(cookies);
 	QDialog::accept();
 }
@@ -51,10 +58,12 @@ void RssFeedSettingsDialog::onAddRow()
 void RssFeedSettingsDialog::onRemoveRow()
 {
 	QList<QTableWidgetSelectionRange> selectedRanges = m_pCoociesTabWidget->selectedRanges();
-	for (int i = 0; i < selectedRanges.length(); ++i)
+
+	for (int i = 0; i < selectedRanges.length(); i++)
 	{
 		QTableWidgetSelectionRange range = selectedRanges.at(i);
-		for (int j = range.topRow(); j < range.bottomRow(); ++j)
+
+		for (int j = range.bottomRow(); j >= range.topRow(); j--)
 		{
 			m_pCoociesTabWidget->removeRow(j);
 		}
@@ -93,6 +102,14 @@ void RssFeedSettingsDialog::FillInData()
 
 	m_pRssUrlEdit->setText(m_pFeed->url().toString());
 	m_pRefreshRateSpinBox->setValue(m_pFeed->ttl());
+	QList<QNetworkCookie> cookies = m_pFeed->coookies();
+	m_pCoociesTabWidget->setRowCount(cookies.size());
+	for (int i = 0; i < cookies.size(); i++)
+	{
+		QNetworkCookie cookie = cookies[i];
+		m_pCoociesTabWidget->setItem(i, 0, new QTableWidgetItem(QString::fromUtf8(cookie.name())));
+		m_pCoociesTabWidget->setItem(i, 1, new QTableWidgetItem(QString::fromUtf8(cookie.value())));
+	}
 }
 
 

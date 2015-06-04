@@ -51,6 +51,7 @@ void AddRssDwonloadRuleDialog::FillRssFeedsList()
 	RssManagerPtr pManager = RssManager::getInstance();
 	FaviconDownloaderPtr pIconDownloader = FaviconDownloader::getInstance();
 	QList<RssFeed*> pFeeds = pManager->feeds();
+
 	foreach(RssFeed* pFeed, pFeeds)
 	{
 		QListWidgetItem* pItem = new QListWidgetItem(pFeed->displayName(true));
@@ -59,12 +60,14 @@ void AddRssDwonloadRuleDialog::FillRssFeedsList()
 		pItem->setIcon(pIconDownloader->getFavicon(pFeed->url().toString()));
 		m_pFeedsListWidget->addItem(pItem);
 	}
+
 	connect(m_pFeedsListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(onFeedListItemChanged(QListWidgetItem*)));
 }
 
 void AddRssDwonloadRuleDialog::onFeedListItemChanged(QListWidgetItem* pItem)
 {
 	QUuid feedUid = pItem->data(Qt::UserRole).value<QUuid>();
+
 	if (pItem->checkState() == Qt::Checked)
 	{
 		m_currentRule->addFeed(feedUid);
@@ -73,6 +76,7 @@ void AddRssDwonloadRuleDialog::onFeedListItemChanged(QListWidgetItem* pItem)
 	{
 		m_currentRule->removeFeed(feedUid);
 	}
+
 	onChange(true);
 }
 
@@ -86,20 +90,24 @@ void AddRssDwonloadRuleDialog::onChange(bool directCall)
 			RssDownloadRule::DownloadRuleType ruleType = RssDownloadRule::EMPTY;
 			QRegExp::PatternSyntax searchType = QRegExp::RegExp2;
 			QString searchString = m_pSearchStringEdit->text();
+
 			if (m_pRuleTypeCombobx->currentIndex() > -1)
 			{
 				ruleType = static_cast<RssDownloadRule::DownloadRuleType>(m_pRuleTypeCombobx->itemData(m_pRuleTypeCombobx->currentIndex(), Qt::UserRole).toInt());
 			}
+
 			if (m_pSearchTypeComboBox->currentIndex() > -1)
 			{
 				searchType = static_cast<QRegExp::PatternSyntax>(m_pSearchTypeComboBox->itemData(m_pSearchTypeComboBox->currentIndex(), Qt::UserRole).toInt());
 			}
+
 			m_currentRule->setUseStaticSavePath(m_pUseSavePathGroupBox->isChecked());
 			m_currentRule->setStaticSavePath(m_pSavePathEdit->text());
 			m_currentRule->setUseGroupFilters(m_pUseGroupsCheckBox->isChecked());
 			m_currentRule->setName(ruleName);
 			m_currentRule->setPattern(searchString);
 			m_currentRule->setRuleType(ruleType);
+
 			if (searchType != QRegExp::RegExp2)
 			{
 				m_currentRule->setPatternType(searchType);
@@ -109,17 +117,19 @@ void AddRssDwonloadRuleDialog::onChange(bool directCall)
 		bool ok;
 		QString result = m_currentRule->validate(ok);
 		QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
+
 		if (okButton)
 		{
 			okButton->setEnabled(ok);
 		}
+
 		m_pStatusBar->showMessage(result);
+
 		if (ok)
 		{
 			m_pRssFilterModel->setRuleFilter(m_currentRule);
 		}
 	}
-	
 }
 
 void AddRssDwonloadRuleDialog::FillComboboxes()
@@ -137,14 +147,16 @@ void AddRssDwonloadRuleDialog::setupTitle(DiaologMode mode)
 {
 	switch (mode)
 	{
-	case EDIT:
-		setTitle(tr("EDIT_RSS_DWONLOAD_RULE_DIALOG"));
-		break;
-	case CREATE:
-		setTitle(tr("ADD_RSS_DWONLOAD_RULE_DIALOG"));
-		break;
-	default:
-		break;
+		case EDIT:
+			setTitle(tr("EDIT_RSS_DWONLOAD_RULE_DIALOG"));
+			break;
+
+		case CREATE:
+			setTitle(tr("ADD_RSS_DWONLOAD_RULE_DIALOG"));
+			break;
+
+		default:
+			break;
 	}
 }
 
@@ -175,6 +187,7 @@ void AddRssDwonloadRuleDialog::FillDataFromDownloadRule()
 	m_pUseGroupsCheckBox->setChecked(useGroupFilters);
 	m_pRuleNameEdit->setText(m_currentRule->Name());
 	m_pSearchStringEdit->setText(m_currentRule->Pattern());
+
 	for (int i = 0; i < m_pRuleTypeCombobx->count(); i++)
 	{
 		if (static_cast<RssDownloadRule::DownloadRuleType>(m_pRuleTypeCombobx->itemData(i).toInt()) == m_currentRule->RuleType())
@@ -183,6 +196,7 @@ void AddRssDwonloadRuleDialog::FillDataFromDownloadRule()
 			break;
 		}
 	}
+
 	for (int i = 0; i < m_pSearchTypeComboBox->count(); i++)
 	{
 		if (static_cast<QRegExp::PatternSyntax>(m_pSearchTypeComboBox->itemData(i).toInt()) == m_currentRule->PatternType())
@@ -191,14 +205,17 @@ void AddRssDwonloadRuleDialog::FillDataFromDownloadRule()
 			break;
 		}
 	}
+
 	for (int i = 0; i < m_pFeedsListWidget->count(); i++)
 	{
 		QListWidgetItem* item = m_pFeedsListWidget->item(i);
+
 		if (m_currentRule->MatchFeed(item->data(Qt::UserRole).value<QUuid>()))
 		{
 			item->setCheckState(Qt::Checked);
 		}
 	}
+
 	m_pRssFilterModel->setRuleFilter(m_currentRule);
 	m_inited = true;
 }
@@ -229,25 +246,31 @@ void AddRssDwonloadRuleDialog::onCancel()
 void AddRssDwonloadRuleDialog::onUpdateRuleTypeHint()
 {
 	RssDownloadRule::DownloadRuleType ruleType = RssDownloadRule::EMPTY;
+
 	if (m_pRuleTypeCombobx->currentIndex() > -1)
 	{
 		ruleType = static_cast<RssDownloadRule::DownloadRuleType>(m_pRuleTypeCombobx->itemData(m_pRuleTypeCombobx->currentIndex(), Qt::UserRole).toInt());
 	}
+
 	switch (ruleType)
 	{
-	case RssDownloadRule::EMPTY: break;
-	case RssDownloadRule::SELECT_FILE_RULE:
-	{
-		m_pRuleTypeHintLabel->setText(tr("SELECT_FILE_RULE_TYPE_HINT"));
-		break; 
+		case RssDownloadRule::EMPTY:
+			break;
+
+		case RssDownloadRule::SELECT_FILE_RULE:
+		{
+			m_pRuleTypeHintLabel->setText(tr("SELECT_FILE_RULE_TYPE_HINT"));
+			break;
+		}
+
+		case RssDownloadRule::DOWNLOAD_RULE:
+		{
+			m_pRuleTypeHintLabel->setText(tr("DOWNLOAD_RULE_TYPE_HINT"));
+			break;
+		}
+
+		default:
+			break;
 	}
-	case RssDownloadRule::DOWNLOAD_RULE: 
-	{
-		m_pRuleTypeHintLabel->setText(tr("DOWNLOAD_RULE_TYPE_HINT"));
-		break;
-	}
-	default: break;
-	}
-	
 }
 

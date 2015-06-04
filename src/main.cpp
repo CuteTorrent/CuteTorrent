@@ -29,6 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTextCodec>
 #include  "StyleEngene.h"
 
+
 void myMessageOutput(QtMsgType type, const char* msg)
 {
 	fflush(stdout);
@@ -116,7 +117,6 @@ int main(int argc, char* argv[])
 		fp = freopen(logFileName.toAscii().data(), "a+", stdout);
 		qInstallMsgHandler(myMessageOutput);
 	}
-
 	a.loadTranslations(":/translations");
 	a.loadTranslationsQt(":/translations_qt");
 	a.addLibraryPath(QCoreApplication::applicationDirPath() + "/plugins");

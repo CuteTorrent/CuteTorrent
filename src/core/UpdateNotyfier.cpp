@@ -40,7 +40,6 @@ void UpdateNotifier::replyFinished(QNetworkReply* pReply)
 {
 	QByteArray data = pReply->readAll();
 	QString str(data);
-	
 	QStringList parts = str.split('.');
 
 	if(parts.count() != 4)
@@ -50,11 +49,10 @@ void UpdateNotifier::replyFinished(QNetworkReply* pReply)
 			emit Notify(NotificationSystem::UPDATE_ERROR, tr("ERROR_GETTING_VERSION_STR %1").arg(pReply->errorString()), QVariant());
 			return;
 		}
+
 		emit Notify(NotificationSystem::UPDATE_ERROR, tr("ERROR_GETTING_VERSION_STR"), QVariant());
 		return;
 	}
-
-	
 
 	Version current = Version::CurrentVersion();
 	Version recived(str);

@@ -119,11 +119,11 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtNetwork;$(QT_DIR)\include\QtGui;$(QT_DIR)\include\phonon;$(QT_DIR)\include;qtsingleapplication\src;..\ThirdParties\boost_1_55_0;..\ThirdParties\libtorrent\include;GeneratedFiles;GeneratedFiles\Release;$(QT_DIR)\include\phonon_compat;$(QT_DIR)\mkspecs\win32-msvc2010;core;Resources;rss;scheduller;search;torrent;tracker;VideoPlayer;webControll;core\helpers;core\datamodels;core\gui;core\http;core\qtsingleapplication;core\viewModel;core\datamodels\json;core\datamodels\SGML;core\gui\backupwizard;core\gui\Controls;core\gui\Dialogs;core\gui\FormFiles;core\qtsingleapplication\src;core\viewModel\itemDelegate;Resources\images;Resources\playerImages;Resources\translations;rss\core;rss\datamodels;rss\gui;rss\viewmodels;rss\gui\Dialogs;rss\gui\FormFiles;rss\viewmodels\ItemDelegate;search\core;search\dataModels;search\searchproviders;search\viewmodels;search\viewmodels\ItemDelegate;torrent\core;torrent\gui;torrent\viewmodels;torrent\gui\Controls;torrent\gui\Dialogs;torrent\gui\FormFiles;torrent\viewmodels\ItemDelegate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtNetwork;$(QT_DIR)\include\QtGui;$(QT_DIR)\include\phonon;$(QT_DIR)\include;qtsingleapplication\src;..\ThirdParties\boost_1_55_0;..\ThirdParties\libtorrent\include;GeneratedFiles;GeneratedFiles\Release;$(QT_DIR)\include\phonon_compat;$(QT_DIR)\mkspecs\win32-msvc2010;core;Resources;rss;scheduller;search;torrent;tracker;VideoPlayer;webControll;core\gui;core\http;core\helpers;core\viewModel;core\datamodels;core\StorrageInfo;core\qtsingleapplication;core\datamodels\json;core\datamodels\SGML;core\gui\backupwizard;core\gui\Controls;core\gui\Dialogs;core\gui\FormFiles;core\qtsingleapplication\src;core\viewModel\itemDelegate;Resources\images;Resources\playerImages;Resources\translations;rss\core;rss\datamodels;rss\gui;rss\viewmodels;rss\gui\Dialogs;rss\gui\FormFiles;rss\viewmodels\ItemDelegate;search\core;search\dataModels;search\searchproviders;search\viewmodels;search\viewmodels\ItemDelegate;torrent\core;torrent\gui;torrent\viewmodels;torrent\gui\Controls;torrent\gui\Dialogs;torrent\gui\FormFiles;torrent\viewmodels\ItemDelegate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>Release\</AssemblerListingLocation>
       <ObjectFileName>Release\</ObjectFileName>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_LARGEFILE_SUPPORT;QT_PHONON_LIB;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;NDEBUG;BOOST_ASIO_SEPARATE_COMPILATION;TORRENT_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_PHONON_LIB;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;NDEBUG;BOOST_ASIO_SEPARATE_COMPILATION;TORRENT_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -160,17 +160,17 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtNetwork;$(QT_DIR)\include\QtGui;$(QT_DIR)\include\phonon;$(QT_DIR)\include;qtsingleapplication\src;..\ThirdParties\boost_1_55_0;..\ThirdParties\libtorrent\include;GeneratedFiles;GeneratedFiles\Release;$(QT_DIR)\include\phonon_compat;$(QT_DIR)\mkspecs\win32-msvc2010;core;Resources;rss;scheduller;search;torrent;tracker;VideoPlayer;webControll;core\helpers;core\datamodels;core\gui;core\http;core\qtsingleapplication;core\viewModel;core\datamodels\json;core\datamodels\SGML;core\gui\backupwizard;core\gui\Controls;core\gui\Dialogs;core\gui\FormFiles;core\qtsingleapplication\src;core\viewModel\itemDelegate;Resources\images;Resources\playerImages;Resources\translations;rss\core;rss\datamodels;rss\gui;rss\viewmodels;rss\gui\Dialogs;rss\gui\FormFiles;rss\viewmodels\ItemDelegate;search\core;search\dataModels;search\searchproviders;search\viewmodels;search\viewmodels\ItemDelegate;torrent\core;torrent\gui;torrent\viewmodels;torrent\gui\Controls;torrent\gui\Dialogs;torrent\gui\FormFiles;torrent\viewmodels\ItemDelegate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>core\StorrageInfo;$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtNetwork;$(QT_DIR)\include\QtGui;$(QT_DIR)\include\phonon;$(QT_DIR)\include;qtsingleapplication\src;..\ThirdParties\boost_1_55_0;..\ThirdParties\libtorrent\include;GeneratedFiles;GeneratedFiles\Release;$(QT_DIR)\include\phonon_compat;$(QT_DIR)\mkspecs\win32-msvc2010;core;Resources;rss;scheduller;search;torrent;tracker;VideoPlayer;webControll;core\helpers;core\datamodels;core\gui;core\http;core\qtsingleapplication;core\viewModel;core\datamodels\json;core\datamodels\SGML;core\gui\backupwizard;core\gui\Controls;core\gui\Dialogs;core\gui\FormFiles;core\qtsingleapplication\src;core\viewModel\itemDelegate;Resources\images;Resources\playerImages;Resources\translations;rss\core;rss\datamodels;rss\gui;rss\viewmodels;rss\gui\Dialogs;rss\gui\FormFiles;rss\viewmodels\ItemDelegate;search\core;search\dataModels;search\searchproviders;search\viewmodels;search\viewmodels\ItemDelegate;torrent\core;torrent\gui;torrent\viewmodels;torrent\gui\Controls;torrent\gui\Dialogs;torrent\gui\FormFiles;torrent\viewmodels\ItemDelegate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>Release\</AssemblerListingLocation>
       <ObjectFileName>Release\</ObjectFileName>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_LARGEFILE_SUPPORT;QT_PHONON_LIB;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;NDEBUG;BOOST_ASIO_SEPARATE_COMPILATION;TORRENT_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_PHONON_LIB;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;NDEBUG;BOOST_ASIO_SEPARATE_COMPILATION;TORRENT_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>Disabled</Optimization>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libtorrent_rd.lib;qtmain.lib;phonon4.lib;QtGui4.lib;QtNetwork4.lib;QtCore4.lib;VirtDisk.lib;libeay32MD.lib;ssleay32MD.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -354,7 +354,10 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\gui\Controls\StyledProgressBar.cpp" />
     <ClCompile Include="core\helpers\VirtualDiskMounter.cpp" />
+    <ClCompile Include="core\StorrageInfo\qstorageinfo.cpp" />
+    <ClCompile Include="core\StorrageInfo\qstorageinfo_win.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_ISerachProvider.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_KickassSearchProvider.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_ObservebaleCollectionBase.cpp" />
@@ -449,7 +452,8 @@
     <ClCompile Include="core\torrentdownloader.cpp" />
     <ClCompile Include="tracker\AnnounceRequest.cpp" />
     <ClCompile Include="core\Version.cpp" />
-    <ClCompile Include="webControll\CommandsApiController.cpp" />
+    <ClCompile Include="webControll\RssCommandsApiController.cpp" />
+    <ClCompile Include="webControll\TorrentCommandsApiController.cpp" />
     <ClCompile Include="torrent\gui\Dialogs\CreateTorrentDialog.cpp" />
     <ClCompile Include="core\gui\Dialogs\CuteTorrentMainWindow.cpp" />
     <ClCompile Include="core\helpers\DT_mounter.cpp" />
@@ -457,6 +461,7 @@
     <ClCompile Include="core\viewModel\FileTreeModel.cpp" />
     <ClCompile Include="core\viewModel\FileViewModel.cpp" />
     <ClCompile Include="core\GroupForFileFiltering.cpp" />
+    <ClCompile Include="webControll\FileSystemController.cpp" />
     <ClCompile Include="webControll\MagnetApiController.cpp" />
     <ClCompile Include="VideoPlayer\MediaControls.cpp" />
     <ClCompile Include="torrent\core\MetaDataDownloadWaiter.cpp" />
@@ -472,6 +477,7 @@
     <ClCompile Include="webControll\RequestMapper.cpp" />
     <ClCompile Include="scheduller\SchedulerTask.cpp" />
     <ClCompile Include="scheduller\Scheduller.cpp" />
+    <ClCompile Include="webControll\RssController.cpp" />
     <ClCompile Include="webControll\SettingsAPiController.cpp" />
     <ClCompile Include="core\gui\Dialogs\SettingsDialog.cpp" />
     <ClCompile Include="core\helpers\StaticHelpers.cpp" />
@@ -516,6 +522,12 @@
     <ClCompile Include="tracker\trackerrequestmapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\gui\Controls\StyledProgressBar.h" />
+    <ClInclude Include="core\StorrageInfo\qstorageinfo.h" />
+    <ClInclude Include="core\StorrageInfo\qstorageinfo_p.h" />
+    <ClInclude Include="webControll\FileSystemController.h" />
+    <ClInclude Include="webControll\RssCommandsApiController.h" />
+    <ClInclude Include="webControll\RssController.h" />
     <CustomBuild Include="rss\gui\Dialogs\AddRssDwonloadRuleDialog.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PHONON_LIB -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"qtsingleapplication\src" -I"..\ThirdParties\boost_1_55_0" -I"..\ThirdParties\libtorrent-rasterbar-1.0.2\include" -I".\GeneratedFiles" -I"." -I".\GeneratedFiles\Release" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I".\GeneratedFiles\Release" -I"GeneratedFiles" -I$(QTDIR)\mkspecs\win32-msvc2010 -D_MSC_VER=1600 -DWIN32 %(Identity) -o .\GeneratedFiles\Release\moc_%(Filename).cpp</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PHONON_LIB -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"qtsingleapplication\src" -I"..\ThirdParties\boost_1_55_0" -I"..\ThirdParties\libtorrent-rasterbar-1.0.2\include" -I".\GeneratedFiles" -I"." -I".\GeneratedFiles\Release" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I".\GeneratedFiles\Release" -I"GeneratedFiles" -I$(QTDIR)\mkspecs\win32-msvc2010 -D_MSC_VER=1600 -DWIN32 %(Identity) -o .\GeneratedFiles\Release\moc_%(Filename).cpp</Command>
@@ -1228,7 +1240,7 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\Release\moc_CuteTorrent.cpp%3b%(Outputs)\GeneratedFiles\Release\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PHONON_LIB -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -DNDEBUG -DBOOST_ASIO_SEPARATE_COMPILATION "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\phonon" "-I$(QTDIR)\include" "-I.\qtsingleapplication\src" "-I.\..\ThirdParties\boost_1_55_0" "-I.\..\ThirdParties\libtorrent-rasterbar-1.0.2\include" "-I.\GeneratedFiles" "-I." "-I.\GeneratedFiles\Release" "-I$(QTDIR)\include\ActiveQt" "-I$(QTDIR)\include\phonon_compat" "-I.\GeneratedFiles" "-I$(QTDIR)\mkspecs\win32-msvc2010"</Command>
     </CustomBuild>
     <ClInclude Include="tracker\AnnounceRequest.h" />
-    <CustomBuild Include="webControll\CommandsApiController.h">
+    <CustomBuild Include="webControll\TorrentCommandsApiController.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;webControll\CommandsApiController.h;</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">$(QTDIR)\bin\moc.exe;webControll\CommandsApiController.h;</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;webControll\CommandsApiController.h;</AdditionalInputs>
@@ -2950,7 +2962,7 @@ $(QTDIR)\bin\lrelease.exe -compress %(Identity) -qm %(RelativeDir)%(Filename).qm
     <None Include="search\dataModels\SerachResult.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resources\CuteTorrent.rc" />
+    <ResourceCompile Include="Resources\CuteTorrentVS.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

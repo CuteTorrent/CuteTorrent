@@ -28,13 +28,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QModelIndex>
 #include "Torrent.h"
 #include <QProgressBar>
+#include <StyledProgressBar.h>
 class Torrent;
 
 class QTorrentItemDelegat: public QStyledItemDelegate
 {
 	Q_OBJECT
 protected:
-	QProgressBar* myProgressBarStyle;
+	StyledProgressBar* myProgressBarStyle;
 
 
 

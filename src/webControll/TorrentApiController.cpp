@@ -1,17 +1,17 @@
 ﻿#include "TorrentApiController.h"
 #include <libtorrent/peer_info.hpp>
 #include "json/json.h"
-TorrentApiController::TorrentApiController(QObject* parent/*=0*/) : HttpRequestHandler("WebControl", parent), m_pTorrentManager(TorrentManager::getInstance())
+TorrentApiController::TorrentApiController(QObject* parent/*=0*/) : HttpRequestHandler("WebControl", parent), m_pTorrentManager(TorrentManager::getInstance()), m_pTorrentStorrage(TorrentStorrage::getInstance())
 {
-	torrents = TorrentStorrage::getInstance();
+
 }
 
 void TorrentApiController::service(HttpRequest& request, HttpResponse& response)
 {
-	/*if (!CheckCreditinals(request,response))
+	if (!CheckCreditinals(request,response))
 	{
 		return;
-	}*/
+	}
 //	QMultiMap<QByteArray,QByteArray> parametrs=request.getParameterMap();
 	if(request.getMethod().toUpper() == "GET")
 	{
@@ -30,10 +30,10 @@ void TorrentApiController::service(HttpRequest& request, HttpResponse& response)
 
 				if(ok)
 				{
-					for(int i = (iPage - 1) * iPageSize; i < std::min(torrents->count(), iPage * iPageSize); i++)
+					for(int i = (iPage - 1) * iPageSize; i < std::min(m_pTorrentStorrage->count(), iPage * iPageSize); i++)
 					{
 						QtJson::JsonObject torrent;
-						Torrent* curret = torrents->at(i);
+						Torrent* curret = m_pTorrentStorrage->at(i);
 						torrent["id"] = curret->GetInfoHash();
 						torrent["torrentType"] = curret->GetType();
 						torrent["torrentName"] = curret->GetName();
@@ -53,7 +53,7 @@ void TorrentApiController::service(HttpRequest& request, HttpResponse& response)
 						torrent["savePath"] = curret->GetSavePath();
 						torrent["seedStr"] = curret->GetSeedString() ;
 						torrent["peerStr"] = curret->GetPeerString() ;
-						torrent["torrentsCount"] = torrents->count();
+						torrent["torrentsCount"] = m_pTorrentStorrage->count();
 						QtJson::JsonArray peers;
 						std::vector<peer_info> peerInfos = curret->GetPeerInfo();
 

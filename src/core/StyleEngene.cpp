@@ -40,9 +40,10 @@ void StyleEngene::setStyle(QString internalName)
 	}
 	else
 	{
-		qDebug() << "No style found";
+		qCritical() << "No style found";
 		return;
 	}
+
 	initIcons();
 	loadStyleSheet(_currentStyle.rootPath + "/style.qss");
 	emit styleChanged();
@@ -50,7 +51,6 @@ void StyleEngene::setStyle(QString internalName)
 
 QIcon StyleEngene::guessMimeIcon(const QString& suffix, QString& type)
 {
-	// qDebug() << "StyleEngene::guessMimeIcon" << suffix;
 	QString lSuffix = suffix.toLower();
 
 	if(fileIcons[0].isNull())
@@ -95,16 +95,13 @@ QIcon StyleEngene::getIcon(QString name)
 	}
 	else
 	{
-		qDebug() << "No icon found for " << name;
+		qCritical() << "No icon found for " << name;
 		return QIcon();
 	}
 }
 
 void StyleEngene::init()
 {
-	qDebug() << "StyleEngene::init";
-	/*  _avaliableStyles.clear();
-	  _styleMap.clear();*/
 	QString rootPath = QApplication::applicationDirPath() + "/styles/";
 	QDir rootDir = QDir(rootPath);
 
@@ -114,20 +111,19 @@ void StyleEngene::init()
 
 		foreach(QString styleDir, styleDirs)
 		{
-			qDebug() << "loading style from" << rootPath + styleDir;
 			loadStyleInfo(rootPath + styleDir);
 		}
 	}
 	else
 	{
-		qDebug() << "NO_STYLE_DIR_FOUND";
+		qCritical() << "NO STYLE DIR FOUND!!!";
 	}
+
 	initFileSuffixes();
 }
 
 void StyleEngene::initFileSuffixes()
 {
-
 	const char* disk_types[] =
 	{
 		"mdx", "mds", "mdf", "iso", "b5t", "b6t", "bwt", "ccd", "cdi",
@@ -138,7 +134,6 @@ void StyleEngene::initFileSuffixes()
 	{
 		suffixes[DISK] << QString::fromLatin1(disk_types[i]);
 	}
-
 
 	const char* doc_types[] =
 	{
@@ -151,7 +146,6 @@ void StyleEngene::initFileSuffixes()
 		suffixes[DOCUMENT] << QString::fromLatin1(doc_types[i]);
 	}
 
-
 	const char* pic_types[] =
 	{
 		"bmp", "gif", "jpg", "jpeg", "pcx", "png", "psd", "ras", "tga", "ico", "tiff"
@@ -161,7 +155,6 @@ void StyleEngene::initFileSuffixes()
 	{
 		suffixes[PICTURE] << QString::fromLatin1(pic_types[i]);
 	}
-
 
 	const char* vid_types[] =
 	{
@@ -174,7 +167,6 @@ void StyleEngene::initFileSuffixes()
 		suffixes[VIDEO] << QString::fromLatin1(vid_types[i]);
 	}
 
-
 	const char* arc_types[] =
 	{
 		"7z", "ace", "bz2", "cbz", "gz", "gzip", "lzma", "rar", "sft", "tar", "zip"
@@ -184,7 +176,6 @@ void StyleEngene::initFileSuffixes()
 	{
 		suffixes[ARCHIVE] << QString::fromLatin1(arc_types[i]);
 	}
-
 
 	const char* aud_types[] =
 	{
@@ -203,8 +194,6 @@ void StyleEngene::initFileSuffixes()
 	{
 		suffixes[APP] << QString::fromLatin1(exe_types[i]);
 	}
-
-
 }
 
 void StyleEngene::initIcons()
@@ -222,7 +211,6 @@ void StyleEngene::initIcons()
 	}
 
 	styleSettings.endGroup();
-	
 	fallback = getIcon("folder");
 	fileIcons[DISK] = getIcon("iso");
 	fileIcons[DOCUMENT] = getIcon("doc");
@@ -240,10 +228,8 @@ void StyleEngene::loadStyleSheet(QString path)
 	if(file.open(QFile::ReadOnly))
 	{
 		QString relativePath = _currentStyle.imageDir;
-		qDebug() << "ImageDir=" << relativePath;
-		//   qDebug() << "Stylesheet  dump:";
+		
 		QString styleSheet = QString(file.readAll()).replace("$[STYLE_DIR]", relativePath);
-		//  qDebug() << styleSheet;
 		static_cast<QApplication*>(QApplication::instance())->setStyleSheet(styleSheet);
 		file.close();
 	}

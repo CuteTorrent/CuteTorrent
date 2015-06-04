@@ -10,6 +10,6 @@ private:
 	QApplicationSettings* settings;
 public:
 	SettingsAPiController(QObject*);
-	void service(HttpRequest& request, HttpResponse& response);
+	void service(HttpRequest& request, HttpResponse& response) override;
 	~SettingsAPiController(void);
 };

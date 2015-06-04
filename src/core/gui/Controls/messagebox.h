@@ -21,8 +21,8 @@ protected:
 public:
 	explicit CustomMessageBox(QWidget* parent = 0);
 	CustomMessageBox(QMessageBox::Icon icon, const QString& title, const QString& text,
-	             QMessageBox::StandardButtons buttons = QMessageBox::NoButton, QWidget* parent = 0,
-	             Qt::WindowFlags flags = Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+	                 QMessageBox::StandardButtons buttons = QMessageBox::NoButton, QWidget* parent = 0,
+	                 Qt::WindowFlags flags = Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 	~CustomMessageBox();
 
 	static QMessageBox::StandardButton critical(QWidget* parent, const QString& title,

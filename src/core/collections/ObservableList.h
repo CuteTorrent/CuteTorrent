@@ -6,16 +6,16 @@ template<typename T>
 class ObservableList : public ObservebaleCollectionBase, public QList<T>
 {
 public:
-	void append(const T &t);
-	void append(const QList<T> &t);
-	void prepend(const T &t);
-	void insert(int i, const T &t);
-	void replace(int i, const T &t);
+	void append(const T& t);
+	void append(const QList<T>& t);
+	void prepend(const T& t);
+	void insert(int i, const T& t);
+	void replace(int i, const T& t);
 	void removeAt(int i);
-	int removeAll(const T &t);
-	bool removeOne(const T &t);
+	int removeAll(const T& t);
+	bool removeOne(const T& t);
 	void move(int from, int to);
-	QList<T>::iterator insert(QList<T>::iterator before, const T &t);
+	QList<T>::iterator insert(QList<T>::iterator before, const T& t);
 	QList<T>::iterator erase(QList<T>::iterator pos);
 	QList<T>::iterator erase(QList<T>::iterator first, QList<T>::iterator last);
 };
@@ -66,6 +66,7 @@ template <typename T>
 int ObservableList<T>::removeAll(const T& t)
 {
 	int foundIndex = indexOf(t);
+
 	while (foundIndex >= 0)
 	{
 		removeAt(foundIndex);

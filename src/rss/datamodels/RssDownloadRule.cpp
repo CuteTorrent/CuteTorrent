@@ -10,23 +10,29 @@ RssDownloadRule::RssDownloadRule() : m_name(""), m_pattern(""), m_patternType(QR
 QString RssDownloadRule::validate(bool& ok)
 {
 	ok = false;
+
 	if (m_name.isEmpty())
 	{
 		return qApp->translate("AddRssDwonloadRuleDialog", "RULE_NAME_CAN_NOT_BE_EMPTY");
 	}
+
 	if (m_ruleType == EMPTY)
 	{
 		return qApp->translate("AddRssDwonloadRuleDialog", "RULE_TYPE_CAN_NOT_BE_EMPTY");
 	}
+
 	if (m_patternType == QRegExp::RegExp2)
 	{
 		return qApp->translate("AddRssDwonloadRuleDialog", "RULE_SEARCH_TYPE_CAN_NOT_BE_EMPTY");
 	}
+
 	if (m_pattern.isEmpty())
 	{
 		return qApp->translate("AddRssDwonloadRuleDialog", "RULE_SEARCH_STRING_CAN_NOT_BE_EMPTY");
 	}
+
 	QRegExp regexp(m_pattern, Qt::CaseInsensitive, m_patternType);
+
 	if (!regexp.isValid())
 	{
 		return regexp.errorString();
@@ -36,10 +42,12 @@ QString RssDownloadRule::validate(bool& ok)
 	{
 		return qApp->translate("AddRssDwonloadRuleDialog", "DONT_KNOW_WHERE_TO_SAVE");
 	}
+
 	if (m_useGroupFilters == m_useStaticSavePath && m_useStaticSavePath == true)
 	{
 		return qApp->translate("AddRssDwonloadRuleDialog", "CHOSE_ONE_STATICK_SAVE_PATH_OR_GROUPS_FILTERING");
 	}
+
 	if (m_useStaticSavePath)
 	{
 		if (m_staticSavePath.isEmpty())
@@ -52,8 +60,7 @@ QString RssDownloadRule::validate(bool& ok)
 	{
 		return qApp->translate("AddRssDwonloadRuleDialog", "YOU_SHOULD_SELECT_ATLEAST_ONE_FEED");
 	}
-	
-	
+
 	ok = true;
 	m_regExp = regexp;
 	return qApp->translate("AddRssDwonloadRuleDialog", "RULE_IS_VALID");
@@ -65,13 +72,13 @@ bool RssDownloadRule::Match(RssFeed* pFeed) const
 	{
 		return m_feedUids.contains(pFeed->uid());
 	}
+
 	return false;
 }
 
 bool RssDownloadRule::Match(RssItem* rssItem) const
 {
-	
-	if (m_regExp.isValid() && rssItem!= nullptr)
+	if (m_regExp.isValid() && rssItem != nullptr)
 	{
 		if (!rssItem->title().isEmpty())
 		{
@@ -81,6 +88,7 @@ bool RssDownloadRule::Match(RssItem* rssItem) const
 			}
 		}
 	}
+
 	return false;
 }
 
@@ -90,6 +98,7 @@ bool RssDownloadRule::MatchFile(QString fileName)
 	{
 		return m_regExp.indexIn(fileName) != -1;
 	}
+
 	return false;
 }
 

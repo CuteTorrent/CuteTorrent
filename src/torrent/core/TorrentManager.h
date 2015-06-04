@@ -24,7 +24,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "libtorrent/error_code.hpp"
 #include "libtorrent/session_settings.hpp"
 #include "libtorrent/torrent_handle.hpp"
-#include <libtorrent/session_settings.hpp>
 #pragma warning (disable: 4005)
 #pragma warning (disable: 4100)
 #pragma warning (disable: 4267)
@@ -108,8 +107,8 @@ private:
 	bool useProxy;
 	proxy_settings ps;
 	NotificationSystemPtr m_pNotificationSys;
-
-
+public slots:
+	void RemoveTorrent(QString InfoHash, bool delFiles = false);
 public:
 	void SaveSession();
 	void RefreshExternalPeerSettings();
@@ -128,12 +127,11 @@ public:
 	std::vector<torrent_status> GetTorrents();
 	opentorrent_info* GetTorrentInfo(QString filename, error_code& ec);
 	openmagnet_info* GetTorrentInfo(const torrent_handle& handle);
-	void RemoveTorrent(QString InfoHash);
-	bool AddMagnet(torrent_handle h, QString SavePath, QString group = "", QMap< QString, qint8> filepriorities = QMap<QString, qint8>());
-	bool AddTorrent(QString path, QString name, QString save_path, error_code& ec, QMap<QString, qint8> filepriorities = QMap<QString, qint8>(), QString group = "", bool sequntial = false);
+	
+	bool AddMagnet(torrent_handle h, QString SavePath, QString group = "", QMap< QString, quint8> filepriorities = QMap<QString, quint8>());
+	bool AddTorrent(QString path, QString name, QString save_path, error_code& ec, QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), QString group = "", bool sequntial = false);
 	void AddPortMapping(session::protocol_type type, ushort sourcePoert, ushort destPort);
 	void PostTorrentUpdate();
-	void RemoveTorrent(torrent_handle h, bool dellfiles = false);
 	torrent_handle ProcessMagnetLink(QString link, error_code& ec);
 	void CancelMagnetLink(QString link);
 	void StartAllTorrents();

@@ -43,7 +43,7 @@ enum
 };
 
 
-QTorrentItemDelegat::QTorrentItemDelegat(const QTorrentItemDelegat& dlg) : QStyledItemDelegate(0) , myProgressBarStyle(new QProgressBar())
+QTorrentItemDelegat::QTorrentItemDelegat(const QTorrentItemDelegat& dlg) : QStyledItemDelegate(0), myProgressBarStyle(new StyledProgressBar())
 {
 	myProgressBarStyle->setMinimum(0);
 	myProgressBarStyle->setMaximum(100);
@@ -51,12 +51,12 @@ QTorrentItemDelegat::QTorrentItemDelegat(const QTorrentItemDelegat& dlg) : QStyl
 	
 }
 
-QTorrentItemDelegat::QTorrentItemDelegat() : QStyledItemDelegate(0) , myProgressBarStyle(new QProgressBar()) {}
+QTorrentItemDelegat::QTorrentItemDelegat() : QStyledItemDelegate(0), myProgressBarStyle(new StyledProgressBar()) {}
 
 
 QTorrentItemDelegat::QTorrentItemDelegat(QObject* parent) :
 	QStyledItemDelegate(parent),
-	myProgressBarStyle(new QProgressBar())
+	myProgressBarStyle(new StyledProgressBar())
 {
 	myProgressBarStyle->setMinimum(0);
 	myProgressBarStyle->setMaximum(100);
@@ -355,13 +355,9 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	painter->setFont(progressFont);
 	style->drawItemText(painter, progArea, Qt::AlignLeft, opt.palette, option.state & QStyle::State_Enabled, progressStr);
 	int progressPercentage = tor.GetProgress();
-	// Customize style using style-sheet..
-	QString stylestr =
-	    QString("QProgressBar::chunk { background-color: qlineargradient(spread:reflect, x1:0.994318, y1:1, x2:1, y2:0.488636, stop:0.0397727 rgba(255, 255, 255, 255), stop:0.431818 rgba(") +
-	    (isPaused ? "172,172,172" : (progressPercentage < 100 ? "81,211,49" : "50,145,212")) + ",255));}";
+	
 	myProgressBarStyle->resize(barArea.size());
 	myProgressBarStyle->setValue(progressPercentage);
-	myProgressBarStyle->setStyleSheet(stylestr);
 	painter->translate(barArea.topLeft());
 	myProgressBarStyle->render(painter);
 	/*myProgressBarStyle->rect = barArea;
