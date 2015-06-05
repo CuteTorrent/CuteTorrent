@@ -185,7 +185,7 @@ QStringList& Torrent::GetImageFiles()
 	return imageFiles;
 }
 Torrent::Torrent(torrent_handle* hTorrent, QString group)
-	: QObject(nullptr), m_hasMedia(false), m_isPrevSeed(false), size(0), mountable(false)
+	: QObject(NULL), m_hasMedia(false), m_isPrevSeed(false), size(0), mountable(false)
 {
 	m_hTorrent = *hTorrent;
 	m_hTorrent.set_share_mode(false);
@@ -799,8 +799,9 @@ void Torrent::RemoveTrackers(QStringList trackers)
 	{
 		std::vector<announce_entry> currenttTrackers = m_hTorrent.trackers();
 
-		for each (QString url in trackers)
+        for (int i = 0 ; i< trackers.size();i++)
 		{
+            QString url = trackers[i];
 			std::string tracker2remove = url.toStdString();
 
 			for (std::vector<announce_entry>::iterator i = currenttTrackers.begin(); i != currenttTrackers.end(); i++)

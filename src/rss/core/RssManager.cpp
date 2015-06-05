@@ -76,9 +76,9 @@ void RssManager::SaveFeeds()
 		dataStream.setVersion(QDataStream::Qt_4_8);
 		dataStream << m_pFeeds.size();
 
-		for each (RssFeed * pFeed in m_pFeeds)
+        for(int i =0; i< m_pFeeds.size(); i++)
 		{
-			dataStream << *pFeed;
+            dataStream << *m_pFeeds[i];
 		}
 
 		feedsDat.flush();
@@ -165,7 +165,7 @@ RssDownloadRule* RssManager::findDownloadRule(const QUuid& uid)
 		}
 	}
 
-	return nullptr;
+	return NULL;
 }
 
 void RssManager::updateDownloadRule(RssDownloadRule* rule)
@@ -265,7 +265,7 @@ void RssManager::onFeedChanged(QUuid uid)
 		{
 			RssFeed* pFeed = findFeed(uid);
 
-			if (pFeed != nullptr)
+			if (pFeed != NULL)
 			{
 				QList<RssItem*> feedItems = pFeed->GetFeedItems();
 
@@ -291,7 +291,7 @@ RssFeed* RssManager::findFeed(const QUuid& uid)
 		}
 	}
 
-	return nullptr;
+	return NULL;
 }
 
 void RssManager::downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRule* rule)
@@ -406,7 +406,7 @@ QString RssManager::gessSavePath(RssDownloadRule* downloadRule, QString base_suf
 	{
 		QList<GroupForFileFiltering> filters = pSettings->GetFileFilterGroups();
 
-		for each(GroupForFileFiltering filter in filters)
+        foreach(GroupForFileFiltering filter, filters)
 		{
 			if (filter.Contains(base_suffix))
 			{

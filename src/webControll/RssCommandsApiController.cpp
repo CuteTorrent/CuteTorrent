@@ -22,7 +22,7 @@ void RssCommandsApiController::service(HttpRequest& request, HttpResponse& respo
 		QUuid uid(feedId);
 		QString action = request.getParameter("action");
 		RssFeed* pFeed = m_pRssManager->findFeed(uid);
-		if (pFeed != nullptr)
+        if (pFeed != NULL)
 		{
 			if (action.compare("remove",Qt::CaseInsensitive) == 0)
 			{

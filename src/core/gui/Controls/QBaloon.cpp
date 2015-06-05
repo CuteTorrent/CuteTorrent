@@ -5,7 +5,7 @@
 #include "StyleEngene.h"
 #include <helpers/StaticHelpers.h>
 
-static QBalloonTip* theSolitaryBalloonTip = nullptr;
+static QBalloonTip* theSolitaryBalloonTip = NULL;
 
 QWidget* QBalloonTip::showBalloon(const QString& title,
                                   const QString& message, QBaloonType type, const QVariant& data, const QSystemTrayIcon::MessageIcon& icon,
@@ -14,7 +14,7 @@ QWidget* QBalloonTip::showBalloon(const QString& title,
 	theSolitaryBalloonTip = new QBalloonTip(title, message, type, data, icon, parent);
 
 	//hideBalloon();
-	if(current != nullptr && current->isFinished())
+	if(current != NULL && current->isFinished())
 	{
 		//	delete current;
 		current = theSolitaryBalloonTip;
@@ -28,7 +28,7 @@ QWidget* QBalloonTip::showBalloon(const QString& title,
 	}
 	else
 	{
-		if(current == nullptr)
+		if(current == NULL)
 		{
 			current = theSolitaryBalloonTip;
 
@@ -57,7 +57,7 @@ void QBalloonTip::hideBalloon()
 
 	current->hide();
 	delete current;
-	current = nullptr;
+	current = NULL;
 }
 
 
@@ -146,7 +146,7 @@ QBalloonTip::QBalloonTip(const QString& title, const QString& message, QBaloonTy
 
 QBalloonTip::~QBalloonTip()
 {
-	theSolitaryBalloonTip = nullptr;
+	theSolitaryBalloonTip = NULL;
 }
 /*
 

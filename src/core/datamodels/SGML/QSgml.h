@@ -24,7 +24,7 @@ under certain conditions.
 #ifndef QSGML_H
 #define QSGML_H
 
-#include <QString.h>
+#include <QString>
 #include <QRegExp>
 #include <QList>
 #include <QFile>

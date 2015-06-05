@@ -578,7 +578,7 @@ void StaticHelpers::OpenFileInExplorer(QString& file)
 	wchar_t wPath[MAX_PATH] = { 0 };
 	file.toWCharArray(wPath);
 	ITEMIDLIST* pItem = ILCreateFromPathW(wPath);
-	SHOpenFolderAndSelectItems(pItem, 0, nullptr, 0);
+	SHOpenFolderAndSelectItems(pItem, 0, NULL, 0);
 	ILFree(pItem);
 }
 #endif
@@ -589,7 +589,7 @@ QString StaticHelpers::CombinePathes(QString path, QString suffix)
 
 NetworkDiskCache* StaticHelpers::GetGLobalWebCache()
 {
-	if (m_pDiskCache == nullptr)
+	if (m_pDiskCache == NULL)
 	{
 		m_pDiskCache = new NetworkDiskCache();
 		m_pDiskCache->setCacheDirectory(QDesktopServices::storageLocation(QDesktopServices::CacheLocation) + "/WebCache");
@@ -600,6 +600,6 @@ NetworkDiskCache* StaticHelpers::GetGLobalWebCache()
 	return m_pDiskCache;
 }
 
-NetworkDiskCache* StaticHelpers::m_pDiskCache = nullptr;
+NetworkDiskCache* StaticHelpers::m_pDiskCache = NULL;
 
 

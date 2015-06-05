@@ -193,7 +193,7 @@ RssItem* RssFeed::GetFeedItem(QString guid)
 		return m_rssItems[guid];
 	}
 
-	return nullptr;
+	return NULL;
 }
 
 void RssFeed::UpdateUnreadCount()

@@ -1,10 +1,10 @@
 #ifndef _RSS_FEED_INCLUDED_
 #define _RSS_FEED_INCLUDED_
 #include <QUuid>
-#include <Qurl>
+#include <QUrl>
 #include <QTime>
 #include <QMetaType>
-#include "../../../../../Qt/4.8.6/src/network/access/qnetworkcookie.h"
+#include "qnetworkcookie.h"
 #include <helpers/DT_mounter.h>
 class RssParser;
 class QNetworkAccessManager;
@@ -13,7 +13,7 @@ class QNetworkReply;
 class QTimer;
 class QDataStream;
 class RssItem;
-
+class RssParser;
 class RssFeed : public QObject
 {
 	Q_OBJECT

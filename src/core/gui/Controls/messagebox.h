@@ -8,6 +8,7 @@
 class CustomMessageBox : public BaseWindow<QDialog>
 {
 	Q_OBJECT
+    Q_DISABLE_COPY(CustomMessageBox)
 private:
 
 	QPixmap standardIcon(QMessageBox::Icon icon);

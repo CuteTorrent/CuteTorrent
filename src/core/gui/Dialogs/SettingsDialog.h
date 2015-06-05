@@ -73,7 +73,7 @@ private:
 	void ApplyRssDownloadRulles();
 	void NeverCallMe();
 public:
-	SettingsDialog(QWidget* parent = nullptr, int flags = 0);
+	SettingsDialog(QWidget* parent = NULL, int flags = 0);
 	~SettingsDialog();
 	void ApplySettingsToSession();
 

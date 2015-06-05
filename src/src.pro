@@ -6,8 +6,8 @@ TEMPLATE = app
 TARGET = CuteTorrent
 DESTDIR = ../Win32/Release
 QT += core gui network phonon
-CONFIG += release
-DEFINES += _WINDOWS QT_DLL QT_PHONON_LIB QT_NETWORK_LIB QT_HAVE_MMX QT_HAVE_3DNOW QT_HAVE_SSE QT_HAVE_MMXEXT QT_HAVE_SSE2 BOOST_ASIO_SEPARATE_COMPILATION TORRENT_NO_DEPRECATE
+CONFIG += debug
+DEFINES += _WINDOWS QT_DLL QT_PHONON_LIB QT_NETWORK_LIB QT_HAVE_MMX QT_HAVE_3DNOW QT_HAVE_SSE QT_HAVE_MMXEXT QT_HAVE_SSE2 BOOST_ASIO_SEPARATE_COMPILATION
 INCLUDEPATH += $(QT_DIR)/include/QtCore \
     $(QT_DIR)/include/QtNetwork \
     $(QT_DIR)/include/QtGui \
@@ -70,8 +70,11 @@ LIBS += -L"./../ThirdParties/openssl/lib/VC/static" \
     -L"$(QT_DIR)/lib" \
     -L"./../ThirdParties/libtorrent/lib" \
     -L"./../ThirdParties/boost_1_55_0/stage/lib" \
-    -llibtorrent \
-    -lphonon4
+    -ltorrent \
+    -lboost_system \
+    -lssl \
+    -lcrypto
+
 win32 {
 CONFIG += embed_manifest_exe
 QMAKE_LFLAGS_WINDOWS += $$quote( /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\" )
@@ -84,6 +87,34 @@ LIBS += -lShell32 \
     -llibeay32MD \
     -lssleay32MD
 }
-include(src/CuteTorrent.pri)
+include(CuteTorrent.pri)
 TRANSLATIONS += Resources/translations/cutetorrent_english.ts \
     Resources/translations/cutetorrent_russian.ts
+
+unix {
+  QMAKE_CXXFLAGS += -fpermissive
+  #VARIABLES
+  isEmpty(PREFIX) {
+    PREFIX = /usr
+  }
+  BINDIR = $$PREFIX/bin
+  DATADIR =$$PREFIX/share
+
+  DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
+
+  #MAKE INSTALL
+
+  INSTALLS += target desktop service iconxpm icon26 icon48 icon64
+
+  target.path =$$BINDIR
+
+  desktop.path = $$DATADIR/applications/hildon
+  desktop.files += $${TARGET}.desktop
+
+  service.path = $$DATADIR/dbus-1/services
+  service.files += $${TARGET}.service
+
+  icon64.path = $$DATADIR/icons/hicolor/64x64/apps
+  icon64.files += ../data/64x64/$${TARGET}.png
+}
+

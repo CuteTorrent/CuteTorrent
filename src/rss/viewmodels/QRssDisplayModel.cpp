@@ -146,8 +146,9 @@ void QRssDisplayModel::UpdateModel()
 	m_rootItems.clear();
 	QList<RssFeed*> feeds = m_pRssManager->feeds();
 
-	for each (RssFeed * var in feeds)
-	{
+    for (int i = 0 ;i < feeds.size(); i++)
+    {
+        RssFeed* var = feeds[i];
 		m_rootItems.append(new RssFeedTreeItem(var));
 	}
 
@@ -165,8 +166,9 @@ QList<RssFeed*> QRssDisplayModel::SelectedFeeds()
 	QSet<RssFeed*> res;
 	QModelIndexList selectedIndexes = m_pItemsView->selectionModel()->selectedIndexes();
 
-	for each (QModelIndex selectedIndex in selectedIndexes)
+     for (int i = 0 ;i < selectedIndexes.size(); i++)
 	{
+        QModelIndex selectedIndex = selectedIndexes[i];
 		if (selectedIndex.isValid())
 		{
 			QVariant data = selectedIndex.data(RssFeedRole);
@@ -194,7 +196,7 @@ QList<RssFeed*> QRssDisplayModel::SelectedFeeds()
 
 RssItem* QRssDisplayModel::SelectedRssItem()
 {
-	RssItem* res = nullptr;
+	RssItem* res = NULL;
 	QModelIndex selectedIndex = m_pItemsView->selectionModel()->currentIndex();
 
 	if (selectedIndex.isValid())
@@ -218,7 +220,7 @@ RssItem* QRssDisplayModel::SelectedRssItem()
 }
 RssFeed* QRssDisplayModel::SelectedFeed()
 {
-	RssFeed* res = nullptr;
+	RssFeed* res = NULL;
 	QModelIndex selectedIndex = m_pItemsView->selectionModel()->currentIndex();
 
 	if (selectedIndex.isValid())
@@ -257,7 +259,7 @@ void QRssDisplayModel::setCurrentFeedUnread(bool val)
 {
 	RssFeed* current = SelectedFeed();
 
-	if (current != nullptr)
+	if (current != NULL)
 	{
 		QList<RssItem*> rssItems = current->GetFeedItems();
 
@@ -367,7 +369,7 @@ void QRssDisplayModel::onFeedUpdate()
 	{
 		RssFeed* current = SelectedFeed();
 
-		if (current != nullptr)
+		if (current != NULL)
 		{
 			current->Update();
 		}
@@ -380,7 +382,7 @@ void QRssDisplayModel::onFeedRename()
 	{
 		RssFeed* current = SelectedFeed();
 
-		if (current != nullptr)
+		if (current != NULL)
 		{
 			bool ok;
 			QString newFeedDisplayName = QInputDialog::getText(m_pItemsView, tr("RSS_FEED_RENAME"), tr("RSS_FEED_NAME:"), QLineEdit::Normal, current->displayName(true), &ok);

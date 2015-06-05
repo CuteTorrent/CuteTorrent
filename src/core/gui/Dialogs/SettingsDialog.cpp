@@ -74,7 +74,7 @@ BOOL IsWow64()
 }
 
 #endif
-SettingsDialog::SettingsDialog(QWidget* parent, int flags) : BaseWindow(OnlyCloseButton, NoResize, parent), editRssRule(nullptr), deleteRssRule(nullptr)
+SettingsDialog::SettingsDialog(QWidget* parent, int flags) : BaseWindow(OnlyCloseButton, NoResize, parent), editRssRule(NULL), deleteRssRule(NULL)
 {
 	setupUi(this);
 	previousFocuse = NULL;
@@ -741,7 +741,7 @@ void SettingsDialog::FillKeyMapTab()
 	qDeleteAll(keyMapContainer->findChildren<QGroupBox*>());
 	QLayout* origLayout = keyMapContainer->layout();
 	QGridLayout* layout = origLayout ? (QGridLayout*) origLayout :  new QGridLayout(keyMapContainer);
-	QMap<QString, QMap<QString, QString>> grouppedKeyMap;
+    QMap<QString, QMap<QString, QString> > grouppedKeyMap;
 	int index = 0;
 	
 	for(QMap<QString, QVariant>::iterator i = keyMappings.begin();
@@ -971,14 +971,14 @@ void SettingsDialog::FillRssTab()
 	StyleEngene* pStyleEngine = StyleEngene::getInstance();
 	updateRulesWidget(downloadRules);
 
-	if (editRssRule == nullptr)
+	if (editRssRule == NULL)
 	{
 		editRssRule = new QAction(pStyleEngine->getIcon("move_folder"), tr("ACTION_SETTINGS_EDIT_RSS_RULE"), this);
 		connect(editRssRule, SIGNAL(triggered()), SLOT(onEditRssRule()));
 		rssRulesListWidget->addAction(editRssRule);
 	}
 
-	if (deleteRssRule == nullptr)
+	if (deleteRssRule == NULL)
 	{
 		deleteRssRule = new QAction(pStyleEngine->getIcon("delete"), tr("ACTION_SETTINGS_DELETE_RSS_RULE"), this);
 		connect(deleteRssRule, SIGNAL(triggered()), SLOT(onDeleteRssRule()));

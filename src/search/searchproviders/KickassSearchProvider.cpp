@@ -93,14 +93,17 @@ QString KickassSearchProvider::detectEncoding(QString contentType)
 	QString encoding = "UTF-8";
 	QStringList parts = contentType.split(';');
 
-	for each (QString part in parts)
-	{
-		if (part.contains("charset"))
-		{
-			QStringList charsetParts = part.split('=');
-			encoding = charsetParts.last();
-		}
-	}
+    for(int i =0 ;i< parts.size();i++)
+    {
+        QString part = parts[i];
+        if (part.contains("charset"))
+        {
+            QStringList charsetParts = part.split('=');
+            encoding = charsetParts.last();
+        }
+    }
+
+    return encoding;
 
 	return encoding;
 }

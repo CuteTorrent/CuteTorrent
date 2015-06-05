@@ -1,7 +1,7 @@
 ﻿#include "StyleEngene.h"
 #include <QSettings>
 #include <QApplication>
-
+#include "StaticHelpers.h"
 StyleEngene* StyleEngene::instance = NULL;
 const char* StyleEngene::EnumStrings[] = { "iso", "doc", "picture", "movie", "archive", "audio", "app" };
 QIcon StyleEngene::fallback = QIcon();
@@ -45,11 +45,11 @@ void StyleEngene::setStyle(QString internalName)
 	}
 
 	initIcons();
-	loadStyleSheet(_currentStyle.rootPath + "/style.qss");
+    loadStyleSheet(StaticHelpers::CombinePathes(_currentStyle.rootPath, "style.qss"));
 	emit styleChanged();
 }
 
-QIcon StyleEngene::guessMimeIcon(const QString& suffix, QString& type)
+QIcon StyleEngene::guessMimeIcon(const QString& suffix, QString type)
 {
 	QString lSuffix = suffix.toLower();
 
@@ -85,11 +85,13 @@ QIcon StyleEngene::getIcon(QString name)
 		return *m_iconCache[name];
 	}
 
-	QString iconsRoot = _currentStyle.rootPath + "/icons/";
+    QString iconsRoot = StaticHelpers::CombinePathes(_currentStyle.rootPath , "icons");
 
 	if(iconNamesMap.contains(name))
 	{
-		QIcon* icon = new QIcon(iconsRoot + iconNamesMap[name]);
+        QString iconPath = StaticHelpers::CombinePathes(iconsRoot, iconNamesMap[name]);
+        qDebug() << "Icon path is " << iconPath;
+        QIcon* icon = new QIcon(iconPath);
 		m_iconCache.insert(name, icon);
 		return *icon;
 	}

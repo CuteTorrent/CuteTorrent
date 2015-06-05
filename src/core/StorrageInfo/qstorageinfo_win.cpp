@@ -133,8 +133,8 @@ void QStorageInfoPrivate::retrieveVolumeInfo()
     const bool result = ::GetVolumeInformation(reinterpret_cast<const wchar_t *>(path.utf16()),
                                                nameBuffer,
                                                defaultBufferSize,
-                                               nullptr,
-											   nullptr,
+                                               NULL,
+											   NULL,
                                                &fileSystemFlags,
                                                fileSystemTypeBuffer,
                                                defaultBufferSize);

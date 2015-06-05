@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define Q_WS_WIN
+//#define Q_WS_WIN
 #include "CuteTorrentMainWindow.h"
 #include <QDir>
 #include <qtsingleapplication.h>
@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 	a.setWindowIcon(QIcon(":/icons/app.ico"));
 	bool minimize = false, debug = false;
 	QString file2open;
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+//	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	qsrand(time(NULL));
 
 	if(a.isRunning())
@@ -146,6 +146,6 @@ int main(int argc, char* argv[])
 		fclose(fp);
 	}
 
-	_CrtDumpMemoryLeaks();
+//	_CrtDumpMemoryLeaks();
 	return res;
 }

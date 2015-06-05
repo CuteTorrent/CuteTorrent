@@ -25,7 +25,7 @@ class FileTreeModel : public QAbstractItemModel
 	Q_OBJECT
 
 public:
-	FileTreeModel(QObject* parent = nullptr);
+	FileTreeModel(QObject* parent = NULL);
 	~FileTreeModel();
 	bool setData(const QModelIndex&, const QVariant&, int role = Qt::EditRole) override;
 	QVariant data(const QModelIndex& index, int role) const;

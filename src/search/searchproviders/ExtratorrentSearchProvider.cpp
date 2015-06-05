@@ -277,8 +277,9 @@ QString ExtratorrentSearchProvider::detectEncoding(QString contentType)
 	QString encoding = "UTF-8";
 	QStringList parts = contentType.split(';');
 
-	for each (QString part in parts)
-	{
+    for(int i =0 ;i< parts.size();i++)
+    {
+        QString part = parts[i];
 		if (part.contains("charset"))
 		{
 			QStringList charsetParts = part.split('=');

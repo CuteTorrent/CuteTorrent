@@ -6,10 +6,11 @@
 template <class T>
 class BaseWindow : public T
 {
+    Q_DISABLE_COPY(BaseWindow)
 public:
 	enum ResizeMode { NoResize, AllowResize};
 	enum TitleMode { FullTitle = 0, MaximizeModeOff = 1, MinimizeModeOff = 2, MaxMinOff = MaximizeModeOff | MinimizeModeOff, OnlyCloseButton = MaxMinOff, FullScreenMode = 4 };
-	BaseWindow(TitleMode titleMode, ResizeMode resizeMode, QWidget* parent = nullptr);
+    BaseWindow(TitleMode titleMode, ResizeMode resizeMode, QWidget* parent = NULL);
 	void showMaximized();
 	void showNormal();
 	void setGeometry(QRect geo);
@@ -111,7 +112,7 @@ public slots:
 template <class T>
 void BaseWindow<T>::setTitle(QString title)
 {
-	if (getTitleLabel() != nullptr)
+    if (getTitleLabel() != NULL)
 	{
 		getTitleLabel()->setText(title);
 	}
@@ -155,43 +156,43 @@ void BaseWindow<T>::showMaximized()
 template <class T>
 QLabel* BaseWindow<T>::getTitleIcon()
 {
-	return nullptr;
+    return NULL;
 }
 
 template <class T>
 QLabel* BaseWindow<T>::getTitleLabel()
 {
-	return nullptr;
+    return NULL;
 }
 
 template <class T>
 QWidget* BaseWindow<T>::centralWidget()
 {
-	return nullptr;
+    return NULL;
 }
 
 template <class T>
 QWidget* BaseWindow<T>::getTitleBar()
 {
-	return nullptr;
+    return NULL;
 }
 
 template <class T>
 QPushButton* BaseWindow<T>::getCloseBtn()
 {
-	return nullptr;
+    return NULL;
 }
 
 template <class T>
 QPushButton* BaseWindow<T>::getMaxBtn()
 {
-	return nullptr;
+    return NULL;
 }
 
 template <class T>
 QPushButton* BaseWindow<T>::getMinBtn()
 {
-	return nullptr;
+    return NULL;
 }
 
 template <class T>
@@ -206,12 +207,12 @@ void BaseWindow<T>::setupWindowIcons()
 {
 	StyleEngene* style = StyleEngene::getInstance();
 
-	if((m_titleMode & MinimizeModeOff) == 0 && getMinBtn() != nullptr)
+    if((m_titleMode & MinimizeModeOff) == 0 && getMinBtn() != NULL)
 	{
 		getMinBtn()->setIcon(style->getIcon("app_min"));
 	}
 
-	if((m_titleMode & MaximizeModeOff) == 0 && getMaxBtn() != nullptr)
+    if((m_titleMode & MaximizeModeOff) == 0 && getMaxBtn() != NULL)
 	{
 		if (m_bIsMaximized)
 		{
@@ -236,7 +237,7 @@ void BaseWindow<T>::setupCustomWindow()
 	getTitleIcon()->setMouseTracking(true);
 	getCloseBtn()->setMouseTracking(true);
 
-	if(centralWidget() == nullptr)
+    if(centralWidget() == NULL)
 	{
 		qDebug() << "Central widget is null";
 	}
@@ -245,27 +246,27 @@ void BaseWindow<T>::setupCustomWindow()
 		centralWidget()->setMouseTracking(true);
 	}
 
-	if ((m_titleMode & MinimizeModeOff) == 0 && getMinBtn() != nullptr)
+    if ((m_titleMode & MinimizeModeOff) == 0 && getMinBtn() != NULL)
 	{
 		getMinBtn()->setMouseTracking(true);
-		connect(getMinBtn(), SIGNAL(clicked()), this, SLOT(minimizeBtnClicked()));
+        T::connect(getMinBtn(), SIGNAL(clicked()), this, SLOT(minimizeBtnClicked()));
 	}
-	else if(getMinBtn() != nullptr)
+    else if(getMinBtn() != NULL)
 	{
 		getMinBtn()->hide();
 	}
 
-	if ((m_titleMode & MaximizeModeOff) == 0 && getMaxBtn() != nullptr)
+    if ((m_titleMode & MaximizeModeOff) == 0 && getMaxBtn() != NULL)
 	{
 		getMaxBtn()->setMouseTracking(true);
-		connect(getMaxBtn(), SIGNAL(clicked()), this, SLOT(maximizeBtnClicked()));
+        T::connect(getMaxBtn(), SIGNAL(clicked()), this, SLOT(maximizeBtnClicked()));
 	}
-	else if(getMaxBtn() != nullptr)
+    else if(getMaxBtn() != NULL)
 	{
 		getMaxBtn()->hide();
 	}
 
-	connect(getCloseBtn(), SIGNAL(clicked()), this, SLOT(close()));
+    T::connect(getCloseBtn(), SIGNAL(clicked()), this, SLOT(close()));
 	moveWidget = false;
 	inResizeZone = false;
 	allowToResize = false;
@@ -481,7 +482,7 @@ void BaseWindow<T>::mouseDoubleClickEvent(QMouseEvent* e)
 	        && position.x() >= geometry.x() && position.y() >= geometry.y()
 	        && getTitleIcon()->isVisible())
 	{
-		close();
+        T::close();
 	}
 	else if(position.x() < getTitleBar()->geometry().width()
 	        && position.y() < getTitleBar()->geometry().height()

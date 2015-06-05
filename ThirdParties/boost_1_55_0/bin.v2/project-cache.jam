@@ -2,21 +2,21 @@
 # Do not edit.
 
 module config-cache {
-  set "32-bit-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "true" ;
-  set "arm-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "false" ;
-  set "mips1-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "false" ;
-  set "power-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "false" ;
-  set "sparc-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "false" ;
-  set "x86-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "true" ;
-  set "has_icu builds-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "false" ;
-  set "ac-library-zlib-<link>static-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "missing" ;
-  set "iconv (libc)-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "false" ;
-  set "iconv (separate)-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "false" ;
-  set "icu-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "false" ;
-  set "icu (lib64)-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "false" ;
-  set "message-compiler-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "true" ;
-  set "compiler-supports-ssse3-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "true" ;
-  set "compiler-supports-avx2-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "false" ;
-  set "gcc visibility-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "false" ;
-  set "long double support-<target-os>windows-<toolset-msvc:version>10.0-<toolset>msvc" : "true" ;
+  set "32-bit-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "false" ;
+  set "64-bit-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "true" ;
+  set "arm-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "false" ;
+  set "mips1-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "false" ;
+  set "power-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "false" ;
+  set "sparc-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "false" ;
+  set "x86-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "true" ;
+  set "has_icu builds-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "false" ;
+  set "ac-library-zlib-<link>static-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "%default" "z" "<link>static" ;
+  set "iconv (libc)-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "true" ;
+  set "icu-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "false" ;
+  set "icu (lib64)-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "false" ;
+  set "compiler-supports-ssse3-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "true" ;
+  set "lockfree boost::atomic_flag-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "true" ;
+  set "compiler-supports-avx2-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "true" ;
+  set "gcc visibility-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "true" ;
+  set "long double support-<target-os>linux-<toolset-gcc:version>4.9.2-<toolset>gcc" : "true" ;
 }

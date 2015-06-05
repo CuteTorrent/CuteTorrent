@@ -3,7 +3,7 @@
 FileViewTreeItem::FileViewTreeItem()
 {
 	m_type = NONE;
-	m_pParrent = nullptr;
+	m_pParrent = NULL;
 	m_name = "";
 	m_pChildren = QVector<FileViewTreeItem*>();
 }

@@ -1,6 +1,6 @@
 ﻿#include "createbackuppage.h"
 #include "backupwizard.h"
-#include <private/qzipwriter_p.h>
+//#include <private/qzipwriter_p.h>
 CreateBackupPage::CreateBackupPage(QWidget* parent) :
 	QWizardPage(parent)
 {
@@ -42,7 +42,7 @@ bool CreateBackupPage::validatePage()
 void CreateBackupPage::createBackup() const
 {
 	QString path = savePathEdit->text();
-	QZipWriter zip(path);
+    /*QZipWriter zip(path);
 
 	if(zip.status() != QZipWriter::NoError)
 	{
@@ -93,7 +93,7 @@ void CreateBackupPage::createBackup() const
 		}
 	}
 
-	zip.close();
+    zip.close();*/
 }
 
 

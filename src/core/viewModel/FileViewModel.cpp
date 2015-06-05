@@ -108,9 +108,10 @@ void FileViewModel::setFilePriority(int priorityToSet)
 {
 	QModelIndexList selection = m_pView->selectionModel()->selectedIndexes();
 
-	for each (QModelIndex index in selection)
-	{
-		QModelIndex sourceIndex = m_pProxyModel->mapToSource(index);
+    for (int i =0 ; i< selection.size(); i++)
+    {
+
+        QModelIndex sourceIndex = m_pProxyModel->mapToSource(selection[i]);
 		FileViewTreeItem* item = static_cast<FileViewTreeItem*>(sourceIndex.internalPointer());
 		SetItemPriority(item, priorityToSet, sourceIndex);
 	}
@@ -231,7 +232,7 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 			case 1:
 				if(item->GetType() == FileViewTreeItem::FILE)
 				{
-					return file.size;
+                    return qVariantFromValue(file.size);
 				}
 				else
 				{

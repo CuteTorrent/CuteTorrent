@@ -29,7 +29,7 @@ QLabel* RssFeedSettingsDialog::getTitleIcon()
 
 void RssFeedSettingsDialog::accept()
 {
-	if (m_pFeed == nullptr)
+	if (m_pFeed == NULL)
 	{
 		return;
 	}
@@ -95,7 +95,7 @@ void RssFeedSettingsDialog::SetFeed(RssFeed* pFeed)
 
 void RssFeedSettingsDialog::FillInData()
 {
-	if (m_pFeed == nullptr)
+	if (m_pFeed == NULL)
 	{
 		return;
 	}

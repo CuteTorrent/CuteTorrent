@@ -2,7 +2,7 @@
 #define _RSS_DWONLOAD_RULE_INCLUDED_
 
 #include <QtCore>
-#include <xstring>
+#include <string>
 #include "RssCommon.h"
 class RssItem;
 

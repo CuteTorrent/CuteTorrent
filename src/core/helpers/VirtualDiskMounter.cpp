@@ -16,7 +16,7 @@ bool VirtualDiskMounter::IsWin8OrGreater()
 	HMODULE hKernel32 = LoadLibrary(L"kernel32.dll");
 	IsWindows8OrGreater_t IsWindows8OrGreater = reinterpret_cast<IsWindows8OrGreater_t>(GetProcAddress(hKernel32, "IsWindows8OrGreater"));
 
-	if (IsWindows8OrGreater != nullptr)
+	if (IsWindows8OrGreater != NULL)
 	{
 		return IsWindows8OrGreater();
 	}
@@ -34,13 +34,13 @@ void VirtualDiskMounter::MountVirualDiskImageWin8OrAbove(QString path)
 	path.toWCharArray(pWStrPath);
 	HANDLE hVirtualDisk;
 	DWORD dwRes = OpenVirtualDisk(&storrageType, pWStrPath, VIRTUAL_DISK_ACCESS_ATTACH_RO |
-	                              VIRTUAL_DISK_ACCESS_DETACH, OPEN_VIRTUAL_DISK_FLAG_NONE, nullptr, &hVirtualDisk);
+	                              VIRTUAL_DISK_ACCESS_DETACH, OPEN_VIRTUAL_DISK_FLAG_NONE, NULL, &hVirtualDisk);
 
 	if (dwRes == ERROR_SUCCESS)
 	{
 		ATTACH_VIRTUAL_DISK_PARAMETERS parameters;
 		parameters.Version = ATTACH_VIRTUAL_DISK_VERSION_1;
-		dwRes = AttachVirtualDisk(hVirtualDisk, nullptr, ATTACH_VIRTUAL_DISK_FLAG_READ_ONLY | ATTACH_VIRTUAL_DISK_FLAG_PERMANENT_LIFETIME, 0, &parameters, nullptr);
+		dwRes = AttachVirtualDisk(hVirtualDisk, NULL, ATTACH_VIRTUAL_DISK_FLAG_READ_ONLY | ATTACH_VIRTUAL_DISK_FLAG_PERMANENT_LIFETIME, 0, &parameters, NULL);
 
 		if (dwRes != ERROR_SUCCESS)
 		{

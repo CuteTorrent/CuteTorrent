@@ -15,7 +15,7 @@ public:
 		EDIT,
 		CREATE
 	};
-	AddRssDwonloadRuleDialog(QWidget* parent = nullptr, DiaologMode mode = CREATE);
+	AddRssDwonloadRuleDialog(QWidget* parent = NULL, DiaologMode mode = CREATE);
 	RssDownloadRule* getFinalRule();
 
 	void setDownloadRule(RssDownloadRule* rule);

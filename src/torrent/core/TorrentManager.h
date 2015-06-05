@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef TOR_MANAGER_H
 #define TOR_MANAGER_H
 #include <vector>
-#include <xstring>
+#include <string>
 
 #include "libtorrent/error_code.hpp"
 #include "libtorrent/session_settings.hpp"

@@ -37,7 +37,7 @@ private:
 		QString rssItemId;
 	};
 	static boost::weak_ptr<RssManager> m_sInstrance;
-	RssManager(QObject* parent = nullptr);
+	RssManager(QObject* parent = NULL);
 	TorrentDownloaderPtr m_pTorrentDownloader;
 	NotificationSystemPtr m_pNotificationSystem;
 	QList<RssFeed*> m_pFeeds;

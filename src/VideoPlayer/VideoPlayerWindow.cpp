@@ -31,7 +31,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QFileDialog>
 #include <QMenu>
 #include "StyleEngene.h"
+#ifdef Q_WS_WIN
 #include <Windows.h>
+#endif
 VideoPlayerWindow::VideoPlayerWindow(QWidget* parent) :	QMainWindow(parent),
 	m_bIsFullScr(false),
 	m_bMouseHideNeeded(false),
@@ -290,7 +292,9 @@ VideoPlayerWindow::~VideoPlayerWindow()
 
 void VideoPlayerWindow::updateWindowActiveState()
 {
+#ifdef Q_WS_WIN
 	SystemParametersInfo(SPI_SETSCREENSAVEACTIVE, 1, NULL, SPIF_SENDWININICHANGE);
+#endif
 }
 
 

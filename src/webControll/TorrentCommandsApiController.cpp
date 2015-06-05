@@ -20,7 +20,7 @@ void TorrentCommandsApiController::service(HttpRequest& request, HttpResponse& r
 		QString id = request.getParameter("id");
 		Torrent* tor = m_pTorrentManager->GetTorrentByInfoHash(id);
 
-		if(tor != nullptr)
+        if(tor != NULL)
 		{
 			if(action == "pause")
 			{

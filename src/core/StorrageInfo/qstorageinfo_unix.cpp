@@ -37,7 +37,11 @@
 #include <QtCore/qfileinfo.h>
 #include <QtCore/qtextstream.h>
 
-#include <QtCore/private/qcore_unix_p.h>
+//#include <QtCore/private/qcore_unix_p.h>
+#define EINTR_LOOP(var, cmd)                    \
+    do {                                        \
+        var = cmd;                              \
+    } while (var == -1 && errno == EINTR)
 
 #include <errno.h>
 #include <sys/stat.h>
@@ -213,7 +217,7 @@ inline QStorageIterator::~QStorageIterator()
 
 inline bool QStorageIterator::isValid() const
 {
-    return fp != Q_NULLPTR;
+    return fp != NULL;
 }
 
 inline bool QStorageIterator::next()
@@ -306,12 +310,12 @@ inline QStorageIterator::~QStorageIterator()
 
 inline bool QStorageIterator::isValid() const
 {
-    return fp != Q_NULLPTR;
+    return fp != NULL;
 }
 
 inline bool QStorageIterator::next()
 {
-    return ::getmntent_r(fp, &mnt, buffer.data(), buffer.size()) != Q_NULLPTR;
+    return ::getmntent_r(fp, &mnt, buffer.data(), buffer.size()) != NULL;
 }
 
 inline QString QStorageIterator::rootPath() const
@@ -432,7 +436,7 @@ void QStorageInfoPrivate::initRootPath()
 
     QStorageIterator it;
     if (!it.isValid()) {
-        rootPath = QStringLiteral("/");
+        rootPath = QString("/");
         return;
     }
 
@@ -541,7 +545,7 @@ QList<QStorageInfo> QStorageInfoPrivate::mountedVolumes()
 
 QStorageInfo QStorageInfoPrivate::root()
 {
-    return QStorageInfo(QStringLiteral("/"));
+    return QStorageInfo(QString("/"));
 }
 
 QT_END_NAMESPACE

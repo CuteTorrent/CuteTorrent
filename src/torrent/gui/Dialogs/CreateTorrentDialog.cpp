@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPainter>
 #include <exception>
 #include <iosfwd>
-#include <xstring>
+#include <string>
 #include "CreateTorrentDialog.h"
 #include "QApplicationSettings.h"
 #include "StyleEngene.h"
@@ -327,7 +327,7 @@ QLabel* CreateTorrentDialog::getTitleIcon()
 
 #include <boost/bind.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include <crtdbg.h>
+//#include <crtdbg.h>
 
 #include "libtorrent/bencode.hpp"
 #include "libtorrent/create_torrent.hpp"

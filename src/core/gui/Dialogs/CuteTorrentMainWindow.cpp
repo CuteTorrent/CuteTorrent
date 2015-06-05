@@ -53,7 +53,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "ProgressItemDelegate.h"
 #include "PriorityItemDelegate.h"
 #include "torrentracker.h"
-#include "version.h"
+#include "core/Version.h"
 #include "RconWebService.h"
 #include "messagebox.h"
 #include "backupwizard/backupwizard.h"
@@ -70,7 +70,7 @@ class SearchResult;
 Q_DECLARE_METATYPE(QList<int>)
 
 CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
-	: BaseWindow(FullTitle, AllowResize, parent), m_httpLinkRegexp("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?"), m_pPieceView(nullptr)
+    : BaseWindow(FullTitle, AllowResize, parent), m_httpLinkRegexp("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?"), m_pPieceView(NULL)
 {
 	m_pSettings = QApplicationSettings::getInstance();
 	Application::setLanguage(m_pSettings->valueString("System", "Lang", "ru_RU"));
@@ -187,7 +187,7 @@ void CuteTorrentMainWindow::setupListView()
 
 void CuteTorrentMainWindow::setupTabelWidgets()
 {
-	QList<int> tracker_column_sizes = m_pSettings->value("Window", "trackers_sizes").value<QList<int>>();
+    QList<int> tracker_column_sizes = m_pSettings->value("Window", "trackers_sizes").value<QList<int> >();
 
 	if (tracker_column_sizes.count() > 0)
 	{
@@ -216,7 +216,7 @@ void CuteTorrentMainWindow::setupTabelWidgets()
 	trackerTableWidget->addAction(addTracker);
 	trackerTableWidget->addAction(removeTracker);
 	trackerTableWidget->addAction(editTracker);
-	QList<int> peer_column_sizes = m_pSettings->value("Window", "peers_sizes").value<QList<int>>();
+    QList<int> peer_column_sizes = m_pSettings->value("Window", "peers_sizes").value<QList<int> >();
 
 	if (peer_column_sizes.count() > 0)
 	{
@@ -377,7 +377,7 @@ void CuteTorrentMainWindow::UpdateLimits()
 
 	Torrent* tor = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (tor != nullptr)
+    if (tor != NULL)
 	{
 		if (ul->value() != tor->GetUploadLimit() / KbInt)
 		{
@@ -532,7 +532,7 @@ void CuteTorrentMainWindow::UpdateFileTab()
 {
 	Torrent* tor = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (tor != nullptr)
+    if (tor != NULL)
 	{
 		if (m_pFileViewModel->setDataSource(tor->GetInternalHandle()))
 		{
@@ -692,8 +692,10 @@ void CuteTorrentMainWindow::HandleNewTorrent(const QString& path)
 {
 	// This hack does not give the focus to the app but brings it to front so
 	// the user sees it.
+#ifdef Q_WS_WIN
 	SetWindowPos(effectiveWinId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
 	SetWindowPos(effectiveWinId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+#endif
 	// HACK END
 	showNormal();
 	setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
@@ -731,7 +733,7 @@ void CuteTorrentMainWindow::UpdateInfoTab()
 {
 	Torrent* tor = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (tor != nullptr)
+    if (tor != NULL)
 	{
 		fillPieceDisplay(m_pPieceView->size());
 		downloadedBytesLabel->setText(tor->GetTotalDownloaded());
@@ -787,7 +789,7 @@ void CuteTorrentMainWindow::UpdatePeerTab()
 {
 	Torrent* tor = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (tor != nullptr)
+    if (tor != NULL)
 	{
 		std::vector<peer_info> peerInfos = tor->GetPeerInfo();
 		peerTableWidget->setRowCount(peerInfos.size());
@@ -831,7 +833,7 @@ void CuteTorrentMainWindow::UpadteTrackerTab()
 {
 	Torrent* tor = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (tor != nullptr)
+    if (tor != NULL)
 	{
 		std::vector<announce_entry> trackers = tor->GetTrackerInfo();
 		QTableWidgetItem* dhtItem = new QTableWidgetItem("DHT");
@@ -1051,7 +1053,7 @@ void CuteTorrentMainWindow::setupFileTabel()
 	fileTableView->setItemDelegateForColumn(1, new FileSizeItemDelegate(this));
 	fileTableView->setItemDelegateForColumn(2, new ProgressItemDelegate(this));
 	fileTableView->setItemDelegateForColumn(3, new PriorityItemDelegate(this));
-	QList<int> file_column_sizes = m_pSettings->value("Window", "files_sizes").value<QList<int>>();
+    QList<int> file_column_sizes = m_pSettings->value("Window", "files_sizes").value<QList<int> >();
 
 	if (file_column_sizes.count() > 0)
 	{
@@ -1111,7 +1113,7 @@ void CuteTorrentMainWindow::PeformSearch()
 
 void CuteTorrentMainWindow::resizeEvent(QResizeEvent* /*event*/)
 {
-	if (m_pPieceView != nullptr)
+    if (m_pPieceView != NULL)
 	{
 		fillPieceDisplay(m_pPieceView->size());
 	}
@@ -1137,7 +1139,7 @@ void CuteTorrentMainWindow::keyPressEvent(QKeyEvent* event)
 		{
 			QAction* action = this->findChild<QAction*>(key);
 
-			if (action != nullptr)
+            if (action != NULL)
 			{
 				qDebug() << "Matched action:" << pressedKey << action->objectName();
 				action->activate(QAction::Trigger);
@@ -1152,7 +1154,7 @@ void CuteTorrentMainWindow::fillPieceDisplay(QSize size)
 {
 	Torrent* tor = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (tor != nullptr)
+    if (tor != NULL)
 	{
 		int piece_count = tor->GetPieceCount();
 		QVector<int> avaliablePieces = tor->GetDownloadedPieces();
@@ -1170,7 +1172,7 @@ void CuteTorrentMainWindow::CopyDiscribtion()
 	QClipboard* clipboard = QApplication::clipboard();
 	Torrent* tor = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (tor != nullptr)
+    if (tor != NULL)
 	{
 		clipboard->setText(tor->GetDiscribtion());
 	}
@@ -1190,7 +1192,7 @@ void CuteTorrentMainWindow::UpdateUL(int kbps)
 {
 	Torrent* tor = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (tor != nullptr)
+    if (tor != NULL)
 	{
 		tor->SetUlLimit(kbps * KbInt);
 	}
@@ -1207,7 +1209,7 @@ void CuteTorrentMainWindow::UpdateDL(int kbps)
 {
 	Torrent* tor = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (tor != nullptr)
+    if (tor != NULL)
 	{
 		tor->SetDlLimit(kbps * KbInt);
 	}
@@ -1224,7 +1226,7 @@ void CuteTorrentMainWindow::AddPeer()
 {
 	Torrent* torrent = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (torrent != nullptr)
+    if (torrent != NULL)
 	{
 		bool ok;
 		QString peerStr = QInputDialog::getText(this, tr("ADD_PEER_DLG"), tr("PEER:"), QLineEdit::Normal, "", &ok);
@@ -1253,7 +1255,7 @@ void CuteTorrentMainWindow::AddTracker()
 {
 	Torrent* torrent = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (torrent != nullptr)
+    if (torrent != NULL)
 	{
 		bool ok;
 		QString trackerUrl = QInputDialog::getText(this, tr("ADD_TRACKER_DLG"), tr("TRACKER:"), QLineEdit::Normal, "", &ok);
@@ -1454,14 +1456,14 @@ void CuteTorrentMainWindow::setupCustomeWindow()
 		m_pTabWidget->setCurrentIndex(selectedTab);
 	}
 
-	QList<int> horizontal_sizes = m_pSettings->value("Window", "horizontal_sizes", qVariantFromValue(QList<int>() << 130 << 538)).value<QList<int>>();
+    QList<int> horizontal_sizes = m_pSettings->value("Window", "horizontal_sizes", qVariantFromValue(QList<int>() << 130 << 538)).value<QList<int> >();
 
 	if (horizontal_sizes.size() > 0)
 	{
 		spliiter1->setSizes(horizontal_sizes);
 	}
 
-	QList<int> vertical_sizes = m_pSettings->value("Window", "vertical_sizes", qVariantFromValue(QList<int>() << 530 << 195)).value<QList<int>>();
+    QList<int> vertical_sizes = m_pSettings->value("Window", "vertical_sizes", qVariantFromValue(QList<int>() << 530 << 195)).value<QList<int> >();
 
 	if (vertical_sizes.size() > 0)
 	{
@@ -1694,7 +1696,7 @@ void CuteTorrentMainWindow::RemoveTracker()
 {
 	Torrent* torrent = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (torrent != nullptr)
+    if (torrent != NULL)
 	{
 		QList<QTableWidgetSelectionRange> selectedRows = trackerTableWidget->selectedRanges();
 
@@ -1705,8 +1707,9 @@ void CuteTorrentMainWindow::RemoveTracker()
 
 		QStringList trackers2remove;
 
-		for each (QTableWidgetSelectionRange selection in selectedRows)
+        for (int j =0 ; j< selectedRows.size(); j++)
 		{
+            QTableWidgetSelectionRange selection = selectedRows[j];
 			for (int i = selection.topRow(); i <= selection.bottomRow(); i++)
 			{
 				trackers2remove.append(trackerTableWidget->item(i, 0)->text());
@@ -1733,7 +1736,7 @@ void CuteTorrentMainWindow::EditTracker()
 {
 	Torrent* torrent = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (torrent != nullptr)
+    if (torrent != NULL)
 	{
 		int selectedRow = trackerTableWidget->currentRow();
 		QString tracker2edit = trackerTableWidget->item(selectedRow, 0)->text();
@@ -1751,7 +1754,7 @@ void CuteTorrentMainWindow::AddWebSeed()
 {
 	Torrent* torrent = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (torrent != nullptr)
+    if (torrent != NULL)
 	{
 		bool ok;
 		QString webSeedUrl = QInputDialog::getText(this, tr("EDIT_TRACKER_DLG"), tr("HTTP_SEED_URL:"), QLineEdit::Normal, "", &ok);
@@ -1793,7 +1796,7 @@ void CuteTorrentMainWindow::editRssFeed()
 	{
 		RssFeed* selecteFeed = m_pRssDisplayModel->SelectedFeed();
 
-		if (selecteFeed != nullptr)
+        if (selecteFeed != NULL)
 		{
 			boost::scoped_ptr<RssFeedSettingsDialog> pDialog(new RssFeedSettingsDialog(this));
 			pDialog->SetFeed(selecteFeed);
@@ -1804,7 +1807,7 @@ void CuteTorrentMainWindow::editRssFeed()
 
 void CuteTorrentMainWindow::OnQuit()
 {
-	if (m_pTorrentManager != nullptr)
+    if (m_pTorrentManager != NULL)
 	{
 		m_pTorrentManager->SaveSession();
 	}
@@ -1825,7 +1828,7 @@ void CuteTorrentMainWindow::UpdateRssInfo(const QItemSelection& /*selection*/)
 
 	RssItem* currentItem = m_pRssDisplayModel->SelectedRssItem();
 
-	if (currentItem != nullptr)
+    if (currentItem != NULL)
 	{
 		m_pFeedItemDescribtionEdit->setHtml(currentItem->description());
 	}

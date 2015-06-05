@@ -25,7 +25,7 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 		buttons = QMessageBox::Ok | QMessageBox::Cancel;
 	}
 
-	clickedButton = nullptr;
+	clickedButton = NULL;
 	uint mask = QMessageBox::FirstButton;
 	bool isFirst = true;
 
@@ -63,25 +63,25 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 QPixmap CustomMessageBox::standardIcon(QMessageBox::Icon icon)
 {
 	QStyle* style = this->style();
-	int iconSize = style->pixelMetric(QStyle::PM_MessageBoxIconSize, nullptr, this);
+	int iconSize = style->pixelMetric(QStyle::PM_MessageBoxIconSize, NULL, this);
 	QIcon tmpIcon;
 
 	switch(icon)
 	{
 		case QMessageBox::Information:
-			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxInformation, nullptr , this);
+			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxInformation, NULL , this);
 			break;
 
 		case QMessageBox::Warning:
-			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxWarning, nullptr, this);
+			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxWarning, NULL, this);
 			break;
 
 		case QMessageBox::Critical:
-			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxCritical, nullptr, this);
+			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxCritical, NULL, this);
 			break;
 
 		case QMessageBox::Question:
-			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxQuestion, nullptr, this);
+			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxQuestion, NULL, this);
 			break;
 
 		case QMessageBox::NoIcon:
@@ -101,7 +101,7 @@ QPixmap CustomMessageBox::standardIcon(QMessageBox::Icon icon)
 
 QMessageBox::StandardButton CustomMessageBox::_clickedButton()
 {
-	return  clickedButton != nullptr ? static_cast<QMessageBox::StandardButton>(ui->buttonBox->standardButton(clickedButton)) : cancelButton;
+	return  clickedButton != NULL ? static_cast<QMessageBox::StandardButton>(ui->buttonBox->standardButton(clickedButton)) : cancelButton;
 }
 
 CustomMessageBox::~CustomMessageBox()

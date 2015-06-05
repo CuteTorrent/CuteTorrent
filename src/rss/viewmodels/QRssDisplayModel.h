@@ -11,7 +11,7 @@ class QRssDisplayModel : public QAbstractItemModel
 	Q_OBJECT
 public:
 	enum Role { RssFeedRole = Qt::UserRole, RssItemRole = Qt::UserRole + 1 };
-	QRssDisplayModel(QTreeView* pItemsView, QObject* parrent = nullptr, bool autoUpdate = true);
+	QRssDisplayModel(QTreeView* pItemsView, QObject* parrent = NULL, bool autoUpdate = true);
 	~QRssDisplayModel();
 	int columnCount(const QModelIndex& parent = QModelIndex()) const override;
 	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;

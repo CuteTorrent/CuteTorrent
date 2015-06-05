@@ -8,8 +8,9 @@ SearchEngine::SearchEngine()
 	m_pSearchProviders.append(new ExtratorrentSearchProvider());
 	m_pSearchProviders.append(new RutorSearchProvider());
 
-	for each(ISerachProvider * searchProvider in m_pSearchProviders)
+    for (int i = 0; i< m_pSearchProviders.size(); i++)
 	{
+        ISerachProvider* searchProvider = m_pSearchProviders[i];
 		QObject::connect(dynamic_cast<QObject*>(searchProvider), SIGNAL(SearchReady(QList<SearchResult*>)), this, SLOT(OnSearchReady(QList<SearchResult*>)));
 	}
 
@@ -26,8 +27,9 @@ void SearchEngine::DoSerach(QString& token, ISerachProvider::SearchCategories ca
 {
 	m_result->clear();
 
-	for each(ISerachProvider * searchProvider in m_pSearchProviders)
-	{
+    for (int i = 0; i< m_pSearchProviders.size(); i++)
+    {
+        ISerachProvider* searchProvider = m_pSearchProviders[i];
 		searchProvider->PeformSearch(token, category, page);
 	}
 }

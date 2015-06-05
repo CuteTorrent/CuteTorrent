@@ -1,11 +1,10 @@
 ﻿#pragma once
 #include "Torrent.h"
-#include <collections/ObservableList.h>
 class Torrent;
 #include "defs.h"
-class TorrentStorrage : public ObservableList<Torrent*>
+class TorrentStorrage : public QList<Torrent*>
 {
-	Q_OBJECT
+//	Q_OBJECT
 
 public:
 	static TorrentStorrage* getInstance();
@@ -20,7 +19,7 @@ public:
 	void clear();
 	Torrent* operator [](QString index);
 protected:
-	TorrentStorrage(QObject* parrent = nullptr);
+	TorrentStorrage(QObject* parrent = NULL);
 	~TorrentStorrage(void);
 private:
 	static TorrentStorrage* m_pInstance;

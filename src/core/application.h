@@ -41,7 +41,9 @@ public:
 	static void loadTranslationsQt(const QString& dir);
 	static void loadTranslationsQt(const QDir& dir);
 	QString currentLocaleQt();
+#ifdef Q_WS_WIN
 	bool winEventFilter(MSG* message, long* result);
+#endif
 protected:
 	bool event(QEvent* event);
 public slots:

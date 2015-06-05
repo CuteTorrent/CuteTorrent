@@ -6,7 +6,7 @@
 #include "QRssDisplayModel.h"
 #include "RssFeed.h"
 #include <QDebug>
-QRssFilterModel::QRssFilterModel(QObject* parent) : QSortFilterProxyModel(parent), m_filterRule(nullptr)
+QRssFilterModel::QRssFilterModel(QObject* parent) : QSortFilterProxyModel(parent), m_filterRule(NULL)
 {
 	//setDynamicSortFilter(true);
 }
@@ -16,7 +16,7 @@ bool QRssFilterModel::filterAcceptsRow(int source_row, const QModelIndex& source
 {
 	QModelIndex index = sourceModel()->index(source_row, 0, source_parent);
 
-	if (index.isValid() && m_filterRule != nullptr && m_filterRule->RuleType() != RssDownloadRule::SELECT_FILE_RULE)
+	if (index.isValid() && m_filterRule != NULL && m_filterRule->RuleType() != RssDownloadRule::SELECT_FILE_RULE)
 	{
 		QVariant data = index.data(QRssDisplayModel::RssFeedRole);
 

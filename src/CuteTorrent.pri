@@ -49,7 +49,6 @@ HEADERS += ./core/Build_Increment.h \
     ./core/qtsingleapplication/src/qtsinglecoreapplication.h \
     ./core/datamodels/SGML/QSgml.h \
     ./core/datamodels/SGML/QSgmlTag.h \
-    ./webControll/CommandsApiController.h \
     ./webControll/MagnetApiController.h \
     ./webControll/RconWebService.h \
     ./webControll/RequestMapper.h \
@@ -118,7 +117,9 @@ HEADERS += ./core/Build_Increment.h \
     $$PWD/core/collections/ObservableList.h \
     $$PWD/core/collections/ObservebaleCollectionBase.h \
     $$PWD/core/StorrageInfo/qstorageinfo.h \
-    $$PWD/core/StorrageInfo/qstorageinfo_p.h
+    $$PWD/core/StorrageInfo/qstorageinfo_p.h \
+    webControll/RssCommandsApiController.h \
+    webControll/TorrentCommandsApiController.h
 SOURCES += ./core/gui/Dialogs/CuteTorrentMainWindow.cpp \
     ./main.cpp \
     ./core/gui/backupwizard/applybackuppage.cpp \
@@ -157,7 +158,6 @@ SOURCES += ./core/gui/Dialogs/CuteTorrentMainWindow.cpp \
     ./core/qtsingleapplication/src/qtsinglecoreapplication.cpp \
     ./core/datamodels/SGML/QSgml.cpp \
     ./core/datamodels/SGML/QSgmlTag.cpp \
-    ./webControll/CommandsApiController.cpp \
     ./webControll/MagnetApiController.cpp \
     ./webControll/RconWebService.cpp \
     ./webControll/RequestMapper.cpp \
@@ -218,11 +218,13 @@ SOURCES += ./core/gui/Dialogs/CuteTorrentMainWindow.cpp \
     ./core/gui/Controls/StyledProgressBar.cpp \
     ./webControll/FileSystemController.cpp \
     ./webControll/RssController.cpp \
-    ./core/StorrageInfo/qstorageinfo.cpp
+    ./core/StorrageInfo/qstorageinfo.cpp \
+    ./webControll/RssCommandsApiController.cpp \
+    ./webControll/TorrentCommandsApiController.cpp
+unix {
+    SOURCES += ./core/StorrageInfo/qstorageinfo_unix.cpp \
+    ./core/qtsingleapplication/src/qtlockedfile_unix.cpp
 
-win32{
-SOURCES += ./core/StorrageInfo/qstorageinfo_win.cpp \
-    ./core/qtsingleapplication/src/qtlockedfile_win.cpp
 }
 FORMS += ./rss/gui/FormFiles/RssFeedSettingsDialog.ui \
     ./torrent/gui/FormFiles/CreateTorrentDialog.ui \
@@ -235,4 +237,4 @@ FORMS += ./rss/gui/FormFiles/RssFeedSettingsDialog.ui \
     ./rss/gui/FormFiles/AddDownloadRuleDialog.ui
 TRANSLATIONS += ./Resources/translations/cutetorrent_english.ts \
     ./Resources/translations/cutetorrent_russian.ts
-RESOURCES += Resources/ltorrent.qrc
+RESOURCES += ./Resources/ltorrent.qrc

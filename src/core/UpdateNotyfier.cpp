@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "UpdateNotyfier.h"
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include "version.h"
+#include "Version.h"
 #include <QStringList>
 #include "NotificationSystem.h"
 UpdateNotifier::UpdateNotifier(QObject* parent) : QObject(parent)

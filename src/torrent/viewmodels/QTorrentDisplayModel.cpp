@@ -80,7 +80,7 @@ void QTorrentDisplayModel::MountDT()
 {
 	Torrent* tor = GetSelectedTorrent();
 
-	if(tor != nullptr)
+	if(tor != NULL)
 	{
 		if(tor->isDaemonToolsMountable() && (tor->isSeeding() || tor->isPaused()))
 		{
@@ -113,7 +113,7 @@ void QTorrentDisplayModel::OpenDirSelected()
 
 	Torrent* tor = GetSelectedTorrent();
 
-	if(tor != nullptr)
+	if(tor != NULL)
 	{
 		QString path = QFileInfo(QDir::toNativeSeparators(tor->GetSavePath() + (tor->isSingleFile() ? QString::fromUtf8(tor->GetFileDownloadInfo().storrage.file_path(0).c_str()) : tor->GetName()))).absoluteFilePath();
 #ifdef Q_WS_MAC
@@ -149,7 +149,7 @@ void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 	{
 		Torrent* torrent = qmi.data(TorrentRole).value<Torrent*>();
 
-		if(torrent != nullptr)
+		if(torrent != NULL)
 		{
 			if(!torrent->isDaemonToolsMountable() || !torrent->isSeeding())
 			{
@@ -221,7 +221,7 @@ void QTorrentDisplayModel::UpdateSelectedIndex(const QItemSelection& selection)
 		else
 		{
 			selectedRow = -1;
-			CurrentTorrent = nullptr;
+			CurrentTorrent = NULL;
 		}
 	}
 	catch(std::exception e)
@@ -252,17 +252,17 @@ Torrent* QTorrentDisplayModel::GetSelectedTorrent()
 	{
 		if(rowCount() == 0)
 		{
-			return nullptr;
+			return NULL;
 		}
 
 		if(selectedRow >= rowCount())
 		{
-			return nullptr;
+			return NULL;
 		}
 
 		if(selectedRow < 0)
 		{
-			return nullptr;
+			return NULL;
 		}
 
 		return CurrentTorrent;
@@ -272,7 +272,7 @@ Torrent* QTorrentDisplayModel::GetSelectedTorrent()
 		qDebug() << "Exception QTorrentDisplayModel::GetSelectedTorrent" << e.what();
 	}
 
-	return nullptr;
+	return NULL;
 }
 bool indexByRowLessThan(const QModelIndex& right, const QModelIndex& left)
 {
@@ -574,7 +574,7 @@ bool QTorrentDisplayModel::removeRow(int row, bool delFiles)
 
 	if(m_pTorrentStorrage->at(row) == CurrentTorrent)
 	{
-		CurrentTorrent = nullptr;
+		CurrentTorrent = NULL;
 	}
 	m_pTorrentManager->RemoveTorrent(m_pTorrentStorrage->at(row)->GetInfoHash(), delFiles);
 	endRemoveRows();

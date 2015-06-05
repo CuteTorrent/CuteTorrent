@@ -68,7 +68,7 @@ QString RssDownloadRule::validate(bool& ok)
 
 bool RssDownloadRule::Match(RssFeed* pFeed) const
 {
-	if (pFeed != nullptr)
+	if (pFeed != NULL)
 	{
 		return m_feedUids.contains(pFeed->uid());
 	}
@@ -78,7 +78,7 @@ bool RssDownloadRule::Match(RssFeed* pFeed) const
 
 bool RssDownloadRule::Match(RssItem* rssItem) const
 {
-	if (m_regExp.isValid() && rssItem != nullptr)
+	if (m_regExp.isValid() && rssItem != NULL)
 	{
 		if (!rssItem->title().isEmpty())
 		{

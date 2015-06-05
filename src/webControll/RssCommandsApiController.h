@@ -5,7 +5,7 @@ class RssCommandsApiController : public HttpRequestHandler
 {
 	Q_DISABLE_COPY(RssCommandsApiController)
 public:
-	RssCommandsApiController(QObject* parent = nullptr);
+    RssCommandsApiController(QObject* parent = NULL);
 	void service(HttpRequest& request, HttpResponse& response) override;
 private:
 	RssManagerPtr m_pRssManager;
