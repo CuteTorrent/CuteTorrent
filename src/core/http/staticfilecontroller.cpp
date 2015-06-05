@@ -19,7 +19,7 @@ StaticFileController::StaticFileController(QObject* parent)
 	docroot = settings->valueString("WebControl", "path", "./webControll/");
 #endif
 #ifdef Q_OS_UNIX
-    docroot = settings->valueString("WebControl", "path", "/usr/share/cutetorrent/webControll/");
+    docroot = settings->valueString("WebControl", "path", "/usr/share/cutetorrent/webControl/");
 #endif
 	if(QDir::isRelativePath(docroot))
 	{
