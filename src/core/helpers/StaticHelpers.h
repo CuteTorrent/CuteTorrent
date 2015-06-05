@@ -47,7 +47,12 @@ private:
 	static QString translateUpnpError(error_code const& ec);
 	static QString translateError(error_code const& ec, char* msgs[], int msgs_len);
 public:
+#ifdef Q_WS_X11
+    static void OpenFolderNautilus(QString& file);
+#endif
+#ifdef Q_WS_WIN
 	static void OpenFileInExplorer(QString& file);
+#endif
 	static QString toKbMbGb(size_type size);
 	static QString translateLibTorrentError(error_code const& ec);
 	static void dellDir(QString path);

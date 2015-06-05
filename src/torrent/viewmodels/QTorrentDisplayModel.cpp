@@ -128,6 +128,9 @@ void QTorrentDisplayModel::OpenDirSelected()
 		args << "end tell";
 		QProcess::startDetached("osascript", args);
 #endif
+#ifdef Q_WS_X11
+        StaticHelpers::OpenFolderNautilus(path);
+#endif
 #ifdef Q_WS_WIN
 		StaticHelpers::OpenFileInExplorer(path);
 #endif

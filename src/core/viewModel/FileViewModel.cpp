@@ -78,6 +78,11 @@ void FileViewModel::OpenDirSelected()
 	args << "end tell";
 	QProcess::startDetached("osascript", args);
 #endif
+
+#ifdef Q_WS_X11
+        StaticHelpers::OpenFolderNautilus(path);
+#endif
+
 #ifdef Q_WS_WIN
 	StaticHelpers::OpenFileInExplorer(path);
 #endif
@@ -232,7 +237,7 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 			case 1:
 				if(item->GetType() == FileViewTreeItem::FILE)
 				{
-                    return qVariantFromValue(file.size);
+                    return qVariantFromValue<qlonglong>(file.size);
 				}
 				else
 				{

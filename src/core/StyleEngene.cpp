@@ -104,7 +104,12 @@ QIcon StyleEngene::getIcon(QString name)
 
 void StyleEngene::init()
 {
+#ifdef Q_WS_WIN
 	QString rootPath = QApplication::applicationDirPath() + "/styles/";
+#endif
+#ifdef Q_OS_UNIX
+    QString rootPath = "/usr/share/cutetorrent/styles/";
+#endif
 	QDir rootDir = QDir(rootPath);
 
 	if(rootDir.exists())

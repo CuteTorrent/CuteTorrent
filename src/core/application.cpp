@@ -35,6 +35,7 @@ QString Application::default_locale = "ru_RU";
 Application::Application(int& argc, char* argv[])
 	: QtSingleApplication(argc, argv)
 {}
+
 Application::~Application()
 {
 }

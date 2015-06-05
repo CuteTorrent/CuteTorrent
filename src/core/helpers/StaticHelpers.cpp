@@ -568,8 +568,22 @@ QString StaticHelpers::translateError(error_code const& ec, char* msgs[], int ms
 		return QString::fromUtf8(ec.message().c_str());
 	}
 
-	return qApp->translate("ErrorMsg", msgs[code]);
+    return qApp->translate("ErrorMsg", msgs[code]);
 }
+
+#ifdef Q_WS_X11
+void StaticHelpers::OpenFolderNautilus(QString &file)
+{
+    QProcess* nautilus = new QProcess();
+    QStringList arguments;
+    arguments << "--browser" << file;
+
+    nautilus->startDetached("nautilus", arguments);
+    nautilus->deleteLater();
+
+}
+#endif
+
 #ifdef Q_WS_WIN
 #include <Shlobj.h>
 void StaticHelpers::OpenFileInExplorer(QString& file)
