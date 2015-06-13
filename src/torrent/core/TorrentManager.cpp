@@ -367,7 +367,7 @@ void TorrentManager::handle_alert(alert* a)
 				if (torrent != NULL)
 				{
 					bool isSeed = torrent->isSeeding();
-					e["torrent_group"] = torrent->GetGroup().toStdString();
+					e["torrent_group"] = torrent->GetGroup().toUtf8().data();
 					e["torrent_name"] = h.status(torrent_handle::query_name).name;
 					e["is_previous_seed"] = isSeed ? 1 : 0;
 					torrent->setIsPrevioslySeeded(isSeed);
@@ -584,8 +584,7 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 
 	add_torrent_params p;
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-    qDebug() << "Data Dir:" << dataDir;
-	std::string filename = combine_path(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString(), to_hex(t->info_hash().to_string()) + ".resume");
+    std::string filename = combine_path(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString(), to_hex(t->info_hash().to_string()) + ".resume");
 	std::vector<char> buf;
 	bool isPreviousSeed = false;
 
@@ -603,7 +602,7 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 
 		if (entry* i = e.find_key("torrent_group"))
 		{
-			group = QString::fromStdString(i->string());
+			group = QString::fromUtf8(i->string().c_str());
 		}
 
 		if (entry* i = e.find_key("save_path"))

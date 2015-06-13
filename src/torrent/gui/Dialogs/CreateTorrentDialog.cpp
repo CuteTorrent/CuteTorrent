@@ -77,6 +77,12 @@ CreateTorrentDialog::~CreateTorrentDialog()
 	creator->deleteLater();
 }
 
+void CreateTorrentDialog::setPath(QString val)
+{
+	path = val;
+	pathEdit->setText(path);
+}
+
 quint64 CreateTorrentDialog::getPiceSize()
 {
 	switch(piceSizeComboBox->currentIndex())

@@ -147,11 +147,11 @@
     </message>
     <message>
         <source>ERROR</source>
-        <translation>Ошибка</translation>
+        <translation type="obsolete">Ошибка</translation>
     </message>
     <message>
         <source>BAD_RESUME_DATA</source>
-        <translation>Испортченные данные</translation>
+        <translation type="obsolete">Испортченные данные</translation>
     </message>
     <message>
         <source>BACKUP_CHOOSE</source>
@@ -159,7 +159,7 @@
     </message>
     <message>
         <source>UNABLE_TO_OPEN_BACKUP</source>
-        <translation>Не удалось открыть файл</translation>
+        <translation type="obsolete">Не удалось открыть файл</translation>
     </message>
 </context>
 <context>
@@ -350,6 +350,17 @@
     <message>
         <source>TORRENT_FILE (*.torrent)</source>
         <translation>Торрент файл (*.torrent)</translation>
+    </message>
+</context>
+<context>
+    <name>CustomMessageBox</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MB_TITLE</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1075,6 +1086,18 @@ Download: %3</source>
     <message>
         <source>RSS_FEED_URL:</source>
         <translation>Ссылка на Rss-ленту</translation>
+    </message>
+    <message>
+        <source>UNABLE_TO_PROCESS_FILE</source>
+        <translation>Не удалось обработать файл</translation>
+    </message>
+    <message>
+        <source>DROPPED_FILE %1 IS_NOT_TORRENT_OR_MAGNET_LINK</source>
+        <translation>Элемент %1 не торрент файл или магнитная ссылка.</translation>
+    </message>
+    <message>
+        <source>INVALID_COMMAND_RECIVED</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1989,17 +2012,6 @@ Download: %3</source>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
-    </message>
-</context>
-<context>
-    <name>MessageBox</name>
-    <message>
-        <source>Dialog</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>MB_TITLE</source>
         <translation></translation>
     </message>
 </context>

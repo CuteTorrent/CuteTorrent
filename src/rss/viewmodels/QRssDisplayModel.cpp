@@ -482,7 +482,7 @@ void QRssDisplayModel::onItemDownload()
 		{
 			boost::scoped_ptr<OpenTorrentDialog> pDlg(new OpenTorrentDialog(m_pItemsView));
 			pDlg->SetData(torrentUrl);
-			pDlg->execConditional();
+			pDlg->exec();
 		}
 		else
 		{
@@ -508,7 +508,7 @@ void QRssDisplayModel::onTorrentDownloaded(QUrl url, QTemporaryFile* pfile)
 		QString fileName = pfile->fileName();
 		boost::scoped_ptr<OpenTorrentDialog> pDlg(new OpenTorrentDialog(m_pItemsView));
 		pDlg->SetData(fileName);
-		pDlg->execConditional();
+		pDlg->exec();
 		pfile->setAutoRemove(true);
 		delete pfile;
 	}

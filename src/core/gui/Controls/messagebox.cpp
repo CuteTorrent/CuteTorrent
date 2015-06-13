@@ -1,9 +1,19 @@
 ﻿#include <QDebug>
 #include "messagebox.h"
+#ifdef Q_WS_WIN
+#include "Windows.h"
+#endif
+void CustomMessageBox::showEvent(QShowEvent* pEvent)
+{
+#ifndef QT_NO_ACCESSIBILITY
+	QAccessible::updateAccessibility(this, 0, QAccessible::Alert);
+#endif
+	QDialog::showEvent(pEvent);
+}
 
 CustomMessageBox::CustomMessageBox(QWidget* /*parent*/) :
 	BaseWindow<QDialog> (OnlyCloseButton, NoResize),
-	ui(new Ui::MessageBox)
+	ui(new Ui::CustomMessageBox)
 {
 	ui->setupUi(this);
 }
@@ -11,7 +21,7 @@ CustomMessageBox::CustomMessageBox(QWidget* /*parent*/) :
 CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title, const QString& text,
                                    QMessageBox::StandardButtons buttons, QWidget* parent, Qt::WindowFlags /*flags*/) :
 	BaseWindow<QDialog>(OnlyCloseButton, NoResize, parent),
-	ui(new Ui::MessageBox)
+	ui(new Ui::CustomMessageBox)
 {
 	ui->setupUi(this);
 	setupCustomWindow();
@@ -19,6 +29,19 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 	ui->icon->setPixmap(standardIcon(icon));
 	ui->LTitle->setText(title);
 	ui->text->setText(text);
+
+	if (parent != nullptr)
+	{
+#ifdef Q_WS_WIN
+		SetWindowPos(effectiveWinId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+		SetWindowPos(effectiveWinId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+#endif
+		// HACK END
+		parent->showNormal();
+		parent->setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+		parent->raise();
+		parent->activateWindow();
+	}
 
 	if(buttons == QMessageBox::NoButton)
 	{

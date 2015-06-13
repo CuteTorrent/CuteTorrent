@@ -19,41 +19,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef LTORRENT_H
 #define LTORRENT_H
 
-#include <qtsingleapplication.h>
-#include <QCloseEvent>
-#include <QDesktopWidget>
-#include <QEvent>
-#include <QFileDialog>
-#include <QMenu>
-#include <QMenuBar>
-#include <QMutex>
-#include <QScrollBar>
-#include <QSpinBox>
-#include <QRegExp>
-#include <QString>
-#include <QSystemTrayIcon>
-#include <QTimer>
-#include <QtGui/QMainWindow>
-#include <QtNetwork/QHostAddress>
-#include "defs.h"
 #include "CreateTorrentDialog.h"
 #include "CustomWindow.h"
 #include "FileViewModel.h"
 #include "FileViewSortProxyModel.h"
-#include "OpenTorrentDialog.h"
 #include "QSearchDisplayModel.h"
 #include "QSearchItemDelegate.h"
 #include "QTorrentDisplayModel.h"
 #include "QTorrentItemDelegat.h"
 #include "SearchEngine.h"
-#include "SettingsDialog.h"
 #include "StyleEngene.h"
 #include "TorrentManager.h"
 #include "TorrentStorrage.h"
 #include "UpdateNotyfier.h"
 #include "application.h"
 #include "peicedisplaywidget.h"
-#include "searchitem.h"
 #include "torrentracker.h"
 #include "ui_CustomWindow.h"
 #include "RconWebService.h"
@@ -84,15 +64,16 @@ class CuteTorrentMainWindow : public BaseWindow<QWidget> , private Ui::CustomWin
 public:
 	CuteTorrentMainWindow(QWidget* parent = 0);
 	void ConnectMessageReceved(Application* a);
+	void RaiseWindow();
 	~CuteTorrentMainWindow();
 protected:
-	bool eventFilter(QObject* obj, QEvent* event);
-	void changeEvent(QEvent* event);
-	void resizeEvent(QResizeEvent* event);
-	void closeEvent(QCloseEvent* ce);
-	void dragEnterEvent(QDragEnterEvent* event);
-	void dropEvent(QDropEvent* event);
-	void keyPressEvent(QKeyEvent* event);
+	bool eventFilter(QObject* obj, QEvent* event) override;
+	void changeEvent(QEvent* event) override;
+	void resizeEvent(QResizeEvent* event) override;
+	void closeEvent(QCloseEvent* ce) override;
+	void dragEnterEvent(QDragEnterEvent* event) override;
+	void dropEvent(QDropEvent* event) override;
+	void keyPressEvent(QKeyEvent* event) override;
 
 private:
 	void initToolbarIcons();
@@ -177,7 +158,7 @@ public slots:
 	void ShowAbout();
 	void CheckForUpdates();
 	void Retranslate();
-	void ShowCreateTorrentDialog();
+	void ShowCreateTorrentDialog(QString path = "");
 	void ShowOpenTorrentDialog();
 	void PauseSelected();
 	void StopSelected();
@@ -205,8 +186,8 @@ public slots:
 	void ChnageTorrentFilter();
 	void startBackUpWizard();
 	void OnGotSerachResults();
-	void maximizeBtnClicked();
-	void minimizeBtnClicked();
+	void maximizeBtnClicked() override;
+	void minimizeBtnClicked() override;
 	void startDownloadTorrent();
 	void openSearchItemDescribtion();
 	void addRssFeed();
@@ -214,6 +195,7 @@ public slots:
 	void editRssFeed();
 	void OnQuit();
 	void UpdateRssInfo(const QItemSelection&);
+	void OnMessageRecived(QString message);
 };
 
 Q_DECLARE_METATYPE(QHostAddress)
