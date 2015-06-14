@@ -45,7 +45,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "NotificationSystem.h"
 #include "AddRssDwonloadRuleDialog.h"
 #include "RssManager.h"
-#ifdef Q_WS_WIN //file association for windows
+
+#ifdef Q_WS_WIN
 #include <tchar.h>
 #include <windows.h>
 

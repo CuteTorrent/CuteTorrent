@@ -9,6 +9,7 @@
 #include <QDateTime>
 #include <QCryptographicHash>
 #include <QApplication>
+#include <StaticHelpers.h>
 StaticFileController::StaticFileController(QObject* parent)
 	: HttpRequestHandler("WebControl", parent)
 {
@@ -19,7 +20,7 @@ StaticFileController::StaticFileController(QObject* parent)
 	docroot = settings->valueString("WebControl", "path", "./webControll/");
 #endif
 #ifdef Q_OS_UNIX
-    docroot = settings->valueString("WebControl", "path", "/usr/share/cutetorrent/webControl/");
+    docroot = settings->valueString("WebControl", "path", "/usr/share/cutetorrent/webControll/");
 #endif
 	if(QDir::isRelativePath(docroot))
 	{
@@ -57,7 +58,7 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
 	{
 		return;
 	}
-
+    qDebug() << "DocRoot" << docroot;
 	// Check if we have the file in cache
 	qint64 now = QDateTime::currentMSecsSinceEpoch();
 	mutex.lock();
@@ -79,11 +80,11 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
 		// If the filename is a directory, append index.html.
 		if(QFileInfo(docroot + path).isDir())
 		{
-			path += "/index.html";
+            path = StaticHelpers::CombinePathes(path, "index.html").toUtf8();
 		}
-
-		QFile file(docroot + path);
-
+        QString filePath = StaticHelpers::CombinePathes(docroot, path);
+        QFile file(filePath);
+        qDebug() << "Tring open file" << filePath;
 		if(file.exists())
 		{
 			if(file.open(QIODevice::ReadOnly))

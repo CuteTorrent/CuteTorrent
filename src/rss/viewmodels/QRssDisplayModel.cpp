@@ -10,7 +10,6 @@
 #include "torrentdownloader.h"
 #include <QInputDialog>
 #include "RssItem.h"
-#include <QtTest/QtTest>
 QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent, bool autoUpdate) : QAbstractItemModel(parrent), m_pRssManager(RssManager::getInstance()),
 	m_pTorrentDownloader(TorrentDownloader::getInstance())
 {
