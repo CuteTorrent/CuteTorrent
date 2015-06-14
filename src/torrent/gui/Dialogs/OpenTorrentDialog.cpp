@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "QApplicationSettings.h"
 #include "TorrentManager.h"
 
-OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags) : m_bUseGroup(false), BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize, parent), m_pFileTreeModel(NULL)
+OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags) : BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize, parent), m_bUseGroup(false), m_pFileTreeModel(NULL)
 {
 	setupUi(this);
 	setupCustomWindow();
@@ -51,9 +51,9 @@ void OpenTorrentDialog::reject()
 
 	QDialog::reject();
 }
-int OpenTorrentDialog::execConditional()
+int OpenTorrentDialog::exec()
 {
-	return validTorrent ? exec() : QDialog::Rejected;
+	return validTorrent ? QDialog::exec() : Rejected;
 }
 OpenTorrentDialog::~OpenTorrentDialog()
 {

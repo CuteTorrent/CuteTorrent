@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>436</width>
+    <width>458</width>
     <height>482</height>
    </rect>
   </property>
@@ -165,18 +165,11 @@
          <string>OPEN_TORRENT_SAVE_PATH</string>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
-          <widget class="QLineEdit" name="pathEdit"/>
-         </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="browseButton">
-           <property name="text">
-            <string>OPEN_TORRENT_BROWSE_BUTTON</string>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="0">
           <widget class="QComboBox" name="GroupComboBox"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLineEdit" name="pathEdit"/>
          </item>
          <item row="1" column="1">
           <widget class="QLabel" name="label">
@@ -185,94 +178,10 @@
            </property>
           </widget>
          </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="3">
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="title">
-         <string>OPEN_TORRENT_INFO</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_2">
-         <item row="2" column="0">
-          <widget class="QLabel" name="labelSizeTitle">
+         <item row="0" column="1">
+          <widget class="QPushButton" name="browseButton">
            <property name="text">
-            <string>SIZE</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="5">
-          <widget class="QLabel" name="loaderTextLabel">
-           <property name="text">
-            <string>RECIVING_METADATA</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" colspan="2">
-          <widget class="QLabel" name="labelCommentTitle">
-           <property name="text">
-            <string>OPEN_TORRENT_INFO_DESCRIBTION</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="labelNameTitile">
-           <property name="text">
-            <string>OPEN_TORRENT_INFO_NAME</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2" colspan="4">
-          <widget class="QLineEdit" name="labelNameData">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0" colspan="6">
-          <widget class="QTreeView" name="torrentFilesTreeView">
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2" colspan="4">
-          <widget class="QLabel" name="labelComentData">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>13</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="scaledContents">
-            <bool>true</bool>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="4">
-          <widget class="QLabel" name="loaderGifLabel">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1" colspan="3">
-          <widget class="QLabel" name="labelSizeData">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QCheckBox" name="setSequntialCheckBox">
-           <property name="text">
-            <string>SET_SEQUNTIAL</string>
+            <string>OPEN_TORRENT_BROWSE_BUTTON</string>
            </property>
           </widget>
          </item>
@@ -306,6 +215,136 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="0" colspan="3">
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="title">
+         <string>OPEN_TORRENT_INFO</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="labelNameTitile">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>OPEN_TORRENT_INFO_NAME</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="labelCommentTitle">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>OPEN_TORRENT_INFO_DESCRIBTION</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="labelSizeTitle">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>SIZE</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" colspan="3">
+          <widget class="QLineEdit" name="labelNameData">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QLabel" name="loaderTextLabel">
+           <property name="text">
+            <string>RECIVING_METADATA</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLabel" name="labelSizeData">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" colspan="3">
+          <widget class="QLabel" name="labelComentData">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>13</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QLabel" name="loaderGifLabel">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0" colspan="4">
+          <widget class="QTreeView" name="torrentFilesTreeView">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" colspan="4">
+          <widget class="QCheckBox" name="setSequntialCheckBox">
+           <property name="text">
+            <string>SET_SEQUNTIAL</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -313,7 +352,7 @@
  </widget>
  <resources>
   <include location="../../../Resources/ltorrent.qrc"/>
-  <include location="ltorrent.qrc"/>
+  <include location="../../../Resources/ltorrent.qrc"/>
  </resources>
  <connections>
   <connection>

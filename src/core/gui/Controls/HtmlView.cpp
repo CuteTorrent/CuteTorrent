@@ -51,7 +51,7 @@ QVariant HtmlView::loadResource(int type, const QUrl& name)
 			m_activeRequests.insert(url, true);
 			qDebug() << "HtmlBrowser::loadResource() get " << url.toString();
 			QNetworkRequest req(url);
-			req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
+			req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferNetwork);
 			m_netManager->get(req);
 		}
 
@@ -61,22 +61,64 @@ QVariant HtmlView::loadResource(int type, const QUrl& name)
 	return QTextBrowser::loadResource(type, name);
 }
 
-void HtmlView::resourceLoaded(QNetworkReply* reply)
+void HtmlView::resourceLoaded(QNetworkReply* pReply)
 {
-	m_activeRequests.remove(reply->request().url());
+	m_activeRequests.remove(pReply->request().url());
+	QUrl url = pReply->url();
 
-	if (reply->error() == QNetworkReply::NoError && reply->size() > 0)
+	qDebug() << "Url ready" << url;
+
+	if (pReply->error() == QNetworkReply::NoError)
 	{
-		qDebug() << "HtmlBrowser::resourceLoaded() save " << reply->request().url().toString();
+		qDebug() << "HtmlBrowser::resourceLoaded() save " << pReply->request().url().toString();
+		QUrl redirectionTarget = pReply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+
+		if (redirectionTarget.isValid())
+		{
+			if (redirectionTarget.host().isNull())
+			{
+				redirectionTarget.setUrl("http://" + url.host() + redirectionTarget.toString());
+			}
+
+			redirectionMap.insert(redirectionTarget.toString(), url.toString());
+			loadResource(QTextDocument::ImageResource, redirectionTarget);
+		}
+		else
+		{
+			if (redirectionMap.contains(url.toString()))
+			{
+				QString originalUrl = redirectionMap[url.toString()];
+				redirectionMap.remove(url.toString());
+				QNetworkCacheMetaData metaData;
+				QNetworkCacheMetaData::AttributesMap atts;
+				metaData.setUrl(originalUrl);
+				metaData.setSaveToDisk(true);
+				atts[QNetworkRequest::HttpStatusCodeAttribute] = 200;
+				atts[QNetworkRequest::HttpReasonPhraseAttribute] = "Ok";
+				metaData.setAttributes(atts);
+				metaData.setLastModified(QDateTime::currentDateTime());
+				metaData.setExpirationDate(QDateTime::currentDateTime().addDays(1));
+				QIODevice* dev = m_diskCache->prepare(metaData);
+
+				if (!dev)
+				{
+					return;
+				}
+
+				dev->write(pReply->readAll());
+				m_diskCache->insert(dev);
+			}
+		}
 	}
 	else
 	{
+		qDebug() << "HtmlView error during loading" << pReply->errorString();
 		// If resource failed to load, replace it with warning icon and store it in cache for 1 day.
 		// Otherwise HTMLBrowser will keep trying to download it every time article is displayed,
 		// since it's not possible to cache error responses.
 		QNetworkCacheMetaData metaData;
 		QNetworkCacheMetaData::AttributesMap atts;
-		metaData.setUrl(reply->request().url());
+		metaData.setUrl(pReply->request().url());
 		metaData.setSaveToDisk(true);
 		atts[QNetworkRequest::HttpStatusCodeAttribute] = 200;
 		atts[QNetworkRequest::HttpReasonPhraseAttribute] = "Ok";

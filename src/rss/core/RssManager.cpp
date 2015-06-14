@@ -338,11 +338,12 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 		TorrentManager* pTorrentManager = TorrentManager::getInstance();
 		error_code ec;
 		RssFeed* pFeed = findFeed(info.rssFeedId);
+		RssItem* feedItem = pFeed->GetFeedItem(info.rssItemId);
 		boost::scoped_ptr<opentorrent_info> pTorrentInfo(pTorrentManager->GetTorrentInfo(torrentFilePath, ec));
 
 		if (ec)
 		{
-			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), pFeed->displayName(true)), QVariant());
+			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), feedItem->title()), QVariant());
 			TorrentManager::freeInstance();
 			return;
 		}
@@ -353,11 +354,11 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 
 		if (ec)
 		{
-			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), pFeed->displayName(true)), QVariant());
+			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), feedItem->title()), QVariant());
 		}
 		else
 		{
-			emit Notify(NotificationSystem::TORRENT_INFO, tr("AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1 %2").arg(pTorrentInfo->name, pFeed->displayName(true)), QVariant());
+			emit Notify(NotificationSystem::TORRENT_INFO, tr("AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1 %2").arg(pTorrentInfo->name, feedItem->title()), QVariant());
 			RssFeed* rssFeed = findFeed(info.rssFeedId);
 			RssItem* rssItem = rssFeed->GetFeedItem(info.rssItemId);
 			rssItem->setDownloadingTorrent(pTorrentInfo->infoHash);

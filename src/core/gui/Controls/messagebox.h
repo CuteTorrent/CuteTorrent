@@ -17,7 +17,7 @@ private:
 	bool isClosed;
 	QMessageBox::StandardButton cancelButton;
 protected:
-
+	void showEvent(QShowEvent *event) override;
 
 public:
 	explicit CustomMessageBox(QWidget* parent = 0);
@@ -39,7 +39,7 @@ public:
 	        QMessageBox::Icon icon, const QString& title, const QString& text,
 	        QMessageBox::StandardButtons buttons);
 private:
-	Ui::MessageBox* ui;
+	Ui::CustomMessageBox* ui;
 	QPushButton* getCloseBtn() override;
 	QWidget* getTitleBar() override;
 	QLabel* getTitleLabel() override;

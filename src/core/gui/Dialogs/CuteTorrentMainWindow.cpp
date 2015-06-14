@@ -53,7 +53,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "ProgressItemDelegate.h"
 #include "PriorityItemDelegate.h"
 #include "torrentracker.h"
-#include "core/Version.h"
+#include "Version.h"
 #include "RconWebService.h"
 #include "messagebox.h"
 #include "backupwizard/backupwizard.h"
@@ -62,7 +62,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "NotificationSystem.h"
 #include <libtorrent/peer_info.hpp>
 #include "RssItem.h"
-
+#include "qwinjumplist.h"
+#include "qwinjumplistcategory.h"
 class Application;
 class ISerachProvider;
 class SearchResult;
@@ -70,7 +71,8 @@ class SearchResult;
 Q_DECLARE_METATYPE(QList<int>)
 
 CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
-    : BaseWindow(FullTitle, AllowResize, parent), m_httpLinkRegexp("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?"), m_pPieceView(NULL)
+    : BaseWindow(FullTitle, AllowResize, parent), m_httpLinkRegexp("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?"),
+	m_pPieceView(NULL), m_pJumpList(new QWinJumpList(this))
 {
 	m_pSettings = QApplicationSettings::getInstance();
 	Application::setLanguage(m_pSettings->valueString("System", "Lang", "ru_RU"));
@@ -102,6 +104,7 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	setupTabelWidgets();
 	setupGroupTreeWidget();
 	setupConnections();
+	setupJumpList();
 	setupKeyMappings();
 	initWindowIcons();
 	m_pTracker = TorrentTracker::getInstance();
@@ -469,10 +472,11 @@ public:
 			if (ok)
 			{
 				QStringList parts2 = other.text().split(' ');
-				double speed2 = parts2[0].toDouble();
-
-				switch (parts1[1][0].toLower().toLatin1())
+				double speed2 = parts2[0].toDouble(&ok);
+				if (ok)
 				{
+					switch (parts1[1][0].toLower().toLatin1())
+					{
 					case 'k':
 						speed1 *= KbFloat;
 						break;
@@ -491,10 +495,10 @@ public:
 
 					case 'b':
 						break;
-				}
+					}
 
-				switch (parts2[1][0].toLower().toLatin1())
-				{
+					switch (parts2[1][0].toLower().toLatin1())
+					{
 					case 'k':
 						speed2 *= KbInt;
 						break;
@@ -513,9 +517,10 @@ public:
 
 					case 'b':
 						break;
-				}
+					}
 
-				return speed1 < speed2;
+					return speed1 < speed2;
+				}
 			}
 		}
 		else if (text().endsWith('%'))
@@ -610,6 +615,7 @@ void CuteTorrentMainWindow::changeEvent(QEvent* event)
 		categoriesToStr[ISerachProvider::Movie] = tr("FILMS_CATEGORY");;
 		categoriesToStr[ISerachProvider::All] = tr("ALL_CATEGORY");
 		int prevSearchCat = m_pSearchCategory->currentIndex();
+		setupJumpList();
 		m_pSearchCategory->clear();
 		m_pTorrentSearchCategory->clear();
 
@@ -684,11 +690,10 @@ void CuteTorrentMainWindow::createActions()
 
 void CuteTorrentMainWindow::ConnectMessageReceved(Application* a)
 {
-	connect(a, SIGNAL(messageReceived(const QString&)), this, SLOT(HandleNewTorrent(const QString&)));
-	connect(a, SIGNAL(OpenTorrent(QString)), this, SLOT(HandleNewTorrent(QString)));
+	connect(a, SIGNAL(messageReceived(const QString&)), this, SLOT(OnMessageRecived(const QString&)));
 }
 
-void CuteTorrentMainWindow::HandleNewTorrent(const QString& path)
+void CuteTorrentMainWindow::RaiseWindow()
 {
 	// This hack does not give the focus to the app but brings it to front so
 	// the user sees it.
@@ -697,20 +702,36 @@ void CuteTorrentMainWindow::HandleNewTorrent(const QString& path)
 	SetWindowPos(effectiveWinId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
 #endif
 	// HACK END
+
 	showNormal();
 	setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
 	raise();
 	activateWindow();
-	OpenTorrentDialog dlg(this);
-	dlg.SetData(path);
-	dlg.execConditional();
-	QApplication::alert(&dlg);
 }
 
-void CuteTorrentMainWindow::ShowCreateTorrentDialog(void)
+void CuteTorrentMainWindow::HandleNewTorrent(const QString& path)
 {
-	CreateTorrentDialog* dlg = new CreateTorrentDialog();
-	dlg->exec();
+	
+	RaiseWindow();
+	OpenTorrentDialog dlg(this);
+	dlg.SetData(path);
+	QApplication::alert(&dlg);
+	if (dlg.exec() == QDialog::Accepted)
+	{
+		QWinJumpListCategory* recent = m_pJumpList->recent();
+		recent->addDestination(path);
+		recent->setVisible(true);
+	}
+}
+
+void CuteTorrentMainWindow::ShowCreateTorrentDialog(QString path)
+{
+	RaiseWindow();
+	CreateTorrentDialog dlg;
+	dlg.setPath(path);
+	QApplication::alert(&dlg);
+	dlg.exec();
+	
 }
 
 void CuteTorrentMainWindow::ShowOpenTorrentDialog()
@@ -721,11 +742,8 @@ void CuteTorrentMainWindow::ShowOpenTorrentDialog()
 
 	if (!filename.isEmpty())
 	{
-		OpenTorrentDialog* dlg = new OpenTorrentDialog(this);
 		m_pSettings->setValue("System", "LastOpenTorrentDir", filename);
-		dlg->SetData(filename);
-		dlg->execConditional();
-		delete dlg;
+		HandleNewTorrent(filename);
 	}
 }
 
@@ -928,10 +946,9 @@ void CuteTorrentMainWindow::Retranslate()
 
 void CuteTorrentMainWindow::OpenSettingsDialog()
 {
-	SettingsDialog* dlg = new SettingsDialog(this);
-	connect(dlg, SIGNAL(needRetranslate()), this, SLOT(Retranslate()));
-	dlg->exec();
-	delete dlg;
+	SettingsDialog dlg(this);
+	connect(&dlg, SIGNAL(needRetranslate()), this, SLOT(Retranslate()));
+	dlg.exec();
 	setupGroupTreeWidget();
 	setupKeyMappings();
 	UpdateTabWidget();
@@ -987,14 +1004,12 @@ void CuteTorrentMainWindow::dropEvent(QDropEvent* event)
 	{
 		if (file.startsWith("magnet:", Qt::CaseInsensitive) || file.endsWith(".torrent", Qt::CaseInsensitive))
 		{
-			OpenTorrentDialog* dlg2 = new OpenTorrentDialog();
-			dlg2->SetData(file);
-			dlg2->exec();
-			delete dlg2;
+			HandleNewTorrent(file);
 			event->acceptProposedAction();
 		}
 		else
 		{
+			CustomMessageBox::warning(this, tr("UNABLE_TO_PROCESS_FILE"), tr("DROPPED_FILE %1 IS_NOT_TORRENT_OR_MAGNET_LINK").arg(file));
 		}
 	}
 }
@@ -1082,10 +1097,9 @@ void CuteTorrentMainWindow::ProcessMagnet()
 
 	if (ok && !magnetLink.isEmpty())
 	{
-		OpenTorrentDialog* dlg2 = new OpenTorrentDialog();
-		dlg2->SetData(magnetLink);
-		dlg2->exec();
-		dlg2->deleteLater();
+		OpenTorrentDialog dialog(this);
+		dialog.SetData(magnetLink);
+		dialog.exec();
 	}
 }
 
@@ -1357,6 +1371,28 @@ void CuteTorrentMainWindow::setupGroupTreeWidget()
 	m_pGroupTreeWidget->expandAll();
 }
 
+void CuteTorrentMainWindow::setupTasksCategory()
+{
+	QWinJumpListCategory* tasks = m_pJumpList->tasks();
+	tasks->clear();
+
+	QStringList createTorrentArgs;
+	createTorrentArgs << "--create_torrent";
+	tasks->addLink(m_pStyleEngine->getIcon("create_torrent"), QApplication::translate("CustomWindow","MENU_CREATE_TORRENT"), QApplication::applicationFilePath(), createTorrentArgs);
+
+	QStringList settingsArgs;
+	settingsArgs << "--settings";
+	tasks->addLink(m_pStyleEngine->getIcon("menu_settings"), QApplication::translate("CustomWindow", "MENU_CONFIGURATION"), QApplication::applicationFilePath(), settingsArgs);
+
+	tasks->setVisible(true);
+}
+
+void CuteTorrentMainWindow::setupJumpList()
+{
+	setupTasksCategory();
+	QWinJumpListCategory* recent = m_pJumpList->recent();
+	recent->setVisible(true);
+}
 
 void CuteTorrentMainWindow::ChnageTorrentFilter()
 {
@@ -1836,6 +1872,41 @@ void CuteTorrentMainWindow::UpdateRssInfo(const QItemSelection& /*selection*/)
 	{
 		m_pFeedItemDescribtionEdit->setText("");
 	}
+}
+
+void CuteTorrentMainWindow::OnMessageRecived(QString message)
+{
+	int commandEndIndex = message.indexOf(':');
+	if (commandEndIndex > -1)
+	{
+		QString command = message.mid(0, commandEndIndex);
+		QString arg = message.mid(commandEndIndex + 1);
+		QStringList supportedCommands;
+		supportedCommands << "open" << "create_torrent" << "settings";
+		switch (supportedCommands.indexOf(command))
+		{
+			case 0:
+			{
+				HandleNewTorrent(arg);
+				break;
+			}
+			case 1:
+			{
+				ShowCreateTorrentDialog(arg);
+				break;
+			}
+			case 2:
+			{
+				OpenSettingsDialog();
+				break;
+			}
+		}
+	}
+	else
+	{
+		CustomMessageBox::information(this, "CuteTorrent", tr("INVALID_COMMAND_RECIVED"));
+	}
+	
 }
 
 void CuteTorrentMainWindow::setupRssInfoTab()

@@ -95,18 +95,7 @@ SettingsDialog::SettingsDialog(QWidget* parent, int flags) : BaseWindow(OnlyClos
 	FillRssTab();
 	setupCustomWindow();
 	setupWindowIcons();
-	//OS_SPECIFICK////
-#ifdef Q_WS_WIN
-	QSettings assocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
-	QString torrentAssociation = assocSettings.value(".torrent/.").toString();
-	magnetAssociationCheckBox->setChecked(assocSettings.value("Magnet/shell/open/command/.").toString().contains("cutetorrent", Qt::CaseInsensitive));
-	asociationCheckBox->setChecked(torrentAssociation == "CuteTorrent.file");
-	QSettings bootUpSettings(QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\") + (IsWow64() ? "Wow6432Node\\" : "") + "Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
-	QString val = bootUpSettings.value("CuteTorrent").toString();
-	runOnbootCheckBox->setChecked(val.length() > 0);
-	startMinimizedCheckBox->setChecked(val.contains("-m"));
-#endif
-	//OS_SPECIFICK////
+
 	QString curLoc = Application::currentLocale();
 	int current = 0;
 
@@ -211,6 +200,54 @@ void SettingsDialog::FillGeneralTab()
 	showTrackerErrorsCheckBox->setChecked(settings->valueBool("Notifications", "report_tracker_errors", true));
 	showDiskErrorsCheckBox->setChecked(settings->valueBool("Notifications", "report_disk_errors", true));
 	showRssErrorsCheckBox->setChecked(settings->valueBool("Notifications", "report_rss_errors", true));
+	
+	//OS_SPECIFICK////
+#ifdef Q_WS_WIN
+	QSettings assocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
+	QString torrentAssociation = assocSettings.value(".torrent/.").toString();
+	magnetAssociationCheckBox->setChecked(assocSettings.value("Magnet/shell/open/command/.").toString().contains("cutetorrent", Qt::CaseInsensitive));
+	asociationCheckBox->setChecked(torrentAssociation == "CuteTorrent.file");
+	QSettings bootUpSettings(QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\") + (IsWow64() ? "Wow6432Node\\" : "") + "Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+	QString val = bootUpSettings.value("CuteTorrent").toString();
+	runOnbootCheckBox->setChecked(val.length() > 0);
+	startMinimizedCheckBox->setChecked(val.contains("-m"));
+	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
+	QString commandShouldBe = QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1");
+	bool starCommandMatch = assocSettings.value("*/shell/cutetorrent/command/.") == commandShouldBe;
+	bool folderCommandMatch = assocSettings.value("Folder/shell/cutetorrent/command/.") == commandShouldBe;
+	bool dirCommandMatch = assocSettings.value("Directory/shell/cutetorrent/command/.") == commandShouldBe;
+	winShelItegrationCheckBox->setChecked(starCommandMatch && folderCommandMatch && dirCommandMatch);
+#endif
+	
+	
+#ifdef Q_WS_X11
+	runOnbootCheckBox->setChecked(QFile::exists("~/.config/autostart/CuteTorrent.desktop");
+	QFile associtaionGnomeConfig("~/.config/mimeapps.list");
+
+	if (associtaionGnomeConfig.open(QFile::ReadOnly))
+	{
+		QByteArray asscoiationData = associtaionGnomeConfig.readAll();
+		associtaionGnomeConfig.close();
+		QString associationStr = QString::fromUtf8(asscoiationData);
+		QStringList lines = associationStr.split('\n');
+		foreach(QString line, lines)
+		{
+			if (line.startsWith("application/x-bittorrent", Qt::CaseInsensitive))
+			{
+				asociationCheckBox->setChecked(line.endsWith("CuteTorrent.desktop"));
+			}
+			else if (line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive))
+			{
+				magnetAssociationCheckBox->setChecked(line.endsWith("CuteTorrent.desktop"));
+			}
+		}
+	}
+	else
+	{
+		qCritical() << "Unable to open gnome config file for reading";
+	}
+#endif
+	//OS_SPECIFICK////
 }
 
 void SettingsDialog::FillFilteringGroups()
@@ -354,7 +391,8 @@ void SettingsDialog::ApplySettings()
 	pNotifySys->UpdateNotificationSettings();
 #ifdef Q_WS_WIN //file association for windows
 	QSettings asocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
-	QString base_dir = QDir::toNativeSeparators(QApplication::applicationFilePath());
+	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
+	
 
 	if(asociationCheckBox->checkState() == Qt::Checked)
 	{
@@ -362,9 +400,9 @@ void SettingsDialog::ApplySettings()
 		asocSettings.setValue("CuteTorrent.file/.", tr("Torrent file"));
 		asocSettings.setValue(".torrent/OpenWithProgids/CuteTorrent.file", "");
 		asocSettings.setValue("CuteTorrent.file/shell/open/command/.",
-		                      "\"" + QDir::toNativeSeparators(base_dir) + "\"" + " \"%1\"");
+			"\"" + applicationFilePath + "\"" + " \"%1\"");
 		asocSettings.setValue("CuteTorrent.file/DefaultIcon/.",
-		                      QDir::toNativeSeparators(QApplication::applicationFilePath()) + ",1");
+			applicationFilePath + ",1");
 	}
 	else
 	{
@@ -381,7 +419,7 @@ void SettingsDialog::ApplySettings()
 		asocSettings.setValue("Magnet/Content Type", "application/x-magnet");
 		asocSettings.setValue("Magnet/URL Protocol", "");
 		asocSettings.setValue("Magnet/shell/open/command/.",
-		                      "\"" + QDir::toNativeSeparators(base_dir) + "\"" + " \"%1\"");
+			"\"" + applicationFilePath + "\"" + " \"%1\"");
 	}
 	else
 	{
@@ -395,15 +433,134 @@ void SettingsDialog::ApplySettings()
 
 	if(runOnbootCheckBox->checkState() == Qt::Checked)
 	{
-		bootUpSettings.setValue("CuteTorrent", "\"" + base_dir + "\"" + (startMinimizedCheckBox->isChecked() ? " -m" : ""));
+		bootUpSettings.setValue("CuteTorrent", "\"" + applicationFilePath + "\"" + (startMinimizedCheckBox->isChecked() ? " -m" : ""));
 	}
 	else
 	{
 		bootUpSettings.remove("CuteTorrent");
 	}
+	if (winShelItegrationCheckBox->isChecked())
+	{
+		asocSettings.setValue("*/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
+		asocSettings.setValue("*/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
+		asocSettings.setValue("*/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
 
+		asocSettings.setValue("Folder/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
+		asocSettings.setValue("Folder/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
+		asocSettings.setValue("Folder/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
+
+		asocSettings.setValue("Directory/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
+		asocSettings.setValue("Directory/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
+		asocSettings.setValue("Directory/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
+
+
+	}
+	else
+	{
+		asocSettings.remove("*/shell/cutetorrent/.");
+		asocSettings.remove("*/shell/cutetorrent/Icon");
+		asocSettings.remove("*/shell/cutetorrent/command/.");
+		asocSettings.remove("*/shell/cutetorrent/command");
+		asocSettings.remove("*/shell/cutetorrent");
+
+		asocSettings.remove("Folder/shell/cutetorrent/.");
+		asocSettings.remove("Folder/shell/cutetorrent/Icon");
+		asocSettings.remove("Folder/shell/cutetorrent/command/.");
+		asocSettings.remove("Folder/shell/cutetorrent/command");
+		asocSettings.remove("Folder/shell/cutetorrent");
+
+		asocSettings.remove("Directory/shell/cutetorrent/.");
+		asocSettings.remove("Directory/shell/cutetorrent/Icon");
+		asocSettings.remove("Directory/shell/cutetorrent/command/.");
+		asocSettings.remove("Directory/shell/cutetorrent/command");
+		asocSettings.remove("Directory/shell/cutetorrent");
+
+	}
 #endif
+	
+#ifdef Q_WS_X11
+	winShelItegrationCheckBox->setVisible(false);
+	if (runOnbootCheckBox->checkState() == Qt::Checked)
+	{
+		if (!QFile::exists("~/.config/autostart/CuteTorrent.desktop"))
+		{
+			if (!QFile::copy("/usr/share/applications/CuteTorrent.desktop", "~/.config/autostart/CuteTorrent.desktop"))
+			{
+				qCritical() << "Unable to copy /usr/share/applications/CuteTorrent.desktop to ~/.config/autostart/CuteTorrent.desktop";
+			}
+		}
+	}
+	else
+	{
+		if (QFile::exists("~/.config/autostart/CuteTorrent.desktop"))
+		{
+			if (!QFile::remove("~/.config/autostart/CuteTorrent.desktop"))
+			{
+				qCritical() << "failed to remove ~/.config/autostart/CuteTorrent.desktop";
+			}
+		}
+	}
 
+	QFile associtaionGnomeConfig("~/.config/mimeapps.list");
+
+	if (associtaionGnomeConfig.open(QFile::ReadOnly))
+	{
+		QByteArray asscoiationData = associtaionGnomeConfig.readAll();
+		associtaionGnomeConfig.close();
+		QString associationStr = QString::fromUtf8(asscoiationData);
+		QStringList lines = associationStr.split('\n');
+		bool torrentFound = false, magnetFound = false;
+		for (int i = 0; i < lines.size(); i++)
+		{
+			QString line = lines[i];
+			if (line.startsWith("application/x-bittorrent", Qt::CaseInsensitive))
+			{
+				torrentFound = true;
+				if (asociationCheckBox->isChecked())
+				{
+					lines[i] = "application/x-bittorrent=CuteTorrent.desktop;";
+				}
+				else
+				{
+					lines[i] = "";
+				}
+			}
+			else if (line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive))
+			{
+				magnetFound = true;
+				if (magnetAssociationCheckBox->isChecked())
+				{
+					lines[i] = "x-scheme-handler/magnet=CuteTorrent.desktop;";
+				}
+				else
+				{
+					lines[i] = "";
+				}
+			}
+		}
+		if (associtaionGnomeConfig.open(QFile::WriteOnly))
+		{
+			for (int i = 0; i < lines.size(); i++)
+			{
+				QString line = lines[i];
+				if (!line.isEmpty())
+				{
+					associtaionGnomeConfig.write((line + "\n").toUtf8());
+				}
+
+			}
+		}
+		else
+		{
+
+			qCritical() << "Unable to open gnome config file for writing file asscoiations";
+		}
+	}
+	else
+	{
+		qCritical() << "Unable to open gnome config file for reading file asscoiations";
+	}
+#endif
 	if(settings->valueBool("WebControl", "webui_enabled", false))
 	{
 		rcon->Start();

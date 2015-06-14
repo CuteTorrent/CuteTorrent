@@ -39,14 +39,14 @@ class OpenTorrentDialog : public BaseWindow<QDialog> , private Ui::OpenTorrentDi
 {
 	Q_OBJECT
 protected:
-	void changeEvent(QEvent* event);
+	void changeEvent(QEvent* event) override;
 public:
 
 	OpenTorrentDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 	~OpenTorrentDialog();
 	void SetData(QString filename);
 
-	int execConditional();
+	int exec();
 private:
 	bool m_bUseGroup;
 	QList<GroupForFileFiltering> m_lFilters;
@@ -61,7 +61,7 @@ private:
 	QLabel* getTitleLabel() override;
 	QLabel* getTitleIcon() override;
 private slots:
-	virtual void reject();
+	virtual void reject() override;
 	void OnError(QString);
 	void BrowseButton();
 	void AccepTorrent();

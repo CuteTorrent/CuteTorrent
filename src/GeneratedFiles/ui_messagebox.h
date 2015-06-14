@@ -25,7 +25,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MessageBox
+class Ui_CustomMessageBox
 {
 public:
     QVBoxLayout *verticalLayout;
@@ -40,22 +40,22 @@ public:
     QLabel *icon;
     QLabel *text;
 
-    void setupUi(QDialog *MessageBox)
+    void setupUi(QDialog *CustomMessageBox)
     {
-        if (MessageBox->objectName().isEmpty())
-            MessageBox->setObjectName(QString::fromUtf8("MessageBox"));
-        MessageBox->setWindowModality(Qt::WindowModal);
-        MessageBox->resize(352, 120);
+        if (CustomMessageBox->objectName().isEmpty())
+            CustomMessageBox->setObjectName(QString::fromUtf8("CustomMessageBox"));
+        CustomMessageBox->setWindowModality(Qt::WindowModal);
+        CustomMessageBox->resize(352, 120);
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(MessageBox->sizePolicy().hasHeightForWidth());
-        MessageBox->setSizePolicy(sizePolicy);
-        verticalLayout = new QVBoxLayout(MessageBox);
+        sizePolicy.setHeightForWidth(CustomMessageBox->sizePolicy().hasHeightForWidth());
+        CustomMessageBox->setSizePolicy(sizePolicy);
+        verticalLayout = new QVBoxLayout(CustomMessageBox);
         verticalLayout->setSpacing(0);
         verticalLayout->setContentsMargins(1, 1, 1, 1);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        titleBar = new QWidget(MessageBox);
+        titleBar = new QWidget(CustomMessageBox);
         titleBar->setObjectName(QString::fromUtf8("titleBar"));
         titleBar->setMinimumSize(QSize(0, 23));
         titleBar->setMaximumSize(QSize(16777215, 23));
@@ -100,7 +100,7 @@ public:
 
         verticalLayout->addWidget(titleBar);
 
-        m_centralWidget = new QWidget(MessageBox);
+        m_centralWidget = new QWidget(CustomMessageBox);
         m_centralWidget->setObjectName(QString::fromUtf8("m_centralWidget"));
         m_centralWidget->setStyleSheet(QString::fromUtf8(""));
         gridLayout = new QGridLayout(m_centralWidget);
@@ -139,25 +139,25 @@ public:
 
         QWidget::setTabOrder(buttonBox, pbClose);
 
-        retranslateUi(MessageBox);
-        QObject::connect(buttonBox, SIGNAL(accepted()), MessageBox, SLOT(accept()));
-        QObject::connect(buttonBox, SIGNAL(rejected()), MessageBox, SLOT(reject()));
+        retranslateUi(CustomMessageBox);
+        QObject::connect(buttonBox, SIGNAL(accepted()), CustomMessageBox, SLOT(accept()));
+        QObject::connect(buttonBox, SIGNAL(rejected()), CustomMessageBox, SLOT(reject()));
 
-        QMetaObject::connectSlotsByName(MessageBox);
+        QMetaObject::connectSlotsByName(CustomMessageBox);
     } // setupUi
 
-    void retranslateUi(QDialog *MessageBox)
+    void retranslateUi(QDialog *CustomMessageBox)
     {
-        MessageBox->setWindowTitle(QApplication::translate("MessageBox", "Dialog", 0, QApplication::UnicodeUTF8));
+        CustomMessageBox->setWindowTitle(QApplication::translate("CustomMessageBox", "Dialog", 0, QApplication::UnicodeUTF8));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("MessageBox", "MB_TITLE", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("CustomMessageBox", "MB_TITLE", 0, QApplication::UnicodeUTF8));
         text->setText(QString());
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class MessageBox: public Ui_MessageBox {};
+    class CustomMessageBox: public Ui_CustomMessageBox {};
 } // namespace Ui
 
 QT_END_NAMESPACE

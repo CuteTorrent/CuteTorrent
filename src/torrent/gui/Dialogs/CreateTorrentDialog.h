@@ -73,6 +73,7 @@ class CreateTorrentDialog : public BaseWindow<QDialog> , private Ui::CreateTorre
 public:
 	CreateTorrentDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 	~CreateTorrentDialog();
+	void setPath(QString val);
 protected:
 
 	QPushButton* getCloseBtn() override;

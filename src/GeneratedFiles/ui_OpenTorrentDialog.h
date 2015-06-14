@@ -43,31 +43,31 @@ public:
     QGridLayout *gridLayout_3;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
-    QLineEdit *pathEdit;
-    QPushButton *browseButton;
     QComboBox *GroupComboBox;
+    QLineEdit *pathEdit;
     QLabel *label;
-    QGroupBox *groupBox_2;
-    QGridLayout *gridLayout_2;
-    QLabel *labelSizeTitle;
-    QLabel *loaderTextLabel;
-    QLabel *labelCommentTitle;
-    QLabel *labelNameTitile;
-    QLineEdit *labelNameData;
-    QTreeView *torrentFilesTreeView;
-    QLabel *labelComentData;
-    QLabel *loaderGifLabel;
-    QLabel *labelSizeData;
-    QCheckBox *setSequntialCheckBox;
+    QPushButton *browseButton;
     QSpacerItem *horizontalSpacer;
     QPushButton *yesButton;
     QPushButton *cancelButton;
+    QGroupBox *groupBox_2;
+    QGridLayout *gridLayout_2;
+    QLabel *labelNameTitile;
+    QLabel *labelCommentTitle;
+    QLabel *labelSizeTitle;
+    QLineEdit *labelNameData;
+    QLabel *loaderTextLabel;
+    QLabel *labelSizeData;
+    QLabel *labelComentData;
+    QLabel *loaderGifLabel;
+    QTreeView *torrentFilesTreeView;
+    QCheckBox *setSequntialCheckBox;
 
     void setupUi(QDialog *OpenTorrentDialog)
     {
         if (OpenTorrentDialog->objectName().isEmpty())
             OpenTorrentDialog->setObjectName(QString::fromUtf8("OpenTorrentDialog"));
-        OpenTorrentDialog->resize(436, 482);
+        OpenTorrentDialog->resize(458, 482);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
         OpenTorrentDialog->setWindowIcon(icon);
@@ -130,89 +130,28 @@ public:
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         gridLayout = new QGridLayout(groupBox);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        pathEdit = new QLineEdit(groupBox);
-        pathEdit->setObjectName(QString::fromUtf8("pathEdit"));
-
-        gridLayout->addWidget(pathEdit, 0, 0, 1, 1);
-
-        browseButton = new QPushButton(groupBox);
-        browseButton->setObjectName(QString::fromUtf8("browseButton"));
-
-        gridLayout->addWidget(browseButton, 0, 1, 1, 1);
-
         GroupComboBox = new QComboBox(groupBox);
         GroupComboBox->setObjectName(QString::fromUtf8("GroupComboBox"));
 
         gridLayout->addWidget(GroupComboBox, 1, 0, 1, 1);
+
+        pathEdit = new QLineEdit(groupBox);
+        pathEdit->setObjectName(QString::fromUtf8("pathEdit"));
+
+        gridLayout->addWidget(pathEdit, 0, 0, 1, 1);
 
         label = new QLabel(groupBox);
         label->setObjectName(QString::fromUtf8("label"));
 
         gridLayout->addWidget(label, 1, 1, 1, 1);
 
+        browseButton = new QPushButton(groupBox);
+        browseButton->setObjectName(QString::fromUtf8("browseButton"));
+
+        gridLayout->addWidget(browseButton, 0, 1, 1, 1);
+
 
         gridLayout_3->addWidget(groupBox, 0, 0, 1, 3);
-
-        groupBox_2 = new QGroupBox(m_centralWidget);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        gridLayout_2 = new QGridLayout(groupBox_2);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        labelSizeTitle = new QLabel(groupBox_2);
-        labelSizeTitle->setObjectName(QString::fromUtf8("labelSizeTitle"));
-
-        gridLayout_2->addWidget(labelSizeTitle, 2, 0, 1, 1);
-
-        loaderTextLabel = new QLabel(groupBox_2);
-        loaderTextLabel->setObjectName(QString::fromUtf8("loaderTextLabel"));
-
-        gridLayout_2->addWidget(loaderTextLabel, 2, 5, 1, 1);
-
-        labelCommentTitle = new QLabel(groupBox_2);
-        labelCommentTitle->setObjectName(QString::fromUtf8("labelCommentTitle"));
-
-        gridLayout_2->addWidget(labelCommentTitle, 1, 0, 1, 2);
-
-        labelNameTitile = new QLabel(groupBox_2);
-        labelNameTitile->setObjectName(QString::fromUtf8("labelNameTitile"));
-
-        gridLayout_2->addWidget(labelNameTitile, 0, 0, 1, 1);
-
-        labelNameData = new QLineEdit(groupBox_2);
-        labelNameData->setObjectName(QString::fromUtf8("labelNameData"));
-
-        gridLayout_2->addWidget(labelNameData, 0, 2, 1, 4);
-
-        torrentFilesTreeView = new QTreeView(groupBox_2);
-        torrentFilesTreeView->setObjectName(QString::fromUtf8("torrentFilesTreeView"));
-        torrentFilesTreeView->setStyleSheet(QString::fromUtf8(""));
-
-        gridLayout_2->addWidget(torrentFilesTreeView, 4, 0, 1, 6);
-
-        labelComentData = new QLabel(groupBox_2);
-        labelComentData->setObjectName(QString::fromUtf8("labelComentData"));
-        labelComentData->setMaximumSize(QSize(16777215, 13));
-        labelComentData->setScaledContents(true);
-        labelComentData->setWordWrap(true);
-
-        gridLayout_2->addWidget(labelComentData, 1, 2, 1, 4);
-
-        loaderGifLabel = new QLabel(groupBox_2);
-        loaderGifLabel->setObjectName(QString::fromUtf8("loaderGifLabel"));
-
-        gridLayout_2->addWidget(loaderGifLabel, 2, 4, 1, 1);
-
-        labelSizeData = new QLabel(groupBox_2);
-        labelSizeData->setObjectName(QString::fromUtf8("labelSizeData"));
-
-        gridLayout_2->addWidget(labelSizeData, 2, 1, 1, 3);
-
-        setSequntialCheckBox = new QCheckBox(groupBox_2);
-        setSequntialCheckBox->setObjectName(QString::fromUtf8("setSequntialCheckBox"));
-
-        gridLayout_2->addWidget(setSequntialCheckBox, 3, 0, 1, 1);
-
-
-        gridLayout_3->addWidget(groupBox_2, 1, 0, 1, 3);
 
         horizontalSpacer = new QSpacerItem(266, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -227,6 +166,86 @@ public:
         cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
 
         gridLayout_3->addWidget(cancelButton, 2, 2, 1, 1);
+
+        groupBox_2 = new QGroupBox(m_centralWidget);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        gridLayout_2 = new QGridLayout(groupBox_2);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
+        labelNameTitile = new QLabel(groupBox_2);
+        labelNameTitile->setObjectName(QString::fromUtf8("labelNameTitile"));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(labelNameTitile->sizePolicy().hasHeightForWidth());
+        labelNameTitile->setSizePolicy(sizePolicy);
+
+        gridLayout_2->addWidget(labelNameTitile, 0, 0, 1, 1);
+
+        labelCommentTitle = new QLabel(groupBox_2);
+        labelCommentTitle->setObjectName(QString::fromUtf8("labelCommentTitle"));
+        sizePolicy.setHeightForWidth(labelCommentTitle->sizePolicy().hasHeightForWidth());
+        labelCommentTitle->setSizePolicy(sizePolicy);
+
+        gridLayout_2->addWidget(labelCommentTitle, 1, 0, 1, 1);
+
+        labelSizeTitle = new QLabel(groupBox_2);
+        labelSizeTitle->setObjectName(QString::fromUtf8("labelSizeTitle"));
+        sizePolicy.setHeightForWidth(labelSizeTitle->sizePolicy().hasHeightForWidth());
+        labelSizeTitle->setSizePolicy(sizePolicy);
+
+        gridLayout_2->addWidget(labelSizeTitle, 2, 0, 1, 1);
+
+        labelNameData = new QLineEdit(groupBox_2);
+        labelNameData->setObjectName(QString::fromUtf8("labelNameData"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(labelNameData->sizePolicy().hasHeightForWidth());
+        labelNameData->setSizePolicy(sizePolicy1);
+
+        gridLayout_2->addWidget(labelNameData, 0, 1, 1, 3);
+
+        loaderTextLabel = new QLabel(groupBox_2);
+        loaderTextLabel->setObjectName(QString::fromUtf8("loaderTextLabel"));
+
+        gridLayout_2->addWidget(loaderTextLabel, 2, 3, 1, 1);
+
+        labelSizeData = new QLabel(groupBox_2);
+        labelSizeData->setObjectName(QString::fromUtf8("labelSizeData"));
+        sizePolicy1.setHeightForWidth(labelSizeData->sizePolicy().hasHeightForWidth());
+        labelSizeData->setSizePolicy(sizePolicy1);
+
+        gridLayout_2->addWidget(labelSizeData, 2, 1, 1, 1);
+
+        labelComentData = new QLabel(groupBox_2);
+        labelComentData->setObjectName(QString::fromUtf8("labelComentData"));
+        sizePolicy1.setHeightForWidth(labelComentData->sizePolicy().hasHeightForWidth());
+        labelComentData->setSizePolicy(sizePolicy1);
+        labelComentData->setMaximumSize(QSize(16777215, 13));
+        labelComentData->setScaledContents(true);
+        labelComentData->setWordWrap(true);
+
+        gridLayout_2->addWidget(labelComentData, 1, 1, 1, 3);
+
+        loaderGifLabel = new QLabel(groupBox_2);
+        loaderGifLabel->setObjectName(QString::fromUtf8("loaderGifLabel"));
+
+        gridLayout_2->addWidget(loaderGifLabel, 2, 2, 1, 1);
+
+        torrentFilesTreeView = new QTreeView(groupBox_2);
+        torrentFilesTreeView->setObjectName(QString::fromUtf8("torrentFilesTreeView"));
+        torrentFilesTreeView->setStyleSheet(QString::fromUtf8(""));
+
+        gridLayout_2->addWidget(torrentFilesTreeView, 4, 0, 1, 4);
+
+        setSequntialCheckBox = new QCheckBox(groupBox_2);
+        setSequntialCheckBox->setObjectName(QString::fromUtf8("setSequntialCheckBox"));
+
+        gridLayout_2->addWidget(setSequntialCheckBox, 3, 0, 1, 4);
+
+
+        gridLayout_3->addWidget(groupBox_2, 1, 0, 1, 3);
 
 
         verticalLayout->addWidget(m_centralWidget);
@@ -250,20 +269,20 @@ public:
         tbMenu->setText(QString());
         LTitle->setText(QApplication::translate("OpenTorrentDialog", "DIALOG_OPEN_TORRENT", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_SAVE_PATH", 0, QApplication::UnicodeUTF8));
-        browseButton->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_BROWSE_BUTTON", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("OpenTorrentDialog", "DISCRIBTION_LABEL", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_INFO", 0, QApplication::UnicodeUTF8));
-        labelSizeTitle->setText(QApplication::translate("OpenTorrentDialog", "SIZE", 0, QApplication::UnicodeUTF8));
-        loaderTextLabel->setText(QApplication::translate("OpenTorrentDialog", "RECIVING_METADATA", 0, QApplication::UnicodeUTF8));
-        labelCommentTitle->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_INFO_DESCRIBTION", 0, QApplication::UnicodeUTF8));
-        labelNameTitile->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_INFO_NAME", 0, QApplication::UnicodeUTF8));
-        labelNameData->setText(QString());
-        labelComentData->setText(QString());
-        loaderGifLabel->setText(QString());
-        labelSizeData->setText(QString());
-        setSequntialCheckBox->setText(QApplication::translate("OpenTorrentDialog", "SET_SEQUNTIAL", 0, QApplication::UnicodeUTF8));
+        browseButton->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_BROWSE_BUTTON", 0, QApplication::UnicodeUTF8));
         yesButton->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_ADD_BUTTON", 0, QApplication::UnicodeUTF8));
         cancelButton->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_CANCEL_BUTTON", 0, QApplication::UnicodeUTF8));
+        groupBox_2->setTitle(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_INFO", 0, QApplication::UnicodeUTF8));
+        labelNameTitile->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_INFO_NAME", 0, QApplication::UnicodeUTF8));
+        labelCommentTitle->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_INFO_DESCRIBTION", 0, QApplication::UnicodeUTF8));
+        labelSizeTitle->setText(QApplication::translate("OpenTorrentDialog", "SIZE", 0, QApplication::UnicodeUTF8));
+        labelNameData->setText(QString());
+        loaderTextLabel->setText(QApplication::translate("OpenTorrentDialog", "RECIVING_METADATA", 0, QApplication::UnicodeUTF8));
+        labelSizeData->setText(QString());
+        labelComentData->setText(QString());
+        loaderGifLabel->setText(QString());
+        setSequntialCheckBox->setText(QApplication::translate("OpenTorrentDialog", "SET_SEQUNTIAL", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

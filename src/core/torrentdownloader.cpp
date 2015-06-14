@@ -42,7 +42,7 @@ void TorrentDownloader::replyReady(QNetworkReply* pReply)
 			return;
 		}
 
-		QTemporaryFile* pFile = new QTemporaryFile();
+		QTemporaryFile* pFile = new QTemporaryFile(this);
 
 		if (pFile->open())
 		{
@@ -52,8 +52,9 @@ void TorrentDownloader::replyReady(QNetworkReply* pReply)
 
 			while (m_redirectionMap.contains(replyUrl))
 			{
-				replyUrl = m_redirectionMap[replyUrl];
+				QUrl newReplyUrl = m_redirectionMap[replyUrl];
 				m_redirectionMap.remove(replyUrl);
+				replyUrl = newReplyUrl;
 			}
 
 			emit TorrentReady(replyUrl, pFile);
