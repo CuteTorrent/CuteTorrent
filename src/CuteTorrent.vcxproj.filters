@@ -649,6 +649,12 @@
     <ClCompile Include="GeneratedFiles\Release\moc_qwintaskbarprogress.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\winextras\qwintaskbarbutton.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_qwintaskbarbutton.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -861,6 +867,18 @@
     </CustomBuild>
     <CustomBuild Include="webControll\TorrentCommandsApiController.h">
       <Filter>RemoteControl</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\winextras\qwinjumplist.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\winextras\qwintaskbarprogress.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\winextras\qwinthumbnailtoolbutton.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\winextras\qwintaskbarbutton.h">
+      <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1106,9 +1124,6 @@
     <ClInclude Include="core\winextras\qwinfunctions_p.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\winextras\qwinjumplist.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="core\winextras\qwinjumplist_p.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -1124,12 +1139,6 @@
     <ClInclude Include="core\winextras\qwinjumplistitem_p.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\winextras\qwintaskbarprogress.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\qwinthumbnailtoolbutton.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="core\winextras\qwinthumbnailtoolbutton_p.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -1140,6 +1149,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="core\winextras\winshobjidl_p.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\winextras\qwintaskbarbutton_p.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

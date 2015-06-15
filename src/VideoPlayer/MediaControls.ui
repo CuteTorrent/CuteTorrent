@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>391</width>
-    <height>68</height>
+    <width>374</width>
+    <height>70</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -22,141 +22,15 @@
   <property name="styleSheet">
    <string notr="true">#MediaControls{
 border-radius: 10px;
-border:solid 1px 2D2D2D;
+border:solid 1px #2D2D2D;
 background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(93, 93, 93, 255), stop:1 rgba(45, 45, 45, 255));
 }
 </string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" colspan="2">
-    <widget class="Phonon::VolumeSlider" name="volumeSlider" native="true"/>
-   </item>
-   <item row="0" column="2">
-    <widget class="QPushButton" name="playButton">
-     <property name="styleSheet">
-      <string notr="true">background-color:&quot;transparent&quot;;
-border-color:&quot;transparent&quot;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="../Resources/ltorrent.qrc">
-       <normaloff>:/PlayerControlImages/PlayButton.png</normaloff>:/PlayerControlImages/PlayButton.png</iconset>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="3">
-    <widget class="QPushButton" name="pauseButton">
-     <property name="styleSheet">
-      <string notr="true">background-color:&quot;transparent&quot;;
-border-color:&quot;transparent&quot;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="../Resources/ltorrent.qrc">
-       <normaloff>:/PlayerControlImages/PauseButton.png</normaloff>:/PlayerControlImages/PauseButton.png</iconset>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="4">
-    <widget class="QPushButton" name="reverseButton">
-     <property name="styleSheet">
-      <string notr="true">background-color:&quot;transparent&quot;;
-border-color:&quot;transparent&quot;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="../Resources/ltorrent.qrc">
-       <normaloff>:/PlayerControlImages/RateButtonReverse.png</normaloff>:/PlayerControlImages/RateButtonReverse.png</iconset>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="5">
-    <widget class="QPushButton" name="forwardButton">
-     <property name="styleSheet">
-      <string notr="true">background-color:&quot;transparent&quot;;
-border-color:&quot;transparent&quot;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="../Resources/ltorrent.qrc">
-       <normaloff>:/PlayerControlImages/RateButtonForward.png</normaloff>:/PlayerControlImages/RateButtonForward.png</iconset>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="6">
-    <widget class="QPushButton" name="openFileButton">
-     <property name="styleSheet">
-      <string notr="true">background-color:&quot;transparent&quot;;
-border-color:&quot;transparent&quot;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="../Resources/ltorrent.qrc">
-       <normaloff>:/PlayerControlImages/FileButton.png</normaloff>:/PlayerControlImages/FileButton.png</iconset>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="7">
-    <widget class="QPushButton" name="openUrlButton">
-     <property name="styleSheet">
-      <string notr="true">background-color:&quot;transparent&quot;;
-border-color:&quot;transparent&quot;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="../Resources/ltorrent.qrc">
-       <normaloff>:/PlayerControlImages/UrlButton.png</normaloff>:/PlayerControlImages/UrlButton.png</iconset>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="8">
-    <widget class="QPushButton" name="fullScreenButton">
-     <property name="styleSheet">
-      <string notr="true">background-color:&quot;transparent&quot;;
-border-color:&quot;transparent&quot;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="../Resources/ltorrent.qrc">
-       <normaloff>:/PlayerControlImages/FullscreenButton.png</normaloff>:/PlayerControlImages/FullscreenButton.png</iconset>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
+  <layout class="QGridLayout" name="gridLayout" columnminimumwidth="45,50,0,0,0,0,0,0,0,20,25">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetMinimumSize</enum>
+   </property>
    <item row="1" column="0">
     <widget class="QLabel" name="currentTimeLabel">
      <property name="palette">
@@ -282,10 +156,146 @@ border-color:&quot;transparent&quot;</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="1" colspan="6">
-    <widget class="Phonon::SeekSlider" name="seekSlider" native="true"/>
+   <item row="0" column="7">
+    <widget class="QPushButton" name="openFileButton">
+     <property name="styleSheet">
+      <string notr="true">background-color:&quot;transparent&quot;;
+border-color:&quot;transparent&quot;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../Resources/ltorrent.qrc">
+       <normaloff>:/PlayerControlImages/FileButton.png</normaloff>:/PlayerControlImages/FileButton.png</iconset>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
-   <item row="1" column="7" colspan="2">
+   <item row="0" column="8">
+    <widget class="QPushButton" name="openUrlButton">
+     <property name="styleSheet">
+      <string notr="true">background-color:&quot;transparent&quot;;
+border-color:&quot;transparent&quot;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../Resources/ltorrent.qrc">
+       <normaloff>:/PlayerControlImages/UrlButton.png</normaloff>:/PlayerControlImages/UrlButton.png</iconset>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="4">
+    <widget class="QPushButton" name="pauseButton">
+     <property name="styleSheet">
+      <string notr="true">background-color:&quot;transparent&quot;;
+border-color:&quot;transparent&quot;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../Resources/ltorrent.qrc">
+       <normaloff>:/PlayerControlImages/PauseButton.png</normaloff>:/PlayerControlImages/PauseButton.png</iconset>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="5">
+    <widget class="QPushButton" name="reverseButton">
+     <property name="styleSheet">
+      <string notr="true">background-color:&quot;transparent&quot;;
+border-color:&quot;transparent&quot;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../Resources/ltorrent.qrc">
+       <normaloff>:/PlayerControlImages/RateButtonReverse.png</normaloff>:/PlayerControlImages/RateButtonReverse.png</iconset>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="6">
+    <widget class="QPushButton" name="forwardButton">
+     <property name="styleSheet">
+      <string notr="true">background-color:&quot;transparent&quot;;
+border-color:&quot;transparent&quot;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../Resources/ltorrent.qrc">
+       <normaloff>:/PlayerControlImages/RateButtonForward.png</normaloff>:/PlayerControlImages/RateButtonForward.png</iconset>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="3">
+    <widget class="Phonon::VolumeSlider" name="volumeSlider"/>
+   </item>
+   <item row="0" column="3">
+    <widget class="QPushButton" name="playButton">
+     <property name="styleSheet">
+      <string notr="true">background-color:&quot;transparent&quot;;
+border-color:&quot;transparent&quot;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../Resources/ltorrent.qrc">
+       <normaloff>:/PlayerControlImages/PlayButton.png</normaloff>:/PlayerControlImages/PlayButton.png</iconset>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" colspan="8">
+    <widget class="Phonon::SeekSlider" name="seekSlider">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="9" colspan="2">
+    <widget class="QPushButton" name="fullScreenButton">
+     <property name="styleSheet">
+      <string notr="true">background-color:&quot;transparent&quot;;
+border-color:&quot;transparent&quot;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../Resources/ltorrent.qrc">
+       <normaloff>:/PlayerControlImages/FullscreenButton.png</normaloff>:/PlayerControlImages/FullscreenButton.png</iconset>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="9" colspan="2">
     <widget class="QLabel" name="totalTimeLabel">
      <property name="palette">
       <palette>

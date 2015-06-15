@@ -51,6 +51,7 @@ VideoPlayerWindow::VideoPlayerWindow(QWidget* parent) :	QMainWindow(parent),
 		m_pMediaController = m_mediaControl->mediaController();
 		Phonon::createPath(m_mediaControl->mediaObject(), m_pVideoWidget);
 		controls = new MediaControls(m_mediaControl, m_pVideoWidget);
+		controls->installEventFilter(this);
 		setWindowIcon(QIcon(":/icons/app.ico"));
 		SetupConnections();
 		m_windowActiveTimer = new QTimer(this);
@@ -130,7 +131,7 @@ void VideoPlayerWindow::OnAvailableAudioChannelsChanged()
 
 void VideoPlayerWindow::resizeEvent(QResizeEvent* event)
 {
-	controls->move(QPoint((event->size().width() - controls->width()) / 2, event->size().height() - controls->height()));
+	controls->move(QPoint((size().width() - controls->width()) / 2, size().height() - controls->height()));
 	QWidget::resizeEvent(event);
 }
 
@@ -146,6 +147,10 @@ bool VideoPlayerWindow::eventFilter(QObject* src, QEvent* event)
 			return true;
 		}
 		
+	}
+	else if (src == controls && event->type() == QEvent::Resize)
+	{
+		controls->move(QPoint((size().width() - controls->width()) / 2, size().height() - controls->height()));
 	}
 
 	return false;

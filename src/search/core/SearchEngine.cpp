@@ -3,7 +3,7 @@
 #include "ExtratorrentSearchProvider.h"
 #include "RutorSearchProvider.h"
 #include <boost/weak_ptr.hpp>
-static boost::weak_ptr<SearchEngine> SearchEngine::m_pInstance;
+boost::weak_ptr<SearchEngine> SearchEngine::m_pInstance;
 
 SearchEngine::SearchEngine()
 {
@@ -20,7 +20,7 @@ SearchEngine::SearchEngine()
 	m_result = SearchItemsStorrage::getInstance();
 }
 
-static SearchEnginePtr SearchEngine::getInstance()
+SearchEnginePtr SearchEngine::getInstance()
 {
     SearchEnginePtr instance = m_pInstance.lock();
 

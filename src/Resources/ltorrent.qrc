@@ -21,6 +21,6 @@
         <file alias="loader.gif">images/loader.gif</file>
     </qresource>
     <qresource prefix="/translations_qt">
-        <file alias="qt_ru_Ru.qm">/usr/share/qt4/translations/qt_ru.qm</file>
+        <file alias="qt_ru_Ru.qm">E:/Qt/4.8.6/translations/qt_ru.qm</file>
     </qresource>
 </RCC>

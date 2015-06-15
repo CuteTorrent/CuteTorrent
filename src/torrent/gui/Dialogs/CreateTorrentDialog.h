@@ -23,11 +23,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "ui_CreateTorrentDialog.h"
 #include "TorrentManager.h"
 #include "CustomWindow.h"
-#include <QThread>
-#include <QMouseEvent>
 #include <QApplicationSettings.h>
 class CreateTorrentDialog;
 class StyledProgressBar;
+#ifdef Q_WS_WIN
+class QWinTaskbarProgress;
+class QWinTaskbarButton;
+#endif
 class torrentCreatorThread : public QThread
 {
 	Q_OBJECT
@@ -82,6 +84,10 @@ protected:
 	QLabel* getTitleLabel() override;
 	QLabel* getTitleIcon() override;
 private:
+#ifdef Q_WS_WIN
+	QWinTaskbarProgress* m_pTaskBarProggres;
+	QWinTaskbarButton* m_pTaskBarBtn;
+#endif
 	QString path;
 	quint64 listFolder(QString path);
 	torrentCreatorThread* creator;

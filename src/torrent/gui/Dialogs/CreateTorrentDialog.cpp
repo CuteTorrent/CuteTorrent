@@ -20,19 +20,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPainter>
 #include <exception>
 #include <iosfwd>
-#include <string>
 #include "CreateTorrentDialog.h"
 #include "QApplicationSettings.h"
 #include "StyleEngene.h"
 #include "TorrentManager.h"
 #include "Version.h"
 #include "messagebox.h"
-#include <gui/Controls/StyledProgressBar.h>
-
+#include "StyledProgressBar.h"
+#include "qwintaskbarprogress.h"
+#include "qwintaskbarbutton.h"
 CreateTorrentDialog::CreateTorrentDialog(QWidget* parent, Qt::WindowFlags) : BaseWindow(OnlyCloseButton, NoResize, parent)
 {
 	setupUi(this);
-	
+	m_pTaskBarBtn = new QWinTaskbarButton(this);
+	m_pTaskBarBtn->setWindow(this);
+	m_pTaskBarProggres = m_pTaskBarBtn->progress();
+	m_pTaskBarProggres->setRange(0, 100);
 	progressBar = new StyledProgressBar(m_centralWidget);
 	progressBar->setObjectName(QString::fromUtf8("progressBar"));
 	progressBar->setValue(0);
@@ -44,7 +47,8 @@ CreateTorrentDialog::CreateTorrentDialog(QWidget* parent, Qt::WindowFlags) : Bas
 	creator  = new torrentCreatorThread(this);
 	m_pTorrentManager = TorrentManager::getInstance();
 	StyleEngene* style = StyleEngene::getInstance();
-	QObject::connect(style, SIGNAL(styleChanged()), this, SLOT(setupWindowIcons()));
+	connect(style, SIGNAL(styleChanged()), this, SLOT(setupWindowIcons()));
+	
 }
 
 
@@ -256,10 +260,12 @@ void CreateTorrentDialog::BeginCreate()
 
 	if(!save_path.isEmpty())
 	{
+		m_pTaskBarProggres->setVisible(true);
 		QObject::connect(creator, SIGNAL(updateProgress(int)), this, SLOT(UpdateProgressBar(int)));
 		QObject::connect(creator, SIGNAL(ShowCreationSucces(QString)), this, SLOT(ShowCreationSucces(QString)));
 		QObject::connect(creator, SIGNAL(ShowCreationFailture(QString)), this, SLOT(ShowCreationFailture(QString)));
 		QObject::connect(this, SIGNAL(AbortCreation()), creator, SLOT(terminate()));
+		
 		creator->create(pathEdit->text(), save_path, filterEdit->text(), trackers, webseeds, discribtionEdit->text(), privateCheckBox->isChecked(), getPiceSize() * KbInt);
 	}
 	else
@@ -269,8 +275,10 @@ void CreateTorrentDialog::BeginCreate()
 }
 void CreateTorrentDialog::Cancel()
 {
+	m_pTaskBarProggres->setVisible(false);
 	emit AbortCreation();
 	close();
+
 }
 
 void CreateTorrentDialog::ShowCreationSucces(QString filename)
@@ -283,6 +291,7 @@ void CreateTorrentDialog::ShowCreationSucces(QString filename)
 
 	progressBar->setValue(100);
 	createButton->setEnabled(true);
+	m_pTaskBarProggres->setVisible(false);
 	//delete creator;
 	//creator = NULL;
 }
@@ -292,6 +301,7 @@ void CreateTorrentDialog::ShowCreationFailture(QString msg)
 	                           tr("CREATE_TORRENT_FILE_ERROR\n %1").arg(msg));
 	//progressBar->setValue(0);
 	createButton->setEnabled(true);
+	m_pTaskBarProggres->setVisible(false);
 // 	delete creator;
 // 	creator = NULL;
 }
@@ -300,6 +310,7 @@ void CreateTorrentDialog::UpdateProgressBar(int val)
 	if(val <= progressBar->maximum())
 	{
 		progressBar->setValue(val);
+		m_pTaskBarProggres->setValue(val);
 	}
 }
 

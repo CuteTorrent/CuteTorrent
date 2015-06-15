@@ -46,22 +46,23 @@ void MediaControls::paintEvent(QPaintEvent* event)
 	QPainter painter(this);
 	QStyleOption opt;
 	opt.init(this);
-	painter.drawPixmap(rect(), *bg);
+	painter.drawPixmap(rect(), bg->scaled(size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+	setMask(bg->scaled(size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation).mask());
 	style()->drawPrimitive(QStyle::PE_Widget, &opt, &painter, this);
 	QWidget::paintEvent(event);
 }
 
 void MediaControls::setupConnections()
 {
-	QObject::connect(ui->playButton, SIGNAL(clicked()), this, SIGNAL(play()));
-	QObject::connect(ui->pauseButton, SIGNAL(clicked()), this, SIGNAL(pause()));
-	QObject::connect(ui->reverseButton, SIGNAL(clicked()), this, SIGNAL(reverse()));
-	QObject::connect(ui->forwardButton, SIGNAL(clicked()), this, SIGNAL(forvard()));
-	QObject::connect(ui->openFileButton, SIGNAL(clicked()), this, SIGNAL(openFile()));
-	QObject::connect(ui->openUrlButton, SIGNAL(clicked()), this, SIGNAL(openURL()));
-	QObject::connect(ui->fullScreenButton, SIGNAL(clicked()), this, SIGNAL(toggleFullScreen()));
-	QObject::connect(m_mediaControl->mediaObject(), SIGNAL(tick(qint64)), SLOT(updateTime(qint64)));
-	QObject::connect(m_mediaControl->mediaObject(), SIGNAL(totalTimeChanged(qint64)), SLOT(updateTotalTime(qint64)));
+	connect(ui->playButton, SIGNAL(clicked()), this, SIGNAL(play()));
+	connect(ui->pauseButton, SIGNAL(clicked()), this, SIGNAL(pause()));
+	connect(ui->reverseButton, SIGNAL(clicked()), this, SIGNAL(reverse()));
+	connect(ui->forwardButton, SIGNAL(clicked()), this, SIGNAL(forvard()));
+	connect(ui->openFileButton, SIGNAL(clicked()), this, SIGNAL(openFile()));
+	connect(ui->openUrlButton, SIGNAL(clicked()), this, SIGNAL(openURL()));
+	connect(ui->fullScreenButton, SIGNAL(clicked()), this, SIGNAL(toggleFullScreen()));
+	connect(m_mediaControl->mediaObject(), SIGNAL(tick(qint64)), SLOT(updateTime(qint64)));
+	connect(m_mediaControl->mediaObject(), SIGNAL(totalTimeChanged(qint64)), SLOT(updateTotalTime(qint64)));
 }
 
 void MediaControls::updateMedaiObject()

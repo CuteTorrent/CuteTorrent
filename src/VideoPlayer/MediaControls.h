@@ -53,8 +53,8 @@ private:
 	void setupConnections();
 
 protected:
-	void paintEvent(QPaintEvent* event);
-	bool eventFilter(QObject* obj, QEvent* event);
+	void paintEvent(QPaintEvent* event) override;
+	bool eventFilter(QObject* obj, QEvent* event) override;
 
 };
 
