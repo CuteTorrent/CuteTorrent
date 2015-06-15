@@ -2,16 +2,11 @@
 #include "QSearchDisplayModel.h"
 #include "StaticHelpers.h"
 
-QSearchDisplayModel::QSearchDisplayModel(SearchEngine* pSearchEngine, QTreeView* pTorrentListView, QObject* parent) : QAbstractListModel(parent)
+QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QObject* parent) : QAbstractListModel(parent), m_pSearchEngine(SearchEngine::getInstance())
 {
-	if(pSearchEngine == NULL)
-	{
-		throw std::logic_error("Search engine could not be null.");
-	}
+    m_pTorrentListView = pTorrentListView;
 
-	m_pTorrentListView = pTorrentListView;
-	m_pSearchEngine = pSearchEngine;
-	QObject::connect(m_pSearchEngine, SIGNAL(GotResults()), this, SLOT(OnNewSearchResults()));
+    QObject::connect(m_pSearchEngine.get(), SIGNAL(GotResults()), this, SLOT(OnNewSearchResults()));
 	SearchItemsStorrage* pItems = m_pSearchEngine->GetResults();
 	QObject::connect(pItems, SIGNAL(reset()), this, SLOT(OnNewSearchResults()));
 }

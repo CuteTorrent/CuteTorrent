@@ -37,7 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "torrentracker.h"
 #include "ui_CustomWindow.h"
 #include "RconWebService.h"
-
+#include "SearchCommon.h"
 
 class Application;
 class FileViewModel;
@@ -51,7 +51,6 @@ class QTorrentFilterProxyModel;
 class QRssDisplayModel;
 class QRssItemDelegate;
 class RconWebService;
-class SearchEngine;
 class StyleEngene;
 class TorrentManager;
 class TorrentStorrage;
@@ -126,8 +125,10 @@ private:
 	QTreeWidgetItem* groupsTreeItem;
 	QTreeWidgetItem* rssTreeItem;
 	QTreeWidgetItem* searchTreeItem;
-	SearchEngine* m_pSearchEngine;
+    SearchEnginePtr m_pSearchEngine;
+#ifdef Q_WS_WIN
 	QWinJumpList* m_pJumpList;
+#endif
 	void createTrayIcon();
 	void createActions();
 	void setupTray();
@@ -139,8 +140,10 @@ private:
 	void setupRssInfoTab();
 	void setupFileTabel();
 	void setupGroupTreeWidget();
+#ifdef Q_WS_WIN
 	void setupTasksCategory();
 	void setupJumpList();
+#endif
 	void fillPieceDisplay(QSize);
 	void setupCustomeWindow();
 	void setupKeyMappings();
@@ -190,7 +193,6 @@ public slots:
 	void AddWebSeed();
 	void ChnageTorrentFilter();
 	void startBackUpWizard();
-	void OnGotSerachResults();
 	void maximizeBtnClicked() override;
 	void minimizeBtnClicked() override;
 	void startDownloadTorrent();

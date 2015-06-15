@@ -8,7 +8,7 @@ QString KickassSearchProvider::Name()
 
 QString KickassSearchProvider::Url()
 {
-	return "https://kickass.so";
+    return "https://kat.cr/";
 }
 
 int KickassSearchProvider::SupportedCategories()
@@ -26,11 +26,11 @@ QString KickassSearchProvider::BuildUrl(QString token, SearchCategories category
 {
 	if(category != All)
 	{
-		return QString("https://kickass.to/json.php?q=%1+category:%2&field=seeders&order=desc&page=%3").arg(token, m_categoryMap[category], QString::number(page));
+        return QString("http://kat.cr/json.php?q=%1+category:%2&field=seeders&order=desc&page=%3").arg(token, m_categoryMap[category], QString::number(page));
 	}
 	else
 	{
-		return QString("https://kickass.to/json.php?q=%1&field=seeders&order=desc&page=%2").arg(token, QString::number(page));
+        return QString("http://kat.cr/json.php?q=%1&field=seeders&order=desc&page=%2").arg(token, QString::number(page));
 	}
 }
 

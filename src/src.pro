@@ -72,6 +72,7 @@ LIBS += -L"./../ThirdParties/openssl/lib/VC/static" \
     -L"./../ThirdParties/boost_1_55_0/stage/lib" \
     -ltorrent \
     -lboost_system \
+    -lboost_program_options \
     -lssl \
     -lcrypto
 

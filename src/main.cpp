@@ -200,7 +200,7 @@ int main(int argc, char* argv[])
 #else
 	dataDir = QApplication::applicationDirPath() + QDir::separator();
 #endif
-	FILE* fp = nullptr;
+    FILE* fp = NULL;
 
 	if (vm.count("debug"))
 	{
@@ -240,7 +240,7 @@ int main(int argc, char* argv[])
 		w.OpenSettingsDialog();
 	}
 	int res = a.exec();
-	qDebug() << "Launch from console = " << console;
+
 	if (vm.count("debug") && fp)
 	{
 		fclose(fp);
@@ -248,6 +248,7 @@ int main(int argc, char* argv[])
 
 //	_CrtDumpMemoryLeaks();
 #ifdef Q_WS_WIN
+    qDebug() << "Launch from console = " << console;
 	if (console)
 	{
 		sendEnterKey();

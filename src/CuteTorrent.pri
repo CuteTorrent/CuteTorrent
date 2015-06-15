@@ -119,7 +119,8 @@ HEADERS += ./core/Build_Increment.h \
     $$PWD/core/StorrageInfo/qstorageinfo.h \
     $$PWD/core/StorrageInfo/qstorageinfo_p.h \
     webControll/RssCommandsApiController.h \
-    webControll/TorrentCommandsApiController.h
+    webControll/TorrentCommandsApiController.h \
+    search/core/SearchCommon.h
 SOURCES += ./core/gui/Dialogs/CuteTorrentMainWindow.cpp \
     ./main.cpp \
     ./core/gui/backupwizard/applybackuppage.cpp \

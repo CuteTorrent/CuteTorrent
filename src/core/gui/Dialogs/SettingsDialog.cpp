@@ -221,8 +221,10 @@ void SettingsDialog::FillGeneralTab()
 	
 	
 #ifdef Q_WS_X11
-	runOnbootCheckBox->setChecked(QFile::exists("~/.config/autostart/CuteTorrent.desktop");
-	QFile associtaionGnomeConfig("~/.config/mimeapps.list");
+    winShelItegrationCheckBox->setVisible(false);
+    startMinimizedCheckBox->setVisible(false);
+    runOnbootCheckBox->setChecked(QFile::exists(StaticHelpers::CombinePathes(QDir::homePath() ,".config/autostart/CuteTorrent.desktop")));
+    QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() ,".config/mimeapps.list"));
 
 	if (associtaionGnomeConfig.open(QFile::ReadOnly))
 	{
@@ -232,19 +234,24 @@ void SettingsDialog::FillGeneralTab()
 		QStringList lines = associationStr.split('\n');
 		foreach(QString line, lines)
 		{
+            qDebug() << "Line from mimeapps.list" << line;
+            qDebug() << "Line from mimeapps.listline.startsWith(\"application/x-bittorrent\")" << line.startsWith("application/x-bittorrent;", Qt::CaseInsensitive);
+            qDebug() << "Line from mimeapps.listline.startsWith(\"x-scheme-handler/magnet\")" << line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive);
+            qDebug() << "Line from mimeapps.line.endsWith(\"CuteTorrent.desktop\")" << line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive);
 			if (line.startsWith("application/x-bittorrent", Qt::CaseInsensitive))
 			{
-				asociationCheckBox->setChecked(line.endsWith("CuteTorrent.desktop"));
+                asociationCheckBox->setChecked(line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive));
 			}
 			else if (line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive))
 			{
-				magnetAssociationCheckBox->setChecked(line.endsWith("CuteTorrent.desktop"));
+                magnetAssociationCheckBox->setChecked(line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive));
 			}
 		}
 	}
 	else
 	{
-		qCritical() << "Unable to open gnome config file for reading";
+
+        qCritical() << "Unable to open gnome config file for reading" << associtaionGnomeConfig.errorString();
 	}
 #endif
 	//OS_SPECIFICK////
@@ -479,29 +486,31 @@ void SettingsDialog::ApplySettings()
 #endif
 	
 #ifdef Q_WS_X11
-	winShelItegrationCheckBox->setVisible(false);
-	if (runOnbootCheckBox->checkState() == Qt::Checked)
+    if (runOnbootCheckBox->checkState() == Qt::Checked)
 	{
-		if (!QFile::exists("~/.config/autostart/CuteTorrent.desktop"))
+        if (!QFile::exists(StaticHelpers::CombinePathes(QDir::homePath() ,".config/autostart/CuteTorrent.desktop")))
 		{
-			if (!QFile::copy("/usr/share/applications/CuteTorrent.desktop", "~/.config/autostart/CuteTorrent.desktop"))
+            QFile shortcut("/usr/share/applications/CuteTorrent.desktop");
+            if (!shortcut.copy(StaticHelpers::CombinePathes(QDir::homePath() ,".config/autostart/CuteTorrent.desktop")))
 			{
-				qCritical() << "Unable to copy /usr/share/applications/CuteTorrent.desktop to ~/.config/autostart/CuteTorrent.desktop";
+                qCritical() << "Unable to copy /usr/share/applications/CuteTorrent.desktop to ~/.config/autostart/CuteTorrent.desktop" << shortcut.errorString();
+
 			}
 		}
 	}
 	else
 	{
-		if (QFile::exists("~/.config/autostart/CuteTorrent.desktop"))
+         QFile shortcut(StaticHelpers::CombinePathes(QDir::homePath() ,".config/autostart/CuteTorrent.desktop"));
+        if (shortcut.exists())
 		{
-			if (!QFile::remove("~/.config/autostart/CuteTorrent.desktop"))
+            if (!shortcut.remove())
 			{
-				qCritical() << "failed to remove ~/.config/autostart/CuteTorrent.desktop";
+                qCritical() << "failed to remove ~/.config/autostart/CuteTorrent.desktop" << shortcut.errorString();
 			}
 		}
 	}
 
-	QFile associtaionGnomeConfig("~/.config/mimeapps.list");
+    QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() ,".config/mimeapps.list"));
 
 	if (associtaionGnomeConfig.open(QFile::ReadOnly))
 	{
@@ -538,6 +547,14 @@ void SettingsDialog::ApplySettings()
 				}
 			}
 		}
+        if (!torrentFound && asociationCheckBox->isChecked())
+        {
+            lines.append("application/x-bittorrent=CuteTorrent.desktop;\n");
+        }
+        if (!magnetFound && magnetAssociationCheckBox->isChecked())
+        {
+            lines.append("x-scheme-handler/magnet=CuteTorrent.desktop;\n");
+        }
 		if (associtaionGnomeConfig.open(QFile::WriteOnly))
 		{
 			for (int i = 0; i < lines.size(); i++)
@@ -549,16 +566,18 @@ void SettingsDialog::ApplySettings()
 				}
 
 			}
+            associtaionGnomeConfig.close();
+
 		}
 		else
 		{
 
-			qCritical() << "Unable to open gnome config file for writing file asscoiations";
+            qCritical() << "Unable to open gnome config file for writing file asscoiations" << associtaionGnomeConfig.errorString();
 		}
 	}
 	else
 	{
-		qCritical() << "Unable to open gnome config file for reading file asscoiations";
+        qCritical() << "Unable to open gnome config file for reading file asscoiations" << associtaionGnomeConfig.errorString();
 	}
 #endif
 	if(settings->valueBool("WebControl", "webui_enabled", false))
@@ -972,6 +991,7 @@ void SettingsDialog::FillKeyMapTab()
 
 void SettingsDialog::FillSearchTab()
 {
+
 }
 
 void SettingsDialog::UpdateSchedullerTab(int index)

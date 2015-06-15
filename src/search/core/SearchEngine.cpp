@@ -2,6 +2,9 @@
 #include <QMessageBox>
 #include "ExtratorrentSearchProvider.h"
 #include "RutorSearchProvider.h"
+#include <boost/weak_ptr.hpp>
+static boost::weak_ptr<SearchEngine> SearchEngine::m_pInstance;
+
 SearchEngine::SearchEngine()
 {
 	m_pSearchProviders.append(new KickassSearchProvider());
@@ -15,6 +18,19 @@ SearchEngine::SearchEngine()
 	}
 
 	m_result = SearchItemsStorrage::getInstance();
+}
+
+static SearchEnginePtr SearchEngine::getInstance()
+{
+    SearchEnginePtr instance = m_pInstance.lock();
+
+    if (!instance)
+    {
+        instance.reset(new SearchEngine());
+        m_pInstance = instance;
+    }
+
+    return instance;
 }
 
 SearchEngine::~SearchEngine()

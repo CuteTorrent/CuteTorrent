@@ -62,8 +62,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "NotificationSystem.h"
 #include <libtorrent/peer_info.hpp>
 #include "RssItem.h"
+#ifdef Q_WS_WIN
 #include "qwinjumplist.h"
 #include "qwinjumplistcategory.h"
+#endif
 class Application;
 class ISerachProvider;
 class SearchResult;
@@ -72,14 +74,16 @@ Q_DECLARE_METATYPE(QList<int>)
 
 CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
     : BaseWindow(FullTitle, AllowResize, parent), m_httpLinkRegexp("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?"),
-	m_pPieceView(NULL), m_pJumpList(new QWinJumpList(this))
+    m_pPieceView(NULL), m_pSearchEngine(SearchEngine::getInstance())
+#ifdef Q_WS_WIN
+  , m_pJumpList(new QWinJumpList(this))
+#endif
 {
 	m_pSettings = QApplicationSettings::getInstance();
 	Application::setLanguage(m_pSettings->valueString("System", "Lang", "ru_RU"));
 	Application::setLanguageQt(m_pSettings->valueString("System", "Lang", "ru_RU"));
 	m_pStyleEngine = StyleEngene::getInstance();
-	m_pSearchEngine = new SearchEngine();
-	m_pStyleEngine->setStyle(m_pSettings->valueString("System", "Style", "CuteTorrent"));
+    m_pStyleEngine->setStyle(m_pSettings->valueString("System", "Style", "CuteTorrent"));
 	setWindowModality(Qt::NonModal);
 	setupCustomeWindow();
 	m_pUpdateTimer = new QTimer(this);
@@ -89,7 +93,7 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	m_pTorrentDisplayModel = new QTorrentDisplayModel(m_pTorrentListView, m_pTorrentFilterProxyModel, this);
 	m_pTorrentFilterProxyModel->setSourceModel(m_pTorrentDisplayModel);
 	m_pTorrentFilterProxyModel->setDynamicSortFilter(true);
-	m_pSearchDisplayModel = new QSearchDisplayModel(m_pSearchEngine, m_pTorrentListView, this);
+    m_pSearchDisplayModel = new QSearchDisplayModel(m_pTorrentListView, this);
 	m_pSearchItemDelegate = new QSearchItemDelegate(this);
 	m_pRssDisplayModel = new QRssDisplayModel(m_pTorrentListView, this);
 	m_pRssItemDelegate = new QRssItemDelegate(this);
@@ -104,7 +108,9 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	setupTabelWidgets();
 	setupGroupTreeWidget();
 	setupConnections();
+#ifdef Q_WS_WIN
 	setupJumpList();
+#endif
 	setupKeyMappings();
 	initWindowIcons();
 	m_pTracker = TorrentTracker::getInstance();
@@ -345,8 +351,7 @@ void CuteTorrentMainWindow::setupConnections()
 	connect(m_pStyleEngine, SIGNAL(styleChanged()), this, SLOT(initWindowIcons()));
 	connect(m_pStyleEngine, SIGNAL(styleChanged()), m_pTorrentDisplayModel, SLOT(setupContextMenu()));
 	connect(m_pTorrentListView, SIGNAL(doubleClicked(const QModelIndex&)), m_pTorrentDisplayModel, SLOT(OpenDirSelected()));
-	connect(m_pSearchEngine, SIGNAL(GotResults()), this, SLOT(OnGotSerachResults()));
-	connect(m_pTorrentSearchEdit, SIGNAL(textEdited(const QString&)), m_pSearchEdit, SLOT(setText(const QString&)));
+    connect(m_pTorrentSearchEdit, SIGNAL(textEdited(const QString&)), m_pSearchEdit, SLOT(setText(const QString&)));
 	connect(m_pSearchEdit, SIGNAL(textEdited(const QString&)), m_pTorrentSearchEdit, SLOT(setText(const QString&)));
 	connect(qApp, SIGNAL(aboutToQuit()), SLOT(OnQuit()));
 }
@@ -615,7 +620,9 @@ void CuteTorrentMainWindow::changeEvent(QEvent* event)
 		categoriesToStr[ISerachProvider::Movie] = tr("FILMS_CATEGORY");;
 		categoriesToStr[ISerachProvider::All] = tr("ALL_CATEGORY");
 		int prevSearchCat = m_pSearchCategory->currentIndex();
+#ifdef Q_WS_WIN
 		setupJumpList();
+#endif
 		m_pSearchCategory->clear();
 		m_pTorrentSearchCategory->clear();
 
@@ -718,9 +725,11 @@ void CuteTorrentMainWindow::HandleNewTorrent(const QString& path)
 	QApplication::alert(&dlg);
 	if (dlg.exec() == QDialog::Accepted)
 	{
+#ifdef Q_WS_WIN
 		QWinJumpListCategory* recent = m_pJumpList->recent();
 		recent->addDestination(path);
 		recent->setVisible(true);
+#endif
 	}
 }
 
@@ -1370,7 +1379,7 @@ void CuteTorrentMainWindow::setupGroupTreeWidget()
 	m_pGroupTreeWidget->resizeColumnToContents(0);
 	m_pGroupTreeWidget->expandAll();
 }
-
+#ifdef Q_WS_WIN
 void CuteTorrentMainWindow::setupTasksCategory()
 {
 	QWinJumpListCategory* tasks = m_pJumpList->tasks();
@@ -1393,7 +1402,7 @@ void CuteTorrentMainWindow::setupJumpList()
 	QWinJumpListCategory* recent = m_pJumpList->recent();
 	recent->setVisible(true);
 }
-
+#endif
 void CuteTorrentMainWindow::ChnageTorrentFilter()
 {
 	QTreeWidgetItem* item = m_pGroupTreeWidget->currentItem();
@@ -1591,11 +1600,6 @@ void CuteTorrentMainWindow::maximizeBtnClicked()
 void CuteTorrentMainWindow::minimizeBtnClicked()
 {
 	BaseWindow::minimizeBtnClicked();
-}
-
-void CuteTorrentMainWindow::OnGotSerachResults()
-{
-	//ToDo: implement showing of search results
 }
 
 bool CuteTorrentMainWindow::eventFilter(QObject* obj, QEvent* event)
