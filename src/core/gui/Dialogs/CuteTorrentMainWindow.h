@@ -38,6 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "ui_CustomWindow.h"
 #include "RconWebService.h"
 
+
 class Application;
 class FileViewModel;
 class FileViewSortProxyModel;
@@ -57,6 +58,7 @@ class TorrentStorrage;
 class TorrentTracker;
 class UpdateNotifier;
 class HtmlView;
+class QWinJumpList;
 class CuteTorrentMainWindow : public BaseWindow<QWidget> , private Ui::CustomWindow
 {
 	Q_OBJECT
@@ -125,6 +127,7 @@ private:
 	QTreeWidgetItem* rssTreeItem;
 	QTreeWidgetItem* searchTreeItem;
 	SearchEngine* m_pSearchEngine;
+	QWinJumpList* m_pJumpList;
 	void createTrayIcon();
 	void createActions();
 	void setupTray();
@@ -136,6 +139,8 @@ private:
 	void setupRssInfoTab();
 	void setupFileTabel();
 	void setupGroupTreeWidget();
+	void setupTasksCategory();
+	void setupJumpList();
 	void fillPieceDisplay(QSize);
 	void setupCustomeWindow();
 	void setupKeyMappings();

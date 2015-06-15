@@ -130,7 +130,8 @@ int main(int argc, char* argv[])
 		("help,h", "Produce this message")
 		("minimize,m", "Start application in minimized mode")
 		("debug,d", "Write debug logs")
-		("create_torrent,c", po::value<std::string>()->default_value(""), "Create a torrent from a specified path")
+		("create_torrent,c", po::value<std::string>()->implicit_value(""), "Create a torrent from a specified path")
+		("settings,s", "Open settings dialog")
 		("input-file", po::value<std::string>()->default_value(""), "Open a torrent file");
 		
 	po::positional_options_description p;
@@ -158,7 +159,7 @@ int main(int argc, char* argv[])
 	Application a(argc, argv);
 	a.setWindowIcon(QIcon(":/icons/app.ico"));
 	QString file2open = QString::fromUtf8(vm["input-file"].as<std::string>().c_str());
-	QString torrentCreationSource = QString::fromUtf8(vm["create_torrent"].as<std::string>().c_str());
+	
 
 	if(a.isRunning())
 	{
@@ -166,9 +167,14 @@ int main(int argc, char* argv[])
 		{
 			a.sendMessage(QString("open:%1").arg(file2open));
 		}
-		if (!torrentCreationSource.isEmpty())
+		if (vm.count("create_torrent"))
 		{
+			QString torrentCreationSource = QString::fromUtf8(vm["create_torrent"].as<std::string>().c_str());
 			a.sendMessage(QString("create_torrent:%1").arg(torrentCreationSource));
+		}
+		if (vm.count("settings"))
+		{
+			a.sendMessage(QString("settings:"));
 		}
 		return 0;
 	}
@@ -224,6 +230,15 @@ int main(int argc, char* argv[])
 		w.HandleNewTorrent(file2open);
 	}
 
+	if (vm.count("create_torrent"))
+	{
+		QString torrentCreationSource = QString::fromUtf8(vm["create_torrent"].as<std::string>().c_str());
+		w.ShowCreateTorrentDialog(torrentCreationSource);
+	}
+	if (vm.count("settings"))
+	{
+		w.OpenSettingsDialog();
+	}
 	int res = a.exec();
 	qDebug() << "Launch from console = " << console;
 	if (vm.count("debug") && fp)

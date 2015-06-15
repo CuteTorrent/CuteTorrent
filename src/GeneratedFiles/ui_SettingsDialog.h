@@ -67,13 +67,14 @@ public:
     QLabel *label_8;
     QLabel *label_26;
     QComboBox *styleComboBox;
+    QCheckBox *magnetAssociationCheckBox;
+    QSpacerItem *verticalSpacer_5;
+    QCheckBox *winShelItegrationCheckBox;
     QGroupBox *useNotificationsCheckBox;
     QGridLayout *gridLayout_13;
     QCheckBox *showTrackerErrorsCheckBox;
     QCheckBox *showDiskErrorsCheckBox;
     QCheckBox *showRssErrorsCheckBox;
-    QCheckBox *magnetAssociationCheckBox;
-    QSpacerItem *verticalSpacer_5;
     QWidget *restrictionTab;
     QGridLayout *gridLayout_30;
     QGroupBox *groupBox_2;
@@ -403,6 +404,20 @@ public:
 
         gridLayout_22->addWidget(styleComboBox, 1, 1, 1, 1);
 
+        magnetAssociationCheckBox = new QCheckBox(torrentTab);
+        magnetAssociationCheckBox->setObjectName(QString::fromUtf8("magnetAssociationCheckBox"));
+
+        gridLayout_22->addWidget(magnetAssociationCheckBox, 5, 0, 1, 1);
+
+        verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_22->addItem(verticalSpacer_5, 11, 0, 1, 4);
+
+        winShelItegrationCheckBox = new QCheckBox(torrentTab);
+        winShelItegrationCheckBox->setObjectName(QString::fromUtf8("winShelItegrationCheckBox"));
+
+        gridLayout_22->addWidget(winShelItegrationCheckBox, 6, 0, 1, 2);
+
         useNotificationsCheckBox = new QGroupBox(torrentTab);
         useNotificationsCheckBox->setObjectName(QString::fromUtf8("useNotificationsCheckBox"));
         useNotificationsCheckBox->setCheckable(true);
@@ -426,15 +441,6 @@ public:
 
 
         gridLayout_22->addWidget(useNotificationsCheckBox, 2, 2, 4, 2);
-
-        magnetAssociationCheckBox = new QCheckBox(torrentTab);
-        magnetAssociationCheckBox->setObjectName(QString::fromUtf8("magnetAssociationCheckBox"));
-
-        gridLayout_22->addWidget(magnetAssociationCheckBox, 5, 0, 1, 1);
-
-        verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_22->addItem(verticalSpacer_5, 11, 0, 1, 4);
 
         stackedWidget->addWidget(torrentTab);
         restrictionTab = new QWidget();
@@ -1392,14 +1398,15 @@ public:
         startMinimizedCheckBox->setText(QApplication::translate("SettingsDialog", "START_MINIMIZED", 0, QApplication::UnicodeUTF8));
         label_8->setText(QApplication::translate("SettingsDialog", "LANGUAGE", 0, QApplication::UnicodeUTF8));
         label_26->setText(QApplication::translate("SettingsDialog", "STYLE", 0, QApplication::UnicodeUTF8));
-        useNotificationsCheckBox->setTitle(QApplication::translate("SettingsDialog", "ENABLE_NOTIFICATIONS", 0, QApplication::UnicodeUTF8));
-        showTrackerErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_TRACKER_ERRORS", 0, QApplication::UnicodeUTF8));
-        showDiskErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_IO_ERRORS", 0, QApplication::UnicodeUTF8));
-        showRssErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_RSS_ERRORS", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         magnetAssociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         magnetAssociationCheckBox->setText(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION", 0, QApplication::UnicodeUTF8));
+        winShelItegrationCheckBox->setText(QApplication::translate("SettingsDialog", "ENABLE_SHELL_INTEGRATION", 0, QApplication::UnicodeUTF8));
+        useNotificationsCheckBox->setTitle(QApplication::translate("SettingsDialog", "ENABLE_NOTIFICATIONS", 0, QApplication::UnicodeUTF8));
+        showTrackerErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_TRACKER_ERRORS", 0, QApplication::UnicodeUTF8));
+        showDiskErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_IO_ERRORS", 0, QApplication::UnicodeUTF8));
+        showRssErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_RSS_ERRORS", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("SettingsDialog", "SPEED_RESRICTIONS", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         label_6->setWhatsThis(QApplication::translate("SettingsDialog", "UPLOAD_SPEED_LIMIT_WIT", 0, QApplication::UnicodeUTF8));

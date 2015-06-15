@@ -62,7 +62,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "NotificationSystem.h"
 #include <libtorrent/peer_info.hpp>
 #include "RssItem.h"
-
+#include "qwinjumplist.h"
+#include "qwinjumplistcategory.h"
 class Application;
 class ISerachProvider;
 class SearchResult;
@@ -70,7 +71,8 @@ class SearchResult;
 Q_DECLARE_METATYPE(QList<int>)
 
 CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
-    : BaseWindow(FullTitle, AllowResize, parent), m_httpLinkRegexp("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?"), m_pPieceView(NULL)
+    : BaseWindow(FullTitle, AllowResize, parent), m_httpLinkRegexp("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?"),
+	m_pPieceView(NULL), m_pJumpList(new QWinJumpList(this))
 {
 	m_pSettings = QApplicationSettings::getInstance();
 	Application::setLanguage(m_pSettings->valueString("System", "Lang", "ru_RU"));
@@ -102,6 +104,7 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	setupTabelWidgets();
 	setupGroupTreeWidget();
 	setupConnections();
+	setupJumpList();
 	setupKeyMappings();
 	initWindowIcons();
 	m_pTracker = TorrentTracker::getInstance();
@@ -612,6 +615,7 @@ void CuteTorrentMainWindow::changeEvent(QEvent* event)
 		categoriesToStr[ISerachProvider::Movie] = tr("FILMS_CATEGORY");;
 		categoriesToStr[ISerachProvider::All] = tr("ALL_CATEGORY");
 		int prevSearchCat = m_pSearchCategory->currentIndex();
+		setupJumpList();
 		m_pSearchCategory->clear();
 		m_pTorrentSearchCategory->clear();
 
@@ -712,14 +716,18 @@ void CuteTorrentMainWindow::HandleNewTorrent(const QString& path)
 	OpenTorrentDialog dlg(this);
 	dlg.SetData(path);
 	QApplication::alert(&dlg);
-	dlg.exec();
-	
+	if (dlg.exec() == QDialog::Accepted)
+	{
+		QWinJumpListCategory* recent = m_pJumpList->recent();
+		recent->addDestination(path);
+		recent->setVisible(true);
+	}
 }
 
 void CuteTorrentMainWindow::ShowCreateTorrentDialog(QString path)
 {
 	RaiseWindow();
-	CreateTorrentDialog dlg(this);
+	CreateTorrentDialog dlg;
 	dlg.setPath(path);
 	QApplication::alert(&dlg);
 	dlg.exec();
@@ -938,10 +946,9 @@ void CuteTorrentMainWindow::Retranslate()
 
 void CuteTorrentMainWindow::OpenSettingsDialog()
 {
-	SettingsDialog* dlg = new SettingsDialog(this);
-	connect(dlg, SIGNAL(needRetranslate()), this, SLOT(Retranslate()));
-	dlg->exec();
-	delete dlg;
+	SettingsDialog dlg(this);
+	connect(&dlg, SIGNAL(needRetranslate()), this, SLOT(Retranslate()));
+	dlg.exec();
 	setupGroupTreeWidget();
 	setupKeyMappings();
 	UpdateTabWidget();
@@ -1364,6 +1371,28 @@ void CuteTorrentMainWindow::setupGroupTreeWidget()
 	m_pGroupTreeWidget->expandAll();
 }
 
+void CuteTorrentMainWindow::setupTasksCategory()
+{
+	QWinJumpListCategory* tasks = m_pJumpList->tasks();
+	tasks->clear();
+
+	QStringList createTorrentArgs;
+	createTorrentArgs << "--create_torrent";
+	tasks->addLink(m_pStyleEngine->getIcon("create_torrent"), QApplication::translate("CustomWindow","MENU_CREATE_TORRENT"), QApplication::applicationFilePath(), createTorrentArgs);
+
+	QStringList settingsArgs;
+	settingsArgs << "--settings";
+	tasks->addLink(m_pStyleEngine->getIcon("menu_settings"), QApplication::translate("CustomWindow", "MENU_CONFIGURATION"), QApplication::applicationFilePath(), settingsArgs);
+
+	tasks->setVisible(true);
+}
+
+void CuteTorrentMainWindow::setupJumpList()
+{
+	setupTasksCategory();
+	QWinJumpListCategory* recent = m_pJumpList->recent();
+	recent->setVisible(true);
+}
 
 void CuteTorrentMainWindow::ChnageTorrentFilter()
 {
@@ -1853,7 +1882,7 @@ void CuteTorrentMainWindow::OnMessageRecived(QString message)
 		QString command = message.mid(0, commandEndIndex);
 		QString arg = message.mid(commandEndIndex + 1);
 		QStringList supportedCommands;
-		supportedCommands << "open" << "create_torrent";
+		supportedCommands << "open" << "create_torrent" << "settings";
 		switch (supportedCommands.indexOf(command))
 		{
 			case 0:
@@ -1864,6 +1893,11 @@ void CuteTorrentMainWindow::OnMessageRecived(QString message)
 			case 1:
 			{
 				ShowCreateTorrentDialog(arg);
+				break;
+			}
+			case 2:
+			{
+				OpenSettingsDialog();
 				break;
 			}
 		}

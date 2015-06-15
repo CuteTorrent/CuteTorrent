@@ -563,6 +563,11 @@ void QWinJumpList::clear()
     d->destroy();
 }
 
+void QWinJumpList::_q_rebuild()
+{
+	d_func()->_q_rebuild();
+}
+
 QT_END_NAMESPACE
 
 

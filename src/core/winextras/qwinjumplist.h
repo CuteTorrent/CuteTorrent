@@ -73,8 +73,8 @@ private:
     Q_DISABLE_COPY(QWinJumpList)
     Q_DECLARE_PRIVATE(QWinJumpList)
     QScopedPointer<QWinJumpListPrivate> d_ptr;
-
-    //Q_PRIVATE_SLOT(d_func(), void _q_rebuild())
+private slots:
+	void _q_rebuild();
 };
 
 QT_END_NAMESPACE

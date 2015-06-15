@@ -356,11 +356,11 @@
     <name>CustomMessageBox</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>MB_TITLE</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1097,7 +1097,7 @@ Download: %3</source>
     </message>
     <message>
         <source>INVALID_COMMAND_RECIVED</source>
-        <translation type="unfinished"></translation>
+        <translation>Получена неизветсная IPC комманда.</translation>
     </message>
 </context>
 <context>
@@ -1270,7 +1270,7 @@ Download: %3</source>
     </message>
     <message>
         <source>destructing torrent</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>timed out</source>
@@ -1278,7 +1278,7 @@ Download: %3</source>
     </message>
     <message>
         <source>upload to upload connection</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>uninteresting upload-only peer</source>
@@ -1302,7 +1302,7 @@ Download: %3</source>
     </message>
     <message>
         <source>too many piece requests while choked</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid piece packet</source>
@@ -2892,55 +2892,55 @@ Download: %3</source>
     </message>
     <message>
         <source>Torrent file</source>
-        <translation>Торрент файл</translation>
+        <translation type="obsolete">Торрент файл</translation>
     </message>
     <message>
         <source>STR_SETTINGS</source>
-        <translation>Настройки</translation>
+        <translation type="obsolete">Настройки</translation>
     </message>
     <message>
         <source>ERROR_GROUP_NAME_NOT_SET</source>
-        <translation>Имя группы должно состоять более чем из одного символа.</translation>
+        <translation type="obsolete">Имя группы должно состоять более чем из одного символа.</translation>
     </message>
     <message>
         <source>ERROR_NO_EXTENSIONS</source>
-        <translation>Должна быть указанно хотбы одно расширение файла.</translation>
+        <translation type="obsolete">Должна быть указанно хотбы одно расширение файла.</translation>
     </message>
     <message>
         <source>ERROR_NO_PATH</source>
-        <translation>Не указан путь сохранения.</translation>
+        <translation type="obsolete">Не указан путь сохранения.</translation>
     </message>
     <message>
         <source>ERROR_PATH_NOT_EXISTS</source>
-        <translation>Указанный путь не существует.</translation>
+        <translation type="obsolete">Указанный путь не существует.</translation>
     </message>
     <message>
         <source>SHURE_IN_CHANGING_GROUP %1</source>
-        <translation>Вы уверенны что хотите изменить группу %1</translation>
+        <translation type="obsolete">Вы уверенны что хотите изменить группу %1</translation>
     </message>
     <message>
         <source>Unable to find %1</source>
-        <translation>Неудалось найти группу %1</translation>
+        <translation type="obsolete">Неудалось найти группу %1</translation>
     </message>
     <message>
         <source>Open Directory</source>
-        <translation>Выбирите папку</translation>
+        <translation type="obsolete">Выбирите папку</translation>
     </message>
     <message>
         <source>WHERE_DT</source>
-        <translation>Путь к DaemonTools</translation>
+        <translation type="obsolete">Путь к DaemonTools</translation>
     </message>
     <message>
         <source>ERROR_SRT</source>
-        <translation>Ошибка</translation>
+        <translation type="obsolete">Ошибка</translation>
     </message>
     <message>
         <source>SCHEDULLER_UNKNOWN_TYPE</source>
-        <translation>Укажите тип задания</translation>
+        <translation type="obsolete">Укажите тип задания</translation>
     </message>
     <message>
         <source>SCHEDULLER_NO_NAME</source>
-        <translation>Укажите имя задания</translation>
+        <translation type="obsolete">Укажите имя задания</translation>
     </message>
     <message>
         <source>SEARCH_ITEM_NO_NAME</source>
@@ -3195,10 +3195,6 @@ Download: %3</source>
         <translation></translation>
     </message>
     <message>
-        <source>DaemonTools Lite (DTLite.exe);;DaemonTools PRO (DTAgent.exe);;Any File (*.*)</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>ADDITINAL_PEER_SOUECES</source>
         <translation>Источники дополнительных пиров</translation>
     </message>
@@ -3420,11 +3416,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ACTION_SETTINGS_EDIT_RSS_RULE</source>
-        <translation>Изменить правило</translation>
+        <translation type="obsolete">Изменить правило</translation>
     </message>
     <message>
         <source>ACTION_SETTINGS_DELETE_RSS_RULE</source>
-        <translation>Удалить правило</translation>
+        <translation type="obsolete">Удалить правило</translation>
     </message>
     <message>
         <source>+</source>
@@ -3453,6 +3449,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>ACTION_RSSLIST_MARK_AS_READ</source>
         <translation>Отметить как прочитанные</translation>
+    </message>
+    <message>
+        <source>ENABLE_SHELL_INTEGRATION</source>
+        <translation>Интегрироваться в Explorer</translation>
     </message>
 </context>
 <context>
