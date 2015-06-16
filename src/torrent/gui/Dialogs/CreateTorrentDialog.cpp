@@ -27,15 +27,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "Version.h"
 #include "messagebox.h"
 #include "StyledProgressBar.h"
+#ifdef Q_WS_WIN
 #include "qwintaskbarprogress.h"
 #include "qwintaskbarbutton.h"
+#endif
 CreateTorrentDialog::CreateTorrentDialog(QWidget* parent, Qt::WindowFlags) : BaseWindow(OnlyCloseButton, NoResize, parent)
 {
 	setupUi(this);
+#ifdef Q_WS_WIN
 	m_pTaskBarBtn = new QWinTaskbarButton(this);
 	m_pTaskBarBtn->setWindow(this);
 	m_pTaskBarProggres = m_pTaskBarBtn->progress();
 	m_pTaskBarProggres->setRange(0, 100);
+#endif
 	progressBar = new StyledProgressBar(m_centralWidget);
 	progressBar->setObjectName(QString::fromUtf8("progressBar"));
 	progressBar->setValue(0);
@@ -260,7 +264,9 @@ void CreateTorrentDialog::BeginCreate()
 
 	if(!save_path.isEmpty())
 	{
+#ifdef Q_WS_WIN
 		m_pTaskBarProggres->setVisible(true);
+#endif
 		QObject::connect(creator, SIGNAL(updateProgress(int)), this, SLOT(UpdateProgressBar(int)));
 		QObject::connect(creator, SIGNAL(ShowCreationSucces(QString)), this, SLOT(ShowCreationSucces(QString)));
 		QObject::connect(creator, SIGNAL(ShowCreationFailture(QString)), this, SLOT(ShowCreationFailture(QString)));
@@ -275,7 +281,9 @@ void CreateTorrentDialog::BeginCreate()
 }
 void CreateTorrentDialog::Cancel()
 {
+#ifdef Q_WS_WIN
 	m_pTaskBarProggres->setVisible(false);
+#endif
 	emit AbortCreation();
 	close();
 
@@ -291,7 +299,9 @@ void CreateTorrentDialog::ShowCreationSucces(QString filename)
 
 	progressBar->setValue(100);
 	createButton->setEnabled(true);
+#ifdef Q_WS_WIN
 	m_pTaskBarProggres->setVisible(false);
+#endif
 	//delete creator;
 	//creator = NULL;
 }
@@ -301,7 +311,9 @@ void CreateTorrentDialog::ShowCreationFailture(QString msg)
 	                           tr("CREATE_TORRENT_FILE_ERROR\n %1").arg(msg));
 	//progressBar->setValue(0);
 	createButton->setEnabled(true);
+#ifdef Q_WS_WIN
 	m_pTaskBarProggres->setVisible(false);
+#endif
 // 	delete creator;
 // 	creator = NULL;
 }
@@ -310,7 +322,9 @@ void CreateTorrentDialog::UpdateProgressBar(int val)
 	if(val <= progressBar->maximum())
 	{
 		progressBar->setValue(val);
+#ifdef Q_WS_WIN
 		m_pTaskBarProggres->setValue(val);
+#endif
 	}
 }
 
