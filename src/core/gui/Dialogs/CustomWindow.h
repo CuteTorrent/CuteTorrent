@@ -8,6 +8,7 @@ class BaseWindow : public T
 {
     Q_DISABLE_COPY(BaseWindow)
 public:
+	enum MoveType { MT_None, MT_NormalMove, MT_ShowRightHalfDesktopPreview, MT_ShowingRightHalfDesktopPreview, MT_ShowLeftHalfDesktopPreview, MT_ShowingLeftHalfDesktopPreview, MT_ShowMaximized, MT_ShowingMaximized };
 	enum ResizeMode { NoResize, AllowResize};
 	enum TitleMode { FullTitle = 0, MaximizeModeOff = 1, MinimizeModeOff = 2, MaxMinOff = MaximizeModeOff | MinimizeModeOff, OnlyCloseButton = MaxMinOff, FullScreenMode = 4 };
     BaseWindow(TitleMode titleMode, ResizeMode resizeMode, QWidget* parent = NULL);
@@ -17,6 +18,10 @@ public:
 	void setTitle(QString title);
 	bool isMaximized();
 protected:
+	MoveType m_moveType;
+	
+	MoveType detectMoveType(const QPoint pos);
+	bool m_bIsHalfDeskMode;
 	bool m_bIsMaximized;
 	QRect preMaximizeGeomentry;
 	QHBoxLayout* centralLayout;
@@ -110,6 +115,86 @@ public slots:
 };
 
 template <class T>
+typename BaseWindow<T>::MoveType BaseWindow<T>::detectMoveType(const QPoint pos)
+{
+	QRect desktopGeometry = QApplication::desktop()->availableGeometry();
+	if (isMaximized())
+	{
+		QRect windowGeometry = geometry();
+		if (abs(pos.y() - desktopGeometry.y()) <= PIXELS_TO_ACT)
+		{
+			return MT_ShowingMaximized;
+		}
+		else if (abs(pos.x() - desktopGeometry.x()) <= PIXELS_TO_ACT)
+		{
+			QRect halfDesctopRect = desktopGeometry;
+			halfDesctopRect.setWidth(halfDesctopRect.width() / 2);
+			//qDebug() << "MT_ShowingLeftHalfDesktopPreview" << windowGeometry << halfDesctopRect;
+			if (m_bIsHalfDeskMode)
+			{
+				return MT_ShowingLeftHalfDesktopPreview;
+			}
+			else
+			{
+				return MT_ShowLeftHalfDesktopPreview;
+			}
+		}
+		else if (abs(pos.x() - desktopGeometry.width() - desktopGeometry.x()) <= PIXELS_TO_ACT)
+		{
+			QRect halfDesctopRect = desktopGeometry;
+			halfDesctopRect.setX(halfDesctopRect.width() / 2);
+			if (m_bIsHalfDeskMode)
+			{
+				return MT_ShowingRightHalfDesktopPreview;
+			}
+			else
+			{
+				return MT_ShowRightHalfDesktopPreview;
+			}
+		}
+	}
+	else
+	{
+		if (abs(pos.y() - desktopGeometry.y()) <= PIXELS_TO_ACT)
+		{
+			return MT_ShowMaximized;
+		}
+		else
+		{
+			QRect windowGeometry = geometry();
+			if (abs(pos.x() - desktopGeometry.x()) <= PIXELS_TO_ACT)
+			{
+				QRect halfDesctopRect = desktopGeometry;
+				halfDesctopRect.setWidth(halfDesctopRect.width() / 2);
+				//qDebug() << "MT_ShowingLeftHalfDesktopPreview" << windowGeometry << halfDesctopRect;
+				if (m_bIsHalfDeskMode)
+				{
+					return MT_ShowingLeftHalfDesktopPreview;
+				}
+				else
+				{
+					return MT_ShowLeftHalfDesktopPreview;
+				}
+			}
+			else if (abs(pos.x() - desktopGeometry.width() - desktopGeometry.x()) <= PIXELS_TO_ACT)
+			{
+				QRect halfDesctopRect = desktopGeometry;
+				halfDesctopRect.setX(halfDesctopRect.width() / 2);
+				if (m_bIsHalfDeskMode)
+				{
+					return MT_ShowingRightHalfDesktopPreview;
+				}
+				else
+				{
+					return MT_ShowRightHalfDesktopPreview;
+				}
+			}
+		}
+	}
+	return MT_NormalMove;
+}
+
+template <class T>
 void BaseWindow<T>::setTitle(QString title)
 {
     if (getTitleLabel() != NULL)
@@ -141,6 +226,7 @@ void BaseWindow<T>::showNormal()
 	setGeometry(preMaximizeGeomentry);
 	T::showNormal();
 	m_bIsMaximized = false;
+	m_bIsHalfDeskMode = false;
 }
 
 template <class T>
@@ -313,32 +399,14 @@ void BaseWindow<T>::moveWindow(QMouseEvent* e)
 	{
 		QRect desktopGeometry = QApplication::desktop()->availableGeometry();
 		const QPoint pos = e->globalPos();
-		//qDebug() << "moveWindow" << pos << desktopGeometry;
-
-		if (abs(pos.y() - desktopGeometry.y()) <= PIXELS_TO_ACT)
+		if (isMaximized())
 		{
+			qDebug() << "Normal Move isMaximized() && !m_bIsHalfDeskMode";
 			maximizeBtnClicked();
+			dragPosition = QPoint(geometry().width() / 2, 0);
 		}
-		else if (abs(pos.x() - desktopGeometry.x()) <= PIXELS_TO_ACT)
-		{
-			QRect halfDesctopRect = desktopGeometry;
-			halfDesctopRect.setWidth(halfDesctopRect.width() / 2);
-			m_bIsMaximized = true;
-			preMaximizeGeomentry = geometry();
-			setGeometry(halfDesctopRect);
-		}
-		else if (abs(pos.x() - desktopGeometry.width() - desktopGeometry.x()) <= PIXELS_TO_ACT)
-		{
-			QRect halfDesctopRect = desktopGeometry;
-			halfDesctopRect.setX(halfDesctopRect.width() / 2);
-			m_bIsMaximized = true;
-			preMaximizeGeomentry = geometry();
-			setGeometry(halfDesctopRect);
-		}
-		else
-		{
-			move(pos - dragPosition);
-		}
+		move(pos - dragPosition);
+		
 
 		e->accept();
 	}
@@ -351,20 +419,21 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 	{
 		int xMouse = e->pos().x();
 		int yMouse = e->pos().y();
-		int wWidth = geometry().width();
-		int wHeight = geometry().height();
+		QRect windowGeoemtry = geometry();
+		int wWidth = windowGeoemtry.width();
+		int wHeight = windowGeoemtry.height();
 
 		if(cursor().shape() == Qt::SizeVerCursor)
 		{
 			if(resizeVerSup)
 			{
-				int newY = geometry().y() + yMouse;
+				int newY = windowGeoemtry.y() + yMouse;
 				int newHeight = wHeight - yMouse;
 
 				if(newHeight > minimumSizeHint().height())
 				{
 					resize(wWidth, newHeight);
-					move(geometry().x(), newY);
+					move(windowGeoemtry.x(), newY);
 				}
 			}
 			else
@@ -376,13 +445,13 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 		{
 			if(resizeHorEsq)
 			{
-				int newX = geometry().x() + xMouse;
+				int newX = windowGeoemtry.x() + xMouse;
 				int newWidth = wWidth - xMouse;
 
 				if(newWidth > minimumSizeHint().width())
 				{
 					resize(newWidth, wHeight);
-					move(newX, geometry().y());
+					move(newX, windowGeoemtry.y());
 				}
 			}
 			else
@@ -399,16 +468,16 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 
 			if(resizeDiagSupDer)
 			{
-				newX = geometry().x();
+				newX = windowGeoemtry.x();
 				newWidth = xMouse;
-				newY = geometry().y() + yMouse;
+				newY = windowGeoemtry.y() + yMouse;
 				newHeight = wHeight - yMouse;
 			}
 			else
 			{
-				newX = geometry().x() + xMouse;
+				newX = windowGeoemtry.x() + xMouse;
 				newWidth = wWidth - xMouse;
-				newY = geometry().y();
+				newY = windowGeoemtry.y();
 				newHeight = yMouse;
 			}
 
@@ -420,21 +489,21 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 			else if(newWidth >= minimumSizeHint().width())
 			{
 				resize(newWidth, wHeight);
-				move(newX, geometry().y());
+				move(newX, windowGeoemtry.y());
 			}
 			else if(newHeight >= minimumSizeHint().height())
 			{
 				resize(wWidth, newHeight);
-				move(geometry().x(), newY);
+				move(windowGeoemtry.x(), newY);
 			}
 		}
 		else if(cursor().shape() == Qt::SizeFDiagCursor)
 		{
 			if(resizeDiagSupEsq)
 			{
-				int newX = geometry().x() + xMouse;
+				int newX = windowGeoemtry.x() + xMouse;
 				int newWidth = wWidth - xMouse;
-				int newY = geometry().y() + yMouse;
+				int newY = windowGeoemtry.y() + yMouse;
 				int newHeight = wHeight - yMouse;
 
 				if(newWidth >= minimumSizeHint().width() && newHeight >= minimumSizeHint().height())
@@ -445,12 +514,12 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 				else if(newWidth >= minimumSizeHint().width())
 				{
 					resize(newWidth, wHeight);
-					move(newX, geometry().y());
+					move(newX, windowGeoemtry.y());
 				}
 				else if(newHeight >= minimumSizeHint().height())
 				{
 					resize(wWidth, newHeight);
-					move(geometry().x(), newY);
+					move(windowGeoemtry.x(), newY);
 				}
 			}
 			else
@@ -551,12 +620,14 @@ void BaseWindow<T>::mousePressEvent(QMouseEvent* e)
 template <class T>
 void BaseWindow<T>::mouseMoveEvent(QMouseEvent* e)
 {
-	int xMouse = e->globalPos().x();
-	int yMouse = e->globalPos().y();
-	int wLeft = geometry().left();
-	int wTop = geometry().top();
-	int wWidth = geometry().width();
-	int wHeight = geometry().height();
+	QPoint pos = e->globalPos();
+	int xMouse = pos.x();
+	int yMouse = pos.y();
+	QRect windowGemetry = geometry();
+	int wLeft = windowGemetry.left();
+	int wTop = windowGemetry.top();
+	int wWidth = windowGemetry.width();
+	int wHeight = windowGemetry.height();
 	bool isResizeEnabled = m_resizeMode == AllowResize;
 //	qDebug() << "mouseMoveEvent" << moveWidget << xMouse << yMouse << wWidth << wHeight << allowToResize << isResizeEnabled;
 
@@ -564,13 +635,86 @@ void BaseWindow<T>::mouseMoveEvent(QMouseEvent* e)
 	{
 		inResizeZone = false;
 
-		if(isMaximized())
+		QRect desktopGeometry = QApplication::desktop()->availableGeometry();
+		if (!desktopGeometry.contains(pos))
 		{
-			maximizeBtnClicked();
-			dragPosition = QPoint(geometry().width() / 2, 0);
+			if (xMouse > desktopGeometry.x() + desktopGeometry.width())
+			{
+				pos.setX(desktopGeometry.x() + desktopGeometry.width());
+				QCursor::setPos(desktopGeometry.x() + desktopGeometry.width(), yMouse);
+			}
+			if (xMouse < desktopGeometry.x())
+			{
+				pos.setX(desktopGeometry.x());
+				QCursor::setPos(desktopGeometry.x(), yMouse);
+			}
+			if (yMouse > desktopGeometry.y() + desktopGeometry.height())
+			{
+				pos.setX(desktopGeometry.y() + desktopGeometry.height());
+				QCursor::setPos(xMouse, desktopGeometry.y() + desktopGeometry.height());
+			}
+			if (xMouse < desktopGeometry.y())
+			{
+				pos.setX(desktopGeometry.y());
+				QCursor::setPos(xMouse, desktopGeometry.y());
+			}
 		}
-
-		moveWindow(e);
+		MoveType prevMoveType = m_moveType;
+		m_moveType = detectMoveType(pos);
+		qDebug() << "MoveType" << m_moveType;
+		switch (m_moveType)
+		{
+			case MT_None:
+			{
+				break;
+			}
+			case MT_NormalMove:
+			{
+				moveWindow(e);
+				break;
+			}
+			case MT_ShowRightHalfDesktopPreview:
+			{
+				QRect halfDesctopRect = desktopGeometry;
+				halfDesctopRect.setX(halfDesctopRect.width() / 2);
+				m_bIsMaximized = true;
+				m_bIsHalfDeskMode = true;
+				preMaximizeGeomentry = windowGemetry;
+				setGeometry(halfDesctopRect);
+				break;
+			}
+			case MT_ShowingRightHalfDesktopPreview:
+			{
+				e->ignore();
+				break;
+			}
+			case MT_ShowLeftHalfDesktopPreview:
+			{
+				qDebug() << "ShowLeftHalfDesktopPreview";
+				QRect halfDesctopRect = desktopGeometry;
+				halfDesctopRect.setWidth(halfDesctopRect.width() / 2);
+				m_bIsMaximized = true;
+				m_bIsHalfDeskMode = true;
+				preMaximizeGeomentry = windowGemetry;
+				setGeometry(halfDesctopRect);
+				break;
+			}
+			case MT_ShowingLeftHalfDesktopPreview:
+			{
+				e->ignore();
+				break;
+			}
+			case MT_ShowMaximized:
+			{
+				maximizeBtnClicked();
+				break;
+			}
+			case MT_ShowingMaximized:
+			{
+				break;
+			}
+			default: break;
+		}
 	}
 	else if(allowToResize)
 	{

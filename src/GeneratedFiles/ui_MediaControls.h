@@ -189,6 +189,13 @@ public:
 
         gridLayout->setColumnMinimumWidth(0, 45);
         gridLayout->setColumnMinimumWidth(1, 50);
+        gridLayout->setColumnMinimumWidth(2, 30);
+        gridLayout->setColumnMinimumWidth(3, 30);
+        gridLayout->setColumnMinimumWidth(4, 30);
+        gridLayout->setColumnMinimumWidth(5, 30);
+        gridLayout->setColumnMinimumWidth(6, 30);
+        gridLayout->setColumnMinimumWidth(7, 30);
+        gridLayout->setColumnMinimumWidth(8, 30);
         gridLayout->setColumnMinimumWidth(9, 20);
         gridLayout->setColumnMinimumWidth(10, 25);
 

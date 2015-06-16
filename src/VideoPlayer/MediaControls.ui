@@ -27,7 +27,7 @@ background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgb
 }
 </string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" columnminimumwidth="45,50,0,0,0,0,0,0,0,20,25">
+  <layout class="QGridLayout" name="gridLayout" columnminimumwidth="45,50,30,30,30,30,30,30,30,20,25">
    <property name="sizeConstraint">
     <enum>QLayout::SetMinimumSize</enum>
    </property>
