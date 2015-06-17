@@ -135,7 +135,7 @@ public:
 	
 	bool AddMagnet(torrent_handle h, QString SavePath, QString group = "", QMap< QString, quint8> filepriorities = QMap<QString, quint8>());
 	bool AddTorrent(QString path, QString name, QString save_path, error_code& ec, QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), QString group = "", bool sequntial = false);
- #if LIBTORRENT_VERSION_NUM >= 100000
+ #if LIBTORRENT_VERSION_NUM >= 10000
 	void AddPortMapping(session::protocol_type type, ushort sourcePoert, ushort destPort);
 #else
     void AddPortMapping(upnp::protocol_type type, ushort sourcePoert, ushort destPort);

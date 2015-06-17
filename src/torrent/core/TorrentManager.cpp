@@ -52,7 +52,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <libtorrent/ip_filter.hpp>
 #include <libtorrent/lazy_entry.hpp>
 #include <libtorrent/session_status.hpp>
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
 #include <libtorrent/sha1_hash.hpp>
 #endif
 #include <libtorrent/size_type.hpp>
@@ -68,7 +68,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "NotificationSystem.h"
 using namespace libtorrent;
 
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
 int load_file(std::string const& filename, std::vector<char>& v, error_code& ec, int limit = 8000000)
 {
 	ec.clear();
@@ -177,7 +177,7 @@ TorrentManager::TorrentManager() : m_pNotificationSys(NotificationSystem::getIns
 
 		session_settings s_settings = readSettings();
 		// upnp
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
         m_pTorrentSession->start_upnp();
 #else
         m_pUpnp = m_pTorrentSession->start_upnp();
@@ -375,7 +375,7 @@ void TorrentManager::handle_alert(alert* a)
 					bool isSeed = torrent->isSeeding();
 					e["torrent_group"] = torrent->GetGroup().toUtf8().data();
                     e["torrent_name"] =
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
                             h.status(torrent_handle::query_name).name;
 #else
                             h.name();
@@ -442,7 +442,7 @@ void TorrentManager::handle_alert(alert* a)
 				try
 				{
 
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
                    boost::intrusive_ptr<torrent_info const> ti = h.torrent_file();
                    if (ti != NULL)
                    {
@@ -613,7 +613,7 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 	if (load_file(filename.c_str(), buf, ec) == 0)
 	{
 		// p.flags |= add_torrent_params::flag_seed_mode;
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
 		p.resume_data = buf;
 #else
         p.resume_data = &buf;
@@ -662,7 +662,7 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 				filepriorities.push_back(1);
 			}
 		}
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
         p.file_priorities = filepriorities;
 #else
         p.file_priorities = &filepriorities;
@@ -683,7 +683,7 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 	p.storage_mode = storage_mode_sparse;
 	p.flags |= add_torrent_params::flag_paused;
 	p.flags |= add_torrent_params::flag_duplicate_is_error;
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
 	if (sequntial)
 	{
 		p.flags |= add_torrent_params::flag_sequential_download;
@@ -960,7 +960,7 @@ void TorrentManager::SaveSession()
 			{
 				e["torrent_group"] = torrent->GetGroup().toStdString();
                 e["torrent_name"] =
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
                         h.status(torrent_handle::query_name).name;
 #else
                         h.name();
@@ -1115,7 +1115,7 @@ openmagnet_info* TorrentManager::GetTorrentInfo(const torrent_handle& handle)
 	{
         openmagnet_info* info = new openmagnet_info;
 
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
         boost::intrusive_ptr<torrent_info const> ti = handle.torrent_file();
         info->size = ti->total_size();
         info->name = QString::fromUtf8(ti->name().c_str());
@@ -1246,7 +1246,7 @@ torrent_handle TorrentManager::ProcessMagnetLink(QString link, error_code& ec)
 
 	if (load_file(filename.c_str(), buf, ec) == 0)
 	{
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
 		add_info.resume_data = buf;
 #else
         add_info.resume_data = &buf;
@@ -1305,7 +1305,7 @@ bool TorrentManager::AddMagnet(torrent_handle h, QString SavePath, QString group
 	{
 		std::vector<int> filepriorities;
         file_storage storrage =
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
                         h.torrent_file()->files();
 #else
                         h.get_torrent_info().files();
@@ -1327,7 +1327,7 @@ bool TorrentManager::AddMagnet(torrent_handle h, QString SavePath, QString group
 		filePriorities.~QMap();
 	}
     std::string save_path =
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
             h.status(torrent_handle::query_save_path).save_path;
 #else
             h.save_path();
@@ -1441,7 +1441,7 @@ Torrent* TorrentManager::GetTorrentByInfoHash(QString infoHash)
 
 	return NULL;
 }
- #if LIBTORRENT_VERSION_NUM >= 100000
+ #if LIBTORRENT_VERSION_NUM >= 10000
 void TorrentManager::AddPortMapping(session::protocol_type type, ushort external_port, ushort local_port)
 {
     m_pTorrentSession->add_port_mapping(type, external_port, local_port);
@@ -1459,7 +1459,7 @@ void TorrentManager::RereshPortForwardingSettings()
 {
 	if (m_pTorrentSessionSettings->valueBool("Torrent", "use_port_forwarding", true))
 	{
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
 		m_pTorrentSession->start_upnp();
 #else
         m_pUpnp = m_pTorrentSession->start_upnp();

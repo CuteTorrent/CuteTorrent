@@ -128,7 +128,14 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 		if (m_pSettings->valueBool("WebControl", "enable_upnp", false))
 		{
 			int port = m_pSettings->valueInt("WebControl", "port", 8080);
-            m_pTorrentManager->AddPortMapping(upnp::tcp, port, port);
+            m_pTorrentManager->AddPortMapping(
+#if LIBTORRENT_VERSION_NUM >= 10000
+				session::tcp,
+#else
+				upnp::tcp,
+#endif
+				
+				port, port);
 		}
 	}
 

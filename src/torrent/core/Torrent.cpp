@@ -161,7 +161,7 @@ void Torrent::UpdateImageFiles()
 	if(m_hTorrent.is_valid())
 	{
         file_storage storrgae =
-        #if LIBTORRENT_VERSION_NUM >= 100000
+        #if LIBTORRENT_VERSION_NUM >= 10000
                 m_hTorrent.torrent_file()->files();
         #else
                 m_hTorrent.get_torrent_info().files();
@@ -180,7 +180,7 @@ void Torrent::UpdateImageFiles()
 			if (mayMount)
 			{
                 std::string save_path =
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
                         m_hTorrent.status(torrent_handle::query_save_path).save_path;
 #else
                         m_hTorrent.save_path();
@@ -209,7 +209,7 @@ Torrent::Torrent(torrent_handle* hTorrent, QString group)
 	}
 
     file_storage storrgae =
-        #if LIBTORRENT_VERSION_NUM >= 100000
+        #if LIBTORRENT_VERSION_NUM >= 10000
                 m_hTorrent.torrent_file()->files();
         #else
                 m_hTorrent.get_torrent_info().files();
@@ -229,7 +229,7 @@ Torrent::Torrent(torrent_handle* hTorrent, QString group)
 		if (mayMount)
 		{
             std::string save_path =
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
                     m_hTorrent.status(torrent_handle::query_save_path).save_path;
 #else
                     m_hTorrent.save_path();
@@ -315,7 +315,7 @@ QString Torrent::GetName() const
 	if(m_hTorrent.is_valid())
 	{
         return QString::fromUtf8(
-            #if LIBTORRENT_VERSION_NUM >= 100000
+            #if LIBTORRENT_VERSION_NUM >= 10000
                                  m_hTorrent.status(torrent_handle::query_name).name.c_str()
             #else
                                 m_hTorrent.name().c_str()
@@ -436,7 +436,7 @@ QString Torrent::GetSavePath()
 	{
         return QDir::toNativeSeparators(
                     QString::fromUtf8(
-                #if LIBTORRENT_VERSION_NUM >= 100000
+                #if LIBTORRENT_VERSION_NUM >= 10000
                                         m_hTorrent.status(torrent_handle::query_save_path).save_path.c_str()
                 #else
                                         m_hTorrent.save_path().c_str()
@@ -535,7 +535,7 @@ files_info Torrent::GetFileDownloadInfo()
 	if(m_hTorrent.is_valid())
 	{
         filesInfo.storrage =
-        #if LIBTORRENT_VERSION_NUM >= 100000
+        #if LIBTORRENT_VERSION_NUM >= 10000
                 m_hTorrent.torrent_file()->files();
         #else
                 m_hTorrent.get_torrent_info().files();
@@ -557,8 +557,8 @@ files_info Torrent::GetFileDownloadInfo()
 
 bool Torrent::isSingleFile()
 {
-    #if LIBTORRENT_VERSION_NUM >= 100000
-            return m_hTorrent.torrent_file()->files()->num_files() == 1;
+    #if LIBTORRENT_VERSION_NUM >= 10000
+            return m_hTorrent.torrent_file()->files().num_files() == 1;
     #else
             return m_hTorrent.get_torrent_info().files().num_files() == 1;
     #endif
@@ -592,8 +592,8 @@ int Torrent::GetPieceCount()
 {
 	if(m_hTorrent.is_valid())
 	{
-#if LIBTORRENT_VERSION_NUM >= 100000
-        return m_hTorrent.torrent_file()->files()->num_files() == 1;
+#if LIBTORRENT_VERSION_NUM >= 10000
+        return m_hTorrent.torrent_file()->files().num_files() == 1;
 #else
         return m_hTorrent.get_torrent_info().files().num_pieces();
 #endif
@@ -657,7 +657,7 @@ QString Torrent::GetDiscribtion()
 	if(m_hTorrent.is_valid())
 	{
         return QString::fromUtf8(
-            #if LIBTORRENT_VERSION_NUM >= 100000
+            #if LIBTORRENT_VERSION_NUM >= 10000
                     m_hTorrent.torrent_file()->comment().c_str()
             #else
                     m_hTorrent.get_torrent_info().comment().c_str()

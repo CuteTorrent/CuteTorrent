@@ -2892,55 +2892,55 @@ Download: %3</source>
     </message>
     <message>
         <source>Torrent file</source>
-        <translation type="obsolete">Торрент файл</translation>
+        <translation type="unfinished">Торрент файл</translation>
     </message>
     <message>
         <source>STR_SETTINGS</source>
-        <translation type="obsolete">Настройки</translation>
+        <translation type="unfinished">Настройки</translation>
     </message>
     <message>
         <source>ERROR_GROUP_NAME_NOT_SET</source>
-        <translation type="obsolete">Имя группы должно состоять более чем из одного символа.</translation>
+        <translation type="unfinished">Имя группы должно состоять более чем из одного символа.</translation>
     </message>
     <message>
         <source>ERROR_NO_EXTENSIONS</source>
-        <translation type="obsolete">Должна быть указанно хотбы одно расширение файла.</translation>
+        <translation type="unfinished">Должна быть указанно хотбы одно расширение файла.</translation>
     </message>
     <message>
         <source>ERROR_NO_PATH</source>
-        <translation type="obsolete">Не указан путь сохранения.</translation>
+        <translation type="unfinished">Не указан путь сохранения.</translation>
     </message>
     <message>
         <source>ERROR_PATH_NOT_EXISTS</source>
-        <translation type="obsolete">Указанный путь не существует.</translation>
+        <translation type="unfinished">Указанный путь не существует.</translation>
     </message>
     <message>
         <source>SHURE_IN_CHANGING_GROUP %1</source>
-        <translation type="obsolete">Вы уверенны что хотите изменить группу %1</translation>
+        <translation type="unfinished">Вы уверенны что хотите изменить группу %1</translation>
     </message>
     <message>
         <source>Unable to find %1</source>
-        <translation type="obsolete">Неудалось найти группу %1</translation>
+        <translation type="unfinished">Неудалось найти группу %1</translation>
     </message>
     <message>
         <source>Open Directory</source>
-        <translation type="obsolete">Выбирите папку</translation>
+        <translation type="unfinished">Выбирите папку</translation>
     </message>
     <message>
         <source>WHERE_DT</source>
-        <translation type="obsolete">Путь к DaemonTools</translation>
+        <translation type="unfinished">Путь к DaemonTools</translation>
     </message>
     <message>
         <source>ERROR_SRT</source>
-        <translation type="obsolete">Ошибка</translation>
+        <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
         <source>SCHEDULLER_UNKNOWN_TYPE</source>
-        <translation type="obsolete">Укажите тип задания</translation>
+        <translation type="unfinished">Укажите тип задания</translation>
     </message>
     <message>
         <source>SCHEDULLER_NO_NAME</source>
-        <translation type="obsolete">Укажите имя задания</translation>
+        <translation type="unfinished">Укажите имя задания</translation>
     </message>
     <message>
         <source>SEARCH_ITEM_NO_NAME</source>
@@ -3416,11 +3416,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ACTION_SETTINGS_EDIT_RSS_RULE</source>
-        <translation type="obsolete">Изменить правило</translation>
+        <translation type="unfinished">Изменить правило</translation>
     </message>
     <message>
         <source>ACTION_SETTINGS_DELETE_RSS_RULE</source>
-        <translation type="obsolete">Удалить правило</translation>
+        <translation type="unfinished">Удалить правило</translation>
     </message>
     <message>
         <source>+</source>
@@ -3453,6 +3453,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>ENABLE_SHELL_INTEGRATION</source>
         <translation>Интегрироваться в Explorer</translation>
+    </message>
+    <message>
+        <source>DaemonTools Lite (DTLite.exe);;DaemonTools PRO (DTAgent.exe);;Any File (*.*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

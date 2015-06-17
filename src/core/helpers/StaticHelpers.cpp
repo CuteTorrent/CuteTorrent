@@ -206,7 +206,7 @@ QString StaticHelpers::GetBaseSuffix(const file_storage& storrage)
 
 QString StaticHelpers::translateLibTorrentError(error_code const& ec)
 {
-#if LIBTORRENT_VERSION_NUM >= 100000
+#if LIBTORRENT_VERSION_NUM >= 10000
 	if (ec.category() == get_libtorrent_category())
 	{
 		return translateSessionError(ec);

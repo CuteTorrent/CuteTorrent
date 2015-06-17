@@ -240,10 +240,12 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 
         #if LIBTORRENT_VERSION_NUM >= 10000
                     dataSource.torrent_file()->files();
+			storrage_index = storrage.file_index_at_offset(file.offset);
         #else
                     dataSource.get_torrent_info().files();
+			storrage_index = storrage.file_index(*storrage.file_at_offset(file.offset));
         #endif
-            storrage_index = storrage.file_index(*storrage.file_at_offset(file.offset));
+          
 		}
 
 		switch(column)
@@ -573,7 +575,12 @@ float FileViewModel::CalculateFolderReady(FileViewTreeItem* item) const
 		if(child->GetType() == FileViewTreeItem::FILE)
 		{
 			file_entry fe = child->GetFileEntery();
-            int storrage_index = storrage.file_index(*storrage.file_at_offset(fe.offset));
+#if LIBTORRENT_VERSION_NUM >= 10000
+			
+			int storrage_index = storrage.file_index_at_offset(fe.offset);
+#else
+			int storrage_index = storrage.file_index(*storrage.file_at_offset(fe.offset));
+#endif
 			result += m_Progresses[storrage_index] * 100.0f / fe.size;
 		}
 		else
@@ -593,10 +600,12 @@ void FileViewModel::SetItemPriority(FileViewTreeItem* item, int priority, const 
 
     #if LIBTORRENT_VERSION_NUM >= 10000
                 dataSource.torrent_file()->files();
+		int file_index = storrage.file_index_at_offset(item->GetFileEntery().offset);
     #else
                 dataSource.get_torrent_info().files();
+		int file_index = storrage.file_index(*storrage.file_at_offset(item->GetFileEntery().offset));
     #endif
-        int file_index = storrage.file_index(*storrage.file_at_offset(item->GetFileEntery().offset));
+       
 		dataSource.file_priority(file_index, priority);
 		emit dataChanged(sourceIndex, sourceIndex);
 	}
