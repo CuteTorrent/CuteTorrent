@@ -160,7 +160,13 @@ void Torrent::UpdateImageFiles()
 
 	if(m_hTorrent.is_valid())
 	{
-		file_storage storrgae = m_hTorrent.torrent_file()->files();
+        file_storage storrgae =
+        #if LIBTORRENT_VERSION_NUM >= 100000
+                m_hTorrent.torrent_file()->files();
+        #else
+                m_hTorrent.get_torrent_info().files();
+        #endif
+
 		std::vector<size_type> progress;
 		m_hTorrent.file_progress(progress);
 
@@ -173,7 +179,13 @@ void Torrent::UpdateImageFiles()
 
 			if (mayMount)
 			{
-				imageFiles << QString::fromUtf8(m_hTorrent.status(torrent_handle::query_save_path).save_path.c_str()) + QString::fromUtf8(storrgae.file_path(i).c_str());
+                std::string save_path =
+#if LIBTORRENT_VERSION_NUM >= 100000
+                        m_hTorrent.status(torrent_handle::query_save_path).save_path;
+#else
+                        m_hTorrent.save_path();
+#endif
+                imageFiles << QString::fromUtf8(save_path.c_str()) + QString::fromUtf8(storrgae.file_path(i).c_str());
 			}
 		}
 	}
@@ -196,7 +208,12 @@ Torrent::Torrent(torrent_handle* hTorrent, QString group)
 		return;
 	}
 
-	file_storage storrgae = m_hTorrent.torrent_file()->files();
+    file_storage storrgae =
+        #if LIBTORRENT_VERSION_NUM >= 100000
+                m_hTorrent.torrent_file()->files();
+        #else
+                m_hTorrent.get_torrent_info().files();
+        #endif
 	this->group = group;
 	std::vector<size_type> progress;
 	m_hTorrent.file_progress(progress);
@@ -211,7 +228,13 @@ Torrent::Torrent(torrent_handle* hTorrent, QString group)
 
 		if (mayMount)
 		{
-			imageFiles << QString::fromUtf8(m_hTorrent.status(torrent_handle::query_save_path).save_path.c_str()) + QString::fromUtf8(storrgae.file_path(i).c_str());
+            std::string save_path =
+#if LIBTORRENT_VERSION_NUM >= 100000
+                    m_hTorrent.status(torrent_handle::query_save_path).save_path;
+#else
+                    m_hTorrent.save_path();
+#endif
+            imageFiles << QString::fromUtf8(save_path.c_str()) + QString::fromUtf8(storrgae.file_path(i).c_str());
 		}
 
 		if (fileReady || m_hTorrent.file_priority(i) > 0)
@@ -291,7 +314,14 @@ QString Torrent::GetName() const
 {
 	if(m_hTorrent.is_valid())
 	{
-		return QString::fromUtf8(m_hTorrent.status(torrent_handle::query_name).name.c_str());
+        return QString::fromUtf8(
+            #if LIBTORRENT_VERSION_NUM >= 100000
+                                 m_hTorrent.status(torrent_handle::query_name).name.c_str()
+            #else
+                                m_hTorrent.name().c_str()
+            #endif
+
+                    );
 	}
 
 	return "";
@@ -404,7 +434,14 @@ QString Torrent::GetSavePath()
 {
 	if(m_hTorrent.is_valid())
 	{
-		return QDir::toNativeSeparators(QString::fromUtf8(m_hTorrent.status(torrent_handle::query_save_path).save_path.c_str()));
+        return QDir::toNativeSeparators(
+                    QString::fromUtf8(
+                #if LIBTORRENT_VERSION_NUM >= 100000
+                                        m_hTorrent.status(torrent_handle::query_save_path).save_path.c_str()
+                #else
+                                        m_hTorrent.save_path().c_str()
+                #endif
+                                            ));
 	}
 
 	return "";
@@ -497,7 +534,12 @@ files_info Torrent::GetFileDownloadInfo()
 
 	if(m_hTorrent.is_valid())
 	{
-		filesInfo.storrage = m_hTorrent.torrent_file()->files();
+        filesInfo.storrage =
+        #if LIBTORRENT_VERSION_NUM >= 100000
+                m_hTorrent.torrent_file()->files();
+        #else
+                m_hTorrent.get_torrent_info().files();
+        #endif
 		std::vector<libtorrent::size_type> downloadedSizes;
 		m_hTorrent.file_progress(downloadedSizes);
 		filesInfo.progresses.reserve(downloadedSizes.size());
@@ -515,7 +557,11 @@ files_info Torrent::GetFileDownloadInfo()
 
 bool Torrent::isSingleFile()
 {
-	return m_hTorrent.torrent_file()->num_files() == 1;
+    #if LIBTORRENT_VERSION_NUM >= 100000
+            return m_hTorrent.torrent_file()->files()->num_files() == 1;
+    #else
+            return m_hTorrent.get_torrent_info().files().num_files() == 1;
+    #endif
 }
 
 void Torrent::SetFilePriority(int index, int prioryty)
@@ -546,7 +592,11 @@ int Torrent::GetPieceCount()
 {
 	if(m_hTorrent.is_valid())
 	{
-		return m_hTorrent.torrent_file()->num_pieces();
+#if LIBTORRENT_VERSION_NUM >= 100000
+        return m_hTorrent.torrent_file()->files()->num_files() == 1;
+#else
+        return m_hTorrent.get_torrent_info().files().num_pieces();
+#endif
 	}
 
 	return 0;
@@ -559,7 +609,7 @@ QVector<int> Torrent::GetDownloadedPieces()
 
 	if(m_hTorrent.is_valid())
 	{
-		int max_num = m_hTorrent.torrent_file()->num_pieces();
+        int max_num = GetPieceCount();
 		data.resize(max_num);
 		data.clear_all();
 
@@ -585,7 +635,7 @@ QVector<int> Torrent::GetDownloadingPieces()
 	{
 		std::vector<partial_piece_info> pieces;
 		m_hTorrent.get_download_queue(pieces);
-		int max_num = m_hTorrent.torrent_file()->num_pieces();
+        int max_num = GetPieceCount();
 		data.resize(max_num);
 		data.clear_all();
 
@@ -606,7 +656,13 @@ QString Torrent::GetDiscribtion()
 {
 	if(m_hTorrent.is_valid())
 	{
-		return QString::fromUtf8(m_hTorrent.torrent_file()->comment().c_str());
+        return QString::fromUtf8(
+            #if LIBTORRENT_VERSION_NUM >= 100000
+                    m_hTorrent.torrent_file()->comment().c_str()
+            #else
+                    m_hTorrent.get_torrent_info().comment().c_str()
+            #endif
+                    );
 	}
 
 	return "";

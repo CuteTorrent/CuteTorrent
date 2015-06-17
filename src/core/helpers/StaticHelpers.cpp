@@ -203,8 +203,10 @@ QString StaticHelpers::GetBaseSuffix(const file_storage& storrage)
 	return base_suffix;
 }
 
+
 QString StaticHelpers::translateLibTorrentError(error_code const& ec)
 {
+#if LIBTORRENT_VERSION_NUM >= 100000
 	if (ec.category() == get_libtorrent_category())
 	{
 		return translateSessionError(ec);
@@ -234,7 +236,7 @@ QString StaticHelpers::translateLibTorrentError(error_code const& ec)
 	{
 		return translateUpnpError(ec);
 	}
-
+#endif
 	return QString::fromUtf8(ec.message().c_str());
 }
 

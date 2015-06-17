@@ -7,15 +7,13 @@ TARGET = CuteTorrent
 DESTDIR = ../Win32/Release
 QT += core gui network phonon
 CONFIG += release
-DEFINES += QT_DLL QT_PHONON_LIB QT_NETWORK_LIB QT_HAVE_MMX QT_HAVE_3DNOW QT_HAVE_SSE QT_HAVE_MMXEXT QT_HAVE_SSE2 BOOST_ASIO_SEPARATE_COMPILATION TORRENT_NO_DEPRECATE
+DEFINES += QT_DLL QT_PHONON_LIB QT_NETWORK_LIB QT_HAVE_MMX QT_HAVE_3DNOW QT_HAVE_SSE QT_HAVE_MMXEXT QT_HAVE_SSE2 BOOST_ASIO_SEPARATE_COMPILATION
 INCLUDEPATH += $(QT_DIR)/include/QtCore \
     $(QT_DIR)/include/QtNetwork \
     $(QT_DIR)/include/QtGui \
     $(QT_DIR)/include/phonon \
     $(QT_DIR)/include \
     ./qtsingleapplication/src \
-    ./../ThirdParties/boost_1_55_0 \
-    ./../ThirdParties/libtorrent/include \
     ./GeneratedFiles \
     ./GeneratedFiles/Release \
     $(QT_DIR)/include/phonon_compat \
@@ -70,7 +68,7 @@ LIBS += -L"./../ThirdParties/openssl/lib/VC/static" \
     -L"$(QT_DIR)/lib" \
     -L"./../ThirdParties/libtorrent/lib" \
     -L"./../ThirdParties/boost_1_55_0/stage/lib" \
-    -ltorrent \
+    -ltorrent-rasterbar \
     -lboost_system \
     -lboost_program_options \
     -lssl \

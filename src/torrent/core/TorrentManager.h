@@ -24,10 +24,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "libtorrent/error_code.hpp"
 #include "libtorrent/session_settings.hpp"
 #include "libtorrent/torrent_handle.hpp"
+#include "libtorrent/version.hpp"
+#include "libtorrent/upnp.hpp"
+#ifdef Q_WS_WIN
 #pragma warning (disable: 4005)
 #pragma warning (disable: 4100)
 #pragma warning (disable: 4267)
-
+#endif
 #include <boost/bind.hpp>
 
 #include "libtorrent/alert_types.hpp"
@@ -66,7 +69,6 @@ class TorrentStorrage;
 namespace libtorrent
 {
 class alert;
-class sha1_hash;
 }  // namespace libtorrent
 struct openmagnet_info;
 struct opentorrent_info;
@@ -94,6 +96,9 @@ protected:
 
 
 private:
+#if LIBTORRENT_VERSION_NUM < 100000
+    upnp* m_pUpnp;
+#endif
 	void handle_alert(alert*);
 	void writeSettings();
 	TorrentStorrage* m_pTorrentStorrage;
@@ -130,7 +135,11 @@ public:
 	
 	bool AddMagnet(torrent_handle h, QString SavePath, QString group = "", QMap< QString, quint8> filepriorities = QMap<QString, quint8>());
 	bool AddTorrent(QString path, QString name, QString save_path, error_code& ec, QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), QString group = "", bool sequntial = false);
+ #if LIBTORRENT_VERSION_NUM >= 100000
 	void AddPortMapping(session::protocol_type type, ushort sourcePoert, ushort destPort);
+#else
+    void AddPortMapping(upnp::protocol_type type, ushort sourcePoert, ushort destPort);
+#endif
 	void PostTorrentUpdate();
 	torrent_handle ProcessMagnetLink(QString link, error_code& ec);
 	void CancelMagnetLink(QString link);
@@ -144,6 +153,6 @@ public:
 	Torrent* GetTorrentByInfoHash(QString hash);
 	void RereshPortForwardingSettings();
 };
-Q_DECLARE_METATYPE(opentorrent_info);
+Q_DECLARE_METATYPE(opentorrent_info)
 
 #endif

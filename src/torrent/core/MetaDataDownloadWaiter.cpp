@@ -36,7 +36,13 @@ void MetaDataDownloadWaiter::run()
 	}
 	else
 	{
-		m_pTorrentManager->AddMagnet(h, QString::fromUtf8(h.status(torrent_handle::query_save_path).save_path.c_str()));
+        std::string save_path =
+#if LIBTORRENT_VERSION_NUM >= 10000
+                h.status(torrent_handle::query_save_path).save_path;
+#else
+                h.save_path();
+#endif
+        m_pTorrentManager->AddMagnet(h, QString::fromUtf8(save_path.c_str()));
 	}
 
 	//this->deleteLater();

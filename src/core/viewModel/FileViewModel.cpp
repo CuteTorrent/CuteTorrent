@@ -56,7 +56,12 @@ int FileViewModel::columnCount(const QModelIndex& parent /*= QModelIndex( ) */) 
 void FileViewModel::OpenFileSelected()
 {
 	FileViewTreeItem* pItem = static_cast<FileViewTreeItem*>(m_pProxyModel->mapToSource(m_pView->selectionModel()->currentIndex()).internalPointer());
-	std::string save_path = dataSource.status(torrent_handle::query_save_path).save_path;
+    std::string save_path =
+#if LIBTORRENT_VERSION_NUM >= 10000
+            dataSource.status(torrent_handle::query_save_path).save_path;
+#else
+            dataSource.save_path();
+#endif
 	QString path = QFileInfo(QDir::toNativeSeparators(QString::fromUtf8((save_path + pItem->GetFileEntery().path).c_str()))).absoluteFilePath();
 	QDesktopServices::openUrl(QUrl("file:///" + path));
 }
@@ -64,7 +69,12 @@ void FileViewModel::OpenFileSelected()
 void FileViewModel::OpenDirSelected()
 {
 	FileViewTreeItem* pItem = static_cast<FileViewTreeItem*>(m_pProxyModel->mapToSource(m_pView->selectionModel()->currentIndex()).internalPointer());
-	std::string save_path = dataSource.status(torrent_handle::query_save_path).save_path;
+    std::string save_path =
+#if LIBTORRENT_VERSION_NUM >= 10000
+            dataSource.status(torrent_handle::query_save_path).save_path;
+#else
+            dataSource.save_path();
+#endif
 	QString path = QFileInfo(QDir::toNativeSeparators(QString::fromUtf8((save_path + pItem->GetFileEntery().path).c_str()))).absoluteFilePath();
 #ifdef Q_WS_MAC
 	QStringList args;
@@ -226,7 +236,14 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 
 		if(item->GetType() == FileViewTreeItem::FILE)
 		{
-			storrage_index = dataSource.torrent_file()->files().file_index_at_offset(file.offset);
+            file_storage storrage =
+
+        #if LIBTORRENT_VERSION_NUM >= 10000
+                    dataSource.torrent_file()->files();
+        #else
+                    dataSource.get_torrent_info().files();
+        #endif
+            storrage_index = storrage.file_index(*storrage.file_at_offset(file.offset));
 		}
 
 		switch(column)
@@ -369,7 +386,13 @@ void FileViewModel::BuildTree()
 {
 	m_Progresses.clear();
 	dataSource.file_progress(m_Progresses, torrent_handle::piece_granularity);
-	file_storage storrage = dataSource.torrent_file()->files();
+    file_storage storrage =
+
+#if LIBTORRENT_VERSION_NUM >= 10000
+            dataSource.torrent_file()->files();
+#else
+            dataSource.get_torrent_info().files();
+#endif
 	int nFilesCount = storrage.num_files();
 
 	for(int i = 0; i < nFilesCount; i++)
@@ -536,7 +559,13 @@ float FileViewModel::CalculateFolderReady(FileViewTreeItem* item) const
 {
 	float result = 0.0f;
 	int nChildrenCount = item->GetChildrenCount();
+    file_storage storrage =
 
+#if LIBTORRENT_VERSION_NUM >= 10000
+            dataSource.torrent_file()->files();
+#else
+            dataSource.get_torrent_info().files();
+#endif
 	for(int i = 0; i < nChildrenCount; i++)
 	{
 		FileViewTreeItem* child = item->GetNthChild(i);
@@ -544,7 +573,7 @@ float FileViewModel::CalculateFolderReady(FileViewTreeItem* item) const
 		if(child->GetType() == FileViewTreeItem::FILE)
 		{
 			file_entry fe = child->GetFileEntery();
-			int storrage_index = dataSource.torrent_file()->files().file_index_at_offset(fe.offset);
+            int storrage_index = storrage.file_index(*storrage.file_at_offset(fe.offset));
 			result += m_Progresses[storrage_index] * 100.0f / fe.size;
 		}
 		else
@@ -560,7 +589,14 @@ void FileViewModel::SetItemPriority(FileViewTreeItem* item, int priority, const 
 {
 	if(item->GetType() == FileViewTreeItem::FILE)
 	{
-		int file_index = dataSource.torrent_file()->files().file_index_at_offset(item->GetFileEntery().offset);
+        file_storage storrage =
+
+    #if LIBTORRENT_VERSION_NUM >= 10000
+                dataSource.torrent_file()->files();
+    #else
+                dataSource.get_torrent_info().files();
+    #endif
+        int file_index = storrage.file_index(*storrage.file_at_offset(item->GetFileEntery().offset));
 		dataSource.file_priority(file_index, priority);
 		emit dataChanged(sourceIndex, sourceIndex);
 	}

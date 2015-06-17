@@ -103,7 +103,7 @@ void OpenTorrentDialog::SetData(QString filename)
 
 			for (int i = 0; i < info->files.num_files(); i++)
 			{
-				m_pFileTreeModel->addPath(QString::fromUtf8(info->files.file_path(i).c_str()), StaticHelpers::toKbMbGb(info->files.file_size(i)));
+                m_pFileTreeModel->addPath(QString::fromUtf8(info->files.file_path(i).c_str()), StaticHelpers::toKbMbGb(info->files.file_size(i)));
 			}
 
 			torrentFilesTreeView->setModel(m_pFileTreeModel);
