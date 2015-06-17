@@ -4,12 +4,12 @@
 WizardSmallImageFile=bottom.bmp
 AppId=CuteTorrent
 AppName=CuteTorrent
-AppVersion=1.0.0.23
+AppVersion=1.0.0.25
 DefaultDirName={pf}\CuteTorrent
 DefaultGroupName=CuteTorrent
 UninstallDisplayIcon={app}\CuteTorrent.exe
 OutputDir=Output
-OutputBaseFilename = CuteTorrent 1.0.0.23
+OutputBaseFilename = CuteTorrent 1.0.0.25
 SolidCompression=yes
 Compression=lzma/ultra
 WizardImageFile=Left.bmp
@@ -30,6 +30,7 @@ Name: TorrentAssociation; Description: "Associate ""torrent"" extension"; GroupD
 Name: MagnetAssociation; Description: "Open magnet links with CuteTorrent"; GroupDescription: File extensions:
 Name: InstallVcRedist; Description: "Install VC++ Redist 2010";
 Name: AddFirewallRule; Description: "Add rule to firewall";
+Name: WinExplorerIntegration; Description: "Integrate to Windows Explorer";
 [Run]
 FileName: "{tmp}\vcredist_x86.exe"; Parameters: "/q"; StatusMsg: "Installing VC++ Redist 2010..."; Flags: waituntilterminated ; Check: VcRedistCheck
 Filename: "{sys}\netsh.exe"; Parameters: "firewall add allowedprogram ""{app}\CuteTorrent.exe"" ""BitTorrent client CuteTorrent"" ENABLE ALL";     StatusMsg: "Adding firewall rule..."; Flags: runhidden waituntilterminated; Check: FirewallCheck
@@ -43,7 +44,15 @@ Root: HKCR; Subkey: "Magnet"; ValueType: string; ValueName: "Content Type"; Valu
 Root: HKCR; Subkey: "Magnet"; ValueType: string; ValueName: "URL Protocol"; ValueData: "application/x-magnet"; Flags: uninsdeletekey; Tasks: MagnetAssociation
 Root: HKCR; Subkey: "Magnet\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\CuteTorrent.exe,1"; Tasks: MagnetAssociation
 Root: HKCR; Subkey: "Magnet\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\CuteTorrent.exe"" ""%1"""; Tasks: MagnetAssociation
-
+Root: HKCR; Subkey: "*\shell\cutetorrent"; ValueType: string; ValueName: ""; ValueData: "Create torrent"; Tasks: WinExplorerIntegration
+Root: HKCR; Subkey: "*\shell\cutetorrent"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\CuteTorrent.exe,0"; Tasks: WinExplorerIntegration
+Root: HKCR; Subkey: "*\shell\cutetorrent\command"; ValueType: string; ValueName: ""; ValueData: """{app}\CuteTorrent.exe"" --create_torrent ""%1"""; Tasks: WinExplorerIntegration
+Root: HKCR; Subkey: "Folder\shell\cutetorrent"; ValueType: string; ValueName: ""; ValueData: "Create torrent"; Tasks: WinExplorerIntegration
+Root: HKCR; Subkey: "Folder\shell\cutetorrent"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\CuteTorrent.exe,0"; Tasks: WinExplorerIntegration
+Root: HKCR; Subkey: "Folder\shell\cutetorrent\command"; ValueType: string; ValueName: ""; ValueData: """{app}\CuteTorrent.exe"" --create_torrent ""%1"""; Tasks: WinExplorerIntegration
+Root: HKCR; Subkey: "Directory\shell\cutetorrent"; ValueType: string; ValueName: ""; ValueData: "Create torrent"; Tasks: WinExplorerIntegration
+Root: HKCR; Subkey: "Directory\shell\cutetorrent"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\CuteTorrent.exe,0"; Tasks: WinExplorerIntegration
+Root: HKCR; Subkey: "Directory\shell\cutetorrent\command"; ValueType: string; ValueName: ""; ValueData: """{app}\CuteTorrent.exe"" --create_torrent ""%1"""; Tasks: WinExplorerIntegration
 [Files]
 ;{ ISFormDesignerFilesBegin } // ?? ??????? ??? ??????!
 ;// ?? ???????? ??? ??????. ??? ??????? ?????????????.

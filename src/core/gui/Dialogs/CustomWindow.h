@@ -367,16 +367,18 @@ template <class T>
 void BaseWindow<T>::maximizeBtnClicked()
 {
 	StyleEngene* styleEngine = StyleEngene::getInstance();
-
-	if(isFullScreen() || isMaximized())
+	if (getMaxBtn() != NULL)
 	{
-		getMaxBtn()->setIcon(styleEngine->getIcon("app_max"));
-		showNormal();
-	}
-	else
-	{
-		getMaxBtn()->setIcon(styleEngine->getIcon("app_reset"));
-		showMaximized();
+		if (isFullScreen() || isMaximized())
+		{
+			getMaxBtn()->setIcon(styleEngine->getIcon("app_max"));
+			showNormal();
+		}
+		else
+		{
+			getMaxBtn()->setIcon(styleEngine->getIcon("app_reset"));
+			showMaximized();
+		}
 	}
 }
 
