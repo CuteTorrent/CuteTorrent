@@ -25,7 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QIntValidator>
 #include <QPainter>
 #include <QScrollArea>
-#include <QString>
 #include <QTranslator>
 #include <QUrl>
 #include "application.h"
@@ -37,18 +36,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "SettingsDialog.h"
 #include "StyleEngene.h"
 #include "TorrentManager.h"
-#include "searchitem.h"
 #include "qkeyedit.h"
 #include "torrentracker.h"
 #include "RconWebService.h"
-#include <QRegExpValidator>
 #include "NotificationSystem.h"
 #include "AddRssDwonloadRuleDialog.h"
 #include "RssManager.h"
 
 #ifdef Q_WS_WIN
-#include <tchar.h>
 #include <windows.h>
+#include <smtp/smtpclient.h>
 
 typedef BOOL (WINAPI* LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);
 
@@ -322,7 +319,6 @@ SettingsDialog::~SettingsDialog()
 	m_downloadRulesCopy.clear();
 	RconWebService::freeInstance();
 	TorrentTracker::freeInstance();
-	QApplicationSettings::FreeInstance();
 }
 void SettingsDialog::ApplySettings()
 {
@@ -381,21 +377,32 @@ void SettingsDialog::ApplySettings()
 	settings->setValue("DT", "UseCustomCommand",				(customMoutGroupBox->isChecked()));
 	settings->setValue("DT", "CustomtCommand",					customCommandEdit->text());
 	settings->setValue("WebControl", "webui_enabled",			webUIGroupBox->isChecked());
-	settings->setValue("WebControl", "requireAuth",              !loginLineEdit->text().isEmpty());
+	settings->setValue("WebControl", "requireAuth",             !loginLineEdit->text().isEmpty());
 	settings->setValue("WebControl", "webui_login",				loginLineEdit->text());
 	settings->setValue("WebControl", "webui_password",			passwordLineEdit->text());
-	settings->setValue("WebControl", "port",                     webPortLineEdit->text());
+	settings->setValue("WebControl", "port",                    webPortLineEdit->text());
 	settings->setValue("WebControl", "enable_upnp",				upnpCheckBox->isChecked());
 	settings->setValue("WebControl", "enable_loggin",			webUILogginGroupBox->isChecked());
-	settings->setValue("WebControl", "log_name",					logLineEdit->text());
+	settings->setValue("WebControl", "log_name",				logLineEdit->text());
 	settings->setValue("WebControl", "enable_ipfilter",			IPFilterGroupBox->isChecked());
-	settings->setValue("WebControl", "ipfilter",					ipFilterTextEdit->toPlainText());
+	settings->setValue("WebControl", "ipfilter",				ipFilterTextEdit->toPlainText());
 	//
 	settings->SaveFilterGropups(filterGroups);
-	settings->setValue("TorrentTracker", "enabled",              trackerGroupBox->isChecked());
-	settings->setValue("TorrentTracker", "port",                 trackerPortEdit->text());
+	settings->setValue("TorrentTracker", "enabled",             trackerGroupBox->isChecked());
+	settings->setValue("TorrentTracker", "port",                trackerPortEdit->text());
+	settings->setValue("rss", "smtp_host",						rssSmtpServerEdit->text());
+	settings->setValue("rss", "smtp_port",						rssSmtpPortEdit->text());
+	settings->setValue("rss", "smtp_conn_type",					rssSmtpConnTypeCombobox->itemData(rssSmtpConnTypeCombobox->currentIndex()).toInt());
+	settings->setValue("rss", "smtp_auth_type",					rssAuthTypeComboBox->itemData(rssAuthTypeComboBox->currentIndex()).toInt());
+	settings->setValue("rss", "smtp_user",						rssSmtpLoginEdit->text());
+	settings->setValue("rss", "smtp_password",					rssSmtpPasswordEdit->text());
+	settings->setValue("rss", "rss_send_to",					rssRecepientEmailEdit->text());
+	settings->setValue("rss", "auto_download_emeail_notify",	autosrtEmailNotificationCheckBox->isChecked());
+	settings->setValue("rss", "default_refresh_rate",			rssRefrashRateEdit->value());
+	
 	NotificationSystemPtr pNotifySys = NotificationSystem::getInstance();
 	pNotifySys->UpdateNotificationSettings();
+
 #ifdef Q_WS_WIN //file association for windows
 	QSettings asocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
@@ -883,7 +890,6 @@ void SettingsDialog::FillNetworkTab()
 {
 	QString ipRange = "(?:[0-1]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])";
 	QString portRange = "(6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|[1-9]\\d{0,3})";
-	// You may want to use QRegularExpression for new code with Qt 5, however.
 	QRegExp ipRegex("^" + ipRange
 	                + "\\." + ipRange
 	                + "\\." + ipRange
@@ -1162,6 +1168,34 @@ void SettingsDialog::FillRssTab()
 		connect(deleteRssRule, SIGNAL(triggered()), SLOT(onDeleteRssRule()));
 		rssRulesListWidget->addAction(deleteRssRule);
 	}
+	rssRefrashRateEdit->setValue(settings->valueInt("rss", "default_refresh_rate", 30));
+	autosrtEmailNotificationCheckBox->setChecked(settings->valueBool("rss", "auto_download_emeail_notify"));
+	rssSmtpServerEdit->setText(settings->valueString("rss", "smtp_host"));
+	rssSmtpPortEdit->setText(settings->valueString("rss", "smtp_port"));
+	char const* smtpConnectionTypes[] =
+	{
+		QT_TR_NOOP("RSS_TCP_CONNECTION"),
+		QT_TR_NOOP("RSS_SSL_CONNECTION"),
+		QT_TR_NOOP("RSS_TLS_CONNECTION"),
+	};
+	for (int i = SmtpClient::TcpConnection; i <= SmtpClient::TlsConnection; i++)
+	{
+		rssSmtpConnTypeCombobox->addItem(tr(smtpConnectionTypes[i]), i);
+	}
+	rssSmtpConnTypeCombobox->setCurrentIndex(settings->valueInt("rss", "smtp_conn_type"));
+	char const* smtpAuthTypes[] =
+	{
+		QT_TR_NOOP("RSS_PLAIN_AUTH"),
+		QT_TR_NOOP("RSS_LOGIN_AUTH"),
+	};
+	for (int i = SmtpClient::AuthPlain; i <= SmtpClient::AuthLogin; i++)
+	{
+		rssAuthTypeComboBox->addItem(tr(smtpAuthTypes[i]), i);
+	}
+	rssAuthTypeComboBox->setCurrentIndex(settings->valueInt("rss", "smtp_auth_type"));
+	rssSmtpLoginEdit->setText(settings->valueString("rss", "smtp_user"));
+	rssSmtpPasswordEdit->setText(settings->valueString("rss", "smtp_password"));
+	rssRecepientEmailEdit->setText(settings->valueString("rss", "rss_send_to"));
 }
 
 void SettingsDialog::ApplyRssDownloadRulles()
@@ -1172,7 +1206,7 @@ void SettingsDialog::ApplyRssDownloadRulles()
 	{
 		pRssManager->updateDownloadRule(new RssDownloadRule(*m_downloadRulesCopy.values().at(i)));
 	}
-
+	
 	for (int i = 0; i < m_deletedRules.size(); i++)
 	{
 		pRssManager->removeDownloadRule(m_deletedRules.at(i));

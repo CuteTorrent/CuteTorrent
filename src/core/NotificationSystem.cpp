@@ -42,7 +42,7 @@ void NotificationSystem::UpdateNotificationSettings()
 }
 NotificationSystem::~NotificationSystem()
 {
-	QApplicationSettings::FreeInstance();
+	
 }
 
 void NotificationSystem::OnNewNotification(int notificationType, QString message, QVariant data)

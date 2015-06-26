@@ -10,6 +10,7 @@
 #include "TorrentManager.h"
 #include "MetaDataDownloadWaiter.h"
 #include "RssItem.h"
+#include "EmailNotifier.h"
 RssManager::RssManager(QObject* parent) : QObject(parent)
 {
 	m_pTorrentDownloader = TorrentDownloader::getInstance();
@@ -43,7 +44,6 @@ RssFeed* RssManager::addFeed(QUrl url, bool& isNew)
 
 RssManager::~RssManager()
 {
-	QApplicationSettings::FreeInstance();
 }
 
 QList<RssFeed*> RssManager::feeds()
@@ -359,6 +359,12 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 		else
 		{
 			emit Notify(NotificationSystem::TORRENT_INFO, tr("AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1 %2").arg(pTorrentInfo->name, feedItem->title()), QVariant());
+			if (m_pSettings->valueBool("rss", "auto_download_emeail_notify",true))
+			{
+				EmailNotifierPtr emailNotifier(new EmailNotifier());
+				QString to = m_pSettings->valueString("rss", "rss_send_to", "ruslan.fedoseenko.91@gmail.com");
+				emailNotifier->SendEmail(to, tr("STARTED_AUTOMETED_RSS_DOWNLOAD"), tr("%1 STARTED_DOWNLOADING.<br/> <a href=\"%3\">DESCRIBTION</a><br/> %2").arg(feedItem->title(), feedItem->description(), feedItem->describtionLink()));
+			}
 			RssFeed* rssFeed = findFeed(info.rssFeedId);
 			RssItem* rssItem = rssFeed->GetFeedItem(info.rssItemId);
 			rssItem->setDownloadingTorrent(pTorrentInfo->infoHash);
@@ -396,11 +402,10 @@ void RssManager::onDownloadMetadataCompleted(openmagnet_info magnetInfo)
 
 QString RssManager::gessSavePath(RssDownloadRule* downloadRule, QString base_suffix)
 {
-	QApplicationSettings* pSettings = QApplicationSettings::getInstance();
+	QApplicationSettingsPtr pSettings = QApplicationSettings::getInstance();
 
 	if (downloadRule->UseStaticSavePath())
 	{
-		QApplicationSettings::FreeInstance();
 		return downloadRule->StaticSavePath();
 	}
 	else
@@ -411,14 +416,12 @@ QString RssManager::gessSavePath(RssDownloadRule* downloadRule, QString base_suf
 		{
 			if (filter.Contains(base_suffix))
 			{
-				QApplicationSettings::FreeInstance();
 				return filter.SavePath();
 			}
 		}
 	}
 
 	QString lastSaveDir = pSettings->valueString("System", "LastSaveTorrentDir");
-	QApplicationSettings::FreeInstance();
 	return lastSaveDir;
 }
 

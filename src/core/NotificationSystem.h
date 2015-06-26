@@ -48,7 +48,7 @@ private:
 	QSystemTrayIcon* m_pTrayIcon;
 	QBalloonTip::QBaloonType gessBaloonType(int notificationType);
 	QSystemTrayIcon::MessageIcon gessIcon(int notificationType);
-	QApplicationSettings* m_pSettings;
+	QApplicationSettingsPtr m_pSettings;
 	bool m_enabled;
 	int m_notificationMask;
 	int m_defaultMessageDuration;

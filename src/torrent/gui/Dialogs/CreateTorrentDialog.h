@@ -92,7 +92,7 @@ private:
 	quint64 listFolder(QString path);
 	torrentCreatorThread* creator;
 	TorrentManager* m_pTorrentManager;
-	QApplicationSettings* settings;
+	QApplicationSettingsPtr settings;
 	StyledProgressBar* progressBar;
 	quint64 getPiceSize();
 signals:

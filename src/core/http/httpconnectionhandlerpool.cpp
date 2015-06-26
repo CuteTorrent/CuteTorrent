@@ -19,8 +19,6 @@ HttpConnectionHandlerPool::~HttpConnectionHandlerPool()
 	{
 		delete handler;
 	}
-
-	QApplicationSettings::FreeInstance();
 }
 
 

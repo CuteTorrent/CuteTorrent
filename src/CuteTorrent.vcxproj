@@ -237,8 +237,27 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\EmailNotifier.cpp" />
     <ClCompile Include="core\gui\Controls\StyledProgressBar.cpp" />
     <ClCompile Include="core\helpers\VirtualDiskMounter.cpp" />
+    <ClCompile Include="core\smtp\emailaddress.cpp" />
+    <ClCompile Include="core\smtp\mimeattachment.cpp" />
+    <ClCompile Include="core\smtp\mimebase64encoder.cpp" />
+    <ClCompile Include="core\smtp\mimebase64formatter.cpp" />
+    <ClCompile Include="core\smtp\mimebytearrayattachment.cpp" />
+    <ClCompile Include="core\smtp\mimecontentencoder.cpp" />
+    <ClCompile Include="core\smtp\mimecontentformatter.cpp" />
+    <ClCompile Include="core\smtp\mimefile.cpp" />
+    <ClCompile Include="core\smtp\mimehtml.cpp" />
+    <ClCompile Include="core\smtp\mimeinlinefile.cpp" />
+    <ClCompile Include="core\smtp\mimemessage.cpp" />
+    <ClCompile Include="core\smtp\mimemultipart.cpp" />
+    <ClCompile Include="core\smtp\mimepart.cpp" />
+    <ClCompile Include="core\smtp\mimeqpencoder.cpp" />
+    <ClCompile Include="core\smtp\mimeqpformatter.cpp" />
+    <ClCompile Include="core\smtp\mimetext.cpp" />
+    <ClCompile Include="core\smtp\quotedprintable.cpp" />
+    <ClCompile Include="core\smtp\smtpclient.cpp" />
     <ClCompile Include="core\StorrageInfo\qstorageinfo.cpp" />
     <ClCompile Include="core\StorrageInfo\qstorageinfo_win.cpp" />
     <ClCompile Include="core\winextras\qwinfunctions.cpp" />
@@ -257,6 +276,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_qwintaskbarbutton.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_qwintaskbarprogress.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_qwinthumbnailtoolbutton.cpp" />
+    <ClCompile Include="GeneratedFiles\Release\moc_smtpclient.cpp" />
     <ClCompile Include="rss\gui\Dialogs\AddRssDwonloadRuleDialog.cpp" />
     <ClCompile Include="search\searchproviders\ExtratorrentSearchProvider.cpp" />
     <ClCompile Include="core\FaviconDownloader.cpp" />
@@ -404,7 +424,37 @@
     <ClCompile Include="tracker\trackerrequestmapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\EmailNotifier.h" />
     <ClInclude Include="core\gui\Controls\StyledProgressBar.h" />
+    <ClInclude Include="core\smtp\emailaddress.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PHONON_LIB -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"qtsingleapplication\src" -I"..\ThirdParties\boost_1_55_0" -I"..\ThirdParties\libtorrent-rasterbar-1.0.2\include" -I".\GeneratedFiles" -I"." -I".\GeneratedFiles\Release" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I".\GeneratedFiles\Release" -I"GeneratedFiles" -I$(QTDIR)\mkspecs\win32-msvc2010 -D_MSC_VER=1600 -DWIN32 %(Identity) -o .\GeneratedFiles\Release\moc_%(Filename).cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">MOC %(Filename).h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">.\GeneratedFiles\Release\moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">$(QTDIR)\bin\moc.exe;%(Filename).h;</AdditionalInputs>
+    </ClInclude>
+    <ClInclude Include="core\smtp\mimeattachment.h" />
+    <ClInclude Include="core\smtp\mimebase64encoder.h" />
+    <ClInclude Include="core\smtp\mimebase64formatter.h" />
+    <ClInclude Include="core\smtp\mimebytearrayattachment.h" />
+    <ClInclude Include="core\smtp\mimecontentencoder.h" />
+    <ClInclude Include="core\smtp\mimecontentformatter.h" />
+    <ClInclude Include="core\smtp\mimefile.h" />
+    <ClInclude Include="core\smtp\mimehtml.h" />
+    <ClInclude Include="core\smtp\mimeinlinefile.h" />
+    <ClInclude Include="core\smtp\mimemessage.h" />
+    <ClInclude Include="core\smtp\mimemultipart.h" />
+    <ClInclude Include="core\smtp\mimepart.h" />
+    <ClInclude Include="core\smtp\mimeqpencoder.h" />
+    <ClInclude Include="core\smtp\mimeqpformatter.h" />
+    <ClInclude Include="core\smtp\mimetext.h" />
+    <ClInclude Include="core\smtp\quotedprintable.h" />
+    <CustomBuild Include="core\smtp\smtpclient.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PHONON_LIB -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"qtsingleapplication\src" -I"..\ThirdParties\boost_1_55_0" -I"..\ThirdParties\libtorrent-rasterbar-1.0.2\include" -I".\GeneratedFiles" -I"." -I".\GeneratedFiles\Release" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I".\GeneratedFiles\Release" -I"GeneratedFiles" -I$(QTDIR)\mkspecs\win32-msvc2010 -D_MSC_VER=1600 -DWIN32 %(Identity) -o .\GeneratedFiles\Release\moc_%(Filename).cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">MOC %(Filename).h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">.\GeneratedFiles\Release\moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">$(QTDIR)\bin\moc.exe;%(Filename).h;</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="core\smtp\smtpmime_global.h" />
     <ClInclude Include="core\StorrageInfo\qstorageinfo.h" />
     <ClInclude Include="core\StorrageInfo\qstorageinfo_p.h" />
     <ClInclude Include="core\winextras\qwinextrasglobal.h" />

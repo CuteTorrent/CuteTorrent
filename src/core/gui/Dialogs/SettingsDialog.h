@@ -20,14 +20,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _SETTINGS_DLG_H
 
 
-#include <QDialog>
-#include <QMouseEvent>
-#include <QStackedWidget>
-
 #include "CustomWindow.h"
 #include "GroupForFileFiltering.h"
 #include "QApplicationSettings.h"
-#include "searchitem.h"
 #include "torrentracker.h"
 #include "ui_SettingsDialog.h"
 #include "RconWebService.h"
@@ -51,7 +46,7 @@ protected:
 private:
 	QHash<QUuid, RssDownloadRule*> m_downloadRulesCopy;
 	QList<QUuid> m_deletedRules;
-	QApplicationSettings* settings;
+	QApplicationSettingsPtr settings;
 	QList<GroupForFileFiltering> filterGroups;
 	QList<SchedulerTask> tasks;
 	QDateTimeEdit* previousFocuse;

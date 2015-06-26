@@ -112,8 +112,8 @@ void OpenTorrentDialog::SetData(QString filename)
 
 			if(!info->baseSuffix.isEmpty())
 			{
-				QApplicationSettings* instance = QApplicationSettings::getInstance();
-				m_lFilters = instance->GetFileFilterGroups();
+				QApplicationSettingsPtr settings = QApplicationSettings::getInstance();
+				m_lFilters = settings->GetFileFilterGroups();
 				int selected = -1;
 
 				for(int i = 0; i < m_lFilters.count(); i++)
@@ -133,14 +133,12 @@ void OpenTorrentDialog::SetData(QString filename)
 				}
 				else
 				{
-					QApplicationSettings* settings = QApplicationSettings::getInstance();
 					QString lastDir = settings->valueString("System", "LastSaveTorrentDir");
 					pathEdit->setText(lastDir);
 					GroupComboBox->setCurrentIndex(-1);
-					QApplicationSettings::FreeInstance();
+
 				}
 
-				QApplicationSettings::FreeInstance();
 			}
 
 			delete info;
@@ -157,7 +155,7 @@ void OpenTorrentDialog::SetData(QString filename)
 
 void OpenTorrentDialog::BrowseButton()
 {
-	QApplicationSettings* settings = QApplicationSettings::getInstance();
+	QApplicationSettingsPtr settings = QApplicationSettings::getInstance();
 	QString lastDir = pathEdit->text();
 	QString dir = QFileDialog::getExistingDirectory(this, tr("DIALOF_OPEN_DIR"),
 	              lastDir,
@@ -173,8 +171,6 @@ void OpenTorrentDialog::BrowseButton()
 		pathEdit->setText(dir);
 		m_bUseGroup = false;
 	}
-
-	QApplicationSettings::FreeInstance();
 }
 
 
@@ -243,7 +239,7 @@ void OpenTorrentDialog::DownloadMetadataCompleted(openmagnet_info info)
 	{
 		try
 		{
-			QApplicationSettings* instance = QApplicationSettings::getInstance();
+			QApplicationSettingsPtr instance = QApplicationSettings::getInstance();
 			m_lFilters = instance->GetFileFilterGroups();
 			int selected = -1;
 
@@ -268,7 +264,7 @@ void OpenTorrentDialog::DownloadMetadataCompleted(openmagnet_info info)
 			qDebug() << ex.what();
 		}
 
-		QApplicationSettings::FreeInstance();
+		
 	}
 }
 

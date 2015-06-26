@@ -89,7 +89,7 @@ void RssFeed::resourceLoaded(QNetworkReply* pReply)
 
 	if (m_ttl == 0)
 	{
-		m_ttl = 30;
+		m_ttl = QApplicationSettings::getInstance()->valueInt("rss", "default_refresh_rate", 30);
 	}
 
 	m_pUpdateTimer->setInterval(ttl() * 60l * 1000l);

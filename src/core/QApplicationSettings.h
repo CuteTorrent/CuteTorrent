@@ -19,37 +19,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _QAPPSETTINGS
 #define _QAPPSETTINGS
 
-#include <QSettings>
-#include <QString>
-#include <QStringList>
-#include <QMutex>
-#include <QQueue>
 #include "GroupForFileFiltering.h"
 #include "SchedulerTask.h"
-#include "searchitem.h"
-// support only one sub level in settings
+#include "ServiceCommon.h"
+class QMutex;
+class QSettings;
 class QApplicationSettings
 {
 protected:
 
-	static QApplicationSettings* _instance;
-	static int _instanceCount;
+	static boost::weak_ptr<QApplicationSettings> m_pInstance;
 	QApplicationSettings();
-	~QApplicationSettings();
+	
 private:
 	QSettings* settings;
 	QMutex* locker;
 public:
+	~QApplicationSettings();
 	void ReedSettings();
 	QVariant value(const QString& group, const QString& key, const QVariant& defaultVal = QVariant(QVariant::Invalid));
 	void SaveFilterGropups(QList<GroupForFileFiltering>);
 	QList<GroupForFileFiltering> GetFileFilterGroups();
-	static void FreeInstance();
-	static QApplicationSettings* getInstance();
+	static QApplicationSettingsPtr getInstance();
 	QStringList GetGroupNames();
 	QList<SchedulerTask> GetSchedullerQueue();
-	QList<SearchItem> GetSearchSources();
-	void setSearchSources(QList<SearchItem> searchSources);
 	void SaveSchedullerQueue(QList<SchedulerTask>&);
 	void setValue(const QString& group, const QString& key, const QVariant& value);
 	int valueInt(const QString& group, const QString& key, const int& defalt = 0);

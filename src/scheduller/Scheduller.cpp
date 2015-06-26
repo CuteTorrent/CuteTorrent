@@ -40,7 +40,6 @@ void Scheduller::freeInstance()
 
 Scheduller::~Scheduller()
 {
-	QApplicationSettings::FreeInstance();
 }
 
 void Scheduller::UpdateTasks()

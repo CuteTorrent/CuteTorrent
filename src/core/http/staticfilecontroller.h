@@ -53,7 +53,7 @@ public:
 
 private:
 
-	QApplicationSettings* settings;
+	QApplicationSettingsPtr settings;
 	/** Encoding of text files */
 	QString encoding;
 

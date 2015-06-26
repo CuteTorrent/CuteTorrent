@@ -1072,7 +1072,6 @@ CuteTorrentMainWindow::~CuteTorrentMainWindow()
 	m_pTrayIcon->hide();
 	TorrentManager::freeInstance();
 	Scheduller::freeInstance();
-	QApplicationSettings::FreeInstance();
 }
 
 void CuteTorrentMainWindow::setupFileTabel()

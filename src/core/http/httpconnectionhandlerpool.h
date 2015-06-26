@@ -52,7 +52,7 @@ private:
 	QString serverName;
 
 	/** Settings for this pool */
-	QApplicationSettings* settings;
+	QApplicationSettingsPtr settings;
 
 	/** Will be assigned to each Connectionhandler during their creation */
 	HttpRequestHandler* requestHandler;

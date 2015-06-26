@@ -1053,7 +1053,6 @@ TorrentManager::~TorrentManager()
 {
 	SaveSession();
 	TorrentStorrage::freeInstance();
-	QApplicationSettings::FreeInstance();
 }
 
 TorrentManager* TorrentManager::_instance = NULL;

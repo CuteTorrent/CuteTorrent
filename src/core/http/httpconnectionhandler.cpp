@@ -31,7 +31,6 @@ HttpConnectionHandler::HttpConnectionHandler(HttpRequestHandler* requestHandler)
 
 HttpConnectionHandler::~HttpConnectionHandler()
 {
-	QApplicationSettings::FreeInstance();
 	socket.close();
 	quit();
 	wait();

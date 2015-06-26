@@ -720,7 +720,6 @@ void QTorrentDisplayModel::setupContextMenu()
 	groupsMenu = new QMenu(tr("ACTION_CHANGE_GROUP"), menu);
 	groupsMenu->setIcon(style->getIcon("groups"));
 	QList<GroupForFileFiltering> filters = QApplicationSettings::getInstance()->GetFileFilterGroups();
-	QApplicationSettings::FreeInstance();
 	QString type;
 
 	for(int i = 0; i < filters.size(); i++)

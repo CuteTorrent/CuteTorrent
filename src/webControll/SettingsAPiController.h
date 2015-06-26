@@ -7,7 +7,7 @@ class SettingsAPiController :
 	Q_OBJECT
 	Q_DISABLE_COPY(SettingsAPiController)
 private:
-	QApplicationSettings* settings;
+	QApplicationSettingsPtr settings;
 public:
 	SettingsAPiController(QObject*);
 	void service(HttpRequest& request, HttpResponse& response) override;

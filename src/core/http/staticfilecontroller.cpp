@@ -193,7 +193,7 @@ void StaticFileController::setContentType(QString fileName, HttpResponse& respon
 
 StaticFileController::~StaticFileController()
 {
-	QApplicationSettings::FreeInstance();
+	
 }
 
 /*

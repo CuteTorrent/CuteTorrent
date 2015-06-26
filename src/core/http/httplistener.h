@@ -61,7 +61,7 @@ private:
 
 	QString serverName;
 	/** Configuration settings for the HTTP server */
-	QApplicationSettings* settings;
+	QApplicationSettingsPtr settings;
 
 	/** Pool of connection handlers */
 	HttpConnectionHandlerPool* pool;

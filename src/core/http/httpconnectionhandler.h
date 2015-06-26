@@ -54,7 +54,7 @@ public:
 private:
 	bool blockClient;
 	/** Configuration settings */
-	QApplicationSettings* settings;
+	QApplicationSettingsPtr settings;
 
 	/** TCP socket of the current connection */
 	QTcpSocket socket;

@@ -593,7 +593,7 @@ int Torrent::GetPieceCount()
 	if(m_hTorrent.is_valid())
 	{
 #if LIBTORRENT_VERSION_NUM >= 10000
-        return m_hTorrent.torrent_file()->files().num_files() == 1;
+		return m_hTorrent.torrent_file()->files().num_pieces();
 #else
         return m_hTorrent.get_torrent_info().files().num_pieces();
 #endif

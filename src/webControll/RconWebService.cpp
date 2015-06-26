@@ -1,5 +1,5 @@
 ﻿#include "RconWebService.h"
-#include <QApplication>
+#include <QStringList>
 RconWebService::RconWebService(void)
 {
 	mapper = new RequestMapper(this);

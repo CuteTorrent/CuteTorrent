@@ -6,7 +6,6 @@ SettingsAPiController::SettingsAPiController(QObject* parent) : HttpRequestHandl
 
 SettingsAPiController::~SettingsAPiController(void)
 {
-	QApplicationSettings::FreeInstance();
 }
 
 void SettingsAPiController::service(HttpRequest& request, HttpResponse& response)

@@ -18,7 +18,7 @@ public:
 private:
 	int cuurentTimerID;
 	QList<SchedulerTask> tasks;
-	QApplicationSettings* settings;
+	QApplicationSettingsPtr settings;
 	void checkTasks();
 public slots:
 	void UpdateTasks();

@@ -18,13 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "QApplicationSettings.h"
 #include "messagebox.h"
-#include <QDebug>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
-#include <QFile>
+#include <QMutex>
+#include <QSettings>
 #include "StaticHelpers.h"
-QApplicationSettings* QApplicationSettings::_instance = NULL;
-int QApplicationSettings::_instanceCount = 0;
+boost::weak_ptr<QApplicationSettings> QApplicationSettings::m_pInstance;
+
 
 QApplicationSettings::QApplicationSettings()
 {
@@ -56,25 +54,17 @@ QApplicationSettings::~QApplicationSettings()
 {
 	WriteSettings();
 }
-QApplicationSettings* QApplicationSettings::getInstance()
+QApplicationSettingsPtr QApplicationSettings::getInstance()
 {
-	if(_instance == NULL)
+	QApplicationSettingsPtr instance = m_pInstance.lock();
+
+	if (!instance)
 	{
-		_instance = new QApplicationSettings();
+		instance.reset(new QApplicationSettings());
+		m_pInstance = instance;
 	}
 
-	_instanceCount++;
-	return _instance;
-}
-void QApplicationSettings::FreeInstance()
-{
-	_instanceCount--;
-
-	if(!_instanceCount)
-	{
-		_instance->~QApplicationSettings();
-		_instance = NULL;
-	}
+	return instance;
 }
 QStringList QApplicationSettings::GetGroupNames()
 {
@@ -341,26 +331,6 @@ QList<SchedulerTask> QApplicationSettings::GetSchedullerQueue()
 	return res;
 }
 
-QList<SearchItem> QApplicationSettings::GetSearchSources()
-{
-	QList<SearchItem> res;
-	settings->beginGroup("Search");
-	int size = settings->value("size", 0).toInt();
-	settings->endGroup();
-	settings->beginReadArray("Search");
-
-	for(int i = 0; i < size; i++)
-	{
-		settings->setArrayIndex(i);
-		SearchItem item;
-		item.setName(settings->value("name").toString());
-		item.setPattern(settings->value("pattern").toString());
-		res.append(item);
-	}
-
-	settings->endArray();
-	return res;
-}
 
 void QApplicationSettings::SaveSchedullerQueue(QList<SchedulerTask>& tasks)
 {

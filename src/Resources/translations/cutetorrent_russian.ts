@@ -2310,6 +2310,14 @@ Download: %3</source>
         <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1 %2</source>
         <translation>Началась загруска торрента %1 %2 полученного из RSS-ленты</translation>
     </message>
+    <message>
+        <source>STARTED_AUTOMETED_RSS_DOWNLOAD</source>
+        <translation>Началась автоматисеска загрузка из RSS-ленты</translation>
+    </message>
+    <message>
+        <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
+        <translation>%1 загружается. &lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;Описание&lt;/a&gt;&lt;br/&gt; %2</translation>
+    </message>
 </context>
 <context>
     <name>RssParser</name>
@@ -2892,55 +2900,55 @@ Download: %3</source>
     </message>
     <message>
         <source>Torrent file</source>
-        <translation type="unfinished">Торрент файл</translation>
+        <translation>Торрент файл</translation>
     </message>
     <message>
         <source>STR_SETTINGS</source>
-        <translation type="unfinished">Настройки</translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>ERROR_GROUP_NAME_NOT_SET</source>
-        <translation type="unfinished">Имя группы должно состоять более чем из одного символа.</translation>
+        <translation>Имя группы должно состоять более чем из одного символа.</translation>
     </message>
     <message>
         <source>ERROR_NO_EXTENSIONS</source>
-        <translation type="unfinished">Должна быть указанно хотбы одно расширение файла.</translation>
+        <translation>Должна быть указанно хотбы одно расширение файла.</translation>
     </message>
     <message>
         <source>ERROR_NO_PATH</source>
-        <translation type="unfinished">Не указан путь сохранения.</translation>
+        <translation>Не указан путь сохранения.</translation>
     </message>
     <message>
         <source>ERROR_PATH_NOT_EXISTS</source>
-        <translation type="unfinished">Указанный путь не существует.</translation>
+        <translation>Указанный путь не существует.</translation>
     </message>
     <message>
         <source>SHURE_IN_CHANGING_GROUP %1</source>
-        <translation type="unfinished">Вы уверенны что хотите изменить группу %1</translation>
+        <translation>Вы уверенны что хотите изменить группу %1</translation>
     </message>
     <message>
         <source>Unable to find %1</source>
-        <translation type="unfinished">Неудалось найти группу %1</translation>
+        <translation>Неудалось найти группу %1</translation>
     </message>
     <message>
         <source>Open Directory</source>
-        <translation type="unfinished">Выбирите папку</translation>
+        <translation>Выбирите папку</translation>
     </message>
     <message>
         <source>WHERE_DT</source>
-        <translation type="unfinished">Путь к DaemonTools</translation>
+        <translation>Путь к DaemonTools</translation>
     </message>
     <message>
         <source>ERROR_SRT</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <source>SCHEDULLER_UNKNOWN_TYPE</source>
-        <translation type="unfinished">Укажите тип задания</translation>
+        <translation>Укажите тип задания</translation>
     </message>
     <message>
         <source>SCHEDULLER_NO_NAME</source>
-        <translation type="unfinished">Укажите имя задания</translation>
+        <translation>Укажите имя задания</translation>
     </message>
     <message>
         <source>SEARCH_ITEM_NO_NAME</source>
@@ -3416,11 +3424,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ACTION_SETTINGS_EDIT_RSS_RULE</source>
-        <translation type="unfinished">Изменить правило</translation>
+        <translation>Изменить правило</translation>
     </message>
     <message>
         <source>ACTION_SETTINGS_DELETE_RSS_RULE</source>
-        <translation type="unfinished">Удалить правило</translation>
+        <translation>Удалить правило</translation>
     </message>
     <message>
         <source>+</source>
@@ -3456,7 +3464,67 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>DaemonTools Lite (DTLite.exe);;DaemonTools PRO (DTAgent.exe);;Any File (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
+    </message>
+    <message>
+        <source>RSS_DEFAULT_REFRESH_RATE</source>
+        <translation>Время обновления по-умолчанию</translation>
+    </message>
+    <message>
+        <source> MINUTES</source>
+        <translation> минут</translation>
+    </message>
+    <message>
+        <source>RSS_AUTO_START_EMAIL_NOTIFICATION</source>
+        <translation>Уведомалять по почте о старте автоматичской загрузки</translation>
+    </message>
+    <message>
+        <source>RSS_SMTP_AUTH_TYPE</source>
+        <translation>Тим SMTP-аутентификации</translation>
+    </message>
+    <message>
+        <source>RSS_SMTP_PASSWORD</source>
+        <translation>Пароль</translation>
+    </message>
+    <message>
+        <source>RSS_SMTP_SERVER</source>
+        <translation>SMTP сервер</translation>
+    </message>
+    <message>
+        <source>RSS_SMTP_PORT</source>
+        <translation>SMTP порт</translation>
+    </message>
+    <message>
+        <source>RSS_SMTP_LOGIN</source>
+        <translation>Имя пользователя</translation>
+    </message>
+    <message>
+        <source>RSS_NOTIFICATION_EMEAIL</source>
+        <translation>Присылать письма на email</translation>
+    </message>
+    <message>
+        <source>RSS_SMTP_CONN_TYPE</source>
+        <translation>Тип соединения</translation>
+    </message>
+    <message>
+        <source>RSS_TCP_CONNECTION</source>
+        <translation>TCP</translation>
+    </message>
+    <message>
+        <source>RSS_SSL_CONNECTION</source>
+        <translation>SSL</translation>
+    </message>
+    <message>
+        <source>RSS_TLS_CONNECTION</source>
+        <translation>TLS</translation>
+    </message>
+    <message>
+        <source>RSS_PLAIN_AUTH</source>
+        <translation>PLAIN</translation>
+    </message>
+    <message>
+        <source>RSS_LOGIN_AUTH</source>
+        <translation>LOGIN</translation>
     </message>
 </context>
 <context>

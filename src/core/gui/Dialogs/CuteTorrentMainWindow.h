@@ -90,7 +90,7 @@ private:
 	FileViewSortProxyModel* m_pFileViewProxymodel;
 	FileViewModel* m_pFileViewModel;
 	TorrentTracker* m_pTracker;
-	QApplicationSettings* m_pSettings;
+	QApplicationSettingsPtr m_pSettings;
 	RconWebService* m_pRcon;
 	UpdateNotifier* m_pUpdateNotifier;
 	HtmlView* m_pFeedItemDescribtionEdit;

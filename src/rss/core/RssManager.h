@@ -43,7 +43,7 @@ private:
 	QList<RssFeed*> m_pFeeds;
 	QHash<QUrl, TorrentDownloadInfo> m_activeTorrentDownloads;
 	QHash<QUuid, RssDownloadRule*> m_downloadRules;
-	QApplicationSettings* m_pSettings;
+	QApplicationSettingsPtr m_pSettings;
 	void downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRule* rule);
 	QString gessSavePath(RssDownloadRule* downloadRule, QString base_suffix);
 	QMap<QString, quint8> getFilePriorities(TorrentDownloadInfo downloadInfo, file_storage fileStorage);

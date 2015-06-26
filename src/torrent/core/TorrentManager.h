@@ -103,7 +103,7 @@ private:
 	void writeSettings();
 	TorrentStorrage* m_pTorrentStorrage;
 	session* m_pTorrentSession;
-	QApplicationSettings* m_pTorrentSessionSettings;
+	QApplicationSettingsPtr m_pTorrentSessionSettings;
 	int save_file(std::string const& filename, std::vector<char>& v);
 	QString DTInstallPath;
 	int max_connections_per_torrent;

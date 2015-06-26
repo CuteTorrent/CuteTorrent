@@ -22,7 +22,6 @@ HttpListener::~HttpListener()
 {
 	close();
 	delete pool;
-	QApplicationSettings::FreeInstance();
 }
 
 
