@@ -18,11 +18,8 @@ public:
 	static QWidget* showBalloon(const QString& title,
 	                            const QString& msg, QBaloonType type, const QVariant& data, const QSystemTrayIcon::MessageIcon& icon = QSystemTrayIcon::Information ,
 	                            int timeout = 0, bool showArrow = true, QWidget* parrent = 0);
-	static void hideBalloon();
 
 private:
-	static QQueue<QBalloonTip*> baloonQueue;
-	static QBalloonTip* current;
 	QBalloonTip(const QString& title, const QString& msg, QBaloonType type, QVariant data,
 	            const QSystemTrayIcon::MessageIcon& icon, QWidget* parent = 0);
 	~QBalloonTip();
@@ -33,7 +30,6 @@ protected:
 	void timerEvent(QTimerEvent*) override;
 	void resizeEvent(QResizeEvent*) override;
 	void mousePressEvent(QMouseEvent* e) override;
-	void closeEvent(QCloseEvent* e) override;
 
 private:
 	bool finished;

@@ -4,10 +4,10 @@
 #include <QObject>
 #include "QBaloon.h"
 #include "ServiceCommon.h"
+#include <QMutex>
+#include <QWaitCondition>
 class QApplicationSettings;
 class QSystemTrayIcon;
-class QWaitCondition;
-class QMutex;
 class QTimerEvent;
 class NotificationSystem : public QObject
 {
@@ -15,6 +15,7 @@ class NotificationSystem : public QObject
 public slots:
 	void OnNewNotification(int notificationType, QString message, QVariant data);
 private slots :
+	void dispatchNotifications();
 public:
 	enum NotificationType
 	{
@@ -33,8 +34,9 @@ public:
 
 	static NotificationSystemPtr getInstance();
 	~NotificationSystem();
-	void setTrayIcon(QSystemTrayIcon* pTrayIcon);
 	void UpdateNotificationSettings();
+
+	
 private:
 	struct Notification
 	{
@@ -42,16 +44,20 @@ private:
 		QString message;
 		QVariant data;
 	};
+	Notification getPendingNotification();
 	QQueue<Notification> m_notifications;
 	static boost::weak_ptr<NotificationSystem> m_pInstance;
 	NotificationSystem();
-	QSystemTrayIcon* m_pTrayIcon;
+	QMutex m_notificationMutex;
+	QWaitCondition m_notificationWaitCOndition;
 	QBalloonTip::QBaloonType gessBaloonType(int notificationType);
 	QSystemTrayIcon::MessageIcon gessIcon(int notificationType);
 	QApplicationSettingsPtr m_pSettings;
+	bool m_isShwoingNotification;
 	bool m_enabled;
 	int m_notificationMask;
 	int m_defaultMessageDuration;
 protected:
+	bool eventFilter(QObject *obj, QEvent *event);
 };
 #endif //_NOTIFICATION_SYSTEM_INCLUDED_ 

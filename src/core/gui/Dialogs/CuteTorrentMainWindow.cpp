@@ -375,7 +375,6 @@ void CuteTorrentMainWindow::UpdateStatusbar()
 	upLabelText->setText(QString("%1(%2)").arg(m_pTorrentManager->GetSessionUploaded(), m_pTorrentManager->GetSessionUploadSpeed()));
 	downLabelText->setText(QString("%1(%2)").arg(m_pTorrentManager->GetSessionDownloaded(), m_pTorrentManager->GetSessionDownloadSpeed()));
 	dhtNodesLabel->setText(tr("DHT: %1 nodes").arg(m_pTorrentManager->GetSessionDHTstate()));
-	m_pTorrentManager->PostTorrentUpdate();
 }
 
 void CuteTorrentMainWindow::UpdateLimits()
@@ -568,8 +567,6 @@ void CuteTorrentMainWindow::setupTray()
 	createTrayIcon();
 	m_pTrayIcon->setToolTip(QString("CuteTorrent %1").arg(Version::getVersionStr()));
 	m_pTrayIcon->show();
-	NotificationSystemPtr pNotificationSys = NotificationSystem::getInstance();
-	pNotificationSys->setTrayIcon(m_pTrayIcon);
 }
 
 void CuteTorrentMainWindow::changeEvent(QEvent* event)

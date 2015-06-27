@@ -19,8 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef TOR_MANAGER_H
 #define TOR_MANAGER_H
 #include <vector>
-#include <string>
-
+#include <QMutex>
+#include <QWaitCondition>
 #include "libtorrent/error_code.hpp"
 #include "libtorrent/session_settings.hpp"
 #include "libtorrent/torrent_handle.hpp"
@@ -40,25 +40,6 @@ using boost::bind;
 using namespace libtorrent;
 
 
-#ifdef _WIN32
-
-#if defined(_MSC_VER)
-#	define for if (false) {} else for
-#endif
-
-
-#else
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/ioctl.h>
-#include <termios.h>
-
-#endif
-
-
-#include "QApplicationSettings.h"
 #include "TorrentStorrage.h"
 #include "defs.h"
 #include "ServiceCommon.h"
@@ -96,9 +77,11 @@ protected:
 
 
 private:
-#if LIBTORRENT_VERSION_NUM < 100000
+#if LIBTORRENT_VERSION_NUM < 10000
     upnp* m_pUpnp;
 #endif
+	int num_outstanding_resume_data;
+	bool m_bIsSaveSessionInitiated;
 	void handle_alert(alert*);
 	void writeSettings();
 	TorrentStorrage* m_pTorrentStorrage;
@@ -112,6 +95,13 @@ private:
 	bool useProxy;
 	proxy_settings ps;
 	NotificationSystemPtr m_pNotificationSys;
+	QMutex m_alertMutex;
+	QWaitCondition m_alertsWaitCondition;
+	QVector<alert *> m_alerts;
+	void collectAlerts(std::auto_ptr<alert> a);
+	void getPendingAlerts(QVector<alert *> &out);
+private slots:
+	void dispatchPendingAlerts();
 public slots:
 	void RemoveTorrent(QString InfoHash, bool delFiles = false);
 public:
@@ -140,7 +130,6 @@ public:
 #else
     void AddPortMapping(upnp::protocol_type type, ushort sourcePoert, ushort destPort);
 #endif
-	void PostTorrentUpdate();
 	torrent_handle ProcessMagnetLink(QString link, error_code& ec);
 	void CancelMagnetLink(QString link);
 	void StartAllTorrents();

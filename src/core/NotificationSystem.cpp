@@ -1,6 +1,6 @@
 #include "NotificationSystem.h"
 #include "QApplicationSettings.h"
-#include <QDebug>
+#include <QEvent>
 
 
 NotificationSystemPtr NotificationSystem::getInstance()
@@ -15,7 +15,10 @@ NotificationSystemPtr NotificationSystem::getInstance()
 
 	return instance;
 }
-NotificationSystem::NotificationSystem() : QObject(), m_pSettings(QApplicationSettings::getInstance()), m_pTrayIcon(NULL), m_defaultMessageDuration(5000)
+
+
+
+NotificationSystem::NotificationSystem() : QObject(), m_pSettings(QApplicationSettings::getInstance()), m_isShwoingNotification(false), m_defaultMessageDuration(5000)
 {
 	UpdateNotificationSettings();
 }
@@ -37,7 +40,15 @@ void NotificationSystem::UpdateNotificationSettings()
 	{
 		m_notificationMask &= ~RSS_ERROR;
 	}
-
+	QMutexLocker lock(&m_notificationMutex);
+	for (int i = m_notifications.size() - 1; i > -1; i--)
+	{
+		int notificationType = m_notifications[i].notificationType;
+		if ((m_notificationMask & notificationType) != notificationType)
+		{
+			m_notifications.removeAt(i);
+		}
+	}
 	m_enabled = m_pSettings->valueBool("Notifications", "use_notification_sys", true);
 }
 NotificationSystem::~NotificationSystem()
@@ -51,11 +62,43 @@ void NotificationSystem::OnNewNotification(int notificationType, QString message
 	{
 		if ((m_notificationMask & notificationType) == notificationType)
 		{
-			QSystemTrayIcon::MessageIcon icon = gessIcon(notificationType);
-			QBalloonTip::QBaloonType type = gessBaloonType(notificationType);
-			QBalloonTip::showBalloon("CuteTorrent", message, type, data, icon, m_defaultMessageDuration);
+			QMutexLocker lock(&m_notificationMutex);
+			Notification n;
+			n.message = message;
+			n.data = data;
+			n.notificationType = notificationType;
+
+			bool wasEmpty = m_notifications.isEmpty();
+			m_notifications.enqueue(n);
+
+			if (wasEmpty && !m_isShwoingNotification)
+			{
+				m_notificationWaitCOndition.wakeAll();
+				QMetaObject::invokeMethod(this, "dispatchNotifications", Qt::QueuedConnection);
+			}
 		}
 	}
+}
+
+NotificationSystem::Notification NotificationSystem::getPendingNotification()
+{
+	QMutexLocker lock(&m_notificationMutex);
+
+	while (m_notifications.empty())
+		m_notificationWaitCOndition.wait(&m_notificationMutex, 0);
+
+	return m_notifications.dequeue();
+}
+
+void NotificationSystem::dispatchNotifications()
+{
+	Notification notification = getPendingNotification();
+
+	QSystemTrayIcon::MessageIcon icon = gessIcon(notification.notificationType);
+	QBalloonTip::QBaloonType type = gessBaloonType(notification.notificationType);
+	QWidget* balloon = QBalloonTip::showBalloon("CuteTorrent", notification.message, type, notification.data, icon, m_defaultMessageDuration);
+	m_isShwoingNotification = true;
+	balloon->installEventFilter(this);
 }
 
 QBalloonTip::QBaloonType NotificationSystem::gessBaloonType(int notificationType)
@@ -108,9 +151,19 @@ QSystemTrayIcon::MessageIcon NotificationSystem::gessIcon(int notificationType)
 	return QSystemTrayIcon::Information;
 }
 
-void NotificationSystem::setTrayIcon(QSystemTrayIcon* pTrayIcon)
+bool NotificationSystem::eventFilter(QObject* obj, QEvent* event)
 {
-	m_pTrayIcon = pTrayIcon;
+	if (event->type() == QEvent::Close)
+	{
+		m_isShwoingNotification = false;
+		if (! m_notifications.isEmpty())
+		{
+			m_notificationWaitCOndition.wakeAll();
+			QMetaObject::invokeMethod(this, "dispatchNotifications", Qt::QueuedConnection);
+		}
+	}
+	return false;
 }
+
 
 boost::weak_ptr<NotificationSystem> NotificationSystem::m_pInstance;

@@ -7,7 +7,7 @@
 #include <QNetworkReply>
 #include "StaticHelpers.h"
 #include "RssItem.h"
-
+#include "QApplicationSettings.h"
 RssFeed::RssFeed(QUrl url, QUuid uid) : m_uid(uid), m_url(url), m_ttl(0), m_customTtl(0)
 {
 	m_pNetManager = new QNetworkAccessManager(this);

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include <boost/bind.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include <boost/filesystem/operations.hpp>
+
 #include <boost/filesystem/path.hpp>
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QApplication>
 #include <QDebug>
 #include <QDir>
-#include <QTimer>
+
 #include <deque>
 #include <exception>
 #include <iosfwd>
@@ -140,7 +140,10 @@ int load_file(std::string const& filename, std::vector<char>& v, error_code& ec,
 	return 0;
 }
 #endif
-TorrentManager::TorrentManager() : m_pNotificationSys(NotificationSystem::getInstance()), m_pUpnp(NULL)
+TorrentManager::TorrentManager() : m_pNotificationSys(NotificationSystem::getInstance())
+#if LIBTORRENT_VERSION_NUM < 10000
+	, m_pUpnp(NULL)
+#endif
 {
 	try
 	{
@@ -203,6 +206,8 @@ TorrentManager::TorrentManager() : m_pNotificationSys(NotificationSystem::getIns
 		}
 
 		m_pTorrentSession->set_settings(s_settings);
+		m_pTorrentSession->set_alert_mask(alert::error_notification | alert::storage_notification | alert::status_notification | alert::tracker_notification);
+		m_pTorrentSession->set_alert_dispatch(boost::bind(&TorrentManager::collectAlerts, this, _1));
 		connect(this, SIGNAL(Notify(int, QString, QVariant)), m_pNotificationSys.get(), SLOT(OnNewNotification(int, QString, QVariant)));
 	}
 	catch (std::exception ex)
@@ -298,7 +303,7 @@ void TorrentManager::InitSession()
 	}
 
 	emit initCompleted();
-	m_pTorrentSession->set_alert_mask(alert::error_notification | alert::storage_notification | alert::status_notification | alert::tracker_notification);
+	
 }
 
 bool yes(torrent_status const&)
@@ -316,282 +321,277 @@ std::vector<torrent_status> TorrentManager::GetTorrents()
 void TorrentManager::handle_alert(alert* a)
 {
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-
-	switch (a->type())
+	TORRENT_TRY
 	{
-		case tracker_reply_alert::alert_type:
+		switch (a->type())
 		{
-			tracker_reply_alert* p = alert_cast<tracker_reply_alert>(a);
-			Torrent* pTorrent = m_pTorrentStorrage->getTorrent(QString::fromStdString(to_hex(p->handle.info_hash().to_string())));
-
-			if (pTorrent != NULL)
+			case tracker_reply_alert::alert_type:
 			{
-				pTorrent->SetTrackerPeersCnt(QString::fromStdString(p->url), p->num_peers);
-			}
+				tracker_reply_alert* p = alert_cast<tracker_reply_alert>(a);
+				Torrent* pTorrent = m_pTorrentStorrage->getTorrent(QString::fromStdString(to_hex(p->handle.info_hash().to_string())));
 
-			break;
-		}
-
-		case file_error_alert::alert_type:
-		{
-			file_error_alert* p = alert_cast<file_error_alert>(a);
-			QString message = StaticHelpers::translateLibTorrentError(p->error);
-			message.append(QString::fromUtf8(p->message().c_str()));
-			emit Notify(NotificationSystem::DISK_ERROR, message, QVariant());
-			break;
-		}
-
-		case torrent_finished_alert::alert_type:
-		{
-			torrent_finished_alert* p = alert_cast<torrent_finished_alert>(a);
-			p->handle.set_max_connections(max_connections_per_torrent / 2);
-			torrent_handle h = p->handle;
-			QString infoHash = QString::fromStdString(to_hex(h.info_hash().to_string()));
-			Torrent* pTorrent = m_pTorrentStorrage->getTorrent(infoHash);
-			
-			if (pTorrent != NULL && !pTorrent->isPrevioslySeeded())
-			{
-				emit Notify(NotificationSystem::TORRENT_COMPLETED, tr("TORRENT_COMPLETED %1").arg(pTorrent->GetName()), StaticHelpers::CombinePathes(pTorrent->GetSavePath(), pTorrent->GetName()));
-			}
-
-			h.save_resume_data();
-			break;
-		}
-
-		case save_resume_data_alert::alert_type:
-		{
-			save_resume_data_alert* p = alert_cast<save_resume_data_alert>(a);
-			torrent_handle h = p->handle;
-
-			if (p->resume_data)
-			{
-				std::vector<char> out;
-				entry e = *p->resume_data;
-				std::string info_hash = to_hex(h.info_hash().to_string());
-				Torrent* torrent = m_pTorrentStorrage->getTorrent(QString::fromStdString(info_hash));
-
-				if (torrent != NULL)
+				if (pTorrent != NULL)
 				{
-					bool isSeed = torrent->isSeeding();
-					e["torrent_group"] = torrent->GetGroup().toUtf8().data();
-                    e["torrent_name"] =
-#if LIBTORRENT_VERSION_NUM >= 10000
-                            h.status(torrent_handle::query_name).name;
-#else
-                            h.name();
-#endif
-					e["is_previous_seed"] = isSeed ? 1 : 0;
-					torrent->setIsPrevioslySeeded(isSeed);
+					pTorrent->SetTrackerPeersCnt(QString::fromStdString(p->url), p->num_peers);
 				}
 
-				bencode(back_inserter(out), e);
-				save_file(combine_path(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString(), to_hex(h.info_hash().to_string()) + ".resume"), out);
+				break;
 			}
 
-			break;
-		}
-
-		case tracker_error_alert::alert_type:
-		{
-			tracker_error_alert* p = alert_cast<tracker_error_alert>(a);
-			QString message = StaticHelpers::translateLibTorrentError(p->error);
-			message.append(QString::fromLocal8Bit(p->message().c_str()));
-			emit Notify(NotificationSystem::TRACKER_ERROR, message, QVariant());
-			break;
-		}
-
-		case storage_moved_alert::alert_type:
-		{
-			storage_moved_alert* p = alert_cast<storage_moved_alert>(a);
-			torrent_handle h = p->handle;
-
-			if (h.is_valid())
+			case file_error_alert::alert_type:
 			{
-				h.resume();
-				h.save_resume_data();
+				file_error_alert* p = alert_cast<file_error_alert>(a);
+				QString message = StaticHelpers::translateLibTorrentError(p->error);
+				message.append(QString::fromUtf8(p->message().c_str()));
+				emit Notify(NotificationSystem::DISK_ERROR, message, QVariant());
+				break;
 			}
 
-			QString infoHash = QString::fromStdString(to_hex(h.info_hash().to_string()));
-			Torrent* pTorrent = m_pTorrentStorrage->getTorrent(infoHash);
-
-			if (pTorrent != NULL)
+			case torrent_finished_alert::alert_type:
 			{
-				emit Notify(NotificationSystem::TORRENT_INFO, tr("MOVE_STORRAGE_COMPLETED_TO:\n%1 %2").arg(pTorrent->GetName(), pTorrent->GetSavePath()), pTorrent->GetSavePath());
-			}
+				torrent_finished_alert* p = alert_cast<torrent_finished_alert>(a);
+				p->handle.set_max_connections(max_connections_per_torrent / 2);
+				torrent_handle h = p->handle;
+				QString infoHash = QString::fromStdString(to_hex(h.info_hash().to_string()));
+				Torrent* pTorrent = m_pTorrentStorrage->getTorrent(infoHash);
 
-			break;
-		}
-
-		case fastresume_rejected_alert::alert_type:
-		{
-			fastresume_rejected_alert* p = alert_cast<fastresume_rejected_alert>(a);
-			torrent_handle h = p->handle;
-			h.auto_managed(false);
-			h.pause();
-			emit Notify(NotificationSystem::TORRENT_ERROR, StaticHelpers::translateLibTorrentError(p->error), QVariant());
-			break;
-		}
-
-		case metadata_received_alert::alert_type:
-		{
-			metadata_received_alert* p = alert_cast<metadata_received_alert>(a);
-			torrent_handle h = p->handle;
-
-			if (h.is_valid())
-			{
-				try
+				if (pTorrent != NULL && !pTorrent->isPrevioslySeeded())
 				{
+					emit Notify(NotificationSystem::TORRENT_COMPLETED, tr("TORRENT_COMPLETED %1").arg(pTorrent->GetName()), StaticHelpers::CombinePathes(pTorrent->GetSavePath(), pTorrent->GetName()));
+				}
 
-#if LIBTORRENT_VERSION_NUM >= 10000
-                   boost::intrusive_ptr<torrent_info const> ti = h.torrent_file();
-                   if (ti != NULL)
-                   {
-                       create_torrent ct(*ti.get());
-                       std::string info_hash = ti->info_hash().to_string();
-#else
-                    const torrent_info ti = h.get_torrent_info();
-                    {
-                        create_torrent ct(ti);
-                        std::string info_hash = ti.info_hash().to_string();
-#endif
+				h.save_resume_data();
+				break;
+			}
+			case save_resume_data_failed_alert::alert_type:
+			{
+				save_resume_data_failed_alert* p = alert_cast<save_resume_data_failed_alert>(a);
+				p->handle.save_resume_data();
+				break;
+			}
+			case save_resume_data_alert::alert_type:
+			{
+				save_resume_data_alert* p = alert_cast<save_resume_data_alert>(a);
+				torrent_handle h = p->handle;
 
+				if (p->resume_data)
+				{
+					std::vector<char> out;
+					entry e = *p->resume_data;
+					std::string info_hash = to_hex(h.info_hash().to_string());
+					Torrent* torrent = m_pTorrentStorrage->getTorrent(QString::fromStdString(info_hash));
 
+					if (torrent != NULL)
+					{
+						bool isSeed = torrent->isSeeding();
+						e["torrent_group"] = torrent->GetGroup().toUtf8().data();
+						e["torrent_name"] =
+	#if LIBTORRENT_VERSION_NUM >= 10000
+							h.status(torrent_handle::query_name).name;
+	#else
+							h.name();
+	#endif
+						e["is_previous_seed"] = isSeed ? 1 : 0;
+						torrent->setIsPrevioslySeeded(isSeed);
+					}
 
-                        std::ofstream out(complete(combine_path(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString(), to_hex(info_hash) + ".torrent")).c_str(), std::ios_base::binary);
-						bencode(std::ostream_iterator<char>(out), ct.generate());
+					bencode(back_inserter(out), e);
+					save_file(combine_path(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString(), to_hex(h.info_hash().to_string()) + ".resume"), out);
+
+					if (m_bIsSaveSessionInitiated)
+					{
+						num_outstanding_resume_data--;
 					}
 				}
-				catch (...)
+
+				break;
+			}
+
+			case tracker_error_alert::alert_type:
+			{
+				tracker_error_alert* p = alert_cast<tracker_error_alert>(a);
+				QString message = StaticHelpers::translateLibTorrentError(p->error);
+				message.append(QString::fromLocal8Bit(p->message().c_str()));
+				emit Notify(NotificationSystem::TRACKER_ERROR, message, QVariant());
+				break;
+			}
+
+			case storage_moved_alert::alert_type:
+			{
+				storage_moved_alert* p = alert_cast<storage_moved_alert>(a);
+				torrent_handle h = p->handle;
+
+				if (h.is_valid())
 				{
-					qCritical() << "Exception in metadata_received_alert";
+					h.resume();
+					h.save_resume_data();
 				}
+
+				QString infoHash = QString::fromStdString(to_hex(h.info_hash().to_string()));
+				Torrent* pTorrent = m_pTorrentStorrage->getTorrent(infoHash);
+
+				if (pTorrent != NULL)
+				{
+					emit Notify(NotificationSystem::TORRENT_INFO, tr("MOVE_STORRAGE_COMPLETED_TO:\n%1 %2").arg(pTorrent->GetName(), pTorrent->GetSavePath()), pTorrent->GetSavePath());
+				}
+
+				break;
 			}
 
-			break;
-		}
-
-		case portmap_alert::alert_type:
-		{
-			portmap_alert* alert = alert_cast<portmap_alert>(a);
-			emit Notify(NotificationSystem::SYSTEM_ERROR, QString::fromUtf8(alert->message().c_str()), QVariant());
-		}
-
-		case performance_alert::alert_type:
-
-		/*{
-		    performance_alert* p=alert_cast<performance_alert>(a);
-		    session_settings settings = ses->settings();
-		    switch (p->warning_code)
-		    {
-		        case performance_alert::outstanding_disk_buffer_limit_reached:
-		        {
-
-		            settings.max_queued_disk_bytes+=settings.max_queued_disk_bytes/4;
-		            break;
-		        }
-		        case performance_alert::outstanding_request_limit_reached:
-		        {
-
-		            settings.max_out_request_queue+=settings.max_out_request_queue/4;
-		            break;
-		        }
-		        case performance_alert::upload_limit_too_low:
-		        {
-
-		            settings.upload_rate_limit+=settings.upload_rate_limit*5/100;
-		            break;
-		        }
-		        case performance_alert::download_limit_too_low:
-		        {
-
-		            settings.download_rate_limit+=settings.download_rate_limit*5/100;
-		            break;
-		        }
-		        case performance_alert::send_buffer_watermark_too_low:
-		        {
-
-		            settings.send_buffer_watermark+=settings.send_buffer_watermark/4;
-		            break;
-		        }
-		        case performance_alert::too_many_optimistic_unchoke_slots:
-		        {
-
-		            settings.unchoke_slots_limit+= settings.unchoke_slots_limit/4;
-		            break;
-		        }
-		        case performance_alert::too_high_disk_queue_limit:
-		        {
-
-
-		            if (settings.max_queued_disk_bytes-settings.max_queued_disk_bytes/4 < 16*KbInt)
-		            {
-		                settings.max_queued_disk_bytes=settings.max_queued_disk_bytes-settings.max_queued_disk_bytes/4;
-		            }
-		            else
-		            {
-		                settings.cache_size+=32;
-		            }
-		            break;
-		        }
-		    }
-		    ses->set_settings(settings);
-		}*/
-		case add_torrent_alert::alert_type:
-		case listen_succeeded_alert::alert_type:
-		case state_changed_alert::alert_type:
-		case state_update_alert::alert_type:
-		case torrent_added_alert::alert_type:
-		case torrent_checked_alert::alert_type:
-		case torrent_resumed_alert::alert_type:
-		case torrent_paused_alert::alert_type:
-		case torrent_removed_alert::alert_type:
-		case cache_flushed_alert::alert_type:
-		case torrent_deleted_alert::alert_type:
-		case external_ip_alert::alert_type:
-		case udp_error_alert::alert_type:
-		case dht_reply_alert::alert_type:
-		case tracker_announce_alert::alert_type:
-			break;
-
-		default:
-		{
-			QString information = QString::fromUtf8(a->message().c_str());
-
-			if ((a->category() & alert::error_notification) == alert::error_notification)
+			case fastresume_rejected_alert::alert_type:
 			{
-				emit Notify(NotificationSystem::ERRORS, information, QVariant());
-			}
-			else
-			{
-				emit Notify(NotificationSystem::TORRENT_INFO, information, QVariant());
+				fastresume_rejected_alert* p = alert_cast<fastresume_rejected_alert>(a);
+				torrent_handle h = p->handle;
+				h.auto_managed(false);
+				h.pause();
+				emit Notify(NotificationSystem::TORRENT_ERROR, StaticHelpers::translateLibTorrentError(p->error), QVariant());
+				break;
 			}
 
-			break;
+			case metadata_received_alert::alert_type:
+			{
+				metadata_received_alert* p = alert_cast<metadata_received_alert>(a);
+				torrent_handle h = p->handle;
+
+				if (h.is_valid())
+				{
+					try
+					{
+
+	#if LIBTORRENT_VERSION_NUM >= 10000
+						boost::intrusive_ptr<torrent_info const> ti = h.torrent_file();
+						if (ti != NULL)
+						{
+							create_torrent ct(*ti.get());
+							std::string info_hash = ti->info_hash().to_string();
+	#else
+						const torrent_info ti = h.get_torrent_info();
+						{
+							create_torrent ct(ti);
+							std::string info_hash = ti.info_hash().to_string();
+	#endif
+
+
+
+							std::ofstream out(complete(combine_path(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString(), to_hex(info_hash) + ".torrent")).c_str(), std::ios_base::binary);
+							bencode(std::ostream_iterator<char>(out), ct.generate());
+						}
+					}
+					catch (...)
+					{
+						qCritical() << "Exception in metadata_received_alert";
+					}
+				}
+
+				break;
+			}
+
+			case portmap_alert::alert_type:
+			{
+				portmap_alert* alert = alert_cast<portmap_alert>(a);
+				emit Notify(NotificationSystem::SYSTEM_ERROR, QString::fromUtf8(alert->message().c_str()), QVariant());
+			}
+
+			case performance_alert::alert_type:
+
+				/*{
+					performance_alert* p=alert_cast<performance_alert>(a);
+					session_settings settings = ses->settings();
+					switch (p->warning_code)
+					{
+					case performance_alert::outstanding_disk_buffer_limit_reached:
+					{
+
+					settings.max_queued_disk_bytes+=settings.max_queued_disk_bytes/4;
+					break;
+					}
+					case performance_alert::outstanding_request_limit_reached:
+					{
+
+					settings.max_out_request_queue+=settings.max_out_request_queue/4;
+					break;
+					}
+					case performance_alert::upload_limit_too_low:
+					{
+
+					settings.upload_rate_limit+=settings.upload_rate_limit*5/100;
+					break;
+					}
+					case performance_alert::download_limit_too_low:
+					{
+
+					settings.download_rate_limit+=settings.download_rate_limit*5/100;
+					break;
+					}
+					case performance_alert::send_buffer_watermark_too_low:
+					{
+
+					settings.send_buffer_watermark+=settings.send_buffer_watermark/4;
+					break;
+					}
+					case performance_alert::too_many_optimistic_unchoke_slots:
+					{
+
+					settings.unchoke_slots_limit+= settings.unchoke_slots_limit/4;
+					break;
+					}
+					case performance_alert::too_high_disk_queue_limit:
+					{
+
+
+					if (settings.max_queued_disk_bytes-settings.max_queued_disk_bytes/4 < 16*KbInt)
+					{
+					settings.max_queued_disk_bytes=settings.max_queued_disk_bytes-settings.max_queued_disk_bytes/4;
+					}
+					else
+					{
+					settings.cache_size+=32;
+					}
+					break;
+					}
+					}
+					ses->set_settings(settings);
+					}*/
+			case add_torrent_alert::alert_type:
+			case listen_succeeded_alert::alert_type:
+			case state_changed_alert::alert_type:
+			case state_update_alert::alert_type:
+			case torrent_added_alert::alert_type:
+			case torrent_checked_alert::alert_type:
+			case torrent_resumed_alert::alert_type:
+			case torrent_paused_alert::alert_type:
+			case torrent_removed_alert::alert_type:
+			case cache_flushed_alert::alert_type:
+			case torrent_deleted_alert::alert_type:
+			case external_ip_alert::alert_type:
+			case udp_error_alert::alert_type:
+			case dht_reply_alert::alert_type:
+			case tracker_announce_alert::alert_type:
+				break;
+
+			default:
+			{
+				QString information = QString::fromUtf8(a->message().c_str());
+
+				if ((a->category() & alert::error_notification) == alert::error_notification)
+				{
+					emit Notify(NotificationSystem::ERRORS, information, QVariant());
+				}
+				else
+				{
+					emit Notify(NotificationSystem::TORRENT_INFO, information, QVariant());
+				}
+
+				break;
+			}
 		}
 	}
-}
-
-void TorrentManager::PostTorrentUpdate()
-{
-	std::deque<alert*> alerts;
-	m_pTorrentSession->pop_alerts(&alerts);
-
-	for (std::deque<alert*>::iterator i = alerts.begin()
-	                                      , end(alerts.end()); i != end; ++i)
+	TORRENT_CATCH(std::exception & e)
 	{
-		TORRENT_TRY
-		{
-			handle_alert(*i);
-		} TORRENT_CATCH(std::exception & e)
-		{
-			qCritical() << "exception in handle_alert" << e.what();
-		}
-		delete *i;
+		qCritical() << "exception in handle_alert" << e.what();
 	}
-
-	alerts.clear();
-	m_pTorrentSession->post_torrent_updates();
 }
+
 
 bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, error_code& ec, QMap<QString, quint8> filePriorities, QString group, bool sequntial)
 
@@ -698,7 +698,7 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 		//	QMessageBox::warning(0,"Error",ec.message().c_str());
 		return false;
 	}
-#if LIBTORRENT_VERSION_NUM <= 100000
+#if LIBTORRENT_VERSION_NUM <= 10000
     h.set_sequential_download(sequntial);
 #endif
 	Torrent* current = new Torrent(&h, group);
@@ -888,11 +888,11 @@ void TorrentManager::writeSettings()
 void TorrentManager::SaveSession()
 {
 	writeSettings();
-	int num_outstanding_resume_data = 0;
+	num_outstanding_resume_data = 0;
 	std::vector<torrent_status> temp;
 	m_pTorrentSession->pause();
 	m_pTorrentSession->get_torrent_status(&temp, &yes, 0);
-
+	m_bIsSaveSessionInitiated = true;
 	for (std::vector<torrent_status>::iterator i = temp.begin();
 	        i != temp.end(); ++i)
 	{
@@ -922,10 +922,10 @@ void TorrentManager::SaveSession()
 
 	while (num_outstanding_resume_data > 0)
 	{
-		std::deque<alert*> alerts;
-		m_pTorrentSession->pop_alerts(&alerts);
+		QVector<alert *> alerts;
+		getPendingAlerts(alerts);
 
-		for (std::deque<alert*>::iterator i = alerts.begin()
+		for (QVector<alert*>::iterator i = alerts.begin()
 		                                      , end(alerts.end()); i != end; ++i)
 		{
 			boost::scoped_ptr<alert> a(*i);
@@ -1136,6 +1136,42 @@ openmagnet_info* TorrentManager::GetTorrentInfo(const torrent_handle& handle)
 	}
 
 	return NULL;
+}
+
+void TorrentManager::collectAlerts(std::auto_ptr<alert> alertPtr)
+{
+	QMutexLocker locker(&m_alertMutex);
+	bool wasEmpty = m_alerts.isEmpty();
+
+	m_alerts.append(alertPtr.release());
+
+	if (wasEmpty) {
+		m_alertsWaitCondition.wakeAll();
+		QMetaObject::invokeMethod(this, "dispatchPendingAlerts", Qt::QueuedConnection);
+	}
+
+}
+
+void TorrentManager::getPendingAlerts(QVector<alert*>& out)
+{
+
+	QMutexLocker lock(&m_alertMutex);
+
+	while (m_alerts.empty())
+		m_alertsWaitCondition.wait(&m_alertMutex, 0);
+
+	m_alerts.swap(out);
+}
+
+void TorrentManager::dispatchPendingAlerts()
+{
+	QVector<alert *> alerts;
+	getPendingAlerts(alerts);
+
+	foreach(alert *const a, alerts) {
+		handle_alert(a);
+		delete a;
+	}
 }
 
 void TorrentManager::RemoveTorrent(QString infoHash, bool delFiles)
@@ -1486,7 +1522,7 @@ void TorrentManager::RefreshExternalPeerSettings()
 	if (m_pTorrentSessionSettings->valueBool("Torrent", "use_dht", true))
 	{
 		m_pTorrentSession->add_dht_router(make_pair(
-		                                      std::string("router.bittorrent.com"), 6881));
+											  std::string("router.bittorrent.com"), 8991));
 		m_pTorrentSession->add_dht_router(make_pair(
 		                                      std::string("router.utorrent.com"), 6881));
 		m_pTorrentSession->add_dht_router(make_pair(

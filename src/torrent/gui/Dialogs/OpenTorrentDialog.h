@@ -31,6 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "TorrentManager.h"
 #include "defs.h"
 #include "ui_OpenTorrentDialog.h"
+#include <GroupForFileFiltering.h>
 
 class FileTreeModel;
 class TorrentManager;

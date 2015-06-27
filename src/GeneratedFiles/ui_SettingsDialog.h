@@ -463,7 +463,7 @@ public:
         magnetAssociationCheckBox = new QCheckBox(torrentTab);
         magnetAssociationCheckBox->setObjectName(QString::fromUtf8("magnetAssociationCheckBox"));
 
-        gridLayout_22->addWidget(magnetAssociationCheckBox, 5, 0, 1, 1);
+        gridLayout_22->addWidget(magnetAssociationCheckBox, 5, 0, 1, 2);
 
         stackedWidget->addWidget(torrentTab);
         restrictionTab = new QWidget();

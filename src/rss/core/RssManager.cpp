@@ -359,10 +359,10 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 		else
 		{
 			emit Notify(NotificationSystem::TORRENT_INFO, tr("AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1 %2").arg(pTorrentInfo->name, feedItem->title()), QVariant());
-			if (m_pSettings->valueBool("rss", "auto_download_emeail_notify",true))
+			if (m_pSettings->valueBool("rss", "auto_download_emeail_notify"))
 			{
 				EmailNotifierPtr emailNotifier(new EmailNotifier());
-				QString to = m_pSettings->valueString("rss", "rss_send_to", "ruslan.fedoseenko.91@gmail.com");
+				QString to = m_pSettings->valueString("rss", "rss_send_to");
 				emailNotifier->SendEmail(to, tr("STARTED_AUTOMETED_RSS_DOWNLOAD"), tr("%1 STARTED_DOWNLOADING.<br/> <a href=\"%3\">DESCRIBTION</a><br/> %2").arg(feedItem->title(), feedItem->description(), feedItem->describtionLink()));
 			}
 			RssFeed* rssFeed = findFeed(info.rssFeedId);

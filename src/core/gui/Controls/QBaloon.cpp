@@ -12,53 +12,10 @@ QWidget* QBalloonTip::showBalloon(const QString& title,
                                   int timeout, bool showArrow, QWidget* parent)
 {
 	theSolitaryBalloonTip = new QBalloonTip(title, message, type, data, icon, parent);
-
-	//hideBalloon();
-	if(current != NULL && current->isFinished())
-	{
-		//	delete current;
-		current = theSolitaryBalloonTip;
-
-		if(timeout <= 0)
-		{
-			timeout = 10000;
-		}
-
-		theSolitaryBalloonTip->balloon(timeout, showArrow);
-	}
-	else
-	{
-		if(current == NULL)
-		{
-			current = theSolitaryBalloonTip;
-
-			if(timeout <= 0)
-			{
-				timeout = 10000;
-			}
-
-			theSolitaryBalloonTip->balloon(timeout, showArrow);
-		}
-		else
-		{
-			baloonQueue.enqueue(theSolitaryBalloonTip);
-		}
-	}
-
+	theSolitaryBalloonTip->balloon(timeout, showArrow);
 	return theSolitaryBalloonTip;
 }
 
-void QBalloonTip::hideBalloon()
-{
-	if(!current)
-	{
-		return;
-	}
-
-	current->hide();
-	delete current;
-	current = NULL;
-}
 
 
 QBalloonTip::QBalloonTip(const QString& title, const QString& message, QBaloonType type, QVariant data,
@@ -337,18 +294,6 @@ void QBalloonTip::timerEvent(QTimerEvent* e)
 	}
 }
 
-void QBalloonTip::closeEvent(QCloseEvent* e)
-{
-	hideBalloon();
-
-	if(!baloonQueue.isEmpty())
-	{
-		current = baloonQueue.dequeue();
-		current->balloon(10000, false);
-	}
-
-	e->accept();
-}
 
 /*void QBalloonTip::paintEvent(QPaintEvent* e)
 {
@@ -357,7 +302,3 @@ void QBalloonTip::closeEvent(QCloseEvent* e)
 	QPainter p(this);
 	style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }*/
-
-QBalloonTip* QBalloonTip::current = NULL;
-
-QQueue<QBalloonTip*> QBalloonTip::baloonQueue;
