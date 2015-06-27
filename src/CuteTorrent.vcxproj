@@ -240,6 +240,7 @@
     <ClCompile Include="core\EmailNotifier.cpp" />
     <ClCompile Include="core\gui\Controls\StyledProgressBar.cpp" />
     <ClCompile Include="core\helpers\VirtualDiskMounter.cpp" />
+    <ClCompile Include="core\NetworkDiskCache.cpp" />
     <ClCompile Include="core\smtp\emailaddress.cpp" />
     <ClCompile Include="core\smtp\mimeattachment.cpp" />
     <ClCompile Include="core\smtp\mimebase64encoder.cpp" />
