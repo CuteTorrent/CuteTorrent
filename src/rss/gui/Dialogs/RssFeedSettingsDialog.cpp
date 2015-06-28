@@ -36,7 +36,13 @@ void RssFeedSettingsDialog::accept()
 
 	m_pFeed->setTll(m_pRefreshRateSpinBox->value());
 	QHash<QString, QString> cookies;
-
+	QModelIndex index = m_pCoociesTabWidget->currentIndex();
+	if (index.isValid())
+	{
+		m_pCoociesTabWidget->clearFocus();
+	}
+	
+	
 	for (int i = 0; i < m_pCoociesTabWidget->rowCount(); i++)
 	{
 		QTableWidgetItem* keyItem = m_pCoociesTabWidget->item(i, 0);
@@ -52,7 +58,10 @@ void RssFeedSettingsDialog::accept()
 
 void RssFeedSettingsDialog::onAddRow()
 {
-	m_pCoociesTabWidget->insertRow(m_pCoociesTabWidget->rowCount());
+	int nRow = m_pCoociesTabWidget->rowCount();
+	m_pCoociesTabWidget->insertRow(nRow);
+	m_pCoociesTabWidget->setItem(nRow, 0, new QTableWidgetItem(""));
+	m_pCoociesTabWidget->setItem(nRow, 1, new QTableWidgetItem(""));
 }
 
 void RssFeedSettingsDialog::onRemoveRow()

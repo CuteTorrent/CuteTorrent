@@ -2058,6 +2058,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>showTrackerErrorsCheckBox</tabstop>
   <tabstop>showDiskErrorsCheckBox</tabstop>
   <tabstop>showRssErrorsCheckBox</tabstop>
+  <tabstop>winShelItegrationCheckBox</tabstop>
   <tabstop>activeLimitEdit</tabstop>
   <tabstop>activeSeedLimitEdit</tabstop>
   <tabstop>activeDownloadLimitEdit</tabstop>
@@ -2087,10 +2088,10 @@ p, li { white-space: pre-wrap; }
   <tabstop>diskIOCasheModeComboBox</tabstop>
   <tabstop>casheSizeLineEdit</tabstop>
   <tabstop>useDiskReadAheadCheckBox</tabstop>
-  <tabstop>alowReorderedOpsCheckBox</tabstop>
   <tabstop>lowPrioDiskCheckBox</tabstop>
-  <tabstop>useReadCasheCheckBox</tabstop>
   <tabstop>lockFilesCheckBox</tabstop>
+  <tabstop>alowReorderedOpsCheckBox</tabstop>
+  <tabstop>useReadCasheCheckBox</tabstop>
   <tabstop>GroupsListWidget</tabstop>
   <tabstop>removeGroupButton</tabstop>
   <tabstop>newGroupNameEdit</tabstop>
@@ -2110,10 +2111,11 @@ p, li { white-space: pre-wrap; }
   <tabstop>beginDateTimeEdit</tabstop>
   <tabstop>pauseAllRadioButton</tabstop>
   <tabstop>limitDlRadioButton</tabstop>
-  <tabstop>dlLimitEdit</tabstop>
   <tabstop>startAllRadioButton</tabstop>
   <tabstop>limitUlRadioButton</tabstop>
+  <tabstop>dlLimitEdit</tabstop>
   <tabstop>ulLimitEdit</tabstop>
+  <tabstop>calendarWidget</tabstop>
   <tabstop>webUIGroupBox</tabstop>
   <tabstop>loginLineEdit</tabstop>
   <tabstop>passwordLineEdit</tabstop>
@@ -2131,10 +2133,18 @@ p, li { white-space: pre-wrap; }
   <tabstop>removeRssDLRuleButton</tabstop>
   <tabstop>pushButton_3</tabstop>
   <tabstop>pushButton_2</tabstop>
-  <tabstop>calendarWidget</tabstop>
-  <tabstop>listWidget</tabstop>
-  <tabstop>pbClose</tabstop>
+  <tabstop>rssRefrashRateEdit</tabstop>
+  <tabstop>autosrtEmailNotificationCheckBox</tabstop>
+  <tabstop>rssSmtpServerEdit</tabstop>
+  <tabstop>rssSmtpPortEdit</tabstop>
+  <tabstop>rssSmtpConnTypeCombobox</tabstop>
+  <tabstop>rssAuthTypeComboBox</tabstop>
+  <tabstop>rssSmtpLoginEdit</tabstop>
+  <tabstop>rssSmtpPasswordEdit</tabstop>
+  <tabstop>rssRecepientEmailEdit</tabstop>
   <tabstop>buttonBox</tabstop>
+  <tabstop>pbClose</tabstop>
+  <tabstop>listWidget</tabstop>
   <tabstop>hotKeyScrollArea</tabstop>
  </tabstops>
  <resources>

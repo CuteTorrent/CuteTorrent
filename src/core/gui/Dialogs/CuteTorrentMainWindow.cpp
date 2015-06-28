@@ -80,8 +80,8 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 #endif
 {
 	m_pSettings = QApplicationSettings::getInstance();
-	Application::setLanguage(m_pSettings->valueString("System", "Lang", "ru_RU"));
-	Application::setLanguageQt(m_pSettings->valueString("System", "Lang", "ru_RU"));
+	Application::setLanguage(m_pSettings->valueString("System", "Lang", "en_US"));
+	Application::setLanguageQt(m_pSettings->valueString("System", "Lang", "en_US"));
 	m_pStyleEngine = StyleEngene::getInstance();
     m_pStyleEngine->setStyle(m_pSettings->valueString("System", "Style", "CuteTorrent"));
 	setWindowModality(Qt::NonModal);
@@ -624,6 +624,8 @@ void CuteTorrentMainWindow::changeEvent(QEvent* event)
 		categoriesToStr[ISerachProvider::Movie] = tr("FILMS_CATEGORY");;
 		categoriesToStr[ISerachProvider::All] = tr("ALL_CATEGORY");
 		int prevSearchCat = m_pSearchCategory->currentIndex();
+		m_pSearchEdit->setPlaceholderText(tr("Search"));
+		m_pTorrentSearchEdit->setPlaceholderText(tr("Search"));
 #ifdef Q_WS_WIN
 		setupJumpList();
 #endif

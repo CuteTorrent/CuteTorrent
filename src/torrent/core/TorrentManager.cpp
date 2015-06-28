@@ -1526,8 +1526,6 @@ void TorrentManager::RefreshExternalPeerSettings()
 		m_pTorrentSession->add_dht_router(make_pair(
 		                                      std::string("router.utorrent.com"), 6881));
 		m_pTorrentSession->add_dht_router(make_pair(
-		                                      std::string("router.bitcomet.com"), 6881));
-		m_pTorrentSession->add_dht_router(make_pair(
 		                                      std::string("dht.transmissionbt.com"), 6881));
 		m_pTorrentSession->add_dht_router(make_pair(
 		                                      std::string("dht.aelitis.com"), 6881));

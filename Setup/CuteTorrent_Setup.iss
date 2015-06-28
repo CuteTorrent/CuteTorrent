@@ -4,12 +4,12 @@
 WizardSmallImageFile=bottom.bmp
 AppId=CuteTorrent
 AppName=CuteTorrent
-AppVersion=1.0.0.25
+AppVersion=1.0.0.26
 DefaultDirName={pf}\CuteTorrent
 DefaultGroupName=CuteTorrent
 UninstallDisplayIcon={app}\CuteTorrent.exe
 OutputDir=Output
-OutputBaseFilename = CuteTorrent 1.0.0.25
+OutputBaseFilename = CuteTorrent 1.0.0.26
 SolidCompression=yes
 Compression=lzma/ultra
 WizardImageFile=Left.bmp
@@ -25,15 +25,41 @@ ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
 #endif
 [Tasks]
-Name: DesctopIcon; Description: "Create desctop icon"; GroupDescription: Shortcuts:
-Name: TorrentAssociation; Description: "Associate ""torrent"" extension"; GroupDescription: File extensions:
-Name: MagnetAssociation; Description: "Open magnet links with CuteTorrent"; GroupDescription: File extensions:
-Name: InstallVcRedist; Description: "Install VC++ Redist 2010";
-Name: AddFirewallRule; Description: "Add rule to firewall";
-Name: WinExplorerIntegration; Description: "Integrate to Windows Explorer";
+Name: DesctopIcon; Description:  "{cm:CreateDesktopIcon}"; GroupDescription: {cm:Shortcuts}:
+Name: TorrentAssociation; Description: "{cm:TorrentFileAssociation}"; GroupDescription: {cm:FileAssociations}:
+Name: MagnetAssociation; Description: {cm:MgnetLinkHandler}; GroupDescription: {cm:FileAssociations}:
+Name: InstallVcRedist; Description: "{cm:InstallVCRedist}";
+Name: AddFirewallRule; Description: "{cm:AddFirewallRule}";
+Name: WinExplorerIntegration; Description: "{cm:WinExplorerIntegration}";
+[Languages]
+Name: "en"; MessagesFile: "compiler:Default.isl"
+Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
+#include <idplang\Russian.iss>
+[CustomMessages]
+en.FileAssociations=File extensions
+en.Shortcuts=Shortcuts
+en.CreateDesktopIcon=Create desctop icon
+en.TorrentFileAssociation=Associate "torrent" extension
+en.MgnetLinkHandler=Open magnet links with CuteTorrent
+en.InstallVCRedist=Install VC++ Redist 2010
+en.AddFirewallRule=Add rule to firewall
+en.WinExplorerIntegration=Integrate to Windows Explorer
+en.VCRedistInstalling=Installing VC++ Redist 2010...
+en.AddingFirewallRule=Adding firewall rule...
+
+ru.FileAssociations=Файлы
+ru.Shortcuts=Ярлыки
+ru.CreateDesktopIcon=Создать ярлык на рабочем столе
+ru.TorrentFileAssociation=Открывать torrent Файлы с помощью CuteTorrent
+ru.MgnetLinkHandler=Открывать магнитные ссылки с помощью CuteTorrent
+ru.InstallVCRedist=Установить VC++ Redist 2010
+ru.AddFirewallRule=Добавить в исключения файерволла
+ru.WinExplorerIntegration=Интегрироваться в проводник Windows
+ru.VCRedistInstalling=Устанавливается VC++ Redist 2010...
+ru.AddingFirewallRule=Добавляется правило для файерволла...
 [Run]
-FileName: "{tmp}\vcredist_x86.exe"; Parameters: "/q"; StatusMsg: "Installing VC++ Redist 2010..."; Flags: waituntilterminated ; Check: VcRedistCheck
-Filename: "{sys}\netsh.exe"; Parameters: "firewall add allowedprogram ""{app}\CuteTorrent.exe"" ""BitTorrent client CuteTorrent"" ENABLE ALL";     StatusMsg: "Adding firewall rule..."; Flags: runhidden waituntilterminated; Check: FirewallCheck
+FileName: "{tmp}\vcredist_x86.exe"; Parameters: "/q"; StatusMsg: "{cm:VCRedistInstalling}"; Flags: waituntilterminated ; Check: VcRedistCheck
+Filename: "{sys}\netsh.exe"; Parameters: "firewall add allowedprogram ""{app}\CuteTorrent.exe"" ""BitTorrent client CuteTorrent"" ENABLE ALL";     StatusMsg: "{cm:AddingFirewallRule}"; Flags: runhidden waituntilterminated; Check: FirewallCheck
 [Registry]
 Root: HKCR; Subkey: ".torrent"; ValueType: string; ValueName: ""; ValueData: "CuteTorrent.file"; Flags: uninsdeletevalue; Tasks: TorrentAssociation
 Root: HKCR; Subkey: "CuteTorrent.file"; ValueType: string; ValueName: ""; ValueData: "Torrent File"; Flags: uninsdeletekey; Tasks: TorrentAssociation
@@ -312,9 +338,9 @@ begin
 
   with WizardForm.LicenseNotAcceptedRadio do
   begin
-    Left := ScaleX(230);
-    Top := ScaleY(332);
-    Width := ScaleX(150);
+    Left := ScaleX(300);
+    Top := ScaleY(330);
+    Width := ScaleX(210);
     Height := ScaleY(16);
     Font.Color := clWhite;
     ParentFont := False;
@@ -324,8 +350,8 @@ begin
   with WizardForm.LicenseAcceptedRadio do
   begin
     Left := ScaleX(64);
-    Top := ScaleY(332);
-    Width := ScaleX(150);
+    Top := ScaleY(330);
+    Width := ScaleX(190);
     Height := ScaleY(16);
     Font.Color := clWhite;
     ParentFont := False;
@@ -354,8 +380,8 @@ begin
   begin
     Parent := WizardForm.LicensePage;
     Left := ScaleX(64);
-    Top := ScaleY(332);
-    Width := ScaleX(166);
+    Top := ScaleY(330);
+    Width := ScaleX(206);
     Height := ScaleY(16);
     BorderStyle := bsNone;
     Color := 11297329;
@@ -374,9 +400,9 @@ begin
   with nLicenseNotAcceptedRadio do
   begin
     Parent := WizardForm.LicensePage;
-    Left := ScaleX(230);
-    Top := ScaleY(332);
-    Width := ScaleX(182);
+    Left := ScaleX(300);
+    Top := ScaleY(330);
+    Width := ScaleX(226);
     Height := ScaleY(16);
     BorderStyle := bsNone;
     Color := 11297329;
@@ -611,7 +637,7 @@ begin
     Font.Color := clWhite;
     ParentFont := False;
     Left := ScaleX(64);
-    Top := ScaleY(100);
+    Top := ScaleY(90);
     Width := ScaleX(437);
   end;
 
