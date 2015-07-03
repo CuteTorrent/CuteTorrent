@@ -6,7 +6,7 @@
 #include <QIcon>
 #include <QBuffer>
 
-EmailNotifier::EmailNotifier(QObject* parent) : QObject(parent)
+EmailNotifier::EmailNotifier(QObject* parent)
 {}
 
 void EmailNotifier::SendEmail(QString to, QString subject, QString body)

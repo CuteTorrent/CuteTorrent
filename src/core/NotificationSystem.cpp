@@ -3,21 +3,6 @@
 #include <QEvent>
 
 
-NotificationSystemPtr NotificationSystem::getInstance()
-{
-	NotificationSystemPtr instance = m_pInstance.lock();
-
-	if (!instance)
-	{
-		instance.reset(new NotificationSystem());
-		m_pInstance = instance;
-	}
-
-	return instance;
-}
-
-
-
 NotificationSystem::NotificationSystem() : QObject(), m_pSettings(QApplicationSettings::getInstance()), m_isShwoingNotification(false), m_defaultMessageDuration(5000)
 {
 	UpdateNotificationSettings();
@@ -165,5 +150,3 @@ bool NotificationSystem::eventFilter(QObject* obj, QEvent* event)
 	return false;
 }
 
-
-boost::weak_ptr<NotificationSystem> NotificationSystem::m_pInstance;

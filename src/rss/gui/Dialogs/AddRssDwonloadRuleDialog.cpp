@@ -6,6 +6,8 @@
 #include "QRssFilterModel.h"
 #include "QRssItemDelegate.h"
 #include <QSizePolicy>
+#include <QApplicationSettings.h>
+
 AddRssDwonloadRuleDialog::AddRssDwonloadRuleDialog(QWidget* parent, DiaologMode mode) : BaseWindow(OnlyCloseButton, AllowResize, parent), m_currentRule(new RssDownloadRule())
 {
 	m_inited = false;
@@ -274,3 +276,11 @@ void AddRssDwonloadRuleDialog::onUpdateRuleTypeHint()
 	}
 }
 
+void AddRssDwonloadRuleDialog::onBrowseStaticPath()
+{
+	QString lastDir = QApplicationSettings::getInstance()->valueString("System", "LastSaveTorrentDir", QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation));
+	QString dir = QFileDialog::getExistingDirectory(this, tr("DIALOG_OPEN_DIR"),
+		lastDir,
+		QFileDialog::ShowDirsOnly
+		| QFileDialog::DontResolveSymlinks);
+}

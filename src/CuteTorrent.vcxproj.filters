@@ -1286,6 +1286,9 @@
     <ClInclude Include="core\smtp\smtpmime_global.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\Singleton.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\CuteTorrentVS.rc" />

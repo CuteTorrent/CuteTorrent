@@ -5,7 +5,7 @@
 #include <string>
 #include "RssCommon.h"
 class RssItem;
-
+class RssFeed;
 class RssDownloadRule
 {
 	friend QDataStream& operator <<(QDataStream& out, const RssDownloadRule& any);

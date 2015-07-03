@@ -133,7 +133,7 @@ void OpenTorrentDialog::SetData(QString filename)
 				}
 				else
 				{
-					QString lastDir = settings->valueString("System", "LastSaveTorrentDir");
+					QString lastDir = settings->valueString("System", "LastSaveTorrentDir", QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation));
 					pathEdit->setText(lastDir);
 					GroupComboBox->setCurrentIndex(-1);
 
@@ -157,7 +157,7 @@ void OpenTorrentDialog::BrowseButton()
 {
 	QApplicationSettingsPtr settings = QApplicationSettings::getInstance();
 	QString lastDir = pathEdit->text();
-	QString dir = QFileDialog::getExistingDirectory(this, tr("DIALOF_OPEN_DIR"),
+	QString dir = QFileDialog::getExistingDirectory(this, tr("DIALOG_OPEN_DIR"),
 	              lastDir,
 	              QFileDialog::ShowDirsOnly
 	              | QFileDialog::DontResolveSymlinks);

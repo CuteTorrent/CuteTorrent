@@ -1,13 +1,9 @@
-#include <boost/shared_ptr.hpp>
+#ifndef RSS_COMMON_INCLUDED
+#define RSS_COMMON_INCLUDED
+#include "Singleton.h"
 
+DEFINE_PTR_CALSS(RssManager)
 
-class RssManager;
-typedef boost::shared_ptr<RssManager> RssManagerPtr;
+DEFINE_PTR_CALSS(RssParser)
 
-class RssFeed;
-
-class RssParser;
-typedef boost::shared_ptr<RssParser> RssParserPtr;
-
-class RssDownloader;
-typedef boost::shared_ptr<RssDownloader> RssDownloaderPtr;
+#endif

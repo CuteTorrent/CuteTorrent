@@ -7,7 +7,6 @@
 #include <QStringList>
 #include "RssFeed.h"
 #include "RssItem.h"
-boost::weak_ptr<RssParser> RssParser::m_pInstance;
 
 static const char shortDay[][4] =
 {
@@ -248,20 +247,6 @@ QDateTime RssParser::parseDate(const QString& string)
 RssParser::RssParser()
 {
 }
-
-RssParserPtr RssParser::getInstance()
-{
-	RssParserPtr instance = m_pInstance.lock();
-
-	if (!instance)
-	{
-		instance.reset(new RssParser());
-		m_pInstance = instance;
-	}
-
-	return instance;
-}
-
 
 void RssParser::fillFeed(QIODevice* pData, RssFeed* pFeed, bool& ok, QString& error)
 {

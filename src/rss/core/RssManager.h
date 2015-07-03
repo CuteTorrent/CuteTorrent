@@ -4,16 +4,16 @@
 #include <QHash>
 #include <QUrl>
 #include <QUuid>
-#include <QRunnable>
-#include <QQueue>
-#include "RssCommon.h"
 #include "RssDownloadRule.h"
 #include "ServiceCommon.h"
 #include "defs.h"
+#include "Singleton.h"
+class RssFeed;
 class QApplicationSettings;
 class RssItem;
-class RssManager : public QObject
+class RssManager : public QObject, public Singleton<RssManager>
 {
+	friend class Singleton<RssManager>;
 	Q_OBJECT
 public:
 
@@ -27,7 +27,6 @@ public:
 	~RssManager();
 	void SaveFeeds();
 	void SaveDownloadRules();
-	static RssManagerPtr getInstance();
 private:
 	struct TorrentDownloadInfo
 	{
@@ -36,7 +35,6 @@ private:
 		QUuid rssFeedId;
 		QString rssItemId;
 	};
-	static boost::weak_ptr<RssManager> m_sInstrance;
 	RssManager(QObject* parent = NULL);
 	TorrentDownloaderPtr m_pTorrentDownloader;
 	NotificationSystemPtr m_pNotificationSystem;

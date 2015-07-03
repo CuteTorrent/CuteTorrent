@@ -1469,6 +1469,7 @@ void SettingsDialog::onImportRssRules()
 				if (ok)
 				{
 					m_downloadRulesCopy.insert(pRule->Uuid(), pRule);
+					m_deletedRules.removeAll(pRule->Uuid());
 				}
 				else
 				{

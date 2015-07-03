@@ -74,6 +74,8 @@ void *FaviconDownloader::qt_metacast(const char *_clname)
     if (!_clname) return 0;
     if (!strcmp(_clname, qt_meta_stringdata_FaviconDownloader))
         return static_cast<void*>(const_cast< FaviconDownloader*>(this));
+    if (!strcmp(_clname, "Singleton<FaviconDownloader>"))
+        return static_cast< Singleton<FaviconDownloader>*>(const_cast< FaviconDownloader*>(this));
     return QObject::qt_metacast(_clname);
 }
 

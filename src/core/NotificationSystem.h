@@ -6,11 +6,13 @@
 #include "ServiceCommon.h"
 #include <QMutex>
 #include <QWaitCondition>
+#include "Singleton.h"
 class QApplicationSettings;
 class QSystemTrayIcon;
 class QTimerEvent;
-class NotificationSystem : public QObject
+class NotificationSystem : public QObject, public Singleton<NotificationSystem>
 {
+	friend class Singleton<NotificationSystem>;
 	Q_OBJECT
 public slots:
 	void OnNewNotification(int notificationType, QString message, QVariant data);
@@ -32,7 +34,6 @@ public:
 		ERRORS = TRACKER_ERROR | DISK_ERROR | RSS_ERROR | TORRENT_ERROR | SYSTEM_ERROR | UPDATE_ERROR
 	};
 
-	static NotificationSystemPtr getInstance();
 	~NotificationSystem();
 	void UpdateNotificationSettings();
 
@@ -46,7 +47,6 @@ private:
 	};
 	Notification getPendingNotification();
 	QQueue<Notification> m_notifications;
-	static boost::weak_ptr<NotificationSystem> m_pInstance;
 	NotificationSystem();
 	QMutex m_notificationMutex;
 	QWaitCondition m_notificationWaitCOndition;

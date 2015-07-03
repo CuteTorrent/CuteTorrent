@@ -51,19 +51,6 @@ QList<RssFeed*> RssManager::feeds()
 	return m_pFeeds;
 }
 
-RssManagerPtr RssManager::getInstance()
-{
-	RssManagerPtr instance = m_sInstrance.lock();
-
-	if (!instance)
-	{
-		instance.reset(new RssManager());
-		m_sInstrance = instance;
-	}
-
-	return instance;
-}
-
 void RssManager::SaveFeeds()
 {
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
@@ -424,6 +411,4 @@ QString RssManager::gessSavePath(RssDownloadRule* downloadRule, QString base_suf
 	QString lastSaveDir = pSettings->valueString("System", "LastSaveTorrentDir");
 	return lastSaveDir;
 }
-
-boost::weak_ptr<RssManager> RssManager::m_sInstrance;
 

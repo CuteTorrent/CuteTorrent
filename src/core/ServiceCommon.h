@@ -1,20 +1,15 @@
 #ifndef _SERVICE_COMMON_H_
 #define _SERVICE_COMMON_H_
-#include <boost/smart_ptr.hpp>
+#include "Singleton.h"
 
+DEFINE_PTR_CALSS(FaviconDownloader);
 
-class FaviconDownloader;
-typedef boost::shared_ptr<FaviconDownloader>  FaviconDownloaderPtr;
+DEFINE_PTR_CALSS(TorrentDownloader);
 
-class TorrentDownloader;
-typedef boost::shared_ptr<TorrentDownloader>  TorrentDownloaderPtr;
+DEFINE_PTR_CALSS(NotificationSystem);
 
-class NotificationSystem;
-typedef boost::shared_ptr<NotificationSystem>  NotificationSystemPtr;
+DEFINE_PTR_CALSS(EmailNotifier);
 
-class EmailNotifier;
-typedef boost::scoped_ptr<EmailNotifier>  EmailNotifierPtr;
+DEFINE_PTR_CALSS(QApplicationSettings);
 
-class QApplicationSettings;
-typedef boost::shared_ptr<QApplicationSettings>  QApplicationSettingsPtr;
 #endif

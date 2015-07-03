@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QMutex>
 #include <QSettings>
 #include "StaticHelpers.h"
-boost::weak_ptr<QApplicationSettings> QApplicationSettings::m_pInstance;
+
 
 
 QApplicationSettings::QApplicationSettings()
@@ -54,18 +54,7 @@ QApplicationSettings::~QApplicationSettings()
 {
 	WriteSettings();
 }
-QApplicationSettingsPtr QApplicationSettings::getInstance()
-{
-	QApplicationSettingsPtr instance = m_pInstance.lock();
 
-	if (!instance)
-	{
-		instance.reset(new QApplicationSettings());
-		m_pInstance = instance;
-	}
-
-	return instance;
-}
 QStringList QApplicationSettings::GetGroupNames()
 {
 	locker->lock();

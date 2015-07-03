@@ -6,15 +6,17 @@
 #include <QXmlStreamReader>
 #include <QHash>
 #include  <QDateTime>
+#include "Singleton.h"
 class RssItem;
-class RssParser
+class RssFeed;
+class RssParser : public Singleton<RssParser>
 {
+	friend class Singleton<RssParser>;
 protected:
 
 	QMutex m_mutex;
 	/*feedUrl*//*lastBuildDate*/
 	QHash<QString, QString> m_lastUpdateDates;
-	static boost::weak_ptr<RssParser> m_pInstance;
 	void parseRssChannel(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok, QString& error);
 	void parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok, QString& error);
 	void parseTorrentSection(QXmlStreamReader& reader, RssItem* item, bool& ok, QString& error);
@@ -23,7 +25,6 @@ protected:
 	QDateTime parseDate(const QString& string);
 public:
 	RssParser();
-	static RssParserPtr getInstance();
 	void fillFeed(QIODevice* pData, RssFeed* pFeed, bool& ok, QString& error);
 
 };

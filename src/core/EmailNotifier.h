@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-class SmtpClient;
-class EmailNotifier : public QObject
+
+class EmailNotifier
 {
 public:
 	explicit EmailNotifier(QObject* parent = NULL);

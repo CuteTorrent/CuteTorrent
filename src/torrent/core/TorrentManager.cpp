@@ -628,7 +628,8 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 
 		if (entry* i = e.find_key("torrent_group"))
 		{
-			group = QString::fromUtf8(i->string().c_str());
+			std::string string = i->string();
+			group = QString::fromUtf8(string.c_str());
 		}
 
 		if (entry* i = e.find_key("save_path"))
@@ -958,7 +959,7 @@ void TorrentManager::SaveSession()
 
 			if (torrent != NULL)
 			{
-				e["torrent_group"] = torrent->GetGroup().toStdString();
+				e["torrent_group"] = torrent->GetGroup().toUtf8().data();
                 e["torrent_name"] =
 #if LIBTORRENT_VERSION_NUM >= 10000
                         h.status(torrent_handle::query_name).name;

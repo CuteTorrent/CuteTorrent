@@ -150,18 +150,5 @@ QPixmap FaviconDownloader::getFromWeb(QUrl url)
 	return m_pStyleEngine->getIcon("toolbar_download").pixmap(16);
 }
 
-FaviconDownloaderPtr FaviconDownloader::getInstance()
-{
-	FaviconDownloaderPtr instance = m_pInstance.lock();
 
-	if (!instance)
-	{
-		instance.reset(new FaviconDownloader());
-		m_pInstance = instance;
-	}
-
-	return instance;
-}
-
-boost::weak_ptr<FaviconDownloader> FaviconDownloader::m_pInstance;
 

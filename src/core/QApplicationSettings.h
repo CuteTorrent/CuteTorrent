@@ -22,13 +22,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "GroupForFileFiltering.h"
 #include "SchedulerTask.h"
 #include "ServiceCommon.h"
+#include "Singleton.h"
 class QMutex;
 class QSettings;
-class QApplicationSettings
+class QApplicationSettings : public Singleton<QApplicationSettings>
 {
+	friend class Singleton<QApplicationSettings>;
 protected:
 
-	static boost::weak_ptr<QApplicationSettings> m_pInstance;
 	QApplicationSettings();
 	
 private:
@@ -40,7 +41,6 @@ public:
 	QVariant value(const QString& group, const QString& key, const QVariant& defaultVal = QVariant(QVariant::Invalid));
 	void SaveFilterGropups(QList<GroupForFileFiltering>);
 	QList<GroupForFileFiltering> GetFileFilterGroups();
-	static QApplicationSettingsPtr getInstance();
 	QStringList GetGroupNames();
 	QList<SchedulerTask> GetSchedullerQueue();
 	void SaveSchedullerQueue(QList<SchedulerTask>&);

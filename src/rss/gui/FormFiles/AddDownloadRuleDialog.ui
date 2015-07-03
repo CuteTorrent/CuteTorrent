@@ -319,7 +319,7 @@
  </tabstops>
  <resources>
   <include location="../../../Resources/ltorrent.qrc"/>
-  <include location="ltorrent.qrc"/>
+  <include location="../../../Resources/ltorrent.qrc"/>
  </resources>
  <connections>
   <connection>

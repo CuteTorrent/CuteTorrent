@@ -4,7 +4,7 @@
 #include <QNetworkReply>
 #include <QTemporaryFile>
 
-boost::weak_ptr<TorrentDownloader> TorrentDownloader::m_pInstance;
+
 TorrentDownloader::TorrentDownloader(QObject* parent)
 	: QObject(parent)
 {
@@ -14,19 +14,6 @@ TorrentDownloader::TorrentDownloader(QObject* parent)
 
 TorrentDownloader::~TorrentDownloader()
 {
-}
-
-TorrentDownloaderPtr TorrentDownloader::getInstance()
-{
-	TorrentDownloaderPtr instance = m_pInstance.lock();
-
-	if (!instance)
-	{
-		instance.reset(new TorrentDownloader(NULL));
-		m_pInstance = instance;
-	}
-
-	return instance;
 }
 
 void TorrentDownloader::replyReady(QNetworkReply* pReply)

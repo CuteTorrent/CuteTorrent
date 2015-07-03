@@ -25,6 +25,7 @@ private slots:
 	void onApplyRule();
 	void onCancel();
 	void onUpdateRuleTypeHint();
+	void onBrowseStaticPath();
 private:
 	bool m_inited;
 	QRssFilterModel* m_pRssFilterModel;
