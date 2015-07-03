@@ -1087,17 +1087,10 @@ opentorrent_info* TorrentManager::GetTorrentInfo(QString filename, error_code& e
 
 	if (ec != 0)
 	{
-		//	CustomMessageBox::warning(NULL, "Warning", QObject::tr("ERROR_OPENING_FILE\n%1").arg(filename + "\n" + StaticHelpers::translateLibTorrentError(ec)));
 		return NULL;
 	}
 
 	torrent_handle foundTorrent = m_pTorrentSession->find_torrent(ti->info_hash());
-
-	if (foundTorrent.is_valid())
-	{
-		ec.assign(errors::duplicate_torrent, get_libtorrent_category());
-		return NULL;
-	}
 
 	opentorrent_info* info = new opentorrent_info;
 	info->size = ti->total_size();
@@ -1106,6 +1099,12 @@ opentorrent_info* TorrentManager::GetTorrentInfo(QString filename, error_code& e
 	info->files = ti->files();
 	info->baseSuffix = StaticHelpers::GetBaseSuffix(info->files);
 	info->infoHash = QString::fromStdString(to_hex(ti->info_hash().to_string()));
+
+	if (foundTorrent.is_valid())
+	{
+		ec.assign(errors::duplicate_torrent, get_libtorrent_category());
+	}
+	
 	return info;
 }
 

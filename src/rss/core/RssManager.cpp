@@ -328,6 +328,15 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 		RssItem* feedItem = pFeed->GetFeedItem(info.rssItemId);
 		boost::scoped_ptr<opentorrent_info> pTorrentInfo(pTorrentManager->GetTorrentInfo(torrentFilePath, ec));
 
+		if (ec.category() == get_libtorrent_category())
+		{
+			if (ec.value() == errors::duplicate_torrent)
+			{
+				feedItem->setInfoHash(pTorrentInfo->infoHash);
+				return;
+			}
+		}
+
 		if (ec)
 		{
 			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), feedItem->title()), QVariant());
