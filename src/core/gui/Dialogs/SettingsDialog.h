@@ -44,6 +44,18 @@ protected:
 	virtual QLabel* getTitleIcon() override;
 
 private:
+	enum RssDownloadRuleSerializtionParts
+	{
+		UID,
+		NAME,
+		RULE_TYPE,
+		SEARCH_TYPE,
+		SEARCH_STR,
+		USE_GROUP_FILTERS,
+		USE_STATIC_SAVE_PATH,
+		STATIC_SAVE_PATH,
+		NUMBER_OF_FEEDS
+	};
 	QHash<QUuid, RssDownloadRule*> m_downloadRulesCopy;
 	QList<QUuid> m_deletedRules;
 	QApplicationSettingsPtr settings;
@@ -95,6 +107,8 @@ private slots:
 	void addRssRule();
 	void onEditRssRule();
 	void onDeleteRssRule();
+	void onExportRssRules();
+	void onImportRssRules();
 };
 
 #endif // !_SETTINGS_DLG_H

@@ -718,6 +718,12 @@
     <ClCompile Include="core\NetworkDiskCache.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PiceAvailabilityWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\gui\Controls\PieceAvailabilityWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -944,6 +950,9 @@
       <Filter>Generated Files</Filter>
     </CustomBuild>
     <CustomBuild Include="core\smtp\smtpclient.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrent\gui\Controls\PieceAvailabilityWidget.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>

@@ -732,7 +732,13 @@ void RssParser::parseAtomArticle(QXmlStreamReader& reader, QString baseURL, RssF
 			{
 				boost::scoped_ptr<RssItem> pOldItem(pFeed->m_rssItems[guid]);
 				pFeed->m_rssItems.remove(guid);
-				pFeed->m_rssItems.insert(guid, new RssItem(*pItem.get()));
+				RssItem* pNewItem = new RssItem(*pItem.get());
+				QString infoHash = pOldItem->infoHash();
+				if (!infoHash.isEmpty())
+				{
+					pNewItem->setInfoHash(infoHash);
+				}
+				pFeed->m_rssItems.insert(guid, pNewItem);
 				return;
 			}
 		}

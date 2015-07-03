@@ -197,7 +197,7 @@ QStringList& Torrent::GetImageFiles()
 	return imageFiles;
 }
 Torrent::Torrent(torrent_handle* hTorrent, QString group)
-	: QObject(NULL), m_hasMedia(false), m_isPrevSeed(false), size(0), mountable(false)
+	: QObject(NULL), m_hasMedia(false), m_isPrevSeed(false), size(0), mountable(false), isMovingFileStorrage(false)
 {
 	m_hTorrent = *hTorrent;
 	m_hTorrent.set_share_mode(false);
@@ -279,18 +279,26 @@ QString Torrent::GetProgresString() const
 }
 QString Torrent::GetStatusString() const
 {
-	static QStringList state_str = QStringList() << (QT_TR_NOOP("STATE_FILE_CHEACKING (q)"))
-	                               << (QT_TR_NOOP("STATE_FILE_CHEACKING"))
-	                               << (QT_TR_NOOP("STATE_DOWNLOADING"))
-	                               << (QT_TR_NOOP("STATE_DOWNLOADING"))
-	                               << (QT_TR_NOOP("STATE_SEEDING"))
-	                               << (QT_TR_NOOP("STATE_SEEDING"))
-	                               << (QT_TR_NOOP("STATE_PREPARING"))
-	                               << (QT_TR_NOOP("STATE_FILE_CHEACKING (r)"));
+	static const char* state_str[] = {
+		QT_TR_NOOP("STATE_FILE_CHEACKING (q)"),
+		QT_TR_NOOP("STATE_FILE_CHEACKING"),
+		QT_TR_NOOP("STATE_DOWNLOADING"),
+		QT_TR_NOOP("STATE_DOWNLOADING"),
+		QT_TR_NOOP("STATE_SEEDING"),
+		QT_TR_NOOP("STATE_SEEDING"),
+		QT_TR_NOOP("STATE_PREPARING"),
+		QT_TR_NOOP("STATE_FILE_CHEACKING (r)"),
+		QT_TR_NOOP("MOVING_FILE_STORRAGE")
+	};
 
 	if(m_hTorrent.is_valid())
 	{
-		return tr(state_str.at(m_hTorrent.status().state).toLatin1().data()) + (m_hTorrent.status().sequential_download ? (" [S]") : "");
+		int state = m_hTorrent.status().state;
+		if (isMovingFileStorrage)
+		{
+			state = 8;
+		}
+		return tr(state_str[state]) + (m_hTorrent.status().sequential_download ? (" [S]") : "");
 	}
 
 	return "";
@@ -572,6 +580,12 @@ void Torrent::SetFilePriority(int index, int prioryty)
 	}
 }
 
+
+void Torrent::CompliteMoveStorrage()
+{
+	isMovingFileStorrage = false;
+}
+
 void Torrent::updateTrackers()
 {
 	if(m_hTorrent.is_valid())
@@ -585,6 +599,7 @@ void Torrent::MoveStorrage(QString path)
 	if(m_hTorrent.is_valid())
 	{
 		m_hTorrent.move_storage(path.toStdString());
+		isMovingFileStorrage = true;
 	}
 }
 
@@ -602,23 +617,21 @@ int Torrent::GetPieceCount()
 	return 0;
 }
 
-QVector<int> Torrent::GetDownloadedPieces()
+QBitArray Torrent::GetDownloadedPieces()
 {
-	QVector<int> res;
-	libtorrent::bitfield data;
+	QBitArray res(GetPieceCount());
+	bitfield data;
 
 	if(m_hTorrent.is_valid())
 	{
-        int max_num = GetPieceCount();
-		data.resize(max_num);
-		data.clear_all();
-
+		data = m_hTorrent.status().pieces;
+		int max_num = data.size();
+		
 		for(int i = 0; i < max_num; i++)
 		{
-			if(m_hTorrent.have_piece(i))
+			if(data.get_bit(i))
 			{
-				data.set_bit(i);
-				res.append(i);
+				res.setBit(i);
 			}
 		}
 	}
@@ -626,26 +639,18 @@ QVector<int> Torrent::GetDownloadedPieces()
 	return res;
 }
 
-QVector<int> Torrent::GetDownloadingPieces()
+QBitArray Torrent::GetDownloadingPieces()
 {
-	QVector<int> res;
-	libtorrent::bitfield data;
-
+	QBitArray res(GetPieceCount());
+	//m_hTorrent.piece_availability();
 	if(m_hTorrent.is_valid())
 	{
 		std::vector<partial_piece_info> pieces;
 		m_hTorrent.get_download_queue(pieces);
-        int max_num = GetPieceCount();
-		data.resize(max_num);
-		data.clear_all();
 
 		for(std::vector<partial_piece_info>::iterator i = pieces.begin(); i != pieces.end(); ++i)
 		{
-			if(i->finished + i->writing > 0)
-			{
-				data.set_bit(i->piece_index);
-				res.append(i->piece_index);
-			}
+			res.setBit(i->piece_index);
 		}
 	}
 
@@ -666,6 +671,24 @@ QString Torrent::GetDiscribtion()
 	}
 
 	return "";
+}
+
+void Torrent::GetPieceAvalibility(std::vector<int>& availibility)
+{
+	if (m_hTorrent.is_valid())
+	{
+		
+		m_hTorrent.piece_availability(availibility);
+	}
+}
+
+float Torrent::GetDistributedCopies()
+{
+	if (m_hTorrent.is_valid())
+	{
+		return m_hTorrent.status().distributed_copies;
+	}
+	return 0.0f;
 }
 
 void Torrent::SetUlLimit(int val)

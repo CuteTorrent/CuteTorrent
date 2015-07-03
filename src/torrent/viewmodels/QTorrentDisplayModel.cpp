@@ -710,7 +710,7 @@ void QTorrentDisplayModel::setupContextMenu()
 	DelAll = new QAction(style->getIcon("delete"), tr("ACTION_DELETE_ALL"), this);
 	DelAll->setObjectName("ACTION_TORRENTLIST_DEL_ALL");
 	connect(DelAll, SIGNAL(triggered()), this, SLOT(DellAll()));
-	DelAll->setShortcut(Qt::Key_Shift | Qt::Key_Delete);
+	DelAll->setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Delete));
 	menu->addAction(DelAll);
 	DelTorrentOnly = new QAction(style->getIcon("delete"), tr("ACTION_DELETE_TORRENT"), this);
 	DelTorrentOnly->setObjectName("ACTION_TORRENTLIST_DEL_TORRENT");

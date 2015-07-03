@@ -38,6 +38,8 @@ Application::Application(int& argc, char* argv[])
 
 Application::~Application()
 {
+	qDeleteAll(translators.values());
+	qDeleteAll(qt_translators.values());
 }
 void Application::loadTranslations(const QString& dir)
 {

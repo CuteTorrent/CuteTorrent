@@ -7,6 +7,11 @@ RssDownloadRule::RssDownloadRule() : m_name(""), m_pattern(""), m_patternType(QR
 }
 
 
+void RssDownloadRule::setUuid(QUuid& uid)
+{
+	m_uid = uid;
+}
+
 QString RssDownloadRule::validate(bool& ok)
 {
 	ok = false;
@@ -210,6 +215,11 @@ QSet<QUuid> RssDownloadRule::FeedUids() const
 void RssDownloadRule::setFeedUids(const QSet<QUuid>& mFeedUids)
 {
 	m_feedUids = mFeedUids;
+}
+
+QUuid RssDownloadRule::Uuid()
+{
+	return m_uid;
 }
 
 QDataStream& operator <<(QDataStream& out, const RssDownloadRule& any)

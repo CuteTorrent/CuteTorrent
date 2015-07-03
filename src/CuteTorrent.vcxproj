@@ -96,7 +96,7 @@
       <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <Optimization>MinSpace</Optimization>
+      <Optimization>MaxSpeed</Optimization>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
@@ -273,6 +273,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ISerachProvider.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_KickassSearchProvider.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_ObservebaleCollectionBase.cpp" />
+    <ClCompile Include="GeneratedFiles\Release\moc_PiceAvailabilityWidget.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_qwinjumplist.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_qwintaskbarbutton.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_qwintaskbarprogress.cpp" />
@@ -337,6 +338,7 @@
       </AdditionalInputs>
       <SubType>Designer</SubType>
     </CustomBuild>
+    <ClCompile Include="torrent\gui\Controls\PieceAvailabilityWidget.cpp" />
     <ClCompile Include="torrent\viewmodels\QTorrentFilterProxyModel.cpp" />
     <ClCompile Include="rss\datamodels\RssBaseTreeItem.cpp" />
     <ClCompile Include="rss\datamodels\RssDownloadRule.cpp" />
@@ -507,6 +509,12 @@
     <ClInclude Include="core\winextras\windowsguidsdefs_p.h" />
     <ClInclude Include="core\winextras\winpropkey_p.h" />
     <ClInclude Include="core\winextras\winshobjidl_p.h" />
+    <CustomBuild Include="torrent\gui\Controls\PieceAvailabilityWidget.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QT_DIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PHONON_LIB -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QT_DIR)\include\QtCore" -I"$(QT_DIR)\include\QtNetwork" -I"$(QT_DIR)\include\QtGui" -I"$(QT_DIR)\include\phonon" -I"$(QT_DIR)\include" -I"qtsingleapplication\src" -I"..\ThirdParties\boost_1_55_0" -I"..\ThirdParties\libtorrent-rasterbar-1.0.2\include" -I".\GeneratedFiles" -I"." -I".\GeneratedFiles\Release" -I"$(QT_DIR)\include\ActiveQt" -I"$(QT_DIR)\include\phonon_compat" -I".\GeneratedFiles\Release" -I"GeneratedFiles" -I$(QT_DIR)\mkspecs\win32-msvc2010 -D_MSC_VER=1600 -DWIN32 %(Identity) -o .\GeneratedFiles\Release\moc_%(Filename).cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC %(Filename).h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\Release\moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QT_DIR)\bin\moc.exe;%(Filename).h;</AdditionalInputs>
+    </CustomBuild>
     <ClInclude Include="webControll\FileSystemController.h" />
     <ClInclude Include="webControll\RssCommandsApiController.h" />
     <ClInclude Include="webControll\RssController.h" />

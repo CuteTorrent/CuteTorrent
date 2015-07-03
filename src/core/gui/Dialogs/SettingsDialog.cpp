@@ -1325,10 +1325,165 @@ void SettingsDialog::onDeleteRssRule()
 {
 	if (rssRulesListWidget->currentRow() != -1)
 	{
-		QListWidgetItem* currentItem = rssRulesListWidget->currentItem();
-		QUuid uid = currentItem->data(Qt::UserRole).value<QUuid>();
-		m_downloadRulesCopy.remove(uid);
-		m_deletedRules.append(uid);
+		QList<QListWidgetItem*> selectedItems = rssRulesListWidget->selectedItems();
+		foreach(QListWidgetItem* currentItem, selectedItems)
+		{
+			QUuid uid = currentItem->data(Qt::UserRole).value<QUuid>();
+			m_downloadRulesCopy.remove(uid);
+			m_deletedRules.append(uid);
+		}
 		updateRulesWidget(m_downloadRulesCopy.values());
+	}
+}
+
+void SettingsDialog::onExportRssRules()
+{
+	QString savePath = QFileDialog::getSaveFileName(this, tr("RSS_RULES_EXPORT"), QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation), tr("CT_RSS_RULE_LIST (*.cdrl)"));
+
+	if (savePath.isEmpty())
+	{
+		return;
+	}
+
+	RssManagerPtr pRssManager = RssManager::getInstance();
+	QList<RssDownloadRule*> rssDownloadRules = pRssManager->downloadRules();
+
+	QFile rulesFile(savePath);
+
+	if (rulesFile.open(QFile::WriteOnly))
+	{
+		foreach(RssDownloadRule* rule, rssDownloadRules)
+		{
+			QSet<QUuid> feedUids = rule->FeedUids();
+			QSet<QUuid>::Iterator begin = feedUids.begin()
+				, end = feedUids.end();
+			int size = feedUids.size();
+			QString serializedRule = rule->Uid().toString() % "|" % QUrl::toPercentEncoding(rule->Name()) % "|" % QString::number(rule->RuleType()) % "|" % QString::number(rule->PatternType()) % "|" % QUrl::toPercentEncoding(rule->Pattern()) % "|" % QString::number(rule->UseGroupFilters()) % "|" % QString::number(rule->UseStaticSavePath()) % "|" % rule->StaticSavePath() % "|" % QString::number(size);
+			
+			
+			for (QSet<QUuid>::Iterator i = begin; i != end; ++i)
+			{
+				serializedRule.append("|" % (*i).toString());
+			}
+			serializedRule.append("\n");
+			rulesFile.write(serializedRule.toUtf8());
+		}
+	}
+	else
+	{
+		CustomMessageBox::critical(this, tr("ERROR"), tr("ERROR_WRITING_RSS_RULE_LIST: %1").arg(rulesFile.errorString()));
+	}
+
+	
+}
+
+void SettingsDialog::onImportRssRules()
+{
+	QString openPath = QFileDialog::getOpenFileName(this, tr("RSS_RULES_IMPORT"), QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation), tr("CT_RSS_RULE_LIST (*.cdrl)"));
+
+	if (openPath.isEmpty())
+	{
+		return;
+	}
+
+	QFile rulesFile(openPath);
+
+	if (rulesFile.open(QFile::ReadOnly))
+	{
+		RssManagerPtr pRssManager = RssManager::getInstance();
+		while (!rulesFile.atEnd())
+		{
+			QByteArray lineData = rulesFile.readLine();
+			QString line = QString::fromUtf8(lineData);
+			QStringList parts = line.split("|");
+			int size = parts.size();
+			int index = 0;
+			
+			if (size > NUMBER_OF_FEEDS)
+			{
+				RssDownloadRule* pRule = new RssDownloadRule();
+				while (index < size)
+				{
+					switch (index)
+					{
+						case UID:
+						{
+							QUuid uid = QUuid(parts[index]);
+							pRule->setUuid(uid);
+							break;
+						}
+						case NAME:
+						{
+							pRule->setName(QUrl::fromPercentEncoding(parts[index].toUtf8()));
+							break;
+						}
+						case RULE_TYPE:
+						{
+							pRule->setRuleType(static_cast<RssDownloadRule::DownloadRuleType>(parts[index].toInt()));
+							break;
+						}
+						case SEARCH_TYPE:
+						{
+							pRule->setPatternType(static_cast<QRegExp::PatternSyntax>(parts[index].toInt()));
+							break;
+						}
+						case SEARCH_STR:
+						{
+							pRule->setPattern(QUrl::fromPercentEncoding(parts[index].toUtf8()));
+							break;
+						}
+						case USE_GROUP_FILTERS:
+						{
+							pRule->setUseGroupFilters(parts[index].toInt() > 0);
+							break;
+						}
+						case USE_STATIC_SAVE_PATH:
+						{
+							pRule->setUseStaticSavePath(parts[index].toInt() > 0);
+							break;
+						}
+						case STATIC_SAVE_PATH:
+						{
+							pRule->setStaticSavePath(parts[index]);
+							break;
+						}
+						case NUMBER_OF_FEEDS:
+						{
+							int numFeeds = parts[index].toInt();
+							QSet<QUuid> feedUids;
+							feedUids.reserve(numFeeds);
+
+							for (int i = NUMBER_OF_FEEDS + 1; i <= NUMBER_OF_FEEDS + numFeeds; i++)
+							{
+								feedUids.insert(QUuid(parts[i]));
+							}
+							pRule->setFeedUids(feedUids);
+							break;
+						}
+					}
+					index++;
+
+				}
+				bool ok;
+				QString error = pRule->validate(ok);
+				if (ok)
+				{
+					m_downloadRulesCopy.insert(pRule->Uuid(), pRule);
+				}
+				else
+				{
+					CustomMessageBox::critical(this, "ERROR", tr("PARSED_RULE_IS_NOT_VALID:\n %1\nERROR: %2").arg(line, error));
+				}
+				
+			}
+			
+		}
+		updateRulesWidget(m_downloadRulesCopy.values());
+
+		
+	}
+	else
+	{
+		CustomMessageBox::critical(this, tr("ERROR"), tr("ERROR_READING_RSS_RULE_LIST: %1").arg(rulesFile.errorString()));
 	}
 }

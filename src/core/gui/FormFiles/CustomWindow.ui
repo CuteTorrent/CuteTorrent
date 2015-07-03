@@ -352,38 +352,128 @@
                 <attribute name="title">
                  <string>TAB_INFO</string>
                 </attribute>
-                <layout class="QGridLayout" name="gridLayout_4">
-                 <item row="7" column="3">
-                  <widget class="QLabel" name="label_11">
+                <layout class="QGridLayout" name="gridLayout_4" columnminimumwidth="50,50,50,50,15">
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_2">
                    <property name="text">
-                    <string>INFO_PEER_COUNT</string>
+                    <string>INFO_DOWNLOADED</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="4">
-                  <widget class="QLabel" name="pathLabel">
+                 <item row="1" column="4">
+                  <widget class="QLabel" name="availibilityLabel">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>50</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string/>
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="3">
+                 <item row="2" column="2">
+                  <widget class="QLabel" name="label_7">
+                   <property name="text">
+                    <string>INFO_REMAININF_TIME</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QLabel" name="downloadedBytesLabel">
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label">
+                   <property name="text">
+                    <string>INFO_ACTIVE_TIME</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLabel" name="activetimeLabel">
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="2">
                   <widget class="QLabel" name="label_8">
                    <property name="text">
                     <string>INFO_UPLOADED</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="0" colspan="5">
-                  <widget class="QWidget" name="widget" native="true">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>20</height>
-                    </size>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_3">
+                   <property name="text">
+                    <string>INFO_DOWNLOAD_SPEED</string>
                    </property>
-                   <property name="styleSheet">
-                    <string notr="true"/>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QLabel" name="downloadSpeedLabel">
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="2">
+                  <widget class="QLabel" name="label_9">
+                   <property name="text">
+                    <string>INFO_UPLOAD_SPEED</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="2">
+                  <widget class="QLabel" name="label_4">
+                   <property name="text">
+                    <string>INFO_PATH</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="1">
+                  <widget class="QLabel" name="totalSizeLabel">
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="0">
+                  <widget class="QLabel" name="label_5">
+                   <property name="text">
+                    <string>INFO_TOTAL_SIZE</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="0">
+                  <widget class="QLabel" name="label_6">
+                   <property name="text">
+                    <string>INFO_DESCRIBTION</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="2">
+                  <widget class="QLabel" name="label_11">
+                   <property name="text">
+                    <string>INFO_PEER_COUNT</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="3" colspan="2">
+                  <widget class="QLabel" name="timeleftLabel">
+                   <property name="text">
+                    <string/>
                    </property>
                   </widget>
                  </item>
@@ -394,49 +484,14 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="4">
-                  <widget class="QLabel" name="uploadSpeedLabel">
-                   <property name="text">
-                    <string/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="4">
-                  <widget class="QLabel" name="uploadedBytesLabel">
-                   <property name="text">
-                    <string/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="0">
-                  <widget class="QLabel" name="label_6">
-                   <property name="text">
-                    <string>INFO_DESCRIBTION</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="1" colspan="2">
+                 <item row="7" column="1">
                   <widget class="QLabel" name="seedCoutLabel">
                    <property name="text">
                     <string/>
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="1" colspan="2">
-                  <widget class="QLabel" name="activetimeLabel">
-                   <property name="text">
-                    <string/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="6" column="3">
-                  <widget class="QLabel" name="label_4">
-                   <property name="text">
-                    <string>INFO_PATH</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="1" colspan="4">
+                 <item row="5" column="1" colspan="4">
                   <widget class="QLabel" name="describtionLabel">
                    <property name="maximumSize">
                     <size>
@@ -458,80 +513,85 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="1" colspan="2">
-                  <widget class="QLabel" name="totalSizeLabel">
+                 <item row="3" column="3" colspan="2">
+                  <widget class="QLabel" name="uploadedBytesLabel">
                    <property name="text">
                     <string/>
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="3">
-                  <widget class="QLabel" name="label_7">
-                   <property name="text">
-                    <string>INFO_REMAININF_TIME</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="4">
-                  <widget class="QLabel" name="timeleftLabel">
+                 <item row="4" column="3" colspan="2">
+                  <widget class="QLabel" name="uploadSpeedLabel">
                    <property name="text">
                     <string/>
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="label_2">
-                   <property name="text">
-                    <string>INFO_DOWNLOADED</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label">
-                   <property name="text">
-                    <string>INFO_ACTIVE_TIME</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1" colspan="2">
-                  <widget class="QLabel" name="downloadedBytesLabel">
+                 <item row="6" column="3" colspan="2">
+                  <widget class="QLabel" name="pathLabel">
                    <property name="text">
                     <string/>
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="0">
-                  <widget class="QLabel" name="label_3">
-                   <property name="text">
-                    <string>INFO_DOWNLOAD_SPEED</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="4">
+                 <item row="7" column="3" colspan="2">
                   <widget class="QLabel" name="peerCoutLabel">
                    <property name="text">
                     <string/>
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="0">
-                  <widget class="QLabel" name="label_5">
-                   <property name="text">
-                    <string>INFO_TOTAL_SIZE</string>
+                 <item row="1" column="0" colspan="4">
+                  <widget class="QWidget" name="widget_2" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>15</height>
+                    </size>
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="1" colspan="2">
-                  <widget class="QLabel" name="downloadSpeedLabel">
+                 <item row="0" column="0" colspan="4">
+                  <widget class="QWidget" name="widget" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="4">
+                  <widget class="QLabel" name="progressLabel">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>50</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="3">
-                  <widget class="QLabel" name="label_9">
-                   <property name="text">
-                    <string>INFO_UPLOAD_SPEED</string>
                    </property>
                   </widget>
                  </item>
@@ -706,6 +766,9 @@
                    </property>
                    <property name="contextMenuPolicy">
                     <enum>Qt::CustomContextMenu</enum>
+                   </property>
+                   <property name="selectionMode">
+                    <enum>QAbstractItemView::ExtendedSelection</enum>
                    </property>
                    <property name="sortingEnabled">
                     <bool>true</bool>

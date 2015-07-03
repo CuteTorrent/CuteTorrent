@@ -16,17 +16,30 @@ PeiceDisplayWidget::~PeiceDisplayWidget()
 {
 }
 
+void PeiceDisplayWidget::clear()
+{
+	QImage img2(m_iPiceCount, 1, QImage::Format_RGB32);
+
+	img2.fill(m_cBackground);
+	img = img2;
+}
+
+void PeiceDisplayWidget::setProgress(const QBitArray& availibalePieces, const QBitArray& downloadingPieces)
+{
+	m_dowloadingParts = downloadingPieces;
+	m_dowloadedParts = availibalePieces;
+	m_iPiceCount = m_dowloadedParts.size();
+	UpdateImage();
+}
+
 void PeiceDisplayWidget::paintEvent(QPaintEvent* paintEvent)
 {
 	QPainter painter(this);
-
-	if(img.isNull())
+	painter.fillRect(0, 0, width() - 1, height() - 1, m_cBackground);
+	QRect imageRect(1, 1, width() - 2, height() - 2);
+	if(!img.isNull())
 	{
-		painter.fillRect(0, 0, width() - 1, height() - 1, m_cBackground);
-	}
-	else
-	{
-		painter.drawImage(0, 0, img);
+		painter.drawImage(imageRect, img);
 	}
 
 	painter.setPen(m_cBorder);
@@ -35,9 +48,9 @@ void PeiceDisplayWidget::paintEvent(QPaintEvent* paintEvent)
 
 void PeiceDisplayWidget::UpdateImage()
 {
-	QImage img2(width() - 1, height() - 1, QImage::Format_RGB32);
-	QPainter painter(&img2);
-	painter.fillRect(0, 0, width() - 1, height() - 1, m_cBackground);
+	QImage img2(m_iPiceCount, 1, QImage::Format_RGB32);
+	
+	img2.fill(m_cBackground);
 
 	if(m_iPiceCount != 0)
 	{
@@ -45,66 +58,26 @@ void PeiceDisplayWidget::UpdateImage()
 		double pieceItemHeight = height();
 		int i = 0;
 
-		for(i = 0; i < dowloadedParts.size(); i++)
+		for(i = 0; i < m_dowloadedParts.size(); i++)
 		{
-			QRectF currentRect(dowloadedParts[i].first * pieceItemWidth, 0, (dowloadedParts[i].second - dowloadedParts[i].first + 1) *pieceItemWidth, pieceItemHeight);
-			painter.fillRect(currentRect, m_cDwonloaded);
+			if (m_dowloadedParts.at(i))
+			{
+				img2.setPixel(i, 0, m_cDwonloaded.rgb());
+			}
+			
 		}
 
-		for(i = 0; i < dowloadingParts.size(); i++)
+		for(i = 0; i < m_dowloadingParts.size(); i++)
 		{
-			QRectF currentRect(dowloadingParts[i].first * pieceItemWidth, 0, (dowloadingParts[i].second - dowloadingParts[i].first + 1) *pieceItemWidth, pieceItemHeight);
-			painter.fillRect(currentRect, m_cDownloading);
+			if (m_dowloadingParts.at(i))
+			{
+				img2.setPixel(i, 0, m_cDownloading.rgb());
+			}
+			
 		}
 	}
 
 	img = img2;
-}
-
-void PeiceDisplayWidget::setPiceCount(int _pieceCount)
-{
-	m_iPiceCount = _pieceCount;
-	UpdateImage();
-}
-
-void PeiceDisplayWidget::setDowloadingParts(QVector<int> parts)
-{
-	dowloadingParts.clear();
-	int previusPicNumber = -1;
-
-	foreach(int piceNumber, parts)
-	{
-		if(piceNumber - previusPicNumber == 1)
-		{
-			dowloadingParts.last().second = piceNumber;
-		}
-		else
-		{
-			dowloadingParts.append(qMakePair(piceNumber, piceNumber + 1));
-		}
-
-		previusPicNumber = piceNumber;
-	}
-}
-
-void PeiceDisplayWidget::setDowloadedParts(QVector<int> parts)
-{
-	dowloadedParts.clear();
-	int previusPicNumber = 0;
-
-	foreach(int piceNumber, parts)
-	{
-		if(piceNumber - previusPicNumber == 1)
-		{
-			dowloadedParts.last().second = piceNumber;
-		}
-		else
-		{
-			dowloadedParts.append(qMakePair(piceNumber, piceNumber + 1));
-		}
-
-		previusPicNumber = piceNumber;
-	}
 }
 
 QColor PeiceDisplayWidget::downloadedColor()

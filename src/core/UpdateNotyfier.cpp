@@ -41,7 +41,7 @@ void UpdateNotifier::replyFinished(QNetworkReply* pReply)
 	QByteArray data = pReply->readAll();
 	QString str(data);
 	QStringList parts = str.split('.');
-
+	//pReply->ignoreSslErrors();
 	if(parts.count() != 4)
 	{
 		if (pReply->error() != QNetworkReply::NoError)

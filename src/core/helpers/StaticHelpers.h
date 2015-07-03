@@ -18,23 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #ifndef _S_H_H
 #define _S_H_H
-#include <QString>
-#include <QIcon>
-#include <QSet>
-#include <QFileInfo>
-#include <QApplication>
 
-#include <QFile>
-#include <QFileDialog>
-
-#include <QInputDialog>
-#include <QObject>
-#include <QNetworkDiskCache>
-#include <QStyle>
 #include "TorrentManager.h"
 #include "SchedulerTask.h"
-#include "defs.h"
 #include "NetworkDiskCache.h"
+
 class StaticHelpers
 {
 private:
@@ -62,8 +50,17 @@ public:
 	static QString GetBaseSuffix(const file_storage& storrage);
 	static QString CombinePathes(QString path, QString suffix);
 	static NetworkDiskCache* GetGLobalWebCache();
+	template <typename T> static size_t HashVector(const std::vector<T>& vector);
 	template <typename T> static QList<T> reversed(const QList<T>& in);
 };
+
+template <typename T>
+size_t StaticHelpers::HashVector(const std::vector<T>& vector)
+{
+	size_t result = 0;
+	boost::hash_range(result, vector.begin(), vector.end());
+	return result;
+}
 
 template <typename T> QList<T>
 StaticHelpers::reversed(const QList<T>& in)

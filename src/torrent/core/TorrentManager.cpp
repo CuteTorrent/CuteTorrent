@@ -423,7 +423,6 @@ void TorrentManager::handle_alert(alert* a)
 
 				if (h.is_valid())
 				{
-					h.resume();
 					h.save_resume_data();
 				}
 
@@ -433,6 +432,7 @@ void TorrentManager::handle_alert(alert* a)
 				if (pTorrent != NULL)
 				{
 					emit Notify(NotificationSystem::TORRENT_INFO, tr("MOVE_STORRAGE_COMPLETED_TO:\n%1 %2").arg(pTorrent->GetName(), pTorrent->GetSavePath()), pTorrent->GetSavePath());
+					pTorrent->CompliteMoveStorrage();
 				}
 
 				break;
@@ -680,7 +680,7 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 
 	p.ti = t;
 	p.save_path = std::string(save_path.toUtf8().data());
-	p.storage_mode = storage_mode_sparse;
+	p.storage_mode = storage_mode_allocate;
 	p.flags |= add_torrent_params::flag_paused;
 	p.flags |= add_torrent_params::flag_duplicate_is_error;
 #if LIBTORRENT_VERSION_NUM >= 10000

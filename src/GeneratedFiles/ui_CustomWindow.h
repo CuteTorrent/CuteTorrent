@@ -74,29 +74,32 @@ public:
     QTabWidget *m_pTabWidget;
     QWidget *tab;
     QGridLayout *gridLayout_4;
-    QLabel *label_11;
-    QLabel *pathLabel;
-    QLabel *label_8;
-    QWidget *widget;
-    QLabel *label_10;
-    QLabel *uploadSpeedLabel;
-    QLabel *uploadedBytesLabel;
-    QLabel *label_6;
-    QLabel *seedCoutLabel;
-    QLabel *activetimeLabel;
-    QLabel *label_4;
-    QLabel *describtionLabel;
-    QLabel *totalSizeLabel;
-    QLabel *label_7;
-    QLabel *timeleftLabel;
     QLabel *label_2;
-    QLabel *label;
+    QLabel *availibilityLabel;
+    QLabel *label_7;
     QLabel *downloadedBytesLabel;
+    QLabel *label;
+    QLabel *activetimeLabel;
+    QLabel *label_8;
     QLabel *label_3;
-    QLabel *peerCoutLabel;
-    QLabel *label_5;
     QLabel *downloadSpeedLabel;
     QLabel *label_9;
+    QLabel *label_4;
+    QLabel *totalSizeLabel;
+    QLabel *label_5;
+    QLabel *label_6;
+    QLabel *label_11;
+    QLabel *timeleftLabel;
+    QLabel *label_10;
+    QLabel *seedCoutLabel;
+    QLabel *describtionLabel;
+    QLabel *uploadedBytesLabel;
+    QLabel *uploadSpeedLabel;
+    QLabel *pathLabel;
+    QLabel *peerCoutLabel;
+    QWidget *widget_2;
+    QWidget *widget;
+    QLabel *progressLabel;
     QWidget *tab_3;
     QGridLayout *gridLayout_2;
     QTableWidget *peerTableWidget;
@@ -303,62 +306,101 @@ public:
         gridLayout_4->setSpacing(6);
         gridLayout_4->setContentsMargins(11, 11, 11, 11);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        label_11 = new QLabel(tab);
-        label_11->setObjectName(QString::fromUtf8("label_11"));
+        label_2 = new QLabel(tab);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
 
-        gridLayout_4->addWidget(label_11, 7, 3, 1, 1);
+        gridLayout_4->addWidget(label_2, 3, 0, 1, 1);
 
-        pathLabel = new QLabel(tab);
-        pathLabel->setObjectName(QString::fromUtf8("pathLabel"));
+        availibilityLabel = new QLabel(tab);
+        availibilityLabel->setObjectName(QString::fromUtf8("availibilityLabel"));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(availibilityLabel->sizePolicy().hasHeightForWidth());
+        availibilityLabel->setSizePolicy(sizePolicy1);
+        availibilityLabel->setMaximumSize(QSize(50, 16777215));
 
-        gridLayout_4->addWidget(pathLabel, 6, 4, 1, 1);
+        gridLayout_4->addWidget(availibilityLabel, 1, 4, 1, 1);
+
+        label_7 = new QLabel(tab);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+
+        gridLayout_4->addWidget(label_7, 2, 2, 1, 1);
+
+        downloadedBytesLabel = new QLabel(tab);
+        downloadedBytesLabel->setObjectName(QString::fromUtf8("downloadedBytesLabel"));
+
+        gridLayout_4->addWidget(downloadedBytesLabel, 3, 1, 1, 1);
+
+        label = new QLabel(tab);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        gridLayout_4->addWidget(label, 2, 0, 1, 1);
+
+        activetimeLabel = new QLabel(tab);
+        activetimeLabel->setObjectName(QString::fromUtf8("activetimeLabel"));
+
+        gridLayout_4->addWidget(activetimeLabel, 2, 1, 1, 1);
 
         label_8 = new QLabel(tab);
         label_8->setObjectName(QString::fromUtf8("label_8"));
 
-        gridLayout_4->addWidget(label_8, 2, 3, 1, 1);
+        gridLayout_4->addWidget(label_8, 3, 2, 1, 1);
 
-        widget = new QWidget(tab);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setMinimumSize(QSize(0, 20));
-        widget->setStyleSheet(QString::fromUtf8(""));
+        label_3 = new QLabel(tab);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
 
-        gridLayout_4->addWidget(widget, 0, 0, 1, 5);
+        gridLayout_4->addWidget(label_3, 4, 0, 1, 1);
+
+        downloadSpeedLabel = new QLabel(tab);
+        downloadSpeedLabel->setObjectName(QString::fromUtf8("downloadSpeedLabel"));
+
+        gridLayout_4->addWidget(downloadSpeedLabel, 4, 1, 1, 1);
+
+        label_9 = new QLabel(tab);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        gridLayout_4->addWidget(label_9, 4, 2, 1, 1);
+
+        label_4 = new QLabel(tab);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        gridLayout_4->addWidget(label_4, 6, 2, 1, 1);
+
+        totalSizeLabel = new QLabel(tab);
+        totalSizeLabel->setObjectName(QString::fromUtf8("totalSizeLabel"));
+
+        gridLayout_4->addWidget(totalSizeLabel, 6, 1, 1, 1);
+
+        label_5 = new QLabel(tab);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+
+        gridLayout_4->addWidget(label_5, 6, 0, 1, 1);
+
+        label_6 = new QLabel(tab);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        gridLayout_4->addWidget(label_6, 5, 0, 1, 1);
+
+        label_11 = new QLabel(tab);
+        label_11->setObjectName(QString::fromUtf8("label_11"));
+
+        gridLayout_4->addWidget(label_11, 7, 2, 1, 1);
+
+        timeleftLabel = new QLabel(tab);
+        timeleftLabel->setObjectName(QString::fromUtf8("timeleftLabel"));
+
+        gridLayout_4->addWidget(timeleftLabel, 2, 3, 1, 2);
 
         label_10 = new QLabel(tab);
         label_10->setObjectName(QString::fromUtf8("label_10"));
 
         gridLayout_4->addWidget(label_10, 7, 0, 1, 1);
 
-        uploadSpeedLabel = new QLabel(tab);
-        uploadSpeedLabel->setObjectName(QString::fromUtf8("uploadSpeedLabel"));
-
-        gridLayout_4->addWidget(uploadSpeedLabel, 3, 4, 1, 1);
-
-        uploadedBytesLabel = new QLabel(tab);
-        uploadedBytesLabel->setObjectName(QString::fromUtf8("uploadedBytesLabel"));
-
-        gridLayout_4->addWidget(uploadedBytesLabel, 2, 4, 1, 1);
-
-        label_6 = new QLabel(tab);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-
-        gridLayout_4->addWidget(label_6, 4, 0, 1, 1);
-
         seedCoutLabel = new QLabel(tab);
         seedCoutLabel->setObjectName(QString::fromUtf8("seedCoutLabel"));
 
-        gridLayout_4->addWidget(seedCoutLabel, 7, 1, 1, 2);
-
-        activetimeLabel = new QLabel(tab);
-        activetimeLabel->setObjectName(QString::fromUtf8("activetimeLabel"));
-
-        gridLayout_4->addWidget(activetimeLabel, 1, 1, 1, 2);
-
-        label_4 = new QLabel(tab);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-
-        gridLayout_4->addWidget(label_4, 6, 3, 1, 1);
+        gridLayout_4->addWidget(seedCoutLabel, 7, 1, 1, 1);
 
         describtionLabel = new QLabel(tab);
         describtionLabel->setObjectName(QString::fromUtf8("describtionLabel"));
@@ -367,63 +409,61 @@ public:
         describtionLabel->setWordWrap(true);
         describtionLabel->setOpenExternalLinks(true);
 
-        gridLayout_4->addWidget(describtionLabel, 4, 1, 1, 4);
+        gridLayout_4->addWidget(describtionLabel, 5, 1, 1, 4);
 
-        totalSizeLabel = new QLabel(tab);
-        totalSizeLabel->setObjectName(QString::fromUtf8("totalSizeLabel"));
+        uploadedBytesLabel = new QLabel(tab);
+        uploadedBytesLabel->setObjectName(QString::fromUtf8("uploadedBytesLabel"));
 
-        gridLayout_4->addWidget(totalSizeLabel, 6, 1, 1, 2);
+        gridLayout_4->addWidget(uploadedBytesLabel, 3, 3, 1, 2);
 
-        label_7 = new QLabel(tab);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
+        uploadSpeedLabel = new QLabel(tab);
+        uploadSpeedLabel->setObjectName(QString::fromUtf8("uploadSpeedLabel"));
 
-        gridLayout_4->addWidget(label_7, 1, 3, 1, 1);
+        gridLayout_4->addWidget(uploadSpeedLabel, 4, 3, 1, 2);
 
-        timeleftLabel = new QLabel(tab);
-        timeleftLabel->setObjectName(QString::fromUtf8("timeleftLabel"));
+        pathLabel = new QLabel(tab);
+        pathLabel->setObjectName(QString::fromUtf8("pathLabel"));
 
-        gridLayout_4->addWidget(timeleftLabel, 1, 4, 1, 1);
-
-        label_2 = new QLabel(tab);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        gridLayout_4->addWidget(label_2, 2, 0, 1, 1);
-
-        label = new QLabel(tab);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        gridLayout_4->addWidget(label, 1, 0, 1, 1);
-
-        downloadedBytesLabel = new QLabel(tab);
-        downloadedBytesLabel->setObjectName(QString::fromUtf8("downloadedBytesLabel"));
-
-        gridLayout_4->addWidget(downloadedBytesLabel, 2, 1, 1, 2);
-
-        label_3 = new QLabel(tab);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        gridLayout_4->addWidget(label_3, 3, 0, 1, 1);
+        gridLayout_4->addWidget(pathLabel, 6, 3, 1, 2);
 
         peerCoutLabel = new QLabel(tab);
         peerCoutLabel->setObjectName(QString::fromUtf8("peerCoutLabel"));
 
-        gridLayout_4->addWidget(peerCoutLabel, 7, 4, 1, 1);
+        gridLayout_4->addWidget(peerCoutLabel, 7, 3, 1, 2);
 
-        label_5 = new QLabel(tab);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
+        widget_2 = new QWidget(tab);
+        widget_2->setObjectName(QString::fromUtf8("widget_2"));
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(widget_2->sizePolicy().hasHeightForWidth());
+        widget_2->setSizePolicy(sizePolicy2);
+        widget_2->setMinimumSize(QSize(0, 15));
 
-        gridLayout_4->addWidget(label_5, 6, 0, 1, 1);
+        gridLayout_4->addWidget(widget_2, 1, 0, 1, 4);
 
-        downloadSpeedLabel = new QLabel(tab);
-        downloadSpeedLabel->setObjectName(QString::fromUtf8("downloadSpeedLabel"));
+        widget = new QWidget(tab);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        sizePolicy2.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
+        widget->setSizePolicy(sizePolicy2);
+        widget->setMinimumSize(QSize(0, 20));
+        widget->setStyleSheet(QString::fromUtf8(""));
 
-        gridLayout_4->addWidget(downloadSpeedLabel, 3, 1, 1, 2);
+        gridLayout_4->addWidget(widget, 0, 0, 1, 4);
 
-        label_9 = new QLabel(tab);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
+        progressLabel = new QLabel(tab);
+        progressLabel->setObjectName(QString::fromUtf8("progressLabel"));
+        sizePolicy1.setHeightForWidth(progressLabel->sizePolicy().hasHeightForWidth());
+        progressLabel->setSizePolicy(sizePolicy1);
+        progressLabel->setMaximumSize(QSize(50, 16777215));
 
-        gridLayout_4->addWidget(label_9, 3, 3, 1, 1);
+        gridLayout_4->addWidget(progressLabel, 0, 4, 1, 1);
 
+        gridLayout_4->setColumnMinimumWidth(0, 50);
+        gridLayout_4->setColumnMinimumWidth(1, 50);
+        gridLayout_4->setColumnMinimumWidth(2, 50);
+        gridLayout_4->setColumnMinimumWidth(3, 50);
+        gridLayout_4->setColumnMinimumWidth(4, 15);
         m_pTabWidget->addTab(tab, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QString::fromUtf8("tab_3"));
@@ -509,6 +549,7 @@ public:
         fileTableView->setMaximumSize(QSize(16777215, 16777215));
         fileTableView->setMouseTracking(true);
         fileTableView->setContextMenuPolicy(Qt::CustomContextMenu);
+        fileTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
         fileTableView->setSortingEnabled(true);
         fileTableView->setAnimated(true);
 
@@ -704,28 +745,30 @@ public:
         ACTION_TOOLBAR_RSS_EDIT->setText(QApplication::translate("CustomWindow", "ACTION_RSS_EDIT", 0, QApplication::UnicodeUTF8));
         tbMenu->setText(QString());
         LTitle->setText(QApplication::translate("CustomWindow", "CuteTorrent", 0, QApplication::UnicodeUTF8));
-        label_11->setText(QApplication::translate("CustomWindow", "INFO_PEER_COUNT", 0, QApplication::UnicodeUTF8));
-        pathLabel->setText(QString());
-        label_8->setText(QApplication::translate("CustomWindow", "INFO_UPLOADED", 0, QApplication::UnicodeUTF8));
-        label_10->setText(QApplication::translate("CustomWindow", "INFO_SEED_COUNT", 0, QApplication::UnicodeUTF8));
-        uploadSpeedLabel->setText(QString());
-        uploadedBytesLabel->setText(QString());
-        label_6->setText(QApplication::translate("CustomWindow", "INFO_DESCRIBTION", 0, QApplication::UnicodeUTF8));
-        seedCoutLabel->setText(QString());
-        activetimeLabel->setText(QString());
-        label_4->setText(QApplication::translate("CustomWindow", "INFO_PATH", 0, QApplication::UnicodeUTF8));
-        describtionLabel->setText(QString());
-        totalSizeLabel->setText(QString());
-        label_7->setText(QApplication::translate("CustomWindow", "INFO_REMAININF_TIME", 0, QApplication::UnicodeUTF8));
-        timeleftLabel->setText(QString());
         label_2->setText(QApplication::translate("CustomWindow", "INFO_DOWNLOADED", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("CustomWindow", "INFO_ACTIVE_TIME", 0, QApplication::UnicodeUTF8));
+        availibilityLabel->setText(QString());
+        label_7->setText(QApplication::translate("CustomWindow", "INFO_REMAININF_TIME", 0, QApplication::UnicodeUTF8));
         downloadedBytesLabel->setText(QString());
+        label->setText(QApplication::translate("CustomWindow", "INFO_ACTIVE_TIME", 0, QApplication::UnicodeUTF8));
+        activetimeLabel->setText(QString());
+        label_8->setText(QApplication::translate("CustomWindow", "INFO_UPLOADED", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("CustomWindow", "INFO_DOWNLOAD_SPEED", 0, QApplication::UnicodeUTF8));
-        peerCoutLabel->setText(QString());
-        label_5->setText(QApplication::translate("CustomWindow", "INFO_TOTAL_SIZE", 0, QApplication::UnicodeUTF8));
         downloadSpeedLabel->setText(QString());
         label_9->setText(QApplication::translate("CustomWindow", "INFO_UPLOAD_SPEED", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("CustomWindow", "INFO_PATH", 0, QApplication::UnicodeUTF8));
+        totalSizeLabel->setText(QString());
+        label_5->setText(QApplication::translate("CustomWindow", "INFO_TOTAL_SIZE", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("CustomWindow", "INFO_DESCRIBTION", 0, QApplication::UnicodeUTF8));
+        label_11->setText(QApplication::translate("CustomWindow", "INFO_PEER_COUNT", 0, QApplication::UnicodeUTF8));
+        timeleftLabel->setText(QString());
+        label_10->setText(QApplication::translate("CustomWindow", "INFO_SEED_COUNT", 0, QApplication::UnicodeUTF8));
+        seedCoutLabel->setText(QString());
+        describtionLabel->setText(QString());
+        uploadedBytesLabel->setText(QString());
+        uploadSpeedLabel->setText(QString());
+        pathLabel->setText(QString());
+        peerCoutLabel->setText(QString());
+        progressLabel->setText(QString());
         m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab), QApplication::translate("CustomWindow", "TAB_INFO", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = peerTableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("CustomWindow", "PEER_IP", 0, QApplication::UnicodeUTF8));

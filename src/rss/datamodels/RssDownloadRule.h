@@ -55,6 +55,10 @@ public:
 	QSet<QUuid> FeedUids() const;
 
 	void setFeedUids(const QSet<QUuid>& mFeedUids);
+
+	QUuid Uuid();
+
+	void setUuid(QUuid& uid);
 	QString validate(bool& ok);
 	bool Match(RssFeed* pFeed) const;
 	bool Match(RssItem* rssItem) const;

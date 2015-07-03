@@ -358,8 +358,12 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	
 	myProgressBarStyle->resize(barArea.size());
 	myProgressBarStyle->setValue(progressPercentage);
-	painter->translate(barArea.topLeft());
-	myProgressBarStyle->render(painter);
+	//painter->translate(barArea.topLeft());
+	//myProgressBarStyle->render(painter);
+	QStyleOptionProgressBarV2 pbStyleOpt;
+
+	myProgressBarStyle->initilizeStyleOption(&pbStyleOpt);
+	pbStyleOpt.rect = barArea;
 	/*myProgressBarStyle->rect = barArea;
 	if ( tor.isDownloading() ) {
 	    myProgressBarStyle->palette.setBrush( QPalette::Highlight, blueBrush );
@@ -374,8 +378,9 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 
 	myProgressBarStyle->state = progressBarState;
 	setProgressBarPercentDone( option, tor );
-
-	style->drawControl( QStyle::CE_ProgressBar, myProgressBarStyle, painter );
 	*/
+	
+	style->drawControl(QStyle::CE_ProgressBar, &pbStyleOpt, painter, myProgressBarStyle);
+	
 	painter->restore();
 }

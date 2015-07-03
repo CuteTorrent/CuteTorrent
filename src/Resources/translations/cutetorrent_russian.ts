@@ -49,7 +49,7 @@
     </message>
     <message>
         <source>FEED_ITEMS_MATCHED_BY_CURRENT_RULE:</source>
-        <translation>Элементы удовлетворяющие текужему правилу:</translation>
+        <translation>Элементы удовлетворяющие текущему правилу:</translation>
     </message>
 </context>
 <context>
@@ -1426,43 +1426,43 @@ Download: %3</source>
     </message>
     <message>
         <source>peer selected unsupported encryption mode</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid encryption pad size</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid encryption handshake</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>incoming encrypted connections disabled</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>incoming regular connections disabled</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>duplicate peer-id</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>torrent removed</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>packet too large</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>HTTP error</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>missing location header</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid redirection</source>
@@ -1474,27 +1474,27 @@ Download: %3</source>
     </message>
     <message>
         <source>invalid HTTP range</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>missing content-length</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>banned by IP filter</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>too many connections</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>peer banned</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>stopping torrent</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>too many corrupt pieces</source>
@@ -1526,19 +1526,19 @@ Download: %3</source>
     </message>
     <message>
         <source>invalid metadata request</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid metadata size</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid metadata offset</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid metadata message</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pex message too large</source>
@@ -1558,7 +1558,7 @@ Download: %3</source>
     </message>
     <message>
         <source>torrent has no metadata</source>
-        <translation type="unfinished">\</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid dont-have message</source>
@@ -1718,7 +1718,7 @@ Download: %3</source>
     </message>
     <message>
         <source>expected value (list, dict, int or string) in bencoded string</source>
-        <translation type="unfinished">Торрент файл испорчен: ожидалось значение (list, dict, int or string) в bencoded строке</translation>
+        <translation>Торрент файл испорчен: ожидалось значение (list, dict, int or string) в bencoded строке</translation>
     </message>
     <message>
         <source>bencoded nesting depth exceeded</source>
@@ -2312,7 +2312,7 @@ Download: %3</source>
     </message>
     <message>
         <source>STARTED_AUTOMETED_RSS_DOWNLOAD</source>
-        <translation>Началась автоматисеска загрузка из RSS-ленты</translation>
+        <translation>Началась автоматическая загрузка из RSS-ленты</translation>
     </message>
     <message>
         <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
@@ -2334,7 +2334,7 @@ Download: %3</source>
     <name>RssSettings</name>
     <message>
         <source>RSS_SETTINGS</source>
-        <translation>Настройки Rss канала</translation>
+        <translation>Настройки RSS-ленты</translation>
     </message>
     <message>
         <source>RSS_AUTO_DOWNLOAD</source>
@@ -2358,7 +2358,7 @@ Download: %3</source>
     </message>
     <message>
         <source>RSS_URL</source>
-        <translation>Ссылка Rss-канала</translation>
+        <translation>Ссылка RSS-ленты</translation>
     </message>
     <message>
         <source>RSS_REFRASH_RATE</source>
@@ -3552,6 +3552,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>STATE_FILE_CHEACKING (r)</source>
         <translation>Проверка файлов (r)</translation>
+    </message>
+    <message>
+        <source>MOVING_FILE_STORRAGE</source>
+        <translation>Перемещается</translation>
     </message>
 </context>
 <context>

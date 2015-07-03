@@ -12,9 +12,8 @@ class PeiceDisplayWidget : public QWidget
 public:
 	PeiceDisplayWidget(QWidget* parent = 0);
 	~PeiceDisplayWidget();
-	void setDowloadedParts(QVector<int> parts);
-	void setDowloadingParts(QVector<int> parts);
-	void setPiceCount(int);
+	void clear();
+	void setProgress(const QBitArray& availibalePieces, const QBitArray& downloadingPieces);
 	QColor downloadedColor();
 	QColor downloadingColor();
 	QColor borderColor();
@@ -24,14 +23,14 @@ public:
 	void setBorderColor(QColor value);
 	void setBackgroudColor(QColor value);
 protected:
-	void paintEvent(QPaintEvent*);
+	void paintEvent(QPaintEvent*) override;
 private:
 	void UpdateImage();
 	QImage img;
 	QColor m_cDwonloaded, m_cDownloading, m_cBorder, m_cBackground;
 	int m_iPiceCount;
-	QVector<QPair<int, int> > dowloadingParts;
-	QVector<QPair<int, int> > dowloadedParts;
+	QBitArray m_dowloadingParts;
+	QBitArray m_dowloadedParts;
 
 };
 

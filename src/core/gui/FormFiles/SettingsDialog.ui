@@ -283,7 +283,7 @@ QListView::item{
       <item row="0" column="2" colspan="2">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>8</number>
         </property>
         <widget class="QWidget" name="torrentTab">
          <layout class="QGridLayout" name="gridLayout_22">
@@ -1823,10 +1823,7 @@ p, li { white-space: pre-wrap; }
            </spacer>
           </item>
           <item row="3" column="3">
-           <widget class="QPushButton" name="pushButton_2">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
+           <widget class="QPushButton" name="importRssRulesButton">
             <property name="text">
              <string>RSS_RULES_IMPORT</string>
             </property>
@@ -1894,10 +1891,7 @@ p, li { white-space: pre-wrap; }
            </spacer>
           </item>
           <item row="3" column="2">
-           <widget class="QPushButton" name="pushButton_3">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
+           <widget class="QPushButton" name="exportRssRulesButton">
             <property name="text">
              <string>RSS_RULES_EXPORT</string>
             </property>
@@ -1907,6 +1901,9 @@ p, li { white-space: pre-wrap; }
            <widget class="QListWidget" name="rssRulesListWidget">
             <property name="contextMenuPolicy">
              <enum>Qt::ActionsContextMenu</enum>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::ExtendedSelection</enum>
             </property>
            </widget>
           </item>
@@ -2131,8 +2128,8 @@ p, li { white-space: pre-wrap; }
   <tabstop>rssRulesListWidget</tabstop>
   <tabstop>addRssDLRuleButton</tabstop>
   <tabstop>removeRssDLRuleButton</tabstop>
-  <tabstop>pushButton_3</tabstop>
-  <tabstop>pushButton_2</tabstop>
+  <tabstop>exportRssRulesButton</tabstop>
+  <tabstop>importRssRulesButton</tabstop>
   <tabstop>rssRefrashRateEdit</tabstop>
   <tabstop>autosrtEmailNotificationCheckBox</tabstop>
   <tabstop>rssSmtpServerEdit</tabstop>
@@ -2423,6 +2420,38 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>exportRssRulesButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SettingsDialog</receiver>
+   <slot>onExportRssRules()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>302</x>
+     <y>311</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>180</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>importRssRulesButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SettingsDialog</receiver>
+   <slot>onImportRssRules()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>417</x>
+     <y>311</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>180</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>proxySwitcher()</slot>
@@ -2446,5 +2475,7 @@ p, li { white-space: pre-wrap; }
   <slot>addRssRule()</slot>
   <slot>onEditRssRule()</slot>
   <slot>onDeleteRssRule()</slot>
+  <slot>onExportRssRules()</slot>
+  <slot>onImportRssRules()</slot>
  </slots>
 </ui>

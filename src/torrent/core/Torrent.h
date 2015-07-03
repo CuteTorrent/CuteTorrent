@@ -42,7 +42,7 @@ private:
 	bool m_hasMedia;
 	bool m_isPrevSeed;
 	torrent_handle m_hTorrent;
-	libtorrent::size_type size;
+	size_type size;
 	QIcon icon;
 	QString ErrorString;
 	bool mountable;
@@ -50,13 +50,13 @@ private:
 	QString type;
 	QString group;
 	QStringList imageFiles;
-
-//	bool prevHaserror,prevIsCompleted;
+	bool isMovingFileStorrage;
 public :
 
 	Torrent(torrent_handle* torrentStatus, QString group);
 	~Torrent() {};
 	void SetFilePriority(int index, int prioryty);
+	void CompliteMoveStorrage();
 	QString GetRemainingTime();
 	QStringList& GetImageFiles();
 	QString GetSuffix();
@@ -76,6 +76,8 @@ public :
 	QString GetName() const;
 	QString GetType();
 	QString GetDiscribtion();
+	void GetPieceAvalibility(std::vector<int>& availibility);
+	float GetDistributedCopies();
 	int GetStatus();
 	torrent_handle& GetInternalHandle();
 	QString GetInfoHash();
@@ -105,8 +107,8 @@ public :
 	bool isActive() const;
 	bool hasMediaFiles();
 	int GetPieceCount();
-	QVector<int> GetDownloadedPieces();
-	QVector<int> GetDownloadingPieces();
+	QBitArray GetDownloadedPieces();
+	QBitArray GetDownloadingPieces();
 	QString GetStatusString() const;
 	QString GetProgresString() const;
 	QString GetDwonloadSpeed() const;

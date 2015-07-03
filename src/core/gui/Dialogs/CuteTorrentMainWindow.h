@@ -58,6 +58,7 @@ class TorrentTracker;
 class UpdateNotifier;
 class HtmlView;
 class QWinJumpList;
+class PieceAvailabilityWidget;
 class CuteTorrentMainWindow : public BaseWindow<QWidget> , private Ui::CustomWindow
 {
 	Q_OBJECT
@@ -96,6 +97,7 @@ private:
 	HtmlView* m_pFeedItemDescribtionEdit;
 	QSystemTrayIcon* m_pTrayIcon;
 	QSpinBox* ul, *dl;
+	PieceAvailabilityWidget* m_pieceAvalibilityWidget;
 	QMenu* trayIconMenu;
 	QAction* minimizeAction;
 	QAction* maximizeAction;

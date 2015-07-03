@@ -66,6 +66,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "qwinjumplist.h"
 #include "qwinjumplistcategory.h"
 #endif
+#include "PieceAvailabilityWidget.h"
 class Application;
 class ISerachProvider;
 class SearchResult;
@@ -74,7 +75,7 @@ Q_DECLARE_METATYPE(QList<int>)
 
 CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
     : BaseWindow(FullTitle, AllowResize, parent), m_httpLinkRegexp("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?"),
-    m_pPieceView(NULL), m_pSearchEngine(SearchEngine::getInstance())
+	m_pPieceView(NULL), m_pSearchEngine(SearchEngine::getInstance()), m_pieceAvalibilityWidget(NULL)
 #ifdef Q_WS_WIN
   , m_pJumpList(new QWinJumpList(this))
 #endif
@@ -190,8 +191,10 @@ void CuteTorrentMainWindow::setupStatusBar()
 	mystatusBar->addPermanentWidget(downLabel);
 	mystatusBar->addPermanentWidget(downLabelText);
 	m_pPieceView = new PeiceDisplayWidget(this);
-	gridLayout_4->addWidget(m_pPieceView, 0, 0, 1, 5);
+	gridLayout_4->addWidget(m_pPieceView, 0, 0, 1, 4);
 	initStatusBarIcons();
+	m_pieceAvalibilityWidget = new PieceAvailabilityWidget(this);
+	gridLayout_4->addWidget(m_pieceAvalibilityWidget, 1, 0, 1, 4);
 }
 
 void CuteTorrentMainWindow::setupListView()
@@ -797,7 +800,14 @@ void CuteTorrentMainWindow::UpdateInfoTab()
 			}
 		}
 
-		
+		std::vector<int> pieceAvalibility;
+		tor->GetPieceAvalibility(pieceAvalibility);
+		if (m_pieceAvalibilityWidget != NULL)
+		{
+			m_pieceAvalibilityWidget->setPiceAvailability(pieceAvalibility);
+		}
+		progressLabel->setText(QString("%1 %2").arg(QString::number(tor->GetProgress(),'f', 2), "%"));
+		availibilityLabel->setText(QString::number(std::abs(tor->GetDistributedCopies()), 'f', 2));
 		describtionLabel->setText(discribtion);
 		timeleftLabel->setText(tor->GetRemainingTime());
 	}
@@ -815,6 +825,8 @@ void CuteTorrentMainWindow::UpdateInfoTab()
 		seedCoutLabel->setText("");
 		peerCoutLabel->setText("");
 		describtionLabel->setText("");
+		progressLabel->setText("");
+		availibilityLabel->setText("");
 	}
 }
 
@@ -1185,13 +1197,10 @@ void CuteTorrentMainWindow::fillPieceDisplay(QSize size)
     if (tor != NULL)
 	{
 		int piece_count = tor->GetPieceCount();
-		QVector<int> avaliablePieces = tor->GetDownloadedPieces();
-		QVector<int> dwonloadingPieces = tor->GetDownloadingPieces();
+		QBitArray avaliablePieces = tor->GetDownloadedPieces();
+		QBitArray dwonloadingPieces = tor->GetDownloadingPieces();
 		m_pPieceView->resize(size);
-		m_pPieceView->setDowloadedParts(avaliablePieces);
-		m_pPieceView->setDowloadingParts(dwonloadingPieces);
-		m_pPieceView->setPiceCount(piece_count);
-		m_pPieceView->update();
+		m_pPieceView->setProgress(avaliablePieces, dwonloadingPieces);
 	}
 }
 
@@ -1208,7 +1217,8 @@ void CuteTorrentMainWindow::CopyDiscribtion()
 
 void CuteTorrentMainWindow::ClearPieceDisplay()
 {
-	m_pPieceView->setPiceCount(0);
+	m_pPieceView->clear();
+	m_pieceAvalibilityWidget->clear();
 	/*QGraphicsScene *scene = new QGraphicsScene(this);
 	scene->clear();
 	piceDwonloadedView->scene()->deleteLater();

@@ -234,12 +234,12 @@ public:
     QGridLayout *gridLayout_33;
     QLabel *label_24;
     QSpacerItem *verticalSpacer_7;
-    QPushButton *pushButton_2;
+    QPushButton *importRssRulesButton;
     QPushButton *addRssDLRuleButton;
     QSpinBox *rssRefrashRateEdit;
     QPushButton *removeRssDLRuleButton;
     QSpacerItem *horizontalSpacer;
-    QPushButton *pushButton_3;
+    QPushButton *exportRssRulesButton;
     QListWidget *rssRulesListWidget;
     QGroupBox *autosrtEmailNotificationCheckBox;
     QGridLayout *gridLayout_34;
@@ -1215,11 +1215,10 @@ public:
 
         gridLayout_33->addItem(verticalSpacer_7, 2, 5, 1, 1);
 
-        pushButton_2 = new QPushButton(page_2);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setEnabled(false);
+        importRssRulesButton = new QPushButton(page_2);
+        importRssRulesButton->setObjectName(QString::fromUtf8("importRssRulesButton"));
 
-        gridLayout_33->addWidget(pushButton_2, 3, 3, 1, 1);
+        gridLayout_33->addWidget(importRssRulesButton, 3, 3, 1, 1);
 
         addRssDLRuleButton = new QPushButton(page_2);
         addRssDLRuleButton->setObjectName(QString::fromUtf8("addRssDLRuleButton"));
@@ -1246,15 +1245,15 @@ public:
 
         gridLayout_33->addItem(horizontalSpacer, 3, 4, 1, 1);
 
-        pushButton_3 = new QPushButton(page_2);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-        pushButton_3->setEnabled(false);
+        exportRssRulesButton = new QPushButton(page_2);
+        exportRssRulesButton->setObjectName(QString::fromUtf8("exportRssRulesButton"));
 
-        gridLayout_33->addWidget(pushButton_3, 3, 2, 1, 1);
+        gridLayout_33->addWidget(exportRssRulesButton, 3, 2, 1, 1);
 
         rssRulesListWidget = new QListWidget(page_2);
         rssRulesListWidget->setObjectName(QString::fromUtf8("rssRulesListWidget"));
         rssRulesListWidget->setContextMenuPolicy(Qt::ActionsContextMenu);
+        rssRulesListWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
         gridLayout_33->addWidget(rssRulesListWidget, 0, 0, 3, 5);
 
@@ -1455,9 +1454,9 @@ public:
         QWidget::setTabOrder(ipFilterTextEdit, rssRulesListWidget);
         QWidget::setTabOrder(rssRulesListWidget, addRssDLRuleButton);
         QWidget::setTabOrder(addRssDLRuleButton, removeRssDLRuleButton);
-        QWidget::setTabOrder(removeRssDLRuleButton, pushButton_3);
-        QWidget::setTabOrder(pushButton_3, pushButton_2);
-        QWidget::setTabOrder(pushButton_2, rssRefrashRateEdit);
+        QWidget::setTabOrder(removeRssDLRuleButton, exportRssRulesButton);
+        QWidget::setTabOrder(exportRssRulesButton, importRssRulesButton);
+        QWidget::setTabOrder(importRssRulesButton, rssRefrashRateEdit);
         QWidget::setTabOrder(rssRefrashRateEdit, autosrtEmailNotificationCheckBox);
         QWidget::setTabOrder(autosrtEmailNotificationCheckBox, rssSmtpServerEdit);
         QWidget::setTabOrder(rssSmtpServerEdit, rssSmtpPortEdit);
@@ -1489,9 +1488,11 @@ public:
         QObject::connect(addRssDLRuleButton, SIGNAL(clicked()), SettingsDialog, SLOT(addRssRule()));
         QObject::connect(rssRulesListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), SettingsDialog, SLOT(onEditRssRule()));
         QObject::connect(removeRssDLRuleButton, SIGNAL(clicked()), SettingsDialog, SLOT(onDeleteRssRule()));
+        QObject::connect(exportRssRulesButton, SIGNAL(clicked()), SettingsDialog, SLOT(onExportRssRules()));
+        QObject::connect(importRssRulesButton, SIGNAL(clicked()), SettingsDialog, SLOT(onImportRssRules()));
 
         listWidget->setCurrentRow(-1);
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(8);
         inEncPolicyComboBox->setCurrentIndex(0);
         outEncPolicyComboBox->setCurrentIndex(0);
         encLevelComboBox->setCurrentIndex(2);
@@ -1804,11 +1805,11 @@ public:
         RunningLabel->setText(QString());
         openWebUiButton->setText(QApplication::translate("SettingsDialog", "OPEN_WEBUI", 0, QApplication::UnicodeUTF8));
         label_24->setText(QApplication::translate("SettingsDialog", "RSS_DEFAULT_REFRESH_RATE", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("SettingsDialog", "RSS_RULES_IMPORT", 0, QApplication::UnicodeUTF8));
+        importRssRulesButton->setText(QApplication::translate("SettingsDialog", "RSS_RULES_IMPORT", 0, QApplication::UnicodeUTF8));
         addRssDLRuleButton->setText(QApplication::translate("SettingsDialog", "+", 0, QApplication::UnicodeUTF8));
         rssRefrashRateEdit->setSuffix(QApplication::translate("SettingsDialog", " MINUTES", 0, QApplication::UnicodeUTF8));
         removeRssDLRuleButton->setText(QApplication::translate("SettingsDialog", "-", 0, QApplication::UnicodeUTF8));
-        pushButton_3->setText(QApplication::translate("SettingsDialog", "RSS_RULES_EXPORT", 0, QApplication::UnicodeUTF8));
+        exportRssRulesButton->setText(QApplication::translate("SettingsDialog", "RSS_RULES_EXPORT", 0, QApplication::UnicodeUTF8));
         autosrtEmailNotificationCheckBox->setTitle(QApplication::translate("SettingsDialog", "RSS_AUTO_START_EMAIL_NOTIFICATION", 0, QApplication::UnicodeUTF8));
         label_36->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_AUTH_TYPE", 0, QApplication::UnicodeUTF8));
         label_38->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_PASSWORD", 0, QApplication::UnicodeUTF8));
