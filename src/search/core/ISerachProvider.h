@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <QtCore>
-#include "SerachResult.h"
+#include "SearchResult.h"
 
 
 
@@ -23,6 +23,7 @@ public:
 
 	virtual QString Name() = 0;
 	virtual QString Url() = 0;
+	virtual QIcon getIcon() = 0;
 	virtual int SupportedCategories() = 0;
 	virtual void PeformSearch(QString token, SearchCategories category, int page) = 0;
 signals:

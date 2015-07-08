@@ -52,7 +52,7 @@ private:
 	bool m_bUseGroup;
 	QList<GroupForFileFiltering> m_lFilters;
 	bool validTorrent;
-	TorrentManager* m_pTorrentManager;
+	TorrentManagerPtr m_pTorrentManager;
 	QString m_pTorrentFilename;
 	openmagnet_info m_info;
 	FileTreeModel* m_pFileTreeModel;

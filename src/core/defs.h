@@ -1,7 +1,9 @@
 ﻿#ifndef _DEFS_H
 #define _DEFS_H
 
-
+#include <QObject>
+#include <QString>
+#include <QMetaType>
 #include "libtorrent/config.hpp"
 #include "libtorrent/file_storage.hpp"
 #include "libtorrent/torrent_handle.hpp"

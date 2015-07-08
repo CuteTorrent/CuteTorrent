@@ -263,6 +263,96 @@ void QSgmlTag::resetLevel(void)
 	}
 }
 
+QString QSgmlTag::GetName()
+{
+	return Name;
+}
+
+void QSgmlTag::SetName(QString val)
+{
+	Name = val;
+}
+
+QSgmlTag* QSgmlTag::GetParent()
+{
+	return Parent;
+}
+
+void QSgmlTag::SetParent(QSgmlTag* val)
+{
+	Parent = val;
+}
+
+QSgmlTag::QSgmlTaglist QSgmlTag::GetChildren()
+{
+	return Children;
+}
+
+void QSgmlTag::SetChildren(QSgmlTaglist val)
+{
+	Children = val;
+}
+
+QString QSgmlTag::GetValue()
+{
+	return Value;
+}
+
+void QSgmlTag::SetValue(QString val)
+{
+	Value = val;
+}
+
+int QSgmlTag::GetType()
+{
+	return Type;
+}
+
+void QSgmlTag::SetType(int val)
+{
+	Type = TagType(val);
+}
+
+int QSgmlTag::GetStartTagPos()
+{
+	return StartTagPos;
+}
+
+void QSgmlTag::SetStartTagPos(int val)
+{
+	StartTagPos = val;
+}
+
+int QSgmlTag::GetStartTagLength()
+{
+	return StartTagLength;
+}
+
+void QSgmlTag::SetStartTagLength(int val)
+{
+	StartTagLength = val;
+}
+
+int QSgmlTag::GetEndTagPos()
+{
+	return EndTagPos;
+}
+
+void QSgmlTag::SetEndTagPos(int val)
+{
+	EndTagPos = val;
+}
+
+int QSgmlTag::GetEndTagLength()
+{
+	return EndTagLength;
+}
+
+void QSgmlTag::SetEndTagLength(int val)
+{
+	EndTagLength = val;
+}
+
 // returns true if the tag has an Atribute "AtrName"
 bool QSgmlTag::hasAttribute(QString AtrName)
 {

@@ -4,27 +4,28 @@
 #include <QObject>
 #include "http/httplistener.h"
 #include "trackerrequestmapper.h"
-class TorrentTracker : public QObject
+#include "Singleton.h"
+class TorrentTracker : public QObject, public Singleton<TorrentTracker>
 {
+	friend class Singleton<TorrentTracker>;
 	Q_OBJECT
 private:
-	static TorrentTracker* instance;
-	static int instanceCount;
 	HttpListener* httpServer;
 	TrackerRequestHandler* requestHandler;
+	
 protected:
 	explicit TorrentTracker(QObject* parent = 0);
-	~TorrentTracker();
+	
 public:
-	static TorrentTracker* getInstance();
-	static void freeInstance();
 	bool isRunning();
 	void start();
 	void stop();
+	~TorrentTracker();
 signals:
 
 public slots:
 
 };
 
+DEFINE_PTR_CALSS(TorrentTracker)
 #endif // TORRENTRACKER_H

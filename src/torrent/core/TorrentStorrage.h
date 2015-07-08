@@ -2,13 +2,12 @@
 #include "Torrent.h"
 class Torrent;
 #include "defs.h"
-class TorrentStorrage : public QList<Torrent*>
+#include "Singleton.h"
+class TorrentStorrage : public QList<Torrent*>, public Singleton<TorrentStorrage>
 {
 //	Q_OBJECT
-
+	friend class Singleton<TorrentStorrage>;
 public:
-	static TorrentStorrage* getInstance();
-	static void freeInstance();
 	void append(Torrent*);
 	void remove(Torrent* torrent);
 	void remove(QString);
@@ -18,16 +17,16 @@ public:
 	Torrent* getTorrent(QString infoHash);
 	void clear();
 	Torrent* operator [](QString index);
+	~TorrentStorrage(void);
 protected:
 	TorrentStorrage(QObject* parrent = NULL);
-	~TorrentStorrage(void);
+	
 private:
-	static TorrentStorrage* m_pInstance;
-	static int m_nInstanceCount;
 	QMap<QString, Torrent*> m_torrentsMap;
 	QMutex* m_pMapSynkMutex;
 	FilterType m_filterType;
 	QString m_groupFilter;
 };
+
 
 //Q_DECLARE_METATYPE(TorrentStorrage::TorrentFilterType)

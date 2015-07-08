@@ -25,6 +25,8 @@ public slots:
 	void setPieceColor(QColor newValue);
 	void setBackgroudColor(QColor value);
 	void clear();
+	QVector<float> intToFloatVector(const std::vector<int>& vecin, int reqSize);
+	int mixTwoColors(int& rgb1, int& rgb2, float ratio);
 private:
 	QImage m_img;
 	QColor m_pieceColor, m_borderColor;

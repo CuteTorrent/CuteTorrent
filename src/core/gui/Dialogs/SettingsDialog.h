@@ -62,7 +62,7 @@ private:
 	QList<GroupForFileFiltering> filterGroups;
 	QList<SchedulerTask> tasks;
 	QDateTimeEdit* previousFocuse;
-	TorrentTracker* tracker;
+	TorrentTrackerPtr tracker;
 	RconWebService* rcon;
 	QAction* editRssRule, *deleteRssRule;
 	void FillFilteringGroups();

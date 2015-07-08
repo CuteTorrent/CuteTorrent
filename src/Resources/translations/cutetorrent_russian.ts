@@ -126,6 +126,10 @@
         <source>RULE_SEARCH_TYPE_CAN_NOT_BE_EMPTY</source>
         <translation>Укажите тип поиска</translation>
     </message>
+    <message>
+        <source>DIALOG_OPEN_DIR</source>
+        <translation>Укажите папку</translation>
+    </message>
 </context>
 <context>
     <name>ApplyBackupPage</name>
@@ -2068,11 +2072,15 @@ Download: %3</source>
     <message>
         <source>DIALOF_OPEN_DIR</source>
         <oldsource>Open Directory</oldsource>
-        <translation>Выбирите папку</translation>
+        <translation type="obsolete">Выбирите папку</translation>
     </message>
     <message>
         <source>OPEN_TORRENT_ERROR</source>
         <translation>Ошибка открытия торрента</translation>
+    </message>
+    <message>
+        <source>DIALOG_OPEN_DIR</source>
+        <translation>Выбирите папку</translation>
     </message>
 </context>
 <context>
@@ -2266,7 +2274,7 @@ Download: %3</source>
     </message>
     <message>
         <source>ACTION_REHASH</source>
-        <translation>Обновить хеш</translation>
+        <translation>Перепроверить файлы</translation>
     </message>
 </context>
 <context>
@@ -2762,7 +2770,7 @@ Download: %3</source>
     </message>
     <message>
         <source>TAB_SEARCH</source>
-        <translation>Поиск</translation>
+        <translation type="obsolete">Поиск</translation>
     </message>
     <message>
         <source>TAB_KEY_MAPPINGS</source>
@@ -3525,6 +3533,34 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>RSS_LOGIN_AUTH</source>
         <translation>LOGIN</translation>
+    </message>
+    <message>
+        <source>CT_RSS_RULE_LIST (*.cdrl)</source>
+        <translation>CuteTorrent RSS download rules file</translation>
+    </message>
+    <message>
+        <source>ERROR</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <source>ERROR_WRITING_RSS_RULE_LIST: %1</source>
+        <translation>Не удалось записать файл правил загрухки: %1</translation>
+    </message>
+    <message>
+        <source>PARSED_RULE_IS_NOT_VALID:
+ %1
+ERROR: %2</source>
+        <translation>Строка: %1
+является невалидным правилом.
+Ошибка: %2</translation>
+    </message>
+    <message>
+        <source>ERROR_READING_RSS_RULE_LIST: %1</source>
+        <translation>Не удалось открыть файл правил загрухки: %1</translation>
+    </message>
+    <message>
+        <source>ENABLE_SEARCH_SCRIPT_DEBUGING</source>
+        <translation>Включить отладку скриптов поиска</translation>
     </message>
 </context>
 <context>

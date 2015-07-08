@@ -139,6 +139,24 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 				port, port);
 		}
 	}
+	bool isScriptDebuggingEnabled = m_pSettings->valueBool("Search", "script_debuging_enabled", false);
+	
+	SearchEnginePtr searchEngine = SearchEngine::getInstance();
+	if (isScriptDebuggingEnabled)
+	{
+
+		if (!searchEngine->isEnabledScriptDebugging())
+		{
+			searchEngine->enableScriptDebugging();
+		}
+	}
+	else
+	{
+		if (searchEngine->isEnabledScriptDebugging())
+		{
+			searchEngine->disableScriptDebugging();
+		}
+	}
 
 	if (m_pSettings->valueBool("TorrentTracker", "enabled", false))
 	{
@@ -356,7 +374,7 @@ void CuteTorrentMainWindow::setupConnections()
 	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(UpdateStatusbar()));
 	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(UpdateTabWidget()));
 	connect(fileTableView, SIGNAL(customContextMenuRequested(const QPoint&)), m_pFileViewModel, SLOT(FileTabContextMenu(const QPoint&)));
-	connect(m_pTorrentManager, SIGNAL(initCompleted()), m_pTorrentDisplayModel, SLOT(initSessionFinished()));
+	connect(m_pTorrentManager.get(), SIGNAL(initCompleted()), m_pTorrentDisplayModel, SLOT(initSessionFinished()));
 	connect(m_pGroupTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(ChnageTorrentFilter()));
 	connect(m_pStyleEngine, SIGNAL(styleChanged()), this, SLOT(initWindowIcons()));
 	connect(m_pStyleEngine, SIGNAL(styleChanged()), m_pTorrentDisplayModel, SLOT(setupContextMenu()));
@@ -1078,10 +1096,8 @@ void CuteTorrentMainWindow::saveWindowState()
 
 CuteTorrentMainWindow::~CuteTorrentMainWindow()
 {
-	TorrentTracker::freeInstance();
 	RconWebService::freeInstance();
 	m_pTrayIcon->hide();
-	TorrentManager::freeInstance();
 	Scheduller::freeInstance();
 }
 
@@ -1386,7 +1402,7 @@ void CuteTorrentMainWindow::setupGroupTreeWidget()
 		QTreeWidgetItem* item = new QTreeWidgetItem(searchTreeItem);
 		QString engineName = current->Name();
 		item->setText(0, engineName);
-		item->setIcon(0, m_pStyleEngine->getIcon(engineName));
+		item->setIcon(0, current->getIcon());
 		item->setData(0, Qt::UserRole + 1, SEARCH);
 		item->setData(0, Qt::UserRole + 2, engineName);
 	}
@@ -1732,7 +1748,7 @@ void CuteTorrentMainWindow::openSearchItemDescribtion()
 
 	QModelIndex index = m_pTorrentListView->currentIndex();
 	SearchResult* searchResult = index.data(QSearchDisplayModel::SearchItemRole).value<SearchResult*>();
-	QDesktopServices::openUrl(searchResult->TorrentDescUrl);
+	QDesktopServices::openUrl(searchResult->TorrentDescUrl());
 }
 
 void CuteTorrentMainWindow::startDownloadTorrent()
@@ -1744,7 +1760,7 @@ void CuteTorrentMainWindow::startDownloadTorrent()
 
 	QModelIndex index = m_pTorrentListView->currentIndex();
 	SearchResult* searchResult = index.data(QSearchDisplayModel::SearchItemRole).value<SearchResult*>();
-	QDesktopServices::openUrl(searchResult->TorrentFileUrl);
+	QDesktopServices::openUrl(searchResult->TorrentFileUrl());
 }
 
 void CuteTorrentMainWindow::RemoveTracker()

@@ -75,6 +75,7 @@ public:
     QSpacerItem *verticalSpacer_5;
     QCheckBox *winShelItegrationCheckBox;
     QCheckBox *magnetAssociationCheckBox;
+    QCheckBox *scriptDebugingCheckBox;
     QWidget *restrictionTab;
     QGridLayout *gridLayout_30;
     QGroupBox *groupBox_2;
@@ -257,8 +258,6 @@ public:
     QLineEdit *rssRecepientEmailEdit;
     QLabel *label_40;
     QComboBox *rssSmtpConnTypeCombobox;
-    QWidget *serchTab;
-    QGridLayout *gridLayout_12;
     QWidget *keyMappingTab;
     QGridLayout *gridLayout_17;
     QScrollArea *hotKeyScrollArea;
@@ -334,7 +333,6 @@ public:
         gridLayout_4->addWidget(buttonBox, 2, 3, 1, 1);
 
         listWidget = new QListWidget(m_centralWidget);
-        new QListWidgetItem(listWidget);
         new QListWidgetItem(listWidget);
         new QListWidgetItem(listWidget);
         new QListWidgetItem(listWidget);
@@ -464,6 +462,11 @@ public:
         magnetAssociationCheckBox->setObjectName(QString::fromUtf8("magnetAssociationCheckBox"));
 
         gridLayout_22->addWidget(magnetAssociationCheckBox, 5, 0, 1, 2);
+
+        scriptDebugingCheckBox = new QCheckBox(torrentTab);
+        scriptDebugingCheckBox->setObjectName(QString::fromUtf8("scriptDebugingCheckBox"));
+
+        gridLayout_22->addWidget(scriptDebugingCheckBox, 6, 2, 1, 2);
 
         stackedWidget->addWidget(torrentTab);
         restrictionTab = new QWidget();
@@ -1338,11 +1341,6 @@ public:
         gridLayout_33->addWidget(autosrtEmailNotificationCheckBox, 1, 5, 1, 2);
 
         stackedWidget->addWidget(page_2);
-        serchTab = new QWidget();
-        serchTab->setObjectName(QString::fromUtf8("serchTab"));
-        gridLayout_12 = new QGridLayout(serchTab);
-        gridLayout_12->setObjectName(QString::fromUtf8("gridLayout_12"));
-        stackedWidget->addWidget(serchTab);
         keyMappingTab = new QWidget();
         keyMappingTab->setObjectName(QString::fromUtf8("keyMappingTab"));
         sizePolicy.setHeightForWidth(keyMappingTab->sizePolicy().hasHeightForWidth());
@@ -1492,7 +1490,7 @@ public:
         QObject::connect(importRssRulesButton, SIGNAL(clicked()), SettingsDialog, SLOT(onImportRssRules()));
 
         listWidget->setCurrentRow(-1);
-        stackedWidget->setCurrentIndex(8);
+        stackedWidget->setCurrentIndex(0);
         inEncPolicyComboBox->setCurrentIndex(0);
         outEncPolicyComboBox->setCurrentIndex(0);
         encLevelComboBox->setCurrentIndex(2);
@@ -1528,9 +1526,7 @@ public:
         QListWidgetItem *___qlistwidgetitem8 = listWidget->item(8);
         ___qlistwidgetitem8->setText(QApplication::translate("SettingsDialog", "TAB_RSS", 0, QApplication::UnicodeUTF8));
         QListWidgetItem *___qlistwidgetitem9 = listWidget->item(9);
-        ___qlistwidgetitem9->setText(QApplication::translate("SettingsDialog", "TAB_SEARCH", 0, QApplication::UnicodeUTF8));
-        QListWidgetItem *___qlistwidgetitem10 = listWidget->item(10);
-        ___qlistwidgetitem10->setText(QApplication::translate("SettingsDialog", "TAB_KEY_MAPPINGS", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem9->setText(QApplication::translate("SettingsDialog", "TAB_KEY_MAPPINGS", 0, QApplication::UnicodeUTF8));
         listWidget->setSortingEnabled(__sortingEnabled);
 
         useNotificationsCheckBox->setTitle(QApplication::translate("SettingsDialog", "ENABLE_NOTIFICATIONS", 0, QApplication::UnicodeUTF8));
@@ -1558,6 +1554,7 @@ public:
         magnetAssociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         magnetAssociationCheckBox->setText(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION", 0, QApplication::UnicodeUTF8));
+        scriptDebugingCheckBox->setText(QApplication::translate("SettingsDialog", "ENABLE_SEARCH_SCRIPT_DEBUGING", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("SettingsDialog", "SPEED_RESRICTIONS", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         label_6->setWhatsThis(QApplication::translate("SettingsDialog", "UPLOAD_SPEED_LIMIT_WIT", 0, QApplication::UnicodeUTF8));

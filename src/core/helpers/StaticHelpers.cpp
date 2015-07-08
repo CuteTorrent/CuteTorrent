@@ -19,10 +19,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "StaticHelpers.h"
 #include <QDebug>
 #include <libtorrent/gzip.hpp>
+#include <QApplication>
 #include <libtorrent/upnp.hpp>
 #include <libtorrent/i2p_stream.hpp>
 #include <libtorrent/socks5_stream.hpp>
-
+#include "StyleEngene.h"
 QString StaticHelpers::toKbMbGb(size_type size)
 {
 	float val = size;

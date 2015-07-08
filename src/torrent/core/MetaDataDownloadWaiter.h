@@ -12,9 +12,9 @@ public:
 private:
 	bool _autoAdd;
 	QString MetaLink;
-	TorrentManager* m_pTorrentManager;
+	TorrentManagerPtr m_pTorrentManager;
 protected:
-	void run();
+	void run() override;
 };
 
 

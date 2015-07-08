@@ -7,8 +7,8 @@ class TorrentApiController: public HttpRequestHandler
 	Q_OBJECT
 	Q_DISABLE_COPY(TorrentApiController)
 private:
-	TorrentManager* m_pTorrentManager;
-	TorrentStorrage* m_pTorrentStorrage;
+	TorrentManagerPtr m_pTorrentManager;
+	TorrentStorragePtr m_pTorrentStorrage;
 public:
 
 	TorrentApiController(QObject* parent = 0);

@@ -9,6 +9,7 @@ class PeiceDisplayWidget : public QWidget
 	Q_PROPERTY(QColor downloadingColor READ downloadingColor WRITE setDownloadingColor)
 	Q_PROPERTY(QColor borderColor READ borderColor WRITE setBorderColor)
 	Q_PROPERTY(QColor backgroudColor READ backgroudColor WRITE setBackgroudColor)
+
 public:
 	PeiceDisplayWidget(QWidget* parent = 0);
 	~PeiceDisplayWidget();
@@ -25,8 +26,9 @@ public:
 protected:
 	void paintEvent(QPaintEvent*) override;
 private:
+	int mixTwoColors(QRgb rgb, QRgb qRgb, float ratio);
 	void UpdateImage();
-	QImage img;
+	QImage m_image;
 	QColor m_cDwonloaded, m_cDownloading, m_cBorder, m_cBackground;
 	int m_iPiceCount;
 	QBitArray m_dowloadingParts;

@@ -1,5 +1,5 @@
 ﻿#include "FileViewModel.h"
-
+#include "StaticHelpers.h"
 void FileViewModel::retranslateUI()
 {
 	headerStringsData.clear();

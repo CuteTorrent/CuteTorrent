@@ -43,8 +43,8 @@ QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterPr
 	selectedRow = -1;
 	setupContextMenu();
 	locker = new QMutex();
-	connect(m_pTorrentManager, SIGNAL(AddTorrentGui(Torrent*)), SLOT(OnAddTorrent()));
-	connect(m_pTorrentManager, SIGNAL(TorrentRemove(QString)), SLOT(Update()));
+	connect(m_pTorrentManager.get(), SIGNAL(AddTorrentGui(Torrent*)), SLOT(OnAddTorrent()));
+	connect(m_pTorrentManager.get(), SIGNAL(TorrentRemove(QString)), SLOT(Update()));
 }
 void QTorrentDisplayModel::Rehash()
 {
@@ -59,22 +59,6 @@ void QTorrentDisplayModel::DellAll()
 {
 	ActionOnSelectedItem(remove_all);
 }
-class MountDialogThread : QThread
-{
-	MultipleDTDialog* dlg;
-public:
-	void create(QStringList _files)
-	{
-		dlg = new MultipleDTDialog(_files);
-		start();
-	}
-protected:
-	void run() override
-	{
-		dlg->exec();
-		delete dlg;
-	}
-};
 
 void QTorrentDisplayModel::MountDT()
 {
@@ -115,7 +99,7 @@ void QTorrentDisplayModel::OpenDirSelected()
 
 	if(tor != NULL)
 	{
-		QString path = QFileInfo(QDir::toNativeSeparators(tor->GetSavePath() + (tor->isSingleFile() ? QString::fromUtf8(tor->GetFileDownloadInfo().storrage.file_path(0).c_str()) : tor->GetName()))).absoluteFilePath();
+		QString path = QFileInfo(StaticHelpers::CombinePathes(tor->GetSavePath() ,(tor->isSingleFile() ? QString::fromUtf8(tor->GetFileDownloadInfo().storrage.file_path(0).c_str()) : tor->GetName()))).absoluteFilePath();
 #ifdef Q_WS_MAC
 		QStringList args;
 		args << "-e";
@@ -611,8 +595,6 @@ bool QTorrentDisplayModel::removeRows(int row, int count, const QModelIndex& par
 
 QTorrentDisplayModel::~QTorrentDisplayModel()
 {
-	TorrentManager::freeInstance();
-	TorrentStorrage::freeInstance();
 }
 
 void QTorrentDisplayModel::retranslate()
@@ -792,6 +774,10 @@ void QTorrentDisplayModel::Update()
 void QTorrentDisplayModel::OnAddTorrent()
 {
 	Update();
+	if (m_pTorrentListView->model() != m_pProxyFilterModel)
+	{
+		return;
+	}
 	m_pTorrentListView->scrollToBottom();
 	m_pTorrentListView->setCurrentIndex(index(m_pTorrentStorrage->count() - 1));
 }

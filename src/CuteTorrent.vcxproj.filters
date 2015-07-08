@@ -261,15 +261,6 @@
     <ClCompile Include="search\core\SearchEngine.cpp">
       <Filter>SearchEngine</Filter>
     </ClCompile>
-    <ClCompile Include="search\searchproviders\ExtratorrentSearchProvider.cpp">
-      <Filter>SearchEngine\SearchProviders</Filter>
-    </ClCompile>
-    <ClCompile Include="search\searchproviders\KickassSearchProvider.cpp">
-      <Filter>SearchEngine\SearchProviders</Filter>
-    </ClCompile>
-    <ClCompile Include="search\searchproviders\RutorSearchProvider.cpp">
-      <Filter>SearchEngine\SearchProviders</Filter>
-    </ClCompile>
     <ClCompile Include="search\viewmodels\QSearchDisplayModel.cpp">
       <Filter>ViewModel</Filter>
     </ClCompile>
@@ -355,9 +346,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CuteTorrent.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ExtratorrentSearchProvider.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_FaviconDownloader.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -392,9 +380,6 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_ISerachProvider.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_KickassSearchProvider.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_MagnetApiController.cpp">
@@ -479,9 +464,6 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_RssManager.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_RutorSearchProvider.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_Scheduller.cpp">
@@ -718,10 +700,25 @@
     <ClCompile Include="core\NetworkDiskCache.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_PiceAvailabilityWidget.cpp">
+    <ClCompile Include="torrent\gui\Controls\PieceAvailabilityWidget.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="torrent\gui\Controls\PieceAvailabilityWidget.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_CustomScriptSearchProvider.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SearchResult.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="search\searchproviders\CustomScriptSearchProvider.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PieceAvailabilityWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QSgmlTag.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QSgml.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -822,15 +819,6 @@
     <CustomBuild Include="search\core\SearchEngine.h">
       <Filter>SearchEngine</Filter>
     </CustomBuild>
-    <CustomBuild Include="search\searchproviders\ExtratorrentSearchProvider.h">
-      <Filter>SearchEngine\SearchProviders</Filter>
-    </CustomBuild>
-    <CustomBuild Include="search\searchproviders\KickassSearchProvider.h">
-      <Filter>SearchEngine\SearchProviders</Filter>
-    </CustomBuild>
-    <CustomBuild Include="search\searchproviders\RutorSearchProvider.h">
-      <Filter>SearchEngine\SearchProviders</Filter>
-    </CustomBuild>
     <CustomBuild Include="search\viewmodels\QSearchDisplayModel.h">
       <Filter>ViewModel</Filter>
     </CustomBuild>
@@ -868,9 +856,6 @@
       <Filter>DataModels</Filter>
     </CustomBuild>
     <CustomBuild Include="torrent\core\TorrentManager.h">
-      <Filter>Service</Filter>
-    </CustomBuild>
-    <CustomBuild Include="torrent\core\TorrentStorrage.h">
       <Filter>Service</Filter>
     </CustomBuild>
     <CustomBuild Include="torrent\viewmodels\ItemDelegate\QTorrentItemDelegat.h">
@@ -955,6 +940,21 @@
     <CustomBuild Include="torrent\gui\Controls\PieceAvailabilityWidget.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="torrent\core\TorrentStorrage.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="search\searchproviders\CustomScriptSearchProvider.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="search\dataModels\SearchResult.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\datamodels\SGML\QSgml.h">
+      <Filter>ThirdParties\SGMLParser</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\datamodels\SGML\QSgmlTag.h">
+      <Filter>ThirdParties\SGMLParser</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\MagnetApiController.h">
@@ -1013,7 +1013,7 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="search\dataModels\SerachResult.h">
-      <Filter>SearchEngine</Filter>
+      <Filter>Generated Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1138,12 +1138,6 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_SettingsDialog.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\datamodels\SGML\QSgml.h">
-      <Filter>ThirdParties\SGMLParser</Filter>
-    </ClInclude>
-    <ClInclude Include="core\datamodels\SGML\QSgmlTag.h">
-      <Filter>ThirdParties\SGMLParser</Filter>
     </ClInclude>
     <ClInclude Include="core\datamodels\json\json.h">
       <Filter>WebBasic\JSON</Filter>
@@ -1287,6 +1281,12 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="core\Singleton.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="torrent\core\TorrentCommon.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="search\core\SearchCommon.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

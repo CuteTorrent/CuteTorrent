@@ -1,29 +1,5 @@
 ﻿#include "TorrentStorrage.h"
 
-TorrentStorrage* TorrentStorrage::m_pInstance = NULL;
-
-int TorrentStorrage::m_nInstanceCount = 0;
-
-TorrentStorrage* TorrentStorrage::getInstance()
-{
-	if(m_pInstance == NULL)
-	{
-		m_pInstance = new TorrentStorrage();
-	}
-
-	m_nInstanceCount++;
-	return m_pInstance;
-}
-
-void TorrentStorrage::freeInstance()
-{
-	m_nInstanceCount--;
-
-	if(m_nInstanceCount == 0)
-	{
-		delete m_pInstance;
-	}
-}
 bool LessThan(Torrent* left, Torrent* right)
 {
 	return * (left) < * (right);

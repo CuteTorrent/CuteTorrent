@@ -8,7 +8,7 @@ class MagnetApiController :
 	Q_OBJECT
 private:
 	QMap<QString, QString> savePathMap;
-	TorrentManager* m_pTorrentManager;
+	TorrentManagerPtr m_pTorrentManager;
 public:
 	MagnetApiController(QObject*);
 

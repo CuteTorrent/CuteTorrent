@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "TorrentManager.h"
+#include <QVector>
 class FileViewTreeItem
 {
 	friend class FileViewModel;

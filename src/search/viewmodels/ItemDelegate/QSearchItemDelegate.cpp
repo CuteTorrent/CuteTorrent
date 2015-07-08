@@ -1,6 +1,6 @@
 ﻿#include "QSearchItemDelegate.h"
 #include "QSearchDisplayModel.h"
-#include "QTorrentItemDelegat.h"
+#include "SearchResult.h"
 #include "StaticHelpers.h"
 
 
@@ -54,13 +54,29 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	QFont nameFont(option.font);
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
-	const QIcon mimeIcon = m_pStyleEngine->getIcon(res->Engine);
-	QString nameStr(res->Name);
+	SearchEnginePtr instance = SearchEngine::getInstance();
+	QList<ISerachProvider*> iSerachProviders = instance->GetSearchProviders();
+	ISerachProvider* pFoundProvider = NULL;
+	QString name = res->Engine();
+	for (int i = 0; i < iSerachProviders.length(); i++)
+	{
+		if (iSerachProviders[i]->Name() == name)
+		{
+			pFoundProvider = iSerachProviders[i];
+			break;
+		}
+	}
+	QIcon mimeIcon;
+	if (pFoundProvider != NULL)
+	{
+		mimeIcon = pFoundProvider->getIcon();
+	}
+	QString nameStr(res->Name());
 	QSize nameSize(nameFM.size(0, nameStr));
 	QFont statusFont(option.font);
 	statusFont.setPointSize(int (option.font.pointSize() * 0.9));
 	const QFontMetrics statusFM(statusFont);
-	const QString statusStr(StaticHelpers::toKbMbGb(res->size));
+	const QString statusStr(res->Size());
 	QFont progressFont(statusFont);
 	const QFontMetrics progressFM(progressFont);
 	const QString progressStr(GetPeersStr(res));
@@ -119,7 +135,7 @@ QSize QSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
 	QFont nameFont(option.font);
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
-	const QString nameStr(res->Name);
+	const QString nameStr(res->Name());
 	int nameWidth = nameFM.width(nameStr);
 
 	if (nameWidth + iconSize > option.rect.width())
@@ -140,7 +156,7 @@ QSize QSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
 
 	QFont progressFont(statusFont);
 	const QFontMetrics progressFM(progressFont);
-	const QString progressStr(StaticHelpers::toKbMbGb(res->size));
+	const QString progressStr(res->Size());
 	const int progressWidth = progressFM.width(progressStr);
 	const QSize m(margin(*style));
 	return QSize(m.width() + iconSize + MAX3(nameWidth, statusWidth, progressWidth),
@@ -149,9 +165,9 @@ QSize QSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
 
 QString QSearchItemDelegate::GetPeersStr(const SearchResult* res) const
 {
-	if(res->leechers >= 0 && res->seeders >= 0)
+	if(res->Leechers() >= 0 && res->Seeders() >= 0)
 	{
-		return tr("Leechs: %1 Seeds: %2").arg(QString::number(res->leechers), QString::number(res->seeders));
+		return tr("Leechs: %1 Seeds: %2").arg(res->Leechers(), res->Seeders());
 	}
 	else
 	{

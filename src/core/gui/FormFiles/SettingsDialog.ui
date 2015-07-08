@@ -270,11 +270,6 @@ QListView::item{
         </item>
         <item>
          <property name="text">
-          <string>TAB_SEARCH</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
           <string>TAB_KEY_MAPPINGS</string>
          </property>
         </item>
@@ -283,7 +278,7 @@ QListView::item{
       <item row="0" column="2" colspan="2">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>8</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="torrentTab">
          <layout class="QGridLayout" name="gridLayout_22">
@@ -429,6 +424,13 @@ QListView::item{
             </property>
             <property name="text">
              <string>MAGNET_ASSOCIATION</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="2" colspan="2">
+           <widget class="QCheckBox" name="scriptDebugingCheckBox">
+            <property name="text">
+             <string>ENABLE_SEARCH_SCRIPT_DEBUGING</string>
             </property>
            </widget>
           </item>
@@ -1997,9 +1999,6 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
          </layout>
-        </widget>
-        <widget class="QWidget" name="serchTab">
-         <layout class="QGridLayout" name="gridLayout_12"/>
         </widget>
         <widget class="QWidget" name="keyMappingTab">
          <property name="sizePolicy">

@@ -1,6 +1,6 @@
 ﻿#include "UploadController.h"
 #include <QDir>
-#include <QApplication>
+#include "StaticHelpers.h"
 UploadController::UploadController(QObject* parent) : HttpRequestHandler("WebControl", parent), m_pTorrentManager(TorrentManager::getInstance())
 {
 }
@@ -48,5 +48,4 @@ void UploadController::service(HttpRequest& request, HttpResponse& response)
 
 UploadController::~UploadController()
 {
-	TorrentManager::freeInstance();
 }

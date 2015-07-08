@@ -42,7 +42,7 @@ class QTorrentFilterProxyModel;
 class QTorrentDisplayModel: public QAbstractListModel
 {
 	Q_OBJECT
-	TorrentStorrage* m_pTorrentStorrage;
+	TorrentStorragePtr m_pTorrentStorrage;
 	int auto_id;
 	QTreeView* m_pTorrentListView;
 	int selectedRow;
@@ -59,7 +59,7 @@ class QTorrentDisplayModel: public QAbstractListModel
 	QAction* MoveStorrage;
 	QAction* PlayInPlayer;
 	QAction* GenerateMagnet;
-	TorrentManager* m_pTorrentManager;
+	TorrentManagerPtr m_pTorrentManager;
 	Torrent* CurrentTorrent;
 	QMutex* locker;
 	QTorrentFilterProxyModel* m_pProxyFilterModel;

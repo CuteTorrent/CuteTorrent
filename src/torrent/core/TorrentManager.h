@@ -40,24 +40,28 @@ using boost::bind;
 using namespace libtorrent;
 
 
-#include "TorrentStorrage.h"
 #include "defs.h"
 #include "ServiceCommon.h"
+#include "Singleton.h"
+#include "TorrentCommon.h"
+#include <QVariant>
+#include <QVector>
+#include <QMap>
 class QApplicationSettings;
 class QTorrentDisplayModel;
 class Torrent;
-class TorrentStorrage;
 namespace libtorrent
 {
 class alert;
 }  // namespace libtorrent
 struct openmagnet_info;
 struct opentorrent_info;
-class MessageBox;
 
 
-class TorrentManager : public QObject
+
+class TorrentManager : public QObject, public Singleton<TorrentManager>
 {
+	friend class Singleton<TorrentManager>;
 	Q_OBJECT
 signals:
 	void AddTorrentGui(Torrent*);
@@ -70,13 +74,12 @@ signals:
 	void OnFeedChanged();
 protected:
 	bool MoveFiles(QString oldStyleDirPath, QString newStyleDirPath);
-	TorrentManager();
-	~TorrentManager();
-	static TorrentManager* _instance;
-	static int _instanceCount;
-
+	
+	
 
 private:
+	TorrentManager();
+	
 #if LIBTORRENT_VERSION_NUM < 10000
     upnp* m_pUpnp;
 #endif
@@ -84,7 +87,7 @@ private:
 	bool m_bIsSaveSessionInitiated;
 	void handle_alert(alert*);
 	void writeSettings();
-	TorrentStorrage* m_pTorrentStorrage;
+	TorrentStorragePtr m_pTorrentStorrage;
 	session* m_pTorrentSession;
 	QApplicationSettingsPtr m_pTorrentSessionSettings;
 	int save_file(std::string const& filename, std::vector<char>& v);
@@ -117,14 +120,13 @@ public:
 	QString GetSessionDownloaded();
 	QString GetSessionUploaded();
 	QString GetSessionDHTstate();
-	static TorrentManager* getInstance();
-	static void freeInstance();
 	std::vector<torrent_status> GetTorrents();
 	opentorrent_info* GetTorrentInfo(QString filename, error_code& ec);
 	openmagnet_info* GetTorrentInfo(const torrent_handle& handle);
 	
 	bool AddMagnet(torrent_handle h, QString SavePath, QString group = "", QMap< QString, quint8> filepriorities = QMap<QString, quint8>());
 	bool AddTorrent(QString path, QString name, QString save_path, error_code& ec, QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), QString group = "", bool sequntial = false);
+	~TorrentManager();
  #if LIBTORRENT_VERSION_NUM >= 10000
 	void AddPortMapping(session::protocol_type type, ushort sourcePoert, ushort destPort);
 #else

@@ -1,5 +1,6 @@
 ﻿#include "TorrentCommandsApiController.h"
 #include "TorrentManager.h"
+#include "Torrent.h"
 TorrentCommandsApiController::TorrentCommandsApiController(QObject* parent/*=0*/) : HttpRequestHandler("WebControl", parent), m_pTorrentManager(TorrentManager::getInstance())
 {}
 
@@ -32,7 +33,7 @@ void TorrentCommandsApiController::service(HttpRequest& request, HttpResponse& r
 			}
 			else if(action == "remove")
 			{
-				if (!QMetaObject::invokeMethod(m_pTorrentManager, "RemoveTorrent", Qt::QueuedConnection, Q_ARG(QString, id), Q_ARG(bool, true)))
+				if (!QMetaObject::invokeMethod(m_pTorrentManager.get(), "RemoveTorrent", Qt::QueuedConnection, Q_ARG(QString, id), Q_ARG(bool, true)))
 				{
 					qWarning() << "QMetaObject::invokeMethod RemoveTorrent FAILED";
 				}
@@ -56,5 +57,4 @@ void TorrentCommandsApiController::service(HttpRequest& request, HttpResponse& r
 
 TorrentCommandsApiController::~TorrentCommandsApiController()
 {
-	TorrentManager::freeInstance();
 }

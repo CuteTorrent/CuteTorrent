@@ -198,13 +198,13 @@ RssItem* RssFeed::GetFeedItem(QString guid)
 
 void RssFeed::UpdateUnreadCount()
 {
-	m_unreadCount = m_rssItemsByDate.size();
+	m_unreadCount = 0;
 
 	foreach (RssItem* item, m_rssItemsByDate)
 	{
-		if (!item->unread())
+		if (item->unread())
 		{
-			m_unreadCount--;
+			m_unreadCount++;
 		}
 	}
 }

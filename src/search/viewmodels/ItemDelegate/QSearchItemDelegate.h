@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include <QtGui>
-#include "SerachResult.h"
 #include "StyleEngene.h"
+class SearchResult;
+
 class QSearchItemDelegate : public QStyledItemDelegate
 {
 	Q_OBJECT

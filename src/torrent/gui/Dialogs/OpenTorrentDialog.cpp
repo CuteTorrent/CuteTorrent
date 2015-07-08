@@ -57,8 +57,6 @@ int OpenTorrentDialog::exec()
 }
 OpenTorrentDialog::~OpenTorrentDialog()
 {
-	TorrentManager::freeInstance();
-
 	if (m_pFileTreeModel != NULL)
 	{
 		delete m_pFileTreeModel;

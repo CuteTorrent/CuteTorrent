@@ -101,29 +101,23 @@ QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem& option, const Torrent&
 		const QString nameStr(tor.GetName());
 		int nameWidth = nameFM.width(nameStr);
 
-		if (nameWidth + iconSize > option.rect.width())
-		{
-			nameWidth = option.rect.width() - iconSize;
-		}
-
+		
 		QFont statusFont(option.font);
 		statusFont.setPointSize(int (option.font.pointSize() * 0.9));
 		const QFontMetrics statusFM(statusFont);
 		const QString statusStr(GetStatusString(tor));
 		int statusWidth = statusFM.width(statusStr);
 
-		if (statusWidth  + iconSize > option.rect.width())
-		{
-			statusWidth = option.rect.width() - iconSize;
-		}
+		
 
 		QFont progressFont(statusFont);
 		const QFontMetrics progressFM(progressFont);
-		const QString progressStr(tor.GetProgresString());
+		const QString progressStr(GetProgressString(tor));
 		const int progressWidth = progressFM.width(progressStr);
 		const QSize m(margin(*style));
-		return QSize(m.width() + iconSize  + MAX3(nameWidth, statusWidth, progressWidth),
-		             m.height() * 3 + nameFM.lineSpacing() /*+ statusFM.lineSpacing()*/ + 2 * GUI_PAD + progressFM.lineSpacing());
+		int width = m.width() + iconSize  + std::max(nameWidth, statusWidth + progressWidth);
+		int height = m.height() * 3 + nameFM.lineSpacing() + 2 * GUI_PAD + progressFM.lineSpacing();
+		return QSize(width, height);
 	}
 	catch(...)
 	{
@@ -140,7 +134,7 @@ QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem&   option,
 	try
 	{
 		Torrent*  tor(index.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>());
-
+		initStyleOption(const_cast<QStyleOptionViewItem*>(&option), index);
 		if(tor != NULL)
 		{
 			return sizeHint(option, *tor);
@@ -250,10 +244,11 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	QFont statusFont(option.font);
 	statusFont.setPointSize(int (option.font.pointSize() * 0.9));
 	const QFontMetrics statusFM(statusFont);
-	const QString statusStr(GetStatusString(tor));
+	QString statusStr(GetStatusString(tor));
+	int statusWidth = statusFM.width(statusStr);
 	QFont progressFont(statusFont);
 	const QFontMetrics progressFM(progressFont);
-	const QString progressStr(GetProgressString(tor));
+	QString progressStr(GetProgressString(tor));
 	bool isPaused(tor.isPaused());
 	painter->save();
 	painter->setRenderHint(QPainter::Antialiasing);
@@ -325,18 +320,10 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	{
 		nameArea.setWidth(opt.rect.width() - nameArea.x());
 	}
-	QRect barArea(nameArea);
-	barArea.setHeight(BAR_HEIGHT);
-	barArea.moveTop(nameArea.y() + statusFM.lineSpacing() + GUI_PAD / 2);
-	QRect progArea(nameArea);
-	progArea.moveTop(barArea.y() + barArea.height() + GUI_PAD / 2);
-	progArea.setWidth(barArea.width() / 2);
-	QRect statusArea(barArea);
-	statusArea.moveTop(barArea.y() + BAR_HEIGHT + GUI_PAD / 2);
-	statusArea.moveLeft(barArea.width() / 2 + iconArea.width() + GUI_PAD);
-	statusArea.setWidth(barArea.width() / 2);
-	statusArea.setHeight(nameSize.height());
-
+	QRect barArea(nameArea.x(), nameArea.y() + statusFM.lineSpacing() + GUI_PAD / 2, nameArea.width(), BAR_HEIGHT);
+	QRect progArea(nameArea.x(), barArea.y() + barArea.height() + GUI_PAD / 2, barArea.width() - statusWidth, nameArea.height());
+	QRect statusArea(progArea.x() + progArea.width(), progArea.y(), statusWidth, progArea.height());
+	
 	if(tor.hasError())
 	{
 		painter->setPen(QColor("red"));
@@ -351,8 +338,10 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	nameStr = nameFM.elidedText(nameStr, Qt::ElideRight, nameArea.width());
 	style->drawItemText(painter, nameArea, Qt::AlignLeft, opt.palette, option.state & QStyle::State_Enabled, nameStr);
 	painter->setFont(statusFont);
+	statusStr = statusFM.elidedText(statusStr, Qt::ElideRight, statusArea.width());
 	style->drawItemText(painter,  statusArea, Qt::AlignRight, opt.palette, option.state & QStyle::State_Enabled, statusStr);
 	painter->setFont(progressFont);
+	progressStr = statusFM.elidedText(progressStr, Qt::ElideRight, progArea.width());
 	style->drawItemText(painter, progArea, Qt::AlignLeft, opt.palette, option.state & QStyle::State_Enabled, progressStr);
 	int progressPercentage = tor.GetProgress();
 	

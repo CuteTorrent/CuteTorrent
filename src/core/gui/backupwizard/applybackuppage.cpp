@@ -104,7 +104,6 @@ void ApplyBackupPage::ApplyBackup() const
 
 		QApplicationSettings::getInstance()->ReedSettings();
 		TorrentManager::getInstance()->InitSession();
-		TorrentManager::freeInstance();
 	}
 }
 

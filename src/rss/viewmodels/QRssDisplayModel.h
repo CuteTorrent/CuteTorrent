@@ -19,6 +19,7 @@ public:
 	QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const override;
 	QModelIndex parent(const QModelIndex& child) const override;
 	QList<RssFeed*> SelectedFeeds();
+	QList<RssItem*> SelectedRssItems();
 	RssFeed* SelectedFeed();
 	RssItem* SelectedRssItem();
 	void retranslate();
@@ -49,6 +50,7 @@ private:
 	QList<RssFeedTreeItem*> m_rootItems;
 	void setupFeedMenu();
 	void setupItemMenu();
+	
 	void setCurrentItemUnread(bool val);
 	void setCurrentFeedUnread(bool val);
 

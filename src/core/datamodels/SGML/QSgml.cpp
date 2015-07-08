@@ -372,78 +372,87 @@ void QSgml::HandleStartTag(QString SgmlString, QSgmlTag*& pLastTag, int& iStart,
 }
 
 // find an element with a defined name
-void QSgml::getElementsByName(QString Name, QList<QSgmlTag*>* Elements)
+QList<QSgmlTag*> QSgml::getElementsByName(QString Name)
 {
+	QList<QSgmlTag*> Elements;
 	QSgmlTag* Tag = DocTag;
-	Elements->clear();
+	Elements.clear();
 
 	while(Tag->Type != QSgmlTag::eVirtualEndTag)
 	{
 		if(Tag->Name == Name.toLower())
 		{
-			Elements->append(Tag);
+			Elements.append(Tag);
 		}
 
 		Tag = &Tag->getNextElement();
 	}
+	return Elements;
 }
 
 // find an element with a defined name and an atribte
-void QSgml::getElementsByName(QString Name, QString AtrName, QList<QSgmlTag*>* Elements)
+QList<QSgmlTag*> QSgml::getElementsByName(QString Name, QString AtrName)
 {
+	QList<QSgmlTag*> Elements;
 	QSgmlTag* Tag = DocTag;
-	Elements->clear();
+	Elements.clear();
 
 	while(Tag->Type != QSgmlTag::eVirtualEndTag)
 	{
 		if((Tag->Name == Name) && (Tag->hasAttribute(AtrName) == true))
 		{
-			Elements->append(Tag);
+			Elements.append(Tag);
 		}
 
 		Tag = &Tag->getNextElement();
 	}
+	return Elements;
 }
 
 // find an element with a defined name and an atribte with a value
-void QSgml::getElementsByName(QString Name, QString AtrName, QString AtrValue, QList<QSgmlTag*>* Elements)
+QList<QSgmlTag*> QSgml::getElementsByName(QString Name, QString AtrName, QString AtrValue)
 {
+	QList<QSgmlTag*> Elements;
 	QSgmlTag* Tag = DocTag;
-	Elements->clear();
+	Elements.clear();
 
 	while(Tag->Type != QSgmlTag::eVirtualEndTag)
 	{
 		if((Tag->Name == Name) && (Tag->hasAttribute(AtrName) == true) && (Tag->Attributes.value(AtrName) == AtrValue))
 		{
-			Elements->append(Tag);
+			Elements.append(Tag);
 		}
 
 		Tag = &Tag->getNextElement();
 	}
+	return Elements;
 }
 
 // find an element with a defined attribute-name
-void QSgml::getElementsByAtribute(QString AtrName, QList<QSgmlTag*>* Elements)
+QList<QSgmlTag*> QSgml::getElementsByAtribute(QString AtrName)
 {
+	QList<QSgmlTag*> Elements;
 	QSgmlTag* Tag = DocTag;
-	Elements->clear();
+	Elements.clear();
 
 	while(Tag->Type != QSgmlTag::eVirtualEndTag)
 	{
 		if(Tag->Attributes.find(AtrName) != Tag->Attributes.end())
 		{
-			Elements->append(Tag);
+			Elements.append(Tag);
 		}
 
 		Tag = &Tag->getNextElement();
 	}
+	return Elements;
 }
 
 // find an element with a defined attribute-name and attribute-value
-void QSgml::getElementsByAtribute(QString AtrName, QString AtrValue, QList<QSgmlTag*>* Elements)
+QList<QSgmlTag*> QSgml::getElementsByAtribute(QString AtrName, QString AtrValue)
 {
+	QList<QSgmlTag*> Elements;
 	QSgmlTag* Tag = DocTag;
-	Elements->clear();
+	Elements.clear();
 
 	while(Tag->Type != QSgmlTag::eVirtualEndTag)
 	{
@@ -451,12 +460,13 @@ void QSgml::getElementsByAtribute(QString AtrName, QString AtrValue, QList<QSgml
 		{
 			if(Tag->Attributes[AtrName] == AtrValue)
 			{
-				Elements->append(Tag);
+				Elements.append(Tag);
 			}
 		}
 
 		Tag = &Tag->getNextElement();
 	}
+	return Elements;
 }
 
 // load from a file

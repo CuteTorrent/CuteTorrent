@@ -25,14 +25,15 @@ under certain conditions.
 #define QSGML_H
 
 #include <QString>
-#include <QRegExp>
+#include <QMetaType>
 #include <QList>
 #include <QFile>
 #include <QDir>
 #include "QSgmlTag.h"
 
-class QSgml
+class QSgml : public QObject
 {
+	Q_OBJECT
 public:
 	typedef QList<QString>           QSgmlStringlist;
 
@@ -119,17 +120,18 @@ public:
 
 	bool load(QString sFileName);
 	bool save(QString sFileName);
-
-	void getElementsByName(QString Name, QList<QSgmlTag*>* Elements);
-	void getElementsByName(QString Name, QString AtrName, QList<QSgmlTag*>* Elements);
-	void getElementsByName(QString Name, QString AtrName, QString AtrValue, QList<QSgmlTag*>* Elements);
-	void getElementsByAtribute(QString AtrName, QList<QSgmlTag*>* Elements);
-	void getElementsByAtribute(QString AtrName, QString AtrValue, QList<QSgmlTag*>* Elements);
+public slots:
+	QList<QSgmlTag*> getElementsByName(QString Name);
+	QList<QSgmlTag*> getElementsByName(QString Name, QString AtrName);
+	QList<QSgmlTag*> getElementsByName(QString Name, QString AtrName, QString AtrValue);
+	QList<QSgmlTag*> getElementsByAtribute(QString AtrName);
+	QList<QSgmlTag*> getElementsByAtribute(QString AtrName, QString AtrValue);
 	QString getInnerText(QSgmlTag* ptag);
 	void ExportString(QString* HtmlString);
 	void ExportString(QString* HtmlString, char Optimze, int Tabsize);
 	void String2Sgml(const QString SgmlString);
 protected:
+	Q_DISABLE_COPY(QSgml)
 	QDir dirPath;
 
 	void MoveChildren(QSgmlTag* Source, QSgmlTag* Dest);

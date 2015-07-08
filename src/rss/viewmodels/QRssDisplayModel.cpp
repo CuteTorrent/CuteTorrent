@@ -165,7 +165,7 @@ QList<RssFeed*> QRssDisplayModel::SelectedFeeds()
 	QSet<RssFeed*> res;
 	QModelIndexList selectedIndexes = m_pItemsView->selectionModel()->selectedIndexes();
 
-     for (int i = 0 ;i < selectedIndexes.size(); i++)
+    for (int i = 0 ;i < selectedIndexes.size(); i++)
 	{
         QModelIndex selectedIndex = selectedIndexes[i];
 		if (selectedIndex.isValid())
@@ -190,6 +190,29 @@ QList<RssFeed*> QRssDisplayModel::SelectedFeeds()
 		}
 	}
 
+	return res.toList();
+}
+
+QList<RssItem*> QRssDisplayModel::SelectedRssItems()
+{
+	QSet<RssItem*> res;
+
+	QModelIndexList selectedIndexes = m_pItemsView->selectionModel()->selectedIndexes();
+
+	for (int i = 0; i < selectedIndexes.size(); i++)
+	{
+		QModelIndex selectedIndex = selectedIndexes[i];
+		if (selectedIndex.isValid())
+		{
+			QVariant data = selectedIndex.data(RssItemRole);
+
+			if (data.isValid())
+			{
+				RssItem* pItem = data.value<RssItem*>();
+				res.insert(pItem);
+			}
+		}
+	}
 	return res.toList();
 }
 
@@ -281,10 +304,20 @@ void QRssDisplayModel::onMarkAllUnread()
 
 void QRssDisplayModel::setCurrentItemUnread(bool val)
 {
-	RssItem* currentItem = SelectedRssItem();
-	RssFeed* currentFeed = SelectedFeed();
-	currentItem->setUread(val);
-	currentFeed->UpdateUnreadCount();
+	QList<RssItem*> rssItems = SelectedRssItems();
+	QSet<RssFeed*> feeds2updateUnreadCount;
+
+	foreach(RssItem* pItem, rssItems)
+	{
+		pItem->setUread(val);
+		feeds2updateUnreadCount.insert(pItem->rssFeed());
+	}
+
+	
+	foreach(RssFeed* pFeed, feeds2updateUnreadCount)
+	{
+		pFeed->UpdateUnreadCount();
+	}
 }
 
 void QRssDisplayModel::onMarkRead()
@@ -500,16 +533,17 @@ void QRssDisplayModel::onItemOpenDesc()
 	}
 }
 
-void QRssDisplayModel::onTorrentDownloaded(QUrl url, QTemporaryFile* pfile)
+void QRssDisplayModel::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 {
 	if (m_activeTorrentDownloads.contains(url))
 	{
-		QString fileName = pfile->fileName();
+		boost::scoped_ptr<QTemporaryFile> pSafeFile(pUnsafeFile);
+		QString fileName = pSafeFile->fileName();
 		boost::scoped_ptr<OpenTorrentDialog> pDlg(new OpenTorrentDialog(m_pItemsView));
 		pDlg->SetData(fileName);
 		pDlg->exec();
-		pfile->setAutoRemove(true);
-		delete pfile;
+		pSafeFile->setAutoRemove(true);
+		m_activeTorrentDownloads.removeAll(url);
 	}
 }
 

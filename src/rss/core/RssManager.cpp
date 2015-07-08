@@ -320,9 +320,10 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 	if (m_activeTorrentDownloads.contains(url))
 	{
 		TorrentDownloadInfo info = m_activeTorrentDownloads[url];
+		m_activeTorrentDownloads.remove(url);
 		boost::scoped_ptr<QTemporaryFile> pFile(pUnsafeFile);
 		QString torrentFilePath = pFile->fileName();
-		TorrentManager* pTorrentManager = TorrentManager::getInstance();
+		TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
 		error_code ec;
 		RssFeed* pFeed = findFeed(info.rssFeedId);
 		RssItem* feedItem = pFeed->GetFeedItem(info.rssItemId);
@@ -340,7 +341,6 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 		if (ec)
 		{
 			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), feedItem->title()), QVariant());
-			TorrentManager::freeInstance();
 			return;
 		}
 
@@ -365,9 +365,6 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 			RssItem* rssItem = rssFeed->GetFeedItem(info.rssItemId);
 			rssItem->setDownloadingTorrent(pTorrentInfo->infoHash);
 		}
-
-		m_activeTorrentDownloads.remove(url);
-		TorrentManager::freeInstance();
 	}
 	else
 	{
@@ -382,7 +379,7 @@ void RssManager::onMagnetError(QString error)
 
 void RssManager::onDownloadMetadataCompleted(openmagnet_info magnetInfo)
 {
-	TorrentManager* pTorrentManager = TorrentManager::getInstance();
+	TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
 
 	if (m_activeTorrentDownloads.contains(magnetInfo.link))
 	{
@@ -392,8 +389,6 @@ void RssManager::onDownloadMetadataCompleted(openmagnet_info magnetInfo)
 		m_activeTorrentDownloads.remove(magnetInfo.link);
 		emit Notify(NotificationSystem::TORRENT_INFO, tr("AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1").arg(magnetInfo.name), QVariant());
 	}
-
-	TorrentManager::freeInstance();
 }
 
 QString RssManager::gessSavePath(RssDownloadRule* downloadRule, QString base_suffix)

@@ -27,10 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "QSearchItemDelegate.h"
 #include "QTorrentDisplayModel.h"
 #include "QTorrentItemDelegat.h"
-#include "SearchEngine.h"
 #include "StyleEngene.h"
 #include "TorrentManager.h"
-#include "TorrentStorrage.h"
 #include "UpdateNotyfier.h"
 #include "application.h"
 #include "peicedisplaywidget.h"
@@ -86,11 +84,11 @@ private:
 	StyleEngene* m_pStyleEngine;
 	QComboBox* m_pTorrentSearchCategory;
 	QComboBox* m_pSearchCategory;
-	TorrentStorrage* m_pTorrents;
+	TorrentStorragePtr m_pTorrents;
 	PeiceDisplayWidget* m_pPieceView;
 	FileViewSortProxyModel* m_pFileViewProxymodel;
 	FileViewModel* m_pFileViewModel;
-	TorrentTracker* m_pTracker;
+	TorrentTrackerPtr m_pTracker;
 	QApplicationSettingsPtr m_pSettings;
 	RconWebService* m_pRcon;
 	UpdateNotifier* m_pUpdateNotifier;
@@ -115,7 +113,7 @@ private:
 	QTorrentItemDelegat* m_pTorrentItemDelegate;
 	QSearchDisplayModel* m_pSearchDisplayModel;
 	QSearchItemDelegate* m_pSearchItemDelegate;
-	TorrentManager* m_pTorrentManager;
+	TorrentManagerPtr m_pTorrentManager;
 	QLineEdit* m_pTorrentSearchEdit;
 	QLineEdit* m_pSearchEdit;
 	QTreeWidgetItem* torrentTreeItem;

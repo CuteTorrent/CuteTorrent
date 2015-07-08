@@ -49,27 +49,27 @@ QVariant QSearchDisplayModel::data(const QModelIndex& index, int role /*= Qt::Di
 				{
 					case 0:
 					{
-						return qVariantFromValue(res->Name);
+						return qVariantFromValue(res->Name());
 					}
 
 					case 1:
 					{
-						return qVariantFromValue(StaticHelpers::toKbMbGb(res->size));
+						return qVariantFromValue(res->Size());
 					}
 
 					case 2:
 					{
-						return qVariantFromValue(res->leechers);
+						return qVariantFromValue(res->Leechers());
 					}
 
 					case 3:
 					{
-						return qVariantFromValue(res->seeders);
+						return qVariantFromValue(res->Seeders());
 					}
 
 					case 4:
 					{
-						return qVariantFromValue(res->Engine);
+						return qVariantFromValue(res->Engine());
 					}
 				}
 			}

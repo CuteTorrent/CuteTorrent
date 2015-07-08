@@ -30,7 +30,7 @@ void SearchItemsStorrage::filterData()
 		{
 			SearchResult* item = m_items.at(i);
 
-			if(item->Engine.compare(m_sEngineName, Qt::CaseInsensitive) == 0)
+			if(item->Engine().compare(m_sEngineName, Qt::CaseInsensitive) == 0)
 			{
 				m_filteredItems.append(item);
 			}
@@ -82,7 +82,7 @@ void SearchItemsStorrage::append(SearchResult* item)
 	}
 	else
 	{
-		if(item->Engine.compare(m_sEngineName, Qt::CaseInsensitive))
+		if(item->Engine().compare(m_sEngineName, Qt::CaseInsensitive))
 		{
 			m_filteredItems.append(item);
 		}

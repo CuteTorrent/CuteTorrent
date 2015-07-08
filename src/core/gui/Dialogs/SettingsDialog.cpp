@@ -46,6 +46,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifdef Q_WS_WIN
 #include <windows.h>
 #include <smtp/smtpclient.h>
+#include <core/SearchEngine.h>
 
 typedef BOOL (WINAPI* LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);
 
@@ -146,8 +147,7 @@ void SettingsDialog::setupWindowIcons()
 	listWidget->item(6)->setIcon(style->getIcon("settings_scheduler"));
 	listWidget->item(7)->setIcon(style->getIcon("settings_web_controll"));
 	listWidget->item(8)->setIcon(style->getIcon("settings_rss"));
-	listWidget->item(9)->setIcon(style->getIcon("settings_search"));
-	listWidget->item(10)->setIcon(style->getIcon("settings_hotkeys"));
+	listWidget->item(9)->setIcon(style->getIcon("settings_hotkeys"));
 	QToolButton* prevMonthBtn = calendarWidget->findChild<QToolButton*> ("qt_calendar_prevmonth");
 
 	if(prevMonthBtn != NULL)
@@ -214,6 +214,7 @@ void SettingsDialog::FillGeneralTab()
 	bool folderCommandMatch = assocSettings.value("Folder/shell/cutetorrent/command/.") == commandShouldBe;
 	bool dirCommandMatch = assocSettings.value("Directory/shell/cutetorrent/command/.") == commandShouldBe;
 	winShelItegrationCheckBox->setChecked(starCommandMatch && folderCommandMatch && dirCommandMatch);
+	scriptDebugingCheckBox->setChecked(settings->valueBool("Search", "script_debuging_enabled", false));
 #endif
 	
 	
@@ -318,7 +319,6 @@ SettingsDialog::~SettingsDialog()
 	qDeleteAll(m_downloadRulesCopy.values());
 	m_downloadRulesCopy.clear();
 	RconWebService::freeInstance();
-	TorrentTracker::freeInstance();
 }
 void SettingsDialog::ApplySettings()
 {
@@ -339,6 +339,25 @@ void SettingsDialog::ApplySettings()
 	settings->setValue("Torrent", "use_dht",					qVariantFromValue(useDHTCheckBox->isChecked()));
 	settings->setValue("Torrent", "use_lsd",					qVariantFromValue(useLSDCheckBox->isChecked()));
 	settings->setValue("Torrent", "use_pex",					qVariantFromValue(usePExCheckBox->isChecked()));
+	bool isScriptDebuggingEnabled = scriptDebugingCheckBox->isChecked();
+	settings->setValue("Search", "script_debuging_enabled",		qVariantFromValue(isScriptDebuggingEnabled));
+	
+	SearchEnginePtr searchEngine = SearchEngine::getInstance();
+	if (isScriptDebuggingEnabled)
+	{
+		
+		if (!searchEngine->isEnabledScriptDebugging())
+		{
+			searchEngine->enableScriptDebugging();
+		}
+	}
+	else
+	{
+		if (searchEngine->isEnabledScriptDebugging())
+		{
+			searchEngine->disableScriptDebugging();
+		}
+	}
 
 	if(proxyGroupBox->isChecked())
 	{
@@ -652,7 +671,7 @@ void SettingsDialog::ApplySettings()
 }
 void SettingsDialog::ApplySettingsToSession()
 {
-	TorrentManager* manager = TorrentManager::getInstance();
+	TorrentManagerPtr manager = TorrentManager::getInstance();
 	session_settings current = manager->readSettings();
 	current.active_limit		= activeLimitEdit->value();
 	current.active_downloads	= activeDownloadLimitEdit->value();
@@ -675,12 +694,11 @@ void SettingsDialog::ApplySettingsToSession()
 	manager->updateSettings(current);
 	manager->RefreshExternalPeerSettings();
 	pe_settings enc_settings = manager->readEncSettings();
-	enc_settings.in_enc_policy = (pe_settings::enc_policy) inEncPolicyComboBox->currentIndex();
-	enc_settings.out_enc_policy = (pe_settings::enc_policy) outEncPolicyComboBox->currentIndex();
-	enc_settings.allowed_enc_level = (pe_settings::enc_level)(encLevelComboBox->currentIndex() + 1);
+	enc_settings.in_enc_policy = static_cast<pe_settings::enc_policy>(inEncPolicyComboBox->currentIndex());
+	enc_settings.out_enc_policy = static_cast<pe_settings::enc_policy>(outEncPolicyComboBox->currentIndex());
+	enc_settings.allowed_enc_level = static_cast<pe_settings::enc_level>(encLevelComboBox->currentIndex() + 1);
 	enc_settings.prefer_rc4 = preferFullEncCheckBox->isChecked();
 	manager->updateEncSettings(enc_settings);
-	TorrentManager::freeInstance();
 }
 void SettingsDialog::addGroup()
 {

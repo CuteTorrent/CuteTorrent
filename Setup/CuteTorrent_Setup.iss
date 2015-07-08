@@ -4,12 +4,12 @@
 WizardSmallImageFile=bottom.bmp
 AppId=CuteTorrent
 AppName=CuteTorrent
-AppVersion=1.0.0.27
+AppVersion=1.0.0.28
 DefaultDirName={pf}\CuteTorrent
 DefaultGroupName=CuteTorrent
 UninstallDisplayIcon={app}\CuteTorrent.exe
 OutputDir=Output
-OutputBaseFilename = CuteTorrent 1.0.0.27
+OutputBaseFilename=CuteTorrent 1.0.0.28
 SolidCompression=yes
 Compression=lzma/ultra
 WizardImageFile=Left.bmp

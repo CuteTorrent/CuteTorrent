@@ -53,11 +53,11 @@ public:
     QSplitter *splitter;
     QWidget *widget;
     QGridLayout *gridLayout_2;
-    QLabel *label_2;
-    QPushButton *removeRowButton;
-    QPushButton *addRowButton;
-    QSpacerItem *horizontalSpacer_2;
     QTableWidget *m_pCoociesTabWidget;
+    QPushButton *addRowButton;
+    QPushButton *removeRowButton;
+    QSpacerItem *horizontalSpacer_2;
+    QLabel *label_2;
 
     void setupUi(QDialog *RssSettings)
     {
@@ -163,26 +163,6 @@ public:
         widget->setObjectName(QString::fromUtf8("widget"));
         gridLayout_2 = new QGridLayout(widget);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        label_2 = new QLabel(widget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setWordWrap(true);
-
-        gridLayout_2->addWidget(label_2, 2, 0, 1, 1);
-
-        removeRowButton = new QPushButton(widget);
-        removeRowButton->setObjectName(QString::fromUtf8("removeRowButton"));
-
-        gridLayout_2->addWidget(removeRowButton, 1, 1, 1, 1);
-
-        addRowButton = new QPushButton(widget);
-        addRowButton->setObjectName(QString::fromUtf8("addRowButton"));
-
-        gridLayout_2->addWidget(addRowButton, 1, 0, 1, 1);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_2->addItem(horizontalSpacer_2, 1, 2, 1, 1);
-
         m_pCoociesTabWidget = new QTableWidget(widget);
         if (m_pCoociesTabWidget->columnCount() < 2)
             m_pCoociesTabWidget->setColumnCount(2);
@@ -206,7 +186,27 @@ public:
         m_pCoociesTabWidget->verticalHeader()->setVisible(false);
         m_pCoociesTabWidget->verticalHeader()->setDefaultSectionSize(19);
 
-        gridLayout_2->addWidget(m_pCoociesTabWidget, 0, 0, 1, 3);
+        gridLayout_2->addWidget(m_pCoociesTabWidget, 0, 0, 1, 4);
+
+        addRowButton = new QPushButton(widget);
+        addRowButton->setObjectName(QString::fromUtf8("addRowButton"));
+
+        gridLayout_2->addWidget(addRowButton, 1, 0, 1, 1);
+
+        removeRowButton = new QPushButton(widget);
+        removeRowButton->setObjectName(QString::fromUtf8("removeRowButton"));
+
+        gridLayout_2->addWidget(removeRowButton, 1, 1, 1, 1);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(horizontalSpacer_2, 1, 2, 1, 1);
+
+        label_2 = new QLabel(widget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setWordWrap(true);
+
+        gridLayout_2->addWidget(label_2, 4, 0, 1, 3);
 
         splitter->addWidget(widget);
 
@@ -240,9 +240,6 @@ public:
         m_pRefreshRateSpinBox->setSuffix(QApplication::translate("RssSettings", " MINUTES", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("RssSettings", "RSS_URL", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("RssSettings", "COOKIES", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("RssSettings", "COOKIE_HINT", 0, QApplication::UnicodeUTF8));
-        removeRowButton->setText(QApplication::translate("RssSettings", "REMOVE_ROW", 0, QApplication::UnicodeUTF8));
-        addRowButton->setText(QApplication::translate("RssSettings", "ADD_ROW", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = m_pCoociesTabWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("RssSettings", "COOKIE_ATTRIBUTE", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem1 = m_pCoociesTabWidget->horizontalHeaderItem(1);
@@ -254,6 +251,9 @@ public:
         m_pCoociesTabWidget->setSortingEnabled(false);
         m_pCoociesTabWidget->setSortingEnabled(__sortingEnabled);
 
+        addRowButton->setText(QApplication::translate("RssSettings", "ADD_ROW", 0, QApplication::UnicodeUTF8));
+        removeRowButton->setText(QApplication::translate("RssSettings", "REMOVE_ROW", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("RssSettings", "COOKIE_HINT", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

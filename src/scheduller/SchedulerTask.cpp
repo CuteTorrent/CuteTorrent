@@ -42,7 +42,7 @@ SchedulerTask::TaskType SchedulerTask::type() const
 
 void SchedulerTask::pefromTask()
 {
-	TorrentManager* tManager = TorrentManager::getInstance();
+	TorrentManagerPtr tManager = TorrentManager::getInstance();
 	libtorrent::session_settings current = tManager->readSettings();
 
 	switch(iType)
@@ -72,8 +72,6 @@ void SchedulerTask::pefromTask()
 		default:
 			break;
 	}
-
-	TorrentManager::freeInstance();
 }
 
 bool SchedulerTask::operator< (const SchedulerTask& other) const
