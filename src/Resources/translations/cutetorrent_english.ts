@@ -4387,7 +4387,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1359"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1400"/>
         <source>CT_RSS_RULE_LIST (*.cdrl)</source>
-        <translation>CuteTorrent RSS download rules file</translation>
+        <translation>CuteTorrent RSS download rules file (*.cdrl)</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1392"/>

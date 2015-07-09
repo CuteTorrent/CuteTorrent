@@ -3536,7 +3536,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>CT_RSS_RULE_LIST (*.cdrl)</source>
-        <translation>CuteTorrent RSS download rules file</translation>
+        <translation>CuteTorrent RSS download rules file (*cdrl)</translation>
     </message>
     <message>
         <source>ERROR</source>
