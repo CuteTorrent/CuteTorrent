@@ -21,14 +21,14 @@
 /* [1] Constructors and Destructors */
 
 MimeInlineFile::MimeInlineFile(QByteArray data, QString name)
-	: MimeFile(data,name)
+	: MimeFile(data, name)
 {
 }
 
-MimeInlineFile::MimeInlineFile(QFile *f)
-    : MimeFile(f)
+MimeInlineFile::MimeInlineFile(QFile* f)
+	: MimeFile(f)
 {
-    addHeaderLine("Content-Disposition: inline");
+	addHeaderLine("Content-Disposition: inline");
 }
 
 MimeInlineFile::~MimeInlineFile()

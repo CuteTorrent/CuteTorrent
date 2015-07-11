@@ -6,9 +6,9 @@
 class MimeQpEncoder : public MimeContentEncoder
 {
 public:
-    MimeQpEncoder();
+	MimeQpEncoder();
 
-    QByteArray encode(const QByteArray &data);
+	QByteArray encode(const QByteArray& data);
 };
 
 #endif // MIMEQPENCODER_H

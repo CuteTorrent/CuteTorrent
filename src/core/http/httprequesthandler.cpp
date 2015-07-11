@@ -93,6 +93,7 @@ bool HttpRequestHandler::CheckCreditinals(HttpRequest& request, HttpResponse& re
 			response.write("<BODY><H1>401 Unauthorized.</H1></BODY>");
 			return false;
 		}
+
 		QByteArray HA1 = QCryptographicHash::hash((parametrsMap->value("username") + ":" + parametrsMap->value("realm") + ":" + account.password).toUtf8(), QCryptographicHash::Md5);
 		QByteArray HA2 = QCryptographicHash::hash(request.getMethod() + ":" + parametrsMap->value("uri").toUtf8(), QCryptographicHash::Md5);
 		QByteArray Response = QCryptographicHash::hash((HA1.toHex() + ":" + \
@@ -101,6 +102,7 @@ bool HttpRequestHandler::CheckCreditinals(HttpRequest& request, HttpResponse& re
 		                      parametrsMap->value("cnonce") + ":" + \
 		                      parametrsMap->value("qop") + ":" + \
 		                      HA2.toHex()).toUtf8(), QCryptographicHash::Md5);
+
 		if(Response.toHex() != parametrsMap->value("response"))
 		{
 			response.setStatus(401, "Unauthorized");

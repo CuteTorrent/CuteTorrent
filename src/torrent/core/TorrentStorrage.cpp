@@ -16,7 +16,7 @@ void TorrentStorrage::append(Torrent* torrent)
 
 	QMutexLocker mutexLocker(m_pMapSynkMutex);
 	QMap<QString, Torrent*>::Iterator it = m_torrentsMap.insert(infoHash, torrent);
-    QList::append(torrent);
+	QList::append(torrent);
 }
 
 void TorrentStorrage::remove(Torrent* torrent)
@@ -69,7 +69,7 @@ TorrentStorrage::~TorrentStorrage(void)
 void TorrentStorrage::clear()
 {
 	m_torrentsMap.clear();
-    QList::clear();
+	QList::clear();
 }
 
 TorrentStorrage::TorrentStorrage(QObject* parrent/*=NULL*/) : QList<Torrent * >(), m_pMapSynkMutex(new QMutex())

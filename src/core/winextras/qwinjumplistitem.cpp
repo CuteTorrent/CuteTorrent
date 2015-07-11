@@ -60,18 +60,20 @@ QT_BEGIN_NAMESPACE
 
 void QWinJumpListItemPrivate::invalidate()
 {
-    if (category)
-        QWinJumpListCategoryPrivate::get(category)->invalidate();
+	if (category)
+	{
+		QWinJumpListCategoryPrivate::get(category)->invalidate();
+	}
 }
 
 /*!
     Constructs a QWinJumpListItem with the specified \a type.
  */
 QWinJumpListItem::QWinJumpListItem(QWinJumpListItem::Type type) :
-    d_ptr(new QWinJumpListItemPrivate)
+	d_ptr(new QWinJumpListItemPrivate)
 {
-    d_ptr->type = type;
-    d_ptr->category = 0;
+	d_ptr->type = type;
+	d_ptr->category = 0;
 }
 
 /*!
@@ -86,11 +88,13 @@ QWinJumpListItem::~QWinJumpListItem()
  */
 void QWinJumpListItem::setType(QWinJumpListItem::Type type)
 {
-    Q_D(QWinJumpListItem);
-    if (d->type != type) {
-        d->type = type;
-        d->invalidate();
-    }
+	Q_D(QWinJumpListItem);
+
+	if (d->type != type)
+	{
+		d->type = type;
+		d->invalidate();
+	}
 }
 
 /*!
@@ -98,8 +102,8 @@ void QWinJumpListItem::setType(QWinJumpListItem::Type type)
  */
 QWinJumpListItem::Type QWinJumpListItem::type() const
 {
-    Q_D(const QWinJumpListItem);
-    return d->type;
+	Q_D(const QWinJumpListItem);
+	return d->type;
 }
 
 /*!
@@ -119,13 +123,15 @@ QWinJumpListItem::Type QWinJumpListItem::type() const
 
     \sa setWorkingDirectory(), setArguments()
  */
-void QWinJumpListItem::setFilePath(const QString &filePath)
+void QWinJumpListItem::setFilePath(const QString& filePath)
 {
-    Q_D(QWinJumpListItem);
-    if (d->filePath != filePath) {
-        d->filePath = filePath;
-        d->invalidate();
-    }
+	Q_D(QWinJumpListItem);
+
+	if (d->filePath != filePath)
+	{
+		d->filePath = filePath;
+		d->invalidate();
+	}
 }
 
 /*!
@@ -133,8 +139,8 @@ void QWinJumpListItem::setFilePath(const QString &filePath)
  */
 QString QWinJumpListItem::filePath() const
 {
-    Q_D(const QWinJumpListItem);
-    return d->filePath;
+	Q_D(const QWinJumpListItem);
+	return d->filePath;
 }
 
 /*!
@@ -144,13 +150,15 @@ QString QWinJumpListItem::filePath() const
 
     \sa setFilePath()
  */
-void QWinJumpListItem::setWorkingDirectory(const QString &workingDirectory)
+void QWinJumpListItem::setWorkingDirectory(const QString& workingDirectory)
 {
-    Q_D(QWinJumpListItem);
-    if (d->workingDirectory != workingDirectory) {
-        d->workingDirectory = workingDirectory;
-        d->invalidate();
-    }
+	Q_D(QWinJumpListItem);
+
+	if (d->workingDirectory != workingDirectory)
+	{
+		d->workingDirectory = workingDirectory;
+		d->invalidate();
+	}
 }
 
 /*!
@@ -158,8 +166,8 @@ void QWinJumpListItem::setWorkingDirectory(const QString &workingDirectory)
  */
 QString QWinJumpListItem::workingDirectory() const
 {
-    Q_D(const QWinJumpListItem);
-    return d->workingDirectory;
+	Q_D(const QWinJumpListItem);
+	return d->workingDirectory;
 }
 
 /*!
@@ -167,13 +175,15 @@ QString QWinJumpListItem::workingDirectory() const
 
     This value is used only if the type of this item is QWinJumpListItem::Link.
  */
-void QWinJumpListItem::setIcon(const QIcon &icon)
+void QWinJumpListItem::setIcon(const QIcon& icon)
 {
-    Q_D(QWinJumpListItem);
-    if (d->icon.cacheKey() != icon.cacheKey()) {
-        d->icon = icon;
-        d->invalidate();
-    }
+	Q_D(QWinJumpListItem);
+
+	if (d->icon.cacheKey() != icon.cacheKey())
+	{
+		d->icon = icon;
+		d->invalidate();
+	}
 }
 
 /*!
@@ -181,8 +191,8 @@ void QWinJumpListItem::setIcon(const QIcon &icon)
  */
 QIcon QWinJumpListItem::icon() const
 {
-    Q_D(const QWinJumpListItem);
-    return d->icon;
+	Q_D(const QWinJumpListItem);
+	return d->icon;
 }
 
 /*!
@@ -190,13 +200,15 @@ QIcon QWinJumpListItem::icon() const
 
     This value is used only if the type of this item is QWinJumpListItem::Link.
  */
-void QWinJumpListItem::setTitle(const QString &title)
+void QWinJumpListItem::setTitle(const QString& title)
 {
-    Q_D(QWinJumpListItem);
-    if (d->title != title) {
-        d->title = title;
-        d->invalidate();
-    }
+	Q_D(QWinJumpListItem);
+
+	if (d->title != title)
+	{
+		d->title = title;
+		d->invalidate();
+	}
 }
 
 /*!
@@ -204,8 +216,8 @@ void QWinJumpListItem::setTitle(const QString &title)
  */
 QString QWinJumpListItem::title() const
 {
-    Q_D(const QWinJumpListItem);
-    return d->title;
+	Q_D(const QWinJumpListItem);
+	return d->title;
 }
 
 /*!
@@ -213,13 +225,15 @@ QString QWinJumpListItem::title() const
 
     This value is used only if the type of this item is QWinJumpListItem::Link.
  */
-void QWinJumpListItem::setDescription(const QString &description)
+void QWinJumpListItem::setDescription(const QString& description)
 {
-    Q_D(QWinJumpListItem);
-    if (d->description != description) {
-        d->description = description;
-        d->invalidate();
-    }
+	Q_D(QWinJumpListItem);
+
+	if (d->description != description)
+	{
+		d->description = description;
+		d->invalidate();
+	}
 }
 
 /*!
@@ -227,8 +241,8 @@ void QWinJumpListItem::setDescription(const QString &description)
  */
 QString QWinJumpListItem::description() const
 {
-    Q_D(const QWinJumpListItem);
-    return d->description;
+	Q_D(const QWinJumpListItem);
+	return d->description;
 }
 
 /*!
@@ -238,13 +252,15 @@ QString QWinJumpListItem::description() const
 
     \sa setFilePath()
  */
-void QWinJumpListItem::setArguments(const QStringList &arguments)
+void QWinJumpListItem::setArguments(const QStringList& arguments)
 {
-    Q_D(QWinJumpListItem);
-    if (d->arguments != arguments) {
-        d->arguments = arguments;
-        d->invalidate();
-    }
+	Q_D(QWinJumpListItem);
+
+	if (d->arguments != arguments)
+	{
+		d->arguments = arguments;
+		d->invalidate();
+	}
 }
 
 /*!
@@ -252,8 +268,8 @@ void QWinJumpListItem::setArguments(const QStringList &arguments)
  */
 QStringList QWinJumpListItem::arguments() const
 {
-    Q_D(const QWinJumpListItem);
-    return d->arguments;
+	Q_D(const QWinJumpListItem);
+	return d->arguments;
 }
 
 QT_END_NAMESPACE

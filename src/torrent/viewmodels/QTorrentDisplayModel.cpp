@@ -99,7 +99,8 @@ void QTorrentDisplayModel::OpenDirSelected()
 
 	if(tor != NULL)
 	{
-		QString path = QFileInfo(StaticHelpers::CombinePathes(tor->GetSavePath() ,(tor->isSingleFile() ? QString::fromUtf8(tor->GetFileDownloadInfo().storrage.file_path(0).c_str()) : tor->GetName()))).absoluteFilePath();
+		QString path = QFileInfo(StaticHelpers::CombinePathes(tor->GetSavePath() ,
+		                         (tor->isSingleFile() ? QString::fromUtf8(tor->GetFileDownloadInfo().storrage.file_path(0).c_str()) : tor->GetName()))).absoluteFilePath();
 #ifdef Q_WS_MAC
 		QStringList args;
 		args << "-e";
@@ -113,7 +114,7 @@ void QTorrentDisplayModel::OpenDirSelected()
 		QProcess::startDetached("osascript", args);
 #endif
 #ifdef Q_WS_X11
-        StaticHelpers::OpenFolderNautilus(path);
+		StaticHelpers::OpenFolderNautilus(path);
 #endif
 #ifdef Q_WS_WIN
 		StaticHelpers::OpenFileInExplorer(path);
@@ -563,6 +564,7 @@ bool QTorrentDisplayModel::removeRow(int row, bool delFiles)
 	{
 		CurrentTorrent = NULL;
 	}
+
 	m_pTorrentManager->RemoveTorrent(m_pTorrentStorrage->at(row)->GetInfoHash(), delFiles);
 	endRemoveRows();
 	return true;
@@ -586,7 +588,7 @@ bool QTorrentDisplayModel::removeRows(int row, int count, const QModelIndex& par
 
 	for(int i = row; i < row + count; i++)
 	{
-		m_pTorrentManager->RemoveTorrent(m_pTorrentStorrage->at(i)->GetInfoHash(),true);
+		m_pTorrentManager->RemoveTorrent(m_pTorrentStorrage->at(i)->GetInfoHash(), true);
 	}
 
 	endRemoveRows();
@@ -774,10 +776,12 @@ void QTorrentDisplayModel::Update()
 void QTorrentDisplayModel::OnAddTorrent()
 {
 	Update();
+
 	if (m_pTorrentListView->model() != m_pProxyFilterModel)
 	{
 		return;
 	}
+
 	m_pTorrentListView->scrollToBottom();
 	m_pTorrentListView->setCurrentIndex(index(m_pTorrentStorrage->count() - 1));
 }

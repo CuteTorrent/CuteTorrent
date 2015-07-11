@@ -6,10 +6,10 @@
 class MimeQPFormatter : public MimeContentFormatter
 {
 public:
-    MimeQPFormatter(QIODevice*);
+	MimeQPFormatter(QIODevice*);
 
 protected:
-    virtual qint64 writeData(const char *data, qint64 len);
+	virtual qint64 writeData(const char* data, qint64 len);
 };
 
 #endif // MIMEQPFORMATTER_H

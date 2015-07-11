@@ -25,20 +25,23 @@ void NotificationSystem::UpdateNotificationSettings()
 	{
 		m_notificationMask &= ~RSS_ERROR;
 	}
+
 	QMutexLocker lock(&m_notificationMutex);
+
 	for (int i = m_notifications.size() - 1; i > -1; i--)
 	{
 		int notificationType = m_notifications[i].notificationType;
+
 		if ((m_notificationMask & notificationType) != notificationType)
 		{
 			m_notifications.removeAt(i);
 		}
 	}
+
 	m_enabled = m_pSettings->valueBool("Notifications", "use_notification_sys", true);
 }
 NotificationSystem::~NotificationSystem()
 {
-	
 }
 
 void NotificationSystem::OnNewNotification(int notificationType, QString message, QVariant data)
@@ -52,7 +55,6 @@ void NotificationSystem::OnNewNotification(int notificationType, QString message
 			n.message = message;
 			n.data = data;
 			n.notificationType = notificationType;
-
 			bool wasEmpty = m_notifications.isEmpty();
 			m_notifications.enqueue(n);
 
@@ -70,7 +72,9 @@ NotificationSystem::Notification NotificationSystem::getPendingNotification()
 	QMutexLocker lock(&m_notificationMutex);
 
 	while (m_notifications.empty())
+	{
 		m_notificationWaitCOndition.wait(&m_notificationMutex, 0);
+	}
 
 	return m_notifications.dequeue();
 }
@@ -78,7 +82,6 @@ NotificationSystem::Notification NotificationSystem::getPendingNotification()
 void NotificationSystem::dispatchNotifications()
 {
 	Notification notification = getPendingNotification();
-
 	QSystemTrayIcon::MessageIcon icon = gessIcon(notification.notificationType);
 	QBalloonTip::QBaloonType type = gessBaloonType(notification.notificationType);
 	QWidget* balloon = QBalloonTip::showBalloon("CuteTorrent", notification.message, type, notification.data, icon, m_defaultMessageDuration);
@@ -141,12 +144,14 @@ bool NotificationSystem::eventFilter(QObject* obj, QEvent* event)
 	if (event->type() == QEvent::Close)
 	{
 		m_isShwoingNotification = false;
+
 		if (! m_notifications.isEmpty())
 		{
 			m_notificationWaitCOndition.wakeAll();
 			QMetaObject::invokeMethod(this, "dispatchNotifications", Qt::QueuedConnection);
 		}
 	}
+
 	return false;
 }
 

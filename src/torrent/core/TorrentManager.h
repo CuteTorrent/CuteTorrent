@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "libtorrent/alert_types.hpp"
 #include "libtorrent/session.hpp"
 
+class QTemporaryFile;
 using boost::bind;
 using namespace libtorrent;
 
@@ -47,6 +48,7 @@ using namespace libtorrent;
 #include <QVariant>
 #include <QVector>
 #include <QMap>
+#include <QUrl>
 class QApplicationSettings;
 class QTorrentDisplayModel;
 class Torrent;
@@ -74,15 +76,16 @@ signals:
 	void OnFeedChanged();
 protected:
 	bool MoveFiles(QString oldStyleDirPath, QString newStyleDirPath);
-	
-	
+
+
 
 private:
 	TorrentManager();
-	
+
 #if LIBTORRENT_VERSION_NUM < 10000
-    upnp* m_pUpnp;
+	upnp* m_pUpnp;
 #endif
+	FileDownloaderPtr m_pFileDownloader;
 	int num_outstanding_resume_data;
 	bool m_bIsSaveSessionInitiated;
 	void handle_alert(alert*);
@@ -100,13 +103,14 @@ private:
 	NotificationSystemPtr m_pNotificationSys;
 	QMutex m_alertMutex;
 	QWaitCondition m_alertsWaitCondition;
-	QVector<alert *> m_alerts;
+	QVector<alert*> m_alerts;
 	void collectAlerts(std::auto_ptr<alert> a);
-	void getPendingAlerts(QVector<alert *> &out);
+	void getPendingAlerts(QVector<alert*>& out);
 private slots:
 	void dispatchPendingAlerts();
 public slots:
 	void RemoveTorrent(QString InfoHash, bool delFiles = false);
+	void OnDownloadReady(QUrl, QTemporaryFile*);
 public:
 	void SaveSession();
 	void RefreshExternalPeerSettings();
@@ -123,14 +127,14 @@ public:
 	std::vector<torrent_status> GetTorrents();
 	opentorrent_info* GetTorrentInfo(QString filename, error_code& ec);
 	openmagnet_info* GetTorrentInfo(const torrent_handle& handle);
-	
+
 	bool AddMagnet(torrent_handle h, QString SavePath, QString group = "", QMap< QString, quint8> filepriorities = QMap<QString, quint8>());
 	bool AddTorrent(QString path, QString name, QString save_path, error_code& ec, QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), QString group = "", bool sequntial = false);
 	~TorrentManager();
- #if LIBTORRENT_VERSION_NUM >= 10000
+#if LIBTORRENT_VERSION_NUM >= 10000
 	void AddPortMapping(session::protocol_type type, ushort sourcePoert, ushort destPort);
 #else
-    void AddPortMapping(upnp::protocol_type type, ushort sourcePoert, ushort destPort);
+	void AddPortMapping(upnp::protocol_type type, ushort sourcePoert, ushort destPort);
 #endif
 	torrent_handle ProcessMagnetLink(QString link, error_code& ec);
 	void CancelMagnetLink(QString link);

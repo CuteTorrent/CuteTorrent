@@ -10,23 +10,27 @@ FileSystemController::~FileSystemController()
 
 void FileSystemController::service(HttpRequest& request, HttpResponse& response)
 {
-	if (!CheckCreditinals(request,response))
+	if (!CheckCreditinals(request, response))
 	{
 		return;
 	}
 
 	QString method = request.getMethod();
+
 	if (method.compare("GET", Qt::CaseInsensitive) == 0)
 	{
 		QString currentPath = request.getParameter("currentPath");
 		currentPath = QUrl::fromPercentEncoding(currentPath.toUtf8());
 		QtJson::JsonArray respJson;
+
 		if (!currentPath.isEmpty())
 		{
 			QDir pathDir(currentPath);
+
 			if (pathDir.exists())
 			{
 				QStringList subdirsList = pathDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+
 				for (int i = 0; i < subdirsList.count(); i++)
 				{
 					QtJson::JsonObject dir;
@@ -45,7 +49,6 @@ void FileSystemController::service(HttpRequest& request, HttpResponse& response)
 		}
 		else
 		{
-
 			QList<QStorageInfo> volumes = QStorageInfo::mountedVolumes();
 
 			for (int i = 0; i < volumes.count(); i++)
@@ -58,6 +61,7 @@ void FileSystemController::service(HttpRequest& request, HttpResponse& response)
 				respJson.append(drive);
 			}
 		}
+
 		response.setHeader("Content-Type", "application/json");
 		response.write(QtJson::serialize(respJson));
 	}

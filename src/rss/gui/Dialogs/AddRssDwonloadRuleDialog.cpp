@@ -280,7 +280,7 @@ void AddRssDwonloadRuleDialog::onBrowseStaticPath()
 {
 	QString lastDir = QApplicationSettings::getInstance()->valueString("System", "LastSaveTorrentDir", QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation));
 	QString dir = QFileDialog::getExistingDirectory(this, tr("DIALOG_OPEN_DIR"),
-		lastDir,
-		QFileDialog::ShowDirsOnly
-		| QFileDialog::DontResolveSymlinks);
+	              lastDir,
+	              QFileDialog::ShowDirsOnly
+	              | QFileDialog::DontResolveSymlinks);
 }

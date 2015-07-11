@@ -48,158 +48,200 @@ QT_BEGIN_NAMESPACE
 
 void QStorageInfoPrivate::initRootPath()
 {
-    rootPath = QFileInfo(rootPath).canonicalFilePath();
+	QFileInfo fileInfo = QFileInfo(rootPath);
 
-    if (rootPath.isEmpty())
-        return;
+	if (fileInfo.exists())
+	{
+		rootPath = fileInfo.canonicalFilePath();
 
-    retrieveUrlProperties(true);
+		if (rootPath.isEmpty())
+		{
+			return;
+		}
+	}
+
+	retrieveUrlProperties(true);
 }
 
 void QStorageInfoPrivate::doStat()
 {
-    initRootPath();
+	initRootPath();
 
-    if (rootPath.isEmpty())
-        return;
+	if (rootPath.isEmpty())
+	{
+		return;
+	}
 
-    retrieveLabel();
-    retrievePosixInfo();
-    retrieveUrlProperties();
+	retrieveLabel();
+	retrievePosixInfo();
+	retrieveUrlProperties();
 }
 
 void QStorageInfoPrivate::retrievePosixInfo()
 {
-    QT_STATFSBUF statfs_buf;
-    int result = QT_STATFS(QFile::encodeName(rootPath).constData(), &statfs_buf);
-    if (result == 0) {
-        device = QByteArray(statfs_buf.f_mntfromname);
-        readOnly = (statfs_buf.f_flags & MNT_RDONLY) != 0;
-        fileSystemType = QByteArray(statfs_buf.f_fstypename);
-    }
+	QT_STATFSBUF statfs_buf;
+	int result = QT_STATFS(QFile::encodeName(rootPath).constData(), &statfs_buf);
+
+	if (result == 0)
+	{
+		device = QByteArray(statfs_buf.f_mntfromname);
+		readOnly = (statfs_buf.f_flags & MNT_RDONLY) != 0;
+		fileSystemType = QByteArray(statfs_buf.f_fstypename);
+	}
 }
 
-static inline qint64 CFDictionaryGetInt64(CFDictionaryRef dictionary, const void *key)
+static inline qint64 CFDictionaryGetInt64(CFDictionaryRef dictionary, const void* key)
 {
-    CFNumberRef cfNumber = (CFNumberRef)CFDictionaryGetValue(dictionary, key);
-    if (!cfNumber)
-        return -1;
-    qint64 result;
-    bool ok = CFNumberGetValue(cfNumber, kCFNumberSInt64Type, &result);
-    if (!ok)
-        return -1;
-    return result;
+	CFNumberRef cfNumber = (CFNumberRef)CFDictionaryGetValue(dictionary, key);
+
+	if (!cfNumber)
+	{
+		return -1;
+	}
+
+	qint64 result;
+	bool ok = CFNumberGetValue(cfNumber, kCFNumberSInt64Type, &result);
+
+	if (!ok)
+	{
+		return -1;
+	}
+
+	return result;
 }
 
 void QStorageInfoPrivate::retrieveUrlProperties(bool initRootPath)
 {
-    static const void *rootPathKeys[] = { kCFURLVolumeURLKey };
-    static const void *propertyKeys[] = {
-        // kCFURLVolumeNameKey, // 10.7
-        // kCFURLVolumeLocalizedNameKey, // 10.7
-        kCFURLVolumeTotalCapacityKey,
-        kCFURLVolumeAvailableCapacityKey,
-        // kCFURLVolumeIsReadOnlyKey // 10.7
-    };
-    size_t size = (initRootPath ? sizeof(rootPathKeys) : sizeof(propertyKeys)) / sizeof(void*);
-    QCFType<CFArrayRef> keys = CFArrayCreate(kCFAllocatorDefault,
-                                             initRootPath ? rootPathKeys : propertyKeys,
-                                             size,
-                                             Q_NULLPTR);
+	static const void* rootPathKeys[] = { kCFURLVolumeURLKey };
+	static const void* propertyKeys[] =
+	{
+		// kCFURLVolumeNameKey, // 10.7
+		// kCFURLVolumeLocalizedNameKey, // 10.7
+		kCFURLVolumeTotalCapacityKey,
+		kCFURLVolumeAvailableCapacityKey,
+		// kCFURLVolumeIsReadOnlyKey // 10.7
+	};
+	size_t size = (initRootPath ? sizeof(rootPathKeys) : sizeof(propertyKeys)) / sizeof(void*);
+	QCFType<CFArrayRef> keys = CFArrayCreate(kCFAllocatorDefault,
+	                           initRootPath ? rootPathKeys : propertyKeys,
+	                           size,
+	                           Q_NULLPTR);
 
-    if (!keys)
-        return;
+	if (!keys)
+	{
+		return;
+	}
 
-    const QCFString cfPath = rootPath;
-    if (initRootPath)
-        rootPath.clear();
+	const QCFString cfPath = rootPath;
 
-    QCFType<CFURLRef> url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault,
-                                                          cfPath,
-                                                          kCFURLPOSIXPathStyle,
-                                                          true);
-    if (!url)
-        return;
+	if (initRootPath)
+	{
+		rootPath.clear();
+	}
 
-    CFErrorRef error;
-    QCFType<CFDictionaryRef> map = CFURLCopyResourcePropertiesForKeys(url, keys, &error);
+	QCFType<CFURLRef> url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault,
+	                        cfPath,
+	                        kCFURLPOSIXPathStyle,
+	                        true);
 
-    if (!map)
-        return;
+	if (!url)
+	{
+		return;
+	}
 
-    if (initRootPath) {
-        const CFURLRef rootUrl = (CFURLRef)CFDictionaryGetValue(map, kCFURLVolumeURLKey);
-        if (!rootUrl)
-            return;
+	CFErrorRef error;
+	QCFType<CFDictionaryRef> map = CFURLCopyResourcePropertiesForKeys(url, keys, &error);
 
-        rootPath = QCFString(CFURLCopyFileSystemPath(rootUrl, kCFURLPOSIXPathStyle));
-        valid = true;
-        ready = true;
+	if (!map)
+	{
+		return;
+	}
 
-        return;
-    }
+	if (initRootPath)
+	{
+		const CFURLRef rootUrl = (CFURLRef)CFDictionaryGetValue(map, kCFURLVolumeURLKey);
 
-    bytesTotal = CFDictionaryGetInt64(map, kCFURLVolumeTotalCapacityKey);
-    bytesAvailable = CFDictionaryGetInt64(map, kCFURLVolumeAvailableCapacityKey);
-    bytesFree = bytesAvailable;
+		if (!rootUrl)
+		{
+			return;
+		}
+
+		rootPath = QCFString(CFURLCopyFileSystemPath(rootUrl, kCFURLPOSIXPathStyle));
+		valid = true;
+		ready = true;
+		return;
+	}
+
+	bytesTotal = CFDictionaryGetInt64(map, kCFURLVolumeTotalCapacityKey);
+	bytesAvailable = CFDictionaryGetInt64(map, kCFURLVolumeAvailableCapacityKey);
+	bytesFree = bytesAvailable;
 }
 
 void QStorageInfoPrivate::retrieveLabel()
 {
 #if !defined(Q_OS_IOS)
-    // deprecated since 10.8
-    FSRef ref;
-    FSPathMakeRef(reinterpret_cast<const UInt8*>(QFile::encodeName(rootPath).constData()),
-                  &ref,
-                  Q_NULLPTR);
+	// deprecated since 10.8
+	FSRef ref;
+	FSPathMakeRef(reinterpret_cast<const UInt8*>(QFile::encodeName(rootPath).constData()),
+	              &ref,
+	              Q_NULLPTR);
+	// deprecated since 10.8
+	FSCatalogInfo catalogInfo;
+	OSErr error;
+	error = FSGetCatalogInfo(&ref, kFSCatInfoVolume, &catalogInfo, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 
-    // deprecated since 10.8
-    FSCatalogInfo catalogInfo;
-    OSErr error;
-    error = FSGetCatalogInfo(&ref, kFSCatInfoVolume, &catalogInfo, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-    if (error != noErr)
-        return;
+	if (error != noErr)
+	{
+		return;
+	}
 
-    // deprecated (use CFURLCopyResourcePropertiesForKeys for 10.7 and higher)
-    HFSUniStr255 volumeName;
-    error = FSGetVolumeInfo(catalogInfo.volume,
-                            0,
-                            Q_NULLPTR,
-                            kFSVolInfoFSInfo,
-                            Q_NULLPTR,
-                            &volumeName,
-                            Q_NULLPTR);
-    if (error == noErr)
-        name = QCFString(FSCreateStringFromHFSUniStr(Q_NULLPTR, &volumeName));
+	// deprecated (use CFURLCopyResourcePropertiesForKeys for 10.7 and higher)
+	HFSUniStr255 volumeName;
+	error = FSGetVolumeInfo(catalogInfo.volume,
+	                        0,
+	                        Q_NULLPTR,
+	                        kFSVolInfoFSInfo,
+	                        Q_NULLPTR,
+	                        &volumeName,
+	                        Q_NULLPTR);
+
+	if (error == noErr)
+	{
+		name = QCFString(FSCreateStringFromHFSUniStr(Q_NULLPTR, &volumeName));
+	}
+
 #endif
 }
 
 QList<QStorageInfo> QStorageInfoPrivate::mountedVolumes()
 {
-    QList<QStorageInfo> volumes;
+	QList<QStorageInfo> volumes;
+	QCFType<CFURLEnumeratorRef> enumerator;
+	enumerator = CFURLEnumeratorCreateForMountedVolumes(Q_NULLPTR,
+	             kCFURLEnumeratorSkipInvisibles,
+	             Q_NULLPTR);
+	CFURLEnumeratorResult result = kCFURLEnumeratorSuccess;
 
-    QCFType<CFURLEnumeratorRef> enumerator;
-    enumerator = CFURLEnumeratorCreateForMountedVolumes(Q_NULLPTR,
-                                                        kCFURLEnumeratorSkipInvisibles,
-                                                        Q_NULLPTR);
+	do
+	{
+		CFURLRef url;
+		CFErrorRef error;
+		result = CFURLEnumeratorGetNextURL(enumerator, &url, &error);
 
-    CFURLEnumeratorResult result = kCFURLEnumeratorSuccess;
-    do {
-        CFURLRef url;
-        CFErrorRef error;
-        result = CFURLEnumeratorGetNextURL(enumerator, &url, &error);
-        if (result == kCFURLEnumeratorSuccess) {
-            const QCFString urlString = CFURLCopyFileSystemPath(url, kCFURLPOSIXPathStyle);
-            volumes.append(QStorageInfo(urlString));
-        }
-    } while (result != kCFURLEnumeratorEnd);
+		if (result == kCFURLEnumeratorSuccess)
+		{
+			const QCFString urlString = CFURLCopyFileSystemPath(url, kCFURLPOSIXPathStyle);
+			volumes.append(QStorageInfo(urlString));
+		}
+	}
+	while (result != kCFURLEnumeratorEnd);
 
-    return volumes;
+	return volumes;
 }
 
 QStorageInfo QStorageInfoPrivate::root()
 {
-    return QStorageInfo(QStringLiteral("/"));
+	return QStorageInfo(QStringLiteral("/"));
 }
 
 QT_END_NAMESPACE

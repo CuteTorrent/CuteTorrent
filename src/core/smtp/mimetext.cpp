@@ -20,12 +20,12 @@
 
 /* [1] Constructors and Destructors */
 
-MimeText::MimeText(const QString &txt)
+MimeText::MimeText(const QString& txt)
 {
-    this->text = txt;
-    this->cType = "text/plain";
-    this->cCharset = "utf-8";
-    this->cEncoding = _8Bit;
+	this->text = txt;
+	this->cType = "text/plain";
+	this->cCharset = "utf-8";
+	this->cEncoding = _8Bit;
 }
 
 MimeText::~MimeText() { }
@@ -35,14 +35,14 @@ MimeText::~MimeText() { }
 
 /* [2] Getters and Setters */
 
-void MimeText::setText(const QString & text)
+void MimeText::setText(const QString& text)
 {
-    this->text = text;
+	this->text = text;
 }
 
-const QString & MimeText::getText() const
+const QString& MimeText::getText() const
 {
-    return text;
+	return text;
 }
 
 /* [2] --- */
@@ -50,8 +50,9 @@ const QString & MimeText::getText() const
 
 /* [3] Protected Methods */
 
-void MimeText::writeContent(QIODevice &device) const {
-    MimePart::writeContent(device, text.toLocal8Bit());
+void MimeText::writeContent(QIODevice& device) const
+{
+	MimePart::writeContent(device, text.toLocal8Bit());
 }
 
 /* [3] --- */

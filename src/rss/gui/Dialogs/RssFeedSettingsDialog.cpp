@@ -37,12 +37,12 @@ void RssFeedSettingsDialog::accept()
 	m_pFeed->setTll(m_pRefreshRateSpinBox->value());
 	QHash<QString, QString> cookies;
 	QModelIndex index = m_pCoociesTabWidget->currentIndex();
+
 	if (index.isValid())
 	{
 		m_pCoociesTabWidget->clearFocus();
 	}
-	
-	
+
 	for (int i = 0; i < m_pCoociesTabWidget->rowCount(); i++)
 	{
 		QTableWidgetItem* keyItem = m_pCoociesTabWidget->item(i, 0);
@@ -113,6 +113,7 @@ void RssFeedSettingsDialog::FillInData()
 	m_pRefreshRateSpinBox->setValue(m_pFeed->ttl());
 	QList<QNetworkCookie> cookies = m_pFeed->coookies();
 	m_pCoociesTabWidget->setRowCount(cookies.size());
+
 	for (int i = 0; i < cookies.size(); i++)
 	{
 		QNetworkCookie cookie = cookies[i];

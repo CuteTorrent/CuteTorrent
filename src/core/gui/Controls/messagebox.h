@@ -8,7 +8,7 @@
 class CustomMessageBox : public BaseWindow<QDialog>
 {
 	Q_OBJECT
-    Q_DISABLE_COPY(CustomMessageBox)
+	Q_DISABLE_COPY(CustomMessageBox)
 private:
 
 	QPixmap standardIcon(QMessageBox::Icon icon);
@@ -17,7 +17,7 @@ private:
 	bool isClosed;
 	QMessageBox::StandardButton cancelButton;
 protected:
-	void showEvent(QShowEvent *event) override;
+	void showEvent(QShowEvent* event) override;
 
 public:
 	explicit CustomMessageBox(QWidget* parent = 0);

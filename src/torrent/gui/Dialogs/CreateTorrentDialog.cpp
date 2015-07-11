@@ -52,7 +52,13 @@ CreateTorrentDialog::CreateTorrentDialog(QWidget* parent, Qt::WindowFlags) : Bas
 	m_pTorrentManager = TorrentManager::getInstance();
 	StyleEngene* style = StyleEngene::getInstance();
 	connect(style, SIGNAL(styleChanged()), this, SLOT(setupWindowIcons()));
-	
+	QCompleter* pathComplitter = new QCompleter(this);
+	m_compliterModel = new QFileSystemModel(pathComplitter);
+	m_compliterModel->setRootPath("");
+	pathComplitter->setModel(m_compliterModel);
+	pathComplitter->setCaseSensitivity(Qt::CaseInsensitive);
+	pathComplitter->setCompletionMode(QCompleter::PopupCompletion);
+	pathEdit->setCompleter(pathComplitter);
 }
 
 
@@ -269,7 +275,6 @@ void CreateTorrentDialog::BeginCreate()
 		QObject::connect(creator, SIGNAL(ShowCreationSucces(QString)), this, SLOT(ShowCreationSucces(QString)));
 		QObject::connect(creator, SIGNAL(ShowCreationFailture(QString)), this, SLOT(ShowCreationFailture(QString)));
 		QObject::connect(this, SIGNAL(AbortCreation()), creator, SLOT(terminate()));
-		
 		creator->create(pathEdit->text(), save_path, filterEdit->text(), trackers, webseeds, discribtionEdit->text(), privateCheckBox->isChecked(), getPiceSize() * KbInt);
 	}
 	else
@@ -284,7 +289,6 @@ void CreateTorrentDialog::Cancel()
 #endif
 	emit AbortCreation();
 	close();
-
 }
 
 void CreateTorrentDialog::ShowCreationSucces(QString filename)

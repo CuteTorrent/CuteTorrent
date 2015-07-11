@@ -7,17 +7,17 @@
 class MimeContentFormatter : public QIODevice
 {
 public:
-    MimeContentFormatter(QIODevice *device, int lineLength = 76);
+	MimeContentFormatter(QIODevice* device, int lineLength = 76);
 
-    int getLineLength() const;
-    void setLineLength(int l);
+	int getLineLength() const;
+	void setLineLength(int l);
 
 protected:
-    qint64 readData(char *data, qint64 maxlen);
-    qint64 writeData(const char *data, qint64 len) = 0;
+	qint64 readData(char* data, qint64 maxlen);
+	qint64 writeData(const char* data, qint64 len) = 0;
 
-    QIODevice *output;
-    int lineLength;
+	QIODevice* output;
+	int lineLength;
 };
 
 #endif // MIMECONTENTFORMATTER_H

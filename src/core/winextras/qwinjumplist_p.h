@@ -42,47 +42,47 @@ QT_BEGIN_NAMESPACE
 
 class QWinJumpListPrivate
 {
-    Q_DECLARE_PUBLIC(QWinJumpList)
+	Q_DECLARE_PUBLIC(QWinJumpList)
 
 public:
-    QWinJumpListPrivate();
+	QWinJumpListPrivate();
 
-    static QWinJumpListPrivate *get(QWinJumpList *list)
-    {
-        return list->d_func();
-    }
+	static QWinJumpListPrivate* get(QWinJumpList* list)
+	{
+		return list->d_func();
+	}
 
-    static void warning(const char *function, HRESULT hresult);
-    static QString iconsDirPath();
+	static void warning(const char* function, HRESULT hresult);
+	static QString iconsDirPath();
 
-    void invalidate();
-    void _q_rebuild();
-    void destroy();
+	void invalidate();
+	void _q_rebuild();
+	void destroy();
 
-    bool beginList();
-    bool commitList();
+	bool beginList();
+	bool commitList();
 
-    void appendKnownCategory(KNOWNDESTCATEGORY category);
-    void appendCustomCategory(QWinJumpListCategory *category);
-    void appendTasks(const QList<QWinJumpListItem *> &items);
+	void appendKnownCategory(KNOWNDESTCATEGORY category);
+	void appendCustomCategory(QWinJumpListCategory* category);
+	void appendTasks(const QList<QWinJumpListItem*>& items);
 
-    static QList<QWinJumpListItem *> fromComCollection(IObjectArray *array);
-    static IObjectCollection *toComCollection(const QList<QWinJumpListItem *> &list);
-    static QWinJumpListItem *fromIShellLink(IShellLinkW *link);
-    static QWinJumpListItem *fromIShellItem(IShellItem2 *shellitem);
-    static IUnknown *toICustomDestinationListItem(const QWinJumpListItem *item);
-    static IShellLinkW *toIShellLink(const QWinJumpListItem *item);
-    static IShellItem2 *toIShellItem(const QWinJumpListItem *item);
-    static IShellLinkW *makeSeparatorShellItem();
+	static QList<QWinJumpListItem*> fromComCollection(IObjectArray* array);
+	static IObjectCollection* toComCollection(const QList<QWinJumpListItem*>& list);
+	static QWinJumpListItem* fromIShellLink(IShellLinkW* link);
+	static QWinJumpListItem* fromIShellItem(IShellItem2* shellitem);
+	static IUnknown* toICustomDestinationListItem(const QWinJumpListItem* item);
+	static IShellLinkW* toIShellLink(const QWinJumpListItem* item);
+	static IShellItem2* toIShellItem(const QWinJumpListItem* item);
+	static IShellLinkW* makeSeparatorShellItem();
 
-    QWinJumpList *q_ptr;
-    ICustomDestinationList *pDestList;
-    QWinJumpListCategory *recent;
-    QWinJumpListCategory *frequent;
-    QWinJumpListCategory *tasks;
-    QList<QWinJumpListCategory *> categories;
-    QString identifier;
-    bool dirty;
+	QWinJumpList* q_ptr;
+	ICustomDestinationList* pDestList;
+	QWinJumpListCategory* recent;
+	QWinJumpListCategory* frequent;
+	QWinJumpListCategory* tasks;
+	QList<QWinJumpListCategory*> categories;
+	QString identifier;
+	bool dirty;
 };
 
 QT_END_NAMESPACE

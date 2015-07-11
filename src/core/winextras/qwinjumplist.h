@@ -48,31 +48,31 @@ class QWinJumpListCategory;
 
 class  QWinJumpList : public QObject
 {
-    Q_OBJECT
-    Q_PROPERTY(QString identifier READ identifier WRITE setIdentifier)
+	Q_OBJECT
+	Q_PROPERTY(QString identifier READ identifier WRITE setIdentifier)
 
 public:
-    explicit QWinJumpList(QObject *parent = 0);
-    ~QWinJumpList();
+	explicit QWinJumpList(QObject* parent = 0);
+	~QWinJumpList();
 
-    QString identifier() const;
-    void setIdentifier(const QString &identifier);
+	QString identifier() const;
+	void setIdentifier(const QString& identifier);
 
-    QWinJumpListCategory *recent() const;
-    QWinJumpListCategory *frequent() const;
-    QWinJumpListCategory *tasks() const;
+	QWinJumpListCategory* recent() const;
+	QWinJumpListCategory* frequent() const;
+	QWinJumpListCategory* tasks() const;
 
-    QList<QWinJumpListCategory *> categories() const;
-    void addCategory(QWinJumpListCategory *category);
-    QWinJumpListCategory *addCategory(const QString &title, const QList<QWinJumpListItem *> items = QList<QWinJumpListItem *>());
+	QList<QWinJumpListCategory*> categories() const;
+	void addCategory(QWinJumpListCategory* category);
+	QWinJumpListCategory* addCategory(const QString& title, const QList<QWinJumpListItem*> items = QList<QWinJumpListItem*>());
 
 public Q_SLOTS:
-    void clear();
+	void clear();
 
 private:
-    Q_DISABLE_COPY(QWinJumpList)
-    Q_DECLARE_PRIVATE(QWinJumpList)
-    QScopedPointer<QWinJumpListPrivate> d_ptr;
+	Q_DISABLE_COPY(QWinJumpList)
+	Q_DECLARE_PRIVATE(QWinJumpList)
+	QScopedPointer<QWinJumpListPrivate> d_ptr;
 private slots:
 	void _q_rebuild();
 };

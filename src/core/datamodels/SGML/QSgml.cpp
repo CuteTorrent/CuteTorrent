@@ -387,6 +387,7 @@ QList<QSgmlTag*> QSgml::getElementsByName(QString Name)
 
 		Tag = &Tag->getNextElement();
 	}
+
 	return Elements;
 }
 
@@ -406,6 +407,7 @@ QList<QSgmlTag*> QSgml::getElementsByName(QString Name, QString AtrName)
 
 		Tag = &Tag->getNextElement();
 	}
+
 	return Elements;
 }
 
@@ -425,6 +427,7 @@ QList<QSgmlTag*> QSgml::getElementsByName(QString Name, QString AtrName, QString
 
 		Tag = &Tag->getNextElement();
 	}
+
 	return Elements;
 }
 
@@ -444,6 +447,7 @@ QList<QSgmlTag*> QSgml::getElementsByAtribute(QString AtrName)
 
 		Tag = &Tag->getNextElement();
 	}
+
 	return Elements;
 }
 
@@ -466,6 +470,7 @@ QList<QSgmlTag*> QSgml::getElementsByAtribute(QString AtrName, QString AtrValue)
 
 		Tag = &Tag->getNextElement();
 	}
+
 	return Elements;
 }
 

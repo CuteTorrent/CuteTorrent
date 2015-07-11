@@ -10,38 +10,41 @@
 boost::weak_ptr<SearchEngine> SearchEngine::m_pInstance;
 
 
-QScriptValue SearchEngine::searchProviderCtor(QScriptContext *context, QScriptEngine *engine)
+QScriptValue SearchEngine::searchProviderCtor(QScriptContext* context, QScriptEngine* engine)
 {
-	CustomScriptSearchProvider *object = new CustomScriptSearchProvider();
+	CustomScriptSearchProvider* object = new CustomScriptSearchProvider();
 	QScriptValue scriptValue = engine->newQObject(object);
 	object->setScriptObject(scriptValue);
 	return scriptValue;
 }
 
-QScriptValue SearchEngine::searchResultCtor(QScriptContext *context, QScriptEngine *engine)
+QScriptValue SearchEngine::searchResultCtor(QScriptContext* context, QScriptEngine* engine)
 {
-	SearchResult *object = new SearchResult();
+	SearchResult* object = new SearchResult();
 	return engine->newQObject(object);
 }
 
 
-QScriptValue SearchEngine::listSearchResToScriptVal(QScriptEngine* engine, const QList<SearchResult*> &list)
+QScriptValue SearchEngine::listSearchResToScriptVal(QScriptEngine* engine, const QList<SearchResult*>& list)
 {
 	int len = list.length();
 	QScriptValue val = engine->newArray(len);
-	for (int i = 0; i<len; i++)
+
+	for (int i = 0; i < len; i++)
 	{
 		val.setProperty(QString::number(i), engine->newQObject(list[i]));
 	}
+
 	return val;
 }
 
 
-void SearchEngine::listSearchResFromScriptVal(const QScriptValue &value, QList<SearchResult*> &list)
+void SearchEngine::listSearchResFromScriptVal(const QScriptValue& value, QList<SearchResult*>& list)
 {
 	int len = value.property("length").toInt32();
 	list.reserve(len);
-	for (int i = 0; i< len; i++)
+
+	for (int i = 0; i < len; i++)
 	{
 		list.append(qobject_cast<SearchResult*>(value.property(QString::number(i)).toQObject()));
 	}
@@ -51,10 +54,12 @@ QScriptValue SearchEngine::listSgmTagsToScriptVal(QScriptEngine* engine, const Q
 {
 	int len = list.length();
 	QScriptValue val = engine->newArray(len);
-	for (int i = 0; i<len; i++)
+
+	for (int i = 0; i < len; i++)
 	{
 		val.setProperty(QString::number(i), engine->newQObject(list[i]));
 	}
+
 	return val;
 }
 
@@ -62,13 +67,14 @@ void SearchEngine::listSgmlTagsFromScriptVal(const QScriptValue& value, QList<QS
 {
 	int len = value.property("length").toInt32();
 	list.reserve(len);
-	for (int i = 0; i< len; i++)
+
+	for (int i = 0; i < len; i++)
 	{
 		list.append(qobject_cast<QSgmlTag*>(value.property(QString::number(i)).toQObject()));
 	}
 }
 
-QScriptValue SearchEngine::sgmTagToScriptVal(QScriptEngine* engine, QSgmlTag* const &sgmlTag)
+QScriptValue SearchEngine::sgmTagToScriptVal(QScriptEngine* engine, QSgmlTag* const& sgmlTag)
 {
 	return engine->newQObject(sgmlTag);
 }
@@ -91,7 +97,6 @@ void SearchEngine::initScriptEngine()
 	m_scriptEngine->globalObject().setProperty("SearchResult", searchResultMetaObject);
 	m_scriptEngine->globalObject().setProperty("CustomScriptSearchProvider", searchProviderMetaObject);
 	m_scriptEngine->globalObject().setProperty("Enums", searchProviderMetaObject);
-
 #if !defined(QT_NO_SCRIPTTOOLS)
 	/*QScriptEngineDebugger* debugger = new QScriptEngineDebugger(this);
 	debugger->attachTo(m_scriptEngine);
@@ -108,7 +113,6 @@ SearchEngine::SearchEngine() : m_scriptDebugger(NULL), m_debuggerWindow(NULL), m
 	m_scriptEngine = new QScriptEngine(this);
 	initScriptEngine();
 	init();
-
 	m_result = SearchItemsStorrage::getInstance();
 }
 
@@ -127,22 +131,24 @@ void SearchEngine::loadSearchProvider(const QString path)
 		searchSettings.endGroup();
 		QString scriptFileName = StaticHelpers::CombinePathes(path, info.ScriptName);
 		QFile scriptFile(scriptFileName);
+
 		if (scriptFile.open(QIODevice::ReadOnly))
 		{
 			m_scriptEngine->evaluate(scriptFile.readAll(), scriptFileName);
 			QScriptValue jsSearchProvider = m_scriptEngine->globalObject().property(info.GlobalName);
+
 			if (jsSearchProvider.isObject() && jsSearchProvider.isValid())
 			{
 				CustomScriptSearchProvider* provider = qobject_cast<CustomScriptSearchProvider*>(jsSearchProvider.toQObject());
+
 				if (provider != NULL)
 				{
 					m_pSearchProviders.append(provider);
 					provider->setIcon(QIcon(StaticHelpers::CombinePathes(path, info.IconName)));
 					connect(provider, SIGNAL(SearchReady(QList<SearchResult*>)), SLOT(OnSearchReady(QList<SearchResult*>)));
 				}
-				
-
 			}
+
 			scriptFile.close();
 		}
 	}
@@ -150,7 +156,6 @@ void SearchEngine::loadSearchProvider(const QString path)
 
 void SearchEngine::init()
 {
-
 #ifdef Q_WS_WIN
 	QString rootPath = QApplication::applicationDirPath() + "/searchEngines/";
 #endif
@@ -176,15 +181,15 @@ void SearchEngine::init()
 
 SearchEnginePtr SearchEngine::getInstance()
 {
-    SearchEnginePtr instance = m_pInstance.lock();
+	SearchEnginePtr instance = m_pInstance.lock();
 
-    if (!instance)
-    {
-        instance.reset(new SearchEngine());
-        m_pInstance = instance;
-    }
+	if (!instance)
+	{
+		instance.reset(new SearchEngine());
+		m_pInstance = instance;
+	}
 
-    return instance;
+	return instance;
 }
 
 SearchEngine::~SearchEngine()
@@ -197,9 +202,9 @@ void SearchEngine::DoSerach(QString& token, ISerachProvider::SearchCategories ca
 {
 	m_result->clear();
 
-    for (int i = 0; i< m_pSearchProviders.size(); i++)
-    {
-        ISerachProvider* searchProvider = m_pSearchProviders[i];
+	for (int i = 0; i < m_pSearchProviders.size(); i++)
+	{
+		ISerachProvider* searchProvider = m_pSearchProviders[i];
 		searchProvider->PeformSearch(token, category, page);
 	}
 }
@@ -223,10 +228,8 @@ QList<ISerachProvider*> SearchEngine::GetSearchProviders()
 void SearchEngine::enableScriptDebugging()
 {
 	m_scriptDebugingEnabled = true;
-
 	m_scriptDebugger = new QScriptEngineDebugger(this);
 	m_scriptDebugger->attachTo(m_scriptEngine);
-
 	m_debuggerWindow = m_scriptDebugger->standardWindow();
 	m_debuggerWindow->resize(1024, 640);
 	m_debuggerWindow->show();

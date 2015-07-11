@@ -733,7 +733,7 @@ Are you shure?</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="974"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1421"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1423"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="477"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="481"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="485"/>
@@ -762,7 +762,7 @@ Are you shure?</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="993"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1425"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1427"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="719"/>
         <source>MENU_CONFIGURATION</source>
         <translation>Configuration</translation>
@@ -1126,40 +1126,40 @@ If you have paid money for this software demand a refund</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="201"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="202"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="615"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="616"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="617"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="618"/>
         <source>STATUS_DWONLOAD</source>
         <translation>Downloaded(Download speed)</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="203"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="204"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="617"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="618"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="619"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="620"/>
         <source>STATUS_UPLOAD</source>
         <translation>Uloaded(Upload speed)</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="244"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="621"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="623"/>
         <source>ADD_TRACKER</source>
         <translation>Add tracker</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="246"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="622"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="624"/>
         <source>REMOVE_TRACKER</source>
         <translation>Remove tracker</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="248"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="623"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="625"/>
         <source>EDIT_TRACKER</source>
         <translation>Edit tracker</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="271"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="624"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="626"/>
         <source>ADD_PEER</source>
         <translation>Add peer</translation>
     </message>
@@ -1170,83 +1170,83 @@ If you have paid money for this software demand a refund</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="300"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="638"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="640"/>
         <source>ANIME_CATEGORY</source>
         <translation>Anime</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="301"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="639"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="641"/>
         <source>MUSIC_CATEGORY</source>
         <translation>Music</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="302"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="640"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="642"/>
         <source>TV_CATEGORY</source>
         <translation>TV</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="303"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="641"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="643"/>
         <source>PORN_CATEGORY</source>
         <translation>Adult video</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="304"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="642"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="644"/>
         <source>APP_CATEGORY</source>
         <translation>Software</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="305"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="643"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="645"/>
         <source>GAMES_CATEGORY</source>
         <translation>Games</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="306"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="644"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="646"/>
         <source>BOOKS_CATEGORY</source>
         <translation>Books</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="307"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="645"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="647"/>
         <source>FILMS_CATEGORY</source>
         <translation>Video</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="308"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="646"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="648"/>
         <source>ALL_CATEGORY</source>
         <translation>All</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="319"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="321"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="648"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="649"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="650"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="651"/>
         <source>Search</source>
         <translation>Search</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="331"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="332"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="632"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="633"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="634"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="635"/>
         <source>None</source>
         <translation>None</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="338"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="619"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="621"/>
         <source>LIMIT_UL</source>
         <translation>Upload Limit</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="340"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="620"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="622"/>
         <source>LIMIT_DL</source>
         <translation>Download Limit</translation>
     </message>
@@ -1263,176 +1263,176 @@ Download: %3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="610"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="707"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="612"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="709"/>
         <source>ACTION_HIDE</source>
         <translation>Minimize</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="611"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="710"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="613"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="712"/>
         <source>ACTION_MAXIMIZE_FULLSCREEN</source>
         <translation>Maximze to full screen</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="612"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="713"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="614"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="715"/>
         <source>ACTION_MAXIMIZE</source>
         <translation>Maximize</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="613"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="716"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="615"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="718"/>
         <source>ACTION_EXIT</source>
         <translation>Exit</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="614"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="719"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="616"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="721"/>
         <source>ACTION_COPY</source>
         <translation>Copy</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="625"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1342"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="627"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1344"/>
         <source>TORRENTS_ACTIVITY</source>
         <translation>Torrents</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="626"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1347"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="628"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1349"/>
         <source>DOWNLOADING_FLTR</source>
         <translation>Downloading</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="627"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1352"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="629"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1354"/>
         <source>SEEDING_FLTR</source>
         <translation>Seeding</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="628"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1357"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="630"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1359"/>
         <source>COMPLETED_FLTR</source>
         <translation>Completed</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="629"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1362"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="631"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1364"/>
         <source>ACTIVE_FLTR</source>
         <translation>Active</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="630"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1367"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="632"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1369"/>
         <source>NOT_ACTIVE_FLTR</source>
         <translation>Not active</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="631"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1371"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="633"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1373"/>
         <source>TORRENT_GROUPS</source>
         <translation>Groups</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="776"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="778"/>
         <source>OPEN_TOORENT_DIALOG</source>
         <translation>Choose a torrent file</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="777"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="779"/>
         <source>TORRENT_FILES (*.torrent);;Any File (*.*)</source>
         <translation>Torrent files (*.torrent);;Any File (*.*)</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="953"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="955"/>
         <source>TRACKER_UPDATING</source>
         <translation>Updating...</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1057"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1059"/>
         <source>UNABLE_TO_PROCESS_FILE</source>
         <translation>Unable to precess file</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1057"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1059"/>
         <source>DROPPED_FILE %1 IS_NOT_TORRENT_OR_MAGNET_LINK</source>
         <translation>Dropped element %1 is not a torrent or Magnet link.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1138"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1140"/>
         <source>MAGNET_LINK_DLG</source>
         <translation>Magnet-link</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1138"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1140"/>
         <source>MAGNET_LINK:</source>
         <translation>Magnet-link:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1286"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1288"/>
         <source>ADD_PEER_DLG</source>
         <translation>Adding a peer</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1286"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1288"/>
         <source>PEER:</source>
         <translation>Peer:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1303"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1305"/>
         <source>PEER_ERR</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1303"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1305"/>
         <source>INVALID_IP_STRING</source>
         <translation>Invalid ip string</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1315"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1317"/>
         <source>ADD_TRACKER_DLG</source>
         <translation>Adding a tracker</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1315"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1815"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1317"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1817"/>
         <source>TRACKER:</source>
         <translation>Tracker:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1389"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1391"/>
         <source>RSS_CHANELS</source>
         <translation>RSS-chanels</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1393"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1395"/>
         <source>TAB_SEARCH</source>
         <translation>Search</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1815"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1831"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1817"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1833"/>
         <source>EDIT_TRACKER_DLG</source>
         <translation>Tracker editing</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1831"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1833"/>
         <source>HTTP_SEED_URL:</source>
         <translation>Web seed:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1845"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1847"/>
         <source>RSS_FEED_ADD</source>
         <translation>Adding Rss-feed</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1845"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1847"/>
         <source>RSS_FEED_URL:</source>
         <translation>Rss-feed URL:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1942"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1944"/>
         <source>INVALID_COMMAND_RECIVED</source>
         <translation>Invalid IPC command recived.</translation>
     </message>
@@ -1463,12 +1463,12 @@ Download: %3</source>
 <context>
     <name>DateTime</name>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="118"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="119"/>
         <source>%1 WEEK </source>
         <translation>%1 weeks </translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="123"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="124"/>
         <source>%1 DAY </source>
         <translation>%1 days </translation>
     </message>
@@ -1476,975 +1476,989 @@ Download: %3</source>
 <context>
     <name>ErrorMsg</name>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="248"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="446"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="462"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="486"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="525"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="249"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="447"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="463"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="487"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="526"/>
         <source>no error</source>
         <translation>No error</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="249"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="250"/>
         <source>torrent file collides with file from another torrent</source>
         <translation>Torrent file collides with file from another torrent</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="250"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="251"/>
         <source>hash check failed</source>
         <translation>Hash check failed</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="251"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="252"/>
         <source>torrent file is not a dictionary</source>
         <translation>Torrent file is not a dictionary</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="252"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="253"/>
         <source>missing or invalid &apos;info&apos; section in torrent file</source>
         <translation>Missing or invalid &apos;info&apos; section in torrent file</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="253"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="254"/>
         <source>&apos;info&apos; entry is not a dictionary</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="254"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="255"/>
         <source>invalid or missing &apos;piece length&apos; entry in torrent file</source>
         <translation>Invalid or missing &apos;piece length&apos; entry in torrent file</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="255"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="256"/>
         <source>missing name in torrent file</source>
         <translation>Missing name in torrent file</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="256"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="257"/>
         <source>invalid &apos;name&apos; of torrent (possible exploit attempt)</source>
         <translation>Invalid &apos;name&apos; of torrent (possible exploit attempt)</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="257"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="258"/>
         <source>invalid length of torrent</source>
         <translation>Invalid length of torrent</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="258"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="259"/>
         <source>failed to parse files from torrent file</source>
         <translation>Failed to parse files from torrent file</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="259"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="260"/>
         <source>invalid or missing &apos;pieces&apos; entry in torrent file</source>
         <translation>Invalid or missing &apos;pieces&apos; entry in torrent file</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="260"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="261"/>
         <source>incorrect number of piece hashes in torrent file</source>
         <translation>Incorrect number of piece hashes in torrent file</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="261"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="262"/>
         <source>too many pieces in torrent</source>
         <translation>Too many pieces in torrent</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="262"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="263"/>
         <source>invalid metadata received from swarm</source>
         <translation>Invalid metadata received from swarm</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="263"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="264"/>
         <source>invalid bencoding</source>
         <translation>Invalid bencoding</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="264"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="265"/>
         <source>no files in torrent</source>
         <translation>No files in torrent</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="265"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="266"/>
         <source>invalid escaped string</source>
         <translation>Invalid escaped string</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="266"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="344"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="267"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="345"/>
         <source>session is closing</source>
         <translation>Session is closing</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="267"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="268"/>
         <source>torrent already exists in session</source>
         <translation>Torrent already exists in session</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="268"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="269"/>
         <source>invalid torrent handle used</source>
         <translation>Invalid torrent handle used</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="269"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="270"/>
         <source>invalid type requested from entry</source>
         <translation>Invalid type requested from entry</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="270"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="271"/>
         <source>missing info-hash from URI</source>
         <translation>Missing info-hash from URI</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="271"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="272"/>
         <source>file too short</source>
         <translation>File too short</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="272"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="273"/>
         <source>unsupported URL protocol</source>
         <translation>Unsupported URL protocol</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="273"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="274"/>
         <source>failed to parse URL</source>
         <translation>Failed to parse URL</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="274"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="275"/>
         <source>peer sent 0 length piece</source>
         <translation>Peer sent 0 length piece</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="275"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="487"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="276"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="488"/>
         <source>parse failed</source>
         <translation>Parse failed</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="276"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="277"/>
         <source>invalid file format tag</source>
         <translation>Invalid file format tag</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="277"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="278"/>
         <source>missing info-hash</source>
         <translation>Missing info-hash</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="278"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="279"/>
         <source>mismatching info-hash</source>
         <translation>Mismatching info-hash</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="279"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="280"/>
         <source>invalid hostname</source>
         <translation>Invalid hostname</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="280"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="281"/>
         <source>invalid port</source>
         <translation>Invalid port</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="281"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="282"/>
         <source>port blocked by port-filter</source>
         <translation>Port blocked by port-filter</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="282"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="283"/>
         <source>expected closing ] for address</source>
         <translation>Expected closing ] for address</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="283"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="284"/>
         <source>destructing torrent</source>
         <translation>Destructing torrent</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="284"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="285"/>
         <source>timed out</source>
         <translation>Timed out</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="285"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="286"/>
         <source>upload to upload connection</source>
         <translation>Upload to upload connection</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="286"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="287"/>
         <source>uninteresting upload-only peer</source>
         <translation>Upload to upload connection</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="287"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="288"/>
         <source>invalid info-hash</source>
         <translation>Invalid info-hash</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="288"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="289"/>
         <source>torrent paused</source>
         <translation>Torrent paused</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="289"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="290"/>
         <source>&apos;have&apos;-message with higher index than the number of pieces</source>
         <translation>Have message with higher index than the number of pieces</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="290"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="291"/>
         <source>bitfield of invalid size</source>
         <translation>Bitfield of invalid size</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="291"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="292"/>
         <source>too many piece requests while choked</source>
         <translation>Too many piece requests while choked</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="292"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="293"/>
         <source>invalid piece packet</source>
         <translation>Invalid piece packet</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="293"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="294"/>
         <source>out of memory</source>
         <translation>Out of memory</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="294"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="295"/>
         <source>torrent aborted</source>
         <translation>Torrent aborted</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="295"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="296"/>
         <source>connected to ourselves</source>
         <translation>Connected to ourselves</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="296"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="297"/>
         <source>invalid piece size</source>
         <translation>Invalid piece size</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="297"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="298"/>
         <source>timed out: no interest</source>
         <translation>Timed out: no interest</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="298"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="299"/>
         <source>timed out: inactivity</source>
         <translation>Timed out: inactivity</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="299"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="300"/>
         <source>timed out: no handshake</source>
         <translation>Timed out: no handshake</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="300"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="301"/>
         <source>timed out: no request</source>
         <translation>Timed out: no request</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="301"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="302"/>
         <source>invalid choke message</source>
         <translation>Invalid choke message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="302"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="303"/>
         <source>invalid unchoke message</source>
         <translation>Invalid unchoke message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="303"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="304"/>
         <source>invalid interested message</source>
         <translation>Invalid interested message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="304"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="305"/>
         <source>invalid not-interested message</source>
         <translation>Invalid not-interested message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="305"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="306"/>
         <source>invalid request message</source>
         <translation>Invalid request message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="306"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="307"/>
         <source>invalid hash list</source>
         <translation>Invalid hash list</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="307"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="308"/>
         <source>invalid hash piece message</source>
         <translation>Invalid hash piece message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="308"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="309"/>
         <source>invalid cancel message</source>
         <translation>Invalid cancel message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="309"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="310"/>
         <source>invalid dht-port message</source>
         <translation>Invalid dht-port message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="310"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="311"/>
         <source>invalid suggest piece message</source>
         <translation>Invalid suggest piece message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="311"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="312"/>
         <source>invalid have-all message</source>
         <translation>Invalid have-all message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="312"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="313"/>
         <source>invalid have-none message</source>
         <translation>Invalid have-none message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="313"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="314"/>
         <source>invalid reject message</source>
         <translation>Invalid reject message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="314"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="315"/>
         <source>invalid allow-fast message</source>
         <translation>Invalid allow-fast message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="315"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="316"/>
         <source>invalid extended message</source>
         <translation>Invalid extended message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="316"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="317"/>
         <source>invalid message</source>
         <translation>Invalid message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="317"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="318"/>
         <source>sync hash not found</source>
         <translation>Sync hash not found</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="318"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="319"/>
         <source>unable to verify encryption constant</source>
         <translation>Unable to verify encryption constant</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="319"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="320"/>
         <source>plaintext mode not provided</source>
         <translation>Plaintext mode not provided</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="320"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="321"/>
         <source>rc4 mode not provided</source>
         <translation>RC4 mode not provided</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="321"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="322"/>
         <source>unsupported encryption mode</source>
         <translation>Unsupported encryption mode</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="322"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="323"/>
         <source>peer selected unsupported encryption mode</source>
         <translation>Peer selected unsupported encryption mode</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="323"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="324"/>
         <source>invalid encryption pad size</source>
         <translation>Invalid encryption pad size</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="324"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="325"/>
         <source>invalid encryption handshake</source>
         <translation>Invalid encryption handshake</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="325"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="326"/>
         <source>incoming encrypted connections disabled</source>
         <translation>Incoming encrypted connections disabled</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="326"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="327"/>
         <source>incoming regular connections disabled</source>
         <translation>Incoming regular connections disabled</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="327"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="328"/>
         <source>duplicate peer-id</source>
         <translation>Duplicate peer-id</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="328"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="329"/>
         <source>torrent removed</source>
         <translation>Torrent removed</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="329"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="330"/>
         <source>packet too large</source>
         <translation>Packet too large</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="331"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="332"/>
         <source>HTTP error</source>
         <translation>HTTP error</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="332"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="333"/>
         <source>missing location header</source>
         <translation>Missing location header</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="333"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="334"/>
         <source>invalid redirection</source>
         <translation>Invalid redirection</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="334"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="335"/>
         <source>redirecting</source>
         <translation>Redirecting</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="335"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="336"/>
         <source>invalid HTTP range</source>
         <translation>Invalid HTTP range</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="336"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="337"/>
         <source>missing content-length</source>
         <translation>Missing content-length</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="337"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="338"/>
         <source>banned by IP filter</source>
         <translation>Banned by IP filter</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="338"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="339"/>
         <source>too many connections</source>
         <translation>Too many connections</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="339"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="340"/>
         <source>peer banned</source>
         <translation>Peer banned</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="340"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="341"/>
         <source>stopping torrent</source>
         <translation>Stopping torrent</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="341"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="342"/>
         <source>too many corrupt pieces</source>
         <translation>Too many corrupt pieces</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="342"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="343"/>
         <source>torrent is not ready to accept peers</source>
         <translation>Torrent is not ready to accept peers</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="343"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="344"/>
         <source>peer is not properly constructed</source>
         <translation>Peer is not properly constructed</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="345"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="346"/>
         <source>optimistic disconnect</source>
         <translation>Optimistic disconnect</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="346"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="347"/>
         <source>torrent finished</source>
         <translation>Torrent finished</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="347"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="348"/>
         <source>no router found</source>
         <translation>No router found</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="348"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="349"/>
         <source>metadata too large</source>
         <translation>Metadata too large</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="349"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="350"/>
         <source>invalid metadata request</source>
         <translation>Invalid metadata request</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="350"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="351"/>
         <source>invalid metadata size</source>
         <translation>Invalid metadata size</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="351"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="352"/>
         <source>invalid metadata offset</source>
         <translation>Invalid metadata offset</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="352"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="353"/>
         <source>invalid metadata message</source>
         <translation>Invalid metadata message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="353"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="354"/>
         <source>pex message too large</source>
         <translation>PEX message too large</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="354"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="355"/>
         <source>invalid pex message</source>
         <translation>Invalid PEX message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="355"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="356"/>
         <source>invalid lt_tracker message</source>
         <translation>Invalid lt_tracker message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="356"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="357"/>
         <source>pex messages sent too frequent (possible attack)</source>
         <translation>PEX messages sent too frequent (possible attack)</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="357"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="358"/>
         <source>torrent has no metadata</source>
         <translation>Torrent has no metadata</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="358"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="359"/>
         <source>invalid dont-have message</source>
         <translation>Invalid dont-have message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="359"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="360"/>
         <source>SSL connection required</source>
         <translation>SSL connection required</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="360"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="361"/>
         <source>invalid SSL certificate</source>
         <translation>Invalid SSL certificate</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="361"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="362"/>
         <source>not an SSL torrent</source>
         <translation>Not an SSL torrent</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="370"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="371"/>
         <source>unsupported protocol version</source>
         <translation>Unsupported protocol version</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="371"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="372"/>
         <source>not authorized to create port map (enable NAT-PMP on your router)</source>
         <translation>Not authorized to create port map (enable NAT-PMP on your router)</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="372"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="373"/>
         <source>network failure</source>
         <translation>Network failure</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="373"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="374"/>
         <source>out of resources</source>
         <translation>Out of resources</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="374"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="375"/>
         <source>unsupported opcode</source>
         <translation>Unsupported opcode</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="382"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="383"/>
         <source>missing or invalid &apos;file sizes&apos; entry</source>
         <translation>Missing or invalid &apos;file sizes&apos; entry</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="383"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="384"/>
         <source>no files in resume data</source>
         <translation>No files in resume data</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="384"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="385"/>
         <source>missing &apos;slots&apos; and &apos;pieces&apos; entry</source>
         <translation>Missing &apos;slots&apos; and &apos;pieces&apos; entry</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="385"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="386"/>
         <source>mismatching number of files</source>
         <translation>Mismatching number of files</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="386"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="387"/>
         <source>mismatching file size</source>
         <translation>Mismatching file size</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="387"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="388"/>
         <source>mismatching file timestamp</source>
         <translation>Mismatching file timestamp</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="388"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="389"/>
         <source>not a dictionary</source>
         <translation>Not a dictionary</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="389"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="390"/>
         <source>invalid &apos;blocks per piece&apos; entry</source>
         <translation>Invalid &apos;blocks per piece&apos; entry</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="390"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="391"/>
         <source>missing slots list</source>
         <translation>Missing slots list</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="391"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="392"/>
         <source>file has more slots than torrent</source>
         <translation>File has more slots than torrent</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="392"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="393"/>
         <source>invalid entry type in slot list</source>
         <translation>Invalid entry type in slot list</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="393"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="394"/>
         <source>invalid piece index in slot list</source>
         <translation>Invalid piece index in slot list</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="394"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="395"/>
         <source>pieces needs to be reordered</source>
         <translation>Pieces needs to be reordered</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="404"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="405"/>
         <source>Invalid HTTP header</source>
         <translation>Invalid HTTP header</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="405"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="406"/>
         <source>missing Location header in HTTP redirect</source>
         <translation>Missing Location header in HTTP redirect</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="406"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="407"/>
         <source>failed to decompress HTTP response</source>
         <translation>Failed to decompress HTTP response</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="416"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="417"/>
         <source>no i2p router is set up</source>
         <translation>No i2p router is set up</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="428"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="429"/>
         <source>scrape not available on tracker</source>
         <translation>Scrape not available on tracker</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="429"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="430"/>
         <source>invalid tracker response</source>
         <translation>Invalid tracker response</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="430"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="431"/>
         <source>invalid peer dictionary entry</source>
         <translation>Invalid peer dictionary entry</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="431"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="432"/>
         <source>tracker sent a failure message</source>
         <translation>Tracker sent a failure message</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="432"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="433"/>
         <source>missing or invalid &apos;files&apos; entry</source>
         <translation>Missing or invalid &apos;files&apos; entry</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="433"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="434"/>
         <source>missing or invalid &apos;hash&apos; entry</source>
         <translation>Missing or invalid &apos;hash&apos; entry</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="434"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="435"/>
         <source>missing or invalid &apos;peers&apos; and &apos;peers6&apos; entry</source>
         <translation>Missing or invalid &apos;peers&apos; and &apos;peers6&apos; entry</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="435"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="436"/>
         <source>udp tracker response packet has invalid size</source>
         <translation>Udp tracker response packet has invalid size</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="436"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="437"/>
         <source>invalid transaction id in udp tracker response</source>
         <translation>Invalid transaction id in udp tracker response</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="437"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="438"/>
         <source>invalid action field in udp tracker response</source>
         <translation>Invalid action field in udp tracker response</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="447"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="448"/>
         <source>expected string in bencoded string</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="448"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="449"/>
         <source>expected colon in bencoded string</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="449"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="450"/>
         <source>unexpected end of file in bencoded string</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="450"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="451"/>
         <source>expected value (list, dict, int or string) in bencoded string</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="451"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="452"/>
         <source>bencoded nesting depth exceeded</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="452"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="453"/>
         <source>bencoded item count limit exceeded</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="453"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="454"/>
         <source>integer overflow</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="463"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="464"/>
         <source>invalid gzip header</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="464"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="465"/>
         <source>inflated data too large</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="465"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="466"/>
         <source>available inflate data did not terminate</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="466"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="467"/>
         <source>output space exhausted before completing inflate</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="467"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="468"/>
         <source>invalid block type (type == 3)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="468"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="469"/>
         <source>stored block length did not match one&apos;s complement</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="469"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="470"/>
         <source>dynamic block code description: too many length or distance codes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="470"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="471"/>
         <source>dynamic block code description: code lengths codes incomplete</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="471"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="472"/>
         <source>dynamic block code description: repeat lengths with no first length</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="472"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="473"/>
         <source>dynamic block code description: repeat more than specified lengths</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="473"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="474"/>
         <source>dynamic block code description: invalid literal/length code lengths</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="474"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="475"/>
         <source>dynamic block code description: invalid distance code lengths</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="475"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="476"/>
         <source>invalid literal/length or distance code in fixed or dynamic block</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="476"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="477"/>
         <source>distance is too far back in fixed or dynamic block</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="477"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="478"/>
         <source>unknown gzip error</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="488"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="489"/>
         <source>cannot reach peer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="489"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="490"/>
         <source>i2p error</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="490"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="491"/>
         <source>invalid key</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="491"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="492"/>
         <source>invalid id</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="492"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="493"/>
         <source>timeout</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="493"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="494"/>
         <source>key not found</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="494"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="495"/>
         <source>duplicated id</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="503"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="504"/>
         <source>SOCKS no error</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="504"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="505"/>
         <source>SOCKS unsupported version</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="505"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="506"/>
         <source>SOCKS unsupported authentication method</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="506"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="507"/>
         <source>SOCKS unsupported authentication version</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="507"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="508"/>
         <source>SOCKS authentication error</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="508"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="509"/>
         <source>SOCKS username required</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="509"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="510"/>
         <source>SOCKS general failure</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="510"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="511"/>
         <source>SOCKS command not supported</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="511"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="512"/>
         <source>SOCKS no identd running</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="512"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="513"/>
         <source>SOCKS identd could not identify username</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="526"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="527"/>
         <source>Invalid Arguments</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="527"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="528"/>
         <source>Action Failed</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="528"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="529"/>
         <source>The specified value does not exist in the array</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="529"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="530"/>
         <source>The source IP address cannot be wild-carded</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="530"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="531"/>
         <source>The external port cannot be wild-carded</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="532"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="533"/>
         <source>The port mapping entry specified conflicts with a mapping assigned previously to another client</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="535"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="536"/>
         <source>Internal and External port values must be the same</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="537"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="538"/>
         <source>The NAT implementation only supports permanent lease times on port mappings</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="541"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="542"/>
         <source>RemoteHost must be a wildcard and cannot be a specific IP address or DNS name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="544"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="545"/>
         <source>ExternalPort must be a wildcard and cannot be a specific port </source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>FileDownloader</name>
+    <message>
+        <location filename="../../core/filedownloader.cpp" line="51"/>
+        <source>UNABLE_TO_SAVE_DOWNLOADED_FILE</source>
+        <translation>Unable to save downloaded file</translation>
+    </message>
+    <message>
+        <location filename="../../core/filedownloader.cpp" line="56"/>
+        <source>NETWORK_ERROR: %1</source>
+        <translation>Network error occured:
+%1</translation>
     </message>
 </context>
 <context>
@@ -2505,28 +2519,28 @@ Download: %3</source>
         <translation>Priority</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="60"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="61"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="10"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="151"/>
         <source>FILETAB_PRIORITY_LOW</source>
         <translation>Low</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="61"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="62"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="11"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="157"/>
         <source>FILETAB_PRIORITY_MEDIUM</source>
         <translation>Medium</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="62"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="63"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="12"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="163"/>
         <source>FILETAB_PRIORITY_HIGH</source>
         <translation>High</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="59"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="60"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="13"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="171"/>
         <source>FILETAB_PRIORITY_ZERO</source>
@@ -2609,86 +2623,91 @@ Download: %3</source>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="14"/>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="121"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="265"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="270"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="266"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="271"/>
         <source>DIALOG_OPEN_TORRENT</source>
         <translation>Open Torrent</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="165"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="271"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="272"/>
         <source>OPEN_TORRENT_SAVE_PATH</source>
         <translation>Save to...</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="184"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="273"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="274"/>
         <source>OPEN_TORRENT_BROWSE_BUTTON</source>
         <translation>Browse</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="177"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="272"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="273"/>
         <source>DISCRIBTION_LABEL</source>
         <translation>Group</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="221"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="276"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="277"/>
         <source>OPEN_TORRENT_INFO</source>
         <translation>Information</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="236"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="277"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="278"/>
         <source>OPEN_TORRENT_INFO_NAME</source>
         <translation>Name</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="249"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="278"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="279"/>
         <source>OPEN_TORRENT_INFO_DESCRIBTION</source>
         <translation>Describtion</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="262"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="279"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="280"/>
         <source>SIZE</source>
         <translation>Total Size</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="282"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="281"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="282"/>
         <source>RECIVING_METADATA</source>
         <translation>Reciving metadata</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="341"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="285"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="286"/>
         <source>SET_SEQUNTIAL</source>
         <translation>Sequntial Download</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="214"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="275"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="276"/>
         <source>OPEN_TORRENT_CANCEL_BUTTON</source>
         <translation>Cancel</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="207"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="274"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="275"/>
         <source>OPEN_TORRENT_ADD_BUTTON</source>
         <translation>Add</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="147"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="153"/>
         <source>OPEN_TORRENT_ERROR</source>
         <translation>Error while tring to open torrent</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="158"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="164"/>
         <source>DIALOG_OPEN_DIR</source>
         <translation>Choose save dirrectory</translation>
+    </message>
+    <message>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="279"/>
+        <source>%1 (AVAILABLE: %2)</source>
+        <translation>%1 (Available: %2)</translation>
     </message>
     <message>
         <source>DIALOF_OPEN_DIR</source>
@@ -4777,36 +4796,34 @@ Error: %2</translation>
 <context>
     <name>TorrentDownloader</name>
     <message>
-        <location filename="../../core/torrentdownloader.cpp" line="51"/>
         <source>UNABLE_TO_SAVE_DOWNLOADED_FILE</source>
-        <translation>Unable to save downloaded file</translation>
+        <translation type="obsolete">Unable to save downloaded file</translation>
     </message>
     <message>
-        <location filename="../../core/torrentdownloader.cpp" line="56"/>
         <source>NETWORK_ERROR: %1</source>
-        <translation>Network error occured:
+        <translation type="obsolete">Network error occured:
 %1</translation>
     </message>
 </context>
 <context>
     <name>TorrentManager</name>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="204"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="224"/>
         <source>LISTENING ON PORT %1 FAILED</source>
         <translation>Listening on port %1 failed.</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="301"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="322"/>
         <source>Error in TorrentManager::AddTorrent</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="366"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="387"/>
         <source>TORRENT_COMPLETED %1</source>
         <translation>Torreant %1 was successfully downloaded.</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="442"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="463"/>
         <source>MOVE_STORRAGE_COMPLETED_TO:
 %1 %2</source>
         <translation>Moving torrent %1 to %2 completed.</translation>

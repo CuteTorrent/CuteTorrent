@@ -14,7 +14,9 @@ void SettingsAPiController::service(HttpRequest& request, HttpResponse& response
 	{
 		return;
 	}
+
 	QString method = request.getMethod();
+
 	if (method.compare("GET", Qt::CaseInsensitive) == 0)
 	{
 		QtJson::JsonObject jSettings;

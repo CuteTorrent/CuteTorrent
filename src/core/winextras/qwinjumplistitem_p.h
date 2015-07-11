@@ -44,21 +44,21 @@ class QWinJumpListCategory;
 class QWinJumpListItemPrivate
 {
 public:
-    static QWinJumpListItemPrivate *get(QWinJumpListItem *item)
-    {
-        return item->d_func();
-    }
+	static QWinJumpListItemPrivate* get(QWinJumpListItem* item)
+	{
+		return item->d_func();
+	}
 
-    void invalidate();
+	void invalidate();
 
-    QString filePath;
-    QString workingDirectory;
-    QString title;
-    QString description;
-    QIcon icon;
-    QStringList arguments;
-    QWinJumpListItem::Type type;
-    QWinJumpListCategory *category;
+	QString filePath;
+	QString workingDirectory;
+	QString title;
+	QString description;
+	QIcon icon;
+	QStringList arguments;
+	QWinJumpListItem::Type type;
+	QWinJumpListCategory* category;
 };
 
 QT_END_NAMESPACE

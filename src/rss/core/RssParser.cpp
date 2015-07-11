@@ -719,10 +719,12 @@ void RssParser::parseAtomArticle(QXmlStreamReader& reader, QString baseURL, RssF
 				pFeed->m_rssItems.remove(guid);
 				RssItem* pNewItem = new RssItem(*pItem.get());
 				QString infoHash = pOldItem->infoHash();
+
 				if (!infoHash.isEmpty())
 				{
 					pNewItem->setInfoHash(infoHash);
 				}
+
 				pFeed->m_rssItems.insert(guid, pNewItem);
 				return;
 			}

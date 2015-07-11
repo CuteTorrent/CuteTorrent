@@ -17,6 +17,7 @@ void MagnetApiController::service(HttpRequest& request, HttpResponse& response)
 	}
 
 	QString method = request.getMethod();
+
 	if (method.compare("post", Qt::CaseInsensitive) == 0)
 	{
 		QString magnetLink = request.getParameter("magnetLink");

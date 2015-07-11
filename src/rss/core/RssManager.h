@@ -36,7 +36,7 @@ private:
 		QString rssItemId;
 	};
 	RssManager(QObject* parent = NULL);
-	TorrentDownloaderPtr m_pTorrentDownloader;
+	FileDownloaderPtr m_pTorrentDownloader;
 	NotificationSystemPtr m_pNotificationSystem;
 	QList<RssFeed*> m_pFeeds;
 	QHash<QUrl, TorrentDownloadInfo> m_activeTorrentDownloads;

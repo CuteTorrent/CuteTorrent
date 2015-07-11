@@ -49,6 +49,8 @@ public:
 
 	int exec();
 private:
+	int64_t m_size;
+	QFileSystemModel* m_compliterModel;
 	bool m_bUseGroup;
 	QList<GroupForFileFiltering> m_lFilters;
 	bool validTorrent;
@@ -62,11 +64,12 @@ private:
 	QLabel* getTitleLabel() override;
 	QLabel* getTitleIcon() override;
 private slots:
-	virtual void reject() override;
+	void reject() override;
 	void OnError(QString);
 	void BrowseButton();
 	void AccepTorrent();
 	void ChangeGroup();
 	void DownloadMetadataCompleted(openmagnet_info);
+	void OnPathChanged(QString path);
 };
 

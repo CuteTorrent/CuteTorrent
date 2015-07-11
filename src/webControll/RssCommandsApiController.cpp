@@ -7,12 +7,13 @@ RssCommandsApiController::RssCommandsApiController(QObject* parent) : HttpReques
 
 void RssCommandsApiController::service(HttpRequest& request, HttpResponse& response)
 {
-	if (!CheckCreditinals(request,response))
+	if (!CheckCreditinals(request, response))
 	{
 		return;
 	}
 
 	QString method = request.getMethod();
+
 	if (method.compare("post", Qt::CaseInsensitive) == 0)
 	{
 		QString feedId = request.getParameter("feedId");
@@ -22,21 +23,21 @@ void RssCommandsApiController::service(HttpRequest& request, HttpResponse& respo
 		QUuid uid(feedId);
 		QString action = request.getParameter("action");
 		RssFeed* pFeed = m_pRssManager->findFeed(uid);
-        if (pFeed != NULL)
+
+		if (pFeed != NULL)
 		{
-			if (action.compare("remove",Qt::CaseInsensitive) == 0)
+			if (action.compare("remove", Qt::CaseInsensitive) == 0)
 			{
 				//QEventLoop loop;
-				
 				if (!QMetaObject::invokeMethod(m_pRssManager.get(), "removeFeed", Qt::QueuedConnection, Q_ARG(QUuid, uid)))
 				{
 					qWarning() << "QMetaObject::invokeMethod removeFeed failed";
 				}
+
 				//m_pRssManager->removeFeed(uid);
 			}
 			else if (action.compare("downloadItem", Qt::CaseInsensitive) == 0)
 			{
-				
 			}
 		}
 		else

@@ -140,13 +140,13 @@ bool VideoPlayerWindow::eventFilter(QObject* src, QEvent* event)
 	if(src == m_pVideoWidget && event->type() == QEvent::MouseButtonDblClick)
 	{
 		QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+
 		if (mouseEvent->button() == Qt::LeftButton)
 		{
 			goFullScreen();
 			mouseEvent->accept();
 			return true;
 		}
-		
 	}
 	else if (src == controls && event->type() == QEvent::Resize)
 	{

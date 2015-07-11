@@ -65,7 +65,6 @@ void HtmlView::resourceLoaded(QNetworkReply* pReply)
 {
 	m_activeRequests.remove(pReply->request().url());
 	QUrl url = pReply->url();
-
 	qDebug() << "Url ready" << url;
 
 	if (pReply->error() == QNetworkReply::NoError)

@@ -69,356 +69,458 @@ QT_BEGIN_NAMESPACE
  */
 
 // partial copy of qprocess_win.cpp:qt_create_commandline()
-static QString createArguments(const QStringList &arguments)
+static QString createArguments(const QStringList& arguments)
 {
-    QString args;
-    for (int i=0; i<arguments.size(); ++i) {
-        QString tmp = arguments.at(i);
-        // Quotes are escaped and their preceding backslashes are doubled.
-        tmp.replace(QRegExp(QLatin1String("(\\\\*)\"")), QLatin1String("\\1\\1\\\""));
-        if (tmp.isEmpty() || tmp.contains(QLatin1Char(' ')) || tmp.contains(QLatin1Char('\t'))) {
-            // The argument must not end with a \ since this would be interpreted
-            // as escaping the quote -- rather put the \ behind the quote: e.g.
-            // rather use "foo"\ than "foo\"
-            int i = tmp.length();
-            while (i > 0 && tmp.at(i - 1) == QLatin1Char('\\'))
-                --i;
-            tmp.insert(i, QLatin1Char('"'));
-            tmp.prepend(QLatin1Char('"'));
-        }
-        args += QLatin1Char(' ') + tmp;
-    }
-    return args;
+	QString args;
+
+	for (int i = 0; i < arguments.size(); ++i)
+	{
+		QString tmp = arguments.at(i);
+		// Quotes are escaped and their preceding backslashes are doubled.
+		tmp.replace(QRegExp(QLatin1String("(\\\\*)\"")), QLatin1String("\\1\\1\\\""));
+
+		if (tmp.isEmpty() || tmp.contains(QLatin1Char(' ')) || tmp.contains(QLatin1Char('\t')))
+		{
+			// The argument must not end with a \ since this would be interpreted
+			// as escaping the quote -- rather put the \ behind the quote: e.g.
+			// rather use "foo"\ than "foo\"
+			int i = tmp.length();
+
+			while (i > 0 && tmp.at(i - 1) == QLatin1Char('\\'))
+			{
+				--i;
+			}
+
+			tmp.insert(i, QLatin1Char('"'));
+			tmp.prepend(QLatin1Char('"'));
+		}
+
+		args += QLatin1Char(' ') + tmp;
+	}
+
+	return args;
 }
 
 QWinJumpListPrivate::QWinJumpListPrivate() :
-    pDestList(0), recent(0), frequent(0), tasks(0), dirty(false)
+	pDestList(0), recent(0), frequent(0), tasks(0), dirty(false)
 {
 }
 
-void QWinJumpListPrivate::warning(const char *function, HRESULT hresult)
+void QWinJumpListPrivate::warning(const char* function, HRESULT hresult)
 {
-    const QString err = QtWin::errorStringFromHresult(hresult);
-    qWarning("QWinJumpList: %s() failed: %#010x, %s.", function, (unsigned)hresult, qPrintable(err));
+	const QString err = QtWin::errorStringFromHresult(hresult);
+	qWarning("QWinJumpList: %s() failed: %#010x, %s.", function, (unsigned)hresult, qPrintable(err));
 }
 
 QString QWinJumpListPrivate::iconsDirPath()
 {
-    QString iconDirPath = QDir::tempPath() + QLatin1Char('/') + QCoreApplication::instance()->applicationName() + QLatin1String("/qt-jl-icons/");
-    QDir().mkpath(iconDirPath);
-    return iconDirPath;
+	QString iconDirPath = QDir::tempPath() + QLatin1Char('/') + QCoreApplication::instance()->applicationName() + QLatin1String("/qt-jl-icons/");
+	QDir().mkpath(iconDirPath);
+	return iconDirPath;
 }
 
 void QWinJumpListPrivate::invalidate()
 {
-    Q_Q(QWinJumpList);
-    if (!pDestList)
-        return;
+	Q_Q(QWinJumpList);
 
-    if (!dirty) {
-        dirty = true;
-        QMetaObject::invokeMethod(q, "_q_rebuild", Qt::QueuedConnection);
-    }
+	if (!pDestList)
+	{
+		return;
+	}
+
+	if (!dirty)
+	{
+		dirty = true;
+		QMetaObject::invokeMethod(q, "_q_rebuild", Qt::QueuedConnection);
+	}
 }
 
 void QWinJumpListPrivate::_q_rebuild()
 {
-    if (beginList()) {
-        if (recent && recent->isVisible())
-            appendKnownCategory(KDC_RECENT);
-        if (frequent && frequent->isVisible())
-            appendKnownCategory(KDC_FREQUENT);
-        foreach (QWinJumpListCategory *category, categories) {
-            if (category->isVisible())
-                appendCustomCategory(category);
-        }
-        if (tasks && tasks->isVisible())
-            appendTasks(tasks->items());
-        commitList();
-    }
-    dirty = false;
+	if (beginList())
+	{
+		if (recent && recent->isVisible())
+		{
+			appendKnownCategory(KDC_RECENT);
+		}
+
+		if (frequent && frequent->isVisible())
+		{
+			appendKnownCategory(KDC_FREQUENT);
+		}
+
+		foreach (QWinJumpListCategory* category, categories)
+		{
+			if (category->isVisible())
+			{
+				appendCustomCategory(category);
+			}
+		}
+
+		if (tasks && tasks->isVisible())
+		{
+			appendTasks(tasks->items());
+		}
+
+		commitList();
+	}
+
+	dirty = false;
 }
 
 void QWinJumpListPrivate::destroy()
 {
-    delete recent;
-    recent = 0;
-    delete frequent;
-    frequent = 0;
-    delete tasks;
-    tasks = 0;
-    qDeleteAll(categories);
-    categories.clear();
-    invalidate();
+	delete recent;
+	recent = 0;
+	delete frequent;
+	frequent = 0;
+	delete tasks;
+	tasks = 0;
+	qDeleteAll(categories);
+	categories.clear();
+	invalidate();
 }
 
 bool QWinJumpListPrivate::beginList()
 {
-    HRESULT hresult = S_OK;
-    if (!identifier.isEmpty()) {
-        wchar_t *id = qt_qstringToNullTerminated(identifier);
-        hresult = pDestList->SetAppID(id);
-        delete[] id;
-    }
-    if (SUCCEEDED(hresult)) {
-        UINT maxSlots = 0;
-        IUnknown *array = 0;
-        hresult = pDestList->BeginList(&maxSlots, qIID_IUnknown, reinterpret_cast<void **>(&array));
-        if (array)
-            array->Release();
-    }
-    if (FAILED(hresult))
-        QWinJumpListPrivate::warning("BeginList", hresult);
-    return SUCCEEDED(hresult);
+	HRESULT hresult = S_OK;
+
+	if (!identifier.isEmpty())
+	{
+		wchar_t* id = qt_qstringToNullTerminated(identifier);
+		hresult = pDestList->SetAppID(id);
+		delete[] id;
+	}
+
+	if (SUCCEEDED(hresult))
+	{
+		UINT maxSlots = 0;
+		IUnknown* array = 0;
+		hresult = pDestList->BeginList(&maxSlots, qIID_IUnknown, reinterpret_cast<void**>(&array));
+
+		if (array)
+		{
+			array->Release();
+		}
+	}
+
+	if (FAILED(hresult))
+	{
+		QWinJumpListPrivate::warning("BeginList", hresult);
+	}
+
+	return SUCCEEDED(hresult);
 }
 
 bool QWinJumpListPrivate::commitList()
 {
-    HRESULT hresult = pDestList->CommitList();
-    if (FAILED(hresult))
-        QWinJumpListPrivate::warning("CommitList", hresult);
-    return SUCCEEDED(hresult);
+	HRESULT hresult = pDestList->CommitList();
+
+	if (FAILED(hresult))
+	{
+		QWinJumpListPrivate::warning("CommitList", hresult);
+	}
+
+	return SUCCEEDED(hresult);
 }
 
 void QWinJumpListPrivate::appendKnownCategory(KNOWNDESTCATEGORY category)
 {
-    HRESULT hresult = pDestList->AppendKnownCategory(category);
-    if (FAILED(hresult))
-        QWinJumpListPrivate::warning("AppendKnownCategory", hresult);
+	HRESULT hresult = pDestList->AppendKnownCategory(category);
+
+	if (FAILED(hresult))
+	{
+		QWinJumpListPrivate::warning("AppendKnownCategory", hresult);
+	}
 }
 
-void QWinJumpListPrivate::appendCustomCategory(QWinJumpListCategory *category)
+void QWinJumpListPrivate::appendCustomCategory(QWinJumpListCategory* category)
 {
-    IObjectCollection *collection = toComCollection(category->items());
-    if (collection) {
-        wchar_t *title = qt_qstringToNullTerminated(category->title());
-        HRESULT hresult = pDestList->AppendCategory(title, collection);
-        if (FAILED(hresult))
-            QWinJumpListPrivate::warning("AppendCategory", hresult);
-        delete[] title;
-        collection->Release();
-    }
+	IObjectCollection* collection = toComCollection(category->items());
+
+	if (collection)
+	{
+		wchar_t* title = qt_qstringToNullTerminated(category->title());
+		HRESULT hresult = pDestList->AppendCategory(title, collection);
+
+		if (FAILED(hresult))
+		{
+			QWinJumpListPrivate::warning("AppendCategory", hresult);
+		}
+
+		delete[] title;
+		collection->Release();
+	}
 }
 
-void QWinJumpListPrivate::appendTasks(const QList<QWinJumpListItem *> &items)
+void QWinJumpListPrivate::appendTasks(const QList<QWinJumpListItem*>& items)
 {
-    IObjectCollection *collection = toComCollection(items);
-    if (collection) {
-        HRESULT hresult = pDestList->AddUserTasks(collection);
-        if (FAILED(hresult))
-            QWinJumpListPrivate::warning("AddUserTasks", hresult);
-        collection->Release();
-    }
+	IObjectCollection* collection = toComCollection(items);
+
+	if (collection)
+	{
+		HRESULT hresult = pDestList->AddUserTasks(collection);
+
+		if (FAILED(hresult))
+		{
+			QWinJumpListPrivate::warning("AddUserTasks", hresult);
+		}
+
+		collection->Release();
+	}
 }
 
-QList<QWinJumpListItem *> QWinJumpListPrivate::fromComCollection(IObjectArray *array)
+QList<QWinJumpListItem*> QWinJumpListPrivate::fromComCollection(IObjectArray* array)
 {
-    QList<QWinJumpListItem *> list;
-    UINT count = 0;
-    array->GetCount(&count);
-    for (UINT i = 0; i < count; ++i) {
-        IUnknown *collectionItem = 0;
-        HRESULT hresult = array->GetAt(i, qIID_IUnknown, reinterpret_cast<void **>(&collectionItem));
-        if (FAILED(hresult)) {
-            QWinJumpListPrivate::warning("GetAt", hresult);
-            continue;
-        }
-        IShellItem2 *shellItem = 0;
-        IShellLinkW *shellLink = 0;
-        QWinJumpListItem *jumplistItem = 0;
-        if (SUCCEEDED(collectionItem->QueryInterface(qIID_IShellItem2, reinterpret_cast<void **>(&shellItem)))) {
-            jumplistItem = fromIShellItem(shellItem);
-            shellItem->Release();
-        } else if (SUCCEEDED(collectionItem->QueryInterface(qIID_IShellLinkW, reinterpret_cast<void **>(&shellLink)))) {
-            jumplistItem = fromIShellLink(shellLink);
-            shellLink->Release();
-        } else {
-            qWarning("QWinJumpList: object of unexpected class found");
-        }
-        collectionItem->Release();
-        if (jumplistItem)
-            list.append(jumplistItem);
-    }
-    return list;
+	QList<QWinJumpListItem*> list;
+	UINT count = 0;
+	array->GetCount(&count);
+
+	for (UINT i = 0; i < count; ++i)
+	{
+		IUnknown* collectionItem = 0;
+		HRESULT hresult = array->GetAt(i, qIID_IUnknown, reinterpret_cast<void**>(&collectionItem));
+
+		if (FAILED(hresult))
+		{
+			QWinJumpListPrivate::warning("GetAt", hresult);
+			continue;
+		}
+
+		IShellItem2* shellItem = 0;
+		IShellLinkW* shellLink = 0;
+		QWinJumpListItem* jumplistItem = 0;
+
+		if (SUCCEEDED(collectionItem->QueryInterface(qIID_IShellItem2, reinterpret_cast<void**>(&shellItem))))
+		{
+			jumplistItem = fromIShellItem(shellItem);
+			shellItem->Release();
+		}
+		else if (SUCCEEDED(collectionItem->QueryInterface(qIID_IShellLinkW, reinterpret_cast<void**>(&shellLink))))
+		{
+			jumplistItem = fromIShellLink(shellLink);
+			shellLink->Release();
+		}
+		else
+		{
+			qWarning("QWinJumpList: object of unexpected class found");
+		}
+
+		collectionItem->Release();
+
+		if (jumplistItem)
+		{
+			list.append(jumplistItem);
+		}
+	}
+
+	return list;
 }
 
-IObjectCollection *QWinJumpListPrivate::toComCollection(const QList<QWinJumpListItem *> &list)
+IObjectCollection* QWinJumpListPrivate::toComCollection(const QList<QWinJumpListItem*>& list)
 {
-    if (list.isEmpty())
-        return 0;
-    IObjectCollection *collection = 0;
-    HRESULT hresult = CoCreateInstance(qCLSID_EnumerableObjectCollection, 0, CLSCTX_INPROC_SERVER, qIID_IObjectCollection, reinterpret_cast<void **>(&collection));
-    if (FAILED(hresult)) {
-        QWinJumpListPrivate::warning("QWinJumpList: failed to instantiate IObjectCollection", hresult);
-        return 0;
-    }
-    Q_FOREACH (QWinJumpListItem *item, list) {
-        IUnknown *iitem = toICustomDestinationListItem(item);
-        if (iitem) {
-            collection->AddObject(iitem);
-            iitem->Release();
-        }
-    }
-    return collection;
+	if (list.isEmpty())
+	{
+		return 0;
+	}
+
+	IObjectCollection* collection = 0;
+	HRESULT hresult = CoCreateInstance(qCLSID_EnumerableObjectCollection, 0, CLSCTX_INPROC_SERVER, qIID_IObjectCollection, reinterpret_cast<void**>(&collection));
+
+	if (FAILED(hresult))
+	{
+		QWinJumpListPrivate::warning("QWinJumpList: failed to instantiate IObjectCollection", hresult);
+		return 0;
+	}
+
+	Q_FOREACH (QWinJumpListItem* item, list)
+	{
+		IUnknown* iitem = toICustomDestinationListItem(item);
+
+		if (iitem)
+		{
+			collection->AddObject(iitem);
+			iitem->Release();
+		}
+	}
+
+	return collection;
 }
 
-QWinJumpListItem *QWinJumpListPrivate::fromIShellLink(IShellLinkW *link)
+QWinJumpListItem* QWinJumpListPrivate::fromIShellLink(IShellLinkW* link)
 {
-    QWinJumpListItem *item = new QWinJumpListItem(QWinJumpListItem::Link);
-
-    IPropertyStore *linkProps;
-    link->QueryInterface(qIID_IPropertyStore, reinterpret_cast<void **>(&linkProps));
-    PROPVARIANT var;
-    linkProps->GetValue(qPKEY_Link_Arguments, &var);
-    item->setArguments(QStringList(QString::fromWCharArray(var.pwszVal)));
-    PropVariantClear(&var);
-    linkProps->Release();
-
-    const int buffersize = 2048;
-    wchar_t buffer[buffersize];
-
-    link->GetDescription(buffer, INFOTIPSIZE);
-    item->setDescription(QString::fromWCharArray(buffer));
-
-    int dummyindex;
-    link->GetIconLocation(buffer, buffersize-1, &dummyindex);
-    item->setIcon(QIcon(QString::fromWCharArray(buffer)));
-
-    link->GetPath(buffer, buffersize-1, 0, 0);
-    item->setFilePath(QDir::fromNativeSeparators(QString::fromWCharArray(buffer)));
-
-    return item;
+	QWinJumpListItem* item = new QWinJumpListItem(QWinJumpListItem::Link);
+	IPropertyStore* linkProps;
+	link->QueryInterface(qIID_IPropertyStore, reinterpret_cast<void**>(&linkProps));
+	PROPVARIANT var;
+	linkProps->GetValue(qPKEY_Link_Arguments, &var);
+	item->setArguments(QStringList(QString::fromWCharArray(var.pwszVal)));
+	PropVariantClear(&var);
+	linkProps->Release();
+	const int buffersize = 2048;
+	wchar_t buffer[buffersize];
+	link->GetDescription(buffer, INFOTIPSIZE);
+	item->setDescription(QString::fromWCharArray(buffer));
+	int dummyindex;
+	link->GetIconLocation(buffer, buffersize - 1, &dummyindex);
+	item->setIcon(QIcon(QString::fromWCharArray(buffer)));
+	link->GetPath(buffer, buffersize - 1, 0, 0);
+	item->setFilePath(QDir::fromNativeSeparators(QString::fromWCharArray(buffer)));
+	return item;
 }
 
-QWinJumpListItem *QWinJumpListPrivate::fromIShellItem(IShellItem2 *shellitem)
+QWinJumpListItem* QWinJumpListPrivate::fromIShellItem(IShellItem2* shellitem)
 {
-    QWinJumpListItem *item = new QWinJumpListItem(QWinJumpListItem::Destination);
-    wchar_t *strPtr;
-    shellitem->GetDisplayName(SIGDN_FILESYSPATH, &strPtr);
-    item->setFilePath(QDir::fromNativeSeparators(QString::fromWCharArray(strPtr)));
-    CoTaskMemFree(strPtr);
-    return item;
+	QWinJumpListItem* item = new QWinJumpListItem(QWinJumpListItem::Destination);
+	wchar_t* strPtr;
+	shellitem->GetDisplayName(SIGDN_FILESYSPATH, &strPtr);
+	item->setFilePath(QDir::fromNativeSeparators(QString::fromWCharArray(strPtr)));
+	CoTaskMemFree(strPtr);
+	return item;
 }
 
-IUnknown *QWinJumpListPrivate::toICustomDestinationListItem(const QWinJumpListItem *item)
+IUnknown* QWinJumpListPrivate::toICustomDestinationListItem(const QWinJumpListItem* item)
 {
-    switch (item->type()) {
-    case QWinJumpListItem::Destination :
-        return toIShellItem(item);
-    case QWinJumpListItem::Link :
-        return toIShellLink(item);
-    case QWinJumpListItem::Separator :
-        return makeSeparatorShellItem();
-    default:
-        return 0;
-    }
+	switch (item->type())
+	{
+		case QWinJumpListItem::Destination :
+			return toIShellItem(item);
+
+		case QWinJumpListItem::Link :
+			return toIShellLink(item);
+
+		case QWinJumpListItem::Separator :
+			return makeSeparatorShellItem();
+
+		default:
+			return 0;
+	}
 }
 
-IShellLinkW *QWinJumpListPrivate::toIShellLink(const QWinJumpListItem *item)
+IShellLinkW* QWinJumpListPrivate::toIShellLink(const QWinJumpListItem* item)
 {
-    IShellLinkW *link = 0;
-    HRESULT hresult = CoCreateInstance(CLSID_ShellLink, 0, CLSCTX_INPROC_SERVER, qIID_IShellLinkW, reinterpret_cast<void **>(&link));
-    if (FAILED(hresult)) {
-        QWinJumpListPrivate::warning("QWinJumpList: failed to instantiate IShellLinkW", hresult);
-        return 0;
-    }
+	IShellLinkW* link = 0;
+	HRESULT hresult = CoCreateInstance(CLSID_ShellLink, 0, CLSCTX_INPROC_SERVER, qIID_IShellLinkW, reinterpret_cast<void**>(&link));
 
-    const QString args = createArguments(item->arguments());
-    const int iconPathSize = QWinJumpListPrivate::iconsDirPath().size() + sizeof(void *)*2 + 4; // path + ptr-name-in-hex + .ico
-    const int bufferSize = qMax(args.size(), qMax(item->workingDirectory().size(), qMax(item->description().size(), qMax(item->title().size(), qMax(item->filePath().size(), iconPathSize))))) + 1;
-    wchar_t *buffer = new wchar_t[bufferSize];
+	if (FAILED(hresult))
+	{
+		QWinJumpListPrivate::warning("QWinJumpList: failed to instantiate IShellLinkW", hresult);
+		return 0;
+	}
 
-    if (!item->description().isEmpty()) {
-        qt_qstringToNullTerminated(item->description(), buffer);
-        link->SetDescription(buffer);
-    }
+	const QString args = createArguments(item->arguments());
+	const int iconPathSize = QWinJumpListPrivate::iconsDirPath().size() + sizeof(void*) * 2 + 4; // path + ptr-name-in-hex + .ico
+	const int bufferSize = qMax(args.size(), qMax(item->workingDirectory().size(), qMax(item->description().size(), qMax(item->title().size(), qMax(item->filePath().size(), iconPathSize))))) + 1;
+	wchar_t* buffer = new wchar_t[bufferSize];
 
-    qt_qstringToNullTerminated(item->filePath(), buffer);
-    link->SetPath(buffer);
+	if (!item->description().isEmpty())
+	{
+		qt_qstringToNullTerminated(item->description(), buffer);
+		link->SetDescription(buffer);
+	}
 
-    if (!item->workingDirectory().isEmpty()) {
-        qt_qstringToNullTerminated(item->workingDirectory(), buffer);
-        link->SetWorkingDirectory(buffer);
-    }
+	qt_qstringToNullTerminated(item->filePath(), buffer);
+	link->SetPath(buffer);
 
-    qt_qstringToNullTerminated(args, buffer);
-    link->SetArguments(buffer);
+	if (!item->workingDirectory().isEmpty())
+	{
+		qt_qstringToNullTerminated(item->workingDirectory(), buffer);
+		link->SetWorkingDirectory(buffer);
+	}
 
-    if (!item->icon().isNull()) {
-        QString iconPath = QWinJumpListPrivate::iconsDirPath() + QString::number(reinterpret_cast<quintptr>(item), 16) + QLatin1String(".ico");
-        bool iconSaved = item->icon().pixmap(GetSystemMetrics(SM_CXICON)).save(iconPath, "ico");
-        if (iconSaved) {
-            qt_qstringToNullTerminated(iconPath, buffer);
-            link->SetIconLocation(buffer, 0);
-        }
-    }
+	qt_qstringToNullTerminated(args, buffer);
+	link->SetArguments(buffer);
 
-    IPropertyStore *properties;
-    PROPVARIANT titlepv;
-    hresult = link->QueryInterface(qIID_IPropertyStore, reinterpret_cast<void **>(&properties));
-    if (FAILED(hresult)) {
-        link->Release();
-        return 0;
-    }
+	if (!item->icon().isNull())
+	{
+		QString iconPath = QWinJumpListPrivate::iconsDirPath() + QString::number(reinterpret_cast<quintptr>(item), 16) + QLatin1String(".ico");
+		bool iconSaved = item->icon().pixmap(GetSystemMetrics(SM_CXICON)).save(iconPath, "ico");
 
-    qt_qstringToNullTerminated(item->title(), buffer);
-    InitPropVariantFromString(buffer, &titlepv);
-    properties->SetValue(qPKEY_Title, titlepv);
-    properties->Commit();
-    properties->Release();
-    PropVariantClear(&titlepv);
+		if (iconSaved)
+		{
+			qt_qstringToNullTerminated(iconPath, buffer);
+			link->SetIconLocation(buffer, 0);
+		}
+	}
 
-    delete[] buffer;
-    return link;
+	IPropertyStore* properties;
+	PROPVARIANT titlepv;
+	hresult = link->QueryInterface(qIID_IPropertyStore, reinterpret_cast<void**>(&properties));
+
+	if (FAILED(hresult))
+	{
+		link->Release();
+		return 0;
+	}
+
+	qt_qstringToNullTerminated(item->title(), buffer);
+	InitPropVariantFromString(buffer, &titlepv);
+	properties->SetValue(qPKEY_Title, titlepv);
+	properties->Commit();
+	properties->Release();
+	PropVariantClear(&titlepv);
+	delete[] buffer;
+	return link;
 }
 
-IShellItem2 *QWinJumpListPrivate::toIShellItem(const QWinJumpListItem *item)
+IShellItem2* QWinJumpListPrivate::toIShellItem(const QWinJumpListItem* item)
 {
-    IShellItem2 *shellitem = 0;
-    qtShell32Dll.init();
-    if (qtShell32Dll.sHCreateItemFromParsingName) {
-        QScopedArrayPointer<wchar_t> buffer(qt_qstringToNullTerminated(item->filePath()));
-        qtShell32Dll.sHCreateItemFromParsingName(buffer.data(), 0, qIID_IShellItem2, reinterpret_cast<void **>(&shellitem));
-    }
-    return shellitem;
+	IShellItem2* shellitem = 0;
+	qtShell32Dll.init();
+
+	if (qtShell32Dll.sHCreateItemFromParsingName)
+	{
+		QScopedArrayPointer<wchar_t> buffer(qt_qstringToNullTerminated(item->filePath()));
+		qtShell32Dll.sHCreateItemFromParsingName(buffer.data(), 0, qIID_IShellItem2, reinterpret_cast<void**>(&shellitem));
+	}
+
+	return shellitem;
 }
 
-IShellLinkW *QWinJumpListPrivate::makeSeparatorShellItem()
+IShellLinkW* QWinJumpListPrivate::makeSeparatorShellItem()
 {
-    IShellLinkW *separator;
-    HRESULT res = CoCreateInstance(CLSID_ShellLink, 0, CLSCTX_INPROC_SERVER, qIID_IShellLinkW, reinterpret_cast<void **>(&separator));
-    if (FAILED(res))
-        return 0;
+	IShellLinkW* separator;
+	HRESULT res = CoCreateInstance(CLSID_ShellLink, 0, CLSCTX_INPROC_SERVER, qIID_IShellLinkW, reinterpret_cast<void**>(&separator));
 
-    IPropertyStore *properties;
-    res = separator->QueryInterface(qIID_IPropertyStore, reinterpret_cast<void **>(&properties));
-    if (FAILED(res)) {
-        separator->Release();
-        return 0;
-    }
+	if (FAILED(res))
+	{
+		return 0;
+	}
 
-    PROPVARIANT isSeparator;
-    InitPropVariantFromBoolean(TRUE, &isSeparator);
-    properties->SetValue(qPKEY_AppUserModel_IsDestListSeparator, isSeparator);
-    properties->Commit();
-    properties->Release();
-    PropVariantClear(&isSeparator);
+	IPropertyStore* properties;
+	res = separator->QueryInterface(qIID_IPropertyStore, reinterpret_cast<void**>(&properties));
 
-    return separator;
+	if (FAILED(res))
+	{
+		separator->Release();
+		return 0;
+	}
+
+	PROPVARIANT isSeparator;
+	InitPropVariantFromBoolean(TRUE, &isSeparator);
+	properties->SetValue(qPKEY_AppUserModel_IsDestListSeparator, isSeparator);
+	properties->Commit();
+	properties->Release();
+	PropVariantClear(&isSeparator);
+	return separator;
 }
 
 /*!
     Constructs a QWinJumpList with the parent object \a parent.
  */
-QWinJumpList::QWinJumpList(QObject *parent) :
-    QObject(parent), d_ptr(new QWinJumpListPrivate)
+QWinJumpList::QWinJumpList(QObject* parent) :
+	QObject(parent), d_ptr(new QWinJumpListPrivate)
 {
-    Q_D(QWinJumpList);
-    d->q_ptr = this;
-    HRESULT hresult = CoCreateInstance(qCLSID_DestinationList, 0, CLSCTX_INPROC_SERVER, qIID_ICustomDestinationList, reinterpret_cast<void **>(&d_ptr->pDestList));
-    if (FAILED(hresult))
-        QWinJumpListPrivate::warning("CoCreateInstance", hresult);
-    d->invalidate();
+	Q_D(QWinJumpList);
+	d->q_ptr = this;
+	HRESULT hresult = CoCreateInstance(qCLSID_DestinationList, 0, CLSCTX_INPROC_SERVER, qIID_ICustomDestinationList, reinterpret_cast<void**>(&d_ptr->pDestList));
+
+	if (FAILED(hresult))
+	{
+		QWinJumpListPrivate::warning("CoCreateInstance", hresult);
+	}
+
+	d->invalidate();
 }
 
 /*!
@@ -426,14 +528,20 @@ QWinJumpList::QWinJumpList(QObject *parent) :
  */
 QWinJumpList::~QWinJumpList()
 {
-    Q_D(QWinJumpList);
-    if (d->dirty)
-        d->_q_rebuild();
-    if (d->pDestList) {
-        d->pDestList->Release();
-        d->pDestList = 0;
-    }
-    d->destroy();
+	Q_D(QWinJumpList);
+
+	if (d->dirty)
+	{
+		d->_q_rebuild();
+	}
+
+	if (d->pDestList)
+	{
+		d->pDestList->Release();
+		d->pDestList = 0;
+	}
+
+	d->destroy();
 }
 
 /*!
@@ -453,83 +561,100 @@ QWinJumpList::~QWinJumpList()
  */
 QString QWinJumpList::identifier() const
 {
-    Q_D(const QWinJumpList);
-    return d->identifier;
+	Q_D(const QWinJumpList);
+	return d->identifier;
 }
 
-void QWinJumpList::setIdentifier(const QString &identifier)
+void QWinJumpList::setIdentifier(const QString& identifier)
 {
-    Q_D(QWinJumpList);
-    QString id = identifier;
-    id.replace(QLatin1Char(' '), QLatin1Char('_'));
-    if (id.size() > 128)
-        id.truncate(128);
-    if (d->identifier != id) {
-        d->identifier = id;
-        d->invalidate();
-    }
+	Q_D(QWinJumpList);
+	QString id = identifier;
+	id.replace(QLatin1Char(' '), QLatin1Char('_'));
+
+	if (id.size() > 128)
+	{
+		id.truncate(128);
+	}
+
+	if (d->identifier != id)
+	{
+		d->identifier = id;
+		d->invalidate();
+	}
 }
 
 /*!
     Returns the recent items category in the jump list.
  */
-QWinJumpListCategory *QWinJumpList::recent() const
+QWinJumpListCategory* QWinJumpList::recent() const
 {
-    Q_D(const QWinJumpList);
-    if (!d->recent) {
-        QWinJumpList *that = const_cast<QWinJumpList *>(this);
-        that->d_func()->recent = QWinJumpListCategoryPrivate::create(QWinJumpListCategory::Recent, that);
-    }
-    return d->recent;
+	Q_D(const QWinJumpList);
+
+	if (!d->recent)
+	{
+		QWinJumpList* that = const_cast<QWinJumpList*>(this);
+		that->d_func()->recent = QWinJumpListCategoryPrivate::create(QWinJumpListCategory::Recent, that);
+	}
+
+	return d->recent;
 }
 
 /*!
     Returns the frequent items category in the jump list.
  */
-QWinJumpListCategory *QWinJumpList::frequent() const
+QWinJumpListCategory* QWinJumpList::frequent() const
 {
-    Q_D(const QWinJumpList);
-    if (!d->frequent) {
-        QWinJumpList *that = const_cast<QWinJumpList *>(this);
-        that->d_func()->frequent = QWinJumpListCategoryPrivate::create(QWinJumpListCategory::Frequent, that);
-    }
-    return d->frequent;
+	Q_D(const QWinJumpList);
+
+	if (!d->frequent)
+	{
+		QWinJumpList* that = const_cast<QWinJumpList*>(this);
+		that->d_func()->frequent = QWinJumpListCategoryPrivate::create(QWinJumpListCategory::Frequent, that);
+	}
+
+	return d->frequent;
 }
 
 /*!
     Returns the tasks category in the jump list.
  */
-QWinJumpListCategory *QWinJumpList::tasks() const
+QWinJumpListCategory* QWinJumpList::tasks() const
 {
-    Q_D(const QWinJumpList);
-    if (!d->tasks) {
-        QWinJumpList *that = const_cast<QWinJumpList *>(this);
-        that->d_func()->tasks = QWinJumpListCategoryPrivate::create(QWinJumpListCategory::Tasks, that);
-    }
-    return d->tasks;
+	Q_D(const QWinJumpList);
+
+	if (!d->tasks)
+	{
+		QWinJumpList* that = const_cast<QWinJumpList*>(this);
+		that->d_func()->tasks = QWinJumpListCategoryPrivate::create(QWinJumpListCategory::Tasks, that);
+	}
+
+	return d->tasks;
 }
 
 /*!
     Returns the custom categories in the jump list.
  */
-QList<QWinJumpListCategory *> QWinJumpList::categories() const
+QList<QWinJumpListCategory*> QWinJumpList::categories() const
 {
-    Q_D(const QWinJumpList);
-    return d->categories;
+	Q_D(const QWinJumpList);
+	return d->categories;
 }
 
 /*!
     Adds a custom \a category to the jump list.
  */
-void QWinJumpList::addCategory(QWinJumpListCategory *category)
+void QWinJumpList::addCategory(QWinJumpListCategory* category)
 {
-    Q_D(QWinJumpList);
-    if (!category)
-        return;
+	Q_D(QWinJumpList);
 
-    QWinJumpListCategoryPrivate::get(category)->jumpList = this;
-    d->categories.append(category);
-    d->invalidate();
+	if (!category)
+	{
+		return;
+	}
+
+	QWinJumpListCategoryPrivate::get(category)->jumpList = this;
+	d->categories.append(category);
+	d->invalidate();
 }
 
 /*!
@@ -537,13 +662,17 @@ void QWinJumpList::addCategory(QWinJumpListCategory *category)
     Creates a custom category with provided \a title and optional \a items,
     and adds it to the jump list.
  */
-QWinJumpListCategory *QWinJumpList::addCategory(const QString &title, const QList<QWinJumpListItem *> items)
+QWinJumpListCategory* QWinJumpList::addCategory(const QString& title, const QList<QWinJumpListItem*> items)
 {
-    QWinJumpListCategory *category = new QWinJumpListCategory(title);
-    foreach (QWinJumpListItem *item, items)
-        category->addItem(item);
-    addCategory(category);
-    return category;
+	QWinJumpListCategory* category = new QWinJumpListCategory(title);
+
+	foreach (QWinJumpListItem* item, items)
+	{
+		category->addItem(item);
+	}
+
+	addCategory(category);
+	return category;
 }
 
 /*!
@@ -553,14 +682,21 @@ QWinJumpListCategory *QWinJumpList::addCategory(const QString &title, const QLis
  */
 void QWinJumpList::clear()
 {
-    Q_D(QWinJumpList);
-    recent()->clear();
-    frequent()->clear();
-    if (d->tasks)
-        d->tasks->clear();
-    foreach (QWinJumpListCategory *category, d->categories)
-        category->clear();
-    d->destroy();
+	Q_D(QWinJumpList);
+	recent()->clear();
+	frequent()->clear();
+
+	if (d->tasks)
+	{
+		d->tasks->clear();
+	}
+
+	foreach (QWinJumpListCategory* category, d->categories)
+	{
+		category->clear();
+	}
+
+	d->destroy();
 }
 
 void QWinJumpList::_q_rebuild()

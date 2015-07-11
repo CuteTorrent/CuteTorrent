@@ -28,34 +28,34 @@ class SMTP_MIME_EXPORT MimeFile : public MimePart
 {
 public:
 
-    /* [1] Constructors and Destructors */
+	/* [1] Constructors and Destructors */
 
 	MimeFile(const QByteArray& stream, const QString& fileName);
-	MimeFile(QFile *f);
-    ~MimeFile();
+	MimeFile(QFile* f);
+	~MimeFile();
 
-    /* [1] --- */
+	/* [1] --- */
 
 
-    /* [2] Getters and Setters */
+	/* [2] Getters and Setters */
 
-    /* [2] --- */
+	/* [2] --- */
 
 protected:
 
-    /* [3] Protected members */
+	/* [3] Protected members */
 
-    QFile* file;
+	QFile* file;
 
-    /* [3] --- */
-
-
-    /* [4] Protected methods */
-
-    void writeContent(QIODevice &device) const;
+	/* [3] --- */
 
 
-    /* [4] --- */
+	/* [4] Protected methods */
+
+	void writeContent(QIODevice& device) const;
+
+
+	/* [4] --- */
 
 };
 

@@ -44,25 +44,25 @@ class QWinJumpList;
 class QWinJumpListCategoryPrivate
 {
 public:
-    QWinJumpListCategoryPrivate();
+	QWinJumpListCategoryPrivate();
 
-    static QWinJumpListCategoryPrivate *get(QWinJumpListCategory *category)
-    {
-        return category->d_func();
-    }
+	static QWinJumpListCategoryPrivate* get(QWinJumpListCategory* category)
+	{
+		return category->d_func();
+	}
 
-    static QWinJumpListCategory *create(QWinJumpListCategory::Type type, QWinJumpList *jumpList);
+	static QWinJumpListCategory* create(QWinJumpListCategory::Type type, QWinJumpList* jumpList);
 
-    void invalidate();
-    void loadRecents();
-    void addRecent(QWinJumpListItem *item);
-    void clearRecents();
+	void invalidate();
+	void loadRecents();
+	void addRecent(QWinJumpListItem* item);
+	void clearRecents();
 
-    bool visible;
-    QString title;
-    QWinJumpList *jumpList;
-    QWinJumpListCategory::Type type;
-    QList<QWinJumpListItem *> items;
+	bool visible;
+	QString title;
+	QWinJumpList* jumpList;
+	QWinJumpListCategory::Type type;
+	QList<QWinJumpListItem*> items;
 };
 
 QT_END_NAMESPACE

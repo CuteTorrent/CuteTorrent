@@ -66,18 +66,18 @@ public slots:
 signals:
 	void SearchReady(QList<SearchResult*> result) override;
 	void Error(QString error) override;
-    void JsonResultReady();
+	void JsonResultReady();
 	void HtmlResultReady();
 private:
 	Q_DISABLE_COPY(CustomScriptSearchProvider);
-    QScriptValue m_scriptVal;
+	QScriptValue m_scriptVal;
 	QString m_name;
 	QString m_url;
 	SearchCategories_t m_supportedCategories;
-    ResponseType_t m_responseType;
+	ResponseType_t m_responseType;
 	RequestType_t m_requestType;
 	QNetworkAccessManager* m_pNetworkManager;
-    QScriptEngine* m_pEngine;
+	QScriptEngine* m_pEngine;
 	QIcon m_icon;
 	void parseAsHtml(QNetworkReply* pReply);
 	void parseAsJson(QNetworkReply* pReply);

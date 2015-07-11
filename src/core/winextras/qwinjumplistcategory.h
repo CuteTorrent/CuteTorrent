@@ -49,40 +49,41 @@ class QWinJumpListCategoryPrivate;
 class  QWinJumpListCategory
 {
 public:
-    enum Type {
-        Custom,
-        Recent,
-        Frequent,
-        Tasks
-    };
+	enum Type
+	{
+		Custom,
+		Recent,
+		Frequent,
+		Tasks
+	};
 
-    explicit QWinJumpListCategory(const QString &title = QString());
-    ~QWinJumpListCategory();
+	explicit QWinJumpListCategory(const QString& title = QString());
+	~QWinJumpListCategory();
 
-    Type type() const;
+	Type type() const;
 
-    bool isVisible() const;
-    void setVisible(bool visible);
+	bool isVisible() const;
+	void setVisible(bool visible);
 
-    QString title() const;
-    void setTitle(const QString &title);
+	QString title() const;
+	void setTitle(const QString& title);
 
-    int count() const;
-    bool isEmpty() const;
-    QList<QWinJumpListItem *> items() const;
+	int count() const;
+	bool isEmpty() const;
+	QList<QWinJumpListItem*> items() const;
 
-    void addItem(QWinJumpListItem *item);
-    QWinJumpListItem *addDestination(const QString &filePath);
-    QWinJumpListItem *addLink(const QString &title, const QString &executablePath, const QStringList &arguments = QStringList());
-    QWinJumpListItem *addLink(const QIcon &icon, const QString &title, const QString &executablePath, const QStringList &arguments = QStringList());
-    QWinJumpListItem *addSeparator();
+	void addItem(QWinJumpListItem* item);
+	QWinJumpListItem* addDestination(const QString& filePath);
+	QWinJumpListItem* addLink(const QString& title, const QString& executablePath, const QStringList& arguments = QStringList());
+	QWinJumpListItem* addLink(const QIcon& icon, const QString& title, const QString& executablePath, const QStringList& arguments = QStringList());
+	QWinJumpListItem* addSeparator();
 
-    void clear();
+	void clear();
 
 private:
-    Q_DISABLE_COPY(QWinJumpListCategory)
-    Q_DECLARE_PRIVATE(QWinJumpListCategory)
-    QScopedPointer<QWinJumpListCategoryPrivate> d_ptr;
+	Q_DISABLE_COPY(QWinJumpListCategory)
+	Q_DECLARE_PRIVATE(QWinJumpListCategory)
+	QScopedPointer<QWinJumpListCategoryPrivate> d_ptr;
 };
 
 QT_END_NAMESPACE

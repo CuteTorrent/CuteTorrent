@@ -15,13 +15,14 @@ void TorrentCommandsApiController::service(HttpRequest& request, HttpResponse& r
 	}
 
 	QString method = request.getMethod();
+
 	if(method.compare("post", Qt::CaseInsensitive) == 0)
 	{
 		QString action = request.getParameter("action");
 		QString id = request.getParameter("id");
 		Torrent* tor = m_pTorrentManager->GetTorrentByInfoHash(id);
 
-        if(tor != NULL)
+		if(tor != NULL)
 		{
 			if(action == "pause")
 			{
@@ -37,6 +38,7 @@ void TorrentCommandsApiController::service(HttpRequest& request, HttpResponse& r
 				{
 					qWarning() << "QMetaObject::invokeMethod RemoveTorrent FAILED";
 				}
+
 				//m_pTorrentManager->RemoveTorrent(id, true);
 			}
 			else

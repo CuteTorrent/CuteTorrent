@@ -26,35 +26,35 @@ class SMTP_MIME_EXPORT MimeText : public MimePart
 {
 public:
 
-    /* [1] Constructors and Destructors */
+	/* [1] Constructors and Destructors */
 
-    MimeText(const QString &text = "");
-    ~MimeText();
+	MimeText(const QString& text = "");
+	~MimeText();
 
-    /* [1] --- */
+	/* [1] --- */
 
 
-    /* [2] Getters and Setters*/
+	/* [2] Getters and Setters*/
 
-    void setText(const QString & text);
+	void setText(const QString& text);
 
-    const QString & getText() const;
+	const QString& getText() const;
 
-    /* [2] --- */
+	/* [2] --- */
 
 protected:
 
-    /* [3] Protected members */
+	/* [3] Protected members */
 
-    QString text;
-    /* [3] --- */
+	QString text;
+	/* [3] --- */
 
 
-    /* [4] Protected methods */
+	/* [4] Protected methods */
 
-    void writeContent(QIODevice &device) const;
+	void writeContent(QIODevice& device) const;
 
-    /* [4] --- */
+	/* [4] --- */
 
 };
 

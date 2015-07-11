@@ -72,8 +72,8 @@
 
 #if defined(Q_OS_BSD4)
 #  if defined(Q_OS_NETBSD)
-     define QT_STATFSBUF struct statvfs
-     define QT_STATFS    ::statvfs
+define QT_STATFSBUF struct statvfs
+	define QT_STATFS    ::statvfs
 #  else
 #    define QT_STATFSBUF struct statfs
 #    define QT_STATFS    ::statfs
@@ -104,69 +104,77 @@
 #  endif // QT_LARGEFILE_SUPPORT
 #endif // Q_OS_BSD4
 
-QT_BEGIN_NAMESPACE
+	QT_BEGIN_NAMESPACE
 
-static bool isPseudoFs(const QString &mountDir, const QByteArray &type)
+static bool isPseudoFs(const QString& mountDir, const QByteArray& type)
 {
-    if (mountDir.startsWith(QLatin1String("/dev"))
-        || mountDir.startsWith(QLatin1String("/proc"))
-        || mountDir.startsWith(QLatin1String("/sys"))
-        || mountDir.startsWith(QLatin1String("/var/run"))
-        || mountDir.startsWith(QLatin1String("/var/lock"))) {
-        return true;
-    }
-    if (type == "tmpfs")
-        return true;
-#if defined(Q_OS_LINUX)
-    if (type == "rootfs" || type == "rpc_pipefs")
-        return true;
-#endif
+	if (mountDir.startsWith(QLatin1String("/dev"))
+	        || mountDir.startsWith(QLatin1String("/proc"))
+	        || mountDir.startsWith(QLatin1String("/sys"))
+	        || mountDir.startsWith(QLatin1String("/var/run"))
+	        || mountDir.startsWith(QLatin1String("/var/lock")))
+	{
+		return true;
+	}
 
-    return false;
+	if (type == "tmpfs")
+	{
+		return true;
+	}
+
+#if defined(Q_OS_LINUX)
+
+	if (type == "rootfs" || type == "rpc_pipefs")
+	{
+		return true;
+	}
+
+#endif
+	return false;
 }
 
 class QStorageIterator
 {
 public:
-    QStorageIterator();
-    ~QStorageIterator();
+	QStorageIterator();
+	~QStorageIterator();
 
-    inline bool isValid() const;
-    inline bool next();
-    inline QString rootPath() const;
-    inline QByteArray fileSystemType() const;
-    inline QByteArray device() const;
+	inline bool isValid() const;
+	inline bool next();
+	inline QString rootPath() const;
+	inline QByteArray fileSystemType() const;
+	inline QByteArray device() const;
 private:
 #if defined(Q_OS_BSD4)
-    QT_STATFSBUF *stat_buf;
-    int entryCount;
-    int currentIndex;
+	QT_STATFSBUF* stat_buf;
+	int entryCount;
+	int currentIndex;
 #elif defined(Q_OS_SOLARIS)
-    FILE *fp;
-    mnttab mnt;
+	FILE* fp;
+	mnttab mnt;
 #elif defined(Q_OS_ANDROID)
-    QFile file;
-    QByteArray m_rootPath;
-    QByteArray m_fileSystemType;
-    QByteArray m_device;
+	QFile file;
+	QByteArray m_rootPath;
+	QByteArray m_fileSystemType;
+	QByteArray m_device;
 #elif defined(Q_OS_LINUX)
-    FILE *fp;
-    mntent mnt;
-    QByteArray buffer;
+	FILE* fp;
+	mntent mnt;
+	QByteArray buffer;
 #elif defined(Q_OS_HAIKU)
-    BVolumeRoster m_volumeRoster;
+	BVolumeRoster m_volumeRoster;
 
-    QByteArray m_rootPath;
-    QByteArray m_fileSystemType;
-    QByteArray m_device;
+	QByteArray m_rootPath;
+	QByteArray m_fileSystemType;
+	QByteArray m_device;
 #endif
 };
 
 #if defined(Q_OS_BSD4)
 
 inline QStorageIterator::QStorageIterator()
-    : entryCount(::getmntinfo(&stat_buf, 0)),
-      currentIndex(-1)
+	: entryCount(::getmntinfo(&stat_buf, 0)),
+	  currentIndex(-1)
 {
 }
 
@@ -176,27 +184,27 @@ inline QStorageIterator::~QStorageIterator()
 
 inline bool QStorageIterator::isValid() const
 {
-    return entryCount != -1;
+	return entryCount != -1;
 }
 
 inline bool QStorageIterator::next()
 {
-    return ++currentIndex < entryCount;
+	return ++currentIndex < entryCount;
 }
 
 inline QString QStorageIterator::rootPath() const
 {
-    return QFile::decodeName(stat_buf[currentIndex].f_mntonname);
+	return QFile::decodeName(stat_buf[currentIndex].f_mntonname);
 }
 
 inline QByteArray QStorageIterator::fileSystemType() const
 {
-    return QByteArray(stat_buf[currentIndex].f_fstypename);
+	return QByteArray(stat_buf[currentIndex].f_fstypename);
 }
 
 inline QByteArray QStorageIterator::device() const
 {
-    return QByteArray(stat_buf[currentIndex].f_mntfromname);
+	return QByteArray(stat_buf[currentIndex].f_mntfromname);
 }
 
 #elif defined(Q_OS_SOLARIS)
@@ -205,39 +213,41 @@ static const char pathMounted[] = "/etc/mnttab";
 
 inline QStorageIterator::QStorageIterator()
 {
-    const int fd = qt_safe_open(pathMounted, O_RDONLY);
-    fp = ::fdopen(fd, "r");
+	const int fd = qt_safe_open(pathMounted, O_RDONLY);
+	fp = ::fdopen(fd, "r");
 }
 
 inline QStorageIterator::~QStorageIterator()
 {
-    if (fp)
-        ::fclose(fp);
+	if (fp)
+	{
+		::fclose(fp);
+	}
 }
 
 inline bool QStorageIterator::isValid() const
 {
-    return fp != NULL;
+	return fp != NULL;
 }
 
 inline bool QStorageIterator::next()
 {
-    return ::getmntent(fp, &mnt) == 0;
+	return ::getmntent(fp, &mnt) == 0;
 }
 
 inline QString QStorageIterator::rootPath() const
 {
-    return QFile::decodeName(mnt.mnt_mountp);
+	return QFile::decodeName(mnt.mnt_mountp);
 }
 
 inline QByteArray QStorageIterator::fileSystemType() const
 {
-    return QByteArray(mnt.mnt_fstype);
+	return QByteArray(mnt.mnt_fstype);
 }
 
 inline QByteArray QStorageIterator::device() const
 {
-    return QByteArray(mnt.mnt_mntopts);
+	return QByteArray(mnt.mnt_mntopts);
 }
 
 #elif defined(Q_OS_ANDROID)
@@ -246,8 +256,8 @@ static const char pathMounted[] = "/proc/mounts";
 
 inline QStorageIterator::QStorageIterator()
 {
-    file.setFileName(pathMounted);
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
+	file.setFileName(pathMounted);
+	file.open(QIODevice::ReadOnly | QIODevice::Text);
 }
 
 inline QStorageIterator::~QStorageIterator()
@@ -256,81 +266,88 @@ inline QStorageIterator::~QStorageIterator()
 
 inline bool QStorageIterator::isValid() const
 {
-    return file.isOpen();
+	return file.isOpen();
 }
 
 inline bool QStorageIterator::next()
 {
-    QList<QByteArray> data;
-    do {
-        const QByteArray line = file.readLine();
-        data = line.split(' ');
-    } while (data.count() < 3 && !file.atEnd());
+	QList<QByteArray> data;
 
-    if (file.atEnd())
-        return false;
-    m_device = data.at(0);
-    m_rootPath = data.at(1);
-    m_fileSystemType = data.at(2);
+	do
+	{
+		const QByteArray line = file.readLine();
+		data = line.split(' ');
+	}
+	while (data.count() < 3 && !file.atEnd());
 
-    return true;
+	if (file.atEnd())
+	{
+		return false;
+	}
+
+	m_device = data.at(0);
+	m_rootPath = data.at(1);
+	m_fileSystemType = data.at(2);
+	return true;
 }
 
 inline QString QStorageIterator::rootPath() const
 {
-    return QFile::decodeName(m_rootPath);
+	return QFile::decodeName(m_rootPath);
 }
 
 inline QByteArray QStorageIterator::fileSystemType() const
 {
-    return m_fileSystemType;
+	return m_fileSystemType;
 }
 
 inline QByteArray QStorageIterator::device() const
 {
-    return m_device;
+	return m_device;
 }
 
 #elif defined(Q_OS_LINUX)
 
 static const char pathMounted[] = "/etc/mtab";
-static const int bufferSize = 3*PATH_MAX; // 2 paths (mount point+device) and metainfo
+static const int bufferSize = 3 * PATH_MAX; // 2 paths (mount point+device) and metainfo
 
 inline QStorageIterator::QStorageIterator() :
-    buffer(QByteArray(bufferSize, 0))
+	buffer(QByteArray(bufferSize, 0))
 {
-    fp = ::setmntent(pathMounted, "r");
+	fp = ::setmntent(pathMounted, "r");
 }
 
 inline QStorageIterator::~QStorageIterator()
 {
-    if (fp)
-        ::endmntent(fp);
+	if (fp)
+	{
+		::endmntent(fp);
+	}
 }
 
 inline bool QStorageIterator::isValid() const
 {
-    return fp != NULL;
+	return fp != NULL;
 }
 
 inline bool QStorageIterator::next()
 {
-    return ::getmntent_r(fp, &mnt, buffer.data(), buffer.size()) != NULL;
+	return ::getmntent_r(fp, &mnt, buffer.data(), buffer.size()) != NULL;
 }
 
 inline QString QStorageIterator::rootPath() const
 {
-    return QFile::decodeName(mnt.mnt_dir);
+	return QFile::decodeName(mnt.mnt_dir);
 }
 
 inline QByteArray QStorageIterator::fileSystemType() const
 {
-    return QByteArray(mnt.mnt_type);
+	return QByteArray(mnt.mnt_type);
 }
 
 inline QByteArray QStorageIterator::device() const
 {
-    return QByteArray(mnt.mnt_fsname);
+	return QByteArray(mnt.mnt_fsname);
 }
 
 #elif defined(Q_OS_HAIKU)
@@ -344,50 +361,54 @@ inline QStorageIterator::~QStorageIterator()
 
 inline bool QStorageIterator::isValid() const
 {
-    return true;
+	return true;
 }
 
 inline bool QStorageIterator::next()
 {
-    BVolume volume;
+	BVolume volume;
 
-    if (m_volumeRoster.GetNextVolume(&volume) != B_OK)
-        return false;
+	if (m_volumeRoster.GetNextVolume(&volume) != B_OK)
+	{
+		return false;
+	}
 
-    BDirectory directory;
-    if (volume.GetRootDirectory(&directory) != B_OK)
-        return false;
+	BDirectory directory;
 
-    const BPath path(&directory);
+	if (volume.GetRootDirectory(&directory) != B_OK)
+	{
+		return false;
+	}
 
-    fs_info fsInfo;
-    memset(&fsInfo, 0, sizeof(fsInfo));
+	const BPath path(&directory);
+	fs_info fsInfo;
+	memset(&fsInfo, 0, sizeof(fsInfo));
 
-    if (fs_stat_dev(volume.Device(), &fsInfo) != 0)
-        return false;
+	if (fs_stat_dev(volume.Device(), &fsInfo) != 0)
+	{
+		return false;
+	}
 
-    m_rootPath = path.Path();
-    m_fileSystemType = QByteArray(fsInfo.fsh_name);
-
-    const QByteArray deviceName(fsInfo.device_name);
-    m_device = (deviceName.isEmpty() ? QByteArray::number(qint32(volume.Device())) : deviceName);
-
-    return true;
+	m_rootPath = path.Path();
+	m_fileSystemType = QByteArray(fsInfo.fsh_name);
+	const QByteArray deviceName(fsInfo.device_name);
+	m_device = (deviceName.isEmpty() ? QByteArray::number(qint32(volume.Device())) : deviceName);
+	return true;
 }
 
 inline QString QStorageIterator::rootPath() const
 {
-    return QFile::decodeName(m_rootPath);
+	return QFile::decodeName(m_rootPath);
 }
 
 inline QByteArray QStorageIterator::fileSystemType() const
 {
-    return m_fileSystemType;
+	return m_fileSystemType;
 }
 
 inline QByteArray QStorageIterator::device() const
 {
-    return m_device;
+	return m_device;
 }
 
 #else
@@ -402,150 +423,186 @@ inline QStorageIterator::~QStorageIterator()
 
 inline bool QStorageIterator::isValid() const
 {
-    return false;
+	return false;
 }
 
 inline bool QStorageIterator::next()
 {
-    return false;
+	return false;
 }
 
 inline QString QStorageIterator::rootPath() const
 {
-    return QString();
+	return QString();
 }
 
 inline QByteArray QStorageIterator::fileSystemType() const
 {
-    return QByteArray();
+	return QByteArray();
 }
 
 inline QByteArray QStorageIterator::device() const
 {
-    return QByteArray();
+	return QByteArray();
 }
 
 #endif
 
 void QStorageInfoPrivate::initRootPath()
 {
-    rootPath = QFileInfo(rootPath).canonicalFilePath();
+	QFileInfo fileInfo = QFileInfo(rootPath);
 
-    if (rootPath.isEmpty())
-        return;
+	if (fileInfo.exists())
+	{
+		rootPath = fileInfo.canonicalFilePath();
 
-    QStorageIterator it;
-    if (!it.isValid()) {
-        rootPath = QString("/");
-        return;
-    }
+		if (rootPath.isEmpty())
+		{
+			return;
+		}
+	}
 
-    int maxLength = 0;
-    const QString oldRootPath = rootPath;
-    rootPath.clear();
+	QStorageIterator it;
 
-    while (it.next()) {
-        const QString mountDir = it.rootPath();
-        const QByteArray fsName = it.fileSystemType();
-        if (isPseudoFs(mountDir, fsName))
-            continue;
-        // we try to find most suitable entry
-        if (oldRootPath.startsWith(mountDir) && maxLength < mountDir.length()) {
-            maxLength = mountDir.length();
-            rootPath = mountDir;
-            device = it.device();
-            fileSystemType = fsName;
-        }
-    }
+	if (!it.isValid())
+	{
+		rootPath = QString("/");
+		return;
+	}
+
+	int maxLength = 0;
+	const QString oldRootPath = rootPath;
+	rootPath.clear();
+
+	while (it.next())
+	{
+		const QString mountDir = it.rootPath();
+		const QByteArray fsName = it.fileSystemType();
+
+		if (isPseudoFs(mountDir, fsName))
+		{
+			continue;
+		}
+
+		// we try to find most suitable entry
+		if (oldRootPath.startsWith(mountDir) && maxLength < mountDir.length())
+		{
+			maxLength = mountDir.length();
+			rootPath = mountDir;
+			device = it.device();
+			fileSystemType = fsName;
+		}
+	}
 }
 
-static inline QString retrieveLabel(const QByteArray &device)
+static inline QString retrieveLabel(const QByteArray& device)
 {
 #ifdef Q_OS_LINUX
-    static const char pathDiskByLabel[] = "/dev/disk/by-label";
+	static const char pathDiskByLabel[] = "/dev/disk/by-label";
+	QDirIterator it(QLatin1String(pathDiskByLabel), QDir::NoDotAndDotDot);
 
-    QDirIterator it(QLatin1String(pathDiskByLabel), QDir::NoDotAndDotDot);
-    while (it.hasNext()) {
-        it.next();
-        QFileInfo fileInfo(it.fileInfo());
-        if (fileInfo.isSymLink() && fileInfo.symLinkTarget().toLocal8Bit() == device)
-            return fileInfo.fileName();
-    }
+	while (it.hasNext())
+	{
+		it.next();
+		QFileInfo fileInfo(it.fileInfo());
+
+		if (fileInfo.isSymLink() && fileInfo.symLinkTarget().toLocal8Bit() == device)
+		{
+			return fileInfo.fileName();
+		}
+	}
+
 #elif defined Q_OS_HAIKU
-    fs_info fsInfo;
-    memset(&fsInfo, 0, sizeof(fsInfo));
+	fs_info fsInfo;
+	memset(&fsInfo, 0, sizeof(fsInfo));
+	int32 pos = 0;
+	dev_t dev;
 
-    int32 pos = 0;
-    dev_t dev;
-    while ((dev = next_dev(&pos)) >= 0) {
-        if (fs_stat_dev(dev, &fsInfo) != 0)
-            continue;
+	while ((dev = next_dev(&pos)) >= 0)
+	{
+		if (fs_stat_dev(dev, &fsInfo) != 0)
+		{
+			continue;
+		}
 
-        if (qstrcmp(fsInfo.device_name, device.constData()) == 0)
-            return QString::fromLocal8Bit(fsInfo.volume_name);
-    }
+		if (qstrcmp(fsInfo.device_name, device.constData()) == 0)
+		{
+			return QString::fromLocal8Bit(fsInfo.volume_name);
+		}
+	}
+
 #else
-    Q_UNUSED(device);
+	Q_UNUSED(device);
 #endif
-
-    return QString();
+	return QString();
 }
 
 void QStorageInfoPrivate::doStat()
 {
-    initRootPath();
-    if (rootPath.isEmpty())
-        return;
+	initRootPath();
 
-    retrieveVolumeInfo();
-    name = retrieveLabel(device);
+	if (rootPath.isEmpty())
+	{
+		return;
+	}
+
+	retrieveVolumeInfo();
+	name = retrieveLabel(device);
 }
 
 void QStorageInfoPrivate::retrieveVolumeInfo()
 {
-    QT_STATFSBUF statfs_buf;
-    int result;
-    EINTR_LOOP(result, QT_STATFS(QFile::encodeName(rootPath).constData(), &statfs_buf));
-    if (result == 0) {
-        valid = true;
-        ready = true;
+	QT_STATFSBUF statfs_buf;
+	int result;
+	EINTR_LOOP(result, QT_STATFS(QFile::encodeName(rootPath).constData(), &statfs_buf));
 
-        bytesTotal = statfs_buf.f_blocks * statfs_buf.f_bsize;
-        bytesFree = statfs_buf.f_bfree * statfs_buf.f_bsize;
-        bytesAvailable = statfs_buf.f_bavail * statfs_buf.f_bsize;
+	if (result == 0)
+	{
+		valid = true;
+		ready = true;
+		bytesTotal = statfs_buf.f_blocks * statfs_buf.f_bsize;
+		bytesFree = statfs_buf.f_bfree * statfs_buf.f_bsize;
+		bytesAvailable = statfs_buf.f_bavail * statfs_buf.f_bsize;
 #if defined(Q_OS_ANDROID) || defined (Q_OS_BSD4)
 #if defined(_STATFS_F_FLAGS)
-        readOnly = (statfs_buf.f_flags & ST_RDONLY) != 0;
+		readOnly = (statfs_buf.f_flags & ST_RDONLY) != 0;
 #endif
 #else
-        readOnly = (statfs_buf.f_flag & ST_RDONLY) != 0;
+		readOnly = (statfs_buf.f_flag & ST_RDONLY) != 0;
 #endif
-    }
+	}
 }
 
 QList<QStorageInfo> QStorageInfoPrivate::mountedVolumes()
 {
-    QStorageIterator it;
-    if (!it.isValid())
-        return QList<QStorageInfo>() << root();
+	QStorageIterator it;
 
-    QList<QStorageInfo> volumes;
+	if (!it.isValid())
+	{
+		return QList<QStorageInfo>() << root();
+	}
 
-    while (it.next()) {
-        const QString mountDir = it.rootPath();
-        const QByteArray fsName = it.fileSystemType();
-        if (isPseudoFs(mountDir, fsName))
-            continue;
+	QList<QStorageInfo> volumes;
 
-        volumes.append(QStorageInfo(mountDir));
-    }
+	while (it.next())
+	{
+		const QString mountDir = it.rootPath();
+		const QByteArray fsName = it.fileSystemType();
 
-    return volumes;
+		if (isPseudoFs(mountDir, fsName))
+		{
+			continue;
+		}
+
+		volumes.append(QStorageInfo(mountDir));
+	}
+
+	return volumes;
 }
 
 QStorageInfo QStorageInfoPrivate::root()
 {
-    return QStorageInfo(QString("/"));
+	return QStorageInfo(QString("/"));
 }
 
 QT_END_NAMESPACE

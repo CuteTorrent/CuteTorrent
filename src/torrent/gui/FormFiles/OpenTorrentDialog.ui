@@ -419,6 +419,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pathEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>OpenTorrentDialog</receiver>
+   <slot>OnPathChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>134</x>
+     <y>66</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>240</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>CancelButton()</slot>
@@ -426,5 +442,6 @@
   <slot>AccepTorrent()</slot>
   <slot>ChangeGroup()</slot>
   <slot>DownloadMetadataCompleted()</slot>
+  <slot>OnPathChanged(QString)</slot>
  </slots>
 </ui>

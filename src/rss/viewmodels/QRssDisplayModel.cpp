@@ -7,11 +7,11 @@
 #include "messagebox.h"
 #include "StyleEngene.h"
 #include "OpenTorrentDialog.h"
-#include "torrentdownloader.h"
+#include "filedownloader.h"
 #include <QInputDialog>
 #include "RssItem.h"
 QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent, bool autoUpdate) : QAbstractItemModel(parrent), m_pRssManager(RssManager::getInstance()),
-	m_pTorrentDownloader(TorrentDownloader::getInstance())
+	m_pTorrentDownloader(FileDownloader::getInstance())
 {
 	m_pItemsView = pItemsView;
 	m_pUdpateTimer = new QTimer(this);
@@ -19,7 +19,7 @@ QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent, bool
 	setupItemMenu();
 	UpdateModel();
 	connect(m_pRssManager.get(), SIGNAL(FeedChanged(QUuid)), this, SLOT(UpdateModel()));
-	connect(m_pTorrentDownloader.get(), SIGNAL(TorrentReady(QUrl, QTemporaryFile*)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFile*)));
+	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFile*)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFile*)));
 	connect(m_pUdpateTimer, SIGNAL(timeout()), this, SLOT(UpdateVisibleData()));
 
 	if (autoUpdate)
@@ -145,9 +145,9 @@ void QRssDisplayModel::UpdateModel()
 	m_rootItems.clear();
 	QList<RssFeed*> feeds = m_pRssManager->feeds();
 
-    for (int i = 0 ;i < feeds.size(); i++)
-    {
-        RssFeed* var = feeds[i];
+	for (int i = 0 ; i < feeds.size(); i++)
+	{
+		RssFeed* var = feeds[i];
 		m_rootItems.append(new RssFeedTreeItem(var));
 	}
 
@@ -165,9 +165,10 @@ QList<RssFeed*> QRssDisplayModel::SelectedFeeds()
 	QSet<RssFeed*> res;
 	QModelIndexList selectedIndexes = m_pItemsView->selectionModel()->selectedIndexes();
 
-    for (int i = 0 ;i < selectedIndexes.size(); i++)
+	for (int i = 0 ; i < selectedIndexes.size(); i++)
 	{
-        QModelIndex selectedIndex = selectedIndexes[i];
+		QModelIndex selectedIndex = selectedIndexes[i];
+
 		if (selectedIndex.isValid())
 		{
 			QVariant data = selectedIndex.data(RssFeedRole);
@@ -196,12 +197,12 @@ QList<RssFeed*> QRssDisplayModel::SelectedFeeds()
 QList<RssItem*> QRssDisplayModel::SelectedRssItems()
 {
 	QSet<RssItem*> res;
-
 	QModelIndexList selectedIndexes = m_pItemsView->selectionModel()->selectedIndexes();
 
 	for (int i = 0; i < selectedIndexes.size(); i++)
 	{
 		QModelIndex selectedIndex = selectedIndexes[i];
+
 		if (selectedIndex.isValid())
 		{
 			QVariant data = selectedIndex.data(RssItemRole);
@@ -213,6 +214,7 @@ QList<RssItem*> QRssDisplayModel::SelectedRssItems()
 			}
 		}
 	}
+
 	return res.toList();
 }
 
@@ -313,7 +315,6 @@ void QRssDisplayModel::setCurrentItemUnread(bool val)
 		feeds2updateUnreadCount.insert(pItem->rssFeed());
 	}
 
-	
 	foreach(RssFeed* pFeed, feeds2updateUnreadCount)
 	{
 		pFeed->UpdateUnreadCount();
@@ -518,8 +519,7 @@ void QRssDisplayModel::onItemDownload()
 		}
 		else
 		{
-			m_pTorrentDownloader->downloadTorrent(torrentUrl, current->rssFeed()->coookies());
-			m_activeTorrentDownloads.append(torrentUrl);
+			m_pTorrentDownloader->download(torrentUrl, current->rssFeed()->coookies());
 		}
 	}
 }
@@ -535,16 +535,12 @@ void QRssDisplayModel::onItemOpenDesc()
 
 void QRssDisplayModel::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 {
-	if (m_activeTorrentDownloads.contains(url))
-	{
-		boost::scoped_ptr<QTemporaryFile> pSafeFile(pUnsafeFile);
-		QString fileName = pSafeFile->fileName();
-		boost::scoped_ptr<OpenTorrentDialog> pDlg(new OpenTorrentDialog(m_pItemsView));
-		pDlg->SetData(fileName);
-		pDlg->exec();
-		pSafeFile->setAutoRemove(true);
-		m_activeTorrentDownloads.removeAll(url);
-	}
+	boost::scoped_ptr<QTemporaryFile> pSafeFile(pUnsafeFile);
+	QString fileName = pSafeFile->fileName();
+	boost::scoped_ptr<OpenTorrentDialog> pDlg(new OpenTorrentDialog(m_pItemsView));
+	pDlg->SetData(fileName);
+	pDlg->exec();
+	pSafeFile->setAutoRemove(true);
 }
 
 void QRssDisplayModel::onMarkAllRead()

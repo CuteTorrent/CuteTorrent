@@ -20,13 +20,13 @@
 
 /* [1] Constructors and Destructors */
 
-EmailAddress::EmailAddress(const QString & address, const QString & name)
-    : address(address), name(name)
+EmailAddress::EmailAddress(const QString& address, const QString& name)
+	: address(address), name(name)
 {
 }
 
-EmailAddress::EmailAddress(const EmailAddress &other)
-    : address(other.address), name(other.name)
+EmailAddress::EmailAddress(const EmailAddress& other)
+	: address(other.address), name(other.name)
 {
 }
 
@@ -42,12 +42,12 @@ EmailAddress::~EmailAddress()
 
 QString EmailAddress::getName() const
 {
-    return name;
+	return name;
 }
 
 QString EmailAddress::getAddress() const
 {
-    return address;
+	return address;
 }
 
 /* [2] --- */

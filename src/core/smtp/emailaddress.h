@@ -26,32 +26,32 @@ class SMTP_MIME_EXPORT EmailAddress
 {
 public:
 
-    /* [1] Constructors and Destructors */
+	/* [1] Constructors and Destructors */
 
-    EmailAddress(const QString & address = "", const QString & name = "");
-    EmailAddress(const EmailAddress &other);
+	EmailAddress(const QString& address = "", const QString& name = "");
+	EmailAddress(const EmailAddress& other);
 
-    ~EmailAddress();
+	~EmailAddress();
 
-    /* [1] --- */
+	/* [1] --- */
 
 
-    /* [2] Getters and Setters */
+	/* [2] Getters and Setters */
 
-    QString getAddress() const;
-    QString getName() const;
+	QString getAddress() const;
+	QString getName() const;
 
-    /* [2] --- */
+	/* [2] --- */
 
 
 private:
 
-    /* [3] Private members */
+	/* [3] Private members */
 
-    QString address;
-    QString name;
+	QString address;
+	QString name;
 
-    /* [3] --- */
+	/* [3] --- */
 };
 
 #endif // EMAILADDRESS_H

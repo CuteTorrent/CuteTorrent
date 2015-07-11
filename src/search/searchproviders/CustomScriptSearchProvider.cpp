@@ -61,44 +61,50 @@ void CustomScriptSearchProvider::setRequestType(int val)
 QString CustomScriptSearchProvider::BuildUrl(QString token, int category, int page)
 {
 	QScriptValue obj = m_scriptVal;
+
 	if (obj.isObject())
 	{
-        m_pEngine = obj.engine();
-        m_scriptVal = obj;
+		m_pEngine = obj.engine();
+		m_scriptVal = obj;
 		QScriptValue buildUrlFunk = obj.property("BuildUrl");
+
 		if (!buildUrlFunk.isFunction())
 		{
 			m_pEngine->currentContext()->throwError("No implementation for SearchPlugin.BuildUrl provided.");
 			return "";
 		}
+
 		QScriptValueList args;
 		args << QScriptValue(token) << category << page;
 		QScriptValue ret = buildUrlFunk.call(obj, args);
 		return ret.toString();
-
 	}
+
 	return "";
 }
 
 QString CustomScriptSearchProvider::BuildPostData(QString token, int category, int page)
 {
 	QScriptValue obj = m_scriptVal;
+
 	if (obj.isObject())
 	{
 		m_pEngine = obj.engine();
 		m_scriptVal = obj;
 		QScriptValue buildUrlFunk = obj.property("BuildPostData");
+
 		if (!buildUrlFunk.isFunction())
 		{
 			m_pEngine->currentContext()->throwError("No implementation for SearchPlugin.BuildPostData provided.");
 			return "";
 		}
+
 		QScriptValueList args;
 		args << QScriptValue(token) << category << page;
 		QScriptValue ret = buildUrlFunk.call(obj, args);
 		return ret.toString();
-
 	}
+
 	return "";
 }
 
@@ -113,10 +119,12 @@ void CustomScriptSearchProvider::PeformSearch(QString token, int category, int p
 	QString url = BuildUrl(token, category, page);
 	qDebug() << "Url:" << url;
 	request.setUrl(url);
+
 	if (m_scriptVal.isValid())
 	{
 		fillAdditionalHeaders(request, m_scriptVal);
 	}
+
 	switch (m_requestType)
 	{
 		case GET:
@@ -124,15 +132,17 @@ void CustomScriptSearchProvider::PeformSearch(QString token, int category, int p
 			m_pNetworkManager->get(request);
 			break;
 		}
+
 		case POST:
 		{
 			QByteArray postData = BuildPostData(token, category, page).toUtf8();
 			m_pNetworkManager->post(request, postData);
 			break;
 		}
-		default: break;
+
+		default:
+			break;
 	}
-	
 }
 
 
@@ -154,6 +164,7 @@ void CustomScriptSearchProvider::setIcon(QIcon ico)
 void CustomScriptSearchProvider::fillAdditionalHeaders(QNetworkRequest& networkRequest, QScriptValue scriptVal)
 {
 	QScriptValue headers = scriptVal.property("custom_headers");
+
 	if (headers.isValid() && headers.isObject())
 	{
 		QScriptValueIterator it(headers);
@@ -161,8 +172,12 @@ void CustomScriptSearchProvider::fillAdditionalHeaders(QNetworkRequest& networkR
 		while (it.hasNext())
 		{
 			it.next();
+
 			if (it.flags() & QScriptValue::SkipInEnumeration)
+			{
 				continue;
+			}
+
 			networkRequest.setRawHeader(it.name().toUtf8(), it.value().toString().toUtf8());
 		}
 	}
@@ -173,9 +188,10 @@ QString CustomScriptSearchProvider::detectEncoding(QString contentType)
 	QString encoding = "UTF-8";
 	QStringList parts = contentType.split(';');
 
-	for (int i = 0; i< parts.size(); i++)
+	for (int i = 0; i < parts.size(); i++)
 	{
 		QString part = parts[i];
+
 		if (part.contains("charset"))
 		{
 			QStringList charsetParts = part.split('=');
@@ -196,69 +212,70 @@ void CustomScriptSearchProvider::parseAsHtml(QNetworkReply* pReply)
 		QSgml* sgml = new QSgml(data);
 		QScriptValue htmlResult = m_pEngine->newQObject(sgml);
 		QScriptValue thisObj = m_scriptVal;
+
 		if (thisObj.isObject() && thisObj.isValid())
 		{
 			thisObj.setProperty("htmlResult", htmlResult);
 			emit HtmlResultReady();
 		}
 	}
-
 }
 
 void CustomScriptSearchProvider::parseAsJson(QNetworkReply* pReply)
 {
-    if (m_pEngine)
-    {
-        QScriptValue globalObject = m_pEngine->globalObject();
-        QScriptValue json = globalObject.property("JSON");
-        if (json.isObject())
-        {
-            QScriptValue parseFunk = json.property("parse");
+	if (m_pEngine)
+	{
+		QScriptValue globalObject = m_pEngine->globalObject();
+		QScriptValue json = globalObject.property("JSON");
 
-            if (parseFunk.isFunction())
-            {
-                QString jsonStr = pReply->readAll();
-                QScriptValue object = parseFunk.call(json, QScriptValueList() << jsonStr);
-                QScriptValue thisObj = m_scriptVal;
-                if (thisObj.isObject() && thisObj.isValid())
-                {
-                    thisObj.setProperty("jsonResult", object);
-                    emit JsonResultReady();
-                }
+		if (json.isObject())
+		{
+			QScriptValue parseFunk = json.property("parse");
 
-            }
-        }
-    }
+			if (parseFunk.isFunction())
+			{
+				QString jsonStr = pReply->readAll();
+				QScriptValue object = parseFunk.call(json, QScriptValueList() << jsonStr);
+				QScriptValue thisObj = m_scriptVal;
 
+				if (thisObj.isObject() && thisObj.isValid())
+				{
+					thisObj.setProperty("jsonResult", object);
+					emit JsonResultReady();
+				}
+			}
+		}
+	}
 }
 
 void CustomScriptSearchProvider::OnReplyReady(QNetworkReply* pReply)
 {
-    if (pReply->error() == QNetworkReply::NoError)
-    {
-        switch (m_responseType)
-        {
-            case HTML:
-            {
-                parseAsHtml(pReply);
-                break;
-            }
-            case JSON:
-            {
-                parseAsJson(pReply);
-                break;
-            }
-            default:
-            {
+	if (pReply->error() == QNetworkReply::NoError)
+	{
+		switch (m_responseType)
+		{
+			case HTML:
+			{
+				parseAsHtml(pReply);
+				break;
+			}
 
-                break;
-            }
-        }
-    }
-    else
-    {
-        emit Error(pReply->errorString());
-    }
+			case JSON:
+			{
+				parseAsJson(pReply);
+				break;
+			}
+
+			default:
+			{
+				break;
+			}
+		}
+	}
+	else
+	{
+		emit Error(pReply->errorString());
+	}
 }
 
 int CustomScriptSearchProvider::SupportedCategories()

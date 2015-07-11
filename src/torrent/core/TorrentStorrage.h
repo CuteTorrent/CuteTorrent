@@ -20,7 +20,7 @@ public:
 	~TorrentStorrage(void);
 protected:
 	TorrentStorrage(QObject* parrent = NULL);
-	
+
 private:
 	QMap<QString, Torrent*> m_torrentsMap;
 	QMutex* m_pMapSynkMutex;

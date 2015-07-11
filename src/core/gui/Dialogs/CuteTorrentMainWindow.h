@@ -125,7 +125,7 @@ private:
 	QTreeWidgetItem* groupsTreeItem;
 	QTreeWidgetItem* rssTreeItem;
 	QTreeWidgetItem* searchTreeItem;
-    SearchEnginePtr m_pSearchEngine;
+	SearchEnginePtr m_pSearchEngine;
 #ifdef Q_WS_WIN
 	QWinJumpList* m_pJumpList;
 #endif

@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <libtorrent/i2p_stream.hpp>
 #include <libtorrent/socks5_stream.hpp>
 #include "StyleEngene.h"
+#include <zlib.h>
 QString StaticHelpers::toKbMbGb(size_type size)
 {
 	float val = size;
@@ -208,6 +209,7 @@ QString StaticHelpers::GetBaseSuffix(const file_storage& storrage)
 QString StaticHelpers::translateLibTorrentError(error_code const& ec)
 {
 #if LIBTORRENT_VERSION_NUM >= 10000
+
 	if (ec.category() == get_libtorrent_category())
 	{
 		return translateSessionError(ec);
@@ -237,6 +239,7 @@ QString StaticHelpers::translateLibTorrentError(error_code const& ec)
 	{
 		return translateUpnpError(ec);
 	}
+
 #endif
 	return QString::fromUtf8(ec.message().c_str());
 }
@@ -571,19 +574,17 @@ QString StaticHelpers::translateError(error_code const& ec, char* msgs[], int ms
 		return QString::fromUtf8(ec.message().c_str());
 	}
 
-    return qApp->translate("ErrorMsg", msgs[code]);
+	return qApp->translate("ErrorMsg", msgs[code]);
 }
 
 #ifdef Q_WS_X11
-void StaticHelpers::OpenFolderNautilus(QString &file)
+void StaticHelpers::OpenFolderNautilus(QString& file)
 {
-    QProcess* nautilus = new QProcess();
-    QStringList arguments;
-    arguments << "--browser" << file;
-
-    nautilus->startDetached("nautilus", arguments);
-    nautilus->deleteLater();
-
+	QProcess* nautilus = new QProcess();
+	QStringList arguments;
+	arguments << "--browser" << file;
+	nautilus->startDetached("nautilus", arguments);
+	nautilus->deleteLater();
 }
 #endif
 
@@ -615,6 +616,60 @@ NetworkDiskCache* StaticHelpers::GetGLobalWebCache()
 	}
 
 	return m_pDiskCache;
+}
+
+QByteArray StaticHelpers::gUncompress(QByteArray data)
+{
+	if (data.size() <= 4)
+	{
+		qWarning("gUncompress: Input data is truncated");
+		return QByteArray();
+	}
+
+	QByteArray result;
+	int ret;
+	z_stream strm;
+	static const int CHUNK_SIZE = 1024;
+	char out[CHUNK_SIZE];
+	/* allocate inflate state */
+	strm.zalloc = Z_NULL;
+	strm.zfree = Z_NULL;
+	strm.opaque = Z_NULL;
+	strm.avail_in = data.size();
+	strm.next_in = (Bytef*)(data.data());
+	ret = inflateInit2(&strm, 15 + 32); // gzip decoding
+
+	if (ret != Z_OK)
+	{
+		return QByteArray();
+	}
+
+	// run inflate()
+	do
+	{
+		strm.avail_out = CHUNK_SIZE;
+		strm.next_out = (Bytef*)(out);
+		ret = inflate(&strm, Z_NO_FLUSH);
+		Q_ASSERT(ret != Z_STREAM_ERROR);  // state not clobbered
+
+		switch (ret)
+		{
+			case Z_NEED_DICT:
+				ret = Z_DATA_ERROR;     // and fall through
+
+			case Z_DATA_ERROR:
+			case Z_MEM_ERROR:
+				(void)inflateEnd(&strm);
+				return QByteArray();
+		}
+
+		result.append(out, CHUNK_SIZE - strm.avail_out);
+	}
+	while (strm.avail_out == 0);
+
+	// clean up and return
+	inflateEnd(&strm);
+	return result;
 }
 
 NetworkDiskCache* StaticHelpers::m_pDiskCache = NULL;

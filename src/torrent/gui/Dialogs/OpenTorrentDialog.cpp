@@ -28,13 +28,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "OpenTorrentDialog.h"
 #include "QApplicationSettings.h"
 #include "TorrentManager.h"
+#include "qstorageinfo.h"
 
-OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags) : BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize, parent), m_bUseGroup(false), m_pFileTreeModel(NULL)
+OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags)
+	: BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize, parent)
+	, m_bUseGroup(false)
+	, m_pFileTreeModel(NULL)
+	, m_size(0)
 {
 	setupUi(this);
 	setupCustomWindow();
 	setupWindowIcons();
 	m_pTorrentManager = TorrentManager::getInstance();
+	QCompleter* pathComplitter = new QCompleter(this);
+	m_compliterModel = new QFileSystemModel(pathComplitter);
+	m_compliterModel->setFilter(QDir::AllDirs | QDir::NoDotAndDotDot);
+	m_compliterModel->setRootPath("");
+	pathComplitter->setModel(m_compliterModel);
+	pathComplitter->setCaseSensitivity(Qt::CaseInsensitive);
+	pathComplitter->setCompletionMode(QCompleter::PopupCompletion);
+	pathEdit->setCompleter(pathComplitter);
 	validTorrent = true;
 	/*QTextCodec* wantUnicode = QTextCodec::codecForName("UTF-8");
 	QTextCodec::setCodecForTr(wantUnicode);
@@ -96,12 +109,13 @@ void OpenTorrentDialog::SetData(QString filename)
 			QFontMetrics metrics(labelComentData->font());
 			QString elidedText = metrics.elidedText(info->describtion, Qt::ElideRight, labelComentData->width());
 			labelComentData->setText(elidedText);
+			m_size = info->size;
 			labelSizeData->setText(StaticHelpers::toKbMbGb(info->size));
 			m_pFileTreeModel = new FileTreeModel();
 
 			for (int i = 0; i < info->files.num_files(); i++)
 			{
-                m_pFileTreeModel->addPath(QString::fromUtf8(info->files.file_path(i).c_str()), StaticHelpers::toKbMbGb(info->files.file_size(i)));
+				m_pFileTreeModel->addPath(QString::fromUtf8(info->files.file_path(i).c_str()), StaticHelpers::toKbMbGb(info->files.file_size(i)));
 			}
 
 			torrentFilesTreeView->setModel(m_pFileTreeModel);
@@ -121,7 +135,9 @@ void OpenTorrentDialog::SetData(QString filename)
 					if(m_lFilters.at(i).Contains(info->baseSuffix) && selected < 0)
 					{
 						selected = i;
-						pathEdit->setText(m_lFilters.at(i).SavePath());
+						QString path = m_lFilters.at(i).SavePath();
+						m_compliterModel->setRootPath(path);
+						pathEdit->setText(path);
 					}
 				}
 
@@ -134,9 +150,7 @@ void OpenTorrentDialog::SetData(QString filename)
 					QString lastDir = settings->valueString("System", "LastSaveTorrentDir", QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation));
 					pathEdit->setText(lastDir);
 					GroupComboBox->setCurrentIndex(-1);
-
 				}
-
 			}
 
 			delete info;
@@ -166,6 +180,7 @@ void OpenTorrentDialog::BrowseButton()
 		dir = QDir::toNativeSeparators(dir);
 		settings->setValue("System", "LastSaveTorrentDir", dir);
 		GroupComboBox->setCurrentIndex(-1);
+		m_compliterModel->setRootPath(dir);
 		pathEdit->setText(dir);
 		m_bUseGroup = false;
 	}
@@ -221,6 +236,7 @@ void OpenTorrentDialog::DownloadMetadataCompleted(openmagnet_info info)
 	QFontMetrics metrics(labelComentData->font());
 	QString elidedText = metrics.elidedText(info.describtion, Qt::ElideRight, labelComentData->width());
 	labelComentData->setText(elidedText);
+	m_size = info.size;
 	labelSizeData->setText(StaticHelpers::toKbMbGb(info.size));
 	m_pFileTreeModel = new FileTreeModel();
 
@@ -248,7 +264,9 @@ void OpenTorrentDialog::DownloadMetadataCompleted(openmagnet_info info)
 				if(m_lFilters.at(i).Contains(info.baseSuffix) && selected < 0)
 				{
 					selected = i;
-					pathEdit->setText(m_lFilters.at(i).SavePath());
+					QString path = m_lFilters.at(i).SavePath();
+					m_compliterModel->setRootPath(path);
+					pathEdit->setText(path);
 				}
 			}
 
@@ -261,9 +279,15 @@ void OpenTorrentDialog::DownloadMetadataCompleted(openmagnet_info info)
 		{
 			qDebug() << ex.what();
 		}
-
-		
 	}
+}
+
+
+
+void OpenTorrentDialog::OnPathChanged(QString path)
+{
+	QStorageInfo storageInfo(path);
+	labelSizeData->setText(tr("%1 (AVAILABLE: %2)").arg(StaticHelpers::toKbMbGb(m_size), StaticHelpers::toKbMbGb(storageInfo.bytesAvailable())));
 }
 
 void OpenTorrentDialog::changeEvent(QEvent* event)
@@ -273,6 +297,7 @@ void OpenTorrentDialog::changeEvent(QEvent* event)
 		retranslateUi(this);
 	}
 }
+
 
 QPushButton* OpenTorrentDialog::getCloseBtn()
 {

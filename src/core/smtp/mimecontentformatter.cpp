@@ -1,20 +1,23 @@
 #include "mimecontentformatter.h"
 
-MimeContentFormatter::MimeContentFormatter(QIODevice *out, int length) :
-    output(out),
-    lineLength(length)
+MimeContentFormatter::MimeContentFormatter(QIODevice* out, int length) :
+	output(out),
+	lineLength(length)
 {
-    QIODevice::open(WriteOnly);
+	QIODevice::open(WriteOnly);
 }
 
-int MimeContentFormatter::getLineLength() const {
-    return lineLength;
+int MimeContentFormatter::getLineLength() const
+{
+	return lineLength;
 }
 
-void MimeContentFormatter::setLineLength(int l) {
-    lineLength = l;
+void MimeContentFormatter::setLineLength(int l)
+{
+	lineLength = l;
 }
 
-qint64 MimeContentFormatter::readData(char*, qint64) {
-    return -1;
+qint64 MimeContentFormatter::readData(char*, qint64)
+{
+	return -1;
 }

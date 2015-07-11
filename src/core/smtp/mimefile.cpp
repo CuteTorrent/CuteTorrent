@@ -30,17 +30,17 @@ MimeFile::MimeFile(const QByteArray& stream, const QString& fileName)
 	this->content = stream;
 }
 
-MimeFile::MimeFile(QFile *file)
+MimeFile::MimeFile(QFile* file)
 {
-    this->file = file;
-    this->cType = "application/octet-stream";
-    this->cName = QFileInfo(*file).fileName();
-    this->cEncoding = Base64;
+	this->file = file;
+	this->cType = "application/octet-stream";
+	this->cName = QFileInfo(*file).fileName();
+	this->cEncoding = Base64;
 }
 
 MimeFile::~MimeFile()
 {
-    delete file;
+	delete file;
 }
 
 /* [1] --- */
@@ -54,11 +54,12 @@ MimeFile::~MimeFile()
 /* [3] Protected methods */
 
 
-void MimeFile::writeContent(QIODevice &device) const {
+void MimeFile::writeContent(QIODevice& device) const
+{
 	if (file)
 	{
 		file->open(QIODevice::ReadOnly);
-		const QByteArray &fileContent = file->readAll();
+		const QByteArray& fileContent = file->readAll();
 		file->close();
 		MimePart::writeContent(device, fileContent);
 	}
@@ -66,8 +67,6 @@ void MimeFile::writeContent(QIODevice &device) const {
 	{
 		MimePart::writeContent(device, content);
 	}
-
-    
 }
 
 /* [3] --- */

@@ -2,7 +2,7 @@
 #include "http/httprequesthandler.h"
 class FileSystemController : public HttpRequestHandler
 {
-	
+
 public:
 	FileSystemController(QObject* parent)
 		: HttpRequestHandler("WebControl", parent)

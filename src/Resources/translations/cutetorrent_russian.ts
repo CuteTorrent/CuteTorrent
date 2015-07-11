@@ -1906,6 +1906,17 @@ Download: %3</source>
     </message>
 </context>
 <context>
+    <name>FileDownloader</name>
+    <message>
+        <source>UNABLE_TO_SAVE_DOWNLOADED_FILE</source>
+        <translation>Неудалось сохранить скачанный файл</translation>
+    </message>
+    <message>
+        <source>NETWORK_ERROR: %1</source>
+        <translation>Ошибка сети: %1</translation>
+    </message>
+</context>
+<context>
     <name>FileTreeModel</name>
     <message>
         <source>FILE</source>
@@ -2081,6 +2092,10 @@ Download: %3</source>
     <message>
         <source>DIALOG_OPEN_DIR</source>
         <translation>Выбирите папку</translation>
+    </message>
+    <message>
+        <source>%1 (AVAILABLE: %2)</source>
+        <translation>%1 (Доступно: %2)</translation>
     </message>
 </context>
 <context>
@@ -3598,11 +3613,11 @@ ERROR: %2</source>
     <name>TorrentDownloader</name>
     <message>
         <source>UNABLE_TO_SAVE_DOWNLOADED_FILE</source>
-        <translation>Неудалось сохранить скачанный файл</translation>
+        <translation type="obsolete">Неудалось сохранить скачанный файл</translation>
     </message>
     <message>
         <source>NETWORK_ERROR: %1</source>
-        <translation>Ошибка сети: %1</translation>
+        <translation type="obsolete">Ошибка сети: %1</translation>
     </message>
 </context>
 <context>

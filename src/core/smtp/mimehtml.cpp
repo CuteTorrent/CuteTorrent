@@ -20,9 +20,9 @@
 
 /* [1] Constructors and Destructors */
 
-MimeHtml::MimeHtml(const QString &html) : MimeText(html)
+MimeHtml::MimeHtml(const QString& html) : MimeText(html)
 {
-    this->cType = "text/html";
+	this->cType = "text/html";
 }
 
 MimeHtml::~MimeHtml() {}
@@ -32,14 +32,14 @@ MimeHtml::~MimeHtml() {}
 
 /* [2] Getters and Setters */
 
-void MimeHtml::setHtml(const QString & html)
+void MimeHtml::setHtml(const QString& html)
 {
-    this->text = html;
+	this->text = html;
 }
 
 QString MimeHtml::getHtml() const
 {
-    return text;
+	return text;
 }
 
 

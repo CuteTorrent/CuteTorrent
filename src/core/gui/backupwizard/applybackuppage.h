@@ -21,9 +21,9 @@ private:
 	QGridLayout* gridLayout_2;
 	QTableWidget* tableWidget;
 	QString pathResumeData;
-    //QZipReader* zipReader;
+	//QZipReader* zipReader;
 	QString GetLongestCommonSubstr(QString a, QString  b);
-    //bool parseData(QZipReader* reader);
+	//bool parseData(QZipReader* reader);
 	QStringList GetLongestCommonSubstr(QStringList strings);
 	void ApplyBackup() const;
 public slots:

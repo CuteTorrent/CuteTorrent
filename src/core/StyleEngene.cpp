@@ -45,7 +45,7 @@ void StyleEngene::setStyle(QString internalName)
 	}
 
 	initIcons();
-    loadStyleSheet(StaticHelpers::CombinePathes(_currentStyle.rootPath, "style.qss"));
+	loadStyleSheet(StaticHelpers::CombinePathes(_currentStyle.rootPath, "style.qss"));
 	emit styleChanged();
 }
 
@@ -85,13 +85,13 @@ QIcon StyleEngene::getIcon(QString name)
 		return *m_iconCache[name];
 	}
 
-    QString iconsRoot = StaticHelpers::CombinePathes(_currentStyle.rootPath , "icons");
+	QString iconsRoot = StaticHelpers::CombinePathes(_currentStyle.rootPath , "icons");
 
 	if(iconNamesMap.contains(name))
 	{
-        QString iconPath = StaticHelpers::CombinePathes(iconsRoot, iconNamesMap[name]);
-        qDebug() << "Icon path is " << iconPath;
-        QIcon* icon = new QIcon(iconPath);
+		QString iconPath = StaticHelpers::CombinePathes(iconsRoot, iconNamesMap[name]);
+		qDebug() << "Icon path is " << iconPath;
+		QIcon* icon = new QIcon(iconPath);
 		m_iconCache.insert(name, icon);
 		return *icon;
 	}
@@ -108,7 +108,7 @@ void StyleEngene::init()
 	QString rootPath = QApplication::applicationDirPath() + "/styles/";
 #endif
 #ifdef Q_OS_UNIX
-    QString rootPath = "/usr/share/cutetorrent/styles/";
+	QString rootPath = "/usr/share/cutetorrent/styles/";
 #endif
 	QDir rootDir = QDir(rootPath);
 
@@ -235,7 +235,6 @@ void StyleEngene::loadStyleSheet(QString path)
 	if(file.open(QFile::ReadOnly))
 	{
 		QString relativePath = _currentStyle.imageDir;
-		
 		QString styleSheet = QString(file.readAll()).replace("$[STYLE_DIR]", relativePath);
 		static_cast<QApplication*>(QApplication::instance())->setStyleSheet(styleSheet);
 		file.close();

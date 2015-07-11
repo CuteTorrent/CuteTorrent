@@ -5,7 +5,7 @@
 #include "QApplicationSettings.h"
 #include "RssFeed.h"
 #include "StaticHelpers.h"
-#include "torrentdownloader.h"
+#include "filedownloader.h"
 #include "NotificationSystem.h"
 #include "TorrentManager.h"
 #include "MetaDataDownloadWaiter.h"
@@ -13,13 +13,13 @@
 #include "EmailNotifier.h"
 RssManager::RssManager(QObject* parent) : QObject(parent)
 {
-	m_pTorrentDownloader = TorrentDownloader::getInstance();
+	m_pTorrentDownloader = FileDownloader::getInstance();
 	m_pNotificationSystem = NotificationSystem::getInstance();
 	m_pSettings = QApplicationSettings::getInstance();
 	QTimer::singleShot(1000, this, SLOT(LoadFeeds()));
 	QTimer::singleShot(1000, this, SLOT(LoadDownloadRules()));
 	connect(this, SIGNAL(Notify(int, QString, QVariant)), m_pNotificationSystem.get(), SLOT(OnNewNotification(int, QString, QVariant)));;
-	connect(m_pTorrentDownloader.get(), SIGNAL(TorrentReady(QUrl, QTemporaryFile*)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFile*)));
+	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFile*)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFile*)));
 }
 
 RssFeed* RssManager::addFeed(QUrl url, bool& isNew)
@@ -63,9 +63,9 @@ void RssManager::SaveFeeds()
 		dataStream.setVersion(QDataStream::Qt_4_8);
 		dataStream << m_pFeeds.size();
 
-        for(int i =0; i< m_pFeeds.size(); i++)
+		for(int i = 0; i < m_pFeeds.size(); i++)
 		{
-            dataStream << *m_pFeeds[i];
+			dataStream << *m_pFeeds[i];
 		}
 
 		feedsDat.flush();
@@ -292,7 +292,7 @@ void RssManager::downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRu
 		info.rssFeedId = pFeed->uid();
 		info.rssItemId = rssItem->guid();
 		m_activeTorrentDownloads.insert(torrentUrl, info);
-		m_pTorrentDownloader->downloadTorrent(torrentUrl, pFeed->coookies());
+		m_pTorrentDownloader->download(torrentUrl, pFeed->coookies());
 	}
 	else if (!rssItem->magnetUrl().isEmpty())
 	{
@@ -317,58 +317,54 @@ void RssManager::downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRu
 
 void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 {
-	if (m_activeTorrentDownloads.contains(url))
+	TorrentDownloadInfo info = m_activeTorrentDownloads[url];
+	m_activeTorrentDownloads.remove(url);
+	boost::scoped_ptr<QTemporaryFile> pFile(pUnsafeFile);
+	QString torrentFilePath = pFile->fileName();
+	TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
+	error_code ec;
+	RssFeed* pFeed = findFeed(info.rssFeedId);
+	RssItem* feedItem = pFeed->GetFeedItem(info.rssItemId);
+	boost::scoped_ptr<opentorrent_info> pTorrentInfo(pTorrentManager->GetTorrentInfo(torrentFilePath, ec));
+
+	if (ec.category() == get_libtorrent_category())
 	{
-		TorrentDownloadInfo info = m_activeTorrentDownloads[url];
-		m_activeTorrentDownloads.remove(url);
-		boost::scoped_ptr<QTemporaryFile> pFile(pUnsafeFile);
-		QString torrentFilePath = pFile->fileName();
-		TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
-		error_code ec;
-		RssFeed* pFeed = findFeed(info.rssFeedId);
-		RssItem* feedItem = pFeed->GetFeedItem(info.rssItemId);
-		boost::scoped_ptr<opentorrent_info> pTorrentInfo(pTorrentManager->GetTorrentInfo(torrentFilePath, ec));
-
-		if (ec.category() == get_libtorrent_category())
+		if (ec.value() == errors::duplicate_torrent)
 		{
-			if (ec.value() == errors::duplicate_torrent)
-			{
-				feedItem->setInfoHash(pTorrentInfo->infoHash);
-				return;
-			}
-		}
-
-		if (ec)
-		{
-			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), feedItem->title()), QVariant());
+			feedItem->setInfoHash(pTorrentInfo->infoHash);
 			return;
 		}
+	}
 
-		QString savePath = gessSavePath(info.downloadRule, pTorrentInfo->baseSuffix);
-		QMap<QString, quint8> filePriorities = getFilePriorities(info, pTorrentInfo->files);
-		pTorrentManager->AddTorrent(torrentFilePath, savePath, "", ec, filePriorities);
+	if (ec)
+	{
+		emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), feedItem->title()), QVariant());
+		return;
+	}
 
-		if (ec)
-		{
-			emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), feedItem->title()), QVariant());
-		}
-		else
-		{
-			emit Notify(NotificationSystem::TORRENT_INFO, tr("AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1 %2").arg(pTorrentInfo->name, feedItem->title()), QVariant());
-			if (m_pSettings->valueBool("rss", "auto_download_emeail_notify"))
-			{
-				EmailNotifierPtr emailNotifier(new EmailNotifier());
-				QString to = m_pSettings->valueString("rss", "rss_send_to");
-				emailNotifier->SendEmail(to, tr("STARTED_AUTOMETED_RSS_DOWNLOAD"), tr("%1 STARTED_DOWNLOADING.<br/> <a href=\"%3\">DESCRIBTION</a><br/> %2").arg(feedItem->title(), feedItem->description(), feedItem->describtionLink()));
-			}
-			RssFeed* rssFeed = findFeed(info.rssFeedId);
-			RssItem* rssItem = rssFeed->GetFeedItem(info.rssItemId);
-			rssItem->setDownloadingTorrent(pTorrentInfo->infoHash);
-		}
+	QString savePath = gessSavePath(info.downloadRule, pTorrentInfo->baseSuffix);
+	QMap<QString, quint8> filePriorities = getFilePriorities(info, pTorrentInfo->files);
+	pTorrentManager->AddTorrent(torrentFilePath, savePath, "", ec, filePriorities);
+
+	if (ec)
+	{
+		emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(StaticHelpers::translateLibTorrentError(ec), feedItem->title()), QVariant());
 	}
 	else
 	{
-		qWarning() << "RssManger do not request download " << url << " but received that it was downloaded to " << pUnsafeFile->fileName();
+		emit Notify(NotificationSystem::TORRENT_INFO, tr("AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1 %2").arg(pTorrentInfo->name, feedItem->title()), QVariant());
+
+		if (m_pSettings->valueBool("rss", "auto_download_emeail_notify"))
+		{
+			EmailNotifierPtr emailNotifier(new EmailNotifier());
+			QString to = m_pSettings->valueString("rss", "rss_send_to");
+			emailNotifier->SendEmail(to, tr("STARTED_AUTOMETED_RSS_DOWNLOAD"), tr("%1 STARTED_DOWNLOADING.<br/> <a href=\"%3\">DESCRIBTION</a><br/> %2").arg(feedItem->title(), feedItem->description(),
+			                         feedItem->describtionLink()));
+		}
+
+		RssFeed* rssFeed = findFeed(info.rssFeedId);
+		RssItem* rssItem = rssFeed->GetFeedItem(info.rssItemId);
+		rssItem->setDownloadingTorrent(pTorrentInfo->infoHash);
 	}
 }
 
@@ -403,7 +399,7 @@ QString RssManager::gessSavePath(RssDownloadRule* downloadRule, QString base_suf
 	{
 		QList<GroupForFileFiltering> filters = pSettings->GetFileFilterGroups();
 
-        foreach(GroupForFileFiltering filter, filters)
+		foreach(GroupForFileFiltering filter, filters)
 		{
 			if (filter.Contains(base_suffix))
 			{

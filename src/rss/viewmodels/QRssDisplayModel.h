@@ -41,16 +41,15 @@ public slots:
 private:
 	QAction* updateAction, *renameAction, *removeAction, *markAllAsReeded, *markAllAsUnread;
 	QAction* downloadTorrent, *openLink, *markAsReeded, *markAsUnread;
-	TorrentDownloaderPtr m_pTorrentDownloader;
+	FileDownloaderPtr m_pTorrentDownloader;
 	QMenu* m_pFeedMenu, *m_pItemMenu;
 	QTreeView* m_pItemsView;
 	QTimer* m_pUdpateTimer;
-	QList<QUrl> m_activeTorrentDownloads;
 	RssManagerPtr m_pRssManager;
 	QList<RssFeedTreeItem*> m_rootItems;
 	void setupFeedMenu();
 	void setupItemMenu();
-	
+
 	void setCurrentItemUnread(bool val);
 	void setCurrentFeedUnread(bool val);
 

@@ -6,9 +6,9 @@
 class MimeBase64Encoder : public MimeContentEncoder
 {
 public:
-    MimeBase64Encoder();
+	MimeBase64Encoder();
 
-    QByteArray encode(const QByteArray &data);
+	QByteArray encode(const QByteArray& data);
 };
 
 #endif // MIMEBASE64ENCODER_H

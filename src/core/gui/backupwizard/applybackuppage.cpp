@@ -91,7 +91,7 @@ void ApplyBackupPage::ApplyBackup() const
 		}
 
 		QString newPathResumeData = lines.join("\n");
-        //zipReader->extractAll(QApplication::applicationDirPath());
+		//zipReader->extractAll(QApplication::applicationDirPath());
 		QFile pathResumeFile(QApplication::applicationDirPath() + "/CT_DATA/path.resume");
 
 		if(pathResumeFile.open(QIODevice::WriteOnly))
@@ -172,15 +172,15 @@ bool ApplyBackupPage::parseData(QZipReader* reader)
 void ApplyBackupPage::browseButtonClicked()
 {
 	backupPathLineEdit->setText(QFileDialog::getOpenFileName(this, tr("BACKUP_CHOOSE"), QApplication::applicationDirPath() + QDir::separator()));
-/*	zipReader = new QZipReader(backupPathLineEdit->text());
+	/*	zipReader = new QZipReader(backupPathLineEdit->text());
 
-	if(zipReader->isReadable())
-	{
-		parseData(zipReader);
-	}
-	else
-	{
-		QMessageBox::critical(this, tr("ERROR"), tr("UNABLE_TO_OPEN_BACKUP"));
-		return;
-    }*/
+		if(zipReader->isReadable())
+		{
+			parseData(zipReader);
+		}
+		else
+		{
+			QMessageBox::critical(this, tr("ERROR"), tr("UNABLE_TO_OPEN_BACKUP"));
+			return;
+	    }*/
 }

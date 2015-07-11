@@ -7,10 +7,10 @@
 class MimeContentEncoder : public QObject
 {
 public:
-    virtual QByteArray encode(const QByteArray &data) =0;
+	virtual QByteArray encode(const QByteArray& data) = 0;
 
 protected:
-    MimeContentEncoder();
+	MimeContentEncoder();
 };
 
 #endif // MIMEENCODER_H

@@ -42,7 +42,7 @@ bool CreateBackupPage::validatePage()
 void CreateBackupPage::createBackup() const
 {
 	QString path = savePathEdit->text();
-    /*QZipWriter zip(path);
+	/*QZipWriter zip(path);
 
 	if(zip.status() != QZipWriter::NoError)
 	{
@@ -51,11 +51,11 @@ void CreateBackupPage::createBackup() const
 
 	zip.setCompressionPolicy(QZipWriter::AutoCompress);
 	QString dataDir;
-#ifdef Q_WS_MAC
+	#ifdef Q_WS_MAC
 	dataDir = "/Library/CuteTorrent/";
-#else
+	#else
 	dataDir = QDir::toNativeSeparators(QApplication::applicationDirPath() + QDir::separator());
-#endif
+	#endif
 	QString iniPath = "CuteTorrent.ini" ;
 	QFile iniFile(dataDir + iniPath);
 
@@ -93,7 +93,7 @@ void CreateBackupPage::createBackup() const
 		}
 	}
 
-    zip.close();*/
+	zip.close();*/
 }
 
 

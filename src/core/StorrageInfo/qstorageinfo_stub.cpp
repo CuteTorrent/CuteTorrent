@@ -41,25 +41,25 @@ QT_BEGIN_NAMESPACE
 
 void QStorageInfoPrivate::initRootPath()
 {
-    Q_UNIMPLEMENTED();
-    rootPath = QString();
+	Q_UNIMPLEMENTED();
+	rootPath = QString();
 }
 
 void QStorageInfoPrivate::doStat()
 {
-    Q_UNIMPLEMENTED();
+	Q_UNIMPLEMENTED();
 }
 
 QList<QStorageInfo> QStorageInfoPrivate::mountedVolumes()
 {
-    Q_UNIMPLEMENTED();
-    return QList<QStorageInfo>();
+	Q_UNIMPLEMENTED();
+	return QList<QStorageInfo>();
 }
 
 QStorageInfo QStorageInfoPrivate::root()
 {
-    Q_UNIMPLEMENTED();
-    return QStorageInfo();
+	Q_UNIMPLEMENTED();
+	return QStorageInfo();
 }
 
 QT_END_NAMESPACE

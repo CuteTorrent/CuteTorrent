@@ -16,8 +16,8 @@ void UploadController::service(HttpRequest& request, HttpResponse& response)
 	{
 		//std::map<QByteArray,QByteArray> parametrs=request.getParameterMap().toStdMap();
 		QString save_path = request.getParameter("savePath");
+		boost::scoped_ptr<QTemporaryFile> safeFile(request.getUploadedFile("files[]"));
 
-        boost::scoped_ptr<QTemporaryFile> safeFile(request.getUploadedFile("files[]"));
 		if(save_path.isEmpty() ||  !QDir(save_path).exists())
 		{
 			response.setStatus(400, "Bad Request");
@@ -27,8 +27,8 @@ void UploadController::service(HttpRequest& request, HttpResponse& response)
 		}
 
 		error_code ec;
-        QString tempFileName = safeFile->fileName();
-        m_pTorrentManager->AddTorrent(tempFileName, save_path, "", ec);
+		QString tempFileName = safeFile->fileName();
+		m_pTorrentManager->AddTorrent(tempFileName, save_path, "", ec);
 
 		if(ec)
 		{

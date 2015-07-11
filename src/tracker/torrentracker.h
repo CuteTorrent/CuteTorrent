@@ -12,10 +12,10 @@ class TorrentTracker : public QObject, public Singleton<TorrentTracker>
 private:
 	HttpListener* httpServer;
 	TrackerRequestHandler* requestHandler;
-	
+
 protected:
 	explicit TorrentTracker(QObject* parent = 0);
-	
+
 public:
 	bool isRunning();
 	void start();

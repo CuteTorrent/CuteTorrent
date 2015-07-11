@@ -1,17 +1,18 @@
 ﻿#include "TorrentApiController.h"
 #include <libtorrent/peer_info.hpp>
 #include "json/json.h"
-TorrentApiController::TorrentApiController(QObject* parent/*=0*/) : HttpRequestHandler("WebControl", parent), m_pTorrentManager(TorrentManager::getInstance()), m_pTorrentStorrage(TorrentStorrage::getInstance())
+TorrentApiController::TorrentApiController(QObject* parent/*=0*/) : HttpRequestHandler("WebControl", parent), m_pTorrentManager(TorrentManager::getInstance()),
+	m_pTorrentStorrage(TorrentStorrage::getInstance())
 {
-
 }
 
 void TorrentApiController::service(HttpRequest& request, HttpResponse& response)
 {
-	if (!CheckCreditinals(request,response))
+	if (!CheckCreditinals(request, response))
 	{
 		return;
 	}
+
 //	QMultiMap<QByteArray,QByteArray> parametrs=request.getParameterMap();
 	if(request.getMethod().toUpper() == "GET")
 	{

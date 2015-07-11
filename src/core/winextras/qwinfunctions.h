@@ -59,171 +59,187 @@ class QRegion;
 
 namespace QtWin
 {
-    enum HBitmapFormat
-    {
-        HBitmapNoAlpha,
-        HBitmapPremultipliedAlpha,
-        HBitmapAlpha
-    };
+enum HBitmapFormat
+{
+	HBitmapNoAlpha,
+	HBitmapPremultipliedAlpha,
+	HBitmapAlpha
+};
 
-    enum WindowFlip3DPolicy
-    {
-        FlipDefault,
-        FlipExcludeBelow,
-        FlipExcludeAbove
-    };
+enum WindowFlip3DPolicy
+{
+	FlipDefault,
+	FlipExcludeBelow,
+	FlipExcludeAbove
+};
 
-     HBITMAP createMask(const QBitmap &bitmap);
-     HBITMAP toHBITMAP(const QPixmap &p, HBitmapFormat format = HBitmapNoAlpha);
-     QPixmap fromHBITMAP(HBITMAP bitmap, HBitmapFormat format = HBitmapNoAlpha);
-     HICON toHICON(const QPixmap &p);
-     QImage imageFromHBITMAP(HDC hdc, HBITMAP bitmap, int width, int height);
-     QPixmap fromHICON(HICON icon);
-     HRGN toHRGN(const QRegion &region);
-     QRegion fromHRGN(HRGN hrgn);
+HBITMAP createMask(const QBitmap& bitmap);
+HBITMAP toHBITMAP(const QPixmap& p, HBitmapFormat format = HBitmapNoAlpha);
+QPixmap fromHBITMAP(HBITMAP bitmap, HBitmapFormat format = HBitmapNoAlpha);
+HICON toHICON(const QPixmap& p);
+QImage imageFromHBITMAP(HDC hdc, HBITMAP bitmap, int width, int height);
+QPixmap fromHICON(HICON icon);
+HRGN toHRGN(const QRegion& region);
+QRegion fromHRGN(HRGN hrgn);
 
-     QString stringFromHresult(HRESULT hresult);
-     QString errorStringFromHresult(HRESULT hresult);
+QString stringFromHresult(HRESULT hresult);
+QString errorStringFromHresult(HRESULT hresult);
 
-     QColor colorizationColor(bool *opaqueBlend = 0);
-     QColor realColorizationColor();
+QColor colorizationColor(bool* opaqueBlend = 0);
+QColor realColorizationColor();
 
-     void setWindowExcludedFromPeek(QWidget *window, bool exclude);
-     bool isWindowExcludedFromPeek(QWidget *window);
-     void setWindowDisallowPeek(QWidget *window, bool disallow);
-     bool isWindowPeekDisallowed(QWidget *window);
-     void setWindowFlip3DPolicy(QWidget *window, WindowFlip3DPolicy policy);
-     WindowFlip3DPolicy windowFlip3DPolicy(QWidget *);
+void setWindowExcludedFromPeek(QWidget* window, bool exclude);
+bool isWindowExcludedFromPeek(QWidget* window);
+void setWindowDisallowPeek(QWidget* window, bool disallow);
+bool isWindowPeekDisallowed(QWidget* window);
+void setWindowFlip3DPolicy(QWidget* window, WindowFlip3DPolicy policy);
+WindowFlip3DPolicy windowFlip3DPolicy(QWidget*);
 
-     void extendFrameIntoClientArea(QWidget *window, int left, int top, int right, int bottom);
-     void extendFrameIntoClientArea(QWidget *window, const QMargins &margins);
-     void resetExtendedFrame(QWidget *window);
+void extendFrameIntoClientArea(QWidget* window, int left, int top, int right, int bottom);
+void extendFrameIntoClientArea(QWidget* window, const QMargins& margins);
+void resetExtendedFrame(QWidget* window);
 
-     void enableBlurBehindWindow(QWidget *window, const QRegion &region);
-     void enableBlurBehindWindow(QWidget *window);
-     void disableBlurBehindWindow(QWidget *window);
+void enableBlurBehindWindow(QWidget* window, const QRegion& region);
+void enableBlurBehindWindow(QWidget* window);
+void disableBlurBehindWindow(QWidget* window);
 
-     bool isCompositionEnabled();
-     void setCompositionEnabled(bool enabled);
-     bool isCompositionOpaque();
+bool isCompositionEnabled();
+void setCompositionEnabled(bool enabled);
+bool isCompositionOpaque();
 
-     void setCurrentProcessExplicitAppUserModelID(const QString &id);
+void setCurrentProcessExplicitAppUserModelID(const QString& id);
 
-     void markFullscreenWindow(QWidget *, bool fullscreen = true);
+void markFullscreenWindow(QWidget*, bool fullscreen = true);
 
-     void taskbarActivateTab(QWidget *);
-     void taskbarActivateTabAlt(QWidget *);
-     void taskbarAddTab(QWidget *);
-     void taskbarDeleteTab(QWidget *);
+void taskbarActivateTab(QWidget*);
+void taskbarActivateTabAlt(QWidget*);
+void taskbarAddTab(QWidget*);
+void taskbarDeleteTab(QWidget*);
 
 #ifdef QT_WIDGETS_LIB
-    inline void setWindowExcludedFromPeek(QWidget *window, bool exclude)
-    {
-        window->createWinId();
-        setWindowExcludedFromPeek(window->windowHandle(), exclude);
-    }
+inline void setWindowExcludedFromPeek(QWidget* window, bool exclude)
+{
+	window->createWinId();
+	setWindowExcludedFromPeek(window->windowHandle(), exclude);
+}
 
-    inline bool isWindowExcludedFromPeek(QWidget *window)
-    {
-        if (!window->windowHandle())
-            return false;
-        else
-            return isWindowExcludedFromPeek(window->windowHandle());
-    }
+inline bool isWindowExcludedFromPeek(QWidget* window)
+{
+	if (!window->windowHandle())
+	{
+		return false;
+	}
+	else
+	{
+		return isWindowExcludedFromPeek(window->windowHandle());
+	}
+}
 
-    inline void setWindowDisallowPeek(QWidget *window, bool disallow)
-    {
-        window->createWinId();
-        setWindowDisallowPeek(window->windowHandle(), disallow);
-    }
+inline void setWindowDisallowPeek(QWidget* window, bool disallow)
+{
+	window->createWinId();
+	setWindowDisallowPeek(window->windowHandle(), disallow);
+}
 
-    inline bool isWindowPeekDisallowed(QWidget *window)
-    {
-        if (!window->windowHandle())
-            return false;
-        else
-            return isWindowPeekDisallowed(window->windowHandle());
-    }
+inline bool isWindowPeekDisallowed(QWidget* window)
+{
+	if (!window->windowHandle())
+	{
+		return false;
+	}
+	else
+	{
+		return isWindowPeekDisallowed(window->windowHandle());
+	}
+}
 
-    inline void setWindowFlip3DPolicy(QWidget *window, WindowFlip3DPolicy policy)
-    {
-        window->createWinId();
-        setWindowFlip3DPolicy(window->windowHandle(), policy);
-    }
+inline void setWindowFlip3DPolicy(QWidget* window, WindowFlip3DPolicy policy)
+{
+	window->createWinId();
+	setWindowFlip3DPolicy(window->windowHandle(), policy);
+}
 
-    inline WindowFlip3DPolicy windowFlip3DPolicy(QWidget *window)
-    {
-        if (!window->windowHandle())
-            return FlipDefault;
-        else
-            return windowFlip3DPolicy(window->windowHandle());
-    }
+inline WindowFlip3DPolicy windowFlip3DPolicy(QWidget* window)
+{
+	if (!window->windowHandle())
+	{
+		return FlipDefault;
+	}
+	else
+	{
+		return windowFlip3DPolicy(window->windowHandle());
+	}
+}
 
-    inline void extendFrameIntoClientArea(QWidget *window, const QMargins &margins)
-    {
-        window->createWinId();
-        extendFrameIntoClientArea(window->windowHandle(), margins);
-    }
+inline void extendFrameIntoClientArea(QWidget* window, const QMargins& margins)
+{
+	window->createWinId();
+	extendFrameIntoClientArea(window->windowHandle(), margins);
+}
 
-    inline void extendFrameIntoClientArea(QWidget *window, int left, int top, int right, int bottom)
-    {
-        window->createWinId();
-        extendFrameIntoClientArea(window->windowHandle(), left, top, right, bottom);
-    }
+inline void extendFrameIntoClientArea(QWidget* window, int left, int top, int right, int bottom)
+{
+	window->createWinId();
+	extendFrameIntoClientArea(window->windowHandle(), left, top, right, bottom);
+}
 
-    inline void resetExtendedFrame(QWidget *window)
-    {
-        if (window->windowHandle())
-            resetExtendedFrame(window->windowHandle());
-    }
+inline void resetExtendedFrame(QWidget* window)
+{
+	if (window->windowHandle())
+	{
+		resetExtendedFrame(window->windowHandle());
+	}
+}
 
-    inline void enableBlurBehindWindow(QWidget *window, const QRegion &region)
-    {
-        window->createWinId();
-        enableBlurBehindWindow(window->windowHandle(), region);
-    }
+inline void enableBlurBehindWindow(QWidget* window, const QRegion& region)
+{
+	window->createWinId();
+	enableBlurBehindWindow(window->windowHandle(), region);
+}
 
-    inline void enableBlurBehindWindow(QWidget *window)
-    {
-        window->createWinId();
-        enableBlurBehindWindow(window->windowHandle());
-    }
+inline void enableBlurBehindWindow(QWidget* window)
+{
+	window->createWinId();
+	enableBlurBehindWindow(window->windowHandle());
+}
 
-    inline void disableBlurBehindWindow(QWidget *window)
-    {
-        if (window->windowHandle())
-            disableBlurBehindWindow(window->windowHandle());
-    }
+inline void disableBlurBehindWindow(QWidget* window)
+{
+	if (window->windowHandle())
+	{
+		disableBlurBehindWindow(window->windowHandle());
+	}
+}
 
-    inline void markFullscreenWindow(QWidget *window, bool fullscreen = true)
-    {
-        window->createWinId();
-        markFullscreenWindow(window->windowHandle(), fullscreen);
-    }
+inline void markFullscreenWindow(QWidget* window, bool fullscreen = true)
+{
+	window->createWinId();
+	markFullscreenWindow(window->windowHandle(), fullscreen);
+}
 
-    inline void taskbarActivateTab(QWidget *window)
-    {
-        window->createWinId();
-        taskbarActivateTab(window->windowHandle());
-    }
+inline void taskbarActivateTab(QWidget* window)
+{
+	window->createWinId();
+	taskbarActivateTab(window->windowHandle());
+}
 
-    inline void taskbarActivateTabAlt(QWidget *window)
-    {
-        window->createWinId();
-        taskbarActivateTabAlt(window->windowHandle());
-    }
+inline void taskbarActivateTabAlt(QWidget* window)
+{
+	window->createWinId();
+	taskbarActivateTabAlt(window->windowHandle());
+}
 
-    inline void taskbarAddTab(QWidget *window)
-    {
-        window->createWinId();
-        taskbarAddTab(window->windowHandle());
-    }
+inline void taskbarAddTab(QWidget* window)
+{
+	window->createWinId();
+	taskbarAddTab(window->windowHandle());
+}
 
-    inline void taskbarDeleteTab(QWidget *window)
-    {
-        window->createWinId();
-        taskbarDeleteTab(window->windowHandle());
-    }
+inline void taskbarDeleteTab(QWidget* window)
+{
+	window->createWinId();
+	taskbarDeleteTab(window->windowHandle());
+}
 #endif // QT_WIDGETS_LIB
 }
 

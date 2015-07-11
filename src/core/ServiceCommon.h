@@ -4,7 +4,7 @@
 
 DEFINE_PTR_CALSS(FaviconDownloader);
 
-DEFINE_PTR_CALSS(TorrentDownloader);
+DEFINE_PTR_CALSS(FileDownloader);
 
 DEFINE_PTR_CALSS(NotificationSystem);
 

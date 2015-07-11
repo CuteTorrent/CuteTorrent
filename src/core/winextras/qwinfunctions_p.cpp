@@ -43,40 +43,44 @@ QtShell32Dll qtShell32Dll;
 
 void QtDwmApiDll::resolve()
 {
-    if (const HMODULE dwmapi = LoadLibraryW(L"dwmapi.dll")) {
-        dwmExtendFrameIntoClientArea =
-            (DwmExtendFrameIntoClientArea) GetProcAddress(dwmapi, "DwmExtendFrameIntoClientArea");
-        dwmEnableBlurBehindWindow =
-            (DwmEnableBlurBehindWindow) GetProcAddress(dwmapi, "DwmEnableBlurBehindWindow");
-        dwmGetColorizationColor =
-            (DwmGetColorizationColor) GetProcAddress(dwmapi, "DwmGetColorizationColor");
-        dwmSetWindowAttribute =
-            (DwmSetWindowAttribute) GetProcAddress(dwmapi, "DwmSetWindowAttribute");
-        dwmGetWindowAttribute =
-            (DwmGetWindowAttribute) GetProcAddress(dwmapi, "DwmGetWindowAttribute");
-        dwmIsCompositionEnabled =
-            (DwmIsCompositionEnabled) GetProcAddress(dwmapi, "DwmIsCompositionEnabled");
-        dwmEnableComposition =
-            (DwmEnableComposition) GetProcAddress(dwmapi, "DwmEnableComposition");
-        if (QSysInfo::windowsVersion() >= QSysInfo::WV_WINDOWS7) {
-            dwmSetIconicThumbnail =
-                (DwmSetIconicThumbnail) GetProcAddress(dwmapi, "DwmSetIconicThumbnail");
-            dwmSetIconicLivePreviewBitmap =
-                (DwmSetIconicLivePreviewBitmap) GetProcAddress(dwmapi, "DwmSetIconicLivePreviewBitmap");
-            dwmInvalidateIconicBitmaps =
-                (DwmInvalidateIconicBitmaps) GetProcAddress(dwmapi, "DwmInvalidateIconicBitmaps");
-        }
-    }
+	if (const HMODULE dwmapi = LoadLibraryW(L"dwmapi.dll"))
+	{
+		dwmExtendFrameIntoClientArea =
+		    (DwmExtendFrameIntoClientArea) GetProcAddress(dwmapi, "DwmExtendFrameIntoClientArea");
+		dwmEnableBlurBehindWindow =
+		    (DwmEnableBlurBehindWindow) GetProcAddress(dwmapi, "DwmEnableBlurBehindWindow");
+		dwmGetColorizationColor =
+		    (DwmGetColorizationColor) GetProcAddress(dwmapi, "DwmGetColorizationColor");
+		dwmSetWindowAttribute =
+		    (DwmSetWindowAttribute) GetProcAddress(dwmapi, "DwmSetWindowAttribute");
+		dwmGetWindowAttribute =
+		    (DwmGetWindowAttribute) GetProcAddress(dwmapi, "DwmGetWindowAttribute");
+		dwmIsCompositionEnabled =
+		    (DwmIsCompositionEnabled) GetProcAddress(dwmapi, "DwmIsCompositionEnabled");
+		dwmEnableComposition =
+		    (DwmEnableComposition) GetProcAddress(dwmapi, "DwmEnableComposition");
+
+		if (QSysInfo::windowsVersion() >= QSysInfo::WV_WINDOWS7)
+		{
+			dwmSetIconicThumbnail =
+			    (DwmSetIconicThumbnail) GetProcAddress(dwmapi, "DwmSetIconicThumbnail");
+			dwmSetIconicLivePreviewBitmap =
+			    (DwmSetIconicLivePreviewBitmap) GetProcAddress(dwmapi, "DwmSetIconicLivePreviewBitmap");
+			dwmInvalidateIconicBitmaps =
+			    (DwmInvalidateIconicBitmaps) GetProcAddress(dwmapi, "DwmInvalidateIconicBitmaps");
+		}
+	}
 }
 
 void QtShell32Dll::resolve()
 {
-    if (const HMODULE shell32 = LoadLibraryW(L"shell32.dll")) {
-        sHCreateItemFromParsingName =
-            (SHCreateItemFromParsingName) GetProcAddress(shell32, "SHCreateItemFromParsingName");
-        setCurrentProcessExplicitAppUserModelID =
-            (SetCurrentProcessExplicitAppUserModelID) GetProcAddress(shell32, "SetCurrentProcessExplicitAppUserModelID");
-    }
+	if (const HMODULE shell32 = LoadLibraryW(L"shell32.dll"))
+	{
+		sHCreateItemFromParsingName =
+		    (SHCreateItemFromParsingName) GetProcAddress(shell32, "SHCreateItemFromParsingName");
+		setCurrentProcessExplicitAppUserModelID =
+		    (SetCurrentProcessExplicitAppUserModelID) GetProcAddress(shell32, "SetCurrentProcessExplicitAppUserModelID");
+	}
 }
 
 QT_END_NAMESPACE

@@ -207,9 +207,6 @@
     <ClCompile Include="core\StyleEngene.cpp">
       <Filter>Service</Filter>
     </ClCompile>
-    <ClCompile Include="core\torrentdownloader.cpp">
-      <Filter>Service</Filter>
-    </ClCompile>
     <ClCompile Include="core\TreeItem.cpp">
       <Filter>DataModels</Filter>
     </ClCompile>
@@ -493,9 +490,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_TorrentApiController.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_torrentdownloader.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_TorrentManager.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -721,6 +715,12 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QSgml.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\filedownloader.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_filedownloader.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -778,9 +778,6 @@
       <Filter>Service</Filter>
     </CustomBuild>
     <CustomBuild Include="core\StyleEngene.h">
-      <Filter>Service</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\torrentdownloader.h">
       <Filter>Service</Filter>
     </CustomBuild>
     <CustomBuild Include="core\UpdateNotyfier.h">
@@ -954,6 +951,9 @@
     </CustomBuild>
     <CustomBuild Include="core\datamodels\SGML\QSgmlTag.h">
       <Filter>ThirdParties\SGMLParser</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\filedownloader.h">
+      <Filter>Service</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

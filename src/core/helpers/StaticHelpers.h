@@ -36,7 +36,7 @@ private:
 	static QString translateError(error_code const& ec, char* msgs[], int msgs_len);
 public:
 #ifdef Q_WS_X11
-    static void OpenFolderNautilus(QString& file);
+	static void OpenFolderNautilus(QString& file);
 #endif
 #ifdef Q_WS_WIN
 	static void OpenFileInExplorer(QString& file);
@@ -50,6 +50,7 @@ public:
 	static QString GetBaseSuffix(const file_storage& storrage);
 	static QString CombinePathes(QString path, QString suffix);
 	static NetworkDiskCache* GetGLobalWebCache();
+	static QByteArray gUncompress(QByteArray data);
 	template <typename T> static size_t HashVector(const std::vector<T>& vector);
 	template <typename T> static QList<T> reversed(const QList<T>& in);
 };

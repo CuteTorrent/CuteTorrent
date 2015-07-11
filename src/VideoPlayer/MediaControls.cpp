@@ -88,15 +88,14 @@ bool MediaControls::eventFilter(QObject* obj, QEvent* event)
 {
 	if(obj == ui->currentTimeLabel && event->type() == QEvent::MouseButtonPress)
 	{
-
 		QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+
 		if (mouseEvent->button() == Qt::LeftButton)
 		{
 			reverseTime = !reverseTime;
 			mouseEvent->accept();
 			return true;
 		}
-		
 	}
 
 	return QWidget::eventFilter(obj, event);

@@ -58,6 +58,7 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	QList<ISerachProvider*> iSerachProviders = instance->GetSearchProviders();
 	ISerachProvider* pFoundProvider = NULL;
 	QString name = res->Engine();
+
 	for (int i = 0; i < iSerachProviders.length(); i++)
 	{
 		if (iSerachProviders[i]->Name() == name)
@@ -66,11 +67,14 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 			break;
 		}
 	}
+
 	QIcon mimeIcon;
+
 	if (pFoundProvider != NULL)
 	{
 		mimeIcon = pFoundProvider->getIcon();
 	}
+
 	QString nameStr(res->Name());
 	QSize nameSize(nameFM.size(0, nameStr));
 	QFont statusFont(option.font);

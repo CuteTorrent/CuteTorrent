@@ -89,6 +89,7 @@ private:
 	QWinTaskbarButton* m_pTaskBarBtn;
 #endif
 	QString path;
+	QFileSystemModel* m_compliterModel;
 	quint64 listFolder(QString path);
 	torrentCreatorThread* creator;
 	TorrentManagerPtr m_pTorrentManager;

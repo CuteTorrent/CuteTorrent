@@ -16,79 +16,114 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-static const uint qt_meta_data_FaviconDownloader[] = {
-
- // content:
-       6,       // revision
-       0,       // classname
-       0,    0, // classinfo
-       1,   14, // methods
-       0,    0, // properties
-       0,    0, // enums/sets
-       0,    0, // constructors
-       0,       // flags
-       0,       // signalCount
-
- // slots: signature, parameters, type, tag, flags
-      19,   18,   18,   18, 0x08,
-
-       0        // eod
-};
-
-static const char qt_meta_stringdata_FaviconDownloader[] = {
-    "FaviconDownloader\0\0replyReady(QNetworkReply*)\0"
-};
-
-void FaviconDownloader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+static const uint qt_meta_data_FaviconDownloader[] =
 {
-    if (_c == QMetaObject::InvokeMetaMethod) {
-        Q_ASSERT(staticMetaObject.cast(_o));
-        FaviconDownloader *_t = static_cast<FaviconDownloader *>(_o);
-        switch (_id) {
-        case 0: _t->replyReady((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
-        default: ;
-        }
-    }
+
+// content:
+	6,       // revision
+	0,       // classname
+	0,    0, // classinfo
+	1,   14, // methods
+	0,    0, // properties
+	0,    0, // enums/sets
+	0,    0, // constructors
+	0,       // flags
+	0,       // signalCount
+
+// slots: signature, parameters, type, tag, flags
+	19,   18,   18,   18, 0x08,
+
+	0        // eod
+};
+
+static const char qt_meta_stringdata_FaviconDownloader[] =
+{
+	"FaviconDownloader\0\0replyReady(QNetworkReply*)\0"
+};
+
+void FaviconDownloader::qt_static_metacall(QObject* _o, QMetaObject::Call _c, int _id, void** _a)
+{
+	if (_c == QMetaObject::InvokeMetaMethod)
+	{
+		Q_ASSERT(staticMetaObject.cast(_o));
+		FaviconDownloader* _t = static_cast<FaviconDownloader*>(_o);
+
+		switch (_id)
+		{
+			case 0:
+				_t->replyReady((*reinterpret_cast< QNetworkReply*(*)>(_a[1])));
+				break;
+
+			default:
+				;
+		}
+	}
 }
 
-const QMetaObjectExtraData FaviconDownloader::staticMetaObjectExtraData = {
-    0,  qt_static_metacall 
+const QMetaObjectExtraData FaviconDownloader::staticMetaObjectExtraData =
+{
+	0,  qt_static_metacall
 };
 
-const QMetaObject FaviconDownloader::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_FaviconDownloader,
-      qt_meta_data_FaviconDownloader, &staticMetaObjectExtraData }
+const QMetaObject FaviconDownloader::staticMetaObject =
+{
+	{
+		&QObject::staticMetaObject, qt_meta_stringdata_FaviconDownloader,
+		qt_meta_data_FaviconDownloader, &staticMetaObjectExtraData
+	}
 };
 
 #ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &FaviconDownloader::getStaticMetaObject() { return staticMetaObject; }
+const QMetaObject& FaviconDownloader::getStaticMetaObject()
+{
+	return staticMetaObject;
+}
 #endif //Q_NO_DATA_RELOCATION
 
-const QMetaObject *FaviconDownloader::metaObject() const
+const QMetaObject* FaviconDownloader::metaObject() const
 {
-    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+	return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
-void *FaviconDownloader::qt_metacast(const char *_clname)
+void* FaviconDownloader::qt_metacast(const char* _clname)
 {
-    if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_FaviconDownloader))
-        return static_cast<void*>(const_cast< FaviconDownloader*>(this));
-    if (!strcmp(_clname, "Singleton<FaviconDownloader>"))
-        return static_cast< Singleton<FaviconDownloader>*>(const_cast< FaviconDownloader*>(this));
-    return QObject::qt_metacast(_clname);
+	if (!_clname)
+	{
+		return 0;
+	}
+
+	if (!strcmp(_clname, qt_meta_stringdata_FaviconDownloader))
+	{
+		return static_cast<void*>(const_cast< FaviconDownloader*>(this));
+	}
+
+	if (!strcmp(_clname, "Singleton<FaviconDownloader>"))
+	{
+		return static_cast< Singleton<FaviconDownloader>*>(const_cast< FaviconDownloader*>(this));
+	}
+
+	return QObject::qt_metacast(_clname);
 }
 
-int FaviconDownloader::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int FaviconDownloader::qt_metacall(QMetaObject::Call _c, int _id, void** _a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
-    if (_id < 0)
-        return _id;
-    if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
-            qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
-    }
-    return _id;
+	_id = QObject::qt_metacall(_c, _id, _a);
+
+	if (_id < 0)
+	{
+		return _id;
+	}
+
+	if (_c == QMetaObject::InvokeMetaMethod)
+	{
+		if (_id < 1)
+		{
+			qt_static_metacall(this, _c, _id, _a);
+		}
+
+		_id -= 1;
+	}
+
+	return _id;
 }
 QT_END_MOC_NAMESPACE

@@ -52,42 +52,42 @@ QT_BEGIN_NAMESPACE
 class QStorageInfoPrivate : public QSharedData
 {
 public:
-    inline QStorageInfoPrivate() : QSharedData(),
-        bytesTotal(-1), bytesFree(-1), bytesAvailable(-1),
-        readOnly(false), ready(false), valid(false)
-    {}
+	inline QStorageInfoPrivate() : QSharedData(),
+		bytesTotal(-1), bytesFree(-1), bytesAvailable(-1),
+		readOnly(false), ready(false), valid(false)
+	{}
 
-    void initRootPath();
-    void doStat();
+	void initRootPath();
+	void doStat();
 
-    static QList<QStorageInfo> mountedVolumes();
-    static QStorageInfo root();
+	static QList<QStorageInfo> mountedVolumes();
+	static QStorageInfo root();
 
 protected:
 #if defined(Q_OS_WIN) && !defined(Q_OS_WINCE) && !defined(Q_OS_WINRT)
-    void retrieveVolumeInfo();
-    void retrieveDiskFreeSpace();
+	void retrieveVolumeInfo();
+	void retrieveDiskFreeSpace();
 #elif defined(Q_OS_MAC)
-    void retrievePosixInfo();
-    void retrieveUrlProperties(bool initRootPath = false);
-    void retrieveLabel();
+	void retrievePosixInfo();
+	void retrieveUrlProperties(bool initRootPath = false);
+	void retrieveLabel();
 #elif defined(Q_OS_UNIX)
-    void retrieveVolumeInfo();
+	void retrieveVolumeInfo();
 #endif
 
 public:
-    QString rootPath;
-    QByteArray device;
-    QByteArray fileSystemType;
-    QString name;
+	QString rootPath;
+	QByteArray device;
+	QByteArray fileSystemType;
+	QString name;
 
-    qint64 bytesTotal;
-    qint64 bytesFree;
-    qint64 bytesAvailable;
+	qint64 bytesTotal;
+	qint64 bytesFree;
+	qint64 bytesAvailable;
 
-    bool readOnly;
-    bool ready;
-    bool valid;
+	bool readOnly;
+	bool ready;
+	bool valid;
 };
 
 QT_END_NAMESPACE

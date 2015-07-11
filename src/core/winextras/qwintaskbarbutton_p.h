@@ -62,8 +62,8 @@ public:
 
 	void _q_updateProgress();
 
-	ITaskbarList4 *pTbList;
-	QWidget *window;
+	ITaskbarList4* pTbList;
+	QWidget* window;
 };
 
 QT_END_NAMESPACE

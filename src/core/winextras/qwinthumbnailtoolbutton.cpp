@@ -66,8 +66,8 @@ QT_BEGIN_NAMESPACE
 /*!
     Constructs a QWinThumbnailToolButton with the specified \a parent.
  */
-QWinThumbnailToolButton::QWinThumbnailToolButton(QObject *parent) :
-    QObject(parent), d_ptr(new QWinThumbnailToolButtonPrivate)
+QWinThumbnailToolButton::QWinThumbnailToolButton(QObject* parent) :
+	QObject(parent), d_ptr(new QWinThumbnailToolButtonPrivate)
 {
 }
 
@@ -82,38 +82,42 @@ QWinThumbnailToolButton::~QWinThumbnailToolButton()
     \property QWinThumbnailToolButton::toolTip
     \brief the tooltip of the button
  */
-void QWinThumbnailToolButton::setToolTip(const QString &toolTip)
+void QWinThumbnailToolButton::setToolTip(const QString& toolTip)
 {
-    Q_D(QWinThumbnailToolButton);
-    if (d->toolTip != toolTip) {
-        d->toolTip = toolTip;
-        emit changed();
-    }
+	Q_D(QWinThumbnailToolButton);
+
+	if (d->toolTip != toolTip)
+	{
+		d->toolTip = toolTip;
+		emit changed();
+	}
 }
 
 QString QWinThumbnailToolButton::toolTip() const
 {
-    Q_D(const QWinThumbnailToolButton);
-    return d->toolTip;
+	Q_D(const QWinThumbnailToolButton);
+	return d->toolTip;
 }
 
 /*!
     \property QWinThumbnailToolButton::icon
     \brief the icon of the button
  */
-void QWinThumbnailToolButton::setIcon(const QIcon &icon)
+void QWinThumbnailToolButton::setIcon(const QIcon& icon)
 {
-    Q_D(QWinThumbnailToolButton);
-    if (d->icon.cacheKey() != icon.cacheKey()) {
-        d->icon = icon;
-        emit changed();
-    }
+	Q_D(QWinThumbnailToolButton);
+
+	if (d->icon.cacheKey() != icon.cacheKey())
+	{
+		d->icon = icon;
+		emit changed();
+	}
 }
 
 QIcon QWinThumbnailToolButton::icon() const
 {
-    Q_D(const QWinThumbnailToolButton);
-    return d->icon;
+	Q_D(const QWinThumbnailToolButton);
+	return d->icon;
 }
 
 /*!
@@ -129,17 +133,19 @@ QIcon QWinThumbnailToolButton::icon() const
  */
 void QWinThumbnailToolButton::setEnabled(bool enabled)
 {
-    Q_D(QWinThumbnailToolButton);
-    if (d->enabled != enabled) {
-        d->enabled = enabled;
-        emit changed();
-    }
+	Q_D(QWinThumbnailToolButton);
+
+	if (d->enabled != enabled)
+	{
+		d->enabled = enabled;
+		emit changed();
+	}
 }
 
 bool QWinThumbnailToolButton::isEnabled() const
 {
-    Q_D(const QWinThumbnailToolButton);
-    return d->enabled;
+	Q_D(const QWinThumbnailToolButton);
+	return d->enabled;
 }
 
 /*!
@@ -156,17 +162,19 @@ bool QWinThumbnailToolButton::isEnabled() const
  */
 void QWinThumbnailToolButton::setInteractive(bool interactive)
 {
-    Q_D(QWinThumbnailToolButton);
-    if (d->interactive != interactive) {
-        d->interactive = interactive;
-        emit changed();
-    }
+	Q_D(QWinThumbnailToolButton);
+
+	if (d->interactive != interactive)
+	{
+		d->interactive = interactive;
+		emit changed();
+	}
 }
 
 bool QWinThumbnailToolButton::isInteractive() const
 {
-    Q_D(const QWinThumbnailToolButton);
-    return d->interactive;
+	Q_D(const QWinThumbnailToolButton);
+	return d->interactive;
 }
 
 /*!
@@ -177,17 +185,19 @@ bool QWinThumbnailToolButton::isInteractive() const
  */
 void QWinThumbnailToolButton::setVisible(bool visible)
 {
-    Q_D(QWinThumbnailToolButton);
-    if (d->visible != visible) {
-        d->visible = visible;
-        emit changed();
-    }
+	Q_D(QWinThumbnailToolButton);
+
+	if (d->visible != visible)
+	{
+		d->visible = visible;
+		emit changed();
+	}
 }
 
 bool QWinThumbnailToolButton::isVisible() const
 {
-    Q_D(const QWinThumbnailToolButton);
-    return d->visible;
+	Q_D(const QWinThumbnailToolButton);
+	return d->visible;
 }
 
 /*!
@@ -198,17 +208,19 @@ bool QWinThumbnailToolButton::isVisible() const
  */
 void QWinThumbnailToolButton::setDismissOnClick(bool dismiss)
 {
-    Q_D(QWinThumbnailToolButton);
-    if (d->dismiss != dismiss) {
-        d->dismiss = dismiss;
-        emit changed();
-    }
+	Q_D(QWinThumbnailToolButton);
+
+	if (d->dismiss != dismiss)
+	{
+		d->dismiss = dismiss;
+		emit changed();
+	}
 }
 
 bool QWinThumbnailToolButton::dismissOnClick() const
 {
-    Q_D(const QWinThumbnailToolButton);
-    return d->dismiss;
+	Q_D(const QWinThumbnailToolButton);
+	return d->dismiss;
 }
 
 /*!
@@ -221,17 +233,19 @@ bool QWinThumbnailToolButton::dismissOnClick() const
  */
 void QWinThumbnailToolButton::setFlat(bool flat)
 {
-    Q_D(QWinThumbnailToolButton);
-    if (d->flat != flat) {
-        d->flat = flat;
-        emit changed();
-    }
+	Q_D(QWinThumbnailToolButton);
+
+	if (d->flat != flat)
+	{
+		d->flat = flat;
+		emit changed();
+	}
 }
 
 bool QWinThumbnailToolButton::isFlat() const
 {
-    Q_D(const QWinThumbnailToolButton);
-    return d->flat;
+	Q_D(const QWinThumbnailToolButton);
+	return d->flat;
 }
 
 /*!
@@ -242,9 +256,12 @@ bool QWinThumbnailToolButton::isFlat() const
  */
 void QWinThumbnailToolButton::click()
 {
-    Q_D(QWinThumbnailToolButton);
-    if (d->enabled && d->interactive)
-        emit clicked();
+	Q_D(QWinThumbnailToolButton);
+
+	if (d->enabled && d->interactive)
+	{
+		emit clicked();
+	}
 }
 
 QT_END_NAMESPACE

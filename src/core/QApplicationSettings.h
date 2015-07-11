@@ -31,7 +31,7 @@ class QApplicationSettings : public Singleton<QApplicationSettings>
 protected:
 
 	QApplicationSettings();
-	
+
 private:
 	QSettings* settings;
 	QMutex* locker;

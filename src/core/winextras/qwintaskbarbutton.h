@@ -46,26 +46,26 @@ class QWinTaskbarButtonPrivate;
 class QWinTaskbarButton : public QObject
 {
 	Q_OBJECT
-		Q_PROPERTY(QIcon overlayIcon READ overlayIcon WRITE setOverlayIcon RESET clearOverlayIcon)
-		Q_PROPERTY(QString overlayAccessibleDescription READ overlayAccessibleDescription WRITE setOverlayAccessibleDescription)
-		Q_PROPERTY(QWinTaskbarProgress *progress READ progress)
-		Q_PROPERTY(QWidget *window READ window WRITE setWindow)
+	Q_PROPERTY(QIcon overlayIcon READ overlayIcon WRITE setOverlayIcon RESET clearOverlayIcon)
+	Q_PROPERTY(QString overlayAccessibleDescription READ overlayAccessibleDescription WRITE setOverlayAccessibleDescription)
+	Q_PROPERTY(QWinTaskbarProgress* progress READ progress)
+	Q_PROPERTY(QWidget* window READ window WRITE setWindow)
 
 public:
-	explicit QWinTaskbarButton(QObject *parent = 0);
+	explicit QWinTaskbarButton(QObject* parent = 0);
 	~QWinTaskbarButton();
 
-	void setWindow(QWidget *window);
-	QWidget *window() const;
+	void setWindow(QWidget* window);
+	QWidget* window() const;
 
 	QIcon overlayIcon() const;
 	QString overlayAccessibleDescription() const;
 
-	QWinTaskbarProgress *progress() const;
+	QWinTaskbarProgress* progress() const;
 
 public Q_SLOTS:
-	void setOverlayIcon(const QIcon &icon);
-	void setOverlayAccessibleDescription(const QString &description);
+	void setOverlayIcon(const QIcon& icon);
+	void setOverlayAccessibleDescription(const QString& description);
 
 	void clearOverlayIcon();
 

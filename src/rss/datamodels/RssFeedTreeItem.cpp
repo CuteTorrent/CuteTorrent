@@ -30,9 +30,9 @@ void RssFeedTreeItem::BuildChildren()
 
 	QList<RssItem*> feedItems = m_pFeed->GetFeedItems();
 
-    for (int i=0; i< feedItems.size(); i++)
+	for (int i = 0; i < feedItems.size(); i++)
 	{
-        m_children.append(new RssFeedItemTreeItem(this, feedItems[i]));
+		m_children.append(new RssFeedItemTreeItem(this, feedItems[i]));
 	}
 }
 

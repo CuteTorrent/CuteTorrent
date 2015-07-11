@@ -30,7 +30,8 @@ class SMTP_MIME_EXPORT MimePart
 public:
 
 	/* [0] Enumerations */
-	enum Encoding {
+	enum Encoding
+	{
 		_7Bit,
 		_8Bit,
 		Base64,
@@ -51,24 +52,24 @@ public:
 
 	/* [2] Getters and Setters */
 
-	void setContent(const QByteArray & content);
+	void setContent(const QByteArray& content);
 	QByteArray getContent() const;
 
-	void setHeader(const QString & headerLines);
+	void setHeader(const QString& headerLines);
 	QString getHeader() const;
 
-	void addHeaderLine(const QString & line);
+	void addHeaderLine(const QString& line);
 
-	void setContentId(const QString & cId);
+	void setContentId(const QString& cId);
 	QString getContentId() const;
 
-	void setContentName(const QString & cName);
+	void setContentName(const QString& cName);
 	QString getContentName() const;
 
-	void setContentType(const QString & cType);
+	void setContentType(const QString& cType);
 	QString getContentType() const;
 
-	void setCharset(const QString & charset);
+	void setCharset(const QString& charset);
 	QString getCharset() const;
 
 	void setEncoding(Encoding enc);
@@ -83,7 +84,7 @@ public:
 	/* [3] Public methods */
 
 	virtual QString toString() const;
-	void writeToDevice(QIODevice &device) const;
+	void writeToDevice(QIODevice& device) const;
 
 	/* [3] --- */
 
@@ -108,8 +109,8 @@ protected:
 
 	/* [4] --- */
 
-	virtual void writeContent(QIODevice &device) const;
-	void writeContent(QIODevice &device, const QByteArray &content) const;
+	virtual void writeContent(QIODevice& device) const;
+	void writeContent(QIODevice& device, const QByteArray& content) const;
 };
 
 #endif // MIMEPART_H

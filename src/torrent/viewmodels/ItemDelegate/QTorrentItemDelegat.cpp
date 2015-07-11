@@ -48,7 +48,6 @@ QTorrentItemDelegat::QTorrentItemDelegat(const QTorrentItemDelegat& dlg) : QStyl
 	myProgressBarStyle->setMinimum(0);
 	myProgressBarStyle->setMaximum(100);
 	myProgressBarStyle->setTextVisible(false);
-	
 }
 
 QTorrentItemDelegat::QTorrentItemDelegat() : QStyledItemDelegate(0), myProgressBarStyle(new StyledProgressBar()) {}
@@ -100,16 +99,11 @@ QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem& option, const Torrent&
 		const QFontMetrics nameFM(nameFont);
 		const QString nameStr(tor.GetName());
 		int nameWidth = nameFM.width(nameStr);
-
-		
 		QFont statusFont(option.font);
 		statusFont.setPointSize(int (option.font.pointSize() * 0.9));
 		const QFontMetrics statusFM(statusFont);
 		const QString statusStr(GetStatusString(tor));
 		int statusWidth = statusFM.width(statusStr);
-
-		
-
 		QFont progressFont(statusFont);
 		const QFontMetrics progressFM(progressFont);
 		const QString progressStr(GetProgressString(tor));
@@ -135,6 +129,7 @@ QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem&   option,
 	{
 		Torrent*  tor(index.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>());
 		initStyleOption(const_cast<QStyleOptionViewItem*>(&option), index);
+
 		if(tor != NULL)
 		{
 			return sizeHint(option, *tor);
@@ -240,7 +235,6 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	const QIcon mimeIcon(tor.GetMimeTypeIcon());
 	QString nameStr(tor.GetName());
 	QSize nameSize(nameFM.size(0, nameStr));
-
 	QFont statusFont(option.font);
 	statusFont.setPointSize(int (option.font.pointSize() * 0.9));
 	const QFontMetrics statusFM(statusFont);
@@ -316,14 +310,16 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	QRect iconArea(fillArea.x(), fillArea.y() + (fillArea.height() - iconSize) / 2, iconSize, iconSize);
 	QRect nameArea(iconArea.x() + iconArea.width() + GUI_PAD, fillArea.y(),
 	               fillArea.width() - GUI_PAD - iconArea.width(), nameSize.height());
+
 	if (nameArea.width() + nameArea.x() > opt.rect.width())
 	{
 		nameArea.setWidth(opt.rect.width() - nameArea.x());
 	}
+
 	QRect barArea(nameArea.x(), nameArea.y() + statusFM.lineSpacing() + GUI_PAD / 2, nameArea.width(), BAR_HEIGHT);
 	QRect progArea(nameArea.x(), barArea.y() + barArea.height() + GUI_PAD / 2, barArea.width() - statusWidth, nameArea.height());
 	QRect statusArea(progArea.x() + progArea.width(), progArea.y(), statusWidth, progArea.height());
-	
+
 	if(tor.hasError())
 	{
 		painter->setPen(QColor("red"));
@@ -344,13 +340,11 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	progressStr = statusFM.elidedText(progressStr, Qt::ElideRight, progArea.width());
 	style->drawItemText(painter, progArea, Qt::AlignLeft, opt.palette, option.state & QStyle::State_Enabled, progressStr);
 	int progressPercentage = tor.GetProgress();
-	
 	myProgressBarStyle->resize(barArea.size());
 	myProgressBarStyle->setValue(progressPercentage);
 	//painter->translate(barArea.topLeft());
 	//myProgressBarStyle->render(painter);
 	QStyleOptionProgressBarV2 pbStyleOpt;
-
 	myProgressBarStyle->initilizeStyleOption(&pbStyleOpt);
 	pbStyleOpt.rect = barArea;
 	/*myProgressBarStyle->rect = barArea;
@@ -368,8 +362,6 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	myProgressBarStyle->state = progressBarState;
 	setProgressBarPercentDone( option, tor );
 	*/
-	
 	style->drawControl(QStyle::CE_ProgressBar, &pbStyleOpt, painter, myProgressBarStyle);
-	
 	painter->restore();
 }

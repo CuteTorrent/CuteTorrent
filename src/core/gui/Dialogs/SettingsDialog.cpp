@@ -93,7 +93,6 @@ SettingsDialog::SettingsDialog(QWidget* parent, int flags) : BaseWindow(OnlyClos
 	FillRssTab();
 	setupCustomWindow();
 	setupWindowIcons();
-
 	QString curLoc = Application::currentLocale();
 	int current = 0;
 
@@ -197,7 +196,6 @@ void SettingsDialog::FillGeneralTab()
 	showTrackerErrorsCheckBox->setChecked(settings->valueBool("Notifications", "report_tracker_errors", true));
 	showDiskErrorsCheckBox->setChecked(settings->valueBool("Notifications", "report_disk_errors", true));
 	showRssErrorsCheckBox->setChecked(settings->valueBool("Notifications", "report_rss_errors", true));
-	
 	//OS_SPECIFICK////
 #ifdef Q_WS_WIN
 	QSettings assocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
@@ -216,13 +214,11 @@ void SettingsDialog::FillGeneralTab()
 	winShelItegrationCheckBox->setChecked(starCommandMatch && folderCommandMatch && dirCommandMatch);
 	scriptDebugingCheckBox->setChecked(settings->valueBool("Search", "script_debuging_enabled", false));
 #endif
-	
-	
 #ifdef Q_WS_X11
-    winShelItegrationCheckBox->setVisible(false);
-    startMinimizedCheckBox->setVisible(false);
-    runOnbootCheckBox->setChecked(QFile::exists(StaticHelpers::CombinePathes(QDir::homePath() ,".config/autostart/CuteTorrent.desktop")));
-    QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() ,".config/mimeapps.list"));
+	winShelItegrationCheckBox->setVisible(false);
+	startMinimizedCheckBox->setVisible(false);
+	runOnbootCheckBox->setChecked(QFile::exists(StaticHelpers::CombinePathes(QDir::homePath() , ".config/autostart/CuteTorrent.desktop")));
+	QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() , ".config/mimeapps.list"));
 
 	if (associtaionGnomeConfig.open(QFile::ReadOnly))
 	{
@@ -230,27 +226,29 @@ void SettingsDialog::FillGeneralTab()
 		associtaionGnomeConfig.close();
 		QString associationStr = QString::fromUtf8(asscoiationData);
 		QStringList lines = associationStr.split('\n');
+
 		foreach(QString line, lines)
 		{
-            qDebug() << "Line from mimeapps.list" << line;
-            qDebug() << "Line from mimeapps.listline.startsWith(\"application/x-bittorrent\")" << line.startsWith("application/x-bittorrent;", Qt::CaseInsensitive);
-            qDebug() << "Line from mimeapps.listline.startsWith(\"x-scheme-handler/magnet\")" << line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive);
-            qDebug() << "Line from mimeapps.line.endsWith(\"CuteTorrent.desktop\")" << line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive);
+			qDebug() << "Line from mimeapps.list" << line;
+			qDebug() << "Line from mimeapps.listline.startsWith(\"application/x-bittorrent\")" << line.startsWith("application/x-bittorrent;", Qt::CaseInsensitive);
+			qDebug() << "Line from mimeapps.listline.startsWith(\"x-scheme-handler/magnet\")" << line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive);
+			qDebug() << "Line from mimeapps.line.endsWith(\"CuteTorrent.desktop\")" << line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive);
+
 			if (line.startsWith("application/x-bittorrent", Qt::CaseInsensitive))
 			{
-                asociationCheckBox->setChecked(line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive));
+				asociationCheckBox->setChecked(line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive));
 			}
 			else if (line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive))
 			{
-                magnetAssociationCheckBox->setChecked(line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive));
+				magnetAssociationCheckBox->setChecked(line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive));
 			}
 		}
 	}
 	else
 	{
-
-        qCritical() << "Unable to open gnome config file for reading" << associtaionGnomeConfig.errorString();
+		qCritical() << "Unable to open gnome config file for reading" << associtaionGnomeConfig.errorString();
 	}
+
 #endif
 	//OS_SPECIFICK////
 }
@@ -341,11 +339,10 @@ void SettingsDialog::ApplySettings()
 	settings->setValue("Torrent", "use_pex",					qVariantFromValue(usePExCheckBox->isChecked()));
 	bool isScriptDebuggingEnabled = scriptDebugingCheckBox->isChecked();
 	settings->setValue("Search", "script_debuging_enabled",		qVariantFromValue(isScriptDebuggingEnabled));
-	
 	SearchEnginePtr searchEngine = SearchEngine::getInstance();
+
 	if (isScriptDebuggingEnabled)
 	{
-		
 		if (!searchEngine->isEnabledScriptDebugging())
 		{
 			searchEngine->enableScriptDebugging();
@@ -418,14 +415,11 @@ void SettingsDialog::ApplySettings()
 	settings->setValue("rss", "rss_send_to",					rssRecepientEmailEdit->text());
 	settings->setValue("rss", "auto_download_emeail_notify",	autosrtEmailNotificationCheckBox->isChecked());
 	settings->setValue("rss", "default_refresh_rate",			rssRefrashRateEdit->value());
-	
 	NotificationSystemPtr pNotifySys = NotificationSystem::getInstance();
 	pNotifySys->UpdateNotificationSettings();
-
 #ifdef Q_WS_WIN //file association for windows
 	QSettings asocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
-	
 
 	if(asociationCheckBox->checkState() == Qt::Checked)
 	{
@@ -433,9 +427,9 @@ void SettingsDialog::ApplySettings()
 		asocSettings.setValue("CuteTorrent.file/.", tr("Torrent file"));
 		asocSettings.setValue(".torrent/OpenWithProgids/CuteTorrent.file", "");
 		asocSettings.setValue("CuteTorrent.file/shell/open/command/.",
-			"\"" + applicationFilePath + "\"" + " \"%1\"");
+		                      "\"" + applicationFilePath + "\"" + " \"%1\"");
 		asocSettings.setValue("CuteTorrent.file/DefaultIcon/.",
-			applicationFilePath + ",1");
+		                      applicationFilePath + ",1");
 	}
 	else
 	{
@@ -452,7 +446,7 @@ void SettingsDialog::ApplySettings()
 		asocSettings.setValue("Magnet/Content Type", "application/x-magnet");
 		asocSettings.setValue("Magnet/URL Protocol", "");
 		asocSettings.setValue("Magnet/shell/open/command/.",
-			"\"" + applicationFilePath + "\"" + " \"%1\"");
+		                      "\"" + applicationFilePath + "\"" + " \"%1\"");
 	}
 	else
 	{
@@ -472,21 +466,18 @@ void SettingsDialog::ApplySettings()
 	{
 		bootUpSettings.remove("CuteTorrent");
 	}
+
 	if (winShelItegrationCheckBox->isChecked())
 	{
 		asocSettings.setValue("*/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
 		asocSettings.setValue("*/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
 		asocSettings.setValue("*/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
-
 		asocSettings.setValue("Folder/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
 		asocSettings.setValue("Folder/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
 		asocSettings.setValue("Folder/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
-
 		asocSettings.setValue("Directory/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
 		asocSettings.setValue("Directory/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
 		asocSettings.setValue("Directory/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
-
-
 	}
 	else
 	{
@@ -495,48 +486,47 @@ void SettingsDialog::ApplySettings()
 		asocSettings.remove("*/shell/cutetorrent/command/.");
 		asocSettings.remove("*/shell/cutetorrent/command");
 		asocSettings.remove("*/shell/cutetorrent");
-
 		asocSettings.remove("Folder/shell/cutetorrent/.");
 		asocSettings.remove("Folder/shell/cutetorrent/Icon");
 		asocSettings.remove("Folder/shell/cutetorrent/command/.");
 		asocSettings.remove("Folder/shell/cutetorrent/command");
 		asocSettings.remove("Folder/shell/cutetorrent");
-
 		asocSettings.remove("Directory/shell/cutetorrent/.");
 		asocSettings.remove("Directory/shell/cutetorrent/Icon");
 		asocSettings.remove("Directory/shell/cutetorrent/command/.");
 		asocSettings.remove("Directory/shell/cutetorrent/command");
 		asocSettings.remove("Directory/shell/cutetorrent");
-
 	}
-#endif
-	
-#ifdef Q_WS_X11
-    if (runOnbootCheckBox->checkState() == Qt::Checked)
-	{
-        if (!QFile::exists(StaticHelpers::CombinePathes(QDir::homePath() ,".config/autostart/CuteTorrent.desktop")))
-		{
-            QFile shortcut("/usr/share/applications/CuteTorrent.desktop");
-            if (!shortcut.copy(StaticHelpers::CombinePathes(QDir::homePath() ,".config/autostart/CuteTorrent.desktop")))
-			{
-                qCritical() << "Unable to copy /usr/share/applications/CuteTorrent.desktop to ~/.config/autostart/CuteTorrent.desktop" << shortcut.errorString();
 
+#endif
+#ifdef Q_WS_X11
+
+	if (runOnbootCheckBox->checkState() == Qt::Checked)
+	{
+		if (!QFile::exists(StaticHelpers::CombinePathes(QDir::homePath() , ".config/autostart/CuteTorrent.desktop")))
+		{
+			QFile shortcut("/usr/share/applications/CuteTorrent.desktop");
+
+			if (!shortcut.copy(StaticHelpers::CombinePathes(QDir::homePath() , ".config/autostart/CuteTorrent.desktop")))
+			{
+				qCritical() << "Unable to copy /usr/share/applications/CuteTorrent.desktop to ~/.config/autostart/CuteTorrent.desktop" << shortcut.errorString();
 			}
 		}
 	}
 	else
 	{
-         QFile shortcut(StaticHelpers::CombinePathes(QDir::homePath() ,".config/autostart/CuteTorrent.desktop"));
-        if (shortcut.exists())
+		QFile shortcut(StaticHelpers::CombinePathes(QDir::homePath() , ".config/autostart/CuteTorrent.desktop"));
+
+		if (shortcut.exists())
 		{
-            if (!shortcut.remove())
+			if (!shortcut.remove())
 			{
-                qCritical() << "failed to remove ~/.config/autostart/CuteTorrent.desktop" << shortcut.errorString();
+				qCritical() << "failed to remove ~/.config/autostart/CuteTorrent.desktop" << shortcut.errorString();
 			}
 		}
 	}
 
-    QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() ,".config/mimeapps.list"));
+	QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() , ".config/mimeapps.list"));
 
 	if (associtaionGnomeConfig.open(QFile::ReadOnly))
 	{
@@ -545,12 +535,15 @@ void SettingsDialog::ApplySettings()
 		QString associationStr = QString::fromUtf8(asscoiationData);
 		QStringList lines = associationStr.split('\n');
 		bool torrentFound = false, magnetFound = false;
+
 		for (int i = 0; i < lines.size(); i++)
 		{
 			QString line = lines[i];
+
 			if (line.startsWith("application/x-bittorrent", Qt::CaseInsensitive))
 			{
 				torrentFound = true;
+
 				if (asociationCheckBox->isChecked())
 				{
 					lines[i] = "application/x-bittorrent=CuteTorrent.desktop;";
@@ -563,6 +556,7 @@ void SettingsDialog::ApplySettings()
 			else if (line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive))
 			{
 				magnetFound = true;
+
 				if (magnetAssociationCheckBox->isChecked())
 				{
 					lines[i] = "x-scheme-handler/magnet=CuteTorrent.desktop;";
@@ -573,39 +567,43 @@ void SettingsDialog::ApplySettings()
 				}
 			}
 		}
-        if (!torrentFound && asociationCheckBox->isChecked())
-        {
-            lines.append("application/x-bittorrent=CuteTorrent.desktop;\n");
-        }
-        if (!magnetFound && magnetAssociationCheckBox->isChecked())
-        {
-            lines.append("x-scheme-handler/magnet=CuteTorrent.desktop;\n");
-        }
+
+		if (!torrentFound && asociationCheckBox->isChecked())
+		{
+			lines.append("application/x-bittorrent=CuteTorrent.desktop;\n");
+		}
+
+		if (!magnetFound && magnetAssociationCheckBox->isChecked())
+		{
+			lines.append("x-scheme-handler/magnet=CuteTorrent.desktop;\n");
+		}
+
 		if (associtaionGnomeConfig.open(QFile::WriteOnly))
 		{
 			for (int i = 0; i < lines.size(); i++)
 			{
 				QString line = lines[i];
+
 				if (!line.isEmpty())
 				{
 					associtaionGnomeConfig.write((line + "\n").toUtf8());
 				}
-
 			}
-            associtaionGnomeConfig.close();
 
+			associtaionGnomeConfig.close();
 		}
 		else
 		{
-
-            qCritical() << "Unable to open gnome config file for writing file asscoiations" << associtaionGnomeConfig.errorString();
+			qCritical() << "Unable to open gnome config file for writing file asscoiations" << associtaionGnomeConfig.errorString();
 		}
 	}
 	else
 	{
-        qCritical() << "Unable to open gnome config file for reading file asscoiations" << associtaionGnomeConfig.errorString();
+		qCritical() << "Unable to open gnome config file for reading file asscoiations" << associtaionGnomeConfig.errorString();
 	}
+
 #endif
+
 	if(settings->valueBool("WebControl", "webui_enabled", false))
 	{
 		rcon->Start();
@@ -942,9 +940,9 @@ void SettingsDialog::FillKeyMapTab()
 	qDeleteAll(keyMapContainer->findChildren<QGroupBox*>());
 	QLayout* origLayout = keyMapContainer->layout();
 	QGridLayout* layout = origLayout ? (QGridLayout*) origLayout :  new QGridLayout(keyMapContainer);
-    QMap<QString, QMap<QString, QString> > grouppedKeyMap;
+	QMap<QString, QMap<QString, QString> > grouppedKeyMap;
 	int index = 0;
-	
+
 	for(QMap<QString, QVariant>::iterator i = keyMappings.begin();
 	        i != keyMappings.end(); ++i, index++)
 	{
@@ -1015,7 +1013,6 @@ void SettingsDialog::FillKeyMapTab()
 
 void SettingsDialog::FillSearchTab()
 {
-
 }
 
 void SettingsDialog::UpdateSchedullerTab(int index)
@@ -1186,6 +1183,7 @@ void SettingsDialog::FillRssTab()
 		connect(deleteRssRule, SIGNAL(triggered()), SLOT(onDeleteRssRule()));
 		rssRulesListWidget->addAction(deleteRssRule);
 	}
+
 	rssRefrashRateEdit->setValue(settings->valueInt("rss", "default_refresh_rate", 30));
 	autosrtEmailNotificationCheckBox->setChecked(settings->valueBool("rss", "auto_download_emeail_notify"));
 	rssSmtpServerEdit->setText(settings->valueString("rss", "smtp_host"));
@@ -1196,20 +1194,24 @@ void SettingsDialog::FillRssTab()
 		QT_TR_NOOP("RSS_SSL_CONNECTION"),
 		QT_TR_NOOP("RSS_TLS_CONNECTION"),
 	};
+
 	for (int i = SmtpClient::TcpConnection; i <= SmtpClient::TlsConnection; i++)
 	{
 		rssSmtpConnTypeCombobox->addItem(tr(smtpConnectionTypes[i]), i);
 	}
+
 	rssSmtpConnTypeCombobox->setCurrentIndex(settings->valueInt("rss", "smtp_conn_type"));
 	char const* smtpAuthTypes[] =
 	{
 		QT_TR_NOOP("RSS_PLAIN_AUTH"),
 		QT_TR_NOOP("RSS_LOGIN_AUTH"),
 	};
+
 	for (int i = SmtpClient::AuthPlain; i <= SmtpClient::AuthLogin; i++)
 	{
 		rssAuthTypeComboBox->addItem(tr(smtpAuthTypes[i]), i);
 	}
+
 	rssAuthTypeComboBox->setCurrentIndex(settings->valueInt("rss", "smtp_auth_type"));
 	rssSmtpLoginEdit->setText(settings->valueString("rss", "smtp_user"));
 	rssSmtpPasswordEdit->setText(settings->valueString("rss", "smtp_password"));
@@ -1224,7 +1226,7 @@ void SettingsDialog::ApplyRssDownloadRulles()
 	{
 		pRssManager->updateDownloadRule(new RssDownloadRule(*m_downloadRulesCopy.values().at(i)));
 	}
-	
+
 	for (int i = 0; i < m_deletedRules.size(); i++)
 	{
 		pRssManager->removeDownloadRule(m_deletedRules.at(i));
@@ -1344,12 +1346,14 @@ void SettingsDialog::onDeleteRssRule()
 	if (rssRulesListWidget->currentRow() != -1)
 	{
 		QList<QListWidgetItem*> selectedItems = rssRulesListWidget->selectedItems();
+
 		foreach(QListWidgetItem* currentItem, selectedItems)
 		{
 			QUuid uid = currentItem->data(Qt::UserRole).value<QUuid>();
 			m_downloadRulesCopy.remove(uid);
 			m_deletedRules.append(uid);
 		}
+
 		updateRulesWidget(m_downloadRulesCopy.values());
 	}
 }
@@ -1365,7 +1369,6 @@ void SettingsDialog::onExportRssRules()
 
 	RssManagerPtr pRssManager = RssManager::getInstance();
 	QList<RssDownloadRule*> rssDownloadRules = pRssManager->downloadRules();
-
 	QFile rulesFile(savePath);
 
 	if (rulesFile.open(QFile::WriteOnly))
@@ -1374,15 +1377,17 @@ void SettingsDialog::onExportRssRules()
 		{
 			QSet<QUuid> feedUids = rule->FeedUids();
 			QSet<QUuid>::Iterator begin = feedUids.begin()
-				, end = feedUids.end();
+			                              , end = feedUids.end();
 			int size = feedUids.size();
-			QString serializedRule = rule->Uid().toString() % "|" % QUrl::toPercentEncoding(rule->Name()) % "|" % QString::number(rule->RuleType()) % "|" % QString::number(rule->PatternType()) % "|" % QUrl::toPercentEncoding(rule->Pattern()) % "|" % QString::number(rule->UseGroupFilters()) % "|" % QString::number(rule->UseStaticSavePath()) % "|" % rule->StaticSavePath() % "|" % QString::number(size);
-			
-			
+			QString serializedRule = rule->Uid().toString() % "|" % QUrl::toPercentEncoding(rule->Name()) % "|" % QString::number(rule->RuleType()) % "|" % QString::number(
+			                             rule->PatternType()) % "|" % QUrl::toPercentEncoding(rule->Pattern()) % "|" % QString::number(rule->UseGroupFilters()) % "|" % QString::number(
+			                             rule->UseStaticSavePath()) % "|" % rule->StaticSavePath() % "|" % QString::number(size);
+
 			for (QSet<QUuid>::Iterator i = begin; i != end; ++i)
 			{
 				serializedRule.append("|" % (*i).toString());
 			}
+
 			serializedRule.append("\n");
 			rulesFile.write(serializedRule.toUtf8());
 		}
@@ -1391,8 +1396,6 @@ void SettingsDialog::onExportRssRules()
 	{
 		CustomMessageBox::critical(this, tr("ERROR"), tr("ERROR_WRITING_RSS_RULE_LIST: %1").arg(rulesFile.errorString()));
 	}
-
-	
 }
 
 void SettingsDialog::onImportRssRules()
@@ -1409,6 +1412,7 @@ void SettingsDialog::onImportRssRules()
 	if (rulesFile.open(QFile::ReadOnly))
 	{
 		RssManagerPtr pRssManager = RssManager::getInstance();
+
 		while (!rulesFile.atEnd())
 		{
 			QByteArray lineData = rulesFile.readLine();
@@ -1416,10 +1420,11 @@ void SettingsDialog::onImportRssRules()
 			QStringList parts = line.split("|");
 			int size = parts.size();
 			int index = 0;
-			
+
 			if (size > NUMBER_OF_FEEDS)
 			{
 				RssDownloadRule* pRule = new RssDownloadRule();
+
 				while (index < size)
 				{
 					switch (index)
@@ -1430,41 +1435,49 @@ void SettingsDialog::onImportRssRules()
 							pRule->setUuid(uid);
 							break;
 						}
+
 						case NAME:
 						{
 							pRule->setName(QUrl::fromPercentEncoding(parts[index].toUtf8()));
 							break;
 						}
+
 						case RULE_TYPE:
 						{
 							pRule->setRuleType(static_cast<RssDownloadRule::DownloadRuleType>(parts[index].toInt()));
 							break;
 						}
+
 						case SEARCH_TYPE:
 						{
 							pRule->setPatternType(static_cast<QRegExp::PatternSyntax>(parts[index].toInt()));
 							break;
 						}
+
 						case SEARCH_STR:
 						{
 							pRule->setPattern(QUrl::fromPercentEncoding(parts[index].toUtf8()));
 							break;
 						}
+
 						case USE_GROUP_FILTERS:
 						{
 							pRule->setUseGroupFilters(parts[index].toInt() > 0);
 							break;
 						}
+
 						case USE_STATIC_SAVE_PATH:
 						{
 							pRule->setUseStaticSavePath(parts[index].toInt() > 0);
 							break;
 						}
+
 						case STATIC_SAVE_PATH:
 						{
 							pRule->setStaticSavePath(parts[index]);
 							break;
 						}
+
 						case NUMBER_OF_FEEDS:
 						{
 							int numFeeds = parts[index].toInt();
@@ -1475,15 +1488,18 @@ void SettingsDialog::onImportRssRules()
 							{
 								feedUids.insert(QUuid(parts[i]));
 							}
+
 							pRule->setFeedUids(feedUids);
 							break;
 						}
 					}
-					index++;
 
+					index++;
 				}
+
 				bool ok;
 				QString error = pRule->validate(ok);
+
 				if (ok)
 				{
 					m_downloadRulesCopy.insert(pRule->Uuid(), pRule);
@@ -1493,13 +1509,10 @@ void SettingsDialog::onImportRssRules()
 				{
 					CustomMessageBox::critical(this, "ERROR", tr("PARSED_RULE_IS_NOT_VALID:\n %1\nERROR: %2").arg(line, error));
 				}
-				
 			}
-			
 		}
-		updateRulesWidget(m_downloadRulesCopy.values());
 
-		
+		updateRulesWidget(m_downloadRulesCopy.values());
 	}
 	else
 	{

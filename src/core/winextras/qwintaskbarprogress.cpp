@@ -88,26 +88,26 @@ QT_BEGIN_NAMESPACE
 class QWinTaskbarProgressPrivate
 {
 public:
-    QWinTaskbarProgressPrivate();
+	QWinTaskbarProgressPrivate();
 
-    int value;
-    int minimum;
-    int maximum;
-    bool visible;
-    bool paused;
-    bool stopped;
+	int value;
+	int minimum;
+	int maximum;
+	bool visible;
+	bool paused;
+	bool stopped;
 };
 
 QWinTaskbarProgressPrivate::QWinTaskbarProgressPrivate() :
-    value(0), minimum(0), maximum(100), visible(false), paused(false), stopped(false)
+	value(0), minimum(0), maximum(100), visible(false), paused(false), stopped(false)
 {
 }
 
 /*!
     Constructs a QWinTaskbarProgress with the parent object \a parent.
  */
-QWinTaskbarProgress::QWinTaskbarProgress(QObject *parent) :
-    QObject(parent), d_ptr(new QWinTaskbarProgressPrivate)
+QWinTaskbarProgress::QWinTaskbarProgress(QObject* parent) :
+	QObject(parent), d_ptr(new QWinTaskbarProgressPrivate)
 {
 }
 
@@ -126,18 +126,21 @@ QWinTaskbarProgress::~QWinTaskbarProgress()
  */
 int QWinTaskbarProgress::value() const
 {
-    Q_D(const QWinTaskbarProgress);
-    return d->value;
+	Q_D(const QWinTaskbarProgress);
+	return d->value;
 }
 
 void QWinTaskbarProgress::setValue(int value)
 {
-    Q_D(QWinTaskbarProgress);
-    if ((value == d->value) || value < d->minimum || value > d->maximum)
-        return;
+	Q_D(QWinTaskbarProgress);
 
-    d->value = value;
-    emit valueChanged(d->value);
+	if ((value == d->value) || value < d->minimum || value > d->maximum)
+	{
+		return;
+	}
+
+	d->value = value;
+	emit valueChanged(d->value);
 }
 
 /*!
@@ -148,14 +151,14 @@ void QWinTaskbarProgress::setValue(int value)
  */
 int QWinTaskbarProgress::minimum() const
 {
-    Q_D(const QWinTaskbarProgress);
-    return d->minimum;
+	Q_D(const QWinTaskbarProgress);
+	return d->minimum;
 }
 
 void QWinTaskbarProgress::setMinimum(int minimum)
 {
-    Q_D(QWinTaskbarProgress);
-    setRange(minimum, qMax(minimum, d->maximum));
+	Q_D(QWinTaskbarProgress);
+	setRange(minimum, qMax(minimum, d->maximum));
 }
 
 /*!
@@ -166,14 +169,14 @@ void QWinTaskbarProgress::setMinimum(int minimum)
  */
 int QWinTaskbarProgress::maximum() const
 {
-    Q_D(const QWinTaskbarProgress);
-    return d->maximum;
+	Q_D(const QWinTaskbarProgress);
+	return d->maximum;
 }
 
 void QWinTaskbarProgress::setMaximum(int maximum)
 {
-    Q_D(QWinTaskbarProgress);
-    setRange(qMin(d->minimum, maximum), maximum);
+	Q_D(QWinTaskbarProgress);
+	setRange(qMin(d->minimum, maximum), maximum);
 }
 
 /*!
@@ -184,18 +187,21 @@ void QWinTaskbarProgress::setMaximum(int maximum)
  */
 bool QWinTaskbarProgress::isVisible() const
 {
-    Q_D(const QWinTaskbarProgress);
-    return d->visible;
+	Q_D(const QWinTaskbarProgress);
+	return d->visible;
 }
 
 void QWinTaskbarProgress::setVisible(bool visible)
 {
-    Q_D(QWinTaskbarProgress);
-    if (visible == d->visible)
-        return;
+	Q_D(QWinTaskbarProgress);
 
-    d->visible = visible;
-    emit visibilityChanged(d->visible);
+	if (visible == d->visible)
+	{
+		return;
+	}
+
+	d->visible = visible;
+	emit visibilityChanged(d->visible);
 }
 
 /*!
@@ -203,7 +209,7 @@ void QWinTaskbarProgress::setVisible(bool visible)
  */
 void QWinTaskbarProgress::show()
 {
-    setVisible(true);
+	setVisible(true);
 }
 
 /*!
@@ -211,7 +217,7 @@ void QWinTaskbarProgress::show()
  */
 void QWinTaskbarProgress::hide()
 {
-    setVisible(false);
+	setVisible(false);
 }
 
 /*!
@@ -219,21 +225,30 @@ void QWinTaskbarProgress::hide()
  */
 void QWinTaskbarProgress::setRange(int minimum, int maximum)
 {
-    Q_D(QWinTaskbarProgress);
-    const bool minChanged = minimum != d->minimum;
-    const bool maxChanged = maximum != d->maximum;
-    if (minChanged || maxChanged) {
-        d->minimum = minimum;
-        d->maximum = qMax(minimum, maximum);
+	Q_D(QWinTaskbarProgress);
+	const bool minChanged = minimum != d->minimum;
+	const bool maxChanged = maximum != d->maximum;
 
-        if (d->value < d->minimum || d->value > d->maximum)
-            reset();
+	if (minChanged || maxChanged)
+	{
+		d->minimum = minimum;
+		d->maximum = qMax(minimum, maximum);
 
-        if (minChanged)
-            emit minimumChanged(d->minimum);
-        if (maxChanged)
-            emit maximumChanged(d->maximum);
-    }
+		if (d->value < d->minimum || d->value > d->maximum)
+		{
+			reset();
+		}
+
+		if (minChanged)
+		{
+			emit minimumChanged(d->minimum);
+		}
+
+		if (maxChanged)
+		{
+			emit maximumChanged(d->maximum);
+		}
+	}
 }
 
 /*!
@@ -243,7 +258,7 @@ void QWinTaskbarProgress::setRange(int minimum, int maximum)
  */
 void QWinTaskbarProgress::reset()
 {
-    setValue(minimum());
+	setValue(minimum());
 }
 
 /*!
@@ -261,18 +276,21 @@ void QWinTaskbarProgress::reset()
  */
 bool QWinTaskbarProgress::isPaused() const
 {
-    Q_D(const QWinTaskbarProgress);
-    return d->paused;
+	Q_D(const QWinTaskbarProgress);
+	return d->paused;
 }
 
 void QWinTaskbarProgress::setPaused(bool paused)
 {
-    Q_D(QWinTaskbarProgress);
-    if (paused == d->paused || d->stopped)
-        return;
+	Q_D(QWinTaskbarProgress);
 
-    d->paused = paused;
-    emit pausedChanged(d->paused);
+	if (paused == d->paused || d->stopped)
+	{
+		return;
+	}
+
+	d->paused = paused;
+	emit pausedChanged(d->paused);
 }
 
 /*!
@@ -282,7 +300,7 @@ void QWinTaskbarProgress::setPaused(bool paused)
  */
 void QWinTaskbarProgress::pause()
 {
-    setPaused(true);
+	setPaused(true);
 }
 
 /*!
@@ -292,12 +310,14 @@ void QWinTaskbarProgress::pause()
  */
 void QWinTaskbarProgress::resume()
 {
-    Q_D(QWinTaskbarProgress);
-    setPaused(false);
-    if (d->stopped) {
-        d->stopped = false;
-        emit stoppedChanged(false);
-    }
+	Q_D(QWinTaskbarProgress);
+	setPaused(false);
+
+	if (d->stopped)
+	{
+		d->stopped = false;
+		emit stoppedChanged(false);
+	}
 }
 
 /*!
@@ -315,8 +335,8 @@ void QWinTaskbarProgress::resume()
  */
 bool QWinTaskbarProgress::isStopped() const
 {
-    Q_D(const QWinTaskbarProgress);
-    return d->stopped;
+	Q_D(const QWinTaskbarProgress);
+	return d->stopped;
 }
 
 /*!
@@ -326,12 +346,14 @@ bool QWinTaskbarProgress::isStopped() const
  */
 void QWinTaskbarProgress::stop()
 {
-    Q_D(QWinTaskbarProgress);
-    setPaused(false);
-    if (!d->stopped) {
-        d->stopped = true;
-        emit stoppedChanged(true);
-    }
+	Q_D(QWinTaskbarProgress);
+	setPaused(false);
+
+	if (!d->stopped)
+	{
+		d->stopped = true;
+		emit stoppedChanged(true);
+	}
 }
 
 QT_END_NAMESPACE

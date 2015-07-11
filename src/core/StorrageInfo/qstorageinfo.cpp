@@ -71,7 +71,7 @@ QT_BEGIN_NAMESPACE
     \sa setPath(), isReady(), isValid()
 */
 QStorageInfo::QStorageInfo()
-    : d(new QStorageInfoPrivate)
+	: d(new QStorageInfoPrivate)
 {
 }
 
@@ -90,27 +90,27 @@ QStorageInfo::QStorageInfo()
 
     \sa setPath()
 */
-QStorageInfo::QStorageInfo(const QString &path)
-    : d(new QStorageInfoPrivate)
+QStorageInfo::QStorageInfo(const QString& path)
+	: d(new QStorageInfoPrivate)
 {
-    setPath(path);
+	setPath(path);
 }
 
 /*!
     Constructs a new QStorageInfo object that gives information about the volume
     containing the \a dir folder.
 */
-QStorageInfo::QStorageInfo(const QDir &dir)
-    : d(new QStorageInfoPrivate)
+QStorageInfo::QStorageInfo(const QDir& dir)
+	: d(new QStorageInfoPrivate)
 {
-    setPath(dir.absolutePath());
+	setPath(dir.absolutePath());
 }
 
 /*!
     Constructs a new QStorageInfo object that is a copy of the \a other QStorageInfo object.
 */
-QStorageInfo::QStorageInfo(const QStorageInfo &other)
-    : d(other.d)
+QStorageInfo::QStorageInfo(const QStorageInfo& other)
+	: d(other.d)
 {
 }
 
@@ -124,10 +124,10 @@ QStorageInfo::~QStorageInfo()
 /*!
     Makes a copy of the QStorageInfo object \a other and assigns it to this QStorageInfo object.
 */
-QStorageInfo &QStorageInfo::operator=(const QStorageInfo &other)
+QStorageInfo& QStorageInfo::operator=(const QStorageInfo& other)
 {
-    d = other.d;
-    return *this;
+	d = other.d;
+	return *this;
 }
 
 /*!
@@ -151,13 +151,16 @@ QStorageInfo &QStorageInfo::operator=(const QStorageInfo &other)
 
     \sa rootPath()
 */
-void QStorageInfo::setPath(const QString &path)
+void QStorageInfo::setPath(const QString& path)
 {
-    if (d->rootPath == path)
-        return;
-    d.detach();
-    d->rootPath = path;
-    d->doStat();
+	if (d->rootPath == path)
+	{
+		return;
+	}
+
+	d.detach();
+	d->rootPath = path;
+	d->doStat();
 }
 
 /*!
@@ -176,7 +179,7 @@ void QStorageInfo::setPath(const QString &path)
 */
 QString QStorageInfo::rootPath() const
 {
-    return d->rootPath;
+	return d->rootPath;
 }
 
 /*!
@@ -192,7 +195,7 @@ QString QStorageInfo::rootPath() const
 */
 qint64 QStorageInfo::bytesAvailable() const
 {
-    return d->bytesAvailable;
+	return d->bytesAvailable;
 }
 
 /*!
@@ -206,7 +209,7 @@ qint64 QStorageInfo::bytesAvailable() const
 */
 qint64 QStorageInfo::bytesFree() const
 {
-    return d->bytesFree;
+	return d->bytesFree;
 }
 
 /*!
@@ -218,7 +221,7 @@ qint64 QStorageInfo::bytesFree() const
 */
 qint64 QStorageInfo::bytesTotal() const
 {
-    return d->bytesTotal;
+	return d->bytesTotal;
 }
 
 /*!
@@ -232,7 +235,7 @@ qint64 QStorageInfo::bytesTotal() const
 */
 QByteArray QStorageInfo::fileSystemType() const
 {
-    return d->fileSystemType;
+	return d->fileSystemType;
 }
 
 /*!
@@ -246,7 +249,7 @@ QByteArray QStorageInfo::fileSystemType() const
 */
 QByteArray QStorageInfo::device() const
 {
-    return d->device;
+	return d->device;
 }
 
 /*!
@@ -263,7 +266,7 @@ QByteArray QStorageInfo::device() const
 */
 QString QStorageInfo::name() const
 {
-    return d->name;
+	return d->name;
 }
 
 /*!
@@ -271,9 +274,12 @@ QString QStorageInfo::name() const
 */
 QString QStorageInfo::displayName() const
 {
-    if (!d->name.isEmpty())
-        return d->name;
-    return d->rootPath;
+	if (!d->name.isEmpty())
+	{
+		return d->name;
+	}
+
+	return d->rootPath;
 }
 
 /*!
@@ -294,7 +300,7 @@ QString QStorageInfo::displayName() const
 */
 bool QStorageInfo::isReadOnly() const
 {
-    return d->readOnly;
+	return d->readOnly;
 }
 
 /*!
@@ -308,7 +314,7 @@ bool QStorageInfo::isReadOnly() const
 */
 bool QStorageInfo::isReady() const
 {
-    return d->ready;
+	return d->ready;
 }
 
 /*!
@@ -319,7 +325,7 @@ bool QStorageInfo::isReady() const
 */
 bool QStorageInfo::isValid() const
 {
-    return d->valid;
+	return d->valid;
 }
 
 /*!
@@ -332,8 +338,8 @@ bool QStorageInfo::isValid() const
 */
 void QStorageInfo::refresh()
 {
-    d.detach();
-    d->doStat();
+	d.detach();
+	d->doStat();
 }
 
 /*!
@@ -354,7 +360,7 @@ void QStorageInfo::refresh()
 */
 QList<QStorageInfo> QStorageInfo::mountedVolumes()
 {
-    return QStorageInfoPrivate::mountedVolumes();
+	return QStorageInfoPrivate::mountedVolumes();
 }
 
 Q_GLOBAL_STATIC_WITH_ARGS(QStorageInfo, getRoot, (QStorageInfoPrivate::root()))
@@ -369,7 +375,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(QStorageInfo, getRoot, (QStorageInfoPrivate::root()))
 */
 QStorageInfo QStorageInfo::root()
 {
-    return *getRoot();
+	return *getRoot();
 }
 
 /*!

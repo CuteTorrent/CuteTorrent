@@ -4,9 +4,8 @@
 
 QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QObject* parent) : QAbstractListModel(parent), m_pSearchEngine(SearchEngine::getInstance())
 {
-    m_pTorrentListView = pTorrentListView;
-
-    QObject::connect(m_pSearchEngine.get(), SIGNAL(GotResults()), this, SLOT(OnNewSearchResults()));
+	m_pTorrentListView = pTorrentListView;
+	QObject::connect(m_pSearchEngine.get(), SIGNAL(GotResults()), this, SLOT(OnNewSearchResults()));
 	SearchItemsStorrage* pItems = m_pSearchEngine->GetResults();
 	QObject::connect(pItems, SIGNAL(reset()), this, SLOT(OnNewSearchResults()));
 }

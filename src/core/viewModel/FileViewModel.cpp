@@ -56,11 +56,11 @@ int FileViewModel::columnCount(const QModelIndex& parent /*= QModelIndex( ) */) 
 void FileViewModel::OpenFileSelected()
 {
 	FileViewTreeItem* pItem = static_cast<FileViewTreeItem*>(m_pProxyModel->mapToSource(m_pView->selectionModel()->currentIndex()).internalPointer());
-    std::string save_path =
+	std::string save_path =
 #if LIBTORRENT_VERSION_NUM >= 10000
-            dataSource.status(torrent_handle::query_save_path).save_path;
+	    dataSource.status(torrent_handle::query_save_path).save_path;
 #else
-            dataSource.save_path();
+	    dataSource.save_path();
 #endif
 	QString path = QFileInfo(QDir::toNativeSeparators(QString::fromUtf8((save_path + pItem->GetFileEntery().path).c_str()))).absoluteFilePath();
 	QDesktopServices::openUrl(QUrl("file:///" + path));
@@ -69,11 +69,11 @@ void FileViewModel::OpenFileSelected()
 void FileViewModel::OpenDirSelected()
 {
 	FileViewTreeItem* pItem = static_cast<FileViewTreeItem*>(m_pProxyModel->mapToSource(m_pView->selectionModel()->currentIndex()).internalPointer());
-    std::string save_path =
+	std::string save_path =
 #if LIBTORRENT_VERSION_NUM >= 10000
-            dataSource.status(torrent_handle::query_save_path).save_path;
+	    dataSource.status(torrent_handle::query_save_path).save_path;
 #else
-            dataSource.save_path();
+	    dataSource.save_path();
 #endif
 	QString path = QFileInfo(QDir::toNativeSeparators(QString::fromUtf8((save_path + pItem->GetFileEntery().path).c_str()))).absoluteFilePath();
 #ifdef Q_WS_MAC
@@ -88,11 +88,9 @@ void FileViewModel::OpenDirSelected()
 	args << "end tell";
 	QProcess::startDetached("osascript", args);
 #endif
-
 #ifdef Q_WS_X11
-        StaticHelpers::OpenFolderNautilus(path);
+	StaticHelpers::OpenFolderNautilus(path);
 #endif
-
 #ifdef Q_WS_WIN
 	StaticHelpers::OpenFileInExplorer(path);
 #endif
@@ -123,10 +121,9 @@ void FileViewModel::setFilePriority(int priorityToSet)
 {
 	QModelIndexList selection = m_pView->selectionModel()->selectedIndexes();
 
-    for (int i =0 ; i< selection.size(); i++)
-    {
-
-        QModelIndex sourceIndex = m_pProxyModel->mapToSource(selection[i]);
+	for (int i = 0 ; i < selection.size(); i++)
+	{
+		QModelIndex sourceIndex = m_pProxyModel->mapToSource(selection[i]);
 		FileViewTreeItem* item = static_cast<FileViewTreeItem*>(sourceIndex.internalPointer());
 		SetItemPriority(item, priorityToSet, sourceIndex);
 	}
@@ -236,16 +233,14 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 
 		if(item->GetType() == FileViewTreeItem::FILE)
 		{
-            file_storage storrage =
-
-        #if LIBTORRENT_VERSION_NUM >= 10000
-                    dataSource.torrent_file()->files();
+			file_storage storrage =
+#if LIBTORRENT_VERSION_NUM >= 10000
+			    dataSource.torrent_file()->files();
 			storrage_index = storrage.file_index_at_offset(file.offset);
-        #else
-                    dataSource.get_torrent_info().files();
+#else
+			    dataSource.get_torrent_info().files();
 			storrage_index = storrage.file_index(*storrage.file_at_offset(file.offset));
-        #endif
-          
+#endif
 		}
 
 		switch(column)
@@ -256,7 +251,7 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 			case 1:
 				if(item->GetType() == FileViewTreeItem::FILE)
 				{
-                    return qVariantFromValue<qlonglong>(file.size);
+					return qVariantFromValue<qlonglong>(file.size);
 				}
 				else
 				{
@@ -388,12 +383,11 @@ void FileViewModel::BuildTree()
 {
 	m_Progresses.clear();
 	dataSource.file_progress(m_Progresses, torrent_handle::piece_granularity);
-    file_storage storrage =
-
+	file_storage storrage =
 #if LIBTORRENT_VERSION_NUM >= 10000
-            dataSource.torrent_file()->files();
+	    dataSource.torrent_file()->files();
 #else
-            dataSource.get_torrent_info().files();
+	    dataSource.get_torrent_info().files();
 #endif
 	int nFilesCount = storrage.num_files();
 
@@ -561,13 +555,13 @@ float FileViewModel::CalculateFolderReady(FileViewTreeItem* item) const
 {
 	float result = 0.0f;
 	int nChildrenCount = item->GetChildrenCount();
-    file_storage storrage =
-
+	file_storage storrage =
 #if LIBTORRENT_VERSION_NUM >= 10000
-            dataSource.torrent_file()->files();
+	    dataSource.torrent_file()->files();
 #else
-            dataSource.get_torrent_info().files();
+	    dataSource.get_torrent_info().files();
 #endif
+
 	for(int i = 0; i < nChildrenCount; i++)
 	{
 		FileViewTreeItem* child = item->GetNthChild(i);
@@ -576,7 +570,6 @@ float FileViewModel::CalculateFolderReady(FileViewTreeItem* item) const
 		{
 			file_entry fe = child->GetFileEntery();
 #if LIBTORRENT_VERSION_NUM >= 10000
-			
 			int storrage_index = storrage.file_index_at_offset(fe.offset);
 #else
 			int storrage_index = storrage.file_index(*storrage.file_at_offset(fe.offset));
@@ -596,16 +589,14 @@ void FileViewModel::SetItemPriority(FileViewTreeItem* item, int priority, const 
 {
 	if(item->GetType() == FileViewTreeItem::FILE)
 	{
-        file_storage storrage =
-
-    #if LIBTORRENT_VERSION_NUM >= 10000
-                dataSource.torrent_file()->files();
+		file_storage storrage =
+#if LIBTORRENT_VERSION_NUM >= 10000
+		    dataSource.torrent_file()->files();
 		int file_index = storrage.file_index_at_offset(item->GetFileEntery().offset);
-    #else
-                dataSource.get_torrent_info().files();
+#else
+		    dataSource.get_torrent_info().files();
 		int file_index = storrage.file_index(*storrage.file_at_offset(item->GetFileEntery().offset));
-    #endif
-       
+#endif
 		dataSource.file_priority(file_index, priority);
 		emit dataChanged(sourceIndex, sourceIndex);
 	}

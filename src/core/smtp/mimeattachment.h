@@ -28,17 +28,17 @@ class SMTP_MIME_EXPORT MimeAttachment : public MimeFile
 {
 public:
 
-    /* [1] Constructors and Destructors */
+	/* [1] Constructors and Destructors */
 
-    MimeAttachment(QFile* file);
-    ~MimeAttachment();
+	MimeAttachment(QFile* file);
+	~MimeAttachment();
 
-    /* [1] --- */
+	/* [1] --- */
 
 protected:
 
-    /* [2] Protected methods */
-    /* [2] --- */
+	/* [2] Protected methods */
+	/* [2] --- */
 };
 
 #endif // MIMEATTACHMENT_H

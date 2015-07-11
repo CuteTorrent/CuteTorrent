@@ -30,7 +30,7 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 	ui->LTitle->setText(title);
 	ui->text->setText(text);
 
-    if (parent != NULL)
+	if (parent != NULL)
 	{
 #ifdef Q_WS_WIN
 		SetWindowPos(effectiveWinId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);

@@ -14,32 +14,29 @@ PieceAvailabilityWidget::PieceAvailabilityWidget(QObject* parent) : m_pieceColor
 void PieceAvailabilityWidget::paintEvent(QPaintEvent* paintEvent)
 {
 	QPainter painter(this);
-
 	QStyleOption opt;
 	opt.initFrom(this);
-
 	QStyle* style = QApplication::style();
-	
 	style->drawPrimitive(QStyle::PE_Widget, &opt, &painter, this);
-	
 	painter.save();
 	QRect imageRect(1, 1, width() - 2, height() - 2);
 	painter.fillRect(0, 0, width() - 1, height() - 1, m_backgroundColor);
+
 	if (!m_img.isNull())
 	{
 		painter.drawImage(imageRect, m_img);
 	}
+
 	painter.setPen(m_borderColor);
 	painter.drawRect(0, 0, width() - 1, height() - 1);
 	painter.restore();
-	
 }
 /*
 QSize PieceAvailabilityWidget::minimumSizeHint()
 {
 	QStyleOption opt;
 	opt.initFrom(this);
-	
+
 	QString avalStr = "8.88";
 
 	QFontMetrics fontMetrics(opt.fontMetrics);
@@ -67,12 +64,13 @@ QColor PieceAvailabilityWidget::backgroudColor()
 
 void PieceAvailabilityWidget::setPiceAvailability(std::vector<int> availiblePieces)
 {
-
 	m_pieceAvailibility.swap(availiblePieces);
+
 	if (!m_pieceAvailibility.empty())
 	{
 		m_maxAvailibility = *max_element(m_pieceAvailibility.begin(), m_pieceAvailibility.end());
 	}
+
 	updateImage();
 }
 
@@ -107,13 +105,16 @@ void PieceAvailabilityWidget::clear()
 	m_img = img;
 }
 
-QVector<float> PieceAvailabilityWidget::intToFloatVector(const std::vector<int> &vecin, int reqSize)
+QVector<float> PieceAvailabilityWidget::intToFloatVector(const std::vector<int>& vecin, int reqSize)
 {
 	QVector<float> result(reqSize, 0.0);
-	if (vecin.empty()) return result;
+
+	if (vecin.empty())
+	{
+		return result;
+	}
 
 	const float ratio = vecin.size() / (float)reqSize;
-
 	const int maxElement = *std::max_element(vecin.begin(), vecin.end());
 
 	// qMax because in normalization we don't want divide by 0
@@ -121,100 +122,104 @@ QVector<float> PieceAvailabilityWidget::intToFloatVector(const std::vector<int> 
 	// const int maxElement = qMax(*std::max_element(avail.begin(), avail.end()), 1);
 
 	if (maxElement == 0)
+	{
 		return result;
+	}
 
 	// simple linear transformation algorithm
 	// for example:
 	// image.x(0) = pieces.x(0.0 >= x < 1.7)
 	// image.x(1) = pieces.x(1.7 >= x < 3.4)
 
-	for (int x = 0; x < reqSize; ++x) {
-
+	for (int x = 0; x < reqSize; ++x)
+	{
 		// don't use previously calculated value "ratio" here!!!
 		// float cannot save irrational number like 7/9, if this number will be rounded up by std::ceil
 		// give you x2 == pieces.size(), and index out of range: pieces[x2]
 		// this code is safe, so keep that in mind when you try optimize more.
 		// tested with size = 3000000ul
-
 		// R - real
 		const float fromR = (x * vecin.size()) / (float)reqSize;
 		const float toR = ((x + 1) * vecin.size()) / (float)reqSize;
-
 		// C - integer
 		int fromC = fromR;// std::floor not needed
 		int toC = std::ceil(toR);
-
 		// position in pieces table
 		// libtorrent::bitfield::m_size is unsigned int(31 bits), so qlonglong is not needed
 		// tested with size = 3000000ul
 		int x2 = fromC;
-
 		// little speed up for really big pieces table, 10K+ size
 		const int toCMinusOne = toC - 1;
-
 		// value in returned vector
 		float value = 0;
 
 		// case when calculated range is (15.2 >= x < 15.7)
-		if (x2 == toCMinusOne) {
-			if (vecin[x2]) {
+		if (x2 == toCMinusOne)
+		{
+			if (vecin[x2])
+			{
 				value += (toR - fromR) * vecin[x2];
 			}
+
 			++x2;
 		}
 		// case when (15.2 >= x < 17.8)
-		else {
+		else
+		{
 			// subcase (15.2 >= x < 16)
-			if (x2 != fromR) {
-				if (vecin[x2]) {
+			if (x2 != fromR)
+			{
+				if (vecin[x2])
+				{
 					value += (1.0 - (fromR - fromC)) * vecin[x2];
 				}
+
 				++x2;
 			}
 
 			// subcase (16 >= x < 17)
-			for (; x2 < toCMinusOne; ++x2) {
-				if (vecin[x2]) {
+			for (; x2 < toCMinusOne; ++x2)
+			{
+				if (vecin[x2])
+				{
 					value += vecin[x2];
 				}
 			}
 
 			// subcase (17 >= x < 17.8)
-			if (x2 == toCMinusOne) {
-				if (vecin[x2]) {
+			if (x2 == toCMinusOne)
+			{
+				if (vecin[x2])
+				{
 					value += (1.0 - (toC - toR)) * vecin[x2];
 				}
+
 				++x2;
 			}
 		}
 
 		// normalization <0, 1>
 		value /= ratio * maxElement;
-
 		// float precision sometimes gives > 1, because in not possible to store irrational numbers
 		value = qMin(value, (float)1.0);
-
 		result[x] = value;
 	}
 
 	return result;
 }
 
-int PieceAvailabilityWidget::mixTwoColors(int &rgb1, int &rgb2, float ratio)
+int PieceAvailabilityWidget::mixTwoColors(int& rgb1, int& rgb2, float ratio)
 {
 	int r1 = qRed(rgb1);
 	int g1 = qGreen(rgb1);
 	int b1 = qBlue(rgb1);
-
 	int r2 = qRed(rgb2);
 	int g2 = qGreen(rgb2);
 	int b2 = qBlue(rgb2);
-
 	float ratio_n = 1.0 - ratio;
 	int r = (r1 * ratio_n) + (r2 * ratio);
 	int g = (g1 * ratio_n) + (g2 * ratio);
 	int b = (b1 * ratio_n) + (b2 * ratio);
-
 	return qRgb(r, g, b);
 }
 
@@ -223,7 +228,8 @@ void PieceAvailabilityWidget::updateImage()
 	//  qDebug() << "updateImageAv";
 	QImage image2(width() - 2, 1, QImage::Format_RGB888);
 
-	if (m_pieceAvailibility.empty()) {
+	if (m_pieceAvailibility.empty())
+	{
 		image2.fill(0xffffff);
 		m_img = image2;
 		update();
@@ -240,5 +246,6 @@ void PieceAvailabilityWidget::updateImage()
 		int rgb1 = m_backgroundColor.rgb();
 		image2.setPixel(x, 0, mixTwoColors(rgb1, rgb2, pieces2_val));
 	}
+
 	m_img = image2;
 }

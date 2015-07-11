@@ -8,7 +8,7 @@
 template<typename T>
 class Singleton
 {
-	
+
 public:
 	static boost::shared_ptr<T> getInstance();
 private:

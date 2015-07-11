@@ -47,63 +47,73 @@ class QStorageInfoPrivate;
 class QStorageInfo
 {
 public:
-    QStorageInfo();
-    explicit QStorageInfo(const QString &path);
-    explicit QStorageInfo(const QDir &dir);
-    QStorageInfo(const QStorageInfo &other);
-    ~QStorageInfo();
+	QStorageInfo();
+	explicit QStorageInfo(const QString& path);
+	explicit QStorageInfo(const QDir& dir);
+	QStorageInfo(const QStorageInfo& other);
+	~QStorageInfo();
 
-    QStorageInfo &operator=(const QStorageInfo &other);
+	QStorageInfo& operator=(const QStorageInfo& other);
 #ifdef Q_COMPILER_RVALUE_REFS
-    inline QStorageInfo &operator=(QStorageInfo &&other)
-    { qSwap(d, other.d); return *this; }
+	inline QStorageInfo& operator=(QStorageInfo&& other)
+	{
+		qSwap(d, other.d);
+		return *this;
+	}
 #endif
 
-    inline void swap(QStorageInfo &other)
-    { qSwap(d, other.d); }
+	inline void swap(QStorageInfo& other)
+	{
+		qSwap(d, other.d);
+	}
 
-    void setPath(const QString &path);
+	void setPath(const QString& path);
 
-    QString rootPath() const;
-    QByteArray device() const;
-    QByteArray fileSystemType() const;
-    QString name() const;
-    QString displayName() const;
+	QString rootPath() const;
+	QByteArray device() const;
+	QByteArray fileSystemType() const;
+	QString name() const;
+	QString displayName() const;
 
-    qint64 bytesTotal() const;
-    qint64 bytesFree() const;
-    qint64 bytesAvailable() const;
+	qint64 bytesTotal() const;
+	qint64 bytesFree() const;
+	qint64 bytesAvailable() const;
 
-    inline bool isRoot() const;
-    bool isReadOnly() const;
-    bool isReady() const;
-    bool isValid() const;
+	inline bool isRoot() const;
+	bool isReadOnly() const;
+	bool isReady() const;
+	bool isValid() const;
 
-    void refresh();
+	void refresh();
 
-    static QList<QStorageInfo> mountedVolumes();
-    static QStorageInfo root();
+	static QList<QStorageInfo> mountedVolumes();
+	static QStorageInfo root();
 
 private:
-    friend class QStorageInfoPrivate;
-    friend bool operator==(const QStorageInfo &first, const QStorageInfo &second);
-    QExplicitlySharedDataPointer<QStorageInfoPrivate> d;
+	friend class QStorageInfoPrivate;
+	friend bool operator==(const QStorageInfo& first, const QStorageInfo& second);
+	QExplicitlySharedDataPointer<QStorageInfoPrivate> d;
 };
 
-inline bool operator==(const QStorageInfo &first, const QStorageInfo &second)
+inline bool operator==(const QStorageInfo& first, const QStorageInfo& second)
 {
-    if (first.d == second.d)
-        return true;
-    return first.device() == second.device();
+	if (first.d == second.d)
+	{
+		return true;
+	}
+
+	return first.device() == second.device();
 }
 
-inline bool operator!=(const QStorageInfo &first, const QStorageInfo &second)
+inline bool operator!=(const QStorageInfo& first, const QStorageInfo& second)
 {
-    return !(first == second);
+	return !(first == second);
 }
 
 inline bool QStorageInfo::isRoot() const
-{ return *this == QStorageInfo::root(); }
+{
+	return *this == QStorageInfo::root();
+}
 
 
 QT_END_NAMESPACE

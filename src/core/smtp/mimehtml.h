@@ -26,32 +26,32 @@ class SMTP_MIME_EXPORT MimeHtml : public MimeText
 {
 public:
 
-    /* [1] Constructors and Destructors */
+	/* [1] Constructors and Destructors */
 
-    MimeHtml(const QString &html = "");
-    ~MimeHtml();
+	MimeHtml(const QString& html = "");
+	~MimeHtml();
 
-    /* [1] --- */
+	/* [1] --- */
 
 
-    /* [2] Getters and Setters */
+	/* [2] Getters and Setters */
 
-    void setHtml(const QString & html);
+	void setHtml(const QString& html);
 
-    QString getHtml() const;
+	QString getHtml() const;
 
-    /* [2] --- */
+	/* [2] --- */
 
 protected:
 
-    /* [3] Protected members */
+	/* [3] Protected members */
 
-    /* [3] --- */
+	/* [3] --- */
 
 
-    /* [4] Protected methods */
+	/* [4] Protected methods */
 
-    /* [4] --- */
+	/* [4] --- */
 };
 
 #endif // MIMEHTML_H

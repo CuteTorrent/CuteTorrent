@@ -37,7 +37,7 @@ public:
 	~NotificationSystem();
 	void UpdateNotificationSettings();
 
-	
+
 private:
 	struct Notification
 	{
@@ -58,6 +58,6 @@ private:
 	int m_notificationMask;
 	int m_defaultMessageDuration;
 protected:
-	bool eventFilter(QObject *obj, QEvent *event);
+	bool eventFilter(QObject* obj, QEvent* event);
 };
 #endif //_NOTIFICATION_SYSTEM_INCLUDED_ 
