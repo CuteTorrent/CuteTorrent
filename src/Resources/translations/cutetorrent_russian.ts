@@ -2097,6 +2097,42 @@ Download: %3</source>
         <source>%1 (AVAILABLE: %2)</source>
         <translation>%1 (Доступно: %2)</translation>
     </message>
+    <message>
+        <source>MARK_ALL</source>
+        <translation>Выбрать все</translation>
+    </message>
+    <message>
+        <source>UNMARK_ALL</source>
+        <translation>Снять выбор</translation>
+    </message>
+    <message>
+        <source>START_SEQUENTIAL_TOOLTIP</source>
+        <translation>Части файлов будут запрошенны последовательно согласно порядку файлов в торренте.</translation>
+    </message>
+    <message>
+        <source>START_SEEDING_TOOLTIP</source>
+        <translation>При добавлении торрента файлы не будут проверятся. В случае если будут обнаружены несоотвествия будит запущенна принудительная перепроверка файлов.</translation>
+    </message>
+    <message>
+        <source>START_SEEDING</source>
+        <translation>Раздавать не проверяя файлы</translation>
+    </message>
+    <message>
+        <source>START_PAUSED_TOOLTIP</source>
+        <translation>Торрент будет запущен в приостановленном состоянии.</translation>
+    </message>
+    <message>
+        <source>START_PAUSED</source>
+        <translation>Приостановить</translation>
+    </message>
+    <message>
+        <source>START_WITH_SUPER_SEED</source>
+        <translation>Включить режим Супер-сид</translation>
+    </message>
+    <message>
+        <source>MAGNET_LINKS_DONT_SUPORT_SEED_MODE</source>
+        <translation>Раздача без проверки файлов не поддерживается для магнитных ссылок.</translation>
+    </message>
 </context>
 <context>
     <name>QKeyEdit</name>

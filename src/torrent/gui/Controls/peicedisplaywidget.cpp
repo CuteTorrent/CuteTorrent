@@ -92,8 +92,8 @@ QVector<float> bitfieldToFloatVector(const QBitArray& vecin, int reqSize)
 		// this code is safe, so keep that in mind when you try optimize more.
 		// tested with size = 3000000ul
 		// R - real
-		const float fromR = (x * vecin.size()) / (float)reqSize;
-		const float toR = ((x + 1) * vecin.size()) / (float)reqSize;
+		const float fromR = float(x * vecin.size()) / reqSize;
+		const float toR = float((x + 1) * vecin.size()) / reqSize;
 		// C - integer
 		int fromC = fromR;// std::floor not needed
 		int toC = std::ceil(toR);

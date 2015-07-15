@@ -45,7 +45,7 @@ MimePart::~MimePart()
 
 void MimePart::setContent(const QByteArray& content)
 {
-	this->content = content;
+	this->baContent = content;
 }
 
 void MimePart::setHeader(const QString& header)
@@ -65,7 +65,7 @@ QString MimePart::getHeader() const
 
 QByteArray MimePart::getContent() const
 {
-	return content;
+	return baContent;
 }
 
 void MimePart::setContentId(const QString& cId)
@@ -213,7 +213,7 @@ void MimePart::writeToDevice(QIODevice& device) const
 
 void MimePart::writeContent(QIODevice& device) const
 {
-	this->writeContent(device, content);
+	this->writeContent(device, baContent);
 }
 
 void MimePart::writeContent(QIODevice& device, const QByteArray& content) const

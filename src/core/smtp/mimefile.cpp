@@ -1,4 +1,4 @@
-/*
+﻿/*
   Copyright (c) 2011-2012 - Tőkés Attila
 
   This file is part of SmtpClient for Qt.
@@ -27,7 +27,7 @@ MimeFile::MimeFile(const QByteArray& stream, const QString& fileName)
 	this->cType = "application/octet-stream";
 	this->file = NULL;
 	this->cName = fileName;
-	this->content = stream;
+	this->baContent = stream;
 }
 
 MimeFile::MimeFile(QFile* file)
@@ -65,7 +65,7 @@ void MimeFile::writeContent(QIODevice& device) const
 	}
 	else
 	{
-		MimePart::writeContent(device, content);
+		MimePart::writeContent(device, baContent);
 	}
 }
 

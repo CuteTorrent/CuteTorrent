@@ -721,6 +721,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_filedownloader.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\viewModel\FileTreeSortProxyModel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -1287,6 +1290,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="search\core\SearchCommon.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\viewModel\FileTreeSortProxyModel.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

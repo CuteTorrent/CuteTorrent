@@ -20,11 +20,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _FILETREEITEM_H
 #include <QPair>
 #include <QVariant>
+#include <cstdint>
 
 class FileTreeItem
 {
 public:
-	FileTreeItem(const QPair<QString, QString>& data, FileTreeItem* parent = 0);
+	FileTreeItem(const QPair<QString, QVariant>& data, FileTreeItem* parent = 0);
 	~FileTreeItem();
 
 	void appendChild(FileTreeItem* child);
@@ -38,10 +39,11 @@ public:
 	Qt::CheckState Checked();
 	QString getPath();
 	void setChecked(Qt::CheckState checked);
+	void setData(int index, QVariant value);
 private:
 	Qt::CheckState checkedState;
 	QList<FileTreeItem*> childItems;
-	QPair<QString, QString> itemData;
+	QPair<QString, QVariant> itemData;
 	FileTreeItem* parentItem;
 };
 

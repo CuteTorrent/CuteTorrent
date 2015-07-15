@@ -49,7 +49,7 @@ public:
 	StaticFileController(QObject* parent = 0);
 	~StaticFileController();
 	/** Generates the response */
-	void service(HttpRequest& request, HttpResponse& response);
+	void service(HttpRequest& request, HttpResponse& response) override;
 
 private:
 
@@ -72,7 +72,6 @@ private:
 	{
 		QString username, password;
 	};
-	bool requireAuth;
 	Creditionals account;
 	/** Timeout for each cached file */
 	int cacheTimeout;
@@ -86,7 +85,7 @@ private:
 	/** Used to synchronize cache access for threads */
 	QMutex mutex;
 
-	/** Set a content-type header in the response depending on the ending of the filename */
+	/** Set a baContent-type header in the response depending on the ending of the filename */
 	void setContentType(QString file, HttpResponse& response) const;
 
 };

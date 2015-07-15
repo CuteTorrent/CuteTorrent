@@ -209,7 +209,7 @@ QSgmlTag& QSgmlTag::getNextElement(void)
 		// search the next parent with sibling
 		Return = this;
 
-		while(&Return->getNextSibling() == NULL)
+		while(&(Return->getNextSibling()) == NULL)
 		{
 			Return = Return->Parent;
 		}

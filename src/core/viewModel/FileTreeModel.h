@@ -37,7 +37,9 @@ public:
 	QModelIndex parent(const QModelIndex& index) const override;
 	int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 	int columnCount(const QModelIndex& parent = QModelIndex()) const override;
-	void addPath(QString path, QString size);
+	void UpdateChildren(const QModelIndex& _index, FileTreeItem* item, Qt::CheckState state);
+	void UpdateParents(const QModelIndex& modelIndex, FileTreeItem* item);
+	void addPath(QString path, uint64_t size);
 	QMap<QString, quint8> getFilePiorites();
 	QStringList getUnicPathes();
 	void getUnicPathes(FileTreeItem*, QList<FileTreeItem*>&);

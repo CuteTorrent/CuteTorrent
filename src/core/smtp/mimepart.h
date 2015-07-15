@@ -93,7 +93,7 @@ protected:
 	/* [4] Protected members */
 
 	QString headerLines;
-	QByteArray content;
+	QByteArray baContent;
 
 	QString cId;
 	QString cName;

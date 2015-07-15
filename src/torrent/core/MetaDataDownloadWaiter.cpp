@@ -1,10 +1,10 @@
 ﻿#include "MetaDataDownloadWaiter.h"
 #include "StaticHelpers.h"
 
-MetaDataDownloadWaiter::MetaDataDownloadWaiter(QString metaLink, QObject* parrent/*=NULL*/, bool autoAdd/*=false*/) : QThread(parrent)
+MetaDataDownloadWaiter::MetaDataDownloadWaiter(QString metaLink, QObject* parrent/*=NULL*/) 
+	: QThread(parrent)
 {
 	MetaLink = metaLink;
-	_autoAdd = autoAdd;
 	m_pTorrentManager = TorrentManager::getInstance();
 }
 
@@ -23,26 +23,12 @@ void MetaDataDownloadWaiter::run()
 		return;
 	}
 
-	if(!_autoAdd)
-	{
-		boost::scoped_ptr<openmagnet_info> ti(m_pTorrentManager->GetTorrentInfo(h));
 
-		if (ti != NULL)
-		{
-			ti->link = MetaLink;
-			emit DownloadCompleted(*ti);
-		}
-	}
-	else
-	{
-		std::string save_path =
-#if LIBTORRENT_VERSION_NUM >= 10000
-		    h.status(torrent_handle::query_save_path).save_path;
-#else
-		    h.save_path();
-#endif
-		m_pTorrentManager->AddMagnet(h, QString::fromUtf8(save_path.c_str()));
-	}
+	boost::scoped_ptr<openmagnet_info> ti(m_pTorrentManager->GetTorrentInfo(h));
 
-	//this->deleteLater();
+	if (ti != NULL)
+	{
+		ti->link = MetaLink;
+		emit DownloadCompleted(*ti);
+	}
 }

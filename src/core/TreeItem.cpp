@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QDebug>
 #include <QDir>
-FileTreeItem::FileTreeItem(const QPair<QString, QString>& data, FileTreeItem* parent)
+FileTreeItem::FileTreeItem(const QPair<QString, QVariant>& data, FileTreeItem* parent)
 {
 	parentItem = parent;
 	itemData = data;
@@ -40,6 +40,23 @@ void FileTreeItem::setChecked(Qt::CheckState _checked)
 			childItems.at(i)->setChecked(_checked);
 		}
 }
+
+void FileTreeItem::setData(int index, QVariant value)
+{
+	if (index > 1)
+	{
+		return;
+	}
+	if (index == 0)
+	{
+		itemData.first = value.toString();
+	}
+	else
+	{
+		itemData.second = value;
+	}
+}
+
 FileTreeItem::~FileTreeItem()
 {
 	qDeleteAll(childItems);

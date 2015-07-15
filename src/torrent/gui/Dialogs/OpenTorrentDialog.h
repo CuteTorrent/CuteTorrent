@@ -45,8 +45,9 @@ public:
 
 	OpenTorrentDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 	~OpenTorrentDialog();
+	void FillData(opentorrent_info* info);
 	void SetData(QString filename);
-
+	void setCheckedValue(bool val);
 	int exec();
 private:
 	int64_t m_size;
@@ -55,7 +56,7 @@ private:
 	QList<GroupForFileFiltering> m_lFilters;
 	bool validTorrent;
 	TorrentManagerPtr m_pTorrentManager;
-	QString m_pTorrentFilename;
+	QString m_torrentFilename;
 	openmagnet_info m_info;
 	FileTreeModel* m_pFileTreeModel;
 	QPushButton* getCloseBtn() override;
@@ -63,13 +64,18 @@ private:
 	QWidget* centralWidget() override;
 	QLabel* getTitleLabel() override;
 	QLabel* getTitleIcon() override;
+	TorrentManager::AddTorrentFlags BuildFlags();
 private slots:
 	void reject() override;
 	void OnError(QString);
 	void BrowseButton();
+	
 	void AccepTorrent();
 	void ChangeGroup();
 	void DownloadMetadataCompleted(openmagnet_info);
 	void OnPathChanged(QString path);
+	
+	void OnCheckAll();
+	void OnUncheckAll();
 };
 

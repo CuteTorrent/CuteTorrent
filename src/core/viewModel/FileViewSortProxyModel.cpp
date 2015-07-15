@@ -15,14 +15,7 @@ bool FileViewSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex
 
 	if(rightItem->GetType() != lefttItem->GetType())
 	{
-		if(rightItem->GetType() == FileViewTreeItem::FOLDER)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return lefttItem->GetType() == FileViewTreeItem::FOLDER;
 	}
 
 	int sortCol = sortColumn();
@@ -31,7 +24,7 @@ bool FileViewSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex
 	{
 		case 0:
 		{
-			return rightItem->GetName().compare(lefttItem->GetName()) < 0;
+			return lefttItem->GetName().compare(rightItem->GetName(), Qt::CaseInsensitive) < 0;
 		}
 
 		case 1:

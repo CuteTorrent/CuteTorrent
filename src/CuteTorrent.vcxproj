@@ -261,6 +261,7 @@
     <ClCompile Include="core\smtp\smtpclient.cpp" />
     <ClCompile Include="core\StorrageInfo\qstorageinfo.cpp" />
     <ClCompile Include="core\StorrageInfo\qstorageinfo_win.cpp" />
+    <ClCompile Include="core\viewModel\FileTreeSortProxyModel.cpp" />
     <ClCompile Include="core\winextras\qwinfunctions.cpp" />
     <ClCompile Include="core\winextras\qwinfunctions_p.cpp" />
     <ClCompile Include="core\winextras\qwinjumplist.cpp" />
@@ -460,6 +461,7 @@
     <ClInclude Include="core\smtp\smtpmime_global.h" />
     <ClInclude Include="core\StorrageInfo\qstorageinfo.h" />
     <ClInclude Include="core\StorrageInfo\qstorageinfo_p.h" />
+    <ClInclude Include="core\viewModel\FileTreeSortProxyModel.h" />
     <ClInclude Include="core\winextras\qwinextrasglobal.h" />
     <ClInclude Include="core\winextras\qwinfunctions.h" />
     <ClInclude Include="core\winextras\qwinfunctions_p.h" />

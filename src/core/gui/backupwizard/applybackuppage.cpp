@@ -119,7 +119,7 @@ QStringList ApplyBackupPage::GetLongestCommonSubstr(QStringList strings)
 
 	foreach(QString string, strings)
 	{
-		model.addPath(string, "");
+		model.addPath(string, 0);
 	}
 
 	return model.getUnicPathes();

@@ -9,6 +9,6 @@ public:
 		QStyledItemDelegate(parent)	{};
 
 
-	QString displayText(const QVariant& value, const QLocale& locale) const;
+	QString displayText(const QVariant& value, const QLocale& locale) const override;
 
 };

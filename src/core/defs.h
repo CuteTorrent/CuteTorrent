@@ -15,12 +15,10 @@ struct opentorrent_info
 	libtorrent::file_storage files;
 	libtorrent::size_type size;
 };
-struct openmagnet_info
+struct openmagnet_info : opentorrent_info
 {
-	QString name, describtion, baseSuffix, link, infoHash;
+	QString link;
 	libtorrent::torrent_handle handle;
-	libtorrent::file_storage files;
-	libtorrent::size_type size;
 };
 Q_DECLARE_METATYPE(openmagnet_info);
 enum FilterType

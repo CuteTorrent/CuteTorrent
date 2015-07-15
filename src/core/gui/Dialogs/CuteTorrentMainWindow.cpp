@@ -575,7 +575,7 @@ void CuteTorrentMainWindow::UpdateFileTab()
 	{
 		if (m_pFileViewModel->setDataSource(tor->GetInternalHandle()))
 		{
-			fileTableView->expand(m_pFileViewProxymodel->index(0, 0));
+			fileTableView->expandToDepth(0);
 		}
 	}
 	else
@@ -1107,6 +1107,7 @@ void CuteTorrentMainWindow::setupFileTabel()
 {
 	m_pFileViewProxymodel = new FileViewSortProxyModel(this);
 	fileTableView->setModel(m_pFileViewProxymodel);
+	fileTableView->header()->setSortIndicator(0, Qt::AscendingOrder);
 	m_pFileViewModel = new FileViewModel(fileTableView, this);
 	m_pFileViewProxymodel->setSourceModel(m_pFileViewModel);
 	fileTableView->setItemDelegateForColumn(1, new FileSizeItemDelegate(this));

@@ -6,8 +6,8 @@
 class RssFeed;
 class RssItem : public QObject
 {
-	friend QDataStream& operator <<(QDataStream& out, const RssItem& any);
-	friend QDataStream& operator >>(QDataStream& out, RssItem& any);
+	friend QDataStream& operator <<(QDataStream& out, const RssItem* any);
+	friend QDataStream& operator >>(QDataStream& out, RssItem* any);
 	Q_OBJECT
 	QString m_title;
 	QString m_description;
@@ -25,9 +25,9 @@ class RssItem : public QObject
 	quint32 m_peers;
 	quint32 m_seeds;
 	bool m_unread;
+	Q_DISABLE_COPY(RssItem)
 public:
 
-	RssItem(const RssItem& other);;
 	RssItem(RssFeed* parent);
 	RssFeed* rssFeed() const;
 	QString title() const;
@@ -61,7 +61,7 @@ public:
 	QString author() const;
 	void setAuthor(const QString& value);
 	bool isValid();
-
+	RssItem* clone();
 
 };
 

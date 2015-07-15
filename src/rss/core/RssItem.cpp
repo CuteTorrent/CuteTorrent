@@ -183,43 +183,48 @@ bool RssItem::isValid()
 	return !m_title.isEmpty();
 }
 
-QDataStream& operator<<(QDataStream& out, const RssItem& any)
+RssItem* RssItem::clone()
 {
-	out << any.m_title;
-	out << any.m_author;
-	out << any.m_category;
-	out << any.m_descriptionLink;
-	out << any.m_description;
-	out << any.m_downloadingTorrent;
-	out << any.m_torrentUrl;
-	out << any.m_magnetUrl;
-	out << any.m_guid;
-	out << any.m_infoHash;
-	out << any.m_peers;
-	out << any.m_seeds;
-	out << any.m_size;
-	out << any.m_pubDate;
-	out << any.m_unread;
+	RssItem* pItem = new RssItem(*this);
+	return pItem;
+}
+
+QDataStream& operator<<(QDataStream& out, const RssItem* any)
+{
+	out << any->m_title;
+	out << any->m_author;
+	out << any->m_category;
+	out << any->m_descriptionLink;
+	out << any->m_description;
+	out << any->m_downloadingTorrent;
+	out << any->m_torrentUrl;
+	out << any->m_magnetUrl;
+	out << any->m_guid;
+	out << any->m_infoHash;
+	out << any->m_peers;
+	out << any->m_seeds;
+	out << any->m_size;
+	out << any->m_pubDate;
+	out << any->m_unread;
 	return out;
 }
 
-QDataStream& operator>>(QDataStream& out, RssItem& any)
+QDataStream& operator>>(QDataStream& out, RssItem* any)
 {
-	out >> any.m_title;
-	out >> any.m_author;
-	out >> any.m_category;
-	out >> any.m_descriptionLink;
-	out >> any.m_description;
-	out >> any.m_downloadingTorrent;
-	out >> any.m_torrentUrl;
-	out >> any.m_magnetUrl;
-	out >> any.m_guid;
-	out >> any.m_infoHash;
-	out >> any.m_peers;
-	out >> any.m_seeds;
-	out >> any.m_size;
-	out >> any.m_pubDate;
-	out >> any.m_unread;
-	return out;
+	out >> any->m_title;
+	out >> any->m_author;
+	out >> any->m_category;
+	out >> any->m_descriptionLink;
+	out >> any->m_description;
+	out >> any->m_downloadingTorrent;
+	out >> any->m_torrentUrl;
+	out >> any->m_magnetUrl;
+	out >> any->m_guid;
+	out >> any->m_infoHash;
+	out >> any->m_peers;
+	out >> any->m_seeds;
+	out >> any->m_size;
+	out >> any->m_pubDate;
+	out >> any->m_unread;
 	return out;
 }

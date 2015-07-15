@@ -281,7 +281,7 @@ QDataStream& operator<<(QDataStream& stream, const RssFeed& any)
 
 	for (int i = 0; i < size; i++)
 	{
-		stream << *any.m_rssItemsByDate.at(i);
+		stream << any.m_rssItemsByDate.at(i);
 	}
 
 	return stream;
@@ -305,7 +305,7 @@ QDataStream& operator>>(QDataStream& stream, RssFeed& any)
 	for (int i = 0; i < size; i++)
 	{
 		RssItem* pItem = new RssItem(&any);
-		stream >> *pItem;
+		stream >> pItem;
 		any.m_rssItems.insert(pItem->guid(), pItem);
 	}
 

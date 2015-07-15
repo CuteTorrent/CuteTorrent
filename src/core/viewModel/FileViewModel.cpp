@@ -225,7 +225,10 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 	{
 		item = static_cast<FileViewTreeItem*>(index.internalPointer());
 	}
-
+	if (role == Qt::InitialSortOrderRole)
+	{
+		return Qt::DescendingOrder;
+	}
 	if(role == Qt::DisplayRole && dataSource.is_valid() && item != NULL)
 	{
 		file_entry file = item->GetFileEntery();
@@ -319,6 +322,10 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 
 QVariant FileViewModel::headerData(int section, Qt::Orientation orientation, int role /*= Qt::DisplayRole*/) const
 {
+	if (role == Qt::InitialSortOrderRole)
+	{
+		return Qt::DescendingOrder;
+	}
 	if(orientation == Qt::Horizontal && role == Qt::DisplayRole)
 	{
 		return headerStringsData.at(section);

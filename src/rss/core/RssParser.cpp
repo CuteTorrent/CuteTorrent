@@ -491,8 +491,17 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 			if (newItemDate > oldItemDate)
 			{
 				boost::scoped_ptr<RssItem> pOldItem(pFeed->m_rssItems[guid]);
+
 				pFeed->m_rssItems.remove(guid);
-				pFeed->m_rssItems.insert(guid, new RssItem(*pItem.get()));
+				RssItem* pNewItem = pItem->clone();
+				QString infoHash = pOldItem->infoHash();
+
+				if (!infoHash.isEmpty())
+				{
+					pNewItem->setInfoHash(infoHash);
+				}
+				pFeed->m_rssItems.remove(guid);
+				pFeed->m_rssItems.insert(guid, pNewItem);
 				return;
 			}
 		}
@@ -502,7 +511,7 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 	}
 
 	qWarning() << "New RssItem" << pItem->guid() << pItem->title();
-	pFeed->m_rssItems.insert(guid, new RssItem(*pItem.get()));
+	pFeed->m_rssItems.insert(guid, pItem->clone());
 }
 
 void RssParser::parseTorrentSection(QXmlStreamReader& reader, RssItem* item, bool& ok, QString& error)
@@ -717,7 +726,7 @@ void RssParser::parseAtomArticle(QXmlStreamReader& reader, QString baseURL, RssF
 			{
 				boost::scoped_ptr<RssItem> pOldItem(pFeed->m_rssItems[guid]);
 				pFeed->m_rssItems.remove(guid);
-				RssItem* pNewItem = new RssItem(*pItem.get());
+				RssItem* pNewItem = pItem->clone();
 				QString infoHash = pOldItem->infoHash();
 
 				if (!infoHash.isEmpty())
@@ -733,7 +742,7 @@ void RssParser::parseAtomArticle(QXmlStreamReader& reader, QString baseURL, RssF
 		return;
 	}
 
-	pFeed->m_rssItems.insert(guid, new RssItem(*pItem.get()));
+	pFeed->m_rssItems.insert(guid, pItem->clone());
 }
 
 

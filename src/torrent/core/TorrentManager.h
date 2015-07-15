@@ -112,6 +112,14 @@ public slots:
 	void RemoveTorrent(QString InfoHash, bool delFiles = false);
 	void OnDownloadReady(QUrl, QTemporaryFile*);
 public:
+	enum AddTorrentFlag
+	{
+		SEQUENTIAL_MODE = 1,
+		SEED_MODE = 2,
+		PAUSED_MODE = 4,
+		SUPER_SEED_MODE = 8
+	};
+	Q_DECLARE_FLAGS(AddTorrentFlags, AddTorrentFlag)
 	void SaveSession();
 	void RefreshExternalPeerSettings();
 	void InitSession();
@@ -128,8 +136,8 @@ public:
 	opentorrent_info* GetTorrentInfo(QString filename, error_code& ec);
 	openmagnet_info* GetTorrentInfo(const torrent_handle& handle);
 
-	bool AddMagnet(torrent_handle h, QString SavePath, QString group = "", QMap< QString, quint8> filepriorities = QMap<QString, quint8>());
-	bool AddTorrent(QString path, QString name, QString save_path, error_code& ec, QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), QString group = "", bool sequntial = false);
+	bool AddMagnet(torrent_handle h, QString SavePath, QString group = "", QMap< QString, quint8> filepriorities = QMap<QString, quint8>(), AddTorrentFlags flags = 0);
+	bool AddTorrent(QString path, QString name, QString save_path, error_code& ec, QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), QString group = "", AddTorrentFlags flags = 0);
 	~TorrentManager();
 #if LIBTORRENT_VERSION_NUM >= 10000
 	void AddPortMapping(session::protocol_type type, ushort sourcePoert, ushort destPort);

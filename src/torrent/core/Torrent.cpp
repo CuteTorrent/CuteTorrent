@@ -394,7 +394,7 @@ QIcon Torrent::GetMimeTypeIcon() const
 {
 	return StyleEngene::getInstance()->guessMimeIcon(base_suffix);
 }
-//-V659
+
 QIcon Torrent::GetMimeTypeIcon()
 {
 	return StyleEngene::getInstance()->guessMimeIcon(base_suffix, type);

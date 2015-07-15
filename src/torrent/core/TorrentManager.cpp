@@ -197,7 +197,7 @@ TorrentManager::TorrentManager()
 		{
 			QFileInfo fileInfo(geoIpPath);
 
-			if (fileInfo.lastModified().addMonths(1) >= QDateTime::currentDateTime())
+			if (QDateTime::currentDateTime() >= fileInfo.lastModified().addMonths(1))
 			{
 				m_pFileDownloader->download(geoIpUrl);
 			}
@@ -625,7 +625,7 @@ void TorrentManager::handle_alert(alert* a)
 }
 
 
-bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, error_code& ec, QMap<QString, quint8> filePriorities, QString group, bool sequntial)
+bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, error_code& ec, QMap<QString, quint8> filePriorities, QString group, AddTorrentFlags flags)
 
 {
 	boost::intrusive_ptr<torrent_info> t;
@@ -644,7 +644,6 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 
 	if (load_file(filename.c_str(), buf, ec) == 0)
 	{
-		// p.flags |= add_torrent_params::flag_seed_mode;
 #if LIBTORRENT_VERSION_NUM >= 10000
 		p.resume_data = buf;
 #else
@@ -714,15 +713,29 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 	p.ti = t;
 	p.save_path = std::string(save_path.toUtf8().data());
 	p.storage_mode = storage_mode_sparse;
-	p.flags |= add_torrent_params::flag_paused;
-	p.flags |= add_torrent_params::flag_duplicate_is_error;
+	
+	p.flags = add_torrent_params::flag_duplicate_is_error;
+	if (flags.testFlag(PAUSED_MODE))
+	{
+		p.flags |= add_torrent_params::flag_paused;
+	}
+	if (flags.testFlag(SEED_MODE))
+	{
+		p.flags |= add_torrent_params::flag_seed_mode;
+	}
+	if (flags.testFlag(SUPER_SEED_MODE))
+	{
+		p.flags |= add_torrent_params::flag_super_seeding;
+	}
 #if LIBTORRENT_VERSION_NUM >= 10000
 
-	if (sequntial)
+	if (flags.testFlag(SEQUENTIAL_MODE))
 	{
 		p.flags |= add_torrent_params::flag_sequential_download;
 	}
-
+	
+#else
+	p.flags |= add_torrent_params::flag_paused;
 #endif
 	p.userdata = static_cast<void*>(strdup(path.toLatin1().data()));
 	torrent_handle h = m_pTorrentSession->add_torrent(p, ec);
@@ -733,8 +746,9 @@ bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, e
 		return false;
 	}
 
-#if LIBTORRENT_VERSION_NUM <= 10000
+#if LIBTORRENT_VERSION_NUM < 10000
 	h.set_sequential_download(sequntial);
+	h.resume();
 #endif
 	Torrent* current = new Torrent(&h, group);
 	current->setIsPrevioslySeeded(isPreviousSeed);
@@ -1327,8 +1341,8 @@ torrent_handle TorrentManager::ProcessMagnetLink(QString link, error_code& ec)
 #endif
 	}
 
-	add_info.flags |= add_torrent_params::flag_paused;
-	add_info.flags |= add_torrent_params::flag_duplicate_is_error;
+	add_info.flags = add_torrent_params::flag_duplicate_is_error;
+	
 	h = m_pTorrentSession->add_torrent(add_info, ec);
 
 	if (ec)
@@ -1338,7 +1352,7 @@ torrent_handle TorrentManager::ProcessMagnetLink(QString link, error_code& ec)
 
 	while (!h.status().has_metadata)
 	{
-		sleep(1000);
+		sleep(100);
 	}
 
 	h.auto_managed(false);
@@ -1373,7 +1387,7 @@ void TorrentManager::CancelMagnetLink(QString link)
 	}
 }
 
-bool TorrentManager::AddMagnet(torrent_handle h, QString SavePath, QString group, QMap<QString, quint8> filePriorities)
+bool TorrentManager::AddMagnet(torrent_handle h, QString SavePath, QString group, QMap<QString, quint8> filePriorities, AddTorrentFlags flags)
 {
 	if (!filePriorities.isEmpty())
 	{
@@ -1413,7 +1427,23 @@ bool TorrentManager::AddMagnet(torrent_handle h, QString SavePath, QString group
 		h.move_storage(SavePath.toStdString());
 	}
 
-	h.auto_managed(true);
+	if (!flags.testFlag(PAUSED_MODE))
+	{
+		h.resume();
+	}
+	
+	if (flags.testFlag(SUPER_SEED_MODE))
+	{
+		h.super_seeding(true);
+	}
+
+	if (flags.testFlag(SEQUENTIAL_MODE))
+	{
+		h.set_sequential_download(true);
+	}
+
+
+
 	Torrent* current = new Torrent(&h, group);
 	m_pTorrentStorrage->append(current);
 

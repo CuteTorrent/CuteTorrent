@@ -139,8 +139,8 @@ QVector<float> PieceAvailabilityWidget::intToFloatVector(const std::vector<int>&
 		// this code is safe, so keep that in mind when you try optimize more.
 		// tested with size = 3000000ul
 		// R - real
-		const float fromR = (x * vecin.size()) / (float)reqSize;
-		const float toR = ((x + 1) * vecin.size()) / (float)reqSize;
+		const float fromR = float(x * vecin.size()) / reqSize;
+		const float toR = float((x + 1) * vecin.size()) / reqSize;
 		// C - integer
 		int fromC = fromR;// std::floor not needed
 		int toC = std::ceil(toR);
@@ -208,7 +208,7 @@ QVector<float> PieceAvailabilityWidget::intToFloatVector(const std::vector<int>&
 	return result;
 }
 
-int PieceAvailabilityWidget::mixTwoColors(int& rgb1, int& rgb2, float ratio)
+int PieceAvailabilityWidget::mixTwoColors(const int& rgb1, const int& rgb2, float ratio)
 {
 	int r1 = qRed(rgb1);
 	int g1 = qGreen(rgb1);
