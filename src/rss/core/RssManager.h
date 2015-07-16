@@ -48,10 +48,11 @@ private:
 public slots:
 	void removeFeed(const QUuid& uid);
 	RssFeed* addFeed(QUrl url, bool& isNew);
-private slots:
-	void onFeedChanged(QUuid);
 	void LoadFeeds();
 	void LoadDownloadRules();
+private slots:
+	void onFeedChanged(QUuid);
+	
 	void onTorrentDownloaded(QUrl url, QTemporaryFile* pFile);
 	void onMagnetError(QString);
 	void onDownloadMetadataCompleted(openmagnet_info);

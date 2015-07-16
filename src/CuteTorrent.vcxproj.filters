@@ -724,6 +724,54 @@
     <ClCompile Include="core\viewModel\FileTreeSortProxyModel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\zip\JlCompress.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\qioapi.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quaadler32.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quacrc32.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quagzipfile.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quaziodevice.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quazip.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quazipdir.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quazipfile.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quazipfileinfo.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quazipnewinfo.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\unzip.c">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\zip.c">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_quagzipfile.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_quaziodevice.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_quazipfile.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -957,6 +1005,15 @@
     </CustomBuild>
     <CustomBuild Include="core\filedownloader.h">
       <Filter>Service</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quazipfile.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quagzipfile.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quaziodevice.h">
+      <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1293,6 +1350,45 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="core\viewModel\FileTreeSortProxyModel.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\crypt.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\ioapi.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\JlCompress.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\quaadler32.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\quachecksum32.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\quacrc32.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\quazip.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\quazip_global.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\quazipdir.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\quazipfileinfo.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\quazipnewinfo.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\unzip.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\zip.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

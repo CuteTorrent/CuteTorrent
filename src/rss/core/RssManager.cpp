@@ -16,8 +16,8 @@ RssManager::RssManager(QObject* parent) : QObject(parent)
 	m_pTorrentDownloader = FileDownloader::getInstance();
 	m_pNotificationSystem = NotificationSystem::getInstance();
 	m_pSettings = QApplicationSettings::getInstance();
-	QTimer::singleShot(1000, this, SLOT(LoadFeeds()));
-	QTimer::singleShot(1000, this, SLOT(LoadDownloadRules()));
+	QTimer::singleShot(500, this, SLOT(LoadFeeds()));
+	QTimer::singleShot(500, this, SLOT(LoadDownloadRules()));
 	connect(this, SIGNAL(Notify(int, QString, QVariant)), m_pNotificationSystem.get(), SLOT(OnNewNotification(int, QString, QVariant)));;
 	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFile*)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFile*)));
 }
@@ -90,10 +90,28 @@ void RssManager::LoadFeeds()
 		for (int i = 0; i < numFeeds; i++)
 		{
 			RssFeed* tempFeed = new RssFeed(QUrl(""), tempUid);
+			QUuid uid = tempFeed->uid();
 			dataStream >> *tempFeed;
-			m_pFeeds.append(tempFeed);
-			tempFeed->Update();
-			connect(tempFeed, SIGNAL(FeedChanged(QUuid)), SLOT(onFeedChanged(QUuid)));
+			int index = -1;
+			foreach(RssFeed* pFeed, m_pFeeds)
+			{
+				if (pFeed->uid() == uid)
+				{
+					index = m_pFeeds.indexOf(pFeed);
+					break;
+				}
+			}
+			if (index > -1)
+			{
+				delete tempFeed;
+			}
+			else
+			{
+				m_pFeeds.append(tempFeed);
+				tempFeed->Update();
+				connect(tempFeed, SIGNAL(FeedChanged(QUuid)), SLOT(onFeedChanged(QUuid)));
+			}
+			
 		}
 
 		feedsDat.close();
@@ -187,7 +205,6 @@ void RssManager::LoadDownloadRules()
 			m_downloadRules.insert(rule->Uid(), rule);;
 		}
 
-		rssDownloadRulesDat.flush();
 		rssDownloadRulesDat.close();
 	}
 }
@@ -286,28 +303,35 @@ void RssManager::downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRu
 	if (!rssItem->torrentUrl().isEmpty())
 	{
 		QString torrentUrl = rssItem->torrentUrl();
-		TorrentDownloadInfo info;
-		info.downloadRule = rule;
-		info.torrentUrl = torrentUrl;
-		info.rssFeedId = pFeed->uid();
-		info.rssItemId = rssItem->guid();
-		m_activeTorrentDownloads.insert(torrentUrl, info);
-		m_pTorrentDownloader->download(torrentUrl, pFeed->coookies());
+		if (!m_activeTorrentDownloads.contains(torrentUrl))
+		{
+			TorrentDownloadInfo info;
+			info.downloadRule = rule;
+			info.torrentUrl = torrentUrl;
+			info.rssFeedId = pFeed->uid();
+			info.rssItemId = rssItem->guid();
+			m_activeTorrentDownloads.insert(torrentUrl, info);
+			m_pTorrentDownloader->download(torrentUrl, pFeed->coookies());
+		}
+		
 	}
 	else if (!rssItem->magnetUrl().isEmpty())
 	{
 		QString magnetUrl = QUrl::fromPercentEncoding(rssItem->magnetUrl().toUtf8());
-		MetaDataDownloadWaiter* magnetWaiter = new MetaDataDownloadWaiter(magnetUrl, this);
-		connect(magnetWaiter, SIGNAL(DownloadCompleted(openmagnet_info)), this, SLOT(onDownloadMetadataCompleted(openmagnet_info)));
-		connect(magnetWaiter, SIGNAL(ErrorOccured(QString)), this, SLOT(onMagnetError(QString)));
-		connect(magnetWaiter, SIGNAL(finished()), magnetWaiter, SLOT(deleteLater()));
-		magnetWaiter->start(QThread::HighPriority);
-		TorrentDownloadInfo info;
-		info.downloadRule = rule;
-		info.torrentUrl = magnetUrl;
-		info.rssFeedId = pFeed->uid();
-		info.rssItemId = rssItem->guid();
-		m_activeTorrentDownloads.insert(magnetUrl, info);
+		if (!m_activeTorrentDownloads.contains(magnetUrl))
+		{
+			MetaDataDownloadWaiter* magnetWaiter = new MetaDataDownloadWaiter(magnetUrl, this);
+			connect(magnetWaiter, SIGNAL(DownloadCompleted(openmagnet_info)), this, SLOT(onDownloadMetadataCompleted(openmagnet_info)));
+			connect(magnetWaiter, SIGNAL(ErrorOccured(QString)), this, SLOT(onMagnetError(QString)));
+			connect(magnetWaiter, SIGNAL(finished()), magnetWaiter, SLOT(deleteLater()));
+			magnetWaiter->start(QThread::HighPriority);
+			TorrentDownloadInfo info;
+			info.downloadRule = rule;
+			info.torrentUrl = magnetUrl;
+			info.rssFeedId = pFeed->uid();
+			info.rssItemId = rssItem->guid();
+			m_activeTorrentDownloads.insert(magnetUrl, info);
+		}
 	}
 	else
 	{

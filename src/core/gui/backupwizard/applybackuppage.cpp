@@ -3,16 +3,15 @@
 #include "FileTreeModel.h"
 #include "QApplicationSettings.h"
 #include "TorrentManager.h"
-//#include "patheditor.h"
-#include <algorithm>
-#include <QApplication>
-#include <QDebug>
-
+#include <libtorrent/bencode.hpp>
+#include "JlCompress.h"
+#include <helpers/StaticHelpers.h>
+#include <core/RssManager.h>
 
 ApplyBackupPage::ApplyBackupPage(QWidget* parent) :
 	QWizardPage(parent)
 {
-	setTitle("APPLY_BAKUP_TITLE");
+	setTitle(tr("APPLY_BAcKUP_TITLE"));
 	gridLayout = new QGridLayout(this);
 	gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
 	backupPathLineEdit = new QLineEdit(this);
@@ -57,54 +56,61 @@ ApplyBackupPage::ApplyBackupPage(QWidget* parent) :
 
 void ApplyBackupPage::ApplyBackup() const
 {
-	if(!pathResumeData.isEmpty())
+	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	JlCompress::extractDir(backupPathLineEdit->text(), dataDir);
+
+	QString btSessionDirPath = StaticHelpers::CombinePathes(dataDir, "BtSessionData");
+
+	QDir btSessionDir(btSessionDirPath);
+
+	QStringList resumeFiles = btSessionDir.entryList(QStringList("*.resume"), QDir::Files | QDir::NoDotAndDotDot);
+
+	QMap<QString, QString> pathMap;
+
+	for (int i = 0; i < tableWidget->rowCount(); i++)
 	{
-		int rowCount = tableWidget->rowCount();
-		QMap<QString, QString> chmagePathMap;
-
-		for(int i = 0; i < rowCount; i++)
+		QTableWidgetItem* sourceItem = tableWidget->item(i, 0);
+		QTableWidgetItem* destItem = tableWidget->item(i, 1);
+		if (sourceItem != NULL && destItem != NULL)
 		{
-			QTableWidgetItem* originalPathItem = tableWidget->item(i, 0);
-			QTableWidgetItem* newPathItem = tableWidget->item(i, 1);
-			QString newPath = newPathItem->text();
-
-			if(!newPath.isEmpty())
-			{
-				chmagePathMap.insert(originalPathItem->text(), newPath);
-			}
+			pathMap.insert(sourceItem->text(), destItem->text());
 		}
-
-		QStringList lines = pathResumeData.split("\n");
-
-		for(int i = 0; i < lines.count(); i++)
-		{
-			QString line = lines[i];
-			QStringList parts = line.split('|');
-
-			if(parts.length() > 2)
-			{
-				if(chmagePathMap.contains(parts[1]))
-				{
-					lines[i] = parts[0] + "|" + chmagePathMap[parts[1]] + "|" + parts[2];
-				}
-			}
-		}
-
-		QString newPathResumeData = lines.join("\n");
-		//zipReader->extractAll(QApplication::applicationDirPath());
-		QFile pathResumeFile(QApplication::applicationDirPath() + "/CT_DATA/path.resume");
-
-		if(pathResumeFile.open(QIODevice::WriteOnly))
-		{
-			QTextStream strm(&pathResumeFile);
-			strm.setCodec("UTF-8");
-			strm << newPathResumeData;
-			pathResumeFile.close();
-		}
-
-		QApplicationSettings::getInstance()->ReedSettings();
-		TorrentManager::getInstance()->InitSession();
 	}
+
+	for (int i = 0; i < resumeFiles.size(); i++)
+	{
+		QFile file(btSessionDir.absoluteFilePath(resumeFiles[i]));
+
+		if (file.open(QIODevice::ReadWrite))
+		{
+			QByteArray resumeData = file.readAll();
+			entry e = bdecode(resumeData.begin(), resumeData.end());
+
+			if (entry* i = e.find_key("save_path"))
+			{
+				QString savePath = QString::fromUtf8(i->string().c_str());
+				if (pathMap.contains(savePath))
+				{
+					QString newPath = pathMap[savePath];
+					e["save_path"] = newPath.toUtf8().data();
+					file.seek(0);
+					QByteArray out;
+					bencode(std::back_inserter(out), e);
+					file.write(out);
+				}
+
+			}
+			file.close();
+		}
+	}
+
+
+	QApplicationSettings::getInstance()->ReedSettings();
+	RssManagerPtr rssManager = RssManager::getInstance();
+	rssManager->LoadDownloadRules();
+	rssManager->LoadFeeds();
+	TorrentManager::getInstance()->InitSession();
+
 }
 
 int ApplyBackupPage::nextId() const
@@ -112,75 +118,84 @@ int ApplyBackupPage::nextId() const
 	ApplyBackup();
 	return BackupWizard::Page_Finish;
 }
+
 QStringList ApplyBackupPage::GetLongestCommonSubstr(QStringList strings)
 {
-	strings.sort();
-	FileTreeModel model;
-
-	foreach(QString string, strings)
-	{
-		model.addPath(string, 0);
-	}
-
-	return model.getUnicPathes();
+	return strings.toSet().toList();
 }
 
-/*
-bool ApplyBackupPage::parseData(QZipReader* reader)
-{
-	pathResumeData = reader->fileData("CT_DATA/path.resume");
-
-	if(pathResumeData.isEmpty())
-	{
-		QMessageBox::critical(this, tr("ERROR"), tr("BAD_RESUME_DATA"));
-		return false;
-	}
-
-	QStringList pathes;
-	QStringList lines = pathResumeData.split("\n");
-
-	foreach(QString line, lines)
-	{
-		QStringList parts = line.split('|');
-
-		if(parts.length() > 2)
-		{
-			pathes << parts[1];
-		}
-	}
-
-	QStringList unick = GetLongestCommonSubstr(pathes);
-	int row = 0;
-	tableWidget->setRowCount(unick.size());
-
-	foreach(QString line, unick)
-	{
-		QTableWidgetItem* tableItem = new QTableWidgetItem();
-		tableItem->setText(line);
-		tableItem->setFlags(tableItem->flags() & ~Qt::ItemIsEditable);
-		tableWidget->setItem(row, 0, tableItem);
-		tableWidget->setItem(row, 1, new QTableWidgetItem());
-		row++;
-	}
-
-	//tableWidget->setItemDelegateForColumn(1, new PathEditor);
-	tableWidget->resizeColumnsToContents();
-	tableWidget->resizeRowsToContents();
-	return true;
-}
-*/
 void ApplyBackupPage::browseButtonClicked()
 {
-	backupPathLineEdit->setText(QFileDialog::getOpenFileName(this, tr("BACKUP_CHOOSE"), QApplication::applicationDirPath() + QDir::separator()));
-	/*	zipReader = new QZipReader(backupPathLineEdit->text());
+	QString fileName = QFileDialog::getOpenFileName(this, tr("BACKUP_CHOOSE"), QApplication::applicationDirPath() + QDir::separator(), "Backup files (*.backup)");
 
-		if(zipReader->isReadable())
+	if (fileName.isEmpty() || !QFile::exists(fileName))
+	{
+		return;
+	}
+	backupPathLineEdit->setText(fileName);
+	QuaZip backupFile(fileName);
+	QStringList savePathes;
+	if (backupFile.open(QuaZip::mdUnzip))
+	{
+		QList<QuaZipFileInfo64> fileInfos = backupFile.getFileInfoList64();
+		for (int i = 0; i < fileInfos.size(); i++)
 		{
-			parseData(zipReader);
+			QuaZipFileInfo64 fileInfo = fileInfos[i];
+			if (fileInfo.name.endsWith(".resume"))
+			{
+				backupFile.setCurrentFile(fileInfo.name);
+				QStringList parts = fileInfo.name.split('/');
+				QString resumeFileName = parts.last();
+				QuaZipFile file(&backupFile);
+				
+				if (file.open(QIODevice::ReadOnly))
+				{
+					QByteArray resumeData;
+					while (!file.atEnd())
+					{
+						char buf[4096];
+						qint64 readLen = file.read(buf, 4096);
+
+						if (readLen > 0)
+						{
+							resumeData.append(QByteArray(buf, readLen));
+						}
+					}
+					
+					
+					
+					entry e = bdecode(resumeData.begin(), resumeData.end());
+					QString savePath;
+					if (entry* i = e.find_key("save_path"))
+					{
+						savePath = QString::fromUtf8(i->string().c_str());
+						savePathes.append(savePath);
+					}
+
+				}
+				else
+				{
+					//Show error
+				}
+				
+				
+			}
+			
+
 		}
-		else
+
+		QStringList uniquePathes = GetLongestCommonSubstr(savePathes);
+
+		for (int i = 0; i < uniquePathes.size(); i++)
 		{
-			QMessageBox::critical(this, tr("ERROR"), tr("UNABLE_TO_OPEN_BACKUP"));
-			return;
-	    }*/
+			tableWidget->insertRow(i);
+			tableWidget->setItem(i, 0, new QTableWidgetItem(uniquePathes[i]));
+		}
+	}
+	else
+	{
+		//int zipError = backupFile.getZipError();
+	}
+	
+
 }

@@ -43,36 +43,6 @@ QMap<QString, quint8> FileTreeModel::getFilePiorites()
 	return res;
 }
 
-QStringList FileTreeModel::getUnicPathes()
-{
-	QList<FileTreeItem*> ends;
-	getUnicPathes(rootItem, ends);
-	QStringList result;
-
-	foreach(FileTreeItem* item, ends)
-	{
-		result.append(item->getPath());
-	}
-
-	return result;
-}
-
-void FileTreeModel::getUnicPathes(FileTreeItem* current, QList<FileTreeItem*>& ends)
-{
-	if(current && current->childCount() == 0)
-	{
-		ends.append(current);
-		return;
-	}
-	else
-	{
-		for(int i = 0; i < current->childCount(); i++)
-		{
-			FileTreeItem* child = current->child(i);
-			getUnicPathes(child, ends);
-		}
-	}
-}
 void FileTreeModel::GetFilePrioritiesInternal(FileTreeItem* current, QMap<QString, quint8>* priorities)
 {
 	for(int i = 0; i < current->childCount(); i++)

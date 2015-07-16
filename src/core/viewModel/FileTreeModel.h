@@ -41,8 +41,6 @@ public:
 	void UpdateParents(const QModelIndex& modelIndex, FileTreeItem* item);
 	void addPath(QString path, uint64_t size);
 	QMap<QString, quint8> getFilePiorites();
-	QStringList getUnicPathes();
-	void getUnicPathes(FileTreeItem*, QList<FileTreeItem*>&);
 private:
 	void GetFilePrioritiesInternal(FileTreeItem* current, QMap<QString, quint8>* priorities);
 

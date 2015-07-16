@@ -3,7 +3,7 @@
 
 
 #include <QtGui>
-//#include <private/qzipreader_p.h>
+#include "quazipfile.h"
 class ApplyBackupPage : public QWizardPage
 {
 	Q_OBJECT
@@ -20,10 +20,6 @@ private:
 	QGroupBox* changePathGroupBox;
 	QGridLayout* gridLayout_2;
 	QTableWidget* tableWidget;
-	QString pathResumeData;
-	//QZipReader* zipReader;
-	QString GetLongestCommonSubstr(QString a, QString  b);
-	//bool parseData(QZipReader* reader);
 	QStringList GetLongestCommonSubstr(QStringList strings);
 	void ApplyBackup() const;
 public slots:
