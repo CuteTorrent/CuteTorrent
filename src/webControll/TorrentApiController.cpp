@@ -64,8 +64,8 @@ void TorrentApiController::service(HttpRequest& request, HttpResponse& response)
 							peer["ip"] = QString::fromStdString(peerInfos[j].ip.address().to_string()) ;
 							peer["client"] = QString::fromUtf8(peerInfos[j].client.c_str()) ;
 							peer["percent"] = QString::number(peerInfos[j].progress_ppm / 10000.f, 'f', 1) ;
-							peer["peerDlSpeed"] = StaticHelpers::toKbMbGb(peerInfos[j].down_speed) + "/s" ;
-							peer["peerUlSpeed"] = StaticHelpers::toKbMbGb(peerInfos[j].up_speed) + "/s" ;
+							peer["peerDlSpeed"] = StaticHelpers::toKbMbGb(peerInfos[j].down_speed, true);
+							peer["peerUlSpeed"] = StaticHelpers::toKbMbGb(peerInfos[j].up_speed, true);
 							peer["dlSize"] = StaticHelpers::toKbMbGb(peerInfos[j].total_download) ;
 							peer["ulSize"] = StaticHelpers::toKbMbGb(peerInfos[j].total_upload) ;
 							peers.append(peer);

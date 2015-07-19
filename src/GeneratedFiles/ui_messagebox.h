@@ -84,7 +84,6 @@ public:
         font.setStyleStrategy(QFont::PreferDefault);
         LTitle->setFont(font);
         LTitle->setStyleSheet(QString::fromUtf8(""));
-        LTitle->setTextFormat(Qt::AutoText);
 
         horizontalLayout->addWidget(LTitle);
 
@@ -148,10 +147,9 @@ public:
 
     void retranslateUi(QDialog *CustomMessageBox)
     {
-        CustomMessageBox->setWindowTitle(QApplication::translate("CustomMessageBox", "Dialog", 0, QApplication::UnicodeUTF8));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("CustomMessageBox", "MB_TITLE", 0, QApplication::UnicodeUTF8));
         text->setText(QString());
+        Q_UNUSED(CustomMessageBox);
     } // retranslateUi
 
 };

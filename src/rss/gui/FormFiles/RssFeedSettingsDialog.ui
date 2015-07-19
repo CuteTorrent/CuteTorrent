@@ -10,9 +10,6 @@
     <height>315</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>RSS_FEED_SETTINGS</string>
-  </property>
   <property name="windowIcon">
    <iconset resource="../../../Resources/ltorrent.qrc">
     <normaloff>:/icons/app.ico</normaloff>:/icons/app.ico</iconset>
@@ -236,7 +233,7 @@
                </attribute>
                <row>
                 <property name="text">
-                 <string>Новая строка</string>
+                 <string notr="true">Новая строка</string>
                 </property>
                </row>
                <column>

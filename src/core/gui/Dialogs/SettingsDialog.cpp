@@ -171,6 +171,7 @@ void SettingsDialog::FillHDDTab()
 	alowReorderedOpsCheckBox->setCheckState(settings->valueBool("Torrent", "allow_reordered_disk_operations") ?  Qt::Checked : Qt::Unchecked);
 	lowPrioDiskCheckBox->setCheckState(settings->valueBool("Torrent", "low_prio_disk") ?  Qt::Checked : Qt::Unchecked);
 	useReadCasheCheckBox->setCheckState(settings->valueBool("Torrent", "use_read_cache") ?  Qt::Checked : Qt::Unchecked);
+	diskAllocationComboBox->setCurrentIndex(settings->valueInt("Torrent", "file_allocation_mode"));
 }
 
 void SettingsDialog::FillGeneralTab()
@@ -229,11 +230,11 @@ void SettingsDialog::FillGeneralTab()
 
 		foreach(QString line, lines)
 		{
-			qDebug() << "Line from mimeapps.list" << line;
+			/*qDebug() << "Line from mimeapps.list" << line;
 			qDebug() << "Line from mimeapps.listline.startsWith(\"application/x-bittorrent\")" << line.startsWith("application/x-bittorrent;", Qt::CaseInsensitive);
 			qDebug() << "Line from mimeapps.listline.startsWith(\"x-scheme-handler/magnet\")" << line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive);
 			qDebug() << "Line from mimeapps.line.endsWith(\"CuteTorrent.desktop\")" << line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive);
-
+			*/
 			if (line.startsWith("application/x-bittorrent", Qt::CaseInsensitive))
 			{
 				asociationCheckBox->setChecked(line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive));
@@ -337,6 +338,7 @@ void SettingsDialog::ApplySettings()
 	settings->setValue("Torrent", "use_dht",					qVariantFromValue(useDHTCheckBox->isChecked()));
 	settings->setValue("Torrent", "use_lsd",					qVariantFromValue(useLSDCheckBox->isChecked()));
 	settings->setValue("Torrent", "use_pex",					qVariantFromValue(usePExCheckBox->isChecked()));
+	settings->setValue("Torrent", "max_connections_per_torrent",maxConnectionsPerTorrentEdit->value());
 	bool isScriptDebuggingEnabled = scriptDebugingCheckBox->isChecked();
 	settings->setValue("Search", "script_debuging_enabled",		qVariantFromValue(isScriptDebuggingEnabled));
 	SearchEnginePtr searchEngine = SearchEngine::getInstance();
@@ -415,6 +417,7 @@ void SettingsDialog::ApplySettings()
 	settings->setValue("rss", "rss_send_to",					rssRecepientEmailEdit->text());
 	settings->setValue("rss", "auto_download_emeail_notify",	autosrtEmailNotificationCheckBox->isChecked());
 	settings->setValue("rss", "default_refresh_rate",			rssRefrashRateEdit->value());
+	settings->setValue("Torrent", "file_allocation_mode",		diskAllocationComboBox->currentIndex());
 	NotificationSystemPtr pNotifySys = NotificationSystem::getInstance();
 	pNotifySys->UpdateNotificationSettings();
 #ifdef Q_WS_WIN //file association for windows
@@ -691,6 +694,7 @@ void SettingsDialog::ApplySettingsToSession()
 	current.share_ratio_limit = settings->valueString("Torrent", "share_ratio_limit").toFloat();
 	manager->updateSettings(current);
 	manager->RefreshExternalPeerSettings();
+	manager->updateMaxConnectionsPerTorrent();
 	pe_settings enc_settings = manager->readEncSettings();
 	enc_settings.in_enc_policy = static_cast<pe_settings::enc_policy>(inEncPolicyComboBox->currentIndex());
 	enc_settings.out_enc_policy = static_cast<pe_settings::enc_policy>(outEncPolicyComboBox->currentIndex());
@@ -1139,6 +1143,7 @@ void SettingsDialog::FillRestrictionTab()
 	limitUtpCheckBox->setChecked(settings->valueBool("Torrent", "rate_limit_utp"));
 	seedTimeLimitEdit->setTime(QTime(0, 0).addSecs(settings->valueInt("Torrent", "seed_time_limit")));
 	seedGlobalRatioEdit->setValue(settings->valueString("Torrent", "share_ratio_limit").toFloat());
+	maxConnectionsPerTorrentEdit->setValue(settings->valueInt("Torrent", "max_connections_per_torrent"));
 }
 
 void SettingsDialog::updateRulesWidget(QList<RssDownloadRule*> downloadRules)
@@ -1287,6 +1292,7 @@ void SettingsDialog::NeverCallMe()
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRACKER_ADD"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRACKER_EDIT"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRACKER_REMOVE"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRACKER_UPDATE"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRAY_EXIT"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRAY_MAXIMIZE"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRAY_MINIMIZE"),

@@ -10,7 +10,6 @@ void TorrentStorrage::append(Torrent* torrent)
 
 	if(hasTorrent(infoHash))
 	{
-		//	delete torrent;
 		return;
 	}
 
@@ -27,8 +26,9 @@ void TorrentStorrage::remove(Torrent* torrent)
 Torrent* TorrentStorrage::getTorrent(QString infoHash)
 {
 	QMutexLocker mutexLocker(m_pMapSynkMutex);
+	
 	QMap<QString, Torrent*>::Iterator it = m_torrentsMap.find(infoHash);
-
+	
 	if(it == m_torrentsMap.end())
 	{
 		return NULL;
@@ -75,10 +75,9 @@ void TorrentStorrage::clear()
 TorrentStorrage::TorrentStorrage(QObject* parrent/*=NULL*/) : QList<Torrent * >(), m_pMapSynkMutex(new QMutex())
 {}
 
-Torrent* TorrentStorrage::operator[](QString index)
+Torrent* TorrentStorrage::operator[](QString infoHash)
 {
-	QMutexLocker mutexLocker(m_pMapSynkMutex);
-	return m_torrentsMap[index];
+	return getTorrent(infoHash);
 }
 
 void TorrentStorrage::sort()

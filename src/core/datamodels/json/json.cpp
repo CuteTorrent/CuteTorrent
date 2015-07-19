@@ -146,10 +146,10 @@ QByteArray serialize(const QVariant& data, bool& success)
 	}
 	else if(data.type() == QVariant::Double)      // double?
 	{
-		double value = data.toDouble();
-		double epsilon = 1 / 100000000.f;
-
-		if((value - value) < epsilon)
+		bool ok;
+		double value = data.toDouble(&ok);
+		
+		if (ok)
 		{
 			str = QByteArray::number(value, 'g', 20);
 

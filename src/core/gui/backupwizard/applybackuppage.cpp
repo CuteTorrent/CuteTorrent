@@ -11,7 +11,7 @@
 ApplyBackupPage::ApplyBackupPage(QWidget* parent) :
 	QWizardPage(parent)
 {
-	setTitle(tr("APPLY_BAcKUP_TITLE"));
+	setTitle(tr("APPLY_BACKUP_TITLE"));
 	gridLayout = new QGridLayout(this);
 	gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
 	backupPathLineEdit = new QLineEdit(this);

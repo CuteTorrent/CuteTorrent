@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "TorrentManager.h"
 #include "SchedulerTask.h"
 #include "NetworkDiskCache.h"
+#include <QDir>
 
 class StaticHelpers
 {
@@ -34,6 +35,10 @@ private:
 	static QString translateSocksError(error_code const& ec);
 	static QString translateUpnpError(error_code const& ec);
 	static QString translateError(error_code const& ec, char* msgs[], int msgs_len);
+	template<typename T> static T CombinePathes(T t)
+	{
+		return t;
+	}
 public:
 #ifdef Q_WS_X11
 	static void OpenFolderNautilus(QString& file);
@@ -41,19 +46,30 @@ public:
 #ifdef Q_WS_WIN
 	static void OpenFileInExplorer(QString& file);
 #endif
-	static QString toKbMbGb(size_type size);
+	static QString toKbMbGb(size_type size, bool isSpped = false);
 	static QString translateLibTorrentError(error_code const& ec);
 	static void dellDir(QString path);
 	static QString toTimeString(int seconds);
 	static QString filePriorityToString(int priority);
 	static QString SchedulerTypeToString(SchedulerTask::TaskType type);
 	static QString GetBaseSuffix(const file_storage& storrage);
-	static QString CombinePathes(QString path, QString suffix);
+	
+	template<typename T, typename... Args> static QString CombinePathes(T first, Args &... args);
 	static NetworkDiskCache* GetGLobalWebCache();
 	static QByteArray gUncompress(QByteArray data);
 	template <typename T> static size_t HashVector(const std::vector<T>& vector);
 	template <typename T> static QList<T> reversed(const QList<T>& in);
 };
+
+
+
+
+template<typename T, typename... Args>
+QString StaticHelpers::CombinePathes(T first, Args &... args)
+{
+	bool addSeparator = !QString(first).endsWith("/") || !QString(first).endsWith("\\");
+	return QDir::toNativeSeparators(QDir::cleanPath(QString(first) + (addSeparator ? QDir::separator() : QString("")) + CombinePathes(args...)));
+}
 
 template <typename T>
 size_t StaticHelpers::HashVector(const std::vector<T>& vector)

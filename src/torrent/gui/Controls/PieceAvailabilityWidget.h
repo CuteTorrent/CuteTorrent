@@ -34,7 +34,7 @@ private:
 	int m_maxAvailibility;
 	float m_totalAvailibility;
 	QColor m_backgroundColor;
-	void updateImage();
+	void UpdateImage();
 };
 
 #endif

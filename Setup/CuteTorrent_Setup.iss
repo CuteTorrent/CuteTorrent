@@ -4,12 +4,12 @@
 WizardSmallImageFile=bottom.bmp
 AppId=CuteTorrent
 AppName=CuteTorrent
-AppVersion=1.0.0.28
+AppVersion=1.0.0.29
 DefaultDirName={pf}\CuteTorrent
 DefaultGroupName=CuteTorrent
 UninstallDisplayIcon={app}\CuteTorrent.exe
 OutputDir=Output
-OutputBaseFilename=CuteTorrent 1.0.0.28
+OutputBaseFilename=CuteTorrent 1.0.0.29
 SolidCompression=yes
 Compression=lzma/ultra
 WizardImageFile=Left.bmp
@@ -41,22 +41,24 @@ en.Shortcuts=Shortcuts
 en.CreateDesktopIcon=Create desctop icon
 en.TorrentFileAssociation=Associate "torrent" extension
 en.MgnetLinkHandler=Open magnet links with CuteTorrent
-en.InstallVCRedist=Install VC++ Redist 2010
+en.InstallVCRedist=Install Visual C++ Redistributable Packages for Visual Studio 2013
 en.AddFirewallRule=Add rule to firewall
 en.WinExplorerIntegration=Integrate to Windows Explorer
-en.VCRedistInstalling=Installing VC++ Redist 2010...
+en.VCRedistInstalling=Installing Visual C++ Redistributable Packages for Visual Studio 2013...
 en.AddingFirewallRule=Adding firewall rule...
+en.CreateTorrent=Create torrent
 
 ru.FileAssociations=Файлы
 ru.Shortcuts=Ярлыки
 ru.CreateDesktopIcon=Создать ярлык на рабочем столе
 ru.TorrentFileAssociation=Открывать torrent Файлы с помощью CuteTorrent
 ru.MgnetLinkHandler=Открывать магнитные ссылки с помощью CuteTorrent
-ru.InstallVCRedist=Установить VC++ Redist 2010
+ru.InstallVCRedist=Установить Visual C++ Redistributable Packages for Visual Studio 2013
 ru.AddFirewallRule=Добавить в исключения файерволла
 ru.WinExplorerIntegration=Интегрироваться в проводник Windows
-ru.VCRedistInstalling=Устанавливается VC++ Redist 2010...
+ru.VCRedistInstalling=Устанавливается Visual C++ Redistributable Packages for Visual Studio 2013...
 ru.AddingFirewallRule=Добавляется правило для файерволла...
+ru.CreateTorrent=Создать торрент
 [Run]
 FileName: "{tmp}\vcredist_x86.exe"; Parameters: "/q"; StatusMsg: "{cm:VCRedistInstalling}"; Flags: waituntilterminated ; Check: VcRedistCheck
 Filename: "{sys}\netsh.exe"; Parameters: "firewall add allowedprogram ""{app}\CuteTorrent.exe"" ""BitTorrent client CuteTorrent"" ENABLE ALL";     StatusMsg: "{cm:AddingFirewallRule}"; Flags: runhidden waituntilterminated; Check: FirewallCheck
@@ -70,13 +72,13 @@ Root: HKCR; Subkey: "Magnet"; ValueType: string; ValueName: "Content Type"; Valu
 Root: HKCR; Subkey: "Magnet"; ValueType: string; ValueName: "URL Protocol"; ValueData: "application/x-magnet"; Flags: uninsdeletekey; Tasks: MagnetAssociation
 Root: HKCR; Subkey: "Magnet\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\CuteTorrent.exe,1"; Tasks: MagnetAssociation
 Root: HKCR; Subkey: "Magnet\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\CuteTorrent.exe"" ""%1"""; Tasks: MagnetAssociation
-Root: HKCR; Subkey: "*\shell\cutetorrent"; ValueType: string; ValueName: ""; ValueData: "Create torrent"; Tasks: WinExplorerIntegration
+Root: HKCR; Subkey: "*\shell\cutetorrent"; ValueType: string; ValueName: ""; ValueData: "{cm:CreateTorrent}"; Tasks: WinExplorerIntegration
 Root: HKCR; Subkey: "*\shell\cutetorrent"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\CuteTorrent.exe,0"; Tasks: WinExplorerIntegration
 Root: HKCR; Subkey: "*\shell\cutetorrent\command"; ValueType: string; ValueName: ""; ValueData: """{app}\CuteTorrent.exe"" --create_torrent ""%1"""; Tasks: WinExplorerIntegration
-Root: HKCR; Subkey: "Folder\shell\cutetorrent"; ValueType: string; ValueName: ""; ValueData: "Create torrent"; Tasks: WinExplorerIntegration
+Root: HKCR; Subkey: "Folder\shell\cutetorrent"; ValueType: string; ValueName: ""; ValueData: "{cm:CreateTorrent}"; Tasks: WinExplorerIntegration
 Root: HKCR; Subkey: "Folder\shell\cutetorrent"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\CuteTorrent.exe,0"; Tasks: WinExplorerIntegration
 Root: HKCR; Subkey: "Folder\shell\cutetorrent\command"; ValueType: string; ValueName: ""; ValueData: """{app}\CuteTorrent.exe"" --create_torrent ""%1"""; Tasks: WinExplorerIntegration
-Root: HKCR; Subkey: "Directory\shell\cutetorrent"; ValueType: string; ValueName: ""; ValueData: "Create torrent"; Tasks: WinExplorerIntegration
+Root: HKCR; Subkey: "Directory\shell\cutetorrent"; ValueType: string; ValueName: ""; ValueData: "{cm:CreateTorrent}"; Tasks: WinExplorerIntegration
 Root: HKCR; Subkey: "Directory\shell\cutetorrent"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\CuteTorrent.exe,0"; Tasks: WinExplorerIntegration
 Root: HKCR; Subkey: "Directory\shell\cutetorrent\command"; ValueType: string; ValueName: ""; ValueData: """{app}\CuteTorrent.exe"" --create_torrent ""%1"""; Tasks: WinExplorerIntegration
 [Files]
@@ -229,7 +231,7 @@ procedure CurPageChanged(CurPageID: Integer);
 begin
   if  (CurPageID = wpReady) and (VcRedistCheck() = True) then
   begin
-    idpAddFile('http://download.microsoft.com/download/5/B/C/5BC5DBB3-652D-4DCE-B14A-475AB85EEF6E/vcredist_x86.exe', expandconstant('{tmp}\vcredist_x86.exe'));
+    idpAddFile('http://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x86.exe', expandconstant('{tmp}\vcredist_x86.exe'));
   end
 end;
 procedure RedesignWizardForm;

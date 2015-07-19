@@ -83,23 +83,6 @@ QVariant QSearchDisplayModel::data(const QModelIndex& index, int role /*= Qt::Di
 	return QVariant();
 }
 
-QVariant QSearchDisplayModel::headerData(int section, Qt::Orientation orientation, int role /*= Qt::DisplayRole*/) const
-{
-	if(role == Qt::DisplayRole && orientation == Qt::Horizontal)
-	{
-		static QStringList captions;
-
-		if(captions.empty())
-		{
-			captions << "cap1" << "cap2" << "cap3" << "cap4" << "cap5";
-		}
-
-		return captions[section];
-	}
-
-	return QVariant();
-}
-
 void QSearchDisplayModel::OnNewSearchResults()
 {
 	reset();

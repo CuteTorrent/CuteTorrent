@@ -41,7 +41,8 @@ bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex
 							return pTorrent->isDownloading();
 
 						case COMPLETED:
-							return pTorrent->GetProgress() == 100;
+							
+							return fabs(pTorrent->GetProgress() - 100.0) < DBL_EPSILON;
 
 						case EMPTY:
 							return true;

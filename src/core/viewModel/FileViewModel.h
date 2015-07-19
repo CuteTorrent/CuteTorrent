@@ -49,7 +49,7 @@ private:
 	QMenu* fileTabMenu;
 	QAction* openFile;
 	QAction* openDir;
-	QMenu* priority;
+	QMenu* priorityMenu;
 	QAction* lowPriority;
 	QAction* mediumPriority;
 	QAction* highPriority;

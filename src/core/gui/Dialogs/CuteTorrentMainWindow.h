@@ -102,7 +102,7 @@ private:
 	QAction* restoreAction;
 	QAction* quitAction;
 	QAction* copyContext;
-	QAction* addPeer, * addWebSeed, * addTracker, * removeTracker, * editTracker;
+	QAction* addPeer, * addWebSeed, * addTracker, * removeTracker, * editTracker, * updateTracker;
 	QLabel* upLabelText, *upLabel, *title, *dhtNodesLabel;
 	QLabel* uploadLimit, *downloadLimit;
 	QLabel* downLabelText, *downLabel;
@@ -189,6 +189,7 @@ public slots:
 	void AddTracker();
 	void RemoveTracker();
 	void EditTracker();
+	void UpdateTracker();
 	void AddPeer();
 	void AddWebSeed();
 	void ChnageTorrentFilter();

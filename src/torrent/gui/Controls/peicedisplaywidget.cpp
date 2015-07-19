@@ -18,10 +18,11 @@ PeiceDisplayWidget::~PeiceDisplayWidget()
 
 void PeiceDisplayWidget::clear()
 {
-	QImage img2(m_iPiceCount, 1, QImage::Format_RGB32);
+	QImage img2(width() - 2, 1, QImage::Format_RGB32);
 	img2.fill(m_cBackground);
 	m_dowloadingParts.clear();
 	m_dowloadedParts.clear();
+	m_iPiceCount = 0;
 	m_image = img2;
 }
 
@@ -41,7 +42,7 @@ void PeiceDisplayWidget::paintEvent(QPaintEvent* paintEvent)
 
 	if(!m_image.isNull())
 	{
-		if (m_image.width() != width() - 1)
+		if (m_image.width() != width() - 2)
 		{
 			UpdateImage();
 		}

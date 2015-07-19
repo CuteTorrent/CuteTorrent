@@ -41,7 +41,7 @@ private:
 	QMap<QString, int> trackerPeerCountMap;
 	bool m_hasMedia;
 	bool m_isPrevSeed;
-	torrent_handle m_hTorrent;
+	torrent_status m_hTorrent;
 	size_type size;
 	QIcon icon;
 	QString ErrorString;
@@ -52,9 +52,9 @@ private:
 	QStringList imageFiles;
 	bool isMovingFileStorrage;
 public :
-
-	Torrent(torrent_handle* torrentStatus, QString group);
+	Torrent(torrent_status torrentStatus, QString group);
 	~Torrent() {};
+	void UpdateStatus(torrent_status newVal);
 	void SetFilePriority(int index, int prioryty);
 	void CompliteMoveStorrage();
 	QString GetRemainingTime();
@@ -85,7 +85,6 @@ public :
 	int GetPeerCount();
 	int GetActivePeerCount();
 	QIcon GetMimeTypeIcon() const;
-	QIcon GetMimeTypeIcon();
 	files_info GetFileDownloadInfo();
 	bool isSingleFile();
 	bool isPrevioslySeeded() const
@@ -118,7 +117,8 @@ public :
 	std::vector<announce_entry> GetTrackerInfo();
 	void SetTrackerPeersCnt(QString trackerUrl, int peerCount);
 	void announceRehash();
-	void updateTrackers();
+	void UpdateTrackers();
+	void UpdateTracker(int index);
 	void seqensialDownload();
 	void pause();
 	void stop();
@@ -134,7 +134,7 @@ public :
 	int GetUploadLimit();
 	bool operator< (const Torrent&) const;
 	bool operator< (Torrent*);
-	void SuperSeed();
+	void SwitchSuperSeed();
 	bool isSuperSeed();
 	QString generateMagnetLink();
 	void RemoveTrackers(QStringList trackers);

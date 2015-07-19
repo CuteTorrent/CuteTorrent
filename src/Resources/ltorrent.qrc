@@ -3,8 +3,8 @@
         <file alias="app.ico">app.ico</file>
     </qresource>
     <qresource prefix="/translations">
-        <file alias="cutetorrent_ru_Ru.qm">translations/cutetorrent_russian.qm</file>
-        <file alias="cutetorrent_en_Us.qm">translations/cutetorrent_english.qm</file>
+        <file alias="cutetorrent_en_US.qm">translations/cutetorrent_en_US.qm</file>
+        <file alias="cutetorrent_ru_RU.qm">translations/cutetorrent_ru_RU.qm</file>
     </qresource>
     <qresource prefix="/PlayerControlImages">
         <file alias="ControlBar.png">playerImages/ControlBar.png</file>
@@ -21,7 +21,7 @@
         <file alias="loader.gif">images/loader.gif</file>
     </qresource>
     <qresource prefix="/translations_qt">
-        <file alias="qt_ru_Ru.qm">../../../../Qt/4.8.6/translations/qt_ru.qm</file>
+        <file alias="qt_ru_Ru.qm">E:/Qt/4.8.6/translations/qt_ru.qm</file>
     </qresource>
     <qresource prefix="/flags">
         <file alias="AE.png">flags/ae.png</file>

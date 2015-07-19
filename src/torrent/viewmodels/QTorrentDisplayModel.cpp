@@ -466,7 +466,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 				{
 					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
-					torrent->SuperSeed();
+					torrent->SwitchSuperSeed();
 				}
 
 				break;
@@ -478,7 +478,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 				{
 					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
-					torrent->updateTrackers();
+					torrent->UpdateTrackers();
 				}
 
 				break;

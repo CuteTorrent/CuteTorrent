@@ -7,7 +7,9 @@
 #include <QBuffer>
 
 EmailNotifier::EmailNotifier(QObject* parent)
-{}
+{
+	
+}
 
 void EmailNotifier::SendEmail(QString to, QString subject, QString body)
 {

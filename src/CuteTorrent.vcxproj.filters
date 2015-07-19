@@ -810,12 +810,6 @@
     <CustomBuild Include="core\qtsingleapplication\src\qtsinglecoreapplication.h">
       <Filter>ThirdParties\QTSingleApplication</Filter>
     </CustomBuild>
-    <CustomBuild Include="Resources\translations\cutetorrent_english.ts">
-      <Filter>Translation Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Resources\translations\cutetorrent_russian.ts">
-      <Filter>Translation Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="Resources\ltorrent.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
@@ -961,9 +955,6 @@
     <CustomBuild Include="core\viewModel\itemDelegate\PriorityItemDelegate.h">
       <Filter>ViewModel\ItemDelegat</Filter>
     </CustomBuild>
-    <CustomBuild Include="Release\CuteTorrent.res">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="core\collections\ObservebaleCollectionBase.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
@@ -1014,6 +1005,12 @@
     </CustomBuild>
     <CustomBuild Include="core\zip\quaziodevice.h">
       <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\translations\cutetorrent_en_US.ts">
+      <Filter>Translation Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\translations\cutetorrent_ru_RU.ts">
+      <Filter>Translation Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1066,15 +1063,11 @@
   <ItemGroup>
     <None Include="Resources\torrentfile.ico" />
     <None Include="..\UpdateInfo\version" />
-    <None Include="Resources\translations\cutetorrent_english.qm">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\translations\cutetorrent_russian.qm">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="search\dataModels\SerachResult.h">
       <Filter>Generated Files</Filter>
     </None>
+    <None Include="Resources\translations\cutetorrent_ru_RU.qm" />
+    <None Include="Resources\translations\cutetorrent_en_US.qm" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="VideoPlayer\MediaControls.ui">

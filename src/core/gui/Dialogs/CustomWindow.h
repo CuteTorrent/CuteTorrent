@@ -21,6 +21,7 @@ protected:
 	MoveType m_moveType;
 
 	MoveType detectMoveType(const QPoint pos);
+	QRect getMultyMonitorDesktopRect();
 	bool m_bIsHalfDeskMode;
 	bool m_bIsMaximized;
 	QRect preMaximizeGeomentry;
@@ -117,8 +118,7 @@ public slots:
 template <class T>
 typename BaseWindow<T>::MoveType BaseWindow<T>::detectMoveType(const QPoint pos)
 {
-	QRect desktopGeometry = QApplication::desktop()->availableGeometry();
-
+	QRect desktopGeometry = getMultyMonitorDesktopRect();
 	if (isMaximized())
 	{
 		QRect windowGeometry = geometry();
@@ -203,6 +203,20 @@ typename BaseWindow<T>::MoveType BaseWindow<T>::detectMoveType(const QPoint pos)
 }
 
 template <class T>
+QRect BaseWindow<T>::getMultyMonitorDesktopRect()
+{
+	QRect desktopGeometry;
+	QDesktopWidget* desktopWidget = QApplication::desktop();
+	int screenCount = desktopWidget->numScreens();
+	for (int i = 0; i < screenCount; i++)
+	{
+		desktopGeometry = desktopGeometry.united(desktopWidget->availableGeometry(i));
+	}
+	//qDebug() << "Final desktop gemetry is:" << desktopGeometry;
+	return desktopGeometry;
+}
+
+template <class T>
 void BaseWindow<T>::setTitle(QString title)
 {
 	if (getTitleLabel() != NULL)
@@ -243,7 +257,7 @@ void BaseWindow<T>::showMaximized()
 	QDesktopWidget* desktop = QApplication::desktop();
 	preMaximizeGeomentry = geometry();
 	m_bIsMaximized = true;
-	setGeometry(desktop->availableGeometry());
+	setGeometry(desktop->availableGeometry(this));
 	T::showNormal();
 }
 
@@ -333,7 +347,7 @@ void BaseWindow<T>::setupCustomWindow()
 
 	if(centralWidget() == NULL)
 	{
-		qDebug() << "Central widget is null";
+		qCritical() << "Central widget is null";
 	}
 	else
 	{
@@ -408,12 +422,11 @@ void BaseWindow<T>::moveWindow(QMouseEvent* e)
 {
 	if (e->buttons() & Qt::LeftButton)
 	{
-		QRect desktopGeometry = QApplication::desktop()->availableGeometry();
+		QRect desktopGeometry = QApplication::desktop()->availableGeometry(this);
 		const QPoint pos = e->globalPos();
 
 		if (isMaximized())
 		{
-			qDebug() << "Normal Move isMaximized() && !m_bIsHalfDeskMode";
 			maximizeBtnClicked();
 			dragPosition = QPoint(geometry().width() / 2, 0);
 		}
@@ -645,7 +658,7 @@ void BaseWindow<T>::mouseMoveEvent(QMouseEvent* e)
 	if(moveWidget)
 	{
 		inResizeZone = false;
-		QRect desktopGeometry = QApplication::desktop()->availableGeometry();
+		QRect desktopGeometry = getMultyMonitorDesktopRect();
 
 		if (!desktopGeometry.contains(pos))
 		{
@@ -676,7 +689,7 @@ void BaseWindow<T>::mouseMoveEvent(QMouseEvent* e)
 
 		MoveType prevMoveType = m_moveType;
 		m_moveType = detectMoveType(pos);
-		qDebug() << "MoveType" << m_moveType;
+		//qDebug() << "MoveType" << m_moveType;
 
 		switch (m_moveType)
 		{
@@ -693,8 +706,8 @@ void BaseWindow<T>::mouseMoveEvent(QMouseEvent* e)
 
 			case MT_ShowRightHalfDesktopPreview:
 			{
-				QRect halfDesctopRect = desktopGeometry;
-				halfDesctopRect.setX(halfDesctopRect.width() / 2);
+				QRect halfDesctopRect = QApplication::desktop()->availableGeometry(this);
+				halfDesctopRect.setX(halfDesctopRect.x() + halfDesctopRect.width() / 2);
 				m_bIsMaximized = true;
 				m_bIsHalfDeskMode = true;
 				preMaximizeGeomentry = windowGemetry;
@@ -710,8 +723,7 @@ void BaseWindow<T>::mouseMoveEvent(QMouseEvent* e)
 
 			case MT_ShowLeftHalfDesktopPreview:
 			{
-				qDebug() << "ShowLeftHalfDesktopPreview";
-				QRect halfDesctopRect = desktopGeometry;
+				QRect halfDesctopRect = QApplication::desktop()->availableGeometry(this);;
 				halfDesctopRect.setWidth(halfDesctopRect.width() / 2);
 				m_bIsMaximized = true;
 				m_bIsHalfDeskMode = true;

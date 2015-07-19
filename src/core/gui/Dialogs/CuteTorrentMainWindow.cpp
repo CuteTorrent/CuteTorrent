@@ -246,9 +246,16 @@ void CuteTorrentMainWindow::setupTabelWidgets()
 	removeTracker->setObjectName("ACTION_TRACKER_REMOVE");
 	editTracker = new QAction(m_pStyleEngine->getIcon("delete"), tr("EDIT_TRACKER"), trackerTableWidget);
 	editTracker->setObjectName("ACTION_TRACKER_EDIT");
+	updateTracker = new QAction(m_pStyleEngine->getIcon("update_trackers"), tr("UPDATE_TRACKER"), trackerTableWidget);
+	updateTracker->setObjectName("ACTION_UPDATE_TRACKER");
+	connect(updateTracker, SIGNAL(triggered()), this, SLOT(UpdateTracker()));
 	connect(addTracker, SIGNAL(triggered()), this, SLOT(AddTracker()));
 	connect(removeTracker, SIGNAL(triggered()), this, SLOT(RemoveTracker()));
 	connect(editTracker, SIGNAL(triggered()), this, SLOT(EditTracker()));
+	QAction* separator = new QAction(trackerTableWidget);
+	separator->setSeparator(true);
+	trackerTableWidget->addAction(updateTracker);
+	trackerTableWidget->addAction(separator);
 	trackerTableWidget->addAction(addTracker);
 	trackerTableWidget->addAction(removeTracker);
 	trackerTableWidget->addAction(editTracker);
@@ -321,23 +328,27 @@ void CuteTorrentMainWindow::setupToolBar()
 	connect(m_pTorrentSearchEdit, SIGNAL(returnPressed()), this, SLOT(PeformSearch()));
 	connect(m_pSearchEdit, SIGNAL(returnPressed()), this, SLOT(PeformSearch()));
 	ul = new QSpinBox(this);
+	ul->setSpecialValueText(tr("None"));
 	ul->setSuffix(" Kb\\s");
-	ul->setMaximum(12000.0f);
-	ul->setSingleStep(10.0);
+	ul->setMaximum(12000);
+	ul->setSingleStep(10);
 	ul->setButtonSymbols(QAbstractSpinBox::PlusMinus);
 	connect(ul, SIGNAL(valueChanged(int)), this, SLOT(UpdateUL(int)));
+
 	dl = new QSpinBox(this);
-	ul->setSpecialValueText(tr("None"));
 	dl->setSpecialValueText(tr("None"));
-	dl->setMaximum(12000.0f);
+	dl->setMaximum(12000);
 	dl->setSuffix(" Kb\\s");
-	dl->setSingleStep(10.0);
+	dl->setSingleStep(10);
 	dl->setButtonSymbols(QAbstractSpinBox::PlusMinus);
 	connect(dl, SIGNAL(valueChanged(int)), this, SLOT(UpdateDL(int)));
+
 	uploadLimit = new QLabel(tr("LIMIT_UL"), this);
 	uploadLimit->setBuddy(ul);
+
 	downloadLimit = new QLabel(tr("LIMIT_DL"), this);
 	downloadLimit->setBuddy(dl);
+
 	m_pSearchEdit->setMaximumWidth(145);
 	m_pTorrentSearchEdit->setMaximumWidth(145);
 	m_pTorrentSearchCategory->setMinimumWidth(120);
@@ -872,21 +883,19 @@ void CuteTorrentMainWindow::UpdatePeerTab()
 			peerTableWidget->setItem(i, 0, new MyTableWidgetItem(QIcon(QPixmap(flagFileName)), QString::fromStdString(peerInfos[i].ip.address().to_string())));
 			peerTableWidget->setItem(i, 1, new MyTableWidgetItem(client));
 			peerTableWidget->setItem(i, 2, new MyTableWidgetItem(QString::number(peerInfos[i].progress_ppm / 10000.f, 'f', 1) + "%"));
-			peerTableWidget->setItem(i, 3, new MyTableWidgetItem(StaticHelpers::toKbMbGb(peerInfos[i].down_speed) + "/s"));
-			peerTableWidget->setItem(i, 4, new MyTableWidgetItem(StaticHelpers::toKbMbGb(peerInfos[i].up_speed) + "/s"));
+			peerTableWidget->setItem(i, 3, new MyTableWidgetItem(StaticHelpers::toKbMbGb(peerInfos[i].down_speed, true)));
+			peerTableWidget->setItem(i, 4, new MyTableWidgetItem(StaticHelpers::toKbMbGb(peerInfos[i].up_speed, true)));
 			peerTableWidget->setItem(i, 5, new MyTableWidgetItem(StaticHelpers::toKbMbGb(peerInfos[i].total_download)));
 			peerTableWidget->setItem(i, 6, new MyTableWidgetItem(StaticHelpers::toKbMbGb(peerInfos[i].total_upload)));
 			QString remoteDlRate;
 
 			if (peerInfos[i].remote_dl_rate > 0)
 			{
-				remoteDlRate = StaticHelpers::toKbMbGb(peerInfos[i].remote_dl_rate) + "/s";
+				remoteDlRate = StaticHelpers::toKbMbGb(peerInfos[i].remote_dl_rate, true);
 			}
 
 			peerTableWidget->setItem(i, 7, new MyTableWidgetItem(remoteDlRate));
 		}
-
-		//peerTableWidget->resizeColumnsToContents();
 	}
 	else
 	{
@@ -1200,7 +1209,7 @@ void CuteTorrentMainWindow::keyPressEvent(QKeyEvent* event)
 
 			if (action != NULL)
 			{
-				qDebug() << "Matched action:" << pressedKey << action->objectName();
+				//qDebug() << "Matched action:" << pressedKey << action->objectName();
 				action->activate(QAction::Trigger);
 			}
 		}
@@ -1578,7 +1587,7 @@ void CuteTorrentMainWindow::setupKeyMappings()
 	}
 
 	m_pSettings->setGroupValues("KeyMap", keyMap);
-	qDebug() << keyMap;
+	//qDebug() << keyMap;
 }
 
 
@@ -1819,6 +1828,21 @@ void CuteTorrentMainWindow::EditTracker()
 		{
 			torrent->ReplaceTracker(tracker2edit, newTrackerUrl);
 		}
+	}
+}
+
+void CuteTorrentMainWindow::UpdateTracker()
+{
+	Torrent* torrent = m_pTorrentDisplayModel->GetSelectedTorrent();
+
+	if (torrent != NULL)
+	{
+		int currentRow = trackerTableWidget->currentRow();
+		if (currentRow > 2)
+		{
+			torrent->UpdateTracker(currentRow - 3);
+		}
+		
 	}
 }
 

@@ -24,6 +24,9 @@
 #include <QEventLoop>
 #include "smtpmime_global.h"
 #include "mimemessage.h"
+#include <QLocalSocket>
+
+class QTcpSocket;
 
 class SmtpClient : public QObject
 {

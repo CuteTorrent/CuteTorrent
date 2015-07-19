@@ -23,6 +23,9 @@
 #include <QTimer>
 #include <QEventLoop>
 #include <QMetaEnum>
+#include <QLocalSocket>
+#include <QTcpSocket>
+#include <QSslSocket>
 
 /* [1] Constructors and destructors */
 

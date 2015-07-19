@@ -24,6 +24,11 @@ void PieceAvailabilityWidget::paintEvent(QPaintEvent* paintEvent)
 
 	if (!m_img.isNull())
 	{
+		if (m_img.width() != width() - 2)
+		{
+			UpdateImage();
+		}
+
 		painter.drawImage(imageRect, m_img);
 	}
 
@@ -31,21 +36,6 @@ void PieceAvailabilityWidget::paintEvent(QPaintEvent* paintEvent)
 	painter.drawRect(0, 0, width() - 1, height() - 1);
 	painter.restore();
 }
-/*
-QSize PieceAvailabilityWidget::minimumSizeHint()
-{
-	QStyleOption opt;
-	opt.initFrom(this);
-
-	QString avalStr = "8.88";
-
-	QFontMetrics fontMetrics(opt.fontMetrics);
-
-	int strWidht = fontMetrics.width(avalStr);
-	int height = fontMetrics.height();
-	return QSize(GUI_PAD * 2 + strWidht, height*2);
-}
-*/
 
 QColor PieceAvailabilityWidget::pieceColor()
 {
@@ -71,7 +61,7 @@ void PieceAvailabilityWidget::setPiceAvailability(std::vector<int> availiblePiec
 		m_maxAvailibility = *max_element(m_pieceAvailibility.begin(), m_pieceAvailibility.end());
 	}
 
-	updateImage();
+	UpdateImage();
 }
 
 void PieceAvailabilityWidget::setBorderColor(QColor value)
@@ -100,8 +90,9 @@ void PieceAvailabilityWidget::setBackgroudColor(QColor value)
 
 void PieceAvailabilityWidget::clear()
 {
-	QImage img(width() - 1, height() - 1, QImage::Format_RGB888);
+	QImage img(width() - 2, 1, QImage::Format_RGB888);
 	img.fill(m_backgroundColor);
+	m_pieceAvailibility.clear();
 	m_img = img;
 }
 
@@ -114,7 +105,7 @@ QVector<float> PieceAvailabilityWidget::intToFloatVector(const std::vector<int>&
 		return result;
 	}
 
-	const float ratio = vecin.size() / (float)reqSize;
+	const float ratio = vecin.size() / float(reqSize);
 	const int maxElement = *std::max_element(vecin.begin(), vecin.end());
 
 	// qMax because in normalization we don't want divide by 0
@@ -139,8 +130,8 @@ QVector<float> PieceAvailabilityWidget::intToFloatVector(const std::vector<int>&
 		// this code is safe, so keep that in mind when you try optimize more.
 		// tested with size = 3000000ul
 		// R - real
-		const float fromR = float(x * vecin.size()) / reqSize;
-		const float toR = float((x + 1) * vecin.size()) / reqSize;
+		const float fromR = float(x * vecin.size()) / float(reqSize);
+		const float toR = float((x + 1) * vecin.size()) / float(reqSize);
 		// C - integer
 		int fromC = fromR;// std::floor not needed
 		int toC = std::ceil(toR);
@@ -201,7 +192,7 @@ QVector<float> PieceAvailabilityWidget::intToFloatVector(const std::vector<int>&
 		// normalization <0, 1>
 		value /= ratio * maxElement;
 		// float precision sometimes gives > 1, because in not possible to store irrational numbers
-		value = qMin(value, (float)1.0);
+		value = qMin(value, float(1.0));
 		result[x] = value;
 	}
 
@@ -223,14 +214,14 @@ int PieceAvailabilityWidget::mixTwoColors(const int& rgb1, const int& rgb2, floa
 	return qRgb(r, g, b);
 }
 
-void PieceAvailabilityWidget::updateImage()
+void PieceAvailabilityWidget::UpdateImage()
 {
 	//  qDebug() << "updateImageAv";
 	QImage image2(width() - 2, 1, QImage::Format_RGB888);
 
 	if (m_pieceAvailibility.empty())
 	{
-		image2.fill(0xffffff);
+		image2.fill(m_backgroundColor);
 		m_img = image2;
 		update();
 		return;

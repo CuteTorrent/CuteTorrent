@@ -165,7 +165,7 @@ void QWinTaskbarButtonPrivate::updateOverlayIcon()
 	}
 	else if (!hicon && !overlayIcon.isNull())
 	{
-		pTbList->SetOverlayIcon(handle(), (HICON)LoadImage(0, IDI_APPLICATION, IMAGE_ICON, SM_CXSMICON, SM_CYSMICON, LR_SHARED), descrPtr);
+		pTbList->SetOverlayIcon(handle(), HICON(LoadImage(0, IDI_APPLICATION, IMAGE_ICON, SM_CXSMICON, SM_CYSMICON, LR_SHARED)), descrPtr);
 	}
 	else
 	{

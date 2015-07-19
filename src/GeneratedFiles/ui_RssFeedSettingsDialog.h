@@ -173,6 +173,7 @@ public:
         if (m_pCoociesTabWidget->rowCount() < 1)
             m_pCoociesTabWidget->setRowCount(1);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        __qtablewidgetitem2->setText(QString::fromUtf8("\320\235\320\276\320\262\320\260\321\217 \321\201\321\202\321\200\320\276\320\272\320\260"));
         m_pCoociesTabWidget->setVerticalHeaderItem(0, __qtablewidgetitem2);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
         m_pCoociesTabWidget->setItem(0, 0, __qtablewidgetitem3);
@@ -233,7 +234,6 @@ public:
 
     void retranslateUi(QDialog *RssSettings)
     {
-        RssSettings->setWindowTitle(QApplication::translate("RssSettings", "RSS_FEED_SETTINGS", 0, QApplication::UnicodeUTF8));
         tbMenu->setText(QString());
         LTitle->setText(QApplication::translate("RssSettings", "RSS_SETTINGS", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("RssSettings", "RSS_REFRASH_RATE", 0, QApplication::UnicodeUTF8));
@@ -244,8 +244,6 @@ public:
         ___qtablewidgetitem->setText(QApplication::translate("RssSettings", "COOKIE_ATTRIBUTE", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem1 = m_pCoociesTabWidget->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QApplication::translate("RssSettings", "COOLIE_VALUE", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem2 = m_pCoociesTabWidget->verticalHeaderItem(0);
-        ___qtablewidgetitem2->setText(QApplication::translate("RssSettings", "\320\235\320\276\320\262\320\260\321\217 \321\201\321\202\321\200\320\276\320\272\320\260", 0, QApplication::UnicodeUTF8));
 
         const bool __sortingEnabled = m_pCoociesTabWidget->isSortingEnabled();
         m_pCoociesTabWidget->setSortingEnabled(false);
@@ -254,6 +252,7 @@ public:
         addRowButton->setText(QApplication::translate("RssSettings", "ADD_ROW", 0, QApplication::UnicodeUTF8));
         removeRowButton->setText(QApplication::translate("RssSettings", "REMOVE_ROW", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("RssSettings", "COOKIE_HINT", 0, QApplication::UnicodeUTF8));
+        Q_UNUSED(RssSettings);
     } // retranslateUi
 
 };

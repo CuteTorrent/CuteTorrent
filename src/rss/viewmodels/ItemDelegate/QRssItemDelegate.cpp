@@ -38,8 +38,8 @@ QSize QRssItemDelegate::margin(const QStyle& style) const
 
 void QRssItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-	try
-	{
+	/*try
+	{*/
 		QVariant data = index.data(QRssDisplayModel::RssFeedRole);
 
 		if (data.isValid())
@@ -55,16 +55,16 @@ void QRssItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opti
 				return drawFeedItem(painter, option, index, data.value<RssItem*>());
 			}
 		}
-	}
+/*	}
 	catch (...)
 	{
-	}
+	}*/
 }
 
 QSize QRssItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-	try
-	{
+/*	try
+	{*/
 		QVariant data = index.data(QRssDisplayModel::RssFeedRole);
 
 		if (data.isValid())
@@ -80,10 +80,10 @@ QSize QRssItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QMode
 				return feedItemSizeHint(option, data.value<RssItem*>());
 			}
 		}
-	}
+	/*}
 	catch (...)
 	{
-	}
+	}*/
 
 	return QSize();
 }

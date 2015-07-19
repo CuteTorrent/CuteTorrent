@@ -25,7 +25,7 @@ HtmlView::~HtmlView()
 
 QVariant HtmlView::loadResource(int type, const QUrl& name)
 {
-	qDebug() << Q_FUNC_INFO << "type=" << type;
+	//qDebug() << Q_FUNC_INFO << "type=" << type;
 
 	if (type == QTextDocument::ImageResource)
 	{
@@ -40,7 +40,7 @@ QVariant HtmlView::loadResource(int type, const QUrl& name)
 
 		if (dev != 0)
 		{
-			qDebug() << "HtmlBrowser::loadResource() cache " << url.toString();
+			//qDebug() << "HtmlBrowser::loadResource() cache " << url.toString();
 			QByteArray res = dev->readAll();
 			//delete dev;
 			return res;
@@ -49,7 +49,7 @@ QVariant HtmlView::loadResource(int type, const QUrl& name)
 		if (!m_activeRequests.contains(url))
 		{
 			m_activeRequests.insert(url, true);
-			qDebug() << "HtmlBrowser::loadResource() get " << url.toString();
+			//qDebug() << "HtmlBrowser::loadResource() get " << url.toString();
 			QNetworkRequest req(url);
 			req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferNetwork);
 			m_netManager->get(req);
@@ -65,11 +65,11 @@ void HtmlView::resourceLoaded(QNetworkReply* pReply)
 {
 	m_activeRequests.remove(pReply->request().url());
 	QUrl url = pReply->url();
-	qDebug() << "Url ready" << url;
+	//qDebug() << "Url ready" << url;
 
 	if (pReply->error() == QNetworkReply::NoError)
 	{
-		qDebug() << "HtmlBrowser::resourceLoaded() save " << pReply->request().url().toString();
+		//qDebug() << "HtmlBrowser::resourceLoaded() save " << pReply->request().url().toString();
 		QUrl redirectionTarget = pReply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
 
 		if (redirectionTarget.isValid())
@@ -111,7 +111,7 @@ void HtmlView::resourceLoaded(QNetworkReply* pReply)
 	}
 	else
 	{
-		qDebug() << "HtmlView error during loading" << pReply->errorString();
+		qCritical() << "HtmlView error during loading" << pReply->errorString();
 		// If resource failed to load, replace it with warning icon and store it in cache for 1 day.
 		// Otherwise HTMLBrowser will keep trying to download it every time article is displayed,
 		// since it's not possible to cache error responses.

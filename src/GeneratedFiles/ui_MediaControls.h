@@ -43,7 +43,7 @@ public:
     {
         if (MediaControls->objectName().isEmpty())
             MediaControls->setObjectName(QString::fromUtf8("MediaControls"));
-        MediaControls->resize(374, 70);
+        MediaControls->resize(416, 70);
         MediaControls->setFocusPolicy(Qt::ClickFocus);
         MediaControls->setContextMenuPolicy(Qt::NoContextMenu);
         MediaControls->setStyleSheet(QString::fromUtf8("#MediaControls{\n"
@@ -206,7 +206,6 @@ public:
 
     void retranslateUi(QWidget *MediaControls)
     {
-        MediaControls->setWindowTitle(QApplication::translate("MediaControls", "Form", 0, QApplication::UnicodeUTF8));
         currentTimeLabel->setText(QApplication::translate("MediaControls", "00:00:00", 0, QApplication::UnicodeUTF8));
         openFileButton->setText(QString());
         openUrlButton->setText(QString());
@@ -216,6 +215,7 @@ public:
         playButton->setText(QString());
         fullScreenButton->setText(QString());
         totalTimeLabel->setText(QApplication::translate("MediaControls", "00:00:00", 0, QApplication::UnicodeUTF8));
+        Q_UNUSED(MediaControls);
     } // retranslateUi
 
 };

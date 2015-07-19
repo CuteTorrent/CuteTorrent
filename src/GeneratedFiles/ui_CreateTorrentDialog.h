@@ -33,7 +33,6 @@ QT_BEGIN_NAMESPACE
 class Ui_CreateTorrentDialog
 {
 public:
-    QAction *actionClose;
     QVBoxLayout *verticalLayout;
     QWidget *titleBar;
     QHBoxLayout *horizontalLayout;
@@ -90,8 +89,6 @@ public:
         icon.addFile(QString::fromUtf8(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
         CreateTorrentDialog->setWindowIcon(icon);
         CreateTorrentDialog->setStyleSheet(QString::fromUtf8(""));
-        actionClose = new QAction(CreateTorrentDialog);
-        actionClose->setObjectName(QString::fromUtf8("actionClose"));
         verticalLayout = new QVBoxLayout(CreateTorrentDialog);
         verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -313,7 +310,6 @@ public:
     void retranslateUi(QDialog *CreateTorrentDialog)
     {
         CreateTorrentDialog->setWindowTitle(QApplication::translate("CreateTorrentDialog", "DIALOG_TORRENT_CREATION", 0, QApplication::UnicodeUTF8));
-        actionClose->setText(QApplication::translate("CreateTorrentDialog", "close", 0, QApplication::UnicodeUTF8));
         tbMenu->setText(QString());
         LTitle->setText(QApplication::translate("CreateTorrentDialog", "DIALOG_TORRENT_CREATION", 0, QApplication::UnicodeUTF8));
         groupBox_3->setTitle(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_ADV_SETTINGS", 0, QApplication::UnicodeUTF8));

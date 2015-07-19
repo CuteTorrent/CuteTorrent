@@ -25,21 +25,51 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <libtorrent/socks5_stream.hpp>
 #include "StyleEngene.h"
 #include <zlib.h>
-QString StaticHelpers::toKbMbGb(size_type size)
+QString StaticHelpers::toKbMbGb(size_type size, bool isSpped)
 {
 	float val = size;
-	char* Suffix[] = { " B\0", " KB\0", " MB\0", " GB\0", " TB\0", " PB\0", " EB\0" , " ZB\0" };
+	char* SizeSuffix[] =
+	{
+		QT_TRANSLATE_NOOP("Torrent", " B"),
+		QT_TRANSLATE_NOOP("Torrent", " Kb"),
+		QT_TRANSLATE_NOOP("Torrent", " Mb"),
+		QT_TRANSLATE_NOOP("Torrent", " Gb"),
+		QT_TRANSLATE_NOOP("Torrent", " Tb"),
+		QT_TRANSLATE_NOOP("Torrent", " Pb"),
+		QT_TRANSLATE_NOOP("Torrent", " Eb"),
+		QT_TRANSLATE_NOOP("Torrent", " Zb")
+	};
+	char* SpeedSuffix[] =
+	{
+		QT_TRANSLATE_NOOP("Torrent", " B\\s"),
+		QT_TRANSLATE_NOOP("Torrent", " Kb\\s"),
+		QT_TRANSLATE_NOOP("Torrent", " Mb\\s"),
+		QT_TRANSLATE_NOOP("Torrent", " Gb\\s"),
+		QT_TRANSLATE_NOOP("Torrent", " Tb\\s"),
+		QT_TRANSLATE_NOOP("Torrent", " Pb\\s"),
+		QT_TRANSLATE_NOOP("Torrent", " Eb\\s"),
+		QT_TRANSLATE_NOOP("Torrent", " Zb\\s")
+	};
 	int i = 0;
 	float dblSByte = val;
 
-	if(size > KbInt)
-		for(i ; (size_type)(val / KbInt) > 0; i++, val /= KbInt)
+	if (size > KbInt)
+	{
+		for (i; size_type(val / KbInt) > 0; i++, val /= KbInt)
 		{
 			dblSByte = val / KbFloat;
 		}
-
+	}
 	QString str = QString::number(dblSByte, 'f', i == 0 ? 0 : 2);
-	str.append(Suffix[i]);
+	if (isSpped)
+	{
+		str.append(qApp->translate("Torrent", SpeedSuffix[i]));
+	}
+	else
+	{
+		str.append(qApp->translate("Torrent", SizeSuffix[i]));
+	}
+
 	return str;
 }
 
@@ -600,10 +630,6 @@ void StaticHelpers::OpenFileInExplorer(QString& file)
 	ILFree(pItem);
 }
 #endif
-QString StaticHelpers::CombinePathes(QString path, QString suffix)
-{
-	return QDir::toNativeSeparators(QDir::cleanPath(path + QDir::separator() + suffix));
-}
 
 NetworkDiskCache* StaticHelpers::GetGLobalWebCache()
 {

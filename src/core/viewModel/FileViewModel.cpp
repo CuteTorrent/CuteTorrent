@@ -6,7 +6,7 @@ void FileViewModel::retranslateUI()
 	headerStringsData << tr("FILES_PATH") << tr("FILES_SIZE") << tr("FILES_READY") << tr("FILES_PRIORITY");
 	openFile->setText(tr("FILETAB_OPEN_FILE"));
 	openDir->setText(tr("FILETAB_OPEN_FOLDER"));
-	priority->setTitle(tr("FILETAB_PRIORITY"));
+	priorityMenu->setTitle(tr("FILETAB_PRIORITY"));
 	lowPriority->setText(tr("FILETAB_PRIORITY_LOW"));
 	mediumPriority->setText(tr("FILETAB_PRIORITY_MEDIUM"));
 	highPriority->setText(tr("FILETAB_PRIORITY_HIGH"));
@@ -143,27 +143,27 @@ void FileViewModel::setupFileTabelContextMenu()
 	fileTabMenu->addAction(openDir);
 	fileTabMenu->addSeparator();
 	QActionGroup* priorityGroup = new QActionGroup(fileTabMenu);
-	priority = new QMenu(fileTabMenu);
-	priority->setTitle(tr("FILETAB_PRIORITY"));
+	priorityMenu = new QMenu(fileTabMenu);
+	priorityMenu->setTitle(tr("FILETAB_PRIORITY"));
 	lowPriority = new QAction(tr("FILETAB_PRIORITY_LOW"), fileTabMenu);
 	lowPriority->setObjectName("ACTION_FILETAB_LOW_PRIORITY");
 	lowPriority->setCheckable(true);
 	priorityGroup->addAction(lowPriority);
 	QObject::connect(lowPriority, SIGNAL(triggered()), this, SLOT(SetLowForCurrentFile()));
-	priority->addAction(lowPriority);
+	priorityMenu->addAction(lowPriority);
 	mediumPriority = new QAction(tr("FILETAB_PRIORITY_MEDIUM"), fileTabMenu);
 	mediumPriority->setObjectName("ACTION_FILETAB_MEDIUM_PRIORITY");
 	mediumPriority->setCheckable(true);
 	priorityGroup->addAction(mediumPriority);
 	QObject::connect(mediumPriority, SIGNAL(triggered()), this, SLOT(SetMediumForCurrentFile()));
-	priority->addAction(mediumPriority);
+	priorityMenu->addAction(mediumPriority);
 	highPriority = new QAction(tr("FILETAB_PRIORITY_HIGH"), fileTabMenu);
 	highPriority->setObjectName("ACTION_FILETAB_HIGH_PRIORITY");
 	highPriority->setCheckable(true);
 	priorityGroup->addAction(highPriority);
 	QObject::connect(highPriority, SIGNAL(triggered()), this, SLOT(SetHighForCurrentFile()));
-	priority->addAction(highPriority);
-	fileTabMenu->addMenu(priority);
+	priorityMenu->addAction(highPriority);
+	fileTabMenu->addMenu(priorityMenu);
 	fileTabMenu->addSeparator();
 	dontDownload = new QAction(tr("FILETAB_PRIORITY_ZERO"), fileTabMenu);
 	dontDownload->setObjectName("ACTION_FILETAB_ZERO_PRIORITY");
@@ -177,7 +177,7 @@ void FileViewModel::FileTabContextMenu(const QPoint& point)
 	QModelIndex qmi = m_pView->indexAt(point);
 	qmi = m_pProxyModel->mapToSource(qmi);
 	bool isPriorityItemsEnabled = !dataSource.status().is_seeding;
-	priority->setEnabled(isPriorityItemsEnabled);
+	priorityMenu->setEnabled(isPriorityItemsEnabled);
 	dontDownload->setEnabled(isPriorityItemsEnabled);
 
 	if(qmi.isValid())

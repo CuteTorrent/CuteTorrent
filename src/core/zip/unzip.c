@@ -2062,6 +2062,8 @@ extern int ZEXPORT unzGetGlobalComment (unzFile file, char * szComment, uLong uS
     uLong uReadThis ;
     if (file==NULL)
         return (int)UNZ_PARAMERROR;
+	if (szComment == NULL)
+		return (int)UNZ_PARAMERROR;
     s=(unz64_s*)file;
 
     uReadThis = uSizeBuf;

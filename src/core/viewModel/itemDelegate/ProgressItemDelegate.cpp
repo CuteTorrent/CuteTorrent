@@ -4,9 +4,12 @@
 
 QString ProgressItemDelegate::displayText(const QVariant& value, const QLocale& locale) const
 {
-	if(value.type() == QMetaType::Float)
+	bool ok;
+	float fVal = value.toFloat(&ok);
+
+	if(ok)
 	{
-		return QString::number(value.toFloat(), 'f', 2) + " %";
+		return QString::number(fVal, 'f', 2) + " %";
 	}
 
 	return "";

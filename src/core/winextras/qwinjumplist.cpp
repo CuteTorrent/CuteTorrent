@@ -84,14 +84,14 @@ static QString createArguments(const QStringList& arguments)
 			// The argument must not end with a \ since this would be interpreted
 			// as escaping the quote -- rather put the \ behind the quote: e.g.
 			// rather use "foo"\ than "foo\"
-			int i = tmp.length();
+			int l = tmp.length();
 
-			while (i > 0 && tmp.at(i - 1) == QLatin1Char('\\'))
+			while (l > 0 && tmp.at(l - 1) == QLatin1Char('\\'))
 			{
-				--i;
+				--l;
 			}
 
-			tmp.insert(i, QLatin1Char('"'));
+			tmp.insert(l, QLatin1Char('"'));
 			tmp.prepend(QLatin1Char('"'));
 		}
 

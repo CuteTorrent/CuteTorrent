@@ -283,4 +283,13 @@ void AddRssDwonloadRuleDialog::onBrowseStaticPath()
 	              lastDir,
 	              QFileDialog::ShowDirsOnly
 	              | QFileDialog::DontResolveSymlinks);
+	if (dir.isEmpty())
+	{
+		dir = QDir::toNativeSeparators(dir);
+		if (!dir.endsWith(QDir::separator()))
+		{
+			dir.append(QDir::separator());
+		}
+		m_pSavePathEdit->setText(dir);
+	}
 }

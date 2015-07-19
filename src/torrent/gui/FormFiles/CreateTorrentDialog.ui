@@ -499,11 +499,6 @@
     </widget>
    </item>
   </layout>
-  <action name="actionClose">
-   <property name="text">
-    <string>close</string>
-   </property>
-  </action>
  </widget>
  <resources>
   <include location="../../../Resources/ltorrent.qrc"/>

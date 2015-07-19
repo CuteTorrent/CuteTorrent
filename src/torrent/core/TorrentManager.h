@@ -76,7 +76,7 @@ signals:
 	void OnFeedChanged();
 protected:
 	bool MoveFiles(QString oldStyleDirPath, QString newStyleDirPath);
-
+	void timerEvent(QTimerEvent *) override;
 
 
 private:
@@ -112,6 +112,7 @@ public slots:
 	void RemoveTorrent(QString InfoHash, bool delFiles = false);
 	void OnDownloadReady(QUrl, QTemporaryFile*);
 public:
+	void UpdateTorrents();
 	enum AddTorrentFlag
 	{
 		SEQUENTIAL_MODE = 1,
@@ -127,6 +128,7 @@ public:
 	pe_settings readEncSettings();
 	void updateEncSettings(const pe_settings& settings);
 	void updateSettings(const session_settings& settings);
+	void updateMaxConnectionsPerTorrent();
 	QString GetSessionDownloadSpeed();
 	QString GetSessionUploadSpeed();
 	QString GetSessionDownloaded();
