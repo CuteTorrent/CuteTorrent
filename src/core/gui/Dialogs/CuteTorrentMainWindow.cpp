@@ -67,6 +67,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "qwinjumplistcategory.h"
 #endif
 #include "PieceAvailabilityWidget.h"
+#include <core/FileSystemTorrentWatcher.h>
 class Application;
 class ISerachProvider;
 class SearchResult;
@@ -155,6 +156,12 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 		{
 			searchEngine->disableScriptDebugging();
 		}
+	}
+	m_pTorrentWatcher = FileSystemTorrentWatcher::getInstance();
+	if (m_pSettings->valueBool("Torrent","should_watch_dir"))
+	{
+		QString watchDir = m_pSettings->valueString("Torrent", "watch_dir");
+		m_pTorrentWatcher->addPath(watchDir);
 	}
 
 	if (m_pSettings->valueBool("TorrentTracker", "enabled", false))
@@ -247,7 +254,7 @@ void CuteTorrentMainWindow::setupTabelWidgets()
 	editTracker = new QAction(m_pStyleEngine->getIcon("delete"), tr("EDIT_TRACKER"), trackerTableWidget);
 	editTracker->setObjectName("ACTION_TRACKER_EDIT");
 	updateTracker = new QAction(m_pStyleEngine->getIcon("update_trackers"), tr("UPDATE_TRACKER"), trackerTableWidget);
-	updateTracker->setObjectName("ACTION_UPDATE_TRACKER");
+	updateTracker->setObjectName("ACTION_TRACKER_UPDATE");
 	connect(updateTracker, SIGNAL(triggered()), this, SLOT(UpdateTracker()));
 	connect(addTracker, SIGNAL(triggered()), this, SLOT(AddTracker()));
 	connect(removeTracker, SIGNAL(triggered()), this, SLOT(RemoveTracker()));
@@ -1942,6 +1949,7 @@ void CuteTorrentMainWindow::OnMessageRecived(QString message)
 	{
 		QString command = message.mid(0, commandEndIndex);
 		QString arg = message.mid(commandEndIndex + 1);
+		qDebug() << "Command" << command << arg;
 		QStringList supportedCommands;
 		supportedCommands << "open" << "create_torrent" << "settings";
 

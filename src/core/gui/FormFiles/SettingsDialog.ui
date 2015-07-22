@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>799</width>
-    <height>361</height>
+    <height>388</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -164,23 +164,8 @@
       </property>
       <item row="2" column="3">
        <widget class="QDialogButtonBox" name="buttonBox">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>23</height>
-         </size>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
         <property name="standardButtons">
          <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-        </property>
-        <property name="centerButtons">
-         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -282,6 +267,31 @@ QListView::item{
         </property>
         <widget class="QWidget" name="torrentTab">
          <layout class="QGridLayout" name="gridLayout_22">
+          <item row="0" column="2" rowspan="2" colspan="2">
+           <widget class="QGroupBox" name="trackerGroupBox">
+            <property name="title">
+             <string>START_TRACKER</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_23">
+               <property name="text">
+                <string>TRACKER_PORT</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="trackerPortEdit"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
           <item row="2" column="2" rowspan="4" colspan="2">
            <widget class="QGroupBox" name="useNotificationsCheckBox">
             <property name="title">
@@ -318,30 +328,18 @@ QListView::item{
             </layout>
            </widget>
           </item>
-          <item row="0" column="2" rowspan="2" colspan="2">
-           <widget class="QGroupBox" name="trackerGroupBox">
-            <property name="title">
-             <string>START_TRACKER</string>
+          <item row="4" column="0" colspan="2">
+           <widget class="QCheckBox" name="asociationCheckBox">
+            <property name="whatsThis">
+             <string>TORRENT_FILES_ASSOCIATION_WIT</string>
             </property>
-            <property name="checkable">
-             <bool>true</bool>
+            <property name="text">
+             <string>TORRENT_FILES_ASSOCIATION</string>
             </property>
-            <property name="checked">
-             <bool>false</bool>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_2">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_23">
-               <property name="text">
-                <string>TRACKER_PORT</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="trackerPortEdit"/>
-             </item>
-            </layout>
            </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="styleComboBox"/>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_26">
@@ -349,6 +347,16 @@ QListView::item{
              <string>STYLE</string>
             </property>
            </widget>
+          </item>
+          <item row="6" column="0" colspan="2">
+           <widget class="QCheckBox" name="winShelItegrationCheckBox">
+            <property name="text">
+             <string>ENABLE_SHELL_INTEGRATION</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="localeComboBox"/>
           </item>
           <item row="3" column="0" colspan="2">
            <widget class="QCheckBox" name="startMinimizedCheckBox">
@@ -360,20 +368,10 @@ QListView::item{
             </property>
            </widget>
           </item>
-          <item row="4" column="0" colspan="2">
-           <widget class="QCheckBox" name="asociationCheckBox">
-            <property name="whatsThis">
-             <string>TORRENT_FILES_ASSOCIATION_WIT</string>
-            </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_8">
             <property name="text">
-             <string>TORRENT_FILES_ASSOCIATION</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QComboBox" name="localeComboBox">
-            <property name="styleSheet">
-             <string notr="true"/>
+             <string>LANGUAGE</string>
             </property>
            </widget>
           </item>
@@ -387,33 +385,10 @@ QListView::item{
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QComboBox" name="styleComboBox"/>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_8">
+          <item row="6" column="2" colspan="2">
+           <widget class="QCheckBox" name="scriptDebugingCheckBox">
             <property name="text">
-             <string>LANGUAGE</string>
-            </property>
-           </widget>
-          </item>
-          <item row="11" column="0" colspan="4">
-           <spacer name="verticalSpacer_5">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="6" column="0" colspan="2">
-           <widget class="QCheckBox" name="winShelItegrationCheckBox">
-            <property name="text">
-             <string>ENABLE_SHELL_INTEGRATION</string>
+             <string>ENABLE_SEARCH_SCRIPT_DEBUGING</string>
             </property>
            </widget>
           </item>
@@ -427,11 +402,84 @@ QListView::item{
             </property>
            </widget>
           </item>
-          <item row="6" column="2" colspan="2">
-           <widget class="QCheckBox" name="scriptDebugingCheckBox">
-            <property name="text">
-             <string>ENABLE_SEARCH_SCRIPT_DEBUGING</string>
+          <item row="7" column="0" colspan="3">
+           <widget class="QGroupBox" name="watchDirEnabledCheckbox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
+            <property name="title">
+             <string>WATCH_DIR_FOR_NEW_TORRENTS</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_35">
+             <item row="2" column="0" colspan="3">
+              <layout class="QGridLayout" name="gridLayout_23">
+               <item row="1" column="0">
+                <widget class="QRadioButton" name="useStaticPathRadioButton">
+                 <property name="text">
+                  <string>AUTO_ADD_USING_STATIC_PATH</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QRadioButton" name="showDialogRadioButton">
+                 <property name="text">
+                  <string>NOT_AUTO_ADD</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1" colspan="3">
+                <widget class="QRadioButton" name="usetTorrentFilteringRadioButton">
+                 <property name="text">
+                  <string>AUTO_ADD_USING_TOR_FILTERING</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QPushButton" name="pushButton_2">
+                 <property name="text">
+                  <string>BROWSE</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLineEdit" name="staticSavePathEdit"/>
+               </item>
+              </layout>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="watchDirPathEdit"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_43">
+               <property name="text">
+                <string>DIR_TO_WATCH</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QPushButton" name="pushButton">
+               <property name="text">
+                <string>BROWSE</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" colspan="2">
+              <widget class="QCheckBox" name="checkBox">
+               <property name="text">
+                <string>DELETE_TORRENTS</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
@@ -783,7 +831,37 @@ QListView::item{
         </widget>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout_20">
-          <item row="0" column="4" rowspan="2">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>LISTEN_PORT</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="portMappingsCheckBox">
+            <property name="text">
+             <string>USE_PORT_MAPPINGS</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="portEdit">
+            <property name="maxLength">
+             <number>5</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3" rowspan="2">
            <widget class="QGroupBox" name="groupBox_10">
             <property name="title">
              <string>NET_ENC</string>
@@ -889,7 +967,7 @@ QListView::item{
             </layout>
            </widget>
           </item>
-          <item row="1" column="0" colspan="4">
+          <item row="1" column="0" rowspan="2" colspan="3">
            <widget class="QGroupBox" name="proxyGroupBox">
             <property name="enabled">
              <bool>true</bool>
@@ -904,20 +982,13 @@ QListView::item{
              <bool>false</bool>
             </property>
             <layout class="QGridLayout" name="gridLayout">
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_5">
-               <property name="whatsThis">
-                <string>PROXY_TYPE_WIT</string>
-               </property>
-               <property name="text">
-                <string>PROXY_TYPE</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="proxyUsernameEdit">
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_3">
                <property name="whatsThis">
                 <string>PROXY_USER_NAME_WIT</string>
+               </property>
+               <property name="text">
+                <string>PROXY_USER_NAME</string>
                </property>
               </widget>
              </item>
@@ -931,13 +1002,30 @@ QListView::item{
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_3">
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="proxyUsernameEdit">
                <property name="whatsThis">
                 <string>PROXY_USER_NAME_WIT</string>
                </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="whatsThis">
+                <string>PROXY_TYPE_WIT</string>
+               </property>
                <property name="text">
-                <string>PROXY_USER_NAME</string>
+                <string>PROXY_TYPE</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_4">
+               <property name="whatsThis">
+                <string>PROXY_PASSWORD_WIT</string>
+               </property>
+               <property name="text">
+                <string>PROXY_PASSWORD</string>
                </property>
               </widget>
              </item>
@@ -947,18 +1035,18 @@ QListView::item{
                 <string>PROXY_HOST_WIT</string>
                </property>
                <property name="text">
-                <string>PROXY_HOST (IP:port)</string>
+                <string>PROXY_HOST</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="3" column="1">
               <widget class="QLineEdit" name="proxyPwdEdit">
                <property name="whatsThis">
                 <string>PROXY_PASSWORD</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
+             <item row="4" column="1">
               <widget class="QComboBox" name="proxyTypeComboBox">
                <property name="whatsThis">
                 <string>PROXY_TYPE</string>
@@ -995,36 +1083,20 @@ QListView::item{
                </item>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_4">
-               <property name="whatsThis">
-                <string>PROXY_PASSWORD_WIT</string>
-               </property>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_44">
                <property name="text">
-                <string>PROXY_PASSWORD</string>
+                <string>PROXY_PORT</string>
                </property>
               </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="proxyPortEdit"/>
              </item>
             </layout>
            </widget>
           </item>
-          <item row="0" column="0" colspan="2">
-           <widget class="QLabel" name="label">
-            <property name="layoutDirection">
-             <enum>Qt::LeftToRight</enum>
-            </property>
-            <property name="autoFillBackground">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>LISTEN_PORT</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
+          <item row="3" column="0" colspan="3">
            <spacer name="verticalSpacer_4">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -1037,19 +1109,18 @@ QListView::item{
             </property>
            </spacer>
           </item>
-          <item row="0" column="2">
-           <widget class="QLineEdit" name="portEdit">
-            <property name="maxLength">
-             <number>5</number>
+          <item row="2" column="3" rowspan="2">
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
             </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QCheckBox" name="portMappingsCheckBox">
-            <property name="text">
-             <string>USE_PORT_MAPPINGS</string>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
             </property>
-           </widget>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -1844,112 +1915,7 @@ QListView::item{
         </widget>
         <widget class="QWidget" name="page_2">
          <layout class="QGridLayout" name="gridLayout_33">
-          <item row="0" column="5">
-           <widget class="QLabel" name="label_24">
-            <property name="text">
-             <string>RSS_DEFAULT_REFRESH_RATE</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="5">
-           <spacer name="verticalSpacer_7">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="3" column="3">
-           <widget class="QPushButton" name="importRssRulesButton">
-            <property name="text">
-             <string>RSS_RULES_IMPORT</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QPushButton" name="addRssDLRuleButton">
-            <property name="minimumSize">
-             <size>
-              <width>30</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>+</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="6">
-           <widget class="QSpinBox" name="rssRefrashRateEdit">
-            <property name="suffix">
-             <string> MINUTES</string>
-            </property>
-            <property name="minimum">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <number>300</number>
-            </property>
-            <property name="singleStep">
-             <number>5</number>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QPushButton" name="removeRssDLRuleButton">
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>-</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="4">
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="3" column="2">
-           <widget class="QPushButton" name="exportRssRulesButton">
-            <property name="text">
-             <string>RSS_RULES_EXPORT</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" rowspan="3" colspan="5">
-           <widget class="QListWidget" name="rssRulesListWidget">
-            <property name="contextMenuPolicy">
-             <enum>Qt::ActionsContextMenu</enum>
-            </property>
-            <property name="selectionMode">
-             <enum>QAbstractItemView::ExtendedSelection</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="5" colspan="2">
+          <item row="1" column="5" colspan="3">
            <widget class="QGroupBox" name="autosrtEmailNotificationCheckBox">
             <property name="title">
              <string>RSS_AUTO_START_EMAIL_NOTIFICATION</string>
@@ -2036,6 +2002,102 @@ QListView::item{
               <widget class="QComboBox" name="rssSmtpConnTypeCombobox"/>
              </item>
             </layout>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QLabel" name="label_24">
+            <property name="text">
+             <string>RSS_DEFAULT_REFRESH_RATE</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <spacer name="verticalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="addRssDLRuleButton">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>+</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="removeRssDLRuleButton">
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>-</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QPushButton" name="importRssRulesButton">
+            <property name="text">
+             <string>RSS_RULES_IMPORT</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" rowspan="3" colspan="5">
+           <widget class="QListWidget" name="rssRulesListWidget">
+            <property name="contextMenuPolicy">
+             <enum>Qt::ActionsContextMenu</enum>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::ExtendedSelection</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="4">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="2">
+           <widget class="QPushButton" name="exportRssRulesButton">
+            <property name="text">
+             <string>RSS_RULES_EXPORT</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="6" colspan="2">
+           <widget class="QTimeEdit" name="rssRefrashRateEdit">
+            <property name="displayFormat">
+             <string notr="true">HH:mm:ss</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -2169,7 +2231,6 @@ QListView::item{
   <tabstop>removeRssDLRuleButton</tabstop>
   <tabstop>exportRssRulesButton</tabstop>
   <tabstop>importRssRulesButton</tabstop>
-  <tabstop>rssRefrashRateEdit</tabstop>
   <tabstop>autosrtEmailNotificationCheckBox</tabstop>
   <tabstop>rssSmtpServerEdit</tabstop>
   <tabstop>rssSmtpPortEdit</tabstop>

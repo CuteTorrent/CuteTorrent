@@ -42,38 +42,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "NotificationSystem.h"
 #include "AddRssDwonloadRuleDialog.h"
 #include "RssManager.h"
-
-#ifdef Q_WS_WIN
-#include <windows.h>
 #include <smtp/smtpclient.h>
 #include <core/SearchEngine.h>
+#include <gui/Utils/UIPropertySetters.h>
+#include <gui/Utils/UIPropertyGetters.h>
+#include <gui/Utils/ValueGetters.h>
+#include <gui/Utils/ValueSetters.h>
 
-typedef BOOL (WINAPI* LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);
-
-LPFN_ISWOW64PROCESS fnIsWow64Process;
-
-BOOL IsWow64()
-{
-	BOOL bIsWow64 = FALSE;
-	//IsWow64Process is not available on all supported versions of Windows.
-	//Use GetModuleHandle to get a handle to the DLL that contains the function
-	//and GetProcAddress to get a pointer to the function if available.
-	fnIsWow64Process = (LPFN_ISWOW64PROCESS) GetProcAddress(
-	                       GetModuleHandle(TEXT("kernel32")), "IsWow64Process");
-
-	if(NULL != fnIsWow64Process)
-	{
-		if(!fnIsWow64Process(GetCurrentProcess(), &bIsWow64))
-		{
-			//handle error
-		}
-	}
-
-	return bIsWow64;
-}
-
-#endif
-SettingsDialog::SettingsDialog(QWidget* parent, int flags) : BaseWindow(OnlyCloseButton, NoResize, parent), editRssRule(NULL), deleteRssRule(NULL)
+SettingsDialog::SettingsDialog(QWidget* parent, int flags) 
+	: BaseWindow(OnlyCloseButton, NoResize, parent)
+	, m_propertyMapper(new SettingsPropertyMapper(this))
+	, editRssRule(NULL)
+	, deleteRssRule(NULL)
 {
 	setupUi(this);
 	previousFocuse = NULL;
@@ -87,31 +67,21 @@ SettingsDialog::SettingsDialog(QWidget* parent, int flags) : BaseWindow(OnlyClos
 	FillHDDTab();
 	FillWebUITab();
 	SetupSchedullerTab();
-	FillSearchTab();
 	FillKeyMapTab();
 	FillNetworkTab();
 	FillRssTab();
 	setupCustomWindow();
-	setupWindowIcons();
-	QString curLoc = Application::currentLocale();
-	int current = 0;
-
-	foreach(QString avail, Application::availableLanguages())
+	QPushButton* applyButton = buttonBox->button(QDialogButtonBox::Apply);
+	if (applyButton != NULL)
 	{
-		QLocale language = QLocale(avail);
-		localeComboBox->addItem(QLocale::languageToString(language.language()), avail);
-
-		if(avail == curLoc)
-		{
-			localeComboBox->setCurrentIndex(current);
-		}
-
-		current++;
+		applyButton->setEnabled(false);
 	}
-
+	setupWindowIcons();
+	
 	StyleEngene* style = StyleEngene::getInstance();
 	connect(style, SIGNAL(styleChanged()), this, SLOT(setupWindowIcons()));
-	//tabWidget->removeTab(5);
+	connect(m_propertyMapper.get(), SIGNAL(GotChanges()), SLOT(EnableApplyButton()));
+	connect(m_propertyMapper.get(), SIGNAL(NoChanges()), SLOT(DisableApplyButton()));
 }
 
 void SettingsDialog::chooseAction(QAbstractButton* button)
@@ -164,92 +134,67 @@ void SettingsDialog::setupWindowIcons()
 
 void SettingsDialog::FillHDDTab()
 {
-	lockFilesCheckBox->setCheckState(settings->valueBool("Torrent", "lock_files") ?  Qt::Checked : Qt::Unchecked);
-	casheSizeLineEdit->setValue(settings->valueInt("Torrent", "cache_size") * 16);
-	diskIOCasheModeComboBox->setCurrentIndex(settings->valueInt("Torrent", "disk_io_write_mode"));
-	useDiskReadAheadCheckBox->setCheckState(settings->valueBool("Torrent", "use_disk_read_ahead") ?  Qt::Checked : Qt::Unchecked);
-	alowReorderedOpsCheckBox->setCheckState(settings->valueBool("Torrent", "allow_reordered_disk_operations") ?  Qt::Checked : Qt::Unchecked);
-	lowPrioDiskCheckBox->setCheckState(settings->valueBool("Torrent", "low_prio_disk") ?  Qt::Checked : Qt::Unchecked);
-	useReadCasheCheckBox->setCheckState(settings->valueBool("Torrent", "use_read_cache") ?  Qt::Checked : Qt::Unchecked);
-	diskAllocationComboBox->setCurrentIndex(settings->valueInt("Torrent", "file_allocation_mode"));
+	m_propertyMapper->AddMapping("Torrent", "lock_files", SettingsPropertyMapper::BOOL, lockFilesCheckBox, SettingsPropertyMapper::CHECKBOX);
+	m_propertyMapper->AddMapping("Torrent", "cache_size", SettingsPropertyMapper::INT, casheSizeLineEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::ChacheSizeSetter, UIPropertyGetters::CacheSizeGetter);
+	m_propertyMapper->AddMapping("Torrent", "disk_io_write_mode", SettingsPropertyMapper::INT, diskIOCasheModeComboBox, SettingsPropertyMapper::COMBOBOX);
+	m_propertyMapper->AddMapping("Torrent", "use_disk_read_ahead", SettingsPropertyMapper::BOOL, useDiskReadAheadCheckBox, SettingsPropertyMapper::CHECKBOX);
+	m_propertyMapper->AddMapping("Torrent", "allow_reordered_disk_operations", SettingsPropertyMapper::BOOL, alowReorderedOpsCheckBox, SettingsPropertyMapper::CHECKBOX);
+	m_propertyMapper->AddMapping("Torrent", "low_prio_disk", SettingsPropertyMapper::BOOL, lowPrioDiskCheckBox, SettingsPropertyMapper::CHECKBOX);
+	m_propertyMapper->AddMapping("Torrent", "use_read_cache", SettingsPropertyMapper::BOOL, useReadCasheCheckBox, SettingsPropertyMapper::CHECKBOX);
+	m_propertyMapper->AddMapping("Torrent", "file_allocation_mode", SettingsPropertyMapper::INT, diskAllocationComboBox, SettingsPropertyMapper::COMBOBOX);
 }
 
 void SettingsDialog::FillGeneralTab()
 {
-	trackerGroupBox->setChecked(settings->valueBool("TorrentTracker", "enabled", false));
-	trackerPortEdit->setText(settings->valueString("TorrentTracker", "port", "6996"));
+	m_propertyMapper->AddMapping("TorrentTracker", "enabled", SettingsPropertyMapper::BOOL, trackerGroupBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, false);
+	m_propertyMapper->AddMapping("TorrentTracker", "port", SettingsPropertyMapper::INT, trackerPortEdit, SettingsPropertyMapper::LINE_EDIT, 6996);
+	
 	StyleEngene* styleEngine = StyleEngene::getInstance();
 	QList<StyleInfo> styleInfos = styleEngine->getAvaliableStyles();
-	StyleInfo currentStyle = styleEngine->getCuurentStyle();
+	
 	styleComboBox->clear();
 
 	for(int i = 0; i < styleInfos.size(); i++)
 	{
 		styleComboBox->addItem(styleInfos[i].DisplayName, styleInfos[i].InternalName);
-
-		if(styleInfos[i] == currentStyle)
-		{
-			styleComboBox->setCurrentIndex(i);
-		}
 	}
+	m_propertyMapper->AddMapping("System", "Style", SettingsPropertyMapper::INT, styleComboBox, SettingsPropertyMapper::COMBOBOX, "CuteTorrent", NULL, NULL, ValueSetters::StyleValueSetter ,ValueGetters::StyleValueGetter);
 
-	useNotificationsCheckBox->setChecked(settings->valueBool("Notifications", "use_notification_sys", true));
-	showTrackerErrorsCheckBox->setChecked(settings->valueBool("Notifications", "report_tracker_errors", true));
-	showDiskErrorsCheckBox->setChecked(settings->valueBool("Notifications", "report_disk_errors", true));
-	showRssErrorsCheckBox->setChecked(settings->valueBool("Notifications", "report_rss_errors", true));
+	QString curLoc = Application::currentLocale();
+	int current = 0;
+	QStringList availableLanguages = Application::availableLanguages();
+	for (int i = 0; i < availableLanguages.size(); i++)
+	{
+		QLocale language = QLocale(availableLanguages[i]);
+		localeComboBox->addItem(QLocale::languageToString(language.language()), availableLanguages[i]);
+	}
+	m_propertyMapper->AddMapping("System", "Lang", SettingsPropertyMapper::INT, localeComboBox, SettingsPropertyMapper::COMBOBOX, "en_US", NULL, NULL, ValueSetters::LanguageValueSetter, ValueGetters::LanguageValueGetter);
+	
+	m_propertyMapper->AddMapping("Notifications", "use_notification_sys", SettingsPropertyMapper::BOOL, useNotificationsCheckBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, true);
+	m_propertyMapper->AddMapping("Notifications", "report_tracker_errors", SettingsPropertyMapper::BOOL, showTrackerErrorsCheckBox, SettingsPropertyMapper::CHECKBOX);
+	m_propertyMapper->AddMapping("Notifications", "report_disk_errors", SettingsPropertyMapper::BOOL, showDiskErrorsCheckBox, SettingsPropertyMapper::CHECKBOX);
+	m_propertyMapper->AddMapping("Notifications", "report_rss_errors", SettingsPropertyMapper::BOOL, showRssErrorsCheckBox, SettingsPropertyMapper::CHECKBOX);
+	
+	
+	m_propertyMapper->AddMapping("WatchDir", "enabled", SettingsPropertyMapper::BOOL, watchDirEnabledCheckbox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, false);
+	m_propertyMapper->AddMapping("WatchDir", "dir_to_watch", SettingsPropertyMapper::STRING, watchDirPathEdit, SettingsPropertyMapper::LINE_EDIT, "");
+	m_propertyMapper->AddMapping("WatchDir", "show_doalog_on_new_torrent", SettingsPropertyMapper::BOOL, showDialogRadioButton, SettingsPropertyMapper::RADIOBUTTON, false);
+	m_propertyMapper->AddMapping("WatchDir", "use_torrent_filtering", SettingsPropertyMapper::BOOL, usetTorrentFilteringRadioButton, SettingsPropertyMapper::RADIOBUTTON, false);
+	m_propertyMapper->AddMapping("WatchDir", "use_static_save_path", SettingsPropertyMapper::BOOL, useStaticPathRadioButton, SettingsPropertyMapper::RADIOBUTTON, false);
+	m_propertyMapper->AddMapping("WatchDir", "use_static_save_path", SettingsPropertyMapper::BOOL, useStaticPathRadioButton, SettingsPropertyMapper::RADIOBUTTON, false);
+	m_propertyMapper->AddMapping("WatchDir", "static_save_path", SettingsPropertyMapper::STRING, staticSavePathEdit, SettingsPropertyMapper::LINE_EDIT, "");
+	m_propertyMapper->AddMapping("System", "open_magent_links", SettingsPropertyMapper::BOOL, magnetAssociationCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL, ValueSetters::MagnetAssociationValueSetter, ValueGetters::MagnetAssociationValueGetter);
+	m_propertyMapper->AddMapping("System", "open_torrent_files", SettingsPropertyMapper::BOOL, asociationCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL, ValueSetters::TorrentAssociationValueSetter, ValueGetters::TorrentAssociationValueGetter);
+	m_propertyMapper->AddMapping("System", "run_on_boot", SettingsPropertyMapper::BOOL, runOnbootCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL, ValueSetters::RunOnBootValueSetter, ValueGetters::RunOnBootValueGetter);
+	m_propertyMapper->AddMapping("Search", "script_debuging_enabled", SettingsPropertyMapper::BOOL, scriptDebugingCheckBox, SettingsPropertyMapper::CHECKBOX, false);
 	//OS_SPECIFICK////
 #ifdef Q_WS_WIN
-	QSettings assocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
-	QString torrentAssociation = assocSettings.value(".torrent/.").toString();
-	magnetAssociationCheckBox->setChecked(assocSettings.value("Magnet/shell/open/command/.").toString().contains("cutetorrent", Qt::CaseInsensitive));
-	asociationCheckBox->setChecked(torrentAssociation == "CuteTorrent.file");
-	QSettings bootUpSettings(QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\") + (IsWow64() ? "Wow6432Node\\" : "") + "Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
-	QString val = bootUpSettings.value("CuteTorrent").toString();
-	runOnbootCheckBox->setChecked(val.length() > 0);
-	startMinimizedCheckBox->setChecked(val.contains("-m"));
-	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
-	QString commandShouldBe = QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1");
-	bool starCommandMatch = assocSettings.value("*/shell/cutetorrent/command/.") == commandShouldBe;
-	bool folderCommandMatch = assocSettings.value("Folder/shell/cutetorrent/command/.") == commandShouldBe;
-	bool dirCommandMatch = assocSettings.value("Directory/shell/cutetorrent/command/.") == commandShouldBe;
-	winShelItegrationCheckBox->setChecked(starCommandMatch && folderCommandMatch && dirCommandMatch);
-	scriptDebugingCheckBox->setChecked(settings->valueBool("Search", "script_debuging_enabled", false));
+	m_propertyMapper->AddMapping("System", "run_on_boot_minimaized", SettingsPropertyMapper::BOOL, startMinimizedCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL, ValueSetters::RunOnBootMinimizedValueSetter, ValueGetters::RunOnBootMinimizedValueGetter);
+	m_propertyMapper->AddMapping("System", "win_explorer_integration_enabled", SettingsPropertyMapper::BOOL, winShelItegrationCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL, ValueSetters::WindowsShellValueSetter, ValueGetters::WindowsShellValueGetter);
 #endif
 #ifdef Q_WS_X11
 	winShelItegrationCheckBox->setVisible(false);
 	startMinimizedCheckBox->setVisible(false);
-	runOnbootCheckBox->setChecked(QFile::exists(StaticHelpers::CombinePathes(QDir::homePath() , ".config/autostart/CuteTorrent.desktop")));
-	QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() , ".config/mimeapps.list"));
-
-	if (associtaionGnomeConfig.open(QFile::ReadOnly))
-	{
-		QByteArray asscoiationData = associtaionGnomeConfig.readAll();
-		associtaionGnomeConfig.close();
-		QString associationStr = QString::fromUtf8(asscoiationData);
-		QStringList lines = associationStr.split('\n');
-
-		foreach(QString line, lines)
-		{
-			/*qDebug() << "Line from mimeapps.list" << line;
-			qDebug() << "Line from mimeapps.listline.startsWith(\"application/x-bittorrent\")" << line.startsWith("application/x-bittorrent;", Qt::CaseInsensitive);
-			qDebug() << "Line from mimeapps.listline.startsWith(\"x-scheme-handler/magnet\")" << line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive);
-			qDebug() << "Line from mimeapps.line.endsWith(\"CuteTorrent.desktop\")" << line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive);
-			*/
-			if (line.startsWith("application/x-bittorrent", Qt::CaseInsensitive))
-			{
-				asociationCheckBox->setChecked(line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive));
-			}
-			else if (line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive))
-			{
-				magnetAssociationCheckBox->setChecked(line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive));
-			}
-		}
-	}
-	else
-	{
-		qCritical() << "Unable to open gnome config file for reading" << associtaionGnomeConfig.errorString();
-	}
-
 #endif
 	//OS_SPECIFICK////
 }
@@ -269,27 +214,27 @@ void SettingsDialog::FillFilteringGroups()
 
 void SettingsDialog::FillDTTab()
 {
-	DTPathEdit->setText(settings->valueString("DT", "Executable"));
-	int driveNumber = settings->valueInt("DT", "Drive");
-	driveNumberComboBox->setCurrentIndex(driveNumber < driveNumberComboBox->count() ? driveNumber : 0);
-	settings->setValue("DT", "DefaultCommand", "-mount dt,%1,\"%2\"");
-	bool useCustomCommand = settings->valueBool("DT", "UseCustomCommand");
-	customMoutGroupBox->setChecked(useCustomCommand);
-	customCommandEdit->setText((useCustomCommand ? settings->valueString("DT", "CustomtCommand") : settings->valueString("DT", "DefaultCommand")));
+	m_propertyMapper->AddMapping("DT", "Executable",		SettingsPropertyMapper::STRING, DTPathEdit,			 SettingsPropertyMapper::LINE_EDIT);
+	m_propertyMapper->AddMapping("DT", "Drive",				SettingsPropertyMapper::INT,	driveNumberComboBox, SettingsPropertyMapper::COMBOBOX);
+	m_propertyMapper->AddMapping("DT", "DefaultCommand",	SettingsPropertyMapper::STRING, customCommandEdit,	 SettingsPropertyMapper::LINE_EDIT);
+	m_propertyMapper->AddMapping("DT", "UseCustomCommand",	SettingsPropertyMapper::BOOL,	customMoutGroupBox,  SettingsPropertyMapper::CHECKABLE_GROUPBOX);
+	m_propertyMapper->AddMapping("DT", "CustomtCommand",	SettingsPropertyMapper::STRING, customCommandEdit,	 SettingsPropertyMapper::LINE_EDIT, "-mount dt,%1,\"%2\"");
 }
 
 void SettingsDialog::FillWebUITab()
 {
-	bool enabled  = settings->valueBool("WebControl", "webui_enabled", false);
-	webUIGroupBox->setChecked(enabled);
-	loginLineEdit->setText(settings->valueString("WebControl", "webui_login"));
-	passwordLineEdit->setText(settings->valueString("WebControl", "webui_password"));
-	webPortLineEdit->setText(settings->valueString("WebControl", "port", "8080"));
-	upnpCheckBox->setChecked(settings->valueBool("WebControl", "enable_upnp", false));
-	webUILogginGroupBox->setChecked(settings->valueBool("WebControl", "enable_loggin", false));
-	logLineEdit->setText(settings->valueString("WebControl", "log_name"));
-	IPFilterGroupBox->setChecked(settings->valueBool("WebControl", "enable_ipfilter", false));
-	ipFilterTextEdit->setText(settings->valueString("WebControl", "ipfilter"));
+	
+	m_propertyMapper->AddMapping("WebControl", "webui_enabled", SettingsPropertyMapper::BOOL, webUIGroupBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, false);
+	m_propertyMapper->AddMapping("WebControl", "webui_login", SettingsPropertyMapper::STRING, loginLineEdit, SettingsPropertyMapper::LINE_EDIT);
+	m_propertyMapper->AddMapping("WebControl", "webui_password", SettingsPropertyMapper::STRING, passwordLineEdit, SettingsPropertyMapper::LINE_EDIT);
+	m_propertyMapper->AddMapping("WebControl", "port", SettingsPropertyMapper::STRING, webPortLineEdit, SettingsPropertyMapper::LINE_EDIT, 8080);
+	m_propertyMapper->AddMapping("WebControl", "enable_upnp", SettingsPropertyMapper::BOOL, upnpCheckBox, SettingsPropertyMapper::CHECKBOX, false);
+	m_propertyMapper->AddMapping("WebControl", "enable_loggin", SettingsPropertyMapper::BOOL, webUILogginGroupBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, false);
+	m_propertyMapper->AddMapping("WebControl", "log_name", SettingsPropertyMapper::STRING, logLineEdit, SettingsPropertyMapper::LINE_EDIT);
+	m_propertyMapper->AddMapping("WebControl", "enable_ipfilter", SettingsPropertyMapper::BOOL, IPFilterGroupBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, false);
+	m_propertyMapper->AddMapping("WebControl", "ipfilter", SettingsPropertyMapper::STRING, ipFilterTextEdit, SettingsPropertyMapper::TEXT_EDIT);
+	
+	bool enabled = settings->valueBool("WebControl", "webui_enabled");
 	bool isRunning = rcon->isRunning();
 	RunningLabel->setEnabled(isRunning && enabled);
 	startRconButton->setEnabled(!isRunning && enabled);
@@ -321,26 +266,9 @@ SettingsDialog::~SettingsDialog()
 }
 void SettingsDialog::ApplySettings()
 {
-	settings->setValue("Torrent", "listen_port",				qVariantFromValue(portEdit->text().toInt()));
-	settings->setValue("Torrent", "active_limit",				qVariantFromValue(activeLimitEdit->value()));
-	settings->setValue("Torrent", "active_downloads",			qVariantFromValue(activeDownloadLimitEdit->value()));
-	settings->setValue("Torrent", "active_seeds",				qVariantFromValue(activeSeedLimitEdit->value()));
-	settings->setValue("Torrent", "upload_rate_limit",			qVariantFromValue(uploadLimitEdit->value() * KbInt));
-	settings->setValue("Torrent", "download_rate_limit",		qVariantFromValue(downloadLimitEdit->value() * KbInt));
-	settings->setValue("Torrent", "dht_upload_rate_limit",		qVariantFromValue(dhtLimitEdit->value() * KbInt));
-	settings->setValue("Torrent", "ignore_limits_on_local_network", qVariantFromValue(limitLocalConnectionCheckBox->isChecked()));
-	settings->setValue("Torrent", "local_upload_rate_limit",	qVariantFromValue(localUploadLimitEdit->value() * KbInt));
-	settings->setValue("Torrent", "local_download_rate_limit",	qVariantFromValue(localDownloadLimitEdit->value() * KbInt));
-	settings->setValue("Torrent", "rate_limit_utp",				qVariantFromValue(limitUtpCheckBox->isChecked()));
-	settings->setValue("Torrent", "seed_time_limit",			qVariantFromValue(QTime(0, 0).secsTo(seedTimeLimitEdit->time())));
-	settings->setValue("Torrent", "share_ratio_limit",			qVariantFromValue(seedGlobalRatioEdit->value()));
-	settings->setValue("Torrent", "useProxy",					qVariantFromValue(proxyGroupBox->isChecked()));
-	settings->setValue("Torrent", "use_dht",					qVariantFromValue(useDHTCheckBox->isChecked()));
-	settings->setValue("Torrent", "use_lsd",					qVariantFromValue(useLSDCheckBox->isChecked()));
-	settings->setValue("Torrent", "use_pex",					qVariantFromValue(usePExCheckBox->isChecked()));
-	settings->setValue("Torrent", "max_connections_per_torrent",maxConnectionsPerTorrentEdit->value());
+	m_propertyMapper->ApplyChanges();
 	bool isScriptDebuggingEnabled = scriptDebugingCheckBox->isChecked();
-	settings->setValue("Search", "script_debuging_enabled",		qVariantFromValue(isScriptDebuggingEnabled));
+
 	SearchEnginePtr searchEngine = SearchEngine::getInstance();
 
 	if (isScriptDebuggingEnabled)
@@ -357,255 +285,10 @@ void SettingsDialog::ApplySettings()
 			searchEngine->disableScriptDebugging();
 		}
 	}
-
-	if(proxyGroupBox->isChecked())
-	{
-		QStringList iport = proxyHostEdit->text().split(':');
-
-		if(iport.count() == 2)
-		{
-			settings->setValue("Torrent", "proxy_hostname",		qVariantFromValue(iport.at(0)));
-			settings->setValue("Torrent", "proxy_password",		qVariantFromValue(proxyPwdEdit->text()));
-			settings->setValue("Torrent", "proxy_port",			qVariantFromValue(iport.at(1)));
-			settings->setValue("Torrent", "proxy_type",			qVariantFromValue(proxyTypeComboBox->currentIndex()));
-			settings->setValue("Torrent", "proxy_username",		qVariantFromValue(proxyUsernameEdit->text()));
-		}
-	}
-
-	settings->setValue("Torrent", "use_port_forwarding",		qVariantFromValue(portMappingsCheckBox->isChecked()));
-	settings->setValue("Torrent", "lock_files",					lockFilesCheckBox->isChecked());
-	settings->setValue("Torrent", "cache_size",					casheSizeLineEdit->value() / 16);
-	settings->setValue("Torrent", "disk_io_read_mode",			diskIOCasheModeComboBox->currentIndex());
-	settings->setValue("Torrent", "disk_io_write_mode",			diskIOCasheModeComboBox->currentIndex());
-	settings->setValue("Torrent", "low_prio_disk",				lowPrioDiskCheckBox->isChecked());
-	settings->setValue("Torrent", "allow_reordered_disk_operations", alowReorderedOpsCheckBox->isChecked());
-	settings->setValue("Torrent", "use_read_cache",				useReadCasheCheckBox->isChecked());
-	settings->setValue("Torrent", "in_enc_policy",              inEncPolicyComboBox->currentIndex());
-	settings->setValue("Torrent", "out_enc_policy",             outEncPolicyComboBox->currentIndex());
-	settings->setValue("Torrent", "allowed_enc_level",          encLevelComboBox->currentIndex());
-	settings->setValue("Torrent", "prefer_rc4",                 preferFullEncCheckBox->isChecked());
-	settings->setValue("Notifications", "use_notification_sys", useNotificationsCheckBox->isChecked());
-	settings->setValue("Notifications", "report_tracker_errors", showTrackerErrorsCheckBox->isChecked());
-	settings->setValue("Notifications", "report_disk_errors",	showDiskErrorsCheckBox->isChecked());
-	settings->setValue("Notifications", "report_rss_errors",	showRssErrorsCheckBox->isChecked());
 	ApplySettingsToSession();
-	settings->setValue("DT", "Executable",						DTPathEdit->text());
-	settings->setValue("DT", "Drive",							driveNumberComboBox->currentIndex());
-	settings->setValue("DT", "DefaultCommand",					"-mount dt,%1,\"%2\"");
-	settings->setValue("DT", "UseCustomCommand",				(customMoutGroupBox->isChecked()));
-	settings->setValue("DT", "CustomtCommand",					customCommandEdit->text());
-	settings->setValue("WebControl", "webui_enabled",			webUIGroupBox->isChecked());
-	settings->setValue("WebControl", "requireAuth",             !loginLineEdit->text().isEmpty());
-	settings->setValue("WebControl", "webui_login",				loginLineEdit->text());
-	settings->setValue("WebControl", "webui_password",			passwordLineEdit->text());
-	settings->setValue("WebControl", "port",                    webPortLineEdit->text());
-	settings->setValue("WebControl", "enable_upnp",				upnpCheckBox->isChecked());
-	settings->setValue("WebControl", "enable_loggin",			webUILogginGroupBox->isChecked());
-	settings->setValue("WebControl", "log_name",				logLineEdit->text());
-	settings->setValue("WebControl", "enable_ipfilter",			IPFilterGroupBox->isChecked());
-	settings->setValue("WebControl", "ipfilter",				ipFilterTextEdit->toPlainText());
-	//
 	settings->SaveFilterGropups(filterGroups);
-	settings->setValue("TorrentTracker", "enabled",             trackerGroupBox->isChecked());
-	settings->setValue("TorrentTracker", "port",                trackerPortEdit->text());
-	settings->setValue("rss", "smtp_host",						rssSmtpServerEdit->text());
-	settings->setValue("rss", "smtp_port",						rssSmtpPortEdit->text());
-	settings->setValue("rss", "smtp_conn_type",					rssSmtpConnTypeCombobox->itemData(rssSmtpConnTypeCombobox->currentIndex()).toInt());
-	settings->setValue("rss", "smtp_auth_type",					rssAuthTypeComboBox->itemData(rssAuthTypeComboBox->currentIndex()).toInt());
-	settings->setValue("rss", "smtp_user",						rssSmtpLoginEdit->text());
-	settings->setValue("rss", "smtp_password",					rssSmtpPasswordEdit->text());
-	settings->setValue("rss", "rss_send_to",					rssRecepientEmailEdit->text());
-	settings->setValue("rss", "auto_download_emeail_notify",	autosrtEmailNotificationCheckBox->isChecked());
-	settings->setValue("rss", "default_refresh_rate",			rssRefrashRateEdit->value());
-	settings->setValue("Torrent", "file_allocation_mode",		diskAllocationComboBox->currentIndex());
 	NotificationSystemPtr pNotifySys = NotificationSystem::getInstance();
 	pNotifySys->UpdateNotificationSettings();
-#ifdef Q_WS_WIN //file association for windows
-	QSettings asocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
-	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
-
-	if(asociationCheckBox->checkState() == Qt::Checked)
-	{
-		asocSettings.setValue(".torrent/.", "CuteTorrent.file");
-		asocSettings.setValue("CuteTorrent.file/.", tr("Torrent file"));
-		asocSettings.setValue(".torrent/OpenWithProgids/CuteTorrent.file", "");
-		asocSettings.setValue("CuteTorrent.file/shell/open/command/.",
-		                      "\"" + applicationFilePath + "\"" + " \"%1\"");
-		asocSettings.setValue("CuteTorrent.file/DefaultIcon/.",
-		                      applicationFilePath + ",1");
-	}
-	else
-	{
-		asocSettings.remove(".torrent/OpenWithProgids/CuteTorrent.file");
-		asocSettings.remove(".torrent/.");
-		asocSettings.remove("CuteTorrent.file/.");
-		asocSettings.remove("CuteTorrent.file/shell/open/command/.");
-		asocSettings.remove("CuteTorrent.file/DefaultIcon/.");
-	}
-
-	if(magnetAssociationCheckBox->isChecked())
-	{
-		asocSettings.setValue("Magnet/.", "Magnet URI");
-		asocSettings.setValue("Magnet/Content Type", "application/x-magnet");
-		asocSettings.setValue("Magnet/URL Protocol", "");
-		asocSettings.setValue("Magnet/shell/open/command/.",
-		                      "\"" + applicationFilePath + "\"" + " \"%1\"");
-	}
-	else
-	{
-		asocSettings.remove("Magnet/.");
-		asocSettings.remove("Magnet/Content Type");
-		asocSettings.remove("Magnet/URL Protocol");
-		asocSettings.remove("Magnet/shell/open/command/.");
-	}
-
-	QSettings bootUpSettings(QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\") + (IsWow64() ? "Wow6432Node\\" : "") + "Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
-
-	if(runOnbootCheckBox->checkState() == Qt::Checked)
-	{
-		bootUpSettings.setValue("CuteTorrent", "\"" + applicationFilePath + "\"" + (startMinimizedCheckBox->isChecked() ? " -m" : ""));
-	}
-	else
-	{
-		bootUpSettings.remove("CuteTorrent");
-	}
-
-	if (winShelItegrationCheckBox->isChecked())
-	{
-		asocSettings.setValue("*/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
-		asocSettings.setValue("*/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
-		asocSettings.setValue("*/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
-		asocSettings.setValue("Folder/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
-		asocSettings.setValue("Folder/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
-		asocSettings.setValue("Folder/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
-		asocSettings.setValue("Directory/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
-		asocSettings.setValue("Directory/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
-		asocSettings.setValue("Directory/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
-	}
-	else
-	{
-		asocSettings.remove("*/shell/cutetorrent/.");
-		asocSettings.remove("*/shell/cutetorrent/Icon");
-		asocSettings.remove("*/shell/cutetorrent/command/.");
-		asocSettings.remove("*/shell/cutetorrent/command");
-		asocSettings.remove("*/shell/cutetorrent");
-		asocSettings.remove("Folder/shell/cutetorrent/.");
-		asocSettings.remove("Folder/shell/cutetorrent/Icon");
-		asocSettings.remove("Folder/shell/cutetorrent/command/.");
-		asocSettings.remove("Folder/shell/cutetorrent/command");
-		asocSettings.remove("Folder/shell/cutetorrent");
-		asocSettings.remove("Directory/shell/cutetorrent/.");
-		asocSettings.remove("Directory/shell/cutetorrent/Icon");
-		asocSettings.remove("Directory/shell/cutetorrent/command/.");
-		asocSettings.remove("Directory/shell/cutetorrent/command");
-		asocSettings.remove("Directory/shell/cutetorrent");
-	}
-
-#endif
-#ifdef Q_WS_X11
-
-	if (runOnbootCheckBox->checkState() == Qt::Checked)
-	{
-		if (!QFile::exists(StaticHelpers::CombinePathes(QDir::homePath() , ".config/autostart/CuteTorrent.desktop")))
-		{
-			QFile shortcut("/usr/share/applications/CuteTorrent.desktop");
-
-			if (!shortcut.copy(StaticHelpers::CombinePathes(QDir::homePath() , ".config/autostart/CuteTorrent.desktop")))
-			{
-				qCritical() << "Unable to copy /usr/share/applications/CuteTorrent.desktop to ~/.config/autostart/CuteTorrent.desktop" << shortcut.errorString();
-			}
-		}
-	}
-	else
-	{
-		QFile shortcut(StaticHelpers::CombinePathes(QDir::homePath() , ".config/autostart/CuteTorrent.desktop"));
-
-		if (shortcut.exists())
-		{
-			if (!shortcut.remove())
-			{
-				qCritical() << "failed to remove ~/.config/autostart/CuteTorrent.desktop" << shortcut.errorString();
-			}
-		}
-	}
-
-	QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() , ".config/mimeapps.list"));
-
-	if (associtaionGnomeConfig.open(QFile::ReadOnly))
-	{
-		QByteArray asscoiationData = associtaionGnomeConfig.readAll();
-		associtaionGnomeConfig.close();
-		QString associationStr = QString::fromUtf8(asscoiationData);
-		QStringList lines = associationStr.split('\n');
-		bool torrentFound = false, magnetFound = false;
-
-		for (int i = 0; i < lines.size(); i++)
-		{
-			QString line = lines[i];
-
-			if (line.startsWith("application/x-bittorrent", Qt::CaseInsensitive))
-			{
-				torrentFound = true;
-
-				if (asociationCheckBox->isChecked())
-				{
-					lines[i] = "application/x-bittorrent=CuteTorrent.desktop;";
-				}
-				else
-				{
-					lines[i] = "";
-				}
-			}
-			else if (line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive))
-			{
-				magnetFound = true;
-
-				if (magnetAssociationCheckBox->isChecked())
-				{
-					lines[i] = "x-scheme-handler/magnet=CuteTorrent.desktop;";
-				}
-				else
-				{
-					lines[i] = "";
-				}
-			}
-		}
-
-		if (!torrentFound && asociationCheckBox->isChecked())
-		{
-			lines.append("application/x-bittorrent=CuteTorrent.desktop;\n");
-		}
-
-		if (!magnetFound && magnetAssociationCheckBox->isChecked())
-		{
-			lines.append("x-scheme-handler/magnet=CuteTorrent.desktop;\n");
-		}
-
-		if (associtaionGnomeConfig.open(QFile::WriteOnly))
-		{
-			for (int i = 0; i < lines.size(); i++)
-			{
-				QString line = lines[i];
-
-				if (!line.isEmpty())
-				{
-					associtaionGnomeConfig.write((line + "\n").toUtf8());
-				}
-			}
-
-			associtaionGnomeConfig.close();
-		}
-		else
-		{
-			qCritical() << "Unable to open gnome config file for writing file asscoiations" << associtaionGnomeConfig.errorString();
-		}
-	}
-	else
-	{
-		qCritical() << "Unable to open gnome config file for reading file asscoiations" << associtaionGnomeConfig.errorString();
-	}
-
-#endif
 
 	if(settings->valueBool("WebControl", "webui_enabled", false))
 	{
@@ -658,22 +341,13 @@ void SettingsDialog::ApplySettings()
 
 	settings->setGroupValues("KeyMap", keyMap);
 	FillKeyMapTab();
-	int styleIndex = styleComboBox->currentIndex();
-	QString currentStyle = styleComboBox->itemData(styleIndex).toString();
-	settings->setValue("System", "Style", currentStyle);
-	StyleEngene* sEngine = StyleEngene::getInstance();
-
-	if(sEngine->getCuurentStyle().InternalName.compare(currentStyle) != 0)
-	{
-		sEngine->setStyle(currentStyle);
-	}
-
+	
 	ApplyRssDownloadRulles();
 }
 void SettingsDialog::ApplySettingsToSession()
 {
-	TorrentManagerPtr manager = TorrentManager::getInstance();
-	session_settings current = manager->readSettings();
+	TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
+	session_settings current = pTorrentManager->readSettings();
 	current.active_limit		= activeLimitEdit->value();
 	current.active_downloads	= activeDownloadLimitEdit->value();
 	current.active_seeds		= activeSeedLimitEdit->value();
@@ -692,15 +366,15 @@ void SettingsDialog::ApplySettingsToSession()
 	current.download_rate_limit = downloadLimitEdit->value() * KbInt;
 	current.seed_time_limit = settings->valueInt("Torrent", "seed_time_limit");
 	current.share_ratio_limit = settings->valueString("Torrent", "share_ratio_limit").toFloat();
-	manager->updateSettings(current);
-	manager->RefreshExternalPeerSettings();
-	manager->updateMaxConnectionsPerTorrent();
-	pe_settings enc_settings = manager->readEncSettings();
+	pTorrentManager->updateSettings(current);
+	pTorrentManager->RefreshExternalPeerSettings();
+	pTorrentManager->updateMaxConnectionsPerTorrent();
+	pe_settings enc_settings = pTorrentManager->readEncSettings();
 	enc_settings.in_enc_policy = static_cast<pe_settings::enc_policy>(inEncPolicyComboBox->currentIndex());
 	enc_settings.out_enc_policy = static_cast<pe_settings::enc_policy>(outEncPolicyComboBox->currentIndex());
 	enc_settings.allowed_enc_level = static_cast<pe_settings::enc_level>(encLevelComboBox->currentIndex() + 1);
 	enc_settings.prefer_rc4 = preferFullEncCheckBox->isChecked();
-	manager->updateEncSettings(enc_settings);
+	pTorrentManager->updateEncSettings(enc_settings);
 }
 void SettingsDialog::addGroup()
 {
@@ -891,7 +565,7 @@ void SettingsDialog::AddTask()
 
 void SettingsDialog::SetupSchedullerTab()
 {
-	connect(calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(SetDate(QDate)));
+	connect(calendarWidget, SIGNAL(clicked(QDate)), beginDateTimeEdit, SLOT(setDate(QDate)));
 	beginDateTimeEdit->setDateTime(QDateTime::currentDateTime().addSecs(120));
 	connect(tasksComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(UpdateSchedullerTab(int)));
 	tasks = settings->GetSchedullerQueue();
@@ -918,24 +592,22 @@ void SettingsDialog::FillNetworkTab()
 	proxyHostEdit->setValidator(ipValidator);
 	QRegExp portRegex("^" + portRange + "$");
 	QRegExpValidator* portValidator = new QRegExpValidator(portRegex, this);
-	portEdit->setText(settings->valueString("Torrent", "listen_port"));
 	portEdit->setValidator(portValidator);
-	bool useProxy = settings->valueBool("Torrent", "useProxy");
-	proxyGroupBox->setChecked(useProxy);
 
-	if (useProxy)
-	{
-		proxyHostEdit->setText(QString("%1:%2").arg(settings->valueString("Torrent",
-		                       "proxy_hostname"), settings->valueString("Torrent", "proxy_port")));
-		proxyUsernameEdit->setText(settings->valueString("Torrent", "proxy_username"));
-		proxyPwdEdit->setText(settings->valueString("Torrent", "proxy_password"));
-	}
+	m_propertyMapper->AddMapping("Torrent", "listen_port", SettingsPropertyMapper::INT, portEdit, SettingsPropertyMapper::LINE_EDIT);
+	m_propertyMapper->AddMapping("Torrent", "useProxy", SettingsPropertyMapper::BOOL, proxyGroupBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX);
+	
+	m_propertyMapper->AddMapping("Torrent", "proxy_hostname", SettingsPropertyMapper::STRING, proxyHostEdit, SettingsPropertyMapper::LINE_EDIT);
+	m_propertyMapper->AddMapping("Torrent", "proxy_port", SettingsPropertyMapper::STRING, proxyPortEdit, SettingsPropertyMapper::LINE_EDIT);
+	m_propertyMapper->AddMapping("Torrent", "proxy_username", SettingsPropertyMapper::STRING, proxyUsernameEdit, SettingsPropertyMapper::LINE_EDIT);
+	m_propertyMapper->AddMapping("Torrent", "proxy_password", SettingsPropertyMapper::STRING, proxyPwdEdit, SettingsPropertyMapper::LINE_EDIT);
 
-	inEncPolicyComboBox->setCurrentIndex(settings->valueInt("Torrent", "in_enc_policy"));
-	outEncPolicyComboBox->setCurrentIndex(settings->valueInt("Torrent", "out_enc_policy"));
-	encLevelComboBox->setCurrentIndex(settings->valueInt("Torrent", "allowed_enc_level"));
-	preferFullEncCheckBox->setChecked(settings->valueBool("Torrent", "prefer_rc4"));
-	portMappingsCheckBox->setChecked(settings->valueBool("Torrent", "use_port_forwarding"));
+	m_propertyMapper->AddMapping("Torrent", "in_enc_policy", SettingsPropertyMapper::INT, inEncPolicyComboBox, SettingsPropertyMapper::COMBOBOX);
+	m_propertyMapper->AddMapping("Torrent", "out_enc_policy", SettingsPropertyMapper::INT, outEncPolicyComboBox, SettingsPropertyMapper::COMBOBOX);
+	m_propertyMapper->AddMapping("Torrent", "allowed_enc_level", SettingsPropertyMapper::INT, encLevelComboBox, SettingsPropertyMapper::COMBOBOX);
+	
+	m_propertyMapper->AddMapping("Torrent", "prefer_rc4", SettingsPropertyMapper::BOOL, preferFullEncCheckBox, SettingsPropertyMapper::CHECKBOX);
+	m_propertyMapper->AddMapping("Torrent", "use_port_forwarding", SettingsPropertyMapper::BOOL, portMappingsCheckBox, SettingsPropertyMapper::CHECKBOX);
 }
 
 void SettingsDialog::FillKeyMapTab()
@@ -1015,10 +687,6 @@ void SettingsDialog::FillKeyMapTab()
 	}
 }
 
-void SettingsDialog::FillSearchTab()
-{
-}
-
 void SettingsDialog::UpdateSchedullerTab(int index)
 {
 	SchedulerTask currentTask = tasksComboBox->itemData(index).value<SchedulerTask>();
@@ -1074,16 +742,10 @@ void SettingsDialog::changeEvent(QEvent* event)
 	if(event->type() == QEvent::LanguageChange)
 	{
 		retranslateUi(this);
-		FillDTTab();
 		FillFilteringGroups();
 		FillGeneralTab();
-		FillHDDTab();
-		FillWebUITab();
-		SetupSchedullerTab();
-		FillSearchTab();
 		FillKeyMapTab();
-		FillNetworkTab();
-		FillRssTab();
+		m_propertyMapper->ResetToCurrentValues();
 		editRssRule->setText(tr("ACTION_SETTINGS_EDIT_RSS_RULE"));
 		deleteRssRule->setText(tr("ACTION_SETTINGS_DELETE_RSS_RULE"));
 	}
@@ -1128,22 +790,26 @@ QLabel* SettingsDialog::getTitleIcon()
 
 void SettingsDialog::FillRestrictionTab()
 {
-	uploadLimitEdit->setValue(settings->valueInt("Torrent", "upload_rate_limit") / KbFloat);
-	downloadLimitEdit->setValue(settings->valueInt("Torrent", "download_rate_limit") / KbFloat);
-	dhtLimitEdit->setValue(settings->valueInt("Torrent", "dht_upload_rate_limit") / KbFloat);
-	activeLimitEdit->setValue(settings->valueInt("Torrent", "active_limit"));
-	activeSeedLimitEdit->setValue(settings->valueInt("Torrent", "active_seeds"));
-	activeDownloadLimitEdit->setValue(settings->valueInt("Torrent", "active_downloads"));
-	useDHTCheckBox->setChecked(settings->valueBool("Torrent", "use_dht"));
-	useLSDCheckBox->setChecked(settings->valueBool("Torrent", "use_lsd"));
-	usePExCheckBox->setChecked(settings->valueBool("Torrent", "use_pex"));
-	limitLocalConnectionCheckBox->setChecked(settings->valueBool("Torrent", "ignore_limits_on_local_network"));
-	localUploadLimitEdit->setValue(settings->valueInt("Torrent", "local_upload_rate_limit") / KbFloat);
-	localDownloadLimitEdit->setValue(settings->valueInt("Torrent", "local_download_rate_limit") / KbFloat);
-	limitUtpCheckBox->setChecked(settings->valueBool("Torrent", "rate_limit_utp"));
-	seedTimeLimitEdit->setTime(QTime(0, 0).addSecs(settings->valueInt("Torrent", "seed_time_limit")));
-	seedGlobalRatioEdit->setValue(settings->valueString("Torrent", "share_ratio_limit").toFloat());
-	maxConnectionsPerTorrentEdit->setValue(settings->valueInt("Torrent", "max_connections_per_torrent"));
+	m_propertyMapper->AddMapping("Torrent", "upload_rate_limit", SettingsPropertyMapper::INT, uploadLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter, UIPropertyGetters::SpinboxKBGetter);
+	m_propertyMapper->AddMapping("Torrent", "download_rate_limit", SettingsPropertyMapper::INT, downloadLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter, UIPropertyGetters::SpinboxKBGetter);
+	m_propertyMapper->AddMapping("Torrent", "dht_upload_rate_limit", SettingsPropertyMapper::INT, dhtLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter, UIPropertyGetters::SpinboxKBGetter);
+	m_propertyMapper->AddMapping("Torrent", "active_limit", SettingsPropertyMapper::INT, activeLimitEdit, SettingsPropertyMapper::SPINBOX);
+	m_propertyMapper->AddMapping("Torrent", "active_seeds", SettingsPropertyMapper::INT, activeSeedLimitEdit, SettingsPropertyMapper::SPINBOX);
+	m_propertyMapper->AddMapping("Torrent", "active_downloads", SettingsPropertyMapper::INT, activeDownloadLimitEdit, SettingsPropertyMapper::SPINBOX);
+	
+	m_propertyMapper->AddMapping("Torrent", "use_dht", SettingsPropertyMapper::BOOL, useDHTCheckBox, SettingsPropertyMapper::CHECKBOX);
+	m_propertyMapper->AddMapping("Torrent", "use_lsd", SettingsPropertyMapper::BOOL, useLSDCheckBox, SettingsPropertyMapper::CHECKBOX);
+	m_propertyMapper->AddMapping("Torrent", "use_pex", SettingsPropertyMapper::BOOL, usePExCheckBox, SettingsPropertyMapper::CHECKBOX);
+	
+	m_propertyMapper->AddMapping("Torrent", "ignore_limits_on_local_network", SettingsPropertyMapper::BOOL, limitLocalConnectionCheckBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX);
+	m_propertyMapper->AddMapping("Torrent", "local_upload_rate_limit", SettingsPropertyMapper::INT, localUploadLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter, UIPropertyGetters::SpinboxKBGetter);
+	m_propertyMapper->AddMapping("Torrent", "local_download_rate_limit", SettingsPropertyMapper::INT, localDownloadLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter, UIPropertyGetters::SpinboxKBGetter);
+	
+	m_propertyMapper->AddMapping("Torrent", "rate_limit_utp", SettingsPropertyMapper::BOOL, limitUtpCheckBox, SettingsPropertyMapper::CHECKBOX);
+	m_propertyMapper->AddMapping("Torrent", "seed_time_limit", SettingsPropertyMapper::INT, seedTimeLimitEdit, SettingsPropertyMapper::TIME_EDIT, 0, UIPropertySetters::TimeFromIntSetter, UIPropertyGetters::IntFromTimeGetter);
+	
+	m_propertyMapper->AddMapping("Torrent", "share_ratio_limit", SettingsPropertyMapper::DOUBLE, seedGlobalRatioEdit, SettingsPropertyMapper::DOUBLE_SPINBOX);
+	m_propertyMapper->AddMapping("Torrent", "max_connections_per_torrent", SettingsPropertyMapper::INT, maxConnectionsPerTorrentEdit, SettingsPropertyMapper::SPINBOX);
 }
 
 void SettingsDialog::updateRulesWidget(QList<RssDownloadRule*> downloadRules)
@@ -1188,11 +854,12 @@ void SettingsDialog::FillRssTab()
 		connect(deleteRssRule, SIGNAL(triggered()), SLOT(onDeleteRssRule()));
 		rssRulesListWidget->addAction(deleteRssRule);
 	}
-
-	rssRefrashRateEdit->setValue(settings->valueInt("rss", "default_refresh_rate", 30));
-	autosrtEmailNotificationCheckBox->setChecked(settings->valueBool("rss", "auto_download_emeail_notify"));
-	rssSmtpServerEdit->setText(settings->valueString("rss", "smtp_host"));
-	rssSmtpPortEdit->setText(settings->valueString("rss", "smtp_port"));
+	
+	m_propertyMapper->AddMapping("rss", "default_refresh_rate", SettingsPropertyMapper::INT, rssRefrashRateEdit, SettingsPropertyMapper::TIME_EDIT, 30 * 60, UIPropertySetters::TimeFromIntSetter, UIPropertyGetters::IntFromTimeGetter);
+	m_propertyMapper->AddMapping("rss", "auto_download_emeail_notify", SettingsPropertyMapper::BOOL, autosrtEmailNotificationCheckBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX);
+	m_propertyMapper->AddMapping("rss", "smtp_host", SettingsPropertyMapper::STRING, rssSmtpServerEdit, SettingsPropertyMapper::LINE_EDIT);
+	m_propertyMapper->AddMapping("rss", "smtp_port", SettingsPropertyMapper::STRING, rssSmtpPortEdit, SettingsPropertyMapper::LINE_EDIT);
+	
 	char const* smtpConnectionTypes[] =
 	{
 		QT_TR_NOOP("RSS_TCP_CONNECTION"),
@@ -1204,8 +871,8 @@ void SettingsDialog::FillRssTab()
 	{
 		rssSmtpConnTypeCombobox->addItem(tr(smtpConnectionTypes[i]), i);
 	}
-
-	rssSmtpConnTypeCombobox->setCurrentIndex(settings->valueInt("rss", "smtp_conn_type"));
+	
+	m_propertyMapper->AddMapping("rss", "smtp_conn_type", SettingsPropertyMapper::INT, rssSmtpConnTypeCombobox, SettingsPropertyMapper::COMBOBOX);
 	char const* smtpAuthTypes[] =
 	{
 		QT_TR_NOOP("RSS_PLAIN_AUTH"),
@@ -1216,11 +883,10 @@ void SettingsDialog::FillRssTab()
 	{
 		rssAuthTypeComboBox->addItem(tr(smtpAuthTypes[i]), i);
 	}
-
-	rssAuthTypeComboBox->setCurrentIndex(settings->valueInt("rss", "smtp_auth_type"));
-	rssSmtpLoginEdit->setText(settings->valueString("rss", "smtp_user"));
-	rssSmtpPasswordEdit->setText(settings->valueString("rss", "smtp_password"));
-	rssRecepientEmailEdit->setText(settings->valueString("rss", "rss_send_to"));
+	m_propertyMapper->AddMapping("rss", "smtp_auth_type", SettingsPropertyMapper::INT, rssAuthTypeComboBox, SettingsPropertyMapper::COMBOBOX);
+	m_propertyMapper->AddMapping("rss", "smtp_user", SettingsPropertyMapper::STRING, rssSmtpLoginEdit, SettingsPropertyMapper::LINE_EDIT);
+	m_propertyMapper->AddMapping("rss", "smtp_password", SettingsPropertyMapper::STRING, rssSmtpPasswordEdit, SettingsPropertyMapper::LINE_EDIT);
+	m_propertyMapper->AddMapping("rss", "rss_send_to", SettingsPropertyMapper::STRING, rssRecepientEmailEdit, SettingsPropertyMapper::LINE_EDIT);
 }
 
 void SettingsDialog::ApplyRssDownloadRulles()
@@ -1523,5 +1189,23 @@ void SettingsDialog::onImportRssRules()
 	else
 	{
 		CustomMessageBox::critical(this, tr("ERROR"), tr("ERROR_READING_RSS_RULE_LIST: %1").arg(rulesFile.errorString()));
+	}
+}
+
+void SettingsDialog::EnableApplyButton()
+{
+	QPushButton* applyButton = buttonBox->button(QDialogButtonBox::Apply);
+	if (applyButton != NULL)
+	{
+		applyButton->setEnabled(true);
+	}
+}
+
+void SettingsDialog::DisableApplyButton()
+{
+	QPushButton* applyButton = buttonBox->button(QDialogButtonBox::Apply);
+	if (applyButton != NULL)
+	{
+		applyButton->setEnabled(false);
 	}
 }

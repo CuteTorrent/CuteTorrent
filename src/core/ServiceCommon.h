@@ -11,5 +11,4 @@ DEFINE_PTR_CALSS(NotificationSystem);
 DEFINE_PTR_CALSS(EmailNotifier);
 
 DEFINE_PTR_CALSS(QApplicationSettings);
-
 #endif

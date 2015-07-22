@@ -52,7 +52,7 @@ public:
 	int unreadCount() const;
 	bool isUpdating() const;
 	QString error() const;
-	int next_update();
+	int nextUpdate();
 	QList<RssItem*> GetFeedItems();
 	void setItemUnread(bool unreadValue, QString guid);
 	RssItem* GetFeedItem(QString guid);

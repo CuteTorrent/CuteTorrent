@@ -201,14 +201,15 @@ void OpenTorrentDialog::AccepTorrent()
 		int groupIndex = GroupComboBox->currentIndex();
 		QString group = groupIndex >= 0 ? m_lFilters[groupIndex].Name() : "";
 		TorrentManager::AddTorrentFlags flags = BuildFlags();
+		QString savePath = pathEdit->displayText();
 
 		if(!m_torrentFilename.startsWith("magnet"))
 		{
-			m_pTorrentManager->AddTorrent(m_torrentFilename, pathEdit->displayText(), labelNameData->text(), ec, filePriorities, group, flags);
+			m_pTorrentManager->AddTorrent(m_torrentFilename, savePath, ec, labelNameData->text(), filePriorities, group, flags);
 		}
 		else
 		{
-			m_pTorrentManager->AddMagnet(m_info.handle, pathEdit->displayText(), group, filePriorities, flags);
+			m_pTorrentManager->AddMagnet(m_info.handle, savePath, group, filePriorities, flags);
 		}
 
 		if(ec)

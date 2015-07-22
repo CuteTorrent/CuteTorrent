@@ -28,7 +28,7 @@ void UploadController::service(HttpRequest& request, HttpResponse& response)
 
 		error_code ec;
 		QString tempFileName = safeFile->fileName();
-		m_pTorrentManager->AddTorrent(tempFileName, save_path, "", ec);
+		m_pTorrentManager->AddTorrent(tempFileName, save_path, ec);
 
 		if(ec)
 		{

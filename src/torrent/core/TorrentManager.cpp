@@ -320,7 +320,7 @@ void TorrentManager::InitSession()
 			group = info.second;
 		}
 
-		AddTorrent(dir.filePath(*i), savePath, "", ec, QMap<QString, quint8>(), group);
+		AddTorrent(filePath, savePath, ec, "", QMap<QString, quint8>(), group);
 
 		if (ec)
 		{
@@ -641,7 +641,7 @@ void TorrentManager::handle_alert(alert* a)
 }
 
 
-bool TorrentManager::AddTorrent(QString path, QString save_path, QString name, error_code& ec, QMap<QString, quint8> filePriorities, QString group, AddTorrentFlags flags)
+bool TorrentManager::AddTorrent(QString& path, QString& save_path, error_code& ec, QString name, QMap<QString, quint8> filePriorities, QString group, AddTorrentFlags flags)
 
 {
 	boost::intrusive_ptr<torrent_info> t;
@@ -855,7 +855,7 @@ session_settings TorrentManager::readSettings()
 	s_settings.disk_io_write_mode = m_pTorrentSessionSettings->valueInt("Torrent", "disk_io_write_mode", 0);
 	s_settings.low_prio_disk = m_pTorrentSessionSettings->valueBool("Torrent", "low_prio_disk", false);
 	s_settings.cache_size = m_pTorrentSessionSettings->valueInt("Torrent", "cache_size", 2048);
-	s_settings.use_read_cache = m_pTorrentSessionSettings->valueInt("Torrent", "use_read_cache", s_settings.cache_size > 0);
+	s_settings.use_read_cache = m_pTorrentSessionSettings->valueBool("Torrent", "use_read_cache", s_settings.cache_size > 0);
 	s_settings.cache_buffer_chunk_size = m_pTorrentSessionSettings->valueInt("Torrent", "cache_buffer_chunk_size", s_settings.cache_size / 100);
 	s_settings.allowed_fast_set_size = m_pTorrentSessionSettings->valueInt("Torrent", "allowed_fast_set_size", 10);
 	s_settings.read_cache_line_size = m_pTorrentSessionSettings->valueInt("Torrent", "read_cache_line_size", 40);
@@ -975,7 +975,7 @@ void TorrentManager::SaveSession()
 				continue;
 			}
 
-			/*if (!st.need_save_resume)
+			/*if (!st.handle.need_save_resume_data())
 			{
 				continue;
 			}*/
@@ -1408,7 +1408,7 @@ void TorrentManager::CancelMagnetLink(QString link)
 	}
 }
 
-bool TorrentManager::AddMagnet(torrent_handle h, QString SavePath, QString group, QMap<QString, quint8> filePriorities, AddTorrentFlags flags)
+bool TorrentManager::AddMagnet(torrent_handle h, QString& SavePath, QString group, QMap<QString, quint8> filePriorities, AddTorrentFlags flags)
 {
 	if (!filePriorities.isEmpty())
 	{

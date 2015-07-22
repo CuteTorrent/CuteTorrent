@@ -134,7 +134,7 @@ void QRssItemDelegate::drawFeed(QPainter* painter, const QStyleOptionViewItem& o
 
 	QFont updateTimeFont(statusFont);
 	const QFontMetrics updateTimeFM(updateTimeFont);
-	const QString updateTimeStr(StaticHelpers::toTimeString(pRssFeed->next_update()));
+	const QString updateTimeStr(StaticHelpers::toTimeString(pRssFeed->nextUpdate()));
 	painter->save();
 	painter->setRenderHint(QPainter::Antialiasing);
 	style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
@@ -296,7 +296,7 @@ QSize QRssItemDelegate::feedSizeHint(const QStyleOptionViewItem& option, RssFeed
 	int statusWidth = statusFM.width(statusStr);
 	QFont updateTimeFont(statusFont);
 	const QFontMetrics updateTimeFM(updateTimeFont);
-	const QString updateTimeStr(StaticHelpers::toTimeString(pRssFeed->next_update()));
+	const QString updateTimeStr(StaticHelpers::toTimeString(pRssFeed->nextUpdate()));
 	const int updateTimeWidth = updateTimeFM.width(updateTimeStr);
 	const QSize m(margin(*style));
 	return QSize(m.width() + iconSize + MAX3(nameWidth, statusWidth, updateTimeWidth),

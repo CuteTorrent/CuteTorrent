@@ -108,8 +108,8 @@ void RssManager::LoadFeeds()
 			else
 			{
 				m_pFeeds.append(tempFeed);
-				tempFeed->Update();
 				connect(tempFeed, SIGNAL(FeedChanged(QUuid)), SLOT(onFeedChanged(QUuid)));
+				tempFeed->Update();
 			}
 			
 		}
@@ -368,7 +368,7 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 
 	QString savePath = gessSavePath(info.downloadRule, pTorrentInfo->baseSuffix);
 	QMap<QString, quint8> filePriorities = getFilePriorities(info, pTorrentInfo->files);
-	pTorrentManager->AddTorrent(torrentFilePath, savePath, "", ec, filePriorities);
+	pTorrentManager->AddTorrent(torrentFilePath, savePath, ec, "", filePriorities);
 
 	if (ec)
 	{

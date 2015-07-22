@@ -772,6 +772,30 @@
     <ClCompile Include="GeneratedFiles\Release\moc_quazipfile.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="torrent\core\FileSystemTorrentWatcher.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_FileSystemTorrentWatcher.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Utils\SettingsPropertyMapper.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SettingsPropertyMapper.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Utils\UIPropertySetters.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Utils\UIPropertyGetters.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Utils\ValueSetters.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Utils\ValueGetters.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -1011,6 +1035,12 @@
     </CustomBuild>
     <CustomBuild Include="Resources\translations\cutetorrent_ru_RU.ts">
       <Filter>Translation Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrent\core\FileSystemTorrentWatcher.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Utils\SettingsPropertyMapper.h">
+      <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1382,6 +1412,18 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="core\zip\zip.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\gui\Utils\UIPropertySetters.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\gui\Utils\UIPropertyGetters.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\gui\Utils\ValueSetters.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\gui\Utils\ValueGetters.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

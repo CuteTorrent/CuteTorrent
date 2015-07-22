@@ -23,9 +23,8 @@
 #include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
 #include <QtGui/QSpacerItem>
-#include <QtGui/QSpinBox>
-#include <QtGui/QSplitter>
 #include <QtGui/QTableWidget>
+#include <QtGui/QTimeEdit>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
@@ -42,22 +41,19 @@ public:
     QPushButton *pbClose;
     QWidget *m_centralWidget;
     QGridLayout *gridLayout;
-    QLabel *label_3;
-    QDialogButtonBox *buttonBox;
-    QLineEdit *m_pRssUrlEdit;
-    QSpinBox *m_pRefreshRateSpinBox;
-    QSpacerItem *horizontalSpacer;
     QLabel *label;
+    QLineEdit *m_pRssUrlEdit;
+    QLabel *label_3;
+    QTimeEdit *m_pRefreshRateSpinBox;
+    QSpacerItem *horizontalSpacer;
     QGroupBox *groupBox;
-    QGridLayout *gridLayout_4;
-    QSplitter *splitter;
-    QWidget *widget;
     QGridLayout *gridLayout_2;
     QTableWidget *m_pCoociesTabWidget;
     QPushButton *addRowButton;
     QPushButton *removeRowButton;
     QSpacerItem *horizontalSpacer_2;
     QLabel *label_2;
+    QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *RssSettings)
     {
@@ -120,16 +116,10 @@ public:
         m_centralWidget->setObjectName(QString::fromUtf8("m_centralWidget"));
         gridLayout = new QGridLayout(m_centralWidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        label_3 = new QLabel(m_centralWidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label = new QLabel(m_centralWidget);
+        label->setObjectName(QString::fromUtf8("label"));
 
-        gridLayout->addWidget(label_3, 1, 0, 1, 1);
-
-        buttonBox = new QDialogButtonBox(m_centralWidget);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-
-        gridLayout->addWidget(buttonBox, 4, 0, 1, 3);
+        gridLayout->addWidget(label, 0, 0, 1, 1);
 
         m_pRssUrlEdit = new QLineEdit(m_centralWidget);
         m_pRssUrlEdit->setObjectName(QString::fromUtf8("m_pRssUrlEdit"));
@@ -137,9 +127,14 @@ public:
 
         gridLayout->addWidget(m_pRssUrlEdit, 0, 1, 1, 2);
 
-        m_pRefreshRateSpinBox = new QSpinBox(m_centralWidget);
+        label_3 = new QLabel(m_centralWidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        gridLayout->addWidget(label_3, 1, 0, 1, 1);
+
+        m_pRefreshRateSpinBox = new QTimeEdit(m_centralWidget);
         m_pRefreshRateSpinBox->setObjectName(QString::fromUtf8("m_pRefreshRateSpinBox"));
-        m_pRefreshRateSpinBox->setMaximum(300);
+        m_pRefreshRateSpinBox->setDisplayFormat(QString::fromUtf8("HH:mm:ss"));
 
         gridLayout->addWidget(m_pRefreshRateSpinBox, 1, 1, 1, 1);
 
@@ -147,23 +142,11 @@ public:
 
         gridLayout->addItem(horizontalSpacer, 1, 2, 1, 1);
 
-        label = new QLabel(m_centralWidget);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        gridLayout->addWidget(label, 0, 0, 1, 1);
-
         groupBox = new QGroupBox(m_centralWidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        gridLayout_4 = new QGridLayout(groupBox);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        splitter = new QSplitter(groupBox);
-        splitter->setObjectName(QString::fromUtf8("splitter"));
-        splitter->setOrientation(Qt::Horizontal);
-        widget = new QWidget(splitter);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        gridLayout_2 = new QGridLayout(widget);
+        gridLayout_2 = new QGridLayout(groupBox);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        m_pCoociesTabWidget = new QTableWidget(widget);
+        m_pCoociesTabWidget = new QTableWidget(groupBox);
         if (m_pCoociesTabWidget->columnCount() < 2)
             m_pCoociesTabWidget->setColumnCount(2);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
@@ -187,14 +170,14 @@ public:
         m_pCoociesTabWidget->verticalHeader()->setVisible(false);
         m_pCoociesTabWidget->verticalHeader()->setDefaultSectionSize(19);
 
-        gridLayout_2->addWidget(m_pCoociesTabWidget, 0, 0, 1, 4);
+        gridLayout_2->addWidget(m_pCoociesTabWidget, 0, 0, 1, 3);
 
-        addRowButton = new QPushButton(widget);
+        addRowButton = new QPushButton(groupBox);
         addRowButton->setObjectName(QString::fromUtf8("addRowButton"));
 
         gridLayout_2->addWidget(addRowButton, 1, 0, 1, 1);
 
-        removeRowButton = new QPushButton(widget);
+        removeRowButton = new QPushButton(groupBox);
         removeRowButton->setObjectName(QString::fromUtf8("removeRowButton"));
 
         gridLayout_2->addWidget(removeRowButton, 1, 1, 1, 1);
@@ -203,24 +186,25 @@ public:
 
         gridLayout_2->addItem(horizontalSpacer_2, 1, 2, 1, 1);
 
-        label_2 = new QLabel(widget);
+        label_2 = new QLabel(groupBox);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setWordWrap(true);
 
-        gridLayout_2->addWidget(label_2, 4, 0, 1, 3);
-
-        splitter->addWidget(widget);
-
-        gridLayout_4->addWidget(splitter, 0, 0, 1, 1);
+        gridLayout_2->addWidget(label_2, 2, 0, 1, 3);
 
 
         gridLayout->addWidget(groupBox, 2, 0, 1, 3);
 
+        buttonBox = new QDialogButtonBox(m_centralWidget);
+        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+
+        gridLayout->addWidget(buttonBox, 3, 0, 1, 3);
+
 
         verticalLayout->addWidget(m_centralWidget);
 
-        QWidget::setTabOrder(m_pRssUrlEdit, m_pRefreshRateSpinBox);
-        QWidget::setTabOrder(m_pRefreshRateSpinBox, pbClose);
+        QWidget::setTabOrder(m_pRssUrlEdit, pbClose);
         QWidget::setTabOrder(pbClose, buttonBox);
 
         retranslateUi(RssSettings);
@@ -236,9 +220,8 @@ public:
     {
         tbMenu->setText(QString());
         LTitle->setText(QApplication::translate("RssSettings", "RSS_SETTINGS", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("RssSettings", "RSS_REFRASH_RATE", 0, QApplication::UnicodeUTF8));
-        m_pRefreshRateSpinBox->setSuffix(QApplication::translate("RssSettings", " MINUTES", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("RssSettings", "RSS_URL", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("RssSettings", "RSS_REFRASH_RATE", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("RssSettings", "COOKIES", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = m_pCoociesTabWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("RssSettings", "COOKIE_ATTRIBUTE", 0, QApplication::UnicodeUTF8));

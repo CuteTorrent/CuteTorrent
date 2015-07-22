@@ -27,6 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "ui_SettingsDialog.h"
 #include "RconWebService.h"
 #include "RssDownloadRule.h"
+#include "Utils/SettingsPropertyMapper.h"
 
 class QApplicationSettings;
 class RconWebService;
@@ -56,6 +57,7 @@ private:
 		STATIC_SAVE_PATH,
 		NUMBER_OF_FEEDS
 	};
+	boost::scoped_ptr<SettingsPropertyMapper> m_propertyMapper;
 	QHash<QUuid, RssDownloadRule*> m_downloadRulesCopy;
 	QList<QUuid> m_deletedRules;
 	QApplicationSettingsPtr settings;
@@ -72,7 +74,6 @@ private:
 	void FillWebUITab();
 	void FillKeyMapTab();
 	void SetupSchedullerTab();
-	void FillSearchTab();
 	void FillNetworkTab();
 	void FillRestrictionTab();
 	void updateRulesWidget(QList<RssDownloadRule*> downloadRules);
@@ -109,6 +110,8 @@ private slots:
 	void onDeleteRssRule();
 	void onExportRssRules();
 	void onImportRssRules();
+	void EnableApplyButton();
+	void DisableApplyButton();
 };
 
 #endif // !_SETTINGS_DLG_H

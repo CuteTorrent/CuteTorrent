@@ -1,5 +1,7 @@
 #include "RssFeedSettingsDialog.h"
 #include "RssFeed.h"
+#include <helpers/StaticHelpers.h>
+
 RssFeedSettingsDialog::RssFeedSettingsDialog(QWidget* parent /*= 0*/, int flags /*= 0*/) : BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize, parent), m_pFeed(NULL)
 {
 	setupUi(this);
@@ -34,7 +36,7 @@ void RssFeedSettingsDialog::accept()
 		return;
 	}
 
-	m_pFeed->setTll(m_pRefreshRateSpinBox->value());
+	m_pFeed->setTll(StaticHelpers::QTimeToSecs(m_pRefreshRateSpinBox->time()));
 	QHash<QString, QString> cookies;
 	QModelIndex index = m_pCoociesTabWidget->currentIndex();
 
@@ -110,7 +112,7 @@ void RssFeedSettingsDialog::FillInData()
 	}
 
 	m_pRssUrlEdit->setText(m_pFeed->url().toString());
-	m_pRefreshRateSpinBox->setValue(m_pFeed->ttl());
+	m_pRefreshRateSpinBox->setTime(StaticHelpers::SecsToQTime(m_pFeed->ttl()));
 	QList<QNetworkCookie> cookies = m_pFeed->coookies();
 	m_pCoociesTabWidget->setRowCount(cookies.size());
 

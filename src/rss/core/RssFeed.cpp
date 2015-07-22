@@ -89,10 +89,10 @@ void RssFeed::resourceLoaded(QNetworkReply* pReply)
 
 	if (m_ttl == 0)
 	{
-		m_ttl = QApplicationSettings::getInstance()->valueInt("rss", "default_refresh_rate", 30);
+		m_ttl = QApplicationSettings::getInstance()->valueInt("rss", "default_refresh_rate", 30*60);
 	}
 
-	m_pUpdateTimer->setInterval(ttl() * 60l * 1000l);
+	m_pUpdateTimer->setInterval(ttl() * 1000l);
 	m_pUpdateTimer->start();
 	m_elapsedTime.start();
 	emit FeedChanged(m_uid);
@@ -122,7 +122,7 @@ int RssFeed::ttl()
 void RssFeed::setTll(int value)
 {
 	m_customTtl = value;
-	m_pUpdateTimer->setInterval(ttl() * 60l * 1000l);
+	m_pUpdateTimer->setInterval(ttl() * 1000l);
 
 	if (m_pUpdateTimer->isActive())
 	{
@@ -163,7 +163,7 @@ QList<QNetworkCookie> RssFeed::buildCookies() const
 	return res;
 }
 
-int RssFeed::next_update()
+int RssFeed::nextUpdate()
 {
 	return (m_pUpdateTimer->interval() - m_elapsedTime.elapsed()) / 1000;
 }

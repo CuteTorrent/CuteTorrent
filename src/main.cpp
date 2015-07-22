@@ -164,7 +164,11 @@ int main(int argc, char* argv[])
 
 	Application a(argc, argv);
 	a.setWindowIcon(QIcon(":/icons/app.ico"));
+#ifdef Q_WS_WIN
+	QString file2open = QString::fromLocal8Bit(vm["input-file"].as<std::string>().c_str());
+#else
 	QString file2open = QString::fromUtf8(vm["input-file"].as<std::string>().c_str());
+#endif
 
 	if(a.isRunning())
 	{
@@ -175,7 +179,12 @@ int main(int argc, char* argv[])
 
 		if (vm.count("create_torrent"))
 		{
+#ifdef Q_WS_WIN
+			QString torrentCreationSource = QString::fromLocal8Bit(vm["create_torrent"].as<std::string>().c_str());
+#else
 			QString torrentCreationSource = QString::fromUtf8(vm["create_torrent"].as<std::string>().c_str());
+#endif
+			
 			a.sendMessage(QString("create_torrent:%1").arg(torrentCreationSource));
 		}
 
@@ -220,7 +229,7 @@ int main(int argc, char* argv[])
 
 	a.loadTranslations(":/translations");
 	a.loadTranslationsQt(":/translations_qt");
-	a.addLibraryPath(QCoreApplication::applicationDirPath() + "/plugins");
+	a.addLibraryPath(StaticHelpers::CombinePathes(QCoreApplication::applicationDirPath(), "plugins"));
 	CuteTorrentMainWindow w;
 	a.setActivationWindow(&w);
 	a.setActiveWindow(&w);

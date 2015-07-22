@@ -271,7 +271,7 @@ QString StaticHelpers::translateLibTorrentError(error_code const& ec)
 	}
 
 #endif
-	return QString::fromUtf8(ec.message().c_str());
+	return QString::fromLocal8Bit(ec.message().c_str());
 }
 
 QString StaticHelpers::translateSessionError(error_code const& ec)
@@ -601,7 +601,7 @@ QString StaticHelpers::translateError(error_code const& ec, char* msgs[], int ms
 
 	if (code < 0 || code >= msgs_len)
 	{
-		return QString::fromUtf8(ec.message().c_str());
+		return QString::fromStdString(ec.message());
 	}
 
 	return qApp->translate("ErrorMsg", msgs[code]);
@@ -628,6 +628,30 @@ void StaticHelpers::OpenFileInExplorer(QString& file)
 	ITEMIDLIST* pItem = ILCreateFromPathW(wPath);
 	SHOpenFolderAndSelectItems(pItem, 0, NULL, 0);
 	ILFree(pItem);
+}
+
+typedef BOOL(WINAPI* LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);
+
+LPFN_ISWOW64PROCESS fnIsWow64Process;
+
+bool StaticHelpers::IsWow64()
+{
+	BOOL bIsWow64 = FALSE;
+	//IsWow64Process is not available on all supported versions of Windows.
+	//Use GetModuleHandle to get a handle to the DLL that contains the function
+	//and GetProcAddress to get a pointer to the function if available.
+	fnIsWow64Process = (LPFN_ISWOW64PROCESS)GetProcAddress(
+		GetModuleHandle(TEXT("kernel32")), "IsWow64Process");
+
+	if (NULL != fnIsWow64Process)
+	{
+		if (!fnIsWow64Process(GetCurrentProcess(), &bIsWow64))
+		{
+			//handle error
+		}
+	}
+
+	return bIsWow64;
 }
 #endif
 
@@ -696,6 +720,22 @@ QByteArray StaticHelpers::gUncompress(QByteArray data)
 	// clean up and return
 	inflateEnd(&strm);
 	return result;
+}
+
+QTime StaticHelpers::SecsToQTime(int secs)
+{
+	int h = 0, m = 0, s = 0;
+	h = secs / 3600;
+	secs -= h * 3600;
+	m = secs / 60;
+	secs -= m * 60;
+	s = secs;
+	return QTime(h, m, s);
+}
+
+int StaticHelpers::QTimeToSecs(const QTime& time)
+{
+	return QTime(0, 0, 0).secsTo(time);
 }
 
 NetworkDiskCache* StaticHelpers::m_pDiskCache = NULL;

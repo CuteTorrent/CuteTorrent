@@ -126,6 +126,7 @@ private:
 	QTreeWidgetItem* rssTreeItem;
 	QTreeWidgetItem* searchTreeItem;
 	SearchEnginePtr m_pSearchEngine;
+	FileSystemTorrentWatcherPtr m_pTorrentWatcher;
 #ifdef Q_WS_WIN
 	QWinJumpList* m_pJumpList;
 #endif

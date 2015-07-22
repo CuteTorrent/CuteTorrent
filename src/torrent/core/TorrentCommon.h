@@ -5,4 +5,7 @@
 DEFINE_PTR_CALSS(TorrentStorrage)
 
 DEFINE_PTR_CALSS(TorrentManager)
+
+DEFINE_PTR_CALSS(FileSystemTorrentWatcher)
+
 #endif

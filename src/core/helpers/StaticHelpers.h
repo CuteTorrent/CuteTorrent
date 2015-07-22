@@ -35,16 +35,14 @@ private:
 	static QString translateSocksError(error_code const& ec);
 	static QString translateUpnpError(error_code const& ec);
 	static QString translateError(error_code const& ec, char* msgs[], int msgs_len);
-	template<typename T> static T CombinePathes(T t)
-	{
-		return t;
-	}
+	template<typename T> static T CombinePathes(T t);
 public:
 #ifdef Q_WS_X11
 	static void OpenFolderNautilus(QString& file);
 #endif
 #ifdef Q_WS_WIN
 	static void OpenFileInExplorer(QString& file);
+	static bool IsWow64();
 #endif
 	static QString toKbMbGb(size_type size, bool isSpped = false);
 	static QString translateLibTorrentError(error_code const& ec);
@@ -59,10 +57,16 @@ public:
 	static QByteArray gUncompress(QByteArray data);
 	template <typename T> static size_t HashVector(const std::vector<T>& vector);
 	template <typename T> static QList<T> reversed(const QList<T>& in);
+	static QTime SecsToQTime(int secs);
+	static int QTimeToSecs(const QTime& time);
 };
 
 
-
+template <typename T>
+T StaticHelpers::CombinePathes(T t)
+{
+	return t;
+}
 
 template<typename T, typename... Args>
 QString StaticHelpers::CombinePathes(T first, Args &... args)
