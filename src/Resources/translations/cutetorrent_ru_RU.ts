@@ -3444,7 +3444,7 @@ Download: %3</source>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1221"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1843"/>
         <source>ALOW_REORDERED_OPERATIONS</source>
-        <translation>Разрешать неупордоченные операции</translation>
+        <translation>Разрешать неупорядоченные операции</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1241"/>

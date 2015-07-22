@@ -98,7 +98,6 @@ private slots:
 	void browseSavepathGroup();
 	void browseDTPath();
 	void showSelectedGroup(int);
-	void SetDate(QDate date);
 	void AddTask();
 	void DeleteTask();
 	void UpdateSchedullerTab(int index);

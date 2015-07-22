@@ -26,6 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "TorrentManager.h"
 #include <libtorrent/magnet_uri.hpp>
 #include <libtorrent/peer_info.hpp>
+#include "QApplicationSettings.h"
 bool Torrent::hasError() const
 {
 	if(m_hTorrent.handle.is_valid())
@@ -565,6 +566,16 @@ bool Torrent::isSingleFile()
 void Torrent::UpdateStatus(torrent_status newVal)
 {
 	m_hTorrent = newVal;
+	float ratioLimit = QApplicationSettings::getInstance()->valueFloat("Torrent", "share_ratio_limit");
+
+	if (ratioLimit > 0.0f)
+	{
+		float currentRatio = float(m_hTorrent.all_time_upload) / m_hTorrent.all_time_download;
+		if (currentRatio > ratioLimit)
+		{
+			pause();
+		}
+	}
 }
 
 void Torrent::SetFilePriority(int index, int prioryty)

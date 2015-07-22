@@ -851,7 +851,7 @@ session_settings TorrentManager::readSettings()
 	}
 
 	s_settings.lock_files = m_pTorrentSessionSettings->valueBool("Torrent", "lock_files", false);
-	s_settings.disk_io_read_mode = m_pTorrentSessionSettings->valueInt("Torrent", "disk_io_read_mode", 0);
+	s_settings.disk_io_read_mode = m_pTorrentSessionSettings->valueInt("Torrent", "disk_io_write_mode", 0);
 	s_settings.disk_io_write_mode = m_pTorrentSessionSettings->valueInt("Torrent", "disk_io_write_mode", 0);
 	s_settings.low_prio_disk = m_pTorrentSessionSettings->valueBool("Torrent", "low_prio_disk", false);
 	s_settings.cache_size = m_pTorrentSessionSettings->valueInt("Torrent", "cache_size", 2048);
@@ -890,11 +890,15 @@ void TorrentManager::updateSettings(const session_settings& settings)
 
 void TorrentManager::updateMaxConnectionsPerTorrent()
 {
-	max_connections_per_torrent = m_pTorrentSessionSettings->valueInt("Torrent", "max_connections_per_torrent");
-	int length = m_pTorrentStorrage->length();
-	for (int i = 0; i < length; i++)
+	int newValue = m_pTorrentSessionSettings->valueInt("Torrent", "max_connections_per_torrent");
+	if (max_connections_per_torrent != newValue)
 	{
-		(*m_pTorrentStorrage.get()).at(i)->GetInternalHandle().set_max_connections(max_connections_per_torrent);
+		max_connections_per_torrent = newValue;
+		int length = m_pTorrentStorrage->length();
+		for (int i = 0; i < length; i++)
+		{
+			(*m_pTorrentStorrage.get()).at(i)->GetInternalHandle().set_max_connections(max_connections_per_torrent);
+		}
 	}
 }
 

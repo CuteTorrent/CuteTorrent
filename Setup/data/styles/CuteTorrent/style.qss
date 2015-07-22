@@ -389,11 +389,18 @@ QCheckBox {
     spacing: 5px;
 }
 
-QListView::indicator ,QTreeView::indicator ,QGroupBox::indicator ,QCheckBox::indicator {
+QListView::indicator ,QTreeView::indicator ,QGroupBox::indicator ,QCheckBox::indicator, QRadioButton::indicator {
      width: 13px;
      height: 13px;
 }
 
+QRadioButton::indicator::unchecked {
+    image: url($[STYLE_DIR]/radiobutton_unchecked.png);
+}
+
+QRadioButton::indicator::checked {
+    image: url($[STYLE_DIR]/radiobutton_checked.png);
+}
 QListView::indicator:unchecked ,QTreeView::indicator:unchecked ,QGroupBox::indicator:unchecked ,QCheckBox::indicator:unchecked {
     image: url($[STYLE_DIR]/checbox-unchecked.png);
 }

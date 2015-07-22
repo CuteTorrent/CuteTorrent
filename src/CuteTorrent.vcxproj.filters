@@ -1003,9 +1003,6 @@
     <CustomBuild Include="torrent\gui\Controls\PieceAvailabilityWidget.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="torrent\core\TorrentStorrage.h">
-      <Filter>Generated Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="search\searchproviders\CustomScriptSearchProvider.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
@@ -1424,6 +1421,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="core\gui\Utils\ValueGetters.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="torrent\core\TorrentStorrage.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

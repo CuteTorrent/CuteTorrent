@@ -50,6 +50,7 @@ public:
 	void setGroupValues(QString group, QMap<QString, QVariant> values);
 	QString valueString(const QString& group, const QString& key, const QString& defalt = "");
 	bool valueBool(const QString& group, const QString& key, bool defalt = true);
+	float valueFloat(const QString& group, const QString& key, float defalt = 0.0f);
 	void WriteSettings();
 };
 

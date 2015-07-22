@@ -164,6 +164,13 @@ bool QApplicationSettings::valueBool(const QString& group, const QString& key, c
 	QVariant val = value(group, key, defalt);
 	return val.toBool();
 }
+
+float QApplicationSettings::valueFloat(const QString& group, const QString& key, float defalt)
+{
+	QVariant val = value(group, key, defalt);
+	return val.toFloat();
+}
+
 void  QApplicationSettings::ReedSettings()
 {
 	settings->sync();

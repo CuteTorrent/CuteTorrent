@@ -3453,7 +3453,7 @@ Download: %3</translation>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1221"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1843"/>
         <source>ALOW_REORDERED_OPERATIONS</source>
-        <translation>Reordered operations</translation>
+        <translation>Allow reordered operations</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1241"/>
@@ -3477,7 +3477,7 @@ Download: %3</translation>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1254"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1851"/>
         <source>USE_READ_CASHE</source>
-        <translation>Use read cash</translation>
+        <translation>Use read cache</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1208"/>

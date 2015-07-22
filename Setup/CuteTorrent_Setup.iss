@@ -1,15 +1,18 @@
 ;#define x64
+#define MainBinaryName  "data/CuteTorrent.exe"
+#define SetupBaseName   "CuteTorrent "
+#define AppVersion      GetFileVersion(AddBackslash(SourcePath) + MainBinaryName)
 #include "idp.iss"
 [Setup]
 WizardSmallImageFile=bottom.bmp
 AppId=CuteTorrent
 AppName=CuteTorrent
-AppVersion=1.0.0.29
+AppVersion={#AppVersion}
 DefaultDirName={pf}\CuteTorrent
 DefaultGroupName=CuteTorrent
 UninstallDisplayIcon={app}\CuteTorrent.exe
 OutputDir=Output
-OutputBaseFilename=CuteTorrent 1.0.0.29
+OutputBaseFilename={#SetupBaseName + AppVersion}
 SolidCompression=yes
 Compression=lzma/ultra
 WizardImageFile=Left.bmp

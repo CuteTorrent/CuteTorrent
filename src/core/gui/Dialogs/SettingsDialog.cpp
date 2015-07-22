@@ -365,7 +365,7 @@ void SettingsDialog::ApplySettingsToSession()
 	current.upload_rate_limit	= uploadLimitEdit->value() * KbInt;
 	current.download_rate_limit = downloadLimitEdit->value() * KbInt;
 	current.seed_time_limit = settings->valueInt("Torrent", "seed_time_limit");
-	current.share_ratio_limit = settings->valueString("Torrent", "share_ratio_limit").toFloat();
+	current.share_ratio_limit = settings->valueFloat("Torrent", "share_ratio_limit");
 	pTorrentManager->updateSettings(current);
 	pTorrentManager->RefreshExternalPeerSettings();
 	pTorrentManager->updateMaxConnectionsPerTorrent();
@@ -498,11 +498,6 @@ void SettingsDialog::ApplyAndClose()
 	close();
 }
 
-void SettingsDialog::SetDate(QDate date)
-{
-	//	QPair<QDateTime,QDateTime> interval=calendarWidget->getSelectedInterval();
-	beginDateTimeEdit->setDate(date);
-}
 
 void SettingsDialog::DeleteTask()
 {
