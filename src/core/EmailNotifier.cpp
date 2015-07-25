@@ -197,7 +197,7 @@ void EmailNotifier::SendEmail(QString to, QString subject, QString body)
 	{
 		smtpClient->login(
 		    settings->valueString("rss", "smtp_user"),
-		    settings->valueString("rss", "smtp_password")
+		    settings->securedValueString("rss", "smtp_password")
 		);
 
 		if (smtpClient->waitForAuthenticated(5000))

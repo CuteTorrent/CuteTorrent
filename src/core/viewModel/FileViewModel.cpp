@@ -268,7 +268,7 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 				}
 				else
 				{
-					return 0;
+					return -1;
 				}
 
 			case 3:

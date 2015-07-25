@@ -157,6 +157,7 @@ void RssManager::addDownloadRule(RssDownloadRule* rule)
 
 void RssManager::removeDownloadRule(const QUuid& uid)
 {
+	boost::scoped_ptr<RssDownloadRule> removedItem(m_downloadRules[uid]);
 	m_downloadRules.remove(uid);
 }
 

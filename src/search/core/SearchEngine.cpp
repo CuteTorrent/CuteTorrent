@@ -7,8 +7,19 @@
 #include <helpers/StaticHelpers.h>
 #include <QMainWindow>
 #include <QAction>
+#include <QApplicationSettings.h>
 boost::weak_ptr<SearchEngine> SearchEngine::m_pInstance;
 
+
+SearchEngine::SearchEngine() : m_scriptDebugger(NULL), m_debuggerWindow(NULL), m_scriptDebugingEnabled(false)
+{
+	m_scriptEngine = new QScriptEngine(this);
+	initScriptEngine();
+	init();
+	m_result = SearchItemsStorrage::getInstance();
+	QApplicationSettingsPtr pSettings = QApplicationSettings::getInstance();
+	connect(pSettings.get(), SIGNAL(PropertyChanged(QString, QString)), SLOT(OnSettngsChnaged(QString, QString)));
+}
 
 QScriptValue SearchEngine::searchProviderCtor(QScriptContext* context, QScriptEngine* engine)
 {
@@ -16,6 +27,29 @@ QScriptValue SearchEngine::searchProviderCtor(QScriptContext* context, QScriptEn
 	QScriptValue scriptValue = engine->newQObject(object);
 	object->setScriptObject(scriptValue);
 	return scriptValue;
+}
+
+void SearchEngine::OnSettngsChnaged(QString group, QString key)
+{
+	if (group == "Search" && key == "script_debuging_enabled")
+	{
+		QApplicationSettingsPtr pSettings = QApplicationSettings::getInstance();
+		if (pSettings->valueBool("Search", "script_debuging_enabled"))
+		{
+			if (!isEnabledScriptDebugging())
+			{
+				enableScriptDebugging();
+			}
+		}
+		else
+		{
+			if (isEnabledScriptDebugging())
+			{
+				disableScriptDebugging();
+			}
+		}
+	}
+	
 }
 
 QScriptValue SearchEngine::searchResultCtor(QScriptContext* context, QScriptEngine* engine)
@@ -97,23 +131,6 @@ void SearchEngine::initScriptEngine()
 	m_scriptEngine->globalObject().setProperty("SearchResult", searchResultMetaObject);
 	m_scriptEngine->globalObject().setProperty("CustomScriptSearchProvider", searchProviderMetaObject);
 	m_scriptEngine->globalObject().setProperty("Enums", searchProviderMetaObject);
-#if !defined(QT_NO_SCRIPTTOOLS)
-	/*QScriptEngineDebugger* debugger = new QScriptEngineDebugger(this);
-	debugger->attachTo(m_scriptEngine);
-	debugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
-	QMainWindow *debugWindow = debugger->standardWindow();
-	debugWindow->resize(1024, 640);
-
-	debugWindow->show();*/
-#endif
-}
-
-SearchEngine::SearchEngine() : m_scriptDebugger(NULL), m_debuggerWindow(NULL), m_scriptDebugingEnabled(false)
-{
-	m_scriptEngine = new QScriptEngine(this);
-	initScriptEngine();
-	init();
-	m_result = SearchItemsStorrage::getInstance();
 }
 
 void SearchEngine::loadSearchProvider(const QString path)
@@ -157,7 +174,7 @@ void SearchEngine::loadSearchProvider(const QString path)
 void SearchEngine::init()
 {
 #ifdef Q_WS_WIN
-	QString rootPath = QApplication::applicationDirPath() + "/searchEngines/";
+	QString rootPath = StaticHelpers::CombinePathes(QApplication::applicationDirPath(), "searchEngines");
 #endif
 #ifdef Q_OS_UNIX
 	QString rootPath = "/usr/share/cutetorrent/searchEngines/";
@@ -170,7 +187,7 @@ void SearchEngine::init()
 
 		foreach(QString styleDir, engineDirs)
 		{
-			loadSearchProvider(rootPath + styleDir);
+			loadSearchProvider(StaticHelpers::CombinePathes(rootPath, styleDir));
 		}
 	}
 	else

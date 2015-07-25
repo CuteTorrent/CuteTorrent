@@ -12,7 +12,9 @@ class TorrentTracker : public QObject, public Singleton<TorrentTracker>
 private:
 	HttpListener* httpServer;
 	TrackerRequestHandler* requestHandler;
-
+	QApplicationSettingsPtr m_pSettings;
+private slots:
+	void OnSettngsChnaged(QString, QString);
 protected:
 	explicit TorrentTracker(QObject* parent = 0);
 

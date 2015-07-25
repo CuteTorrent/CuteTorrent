@@ -176,6 +176,10 @@ const
   // Microsoft Visual C++ 2012 x86 Additional Runtime - 11.0.61030.0 (Update 4)
   VC_2012_REDIST_ADD_UPD4_X86 = '{B175520C-86A2-35A7-8619-86DC379688B9}';
   VC_2012_REDIST_ADD_UPD4_X64 = '{37B8F9C7-03FB-3253-8781-2517C99D7C00}';
+  // Microsoft Visual C++ 2013 x86 Minimum Runtime - 12.0.21005
+  VC_2013_REDIST_MIN_UPD4_X86 = '{13A4EE12-23EA-3371-91EE-EFB36DDFFF3E}';
+  // Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.21005
+  VC_2013_REDIST_ADD_UPD4_X86 = '{F8CFEB22-A2E7-3971-9EDA-4B11EDEFC185}';
 
 function MsiQueryProductState(szProduct: string): INSTALLSTATE;
   external 'MsiQueryProductState{#AW}@msi.dll stdcall';
@@ -192,8 +196,8 @@ begin
   // this statement, the following won't install your VC redist only when
   // the Visual C++ 2010 Redist (x86) and Visual C++ 2010 SP1 Redist(x86)
   // are installed for the current user
-  Result := not (VCVersionInstalled(VC_2012_REDIST_MIN_UPD4_X86) and
-    VCVersionInstalled(VC_2012_REDIST_ADD_UPD4_X86));
+  Result := not (VCVersionInstalled(VC_2013_REDIST_MIN_UPD4_X86) and
+    VCVersionInstalled(VC_2013_REDIST_ADD_UPD4_X86));
 end;
 
 function Process32First(

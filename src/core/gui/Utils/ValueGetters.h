@@ -5,6 +5,7 @@ class ValueGetters
 {
 public:
 	static QVariant SettingsValueGetter(QString group, QString name, QVariant defaultValue = QVariant());
+	static QVariant SettingsEncryptedValueGetter(QString group, QString name, QVariant defaultValue = QVariant());
 	static QVariant StyleValueGetter(QString group, QString name, QVariant defaultValue = QVariant());
 	static QVariant LanguageValueGetter(QString group, QString name, QVariant defaultValue = QVariant());
 	static QVariant MagnetAssociationValueGetter(QString group, QString name, QVariant defaultValue = QVariant());

@@ -75,8 +75,12 @@ class SearchResult;
 Q_DECLARE_METATYPE(QList<int>)
 
 CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
-	: BaseWindow(FullTitle, AllowResize, parent), m_httpLinkRegexp("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?"),
-	  m_pPieceView(NULL), m_pSearchEngine(SearchEngine::getInstance()), m_pieceAvalibilityWidget(NULL)
+	: BaseWindow(FullTitle, AllowResize, parent)
+	, m_httpLinkRegexp("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?")
+	, m_pPieceView(NULL)
+	, m_pSearchEngine(SearchEngine::getInstance())
+	, m_pieceAvalibilityWidget(NULL)
+	, m_pNotificationSystem(NotificationSystem::getInstance())
 #ifdef Q_WS_WIN
 	, m_pJumpList(new QWinJumpList(this))
 #endif
@@ -158,10 +162,13 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 		}
 	}
 	m_pTorrentWatcher = FileSystemTorrentWatcher::getInstance();
-	if (m_pSettings->valueBool("Torrent","should_watch_dir"))
+	if (m_pSettings->valueBool("WatchDir", "enabled"))
 	{
-		QString watchDir = m_pSettings->valueString("Torrent", "watch_dir");
-		m_pTorrentWatcher->addPath(watchDir);
+		QString watchDir = m_pSettings->valueString("WatchDir", "dir_to_watch");
+		if (!watchDir.isEmpty())
+		{
+			m_pTorrentWatcher->addPath(watchDir);
+		}
 	}
 
 	if (m_pSettings->valueBool("TorrentTracker", "enabled", false))
@@ -215,10 +222,10 @@ void CuteTorrentMainWindow::setupStatusBar()
 	mystatusBar->addPermanentWidget(downLabel);
 	mystatusBar->addPermanentWidget(downLabelText);
 	m_pPieceView = new PeiceDisplayWidget(this);
-	gridLayout_4->addWidget(m_pPieceView, 0, 0, 1, 4);
+	gridLayout_4->addWidget(m_pPieceView, 0, 0, 1, 1);
 	initStatusBarIcons();
 	m_pieceAvalibilityWidget = new PieceAvailabilityWidget(this);
-	gridLayout_4->addWidget(m_pieceAvalibilityWidget, 1, 0, 1, 4);
+	gridLayout_4->addWidget(m_pieceAvalibilityWidget, 1, 0, 1, 1);
 }
 
 void CuteTorrentMainWindow::setupListView()
@@ -398,6 +405,7 @@ void CuteTorrentMainWindow::setupConnections()
 	connect(m_pTorrentListView, SIGNAL(doubleClicked(const QModelIndex&)), m_pTorrentDisplayModel, SLOT(OpenDirSelected()));
 	connect(m_pTorrentSearchEdit, SIGNAL(textEdited(const QString&)), m_pSearchEdit, SLOT(setText(const QString&)));
 	connect(m_pSearchEdit, SIGNAL(textEdited(const QString&)), m_pTorrentSearchEdit, SLOT(setText(const QString&)));
+	connect(ACTION_MENU_ABOUT_QT, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 	connect(qApp, SIGNAL(aboutToQuit()), SLOT(OnQuit()));
 }
 
@@ -698,8 +706,8 @@ void CuteTorrentMainWindow::IconActivated(QSystemTrayIcon::ActivationReason reas
 			else
 			{
 				showNormal();
-				raise();
-				activateWindow();
+				QApplication::alert(this);
+				RaiseWindow();
 			}
 
 			break;
@@ -1021,10 +1029,8 @@ void CuteTorrentMainWindow::closeEvent(QCloseEvent* ce)
 {
 	ce->ignore();
 	hide();
-	/*	QBalloonTip::showBalloon("CuteTorrent", tr("CT_HIDE_MSG"), QBalloonTip::Info, qVariantFromValue(0),
-		                         QSystemTrayIcon::Information, 5000, false);*/
+	m_pNotificationSystem->OnNewNotification(NotificationSystem::TORRENT_INFO, tr("CT_HIDE_MSG"), QVariant());
 	setUpdatesEnabled(false);
-	return;
 }
 
 void CuteTorrentMainWindow::dragEnterEvent(QDragEnterEvent* event)
@@ -1114,7 +1120,6 @@ void CuteTorrentMainWindow::saveWindowState()
 
 CuteTorrentMainWindow::~CuteTorrentMainWindow()
 {
-	RconWebService::freeInstance();
 	m_pTrayIcon->hide();
 	Scheduller::freeInstance();
 }
@@ -1254,11 +1259,6 @@ void CuteTorrentMainWindow::ClearPieceDisplay()
 {
 	m_pPieceView->clear();
 	m_pieceAvalibilityWidget->clear();
-	/*QGraphicsScene *scene = new QGraphicsScene(this);
-	scene->clear();
-	piceDwonloadedView->scene()->deleteLater();
-	piceDwonloadedView->setScene(scene);
-	piceDwonloadedView->show();*/
 }
 
 void CuteTorrentMainWindow::UpdateUL(int kbps)
@@ -1271,9 +1271,8 @@ void CuteTorrentMainWindow::UpdateUL(int kbps)
 	}
 	else
 	{
-		//settings = QApplicationSettings::getInstance();
+		
 		m_pSettings->setValue("Torrent", "upload_rate_limit", kbps * KbInt);
-		//QApplicationSettings::FreeInstance();
 		m_pTorrentManager->SetUlLimit(kbps * KbInt);
 	}
 }
@@ -1288,9 +1287,8 @@ void CuteTorrentMainWindow::UpdateDL(int kbps)
 	}
 	else
 	{
-		//	QApplicationSettings* settings = QApplicationSettings::getInstance();
+		
 		m_pSettings->setValue("Torrent", "download_rate_limit", kbps * KbInt);
-		//	QApplicationSettings::FreeInstance();
 		m_pTorrentManager->SetDlLimit(kbps * KbInt);
 	}
 }

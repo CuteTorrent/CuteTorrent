@@ -6,6 +6,7 @@ class ValueSetters
 {
 public:
 	static void SettingsValueSetter(QString group, QString name, QVariant value);
+	static void SettingsEncryptedValueSetter(QString group, QString name, QVariant value);
 	static void StyleValueSetter(QString group, QString name, QVariant value);
 	static void LanguageValueSetter(QString group, QString name, QVariant value);
 	static void MagnetAssociationValueSetter(QString group, QString name, QVariant value);

@@ -9,12 +9,13 @@
 FileSystemTorrentWatcher::FileSystemTorrentWatcher(QObject* parent) 
 	: QObject(parent)
 	, m_pFileSystemWatcher(new QFileSystemWatcher(this))
+	, m_pSettings(QApplicationSettings::getInstance())
 {
 	
 	NotificationSystemPtr pNotificationSystem = NotificationSystem::getInstance();
 	connect(this, SIGNAL(Notify(int, QString, QVariant)), pNotificationSystem.get(), SLOT(OnNewNotification(int, QString, QVariant)));
 	connect(m_pFileSystemWatcher, SIGNAL(directoryChanged(const QString&)), SLOT(OnDirectoryChanged(const QString&)));
-	connect(m_pFileSystemWatcher, SIGNAL(fileChanged(const QString&)), SLOT(OnDirectoryChanged(const QString&)));
+	connect(m_pSettings.get(), SIGNAL(PropertyChanged(QString, QString)), SLOT(OnSettngsChnaged(QString, QString)));
 }
 
 void FileSystemTorrentWatcher::addPath(QString path)
@@ -129,4 +130,24 @@ void FileSystemTorrentWatcher::OnDirectoryChanged(const QString& path)
 			}
 		}
 	}
+}
+
+void FileSystemTorrentWatcher::OnSettngsChnaged(QString group, QString key)
+{
+	if (group == "WatchDir")
+	{
+		if (m_pSettings->valueBool("WatchDir", "enabled"))
+		{
+			QString watchDir = m_pSettings->valueString("WatchDir", "dir_to_watch");
+			if (!watchDir.isEmpty())
+			{
+				addPath(watchDir);
+			}
+		}
+		else
+		{
+			disable();
+		}
+	}
+	
 }

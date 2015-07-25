@@ -21,35 +21,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QMutex>
 #include <QSettings>
 #include "StaticHelpers.h"
-
+#include "SympleCrypt.h"
 
 
 QApplicationSettings::QApplicationSettings()
 {
-	try
-	{
-		QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-		QString oldStylePath = StaticHelpers::CombinePathes(QApplication::applicationDirPath(), "CuteTorrent.ini");
-		QString newStylePath = StaticHelpers::CombinePathes(dataDir, "settings.ini");
-		QFile oldFile(oldStylePath);
+	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString oldStylePath = StaticHelpers::CombinePathes(QApplication::applicationDirPath(), "CuteTorrent.ini");
+	QString newStylePath = StaticHelpers::CombinePathes(dataDir, "settings.ini");
+	QFile oldFile(oldStylePath);
 
-		if (oldFile.exists())
+	if (oldFile.exists())
+	{
+		if (!oldFile.rename(newStylePath))
 		{
-			if (!oldFile.rename(newStylePath))
-			{
-				CustomMessageBox::warning(NULL, "Move file failed", QString("Failed to move %1 to %2!").arg(oldStylePath, newStylePath));
-			}
+			CustomMessageBox::warning(NULL, "Move file failed", QString("Failed to move %1 to %2!").arg(oldStylePath, newStylePath));
 		}
+	}
 
-		settings = new QSettings(newStylePath, QSettings::IniFormat);
-		locker = new QMutex();
-		ReedSettings();
-	}
-	catch(std::exception ex)
-	{
-		CustomMessageBox::warning(0, "Error", QString("QApplicationSettings::QApplicationSettings()") + ex.what());
-	}
+	settings = new QSettings(newStylePath, QSettings::IniFormat);
+	locker = new QMutex();
+	m_pCryptor = new SimpleCrypt(0x1D5AE35A4BDD232i64);
+	ReedSettings();
 }
+
 QApplicationSettings::~QApplicationSettings()
 {
 	WriteSettings();
@@ -71,7 +66,12 @@ void QApplicationSettings::setValue(const QString& group, const QString& key, co
 	}
 
 	settings->beginGroup(group);
-	settings->setValue(key, value);
+	QVariant currentValue = settings->value(key);
+	if (currentValue != value)
+	{
+		settings->setValue(key, value);
+		emit PropertyChanged(group, key);
+	}
 	settings->endGroup();
 	WriteSettings();
 }
@@ -175,7 +175,7 @@ void  QApplicationSettings::ReedSettings()
 {
 	settings->sync();
 }
-void QApplicationSettings::SaveFilterGropups(QList<GroupForFileFiltering> filters)
+void QApplicationSettings::SaveFilterGropups(QList<GroupForFileFiltering>& filters)
 {
 	locker->lock();
 	settings->beginGroup("FileFiltering");
@@ -223,6 +223,19 @@ QList<GroupForFileFiltering> QApplicationSettings::GetFileFilterGroups()
 	locker->unlock();
 	return res;
 }
+
+QString QApplicationSettings::securedValueString(const QString& group, const QString& key, const QString& defalt)
+{
+	QString encryptedValue = valueString(group, key, defalt);
+	return m_pCryptor->decryptToString(encryptedValue);
+}
+
+void QApplicationSettings::setSecuredValue(const QString& group, const QString& key, const QString& value)
+{
+	QString encryptedValue = m_pCryptor->encryptToString(value);
+	setValue(group, key, encryptedValue);
+}
+
 void  QApplicationSettings::WriteSettings()
 {
 	settings->sync();

@@ -66,6 +66,8 @@ public:
 	bool MatchFeed(QUuid uid);
 	void addFeed(QUuid feedUid);
 	void removeFeed(QUuid feedUid);
+	bool operator == (const RssDownloadRule& other);
+	bool operator != (const RssDownloadRule& other);
 private:
 	bool m_useStaticSavePath;
 	bool m_useGroupFilters;

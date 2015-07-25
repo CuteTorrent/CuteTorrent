@@ -25,21 +25,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "Singleton.h"
 class QMutex;
 class QSettings;
-class QApplicationSettings : public Singleton<QApplicationSettings>
+class SimpleCrypt;
+class QApplicationSettings : public QObject, public Singleton<QApplicationSettings>
 {
+	Q_OBJECT
 	friend class Singleton<QApplicationSettings>;
 protected:
 
 	QApplicationSettings();
 
 private:
+	SimpleCrypt* m_pCryptor;
 	QSettings* settings;
 	QMutex* locker;
+signals:
+	void PropertyChanged(QString group, QString key);
 public:
 	~QApplicationSettings();
 	void ReedSettings();
 	QVariant value(const QString& group, const QString& key, const QVariant& defaultVal = QVariant(QVariant::Invalid));
-	void SaveFilterGropups(QList<GroupForFileFiltering>);
+	void SaveFilterGropups(QList<GroupForFileFiltering>&);
 	QList<GroupForFileFiltering> GetFileFilterGroups();
 	QStringList GetGroupNames();
 	QList<SchedulerTask> GetSchedullerQueue();
@@ -51,6 +56,8 @@ public:
 	QString valueString(const QString& group, const QString& key, const QString& defalt = "");
 	bool valueBool(const QString& group, const QString& key, bool defalt = true);
 	float valueFloat(const QString& group, const QString& key, float defalt = 0.0f);
+	QString securedValueString(const QString& group, const QString& key, const QString& defalt = "");
+	void setSecuredValue(const QString& group, const QString& key, const QString& value);
 	void WriteSettings();
 };
 

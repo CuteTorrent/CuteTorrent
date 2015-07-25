@@ -78,7 +78,7 @@ void SettingsPropertyMapper::subscribeToChanges(QWidget* editor, WidgetType edit
 				qCritical() << "Invalid editor given";
 				return;
 			}
-			connect(pLineEdit, SIGNAL(editingFinished()), SLOT(OnEditorCommit()));
+			connect(pLineEdit, SIGNAL(textChanged(QString)), SLOT(OnEditorCommit()));
 			break;
 		}
 		case TEXT_EDIT:
@@ -178,6 +178,25 @@ int SettingsPropertyMapper::findPropertyInfo(QWidget* editor)
 	return -1;
 }
 
+void SettingsPropertyMapper::checkForDuplicates(QString propertyGroup, QString propertyName)
+{
+	QList<PropertyInfo> properties2Remove;
+	for (int i = 0; i < m_propertyInfos.size(); i++)
+	{
+		PropertyInfo& propertyInfo = m_propertyInfos[i];
+		if (propertyInfo.propertyName == propertyName && propertyInfo.group == propertyGroup)
+		{
+			qDebug() << "Find duplicate for property" << propertyGroup << propertyName;
+			properties2Remove.append(propertyInfo);
+		}
+	}
+
+	for (int i = 0; i < properties2Remove.size(); i++)
+	{
+		m_propertyInfos.removeAll(properties2Remove[i]);
+	}
+}
+
 void SettingsPropertyMapper::AddMapping(QString propertyGroup, QString propertyName, PropertyType propertyType, QWidget* editor, WidgetType editorType, QVariant defaultValue, UIValueSetter uiSetter, UIValueGetter uiGetter, ValueSetter valueSetter, ValueGetter valueGetter)
 {
 	PropertyInfo propertyInfo =
@@ -193,6 +212,7 @@ void SettingsPropertyMapper::AddMapping(QString propertyGroup, QString propertyN
 		(uiGetter == NULL ? UIPropertyGetters::DefaultGetter : uiGetter),
 		defaultValue
 	};
+	checkForDuplicates(propertyGroup, propertyName);
 	m_propertyInfos.append(propertyInfo);
 	initilizeEditorValue(propertyInfo);
 	subscribeToChanges(editor, editorType);
@@ -273,4 +293,18 @@ void SettingsPropertyMapper::OnEditorCommit()
 	{
 		qCritical() << "Recived signal from unregisted editor";
 	}
+}
+
+bool SettingsPropertyMapper::PropertyInfo::operator==(const PropertyInfo& other)
+{
+	return group == other.group
+		&& propertyName == other.propertyName
+		&& propertyType == other.propertyType
+		&& editor == other.editor
+		&& editorType == other.editorType
+		&& uiGetter == other.uiGetter
+		&& uiSetter == other.uiSetter
+		&& valueGetter == other.valueGetter
+		&& valueSetter == other.valueSetter
+		&& defaultValue == other.defaultValue;
 }

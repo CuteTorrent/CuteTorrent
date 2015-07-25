@@ -3,3 +3,4 @@
 .git
 LICENSE
 README.MD
+ct_debug.log

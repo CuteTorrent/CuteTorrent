@@ -4,24 +4,26 @@
 #include <QObject>
 #include "http/httplistener.h"
 #include "RequestMapper.h"
-class RconWebService : QObject
+DEFINE_PTR_CALSS(RconWebService)
+
+class RconWebService : public QObject, public Singleton<RconWebService>
 {
+	friend class Singleton<RconWebService>;
 	Q_OBJECT
 private:
-	static RconWebService* instnce;
-	static int intanceCount;
 	QList<QPair<uint, uint> > allowedIP, notAllowedIP;
 	HttpListener* listener;
 	RequestMapper* mapper;
+	QApplicationSettingsPtr m_pSettings;
+private slots:
+	void OnSettngsChnaged(QString, QString);
 protected:
 	RconWebService(void);
-	~RconWebService(void);
 public:
+	~RconWebService(void);
 	void parseIpFilter(QString filter);
 	void Start();
 	bool isRunning();
 	void Stop();
-	static RconWebService* getInstance();
-	static void freeInstance();
 };
 #endif

@@ -33,7 +33,8 @@ public:
 	QString SavePath() const;
 	QString Name() const;
 	QString Extensions() const;
-
+	bool operator == (const GroupForFileFiltering& other);
+	bool operator != (const GroupForFileFiltering& other);
 };
 
 

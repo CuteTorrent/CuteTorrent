@@ -9,6 +9,11 @@ void ValueSetters::SettingsValueSetter(QString group, QString name, QVariant val
 	QApplicationSettings::getInstance()->setValue(group, name, value);
 }
 
+void ValueSetters::SettingsEncryptedValueSetter(QString group, QString name, QVariant value)
+{
+	QApplicationSettings::getInstance()->setSecuredValue(group, name, value.toString());
+}
+
 void ValueSetters::StyleValueSetter(QString group, QString name, QVariant value)
 {
 	int styleIndex = value.toInt();
@@ -38,8 +43,10 @@ void ValueSetters::LanguageValueSetter(QString group, QString name, QVariant val
 	if ( languageIndex < availableLanguages.size() && languageIndex > -1)
 	{
 		QString languageCode = availableLanguages[languageIndex];
+		QApplicationSettings::getInstance()->setValue(group, name, languageCode);
 		Application::setLanguage(languageCode);
 		Application::setLanguageQt(languageCode);
+
 	}
 	else
 	{

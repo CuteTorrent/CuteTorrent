@@ -57,12 +57,15 @@ private:
 		UIValueSetter uiSetter;
 		UIValueGetter uiGetter;
 		QVariant defaultValue, newValue;
+		bool operator==(const PropertyInfo& other);
 	};
+	
 	QList<PropertyInfo> m_propertyInfos;
 	bool m_hasChanges;
 	void subscribeToChanges(QWidget* editor, WidgetType editorType);
 	void initilizeEditorValue(PropertyInfo& propertyInfo);
 	int findPropertyInfo(QWidget* editor);
+	void checkForDuplicates(QString propertyGroup, QString propertyName);
 };
 
 #endif

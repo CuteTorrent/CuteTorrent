@@ -7,6 +7,25 @@ TorrentTracker::TorrentTracker(QObject* parent) :
 	httpServer = new HttpListener("TorrentTracker", requestHandler);
 }
 
+void TorrentTracker::OnSettngsChnaged(QString group, QString key)
+{
+	if (group == "TorrentTracker" && key=="enabled")
+	{
+		if (m_pSettings->valueBool("TorrentTracker", "enabled", false) && isRunning())
+		{
+			start();
+		}
+		else
+		{
+			if (isRunning())
+			{
+				stop();
+			}
+		}
+	}
+	
+}
+
 TorrentTracker::~TorrentTracker()
 {
 	stop();

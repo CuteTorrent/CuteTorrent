@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "RconWebService.h"
 #include "RssDownloadRule.h"
 #include "Utils/SettingsPropertyMapper.h"
-
+#include <collections/ObservableList.h>
 class QApplicationSettings;
 class RconWebService;
 class TorrentTracker;
@@ -58,28 +58,33 @@ private:
 		NUMBER_OF_FEEDS
 	};
 	boost::scoped_ptr<SettingsPropertyMapper> m_propertyMapper;
-	QHash<QUuid, RssDownloadRule*> m_downloadRulesCopy;
-	QList<QUuid> m_deletedRules;
-	QApplicationSettingsPtr settings;
-	QList<GroupForFileFiltering> filterGroups;
-	QList<SchedulerTask> tasks;
-	QDateTimeEdit* previousFocuse;
-	TorrentTrackerPtr tracker;
-	RconWebService* rcon;
+	ObservableList<RssDownloadRule*> m_downloadRulesCopy;
+	ObservableList<QUuid> m_deletedRules;
+	QApplicationSettingsPtr m_pSettings;
+	ObservableList<GroupForFileFiltering> m_filterGroups;
+	ObservableList<SchedulerTask> m_schedulerTasks;
+	TorrentTrackerPtr m_pTracker;
+	RconWebServicePtr m_pRcon;
 	QAction* editRssRule, *deleteRssRule;
+	bool m_filterGroupsHaveChanges;
+	bool m_schedulerTasksHaveChanges;
+	bool m_rssDownloadRulesHaveChanges;
 	void FillFilteringGroups();
 	void FillGeneralTab();
 	void FillHDDTab();
 	void FillDTTab();
+	void UpdateWebUILaunchButtons();
 	void FillWebUITab();
 	void FillKeyMapTab();
-	void SetupSchedullerTab();
+	void FillSchedullerTab();
 	void FillNetworkTab();
 	void FillRestrictionTab();
-	void updateRulesWidget(QList<RssDownloadRule*> downloadRules);
+	void updateRulesWidget(ObservableList<RssDownloadRule*>& downloadRules);
 	void FillRssTab();
 	void ApplyRssDownloadRulles();
 	void NeverCallMe();
+	void UpdateApplyButtonState();
+	RssDownloadRule* findRule(QUuid uid);
 public:
 	SettingsDialog(QWidget* parent = NULL, int flags = 0);
 	~SettingsDialog();
@@ -111,6 +116,11 @@ private slots:
 	void onImportRssRules();
 	void EnableApplyButton();
 	void DisableApplyButton();
+	void onBrowseWatchDir();
+	void onBrowseWatchStaticPath();
+	void onFilteringGroupsChanged();
+	void onRssDownloadRuleesChanged();
+	void onSchedulerTaskChanged();
 };
 
 #endif // !_SETTINGS_DLG_H

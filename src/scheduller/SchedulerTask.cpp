@@ -3,32 +3,32 @@
 #include <QDebug>
 SchedulerTask::SchedulerTask(QString name, TaskType type, QVariant limit, QDateTime begin, QObject* parent /*= 0*/) : QThread(parent)
 {
-	_name = name;
-	iType = type;
+	m_ruleName = name;
+	m_taskType = type;
 	bool ok;
 
 	if(type == LIMIT_DOWNLOAD || type == LIMIT_UPLOAD)
 	{
-		_limit = limit.toInt(&ok);
+		m_speedLimit = limit.toInt(&ok);
 
 		if(!ok)
 		{
 		}
 	}
 
-	_begin = begin;
+	m_beginDate = begin;
 }
 
 SchedulerTask::SchedulerTask(const SchedulerTask& other)
 {
-	iType = other.iType;
-	_name  = other._name;
-	_limit = other._limit;
-	_begin = other._begin;
+	m_taskType = other.m_taskType;
+	m_ruleName  = other.m_ruleName;
+	m_speedLimit = other.m_speedLimit;
+	m_beginDate = other.m_beginDate;
 }
 SchedulerTask::SchedulerTask()
 {
-	iType = UNKNOWN;
+	m_taskType = UNKNOWN;
 }
 
 void SchedulerTask::run()
@@ -37,7 +37,7 @@ void SchedulerTask::run()
 
 SchedulerTask::TaskType SchedulerTask::type() const
 {
-	return iType;
+	return m_taskType;
 }
 
 void SchedulerTask::pefromTask()
@@ -45,7 +45,7 @@ void SchedulerTask::pefromTask()
 	TorrentManagerPtr tManager = TorrentManager::getInstance();
 	libtorrent::session_settings current = tManager->readSettings();
 
-	switch(iType)
+	switch(m_taskType)
 	{
 		case START_ALL		:
 			tManager->StartAllTorrents();
@@ -57,14 +57,14 @@ void SchedulerTask::pefromTask()
 
 		case LIMIT_UPLOAD	:
 		{
-			current.upload_rate_limit = _limit;
+			current.upload_rate_limit = m_speedLimit;
 			tManager->updateSettings(current);
 		}
 		break;
 
 		case LIMIT_DOWNLOAD	:
 		{
-			current.download_rate_limit = _limit;
+			current.download_rate_limit = m_speedLimit;
 			tManager->updateSettings(current);
 		}
 		break;
@@ -76,18 +76,18 @@ void SchedulerTask::pefromTask()
 
 bool SchedulerTask::operator< (const SchedulerTask& other) const
 {
-	return _begin < other.startTime();
+	return m_beginDate < other.startTime();
 }
 
 QDateTime SchedulerTask::startTime() const
 {
-	return _begin;
+	return m_beginDate;
 }
 
 
 int SchedulerTask::limit()
 {
-	return _limit;
+	return m_speedLimit;
 }
 
 SchedulerTask& SchedulerTask::operator= (const SchedulerTask& other)
@@ -97,14 +97,27 @@ SchedulerTask& SchedulerTask::operator= (const SchedulerTask& other)
 		return *this;
 	}
 
-	iType = other.iType;
-	_name  = other._name;
-	_limit = other._limit;
-	_begin = other._begin;
+	m_taskType = other.m_taskType;
+	m_ruleName  = other.m_ruleName;
+	m_speedLimit = other.m_speedLimit;
+	m_beginDate = other.m_beginDate;
 	return *this;
+}
+
+bool SchedulerTask::operator==(const SchedulerTask& other)
+{
+	return m_taskType == other.m_taskType
+		&& m_beginDate == other.m_beginDate
+		&& m_speedLimit == other.m_speedLimit
+		&& m_ruleName == other.m_ruleName;
+}
+
+bool SchedulerTask::operator!=(const SchedulerTask& other)
+{
+	return !operator==(other);
 }
 
 QString SchedulerTask::name() const
 {
-	return _name;
+	return m_ruleName;
 }

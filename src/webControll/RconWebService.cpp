@@ -1,11 +1,33 @@
 ﻿#include "RconWebService.h"
 #include <QStringList>
-RconWebService::RconWebService(void)
+
+RconWebService::RconWebService(void) : m_pSettings(QApplicationSettings::getInstance())
 {
 	mapper = new RequestMapper(this);
 	listener = new HttpListener("WebControl", mapper, this);
+	connect(m_pSettings.get(), SIGNAL(PropertyChanged(QString, QString)), SLOT(OnSettngsChnaged(QString, QString)));
 }
-
+void RconWebService::OnSettngsChnaged(QString group, QString key)
+{
+	if (group == "WebControl" && key == "webui_enabled")
+	{
+		if (m_pSettings->valueBool("WebControl", "webui_enabled", false) && !isRunning())
+		{
+			if (m_pSettings->valueBool("WebControl", "enable_ipfilter", false))
+			{
+				parseIpFilter(m_pSettings->valueString("WebControl", "ipfilter"));
+			}
+			Start();
+		}
+		else
+		{
+			if (isRunning())
+			{
+				Stop();
+			}
+		}
+	}
+}
 RconWebService::~RconWebService(void)
 {
 	if(listener != NULL)
@@ -167,28 +189,3 @@ void RconWebService::Stop()
 	}
 }
 
-RconWebService* RconWebService::getInstance()
-{
-	if(instnce == NULL)
-	{
-		instnce = new RconWebService();
-	}
-
-	intanceCount++;
-	return instnce;
-}
-
-void RconWebService::freeInstance()
-{
-	intanceCount--;
-
-	if(intanceCount == 0)
-	{
-		delete instnce;
-		instnce = NULL;
-	}
-}
-
-int RconWebService::intanceCount = 0;
-
-RconWebService* RconWebService::instnce = NULL;

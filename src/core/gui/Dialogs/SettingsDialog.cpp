@@ -48,25 +48,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <gui/Utils/UIPropertyGetters.h>
 #include <gui/Utils/ValueGetters.h>
 #include <gui/Utils/ValueSetters.h>
+#include <core/FileSystemTorrentWatcher.h>
 
 SettingsDialog::SettingsDialog(QWidget* parent, int flags) 
 	: BaseWindow(OnlyCloseButton, NoResize, parent)
 	, m_propertyMapper(new SettingsPropertyMapper(this))
 	, editRssRule(NULL)
 	, deleteRssRule(NULL)
+	, m_filterGroupsHaveChanges(false)
+	, m_rssDownloadRulesHaveChanges(false)
+	, m_schedulerTasksHaveChanges(false)
 {
 	setupUi(this);
-	previousFocuse = NULL;
-	settings = QApplicationSettings::getInstance();
-	rcon = RconWebService::getInstance();
-	tracker = TorrentTracker::getInstance();
+	m_pSettings = QApplicationSettings::getInstance();
+	m_pRcon = RconWebService::getInstance();
+	m_pTracker = TorrentTracker::getInstance();
 	FillDTTab();
 	FillRestrictionTab();
 	FillFilteringGroups();
 	FillGeneralTab();
 	FillHDDTab();
 	FillWebUITab();
-	SetupSchedullerTab();
+	FillSchedullerTab();
 	FillKeyMapTab();
 	FillNetworkTab();
 	FillRssTab();
@@ -159,9 +162,8 @@ void SettingsDialog::FillGeneralTab()
 		styleComboBox->addItem(styleInfos[i].DisplayName, styleInfos[i].InternalName);
 	}
 	m_propertyMapper->AddMapping("System", "Style", SettingsPropertyMapper::INT, styleComboBox, SettingsPropertyMapper::COMBOBOX, "CuteTorrent", NULL, NULL, ValueSetters::StyleValueSetter ,ValueGetters::StyleValueGetter);
-
-	QString curLoc = Application::currentLocale();
-	int current = 0;
+	
+	localeComboBox->clear();
 	QStringList availableLanguages = Application::availableLanguages();
 	for (int i = 0; i < availableLanguages.size(); i++)
 	{
@@ -201,12 +203,14 @@ void SettingsDialog::FillGeneralTab()
 
 void SettingsDialog::FillFilteringGroups()
 {
-	filterGroups = settings->GetFileFilterGroups();
+	m_filterGroups.clear();
+	m_filterGroups.append(m_pSettings->GetFileFilterGroups());
+	connect(&m_filterGroups, SIGNAL(CollectionChanged(CollectionChangedInfo)), SLOT(onFilteringGroupsChanged()));
 	GroupsListWidget->clear();
 
-	for(int i = 0; i < filterGroups.count(); i++)
+	for(int i = 0; i < m_filterGroups.count(); i++)
 	{
-		GroupsListWidget->addItem(filterGroups.at(i).Name());
+		GroupsListWidget->addItem(m_filterGroups.at(i).Name());
 	}
 
 	GroupsListWidget->setSelectionMode(QAbstractItemView::ContiguousSelection);
@@ -216,9 +220,17 @@ void SettingsDialog::FillDTTab()
 {
 	m_propertyMapper->AddMapping("DT", "Executable",		SettingsPropertyMapper::STRING, DTPathEdit,			 SettingsPropertyMapper::LINE_EDIT);
 	m_propertyMapper->AddMapping("DT", "Drive",				SettingsPropertyMapper::INT,	driveNumberComboBox, SettingsPropertyMapper::COMBOBOX);
-	m_propertyMapper->AddMapping("DT", "DefaultCommand",	SettingsPropertyMapper::STRING, customCommandEdit,	 SettingsPropertyMapper::LINE_EDIT);
 	m_propertyMapper->AddMapping("DT", "UseCustomCommand",	SettingsPropertyMapper::BOOL,	customMoutGroupBox,  SettingsPropertyMapper::CHECKABLE_GROUPBOX);
 	m_propertyMapper->AddMapping("DT", "CustomtCommand",	SettingsPropertyMapper::STRING, customCommandEdit,	 SettingsPropertyMapper::LINE_EDIT, "-mount dt,%1,\"%2\"");
+}
+
+void SettingsDialog::UpdateWebUILaunchButtons()
+{
+	bool enabled = m_pSettings->valueBool("WebControl", "webui_enabled");
+	bool isRunning = m_pRcon->isRunning();
+	RunningLabel->setEnabled(isRunning && enabled);
+	startRconButton->setEnabled(!isRunning && enabled);
+	stopRconButton->setEnabled(isRunning && enabled);
 }
 
 void SettingsDialog::FillWebUITab()
@@ -233,17 +245,13 @@ void SettingsDialog::FillWebUITab()
 	m_propertyMapper->AddMapping("WebControl", "log_name", SettingsPropertyMapper::STRING, logLineEdit, SettingsPropertyMapper::LINE_EDIT);
 	m_propertyMapper->AddMapping("WebControl", "enable_ipfilter", SettingsPropertyMapper::BOOL, IPFilterGroupBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, false);
 	m_propertyMapper->AddMapping("WebControl", "ipfilter", SettingsPropertyMapper::STRING, ipFilterTextEdit, SettingsPropertyMapper::TEXT_EDIT);
-	
-	bool enabled = settings->valueBool("WebControl", "webui_enabled");
-	bool isRunning = rcon->isRunning();
-	RunningLabel->setEnabled(isRunning && enabled);
-	startRconButton->setEnabled(!isRunning && enabled);
-	stopRconButton->setEnabled(isRunning && enabled);
+
+	UpdateWebUILaunchButtons();
 }
 
 void SettingsDialog::showSelectedGroup(int row)
 {
-	if(row > filterGroups.count())
+	if(row > m_filterGroups.count())
 	{
 		return;
 	}
@@ -253,119 +261,42 @@ void SettingsDialog::showSelectedGroup(int row)
 		return;
 	}
 
-	GroupForFileFiltering currentGroup = filterGroups.at(row);
+	GroupForFileFiltering currentGroup = m_filterGroups.at(row);
 	newGroupNameEdit->setText(currentGroup.Name());
 	extensionsEdit->setText(currentGroup.Extensions());
 	groupSavePathEdit->setText(currentGroup.SavePath());
 }
 SettingsDialog::~SettingsDialog()
 {
-	qDeleteAll(m_downloadRulesCopy.values());
+	qDeleteAll(m_downloadRulesCopy);
 	m_downloadRulesCopy.clear();
-	RconWebService::freeInstance();
 }
 void SettingsDialog::ApplySettings()
 {
 	m_propertyMapper->ApplyChanges();
-	bool isScriptDebuggingEnabled = scriptDebugingCheckBox->isChecked();
-
-	SearchEnginePtr searchEngine = SearchEngine::getInstance();
-
-	if (isScriptDebuggingEnabled)
-	{
-		if (!searchEngine->isEnabledScriptDebugging())
-		{
-			searchEngine->enableScriptDebugging();
-		}
-	}
-	else
-	{
-		if (searchEngine->isEnabledScriptDebugging())
-		{
-			searchEngine->disableScriptDebugging();
-		}
-	}
+	UpdateWebUILaunchButtons();
 	ApplySettingsToSession();
-	settings->SaveFilterGropups(filterGroups);
-	NotificationSystemPtr pNotifySys = NotificationSystem::getInstance();
-	pNotifySys->UpdateNotificationSettings();
-
-	if(settings->valueBool("WebControl", "webui_enabled", false))
+	if (m_filterGroupsHaveChanges)
 	{
-		rcon->Start();
-
-		if(settings->valueBool("WebControl", "enable_ipfilter", false))
-		{
-			rcon->parseIpFilter(settings->valueString("WebControl", "ipfilter"));
-		}
+		m_pSettings->SaveFilterGropups(m_filterGroups);
 	}
-	else
-	{
-		if(rcon->isRunning())
-		{
-			rcon->Stop();
-		}
-	}
-
-	if(settings->valueBool("TorrentTracker", "enabled", false))
-	{
-		tracker->start();
-	}
-	else
-	{
-		if(tracker->isRunning())
-		{
-			tracker->stop();
-		}
-	}
-
-	int curLocaleIndex = localeComboBox->currentIndex();
-	QString choosenLanguage = localeComboBox->itemData(curLocaleIndex).toString();
-
-	if(Application::currentLocale() != choosenLanguage)
-	{
-		Application::setLanguage(choosenLanguage);
-		Application::setLanguageQt(choosenLanguage);
-		settings->setValue("System", "Lang", choosenLanguage);
-		calendarWidget->setLocale(QLocale(choosenLanguage));
-		buttonBox->setLocale(QLocale(choosenLanguage));
-	}
-
-	QList<QKeyEdit*> keyEdits = keyMapContainer->findChildren<QKeyEdit*>();
-	QMap<QString, QVariant> keyMap;
-
-	foreach(QKeyEdit* keyEdit, keyEdits)
-	{
-		keyMap.insert(keyEdit->objectName(), keyEdit->text());
-	}
-
-	settings->setGroupValues("KeyMap", keyMap);
-	FillKeyMapTab();
 	
-	ApplyRssDownloadRulles();
+	NotificationSystem::getInstance()->UpdateNotificationSettings();
+	
+	if (m_rssDownloadRulesHaveChanges)
+	{
+		ApplyRssDownloadRulles();
+	}
+	
+	if (m_schedulerTasksHaveChanges)
+	{
+		m_pSettings->SaveSchedullerQueue(m_schedulerTasks);
+	}
 }
 void SettingsDialog::ApplySettingsToSession()
 {
 	TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
 	session_settings current = pTorrentManager->readSettings();
-	current.active_limit		= activeLimitEdit->value();
-	current.active_downloads	= activeDownloadLimitEdit->value();
-	current.active_seeds		= activeSeedLimitEdit->value();
-	current.cache_size			= casheSizeLineEdit->value() / 16 ;
-	current.use_read_cache		= useReadCasheCheckBox->isChecked();
-	current.lock_files			= lockFilesCheckBox->isChecked();
-	current.disk_io_write_mode  = diskIOCasheModeComboBox->currentIndex();
-	current.disk_io_read_mode   = current.disk_io_write_mode;
-	current.ignore_limits_on_local_network = settings->valueBool("Torrent", "ignore_limits_on_local_network");
-	current.local_upload_rate_limit = settings->valueInt("Torrent", "local_upload_rate_limit") * KbInt;
-	current.local_download_rate_limit = settings->valueInt("Torrent", "local_download_rate_limit") * KbInt;
-	current.rate_limit_utp = settings->valueBool("Torrent", "rate_limit_utp");
-	current.low_prio_disk		= lowPrioDiskCheckBox->isChecked();
-	current.allow_reordered_disk_operations = alowReorderedOpsCheckBox->isChecked();
-	current.upload_rate_limit	= uploadLimitEdit->value() * KbInt;
-	current.download_rate_limit = downloadLimitEdit->value() * KbInt;
-	current.seed_time_limit = settings->valueInt("Torrent", "seed_time_limit");
-	current.share_ratio_limit = settings->valueFloat("Torrent", "share_ratio_limit");
 	pTorrentManager->updateSettings(current);
 	pTorrentManager->RefreshExternalPeerSettings();
 	pTorrentManager->updateMaxConnectionsPerTorrent();
@@ -413,9 +344,9 @@ void SettingsDialog::addGroup()
 		return;
 	}
 
-	for(int i = 0; i < filterGroups.count(); i++)
+	for(int i = 0; i < m_filterGroups.count(); i++)
 	{
-		if(filterGroups.at(i).Name() == name)
+		if(m_filterGroups.at(i).Name() == name)
 		{
 			foundRow = i;
 			break;
@@ -437,7 +368,7 @@ void SettingsDialog::addGroup()
 	}
 
 	GroupForFileFiltering newfilterGroup = GroupForFileFiltering(name, extensions, dir);
-	foundRow > 0 ? filterGroups.replace(foundRow, newfilterGroup) : filterGroups.append(newfilterGroup);
+	foundRow > 0 ? m_filterGroups.replace(foundRow, newfilterGroup) : m_filterGroups.append(newfilterGroup);
 }
 void SettingsDialog::removeGroup()
 {
@@ -450,9 +381,9 @@ void SettingsDialog::removeGroup()
 			QString name = index->text();
 			int foundRow = -1;
 
-			for(int i = 0; i < filterGroups.count(); i++)
+			for(int i = 0; i < m_filterGroups.count(); i++)
 			{
-				if(filterGroups.at(i).Name() == name)
+				if(m_filterGroups.at(i).Name() == name)
 				{
 					foundRow = i;
 					break;
@@ -464,7 +395,7 @@ void SettingsDialog::removeGroup()
 				newGroupNameEdit->setText("");
 				extensionsEdit->setText("");
 				groupSavePathEdit->setText("");
-				filterGroups.removeAt(foundRow);
+				m_filterGroups.removeAt(foundRow);
 				delete index;
 			}
 			else
@@ -476,17 +407,21 @@ void SettingsDialog::removeGroup()
 }
 void SettingsDialog::browseSavepathGroup()
 {
-	QString lastDir = settings->valueString("System", "LastSaveTorrentDir");
+	QString lastDir = m_pSettings->valueString("System", "LastSaveTorrentDir");
 	QString savaPathForCurrentGroup = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
 	                                  lastDir,
 	                                  QFileDialog::ShowDirsOnly
 	                                  | QFileDialog::DontResolveSymlinks);
-	savaPathForCurrentGroup.append("\\");
-	groupSavePathEdit->setText(QDir::toNativeSeparators(savaPathForCurrentGroup));
+	if (!savaPathForCurrentGroup.isEmpty())
+	{
+		savaPathForCurrentGroup.append(QDir::separator());
+		groupSavePathEdit->setText(QDir::toNativeSeparators(savaPathForCurrentGroup));
+	}
+	
 }
 void SettingsDialog::browseDTPath()
 {
-	QString lastDir = settings->valueString("System", "LastSaveTorrentDir");
+	QString lastDir = m_pSettings->valueString("System", "LastSaveTorrentDir");
 	QString DTPath = QFileDialog::getOpenFileName(this,
 	                 tr("WHERE_DT"), lastDir , tr("DaemonTools Lite (DTLite.exe);;DaemonTools PRO (DTAgent.exe);;Any File (*.*)"));
 	DTPathEdit->setText(QDir::toNativeSeparators(DTPath));
@@ -504,8 +439,7 @@ void SettingsDialog::DeleteTask()
 	int index = tasksComboBox->currentIndex();
 	SchedulerTask currentTask = tasksComboBox->itemData(index).value<SchedulerTask>();
 	tasksComboBox->removeItem(index);
-	tasks.removeAt(index);
-	settings->SaveSchedullerQueue(tasks);
+	m_schedulerTasks.removeAt(index);
 }
 
 void SettingsDialog::AddTask()
@@ -552,24 +486,25 @@ void SettingsDialog::AddTask()
 	}
 
 	SchedulerTask newTask(name, type, limitVal, beginDateTimeEdit->dateTime());
-	tasks.push_back(newTask);
-	settings->SaveSchedullerQueue(tasks);
+	m_schedulerTasks.push_back(newTask);
+	
 	tasksComboBox->addItem(newTask.name(), qVariantFromValue(newTask));
 	emit tasksChanged();
 }
 
-void SettingsDialog::SetupSchedullerTab()
+void SettingsDialog::FillSchedullerTab()
 {
 	connect(calendarWidget, SIGNAL(clicked(QDate)), beginDateTimeEdit, SLOT(setDate(QDate)));
 	beginDateTimeEdit->setDateTime(QDateTime::currentDateTime().addSecs(120));
 	connect(tasksComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(UpdateSchedullerTab(int)));
-	tasks = settings->GetSchedullerQueue();
-
-	for(int i = 0; i < tasks.count(); i++)
+	m_schedulerTasks.append(m_pSettings->GetSchedullerQueue());
+	connect(&m_schedulerTasks, SIGNAL(CollectionChanged(CollectionChangedInfo)), SLOT(onSchedulerTaskChanged()));
+	for(int i = 0; i < m_schedulerTasks.count(); i++)
 	{
-		tasksComboBox->addItem(tasks.at(i).name(), qVariantFromValue(tasks.at(i)));
+		tasksComboBox->addItem(m_schedulerTasks.at(i).name(), qVariantFromValue(m_schedulerTasks.at(i)));
 	}
-
+	QString currentLanguage = Application::currentLocale();
+	calendarWidget->setLocale(QLocale(currentLanguage));
 	Scheduller* scheduller = Scheduller::getInstance();
 	connect(this, SIGNAL(tasksChanged()), scheduller, SLOT(UpdateTasks()));
 	Scheduller::freeInstance();
@@ -607,7 +542,7 @@ void SettingsDialog::FillNetworkTab()
 
 void SettingsDialog::FillKeyMapTab()
 {
-	QMap<QString, QVariant> keyMappings = settings->getGroupValues("KeyMap");
+	QMap<QString, QVariant> keyMappings = m_pSettings->getGroupValues("KeyMap");
 	qDeleteAll(keyMapContainer->findChildren<QGroupBox*>());
 	QLayout* origLayout = keyMapContainer->layout();
 	QGridLayout* layout = origLayout ? (QGridLayout*) origLayout :  new QGridLayout(keyMapContainer);
@@ -658,10 +593,12 @@ void SettingsDialog::FillKeyMapTab()
 		        i != keyMap.end(); ++i, ++index)
 		{
 			QKeyEdit* keyEdit = new QKeyEdit(keyMapContainer);
-			keyEdit->setText(i.value());
-			keyEdit->show();
-			keyEdit->setObjectName(i.key());
-			groupLayout->addRow(trUtf8(i.key().toUtf8()), keyEdit);
+			/*keyEdit->setText(i.value());
+			keyEdit->show();*/
+			QString propertyName = i.key();
+			keyEdit->setObjectName(propertyName);
+			m_propertyMapper->AddMapping("KeyMap", propertyName, SettingsPropertyMapper::STRING, keyEdit, SettingsPropertyMapper::LINE_EDIT);
+			groupLayout->addRow(trUtf8(propertyName.toUtf8()), keyEdit);
 		}
 
 		_groupBox->setLayout(groupLayout);
@@ -712,24 +649,22 @@ void SettingsDialog::UpdateSchedullerTab(int index)
 
 void SettingsDialog::StartRcon()
 {
-	RconWebService* svc = RconWebService::getInstance();
-	svc->Start();
-	bool isRunning = svc->isRunning();
+	
+	m_pRcon->Start();
+	bool isRunning = m_pRcon->isRunning();
 	RunningLabel->setEnabled(isRunning);
 	startRconButton->setEnabled(!isRunning);
 	stopRconButton->setEnabled(isRunning);
-	RconWebService::freeInstance();
+	
 }
 
 void SettingsDialog::StopRcon()
 {
-	RconWebService* svc = RconWebService::getInstance();
-	svc->Stop();
-	bool isRunning = svc->isRunning();
+	m_pRcon->Stop();
+	bool isRunning = m_pRcon->isRunning();
 	RunningLabel->setEnabled(isRunning);
 	startRconButton->setEnabled(!isRunning);
 	stopRconButton->setEnabled(isRunning);
-	RconWebService::freeInstance();
 }
 
 void SettingsDialog::changeEvent(QEvent* event)
@@ -741,6 +676,10 @@ void SettingsDialog::changeEvent(QEvent* event)
 		FillGeneralTab();
 		FillKeyMapTab();
 		m_propertyMapper->ResetToCurrentValues();
+
+		QString choosenLanguage = m_pSettings->valueString("System","Lang");
+		calendarWidget->setLocale(QLocale(choosenLanguage));
+		
 		editRssRule->setText(tr("ACTION_SETTINGS_EDIT_RSS_RULE"));
 		deleteRssRule->setText(tr("ACTION_SETTINGS_DELETE_RSS_RULE"));
 	}
@@ -748,14 +687,10 @@ void SettingsDialog::changeEvent(QEvent* event)
 
 void SettingsDialog::OpenWebUI()
 {
-	RconWebService* svc = RconWebService::getInstance();
-
-	if(svc->isRunning())
+	if (m_pRcon->isRunning())
 	{
 		QDesktopServices::openUrl(QUrl("http://localhost:" + webPortLineEdit->text() + "/"));
 	}
-
-	RconWebService::freeInstance();
 }
 
 QPushButton* SettingsDialog::getCloseBtn()
@@ -807,7 +742,7 @@ void SettingsDialog::FillRestrictionTab()
 	m_propertyMapper->AddMapping("Torrent", "max_connections_per_torrent", SettingsPropertyMapper::INT, maxConnectionsPerTorrentEdit, SettingsPropertyMapper::SPINBOX);
 }
 
-void SettingsDialog::updateRulesWidget(QList<RssDownloadRule*> downloadRules)
+void SettingsDialog::updateRulesWidget(ObservableList<RssDownloadRule*>& downloadRules)
 {
 	rssRulesListWidget->clear();
 
@@ -824,17 +759,17 @@ void SettingsDialog::FillRssTab()
 {
 	RssManagerPtr pRssManager = RssManager::getInstance();
 	QList<RssDownloadRule*> downloadRules = pRssManager->downloadRules();
-	qDeleteAll(m_downloadRulesCopy.values());
+	qDeleteAll(m_downloadRulesCopy);
 	m_downloadRulesCopy.clear();
 
 	for (int i = 0; i < downloadRules.size(); i++)
 	{
 		RssDownloadRule* rssDownloadRule = downloadRules.at(i);
-		m_downloadRulesCopy.insert(rssDownloadRule->Uid(), new RssDownloadRule(*rssDownloadRule));
+		m_downloadRulesCopy.append(new RssDownloadRule(*rssDownloadRule));
 	}
 
 	StyleEngene* pStyleEngine = StyleEngene::getInstance();
-	updateRulesWidget(downloadRules);
+	updateRulesWidget(m_downloadRulesCopy);
 
 	if (editRssRule == NULL)
 	{
@@ -880,8 +815,11 @@ void SettingsDialog::FillRssTab()
 	}
 	m_propertyMapper->AddMapping("rss", "smtp_auth_type", SettingsPropertyMapper::INT, rssAuthTypeComboBox, SettingsPropertyMapper::COMBOBOX);
 	m_propertyMapper->AddMapping("rss", "smtp_user", SettingsPropertyMapper::STRING, rssSmtpLoginEdit, SettingsPropertyMapper::LINE_EDIT);
-	m_propertyMapper->AddMapping("rss", "smtp_password", SettingsPropertyMapper::STRING, rssSmtpPasswordEdit, SettingsPropertyMapper::LINE_EDIT);
+	m_propertyMapper->AddMapping("rss", "smtp_password", SettingsPropertyMapper::STRING, rssSmtpPasswordEdit, SettingsPropertyMapper::LINE_EDIT, QVariant(), NULL, NULL,ValueSetters::SettingsEncryptedValueSetter, ValueGetters::SettingsEncryptedValueGetter);
 	m_propertyMapper->AddMapping("rss", "rss_send_to", SettingsPropertyMapper::STRING, rssRecepientEmailEdit, SettingsPropertyMapper::LINE_EDIT);
+	
+	connect(&m_downloadRulesCopy, SIGNAL(CollectionChanged(CollectionChangedInfo)), SLOT(onRssDownloadRuleesChanged()));
+	connect(&m_deletedRules, SIGNAL(CollectionChanged(CollectionChangedInfo)), SLOT(onRssDownloadRuleesChanged()));
 }
 
 void SettingsDialog::ApplyRssDownloadRulles()
@@ -890,7 +828,7 @@ void SettingsDialog::ApplyRssDownloadRulles()
 
 	for (int i = 0; i < m_downloadRulesCopy.size(); i++)
 	{
-		pRssManager->updateDownloadRule(new RssDownloadRule(*m_downloadRulesCopy.values().at(i)));
+		pRssManager->updateDownloadRule(new RssDownloadRule(*m_downloadRulesCopy.at(i)));
 	}
 
 	for (int i = 0; i < m_deletedRules.size(); i++)
@@ -911,6 +849,7 @@ void SettingsDialog::NeverCallMe()
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_FILETAB_OPEN_FILE"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_FILETAB_ZERO_PRIORITY"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_ABAUT_CT"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_ABOUT_QT"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_BACKUP"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_CHECK_UPDATE"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_CREATE"),
@@ -970,6 +909,31 @@ void SettingsDialog::NeverCallMe()
 	};
 }
 
+void SettingsDialog::UpdateApplyButtonState()
+{
+	if (m_rssDownloadRulesHaveChanges || m_filterGroupsHaveChanges || m_rssDownloadRulesHaveChanges || m_propertyMapper->HasChanges())
+	{
+		EnableApplyButton();
+	}
+	else
+	{
+		DisableApplyButton();
+	}
+}
+
+RssDownloadRule* SettingsDialog::findRule(QUuid uid)
+{
+	int len = m_downloadRulesCopy.size();
+	for (int i = 0; i < len;i++)
+	{
+		if (m_downloadRulesCopy[i]->Uid() == uid)
+		{
+			return m_downloadRulesCopy[i];
+		}
+	}
+	return NULL;
+}
+
 void SettingsDialog::addRssRule()
 {
 	boost::scoped_ptr<AddRssDwonloadRuleDialog> pDialog(new AddRssDwonloadRuleDialog(this));
@@ -977,8 +941,8 @@ void SettingsDialog::addRssRule()
 	if (pDialog->exec() == Accepted)
 	{
 		RssDownloadRule* rule = pDialog->getFinalRule();
-		m_downloadRulesCopy.insert(rule->Uid(), rule);
-		updateRulesWidget(m_downloadRulesCopy.values());
+		m_downloadRulesCopy.append(rule);
+		updateRulesWidget(m_downloadRulesCopy);
 	}
 }
 
@@ -988,7 +952,7 @@ void SettingsDialog::onEditRssRule()
 	{
 		QListWidgetItem* currentItem = rssRulesListWidget->currentItem();
 		QUuid uid = currentItem->data(Qt::UserRole).value<QUuid>();
-		RssDownloadRule* downloadRule = m_downloadRulesCopy[uid];
+		RssDownloadRule* downloadRule = findRule(uid);
 		bool ok;
 		downloadRule->validate(ok);
 
@@ -1000,9 +964,10 @@ void SettingsDialog::onEditRssRule()
 			if (pDialog->exec() == Accepted)
 			{
 				RssDownloadRule* rule = pDialog->getFinalRule();
-				boost::scoped_ptr<RssDownloadRule> rule2del(m_downloadRulesCopy[rule->Uid()]);
-				m_downloadRulesCopy[rule->Uid()] = rule;
-				updateRulesWidget(m_downloadRulesCopy.values());
+				boost::scoped_ptr<RssDownloadRule> rule2del(findRule(rule->Uid()));
+				int ruleIndex = m_downloadRulesCopy.indexOf(rule2del.get());
+				m_downloadRulesCopy.replace(ruleIndex, rule);
+				updateRulesWidget(m_downloadRulesCopy);
 			}
 		}
 	}
@@ -1017,11 +982,12 @@ void SettingsDialog::onDeleteRssRule()
 		foreach(QListWidgetItem* currentItem, selectedItems)
 		{
 			QUuid uid = currentItem->data(Qt::UserRole).value<QUuid>();
-			m_downloadRulesCopy.remove(uid);
+			boost::scoped_ptr<RssDownloadRule> rule2del(findRule(uid));
+			m_downloadRulesCopy.removeOne(rule2del.get());
 			m_deletedRules.append(uid);
 		}
 
-		updateRulesWidget(m_downloadRulesCopy.values());
+		updateRulesWidget(m_downloadRulesCopy);
 	}
 }
 
@@ -1169,7 +1135,7 @@ void SettingsDialog::onImportRssRules()
 
 				if (ok)
 				{
-					m_downloadRulesCopy.insert(pRule->Uuid(), pRule);
+					m_downloadRulesCopy.append(pRule);
 					m_deletedRules.removeAll(pRule->Uuid());
 				}
 				else
@@ -1179,7 +1145,7 @@ void SettingsDialog::onImportRssRules()
 			}
 		}
 
-		updateRulesWidget(m_downloadRulesCopy.values());
+		updateRulesWidget(m_downloadRulesCopy);
 	}
 	else
 	{
@@ -1203,4 +1169,108 @@ void SettingsDialog::DisableApplyButton()
 	{
 		applyButton->setEnabled(false);
 	}
+}
+
+void SettingsDialog::onBrowseWatchDir()
+{
+	QString watchDir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+		QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation),
+		QFileDialog::ShowDirsOnly
+		| QFileDialog::DontResolveSymlinks);
+	if (!watchDir.isEmpty())
+	{
+		watchDir.append("\\");
+		watchDirPathEdit->setText(QDir::toNativeSeparators(watchDir));
+	}
+}
+
+void SettingsDialog::onBrowseWatchStaticPath()
+{
+	QString watchDirStaticPath = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+		QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation),
+		QFileDialog::ShowDirsOnly
+		| QFileDialog::DontResolveSymlinks);
+	if (!watchDirStaticPath.isEmpty())
+	{
+		watchDirStaticPath.append("\\");
+		staticSavePathEdit->setText(QDir::toNativeSeparators(watchDirStaticPath));
+	}
+}
+
+void SettingsDialog::onFilteringGroupsChanged()
+{
+	m_filterGroupsHaveChanges = false;
+	QList<GroupForFileFiltering> originalGroups = m_pSettings->GetFileFilterGroups();
+	if (originalGroups.size() != m_filterGroups.size())
+	{
+		m_filterGroupsHaveChanges = true;
+	}
+	else
+	{
+		for (int i = 0; i < m_filterGroups.size();i++)
+		{
+			if (originalGroups[i] != m_filterGroups[i])
+			{
+				m_filterGroupsHaveChanges = true;
+				break;
+			}
+		}
+	}
+	UpdateApplyButtonState();
+}
+
+void SettingsDialog::onRssDownloadRuleesChanged()
+{
+	m_rssDownloadRulesHaveChanges = false;
+	if (!m_deletedRules.isEmpty())
+	{
+		m_rssDownloadRulesHaveChanges = true;
+	}
+	else
+	{
+		RssManagerPtr pRssManager = RssManager::getInstance();
+		QList<RssDownloadRule*> originalRules = pRssManager->downloadRules();
+
+		if (originalRules.size() != m_downloadRulesCopy.size())
+		{
+			m_rssDownloadRulesHaveChanges = true;
+		}
+		else
+		{
+			int size = originalRules.size();
+			for (int i = 0; i < size; i++)
+			{
+				if (*originalRules[i] != *m_downloadRulesCopy[i])
+				{
+					m_rssDownloadRulesHaveChanges = true;
+					break;
+				}
+			}
+		}
+	}
+	UpdateApplyButtonState();
+}
+
+void SettingsDialog::onSchedulerTaskChanged()
+{
+	m_schedulerTasksHaveChanges = false;
+	QList<SchedulerTask> originalSchedulerTasks = m_pSettings->GetSchedullerQueue();
+
+	if (originalSchedulerTasks.size() != m_schedulerTasks.size())
+	{
+		m_schedulerTasksHaveChanges = true;
+	}
+	else
+	{
+		int size = originalSchedulerTasks.size();
+		for (int i = 0; i < size; i++)
+		{
+			if (originalSchedulerTasks[i] != m_schedulerTasks[i])
+			{
+				m_schedulerTasksHaveChanges = true;
+				break;
+			}
+		}
+	}
+	UpdateApplyButtonState();
 }

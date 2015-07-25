@@ -122,6 +122,23 @@ void RssDownloadRule::removeFeed(QUuid feedUid)
 	m_feedUids.remove(feedUid);
 }
 
+bool RssDownloadRule::operator==(const RssDownloadRule& other)
+{
+	return other.m_name == m_name
+		&& other.m_pattern == m_pattern
+		&& other.m_patternType == m_patternType
+		&& other.m_ruleType == m_ruleType
+		&& other.m_uid == m_uid
+		&& other.m_useGroupFilters == m_useGroupFilters
+		&& other.m_useStaticSavePath == m_useStaticSavePath
+		&& other.m_staticSavePath == m_staticSavePath;
+}
+
+bool RssDownloadRule::operator!=(const RssDownloadRule& other)
+{
+	return !operator==(other);
+}
+
 bool RssDownloadRule::UseStaticSavePath() const
 {
 	return m_useStaticSavePath;

@@ -496,9 +496,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_torrentracker.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TorrentStorrage.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_trackerrequestmapper.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -796,6 +793,12 @@
     <ClCompile Include="core\gui\Utils\ValueGetters.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\SympleCrypt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QApplicationSettings.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -1039,6 +1042,9 @@
     <CustomBuild Include="core\gui\Utils\SettingsPropertyMapper.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="core\QApplicationSettings.h">
+      <Filter>Service</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\MagnetApiController.h">
@@ -1147,9 +1153,6 @@
     <ClInclude Include="core\defs.h" />
     <ClInclude Include="core\GroupForFileFiltering.h">
       <Filter>DataModels</Filter>
-    </ClInclude>
-    <ClInclude Include="core\QApplicationSettings.h">
-      <Filter>Service</Filter>
     </ClInclude>
     <ClInclude Include="Resources\resource.h" />
     <ClInclude Include="core\ServiceCommon.h">
@@ -1424,6 +1427,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="torrent\core\TorrentStorrage.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\SympleCrypt.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

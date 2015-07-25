@@ -59,6 +59,17 @@ QString GroupForFileFiltering::Extensions() const
 
 	return res;
 }
+
+bool GroupForFileFiltering::operator==(const GroupForFileFiltering& other)
+{
+	return other.extensions == extensions && other.name == name && other.path == path;
+}
+
+bool GroupForFileFiltering::operator!=(const GroupForFileFiltering& other)
+{
+	return !operator==(other);
+}
+
 QString GroupForFileFiltering::SavePath() const
 {
 	return path;

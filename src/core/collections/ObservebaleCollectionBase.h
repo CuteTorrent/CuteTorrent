@@ -5,12 +5,22 @@
 class ObservebaleCollectionBase : public QObject
 {
 	Q_OBJECT
+public:
+	enum ChangeAction
+	{
+		Add,
+		Remove,
+		Replace,
+		Move,
+		Reset
+	};
+	struct CollectionChangedInfo
+	{
+		ChangeAction Action;
+		int newStartIndex, newCount;
+		int oldStartIndex, oldCount;
+	};
 signals:
-	void itemAdeed(int index);
-	void itemsAdded(int startIndex, int count);
-	void itemRemoved(int index);
-	void itemsRemoved(int startIndex, int count);
-	void itemMoved(int from, int to);
-	void itemChanged(int index);
+	void CollectionChanged(CollectionChangedInfo info);
 };
 #endif

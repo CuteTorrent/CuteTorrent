@@ -542,65 +542,6 @@ void TorrentManager::handle_alert(alert* a)
 			}
 
 			case performance_alert::alert_type:
-
-			/*{
-				performance_alert* p=alert_cast<performance_alert>(a);
-				session_settings settings = ses->settings();
-				switch (p->warning_code)
-				{
-				case performance_alert::outstanding_disk_buffer_limit_reached:
-				{
-
-				settings.max_queued_disk_bytes+=settings.max_queued_disk_bytes/4;
-				break;
-				}
-				case performance_alert::outstanding_request_limit_reached:
-				{
-
-				settings.max_out_request_queue+=settings.max_out_request_queue/4;
-				break;
-				}
-				case performance_alert::upload_limit_too_low:
-				{
-
-				settings.upload_rate_limit+=settings.upload_rate_limit*5/100;
-				break;
-				}
-				case performance_alert::download_limit_too_low:
-				{
-
-				settings.download_rate_limit+=settings.download_rate_limit*5/100;
-				break;
-				}
-				case performance_alert::send_buffer_watermark_too_low:
-				{
-
-				settings.send_buffer_watermark+=settings.send_buffer_watermark/4;
-				break;
-				}
-				case performance_alert::too_many_optimistic_unchoke_slots:
-				{
-
-				settings.unchoke_slots_limit+= settings.unchoke_slots_limit/4;
-				break;
-				}
-				case performance_alert::too_high_disk_queue_limit:
-				{
-
-
-				if (settings.max_queued_disk_bytes-settings.max_queued_disk_bytes/4 < 16*KbInt)
-				{
-				settings.max_queued_disk_bytes=settings.max_queued_disk_bytes-settings.max_queued_disk_bytes/4;
-				}
-				else
-				{
-				settings.cache_size+=32;
-				}
-				break;
-				}
-				}
-				ses->set_settings(settings);
-				}*/
 			case add_torrent_alert::alert_type:
 			case listen_succeeded_alert::alert_type:
 			case state_changed_alert::alert_type:
@@ -803,10 +744,10 @@ session_settings TorrentManager::readSettings()
 	s_settings.urlseed_wait_retry = m_pTorrentSessionSettings->valueInt("Torrent", "urlseed_wait_retry", 30);
 	s_settings.listen_queue_size = m_pTorrentSessionSettings->valueInt("Torrent", "listen_queue_size", 30);
 	s_settings.mixed_mode_algorithm = session_settings::peer_proportional;
-	s_settings.max_peerlist_size = m_pTorrentSessionSettings->valueInt("Torrent", "max_peerlist_size", 4000);
-	s_settings.max_paused_peerlist_size = m_pTorrentSessionSettings->valueInt("Torrent", "max_paused_peerlist_size", 4000);
+	s_settings.max_peerlist_size = m_pTorrentSessionSettings->valueInt("Torrent", "max_peerlist_size", 0);
+	s_settings.max_paused_peerlist_size = m_pTorrentSessionSettings->valueInt("Torrent", "max_paused_peerlist_size", 400);
 	s_settings.seed_time_limit = m_pTorrentSessionSettings->valueInt("Torrent", "seed_time_limit", 0);
-	s_settings.share_ratio_limit = m_pTorrentSessionSettings->valueString("Torrent", "share_ratio_limit", "0.0").toFloat();
+	s_settings.share_ratio_limit = m_pTorrentSessionSettings->valueFloat("Torrent", "share_ratio_limit");
 	m_pTorrentSessionSettings->valueInt("Torrent", "file_allocation_mode", storage_mode_sparse);
 	ipFilterFileName = m_pTorrentSessionSettings->valueString("Torrent", "ip_filter_filename", "");
 	FILE* filter = fopen(ipFilterFileName.toLatin1().data(), "r");
@@ -868,7 +809,6 @@ session_settings TorrentManager::readSettings()
 	s_settings.disk_cache_algorithm = session_settings::avoid_readback;
 	s_settings.user_agent = "CuteTorrent ";
 	s_settings.user_agent.append(Version::getVersionStr());
-	DTInstallPath = m_pTorrentSessionSettings->valueString("DT", "DTInstallPath");
 	s_settings.announce_double_nat = true;
 	return s_settings;
 }
@@ -957,6 +897,7 @@ void TorrentManager::SaveSession()
 {
 	if (!m_bIsSaveSessionInitiated)
 	{
+		m_pTorrentSession->set_alert_dispatch(NULL);
 		m_bIsSaveSessionInitiated = true;
 		writeSettings();
 		num_outstanding_resume_data = 0;
@@ -992,10 +933,10 @@ void TorrentManager::SaveSession()
 
 		while (num_outstanding_resume_data > 0)
 		{
-			QVector<alert*> alerts;
-			getPendingAlerts(alerts);
+			std::deque<alert*> alerts;
+			m_pTorrentSession->pop_alerts(&alerts);
 
-			for (QVector<alert*>::iterator i = alerts.begin()
+			for (std::deque<alert*>::iterator i = alerts.begin()
 			                                   , end(alerts.end()); i != end; ++i)
 			{
 				boost::scoped_ptr<alert> a(*i);

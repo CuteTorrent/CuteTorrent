@@ -430,6 +430,7 @@ void Torrent::resume()
 {
 	if(m_hTorrent.handle.is_valid())
 	{
+		m_hTorrent.handle.auto_managed(true);
 		m_hTorrent.handle.resume();
 	}
 }

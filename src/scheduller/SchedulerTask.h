@@ -24,11 +24,13 @@ public:
 	QString name() const;
 	bool operator < (const SchedulerTask& other) const;
 	SchedulerTask& operator= (const SchedulerTask& right);
+	bool operator == (const SchedulerTask& other);
+	bool operator != (const SchedulerTask& other);
 private:
-	TaskType iType;
-	QDateTime _begin;
-	int _limit;
-	QString _name;
+	TaskType m_taskType;
+	QDateTime m_beginDate;
+	int m_speedLimit;
+	QString m_ruleName;
 protected:
 	void run();
 

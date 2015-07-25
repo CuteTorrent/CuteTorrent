@@ -87,10 +87,11 @@ private:
 	TorrentStorragePtr m_pTorrents;
 	PeiceDisplayWidget* m_pPieceView;
 	FileViewSortProxyModel* m_pFileViewProxymodel;
+	NotificationSystemPtr m_pNotificationSystem;
 	FileViewModel* m_pFileViewModel;
 	TorrentTrackerPtr m_pTracker;
 	QApplicationSettingsPtr m_pSettings;
-	RconWebService* m_pRcon;
+	RconWebServicePtr m_pRcon;
 	UpdateNotifier* m_pUpdateNotifier;
 	HtmlView* m_pFeedItemDescribtionEdit;
 	QSystemTrayIcon* m_pTrayIcon;

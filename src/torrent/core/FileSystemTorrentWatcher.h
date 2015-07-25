@@ -4,6 +4,7 @@
 #include <QStringList>
 #include "Singleton.h"
 #include <QVariant>
+#include <QApplicationSettings.h>
 class QFileSystemWatcher;
 class FileSystemTorrentWatcher : public QObject, public Singleton<FileSystemTorrentWatcher>
 {
@@ -19,11 +20,13 @@ private:
 	QFileSystemWatcher* m_pFileSystemWatcher;
 	QString m_currentPath;
 	QStringList m_currentPathSnapshot;
+	QApplicationSettingsPtr m_pSettings;
 	QStringList getNewFiles(QString path);
 signals:
 	void Notify(int notificationType, QString message, QVariant data);
 private slots:
 	void OnDirectoryChanged(const QString& path);
+	void OnSettngsChnaged(QString group, QString key);
 };
 
 #endif

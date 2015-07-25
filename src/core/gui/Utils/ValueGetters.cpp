@@ -9,6 +9,11 @@ QVariant ValueGetters::SettingsValueGetter(QString group, QString name, QVariant
 	return QApplicationSettings::getInstance()->value(group, name, defaultValue);
 }
 
+QVariant ValueGetters::SettingsEncryptedValueGetter(QString group, QString name, QVariant defaultValue)
+{
+	return QApplicationSettings::getInstance()->securedValueString(group, name, defaultValue.toString());
+}
+
 QVariant ValueGetters::StyleValueGetter(QString group, QString name, QVariant defaultValue)
 {
 	StyleEngene* styleEngine = StyleEngene::getInstance();

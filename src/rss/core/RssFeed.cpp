@@ -8,6 +8,8 @@
 #include "StaticHelpers.h"
 #include "RssItem.h"
 #include "QApplicationSettings.h"
+#include <SympleCrypt.h>
+
 RssFeed::RssFeed(QUrl url, QUuid uid) : m_uid(uid), m_url(url), m_ttl(0), m_customTtl(0)
 {
 	m_pNetManager = new QNetworkAccessManager(this);
@@ -154,9 +156,10 @@ QList<QNetworkCookie> RssFeed::buildCookies() const
 
 	if (m_coookies.size() > 0)
 	{
+		SimpleCrypt cryptor(0xA6C56E2CF17A50);
 		for (QHash<QString, QString>::const_iterator i = m_coookies.constBegin(); i != m_coookies.constEnd(); ++i)
 		{
-			res << QNetworkCookie(i.key().toUtf8(), i.value().toUtf8());
+			res << QNetworkCookie(cryptor.decryptToString(i.key()).toUtf8(), cryptor.decryptToString(i.value()).toUtf8());
 		}
 	}
 

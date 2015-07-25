@@ -52,5 +52,6 @@ private:
 	static QScriptValue searchResultCtor(QScriptContext* context, QScriptEngine* engine);
 	static QScriptValue searchProviderCtor(QScriptContext* context, QScriptEngine* engine);
 private slots:
+	void OnSettngsChnaged(QString, QString);
 	void OnSearchReady(QList<SearchResult*> result);
 };

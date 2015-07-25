@@ -51,7 +51,6 @@ public:
     QPushButton *pbClose;
     QWidget *m_centralWidget;
     QGridLayout *gridLayout_4;
-    QDialogButtonBox *buttonBox;
     QListWidget *listWidget;
     QStackedWidget *stackedWidget;
     QWidget *torrentTab;
@@ -65,35 +64,31 @@ public:
     QCheckBox *showTrackerErrorsCheckBox;
     QCheckBox *showDiskErrorsCheckBox;
     QCheckBox *showRssErrorsCheckBox;
-    QCheckBox *asociationCheckBox;
-    QComboBox *styleComboBox;
-    QLabel *label_26;
-    QCheckBox *winShelItegrationCheckBox;
-    QComboBox *localeComboBox;
-    QCheckBox *startMinimizedCheckBox;
-    QLabel *label_8;
-    QCheckBox *runOnbootCheckBox;
-    QCheckBox *scriptDebugingCheckBox;
-    QCheckBox *magnetAssociationCheckBox;
     QGroupBox *watchDirEnabledCheckbox;
     QGridLayout *gridLayout_35;
     QGridLayout *gridLayout_23;
     QRadioButton *useStaticPathRadioButton;
     QRadioButton *showDialogRadioButton;
     QRadioButton *usetTorrentFilteringRadioButton;
-    QPushButton *pushButton_2;
+    QPushButton *browseWatchStaticPathButton;
     QLineEdit *staticSavePathEdit;
     QLineEdit *watchDirPathEdit;
     QLabel *label_43;
-    QPushButton *pushButton;
+    QPushButton *browseWatchDirButton;
     QCheckBox *checkBox;
+    QComboBox *styleComboBox;
+    QCheckBox *asociationCheckBox;
+    QComboBox *localeComboBox;
+    QLabel *label_26;
+    QCheckBox *winShelItegrationCheckBox;
+    QCheckBox *scriptDebugingCheckBox;
+    QCheckBox *runOnbootCheckBox;
+    QCheckBox *magnetAssociationCheckBox;
+    QCheckBox *startMinimizedCheckBox;
+    QLabel *label_8;
+    QSpacerItem *verticalSpacer_9;
     QWidget *restrictionTab;
     QGridLayout *gridLayout_30;
-    QGroupBox *groupBox_12;
-    QGridLayout *gridLayout_29;
-    QCheckBox *usePExCheckBox;
-    QCheckBox *useLSDCheckBox;
-    QCheckBox *useDHTCheckBox;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_31;
     QLabel *label_6;
@@ -109,6 +104,17 @@ public:
     QLabel *label_32;
     QSpinBox *localDownloadLimitEdit;
     QCheckBox *limitUtpCheckBox;
+    QGroupBox *groupBox_12;
+    QGridLayout *gridLayout_29;
+    QCheckBox *usePExCheckBox;
+    QCheckBox *useLSDCheckBox;
+    QCheckBox *useDHTCheckBox;
+    QDoubleSpinBox *seedGlobalRatioEdit;
+    QLabel *label_34;
+    QTimeEdit *seedTimeLimitEdit;
+    QLabel *label_30;
+    QSpinBox *maxConnectionsPerTorrentEdit;
+    QLabel *label_41;
     QGroupBox *restrictionsGroupBox;
     QGridLayout *gridLayout_3;
     QSpinBox *activeSeedLimitEdit;
@@ -117,18 +123,12 @@ public:
     QLabel *label_17;
     QLabel *label_16;
     QLabel *label_15;
-    QDoubleSpinBox *seedGlobalRatioEdit;
     QSpacerItem *verticalSpacer_6;
-    QLabel *label_34;
-    QTimeEdit *seedTimeLimitEdit;
-    QLabel *label_30;
-    QLabel *label_41;
-    QSpinBox *maxConnectionsPerTorrentEdit;
     QWidget *page;
     QGridLayout *gridLayout_20;
+    QLineEdit *portEdit;
     QLabel *label;
     QCheckBox *portMappingsCheckBox;
-    QLineEdit *portEdit;
     QGroupBox *groupBox_10;
     QGridLayout *gridLayout_28;
     QComboBox *inEncPolicyComboBox;
@@ -150,22 +150,22 @@ public:
     QComboBox *proxyTypeComboBox;
     QLabel *label_44;
     QLineEdit *proxyPortEdit;
-    QSpacerItem *verticalSpacer_4;
     QSpacerItem *verticalSpacer_5;
+    QSpacerItem *verticalSpacer_4;
     QWidget *hddTab;
     QGridLayout *gridLayout_12;
-    QLabel *label_19;
-    QComboBox *diskIOCasheModeComboBox;
-    QLabel *label_20;
-    QSpinBox *casheSizeLineEdit;
-    QLabel *label_42;
-    QComboBox *diskAllocationComboBox;
     QCheckBox *useDiskReadAheadCheckBox;
     QCheckBox *alowReorderedOpsCheckBox;
     QSpacerItem *horizontalSpacer_2;
-    QCheckBox *lowPrioDiskCheckBox;
-    QCheckBox *useReadCasheCheckBox;
+    QLabel *label_42;
+    QSpinBox *casheSizeLineEdit;
+    QComboBox *diskAllocationComboBox;
     QCheckBox *lockFilesCheckBox;
+    QCheckBox *useReadCasheCheckBox;
+    QCheckBox *lowPrioDiskCheckBox;
+    QLabel *label_19;
+    QComboBox *diskIOCasheModeComboBox;
+    QLabel *label_20;
     QSpacerItem *verticalSpacer_3;
     QWidget *filteringTab;
     QGridLayout *gridLayout_24;
@@ -187,18 +187,18 @@ public:
     QSpacerItem *horizontalSpacer_9;
     QWidget *dtTab;
     QGridLayout *gridLayout_25;
-    QSpacerItem *verticalSpacer_2;
     QGroupBox *groupBox_6;
     QGridLayout *gridLayout_9;
     QLineEdit *DTPathEdit;
     QPushButton *browseDTPathButton;
-    QGroupBox *customMoutGroupBox;
-    QGridLayout *gridLayout_10;
-    QLineEdit *customCommandEdit;
     QGroupBox *groupBox_8;
     QGridLayout *gridLayout_11;
     QComboBox *driveNumberComboBox;
+    QGroupBox *customMoutGroupBox;
+    QGridLayout *gridLayout_10;
+    QLineEdit *customCommandEdit;
     QSpacerItem *horizontalSpacer_6;
+    QSpacerItem *verticalSpacer_2;
     QWidget *schedulingTab;
     QGridLayout *gridLayout_26;
     QComboBox *tasksComboBox;
@@ -207,11 +207,6 @@ public:
     QPushButton *deleteTaskButton;
     QGroupBox *groupBox_11;
     QGridLayout *gridLayout_14;
-    QDateTimeEdit *beginDateTimeEdit;
-    QLineEdit *taskNameLineEdit;
-    QLabel *label_9;
-    QLabel *label_13;
-    QCalendarWidget *calendarWidget;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_15;
     QLabel *label_11;
@@ -222,11 +217,16 @@ public:
     QRadioButton *limitUlRadioButton;
     QRadioButton *limitDlRadioButton;
     QRadioButton *pauseAllRadioButton;
+    QDateTimeEdit *beginDateTimeEdit;
+    QLineEdit *taskNameLineEdit;
+    QLabel *label_9;
+    QLabel *label_13;
+    QCalendarWidget *calendarWidget;
     QSpacerItem *verticalSpacer;
     QSpacerItem *horizontalSpacer_8;
     QWidget *webControllTab;
     QGridLayout *gridLayout_27;
-    QSpacerItem *verticalSpacer_8;
+    QSpacerItem *horizontalSpacer_7;
     QGroupBox *webUIGroupBox;
     QGridLayout *gridLayout_18;
     QGroupBox *IPFilterGroupBox;
@@ -249,7 +249,7 @@ public:
     QPushButton *stopRconButton;
     QLabel *RunningLabel;
     QPushButton *openWebUiButton;
-    QSpacerItem *horizontalSpacer_7;
+    QSpacerItem *verticalSpacer_8;
     QWidget *page_2;
     QGridLayout *gridLayout_33;
     QGroupBox *autosrtEmailNotificationCheckBox;
@@ -282,12 +282,13 @@ public:
     QScrollArea *hotKeyScrollArea;
     QWidget *keyMapContainer;
     QGridLayout *gridLayout_19;
+    QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *SettingsDialog)
     {
         if (SettingsDialog->objectName().isEmpty())
             SettingsDialog->setObjectName(QString::fromUtf8("SettingsDialog"));
-        SettingsDialog->resize(799, 388);
+        SettingsDialog->resize(811, 395);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
         SettingsDialog->setWindowIcon(icon);
@@ -337,16 +338,9 @@ public:
         m_centralWidget = new QWidget(SettingsDialog);
         m_centralWidget->setObjectName(QString::fromUtf8("m_centralWidget"));
         gridLayout_4 = new QGridLayout(m_centralWidget);
-        gridLayout_4->setSpacing(0);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        gridLayout_4->setSizeConstraint(QLayout::SetMinimumSize);
-        gridLayout_4->setContentsMargins(6, 0, 6, 6);
-        buttonBox = new QDialogButtonBox(m_centralWidget);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setStandardButtons(QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-
-        gridLayout_4->addWidget(buttonBox, 2, 3, 1, 1);
-
+        gridLayout_4->setHorizontalSpacing(0);
+        gridLayout_4->setContentsMargins(-1, 0, -1, 7);
         listWidget = new QListWidget(m_centralWidget);
         new QListWidgetItem(listWidget);
         new QListWidgetItem(listWidget);
@@ -377,7 +371,7 @@ public:
         listWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
         listWidget->setResizeMode(QListView::Adjust);
 
-        gridLayout_4->addWidget(listWidget, 0, 0, 3, 1);
+        gridLayout_4->addWidget(listWidget, 0, 0, 2, 1);
 
         stackedWidget = new QStackedWidget(m_centralWidget);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
@@ -428,56 +422,6 @@ public:
 
         gridLayout_22->addWidget(useNotificationsCheckBox, 2, 2, 4, 2);
 
-        asociationCheckBox = new QCheckBox(torrentTab);
-        asociationCheckBox->setObjectName(QString::fromUtf8("asociationCheckBox"));
-
-        gridLayout_22->addWidget(asociationCheckBox, 4, 0, 1, 2);
-
-        styleComboBox = new QComboBox(torrentTab);
-        styleComboBox->setObjectName(QString::fromUtf8("styleComboBox"));
-
-        gridLayout_22->addWidget(styleComboBox, 1, 1, 1, 1);
-
-        label_26 = new QLabel(torrentTab);
-        label_26->setObjectName(QString::fromUtf8("label_26"));
-
-        gridLayout_22->addWidget(label_26, 1, 0, 1, 1);
-
-        winShelItegrationCheckBox = new QCheckBox(torrentTab);
-        winShelItegrationCheckBox->setObjectName(QString::fromUtf8("winShelItegrationCheckBox"));
-
-        gridLayout_22->addWidget(winShelItegrationCheckBox, 6, 0, 1, 2);
-
-        localeComboBox = new QComboBox(torrentTab);
-        localeComboBox->setObjectName(QString::fromUtf8("localeComboBox"));
-
-        gridLayout_22->addWidget(localeComboBox, 0, 1, 1, 1);
-
-        startMinimizedCheckBox = new QCheckBox(torrentTab);
-        startMinimizedCheckBox->setObjectName(QString::fromUtf8("startMinimizedCheckBox"));
-
-        gridLayout_22->addWidget(startMinimizedCheckBox, 3, 0, 1, 2);
-
-        label_8 = new QLabel(torrentTab);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
-
-        gridLayout_22->addWidget(label_8, 0, 0, 1, 1);
-
-        runOnbootCheckBox = new QCheckBox(torrentTab);
-        runOnbootCheckBox->setObjectName(QString::fromUtf8("runOnbootCheckBox"));
-
-        gridLayout_22->addWidget(runOnbootCheckBox, 2, 0, 1, 2);
-
-        scriptDebugingCheckBox = new QCheckBox(torrentTab);
-        scriptDebugingCheckBox->setObjectName(QString::fromUtf8("scriptDebugingCheckBox"));
-
-        gridLayout_22->addWidget(scriptDebugingCheckBox, 6, 2, 1, 2);
-
-        magnetAssociationCheckBox = new QCheckBox(torrentTab);
-        magnetAssociationCheckBox->setObjectName(QString::fromUtf8("magnetAssociationCheckBox"));
-
-        gridLayout_22->addWidget(magnetAssociationCheckBox, 5, 0, 1, 2);
-
         watchDirEnabledCheckbox = new QGroupBox(torrentTab);
         watchDirEnabledCheckbox->setObjectName(QString::fromUtf8("watchDirEnabledCheckbox"));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Minimum);
@@ -506,10 +450,10 @@ public:
 
         gridLayout_23->addWidget(usetTorrentFilteringRadioButton, 0, 1, 1, 3);
 
-        pushButton_2 = new QPushButton(watchDirEnabledCheckbox);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        browseWatchStaticPathButton = new QPushButton(watchDirEnabledCheckbox);
+        browseWatchStaticPathButton->setObjectName(QString::fromUtf8("browseWatchStaticPathButton"));
 
-        gridLayout_23->addWidget(pushButton_2, 1, 3, 1, 1);
+        gridLayout_23->addWidget(browseWatchStaticPathButton, 1, 3, 1, 1);
 
         staticSavePathEdit = new QLineEdit(watchDirEnabledCheckbox);
         staticSavePathEdit->setObjectName(QString::fromUtf8("staticSavePathEdit"));
@@ -529,10 +473,10 @@ public:
 
         gridLayout_35->addWidget(label_43, 0, 0, 1, 1);
 
-        pushButton = new QPushButton(watchDirEnabledCheckbox);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        browseWatchDirButton = new QPushButton(watchDirEnabledCheckbox);
+        browseWatchDirButton->setObjectName(QString::fromUtf8("browseWatchDirButton"));
 
-        gridLayout_35->addWidget(pushButton, 0, 2, 1, 1);
+        gridLayout_35->addWidget(browseWatchDirButton, 0, 2, 1, 1);
 
         checkBox = new QCheckBox(watchDirEnabledCheckbox);
         checkBox->setObjectName(QString::fromUtf8("checkBox"));
@@ -542,33 +486,65 @@ public:
 
         gridLayout_22->addWidget(watchDirEnabledCheckbox, 7, 0, 1, 3);
 
+        styleComboBox = new QComboBox(torrentTab);
+        styleComboBox->setObjectName(QString::fromUtf8("styleComboBox"));
+
+        gridLayout_22->addWidget(styleComboBox, 1, 1, 1, 1);
+
+        asociationCheckBox = new QCheckBox(torrentTab);
+        asociationCheckBox->setObjectName(QString::fromUtf8("asociationCheckBox"));
+
+        gridLayout_22->addWidget(asociationCheckBox, 4, 0, 1, 2);
+
+        localeComboBox = new QComboBox(torrentTab);
+        localeComboBox->setObjectName(QString::fromUtf8("localeComboBox"));
+
+        gridLayout_22->addWidget(localeComboBox, 0, 1, 1, 1);
+
+        label_26 = new QLabel(torrentTab);
+        label_26->setObjectName(QString::fromUtf8("label_26"));
+
+        gridLayout_22->addWidget(label_26, 1, 0, 1, 1);
+
+        winShelItegrationCheckBox = new QCheckBox(torrentTab);
+        winShelItegrationCheckBox->setObjectName(QString::fromUtf8("winShelItegrationCheckBox"));
+
+        gridLayout_22->addWidget(winShelItegrationCheckBox, 6, 0, 1, 2);
+
+        scriptDebugingCheckBox = new QCheckBox(torrentTab);
+        scriptDebugingCheckBox->setObjectName(QString::fromUtf8("scriptDebugingCheckBox"));
+
+        gridLayout_22->addWidget(scriptDebugingCheckBox, 6, 2, 1, 2);
+
+        runOnbootCheckBox = new QCheckBox(torrentTab);
+        runOnbootCheckBox->setObjectName(QString::fromUtf8("runOnbootCheckBox"));
+
+        gridLayout_22->addWidget(runOnbootCheckBox, 2, 0, 1, 2);
+
+        magnetAssociationCheckBox = new QCheckBox(torrentTab);
+        magnetAssociationCheckBox->setObjectName(QString::fromUtf8("magnetAssociationCheckBox"));
+
+        gridLayout_22->addWidget(magnetAssociationCheckBox, 5, 0, 1, 2);
+
+        startMinimizedCheckBox = new QCheckBox(torrentTab);
+        startMinimizedCheckBox->setObjectName(QString::fromUtf8("startMinimizedCheckBox"));
+
+        gridLayout_22->addWidget(startMinimizedCheckBox, 3, 0, 1, 2);
+
+        label_8 = new QLabel(torrentTab);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        gridLayout_22->addWidget(label_8, 0, 0, 1, 1);
+
+        verticalSpacer_9 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_22->addItem(verticalSpacer_9, 8, 0, 1, 1);
+
         stackedWidget->addWidget(torrentTab);
         restrictionTab = new QWidget();
         restrictionTab->setObjectName(QString::fromUtf8("restrictionTab"));
         gridLayout_30 = new QGridLayout(restrictionTab);
         gridLayout_30->setObjectName(QString::fromUtf8("gridLayout_30"));
-        groupBox_12 = new QGroupBox(restrictionTab);
-        groupBox_12->setObjectName(QString::fromUtf8("groupBox_12"));
-        gridLayout_29 = new QGridLayout(groupBox_12);
-        gridLayout_29->setObjectName(QString::fromUtf8("gridLayout_29"));
-        usePExCheckBox = new QCheckBox(groupBox_12);
-        usePExCheckBox->setObjectName(QString::fromUtf8("usePExCheckBox"));
-
-        gridLayout_29->addWidget(usePExCheckBox, 1, 0, 1, 1);
-
-        useLSDCheckBox = new QCheckBox(groupBox_12);
-        useLSDCheckBox->setObjectName(QString::fromUtf8("useLSDCheckBox"));
-
-        gridLayout_29->addWidget(useLSDCheckBox, 2, 0, 1, 1);
-
-        useDHTCheckBox = new QCheckBox(groupBox_12);
-        useDHTCheckBox->setObjectName(QString::fromUtf8("useDHTCheckBox"));
-
-        gridLayout_29->addWidget(useDHTCheckBox, 0, 0, 1, 1);
-
-
-        gridLayout_30->addWidget(groupBox_12, 1, 0, 2, 2);
-
         groupBox_2 = new QGroupBox(restrictionTab);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         gridLayout_31 = new QGridLayout(groupBox_2);
@@ -645,6 +621,62 @@ public:
 
         gridLayout_30->addWidget(groupBox_2, 0, 2, 3, 2);
 
+        groupBox_12 = new QGroupBox(restrictionTab);
+        groupBox_12->setObjectName(QString::fromUtf8("groupBox_12"));
+        gridLayout_29 = new QGridLayout(groupBox_12);
+        gridLayout_29->setObjectName(QString::fromUtf8("gridLayout_29"));
+        usePExCheckBox = new QCheckBox(groupBox_12);
+        usePExCheckBox->setObjectName(QString::fromUtf8("usePExCheckBox"));
+
+        gridLayout_29->addWidget(usePExCheckBox, 1, 0, 1, 1);
+
+        useLSDCheckBox = new QCheckBox(groupBox_12);
+        useLSDCheckBox->setObjectName(QString::fromUtf8("useLSDCheckBox"));
+
+        gridLayout_29->addWidget(useLSDCheckBox, 2, 0, 1, 1);
+
+        useDHTCheckBox = new QCheckBox(groupBox_12);
+        useDHTCheckBox->setObjectName(QString::fromUtf8("useDHTCheckBox"));
+
+        gridLayout_29->addWidget(useDHTCheckBox, 0, 0, 1, 1);
+
+
+        gridLayout_30->addWidget(groupBox_12, 1, 0, 2, 2);
+
+        seedGlobalRatioEdit = new QDoubleSpinBox(restrictionTab);
+        seedGlobalRatioEdit->setObjectName(QString::fromUtf8("seedGlobalRatioEdit"));
+
+        gridLayout_30->addWidget(seedGlobalRatioEdit, 3, 1, 1, 1);
+
+        label_34 = new QLabel(restrictionTab);
+        label_34->setObjectName(QString::fromUtf8("label_34"));
+
+        gridLayout_30->addWidget(label_34, 3, 0, 1, 1);
+
+        seedTimeLimitEdit = new QTimeEdit(restrictionTab);
+        seedTimeLimitEdit->setObjectName(QString::fromUtf8("seedTimeLimitEdit"));
+        seedTimeLimitEdit->setDisplayFormat(QString::fromUtf8("HH:mm:ss"));
+
+        gridLayout_30->addWidget(seedTimeLimitEdit, 3, 3, 1, 1);
+
+        label_30 = new QLabel(restrictionTab);
+        label_30->setObjectName(QString::fromUtf8("label_30"));
+
+        gridLayout_30->addWidget(label_30, 3, 2, 1, 1);
+
+        maxConnectionsPerTorrentEdit = new QSpinBox(restrictionTab);
+        maxConnectionsPerTorrentEdit->setObjectName(QString::fromUtf8("maxConnectionsPerTorrentEdit"));
+        maxConnectionsPerTorrentEdit->setMinimum(50);
+        maxConnectionsPerTorrentEdit->setMaximum(65536);
+        maxConnectionsPerTorrentEdit->setSingleStep(10);
+
+        gridLayout_30->addWidget(maxConnectionsPerTorrentEdit, 4, 1, 1, 1);
+
+        label_41 = new QLabel(restrictionTab);
+        label_41->setObjectName(QString::fromUtf8("label_41"));
+
+        gridLayout_30->addWidget(label_41, 4, 0, 1, 1);
+
         restrictionsGroupBox = new QGroupBox(restrictionTab);
         restrictionsGroupBox->setObjectName(QString::fromUtf8("restrictionsGroupBox"));
         gridLayout_3 = new QGridLayout(restrictionsGroupBox);
@@ -694,50 +726,21 @@ public:
 
         gridLayout_30->addWidget(restrictionsGroupBox, 0, 0, 1, 2);
 
-        seedGlobalRatioEdit = new QDoubleSpinBox(restrictionTab);
-        seedGlobalRatioEdit->setObjectName(QString::fromUtf8("seedGlobalRatioEdit"));
-
-        gridLayout_30->addWidget(seedGlobalRatioEdit, 3, 1, 1, 1);
-
         verticalSpacer_6 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         gridLayout_30->addItem(verticalSpacer_6, 5, 0, 1, 4);
-
-        label_34 = new QLabel(restrictionTab);
-        label_34->setObjectName(QString::fromUtf8("label_34"));
-
-        gridLayout_30->addWidget(label_34, 3, 0, 1, 1);
-
-        seedTimeLimitEdit = new QTimeEdit(restrictionTab);
-        seedTimeLimitEdit->setObjectName(QString::fromUtf8("seedTimeLimitEdit"));
-        seedTimeLimitEdit->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-        seedTimeLimitEdit->setDisplayFormat(QString::fromUtf8("HH:mm:ss"));
-
-        gridLayout_30->addWidget(seedTimeLimitEdit, 3, 3, 1, 1);
-
-        label_30 = new QLabel(restrictionTab);
-        label_30->setObjectName(QString::fromUtf8("label_30"));
-
-        gridLayout_30->addWidget(label_30, 3, 2, 1, 1);
-
-        label_41 = new QLabel(restrictionTab);
-        label_41->setObjectName(QString::fromUtf8("label_41"));
-
-        gridLayout_30->addWidget(label_41, 4, 0, 1, 1);
-
-        maxConnectionsPerTorrentEdit = new QSpinBox(restrictionTab);
-        maxConnectionsPerTorrentEdit->setObjectName(QString::fromUtf8("maxConnectionsPerTorrentEdit"));
-        maxConnectionsPerTorrentEdit->setMinimum(50);
-        maxConnectionsPerTorrentEdit->setMaximum(65536);
-        maxConnectionsPerTorrentEdit->setSingleStep(10);
-
-        gridLayout_30->addWidget(maxConnectionsPerTorrentEdit, 4, 1, 1, 1);
 
         stackedWidget->addWidget(restrictionTab);
         page = new QWidget();
         page->setObjectName(QString::fromUtf8("page"));
         gridLayout_20 = new QGridLayout(page);
         gridLayout_20->setObjectName(QString::fromUtf8("gridLayout_20"));
+        portEdit = new QLineEdit(page);
+        portEdit->setObjectName(QString::fromUtf8("portEdit"));
+        portEdit->setMaxLength(5);
+
+        gridLayout_20->addWidget(portEdit, 0, 1, 1, 1);
+
         label = new QLabel(page);
         label->setObjectName(QString::fromUtf8("label"));
         label->setLayoutDirection(Qt::LeftToRight);
@@ -750,12 +753,6 @@ public:
         portMappingsCheckBox->setObjectName(QString::fromUtf8("portMappingsCheckBox"));
 
         gridLayout_20->addWidget(portMappingsCheckBox, 0, 2, 1, 1);
-
-        portEdit = new QLineEdit(page);
-        portEdit->setObjectName(QString::fromUtf8("portEdit"));
-        portEdit->setMaxLength(5);
-
-        gridLayout_20->addWidget(portEdit, 0, 1, 1, 1);
 
         groupBox_10 = new QGroupBox(page);
         groupBox_10->setObjectName(QString::fromUtf8("groupBox_10"));
@@ -861,50 +858,19 @@ public:
 
         gridLayout_20->addWidget(proxyGroupBox, 1, 0, 2, 3);
 
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_20->addItem(verticalSpacer_4, 3, 0, 1, 3);
-
         verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         gridLayout_20->addItem(verticalSpacer_5, 2, 3, 2, 1);
+
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_20->addItem(verticalSpacer_4, 3, 0, 1, 3);
 
         stackedWidget->addWidget(page);
         hddTab = new QWidget();
         hddTab->setObjectName(QString::fromUtf8("hddTab"));
         gridLayout_12 = new QGridLayout(hddTab);
         gridLayout_12->setObjectName(QString::fromUtf8("gridLayout_12"));
-        label_19 = new QLabel(hddTab);
-        label_19->setObjectName(QString::fromUtf8("label_19"));
-
-        gridLayout_12->addWidget(label_19, 0, 0, 1, 1);
-
-        diskIOCasheModeComboBox = new QComboBox(hddTab);
-        diskIOCasheModeComboBox->setObjectName(QString::fromUtf8("diskIOCasheModeComboBox"));
-
-        gridLayout_12->addWidget(diskIOCasheModeComboBox, 0, 1, 1, 1);
-
-        label_20 = new QLabel(hddTab);
-        label_20->setObjectName(QString::fromUtf8("label_20"));
-
-        gridLayout_12->addWidget(label_20, 1, 0, 1, 1);
-
-        casheSizeLineEdit = new QSpinBox(hddTab);
-        casheSizeLineEdit->setObjectName(QString::fromUtf8("casheSizeLineEdit"));
-        casheSizeLineEdit->setMaximum(512000);
-
-        gridLayout_12->addWidget(casheSizeLineEdit, 1, 1, 1, 1);
-
-        label_42 = new QLabel(hddTab);
-        label_42->setObjectName(QString::fromUtf8("label_42"));
-
-        gridLayout_12->addWidget(label_42, 2, 0, 1, 1);
-
-        diskAllocationComboBox = new QComboBox(hddTab);
-        diskAllocationComboBox->setObjectName(QString::fromUtf8("diskAllocationComboBox"));
-
-        gridLayout_12->addWidget(diskAllocationComboBox, 2, 1, 1, 1);
-
         useDiskReadAheadCheckBox = new QCheckBox(hddTab);
         useDiskReadAheadCheckBox->setObjectName(QString::fromUtf8("useDiskReadAheadCheckBox"));
 
@@ -919,20 +885,51 @@ public:
 
         gridLayout_12->addItem(horizontalSpacer_2, 3, 2, 1, 1);
 
-        lowPrioDiskCheckBox = new QCheckBox(hddTab);
-        lowPrioDiskCheckBox->setObjectName(QString::fromUtf8("lowPrioDiskCheckBox"));
+        label_42 = new QLabel(hddTab);
+        label_42->setObjectName(QString::fromUtf8("label_42"));
 
-        gridLayout_12->addWidget(lowPrioDiskCheckBox, 4, 0, 1, 1);
+        gridLayout_12->addWidget(label_42, 2, 0, 1, 1);
+
+        casheSizeLineEdit = new QSpinBox(hddTab);
+        casheSizeLineEdit->setObjectName(QString::fromUtf8("casheSizeLineEdit"));
+        casheSizeLineEdit->setMaximum(512000);
+
+        gridLayout_12->addWidget(casheSizeLineEdit, 1, 1, 1, 1);
+
+        diskAllocationComboBox = new QComboBox(hddTab);
+        diskAllocationComboBox->setObjectName(QString::fromUtf8("diskAllocationComboBox"));
+
+        gridLayout_12->addWidget(diskAllocationComboBox, 2, 1, 1, 1);
+
+        lockFilesCheckBox = new QCheckBox(hddTab);
+        lockFilesCheckBox->setObjectName(QString::fromUtf8("lockFilesCheckBox"));
+
+        gridLayout_12->addWidget(lockFilesCheckBox, 5, 0, 1, 1);
 
         useReadCasheCheckBox = new QCheckBox(hddTab);
         useReadCasheCheckBox->setObjectName(QString::fromUtf8("useReadCasheCheckBox"));
 
         gridLayout_12->addWidget(useReadCasheCheckBox, 4, 1, 1, 1);
 
-        lockFilesCheckBox = new QCheckBox(hddTab);
-        lockFilesCheckBox->setObjectName(QString::fromUtf8("lockFilesCheckBox"));
+        lowPrioDiskCheckBox = new QCheckBox(hddTab);
+        lowPrioDiskCheckBox->setObjectName(QString::fromUtf8("lowPrioDiskCheckBox"));
 
-        gridLayout_12->addWidget(lockFilesCheckBox, 5, 0, 1, 1);
+        gridLayout_12->addWidget(lowPrioDiskCheckBox, 4, 0, 1, 1);
+
+        label_19 = new QLabel(hddTab);
+        label_19->setObjectName(QString::fromUtf8("label_19"));
+
+        gridLayout_12->addWidget(label_19, 0, 0, 1, 1);
+
+        diskIOCasheModeComboBox = new QComboBox(hddTab);
+        diskIOCasheModeComboBox->setObjectName(QString::fromUtf8("diskIOCasheModeComboBox"));
+
+        gridLayout_12->addWidget(diskIOCasheModeComboBox, 0, 1, 1, 1);
+
+        label_20 = new QLabel(hddTab);
+        label_20->setObjectName(QString::fromUtf8("label_20"));
+
+        gridLayout_12->addWidget(label_20, 1, 0, 1, 1);
 
         verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -1016,10 +1013,6 @@ public:
         dtTab->setObjectName(QString::fromUtf8("dtTab"));
         gridLayout_25 = new QGridLayout(dtTab);
         gridLayout_25->setObjectName(QString::fromUtf8("gridLayout_25"));
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_25->addItem(verticalSpacer_2, 2, 0, 1, 1);
-
         groupBox_6 = new QGroupBox(dtTab);
         groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
         gridLayout_9 = new QGridLayout(groupBox_6);
@@ -1036,21 +1029,6 @@ public:
 
 
         gridLayout_25->addWidget(groupBox_6, 0, 0, 1, 1);
-
-        customMoutGroupBox = new QGroupBox(dtTab);
-        customMoutGroupBox->setObjectName(QString::fromUtf8("customMoutGroupBox"));
-        customMoutGroupBox->setEnabled(true);
-        customMoutGroupBox->setCheckable(true);
-        customMoutGroupBox->setChecked(false);
-        gridLayout_10 = new QGridLayout(customMoutGroupBox);
-        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
-        customCommandEdit = new QLineEdit(customMoutGroupBox);
-        customCommandEdit->setObjectName(QString::fromUtf8("customCommandEdit"));
-
-        gridLayout_10->addWidget(customCommandEdit, 0, 0, 1, 1);
-
-
-        gridLayout_25->addWidget(customMoutGroupBox, 1, 0, 1, 2);
 
         groupBox_8 = new QGroupBox(dtTab);
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
@@ -1076,9 +1054,28 @@ public:
 
         gridLayout_25->addWidget(groupBox_8, 0, 1, 1, 1);
 
+        customMoutGroupBox = new QGroupBox(dtTab);
+        customMoutGroupBox->setObjectName(QString::fromUtf8("customMoutGroupBox"));
+        customMoutGroupBox->setEnabled(true);
+        customMoutGroupBox->setCheckable(true);
+        customMoutGroupBox->setChecked(false);
+        gridLayout_10 = new QGridLayout(customMoutGroupBox);
+        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
+        customCommandEdit = new QLineEdit(customMoutGroupBox);
+        customCommandEdit->setObjectName(QString::fromUtf8("customCommandEdit"));
+
+        gridLayout_10->addWidget(customCommandEdit, 0, 0, 1, 1);
+
+
+        gridLayout_25->addWidget(customMoutGroupBox, 1, 0, 1, 2);
+
         horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout_25->addItem(horizontalSpacer_6, 0, 2, 2, 1);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_25->addItem(verticalSpacer_2, 2, 0, 1, 1);
 
         stackedWidget->addWidget(dtTab);
         schedulingTab = new QWidget();
@@ -1111,32 +1108,6 @@ public:
         groupBox_11->setObjectName(QString::fromUtf8("groupBox_11"));
         gridLayout_14 = new QGridLayout(groupBox_11);
         gridLayout_14->setObjectName(QString::fromUtf8("gridLayout_14"));
-        beginDateTimeEdit = new QDateTimeEdit(groupBox_11);
-        beginDateTimeEdit->setObjectName(QString::fromUtf8("beginDateTimeEdit"));
-
-        gridLayout_14->addWidget(beginDateTimeEdit, 1, 1, 1, 1);
-
-        taskNameLineEdit = new QLineEdit(groupBox_11);
-        taskNameLineEdit->setObjectName(QString::fromUtf8("taskNameLineEdit"));
-        taskNameLineEdit->setMaximumSize(QSize(16777215, 16777215));
-
-        gridLayout_14->addWidget(taskNameLineEdit, 0, 1, 1, 1);
-
-        label_9 = new QLabel(groupBox_11);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
-
-        gridLayout_14->addWidget(label_9, 1, 0, 1, 1);
-
-        label_13 = new QLabel(groupBox_11);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
-
-        gridLayout_14->addWidget(label_13, 0, 0, 1, 1);
-
-        calendarWidget = new QCalendarWidget(groupBox_11);
-        calendarWidget->setObjectName(QString::fromUtf8("calendarWidget"));
-
-        gridLayout_14->addWidget(calendarWidget, 0, 2, 3, 1);
-
         groupBox = new QGroupBox(groupBox_11);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         gridLayout_15 = new QGridLayout(groupBox);
@@ -1186,6 +1157,32 @@ public:
 
         gridLayout_14->addWidget(groupBox, 2, 0, 1, 2);
 
+        beginDateTimeEdit = new QDateTimeEdit(groupBox_11);
+        beginDateTimeEdit->setObjectName(QString::fromUtf8("beginDateTimeEdit"));
+
+        gridLayout_14->addWidget(beginDateTimeEdit, 1, 1, 1, 1);
+
+        taskNameLineEdit = new QLineEdit(groupBox_11);
+        taskNameLineEdit->setObjectName(QString::fromUtf8("taskNameLineEdit"));
+        taskNameLineEdit->setMaximumSize(QSize(16777215, 16777215));
+
+        gridLayout_14->addWidget(taskNameLineEdit, 0, 1, 1, 1);
+
+        label_9 = new QLabel(groupBox_11);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        gridLayout_14->addWidget(label_9, 1, 0, 1, 1);
+
+        label_13 = new QLabel(groupBox_11);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+
+        gridLayout_14->addWidget(label_13, 0, 0, 1, 1);
+
+        calendarWidget = new QCalendarWidget(groupBox_11);
+        calendarWidget->setObjectName(QString::fromUtf8("calendarWidget"));
+
+        gridLayout_14->addWidget(calendarWidget, 0, 2, 3, 1);
+
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         gridLayout_14->addItem(verticalSpacer, 3, 0, 1, 2);
@@ -1208,9 +1205,9 @@ public:
         webControllTab->setObjectName(QString::fromUtf8("webControllTab"));
         gridLayout_27 = new QGridLayout(webControllTab);
         gridLayout_27->setObjectName(QString::fromUtf8("gridLayout_27"));
-        verticalSpacer_8 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_27->addItem(verticalSpacer_8, 1, 0, 1, 1);
+        gridLayout_27->addItem(horizontalSpacer_7, 0, 1, 1, 1);
 
         webUIGroupBox = new QGroupBox(webControllTab);
         webUIGroupBox->setObjectName(QString::fromUtf8("webUIGroupBox"));
@@ -1327,9 +1324,9 @@ public:
 
         gridLayout_27->addWidget(webUIGroupBox, 0, 0, 1, 1);
 
-        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        verticalSpacer_8 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_27->addItem(horizontalSpacer_7, 0, 1, 1, 1);
+        gridLayout_27->addItem(verticalSpacer_8, 1, 0, 1, 1);
 
         stackedWidget->addWidget(webControllTab);
         page_2 = new QWidget();
@@ -1479,7 +1476,7 @@ public:
         hotKeyScrollArea->setWidgetResizable(true);
         keyMapContainer = new QWidget();
         keyMapContainer->setObjectName(QString::fromUtf8("keyMapContainer"));
-        keyMapContainer->setGeometry(QRect(0, 0, 98, 28));
+        keyMapContainer->setGeometry(QRect(0, 0, 629, 333));
         gridLayout_19 = new QGridLayout(keyMapContainer);
         gridLayout_19->setObjectName(QString::fromUtf8("gridLayout_19"));
         hotKeyScrollArea->setWidget(keyMapContainer);
@@ -1488,7 +1485,13 @@ public:
 
         stackedWidget->addWidget(keyMappingTab);
 
-        gridLayout_4->addWidget(stackedWidget, 0, 2, 1, 2);
+        gridLayout_4->addWidget(stackedWidget, 0, 1, 1, 1);
+
+        buttonBox = new QDialogButtonBox(m_centralWidget);
+        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setStandardButtons(QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+
+        gridLayout_4->addWidget(buttonBox, 1, 1, 1, 1);
 
 
         verticalLayout->addWidget(m_centralWidget);
@@ -1612,6 +1615,8 @@ public:
         QObject::connect(removeRssDLRuleButton, SIGNAL(clicked()), SettingsDialog, SLOT(onDeleteRssRule()));
         QObject::connect(exportRssRulesButton, SIGNAL(clicked()), SettingsDialog, SLOT(onExportRssRules()));
         QObject::connect(importRssRulesButton, SIGNAL(clicked()), SettingsDialog, SLOT(onImportRssRules()));
+        QObject::connect(browseWatchDirButton, SIGNAL(clicked()), SettingsDialog, SLOT(onBrowseWatchDir()));
+        QObject::connect(browseWatchStaticPathButton, SIGNAL(clicked()), SettingsDialog, SLOT(onBrowseWatchStaticPath()));
 
         listWidget->setCurrentRow(-1);
         stackedWidget->setCurrentIndex(0);
@@ -1659,38 +1664,34 @@ public:
         showTrackerErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_TRACKER_ERRORS", 0, QApplication::UnicodeUTF8));
         showDiskErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_IO_ERRORS", 0, QApplication::UnicodeUTF8));
         showRssErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_RSS_ERRORS", 0, QApplication::UnicodeUTF8));
+        watchDirEnabledCheckbox->setTitle(QApplication::translate("SettingsDialog", "WATCH_DIR_FOR_NEW_TORRENTS", 0, QApplication::UnicodeUTF8));
+        useStaticPathRadioButton->setText(QApplication::translate("SettingsDialog", "AUTO_ADD_USING_STATIC_PATH", 0, QApplication::UnicodeUTF8));
+        showDialogRadioButton->setText(QApplication::translate("SettingsDialog", "NOT_AUTO_ADD", 0, QApplication::UnicodeUTF8));
+        usetTorrentFilteringRadioButton->setText(QApplication::translate("SettingsDialog", "AUTO_ADD_USING_TOR_FILTERING", 0, QApplication::UnicodeUTF8));
+        browseWatchStaticPathButton->setText(QApplication::translate("SettingsDialog", "BROWSE", 0, QApplication::UnicodeUTF8));
+        label_43->setText(QApplication::translate("SettingsDialog", "DIR_TO_WATCH", 0, QApplication::UnicodeUTF8));
+        browseWatchDirButton->setText(QApplication::translate("SettingsDialog", "BROWSE", 0, QApplication::UnicodeUTF8));
+        checkBox->setText(QApplication::translate("SettingsDialog", "DELETE_TORRENTS", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         asociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         asociationCheckBox->setText(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION", 0, QApplication::UnicodeUTF8));
         label_26->setText(QApplication::translate("SettingsDialog", "STYLE", 0, QApplication::UnicodeUTF8));
         winShelItegrationCheckBox->setText(QApplication::translate("SettingsDialog", "ENABLE_SHELL_INTEGRATION", 0, QApplication::UnicodeUTF8));
+        scriptDebugingCheckBox->setText(QApplication::translate("SettingsDialog", "ENABLE_SEARCH_SCRIPT_DEBUGING", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        runOnbootCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_ON_BOOT_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        runOnbootCheckBox->setText(QApplication::translate("SettingsDialog", "START_ON_BOOT", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        magnetAssociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        magnetAssociationCheckBox->setText(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         startMinimizedCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_MINIMIZED_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         startMinimizedCheckBox->setText(QApplication::translate("SettingsDialog", "START_MINIMIZED", 0, QApplication::UnicodeUTF8));
         label_8->setText(QApplication::translate("SettingsDialog", "LANGUAGE", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        runOnbootCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_ON_BOOT_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        runOnbootCheckBox->setText(QApplication::translate("SettingsDialog", "START_ON_BOOT", 0, QApplication::UnicodeUTF8));
-        scriptDebugingCheckBox->setText(QApplication::translate("SettingsDialog", "ENABLE_SEARCH_SCRIPT_DEBUGING", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        magnetAssociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        magnetAssociationCheckBox->setText(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION", 0, QApplication::UnicodeUTF8));
-        watchDirEnabledCheckbox->setTitle(QApplication::translate("SettingsDialog", "WATCH_DIR_FOR_NEW_TORRENTS", 0, QApplication::UnicodeUTF8));
-        useStaticPathRadioButton->setText(QApplication::translate("SettingsDialog", "AUTO_ADD_USING_STATIC_PATH", 0, QApplication::UnicodeUTF8));
-        showDialogRadioButton->setText(QApplication::translate("SettingsDialog", "NOT_AUTO_ADD", 0, QApplication::UnicodeUTF8));
-        usetTorrentFilteringRadioButton->setText(QApplication::translate("SettingsDialog", "AUTO_ADD_USING_TOR_FILTERING", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("SettingsDialog", "BROWSE", 0, QApplication::UnicodeUTF8));
-        label_43->setText(QApplication::translate("SettingsDialog", "DIR_TO_WATCH", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("SettingsDialog", "BROWSE", 0, QApplication::UnicodeUTF8));
-        checkBox->setText(QApplication::translate("SettingsDialog", "DELETE_TORRENTS", 0, QApplication::UnicodeUTF8));
-        groupBox_12->setTitle(QApplication::translate("SettingsDialog", "ADDITINAL_PEER_SOUECES", 0, QApplication::UnicodeUTF8));
-        usePExCheckBox->setText(QApplication::translate("SettingsDialog", "USE_PEX", 0, QApplication::UnicodeUTF8));
-        useLSDCheckBox->setText(QApplication::translate("SettingsDialog", "USE_LSD", 0, QApplication::UnicodeUTF8));
-        useDHTCheckBox->setText(QApplication::translate("SettingsDialog", "USE_DHT", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("SettingsDialog", "SPEED_RESRICTIONS", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         label_6->setWhatsThis(QApplication::translate("SettingsDialog", "UPLOAD_SPEED_LIMIT_WIT", 0, QApplication::UnicodeUTF8));
@@ -1718,6 +1719,13 @@ public:
         localDownloadLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0, QApplication::UnicodeUTF8));
         localDownloadLimitEdit->setSuffix(QApplication::translate("SettingsDialog", "Kb\\s", 0, QApplication::UnicodeUTF8));
         limitUtpCheckBox->setText(QApplication::translate("SettingsDialog", "APPLY_LIMITS_TO_uTP", 0, QApplication::UnicodeUTF8));
+        groupBox_12->setTitle(QApplication::translate("SettingsDialog", "ADDITINAL_PEER_SOUECES", 0, QApplication::UnicodeUTF8));
+        usePExCheckBox->setText(QApplication::translate("SettingsDialog", "USE_PEX", 0, QApplication::UnicodeUTF8));
+        useLSDCheckBox->setText(QApplication::translate("SettingsDialog", "USE_LSD", 0, QApplication::UnicodeUTF8));
+        useDHTCheckBox->setText(QApplication::translate("SettingsDialog", "USE_DHT", 0, QApplication::UnicodeUTF8));
+        label_34->setText(QApplication::translate("SettingsDialog", "SEED_GLOBAL_RATIO_LIMIT", 0, QApplication::UnicodeUTF8));
+        label_30->setText(QApplication::translate("SettingsDialog", "SEED_TIME_LIMIT", 0, QApplication::UnicodeUTF8));
+        label_41->setText(QApplication::translate("SettingsDialog", "MAX_CONNECTIONS_PER_TORRENT", 0, QApplication::UnicodeUTF8));
         restrictionsGroupBox->setTitle(QApplication::translate("SettingsDialog", "ACTIVITY_RESTRICTIONS", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         activeSeedLimitEdit->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_UPLOADS_LIMIT", 0, QApplication::UnicodeUTF8));
@@ -1743,9 +1751,6 @@ public:
         label_15->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_TORRENTS_LIMIT_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         label_15->setText(QApplication::translate("SettingsDialog", "ACTIVE_TORRENTS_LIMIT", 0, QApplication::UnicodeUTF8));
-        label_34->setText(QApplication::translate("SettingsDialog", "SEED_GLOBAL_RATIO_LIMIT", 0, QApplication::UnicodeUTF8));
-        label_30->setText(QApplication::translate("SettingsDialog", "SEED_TIME_LIMIT", 0, QApplication::UnicodeUTF8));
-        label_41->setText(QApplication::translate("SettingsDialog", "MAX_CONNECTIONS_PER_TORRENT", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("SettingsDialog", "LISTEN_PORT", 0, QApplication::UnicodeUTF8));
         portMappingsCheckBox->setText(QApplication::translate("SettingsDialog", "USE_PORT_MAPPINGS", 0, QApplication::UnicodeUTF8));
         groupBox_10->setTitle(QApplication::translate("SettingsDialog", "NET_ENC", 0, QApplication::UnicodeUTF8));
@@ -1811,6 +1816,35 @@ public:
 #endif // QT_NO_WHATSTHIS
         label_44->setText(QApplication::translate("SettingsDialog", "PROXY_PORT", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
+        useDiskReadAheadCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "USE_DISK_READ_AHEAD_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        useDiskReadAheadCheckBox->setText(QApplication::translate("SettingsDialog", "USE_DISK_READ_AHEAD", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        alowReorderedOpsCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "ALOW_REORDERED_OPERATIONS_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        alowReorderedOpsCheckBox->setText(QApplication::translate("SettingsDialog", "ALOW_REORDERED_OPERATIONS", 0, QApplication::UnicodeUTF8));
+        label_42->setText(QApplication::translate("SettingsDialog", "DISK_ALLOCATION_MODE", 0, QApplication::UnicodeUTF8));
+        casheSizeLineEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0, QApplication::UnicodeUTF8));
+        casheSizeLineEdit->setSuffix(QApplication::translate("SettingsDialog", " Kb", 0, QApplication::UnicodeUTF8));
+        casheSizeLineEdit->setPrefix(QString());
+        diskAllocationComboBox->clear();
+        diskAllocationComboBox->insertItems(0, QStringList()
+         << QApplication::translate("SettingsDialog", "FULL_ALLOCATION", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SettingsDialog", "PIECE_ALLOCATION", 0, QApplication::UnicodeUTF8)
+        );
+#ifndef QT_NO_WHATSTHIS
+        lockFilesCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "LOCK_FILES_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        lockFilesCheckBox->setText(QApplication::translate("SettingsDialog", "LOCK_FILES", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        useReadCasheCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "USE_READ_CASHE_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        useReadCasheCheckBox->setText(QApplication::translate("SettingsDialog", "USE_READ_CASHE", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        lowPrioDiskCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "LOW_PORIO_DISK_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        lowPrioDiskCheckBox->setText(QApplication::translate("SettingsDialog", "LOW_PORIO_DISK", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
         label_19->setWhatsThis(QApplication::translate("SettingsDialog", "DISK_IO_CASH_MODE_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         label_19->setText(QApplication::translate("SettingsDialog", "DISK_IO_CASH_MODE", 0, QApplication::UnicodeUTF8));
@@ -1824,35 +1858,6 @@ public:
         label_20->setWhatsThis(QApplication::translate("SettingsDialog", "CASH_SIZE_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         label_20->setText(QApplication::translate("SettingsDialog", "CASH_SIZE", 0, QApplication::UnicodeUTF8));
-        casheSizeLineEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0, QApplication::UnicodeUTF8));
-        casheSizeLineEdit->setSuffix(QApplication::translate("SettingsDialog", " Kb", 0, QApplication::UnicodeUTF8));
-        casheSizeLineEdit->setPrefix(QString());
-        label_42->setText(QApplication::translate("SettingsDialog", "DISK_ALLOCATION_MODE", 0, QApplication::UnicodeUTF8));
-        diskAllocationComboBox->clear();
-        diskAllocationComboBox->insertItems(0, QStringList()
-         << QApplication::translate("SettingsDialog", "FULL_ALLOCATION", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "PIECE_ALLOCATION", 0, QApplication::UnicodeUTF8)
-        );
-#ifndef QT_NO_WHATSTHIS
-        useDiskReadAheadCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "USE_DISK_READ_AHEAD_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        useDiskReadAheadCheckBox->setText(QApplication::translate("SettingsDialog", "USE_DISK_READ_AHEAD", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        alowReorderedOpsCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "ALOW_REORDERED_OPERATIONS_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        alowReorderedOpsCheckBox->setText(QApplication::translate("SettingsDialog", "ALOW_REORDERED_OPERATIONS", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        lowPrioDiskCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "LOW_PORIO_DISK_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        lowPrioDiskCheckBox->setText(QApplication::translate("SettingsDialog", "LOW_PORIO_DISK", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        useReadCasheCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "USE_READ_CASHE_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        useReadCasheCheckBox->setText(QApplication::translate("SettingsDialog", "USE_READ_CASHE", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        lockFilesCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "LOCK_FILES_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        lockFilesCheckBox->setText(QApplication::translate("SettingsDialog", "LOCK_FILES", 0, QApplication::UnicodeUTF8));
         groupBox_3->setTitle(QApplication::translate("SettingsDialog", "FILTERING_GROUP", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         GroupsListWidget->setWhatsThis(QApplication::translate("SettingsDialog", "GROUP_LISTBOX_WIT", 0, QApplication::UnicodeUTF8));
@@ -1886,20 +1891,18 @@ public:
         DTPathEdit->setWhatsThis(QApplication::translate("SettingsDialog", "DTPathEdit_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         browseDTPathButton->setText(QApplication::translate("SettingsDialog", "DAEMONTOOLS_PATH_CHOISE_BUUTON", 0, QApplication::UnicodeUTF8));
-        customMoutGroupBox->setTitle(QApplication::translate("SettingsDialog", "DAEMONTOOLS_CUSTOM_COMMAND", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        customCommandEdit->setWhatsThis(QApplication::translate("SettingsDialog", "DAEMONTOOLS_COMMAND_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
         groupBox_8->setTitle(QApplication::translate("SettingsDialog", "DRIVE_NUMBER", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         driveNumberComboBox->setWhatsThis(QApplication::translate("SettingsDialog", "driveNumberComboBox_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        customMoutGroupBox->setTitle(QApplication::translate("SettingsDialog", "DAEMONTOOLS_CUSTOM_COMMAND", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        customCommandEdit->setWhatsThis(QApplication::translate("SettingsDialog", "DAEMONTOOLS_COMMAND_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         label_14->setText(QApplication::translate("SettingsDialog", "ACTIONS", 0, QApplication::UnicodeUTF8));
         addTaskButton->setText(QApplication::translate("SettingsDialog", "ADD_BUTTON", 0, QApplication::UnicodeUTF8));
         deleteTaskButton->setText(QApplication::translate("SettingsDialog", "DELETE_BUTTON", 0, QApplication::UnicodeUTF8));
         groupBox_11->setTitle(QApplication::translate("SettingsDialog", "GroupBox", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("SettingsDialog", "ACTION_BEGIN", 0, QApplication::UnicodeUTF8));
-        label_13->setText(QApplication::translate("SettingsDialog", "ACTION_NAME", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("SettingsDialog", "ACTIONS", 0, QApplication::UnicodeUTF8));
         label_11->setText(QApplication::translate("SettingsDialog", "LIMIT_DOWNLOAD", 0, QApplication::UnicodeUTF8));
         label_12->setText(QApplication::translate("SettingsDialog", "LIMIT_UPLOAD", 0, QApplication::UnicodeUTF8));
@@ -1907,6 +1910,8 @@ public:
         limitUlRadioButton->setText(QApplication::translate("SettingsDialog", "LIMIT_UPLOAD", 0, QApplication::UnicodeUTF8));
         limitDlRadioButton->setText(QApplication::translate("SettingsDialog", "LIMIT_DOWNLOAD", 0, QApplication::UnicodeUTF8));
         pauseAllRadioButton->setText(QApplication::translate("SettingsDialog", "PUASE_ALL", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("SettingsDialog", "ACTION_BEGIN", 0, QApplication::UnicodeUTF8));
+        label_13->setText(QApplication::translate("SettingsDialog", "ACTION_NAME", 0, QApplication::UnicodeUTF8));
         webUIGroupBox->setTitle(QApplication::translate("SettingsDialog", "WEB_CONTROLL_ENABLED", 0, QApplication::UnicodeUTF8));
         IPFilterGroupBox->setTitle(QApplication::translate("SettingsDialog", "WEB_UI_USE_IP_FILTER", 0, QApplication::UnicodeUTF8));
         webUILogginGroupBox->setTitle(QApplication::translate("SettingsDialog", "WEB_UI_LOGGING_ENABLED", 0, QApplication::UnicodeUTF8));
