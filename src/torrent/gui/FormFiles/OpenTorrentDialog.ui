@@ -471,7 +471,7 @@
    <sender>yesButton</sender>
    <signal>clicked()</signal>
    <receiver>OpenTorrentDialog</receiver>
-   <slot>AccepTorrent()</slot>
+   <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>321</x>

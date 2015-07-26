@@ -308,7 +308,7 @@ public:
         retranslateUi(OpenTorrentDialog);
         QObject::connect(browseButton, SIGNAL(clicked()), OpenTorrentDialog, SLOT(BrowseButton()));
         QObject::connect(cancelButton, SIGNAL(clicked()), OpenTorrentDialog, SLOT(reject()));
-        QObject::connect(yesButton, SIGNAL(clicked()), OpenTorrentDialog, SLOT(AccepTorrent()));
+        QObject::connect(yesButton, SIGNAL(clicked()), OpenTorrentDialog, SLOT(accept()));
         QObject::connect(GroupComboBox, SIGNAL(currentIndexChanged(int)), OpenTorrentDialog, SLOT(ChangeGroup()));
         QObject::connect(pathEdit, SIGNAL(textChanged(QString)), OpenTorrentDialog, SLOT(OnPathChanged(QString)));
         QObject::connect(markAllButton, SIGNAL(clicked()), OpenTorrentDialog, SLOT(OnCheckAll()));

@@ -23,9 +23,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QFileDialog>
 #include <QFormLayout>
 #include <QIntValidator>
-#include <QPainter>
-#include <QScrollArea>
-#include <QTranslator>
 #include <QUrl>
 #include "application.h"
 #include "messagebox.h"
@@ -43,12 +40,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "AddRssDwonloadRuleDialog.h"
 #include "RssManager.h"
 #include <smtp/smtpclient.h>
-#include <core/SearchEngine.h>
 #include <gui/Utils/UIPropertySetters.h>
 #include <gui/Utils/UIPropertyGetters.h>
 #include <gui/Utils/ValueGetters.h>
 #include <gui/Utils/ValueSetters.h>
-#include <core/FileSystemTorrentWatcher.h>
 
 SettingsDialog::SettingsDialog(QWidget* parent, int flags) 
 	: BaseWindow(OnlyCloseButton, NoResize, parent)
@@ -173,11 +168,10 @@ void SettingsDialog::FillGeneralTab()
 	m_propertyMapper->AddMapping("System", "Lang", SettingsPropertyMapper::INT, localeComboBox, SettingsPropertyMapper::COMBOBOX, "en_US", NULL, NULL, ValueSetters::LanguageValueSetter, ValueGetters::LanguageValueGetter);
 	
 	m_propertyMapper->AddMapping("Notifications", "use_notification_sys", SettingsPropertyMapper::BOOL, useNotificationsCheckBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, true);
-	m_propertyMapper->AddMapping("Notifications", "report_tracker_errors", SettingsPropertyMapper::BOOL, showTrackerErrorsCheckBox, SettingsPropertyMapper::CHECKBOX);
+	m_propertyMapper->AddMapping("Notifications", "report_tracker_errors", SettingsPropertyMapper::BOOL, showTrackerErrorsCheckBox, SettingsPropertyMapper::CHECKBOX, false);
 	m_propertyMapper->AddMapping("Notifications", "report_disk_errors", SettingsPropertyMapper::BOOL, showDiskErrorsCheckBox, SettingsPropertyMapper::CHECKBOX);
 	m_propertyMapper->AddMapping("Notifications", "report_rss_errors", SettingsPropertyMapper::BOOL, showRssErrorsCheckBox, SettingsPropertyMapper::CHECKBOX);
-	
-	
+		
 	m_propertyMapper->AddMapping("WatchDir", "enabled", SettingsPropertyMapper::BOOL, watchDirEnabledCheckbox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, false);
 	m_propertyMapper->AddMapping("WatchDir", "dir_to_watch", SettingsPropertyMapper::STRING, watchDirPathEdit, SettingsPropertyMapper::LINE_EDIT, "");
 	m_propertyMapper->AddMapping("WatchDir", "show_doalog_on_new_torrent", SettingsPropertyMapper::BOOL, showDialogRadioButton, SettingsPropertyMapper::RADIOBUTTON, false);
@@ -739,7 +733,8 @@ void SettingsDialog::FillRestrictionTab()
 	m_propertyMapper->AddMapping("Torrent", "seed_time_limit", SettingsPropertyMapper::INT, seedTimeLimitEdit, SettingsPropertyMapper::TIME_EDIT, 0, UIPropertySetters::TimeFromIntSetter, UIPropertyGetters::IntFromTimeGetter);
 	
 	m_propertyMapper->AddMapping("Torrent", "share_ratio_limit", SettingsPropertyMapper::DOUBLE, seedGlobalRatioEdit, SettingsPropertyMapper::DOUBLE_SPINBOX);
-	m_propertyMapper->AddMapping("Torrent", "max_connections_per_torrent", SettingsPropertyMapper::INT, maxConnectionsPerTorrentEdit, SettingsPropertyMapper::SPINBOX);
+	m_propertyMapper->AddMapping("Torrent", "max_connections_per_torrent", SettingsPropertyMapper::INT, maxConnectionsPerTorrentEdit, SettingsPropertyMapper::SPINBOX, 50);
+	m_propertyMapper->AddMapping("Torrent", "connections_limit", SettingsPropertyMapper::INT, maxConnectionsEdit, SettingsPropertyMapper::SPINBOX);
 }
 
 void SettingsDialog::updateRulesWidget(ObservableList<RssDownloadRule*>& downloadRules)
@@ -878,6 +873,8 @@ void SettingsDialog::NeverCallMe()
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_RSS_REMOVE"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_SETTINGS"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_START"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_PAUSE"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_RESUME"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_DEL_ALL"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_DEL_TORRENT"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_DT_MOUNT"),

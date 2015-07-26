@@ -1,13 +1,16 @@
 ﻿#include <stddef.h>
 #include "QSearchDisplayModel.h"
 #include "StaticHelpers.h"
+#include <filedownloader.h>
+#include <gui/Dialogs/OpenTorrentDialog.h>
 
-QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QObject* parent) : QAbstractListModel(parent), m_pSearchEngine(SearchEngine::getInstance())
+QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QObject* parent) : QAbstractListModel(parent), m_pSearchEngine(SearchEngine::getInstance()), m_pTorrentDownloader(FileDownloader::getInstance())
 {
 	m_pTorrentListView = pTorrentListView;
-	QObject::connect(m_pSearchEngine.get(), SIGNAL(GotResults()), this, SLOT(OnNewSearchResults()));
+	connect(m_pSearchEngine.get(), SIGNAL(GotResults()), this, SLOT(OnNewSearchResults()));
 	SearchItemsStorrage* pItems = m_pSearchEngine->GetResults();
-	QObject::connect(pItems, SIGNAL(reset()), this, SLOT(OnNewSearchResults()));
+	connect(pItems, SIGNAL(reset()), this, SLOT(OnNewSearchResults()));
+	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFile*)), SLOT(OnTorrentDownloaded(QUrl, QTemporaryFile*)));
 }
 
 
@@ -83,11 +86,30 @@ QVariant QSearchDisplayModel::data(const QModelIndex& index, int role /*= Qt::Di
 	return QVariant();
 }
 
+void QSearchDisplayModel::downloadTorrent()
+{
+	if (m_pTorrentListView->model() != this)
+	{
+		return;
+	}
+
+	QModelIndex index = m_pTorrentListView->currentIndex();
+	SearchResult* searchResult = index.data(SearchItemRole).value<SearchResult*>();
+	m_pTorrentDownloader->download(searchResult->TorrentFileUrl());
+}
+
 void QSearchDisplayModel::OnNewSearchResults()
 {
 	reset();
 }
 
+void QSearchDisplayModel::OnTorrentDownloaded(QUrl url, QTemporaryFile* pFile)
+{
+	boost::scoped_ptr<QTemporaryFile> pSafeFile(pFile);
+	boost::scoped_ptr<OpenTorrentDialog> pDialog(new OpenTorrentDialog());
+	pDialog->SetData(pSafeFile->fileName());
+	pDialog->exec();
+}
 
 
 

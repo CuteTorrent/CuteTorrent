@@ -113,7 +113,7 @@ bool Torrent::isDownloading() const
 {
 	if(m_hTorrent.handle.is_valid())
 	{
-		return m_hTorrent.state >= 2 && m_hTorrent.state <= 3;
+		return m_hTorrent.state >= torrent_status::downloading_metadata && m_hTorrent.state <= torrent_status::downloading && !m_hTorrent.paused;
 	}
 
 	return false;
@@ -264,7 +264,7 @@ Torrent::Torrent(torrent_status hTorrent, QString group)
 bool Torrent::isDaemonToolsMountable()
 {
 	UpdateImageFiles();
-	return imageFiles.length() > 0;
+	return imageFiles.length() > 0 && (isSeeding() || isPaused());
 }
 QString Torrent::GetProgresString() const
 {
@@ -579,11 +579,23 @@ void Torrent::UpdateStatus(torrent_status newVal)
 	}
 }
 
-void Torrent::SetFilePriority(int index, int prioryty)
+void Torrent::SetFilePriority(int index, int priority)
 {
 	if(m_hTorrent.handle.is_valid())
 	{
-		m_hTorrent.handle.file_priority(index, prioryty);
+		if (m_hTorrent.handle.file_priority(index) != priority)
+		{
+			m_hTorrent.handle.file_priority(index, priority);
+			if (priority > 0)
+			{
+				size += m_hTorrent.torrent_file->file_at(index).size;
+			}
+			else
+			{
+				size -= m_hTorrent.torrent_file->file_at(index).size;
+			}
+		}
+		
 	}
 }
 

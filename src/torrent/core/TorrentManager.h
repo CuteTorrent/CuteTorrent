@@ -88,6 +88,7 @@ private:
 	FileDownloaderPtr m_pFileDownloader;
 	int num_outstanding_resume_data;
 	bool m_bIsSaveSessionInitiated;
+	int m_updateTimerID;
 	void handle_alert(alert*);
 	void writeSettings();
 	TorrentStorragePtr m_pTorrentStorrage;

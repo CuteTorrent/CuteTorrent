@@ -49,21 +49,6 @@ void VirtualDiskMounter::MountVirualDiskImageWin8OrAbove(QString path)
 }
 #endif
 
-boost::weak_ptr<VirtualDiskMounter> VirtualDiskMounter::m_pInstance;
-
-VirtualDiskMounterPtr VirtualDiskMounter::getInstance()
-{
-	VirtualDiskMounterPtr instance = m_pInstance.lock();
-
-	if (!instance)
-	{
-		instance.reset(new VirtualDiskMounter());
-		m_pInstance = instance;
-	}
-
-	return instance;
-}
-
 bool VirtualDiskMounter::MountVirualDiskImage(QString path)
 {
 #ifdef Q_WS_WIN

@@ -14,11 +14,14 @@ public:
 	int columnCount(const QModelIndex& parent = QModelIndex()) const override;
 	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 private:
+	FileDownloaderPtr m_pTorrentDownloader;
 	SearchEnginePtr m_pSearchEngine;
 	QMenu* m_pContextMenu;
 	QTreeView* m_pTorrentListView;
 private slots:
+	void downloadTorrent();
 	void OnNewSearchResults();
+	void OnTorrentDownloaded(QUrl, QTemporaryFile*);
 public slots:
 };
 

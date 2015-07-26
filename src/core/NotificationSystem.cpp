@@ -11,7 +11,7 @@ void NotificationSystem::UpdateNotificationSettings()
 {
 	m_notificationMask = ALL;
 
-	if (!m_pSettings->valueBool("Notifications", "report_tracker_errors", true))
+	if (!m_pSettings->valueBool("Notifications", "report_tracker_errors", false))
 	{
 		m_notificationMask &= ~TRACKER_ERROR;
 	}

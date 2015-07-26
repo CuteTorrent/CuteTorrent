@@ -4,7 +4,7 @@
 QTorrentFilterProxyModel::QTorrentFilterProxyModel(QObject* parent) : QSortFilterProxyModel(parent), m_torrentFilter(EMPTY), m_currentFilterType(TORRENT), m_pUpdateLocker(new QMutex())
 {
 	m_pUpdateTimer = new QTimer(this);
-	m_pUpdateTimer->setInterval(1000);
+	m_pUpdateTimer->setInterval(600);
 	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(Update()));
 	m_pUpdateTimer->start();
 }
@@ -22,6 +22,10 @@ bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex
 			switch (m_currentFilterType)
 			{
 				case GROUP:
+					if (m_groupFilter.isEmpty())
+					{
+						return true;
+					}
 					return pTorrent->GetGroup().compare(m_groupFilter) == 0;
 
 				case TORRENT:
@@ -42,7 +46,7 @@ bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex
 
 						case COMPLETED:
 							
-							return fabs(pTorrent->GetProgress() - 100.0) < DBL_EPSILON;
+							return abs(pTorrent->GetProgress() - 100.0f) < FLT_EPSILON;
 
 						case EMPTY:
 							return true;

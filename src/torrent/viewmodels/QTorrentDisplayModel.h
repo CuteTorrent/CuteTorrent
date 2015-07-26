@@ -48,21 +48,30 @@ class QTorrentDisplayModel: public QAbstractListModel
 	int selectedRow;
 	QMenu* menu;
 	QMenu* groupsMenu;
+	QAction* pauseTorrent;
+	QAction* resumeTorrent;
 	QAction* openDir;
 	QAction* superSeed;
-	QAction* DTmount;
+	QAction* mountDiskImage;
 	QAction* HashRecheck;
-	QAction* DelAll;
-	QAction* DelTorrentOnly;
+	QAction* deleteWithFiles;
+	QAction* deleteTorrentOnly;
 	QAction* setSequentual;
 	QAction* updateTrackers;
-	QAction* MoveStorrage;
-	QAction* PlayInPlayer;
-	QAction* GenerateMagnet;
+	QAction* storrageMove;
+	QAction* playInMediaPlayer;
+	QAction* generateMagnet;
+	QAction* pauseResumeSeparator;
 	TorrentManagerPtr m_pTorrentManager;
-	Torrent* CurrentTorrent;
+	Torrent* m_pCurrentTorrent;
 	QMutex* locker;
 	QTorrentFilterProxyModel* m_pProxyFilterModel;
+	QString getFirstAvailibleFile(files_info& filesInfo);
+	bool checkAllMountable(QModelIndexList& indexes);
+	bool checkAllSuperSeed(QModelIndexList& indexes);
+	bool checkAllHasMedia(QModelIndexList& indexes);
+	bool checkAllSequential(QModelIndexList& indexes);
+	void checkPausedResumed(QModelIndexList indexes, bool& isAllPaused, bool& isAllResumed, bool& hasPaused, bool& hasResumed);
 public:
 	QTorrentDisplayModel(QTreeView*, QTorrentFilterProxyModel*, QObject*);
 	~QTorrentDisplayModel();
@@ -80,7 +89,7 @@ public:
 	                const QModelIndex& parent = QModelIndex()) override;
 	enum Role { TorrentRole = Qt::UserRole };
 	Torrent* GetSelectedTorrent();
-
+	
 signals:
 	void initCompleted();
 public slots:
@@ -93,6 +102,7 @@ public slots:
 	void UpdateTrackers();
 	void DellAll();
 	void MountDT();
+	
 	void playInPlayer();
 	void setSequentualDL();
 	void moveStorrage();
@@ -102,7 +112,8 @@ public slots:
 	void changeGroup();
 	void setupContextMenu();
 	void OnAddTorrent();
-
+	void PauseSelected();
+	void ResumeSelected();
 
 };
 

@@ -16,6 +16,7 @@ public:
 	void showNormal();
 	void setGeometry(QRect geo);
 	void setTitle(QString title);
+	void hide();
 	bool isMaximized();
 protected:
 	MoveType m_moveType;
@@ -223,6 +224,13 @@ void BaseWindow<T>::setTitle(QString title)
 	{
 		getTitleLabel()->setText(title);
 	}
+}
+
+template <class T>
+void BaseWindow<T>::hide()
+{
+	preMaximizeGeomentry = geometry();
+	T::hide();
 }
 
 template <class T>

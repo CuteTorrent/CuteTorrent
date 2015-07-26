@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "ui_CustomWindow.h"
 #include "RconWebService.h"
 #include "SearchCommon.h"
+#include <viewModel/FiltersViewModel.h>
 
 class Application;
 class FileViewModel;
@@ -117,15 +118,7 @@ private:
 	TorrentManagerPtr m_pTorrentManager;
 	QLineEdit* m_pTorrentSearchEdit;
 	QLineEdit* m_pSearchEdit;
-	QTreeWidgetItem* torrentTreeItem;
-	QTreeWidgetItem* dlTreeItem;
-	QTreeWidgetItem* ulTreeItem;
-	QTreeWidgetItem* completedTreeItem;
-	QTreeWidgetItem* activeTreeItem;
-	QTreeWidgetItem* inactiveTreeItem;
-	QTreeWidgetItem* groupsTreeItem;
-	QTreeWidgetItem* rssTreeItem;
-	QTreeWidgetItem* searchTreeItem;
+	FiltersViewModel* m_pFiltersViewModel;
 	SearchEnginePtr m_pSearchEngine;
 	FileSystemTorrentWatcherPtr m_pTorrentWatcher;
 #ifdef Q_WS_WIN

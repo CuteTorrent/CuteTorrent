@@ -799,6 +799,12 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QApplicationSettings.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\viewModel\FiltersViewModel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_FiltersViewModel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -1044,6 +1050,9 @@
     </CustomBuild>
     <CustomBuild Include="core\QApplicationSettings.h">
       <Filter>Service</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\viewModel\FiltersViewModel.h">
+      <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1430,6 +1439,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="core\SympleCrypt.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\datamodels\FilterTreeItem.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

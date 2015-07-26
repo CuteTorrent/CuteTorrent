@@ -178,7 +178,7 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 
 	m_centralWidget->installEventFilter(this);
 	m_pTorrentListView->installEventFilter(this);
-	m_pGroupTreeWidget->installEventFilter(this);
+	m_pGroupTreeView->installEventFilter(this);
 	m_pTabWidget->installEventFilter(this);
 	m_pTorrentManager->InitSession();
 	m_pTorrents = TorrentStorrage::getInstance();
@@ -399,10 +399,12 @@ void CuteTorrentMainWindow::setupConnections()
 	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(UpdateTabWidget()));
 	connect(fileTableView, SIGNAL(customContextMenuRequested(const QPoint&)), m_pFileViewModel, SLOT(FileTabContextMenu(const QPoint&)));
 	connect(m_pTorrentManager.get(), SIGNAL(initCompleted()), m_pTorrentDisplayModel, SLOT(initSessionFinished()));
-	connect(m_pGroupTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(ChnageTorrentFilter()));
+	connect(m_pGroupTreeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)), this, SLOT(ChnageTorrentFilter()));
 	connect(m_pStyleEngine, SIGNAL(styleChanged()), this, SLOT(initWindowIcons()));
 	connect(m_pStyleEngine, SIGNAL(styleChanged()), m_pTorrentDisplayModel, SLOT(setupContextMenu()));
 	connect(m_pTorrentListView, SIGNAL(doubleClicked(const QModelIndex&)), m_pTorrentDisplayModel, SLOT(OpenDirSelected()));
+	connect(m_pTorrentListView, SIGNAL(doubleClicked(const QModelIndex&)), m_pSearchDisplayModel, SLOT(downloadTorrent()));
+	connect(ACTION_TOOLBAR_DOWNLOAD, SIGNAL(triggered()), m_pSearchDisplayModel, SLOT(downloadTorrent()));
 	connect(m_pTorrentSearchEdit, SIGNAL(textEdited(const QString&)), m_pSearchEdit, SLOT(setText(const QString&)));
 	connect(m_pSearchEdit, SIGNAL(textEdited(const QString&)), m_pTorrentSearchEdit, SLOT(setText(const QString&)));
 	connect(ACTION_MENU_ABOUT_QT, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
@@ -650,18 +652,12 @@ void CuteTorrentMainWindow::changeEvent(QEvent* event)
 		removeTracker->setText(tr("REMOVE_TRACKER"));
 		editTracker->setText(tr("EDIT_TRACKER"));
 		addPeer->setText(tr("ADD_PEER"));
-		torrentTreeItem->setText(0, tr("TORRENTS_ACTIVITY"));
-		dlTreeItem->setText(0, tr("DOWNLOADING_FLTR"));
-		ulTreeItem->setText(0, tr("SEEDING_FLTR"));
-		completedTreeItem->setText(0, tr("COMPLETED_FLTR"));
-		activeTreeItem->setText(0, tr("ACTIVE_FLTR"));
-		inactiveTreeItem->setText(0, tr("NOT_ACTIVE_FLTR"));
-		groupsTreeItem->setText(0, tr("TORRENT_GROUPS"));
 		ul->setSpecialValueText(tr("None"));
 		dl->setSpecialValueText(tr("None"));
 		m_pFileViewModel->retranslateUI();
 		m_pTorrentDisplayModel->retranslate();
 		m_pRssDisplayModel->retranslate();
+		m_pFiltersViewModel->Retranslate();
 		QMap<ISerachProvider::SearchCategories, QString> categoriesToStr;
 		categoriesToStr[ISerachProvider::Anime] = tr("ANIME_CATEGORY");
 		categoriesToStr[ISerachProvider::Music] = tr("MUSIC_CATEGORY");
@@ -1017,10 +1013,11 @@ void CuteTorrentMainWindow::Retranslate()
 
 void CuteTorrentMainWindow::OpenSettingsDialog()
 {
-	SettingsDialog dlg(this);
-	connect(&dlg, SIGNAL(needRetranslate()), this, SLOT(Retranslate()));
-	dlg.exec();
-	setupGroupTreeWidget();
+	boost::shared_ptr<SettingsDialog> dlg(new SettingsDialog(this));
+	connect(dlg.get(), SIGNAL(needRetranslate()), this, SLOT(Retranslate()));
+	dlg->exec();
+	m_pFiltersViewModel->UpdateGroupItems();
+	m_pGroupTreeView->expandToDepth(0);
 	setupKeyMappings();
 	UpdateTabWidget();
 }
@@ -1187,7 +1184,8 @@ void CuteTorrentMainWindow::PeformSearch()
 		}
 
 		m_pSearchEngine->DoSerach(searchText, category, 1);
-		m_pGroupTreeWidget->setCurrentItem(searchTreeItem);
+		QModelIndex searchItemIndex = m_pFiltersViewModel->index(3, 0, QModelIndex());
+		m_pGroupTreeView->selectionModel()->setCurrentIndex(searchItemIndex, QItemSelectionModel::Current);
 	}
 }
 
@@ -1345,87 +1343,11 @@ void CuteTorrentMainWindow::StopSelected()
 
 void CuteTorrentMainWindow::setupGroupTreeWidget()
 {
-	m_pGroupTreeWidget->clear();
-	QIcon torrentsIcon = m_pStyleEngine->getIcon("torrents");
-	QIcon downloadingIcon = m_pStyleEngine->getIcon("downloading");
-	QIcon seedingIcon = m_pStyleEngine->getIcon("uploading");
-	QIcon completedIcon = m_pStyleEngine->getIcon("completed");
-	QIcon activeIcon = m_pStyleEngine->getIcon("active");
-	QIcon groupsIcon = m_pStyleEngine->getIcon("groups");
-	QIcon inactiveIcon(activeIcon.pixmap(QSize(16, 16), QIcon::Disabled, QIcon::On));
-	QIcon rssIcon = m_pStyleEngine->getIcon("rss");
-	torrentTreeItem = new QTreeWidgetItem(m_pGroupTreeWidget);
-	torrentTreeItem->setIcon(0, torrentsIcon);
-	torrentTreeItem->setText(0, tr("TORRENTS_ACTIVITY"));
-	torrentTreeItem->setData(0, Qt::UserRole + 1, TORRENT);
-	torrentTreeItem->setData(0, Qt::UserRole + 2, EMPTY);
-	dlTreeItem = new QTreeWidgetItem(torrentTreeItem);
-	dlTreeItem->setIcon(0, downloadingIcon);
-	dlTreeItem->setText(0, tr("DOWNLOADING_FLTR"));
-	dlTreeItem->setData(0, Qt::UserRole + 1, TORRENT);
-	dlTreeItem->setData(0, Qt::UserRole + 2, DOWNLOADING);
-	ulTreeItem = new QTreeWidgetItem(torrentTreeItem);
-	ulTreeItem->setIcon(0, seedingIcon);
-	ulTreeItem->setText(0, tr("SEEDING_FLTR"));
-	ulTreeItem->setData(0, Qt::UserRole + 1, TORRENT);
-	ulTreeItem->setData(0, Qt::UserRole + 2, SEEDING);
-	completedTreeItem = new QTreeWidgetItem(torrentTreeItem);
-	completedTreeItem->setIcon(0, completedIcon);
-	completedTreeItem->setText(0, tr("COMPLETED_FLTR"));
-	completedTreeItem->setData(0, Qt::UserRole + 1, TORRENT);
-	completedTreeItem->setData(0, Qt::UserRole + 2, COMPLETED);
-	activeTreeItem = new QTreeWidgetItem(torrentTreeItem);
-	activeTreeItem->setIcon(0, activeIcon);
-	activeTreeItem->setText(0, tr("ACTIVE_FLTR"));
-	activeTreeItem->setData(0, Qt::UserRole + 1, TORRENT);
-	activeTreeItem->setData(0, Qt::UserRole + 2, ACTIVE);
-	inactiveTreeItem = new QTreeWidgetItem(torrentTreeItem);
-	inactiveTreeItem->setIcon(0, inactiveIcon);
-	inactiveTreeItem->setText(0, tr("NOT_ACTIVE_FLTR"));
-	inactiveTreeItem->setData(0, Qt::UserRole + 1, TORRENT);
-	inactiveTreeItem->setData(0, Qt::UserRole + 2, NOT_ACTIVE);
-	groupsTreeItem = new QTreeWidgetItem(m_pGroupTreeWidget);
-	groupsTreeItem->setText(0, tr("TORRENT_GROUPS"));
-	groupsTreeItem->setData(0, Qt::UserRole + 1, TORRENT);
-	groupsTreeItem->setData(0, Qt::UserRole + 2, EMPTY);
-	groupsTreeItem->setIcon(0, groupsIcon);
-	QList<GroupForFileFiltering> groups = m_pSettings->GetFileFilterGroups();
-	QString type;
+	m_pFiltersViewModel = new FiltersViewModel(this);
+	m_pGroupTreeView->setModel(m_pFiltersViewModel);
 
-	for (int i = 0; i < groups.count(); i++)
-	{
-		QTreeWidgetItem* item = new QTreeWidgetItem(groupsTreeItem);
-		item->setText(0, groups[i].Name());
-		item->setIcon(0, m_pStyleEngine->guessMimeIcon(groups[i].Extensions().split('|')[0], type));
-		item->setData(0, Qt::UserRole + 1, GROUP_FILTER_TYPE);
-		item->setData(0, Qt::UserRole + 2, groups[i].Name());
-	}
-
-	rssTreeItem = new QTreeWidgetItem(m_pGroupTreeWidget);
-	rssTreeItem->setIcon(0, rssIcon);
-	rssTreeItem->setText(0, tr("RSS_CHANELS"));
-	rssTreeItem->setData(0, Qt::UserRole + 1, RSS_FEED);
-	searchTreeItem = new QTreeWidgetItem(m_pGroupTreeWidget);
-	searchTreeItem->setIcon(0, m_pStyleEngine->getIcon("settings_search"));
-	searchTreeItem->setText(0, tr("TAB_SEARCH"));
-	searchTreeItem->setData(0, Qt::UserRole + 1, SEARCH);
-	searchTreeItem->setData(0, Qt::UserRole + 2, "");
-	QList<ISerachProvider*> searchProviders = m_pSearchEngine->GetSearchProviders();
-	int nSearchProvidersCount = searchProviders.length();
-
-	for (int i = 0; i < nSearchProvidersCount; i++)
-	{
-		ISerachProvider* current = searchProviders.at(i);
-		QTreeWidgetItem* item = new QTreeWidgetItem(searchTreeItem);
-		QString engineName = current->Name();
-		item->setText(0, engineName);
-		item->setIcon(0, current->getIcon());
-		item->setData(0, Qt::UserRole + 1, SEARCH);
-		item->setData(0, Qt::UserRole + 2, engineName);
-	}
-
-	m_pGroupTreeWidget->resizeColumnToContents(0);
-	m_pGroupTreeWidget->expandAll();
+	m_pGroupTreeView->resizeColumnToContents(0);
+	m_pGroupTreeView->expandAll();
 }
 #ifdef Q_WS_WIN
 void CuteTorrentMainWindow::setupTasksCategory()
@@ -1450,15 +1372,15 @@ void CuteTorrentMainWindow::setupJumpList()
 #endif
 void CuteTorrentMainWindow::ChnageTorrentFilter()
 {
-	QTreeWidgetItem* item = m_pGroupTreeWidget->currentItem();
-	FilterType filterType = static_cast<FilterType>(item->data(0, Qt::UserRole + 1).toInt());
+	QModelIndex current = m_pGroupTreeView->currentIndex();
+	FilterType filterType = static_cast<FilterType>(current.data(FiltersViewModel::FilterTypeRole).toInt());
 	m_pTorrentListView->selectionModel()->reset();
 
 	switch (filterType)
 	{
 		case GROUP_FILTER_TYPE:
 		{
-			QString gropupFilter = item->data(0, Qt::UserRole + 2).toString();
+			QString gropupFilter = current.data(FiltersViewModel::FilterRole).toString();
 			m_pTorrentFilterProxyModel->setGroupFilter(gropupFilter);
 			switchToTorrentsModel();
 			break;
@@ -1466,7 +1388,7 @@ void CuteTorrentMainWindow::ChnageTorrentFilter()
 
 		case SEARCH:
 		{
-			QString engineName = item->data(0, Qt::UserRole + 2).toString();
+			QString engineName = current.data(FiltersViewModel::FilterRole).toString();
 			m_pSearchEngine->GetResults()->setFilter(engineName);
 			switchToSearchModel();
 			break;
@@ -1480,7 +1402,7 @@ void CuteTorrentMainWindow::ChnageTorrentFilter()
 
 		case TORRENT:
 		{
-			TorrentFilterType torrentFilter = static_cast<TorrentFilterType>(item->data(0, Qt::UserRole + 2).toInt());
+			TorrentFilterType torrentFilter = static_cast<TorrentFilterType>(current.data(FiltersViewModel::FilterRole).toInt());
 			m_pTorrentFilterProxyModel->setTorrentFilter(torrentFilter);
 			switchToTorrentsModel();
 			break;
@@ -1514,7 +1436,7 @@ void CuteTorrentMainWindow::initMainMenuIcons()
 void CuteTorrentMainWindow::initWindowIcons()
 {
 	BaseWindow::setupWindowIcons();
-	setupGroupTreeWidget();
+	m_pFiltersViewModel->UpdateIcons();
 	initToolbarIcons();
 	initStatusBarIcons();
 	initMainMenuIcons();

@@ -27,7 +27,6 @@
 #include <QtGui/QTableWidget>
 #include <QtGui/QToolBar>
 #include <QtGui/QTreeView>
-#include <QtGui/QTreeWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
@@ -67,10 +66,10 @@ public:
     QGridLayout *gridLayout_6;
     QSplitter *spliiter;
     QSplitter *spliiter1;
-    QTreeWidget *m_pGroupTreeWidget;
+    QTreeView *m_pGroupTreeView;
     QTreeView *m_pTorrentListView;
     QStackedWidget *m_pInfoPlaneContainer;
-    QWidget *page_3;
+    QWidget *torrentPage;
     QGridLayout *gridLayout_11;
     QTabWidget *m_pTabWidget;
     QWidget *tab;
@@ -111,7 +110,7 @@ public:
     QWidget *tab_4;
     QGridLayout *gridLayout_5;
     QTreeView *fileTableView;
-    QWidget *page_4;
+    QWidget *rssPage;
     QGridLayout *m_pRssInfoLayout;
     QWidget *widget_3;
     QStatusBar *mystatusBar;
@@ -256,28 +255,20 @@ public:
         spliiter->setSizePolicy(sizePolicy);
         spliiter->setMouseTracking(true);
         spliiter->setOrientation(Qt::Vertical);
-        spliiter->setOpaqueResize(true);
         spliiter1 = new QSplitter(spliiter);
         spliiter1->setObjectName(QString::fromUtf8("spliiter1"));
-        sizePolicy.setHeightForWidth(spliiter1->sizePolicy().hasHeightForWidth());
-        spliiter1->setSizePolicy(sizePolicy);
-        spliiter1->setMinimumSize(QSize(0, 0));
         spliiter1->setMouseTracking(true);
         spliiter1->setStyleSheet(QString::fromUtf8(""));
         spliiter1->setOrientation(Qt::Horizontal);
-        spliiter1->setOpaqueResize(true);
-        m_pGroupTreeWidget = new QTreeWidget(spliiter1);
-        QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
-        __qtreewidgetitem->setText(0, QString::fromUtf8("1"));
-        m_pGroupTreeWidget->setHeaderItem(__qtreewidgetitem);
-        m_pGroupTreeWidget->setObjectName(QString::fromUtf8("m_pGroupTreeWidget"));
-        m_pGroupTreeWidget->setMouseTracking(true);
-        m_pGroupTreeWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        m_pGroupTreeWidget->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
-        m_pGroupTreeWidget->setRootIsDecorated(false);
-        m_pGroupTreeWidget->setAnimated(true);
-        m_pGroupTreeWidget->setHeaderHidden(true);
-        spliiter1->addWidget(m_pGroupTreeWidget);
+        m_pGroupTreeView = new QTreeView(spliiter1);
+        m_pGroupTreeView->setObjectName(QString::fromUtf8("m_pGroupTreeView"));
+        m_pGroupTreeView->setMouseTracking(true);
+        m_pGroupTreeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        m_pGroupTreeView->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+        m_pGroupTreeView->setRootIsDecorated(false);
+        m_pGroupTreeView->setAnimated(true);
+        m_pGroupTreeView->setHeaderHidden(true);
+        spliiter1->addWidget(m_pGroupTreeView);
         m_pTorrentListView = new QTreeView(spliiter1);
         m_pTorrentListView->setObjectName(QString::fromUtf8("m_pTorrentListView"));
         m_pTorrentListView->setMouseTracking(true);
@@ -293,14 +284,14 @@ public:
         spliiter->addWidget(spliiter1);
         m_pInfoPlaneContainer = new QStackedWidget(spliiter);
         m_pInfoPlaneContainer->setObjectName(QString::fromUtf8("m_pInfoPlaneContainer"));
-        page_3 = new QWidget();
-        page_3->setObjectName(QString::fromUtf8("page_3"));
-        gridLayout_11 = new QGridLayout(page_3);
+        torrentPage = new QWidget();
+        torrentPage->setObjectName(QString::fromUtf8("torrentPage"));
+        gridLayout_11 = new QGridLayout(torrentPage);
         gridLayout_11->setSpacing(6);
         gridLayout_11->setContentsMargins(11, 11, 11, 11);
         gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
         gridLayout_11->setContentsMargins(2, 0, 2, 0);
-        m_pTabWidget = new QTabWidget(page_3);
+        m_pTabWidget = new QTabWidget(torrentPage);
         m_pTabWidget->setObjectName(QString::fromUtf8("m_pTabWidget"));
         m_pTabWidget->setMouseTracking(true);
         tab = new QWidget();
@@ -568,20 +559,20 @@ public:
 
         gridLayout_11->addWidget(m_pTabWidget, 0, 0, 1, 1);
 
-        m_pInfoPlaneContainer->addWidget(page_3);
-        page_4 = new QWidget();
-        page_4->setObjectName(QString::fromUtf8("page_4"));
-        m_pRssInfoLayout = new QGridLayout(page_4);
+        m_pInfoPlaneContainer->addWidget(torrentPage);
+        rssPage = new QWidget();
+        rssPage->setObjectName(QString::fromUtf8("rssPage"));
+        m_pRssInfoLayout = new QGridLayout(rssPage);
         m_pRssInfoLayout->setSpacing(6);
         m_pRssInfoLayout->setContentsMargins(11, 11, 11, 11);
         m_pRssInfoLayout->setObjectName(QString::fromUtf8("m_pRssInfoLayout"));
         m_pRssInfoLayout->setContentsMargins(0, 2, 0, 2);
-        widget_3 = new QWidget(page_4);
+        widget_3 = new QWidget(rssPage);
         widget_3->setObjectName(QString::fromUtf8("widget_3"));
 
         m_pRssInfoLayout->addWidget(widget_3, 0, 0, 1, 1);
 
-        m_pInfoPlaneContainer->addWidget(page_4);
+        m_pInfoPlaneContainer->addWidget(rssPage);
         spliiter->addWidget(m_pInfoPlaneContainer);
 
         gridLayout_6->addWidget(spliiter, 0, 1, 1, 1);
@@ -653,7 +644,7 @@ public:
 
         verticalLayout->addWidget(m_centralWidget);
 
-        QWidget::setTabOrder(m_pGroupTreeWidget, m_pTorrentListView);
+        QWidget::setTabOrder(m_pGroupTreeView, m_pTorrentListView);
         QWidget::setTabOrder(m_pTorrentListView, m_pTabWidget);
         QWidget::setTabOrder(m_pTabWidget, peerTableWidget);
         QWidget::setTabOrder(peerTableWidget, trackerTableWidget);
@@ -702,7 +693,6 @@ public:
         QObject::connect(ACTION_MENU_OPEN_MAGNET, SIGNAL(triggered()), CustomWindow, SLOT(ProcessMagnet()));
         QObject::connect(ACTION_TOOLBAR_SETTINGS, SIGNAL(triggered()), CustomWindow, SLOT(OpenSettingsDialog()));
         QObject::connect(ACTION_MENU_BACKUP, SIGNAL(triggered()), CustomWindow, SLOT(startBackUpWizard()));
-        QObject::connect(ACTION_TOOLBAR_DOWNLOAD, SIGNAL(triggered()), CustomWindow, SLOT(startDownloadTorrent()));
         QObject::connect(ACTION_TOOLBAR_OPEN_URL, SIGNAL(triggered()), CustomWindow, SLOT(openSearchItemDescribtion()));
         QObject::connect(ACTION_TOOLBAR_RSS_ADD, SIGNAL(triggered()), CustomWindow, SLOT(addRssFeed()));
         QObject::connect(ACTION_TOOLBAR_RSS_EDIT, SIGNAL(triggered()), CustomWindow, SLOT(editRssFeed()));

@@ -65,17 +65,21 @@ private:
 	QLabel* getTitleLabel() override;
 	QLabel* getTitleIcon() override;
 	TorrentManager::AddTorrentFlags BuildFlags();
+	bool AccepTorrent();
+public slots:
+	void done(int) override;
 private slots:
 	void reject() override;
 	void OnError(QString);
 	void BrowseButton();
 	
-	void AccepTorrent();
+	
 	void ChangeGroup();
 	void DownloadMetadataCompleted(openmagnet_info);
 	void OnPathChanged(QString path);
 	
 	void OnCheckAll();
 	void OnUncheckAll();
+
 };
 

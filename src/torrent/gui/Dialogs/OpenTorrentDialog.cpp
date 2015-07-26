@@ -140,9 +140,9 @@ void OpenTorrentDialog::SetData(QString filename)
 		movie->start();
 		qRegisterMetaType<openmagnet_info>("openmagnet_info");
 		MetaDataDownloadWaiter* magnetWaiter = new MetaDataDownloadWaiter(filename, this);
-		QObject::connect(magnetWaiter, SIGNAL(DownloadCompleted(openmagnet_info)), this, SLOT(DownloadMetadataCompleted(openmagnet_info)));
-		QObject::connect(magnetWaiter, SIGNAL(ErrorOccured(QString)), this, SLOT(OnError(QString)));
-		QObject::connect(magnetWaiter, SIGNAL(finished()), magnetWaiter, SLOT(deleteLater()));
+		connect(magnetWaiter, SIGNAL(DownloadCompleted(openmagnet_info)), this, SLOT(DownloadMetadataCompleted(openmagnet_info)));
+		connect(magnetWaiter, SIGNAL(ErrorOccured(QString)), this, SLOT(OnError(QString)));
+		connect(magnetWaiter, SIGNAL(finished()), magnetWaiter, SLOT(deleteLater()));
 		magnetWaiter->start(QThread::HighPriority);
 		yesButton->setEnabled(false);
 		setSeedModeCheckBox->setEnabled(false);
@@ -192,11 +192,17 @@ void OpenTorrentDialog::BrowseButton()
 
 
 
-void OpenTorrentDialog::AccepTorrent()
+bool OpenTorrentDialog::AccepTorrent()
 {
 	if(validTorrent)
 	{
 		QMap<QString, quint8> filePriorities = m_pFileTreeModel->getFilePiorites();
+		QList<unsigned char> values = filePriorities.values();
+		if (values.count(0) == values.size())
+		{
+			CustomMessageBox::critical(this, "Adding torrent Error", tr("SELECT_AT_LEAST_ONE_FILE"));
+			return false;
+		}
 		error_code ec;
 		int groupIndex = GroupComboBox->currentIndex();
 		QString group = groupIndex >= 0 ? m_lFilters[groupIndex].Name() : "";
@@ -215,11 +221,10 @@ void OpenTorrentDialog::AccepTorrent()
 		if(ec)
 		{
 			CustomMessageBox::critical(this, "Adding torrent Error", StaticHelpers::translateLibTorrentError(ec));
-			return;
+			return false;
 		}
 	}
-
-	accept();
+	return true;
 }
 
 void OpenTorrentDialog::ChangeGroup()
@@ -323,6 +328,21 @@ TorrentManager::AddTorrentFlags OpenTorrentDialog::BuildFlags()
 	return res;
 }
 
+void OpenTorrentDialog::done(int r)
+{
+	if (Accepted == r)
+	{
+		if (AccepTorrent())
+		{
+			QDialog::done(r);
+		}
+	}
+	else if (Rejected == r)
+	{
+		QDialog::done(r);
+	}
+}
+
 QWidget* OpenTorrentDialog::centralWidget()
 {
 	return m_centralWidget;
@@ -331,5 +351,5 @@ QWidget* OpenTorrentDialog::centralWidget()
 void OpenTorrentDialog::OnError(QString error_msg)
 {
 	CustomMessageBox::critical(this, "Error", error_msg);
-	accept();
+	reject();
 }

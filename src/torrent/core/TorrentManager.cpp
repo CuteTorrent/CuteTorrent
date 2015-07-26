@@ -154,7 +154,8 @@ TorrentManager::TorrentManager()
 	m_pTorrentSessionSettings = QApplicationSettings::getInstance();
 	m_pTorrentSession = new session(fingerprint("cT", Version::Major(), Version::Minor(), Version::Revision(), Version::Build())
 		, 0
-		, alert::error_notification);
+		, alert::error_notification | alert::storage_notification | alert::status_notification | alert::tracker_notification | alert::port_mapping_notification);
+	
 	error_code ec;
 	std::vector<char> in;
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
@@ -231,12 +232,11 @@ TorrentManager::TorrentManager()
 	}
 
 	m_pTorrentSession->set_settings(s_settings);
-	m_pTorrentSession->set_alert_mask(alert::error_notification | alert::storage_notification | alert::status_notification | alert::tracker_notification);
 	m_pTorrentSession->set_alert_dispatch(boost::bind(&TorrentManager::collectAlerts, this, _1));
 	connect(this, SIGNAL(Notify(int, QString, QVariant)), m_pNotificationSys.get(), SLOT(OnNewNotification(int, QString, QVariant)));
 
 
-	startTimer(700);
+	m_updateTimerID = startTimer(200);
 }
 
 bool TorrentManager::MoveFiles(QString oldStyleDirPath, QString newStyleDirPath)
@@ -257,9 +257,12 @@ bool TorrentManager::MoveFiles(QString oldStyleDirPath, QString newStyleDirPath)
 	return res;
 }
 
-void TorrentManager::timerEvent(QTimerEvent*)
+void TorrentManager::timerEvent(QTimerEvent* timerEvent)
 {
-	m_pTorrentSession->post_torrent_updates();
+	if (timerEvent->timerId() == m_updateTimerID)
+	{
+		m_pTorrentSession->post_torrent_updates();
+	}
 }
 
 void TorrentManager::InitSession()
@@ -366,9 +369,14 @@ void TorrentManager::handle_alert(alert* a)
 			case file_error_alert::alert_type:
 			{
 				file_error_alert* p = alert_cast<file_error_alert>(a);
-				QString message = StaticHelpers::translateLibTorrentError(p->error);
-				message.append(QString::fromUtf8(p->message().c_str()));
-				emit Notify(NotificationSystem::DISK_ERROR, message, QVariant());
+				torrent_handle h = p->handle;
+				QString infoHash = QString::fromStdString(to_hex(h.info_hash().to_string()));
+				Torrent* pTorrent = m_pTorrentStorrage->getTorrent(infoHash);
+
+				if (pTorrent != NULL)
+				{
+					emit Notify(NotificationSystem::TRACKER_ERROR, tr("TORRENT %1 HAS DISK ERROR %2").arg(pTorrent->GetName(), StaticHelpers::translateLibTorrentError(p->error)), QVariant());
+				}
 				break;
 			}
 
@@ -389,7 +397,8 @@ void TorrentManager::handle_alert(alert* a)
 
 					if (!pTorrent->isPrevioslySeeded())
 					{
-						emit Notify(NotificationSystem::TORRENT_COMPLETED, tr("TORRENT_COMPLETED %1").arg(pTorrent->GetName()), StaticHelpers::CombinePathes(pTorrent->GetSavePath(), pTorrent->GetName()));
+						QString name = pTorrent->GetName();
+						emit Notify(NotificationSystem::TORRENT_COMPLETED, tr("TORRENT_COMPLETED %1").arg(name), StaticHelpers::CombinePathes(pTorrent->GetSavePath(), name));
 					}
 				}
 
@@ -445,9 +454,13 @@ void TorrentManager::handle_alert(alert* a)
 			case tracker_error_alert::alert_type:
 			{
 				tracker_error_alert* p = alert_cast<tracker_error_alert>(a);
-				QString message = StaticHelpers::translateLibTorrentError(p->error);
-				message.append(QString::fromLocal8Bit(p->message().c_str()));
-				emit Notify(NotificationSystem::TRACKER_ERROR, message, QVariant());
+				QString infoHash = QString::fromStdString(to_hex(p->handle.info_hash().to_string()));
+				Torrent* pTorrent = m_pTorrentStorrage->getTorrent(infoHash);
+
+				if (pTorrent != NULL)
+				{
+					emit Notify(NotificationSystem::TRACKER_ERROR, tr("TORRENT %1 HAS TRACKER ERROR %2").arg(pTorrent->GetName(), StaticHelpers::translateLibTorrentError(p->error)), QVariant());
+				}
 				break;
 			}
 
@@ -472,6 +485,19 @@ void TorrentManager::handle_alert(alert* a)
 
 				break;
 			}
+			case torrent_error_alert::alert_type:
+			{
+				torrent_error_alert* p = alert_cast<torrent_error_alert>(a);
+				QString infoHash = QString::fromStdString(to_hex(p->handle.info_hash().to_string()));
+				Torrent* pTorrent = m_pTorrentStorrage->getTorrent(infoHash);
+
+				if (pTorrent != NULL)
+				{
+					emit Notify(NotificationSystem::TORRENT_ERROR, tr("TORRENT %1 HAS ERROR %2").arg(pTorrent->GetName(), StaticHelpers::translateLibTorrentError(p->error)), QVariant());
+				}
+				break;
+				
+			}
 
 			case fastresume_rejected_alert::alert_type:
 			{
@@ -479,7 +505,13 @@ void TorrentManager::handle_alert(alert* a)
 				torrent_handle h = p->handle;
 				h.auto_managed(false);
 				h.pause();
-				emit Notify(NotificationSystem::TORRENT_ERROR, StaticHelpers::translateLibTorrentError(p->error), QVariant());
+				QString infoHash = QString::fromStdString(to_hex(h.info_hash().to_string()));
+				Torrent* pTorrent = m_pTorrentStorrage->getTorrent(infoHash);
+
+				if (pTorrent != NULL)
+				{
+					emit Notify(NotificationSystem::TORRENT_ERROR, tr("TORRENT %1 HAS ERROR %2").arg(pTorrent->GetName(), StaticHelpers::translateLibTorrentError(p->error)), QVariant());
+				}
 				break;
 			}
 
@@ -498,14 +530,14 @@ void TorrentManager::handle_alert(alert* a)
 						if (ti != NULL)
 						{
 							create_torrent ct(*ti.get());
-							QString info_hash = QString::fromStdString(to_hex(ti->info_hash().to_string()));
+							QString infoHash = QString::fromStdString(to_hex(ti->info_hash().to_string()));
 #else
 						const torrent_info ti = h.get_torrent_info();
 						{
 							create_torrent ct(ti);
-							QString info_hash = QString::fromStdString(to_hex(ti.info_hash().to_string()));
+							QString infoHash = QString::fromStdString(to_hex(ti.info_hash().to_string()));
 #endif
-							std::ofstream out(StaticHelpers::CombinePathes(dataDir, "BtSessionData", info_hash + ".torrent").toStdString(), std::ios_base::binary);
+							std::ofstream out(StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".torrent").toStdString(), std::ios_base::binary);
 							bencode(std::ostream_iterator<char>(out), ct.generate());
 						}
 					}
@@ -517,17 +549,36 @@ void TorrentManager::handle_alert(alert* a)
 
 				break;
 			}
-
-			case portmap_alert::alert_type:
+			case peer_error_alert::alert_type:
 			{
-				portmap_alert* alert = alert_cast<portmap_alert>(a);
-				emit Notify(NotificationSystem::SYSTEM_ERROR, QString::fromUtf8(alert->message().c_str()), QVariant());
-			}
+				peer_error_alert* p = alert_cast<peer_error_alert>(a);
+				QString infoHash = QString::fromStdString(to_hex(p->handle.info_hash().to_string()));
+				Torrent* pTorrent = m_pTorrentStorrage->getTorrent(infoHash);
 
+				if (pTorrent != NULL)
+				{
+					emit Notify(NotificationSystem::TORRENT_ERROR, tr("TORRENT %1 HAS ERROR %2").arg(pTorrent->GetName(), StaticHelpers::translateLibTorrentError(p->error)), QVariant());
+				}
+				break;
+			}
+			case portmap_error_alert::alert_type:
+			{
+				portmap_error_alert* alert = alert_cast<portmap_error_alert>(a);
+				emit Notify(NotificationSystem::SYSTEM_ERROR, StaticHelpers::translateLibTorrentError(alert->error), QVariant());
+				break;
+			}
+			case dht_error_alert::alert_type:
+			{
+				dht_error_alert* p = alert_cast<dht_error_alert>(a);
+				emit Notify(NotificationSystem::SYSTEM_ERROR, StaticHelpers::translateLibTorrentError(p->error), QVariant());
+				break;
+			}
 			case state_update_alert::alert_type:
 			{
 				state_update_alert* p = alert_cast<state_update_alert>(a);
-				for (int i = 0; i < p->status.size(); i++)
+				size_t size = p->status.size();
+				qDebug() << "Update size:" << size;
+				for (int i = 0; i < size; i++)
 				{
 					torrent_status status = p->status[i];
 					QString infoHash = QString::fromStdString(to_hex(status.info_hash.to_string()));
@@ -540,7 +591,14 @@ void TorrentManager::handle_alert(alert* a)
 				}
 				break;
 			}
-
+			case lsd_peer_alert::alert_type:
+			case incoming_connection_alert::alert_type:
+			case portmap_log_alert::alert_type:
+			case portmap_alert::alert_type:
+			case peer_unsnubbed_alert::alert_type:
+			case peer_snubbed_alert::alert_type:
+			case peer_disconnected_alert::alert_type:
+			case peer_connect_alert::alert_type:
 			case performance_alert::alert_type:
 			case add_torrent_alert::alert_type:
 			case listen_succeeded_alert::alert_type:
@@ -672,7 +730,7 @@ bool TorrentManager::AddTorrent(QString& path, QString& save_path, error_code& e
 	p.save_path = std::string(save_path.toUtf8().data());
 	p.storage_mode = storage_mode_t(m_pTorrentSessionSettings->valueInt("Torrent", "file_allocation_mode", storage_mode_sparse));
 	
-	p.flags = add_torrent_params::flag_duplicate_is_error | add_torrent_params::flag_update_subscribe;
+	p.flags = add_torrent_params::flag_duplicate_is_error | add_torrent_params::flag_update_subscribe | add_torrent_params::flag_auto_managed;
 	if (flags.testFlag(PAUSED_MODE))
 	{
 		p.flags |= add_torrent_params::flag_paused;
@@ -745,6 +803,7 @@ session_settings TorrentManager::readSettings()
 	s_settings.listen_queue_size = m_pTorrentSessionSettings->valueInt("Torrent", "listen_queue_size", 30);
 	s_settings.mixed_mode_algorithm = session_settings::peer_proportional;
 	s_settings.max_peerlist_size = m_pTorrentSessionSettings->valueInt("Torrent", "max_peerlist_size", 0);
+	s_settings.connections_limit = m_pTorrentSessionSettings->valueInt("Torrent", "connections_limit", 2000);
 	s_settings.max_paused_peerlist_size = m_pTorrentSessionSettings->valueInt("Torrent", "max_paused_peerlist_size", 400);
 	s_settings.seed_time_limit = m_pTorrentSessionSettings->valueInt("Torrent", "seed_time_limit", 0);
 	s_settings.share_ratio_limit = m_pTorrentSessionSettings->valueFloat("Torrent", "share_ratio_limit");
@@ -897,6 +956,7 @@ void TorrentManager::SaveSession()
 {
 	if (!m_bIsSaveSessionInitiated)
 	{
+		killTimer(m_updateTimerID);
 		m_pTorrentSession->set_alert_dispatch(NULL);
 		m_bIsSaveSessionInitiated = true;
 		writeSettings();
@@ -1306,7 +1366,7 @@ torrent_handle TorrentManager::ProcessMagnetLink(QString link, error_code& ec)
 #endif
 	}
 
-	add_info.flags = add_torrent_params::flag_duplicate_is_error | add_torrent_params::flag_update_subscribe;
+	add_info.flags = add_torrent_params::flag_duplicate_is_error | add_torrent_params::flag_update_subscribe | add_torrent_params::flag_auto_managed;
 	
 	h = m_pTorrentSession->add_torrent(add_info, ec);
 

@@ -96,7 +96,6 @@
       <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <Optimization>MaxSpeed</Optimization>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
@@ -136,7 +135,6 @@
       <PreprocessToFile>false</PreprocessToFile>
       <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <Optimization>Disabled</Optimization>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -268,6 +266,7 @@
     <ClCompile Include="core\StorrageInfo\qstorageinfo_win.cpp" />
     <ClCompile Include="core\SympleCrypt.cpp" />
     <ClCompile Include="core\viewModel\FileTreeSortProxyModel.cpp" />
+    <ClCompile Include="core\viewModel\FiltersViewModel.cpp" />
     <ClCompile Include="core\winextras\qwinfunctions.cpp" />
     <ClCompile Include="core\winextras\qwinfunctions_p.cpp" />
     <ClCompile Include="core\winextras\qwinjumplist.cpp" />
@@ -293,6 +292,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CustomScriptSearchProvider.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_filedownloader.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_FileSystemTorrentWatcher.cpp" />
+    <ClCompile Include="GeneratedFiles\Release\moc_FiltersViewModel.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_ISerachProvider.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_ObservebaleCollectionBase.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_PieceAvailabilityWidget.cpp" />
@@ -453,6 +453,7 @@
     <ClCompile Include="tracker\trackerrequestmapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\datamodels\FilterTreeItem.h" />
     <ClInclude Include="core\EmailNotifier.h" />
     <ClInclude Include="core\gui\Controls\StyledProgressBar.h" />
     <ClInclude Include="core\gui\Utils\UIPropertyGetters.h" />
@@ -507,6 +508,16 @@
     <ClInclude Include="core\StorrageInfo\qstorageinfo_p.h" />
     <ClInclude Include="core\SympleCrypt.h" />
     <ClInclude Include="core\viewModel\FileTreeSortProxyModel.h" />
+    <CustomBuild Include="core\viewModel\FiltersViewModel.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">$(QT_DIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PHONON_LIB -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QT_DIR)\include\QtCore" -I"$(QT_DIR)\include\QtNetwork" -I"$(QT_DIR)\include\QtGui" -I"$(QT_DIR)\include\phonon" -I"$(QT_DIR)\include" -I"qtsingleapplication\src" -I"..\ThirdParties\boost_1_55_0" -I"..\ThirdParties\libtorrent-rasterbar-1.0.2\include" -I".\GeneratedFiles" -I"." -I".\GeneratedFiles\Release" -I"$(QT_DIR)\include\ActiveQt" -I"$(QT_DIR)\include\phonon_compat" -I".\GeneratedFiles\Release" -I"GeneratedFiles" -I$(QT_DIR)\mkspecs\win32-msvc2010 -D_MSC_VER=1600 -DWIN32 %(Identity) -o .\GeneratedFiles\Release\moc_%(Filename).cpp</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QT_DIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PHONON_LIB -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QT_DIR)\include\QtCore" -I"$(QT_DIR)\include\QtNetwork" -I"$(QT_DIR)\include\QtGui" -I"$(QT_DIR)\include\phonon" -I"$(QT_DIR)\include" -I"qtsingleapplication\src" -I"..\ThirdParties\boost_1_55_0" -I"..\ThirdParties\libtorrent-rasterbar-1.0.2\include" -I".\GeneratedFiles" -I"." -I".\GeneratedFiles\Release" -I"$(QT_DIR)\include\ActiveQt" -I"$(QT_DIR)\include\phonon_compat" -I".\GeneratedFiles\Release" -I"GeneratedFiles" -I$(QT_DIR)\mkspecs\win32-msvc2010 -D_MSC_VER=1600 -DWIN32 %(Identity) -o .\GeneratedFiles\Release\moc_%(Filename).cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">MOC %(Filename).h</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC %(Filename).h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">.\GeneratedFiles\Release\moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\Release\moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release with debug symbols|Win32'">$(QT_DIR)\bin\moc.exe;%(Filename).h;</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QT_DIR)\bin\moc.exe;%(Filename).h;</AdditionalInputs>
+    </CustomBuild>
     <ClInclude Include="core\winextras\qwinextrasglobal.h" />
     <ClInclude Include="core\winextras\qwinfunctions.h" />
     <ClInclude Include="core\winextras\qwinfunctions_p.h" />

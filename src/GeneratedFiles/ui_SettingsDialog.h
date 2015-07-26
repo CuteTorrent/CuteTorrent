@@ -52,6 +52,7 @@ public:
     QWidget *m_centralWidget;
     QGridLayout *gridLayout_4;
     QListWidget *listWidget;
+    QDialogButtonBox *buttonBox;
     QStackedWidget *stackedWidget;
     QWidget *torrentTab;
     QGridLayout *gridLayout_22;
@@ -89,6 +90,11 @@ public:
     QSpacerItem *verticalSpacer_9;
     QWidget *restrictionTab;
     QGridLayout *gridLayout_30;
+    QGroupBox *groupBox_12;
+    QGridLayout *gridLayout_29;
+    QCheckBox *usePExCheckBox;
+    QCheckBox *useLSDCheckBox;
+    QCheckBox *useDHTCheckBox;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_31;
     QLabel *label_6;
@@ -104,16 +110,11 @@ public:
     QLabel *label_32;
     QSpinBox *localDownloadLimitEdit;
     QCheckBox *limitUtpCheckBox;
-    QGroupBox *groupBox_12;
-    QGridLayout *gridLayout_29;
-    QCheckBox *usePExCheckBox;
-    QCheckBox *useLSDCheckBox;
-    QCheckBox *useDHTCheckBox;
     QDoubleSpinBox *seedGlobalRatioEdit;
-    QLabel *label_34;
-    QTimeEdit *seedTimeLimitEdit;
-    QLabel *label_30;
     QSpinBox *maxConnectionsPerTorrentEdit;
+    QLabel *label_30;
+    QTimeEdit *seedTimeLimitEdit;
+    QLabel *label_34;
     QLabel *label_41;
     QGroupBox *restrictionsGroupBox;
     QGridLayout *gridLayout_3;
@@ -124,6 +125,8 @@ public:
     QLabel *label_16;
     QLabel *label_15;
     QSpacerItem *verticalSpacer_6;
+    QLabel *label_45;
+    QSpinBox *maxConnectionsEdit;
     QWidget *page;
     QGridLayout *gridLayout_20;
     QLineEdit *portEdit;
@@ -131,11 +134,11 @@ public:
     QCheckBox *portMappingsCheckBox;
     QGroupBox *groupBox_10;
     QGridLayout *gridLayout_28;
-    QComboBox *inEncPolicyComboBox;
-    QLabel *label_29;
-    QLabel *label_28;
     QLabel *label_27;
+    QComboBox *inEncPolicyComboBox;
+    QLabel *label_28;
     QComboBox *outEncPolicyComboBox;
+    QLabel *label_29;
     QComboBox *encLevelComboBox;
     QCheckBox *preferFullEncCheckBox;
     QGroupBox *proxyGroupBox;
@@ -282,13 +285,12 @@ public:
     QScrollArea *hotKeyScrollArea;
     QWidget *keyMapContainer;
     QGridLayout *gridLayout_19;
-    QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *SettingsDialog)
     {
         if (SettingsDialog->objectName().isEmpty())
             SettingsDialog->setObjectName(QString::fromUtf8("SettingsDialog"));
-        SettingsDialog->resize(811, 395);
+        SettingsDialog->resize(811, 407);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
         SettingsDialog->setWindowIcon(icon);
@@ -371,7 +373,13 @@ public:
         listWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
         listWidget->setResizeMode(QListView::Adjust);
 
-        gridLayout_4->addWidget(listWidget, 0, 0, 2, 1);
+        gridLayout_4->addWidget(listWidget, 0, 0, 3, 1);
+
+        buttonBox = new QDialogButtonBox(m_centralWidget);
+        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setStandardButtons(QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+
+        gridLayout_4->addWidget(buttonBox, 2, 1, 1, 1);
 
         stackedWidget = new QStackedWidget(m_centralWidget);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
@@ -545,6 +553,28 @@ public:
         restrictionTab->setObjectName(QString::fromUtf8("restrictionTab"));
         gridLayout_30 = new QGridLayout(restrictionTab);
         gridLayout_30->setObjectName(QString::fromUtf8("gridLayout_30"));
+        groupBox_12 = new QGroupBox(restrictionTab);
+        groupBox_12->setObjectName(QString::fromUtf8("groupBox_12"));
+        gridLayout_29 = new QGridLayout(groupBox_12);
+        gridLayout_29->setObjectName(QString::fromUtf8("gridLayout_29"));
+        usePExCheckBox = new QCheckBox(groupBox_12);
+        usePExCheckBox->setObjectName(QString::fromUtf8("usePExCheckBox"));
+
+        gridLayout_29->addWidget(usePExCheckBox, 1, 0, 1, 1);
+
+        useLSDCheckBox = new QCheckBox(groupBox_12);
+        useLSDCheckBox->setObjectName(QString::fromUtf8("useLSDCheckBox"));
+
+        gridLayout_29->addWidget(useLSDCheckBox, 2, 0, 1, 1);
+
+        useDHTCheckBox = new QCheckBox(groupBox_12);
+        useDHTCheckBox->setObjectName(QString::fromUtf8("useDHTCheckBox"));
+
+        gridLayout_29->addWidget(useDHTCheckBox, 0, 0, 1, 1);
+
+
+        gridLayout_30->addWidget(groupBox_12, 1, 0, 2, 2);
+
         groupBox_2 = new QGroupBox(restrictionTab);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         gridLayout_31 = new QGridLayout(groupBox_2);
@@ -621,48 +651,10 @@ public:
 
         gridLayout_30->addWidget(groupBox_2, 0, 2, 3, 2);
 
-        groupBox_12 = new QGroupBox(restrictionTab);
-        groupBox_12->setObjectName(QString::fromUtf8("groupBox_12"));
-        gridLayout_29 = new QGridLayout(groupBox_12);
-        gridLayout_29->setObjectName(QString::fromUtf8("gridLayout_29"));
-        usePExCheckBox = new QCheckBox(groupBox_12);
-        usePExCheckBox->setObjectName(QString::fromUtf8("usePExCheckBox"));
-
-        gridLayout_29->addWidget(usePExCheckBox, 1, 0, 1, 1);
-
-        useLSDCheckBox = new QCheckBox(groupBox_12);
-        useLSDCheckBox->setObjectName(QString::fromUtf8("useLSDCheckBox"));
-
-        gridLayout_29->addWidget(useLSDCheckBox, 2, 0, 1, 1);
-
-        useDHTCheckBox = new QCheckBox(groupBox_12);
-        useDHTCheckBox->setObjectName(QString::fromUtf8("useDHTCheckBox"));
-
-        gridLayout_29->addWidget(useDHTCheckBox, 0, 0, 1, 1);
-
-
-        gridLayout_30->addWidget(groupBox_12, 1, 0, 2, 2);
-
         seedGlobalRatioEdit = new QDoubleSpinBox(restrictionTab);
         seedGlobalRatioEdit->setObjectName(QString::fromUtf8("seedGlobalRatioEdit"));
 
         gridLayout_30->addWidget(seedGlobalRatioEdit, 3, 1, 1, 1);
-
-        label_34 = new QLabel(restrictionTab);
-        label_34->setObjectName(QString::fromUtf8("label_34"));
-
-        gridLayout_30->addWidget(label_34, 3, 0, 1, 1);
-
-        seedTimeLimitEdit = new QTimeEdit(restrictionTab);
-        seedTimeLimitEdit->setObjectName(QString::fromUtf8("seedTimeLimitEdit"));
-        seedTimeLimitEdit->setDisplayFormat(QString::fromUtf8("HH:mm:ss"));
-
-        gridLayout_30->addWidget(seedTimeLimitEdit, 3, 3, 1, 1);
-
-        label_30 = new QLabel(restrictionTab);
-        label_30->setObjectName(QString::fromUtf8("label_30"));
-
-        gridLayout_30->addWidget(label_30, 3, 2, 1, 1);
 
         maxConnectionsPerTorrentEdit = new QSpinBox(restrictionTab);
         maxConnectionsPerTorrentEdit->setObjectName(QString::fromUtf8("maxConnectionsPerTorrentEdit"));
@@ -671,6 +663,22 @@ public:
         maxConnectionsPerTorrentEdit->setSingleStep(10);
 
         gridLayout_30->addWidget(maxConnectionsPerTorrentEdit, 4, 1, 1, 1);
+
+        label_30 = new QLabel(restrictionTab);
+        label_30->setObjectName(QString::fromUtf8("label_30"));
+
+        gridLayout_30->addWidget(label_30, 3, 2, 1, 1);
+
+        seedTimeLimitEdit = new QTimeEdit(restrictionTab);
+        seedTimeLimitEdit->setObjectName(QString::fromUtf8("seedTimeLimitEdit"));
+        seedTimeLimitEdit->setDisplayFormat(QString::fromUtf8("HH:mm:ss"));
+
+        gridLayout_30->addWidget(seedTimeLimitEdit, 3, 3, 1, 1);
+
+        label_34 = new QLabel(restrictionTab);
+        label_34->setObjectName(QString::fromUtf8("label_34"));
+
+        gridLayout_30->addWidget(label_34, 3, 0, 1, 1);
 
         label_41 = new QLabel(restrictionTab);
         label_41->setObjectName(QString::fromUtf8("label_41"));
@@ -730,6 +738,17 @@ public:
 
         gridLayout_30->addItem(verticalSpacer_6, 5, 0, 1, 4);
 
+        label_45 = new QLabel(restrictionTab);
+        label_45->setObjectName(QString::fromUtf8("label_45"));
+
+        gridLayout_30->addWidget(label_45, 4, 2, 1, 1);
+
+        maxConnectionsEdit = new QSpinBox(restrictionTab);
+        maxConnectionsEdit->setObjectName(QString::fromUtf8("maxConnectionsEdit"));
+        maxConnectionsEdit->setMaximum(65536);
+
+        gridLayout_30->addWidget(maxConnectionsEdit, 4, 3, 1, 1);
+
         stackedWidget->addWidget(restrictionTab);
         page = new QWidget();
         page->setObjectName(QString::fromUtf8("page"));
@@ -759,40 +778,43 @@ public:
         groupBox_10->setCheckable(false);
         gridLayout_28 = new QGridLayout(groupBox_10);
         gridLayout_28->setObjectName(QString::fromUtf8("gridLayout_28"));
+        label_27 = new QLabel(groupBox_10);
+        label_27->setObjectName(QString::fromUtf8("label_27"));
+
+        gridLayout_28->addWidget(label_27, 0, 0, 1, 1);
+
         inEncPolicyComboBox = new QComboBox(groupBox_10);
         inEncPolicyComboBox->setObjectName(QString::fromUtf8("inEncPolicyComboBox"));
+        inEncPolicyComboBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-        gridLayout_28->addWidget(inEncPolicyComboBox, 0, 1, 1, 2);
-
-        label_29 = new QLabel(groupBox_10);
-        label_29->setObjectName(QString::fromUtf8("label_29"));
-
-        gridLayout_28->addWidget(label_29, 2, 0, 1, 2);
+        gridLayout_28->addWidget(inEncPolicyComboBox, 0, 1, 1, 1);
 
         label_28 = new QLabel(groupBox_10);
         label_28->setObjectName(QString::fromUtf8("label_28"));
 
         gridLayout_28->addWidget(label_28, 1, 0, 1, 1);
 
-        label_27 = new QLabel(groupBox_10);
-        label_27->setObjectName(QString::fromUtf8("label_27"));
-
-        gridLayout_28->addWidget(label_27, 0, 0, 1, 1);
-
         outEncPolicyComboBox = new QComboBox(groupBox_10);
         outEncPolicyComboBox->setObjectName(QString::fromUtf8("outEncPolicyComboBox"));
+        outEncPolicyComboBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-        gridLayout_28->addWidget(outEncPolicyComboBox, 1, 1, 1, 2);
+        gridLayout_28->addWidget(outEncPolicyComboBox, 1, 1, 1, 1);
+
+        label_29 = new QLabel(groupBox_10);
+        label_29->setObjectName(QString::fromUtf8("label_29"));
+
+        gridLayout_28->addWidget(label_29, 2, 0, 1, 1);
 
         encLevelComboBox = new QComboBox(groupBox_10);
         encLevelComboBox->setObjectName(QString::fromUtf8("encLevelComboBox"));
+        encLevelComboBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-        gridLayout_28->addWidget(encLevelComboBox, 2, 2, 1, 1);
+        gridLayout_28->addWidget(encLevelComboBox, 2, 1, 1, 1);
 
         preferFullEncCheckBox = new QCheckBox(groupBox_10);
         preferFullEncCheckBox->setObjectName(QString::fromUtf8("preferFullEncCheckBox"));
 
-        gridLayout_28->addWidget(preferFullEncCheckBox, 3, 0, 1, 3);
+        gridLayout_28->addWidget(preferFullEncCheckBox, 3, 0, 1, 2);
 
 
         gridLayout_20->addWidget(groupBox_10, 0, 3, 2, 1);
@@ -1476,7 +1498,7 @@ public:
         hotKeyScrollArea->setWidgetResizable(true);
         keyMapContainer = new QWidget();
         keyMapContainer->setObjectName(QString::fromUtf8("keyMapContainer"));
-        keyMapContainer->setGeometry(QRect(0, 0, 629, 333));
+        keyMapContainer->setGeometry(QRect(0, 0, 98, 28));
         gridLayout_19 = new QGridLayout(keyMapContainer);
         gridLayout_19->setObjectName(QString::fromUtf8("gridLayout_19"));
         hotKeyScrollArea->setWidget(keyMapContainer);
@@ -1486,12 +1508,6 @@ public:
         stackedWidget->addWidget(keyMappingTab);
 
         gridLayout_4->addWidget(stackedWidget, 0, 1, 1, 1);
-
-        buttonBox = new QDialogButtonBox(m_centralWidget);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setStandardButtons(QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-
-        gridLayout_4->addWidget(buttonBox, 1, 1, 1, 1);
 
 
         verticalLayout->addWidget(m_centralWidget);
@@ -1692,6 +1708,10 @@ public:
 #endif // QT_NO_WHATSTHIS
         startMinimizedCheckBox->setText(QApplication::translate("SettingsDialog", "START_MINIMIZED", 0, QApplication::UnicodeUTF8));
         label_8->setText(QApplication::translate("SettingsDialog", "LANGUAGE", 0, QApplication::UnicodeUTF8));
+        groupBox_12->setTitle(QApplication::translate("SettingsDialog", "ADDITINAL_PEER_SOUECES", 0, QApplication::UnicodeUTF8));
+        usePExCheckBox->setText(QApplication::translate("SettingsDialog", "USE_PEX", 0, QApplication::UnicodeUTF8));
+        useLSDCheckBox->setText(QApplication::translate("SettingsDialog", "USE_LSD", 0, QApplication::UnicodeUTF8));
+        useDHTCheckBox->setText(QApplication::translate("SettingsDialog", "USE_DHT", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("SettingsDialog", "SPEED_RESRICTIONS", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         label_6->setWhatsThis(QApplication::translate("SettingsDialog", "UPLOAD_SPEED_LIMIT_WIT", 0, QApplication::UnicodeUTF8));
@@ -1719,12 +1739,8 @@ public:
         localDownloadLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0, QApplication::UnicodeUTF8));
         localDownloadLimitEdit->setSuffix(QApplication::translate("SettingsDialog", "Kb\\s", 0, QApplication::UnicodeUTF8));
         limitUtpCheckBox->setText(QApplication::translate("SettingsDialog", "APPLY_LIMITS_TO_uTP", 0, QApplication::UnicodeUTF8));
-        groupBox_12->setTitle(QApplication::translate("SettingsDialog", "ADDITINAL_PEER_SOUECES", 0, QApplication::UnicodeUTF8));
-        usePExCheckBox->setText(QApplication::translate("SettingsDialog", "USE_PEX", 0, QApplication::UnicodeUTF8));
-        useLSDCheckBox->setText(QApplication::translate("SettingsDialog", "USE_LSD", 0, QApplication::UnicodeUTF8));
-        useDHTCheckBox->setText(QApplication::translate("SettingsDialog", "USE_DHT", 0, QApplication::UnicodeUTF8));
-        label_34->setText(QApplication::translate("SettingsDialog", "SEED_GLOBAL_RATIO_LIMIT", 0, QApplication::UnicodeUTF8));
         label_30->setText(QApplication::translate("SettingsDialog", "SEED_TIME_LIMIT", 0, QApplication::UnicodeUTF8));
+        label_34->setText(QApplication::translate("SettingsDialog", "SEED_GLOBAL_RATIO_LIMIT", 0, QApplication::UnicodeUTF8));
         label_41->setText(QApplication::translate("SettingsDialog", "MAX_CONNECTIONS_PER_TORRENT", 0, QApplication::UnicodeUTF8));
         restrictionsGroupBox->setTitle(QApplication::translate("SettingsDialog", "ACTIVITY_RESTRICTIONS", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
@@ -1751,24 +1767,25 @@ public:
         label_15->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_TORRENTS_LIMIT_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         label_15->setText(QApplication::translate("SettingsDialog", "ACTIVE_TORRENTS_LIMIT", 0, QApplication::UnicodeUTF8));
+        label_45->setText(QApplication::translate("SettingsDialog", "MAX_CONNECTIONS", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("SettingsDialog", "LISTEN_PORT", 0, QApplication::UnicodeUTF8));
         portMappingsCheckBox->setText(QApplication::translate("SettingsDialog", "USE_PORT_MAPPINGS", 0, QApplication::UnicodeUTF8));
         groupBox_10->setTitle(QApplication::translate("SettingsDialog", "NET_ENC", 0, QApplication::UnicodeUTF8));
+        label_27->setText(QApplication::translate("SettingsDialog", "IN_ENC_POLICITY", 0, QApplication::UnicodeUTF8));
         inEncPolicyComboBox->clear();
         inEncPolicyComboBox->insertItems(0, QStringList()
          << QApplication::translate("SettingsDialog", "FORCED", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("SettingsDialog", "ENABLED", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("SettingsDialog", "DISABLED", 0, QApplication::UnicodeUTF8)
         );
-        label_29->setText(QApplication::translate("SettingsDialog", "ENCRYPTION_LEVEL", 0, QApplication::UnicodeUTF8));
         label_28->setText(QApplication::translate("SettingsDialog", "OUT_ENC_POLICITY", 0, QApplication::UnicodeUTF8));
-        label_27->setText(QApplication::translate("SettingsDialog", "IN_ENC_POLICITY", 0, QApplication::UnicodeUTF8));
         outEncPolicyComboBox->clear();
         outEncPolicyComboBox->insertItems(0, QStringList()
          << QApplication::translate("SettingsDialog", "FORCED", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("SettingsDialog", "ENABLED", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("SettingsDialog", "DISABLED", 0, QApplication::UnicodeUTF8)
         );
+        label_29->setText(QApplication::translate("SettingsDialog", "ENCRYPTION_LEVEL", 0, QApplication::UnicodeUTF8));
         encLevelComboBox->clear();
         encLevelComboBox->insertItems(0, QStringList()
          << QApplication::translate("SettingsDialog", "PROTOCOL_ENC_ONLY", 0, QApplication::UnicodeUTF8)

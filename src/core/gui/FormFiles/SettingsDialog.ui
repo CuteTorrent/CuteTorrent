@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>811</width>
-    <height>395</height>
+    <height>407</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -153,7 +153,7 @@
       <property name="horizontalSpacing">
        <number>0</number>
       </property>
-      <item row="0" column="0" rowspan="2">
+      <item row="0" column="0" rowspan="3">
        <widget class="QListWidget" name="listWidget">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -242,6 +242,13 @@ QListView::item{
           <string>TAB_KEY_MAPPINGS</string>
          </property>
         </item>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QDialogButtonBox" name="buttonBox">
+        <property name="standardButtons">
+         <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+        </property>
        </widget>
       </item>
       <item row="0" column="1">
@@ -483,6 +490,36 @@ QListView::item{
         </widget>
         <widget class="QWidget" name="restrictionTab">
          <layout class="QGridLayout" name="gridLayout_30">
+          <item row="1" column="0" rowspan="2" colspan="2">
+           <widget class="QGroupBox" name="groupBox_12">
+            <property name="title">
+             <string>ADDITINAL_PEER_SOUECES</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_29">
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="usePExCheckBox">
+               <property name="text">
+                <string>USE_PEX</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="useLSDCheckBox">
+               <property name="text">
+                <string>USE_LSD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="useDHTCheckBox">
+               <property name="text">
+                <string>USE_DHT</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
           <item row="0" column="2" rowspan="3" colspan="2">
            <widget class="QGroupBox" name="groupBox_2">
             <property name="title">
@@ -629,59 +666,8 @@ QListView::item{
             </layout>
            </widget>
           </item>
-          <item row="1" column="0" rowspan="2" colspan="2">
-           <widget class="QGroupBox" name="groupBox_12">
-            <property name="title">
-             <string>ADDITINAL_PEER_SOUECES</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_29">
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="usePExCheckBox">
-               <property name="text">
-                <string>USE_PEX</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="useLSDCheckBox">
-               <property name="text">
-                <string>USE_LSD</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="useDHTCheckBox">
-               <property name="text">
-                <string>USE_DHT</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
           <item row="3" column="1">
            <widget class="QDoubleSpinBox" name="seedGlobalRatioEdit"/>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_34">
-            <property name="text">
-             <string>SEED_GLOBAL_RATIO_LIMIT</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="3">
-           <widget class="QTimeEdit" name="seedTimeLimitEdit">
-            <property name="displayFormat">
-             <string notr="true">HH:mm:ss</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="2">
-           <widget class="QLabel" name="label_30">
-            <property name="text">
-             <string>SEED_TIME_LIMIT</string>
-            </property>
-           </widget>
           </item>
           <item row="4" column="1">
            <widget class="QSpinBox" name="maxConnectionsPerTorrentEdit">
@@ -693,6 +679,27 @@ QListView::item{
             </property>
             <property name="singleStep">
              <number>10</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLabel" name="label_30">
+            <property name="text">
+             <string>SEED_TIME_LIMIT</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QTimeEdit" name="seedTimeLimitEdit">
+            <property name="displayFormat">
+             <string notr="true">HH:mm:ss</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_34">
+            <property name="text">
+             <string>SEED_GLOBAL_RATIO_LIMIT</string>
             </property>
            </widget>
           </item>
@@ -821,6 +828,20 @@ QListView::item{
             </property>
            </spacer>
           </item>
+          <item row="4" column="2">
+           <widget class="QLabel" name="label_45">
+            <property name="text">
+             <string>MAX_CONNECTIONS</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="3">
+           <widget class="QSpinBox" name="maxConnectionsEdit">
+            <property name="maximum">
+             <number>65536</number>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
         <widget class="QWidget" name="page">
@@ -864,10 +885,20 @@ QListView::item{
              <bool>false</bool>
             </property>
             <layout class="QGridLayout" name="gridLayout_28">
-             <item row="0" column="1" colspan="2">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_27">
+               <property name="text">
+                <string>IN_ENC_POLICITY</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
               <widget class="QComboBox" name="inEncPolicyComboBox">
                <property name="currentIndex">
                 <number>0</number>
+               </property>
+               <property name="sizeAdjustPolicy">
+                <enum>QComboBox::AdjustToContents</enum>
                </property>
                <item>
                 <property name="text">
@@ -884,13 +915,6 @@ QListView::item{
                  <string>DISABLED</string>
                 </property>
                </item>
-              </widget>
-             </item>
-             <item row="2" column="0" colspan="2">
-              <widget class="QLabel" name="label_29">
-               <property name="text">
-                <string>ENCRYPTION_LEVEL</string>
-               </property>
               </widget>
              </item>
              <item row="1" column="0">
@@ -900,17 +924,13 @@ QListView::item{
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_27">
-               <property name="text">
-                <string>IN_ENC_POLICITY</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" colspan="2">
+             <item row="1" column="1">
               <widget class="QComboBox" name="outEncPolicyComboBox">
                <property name="currentIndex">
                 <number>0</number>
+               </property>
+               <property name="sizeAdjustPolicy">
+                <enum>QComboBox::AdjustToContents</enum>
                </property>
                <item>
                 <property name="text">
@@ -929,10 +949,20 @@ QListView::item{
                </item>
               </widget>
              </item>
-             <item row="2" column="2">
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_29">
+               <property name="text">
+                <string>ENCRYPTION_LEVEL</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
               <widget class="QComboBox" name="encLevelComboBox">
                <property name="currentIndex">
                 <number>2</number>
+               </property>
+               <property name="sizeAdjustPolicy">
+                <enum>QComboBox::AdjustToContents</enum>
                </property>
                <item>
                 <property name="text">
@@ -951,7 +981,7 @@ QListView::item{
                </item>
               </widget>
              </item>
-             <item row="3" column="0" colspan="3">
+             <item row="3" column="0" colspan="2">
               <widget class="QCheckBox" name="preferFullEncCheckBox">
                <property name="text">
                 <string>PREFER_FULL_ENCRYPTION</string>
@@ -2121,8 +2151,8 @@ QListView::item{
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>629</width>
-               <height>333</height>
+               <width>98</width>
+               <height>28</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_19"/>
@@ -2131,13 +2161,6 @@ QListView::item{
           </item>
          </layout>
         </widget>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QDialogButtonBox" name="buttonBox">
-        <property name="standardButtons">
-         <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-        </property>
        </widget>
       </item>
      </layout>
