@@ -7,6 +7,7 @@ const char* StyleEngene::EnumStrings[] = { "iso", "doc", "picture", "movie", "ar
 QIcon StyleEngene::fallback = QIcon();
 QSet<QString> StyleEngene::suffixes[TYPE_COUNT];
 QIcon StyleEngene::fileIcons[TYPE_COUNT];
+
 StyleEngene::StyleEngene(QObject* parent) : QObject(parent)
 {
 	init();

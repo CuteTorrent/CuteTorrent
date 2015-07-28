@@ -24,6 +24,7 @@
 #include <QtGui/QStackedWidget>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTabWidget>
+#include <QtGui/QTableView>
 #include <QtGui/QTableWidget>
 #include <QtGui/QToolBar>
 #include <QtGui/QTreeView>
@@ -103,7 +104,7 @@ public:
     QLabel *describtionLabel;
     QWidget *tab_3;
     QGridLayout *gridLayout_2;
-    QTableWidget *peerTableWidget;
+    QTableView *peerTableView;
     QWidget *tab_2;
     QGridLayout *gridLayout;
     QTableWidget *trackerTableWidget;
@@ -472,39 +473,16 @@ public:
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        peerTableWidget = new QTableWidget(tab_3);
-        if (peerTableWidget->columnCount() < 8)
-            peerTableWidget->setColumnCount(8);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        peerTableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
-        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        peerTableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        peerTableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
-        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        peerTableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem3);
-        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
-        peerTableWidget->setHorizontalHeaderItem(4, __qtablewidgetitem4);
-        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        peerTableWidget->setHorizontalHeaderItem(5, __qtablewidgetitem5);
-        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        peerTableWidget->setHorizontalHeaderItem(6, __qtablewidgetitem6);
-        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        peerTableWidget->setHorizontalHeaderItem(7, __qtablewidgetitem7);
-        peerTableWidget->setObjectName(QString::fromUtf8("peerTableWidget"));
-        peerTableWidget->setMinimumSize(QSize(0, 10));
-        peerTableWidget->setMaximumSize(QSize(16777215, 16777215));
-        peerTableWidget->setMouseTracking(true);
-        peerTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        peerTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
-        peerTableWidget->setShowGrid(false);
-        peerTableWidget->setSortingEnabled(true);
-        peerTableWidget->horizontalHeader()->setCascadingSectionResizes(true);
-        peerTableWidget->horizontalHeader()->setProperty("showSortIndicator", QVariant(true));
-        peerTableWidget->verticalHeader()->setVisible(false);
-        peerTableWidget->verticalHeader()->setDefaultSectionSize(18);
+        peerTableView = new QTableView(tab_3);
+        peerTableView->setObjectName(QString::fromUtf8("peerTableView"));
+        peerTableView->setMouseTracking(true);
+        peerTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        peerTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+        peerTableView->setShowGrid(false);
+        peerTableView->setSortingEnabled(true);
+        peerTableView->verticalHeader()->setDefaultSectionSize(18);
 
-        gridLayout_2->addWidget(peerTableWidget, 0, 0, 1, 1);
+        gridLayout_2->addWidget(peerTableView, 0, 0, 1, 1);
 
         m_pTabWidget->addTab(tab_3, QString());
         tab_2 = new QWidget();
@@ -517,14 +495,14 @@ public:
         trackerTableWidget = new QTableWidget(tab_2);
         if (trackerTableWidget->columnCount() < 4)
             trackerTableWidget->setColumnCount(4);
-        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
-        trackerTableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem8);
-        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
-        trackerTableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem9);
-        QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
-        trackerTableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem10);
-        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
-        trackerTableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem11);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        trackerTableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        trackerTableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        trackerTableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        trackerTableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem3);
         trackerTableWidget->setObjectName(QString::fromUtf8("trackerTableWidget"));
         trackerTableWidget->setMouseTracking(true);
         trackerTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -646,8 +624,8 @@ public:
 
         QWidget::setTabOrder(m_pGroupTreeView, m_pTorrentListView);
         QWidget::setTabOrder(m_pTorrentListView, m_pTabWidget);
-        QWidget::setTabOrder(m_pTabWidget, peerTableWidget);
-        QWidget::setTabOrder(peerTableWidget, trackerTableWidget);
+        QWidget::setTabOrder(m_pTabWidget, peerTableView);
+        QWidget::setTabOrder(peerTableView, trackerTableWidget);
         QWidget::setTabOrder(trackerTableWidget, fileTableView);
         QWidget::setTabOrder(fileTableView, pbMin);
         QWidget::setTabOrder(pbMin, pbMax);
@@ -771,31 +749,15 @@ public:
         label_6->setText(QApplication::translate("CustomWindow", "INFO_DESCRIBTION", 0, QApplication::UnicodeUTF8));
         describtionLabel->setText(QString());
         m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab), QApplication::translate("CustomWindow", "TAB_INFO", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem = peerTableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("CustomWindow", "PEER_IP", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem1 = peerTableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("CustomWindow", "PEER_CLIENT_NAME", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem2 = peerTableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("CustomWindow", "PEER_%", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem3 = peerTableWidget->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("CustomWindow", "PEER_DOWNLOAD_SPEED", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem4 = peerTableWidget->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("CustomWindow", "PEER_UPLOAD_SPEED", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem5 = peerTableWidget->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QApplication::translate("CustomWindow", "PEER_DOWNLOADED", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem6 = peerTableWidget->horizontalHeaderItem(6);
-        ___qtablewidgetitem6->setText(QApplication::translate("CustomWindow", "PEER_UPLOADED", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem7 = peerTableWidget->horizontalHeaderItem(7);
-        ___qtablewidgetitem7->setText(QApplication::translate("CustomWindow", "PEER_SPEED", 0, QApplication::UnicodeUTF8));
         m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_3), QApplication::translate("CustomWindow", "TAB_PEERS", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem8 = trackerTableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem8->setText(QApplication::translate("CustomWindow", "TRACKER_URL", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem9 = trackerTableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem9->setText(QApplication::translate("CustomWindow", "TRACKER_STATUS", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem10 = trackerTableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem10->setText(QApplication::translate("CustomWindow", "TRACKER_NEXT_ANNOUNCE", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem11 = trackerTableWidget->horizontalHeaderItem(3);
-        ___qtablewidgetitem11->setText(QApplication::translate("CustomWindow", "TRACKER_PEERS", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem = trackerTableWidget->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("CustomWindow", "TRACKER_URL", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem1 = trackerTableWidget->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("CustomWindow", "TRACKER_STATUS", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem2 = trackerTableWidget->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("CustomWindow", "TRACKER_NEXT_ANNOUNCE", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem3 = trackerTableWidget->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QApplication::translate("CustomWindow", "TRACKER_PEERS", 0, QApplication::UnicodeUTF8));
         m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_2), QApplication::translate("CustomWindow", "TAB_TRACKERS", 0, QApplication::UnicodeUTF8));
         m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_4), QApplication::translate("CustomWindow", "TAB_FILES", 0, QApplication::UnicodeUTF8));
         menu->setTitle(QApplication::translate("CustomWindow", "MENU_FILE", 0, QApplication::UnicodeUTF8));

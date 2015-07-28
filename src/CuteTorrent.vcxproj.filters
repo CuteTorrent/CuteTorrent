@@ -805,6 +805,21 @@
     <ClCompile Include="GeneratedFiles\Release\moc_FiltersViewModel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\viewModel\itemDelegate\SpeedItemDelegate.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PeerTableModel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\viewmodels\PeerTableModel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\viewModel\itemDelegate\IpItemDelegate.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\viewmodels\PeerSortModel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -1052,6 +1067,9 @@
       <Filter>Service</Filter>
     </CustomBuild>
     <CustomBuild Include="core\viewModel\FiltersViewModel.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrent\viewmodels\PeerTableModel.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -1442,6 +1460,15 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="core\datamodels\FilterTreeItem.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\viewModel\itemDelegate\SpeedItemDelegate.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\viewModel\itemDelegate\IpItemDelegate.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="torrent\viewmodels\PeerSortModel.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

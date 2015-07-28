@@ -23,7 +23,7 @@ void FileSystemTorrentWatcher::addPath(QString path)
 	disable();
 	m_pFileSystemWatcher->addPath(path);
 	m_currentPath = path;
-	m_currentPathSnapshot = QDir(m_currentPath).entryList(QDir::AllEntries | QDir::NoDotAndDotDot);
+	m_currentPathSnapshot = QDir(m_currentPath).entryList(QStringList() << "*.torrent" ,QDir::AllEntries | QDir::NoDotAndDotDot);
 }
 
 void FileSystemTorrentWatcher::disable()
@@ -40,7 +40,7 @@ QStringList FileSystemTorrentWatcher::getNewFiles(QString path)
 	if (path == m_currentPath)
 	{
 		
-		QStringList currentSnapshot = QDir(m_currentPath).entryList(QDir::AllEntries | QDir::NoDotAndDotDot);
+		QStringList currentSnapshot = QDir(m_currentPath).entryList(QStringList() << "*.torrent", QDir::AllEntries | QDir::NoDotAndDotDot);
 		QVector<QString> snapshotDiff(currentSnapshot.size() + m_currentPathSnapshot.size());
 		QVector<QString>::iterator it = std::set_difference(currentSnapshot.begin(), currentSnapshot.end(), m_currentPathSnapshot.begin(), m_currentPathSnapshot.end(), snapshotDiff.begin());
 		snapshotDiff.resize(it - snapshotDiff.begin());

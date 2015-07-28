@@ -6,7 +6,12 @@ QString FileSizeItemDelegate::displayText(const QVariant& value, const QLocale& 
 {
 	if (value.type() == QVariant::LongLong || value.type() == QVariant::ULongLong)
 	{
-		return StaticHelpers::toKbMbGb(value.toULongLong());
+		bool ok;
+		quint64 size = value.toULongLong(&ok);
+		if (ok && size > KbInt)
+		{
+			return StaticHelpers::toKbMbGb(size);
+		}
 	}
 
 	return "";

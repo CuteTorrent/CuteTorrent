@@ -45,9 +45,11 @@ using namespace libtorrent;
 #include "ServiceCommon.h"
 #include "Singleton.h"
 #include "TorrentCommon.h"
+#include <QStringList>
 #include <QVariant>
 #include <QVector>
 #include <QMap>
+#include <QSet>
 #include <QUrl>
 class QApplicationSettings;
 class QTorrentDisplayModel;
@@ -89,6 +91,7 @@ private:
 	int num_outstanding_resume_data;
 	bool m_bIsSaveSessionInitiated;
 	int m_updateTimerID;
+	QSet<QString> m_recentTorrentUpdates;
 	void handle_alert(alert*);
 	void writeSettings();
 	TorrentStorragePtr m_pTorrentStorrage;
@@ -112,7 +115,7 @@ public slots:
 	void RemoveTorrent(QString InfoHash, bool delFiles = false);
 	void OnDownloadReady(QUrl, QTemporaryFile*);
 public:
-	void UpdateTorrents();
+	void getRecentUpdatedTorrents(QSet<QString>& infoHashes);
 	enum AddTorrentFlag
 	{
 		SEQUENTIAL_MODE = 1,

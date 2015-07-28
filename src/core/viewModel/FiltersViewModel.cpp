@@ -11,7 +11,7 @@
 FiltersViewModel::FiltersViewModel(QObject* parent) : QAbstractItemModel(parent)
 {
 	BuildTree();
-	m_updateTimerID = startTimer(1000);
+	m_updateTimerID = startTimer(400);
 }
 
 FiltersViewModel::~FiltersViewModel()

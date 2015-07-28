@@ -67,7 +67,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "qwinjumplistcategory.h"
 #endif
 #include "PieceAvailabilityWidget.h"
-#include <core/FileSystemTorrentWatcher.h>
+#include <FileSystemTorrentWatcher.h>
+#include <PeerTableModel.h>
+#include "PeerSortModel.h"
+#include "SpeedItemDelegate.h"
+#include <viewModel/itemDelegate/IpItemDelegate.h>
 class Application;
 class ISerachProvider;
 class SearchResult;
@@ -80,6 +84,7 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	, m_pPieceView(NULL)
 	, m_pSearchEngine(SearchEngine::getInstance())
 	, m_pieceAvalibilityWidget(NULL)
+	, m_pPeerTableModel(NULL)
 	, m_pNotificationSystem(NotificationSystem::getInstance())
 #ifdef Q_WS_WIN
 	, m_pJumpList(new QWinJumpList(this))
@@ -93,7 +98,7 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	setWindowModality(Qt::NonModal);
 	setupCustomeWindow();
 	m_pUpdateTimer = new QTimer(this);
-	m_pUpdateTimer->setInterval(1000);
+	m_pUpdateTimer->setInterval(400);
 	m_pTorrentManager = TorrentManager::getInstance();
 	m_pTorrentFilterProxyModel = new QTorrentFilterProxyModel(this);
 	m_pTorrentDisplayModel = new QTorrentDisplayModel(m_pTorrentListView, m_pTorrentFilterProxyModel, this);
@@ -274,28 +279,37 @@ void CuteTorrentMainWindow::setupTabelWidgets()
 	trackerTableWidget->addAction(removeTracker);
 	trackerTableWidget->addAction(editTracker);
 	QList<int> peer_column_sizes = m_pSettings->value("Window", "peers_sizes").value<QList<int> >();
-
+	m_pPeerTableModel = new PeerTableModel(peerTableView);
+	PeerSortModel* peerSorter = new PeerSortModel(peerTableView);
+	peerSorter->setSourceModel(m_pPeerTableModel);
+	peerTableView->setModel(peerSorter);
 	if (peer_column_sizes.count() > 0)
 	{
 		for (int i = 0; i < peer_column_sizes.count(); i++)
 		{
-			peerTableWidget->setColumnWidth(i, peer_column_sizes.at(i));
+			peerTableView->setColumnWidth(i, peer_column_sizes.at(i));
 		}
 	}
 	else
 	{
-		peerTableWidget->setColumnWidth(2, 50);
+		peerTableView->setColumnWidth(2, 50);
 	}
-
-	peerTableWidget->setContextMenuPolicy(Qt::ActionsContextMenu);
-	addPeer = new QAction(m_pStyleEngine->getIcon("add_torrent"), tr("ADD_PEER"), peerTableWidget);
+	peerTableView->setContextMenuPolicy(Qt::ActionsContextMenu);
+	addPeer = new QAction(m_pStyleEngine->getIcon("add_torrent"), tr("ADD_PEER"), peerTableView);
 	addPeer->setObjectName("ACTION_PEER_ADD");
-	addWebSeed = new QAction(m_pStyleEngine->getIcon("add_torrent"), tr("ADD_WEB_SEED"), peerTableWidget);
+	addWebSeed = new QAction(m_pStyleEngine->getIcon("add_torrent"), tr("ADD_WEB_SEED"), peerTableView);
 	addWebSeed->setObjectName("ACTION_PEER_ADD_WEB_SEED");
 	connect(addPeer, SIGNAL(triggered()), this, SLOT(AddPeer()));
 	connect(addWebSeed, SIGNAL(triggered()), this, SLOT(AddWebSeed()));
-	peerTableWidget->addAction(addPeer);
-	peerTableWidget->addAction(addWebSeed);
+	peerTableView->addAction(addPeer);
+	peerTableView->addAction(addWebSeed);
+	peerTableView->setItemDelegateForColumn(PeerTableModel::IP, new IpItemDelegate(this));
+	peerTableView->setItemDelegateForColumn(PeerTableModel::DOWNLOADED, new FileSizeItemDelegate(this));
+	peerTableView->setItemDelegateForColumn(PeerTableModel::UPLOADED, new FileSizeItemDelegate(this));
+	peerTableView->setItemDelegateForColumn(PeerTableModel::DOWNLOAD_RATE, new SpeedItemDelegate(this));
+	peerTableView->setItemDelegateForColumn(PeerTableModel::UPLOAD_RATE, new SpeedItemDelegate(this));
+	peerTableView->setItemDelegateForColumn(PeerTableModel::PEER_SPEED, new SpeedItemDelegate(this));
+	peerTableView->setItemDelegateForColumn(PeerTableModel::PEER_PROGRESS, new ProgressItemDelegate(this));
 }
 
 void CuteTorrentMainWindow::initToolbarIcons()
@@ -875,43 +889,20 @@ void CuteTorrentMainWindow::UpdatePeerTab()
 {
 	Torrent* tor = m_pTorrentDisplayModel->GetSelectedTorrent();
 
-	if (tor != NULL)
+	if (m_pPeerTableModel != NULL)
 	{
-		std::vector<peer_info> peerInfos = tor->GetPeerInfo();
-		peerTableWidget->setRowCount(peerInfos.size());
-
-		for (int i = 0; i < peerInfos.size(); i++)
+		if (tor != NULL)
 		{
-			QString client = QString::fromUtf8(peerInfos[i].client.c_str());
-
-			if ((peerInfos[i].flags & peer_info::rc4_encrypted) == peer_info::rc4_encrypted
-			        || (peerInfos[i].flags & peer_info::plaintext_encrypted) == peer_info::plaintext_encrypted)
-			{
-				client = client.append("*");
-			}
-
-			QString flagFileName = QString(":/flags/%1.png").arg(QString(QByteArray(peerInfos[i].country, 2)));
-			peerTableWidget->setItem(i, 0, new MyTableWidgetItem(QIcon(QPixmap(flagFileName)), QString::fromStdString(peerInfos[i].ip.address().to_string())));
-			peerTableWidget->setItem(i, 1, new MyTableWidgetItem(client));
-			peerTableWidget->setItem(i, 2, new MyTableWidgetItem(QString::number(peerInfos[i].progress_ppm / 10000.f, 'f', 1) + "%"));
-			peerTableWidget->setItem(i, 3, new MyTableWidgetItem(StaticHelpers::toKbMbGb(peerInfos[i].down_speed, true)));
-			peerTableWidget->setItem(i, 4, new MyTableWidgetItem(StaticHelpers::toKbMbGb(peerInfos[i].up_speed, true)));
-			peerTableWidget->setItem(i, 5, new MyTableWidgetItem(StaticHelpers::toKbMbGb(peerInfos[i].total_download)));
-			peerTableWidget->setItem(i, 6, new MyTableWidgetItem(StaticHelpers::toKbMbGb(peerInfos[i].total_upload)));
-			QString remoteDlRate;
-
-			if (peerInfos[i].remote_dl_rate > 0)
-			{
-				remoteDlRate = StaticHelpers::toKbMbGb(peerInfos[i].remote_dl_rate, true);
-			}
-
-			peerTableWidget->setItem(i, 7, new MyTableWidgetItem(remoteDlRate));
+			std::vector<peer_info> peerInfos = tor->GetPeerInfo();
+			m_pPeerTableModel->UpdateData(peerInfos);
+			//peerTableView->update();
+		}
+		else
+		{
+			m_pPeerTableModel->Clear();
 		}
 	}
-	else
-	{
-		peerTableWidget->setRowCount(0);
-	}
+	
 }
 
 void CuteTorrentMainWindow::UpadteTrackerTab()
@@ -1091,9 +1082,9 @@ void CuteTorrentMainWindow::saveWindowState()
 	m_pSettings->setValue("Window", "vertical_sizes", QVariant::fromValue(spliiter->sizes()));
 	QList<int> peer_columns_sizes;
 
-	for (int i = 0; i < peerTableWidget->columnCount(); i++)
+	for (int i = 0; i < m_pPeerTableModel->columnCount(QModelIndex()); i++)
 	{
-		peer_columns_sizes.append(peerTableWidget->columnWidth(i));
+		peer_columns_sizes.append(peerTableView->columnWidth(i));
 	}
 
 	m_pSettings->setValue("Window", "peers_sizes", QVariant::fromValue(peer_columns_sizes));

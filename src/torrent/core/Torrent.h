@@ -60,7 +60,7 @@ public :
 	QString GetRemainingTime();
 	QStringList& GetImageFiles();
 	QString GetSuffix();
-	void UpdateImageFiles();
+	void UpdateDiskImageFiles();
 	QString GetErrorMessage() const;
 
 	QString GetGroup();

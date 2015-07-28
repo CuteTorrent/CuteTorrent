@@ -584,19 +584,7 @@
                 </attribute>
                 <layout class="QGridLayout" name="gridLayout_2">
                  <item row="0" column="0">
-                  <widget class="QTableWidget" name="peerTableWidget">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>10</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
+                  <widget class="QTableView" name="peerTableView">
                    <property name="mouseTracking">
                     <bool>true</bool>
                    </property>
@@ -612,58 +600,9 @@
                    <property name="sortingEnabled">
                     <bool>true</bool>
                    </property>
-                   <attribute name="horizontalHeaderCascadingSectionResizes">
-                    <bool>true</bool>
-                   </attribute>
-                   <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-                    <bool>true</bool>
-                   </attribute>
-                   <attribute name="verticalHeaderVisible">
-                    <bool>false</bool>
-                   </attribute>
                    <attribute name="verticalHeaderDefaultSectionSize">
                     <number>18</number>
                    </attribute>
-                   <column>
-                    <property name="text">
-                     <string>PEER_IP</string>
-                    </property>
-                   </column>
-                   <column>
-                    <property name="text">
-                     <string>PEER_CLIENT_NAME</string>
-                    </property>
-                   </column>
-                   <column>
-                    <property name="text">
-                     <string>PEER_%</string>
-                    </property>
-                   </column>
-                   <column>
-                    <property name="text">
-                     <string>PEER_DOWNLOAD_SPEED</string>
-                    </property>
-                   </column>
-                   <column>
-                    <property name="text">
-                     <string>PEER_UPLOAD_SPEED</string>
-                    </property>
-                   </column>
-                   <column>
-                    <property name="text">
-                     <string>PEER_DOWNLOADED</string>
-                    </property>
-                   </column>
-                   <column>
-                    <property name="text">
-                     <string>PEER_UPLOADED</string>
-                    </property>
-                   </column>
-                   <column>
-                    <property name="text">
-                     <string>PEER_SPEED</string>
-                    </property>
-                   </column>
                   </widget>
                  </item>
                 </layout>
@@ -1080,7 +1019,7 @@
   <tabstop>m_pGroupTreeView</tabstop>
   <tabstop>m_pTorrentListView</tabstop>
   <tabstop>m_pTabWidget</tabstop>
-  <tabstop>peerTableWidget</tabstop>
+  <tabstop>peerTableView</tabstop>
   <tabstop>trackerTableWidget</tabstop>
   <tabstop>fileTableView</tabstop>
   <tabstop>pbMin</tabstop>

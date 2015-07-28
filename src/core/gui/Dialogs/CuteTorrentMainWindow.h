@@ -57,6 +57,7 @@ class TorrentTracker;
 class UpdateNotifier;
 class HtmlView;
 class QWinJumpList;
+class PeerTableModel;
 class PieceAvailabilityWidget;
 class CuteTorrentMainWindow : public BaseWindow<QWidget> , private Ui::CustomWindow
 {
@@ -118,6 +119,7 @@ private:
 	TorrentManagerPtr m_pTorrentManager;
 	QLineEdit* m_pTorrentSearchEdit;
 	QLineEdit* m_pSearchEdit;
+	PeerTableModel* m_pPeerTableModel;
 	FiltersViewModel* m_pFiltersViewModel;
 	SearchEnginePtr m_pSearchEngine;
 	FileSystemTorrentWatcherPtr m_pTorrentWatcher;

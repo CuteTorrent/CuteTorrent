@@ -36,6 +36,35 @@ QIcon FaviconDownloader::getFavicon(QString urlStr)
 	return getFromWeb(faviconUrl);
 }
 
+void FaviconDownloader::InsertWarningInCache(QUrl& url)
+{
+	QNetworkCacheMetaData metaData;
+	QNetworkCacheMetaData::AttributesMap atts;
+	QString urlStr = url.toString();
+	while (redirectionMap.contains(urlStr))
+	{
+		urlStr = redirectionMap[urlStr];
+		redirectionMap.remove(urlStr);
+	}
+
+	metaData.setUrl(url);
+	metaData.setSaveToDisk(true);
+	atts[QNetworkRequest::HttpStatusCodeAttribute] = 200;
+	atts[QNetworkRequest::HttpReasonPhraseAttribute] = "Ok";
+	metaData.setAttributes(atts);
+	metaData.setLastModified(QDateTime::currentDateTime());
+	metaData.setExpirationDate(QDateTime::currentDateTime().addDays(1));
+	QIODevice* dev = m_pDiskCache->prepare(metaData);
+
+	if (!dev)
+	{
+		return;
+	}
+
+	QApplication::style()->standardIcon(QStyle::SP_MessageBoxWarning).pixmap(32, 32).save(dev, "PNG");
+	m_pDiskCache->insert(dev);
+}
+
 void FaviconDownloader::replyReady(QNetworkReply* pReply)
 {
 	QUrl url = pReply->url();
@@ -87,6 +116,10 @@ void FaviconDownloader::replyReady(QNetworkReply* pReply)
 					getFromWeb(linkFavicon);
 				}
 			}
+			else
+			{
+				InsertWarningInCache(url);
+			}
 		}
 		else
 		{
@@ -104,35 +137,41 @@ void FaviconDownloader::replyReady(QNetworkReply* pReply)
 			}
 			else
 			{
-				if (redirectionMap.contains(url.toString()))
+
+				QString urlStr = url.toString();
+				while (redirectionMap.contains(urlStr))
 				{
-					QString originalUrl = redirectionMap[url.toString()];
-					redirectionMap.remove(url.toString());
-					QNetworkCacheMetaData metaData;
-					QNetworkCacheMetaData::AttributesMap atts;
-					metaData.setUrl(originalUrl);
-					metaData.setSaveToDisk(true);
-					atts[QNetworkRequest::HttpStatusCodeAttribute] = 200;
-					atts[QNetworkRequest::HttpReasonPhraseAttribute] = "Ok";
-					metaData.setAttributes(atts);
-					metaData.setLastModified(QDateTime::currentDateTime());
-					metaData.setExpirationDate(QDateTime::currentDateTime().addDays(1));
-					QIODevice* dev = m_pDiskCache->prepare(metaData);
-
-					if (!dev)
-					{
-						return;
-					}
-
-					dev->write(pReply->readAll());
-					m_pDiskCache->insert(dev);
+					urlStr = redirectionMap[urlStr];
+					redirectionMap.remove(urlStr);
 				}
+
+
+				QNetworkCacheMetaData metaData;
+				QNetworkCacheMetaData::AttributesMap atts;
+				metaData.setUrl(url);
+				metaData.setSaveToDisk(true);
+				atts[QNetworkRequest::HttpStatusCodeAttribute] = 200;
+				atts[QNetworkRequest::HttpReasonPhraseAttribute] = "Ok";
+				metaData.setAttributes(atts);
+				metaData.setLastModified(QDateTime::currentDateTime());
+				metaData.setExpirationDate(QDateTime::currentDateTime().addDays(1));
+				QIODevice* dev = m_pDiskCache->prepare(metaData);
+
+				if (!dev)
+				{
+					return;
+				}
+
+				dev->write(pReply->readAll());
+				m_pDiskCache->insert(dev);
+
 			}
 		}
 	}
 	else
 	{
 		qCritical() << "FaviconDownloader error:" << pReply->errorString();
+		InsertWarningInCache(url);
 	}
 }
 

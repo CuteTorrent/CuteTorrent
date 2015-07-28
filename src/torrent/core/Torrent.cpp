@@ -27,6 +27,82 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <libtorrent/magnet_uri.hpp>
 #include <libtorrent/peer_info.hpp>
 #include "QApplicationSettings.h"
+
+
+
+
+
+Torrent::Torrent(torrent_status hTorrent, QString group)
+	: QObject(NULL)
+	, m_hasMedia(false)
+	, m_isPrevSeed(false)
+	, size(0)
+	, mountable(false)
+	, isMovingFileStorrage(false)
+{
+	m_hTorrent = hTorrent;
+	
+	if (!m_hTorrent.handle.is_valid())
+	{
+		qCritical() << "Invalid Torrent recived...";
+		return;
+	}
+
+	file_storage storrgae =
+#if LIBTORRENT_VERSION_NUM >= 10000
+		m_hTorrent.handle.torrent_file()->files();
+#else
+		m_hTorrent.handle.get_torrent_info().files();
+#endif
+	this->group = group;
+	std::vector<size_type> progress;
+	m_hTorrent.handle.file_progress(progress);
+
+	for (int i = 0; i < storrgae.num_files(); i++)
+	{
+		QFileInfo curfile(QString::fromUtf8(storrgae.file_path(i).c_str()));
+		QString currentSuffix = curfile.suffix().toLower();
+		bool fileReady = storrgae.file_size(i) == progress[i];
+		QSet<QString> diskSufixes = StyleEngene::suffixes[StyleEngene::DISK];
+		bool mayMount = ((fileReady || m_hTorrent.handle.file_priority(i) > 0) && diskSufixes.contains(currentSuffix));
+
+		if (mayMount)
+		{
+			std::string save_path =
+#if LIBTORRENT_VERSION_NUM >= 10000
+				m_hTorrent.save_path;
+#else
+				m_hTorrent.handle.save_path();
+#endif
+			imageFiles << QString::fromUtf8(save_path.c_str()) + QString::fromUtf8(storrgae.file_path(i).c_str());
+		}
+
+		if (fileReady || m_hTorrent.handle.file_priority(i) > 0)
+		{
+			QSet<QString> videoSuffix = StyleEngene::suffixes[StyleEngene::VIDEO];
+
+			if (videoSuffix.contains(currentSuffix) || StyleEngene::suffixes[StyleEngene::AUDIO].contains(currentSuffix))
+			{
+				m_hasMedia = true;
+			}
+
+			size += storrgae.file_size(i);
+		}
+	}
+
+	base_suffix = StaticHelpers::GetBaseSuffix(storrgae);
+
+	if (!base_suffix.isEmpty())
+	{
+		icon = StyleEngene::getInstance()->guessMimeIcon(base_suffix, type);
+	}
+	else
+	{
+		icon = QIcon(":/icons/my-folder.ico");
+		type = "folder";
+	}
+}
+
 bool Torrent::hasError() const
 {
 	if(m_hTorrent.handle.is_valid())
@@ -47,10 +123,9 @@ bool Torrent::hasError() const
 
 bool Torrent::isActive() const
 {
-	torrent_status status = m_hTorrent;
-	return (status.download_rate > 2 * KbInt ||
-	        status.upload_rate > 2 * KbInt ||
-	        status.state == torrent_status::checking_files);
+	return (m_hTorrent.download_rate > 2 * KbInt ||
+			m_hTorrent.upload_rate > 2 * KbInt ||
+			m_hTorrent.state == torrent_status::checking_files);
 }
 std::vector<peer_info> Torrent::GetPeerInfo()
 {
@@ -154,7 +229,7 @@ QString Torrent::GetSuffix()
 	return base_suffix;
 }
 
-void Torrent::UpdateImageFiles()
+void Torrent::UpdateDiskImageFiles()
 {
 	imageFiles.clear();
 
@@ -171,7 +246,8 @@ void Torrent::UpdateImageFiles()
 
 		for (int i = 0; i < storrgae.num_files(); ++i)
 		{
-			QFileInfo curfile(QString::fromUtf8(storrgae.file_path(i).c_str()));
+			QString fileSubPath = QString::fromUtf8(storrgae.file_path(i).c_str());
+			QFileInfo curfile(fileSubPath);
 			QString currentSuffix = curfile.suffix().toLower();
 			bool fileReady = storrgae.file_size(i) == progress[i];
 			bool mayMount = (fileReady && StyleEngene::suffixes[StyleEngene::DISK].contains(currentSuffix));
@@ -184,7 +260,7 @@ void Torrent::UpdateImageFiles()
 #else
 					m_hTorrent.handle.save_path();
 #endif
-				imageFiles << QString::fromUtf8(save_path.c_str()) + QString::fromUtf8(storrgae.file_path(i).c_str());
+				imageFiles << StaticHelpers::CombinePathes(QString::fromUtf8(save_path.c_str()), fileSubPath);
 			}
 		}
 	}
@@ -192,78 +268,13 @@ void Torrent::UpdateImageFiles()
 
 QStringList& Torrent::GetImageFiles()
 {
-	UpdateImageFiles();
+	UpdateDiskImageFiles();
 	return imageFiles;
-}
-Torrent::Torrent(torrent_status hTorrent, QString group)
-	: QObject(NULL), m_hasMedia(false), m_isPrevSeed(false), size(0), mountable(false), isMovingFileStorrage(false)
-{
-	m_hTorrent = hTorrent;
-
-	if (!m_hTorrent.handle.is_valid())
-	{
-		qCritical() << "Invalid Torrent recived...";
-		return;
-	}
-
-	file_storage storrgae =
-#if LIBTORRENT_VERSION_NUM >= 10000
-		m_hTorrent.handle.torrent_file()->files();
-#else
-		m_hTorrent.handle.get_torrent_info().files();
-#endif
-	this->group = group;
-	std::vector<size_type> progress;
-	m_hTorrent.handle.file_progress(progress);
-
-	for(int i = 0; i < storrgae.num_files(); i++)
-	{
-		QFileInfo curfile(QString::fromUtf8(storrgae.file_path(i).c_str()));
-		QString currentSuffix = curfile.suffix().toLower();
-		bool fileReady = storrgae.file_size(i) == progress[i];
-		QSet<QString> diskSufixes = StyleEngene::suffixes[StyleEngene::DISK];
-		bool mayMount = ((fileReady || m_hTorrent.handle.file_priority(i) > 0) && diskSufixes.contains(currentSuffix));
-
-		if (mayMount)
-		{
-			std::string save_path =
-#if LIBTORRENT_VERSION_NUM >= 10000
-			    m_hTorrent.save_path;
-#else
-				m_hTorrent.handle.save_path();
-#endif
-			imageFiles << QString::fromUtf8(save_path.c_str()) + QString::fromUtf8(storrgae.file_path(i).c_str());
-		}
-
-		if (fileReady || m_hTorrent.handle.file_priority(i) > 0)
-		{
-			QSet<QString> videoSuffix = StyleEngene::suffixes[StyleEngene::VIDEO];
-
-			if(videoSuffix.contains(currentSuffix) || StyleEngene::suffixes[StyleEngene::AUDIO].contains(currentSuffix))
-			{
-				m_hasMedia = true;
-			}
-
-			size += storrgae.file_size(i);
-		}
-	}
-
-	base_suffix = StaticHelpers::GetBaseSuffix(storrgae);
-
-	if(!base_suffix.isEmpty())
-	{
-		icon = StyleEngene::getInstance()->guessMimeIcon(base_suffix, type);
-	}
-	else
-	{
-		icon = QIcon(":/icons/my-folder.ico");
-		type = "folder";
-	}
 }
 
 bool Torrent::isDaemonToolsMountable()
 {
-	UpdateImageFiles();
+	UpdateDiskImageFiles();
 	return imageFiles.length() > 0 && (isSeeding() || isPaused());
 }
 QString Torrent::GetProgresString() const
@@ -334,6 +345,7 @@ QString Torrent::GetName() const
 
 	return "";
 }
+
 QString Torrent::GetDwonloadSpeed()
 {
 	if(m_hTorrent.handle.is_valid())

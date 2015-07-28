@@ -1725,7 +1725,6 @@ QListView::item{
             <zorder>label_13</zorder>
             <zorder>taskNameLineEdit</zorder>
             <zorder>calendarWidget</zorder>
-            <zorder>verticalSpacer</zorder>
            </widget>
           </item>
           <item row="0" column="4">

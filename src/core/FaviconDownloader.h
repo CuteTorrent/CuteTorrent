@@ -6,14 +6,13 @@ class StyleEngene;
 class NetworkDiskCache;
 class FaviconDownloader : public QObject, public Singleton<FaviconDownloader>
 {
-	friend class Singleton < FaviconDownloader > ;
+	friend class Singleton <FaviconDownloader>;
 	Q_OBJECT
 public:
 	~FaviconDownloader();
 	QIcon getFavicon(QString url);
-//	static FaviconDownloaderPtr getInstance();
+	void InsertWarningInCache(QUrl& url);
 private:
-//	static boost::weak_ptr<FaviconDownloader> m_pInstance;
 	QMutex* m_pSynkMutex;
 	StyleEngene* m_pStyleEngine;
 	QNetworkAccessManager* m_pNatworkManager;

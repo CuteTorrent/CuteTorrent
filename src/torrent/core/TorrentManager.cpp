@@ -172,7 +172,8 @@ TorrentManager::TorrentManager()
 		}
 	}
 
-	if (load_file(StaticHelpers::CombinePathes(dataDir, "BtSessionData/actual.state").toStdString(), in, ec) == 0)
+	std::string stateFileName = StaticHelpers::CombinePathes(dataDir, "BtSessionData/actual.state").toStdString();
+	if (load_file(stateFileName, in, ec) == 0)
 	{
 		lazy_entry e;
 
@@ -220,7 +221,13 @@ TorrentManager::TorrentManager()
 		m_pTorrentSession->add_extension(&create_ut_pex_plugin);
 	}
 
-	create_directory(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toStdString(), ec);
+	create_directory(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toUtf8().data(), ec);
+
+	if (ec)
+	{
+		CustomMessageBox::critical(NULL, "ERROR", StaticHelpers::translateLibTorrentError(ec));
+		return;
+	}
 	RefreshExternalPeerSettings();
 	m_pTorrentSession->listen_on(std::make_pair(listen_port, listen_port + 20)
 		, ec);
@@ -577,11 +584,11 @@ void TorrentManager::handle_alert(alert* a)
 			{
 				state_update_alert* p = alert_cast<state_update_alert>(a);
 				size_t size = p->status.size();
-				qDebug() << "Update size:" << size;
 				for (int i = 0; i < size; i++)
 				{
 					torrent_status status = p->status[i];
 					QString infoHash = QString::fromStdString(to_hex(status.info_hash.to_string()));
+					m_recentTorrentUpdates.insert(infoHash);
 					Torrent* torrent = m_pTorrentStorrage->getTorrent(infoHash);
 					if (torrent != NULL)
 					{
@@ -1290,6 +1297,11 @@ void TorrentManager::OnDownloadReady(QUrl url, QTemporaryFile* pUnsafeFile)
 	}
 }
 
+void TorrentManager::getRecentUpdatedTorrents(QSet<QString>& infoHashes)
+{
+	infoHashes.clear();
+	infoHashes.swap(m_recentTorrentUpdates);
+}
 
 
 QString TorrentManager::GetSessionDownloadSpeed()

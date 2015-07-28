@@ -360,7 +360,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 	try
 	{
-		QModelIndexList indexes = m_pProxyFilterModel->mapSelectionToSource(m_pTorrentListView->selectionModel()->selection()).indexes();
+		QModelIndexList indexes = m_pTorrentListView->selectionModel()->selectedIndexes();
 		qSort(indexes);
 
 		if(rowCount() == 0)
@@ -872,16 +872,15 @@ void QTorrentDisplayModel::Update()
 {
 	QMutexLocker lockMutex(locker);
 	reset();
-	m_pTorrentListView->updateGeometry();
 }
 
 void QTorrentDisplayModel::OnAddTorrent()
 {
+	Update();
 	if (m_pTorrentListView->model() != m_pProxyFilterModel)
 	{
 		return;
 	}
-	Update();
 	m_pTorrentListView->scrollToBottom();
 	m_pTorrentListView->setCurrentIndex(index(m_pTorrentStorrage->count() - 1));
 }

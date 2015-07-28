@@ -1,4 +1,5 @@
 .exp
+.pdb
 .lib
 .git
 LICENSE
