@@ -264,6 +264,10 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 			case 2:
 				if(item->GetType() == FileViewTreeItem::FILE)
 				{
+					if (file.size == 0)
+					{
+						return 100.0f;
+					}
 					return m_Progresses[storrage_index] * 100.0f / file.size;
 				}
 				else

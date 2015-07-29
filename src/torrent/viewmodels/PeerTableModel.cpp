@@ -84,7 +84,7 @@ void PeerTableModel::updatePeer(libtorrent::peer_info peerInfo)
 		client = client.append("*");
 	}
 	setData(index(row, CLIENT_NAME), client, Qt::DisplayRole);
-	setData(index(row, PEER_PROGRESS), peerInfo.progress_ppm / 10000.f, Qt::DisplayRole);
+	setData(index(row, PEER_PROGRESS), peerInfo.progress * 100.f, Qt::DisplayRole);
 	setData(index(row, DOWNLOAD_RATE), peerInfo.down_speed, Qt::DisplayRole);
 	setData(index(row, UPLOAD_RATE), peerInfo.up_speed, Qt::DisplayRole);
 	setData(index(row, DOWNLOADED), peerInfo.total_download, Qt::DisplayRole);
@@ -108,7 +108,7 @@ QStandardItem* PeerTableModel::addPeer(libtorrent::peer_info peerInfo)
 		client = client.append("*");
 	}
 	setData(index(row, CLIENT_NAME), client, Qt::DisplayRole);
-	setData(index(row, PEER_PROGRESS), peerInfo.progress_ppm / 10000.f, Qt::DisplayRole);
+	setData(index(row, PEER_PROGRESS), peerInfo.progress * 100.f, Qt::DisplayRole);
 	setData(index(row, DOWNLOAD_RATE), peerInfo.down_speed, Qt::DisplayRole);
 	setData(index(row, UPLOAD_RATE), peerInfo.up_speed, Qt::DisplayRole);
 	setData(index(row, DOWNLOADED), peerInfo.total_download, Qt::DisplayRole);

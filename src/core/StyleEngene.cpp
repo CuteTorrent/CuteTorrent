@@ -237,6 +237,7 @@ void StyleEngene::loadStyleSheet(QString path)
 	{
 		QString relativePath = _currentStyle.imageDir;
 		QString styleSheet = QString(file.readAll()).replace("$[STYLE_DIR]", relativePath);
+		qDebug() << styleSheet;
 		static_cast<QApplication*>(QApplication::instance())->setStyleSheet(styleSheet);
 		file.close();
 	}

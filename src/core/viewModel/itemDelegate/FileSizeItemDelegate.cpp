@@ -8,9 +8,21 @@ QString FileSizeItemDelegate::displayText(const QVariant& value, const QLocale& 
 	{
 		bool ok;
 		quint64 size = value.toULongLong(&ok);
-		if (ok && size > KbInt)
+		if (ok)
 		{
-			return StaticHelpers::toKbMbGb(size);
+			if (m_hideZeroSize)
+			{
+				if (size > KbInt)
+				{
+					return StaticHelpers::toKbMbGb(size);
+				}
+				
+			}
+			else
+			{
+				return StaticHelpers::toKbMbGb(size);
+			}
+			
 		}
 	}
 

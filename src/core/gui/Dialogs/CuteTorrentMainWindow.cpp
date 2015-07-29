@@ -304,8 +304,8 @@ void CuteTorrentMainWindow::setupTabelWidgets()
 	peerTableView->addAction(addPeer);
 	peerTableView->addAction(addWebSeed);
 	peerTableView->setItemDelegateForColumn(PeerTableModel::IP, new IpItemDelegate(this));
-	peerTableView->setItemDelegateForColumn(PeerTableModel::DOWNLOADED, new FileSizeItemDelegate(this));
-	peerTableView->setItemDelegateForColumn(PeerTableModel::UPLOADED, new FileSizeItemDelegate(this));
+	peerTableView->setItemDelegateForColumn(PeerTableModel::DOWNLOADED, new FileSizeItemDelegate(true, this));
+	peerTableView->setItemDelegateForColumn(PeerTableModel::UPLOADED, new FileSizeItemDelegate(true, this));
 	peerTableView->setItemDelegateForColumn(PeerTableModel::DOWNLOAD_RATE, new SpeedItemDelegate(this));
 	peerTableView->setItemDelegateForColumn(PeerTableModel::UPLOAD_RATE, new SpeedItemDelegate(this));
 	peerTableView->setItemDelegateForColumn(PeerTableModel::PEER_SPEED, new SpeedItemDelegate(this));
@@ -1119,7 +1119,7 @@ void CuteTorrentMainWindow::setupFileTabel()
 	fileTableView->header()->setSortIndicator(0, Qt::AscendingOrder);
 	m_pFileViewModel = new FileViewModel(fileTableView, this);
 	m_pFileViewProxymodel->setSourceModel(m_pFileViewModel);
-	fileTableView->setItemDelegateForColumn(1, new FileSizeItemDelegate(this));
+	fileTableView->setItemDelegateForColumn(1, new FileSizeItemDelegate(false, this));
 	fileTableView->setItemDelegateForColumn(2, new ProgressItemDelegate(this));
 	fileTableView->setItemDelegateForColumn(3, new PriorityItemDelegate(this));
 	QList<int> file_column_sizes = m_pSettings->value("Window", "files_sizes").value<QList<int> >();
