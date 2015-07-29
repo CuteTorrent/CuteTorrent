@@ -14,7 +14,6 @@ INCLUDEPATH += $(QT_DIR)/include/QtCore \
     $(QT_DIR)/include/phonon \
     $(QT_DIR)/include \
     ./qtsingleapplication/src \
-    ./../ThirdParties/boost_1_55_0 \
     ./../ThirdParties/libtorrent/include \
     ./GeneratedFiles \
     ./GeneratedFiles/Release \

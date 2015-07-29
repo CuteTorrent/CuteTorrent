@@ -59,9 +59,6 @@ HEADERS += ./core/Build_Increment.h \
     ./search/core/ISerachProvider.h \
     ./search/core/SearchEngine.h \
     ./search/dataModels/SerachResult.h \
-    ./search/searchproviders/ExtratorrentSearchProvider.h \
-    ./search/searchproviders/KickassSearchProvider.h \
-    ./search/searchproviders/RutorSearchProvider.h \
     ./core/ServiceCommon.h \
     ./core/QApplicationSettings.h \
     ./core/Version.h \
@@ -69,7 +66,6 @@ HEADERS += ./core/Build_Increment.h \
     ./search/core/SearchItemsStorrage.h \
     ./core/NotificationSystem.h \
     ./core/NetworkDiskCache.h \
-    ./core/torrentdownloader.h \
     ./torrent/core/MetaDataDownloadWaiter.h \
     ./scheduller/Scheduller.h \
     ./core/StyleEngene.h \
@@ -120,7 +116,64 @@ HEADERS += ./core/Build_Increment.h \
     $$PWD/core/StorrageInfo/qstorageinfo_p.h \
     webControll/RssCommandsApiController.h \
     webControll/TorrentCommandsApiController.h \
-    search/core/SearchCommon.h
+    search/core/SearchCommon.h \
+    core/datamodels/FilterTreeItem.h \
+    core/gui/Utils/SettingsPropertyMapper.h \
+    core/gui/Utils/UIPropertyGetters.h \
+    core/gui/Utils/UIPropertySetters.h \
+    core/gui/Utils/ValueGetters.h \
+    core/gui/Utils/ValueSetters.h \
+    core/smtp/emailaddress.h \
+    core/smtp/mimeattachment.h \
+    core/smtp/mimebase64encoder.h \
+    core/smtp/mimebase64formatter.h \
+    core/smtp/mimebytearrayattachment.h \
+    core/smtp/mimecontentencoder.h \
+    core/smtp/mimecontentformatter.h \
+    core/smtp/mimefile.h \
+    core/smtp/mimehtml.h \
+    core/smtp/mimeinlinefile.h \
+    core/smtp/mimemessage.h \
+    core/smtp/mimemultipart.h \
+    core/smtp/mimepart.h \
+    core/smtp/mimeqpencoder.h \
+    core/smtp/mimeqpformatter.h \
+    core/smtp/mimetext.h \
+    core/smtp/quotedprintable.h \
+    core/smtp/smtpclient.h \
+    core/smtp/smtpmime_global.h \
+    core/viewModel/itemDelegate/IpItemDelegate.h \
+    core/viewModel/itemDelegate/SpeedItemDelegate.h \
+    core/viewModel/FileTreeSortProxyModel.h \
+    core/viewModel/FiltersViewModel.h \
+    core/zip/crypt.h \
+    core/zip/ioapi.h \
+    core/zip/JlCompress.h \
+    core/zip/quaadler32.h \
+    core/zip/quachecksum32.h \
+    core/zip/quacrc32.h \
+    core/zip/quagzipfile.h \
+    core/zip/quaziodevice.h \
+    core/zip/quazip.h \
+    core/zip/quazip_global.h \
+    core/zip/quazipdir.h \
+    core/zip/quazipfile.h \
+    core/zip/quazipfileinfo.h \
+    core/zip/quazipnewinfo.h \
+    core/zip/unzip.h \
+    core/zip/zip.h \
+    core/EmailNotifier.h \
+    core/filedownloader.h \
+    core/Singleton.h \
+    core/SympleCrypt.h \
+    torrent/core/FileSystemTorrentWatcher.h \
+    torrent/core/TorrentCommon.h \
+    search/dataModels/SearchResult.h \
+    search/searchproviders/CustomScriptSearchProvider.h \
+    torrent/gui/Controls/PieceAvailabilityWidget.h \
+    torrent/viewmodels/PeerSortModel.h \
+    torrent/viewmodels/PeerTableModel.h \
+    core/datamodels/ipaddress.h
 SOURCES += ./core/gui/Dialogs/CuteTorrentMainWindow.cpp \
     ./main.cpp \
     ./core/gui/backupwizard/applybackuppage.cpp \
@@ -167,13 +220,9 @@ SOURCES += ./core/gui/Dialogs/CuteTorrentMainWindow.cpp \
     ./webControll/UploadController.cpp \
     ./core/http/staticfilecontroller.cpp \
     ./search/core/SearchEngine.cpp \
-    ./search/searchproviders/ExtratorrentSearchProvider.cpp \
-    ./search/searchproviders/KickassSearchProvider.cpp \
-    ./search/searchproviders/RutorSearchProvider.cpp \
     ./core/FaviconDownloader.cpp \
     ./core/NotificationSystem.cpp \
     ./search/core/SearchItemsStorrage.cpp \
-    ./core/torrentdownloader.cpp \
     ./core/Version.cpp \
     ./torrent/core/MetaDataDownloadWaiter.cpp \
     ./core/QApplicationSettings.cpp \
@@ -221,7 +270,57 @@ SOURCES += ./core/gui/Dialogs/CuteTorrentMainWindow.cpp \
     ./webControll/RssController.cpp \
     ./core/StorrageInfo/qstorageinfo.cpp \
     ./webControll/RssCommandsApiController.cpp \
-    ./webControll/TorrentCommandsApiController.cpp
+    ./webControll/TorrentCommandsApiController.cpp \
+    core/gui/Utils/SettingsPropertyMapper.cpp \
+    core/gui/Utils/UIPropertyGetters.cpp \
+    core/gui/Utils/UIPropertySetters.cpp \
+    core/gui/Utils/ValueGetters.cpp \
+    core/gui/Utils/ValueSetters.cpp \
+    core/smtp/emailaddress.cpp \
+    core/smtp/mimeattachment.cpp \
+    core/smtp/mimebase64encoder.cpp \
+    core/smtp/mimebase64formatter.cpp \
+    core/smtp/mimebytearrayattachment.cpp \
+    core/smtp/mimecontentencoder.cpp \
+    core/smtp/mimecontentformatter.cpp \
+    core/smtp/mimefile.cpp \
+    core/smtp/mimehtml.cpp \
+    core/smtp/mimeinlinefile.cpp \
+    core/smtp/mimemessage.cpp \
+    core/smtp/mimemultipart.cpp \
+    core/smtp/mimepart.cpp \
+    core/smtp/mimeqpencoder.cpp \
+    core/smtp/mimeqpformatter.cpp \
+    core/smtp/mimetext.cpp \
+    core/smtp/quotedprintable.cpp \
+    core/smtp/smtpclient.cpp \
+    core/viewModel/itemDelegate/IpItemDelegate.cpp \
+    core/viewModel/itemDelegate/SpeedItemDelegate.cpp \
+    core/viewModel/FileTreeSortProxyModel.cpp \
+    core/viewModel/FiltersViewModel.cpp \
+    core/zip/JlCompress.cpp \
+    core/zip/qioapi.cpp \
+    core/zip/quaadler32.cpp \
+    core/zip/quacrc32.cpp \
+    core/zip/quagzipfile.cpp \
+    core/zip/quaziodevice.cpp \
+    core/zip/quazip.cpp \
+    core/zip/quazipdir.cpp \
+    core/zip/quazipfile.cpp \
+    core/zip/quazipfileinfo.cpp \
+    core/zip/quazipnewinfo.cpp \
+    core/EmailNotifier.cpp \
+    core/filedownloader.cpp \
+    core/NetworkDiskCache.cpp \
+    core/SympleCrypt.cpp \
+    core/zip/unzip.c \
+    core/zip/zip.c \
+    torrent/core/FileSystemTorrentWatcher.cpp \
+    search/searchproviders/CustomScriptSearchProvider.cpp \
+    torrent/gui/Controls/PieceAvailabilityWidget.cpp \
+    torrent/viewmodels/PeerSortModel.cpp \
+    torrent/viewmodels/PeerTableModel.cpp \
+    core/datamodels/ipaddress.cpp
 unix {
     SOURCES += ./core/StorrageInfo/qstorageinfo_unix.cpp \
     ./core/qtsingleapplication/src/qtlockedfile_unix.cpp

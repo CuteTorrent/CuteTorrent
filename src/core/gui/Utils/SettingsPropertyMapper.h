@@ -33,7 +33,7 @@ public:
 	typedef void(*UIValueSetter)(QWidget*, WidgetType, PropertyType, QVariant);
 	typedef QVariant (*UIValueGetter)(QWidget*, WidgetType, PropertyType);
 	typedef void(*ValueSetter)(QString group, QString propertyName, QVariant value);
-	typedef QVariant(*ValueGetter)(QString group, QString propertyName, QVariant default);
+    typedef QVariant(*ValueGetter)(QString group, QString propertyName, QVariant defaultValue);
 	SettingsPropertyMapper(QObject* parent = NULL);
 	~SettingsPropertyMapper();
 	bool HasChanges();

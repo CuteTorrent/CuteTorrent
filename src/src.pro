@@ -5,9 +5,9 @@
 TEMPLATE = app
 TARGET = CuteTorrent
 DESTDIR = ../Win32/Release
-QT += core gui network phonon
+QT += core gui network phonon script scripttools
 CONFIG += release
-DEFINES += QT_DLL QT_PHONON_LIB QT_NETWORK_LIB QT_HAVE_MMX QT_HAVE_3DNOW QT_HAVE_SSE QT_HAVE_MMXEXT QT_HAVE_SSE2 BOOST_ASIO_SEPARATE_COMPILATION
+DEFINES += QT_DLL QT_PHONON_LIB QT_NETWORK_LIB QT_HAVE_MMX QT_HAVE_3DNOW QT_HAVE_SSE QT_HAVE_MMXEXT QT_HAVE_SSE2 BOOST_ASIO_SEPARATE_COMPILATION TORRENT_NO_DEPRECATE
 INCLUDEPATH += $(QT_DIR)/include/QtCore \
     $(QT_DIR)/include/QtNetwork \
     $(QT_DIR)/include/QtGui \
@@ -17,7 +17,8 @@ INCLUDEPATH += $(QT_DIR)/include/QtCore \
     ./GeneratedFiles \
     ./GeneratedFiles/Release \
     $(QT_DIR)/include/phonon_compat \
-    $(QT_DIR)/mkspecs/win32-msvc2010 \
+    ./../ThirdParties/libtorrent/include \
+    ./../ThirdParties/boost \
     ./core \
     ./Resources \
     ./rss \
@@ -28,6 +29,7 @@ INCLUDEPATH += $(QT_DIR)/include/QtCore \
     ./VideoPlayer \
     ./webControll \
     ./core/gui \
+    ./core/zip \
     ./core/http \
     ./core/helpers \
     ./core/viewModel \
@@ -64,15 +66,15 @@ INCLUDEPATH += $(QT_DIR)/include/QtCore \
     ./torrent/gui/Dialogs \
     ./torrent/gui/FormFiles \
     ./torrent/viewmodels/ItemDelegate
-LIBS += -L"./../ThirdParties/openssl/lib/VC/static" \
-    -L"$(QT_DIR)/lib" \
-    -L"./../ThirdParties/libtorrent/lib" \
-    -L"./../ThirdParties/boost_1_55_0/stage/lib" \
-    -ltorrent-rasterbar \
+LIBS += -L"$(QT_DIR)/lib" \
+    -L"../ThirdParties/libtorrent/lib" \
+    -L"../ThirdParties/boost/stage/lib" \
+    -ltorrent \
     -lboost_system \
     -lboost_program_options \
     -lssl \
-    -lcrypto
+    -lcrypto \
+    -lz
 
 win32 {
 CONFIG += embed_manifest_exe
@@ -91,7 +93,7 @@ TRANSLATIONS += Resources/translations/cutetorrent_english.ts \
     Resources/translations/cutetorrent_russian.ts
 
 unix {
-  QMAKE_CXXFLAGS += -fpermissive
+  QMAKE_CXXFLAGS += -fpermissive -std=c++11
   #VARIABLES
   isEmpty(PREFIX) {
     PREFIX = /usr
@@ -116,4 +118,8 @@ unix {
   icon64.path = $$DATADIR/icons/hicolor/64x64/apps
   icon64.files += ../data/64x64/$${TARGET}.png
 }
+
+HEADERS +=
+
+SOURCES +=
 

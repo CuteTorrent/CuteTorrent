@@ -76,7 +76,7 @@ void ValueSetters::MagnetAssociationValueSetter(QString group, QString name, QVa
 		asocSettings.remove("Magnet/URL Protocol");
 		asocSettings.remove("Magnet/shell/open/command/.");
 	}
-#elif Q_WS_X11
+#else Q_WS_X11
 	QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() , ".config/mimeapps.list"));
 
 	if (associtaionGnomeConfig.open(QFile::ReadOnly))
@@ -162,7 +162,7 @@ void ValueSetters::TorrentAssociationValueSetter(QString group, QString name, QV
 		asocSettings.remove("CuteTorrent.file/shell/open/command/.");
 		asocSettings.remove("CuteTorrent.file/DefaultIcon/.");
 	}
-#elif Q_WS_X11
+#else Q_WS_X11
 	QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath(), ".config/mimeapps.list"));
 
 	if (associtaionGnomeConfig.open(QFile::ReadOnly))
@@ -237,7 +237,7 @@ void ValueSetters::RunOnBootValueSetter(QString group, QString name, QVariant va
 	{
 		bootUpSettings.remove("CuteTorrent");
 	}
-#elif Q_WS_X11
+#else Q_WS_X11
 	if (runOnBoot)
 	{
 		if (!QFile::exists(StaticHelpers::CombinePathes(QDir::homePath(), ".config/autostart/CuteTorrent.desktop")))

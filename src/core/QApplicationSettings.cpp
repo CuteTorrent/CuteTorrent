@@ -41,7 +41,7 @@ QApplicationSettings::QApplicationSettings()
 
 	settings = new QSettings(newStylePath, QSettings::IniFormat);
 	locker = new QMutex();
-	m_pCryptor = new SimpleCrypt(0x1D5AE35A4BDD232i64);
+    m_pCryptor = new SimpleCrypt(0x1D5AE35A4BDD232LL);
 	ReedSettings();
 }
 

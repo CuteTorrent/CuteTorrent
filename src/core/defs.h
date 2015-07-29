@@ -51,4 +51,4 @@ struct files_info
 
 #define KbFloat 1024.0
 #define KbInt 1024
-#endif _DEFS_H
+#endif //_DEFS_H

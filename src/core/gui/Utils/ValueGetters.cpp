@@ -43,7 +43,7 @@ QVariant ValueGetters::MagnetAssociationValueGetter(QString group, QString name,
 	QString magnetCommand = QDir::toNativeSeparators(assocSettings.value("Magnet/shell/open/command/.").toString());
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 	return QVariant::fromValue(magnetCommand.contains(applicationFilePath, Qt::CaseInsensitive) == true);
-#elif Q_WS_X11
+#else Q_WS_X11
 	QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() , ".config/mimeapps.list"));
 
 	if (associtaionGnomeConfig.open(QFile::ReadOnly))
@@ -77,7 +77,7 @@ QVariant ValueGetters::TorrentAssociationValueGetter(QString group, QString name
 	QString torrentAssociation = assocSettings.value(".torrent/.").toString();
 
 	return torrentAssociation == "CuteTorrent.file";
-#elif Q_WS_X11
+#else Q_WS_X11
 	QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() , ".config/mimeapps.list"));
 
 	if (associtaionGnomeConfig.open(QFile::ReadOnly))
@@ -112,7 +112,7 @@ QVariant ValueGetters::RunOnBootValueGetter(QString group, QString name, QVarian
 	QString bootStartCommand = bootUpSettings.value("CuteTorrent").toString();
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 	return QVariant::fromValue(bootStartCommand.contains(applicationFilePath, Qt::CaseInsensitive) == true);
-#elif Q_WS_X11
+#else Q_WS_X11
 	return QFile::exists(StaticHelpers::CombinePathes(QDir::homePath(), ".config/autostart/CuteTorrent.desktop"));
 #endif
 }

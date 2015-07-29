@@ -1,6 +1,7 @@
 #include "QTorrentFilterProxyModel.h"
 #include "QTorrentDisplayModel.h"
 #include <QtCore>
+#include <float.h>
 QTorrentFilterProxyModel::QTorrentFilterProxyModel(QObject* parent) : QSortFilterProxyModel(parent), m_torrentFilter(EMPTY), m_currentFilterType(TORRENT), m_pUpdateLocker(new QMutex())
 {
 	m_pUpdateTimer = new QTimer(this);
