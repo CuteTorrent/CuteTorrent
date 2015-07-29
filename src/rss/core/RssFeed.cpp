@@ -156,7 +156,7 @@ QList<QNetworkCookie> RssFeed::buildCookies() const
 
 	if (m_coookies.size() > 0)
 	{
-		SimpleCrypt cryptor(0xA6C56E2CF17A50);
+        SimpleCrypt cryptor(0xA6C56E2CF17A50LL);
 		for (QHash<QString, QString>::const_iterator i = m_coookies.constBegin(); i != m_coookies.constEnd(); ++i)
 		{
 			res << QNetworkCookie(cryptor.decryptToString(i.key()).toUtf8(), cryptor.decryptToString(i.value()).toUtf8());

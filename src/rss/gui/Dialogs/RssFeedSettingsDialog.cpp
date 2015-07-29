@@ -45,7 +45,7 @@ void RssFeedSettingsDialog::accept()
 	{
 		m_pCoociesTabWidget->clearFocus();
 	}
-	SimpleCrypt cryptor(0xA6C56E2CF17A50);
+    SimpleCrypt cryptor(0xA6C56E2CF17A50LL);
 	for (int i = 0; i < m_pCoociesTabWidget->rowCount(); i++)
 	{
 		QTableWidgetItem* keyItem = m_pCoociesTabWidget->item(i, 0);
