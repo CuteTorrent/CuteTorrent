@@ -21,11 +21,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define CTD_H
 #include <QDialog>
 #include "ui_CreateTorrentDialog.h"
-#include "TorrentManager.h"
 #include "CustomWindow.h"
-#include <QApplicationSettings.h>
+#include "ServiceCommon.h"
+#include "TorrentCommon.h"
 class CreateTorrentDialog;
 class StyledProgressBar;
+
 #ifdef Q_WS_WIN
 class QWinTaskbarProgress;
 class QWinTaskbarButton;

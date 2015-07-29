@@ -62,6 +62,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "NotificationSystem.h"
 #include <libtorrent/peer_info.hpp>
 #include "RssItem.h"
+#include "RconWebService.h"
+#include "StaticHelpers.h"
+#include "SearchResult.h"
 #ifdef Q_WS_WIN
 #include "qwinjumplist.h"
 #include "qwinjumplistcategory.h"

@@ -27,9 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <libtorrent/magnet_uri.hpp>
 #include <libtorrent/peer_info.hpp>
 #include "QApplicationSettings.h"
-
-
-
+#include "StyleEngene.h"
+#include "StaticHelpers.h"
 
 
 Torrent::Torrent(torrent_status hTorrent, QString group)

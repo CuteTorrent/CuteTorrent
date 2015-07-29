@@ -1,5 +1,5 @@
 ﻿#include "TorrentStorrage.h"
-
+#include "Torrent.h"
 bool LessThan(Torrent* left, Torrent* right)
 {
 	return * (left) < * (right);

@@ -1,5 +1,6 @@
 ﻿#pragma once
-#include "Torrent.h"
+#include <QMutex>
+#include <QMap>
 class Torrent;
 #include "defs.h"
 #include "Singleton.h"

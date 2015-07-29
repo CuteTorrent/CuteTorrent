@@ -1,6 +1,9 @@
 ﻿#include "TorrentApiController.h"
 #include <libtorrent/peer_info.hpp>
 #include "json/json.h"
+#include "TorrentManager.h"
+#include "StaticHelpers.h"
+#include "Torrent.h"
 TorrentApiController::TorrentApiController(QObject* parent/*=0*/) : HttpRequestHandler("WebControl", parent), m_pTorrentManager(TorrentManager::getInstance()),
 	m_pTorrentStorrage(TorrentStorrage::getInstance())
 {

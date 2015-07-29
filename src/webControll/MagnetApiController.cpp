@@ -1,6 +1,6 @@
 ﻿#include "MagnetApiController.h"
 #include "MetaDataDownloadWaiter.h"
-
+#include "TorrentManager.h"
 MagnetApiController::MagnetApiController(QObject* parrent) : HttpRequestHandler("WebControl", parrent), m_pTorrentManager(TorrentManager::getInstance())
 {
 }

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "http/httprequesthandler.h"
-#include "TorrentManager.h"
+#include "TorrentCommon.h"
 class UploadController : public HttpRequestHandler
 {
 	Q_OBJECT

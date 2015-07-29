@@ -32,7 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iosfwd>
 #include <iterator>
 #include <utility>
-
+#include "StaticHelpers.h"
 #include "QApplicationSettings.h"
 #include "TorrentManager.h"
 #include "TorrentStorrage.h"
@@ -63,6 +63,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <libtorrent/extensions/ut_metadata.hpp>
 #include <libtorrent/extensions/smart_ban.hpp>
 #include <libtorrent/magnet_uri.hpp>
+#include <boost/bind.hpp>
 #include "Version.h"
 #include "messagebox.h"
 #include "NotificationSystem.h"

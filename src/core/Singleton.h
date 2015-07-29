@@ -1,6 +1,8 @@
 ﻿#ifndef _SINGLETON_INCLUDED_
 #define _SINGLETON_INCLUDED_
+#ifndef Q_MOC_RUN
 #include <boost/smart_ptr.hpp>
+#endif
 
 #define DEFINE_PTR_CALSS(T) class T;\
 	typedef boost::shared_ptr<T> T##Ptr;

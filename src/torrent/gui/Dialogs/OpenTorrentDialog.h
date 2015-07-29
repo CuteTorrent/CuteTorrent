@@ -25,16 +25,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTreeWidgetItem>
 
 #include "CustomWindow.h"
-#include "FileTreeModel.h"
-#include "MetaDataDownloadWaiter.h"
-#include "StaticHelpers.h"
-#include "TorrentManager.h"
-#include "defs.h"
+#include "TorrentCommon.h"
 #include "ui_OpenTorrentDialog.h"
-#include <GroupForFileFiltering.h>
+#include "GroupForFileFiltering.h"
+#include "defs.h"
 
 class FileTreeModel;
-class TorrentManager;
 
 class OpenTorrentDialog : public BaseWindow<QDialog> , private Ui::OpenTorrentDialog
 {
@@ -64,7 +60,7 @@ private:
 	QWidget* centralWidget() override;
 	QLabel* getTitleLabel() override;
 	QLabel* getTitleIcon() override;
-	TorrentManager::AddTorrentFlags BuildFlags();
+    int BuildFlags();
 	bool AccepTorrent();
 public slots:
 	void done(int) override;

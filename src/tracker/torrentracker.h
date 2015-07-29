@@ -2,9 +2,10 @@
 #define TORRENTRACKER_H
 
 #include <QObject>
-#include "http/httplistener.h"
-#include "trackerrequestmapper.h"
-#include "Singleton.h"
+#include "trackercommon.h"
+#include "ServiceCommon.h"
+class TrackerRequestHandler;
+class HttpListener;
 class TorrentTracker : public QObject, public Singleton<TorrentTracker>
 {
 	friend class Singleton<TorrentTracker>;
@@ -28,6 +29,4 @@ signals:
 public slots:
 
 };
-
-DEFINE_PTR_CALSS(TorrentTracker)
 #endif // TORRENTRACKER_H

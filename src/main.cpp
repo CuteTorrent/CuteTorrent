@@ -29,10 +29,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "application.h"
 #include <QTextCodec>
 #include  "StyleEngene.h"
+#include "StaticHelpers.h"
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/positional_options.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <boost/program_options/parsers.hpp>
+
 namespace po = boost::program_options;
 void myMessageOutput(QtMsgType type, const char* msg)
 {

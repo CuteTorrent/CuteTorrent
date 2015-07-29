@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDebug>
 #include <QDir>
 #include <QItemSelectionModel>
+#include <QTreeView>
 #include <exception>
 #include "MultipleDTDialog.h"
 #include "VirtualDiskMounter.h"
@@ -32,7 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "VideoPlayerWindow.h"
 #include "messagebox.h"
 #include "QTorrentFilterProxyModel.h"
-
+#include "StaticHelpers.h"
 QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterProxyModel* pProxyFilterModel, QObject* __parrent) : QAbstractListModel(__parrent)
 {
 	m_pTorrentListView = _parrent;
@@ -732,7 +733,8 @@ void QTorrentDisplayModel::playInPlayer()
 		}
 		else
 		{
-			filePath = StaticHelpers::CombinePathes(m_pCurrentTorrent->GetSavePath(), m_pCurrentTorrent->GetName(), firstFileSubPath);
+            QString torrentName = m_pCurrentTorrent->GetName();
+            filePath = StaticHelpers::CombinePathes(m_pCurrentTorrent->GetSavePath(), torrentName, firstFileSubPath);
 		}
 		vpw->openFile(filePath);
 		vpw->show();

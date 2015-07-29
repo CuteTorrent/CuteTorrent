@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #ifndef _TOR_H
 #define _TOR_H
+
 #include <QFileIconProvider>
 #include <QHostAddress>
 #include <QIcon>
@@ -25,10 +26,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QString>
 #include <QStringList>
 #include <QVector>
-
-#include "StaticHelpers.h"
-#include "StyleEngene.h"
 #include "defs.h"
+using namespace libtorrent;
 
 class StaticHelpers;
 class TorrentManager;
@@ -144,5 +143,6 @@ public :
 
 //Q_DECLARE_METATYPE(Torrent)
 Q_DECLARE_METATYPE(Torrent*)
+
 
 #endif

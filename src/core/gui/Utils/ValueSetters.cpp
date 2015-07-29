@@ -79,61 +79,89 @@ void ValueSetters::MagnetAssociationValueSetter(QString group, QString name, QVa
 #else Q_WS_X11
 	QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() , ".config/mimeapps.list"));
 
-	if (associtaionGnomeConfig.open(QFile::ReadOnly))
-	{
-		QByteArray asscoiationData = associtaionGnomeConfig.readAll();
-		associtaionGnomeConfig.close();
-		QString associationStr = QString::fromUtf8(asscoiationData);
-		QStringList lines = associationStr.split('\n');
-		bool magnetFound = false;
+    if (associtaionGnomeConfig.exists())
+    {
+        if (associtaionGnomeConfig.open(QFile::ReadOnly))
+        {
+            QByteArray asscoiationData = associtaionGnomeConfig.readAll();
+            associtaionGnomeConfig.close();
+            QString associationStr = QString::fromUtf8(asscoiationData);
+            QStringList lines = associationStr.split('\n');
+            bool magnetFound = false;
 
-		for (int i = 0; i < lines.size(); i++)
-		{
-			QString line = lines[i];
+            for (int i = 0; i < lines.size(); i++)
+            {
+                QString line = lines[i];
 
-			if (line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive))
-			{
-				magnetFound = true;
+                if (line.startsWith("x-scheme-handler/magnet", Qt::CaseInsensitive))
+                {
+                    magnetFound = true;
 
-				if (associate)
-				{
-					lines[i] = "x-scheme-handler/magnet=CuteTorrent.desktop;";
-				}
-				else
-				{
-					lines[i] = "";
-				}
-			}
-		}
+                    if (associate)
+                    {
+                        lines[i] = "x-scheme-handler/magnet=CuteTorrent.desktop;";
+                    }
+                    else
+                    {
+                        lines[i] = "";
+                    }
+                }
+            }
 
-		if (!magnetFound && associate)
-		{
-			lines.append("x-scheme-handler/magnet=CuteTorrent.desktop;\n");
-		}
+            if (!magnetFound && associate)
+            {
+                lines.append("x-scheme-handler/magnet=CuteTorrent.desktop;\n");
+            }
 
-		if (associtaionGnomeConfig.open(QFile::WriteOnly))
-		{
-			for (int i = 0; i < lines.size(); i++)
-			{
-				QString line = lines[i];
+            if (associtaionGnomeConfig.open(QFile::WriteOnly))
+            {
+                for (int i = 0; i < lines.size(); i++)
+                {
+                    QString line = lines[i];
 
-				if (!line.isEmpty())
-				{
-					associtaionGnomeConfig.write((line + "\n").toUtf8());
-				}
-			}
+                    if (!line.isEmpty())
+                    {
+                        associtaionGnomeConfig.write((line + "\n").toUtf8());
+                    }
+                }
 
-			associtaionGnomeConfig.close();
-		}
-		else
-		{
-			qCritical() << "Unable to open gnome config file for writing file asscoiations" << associtaionGnomeConfig.errorString();
-		}
-	}
-	else
-	{
-		qCritical() << "Unable to open gnome config file for reading file asscoiations" << associtaionGnomeConfig.errorString();
-	}
+                associtaionGnomeConfig.close();
+            }
+            else
+            {
+                qCritical() << "Unable to open gnome config file for writing file asscoiations" << associtaionGnomeConfig.errorString();
+            }
+        }
+        else
+        {
+            qCritical() << "Unable to open gnome config file for reading file asscoiations" << associtaionGnomeConfig.errorString();
+        }
+    }
+    else
+    {
+        QStringList lines;
+        lines << "x-scheme-handler/magnet=CuteTorrent.desktop;";
+
+        if (associtaionGnomeConfig.open(QFile::WriteOnly))
+        {
+            for (int i = 0; i < lines.size(); i++)
+            {
+                QString line = lines[i];
+
+                if (!line.isEmpty())
+                {
+                    associtaionGnomeConfig.write((line + "\n").toUtf8());
+                }
+            }
+
+            associtaionGnomeConfig.close();
+        }
+        else
+        {
+            qCritical() << "Unable to open gnome config file for writing file asscoiations" << associtaionGnomeConfig.errorString();
+        }
+    }
+
 #endif
 }
 
@@ -165,61 +193,89 @@ void ValueSetters::TorrentAssociationValueSetter(QString group, QString name, QV
 #else Q_WS_X11
 	QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath(), ".config/mimeapps.list"));
 
-	if (associtaionGnomeConfig.open(QFile::ReadOnly))
-	{
-		QByteArray asscoiationData = associtaionGnomeConfig.readAll();
-		associtaionGnomeConfig.close();
-		QString associationStr = QString::fromUtf8(asscoiationData);
-		QStringList lines = associationStr.split('\n');
-		bool torrentFound = false;
+    if (associtaionGnomeConfig.exists())
+    {
+        if (associtaionGnomeConfig.open(QFile::ReadOnly))
+        {
+            QByteArray asscoiationData = associtaionGnomeConfig.readAll();
+            associtaionGnomeConfig.close();
+            QString associationStr = QString::fromUtf8(asscoiationData);
+            QStringList lines = associationStr.split('\n');
+            bool torrentFound = false;
 
-		for (int i = 0; i < lines.size(); i++)
-		{
-			QString line = lines[i];
+            for (int i = 0; i < lines.size(); i++)
+            {
+                QString line = lines[i];
 
-			if (line.startsWith("application/x-bittorrent", Qt::CaseInsensitive))
-			{
-				torrentFound = true;
+                if (line.startsWith("application/x-bittorrent", Qt::CaseInsensitive))
+                {
+                    torrentFound = true;
 
-				if (associate)
-				{
-					lines[i] = "application/x-bittorrent=CuteTorrent.desktop;";
-				}
-				else
-				{
-					lines[i] = "";
-				}
-			}
-		}
+                    if (associate)
+                    {
+                        lines[i] = "application/x-bittorrent=CuteTorrent.desktop;";
+                    }
+                    else
+                    {
+                        lines[i] = "";
+                    }
+                }
+            }
 
-		if (!torrentFound && associate)
-		{
-			lines.append("application/x-bittorrent=CuteTorrent.desktop;\n");
-		}
+            if (!torrentFound && associate)
+            {
+                lines.append("application/x-bittorrent=CuteTorrent.desktop;\n");
+            }
 
-		if (associtaionGnomeConfig.open(QFile::WriteOnly))
-		{
-			for (int i = 0; i < lines.size(); i++)
-			{
-				QString line = lines[i];
+            if (associtaionGnomeConfig.open(QFile::WriteOnly))
+            {
+                for (int i = 0; i < lines.size(); i++)
+                {
+                    QString line = lines[i];
 
-				if (!line.isEmpty())
-				{
-					associtaionGnomeConfig.write((line + "\n").toUtf8());
-				}
-			}
+                    if (!line.isEmpty())
+                    {
+                        associtaionGnomeConfig.write((line + "\n").toUtf8());
+                    }
+                }
 
-			associtaionGnomeConfig.close();
-		}
-		else
-		{
-			qCritical() << "Unable to open gnome config file for writing file asscoiations" << associtaionGnomeConfig.errorString();
-		}
-	}
-	else
-	{
-		qCritical() << "Unable to open gnome config file for reading file asscoiations" << associtaionGnomeConfig.errorString();
-	}
+                associtaionGnomeConfig.close();
+            }
+            else
+            {
+                qCritical() << "Unable to open gnome config file for writing file asscoiations" << associtaionGnomeConfig.errorString();
+            }
+        }
+        else
+        {
+            qCritical() << "Unable to open gnome config file for reading file asscoiations" << associtaionGnomeConfig.errorString();
+        }
+    }
+    else
+    {
+         QStringList lines;
+         lines << "application/x-bittorrent=CuteTorrent.desktop;";
+
+         if (associtaionGnomeConfig.open(QFile::WriteOnly))
+         {
+             for (int i = 0; i < lines.size(); i++)
+             {
+                 QString line = lines[i];
+
+                 if (!line.isEmpty())
+                 {
+                     associtaionGnomeConfig.write((line + "\n").toUtf8());
+                 }
+             }
+
+             associtaionGnomeConfig.close();
+         }
+         else
+         {
+             qCritical() << "Unable to open gnome config file for writing file asscoiations" << associtaionGnomeConfig.errorString();
+         }
+    }
+
 #endif
 }
 

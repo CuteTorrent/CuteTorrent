@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "TorrentManager.h"
+#include "TorrentCommon.h"
 #include "http/httprequesthandler.h"
 #include "TorrentStorrage.h"
 class TorrentApiController: public HttpRequestHandler

@@ -11,16 +11,16 @@
 using namespace libtorrent;
 struct opentorrent_info
 {
-	QString name, describtion, baseSuffix, infoHash;
-	libtorrent::file_storage files;
-	libtorrent::size_type size;
+    QString name, describtion, baseSuffix, infoHash;
+    libtorrent::file_storage files;
+    libtorrent::size_type size;
 };
 struct openmagnet_info : opentorrent_info
 {
-	QString link;
-	libtorrent::torrent_handle handle;
+    QString link;
+    libtorrent::torrent_handle handle;
 };
-Q_DECLARE_METATYPE(openmagnet_info);
+Q_DECLARE_METATYPE(openmagnet_info)
 enum FilterType
 {
 	GROUP_FILTER_TYPE,

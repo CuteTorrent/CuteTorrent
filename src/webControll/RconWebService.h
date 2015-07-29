@@ -4,7 +4,7 @@
 #include <QObject>
 #include "http/httplistener.h"
 #include "RequestMapper.h"
-DEFINE_PTR_CALSS(RconWebService)
+
 
 class RconWebService : public QObject, public Singleton<RconWebService>
 {

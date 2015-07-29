@@ -38,7 +38,7 @@ class CuteTorrentMainWindow;
 class Torrent;
 class TorrentManager;
 class QTorrentFilterProxyModel;
-
+class QTreeView;
 class QTorrentDisplayModel: public QAbstractListModel
 {
 	Q_OBJECT

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "http/httprequesthandler.h"
-#include "TorrentManager.h"
+#include "TorrentCommon.h"
 #include "defs.h"
 class MagnetApiController :
 	public HttpRequestHandler

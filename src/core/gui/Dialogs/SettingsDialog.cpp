@@ -44,6 +44,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <gui/Utils/UIPropertyGetters.h>
 #include <gui/Utils/ValueGetters.h>
 #include <gui/Utils/ValueSetters.h>
+#include "torrentracker.h"
+#include "RconWebService.h"
 
 SettingsDialog::SettingsDialog(QWidget* parent, int flags) 
 	: BaseWindow(OnlyCloseButton, NoResize, parent)

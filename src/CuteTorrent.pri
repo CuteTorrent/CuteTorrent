@@ -173,7 +173,8 @@ HEADERS += ./core/Build_Increment.h \
     torrent/gui/Controls/PieceAvailabilityWidget.h \
     torrent/viewmodels/PeerSortModel.h \
     torrent/viewmodels/PeerTableModel.h \
-    core/datamodels/ipaddress.h
+    tracker/trackercommon.h \
+    webControll/RconCommon.h
 SOURCES += ./core/gui/Dialogs/CuteTorrentMainWindow.cpp \
     ./main.cpp \
     ./core/gui/backupwizard/applybackuppage.cpp \
@@ -319,8 +320,7 @@ SOURCES += ./core/gui/Dialogs/CuteTorrentMainWindow.cpp \
     search/searchproviders/CustomScriptSearchProvider.cpp \
     torrent/gui/Controls/PieceAvailabilityWidget.cpp \
     torrent/viewmodels/PeerSortModel.cpp \
-    torrent/viewmodels/PeerTableModel.cpp \
-    core/datamodels/ipaddress.cpp
+    torrent/viewmodels/PeerTableModel.cpp
 unix {
     SOURCES += ./core/StorrageInfo/qstorageinfo_unix.cpp \
     ./core/qtsingleapplication/src/qtlockedfile_unix.cpp

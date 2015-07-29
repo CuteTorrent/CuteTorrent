@@ -1,8 +1,6 @@
 ﻿#pragma once
 #include <QtCore>
-#include "SearchResult.h"
-
-
+class SearchResult;
 
 class ISerachProvider : public QObject
 {

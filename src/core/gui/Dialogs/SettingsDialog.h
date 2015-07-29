@@ -22,14 +22,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "CustomWindow.h"
 #include "GroupForFileFiltering.h"
-#include "QApplicationSettings.h"
-#include "torrentracker.h"
+#include "ServiceCommon.h"
+
 #include "ui_SettingsDialog.h"
-#include "RconWebService.h"
+
 #include "RssDownloadRule.h"
-#include "Utils/SettingsPropertyMapper.h"
+#include "trackercommon.h"
+#include "RconCommon.h"
 #include <collections/ObservableList.h>
-class QApplicationSettings;
+#include "SchedulerTask.h"
+class SettingsPropertyMapper;
 class RconWebService;
 class TorrentTracker;
 

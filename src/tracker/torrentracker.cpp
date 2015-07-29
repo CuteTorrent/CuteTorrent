@@ -1,5 +1,7 @@
 ﻿#include "torrentracker.h"
-
+#include "http/httplistener.h"
+#include "trackerrequestmapper.h"
+#include "QApplicationSettings.h"
 TorrentTracker::TorrentTracker(QObject* parent) :
 	QObject(parent)
 {

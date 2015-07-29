@@ -1,5 +1,6 @@
 ﻿#include <QThread>
-#include "TorrentManager.h"
+#include "TorrentCommon.h"
+#include "defs.h"
 class MetaDataDownloadWaiter : public QThread
 {
 	Q_OBJECT

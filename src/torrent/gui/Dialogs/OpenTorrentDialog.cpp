@@ -31,7 +31,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "qstorageinfo.h"
 #include <viewModel/itemDelegate/FileSizeItemDelegate.h>
 #include <viewModel/FileTreeSortProxyModel.h>
-
+#include "MetaDataDownloadWaiter.h"
+#include "StaticHelpers.h"
+#include "defs.h"
 OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags)
 	: BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize, parent)
 	, m_size(0)
@@ -206,7 +208,7 @@ bool OpenTorrentDialog::AccepTorrent()
 		error_code ec;
 		int groupIndex = GroupComboBox->currentIndex();
 		QString group = groupIndex >= 0 ? m_lFilters[groupIndex].Name() : "";
-		TorrentManager::AddTorrentFlags flags = BuildFlags();
+        TorrentManager::AddTorrentFlags flags = static_cast<TorrentManager::AddTorrentFlags>(BuildFlags());
 		QString savePath = pathEdit->displayText();
 
 		if(!m_torrentFilename.startsWith("magnet"))
@@ -306,7 +308,7 @@ QLabel* OpenTorrentDialog::getTitleIcon()
 	return tbMenu;
 }
 
-TorrentManager::AddTorrentFlags OpenTorrentDialog::BuildFlags()
+int OpenTorrentDialog::BuildFlags()
 {
 	TorrentManager::AddTorrentFlags res = 0;
 	if (setSequntialCheckBox->isChecked())

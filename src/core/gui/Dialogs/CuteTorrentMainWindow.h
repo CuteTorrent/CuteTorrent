@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "peicedisplaywidget.h"
 #include "torrentracker.h"
 #include "ui_CustomWindow.h"
-#include "RconWebService.h"
+#include "RconCommon.h"
 #include "SearchCommon.h"
 #include <viewModel/FiltersViewModel.h>
 

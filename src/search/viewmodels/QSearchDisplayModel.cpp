@@ -1,9 +1,9 @@
 ﻿#include <stddef.h>
 #include "QSearchDisplayModel.h"
 #include "StaticHelpers.h"
-#include <filedownloader.h>
+#include "filedownloader.h"
 #include <gui/Dialogs/OpenTorrentDialog.h>
-
+#include "SearchResult.h"
 QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QObject* parent) : QAbstractListModel(parent), m_pSearchEngine(SearchEngine::getInstance()), m_pTorrentDownloader(FileDownloader::getInstance())
 {
 	m_pTorrentListView = pTorrentListView;

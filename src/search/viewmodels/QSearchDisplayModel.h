@@ -2,6 +2,7 @@
 #include <QtGui>
 
 #include "SearchEngine.h"
+#include "ServiceCommon.h"
 #define SEARCH_RESULTS_COLUNS_COUNT 1
 class QSearchDisplayModel: public QAbstractListModel
 {

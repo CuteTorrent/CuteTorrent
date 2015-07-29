@@ -31,17 +31,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma warning (disable: 4100)
 #pragma warning (disable: 4267)
 #endif
-#include <boost/bind.hpp>
 
 #include "libtorrent/alert_types.hpp"
 #include "libtorrent/session.hpp"
 
 class QTemporaryFile;
-using boost::bind;
 using namespace libtorrent;
 
 
-#include "defs.h"
 #include "ServiceCommon.h"
 #include "Singleton.h"
 #include "TorrentCommon.h"
@@ -51,6 +48,7 @@ using namespace libtorrent;
 #include <QMap>
 #include <QSet>
 #include <QUrl>
+#include "defs.h"
 class QApplicationSettings;
 class QTorrentDisplayModel;
 class Torrent;
@@ -58,10 +56,6 @@ namespace libtorrent
 {
 class alert;
 }  // namespace libtorrent
-struct openmagnet_info;
-struct opentorrent_info;
-
-
 
 class TorrentManager : public QObject, public Singleton<TorrentManager>
 {
