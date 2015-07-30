@@ -5,6 +5,7 @@
 #include <QApplication>
 #include "CustomScriptSearchProvider.h"
 #include <helpers/StaticHelpers.h>
+#include "SearchResult.h"
 #include <QMainWindow>
 #include <QAction>
 #include <QApplicationSettings.h>

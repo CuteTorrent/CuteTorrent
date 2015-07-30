@@ -173,7 +173,7 @@ TorrentManager::TorrentManager()
 		}
 	}
 
-	std::string stateFileName = StaticHelpers::CombinePathes(dataDir, "BtSessionData/actual.state").toStdString();
+	std::string stateFileName = StaticHelpers::CombinePathes(dataDir, "BtSessionData/actual.state").toUtf8().data();
 	if (load_file(stateFileName, in, ec) == 0)
 	{
 		lazy_entry e;
@@ -448,7 +448,7 @@ void TorrentManager::handle_alert(alert* a)
 					}
 
 					bencode(back_inserter(out), e);
-					save_file(StaticHelpers::CombinePathes(dataDir, "BtSessionData", info_hash + ".resume").toStdString(), out);
+					save_file(StaticHelpers::CombinePathes(dataDir, "BtSessionData", info_hash + ".resume").toUtf8().data(), out);
 
 					if (m_bIsSaveSessionInitiated)
 					{
@@ -545,7 +545,7 @@ void TorrentManager::handle_alert(alert* a)
 							create_torrent ct(ti);
 							QString infoHash = QString::fromStdString(to_hex(ti.info_hash().to_string()));
 #endif
-							std::ofstream out(StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".torrent").toStdString(), std::ios_base::binary);
+							std::ofstream out(StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".torrent").toUtf8().data(), std::ios_base::binary);
 							bencode(std::ostream_iterator<char>(out), ct.generate());
 						}
 					}
@@ -662,7 +662,7 @@ bool TorrentManager::AddTorrent(QString& path, QString& save_path, error_code& e
 	add_torrent_params p;
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 	QString infoHash = QString::fromStdString(to_hex(t->info_hash().to_string()));
-	std::string resumeFileName = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".resume").toStdString();
+	std::string resumeFileName = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".resume").toUtf8().data();
 	std::vector<char> buf;
 	bool isPreviousSeed = false;
 
@@ -1050,7 +1050,7 @@ void TorrentManager::SaveSession()
 
 				bencode(back_inserter(out), e);
 
-				if (save_file((StaticHelpers::CombinePathes(dataDir, "BtSessionData", info_hash + ".resume").toStdString()), out) < 0)
+				if (save_file((StaticHelpers::CombinePathes(dataDir, "BtSessionData", info_hash + ".resume").toUtf8().data()), out) < 0)
 				{
 					qDebug() << "save_file failed";
 				}
@@ -1367,7 +1367,7 @@ torrent_handle TorrentManager::ProcessMagnetLink(QString link, error_code& ec)
 
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 	QString infoHash = QString::fromStdString(to_hex(add_info.info_hash.to_string()));
-	std::string filename = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".resume").toStdString();
+	std::string filename = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".resume").toUtf8().data();
 	std::vector<char> buf;
 
 	if (load_file(filename.c_str(), buf, ec) == 0)

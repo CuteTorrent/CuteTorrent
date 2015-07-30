@@ -1,5 +1,5 @@
 ﻿#include "SearchItemsStorrage.h"
-
+#include "SearchResult.h"
 SearchItemsStorrage* SearchItemsStorrage::m_pInstance = NULL;
 
 int SearchItemsStorrage::m_nInstanceCount = 0;

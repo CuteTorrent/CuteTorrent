@@ -6,7 +6,9 @@
 #include <QApplicationSettings.h>
 #include <core/ISerachProvider.h>
 #include <core/SearchEngine.h>
+#include "Torrent.h"
 #include <core/TorrentStorrage.h>
+#include "TorrentCommon.h"
 #include <float.h>
 FiltersViewModel::FiltersViewModel(QObject* parent) : QAbstractItemModel(parent)
 {

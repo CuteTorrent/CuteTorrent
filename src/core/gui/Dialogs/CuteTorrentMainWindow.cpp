@@ -88,6 +88,7 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	, m_pSearchEngine(SearchEngine::getInstance())
 	, m_pieceAvalibilityWidget(NULL)
 	, m_pPeerTableModel(NULL)
+	, m_initFinished(false)
 	, m_pNotificationSystem(NotificationSystem::getInstance())
 #ifdef Q_WS_WIN
 	, m_pJumpList(new QWinJumpList(this))
@@ -193,6 +194,7 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	QTimer::singleShot(10000, this, SLOT(CheckForUpdates()));
 	Scheduller::getInstance();
 	m_pUpdateTimer->start();
+	m_initFinished = true;
 }
 
 void CuteTorrentMainWindow::CheckForUpdates()
@@ -654,54 +656,57 @@ void CuteTorrentMainWindow::changeEvent(QEvent* event)
 	if (event->type() == QEvent::LanguageChange)
 	{
 		retranslateUi(this);
-		minimizeAction->setText(tr("ACTION_HIDE"));
-		maximizeAction->setText(tr("ACTION_MAXIMIZE_FULLSCREEN"));
-		restoreAction->setText(tr("ACTION_MAXIMIZE"));
-		quitAction->setText(tr("ACTION_EXIT"));
-		copyContext->setText(tr("ACTION_COPY"));
-		downLabel->setToolTip(tr("STATUS_DWONLOAD"));
-		downLabelText->setToolTip(tr("STATUS_DWONLOAD"));
-		upLabel->setToolTip(tr("STATUS_UPLOAD"));
-		upLabelText->setToolTip(tr("STATUS_UPLOAD"));
-		uploadLimit->setText(tr("LIMIT_UL"));
-		downloadLimit->setText(tr("LIMIT_DL"));
-		addTracker->setText(tr("ADD_TRACKER"));
-		removeTracker->setText(tr("REMOVE_TRACKER"));
-		editTracker->setText(tr("EDIT_TRACKER"));
-		addPeer->setText(tr("ADD_PEER"));
-		ul->setSpecialValueText(tr("None"));
-		dl->setSpecialValueText(tr("None"));
-		m_pFileViewModel->retranslateUI();
-		m_pTorrentDisplayModel->retranslate();
-		m_pRssDisplayModel->retranslate();
-		m_pFiltersViewModel->Retranslate();
-		QMap<ISerachProvider::SearchCategories, QString> categoriesToStr;
-		categoriesToStr[ISerachProvider::Anime] = tr("ANIME_CATEGORY");
-		categoriesToStr[ISerachProvider::Music] = tr("MUSIC_CATEGORY");
-		categoriesToStr[ISerachProvider::TV] = tr("TV_CATEGORY");
-		categoriesToStr[ISerachProvider::Porn] = tr("PORN_CATEGORY");
-		categoriesToStr[ISerachProvider::Software] = tr("APP_CATEGORY");
-		categoriesToStr[ISerachProvider::Games] = tr("GAMES_CATEGORY");
-		categoriesToStr[ISerachProvider::Books] = tr("BOOKS_CATEGORY");
-		categoriesToStr[ISerachProvider::Movie] = tr("FILMS_CATEGORY");;
-		categoriesToStr[ISerachProvider::All] = tr("ALL_CATEGORY");
-		int prevSearchCat = m_pSearchCategory->currentIndex();
-		m_pSearchEdit->setPlaceholderText(tr("Search"));
-		m_pTorrentSearchEdit->setPlaceholderText(tr("Search"));
-#ifdef Q_WS_WIN
-		setupJumpList();
-#endif
-		m_pSearchCategory->clear();
-		m_pTorrentSearchCategory->clear();
-
-		for (int i = categoriesToStr.size() - 1; i >= 0; i--)
+		if (m_initFinished)
 		{
-			m_pTorrentSearchCategory->addItem(categoriesToStr.values().at(i), categoriesToStr.keys().at(i));
-			m_pSearchCategory->addItem(categoriesToStr.values().at(i), categoriesToStr.keys().at(i));
-		}
+			minimizeAction->setText(tr("ACTION_HIDE"));
+			maximizeAction->setText(tr("ACTION_MAXIMIZE_FULLSCREEN"));
+			restoreAction->setText(tr("ACTION_MAXIMIZE"));
+			quitAction->setText(tr("ACTION_EXIT"));
+			copyContext->setText(tr("ACTION_COPY"));
+			downLabel->setToolTip(tr("STATUS_DWONLOAD"));
+			downLabelText->setToolTip(tr("STATUS_DWONLOAD"));
+			upLabel->setToolTip(tr("STATUS_UPLOAD"));
+			upLabelText->setToolTip(tr("STATUS_UPLOAD"));
+			uploadLimit->setText(tr("LIMIT_UL"));
+			downloadLimit->setText(tr("LIMIT_DL"));
+			addTracker->setText(tr("ADD_TRACKER"));
+			removeTracker->setText(tr("REMOVE_TRACKER"));
+			editTracker->setText(tr("EDIT_TRACKER"));
+			addPeer->setText(tr("ADD_PEER"));
+			ul->setSpecialValueText(tr("None"));
+			dl->setSpecialValueText(tr("None"));
+			m_pFileViewModel->retranslateUI();
+			m_pTorrentDisplayModel->retranslate();
+			m_pRssDisplayModel->retranslate();
+			m_pFiltersViewModel->Retranslate();
+			QMap<ISerachProvider::SearchCategories, QString> categoriesToStr;
+			categoriesToStr[ISerachProvider::Anime] = tr("ANIME_CATEGORY");
+			categoriesToStr[ISerachProvider::Music] = tr("MUSIC_CATEGORY");
+			categoriesToStr[ISerachProvider::TV] = tr("TV_CATEGORY");
+			categoriesToStr[ISerachProvider::Porn] = tr("PORN_CATEGORY");
+			categoriesToStr[ISerachProvider::Software] = tr("APP_CATEGORY");
+			categoriesToStr[ISerachProvider::Games] = tr("GAMES_CATEGORY");
+			categoriesToStr[ISerachProvider::Books] = tr("BOOKS_CATEGORY");
+			categoriesToStr[ISerachProvider::Movie] = tr("FILMS_CATEGORY");;
+			categoriesToStr[ISerachProvider::All] = tr("ALL_CATEGORY");
+			int prevSearchCat = m_pSearchCategory->currentIndex();
+			m_pSearchEdit->setPlaceholderText(tr("Search"));
+			m_pTorrentSearchEdit->setPlaceholderText(tr("Search"));
+#ifdef Q_WS_WIN
+			setupJumpList();
+#endif
+			m_pSearchCategory->clear();
+			m_pTorrentSearchCategory->clear();
 
-		m_pTorrentSearchCategory->setCurrentIndex(prevSearchCat);
-		m_pSearchCategory->setCurrentIndex(prevSearchCat);
+			for (int i = categoriesToStr.size() - 1; i >= 0; i--)
+			{
+				m_pTorrentSearchCategory->addItem(categoriesToStr.values().at(i), categoriesToStr.keys().at(i));
+				m_pSearchCategory->addItem(categoriesToStr.values().at(i), categoriesToStr.keys().at(i));
+			}
+
+			m_pTorrentSearchCategory->setCurrentIndex(prevSearchCat);
+			m_pSearchCategory->setCurrentIndex(prevSearchCat);
+		}
 	}
 
 	QWidget::changeEvent(event);
