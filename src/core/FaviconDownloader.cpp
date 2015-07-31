@@ -17,7 +17,7 @@ FaviconDownloader::~FaviconDownloader()
 	m_pNatworkManager = NULL;
 }
 
-QIcon FaviconDownloader::getFavicon(QString urlStr)
+QPixmap FaviconDownloader::getFavicon(QString urlStr)
 {
 	QUrl url(urlStr);
 	QString faviconUrlStr = QString("%1://%2/favicon.ico").arg(url.scheme(), url.host());
@@ -137,34 +137,35 @@ void FaviconDownloader::replyReady(QNetworkReply* pReply)
 			}
 			else
 			{
-
 				QString urlStr = url.toString();
-				while (redirectionMap.contains(urlStr))
+				if (redirectionMap.contains(urlStr))
 				{
-					urlStr = redirectionMap[urlStr];
-					redirectionMap.remove(urlStr);
+					while (redirectionMap.contains(urlStr))
+					{
+						urlStr = redirectionMap[urlStr];
+						redirectionMap.remove(urlStr);
+					}
+
+
+					QNetworkCacheMetaData metaData;
+					QNetworkCacheMetaData::AttributesMap atts;
+					metaData.setUrl(url);
+					metaData.setSaveToDisk(true);
+					atts[QNetworkRequest::HttpStatusCodeAttribute] = 200;
+					atts[QNetworkRequest::HttpReasonPhraseAttribute] = "Ok";
+					metaData.setAttributes(atts);
+					metaData.setLastModified(QDateTime::currentDateTime());
+					metaData.setExpirationDate(QDateTime::currentDateTime().addDays(1));
+					QIODevice* dev = m_pDiskCache->prepare(metaData);
+
+					if (!dev)
+					{
+						return;
+					}
+
+					dev->write(pReply->readAll());
+					m_pDiskCache->insert(dev);
 				}
-
-
-				QNetworkCacheMetaData metaData;
-				QNetworkCacheMetaData::AttributesMap atts;
-				metaData.setUrl(url);
-				metaData.setSaveToDisk(true);
-				atts[QNetworkRequest::HttpStatusCodeAttribute] = 200;
-				atts[QNetworkRequest::HttpReasonPhraseAttribute] = "Ok";
-				metaData.setAttributes(atts);
-				metaData.setLastModified(QDateTime::currentDateTime());
-				metaData.setExpirationDate(QDateTime::currentDateTime().addDays(1));
-				QIODevice* dev = m_pDiskCache->prepare(metaData);
-
-				if (!dev)
-				{
-					return;
-				}
-
-				dev->write(pReply->readAll());
-				m_pDiskCache->insert(dev);
-
 			}
 		}
 	}

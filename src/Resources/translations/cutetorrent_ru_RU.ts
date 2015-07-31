@@ -2625,19 +2625,19 @@ Download: %3</source>
 <context>
     <name>QRssItemDelegate</name>
     <message>
-        <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="123"/>
-        <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="284"/>
+        <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="124"/>
+        <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="285"/>
         <source>STATUS_UPDATING</source>
         <translation>Обновляется</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="127"/>
-        <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="288"/>
+        <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="128"/>
+        <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="289"/>
         <source>STATUS_OK</source>
         <translation>Ок</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="222"/>
+        <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="223"/>
         <source>- Mb</source>
         <translation>- Мб</translation>
     </message>

@@ -107,7 +107,8 @@ void QRssItemDelegate::drawFeed(QPainter* painter, const QStyleOptionViewItem& o
 	QFont nameFont(option.font);
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
-	const QIcon favicon = m_pFaviconDownloader->getFavicon(pRssFeed->url().toString());
+	QIcon favicon;
+	favicon.addPixmap(m_pFaviconDownloader->getFavicon(pRssFeed->url().toString()));
 	QString nameStr = pRssFeed->displayName();
 	QSize nameSize(nameFM.size(0, nameStr));
 	QFont statusFont(option.font);

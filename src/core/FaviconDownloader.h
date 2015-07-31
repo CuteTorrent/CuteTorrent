@@ -10,7 +10,7 @@ class FaviconDownloader : public QObject, public Singleton<FaviconDownloader>
 	Q_OBJECT
 public:
 	~FaviconDownloader();
-	QIcon getFavicon(QString url);
+	QPixmap getFavicon(QString url);
 	void InsertWarningInCache(QUrl& url);
 private:
 	QMutex* m_pSynkMutex;

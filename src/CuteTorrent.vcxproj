@@ -138,14 +138,13 @@
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libtorrentd.lib;qtmaind.lib;phonond4.lib;QtGuid4.lib;QtNetworkd4.lib;QtCored4.lib;QtScriptd4.lib;QtScriptToolsd4.lib;VirtDisk.lib;libeay32.lib;ssleay32.lib;Shlwapi.lib;Dbghelp.lib;libboost_locale-vc120-mt-gd-1_55.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../ThirdParties/openssl/out32/;$(QT_DIR)\lib;../ThirdParties/libtorrent/lib;../ThirdParties/boost/stage/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libtorrentd.lib;qtmaind.lib;phonond4.lib;QtGuid4.lib;QtNetworkd4.lib;QtCored4.lib;QtScriptd4.lib;QtScriptToolsd4.lib;VirtDisk.lib;libeay32MTd.lib;ssleay32MTd.lib;Shlwapi.lib;Dbghelp.lib;libboost_locale-vc120-mt-gd-1_55.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../ThirdParties/openssl/lib/VC/static/;$(QT_DIR)\lib;../ThirdParties/libtorrent/lib;../ThirdParties/boost/stage/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <IgnoreImportLibrary>true</IgnoreImportLibrary>
       <LinkIncremental>false</LinkIncremental>
       <OutputFile>$(OutDir)\CuteTorrent.exe</OutputFile>
       <SubSystem>Windows</SubSystem>
-      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Midl>
