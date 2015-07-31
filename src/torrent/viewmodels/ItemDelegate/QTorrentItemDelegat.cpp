@@ -334,34 +334,17 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	nameStr = nameFM.elidedText(nameStr, Qt::ElideRight, nameArea.width());
 	style->drawItemText(painter, nameArea, Qt::AlignLeft, opt.palette, option.state & QStyle::State_Enabled, nameStr);
 	painter->setFont(statusFont);
-	statusStr = statusFM.elidedText(statusStr, Qt::ElideRight, statusArea.width());
-	style->drawItemText(painter,  statusArea, Qt::AlignRight, opt.palette, option.state & QStyle::State_Enabled, statusStr);
+    style->drawItemText(painter,  statusArea, Qt::AlignRight, opt.palette, option.state & QStyle::State_Enabled, statusStr);
 	painter->setFont(progressFont);
 	progressStr = statusFM.elidedText(progressStr, Qt::ElideRight, progArea.width());
 	style->drawItemText(painter, progArea, Qt::AlignLeft, opt.palette, option.state & QStyle::State_Enabled, progressStr);
 	int progressPercentage = tor.GetProgress();
 	myProgressBarStyle->resize(barArea.size());
 	myProgressBarStyle->setValue(progressPercentage);
-	//painter->translate(barArea.topLeft());
-	//myProgressBarStyle->render(painter);
+
 	QStyleOptionProgressBarV2 pbStyleOpt;
 	myProgressBarStyle->initilizeStyleOption(&pbStyleOpt);
 	pbStyleOpt.rect = barArea;
-	/*myProgressBarStyle->rect = barArea;
-	if ( tor.isDownloading() ) {
-	    myProgressBarStyle->palette.setBrush( QPalette::Highlight, blueBrush );
-	    myProgressBarStyle->palette.setColor( QPalette::Base, blueBack );
-	    myProgressBarStyle->palette.setColor( QPalette::Background, blueBack );
-	}
-	else if ( tor.isSeeding() ) {
-	    myProgressBarStyle->palette.setBrush( QPalette::Highlight, greenBrush );
-	    myProgressBarStyle->palette.setColor( QPalette::Base, greenBack );
-	    myProgressBarStyle->palette.setColor( QPalette::Background, greenBack );
-	}
-
-	myProgressBarStyle->state = progressBarState;
-	setProgressBarPercentDone( option, tor );
-	*/
-	style->drawControl(QStyle::CE_ProgressBar, &pbStyleOpt, painter, myProgressBarStyle);
+    style->drawControl(QStyle::CE_ProgressBar, &pbStyleOpt, painter, myProgressBarStyle);
 	painter->restore();
 }
