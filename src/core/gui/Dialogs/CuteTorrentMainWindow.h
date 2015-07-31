@@ -81,6 +81,7 @@ private:
 	void initToolbarIcons();
 	void initStatusBarIcons();
 	void initMainMenuIcons();
+	bool m_initFinished;
 	QRegExp m_httpLinkRegexp;
 	QTimer* m_pUpdateTimer;
 	StyleEngene* m_pStyleEngine;

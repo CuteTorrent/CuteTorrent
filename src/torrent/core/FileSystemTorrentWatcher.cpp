@@ -6,6 +6,9 @@
 #include <QVector>
 #include "OpenTorrentDialog.h"
 #include <NotificationSystem.h>
+#include <helpers/StaticHelpers.h>
+#include "TorrentManager.h"
+
 FileSystemTorrentWatcher::FileSystemTorrentWatcher(QObject* parent) 
 	: QObject(parent)
 	, m_pFileSystemWatcher(new QFileSystemWatcher(this))
