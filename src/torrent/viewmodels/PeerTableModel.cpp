@@ -3,6 +3,7 @@
 #include <IpItemDelegate.h>
 #include <QDebug>
 #include <QMutexLocker>
+#include <QVariant>
 PeerTableModel::PeerTableModel(QObject* parent)
 	: QStandardItemModel(0, COLUMN_COUNT)
 	, m_pUpdateMutex(new QMutex())
@@ -89,8 +90,8 @@ void PeerTableModel::updatePeer(libtorrent::peer_info peerInfo)
 	setData(index(row, PEER_PROGRESS), peerInfo.progress * 100.f, Qt::DisplayRole);
 	setData(index(row, DOWNLOAD_RATE), peerInfo.down_speed, Qt::DisplayRole);
 	setData(index(row, UPLOAD_RATE), peerInfo.up_speed, Qt::DisplayRole);
-	setData(index(row, DOWNLOADED), peerInfo.total_download, Qt::DisplayRole);
-	setData(index(row, UPLOADED), peerInfo.total_upload, Qt::DisplayRole);
+    setData(index(row, DOWNLOADED), QVariant::fromValue(peerInfo.total_download), Qt::DisplayRole);
+    setData(index(row, UPLOADED), QVariant::fromValue(peerInfo.total_upload), Qt::DisplayRole);
 	setData(index(row, PEER_SPEED), peerInfo.remote_dl_rate, Qt::DisplayRole);
 }
 
@@ -115,8 +116,8 @@ QStandardItem* PeerTableModel::addPeer(libtorrent::peer_info peerInfo)
 	setData(index(row, PEER_PROGRESS), peerInfo.progress * 100.f, Qt::DisplayRole);
 	setData(index(row, DOWNLOAD_RATE), peerInfo.down_speed, Qt::DisplayRole);
 	setData(index(row, UPLOAD_RATE), peerInfo.up_speed, Qt::DisplayRole);
-	setData(index(row, DOWNLOADED), peerInfo.total_download, Qt::DisplayRole);
-	setData(index(row, UPLOADED), peerInfo.total_upload, Qt::DisplayRole);
+    setData(index(row, DOWNLOADED), QVariant::fromValue(peerInfo.total_download), Qt::DisplayRole);
+    setData(index(row, UPLOADED), QVariant::fromValue(peerInfo.total_upload), Qt::DisplayRole);
 	setData(index(row, PEER_SPEED), peerInfo.remote_dl_rate, Qt::DisplayRole);
 	return item(row, IP);
 }
