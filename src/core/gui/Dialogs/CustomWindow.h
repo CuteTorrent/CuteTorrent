@@ -483,16 +483,14 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
         int yMouse = e->globalPos().y();
         int wWidth = windowGeoemtry.width();
 		int wHeight = windowGeoemtry.height();
-        qDebug()<< "resizeWindow" << "xMouse" << xMouse << "yMouse" << yMouse << "wWidth" << wWidth << "wHeight" << wHeight << T::cursor().shape() << windowGeoemtry << T::parentWidget();
+        //qDebug()<< "resizeWindow" << "xMouse" << xMouse << "yMouse" << yMouse << "wWidth" << wWidth << "wHeight" << wHeight << T::cursor().shape() << windowGeoemtry << T::parentWidget();
         if(T::cursor().shape() == Qt::SizeVerCursor)
 		{
             qDebug() << "resizeVerSup" << resizeVerSup;
 			if(resizeVerSup)
 			{
                 int newY = yMouse;
-                qDebug() << "newY" << newY;
                 int newHeight = wHeight - (yMouse - windowGeoemtry.y());
-                qDebug() << "newHeight" << newHeight;
                 if(newHeight > T::minimumSizeHint().height())
 				{
                     T::resize(wWidth, newHeight);
@@ -649,7 +647,7 @@ void BaseWindow<T>::mousePressEvent(QMouseEvent* e)
         QRect windowGeoemtry = T::geometry();
         QRect titleGeometry = getTitleBar()->geometry();
         titleGeometry.moveTopLeft(getTitleBar()->parentWidget()->mapToGlobal(titleGeometry.topLeft()));
-        qDebug() << "TitleBar geometry" << titleGeometry << "pressPos" << pos;
+        //qDebug() << "TitleBar geometry" << titleGeometry << "pressPos" << pos;
 		if(inResizeZone && m_resizeMode == AllowResize)
 		{
 			allowToResize = true;
@@ -696,7 +694,7 @@ void BaseWindow<T>::mouseMoveEvent(QMouseEvent* e)
 	int wWidth = windowGemetry.width();
 	int wHeight = windowGemetry.height();
 	bool isResizeEnabled = m_resizeMode == AllowResize;
-    qDebug() << "mouseMoveEvent" << moveWidget << xMouse << yMouse << wWidth << wHeight << allowToResize << isResizeEnabled;
+    //qDebug() << "mouseMoveEvent" << moveWidget << xMouse << yMouse << wWidth << wHeight << allowToResize << isResizeEnabled;
 
 	if(moveWidget)
 	{

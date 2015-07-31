@@ -299,8 +299,10 @@ void ValueSetters::RunOnBootValueSetter(QString group, QString name, QVariant va
 		if (!QFile::exists(StaticHelpers::CombinePathes(QDir::homePath(), ".config/autostart/CuteTorrent.desktop")))
 		{
 			QFile shortcut("/usr/share/applications/CuteTorrent.desktop");
-
-			if (!shortcut.copy(StaticHelpers::CombinePathes(QDir::homePath(), ".config/autostart/CuteTorrent.desktop")))
+            std::string autostartDir = StaticHelpers::CombinePathes(QDir::homePath(), ".config/autostart").toUtf8().data();
+            error_code ec;
+            create_directories(autostartDir,ec);
+            if (ec || !shortcut.copy(StaticHelpers::CombinePathes(QDir::homePath(), ".config/autostart/CuteTorrent.desktop")))
 			{
 				qCritical() << "Unable to copy /usr/share/applications/CuteTorrent.desktop to ~/.config/autostart/CuteTorrent.desktop" << shortcut.errorString();
 			}
