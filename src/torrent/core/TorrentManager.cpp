@@ -273,7 +273,7 @@ void TorrentManager::timerEvent(QTimerEvent* timerEvent)
 	}
 }
 
-void TorrentManager::InitSession()
+void TorrentManager::InitSession(boost::function<void(int proggres, QString item)> progressCallback)
 {
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 	QDir dir(StaticHelpers::CombinePathes(dataDir, "BtSessionData"));
@@ -315,7 +315,9 @@ void TorrentManager::InitSession()
 		QFile::remove(pathResumeFile);
 	}
 
-	for (QStringList::iterator i = torrentFiles.begin(); i != torrentFiles.end(); ++i)
+	QList<QString>::iterator begin = torrentFiles.begin();
+	int size = torrentFiles.size();
+	for (QStringList::iterator i = begin; i != torrentFiles.end(); ++i)
 	{
 		error_code ec;
 		QString filePath = dir.filePath(*i);
@@ -331,12 +333,17 @@ void TorrentManager::InitSession()
 			group = info.second;
 		}
 
-		AddTorrent(filePath, savePath, ec, "", QMap<QString, quint8>(), group);
+		Torrent* pTorrent = AddTorrent(filePath, savePath, ec, "", QMap<QString, quint8>(), group);
 
 		if (ec)
 		{
-			CustomMessageBox::critical(NULL, tr("Error in TorrentManager::AddTorrent"), StaticHelpers::translateLibTorrentError(ec));
+			qCritical() << StaticHelpers::translateLibTorrentError(ec);
 		}
+		progressCallback((i - begin) * 100 / size, pTorrent->GetName());
+#ifdef Q_WS_WIN
+		Sleep(0);
+#endif
+
 	}
 
 	emit initCompleted();
@@ -648,7 +655,7 @@ void TorrentManager::handle_alert(alert* a)
 }
 
 
-bool TorrentManager::AddTorrent(QString& path, QString& save_path, error_code& ec, QString name, QMap<QString, quint8> filePriorities, QString group, AddTorrentFlags flags)
+Torrent* TorrentManager::AddTorrent(QString& path, QString& save_path, error_code& ec, QString name, QMap<QString, quint8> filePriorities, QString group, AddTorrentFlags flags)
 
 {
 	boost::intrusive_ptr<torrent_info> t;
@@ -656,7 +663,7 @@ bool TorrentManager::AddTorrent(QString& path, QString& save_path, error_code& e
 
 	if (ec != 0)
 	{
-		return false;
+		return NULL;
 	}
 
 	add_torrent_params p;
@@ -767,7 +774,7 @@ bool TorrentManager::AddTorrent(QString& path, QString& save_path, error_code& e
 	if (ec || !h.is_valid())
 	{
 		//	QMessageBox::warning(0,"Error",ec.message().c_str());
-		return false;
+		return NULL;
 	}
 
 #if LIBTORRENT_VERSION_NUM < 10000
@@ -784,7 +791,7 @@ bool TorrentManager::AddTorrent(QString& path, QString& save_path, error_code& e
 	h.set_max_connections(max_connections_per_torrent);
 	QFile::copy(path, StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".torrent"));
 
-	return true;
+	return current;
 }
 
 session_settings TorrentManager::readSettings()

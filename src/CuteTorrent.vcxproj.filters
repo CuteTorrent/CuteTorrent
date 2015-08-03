@@ -820,6 +820,18 @@
     <ClCompile Include="torrent\viewmodels\PeerSortModel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\gui\Dialogs\InitializationDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\InitializationWorker.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_InitializationWorker.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_InitializationDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -1071,6 +1083,9 @@
     </CustomBuild>
     <CustomBuild Include="torrent\viewmodels\PeerTableModel.h">
       <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\FormFiles\InitializtionDialog.ui">
+      <Filter>Form Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1469,6 +1484,18 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="torrent\viewmodels\PeerSortModel.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tracker\trackercommon.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_InitializtionDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\gui\Dialogs\InitializationDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\InitializationWorker.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

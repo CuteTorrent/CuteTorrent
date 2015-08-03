@@ -205,6 +205,10 @@ bool Torrent::isSeeding() const
 {
 	if(m_hTorrent.handle.is_valid())
 	{
+		if (m_hTorrent.paused)
+		{
+			return false;
+		}
 		if (m_hTorrent.state == torrent_status::finished)
 		{
 			return true;

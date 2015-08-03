@@ -66,6 +66,7 @@ class QTorrentDisplayModel: public QAbstractListModel
 	Torrent* m_pCurrentTorrent;
 	QMutex* locker;
 	QTorrentFilterProxyModel* m_pProxyFilterModel;
+	bool m_initFinished;
 	QString getFirstAvailibleFile(files_info& filesInfo);
 	bool checkAllMountable(QModelIndexList& indexes);
 	bool checkAllSuperSeed(QModelIndexList& indexes);
@@ -75,6 +76,7 @@ class QTorrentDisplayModel: public QAbstractListModel
 public:
 	QTorrentDisplayModel(QTreeView*, QTorrentFilterProxyModel*, QObject*);
 	~QTorrentDisplayModel();
+	void setInitFinished(bool value);
 	enum action { stop, pause, resume, remove, remove_all, move_storrage,
 	              set_sequntial, set_superseed, generate_magmet, update_trackers,
 	              rehash, change_group
@@ -84,9 +86,7 @@ public:
 
 	int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 	QVariant data(const QModelIndex& index, int role =	Qt::DisplayRole) const override;
-	bool removeRow(int row, bool delFiles);
-	bool removeRows(int row, int count,
-	                const QModelIndex& parent = QModelIndex()) override;
+	bool removeRow(const QModelIndex& index, bool delFiles);
 	enum Role { TorrentRole = Qt::UserRole };
 	Torrent* GetSelectedTorrent();
 	

@@ -7,6 +7,7 @@
 #include "JlCompress.h"
 #include <helpers/StaticHelpers.h>
 #include <core/RssManager.h>
+#include <gui/Dialogs/InitializationDialog.h>
 
 ApplyBackupPage::ApplyBackupPage(QWidget* parent) :
 	QWizardPage(parent)
@@ -109,8 +110,8 @@ void ApplyBackupPage::ApplyBackup() const
 	RssManagerPtr rssManager = RssManager::getInstance();
 	rssManager->LoadDownloadRules();
 	rssManager->LoadFeeds();
-	TorrentManager::getInstance()->InitSession();
-
+	boost::scoped_ptr<InitializationDialog> pDlg(new InitializationDialog());
+	pDlg->exec();
 }
 
 int ApplyBackupPage::nextId() const

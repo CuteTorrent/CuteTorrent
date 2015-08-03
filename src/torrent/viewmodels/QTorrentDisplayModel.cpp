@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "messagebox.h"
 #include "QTorrentFilterProxyModel.h"
 #include "StaticHelpers.h"
-QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterProxyModel* pProxyFilterModel, QObject* __parrent) : QAbstractListModel(__parrent)
+QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterProxyModel* pProxyFilterModel, QObject* __parrent) : QAbstractListModel(__parrent), m_initFinished(false)
 {
 	m_pTorrentListView = _parrent;
 	m_pTorrentManager = TorrentManager::getInstance();
@@ -45,6 +45,7 @@ QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterPr
 	locker = new QMutex();
 	connect(m_pTorrentManager.get(), SIGNAL(AddTorrentGui(Torrent*)), SLOT(OnAddTorrent()));
 	connect(m_pTorrentManager.get(), SIGNAL(TorrentRemove(QString)), SLOT(Update()));
+
 }
 
 QString QTorrentDisplayModel::getFirstAvailibleFile(files_info& filesInfo)
@@ -373,7 +374,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 		{
 			case stop:
 			{
-				for (int i = indexes.count() - 1; i >= 0; i -= 1)
+				for (int i = indexes.count() - 1; i >= 0; i--)
 				{
 					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
@@ -385,7 +386,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 			case pause:
 			{
-				for (int i = indexes.count() - 1; i >= 0; i -= 1)
+				for (int i = indexes.count() - 1; i >= 0; i--)
 				{
 					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
@@ -399,7 +400,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 			{
 				bool yesToAll = false;
 
-				for (int i = indexes.count() - 1; i >= 0; i -= 1)
+				for (int i = indexes.count() - 1; i >= 0; i--)
 				{
 					QModelIndex& index = indexes[i];
 
@@ -436,7 +437,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 						if (QMessageBox::No != button || yesToAll)
 						{
-							removeRow(index.row(), false);
+							removeRow(index, false);
 						}
 					}
 				}
@@ -448,7 +449,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 			{
 				bool yesToAll = false;
 
-				for (int i = indexes.count() - 1; i >= 0; i -= 1)
+				for (int i = indexes.count() - 1; i >= 0; i--)
 				{
 					QModelIndex& index = indexes[i];
 					QMessageBox::StandardButton button;
@@ -482,7 +483,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 					if (QMessageBox::No != button || yesToAll)
 					{
-						removeRow(index.row(), true);
+						removeRow(index, true);
 					}
 				}
 
@@ -491,7 +492,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 			case resume:
 			{
-				for (int i = indexes.count() - 1; i >= 0; i -= 1)
+				for (int i = indexes.count() - 1; i >= 0; i--)
 				{
 					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
@@ -503,7 +504,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 			case rehash:
 			{
-				for (int i = indexes.count() - 1; i >= 0; i -= 1)
+				for (int i = indexes.count() - 1; i >= 0; i--)
 				{
 					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
@@ -523,7 +524,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 				if(!path.isEmpty())
 				{
-					for (int i = indexes.count() - 1; i >= 0; i -= 1)
+					for (int i = indexes.count() - 1; i >= 0; i--)
 					{
 						QModelIndex index = indexes[i];
 						Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
@@ -536,7 +537,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 			case set_sequntial:
 			{
-				for (int i = indexes.count() - 1; i >= 0; i -= 1)
+				for (int i = indexes.count() - 1; i >= 0; i--)
 				{
 					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
@@ -548,7 +549,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 			case set_superseed:
 			{
-				for (int i = indexes.count() - 1; i >= 0; i -= 1)
+				for (int i = indexes.count() - 1; i >= 0; i--)
 				{
 					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
@@ -560,7 +561,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 			case update_trackers:
 			{
-				for (int i = indexes.count() - 1; i >= 0; i -= 1)
+				for (int i = indexes.count() - 1; i >= 0; i--)
 				{
 					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
@@ -574,7 +575,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 			{
 				QString clipboardData;
 
-				for (int i = indexes.count() - 1; i >= 0; i -= 1)
+				for (int i = indexes.count() - 1; i >= 0; i--)
 				{
 					QModelIndex index = indexes[i];
 					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
@@ -632,57 +633,36 @@ QVariant QTorrentDisplayModel::data(const QModelIndex& index, int role) const
 	return var;
 }
 
-bool QTorrentDisplayModel::removeRow(int row, bool delFiles)
+bool QTorrentDisplayModel::removeRow(const QModelIndex& index, bool delFiles)
 {
-	if((row > m_pTorrentStorrage->count()) || (row < 0))
+	if(!index.isValid())
 	{
 		return false;
 	}
+	QModelIndex realIndex = m_pProxyFilterModel->mapToSource(index);
 
-	if(rowCount() == 0)
-	{
-		return false;
-	}
+	int row = realIndex.row();
 
 	beginRemoveRows(QModelIndex(), row, row);
-
-	if(m_pTorrentStorrage->at(row) == m_pCurrentTorrent)
+	Torrent* tor2del = realIndex.data(TorrentRole).value<Torrent*>();
+	qDebug() << "Removing torrent" << tor2del->GetName();
+	if (tor2del == m_pCurrentTorrent)
 	{
 		m_pCurrentTorrent = NULL;
 	}
 
-	m_pTorrentManager->RemoveTorrent(m_pTorrentStorrage->at(row)->GetInfoHash(), delFiles);
-	endRemoveRows();
-	return true;
-}
-
-bool QTorrentDisplayModel::removeRows(int row, int count, const QModelIndex& parent)
-{
-	if((row + count > m_pTorrentStorrage->count()) || (row < 0))
-	{
-		return false;
-	}
-
-	if(rowCount() == 0)
-	{
-		return false;
-	}
-
-	selectedRow = -1;
-	m_pTorrentListView->selectionModel()->reset();
-	beginRemoveRows(parent, row, row + count);
-
-	for(int i = row; i < row + count; i++)
-	{
-		m_pTorrentManager->RemoveTorrent(m_pTorrentStorrage->at(i)->GetInfoHash(), true);
-	}
-
+	m_pTorrentManager->RemoveTorrent(tor2del->GetInfoHash(), delFiles);
 	endRemoveRows();
 	return true;
 }
 
 QTorrentDisplayModel::~QTorrentDisplayModel()
 {
+}
+
+void QTorrentDisplayModel::setInitFinished(bool value)
+{
+	m_initFinished = value;
 }
 
 void QTorrentDisplayModel::retranslate()
@@ -878,13 +858,16 @@ void QTorrentDisplayModel::Update()
 
 void QTorrentDisplayModel::OnAddTorrent()
 {
-	Update();
-	if (m_pTorrentListView->model() != m_pProxyFilterModel)
+	if (m_initFinished)
 	{
-		return;
+		Update();
+		if (m_pTorrentListView->model() != m_pProxyFilterModel)
+		{
+			return;
+		}
+		m_pTorrentListView->scrollToBottom();
+		m_pTorrentListView->setCurrentIndex(index(m_pTorrentStorrage->count() - 1));
 	}
-	m_pTorrentListView->scrollToBottom();
-	m_pTorrentListView->setCurrentIndex(index(m_pTorrentStorrage->count() - 1));
 }
 
 void QTorrentDisplayModel::PauseSelected()

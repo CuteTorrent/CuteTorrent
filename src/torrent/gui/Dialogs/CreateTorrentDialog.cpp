@@ -271,10 +271,10 @@ void CreateTorrentDialog::BeginCreate()
 #ifdef Q_WS_WIN
 		m_pTaskBarProggres->setVisible(true);
 #endif
-		QObject::connect(creator, SIGNAL(updateProgress(int)), this, SLOT(UpdateProgressBar(int)));
-		QObject::connect(creator, SIGNAL(ShowCreationSucces(QString)), this, SLOT(ShowCreationSucces(QString)));
-		QObject::connect(creator, SIGNAL(ShowCreationFailture(QString)), this, SLOT(ShowCreationFailture(QString)));
-		QObject::connect(this, SIGNAL(AbortCreation()), creator, SLOT(terminate()));
+		connect(creator, SIGNAL(updateProgress(int)), this, SLOT(UpdateProgressBar(int)));
+		connect(creator, SIGNAL(ShowCreationSucces(QString)), this, SLOT(ShowCreationSucces(QString)));
+		connect(creator, SIGNAL(ShowCreationFailture(QString)), this, SLOT(ShowCreationFailture(QString)));
+		connect(this, SIGNAL(AbortCreation()), creator, SLOT(terminate()));
 		creator->create(pathEdit->text(), save_path, filterEdit->text(), trackers, webseeds, discribtionEdit->text(), privateCheckBox->isChecked(), getPiceSize() * KbInt);
 	}
 	else
@@ -383,7 +383,7 @@ void torrentCreatorThread::create(QString _input_path, QString _save_path, QStri
 
 void sendProgressUpdateSignal(int i, int num, torrentCreatorThread* parent)
 {
-	parent->sendProgressSignal(int(i * 100. / float(num)));
+	parent->sendProgressSignal(i * 100 / num);
 }
 
 void torrentCreatorThread::sendProgressSignal(int progress)

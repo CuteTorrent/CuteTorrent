@@ -50,6 +50,7 @@ en.WinExplorerIntegration=Integrate to Windows Explorer
 en.VCRedistInstalling=Installing Visual C++ Redistributable Packages for Visual Studio 2013...
 en.AddingFirewallRule=Adding firewall rule...
 en.CreateTorrent=Create torrent
+en.RemoveSettings=Do you want to remove settings and data created by CuteTorrernt?
 
 ru.FileAssociations=Файлы
 ru.Shortcuts=Ярлыки
@@ -62,6 +63,7 @@ ru.WinExplorerIntegration=Интегрироваться в проводник Windows
 ru.VCRedistInstalling=Устанавливается Visual C++ Redistributable Packages for Visual Studio 2013...
 ru.AddingFirewallRule=Добавляется правило для файерволла...
 ru.CreateTorrent=Создать торрент
+ru.RemoveSettings=Удалить настройки и другие данные CuteTorrent?
 [Run]
 FileName: "{tmp}\vcredist_x86.exe"; Parameters: "/q"; StatusMsg: "{cm:VCRedistInstalling}"; Flags: waituntilterminated ; Check: VcRedistCheck
 Filename: "{sys}\netsh.exe"; Parameters: "firewall add allowedprogram ""{app}\CuteTorrent.exe"" ""BitTorrent client CuteTorrent"" ENABLE ALL";     StatusMsg: "{cm:AddingFirewallRule}"; Flags: runhidden waituntilterminated; Check: FirewallCheck
@@ -980,6 +982,20 @@ begin
   idpSetOption('InvalidCert',    'ignore');
   idpDownloadAfter(wpReady);
   RedesignWizardForm;
+end;
+
+ procedure CurUninstallStepChanged (CurUninstallStep: TUninstallStep);
+ var
+     mres : integer;
+ begin
+    case CurUninstallStep of
+      usUninstall:
+        begin
+          mres := MsgBox(CustomMessage('RemoveSettings'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2)
+          if mres = IDYES then
+            DelTree(ExpandConstant('{localappdata}\CuteTorrent'), True, True, True);
+       end;
+   end;
 end;
 
 

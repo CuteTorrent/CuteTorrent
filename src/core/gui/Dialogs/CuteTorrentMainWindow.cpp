@@ -75,6 +75,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "PeerSortModel.h"
 #include "SpeedItemDelegate.h"
 #include <viewModel/itemDelegate/IpItemDelegate.h>
+#include "InitializationDialog.h"
 class Application;
 class ISerachProvider;
 class SearchResult;
@@ -113,6 +114,8 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	m_pRssDisplayModel = new QRssDisplayModel(m_pTorrentListView, this);
 	m_pRssItemDelegate = new QRssItemDelegate(this);
 	m_pUpdateNotifier = new UpdateNotifier(this);
+	boost::scoped_ptr<InitializationDialog> pDlg(new InitializationDialog(this));
+	pDlg->exec();
 	setAcceptDrops(true);
 	setupStatusBar();
 	setupTray();
@@ -189,12 +192,13 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	m_pTorrentListView->installEventFilter(this);
 	m_pGroupTreeView->installEventFilter(this);
 	m_pTabWidget->installEventFilter(this);
-	m_pTorrentManager->InitSession();
+	
 	m_pTorrents = TorrentStorrage::getInstance();
 	QTimer::singleShot(10000, this, SLOT(CheckForUpdates()));
 	Scheduller::getInstance();
 	m_pUpdateTimer->start();
 	m_initFinished = true;
+	m_pTorrentDisplayModel->setInitFinished(true);
 }
 
 void CuteTorrentMainWindow::CheckForUpdates()
