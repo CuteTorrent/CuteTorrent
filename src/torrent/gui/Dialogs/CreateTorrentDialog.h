@@ -31,6 +31,7 @@ class StyledProgressBar;
 class QWinTaskbarProgress;
 class QWinTaskbarButton;
 #endif
+#define AUTODETECT_VAL 123
 class torrentCreatorThread : public QThread
 {
 	Q_OBJECT
@@ -74,6 +75,7 @@ class CreateTorrentDialog : public BaseWindow<QDialog> , private Ui::CreateTorre
 	Q_OBJECT
 
 public:
+	
 	CreateTorrentDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 	~CreateTorrentDialog();
 	void setPath(QString val);
@@ -85,6 +87,7 @@ protected:
 	QLabel* getTitleLabel() override;
 	QLabel* getTitleIcon() override;
 private:
+	void setupPieceComboBox();
 #ifdef Q_WS_WIN
 	QWinTaskbarProgress* m_pTaskBarProggres;
 	QWinTaskbarButton* m_pTaskBarBtn;

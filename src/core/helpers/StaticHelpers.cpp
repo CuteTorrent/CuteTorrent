@@ -60,7 +60,17 @@ QString StaticHelpers::toKbMbGb(size_type size, bool isSpped)
 			dblSByte = val / KbFloat;
 		}
 	}
-	QString str = QString::number(dblSByte, 'f', i == 0 ? 0 : 2);
+	float fractpart, intpart;
+	fractpart = modff(dblSByte, &intpart);
+	QString str;
+	if (fractpart < FLT_EPSILON)
+	{
+		str = QString::number(int(dblSByte));
+	}
+	else
+	{
+		str = QString::number(dblSByte, 'f', i == 0 ? 0 : 2);
+	}
 	if (isSpped)
 	{
 		str.append(qApp->translate("Torrent", SpeedSuffix[i]));
@@ -73,18 +83,6 @@ QString StaticHelpers::toKbMbGb(size_type size, bool isSpped)
 	return str;
 }
 
-void StaticHelpers::dellDir(QString dirName)
-{
-	try
-	{
-		error_code ec;
-		remove_all(dirName.toStdString(), ec);
-	}
-	catch(...)
-	{
-		qDebug() << " exception caught int deldir";
-	}
-}
 QString StaticHelpers::filePriorityToString(int priority)
 {
 	static char* priority_str[] = { QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_ZERO"),

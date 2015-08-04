@@ -222,7 +222,7 @@ TorrentManager::TorrentManager()
 		m_pTorrentSession->add_extension(&create_ut_pex_plugin);
 	}
 
-	create_directory(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toUtf8().data(), ec);
+	create_directories(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toUtf8().data(), ec);
 
 	if (ec)
 	{

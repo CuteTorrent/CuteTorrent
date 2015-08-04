@@ -6,7 +6,10 @@
 void CustomMessageBox::showEvent(QShowEvent* pEvent)
 {
 #ifndef QT_NO_ACCESSIBILITY
-	QAccessible::updateAccessibility(this, 0, QAccessible::Alert);
+	if (m_icon == QMessageBox::Critical || m_icon == QMessageBox::Warning)
+	{
+		QAccessible::updateAccessibility(this, 0, QAccessible::Alert);
+	}
 #endif
 	QDialog::showEvent(pEvent);
 }
@@ -21,7 +24,8 @@ CustomMessageBox::CustomMessageBox(QWidget* /*parent*/) :
 CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title, const QString& text,
                                    QMessageBox::StandardButtons buttons, QWidget* parent, Qt::WindowFlags /*flags*/) :
 	BaseWindow<QDialog>(OnlyCloseButton, NoResize, parent),
-	ui(new Ui::CustomMessageBox)
+	ui(new Ui::CustomMessageBox),
+	m_icon(icon)
 {
 	ui->setupUi(this);
 	setupCustomWindow();

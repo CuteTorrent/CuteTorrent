@@ -46,7 +46,6 @@ public:
 #endif
 	static QString toKbMbGb(size_type size, bool isSpped = false);
 	static QString translateLibTorrentError(error_code const& ec);
-	static void dellDir(QString path);
 	static QString toTimeString(int seconds);
 	static QString filePriorityToString(int priority);
 	static QString SchedulerTypeToString(SchedulerTask::TaskType type);

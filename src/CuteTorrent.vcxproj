@@ -136,6 +136,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libtorrentd.lib;qtmaind.lib;phonond4.lib;QtGuid4.lib;QtNetworkd4.lib;QtCored4.lib;QtScriptd4.lib;QtScriptToolsd4.lib;VirtDisk.lib;libeay32MTd.lib;ssleay32MTd.lib;Shlwapi.lib;Dbghelp.lib;libboost_locale-vc120-mt-gd-1_55.lib;%(AdditionalDependencies)</AdditionalDependencies>

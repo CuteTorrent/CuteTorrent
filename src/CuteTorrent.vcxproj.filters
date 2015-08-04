@@ -1087,6 +1087,12 @@
     <CustomBuild Include="core\gui\FormFiles\InitializtionDialog.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="core\gui\Dialogs\InitializationDialog.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\InitializationWorker.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\MagnetApiController.h">
@@ -1490,12 +1496,6 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_InitializtionDialog.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\gui\Dialogs\InitializationDialog.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\InitializationWorker.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

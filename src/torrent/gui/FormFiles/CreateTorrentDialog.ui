@@ -296,71 +296,9 @@
          </item>
          <item row="5" column="3">
           <widget class="QComboBox" name="piceSizeComboBox">
-           <item>
-            <property name="text">
-             <string>PIECE_SIZE_AUTODETECT</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>16Mb</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>8Mb</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>4Mb</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>2Mb</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>1Mb</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>512Kb</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>256Kb</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>128Kb</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>64Kb</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>32Kb</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>16Kb</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>8Kb</string>
-            </property>
-           </item>
+           <property name="insertPolicy">
+            <enum>QComboBox::InsertAtTop</enum>
+           </property>
           </widget>
          </item>
          <item row="5" column="0" colspan="2">

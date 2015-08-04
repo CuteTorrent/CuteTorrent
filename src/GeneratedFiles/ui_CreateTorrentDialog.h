@@ -202,6 +202,7 @@ public:
 
         piceSizeComboBox = new QComboBox(groupBox_2);
         piceSizeComboBox->setObjectName(QString::fromUtf8("piceSizeComboBox"));
+        piceSizeComboBox->setInsertPolicy(QComboBox::InsertAtTop);
 
         gridLayout_3->addWidget(piceSizeComboBox, 5, 3, 1, 1);
 
@@ -319,22 +320,6 @@ public:
         createButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_CREATE", 0, QApplication::UnicodeUTF8));
         cancelButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_CANCEL", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_SETTINGS", 0, QApplication::UnicodeUTF8));
-        piceSizeComboBox->clear();
-        piceSizeComboBox->insertItems(0, QStringList()
-         << QApplication::translate("CreateTorrentDialog", "PIECE_SIZE_AUTODETECT", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("CreateTorrentDialog", "16Mb", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("CreateTorrentDialog", "8Mb", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("CreateTorrentDialog", "4Mb", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("CreateTorrentDialog", "2Mb", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("CreateTorrentDialog", "1Mb", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("CreateTorrentDialog", "512Kb", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("CreateTorrentDialog", "256Kb", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("CreateTorrentDialog", "128Kb", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("CreateTorrentDialog", "64Kb", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("CreateTorrentDialog", "32Kb", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("CreateTorrentDialog", "16Kb", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("CreateTorrentDialog", "8Kb", 0, QApplication::UnicodeUTF8)
-        );
         label_4->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_PIECE_SIZE", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_TRACKERS", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_WEBSEEDS", 0, QApplication::UnicodeUTF8));

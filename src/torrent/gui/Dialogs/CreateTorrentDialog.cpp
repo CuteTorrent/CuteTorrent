@@ -31,6 +31,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "qwintaskbarprogress.h"
 #include "qwintaskbarbutton.h"
 #endif
+#include <helpers/StaticHelpers.h>
+
 CreateTorrentDialog::CreateTorrentDialog(QWidget* parent, Qt::WindowFlags) : BaseWindow(OnlyCloseButton, NoResize, parent)
 {
 	setupUi(this);
@@ -59,6 +61,7 @@ CreateTorrentDialog::CreateTorrentDialog(QWidget* parent, Qt::WindowFlags) : Bas
 	pathComplitter->setCaseSensitivity(Qt::CaseInsensitive);
 	pathComplitter->setCompletionMode(QCompleter::PopupCompletion);
 	pathEdit->setCompleter(pathComplitter);
+	setupPieceComboBox();
 }
 
 
@@ -97,104 +100,45 @@ void CreateTorrentDialog::setPath(QString val)
 
 quint64 CreateTorrentDialog::getPiceSize()
 {
-	switch(piceSizeComboBox->currentIndex())
+	int currentIndex = piceSizeComboBox->currentIndex();
+	if (currentIndex > -1)
 	{
-		case 0 :
+		quint64 pieceSize = piceSizeComboBox->itemData(currentIndex).toULongLong();
+		if (pieceSize == AUTODETECT_VAL)
 		{
 			QString file = pathEdit->text();
 			QFileInfo fi(file);
-			quint64 fileSize;
-			quint64 dirSize;
-			quint64 pieceSize = 0;
+			
 			quint64 needToSet;
 
-			if(fi.isFile())
+			if (fi.isFile())
 			{
-				fileSize = fi.size();
+				quint64 fileSize = fi.size();
 				pieceSize = fileSize / 1000;
 			}
-
-			if(fi.isDir())
+			else if (fi.isDir())
 			{
-				dirSize = listFolder(file);
+				quint64 dirSize = listFolder(file);
 				pieceSize = dirSize / 1000;
 			}
 
-			if(pieceSize < (32 * KbInt))
+			int powerOf2 = log(pieceSize) / log(2);
+			if (powerOf2 > 24)
 			{
-				needToSet = 32;
+				powerOf2 = 24;
 			}
-			else if(pieceSize < (64 * KbInt))
+			if (powerOf2 < 13)
 			{
-				needToSet = 64;
+				powerOf2 = 13;
 			}
-			else if(pieceSize < (128 * KbInt))
-			{
-				needToSet = 128;
-			}
-			else if(pieceSize < (256 * KbInt))
-			{
-				needToSet = 256;
-			}
-			else if(pieceSize < (512 * KbInt))
-			{
-				needToSet = 512;
-			}
-			else if(pieceSize < (KbInt * KbInt))
-			{
-				needToSet = KbInt;
-			}
-			else if(pieceSize < (2 * KbInt * KbInt))
-			{
-				needToSet = 2048;
-			}
-			else if(pieceSize < 4 * KbInt * KbInt)
-			{
-				needToSet = 4096;
-			}
-			else if(pieceSize < 8 * KbInt * KbInt)
-			{
-				needToSet = 8 * KbInt;
-			}
-			else
-			{
-				needToSet = 16 * KbInt;
-			}
-
-			return needToSet;
+			pieceSize = 1;
+			pieceSize = pieceSize << powerOf2;
 		}
-
-		case 1 :
-			return 16 * KbInt;
-
-		case 2:
-			return 8 * KbInt;
-
-		case 3:
-			return 4 * KbInt;
-
-		case 4:
-			return 2 * KbInt;
-
-		case 5:
-			return KbInt;
-
-		case 6:
-			return 512;
-
-		case 7:
-			return 256;
-
-		case 8:
-			return 128;
-
-		case 9:
-			return 64;
-
-		default:
-			return 4 * KbInt;
+		return pieceSize;
 	}
+	return 4 * KbInt * KbInt;
 }
+
 void CreateTorrentDialog::BrowseDir()
 {
 	path = QFileDialog::getExistingDirectory(this, tr("DIALOG_OPEN_FOLDER"),
@@ -355,6 +299,17 @@ QLabel* CreateTorrentDialog::getTitleIcon()
 	return tbMenu;
 }
 
+void CreateTorrentDialog::setupPieceComboBox()
+{
+	piceSizeComboBox->addItem(tr("PIECE_SIZE_AUTODETECT"), AUTODETECT_VAL);
+	quint64 startSize = 16 * KbInt * KbInt;
+	for (int i = 1; i < 13; i++)
+	{
+		piceSizeComboBox->addItem(StaticHelpers::toKbMbGb(startSize), startSize);
+		startSize /= 2;
+	}
+	
+}
 
 ////torrentCreatorThread\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 

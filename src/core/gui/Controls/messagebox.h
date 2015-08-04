@@ -39,6 +39,7 @@ public:
 	        QMessageBox::Icon icon, const QString& title, const QString& text,
 	        QMessageBox::StandardButtons buttons);
 private:
+	QMessageBox::Icon m_icon;
 	Ui::CustomMessageBox* ui;
 	QPushButton* getCloseBtn() override;
 	QWidget* getTitleBar() override;
