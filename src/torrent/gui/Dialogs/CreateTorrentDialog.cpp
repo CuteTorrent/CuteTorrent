@@ -219,7 +219,7 @@ void CreateTorrentDialog::BeginCreate()
 		connect(creator, SIGNAL(ShowCreationSucces(QString)), this, SLOT(ShowCreationSucces(QString)));
 		connect(creator, SIGNAL(ShowCreationFailture(QString)), this, SLOT(ShowCreationFailture(QString)));
 		connect(this, SIGNAL(AbortCreation()), creator, SLOT(terminate()));
-		creator->create(pathEdit->text(), save_path, filterEdit->text(), trackers, webseeds, discribtionEdit->text(), privateCheckBox->isChecked(), getPiceSize() * KbInt);
+		creator->create(pathEdit->text(), save_path, filterEdit->text(), trackers, webseeds, discribtionEdit->text(), privateCheckBox->isChecked(), getPiceSize());
 	}
 	else
 	{
