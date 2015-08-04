@@ -316,7 +316,7 @@ void RssParser::parseRssChannel(QXmlStreamReader& reader, RssFeed* pFeed, bool& 
 			}
 			else if (reader.name().compare("ttl", Qt::CaseInsensitive) == 0)
 			{
-				pFeed->m_ttl = reader.readElementText().toInt();
+				pFeed->m_ttl = reader.readElementText().toInt()*60;
 			}
 			else if (reader.name().compare("lastBuildDate", Qt::CaseInsensitive) == 0)
 			{

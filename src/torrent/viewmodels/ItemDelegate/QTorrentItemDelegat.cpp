@@ -97,7 +97,16 @@ QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem& option, const Torrent&
 		QFont nameFont(option.font);
 		nameFont.setWeight(QFont::Bold);
 		const QFontMetrics nameFM(nameFont);
-		const QString nameStr(tor.GetName());
+		QString nameStr;
+		int queuePosition = tor.GetQueuePosition();
+		if (queuePosition > -1)
+		{
+			nameStr = QString("#%1 %2").arg(QString::number(queuePosition + 1), tor.GetName());
+		}
+		else
+		{
+			nameStr = tor.GetName();
+		}
 		int nameWidth = nameFM.width(nameStr);
 		QFont statusFont(option.font);
 		statusFont.setPointSize(int (option.font.pointSize() * 0.9));
@@ -171,12 +180,12 @@ QString QTorrentItemDelegat::GetProgressString(const Torrent& tor) const
 {
 	if(tor.isDownloading())
 	{
-		return tr("%1 STR_DOWNLOADED %2 STR_FROM %3").arg(tor.GetProgresString()).arg(tor.GetTotalDownloaded()).arg(tor.GetTotalSize());
+		return tr("%1 STR_DOWNLOADED %2 STR_FROM %3").arg(tor.GetProgresString()).arg(tor.GetTotalDownloadedStr()).arg(tor.GetTotalSizeStr());
 	}
 
 	if(tor.isSeeding())
 	{
-		return tr("%1 - %3 STR_UPLOADED %2").arg(tor.GetProgresString()).arg(tor.GetTotalUploaded()).arg(tor.GetTotalSize());
+		return tr("%1 - %3 STR_UPLOADED %2").arg(tor.GetProgresString()).arg(tor.GetTotalUploadedStr()).arg(tor.GetTotalSizeStr());
 	}
 
 	return tor.GetProgresString();
@@ -233,7 +242,16 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
 	const QIcon mimeIcon(tor.GetMimeTypeIcon());
-	QString nameStr(tor.GetName());
+	QString nameStr;
+	int queuePosition = tor.GetQueuePosition();
+	if (queuePosition > -1)
+	{
+		nameStr = QString("#%1 %2").arg(QString::number(queuePosition + 1), tor.GetName());
+	}
+	else
+	{
+		nameStr = tor.GetName();
+	}
 	QSize nameSize(nameFM.size(0, nameStr));
 	QFont statusFont(option.font);
 	statusFont.setPointSize(int (option.font.pointSize() * 0.9));

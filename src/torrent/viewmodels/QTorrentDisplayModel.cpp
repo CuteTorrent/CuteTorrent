@@ -625,11 +625,31 @@ QVariant QTorrentDisplayModel::data(const QModelIndex& index, int role) const
 		case TorrentRole:
 			var = qVariantFromValue(t);
 			break;
+		case TorrentQueuePosition: 
+			var = t->GetQueuePosition();
+			break;
+		case TorrentName: 
+			var = t->GetName();
+			break;
+		case TorrentSize: 
+			var = t->GetTotalSize();
+			break;
+		case TorrentTotalDownloaded:
+			var = t->GetTotalDownloaded();
+			break;
+		case TorrentTotalUploaded: 
+			var = t->GetTotalUploaded();
+			break;
+		case TorrentUptime:
+			var = t->GetActiveTime();
+			break;
+		case TorrentRemainingTime: 
+			var = t->GetRemainingTime();
+			break;
 
 		default:
 			break;
 	}
-
 	return var;
 }
 

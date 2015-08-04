@@ -82,6 +82,7 @@ private:
 	void initStatusBarIcons();
 	void initMainMenuIcons();
 	bool m_initFinished;
+	QHeaderView* m_pTorrentSorterView;
 	QRegExp m_httpLinkRegexp;
 	QTimer* m_pUpdateTimer;
 	StyleEngene* m_pStyleEngine;
@@ -131,6 +132,7 @@ private:
 	void createActions();
 	void setupTray();
 	void setupToolBar();
+	
 	void setupConnections();
 	void setupListView();
 	void setupTabelWidgets();
@@ -158,6 +160,7 @@ private:
 	virtual QLabel* getTitleLabel() override;
 	virtual QLabel* getTitleIcon() override;
 public slots:
+	void updateTorrentSorting(int logincalIndex, Qt::SortOrder order);
 	void HandleNewTorrent(const QString&);
 	void UpdateUL(int);
 	void UpdateDL(int);
@@ -205,5 +208,4 @@ public slots:
 };
 
 Q_DECLARE_METATYPE(QHostAddress)
-
 #endif // LTORRENT_H

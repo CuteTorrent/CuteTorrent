@@ -66,6 +66,7 @@ void PeerTableModel::Clear()
 	{
 		removeRows(0, rowCount());
 	}
+	m_peerItems.clear();
 }
 
 void PeerTableModel::updatePeer(libtorrent::peer_info peerInfo)

@@ -2,12 +2,17 @@
 #include "QTorrentDisplayModel.h"
 #include <QtCore>
 #include <float.h>
-QTorrentFilterProxyModel::QTorrentFilterProxyModel(QObject* parent) : QSortFilterProxyModel(parent), m_torrentFilter(EMPTY), m_currentFilterType(TORRENT), m_pUpdateLocker(new QMutex())
+QTorrentFilterProxyModel::QTorrentFilterProxyModel(QObject* parent) 
+	: QSortFilterProxyModel(parent)
+	, m_pUpdateLocker(new QMutex())
+	, m_currentFilterType(TORRENT)
+	, m_torrentFilter(EMPTY)
 {
 	m_pUpdateTimer = new QTimer(this);
 	m_pUpdateTimer->setInterval(400);
 	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(Update()));
 	m_pUpdateTimer->start();
+	setDynamicSortFilter(true);
 }
 
 bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const
@@ -113,7 +118,8 @@ void QTorrentFilterProxyModel::Update()
 				if (torrentIndex.isValid())
 				{
 					Torrent* pTorrent = torrentIndex.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>();
-					if (changedTorrents.contains(pTorrent->GetInfoHash()))
+
+					if (pTorrent != NULL && changedTorrents.contains(pTorrent->GetInfoHash()))
 					{
 						if (changedList.isEmpty())
 						{

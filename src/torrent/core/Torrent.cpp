@@ -465,7 +465,7 @@ QString Torrent::GetSavePath()
 
 	return "";
 }
-QString Torrent::GetTotalUploaded() const
+QString Torrent::GetTotalUploadedStr() const
 {
 	if(m_hTorrent.handle.is_valid())
 	{
@@ -474,7 +474,7 @@ QString Torrent::GetTotalUploaded() const
 
 	return "";
 }
-QString Torrent::GetTotalDownloaded() const
+QString Torrent::GetTotalDownloadedStr() const
 {
 	if(m_hTorrent.handle.is_valid())
 	{
@@ -483,7 +483,7 @@ QString Torrent::GetTotalDownloaded() const
 
 	return "";
 }
-QString Torrent::GetActiveTime()
+QString Torrent::GetActiveTimeStr()
 {
 	if(m_hTorrent.handle.is_valid())
 	{
@@ -493,7 +493,7 @@ QString Torrent::GetActiveTime()
 	return "";
 }
 
-QString Torrent::GetTotalSize() const
+QString Torrent::GetTotalSizeStr() const
 {
 	return StaticHelpers::toKbMbGb(size);
 }
@@ -516,7 +516,8 @@ QString Torrent::GetPeerString()
 	return "";
 }
 
-QString Torrent::GetRemainingTime()
+
+QString Torrent::GetRemainingTimeStr()
 {
 	QString res;
 
@@ -714,6 +715,59 @@ QString Torrent::GetDiscribtion()
 	}
 
 	return "";
+}
+
+quint64 Torrent::GetTotalSize()
+{
+	return size;
+}
+
+quint64 Torrent::GetTotalDownloaded()
+{
+	return m_hTorrent.all_time_download;
+}
+
+quint64 Torrent::GetTotalUploaded()
+{
+	return m_hTorrent.all_time_upload;
+}
+
+float Torrent::GetRemainingTime()
+{
+	
+
+	if (m_hTorrent.handle.is_valid())
+	{
+		float res;
+		if (isSeeding() || isPaused())
+		{
+			res = std::numeric_limits<float>::infinity();
+			return res;
+		}
+
+		if (m_hTorrent.download_rate < KbInt * 10)
+		{
+			res = std::numeric_limits<float>::infinity();
+		}
+		else
+		{
+			res = size * (1.0f - m_hTorrent.progress_ppm / 1000000.f) / m_hTorrent.download_rate;
+			
+		}
+		return res;
+	}
+
+	return std::numeric_limits<float>::infinity();
+}
+
+int Torrent::GetActiveTime()
+{
+	return m_hTorrent.active_time;
+}
+
+int Torrent::GetQueuePosition() const
+{
+	return m_hTorrent.queue_position;
 }
 
 void Torrent::GetPieceAvalibility(std::vector<int>& availibility)

@@ -30,6 +30,7 @@ enum FilterType
 	NONE
 };
 Q_DECLARE_METATYPE(FilterType)
+
 struct torrent_creation_info
 {
 	std::string path, filter, describtion;

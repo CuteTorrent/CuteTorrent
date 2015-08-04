@@ -291,22 +291,24 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 	{
 		QString pathCur = item->GetName();
 		QIcon icon;
-		QFileInfo info(pathCur);
+		QFileInfo filePathInfo(pathCur);
 		QFileIconProvider iPorv;
 
 		if (item->GetType() == FileViewTreeItem::FILE)
 		{
 			QPixmap pixmap;
 
-			if(!iconCache.find(info.suffix(), &pixmap))
+			QString suffix = filePathInfo.suffix();
+			if(!iconCache.find(suffix, &pixmap))
 			{
-				QTemporaryFile tmpfile("tempFileXXXXXX." + info.suffix());
+				QTemporaryFile tmpfile(StaticHelpers::CombinePathes(QDesktopServices::storageLocation(QDesktopServices::TempLocation),"tempFileXXXXXX." + suffix));
 				tmpfile.open();
 				tmpfile.close();
-				QFileInfo info2(tmpfile.fileName());
-				icon = iPorv.icon(info2);
+				qDebug() << "Temp file for icon path" << tmpfile.fileName();
+				QFileInfo tempFileInfo(tmpfile.fileName());
+				icon = iPorv.icon(tempFileInfo);
 				tmpfile.remove();
-				iconCache.insert(info.suffix(), icon.pixmap(QSize(64, 64)));
+				iconCache.insert(suffix, icon.pixmap(QSize(64, 64)));
 			}
 			else
 			{

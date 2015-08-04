@@ -24,6 +24,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QFileInfo>
 #include <QTemporaryFile>
 #include <QQueue>
+#include <QDesktopServices>
+#include <helpers/StaticHelpers.h>
+
 FileTreeModel::~FileTreeModel()
 {
 	delete rootItem;
@@ -250,9 +253,11 @@ QVariant FileTreeModel::data(const QModelIndex& index, int role) const
 		QFileInfo info(pathCur);
 		QFileIconProvider iPorv;
 
-		if(!info.suffix().isEmpty() && item->childCount() == 0)
+		QString suffix = info.suffix();
+		if(!suffix.isEmpty() && item->childCount() == 0)
 		{
-			QTemporaryFile tmpfile("tempFileXXXXXX." + info.suffix());
+			QString fileTemplate = StaticHelpers::CombinePathes(QDesktopServices::storageLocation(QDesktopServices::TempLocation), "tempFileXXXXXX." + suffix);
+			QTemporaryFile tmpfile(fileTemplate);
 			tmpfile.open();
 			tmpfile.close();
 			QFileInfo info2(tmpfile.fileName());

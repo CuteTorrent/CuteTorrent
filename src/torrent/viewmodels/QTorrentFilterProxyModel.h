@@ -1,6 +1,7 @@
 
 #pragma once
 #include <QtGui>
+#include "defs.h"
 enum TorrentFilterType
 {
 	ACTIVE,
@@ -13,6 +14,7 @@ enum TorrentFilterType
 
 class QTorrentFilterProxyModel : public QSortFilterProxyModel
 {
+
 	Q_OBJECT
 public:
 	QTorrentFilterProxyModel(QObject* parent = 0);
@@ -33,6 +35,4 @@ private:
 	TorrentFilterType m_torrentFilter;
 protected:
 	bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
-
-
 };
