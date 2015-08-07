@@ -14,25 +14,26 @@ enum TorrentFilterType
 
 class QTorrentFilterProxyModel : public QSortFilterProxyModel
 {
-
+private:
 	Q_OBJECT
 public:
 	QTorrentFilterProxyModel(QObject* parent = 0);
 	void setGroupFilter(QString groupName);
 	void setTorrentFilter(TorrentFilterType activityFilter);
-private slots:
-	void Update();
+	void setTorrentSearchFilter(QString filter);
 private:
 	enum InternalFilterType
 	{
 		GROUP,
 		TORRENT
 	};
-	QTimer* m_pUpdateTimer;
+	
 	QMutex* m_pUpdateLocker;
 	InternalFilterType m_currentFilterType;
 	QString m_groupFilter;
+	QRegExp m_torrentSearchFilter;
 	TorrentFilterType m_torrentFilter;
 protected:
 	bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+	bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
 };

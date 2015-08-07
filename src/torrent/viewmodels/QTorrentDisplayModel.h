@@ -48,6 +48,11 @@ class QTorrentDisplayModel: public QAbstractListModel
 	int selectedRow;
 	QMenu* menu;
 	QMenu* groupsMenu;
+	QMenu* queueMenu;
+	QAction* queueUp;
+	QAction* queueDown;
+	QAction* queueTop;
+	QAction* queueBottom;
 	QAction* pauseTorrent;
 	QAction* resumeTorrent;
 	QAction* openDir;
@@ -64,23 +69,25 @@ class QTorrentDisplayModel: public QAbstractListModel
 	QAction* pauseResumeSeparator;
 	TorrentManagerPtr m_pTorrentManager;
 	Torrent* m_pCurrentTorrent;
+	QTimer* m_pUpdateTimer;
 	QMutex* locker;
 	QTorrentFilterProxyModel* m_pProxyFilterModel;
-	bool m_initFinished;
 	QString getFirstAvailibleFile(files_info& filesInfo);
 	bool checkAllMountable(QModelIndexList& indexes);
 	bool checkAllSuperSeed(QModelIndexList& indexes);
 	bool checkAllHasMedia(QModelIndexList& indexes);
 	bool checkAllSequential(QModelIndexList& indexes);
+	bool checkAllQueueable(QModelIndexList& indexes);
 	void checkPausedResumed(QModelIndexList indexes, bool& isAllPaused, bool& isAllResumed, bool& hasPaused, bool& hasResumed);
 public:
 	QTorrentDisplayModel(QTreeView*, QTorrentFilterProxyModel*, QObject*);
 	~QTorrentDisplayModel();
-	void setInitFinished(bool value);
-	enum action { stop, pause, resume, remove, remove_all, move_storrage,
-	              set_sequntial, set_superseed, generate_magmet, update_trackers,
-	              rehash, change_group
-	            };
+	enum action 
+	{
+		stop, pause, resume, remove, remove_all, move_storrage,
+		set_sequntial, set_superseed, generate_magmet, update_trackers,
+		rehash, change_group, queue_up, queue_down, queue_top, queue_bottom
+	};
 	void ActionOnSelectedItem(action wtf);
 	void retranslate();
 
@@ -121,10 +128,14 @@ public slots:
 	void generateMagnetLink();
 	void changeGroup();
 	void setupContextMenu();
-	void OnAddTorrent();
+	void OnTorrentAdded();
 	void PauseSelected();
 	void ResumeSelected();
 
+	void MoveUpQueue();
+	void MoveDownQueue();
+	void MoveTopQueue();
+	void MoveBottomQueue();
 };
 
 

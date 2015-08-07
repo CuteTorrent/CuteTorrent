@@ -90,44 +90,37 @@ int MAX3(int a, int b, int c)
 QSize
 QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem& option, const Torrent& tor) const
 {
-	try
-	{
-		const QStyle* style(QApplication::style());
-		const int iconSize(style->pixelMetric(QStyle::PM_MessageBoxIconSize));
-		QFont nameFont(option.font);
-		nameFont.setWeight(QFont::Bold);
-		const QFontMetrics nameFM(nameFont);
-		QString nameStr;
-		int queuePosition = tor.GetQueuePosition();
-		if (queuePosition > -1)
-		{
-			nameStr = QString("#%1 %2").arg(QString::number(queuePosition + 1), tor.GetName());
-		}
-		else
-		{
-			nameStr = tor.GetName();
-		}
-		int nameWidth = nameFM.width(nameStr);
-		QFont statusFont(option.font);
-		statusFont.setPointSize(int (option.font.pointSize() * 0.9));
-		const QFontMetrics statusFM(statusFont);
-		const QString statusStr(GetStatusString(tor));
-		int statusWidth = statusFM.width(statusStr);
-		QFont progressFont(statusFont);
-		const QFontMetrics progressFM(progressFont);
-		const QString progressStr(GetProgressString(tor));
-		const int progressWidth = progressFM.width(progressStr);
-		const QSize m(margin(*style));
-		int width = m.width() + iconSize  + std::max(nameWidth, statusWidth + progressWidth);
-		int height = m.height() * 3 + nameFM.lineSpacing() + 2 * GUI_PAD + progressFM.lineSpacing();
-		return QSize(width, height);
-	}
-	catch(...)
-	{
-		qDebug() << "exception in size hint";
-	}
 
-	return QSize(0, 0);
+	const QStyle* style(QApplication::style());
+	const int iconSize(style->pixelMetric(QStyle::PM_MessageBoxIconSize));
+	QFont nameFont(option.font);
+	nameFont.setWeight(QFont::Bold);
+	const QFontMetrics nameFM(nameFont);
+	QString nameStr;
+	int queuePosition = tor.GetQueuePosition();
+	if (queuePosition > -1)
+	{
+		nameStr = QString("#%1 %2").arg(QString::number(queuePosition + 1), tor.GetName());
+	}
+	else
+	{
+		nameStr = tor.GetName();
+	}
+	int nameWidth = nameFM.width(nameStr);
+	QFont statusFont(option.font);
+	statusFont.setPointSize(int(option.font.pointSize() * 0.9));
+	const QFontMetrics statusFM(statusFont);
+	const QString statusStr(GetStatusString(tor));
+	int statusWidth = statusFM.width(statusStr);
+	QFont progressFont(statusFont);
+	const QFontMetrics progressFM(progressFont);
+	const QString progressStr(GetProgressString(tor));
+	const int progressWidth = progressFM.width(progressStr);
+	const QSize m(margin(*style));
+	int width = m.width() + iconSize + std::max(nameWidth, statusWidth + progressWidth);
+	int height = m.height() * 3 + nameFM.lineSpacing() + 2 * GUI_PAD + progressFM.lineSpacing();
+	return QSize(width, height);
+
 }
 
 QSize

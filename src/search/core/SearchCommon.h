@@ -1,11 +1,11 @@
 #ifndef SEARCHCOMMON_H
 #define SEARCHCOMMON_H
 
-#include <boost/shared_ptr.hpp>
+#include "Singleton.h"
 
-class SearchItemsStorrage;
+DEFINE_PTR_CALSS(SearchItemsStorrage)
 
-class SearchEngine;
-typedef boost::shared_ptr<SearchEngine> SearchEnginePtr;
+DEFINE_PTR_CALSS(SearchEngine)
+
 
 #endif // SEARCHCOMMON_H

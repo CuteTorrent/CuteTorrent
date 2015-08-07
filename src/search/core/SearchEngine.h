@@ -6,6 +6,7 @@
 #include "SearchCommon.h"
 #include <QtScript/QScriptEngine>
 #include "QSgmlTag.h"
+
 class QScriptEngineDebugger;
 class QMainWindow;
 class SearchEngine : public QObject
@@ -15,7 +16,7 @@ public:
 	static SearchEnginePtr getInstance();
 	~SearchEngine();
 	void DoSerach(QString& token, ISerachProvider::SearchCategories category, int page);
-	SearchItemsStorrage* GetResults();
+	SearchItemsStorragePtr GetResults();
 	QList<ISerachProvider*> GetSearchProviders();
 	void enableScriptDebugging();
 	void disableScriptDebugging();
@@ -38,7 +39,7 @@ private:
 	SearchEngine();
 	void loadSearchProvider(const QString path);
 	void init();
-	SearchItemsStorrage* m_result;
+	SearchItemsStorragePtr m_result;
 	QList<ISerachProvider*> m_pSearchProviders;
 	static boost::weak_ptr<SearchEngine> m_pInstance;
 	static void listSearchResFromScriptVal(const QScriptValue& value, QList<SearchResult*>& list);

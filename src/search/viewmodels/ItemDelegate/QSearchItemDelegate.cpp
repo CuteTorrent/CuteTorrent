@@ -80,7 +80,7 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	QFont statusFont(option.font);
 	statusFont.setPointSize(int (option.font.pointSize() * 0.9));
 	const QFontMetrics statusFM(statusFont);
-	const QString statusStr(res->Size());
+	const QString statusStr(StaticHelpers::toKbMbGb(res->Size()));
 	QFont progressFont(statusFont);
 	const QFontMetrics progressFM(progressFont);
 	const QString progressStr(GetPeersStr(res));
@@ -160,7 +160,7 @@ QSize QSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
 
 	QFont progressFont(statusFont);
 	const QFontMetrics progressFM(progressFont);
-	const QString progressStr(res->Size());
+	const QString progressStr(StaticHelpers::toKbMbGb(res->Size()));
 	const int progressWidth = progressFM.width(progressStr);
 	const QSize m(margin(*style));
 	return QSize(m.width() + iconSize + MAX3(nameWidth, statusWidth, progressWidth),
@@ -171,7 +171,7 @@ QString QSearchItemDelegate::GetPeersStr(const SearchResult* res) const
 {
 	if(res->Leechers() >= 0 && res->Seeders() >= 0)
 	{
-		return tr("Leechs: %1 Seeds: %2").arg(res->Leechers(), res->Seeders());
+		return tr("Leechs: %1 Seeds: %2").arg(QString::number(res->Leechers()), QString::number(res->Seeders()));
 	}
 	else
 	{

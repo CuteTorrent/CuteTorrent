@@ -41,8 +41,7 @@ MultipleDTDialog::MultipleDTDialog(QStringList& _files, QWidget* parent/* =0 */,
 	QStandardItemModel* model = new QStandardItemModel(files.count(), 1);
 	listView->setModel(model);
 	listView->setSelectionMode(QAbstractItemView::SingleSelection);
-	QString temp;
-	QIcon iso = StyleEngene::getInstance()->guessMimeIcon("iso", temp);
+	QIcon iso = StyleEngene::getInstance()->guessMimeIcon("iso");
 
 	for(int i = 0; i < files.count(); i++)
 	{

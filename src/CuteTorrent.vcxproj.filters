@@ -832,6 +832,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_InitializationDialog.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\gui\Controls\EditableHeaderView.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_EditableHeaderView.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="search\viewmodels\QSearchFilterModel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -1093,6 +1102,11 @@
     <CustomBuild Include="core\InitializationWorker.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\EditableHeaderView.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\translations\cutetorrent_en_US.qm" />
+    <CustomBuild Include="Resources\translations\cutetorrent_ru_RU.qm" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\MagnetApiController.h">
@@ -1147,8 +1161,6 @@
     <None Include="search\dataModels\SerachResult.h">
       <Filter>Generated Files</Filter>
     </None>
-    <None Include="Resources\translations\cutetorrent_ru_RU.qm" />
-    <None Include="Resources\translations\cutetorrent_en_US.qm" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="VideoPlayer\MediaControls.ui">
@@ -1496,6 +1508,12 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_InitializtionDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="search\viewmodels\QSearchFilterModel.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="webControll\RconCommon.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -38,7 +38,7 @@ public slots:
 	void SetHighForCurrentFile();
 	void SetNotDownloadForCurrentFile();
 private:
-	long long  CalculateFolderSize(FileViewTreeItem* item) const;
+	long long CalculateFolderSize(FileViewTreeItem* item) const;
 	float CalculateFolderReady(FileViewTreeItem* item) const;
 	void setupFileTabelContextMenu();
 	const static int COLUMN_COUNT = 4;

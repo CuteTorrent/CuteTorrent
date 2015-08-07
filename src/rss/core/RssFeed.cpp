@@ -146,6 +146,7 @@ void RssFeed::Update()
 	QNetworkRequest request(m_url);
 	QList<QNetworkCookie> cookies = buildCookies();
 	m_pNetManager->cookieJar()->setCookiesFromUrl(cookies, m_url);
+	request.setRawHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36");
 	m_pNetManager->get(request);
 	m_isUpdating = true;
 }

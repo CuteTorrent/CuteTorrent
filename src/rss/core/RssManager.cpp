@@ -20,6 +20,7 @@ RssManager::RssManager(QObject* parent) : QObject(parent)
 	QTimer::singleShot(500, this, SLOT(LoadDownloadRules()));
 	connect(this, SIGNAL(Notify(int, QString, QVariant)), m_pNotificationSystem.get(), SLOT(OnNewNotification(int, QString, QVariant)));;
 	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFile*)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFile*)));
+	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadError(QUrl, QString)), SLOT(onTorrentDownloadError(QUrl, QString)));
 }
 
 RssFeed* RssManager::addFeed(QUrl url, bool& isNew)
@@ -391,6 +392,15 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 		RssItem* rssItem = rssFeed->GetFeedItem(info.rssItemId);
 		rssItem->setDownloadingTorrent(pTorrentInfo->infoHash);
 	}
+}
+
+void RssManager::onTorrentDownloadError(QUrl url, QString error)
+{
+	TorrentDownloadInfo info = m_activeTorrentDownloads[url];
+	m_activeTorrentDownloads.remove(url);
+	RssFeed* pFeed = findFeed(info.rssFeedId);
+	RssItem* feedItem = pFeed->GetFeedItem(info.rssItemId);
+	emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(feedItem->title(), error), QVariant());
 }
 
 void RssManager::onMagnetError(QString error)

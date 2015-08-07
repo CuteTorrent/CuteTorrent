@@ -9,6 +9,8 @@ InitializationDialog::InitializationDialog(QWidget* parent)
 	m_pWorker = new InitializationWorker();
 	setupUi(this);
 	setupCustomWindow();
+	setupWindowIcons();
+	pbClose->setEnabled(false);
 	m_pWorker->moveToThread(m_pInitThread);
 	connect(m_pInitThread, SIGNAL(started()), m_pWorker, SLOT(PeformInit()));
 	connect(m_pWorker, SIGNAL(progress(int,QString)), SLOT(onProgressChanged(int,QString)), Qt::QueuedConnection);

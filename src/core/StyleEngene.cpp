@@ -50,7 +50,30 @@ void StyleEngene::setStyle(QString internalName)
 	emit styleChanged();
 }
 
-QIcon StyleEngene::guessMimeIcon(const QString& suffix, QString type)
+QString StyleEngene::gessMimeIconType(const QString& suffix)
+{
+	QString lSuffix = suffix.toLower();
+
+	if (fileIcons[0].isNull())
+	{
+		initIcons();
+	}
+
+	if (!suffix.isEmpty())
+	{
+		for (int i = 0; i < TYPE_COUNT; ++i)
+		{
+			if (suffixes[i].contains(lSuffix))
+			{
+				return EnumStrings[i];
+			}
+		}
+	}
+
+	return "folder";
+}
+
+QIcon StyleEngene::guessMimeIcon(const QString& suffix)
 {
 	QString lSuffix = suffix.toLower();
 
@@ -65,7 +88,6 @@ QIcon StyleEngene::guessMimeIcon(const QString& suffix, QString type)
 		{
 			if(suffixes[i].contains(lSuffix))
 			{
-				type = EnumStrings[i];
 				return fileIcons[i];
 			}
 		}
@@ -167,7 +189,7 @@ void StyleEngene::initFileSuffixes()
 	const char* vid_types[] =
 	{
 		"3gp", "asf", "avi", "mov", "mpeg", "mpg", "mp4", "mkv", "mov",
-		"ogm", "ogv", "qt", "rm", "wmv", "m2ts"
+		"ogm", "ogv", "qt", "rm", "wmv", "m2ts", "m4v"
 	};
 
 	for (int i = 0, n = sizeof(vid_types) / sizeof(vid_types[0]); i < n; ++i)

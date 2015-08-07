@@ -340,10 +340,6 @@ void TorrentManager::InitSession(boost::function<void(int proggres, QString item
 			qCritical() << StaticHelpers::translateLibTorrentError(ec);
 		}
 		progressCallback((i - begin) * 100 / size, pTorrent->GetName());
-#ifdef Q_WS_WIN
-		Sleep(0);
-#endif
-
 	}
 
 	emit initCompleted();

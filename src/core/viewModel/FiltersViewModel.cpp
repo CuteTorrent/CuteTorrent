@@ -183,14 +183,13 @@ void FiltersViewModel::UpdateGroupItems()
 	{
 		groupsItem->ClearChildren();
 		QList<GroupForFileFiltering> groups = QApplicationSettings::getInstance()->GetFileFilterGroups();
-		QString type;
 		StyleEngene* pStyleEngine = StyleEngene::getInstance();
 
 		for (int i = 0; i < groups.count(); i++)
 		{
 			GroupForFileFiltering group = groups[i];
 			QString extension = group.Extensions().split('|')[0];
-			FilterTreeItem* groupItem = new FilterTreeItem(group.Name(), pStyleEngine->guessMimeIcon(extension, type), GROUP_FILTER_TYPE, group.Name(), groupsItem);
+			FilterTreeItem* groupItem = new FilterTreeItem(group.Name(), pStyleEngine->guessMimeIcon(extension), GROUP_FILTER_TYPE, group.Name(), groupsItem);
 			groupsItem->AddChlld(groupItem);
 		}
 	}
@@ -305,13 +304,12 @@ void FiltersViewModel::BuildTree()
 	m_rootItems.append(groupsItem);
 
 	QList<GroupForFileFiltering> groups = QApplicationSettings::getInstance()->GetFileFilterGroups();
-	QString type;
-
+	
 	for (int i = 0; i < groups.count(); i++)
 	{
 		GroupForFileFiltering group = groups[i];
 		QString extension = group.Extensions().split('|')[0];
-		FilterTreeItem* groupItem = new FilterTreeItem(group.Name(), pStyleEngine->guessMimeIcon(extension, type), GROUP_FILTER_TYPE, group.Name(), groupsItem);
+		FilterTreeItem* groupItem = new FilterTreeItem(group.Name(), pStyleEngine->guessMimeIcon(extension), GROUP_FILTER_TYPE, group.Name(), groupsItem);
 		groupsItem->AddChlld(groupItem);
 	}
 
@@ -356,7 +354,7 @@ void FiltersViewModel::UpdateCounters()
 	for (int j = 0; j < torrents->size(); j++)
 	{
 		Torrent* pTorrent = torrents->at(j);
-		if (abs(pTorrent->GetProgress() - 100.0f) < FLT_EPSILON)
+		if (100.f - pTorrent->GetProgress() < FLT_EPSILON)
 		{
 			completedCount++;
 		}

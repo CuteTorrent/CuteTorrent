@@ -91,15 +91,9 @@ Torrent::Torrent(torrent_status hTorrent, QString group)
 
 	base_suffix = StaticHelpers::GetBaseSuffix(storrgae);
 
-	if (!base_suffix.isEmpty())
-	{
-		icon = StyleEngene::getInstance()->guessMimeIcon(base_suffix, type);
-	}
-	else
-	{
-		icon = QIcon(":/icons/my-folder.ico");
-		type = "folder";
-	}
+	
+	type = StyleEngene::getInstance()->gessMimeIconType(base_suffix);
+	
 }
 
 bool Torrent::hasError() const
@@ -124,7 +118,7 @@ bool Torrent::isActive() const
 {
 	return (m_hTorrent.download_rate > 2 * KbInt ||
 			m_hTorrent.upload_rate > 2 * KbInt ||
-			m_hTorrent.state == torrent_status::checking_files);
+			m_hTorrent.state == torrent_status::checking_files) && !m_hTorrent.paused;
 }
 std::vector<peer_info> Torrent::GetPeerInfo()
 {
@@ -1014,6 +1008,39 @@ void Torrent::ReplaceTracker(QString original, QString changed)
 		currenttTrackers.push_back(announce_entry(changed.toStdString()));
 		m_hTorrent.handle.replace_trackers(currenttTrackers);
 		m_hTorrent.handle.force_reannounce();
+	}
+}
+
+void Torrent::QueueUp()
+{
+	if (m_hTorrent.handle.is_valid())
+	{
+		m_hTorrent.handle.queue_position_up();
+	}
+
+}
+
+void Torrent::QueueDown()
+{
+	if (m_hTorrent.handle.is_valid())
+	{
+		m_hTorrent.handle.queue_position_down();
+	}
+}
+
+void Torrent::QueueTop()
+{
+	if (m_hTorrent.handle.is_valid())
+	{
+		m_hTorrent.handle.queue_position_top();
+	}
+}
+
+void Torrent::QueueBottom()
+{
+	if (m_hTorrent.handle.is_valid())
+	{
+		m_hTorrent.handle.queue_position_bottom();
 	}
 }
 

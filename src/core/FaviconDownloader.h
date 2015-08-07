@@ -13,6 +13,7 @@ public:
 	QPixmap getFavicon(QString url);
 	void InsertWarningInCache(QUrl& url);
 private:
+	QRegExp m_domainNameMatcher;
 	QMutex* m_pSynkMutex;
 	StyleEngene* m_pStyleEngine;
 	QNetworkAccessManager* m_pNatworkManager;

@@ -8,10 +8,6 @@ QTorrentFilterProxyModel::QTorrentFilterProxyModel(QObject* parent)
 	, m_currentFilterType(TORRENT)
 	, m_torrentFilter(EMPTY)
 {
-	m_pUpdateTimer = new QTimer(this);
-	m_pUpdateTimer->setInterval(400);
-	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(Update()));
-	m_pUpdateTimer->start();
 	setDynamicSortFilter(true);
 }
 
@@ -25,37 +21,39 @@ bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex
 
 		if (pTorrent != NULL)
 		{
+			bool searchFilterAccept = m_torrentSearchFilter.indexIn(pTorrent->GetName()) > -1;
 			switch (m_currentFilterType)
 			{
 				case GROUP:
 					if (m_groupFilter.isEmpty())
 					{
-						return true;
+						return searchFilterAccept;
 					}
-					return pTorrent->GetGroup().compare(m_groupFilter) == 0;
+					return pTorrent->GetGroup().compare(m_groupFilter) == 0 && searchFilterAccept;
 
 				case TORRENT:
 				{
+					
 					switch (m_torrentFilter)
 					{
 						case ACTIVE:
-							return pTorrent->isActive();
+							return pTorrent->isActive() && searchFilterAccept;
 
 						case NOT_ACTIVE:
-							return !pTorrent->isActive();
+							return !pTorrent->isActive() && searchFilterAccept;
 
 						case SEEDING:
-							return pTorrent->isSeeding();
+							return pTorrent->isSeeding() && searchFilterAccept;
 
 						case DOWNLOADING:
-							return pTorrent->isDownloading();
+							return pTorrent->isDownloading() && searchFilterAccept;
 
 						case COMPLETED:
 							
-							return abs(pTorrent->GetProgress() - 100.0f) < FLT_EPSILON;
+							return 100.0f - pTorrent->GetProgress() < FLT_EPSILON && searchFilterAccept;
 
 						case EMPTY:
-							return true;
+							return searchFilterAccept;
 
 						default:
 							break;
@@ -66,11 +64,42 @@ bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex
 
 				default:
 					break;
+				
+
 			}
 		}
 	}
 
-	return true;
+	return false;
+}
+#define COMPARE_EQUALBY_NAME(x,y)  \
+	if (x == y)  \
+	{ \
+		return leftTorrent->GetName().compare(rightTorrent->GetName()) < 0;\
+	} \
+	return x < y;
+bool QTorrentFilterProxyModel::lessThan(const QModelIndex& left, const QModelIndex& right) const
+{
+	if (left.isValid() && right.isValid())
+	{
+		Torrent* rightTorrent = right.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>();
+		Torrent* leftTorrent = left.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>();
+
+		if (rightTorrent != NULL && leftTorrent != NULL)
+		{
+			QTorrentDisplayModel::Role torrentSortRole = QTorrentDisplayModel::Role(sortRole());
+			QVariant leftData = left.data(torrentSortRole);
+			QVariant rightData = right.data(torrentSortRole);
+
+			if (leftData == rightData)
+			{
+				return leftTorrent->GetName().compare(rightTorrent->GetName()) < 0;
+			} 
+			return QSortFilterProxyModel::lessThan(left, right);
+		}
+
+	}
+	return false;
 }
 
 void QTorrentFilterProxyModel::setGroupFilter(QString groupName)
@@ -89,67 +118,11 @@ void QTorrentFilterProxyModel::setTorrentFilter(TorrentFilterType activityFilter
 	invalidateFilter();
 }
 
-typedef QPair<QModelIndex, QModelIndex> IndexInterval;
-
-void QTorrentFilterProxyModel::Update()
+void QTorrentFilterProxyModel::setTorrentSearchFilter(QString filter)
 {
 	QMutexLocker lockMutex(m_pUpdateLocker);
+	m_torrentSearchFilter = QRegExp(filter, Qt::CaseInsensitive, QRegExp::Wildcard);
 	invalidateFilter();
-	//emit dataChanged(index(0, 0), index(rowCount() - 1, 0));
-	//QTime timer;
-	//timer.start();
-	TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
-	QSet<QString> changedTorrents;
-	pTorrentManager->getRecentUpdatedTorrents(changedTorrents);
-	if (changedTorrents.size() > 0)
-	{
-		int rowCnt = rowCount();
-		if (rowCnt == changedTorrents.size())
-		{
-			emit dataChanged(index(0, 0), index(rowCnt - 1, 0));
-		}
-		else
-		{
-			QList<IndexInterval> changedList;
-
-			for (int i = 1; i < rowCnt; i++)
-			{
-				QModelIndex torrentIndex = index(i, 0);
-				if (torrentIndex.isValid())
-				{
-					Torrent* pTorrent = torrentIndex.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>();
-
-					if (pTorrent != NULL && changedTorrents.contains(pTorrent->GetInfoHash()))
-					{
-						if (changedList.isEmpty())
-						{
-							changedList.append(qMakePair(torrentIndex, torrentIndex));
-						}
-						else
-						{
-							IndexInterval last = changedList.last();
-							if (last.second.row() + 1 == torrentIndex.row())
-							{
-								last.second = torrentIndex;
-								changedList.replace(changedList.size() - 1, last);
-							}
-							else
-							{
-								changedList.append(qMakePair(torrentIndex, torrentIndex));
-							}
-
-						}
-					}
-				}
-			}
-			//	qDebug() << "Changed Intervals count " << changedList.size() << changedList;
-			for (int i = 0; i < changedList.size(); i++)
-			{
-				IndexInterval chagedInterval = changedList[i];
-				emit dataChanged(chagedInterval.first, chagedInterval.second);
-			}
-		}
-
-	}
-	//qDebug() << "Update take: " << double(timer.elapsed()) / 1000;
 }
+
+

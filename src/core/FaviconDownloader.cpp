@@ -2,7 +2,10 @@
 #include "FaviconDownloader.h"
 #include "StaticHelpers.h"
 #include "StyleEngene.h"
-FaviconDownloader::FaviconDownloader(QObject* parent) : QObject(parent), m_pStyleEngine(StyleEngene::getInstance())
+FaviconDownloader::FaviconDownloader(QObject* parent) 
+	: QObject(parent)
+	, m_pStyleEngine(StyleEngene::getInstance())
+	, m_domainNameMatcher("([a-z0-9][a-z0-9\\-]{1,63}\\.[a-z\\.]{2,6})$", Qt::CaseInsensitive, QRegExp::RegExp2)
 {
 	m_pNatworkManager = new QNetworkAccessManager(this);
 	m_pDiskCache = StaticHelpers::GetGLobalWebCache();
@@ -20,7 +23,22 @@ FaviconDownloader::~FaviconDownloader()
 QPixmap FaviconDownloader::getFavicon(QString urlStr)
 {
 	QUrl url(urlStr);
-	QString faviconUrlStr = QString("%1://%2/favicon.ico").arg(url.scheme(), url.host());
+	
+	QString domainName;
+	if (m_domainNameMatcher.indexIn(url.host()) != -1)
+	{
+		domainName = m_domainNameMatcher.cap(1);
+	}
+	else
+	{
+		domainName = url.host();
+	}
+	//qDebug() << "Domain name:" << domainName;
+	if (!url.scheme().startsWith("http"))
+	{
+		url.setScheme("http");
+	}
+	QString faviconUrlStr = QString("%1://%2/favicon.ico").arg(url.scheme(), domainName);
 	QUrl faviconUrl(faviconUrlStr);
 	QIODevice* pData = m_pDiskCache->data(faviconUrl);
 
@@ -43,11 +61,12 @@ void FaviconDownloader::InsertWarningInCache(QUrl& url)
 	QString urlStr = url.toString();
 	while (redirectionMap.contains(urlStr))
 	{
+		QString oldUrl = urlStr;
 		urlStr = redirectionMap[urlStr];
-		redirectionMap.remove(urlStr);
+		redirectionMap.remove(oldUrl);
 	}
 
-	metaData.setUrl(url);
+	metaData.setUrl(urlStr);
 	metaData.setSaveToDisk(true);
 	atts[QNetworkRequest::HttpStatusCodeAttribute] = 200;
 	atts[QNetworkRequest::HttpReasonPhraseAttribute] = "Ok";
@@ -68,6 +87,7 @@ void FaviconDownloader::InsertWarningInCache(QUrl& url)
 void FaviconDownloader::replyReady(QNetworkReply* pReply)
 {
 	QUrl url = pReply->url();
+	qDebug() << "Reply from url" << url;
 	QVariant fromCache = pReply->attribute(QNetworkRequest::SourceIsFromCacheAttribute);
 	downloadingList.removeOne(url.host());
 
@@ -131,25 +151,31 @@ void FaviconDownloader::replyReady(QNetworkReply* pReply)
 				{
 					redirectionTarget.setUrl("http://" + url.host() + redirectionTarget.toString());
 				}
-
+				qDebug() << "redirecting to:" << redirectionTarget;
 				redirectionMap.insert(redirectionTarget.toString(), url.toString());
 				getFromWeb(redirectionTarget);
 			}
 			else
 			{
+				if (data.size() == 0)
+				{
+					InsertWarningInCache(url);
+					return;
+				}
 				QString urlStr = url.toString();
 				if (redirectionMap.contains(urlStr))
 				{
 					while (redirectionMap.contains(urlStr))
 					{
+						QString oldUrl = urlStr;
 						urlStr = redirectionMap[urlStr];
-						redirectionMap.remove(urlStr);
+						redirectionMap.remove(oldUrl);
 					}
 
 
 					QNetworkCacheMetaData metaData;
 					QNetworkCacheMetaData::AttributesMap atts;
-					metaData.setUrl(url);
+					metaData.setUrl(urlStr);
 					metaData.setSaveToDisk(true);
 					atts[QNetworkRequest::HttpStatusCodeAttribute] = 200;
 					atts[QNetworkRequest::HttpReasonPhraseAttribute] = "Ok";
@@ -163,7 +189,7 @@ void FaviconDownloader::replyReady(QNetworkReply* pReply)
 						return;
 					}
 
-					dev->write(pReply->readAll());
+					dev->write(data);
 					m_pDiskCache->insert(dev);
 				}
 			}

@@ -17,27 +17,36 @@ void UploadController::service(HttpRequest& request, HttpResponse& response)
 	{
 		//std::map<QByteArray,QByteArray> parametrs=request.getParameterMap().toStdMap();
 		QString save_path = request.getParameter("savePath");
-		boost::scoped_ptr<QTemporaryFile> safeFile(request.getUploadedFile("files[]"));
+		QTemporaryFile* file = request.getUploadedFile("files[]");
+		if (file != NULL)
+		{
+			if (save_path.isEmpty() || !QDir(save_path).exists())
+			{
+				response.setStatus(400, "Bad Request");
+				response.write("<BODY><h3>400 Bad Request.</h3>");
+				response.write("<h3>Invalid save-path</h3></BODY>");
+				return;
+			}
 
-		if(save_path.isEmpty() ||  !QDir(save_path).exists())
+			error_code ec;
+			QString tempFileName = file->fileName();
+			m_pTorrentManager->AddTorrent(tempFileName, save_path, ec);
+
+			if (ec)
+			{
+				response.setStatus(500, " Internal Server Error");
+				response.write("<BODY><h3>500  Internal Server Error.</h3>");
+				response.write(QString("<h3>" + StaticHelpers::translateLibTorrentError(ec) + "</h3></BODY>").toUtf8());
+				return;
+			}
+		}
+		else
 		{
 			response.setStatus(400, "Bad Request");
 			response.write("<BODY><h3>400 Bad Request.</h3>");
-			response.write("<h3>Invalid save-path</h3></BODY>");
-			return;
+			response.write("<h3>File not specified</h3></BODY>");
 		}
-
-		error_code ec;
-		QString tempFileName = safeFile->fileName();
-		m_pTorrentManager->AddTorrent(tempFileName, save_path, ec);
-
-		if(ec)
-		{
-			response.setStatus(500, " Internal Server Error");
-			response.write("<BODY><h3>500  Internal Server Error.</h3>");
-			response.write(QString("<h3>" + StaticHelpers::translateLibTorrentError(ec) + "</h3></BODY>").toUtf8());
-			return;
-		}
+	
 	}
 	else
 	{

@@ -10,7 +10,14 @@ class QSearchDisplayModel: public QAbstractListModel
 public:
 	QSearchDisplayModel(QTreeView* pTorrentListView, QObject* parent = 0);
 	~QSearchDisplayModel();
-	enum Role { SearchItemRole = Qt::UserRole };
+	enum Role
+	{
+		SearchItemRole = Qt::UserRole,
+		SearchItemName,
+		SearchItemSize,
+		SearchItemSeeders,
+		SearchItemPeers
+	};
 	int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 	int columnCount(const QModelIndex& parent = QModelIndex()) const override;
 	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;

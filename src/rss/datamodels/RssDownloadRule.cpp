@@ -124,7 +124,8 @@ void RssDownloadRule::removeFeed(QUuid feedUid)
 
 bool RssDownloadRule::operator==(const RssDownloadRule& other)
 {
-	return other.m_name == m_name
+	return other.m_feedUids == m_feedUids 
+		&& other.m_name == m_name
 		&& other.m_pattern == m_pattern
 		&& other.m_patternType == m_patternType
 		&& other.m_ruleType == m_ruleType

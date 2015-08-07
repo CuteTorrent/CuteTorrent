@@ -1,4 +1,5 @@
-﻿/**
+﻿
+/**
   @file
   @author Stefan Frings
 */

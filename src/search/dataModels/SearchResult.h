@@ -9,9 +9,9 @@ class SearchResult : public QObject
 	Q_PROPERTY(QString torrentFileUrl READ TorrentFileUrl WRITE setTorrentFileUrl)
 	Q_PROPERTY(QString torrentDescUrl READ TorrentDescUrl WRITE setTorrentDescUrl)
 	Q_PROPERTY(QString engine READ Engine WRITE setEngine)
-	Q_PROPERTY(QString leechers READ Leechers WRITE setLeechers)
-	Q_PROPERTY(QString seeders READ Seeders WRITE setSeeders)
-	Q_PROPERTY(QString size READ Size WRITE setSize)
+	Q_PROPERTY(int leechers READ Leechers WRITE setLeechers)
+	Q_PROPERTY(int seeders READ Seeders WRITE setSeeders)
+	Q_PROPERTY(quint64 size READ Size WRITE setSize)
 public:
 	QString Name() const
 	{
@@ -53,44 +53,34 @@ public:
 		m_engine = val;
 	}
 
-	QString Leechers() const
+	int Leechers() const
 	{
 		return m_leechers;
 	}
 
-	void setLeechers(QString val)
+	void setLeechers(int val)
 	{
 		m_leechers = val;
 	}
 
-	QString Seeders() const
+	int Seeders() const
 	{
 		return m_seeders;
 	}
 
-	void setSeeders(QString val)
+	void setSeeders(int val)
 	{
 		m_seeders = val;
 	}
 
-	QString Size() const
+	quint64 Size() const
 	{
 		return m_size;
 	}
 
-	void setSize(QString val)
+	void setSize(quint64 val)
 	{
-		bool ok;
-		uint64_t valL = val.toULongLong(&ok);
-
-		if (ok)
-		{
-			m_size = StaticHelpers::toKbMbGb(valL);
-		}
-		else
-		{
-			m_size = val;
-		}
+		m_size = val;
 	}
 
 	bool operator == (SearchResult other)
@@ -132,9 +122,9 @@ private:
 	QString m_torrentFileUrl;
 	QString m_torrentDescUrl;
 	QString m_engine;
-	QString m_leechers;
-	QString m_seeders;
-	QString m_size;
+	int m_leechers;
+	int m_seeders;
+	quint64 m_size;
 };
 
 

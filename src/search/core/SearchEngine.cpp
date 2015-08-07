@@ -212,7 +212,6 @@ SearchEnginePtr SearchEngine::getInstance()
 
 SearchEngine::~SearchEngine()
 {
-	SearchItemsStorrage::freeInstance();
 	qDeleteAll(m_pSearchProviders);
 }
 
@@ -233,7 +232,7 @@ void SearchEngine::OnSearchReady(QList<SearchResult*> result)
 	emit GotResults();
 }
 
-SearchItemsStorrage* SearchEngine::GetResults()
+SearchItemsStorragePtr SearchEngine::GetResults()
 {
 	return m_result;
 }

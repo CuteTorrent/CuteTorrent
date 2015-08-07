@@ -54,6 +54,8 @@ public:
     QAction *ACTION_TOOLBAR_RSS_REMOVE;
     QAction *ACTION_TOOLBAR_RSS_EDIT;
     QAction *ACTION_MENU_ABOUT_QT;
+    QAction *ACTION_TOOLBAR_QUEUE_UP;
+    QAction *ACTION_TOOLBAR_QUEUE_DOWN;
     QVBoxLayout *verticalLayout;
     QWidget *titleBar;
     QHBoxLayout *horizontalLayout;
@@ -78,33 +80,35 @@ public:
     QTabWidget *m_pTabWidget;
     QWidget *tab;
     QGridLayout *gridLayout_7;
-    QLabel *describtionLabel;
-    QLabel *activetimeLabel;
-    QLabel *label_7;
-    QLabel *label_2;
-    QLabel *timeleftLabel;
-    QLabel *totalSizeLabel;
-    QLabel *label;
     QGridLayout *gridLayout_4;
     QLabel *availibilityLabel;
     QLabel *progressLabel;
     QWidget *widget_2;
     QWidget *widget;
     QLabel *label_4;
-    QLabel *downloadSpeedLabel;
-    QLabel *pathLabel;
     QLabel *label_8;
-    QLabel *peerCoutLabel;
+    QLabel *pathLabel;
+    QLabel *uploadedBytesLabel;
     QLabel *label_9;
     QLabel *downloadedBytesLabel;
-    QLabel *label_10;
-    QLabel *seedCoutLabel;
-    QLabel *uploadedBytesLabel;
     QLabel *label_5;
     QLabel *uploadSpeedLabel;
+    QLabel *activetimeLabel;
     QLabel *label_3;
-    QLabel *label_6;
+    QLabel *timeleftLabel;
+    QLabel *label;
+    QLabel *label_2;
+    QLabel *label_7;
+    QLabel *downloadSpeedLabel;
+    QLabel *totalSizeLabel;
+    QLabel *peerCoutLabel;
     QLabel *label_11;
+    QLabel *seedCoutLabel;
+    QLabel *label_10;
+    QLabel *label_6;
+    QLabel *describtionLabel;
+    QLabel *label_12;
+    QLabel *infoHashLabel;
     QWidget *tab_3;
     QGridLayout *gridLayout_2;
     QTableView *peerTableView;
@@ -131,7 +135,7 @@ public:
     {
         if (CustomWindow->objectName().isEmpty())
             CustomWindow->setObjectName(QString::fromUtf8("CustomWindow"));
-        CustomWindow->resize(563, 681);
+        CustomWindow->resize(547, 681);
         CustomWindow->setMouseTracking(true);
         ACTION_MENU_OPEN_TORRENT = new QAction(CustomWindow);
         ACTION_MENU_OPEN_TORRENT->setObjectName(QString::fromUtf8("ACTION_MENU_OPEN_TORRENT"));
@@ -174,6 +178,10 @@ public:
         ACTION_TOOLBAR_RSS_EDIT->setObjectName(QString::fromUtf8("ACTION_TOOLBAR_RSS_EDIT"));
         ACTION_MENU_ABOUT_QT = new QAction(CustomWindow);
         ACTION_MENU_ABOUT_QT->setObjectName(QString::fromUtf8("ACTION_MENU_ABOUT_QT"));
+        ACTION_TOOLBAR_QUEUE_UP = new QAction(CustomWindow);
+        ACTION_TOOLBAR_QUEUE_UP->setObjectName(QString::fromUtf8("ACTION_TOOLBAR_QUEUE_UP"));
+        ACTION_TOOLBAR_QUEUE_DOWN = new QAction(CustomWindow);
+        ACTION_TOOLBAR_QUEUE_DOWN->setObjectName(QString::fromUtf8("ACTION_TOOLBAR_QUEUE_DOWN"));
         verticalLayout = new QVBoxLayout(CustomWindow);
         verticalLayout->setSpacing(0);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -264,6 +272,7 @@ public:
         sizePolicy.setHeightForWidth(spliiter->sizePolicy().hasHeightForWidth());
         spliiter->setSizePolicy(sizePolicy);
         spliiter->setMouseTracking(true);
+        spliiter->setFrameShape(QFrame::NoFrame);
         spliiter->setOrientation(Qt::Vertical);
         spliiter1 = new QSplitter(spliiter);
         spliiter1->setObjectName(QString::fromUtf8("spliiter1"));
@@ -273,6 +282,7 @@ public:
         m_pGroupTreeView = new QTreeView(spliiter1);
         m_pGroupTreeView->setObjectName(QString::fromUtf8("m_pGroupTreeView"));
         m_pGroupTreeView->setMouseTracking(true);
+        m_pGroupTreeView->setAcceptDrops(true);
         m_pGroupTreeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         m_pGroupTreeView->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
         m_pGroupTreeView->setRootIsDecorated(false);
@@ -289,6 +299,7 @@ public:
         m_pTorrentListView->setObjectName(QString::fromUtf8("m_pTorrentListView"));
         m_pTorrentListView->setMouseTracking(true);
         m_pTorrentListView->setContextMenuPolicy(Qt::CustomContextMenu);
+        m_pTorrentListView->setAcceptDrops(true);
         m_pTorrentListView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         m_pTorrentListView->setDragDropMode(QAbstractItemView::DropOnly);
         m_pTorrentListView->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -314,6 +325,7 @@ public:
         m_pTabWidget = new QTabWidget(torrentPage);
         m_pTabWidget->setObjectName(QString::fromUtf8("m_pTabWidget"));
         m_pTabWidget->setMouseTracking(true);
+        m_pTabWidget->setAcceptDrops(true);
         tab = new QWidget();
         tab->setObjectName(QString::fromUtf8("tab"));
         tab->setMouseTracking(true);
@@ -321,45 +333,6 @@ public:
         gridLayout_7->setSpacing(6);
         gridLayout_7->setContentsMargins(11, 11, 11, 11);
         gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
-        describtionLabel = new QLabel(tab);
-        describtionLabel->setObjectName(QString::fromUtf8("describtionLabel"));
-        describtionLabel->setMaximumSize(QSize(16777215, 16));
-        describtionLabel->setContextMenuPolicy(Qt::ActionsContextMenu);
-        describtionLabel->setWordWrap(true);
-        describtionLabel->setOpenExternalLinks(true);
-
-        gridLayout_7->addWidget(describtionLabel, 4, 1, 1, 4);
-
-        activetimeLabel = new QLabel(tab);
-        activetimeLabel->setObjectName(QString::fromUtf8("activetimeLabel"));
-
-        gridLayout_7->addWidget(activetimeLabel, 1, 1, 1, 2);
-
-        label_7 = new QLabel(tab);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
-
-        gridLayout_7->addWidget(label_7, 1, 3, 1, 1);
-
-        label_2 = new QLabel(tab);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        gridLayout_7->addWidget(label_2, 2, 0, 1, 1);
-
-        timeleftLabel = new QLabel(tab);
-        timeleftLabel->setObjectName(QString::fromUtf8("timeleftLabel"));
-
-        gridLayout_7->addWidget(timeleftLabel, 1, 4, 1, 1);
-
-        totalSizeLabel = new QLabel(tab);
-        totalSizeLabel->setObjectName(QString::fromUtf8("totalSizeLabel"));
-
-        gridLayout_7->addWidget(totalSizeLabel, 6, 1, 1, 2);
-
-        label = new QLabel(tab);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        gridLayout_7->addWidget(label, 1, 0, 1, 1);
-
         gridLayout_4 = new QGridLayout();
         gridLayout_4->setSpacing(6);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
@@ -413,25 +386,20 @@ public:
 
         gridLayout_7->addWidget(label_4, 6, 3, 1, 1);
 
-        downloadSpeedLabel = new QLabel(tab);
-        downloadSpeedLabel->setObjectName(QString::fromUtf8("downloadSpeedLabel"));
+        label_8 = new QLabel(tab);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
 
-        gridLayout_7->addWidget(downloadSpeedLabel, 3, 1, 1, 2);
+        gridLayout_7->addWidget(label_8, 2, 3, 1, 1);
 
         pathLabel = new QLabel(tab);
         pathLabel->setObjectName(QString::fromUtf8("pathLabel"));
 
         gridLayout_7->addWidget(pathLabel, 6, 4, 1, 1);
 
-        label_8 = new QLabel(tab);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
+        uploadedBytesLabel = new QLabel(tab);
+        uploadedBytesLabel->setObjectName(QString::fromUtf8("uploadedBytesLabel"));
 
-        gridLayout_7->addWidget(label_8, 2, 3, 1, 1);
-
-        peerCoutLabel = new QLabel(tab);
-        peerCoutLabel->setObjectName(QString::fromUtf8("peerCoutLabel"));
-
-        gridLayout_7->addWidget(peerCoutLabel, 7, 4, 1, 1);
+        gridLayout_7->addWidget(uploadedBytesLabel, 2, 4, 1, 1);
 
         label_9 = new QLabel(tab);
         label_9->setObjectName(QString::fromUtf8("label_9"));
@@ -443,21 +411,6 @@ public:
 
         gridLayout_7->addWidget(downloadedBytesLabel, 2, 1, 1, 2);
 
-        label_10 = new QLabel(tab);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
-
-        gridLayout_7->addWidget(label_10, 7, 0, 1, 1);
-
-        seedCoutLabel = new QLabel(tab);
-        seedCoutLabel->setObjectName(QString::fromUtf8("seedCoutLabel"));
-
-        gridLayout_7->addWidget(seedCoutLabel, 7, 1, 1, 2);
-
-        uploadedBytesLabel = new QLabel(tab);
-        uploadedBytesLabel->setObjectName(QString::fromUtf8("uploadedBytesLabel"));
-
-        gridLayout_7->addWidget(uploadedBytesLabel, 2, 4, 1, 1);
-
         label_5 = new QLabel(tab);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
@@ -468,20 +421,89 @@ public:
 
         gridLayout_7->addWidget(uploadSpeedLabel, 3, 4, 1, 1);
 
+        activetimeLabel = new QLabel(tab);
+        activetimeLabel->setObjectName(QString::fromUtf8("activetimeLabel"));
+
+        gridLayout_7->addWidget(activetimeLabel, 1, 1, 1, 2);
+
         label_3 = new QLabel(tab);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
         gridLayout_7->addWidget(label_3, 3, 0, 1, 1);
 
-        label_6 = new QLabel(tab);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
+        timeleftLabel = new QLabel(tab);
+        timeleftLabel->setObjectName(QString::fromUtf8("timeleftLabel"));
 
-        gridLayout_7->addWidget(label_6, 4, 0, 1, 1);
+        gridLayout_7->addWidget(timeleftLabel, 1, 4, 1, 1);
+
+        label = new QLabel(tab);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        gridLayout_7->addWidget(label, 1, 0, 1, 1);
+
+        label_2 = new QLabel(tab);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        gridLayout_7->addWidget(label_2, 2, 0, 1, 1);
+
+        label_7 = new QLabel(tab);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+
+        gridLayout_7->addWidget(label_7, 1, 3, 1, 1);
+
+        downloadSpeedLabel = new QLabel(tab);
+        downloadSpeedLabel->setObjectName(QString::fromUtf8("downloadSpeedLabel"));
+
+        gridLayout_7->addWidget(downloadSpeedLabel, 3, 1, 1, 2);
+
+        totalSizeLabel = new QLabel(tab);
+        totalSizeLabel->setObjectName(QString::fromUtf8("totalSizeLabel"));
+
+        gridLayout_7->addWidget(totalSizeLabel, 6, 1, 1, 2);
+
+        peerCoutLabel = new QLabel(tab);
+        peerCoutLabel->setObjectName(QString::fromUtf8("peerCoutLabel"));
+
+        gridLayout_7->addWidget(peerCoutLabel, 8, 4, 1, 1);
 
         label_11 = new QLabel(tab);
         label_11->setObjectName(QString::fromUtf8("label_11"));
 
-        gridLayout_7->addWidget(label_11, 7, 3, 1, 1);
+        gridLayout_7->addWidget(label_11, 8, 3, 1, 1);
+
+        seedCoutLabel = new QLabel(tab);
+        seedCoutLabel->setObjectName(QString::fromUtf8("seedCoutLabel"));
+
+        gridLayout_7->addWidget(seedCoutLabel, 8, 1, 1, 2);
+
+        label_10 = new QLabel(tab);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+
+        gridLayout_7->addWidget(label_10, 8, 0, 1, 1);
+
+        label_6 = new QLabel(tab);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        gridLayout_7->addWidget(label_6, 9, 0, 1, 1);
+
+        describtionLabel = new QLabel(tab);
+        describtionLabel->setObjectName(QString::fromUtf8("describtionLabel"));
+        describtionLabel->setContextMenuPolicy(Qt::ActionsContextMenu);
+        describtionLabel->setWordWrap(true);
+        describtionLabel->setOpenExternalLinks(true);
+
+        gridLayout_7->addWidget(describtionLabel, 9, 1, 1, 4);
+
+        label_12 = new QLabel(tab);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+
+        gridLayout_7->addWidget(label_12, 10, 0, 1, 1);
+
+        infoHashLabel = new QLabel(tab);
+        infoHashLabel->setObjectName(QString::fromUtf8("infoHashLabel"));
+        infoHashLabel->setContextMenuPolicy(Qt::ActionsContextMenu);
+
+        gridLayout_7->addWidget(infoHashLabel, 10, 1, 1, 4);
 
         m_pTabWidget->addTab(tab, QString());
         tab_3 = new QWidget();
@@ -579,9 +601,6 @@ public:
         mainMenuBar = new QMenuBar(m_centralWidget);
         mainMenuBar->setObjectName(QString::fromUtf8("mainMenuBar"));
         mainMenuBar->setEnabled(true);
-        mainMenuBar->setMinimumSize(QSize(0, 0));
-        mainMenuBar->setMaximumSize(QSize(16777215, 16777215));
-        mainMenuBar->setStyleSheet(QString::fromUtf8(""));
         mainMenuBar->setDefaultUp(false);
         mainMenuBar->setNativeMenuBar(false);
         menu = new QMenu(mainMenuBar);
@@ -602,6 +621,7 @@ public:
         m_pToolBarsContainer->setMouseTracking(true);
         m_pTorrentToolBar = new QToolBar();
         m_pTorrentToolBar->setObjectName(QString::fromUtf8("m_pTorrentToolBar"));
+        m_pTorrentToolBar->setAcceptDrops(true);
         m_pTorrentToolBar->setStyleSheet(QString::fromUtf8(" QToolBar {\n"
 "               border-bottom: none;\n"
 "               border-top: none;\n"
@@ -611,6 +631,7 @@ public:
         m_pToolBarsContainer->addWidget(m_pTorrentToolBar);
         m_pSearchToolBar = new QToolBar();
         m_pSearchToolBar->setObjectName(QString::fromUtf8("m_pSearchToolBar"));
+        m_pSearchToolBar->setAcceptDrops(true);
         m_pSearchToolBar->setStyleSheet(QString::fromUtf8(" QToolBar {\n"
 "               border-bottom: none;\n"
 "               border-top: none;\n"
@@ -620,6 +641,7 @@ public:
         m_pToolBarsContainer->addWidget(m_pSearchToolBar);
         m_pRssToolBar = new QToolBar();
         m_pRssToolBar->setObjectName(QString::fromUtf8("m_pRssToolBar"));
+        m_pRssToolBar->setAcceptDrops(true);
         m_pRssToolBar->setStyleSheet(QString::fromUtf8(" QToolBar {\n"
 "               border-bottom: none;\n"
 "               border-top: none;\n"
@@ -660,7 +682,12 @@ public:
         m_pTorrentToolBar->addAction(ACTION_TOOLBAR_START);
         m_pTorrentToolBar->addAction(ACTION_TOOLBAR_PAUSE);
         m_pTorrentToolBar->addAction(ACTION_TOOLBAR_REMOVE);
+        m_pTorrentToolBar->addSeparator();
         m_pTorrentToolBar->addAction(ACTION_TOOLBAR_SETTINGS);
+        m_pTorrentToolBar->addSeparator();
+        m_pTorrentToolBar->addAction(ACTION_TOOLBAR_QUEUE_UP);
+        m_pTorrentToolBar->addAction(ACTION_TOOLBAR_QUEUE_DOWN);
+        m_pTorrentToolBar->addSeparator();
         m_pSearchToolBar->addAction(ACTION_TOOLBAR_DOWNLOAD);
         m_pSearchToolBar->addAction(ACTION_TOOLBAR_OPEN_URL);
         m_pSearchToolBar->addAction(ACTION_TOOLBAR_SETTINGS);
@@ -733,31 +760,38 @@ public:
         ACTION_TOOLBAR_RSS_REMOVE->setText(QApplication::translate("CustomWindow", "ACTION_RSS_REMOVE", 0, QApplication::UnicodeUTF8));
         ACTION_TOOLBAR_RSS_EDIT->setText(QApplication::translate("CustomWindow", "ACTION_RSS_EDIT", 0, QApplication::UnicodeUTF8));
         ACTION_MENU_ABOUT_QT->setText(QApplication::translate("CustomWindow", "MENU_ABOUT_QT", 0, QApplication::UnicodeUTF8));
+        ACTION_TOOLBAR_QUEUE_UP->setText(QApplication::translate("CustomWindow", "QUEUE_UP", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        ACTION_TOOLBAR_QUEUE_UP->setToolTip(QApplication::translate("CustomWindow", "QUEUE_UP", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+        ACTION_TOOLBAR_QUEUE_DOWN->setText(QApplication::translate("CustomWindow", "QUEUE_DOWN", 0, QApplication::UnicodeUTF8));
         tbMenu->setText(QString());
         LTitle->setText(QApplication::translate("CustomWindow", "CuteTorrent", 0, QApplication::UnicodeUTF8));
-        describtionLabel->setText(QString());
-        activetimeLabel->setText(QString());
-        label_7->setText(QApplication::translate("CustomWindow", "INFO_REMAININF_TIME", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("CustomWindow", "INFO_DOWNLOADED", 0, QApplication::UnicodeUTF8));
-        timeleftLabel->setText(QString());
-        totalSizeLabel->setText(QString());
-        label->setText(QApplication::translate("CustomWindow", "INFO_ACTIVE_TIME", 0, QApplication::UnicodeUTF8));
         progressLabel->setText(QString());
         label_4->setText(QApplication::translate("CustomWindow", "INFO_PATH", 0, QApplication::UnicodeUTF8));
-        downloadSpeedLabel->setText(QString());
-        pathLabel->setText(QString());
         label_8->setText(QApplication::translate("CustomWindow", "INFO_UPLOADED", 0, QApplication::UnicodeUTF8));
-        peerCoutLabel->setText(QString());
+        pathLabel->setText(QString());
+        uploadedBytesLabel->setText(QString());
         label_9->setText(QApplication::translate("CustomWindow", "INFO_UPLOAD_SPEED", 0, QApplication::UnicodeUTF8));
         downloadedBytesLabel->setText(QString());
-        label_10->setText(QApplication::translate("CustomWindow", "INFO_SEED_COUNT", 0, QApplication::UnicodeUTF8));
-        seedCoutLabel->setText(QString());
-        uploadedBytesLabel->setText(QString());
         label_5->setText(QApplication::translate("CustomWindow", "INFO_TOTAL_SIZE", 0, QApplication::UnicodeUTF8));
         uploadSpeedLabel->setText(QString());
+        activetimeLabel->setText(QString());
         label_3->setText(QApplication::translate("CustomWindow", "INFO_DOWNLOAD_SPEED", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("CustomWindow", "INFO_DESCRIBTION", 0, QApplication::UnicodeUTF8));
+        timeleftLabel->setText(QString());
+        label->setText(QApplication::translate("CustomWindow", "INFO_ACTIVE_TIME", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("CustomWindow", "INFO_DOWNLOADED", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("CustomWindow", "INFO_REMAININF_TIME", 0, QApplication::UnicodeUTF8));
+        downloadSpeedLabel->setText(QString());
+        totalSizeLabel->setText(QString());
+        peerCoutLabel->setText(QString());
         label_11->setText(QApplication::translate("CustomWindow", "INFO_PEER_COUNT", 0, QApplication::UnicodeUTF8));
+        seedCoutLabel->setText(QString());
+        label_10->setText(QApplication::translate("CustomWindow", "INFO_SEED_COUNT", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("CustomWindow", "INFO_DESCRIBTION", 0, QApplication::UnicodeUTF8));
+        describtionLabel->setText(QString());
+        label_12->setText(QApplication::translate("CustomWindow", "INFO_HASH", 0, QApplication::UnicodeUTF8));
+        infoHashLabel->setText(QString());
         m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab), QApplication::translate("CustomWindow", "TAB_INFO", 0, QApplication::UnicodeUTF8));
         m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_3), QApplication::translate("CustomWindow", "TAB_PEERS", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = trackerTableWidget->horizontalHeaderItem(0);

@@ -164,6 +164,10 @@ void FileTreeModel::UpdateChildren(const QModelIndex& modelIndex, FileTreeItem* 
 void FileTreeModel::UpdateParents(const QModelIndex& modelIndex, FileTreeItem* item)
 {
 	FileTreeItem* parent = item->parent();
+	if (parent == NULL)
+	{
+		return;
+	}
 	bool allUnchecked = true, allChecked = true;
 
 	for(int i = 0; i < parent->childCount(); i++)

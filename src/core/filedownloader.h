@@ -16,7 +16,7 @@ class FileDownloader : public QObject
 
 signals:
 	void DownloadReady(QUrl, QTemporaryFile*);
-	void DownloadError(QUrl, QString error);
+	void DownloadError(QUrl, QString);
 public:
 	FileDownloader(QObject* parent = NULL);
 	void download(QUrl url, QList<QNetworkCookie> cookies = QList<QNetworkCookie>());

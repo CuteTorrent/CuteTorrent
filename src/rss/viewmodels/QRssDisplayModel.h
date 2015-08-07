@@ -32,12 +32,15 @@ private slots:
 	void onMarkAllUnread();
 	void onMarkRead();
 	void onMarkUnread();
+	void onTorrentDownloadError(QUrl, QString);
 public slots:
 	void UpdateModel();
 	void contextualMenu(const QPoint&);
 	void onFeedUpdate();
 	void onFeedRename();
 	void onFeedRemove();
+signals:
+	void Notify(int, QString, QVariant);
 private:
 	QAction* updateAction, *renameAction, *removeAction, *markAllAsReeded, *markAllAsUnread;
 	QAction* downloadTorrent, *openLink, *markAsReeded, *markAsUnread;
@@ -47,6 +50,7 @@ private:
 	QTimer* m_pUdpateTimer;
 	RssManagerPtr m_pRssManager;
 	QList<RssFeedTreeItem*> m_rootItems;
+	NotificationSystemPtr m_pNotificationSystem;
 	void setupFeedMenu();
 	void setupItemMenu();
 

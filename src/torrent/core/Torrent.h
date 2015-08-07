@@ -145,6 +145,10 @@ public :
 	void RemoveTrackers(QStringList trackers);
 	void ReplaceTracker(QString tracker2edit, QString newTrackerUrl);
 	void addWebSeed(QString webSeedUrl);
+	void QueueUp();
+	void QueueDown();
+	void QueueTop();
+	void QueueBottom();
 };
 
 //Q_DECLARE_METATYPE(Torrent)

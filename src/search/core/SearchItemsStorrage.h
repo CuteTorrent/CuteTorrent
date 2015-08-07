@@ -1,23 +1,19 @@
 ﻿#pragma once
 #include "SearchEngine.h"
+#include <Singleton.h>
 
-class SearchItemsStorrage : public QObject
+class SearchItemsStorrage : public QObject, public Singleton<SearchItemsStorrage>
 {
+	friend class Singleton<SearchItemsStorrage>;
 	Q_OBJECT
 protected:
 	SearchItemsStorrage();
-	~SearchItemsStorrage();
+	
 private:
-	static SearchItemsStorrage* m_pInstance;
-	static int m_nInstanceCount;
+	
 	QList<SearchResult*> m_items;
-	QList<SearchResult*> m_filteredItems;
-	QString m_sEngineName;
-	void filterData();
 public:
-	void setFilter(QString engineName);
-	static SearchItemsStorrage* getInstance();
-	static void freeInstance();
+	~SearchItemsStorrage();
 	void append(SearchResult*);
 	void append(QList<SearchResult*>&);
 	void remove(SearchResult*);

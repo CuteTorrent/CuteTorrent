@@ -34,7 +34,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "messagebox.h"
 #include "QTorrentFilterProxyModel.h"
 #include "StaticHelpers.h"
-QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterProxyModel* pProxyFilterModel, QObject* __parrent) : QAbstractListModel(__parrent), m_initFinished(false)
+QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterProxyModel* pProxyFilterModel, QObject* __parrent) 
+	: QAbstractListModel(__parrent)
 {
 	m_pTorrentListView = _parrent;
 	m_pTorrentManager = TorrentManager::getInstance();
@@ -43,8 +44,11 @@ QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterPr
 	selectedRow = -1;
 	setupContextMenu();
 	locker = new QMutex();
-	connect(m_pTorrentManager.get(), SIGNAL(AddTorrentGui(Torrent*)), SLOT(OnAddTorrent()));
-	connect(m_pTorrentManager.get(), SIGNAL(TorrentRemove(QString)), SLOT(Update()));
+	connect(m_pTorrentManager.get(), SIGNAL(AddTorrentGui(Torrent*)), SLOT(OnTorrentAdded()));
+	m_pUpdateTimer = new QTimer(this);
+	m_pUpdateTimer->setInterval(400);
+	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(Update()));
+	m_pUpdateTimer->start();
 
 }
 
@@ -55,7 +59,7 @@ QString QTorrentDisplayModel::getFirstAvailibleFile(files_info& filesInfo)
 	{
 		if (filesInfo.priorities[i] > 0)
 		{
-			return QString::fromUtf8(filesInfo.storrage.file_name(i).c_str());
+			return QString::fromUtf8(filesInfo.storrage.file_path(i).c_str());
 		}
 	}
 	return "";
@@ -106,6 +110,19 @@ bool QTorrentDisplayModel::checkAllSequential(QModelIndexList& indexes)
 	{
 		Torrent* pTorrent = indexes[i].data(TorrentRole).value<Torrent*>();
 		if (!pTorrent->isSquential())
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool QTorrentDisplayModel::checkAllQueueable(QModelIndexList& indexes)
+{
+	for (int i = 0; i < indexes.size(); i++)
+	{
+		Torrent* pTorrent = indexes[i].data(TorrentRole).value<Torrent*>();
+		if (pTorrent->GetQueuePosition() == -1)
 		{
 			return false;
 		}
@@ -235,6 +252,7 @@ void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 		bool isAllSuperSeed = checkAllSuperSeed(indexes);
 		bool isAllHasMedia = checkAllHasMedia(indexes);
 		bool isAllSequential = checkAllSequential(indexes);
+		bool isAllQueueable = checkAllQueueable(indexes);
 		bool isAllPaused = true, isAllResumed = true, hasPaused = false, hasResumed = false;
 		menu->removeAction(pauseTorrent);
 		menu->removeAction(resumeTorrent);
@@ -251,7 +269,7 @@ void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 		superSeed->setChecked(isAllSuperSeed);
 		playInMediaPlayer->setEnabled(isAllHasMedia);
 		setSequentual->setChecked(isAllSequential);
-		
+		queueMenu->setEnabled(isAllQueueable);
 		if (indexes.size() == 1)
 		{
 			Torrent* torrent = indexes[0].data(TorrentRole).value<Torrent*>();
@@ -263,6 +281,14 @@ void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 				{
 					actions[i]->setChecked(actions[i]->text() == group);
 				}
+			}
+		}
+		else
+		{
+			QList<QAction*> actions = groupsMenu->actions();
+			for (int i = 0; i < actions.size(); i++)
+			{
+				actions[i]->setChecked(false);
 			}
 		}
 			
@@ -348,10 +374,6 @@ Torrent* QTorrentDisplayModel::GetSelectedTorrent()
 	}
 
 	return NULL;
-}
-bool indexByRowLessThan(const QModelIndex& right, const QModelIndex& left)
-{
-	return right.row() < left.row();
 }
 void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 {
@@ -587,11 +609,63 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 				break;
 			}
 
-			case change_group:
+			case queue_up:
+			{
+				for (int i = indexes.count() - 1; i >= 0; i--)
+				{
+					QModelIndex index = indexes[i];
+					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
+					if (torrent != NULL)
+					{
+						torrent->QueueUp();
+					}
+					
+				}
 				break;
-
+			}
+			case queue_down:
+			{
+				for (int i = indexes.count() - 1; i >= 0; i--)
+				{
+					QModelIndex index = indexes[i];
+					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
+					if (torrent != NULL)
+					{
+						torrent->QueueDown();
+					}
+				}
+				break;
+			}
+			case queue_top:
+			{
+				for (int i = indexes.count() - 1; i >= 0; i--)
+				{
+					QModelIndex index = indexes[i];
+					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
+					if (torrent != NULL)
+					{
+						torrent->QueueTop();
+					}
+				}
+				break;
+			}
+			case queue_bottom:
+			{
+				for (int i = indexes.count() - 1; i >= 0; i--)
+				{
+					QModelIndex index = indexes[i];
+					Torrent* torrent = index.data(TorrentRole).value<Torrent*>();
+					if (torrent != NULL)
+					{
+						torrent->QueueBottom();
+					}
+				}
+				break;
+			}
 			default:
 				break;
+			
+
 		}
 	}
 	catch(std::exception e)
@@ -625,8 +699,15 @@ QVariant QTorrentDisplayModel::data(const QModelIndex& index, int role) const
 		case TorrentRole:
 			var = qVariantFromValue(t);
 			break;
-		case TorrentQueuePosition: 
-			var = t->GetQueuePosition();
+		case TorrentQueuePosition:
+			{
+				int queuePosition = t->GetQueuePosition();
+				if (queuePosition == -1)
+				{
+					queuePosition = INT_MAX;
+				}
+				var = queuePosition;
+			}
 			break;
 		case TorrentName: 
 			var = t->GetName();
@@ -680,11 +761,6 @@ QTorrentDisplayModel::~QTorrentDisplayModel()
 {
 }
 
-void QTorrentDisplayModel::setInitFinished(bool value)
-{
-	m_initFinished = value;
-}
-
 void QTorrentDisplayModel::retranslate()
 {
 	pauseTorrent->setText(tr("ACTION_TORRENTLIST_PAUSE"));
@@ -701,6 +777,11 @@ void QTorrentDisplayModel::retranslate()
 	superSeed->setText(tr("ACTION_SET_SUPERSEED"));
 	generateMagnet->setText(tr("ACTION_GENERATE_MAGNET"));
 	groupsMenu->setTitle(tr("ACTION_CHANGE_GROUP"));
+	queueMenu->setTitle(tr("ACTION_QUEUE_CONTROLL"));
+	queueBottom->setText(tr("ACTION_QUEUE_BOTTOM"));
+	queueTop->setText(tr("ACTION_QUEUE_TOP"));
+	queueUp->setText(tr("ACTION_QUEUE_UP"));
+	queueDown->setText(tr("ACTION_QUEUE_DOWN"));
 }
 
 void QTorrentDisplayModel::setSequentualDL()
@@ -726,16 +807,7 @@ void QTorrentDisplayModel::playInPlayer()
 		VideoPlayerWindow* vpw = new VideoPlayerWindow(m_pTorrentListView);
 		files_info filesInfo = m_pCurrentTorrent->GetFileDownloadInfo();
 		QString firstFileSubPath = getFirstAvailibleFile(filesInfo);
-		QString filePath;
-		if (m_pCurrentTorrent->isSingleFile())
-		{
-			filePath = StaticHelpers::CombinePathes(m_pCurrentTorrent->GetSavePath(), firstFileSubPath);
-		}
-		else
-		{
-            QString torrentName = m_pCurrentTorrent->GetName();
-            filePath = StaticHelpers::CombinePathes(m_pCurrentTorrent->GetSavePath(), torrentName, firstFileSubPath);
-		}
+		QString filePath = StaticHelpers::CombinePathes(m_pCurrentTorrent->GetSavePath(), firstFileSubPath);
 		vpw->openFile(filePath);
 		vpw->show();
 	}
@@ -771,6 +843,32 @@ void QTorrentDisplayModel::setupContextMenu()
 	storrageMove->setObjectName("ACTION_TORRENTLIST_MOVE_STORRAGE");
 	connect(storrageMove, SIGNAL(triggered()), this, SLOT(moveStorrage()));
 	menu->addAction(storrageMove);
+	menu->addSeparator();
+	
+	queueMenu = new QMenu(tr("ACTION_QUEUE_CONTROLL"), menu);
+	queueMenu->setIcon(pStyleEngene->getIcon("queue_menu"));
+	
+	queueUp = new QAction(pStyleEngene->getIcon("queue_up"), tr("ACTION_QUEUE_UP"), queueMenu);
+	queueUp->setObjectName("ACTION_TORRENTLIST_QUEUE_UP");
+	connect(queueUp, SIGNAL(triggered()), SLOT(MoveUpQueue()));
+	queueMenu->addAction(queueUp);
+
+	queueDown = new QAction(pStyleEngene->getIcon("queue_down"), tr("ACTION_QUEUE_DOWN"), queueMenu);
+	queueDown->setObjectName("ACTION_TORRENTLIST_QUEUE_DOWN");
+	connect(queueDown, SIGNAL(triggered()), SLOT(MoveDownQueue()));
+	queueMenu->addAction(queueDown);
+	queueMenu->addSeparator();
+
+	queueTop = new QAction(pStyleEngene->getIcon("queue_top"), tr("ACTION_QUEUE_TOP"), queueMenu);
+	queueTop->setObjectName("ACTION_TORRENTLIST_QUEUE_TOP");
+	connect(queueTop, SIGNAL(triggered()), SLOT(MoveTopQueue()));
+	queueMenu->addAction(queueTop);
+
+	queueBottom = new QAction(pStyleEngene->getIcon("queue_bottom"), tr("ACTION_QUEUE_BOTTOM"), queueMenu);
+	queueBottom->setObjectName("ACTION_TORRENTLIST_QUEUE_BOTTOM");
+	connect(queueBottom, SIGNAL(triggered()), SLOT(MoveBottomQueue()));
+	queueMenu->addAction(queueBottom);
+	menu->addMenu(queueMenu);
 	menu->addSeparator();
 	superSeed = new QAction(pStyleEngene->getIcon("super_seed"), tr("ACTION_SET_SUPERSEED"), this);
 	superSeed->setObjectName("ACTION_TORRENTLIST_SUPER_SEED");
@@ -808,11 +906,10 @@ void QTorrentDisplayModel::setupContextMenu()
 	groupsMenu = new QMenu(tr("ACTION_CHANGE_GROUP"), menu);
 	groupsMenu->setIcon(pStyleEngene->getIcon("groups"));
 	QList<GroupForFileFiltering> filters = QApplicationSettings::getInstance()->GetFileFilterGroups();
-	QString type;
-
+	
 	for(int i = 0; i < filters.size(); i++)
 	{
-		QAction* changeGroupAction = new QAction(pStyleEngene->guessMimeIcon(filters[i].Extensions().split('|') [0], type), filters[i].Name(), groupsMenu);
+		QAction* changeGroupAction = new QAction(pStyleEngene->guessMimeIcon(filters[i].Extensions().split('|') [0]), filters[i].Name(), groupsMenu);
 		changeGroupAction->setObjectName(filters[i].Name());
 		connect(changeGroupAction, SIGNAL(triggered()), this, SLOT(changeGroup()));
 		changeGroupAction->setCheckable(true);
@@ -822,11 +919,13 @@ void QTorrentDisplayModel::setupContextMenu()
 	menu->addSeparator();
 	menu->addMenu(groupsMenu);
 }
-bool LessThan(const Torrent* a, const Torrent* b)
-{
-	return (*a) < (*b);
-}
 
+void QTorrentDisplayModel::OnTorrentAdded()
+{
+	int rowCnt = rowCount();
+	beginInsertRows(QModelIndex(), rowCnt, rowCnt);
+	endInsertRows();
+}
 
 void QTorrentDisplayModel::SetSuperSeed()
 {
@@ -869,30 +968,89 @@ void QTorrentDisplayModel::changeGroup()
 		qDebug() << "Exception in QTorrentDisplayModel::changeGroup";
 	}
 }
-
+typedef QPair<QModelIndex, QModelIndex> IndexInterval;
 void QTorrentDisplayModel::Update()
 {
 	QMutexLocker lockMutex(locker);
-	reset();
-}
-
-void QTorrentDisplayModel::OnAddTorrent()
-{
-	if (m_initFinished)
+	TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
+	QSet<QString> changedTorrents;
+	pTorrentManager->getRecentUpdatedTorrents(changedTorrents);
+	if (changedTorrents.size() > 0)
 	{
-		Update();
-		if (m_pTorrentListView->model() != m_pProxyFilterModel)
+		int rowCnt = rowCount();
+		if (rowCnt == changedTorrents.size())
 		{
-			return;
+			emit dataChanged(index(0, 0), index(rowCnt - 1, 0));
 		}
-		m_pTorrentListView->scrollToBottom();
-		m_pTorrentListView->setCurrentIndex(index(m_pTorrentStorrage->count() - 1));
+		else
+		{
+			QList<IndexInterval> changedList;
+
+			for (int i = 0; i < rowCnt; i++)
+			{
+				QModelIndex torrentIndex = index(i, 0);
+				if (torrentIndex.isValid())
+				{
+					Torrent* pTorrent = torrentIndex.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>();
+
+					if (pTorrent != NULL && changedTorrents.contains(pTorrent->GetInfoHash()))
+					{
+						if (changedList.isEmpty())
+						{
+							changedList.append(qMakePair(torrentIndex, torrentIndex));
+						}
+						else
+						{
+							IndexInterval last = changedList.last();
+							if (last.second.row() + 1 == torrentIndex.row())
+							{
+								last.second = torrentIndex;
+								changedList.replace(changedList.size() - 1, last);
+							}
+							else
+							{
+								changedList.append(qMakePair(torrentIndex, torrentIndex));
+							}
+
+						}
+					}
+				}
+			}
+			//	qDebug() << "Changed Intervals count " << changedList.size() << changedList;
+			for (int i = 0; i < changedList.size(); i++)
+			{
+				IndexInterval chagedInterval = changedList[i];
+				emit dataChanged(chagedInterval.first, chagedInterval.second);
+			}
+		}
+
 	}
 }
+
 
 void QTorrentDisplayModel::PauseSelected()
 {
 	ActionOnSelectedItem(pause);
+}
+
+void QTorrentDisplayModel::MoveUpQueue()
+{
+	ActionOnSelectedItem(queue_up);
+}
+
+void QTorrentDisplayModel::MoveDownQueue()
+{
+	ActionOnSelectedItem(queue_down);
+}
+
+void QTorrentDisplayModel::MoveTopQueue()
+{
+	ActionOnSelectedItem(queue_top);
+}
+
+void QTorrentDisplayModel::MoveBottomQueue()
+{
+	ActionOnSelectedItem(queue_bottom);
 }
 
 void QTorrentDisplayModel::ResumeSelected()

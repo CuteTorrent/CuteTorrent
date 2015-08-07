@@ -37,6 +37,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "RconCommon.h"
 #include "SearchCommon.h"
 #include <viewModel/FiltersViewModel.h>
+#include <gui/Controls/EditableHeaderView.h>
+#include <viewmodels/QSearchFilterModel.h>
 
 class Application;
 class FileViewModel;
@@ -78,15 +80,26 @@ protected:
 	void keyPressEvent(QKeyEvent* event) override;
 
 private:
+	enum SorterType
+	{
+		TORRENT,
+		SEARCH
+	};
+	SorterType m_lastSorter;
 	void initToolbarIcons();
 	void initStatusBarIcons();
 	void initMainMenuIcons();
 	bool m_initFinished;
-	QHeaderView* m_pTorrentSorterView;
+	EditableHeaderView* m_pItemSorterView;
+	EditableHeaderView* m_pTrackersHeader;
+	EditableHeaderView* m_pPeersHeader;
+	EditableHeaderView* m_pFilesHeader;
+	QStandardItemModel* m_torrentHeaderModel;
+	QStandardItemModel* m_searchHeaderModel;
+	QSearchFilterModel* m_pSearchFilterModel;
 	QRegExp m_httpLinkRegexp;
 	QTimer* m_pUpdateTimer;
 	StyleEngene* m_pStyleEngine;
-	QComboBox* m_pTorrentSearchCategory;
 	QComboBox* m_pSearchCategory;
 	TorrentStorragePtr m_pTorrents;
 	PeiceDisplayWidget* m_pPieceView;
@@ -106,7 +119,7 @@ private:
 	QAction* maximizeAction;
 	QAction* restoreAction;
 	QAction* quitAction;
-	QAction* copyContext;
+	QAction* copyContext, * copyInfoHash;
 	QAction* addPeer, * addWebSeed, * addTracker, * removeTracker, * editTracker, * updateTracker;
 	QLabel* upLabelText, *upLabel, *title, *dhtNodesLabel;
 	QLabel* uploadLimit, *downloadLimit;
@@ -134,9 +147,11 @@ private:
 	void setupToolBar();
 	
 	void setupConnections();
+	void setupSearchHeaderModel();
 	void setupListView();
 	void setupTabelWidgets();
 	void setupStatusBar();
+	void setupTorrentHeaderModel();
 	void setupRssInfoTab();
 	void setupFileTabel();
 	void setupGroupTreeWidget();
@@ -152,6 +167,8 @@ private:
 	void switchToRssModel();
 	void resizeWindow(QMouseEvent* e) override;
 	void saveWindowState();
+	void loadHeaderState(QString prefix, EditableHeaderView* header, QList<int>& defaultColumnSizes);
+	void saveHeaderState(QString prefix, EditableHeaderView* header);
 	virtual QPushButton* getMinBtn() override;
 	virtual QPushButton* getMaxBtn() override;
 	virtual QPushButton* getCloseBtn() override;
@@ -160,7 +177,7 @@ private:
 	virtual QLabel* getTitleLabel() override;
 	virtual QLabel* getTitleIcon() override;
 public slots:
-	void updateTorrentSorting(int logincalIndex, Qt::SortOrder order);
+	void updateSorting(int logincalIndex, Qt::SortOrder order);
 	void HandleNewTorrent(const QString&);
 	void UpdateUL(int);
 	void UpdateDL(int);
@@ -184,7 +201,9 @@ public slots:
 	void UpdateLimits();
 	void ProcessMagnet();
 	void PeformSearch();
+	void PeformTorrentSearch(const QString& text);
 	void CopyDiscribtion();
+	void CopyInfoHash();
 	void ClearPieceDisplay();
 	void initWindowIcons();
 	void AddTracker();

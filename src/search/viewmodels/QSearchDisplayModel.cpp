@@ -8,8 +8,8 @@ QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QObject* p
 {
 	m_pTorrentListView = pTorrentListView;
 	connect(m_pSearchEngine.get(), SIGNAL(GotResults()), this, SLOT(OnNewSearchResults()));
-	SearchItemsStorrage* pItems = m_pSearchEngine->GetResults();
-	connect(pItems, SIGNAL(reset()), this, SLOT(OnNewSearchResults()));
+	SearchItemsStorragePtr pItems = m_pSearchEngine->GetResults();
+	connect(pItems.get(), SIGNAL(reset()), this, SLOT(OnNewSearchResults()));
 	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFile*)), SLOT(OnTorrentDownloaded(QUrl, QTemporaryFile*)));
 }
 
@@ -34,7 +34,7 @@ QVariant QSearchDisplayModel::data(const QModelIndex& index, int role /*= Qt::Di
 	{
 		int row = index.row();
 		int col = index.column();
-		SearchItemsStorrage* results = m_pSearchEngine->GetResults();
+		SearchItemsStorragePtr results = m_pSearchEngine->GetResults();
 
 		if(row > results->length())
 		{
@@ -42,44 +42,30 @@ QVariant QSearchDisplayModel::data(const QModelIndex& index, int role /*= Qt::Di
 		}
 
 		SearchResult* res = (*results) [row];
-
+	
 		switch(role)
 		{
-			case Qt::DisplayRole:
-			{
-				switch(col)
-				{
-					case 0:
-					{
-						return qVariantFromValue(res->Name());
-					}
-
-					case 1:
-					{
-						return qVariantFromValue(res->Size());
-					}
-
-					case 2:
-					{
-						return qVariantFromValue(res->Leechers());
-					}
-
-					case 3:
-					{
-						return qVariantFromValue(res->Seeders());
-					}
-
-					case 4:
-					{
-						return qVariantFromValue(res->Engine());
-					}
-				}
-			}
-
 			case SearchItemRole:
 			{
 				return qVariantFromValue(res);
 			}
+			case SearchItemName:
+			{
+				return res->Name();
+			}
+			case SearchItemSize:
+			{
+				return res->Size();
+			}
+			case SearchItemSeeders:
+			{
+				return res->Seeders();
+			}
+			case SearchItemPeers:
+			{
+				return res->Leechers();
+			}
+
 		}
 	}
 

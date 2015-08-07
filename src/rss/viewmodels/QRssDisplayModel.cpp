@@ -10,18 +10,22 @@
 #include "filedownloader.h"
 #include <QInputDialog>
 #include "RssItem.h"
+#include <NotificationSystem.h>
+
 QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent, bool autoUpdate) : QAbstractItemModel(parrent), m_pRssManager(RssManager::getInstance()),
 	m_pTorrentDownloader(FileDownloader::getInstance())
 {
 	m_pItemsView = pItemsView;
 	m_pUdpateTimer = new QTimer(this);
+	m_pNotificationSystem = NotificationSystem::getInstance();
 	setupFeedMenu();
 	setupItemMenu();
 	UpdateModel();
 	connect(m_pRssManager.get(), SIGNAL(FeedChanged(QUuid)), this, SLOT(UpdateModel()));
 	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFile*)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFile*)));
+	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadError(QUrl, QString)), SLOT(onTorrentDownloadError(QUrl, QString)));
 	connect(m_pUdpateTimer, SIGNAL(timeout()), this, SLOT(UpdateVisibleData()));
-
+	connect(this, SIGNAL(Notify(int, QString, QVariant)), m_pNotificationSystem.get(), SLOT(OnNewNotification(int, QString, QVariant)));;
 	if (autoUpdate)
 	{
 		m_pUdpateTimer->start(1000);
@@ -335,6 +339,11 @@ void QRssDisplayModel::onMarkUnread()
 	{
 		setCurrentItemUnread(true);
 	}
+}
+
+void QRssDisplayModel::onTorrentDownloadError(QUrl url, QString error)
+{
+	emit Notify(NotificationSystem::RSS_ERROR, tr("ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2").arg(url.toString(), error), QVariant());
 }
 
 void QRssDisplayModel::contextualMenu(const QPoint& point)
