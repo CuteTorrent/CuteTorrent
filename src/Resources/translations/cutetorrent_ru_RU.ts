@@ -407,356 +407,356 @@
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="17"/>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="105"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="726"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="769"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="727"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="770"/>
         <source>CuteTorrent</source>
         <translation>CuteTorrent</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="709"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="804"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="712"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="805"/>
         <source>TRACKER_PEERS</source>
         <translation>Пиры</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="795"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="807"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="798"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="808"/>
         <source>MENU_FILE</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="806"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="808"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="809"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="809"/>
         <source>MENU_SETTINGS</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="812"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="809"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="815"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="810"/>
         <source>MENU_HELP</source>
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="821"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="810"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="824"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="811"/>
         <source>MENU_TOOLS</source>
         <translation>Утилиты</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="370"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="795"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="796"/>
         <source>TAB_INFO</source>
         <translation>Информация</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="569"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="788"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="789"/>
         <source>INFO_PEER_COUNT</source>
         <translation>Пиров:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="457"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="772"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="773"/>
         <source>INFO_UPLOADED</source>
         <translation>Отданно</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="583"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="790"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="791"/>
         <source>INFO_SEED_COUNT</source>
         <translation>Сидов:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="590"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="791"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="792"/>
         <source>INFO_DESCRIBTION</source>
         <translation>Описание</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="450"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="771"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="772"/>
         <source>INFO_PATH</source>
         <translation>Путь</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="541"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="784"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="785"/>
         <source>INFO_REMAININF_TIME</source>
         <translation>Осталось</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="534"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="783"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="784"/>
         <source>INFO_DOWNLOADED</source>
         <translation>Загружено</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="527"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="782"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="783"/>
         <source>INFO_ACTIVE_TIME</source>
         <translation>Прошло</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="513"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="780"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="781"/>
         <source>INFO_DOWNLOAD_SPEED</source>
         <translation>Загрузка</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="492"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="777"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="778"/>
         <source>INFO_TOTAL_SIZE</source>
         <translation>Размер</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="478"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="775"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="776"/>
         <source>INFO_UPLOAD_SPEED</source>
         <translation>Отдача</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="613"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="793"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="794"/>
         <source>INFO_HASH</source>
         <translation>Хеш</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="634"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="796"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="797"/>
         <source>TAB_PEERS</source>
         <translation>Пиры</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="666"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="805"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="669"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="806"/>
         <source>TAB_TRACKERS</source>
         <translation>Трекеры</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="694"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="798"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="697"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="799"/>
         <source>TRACKER_URL</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="699"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="800"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="702"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="801"/>
         <source>TRACKER_STATUS</source>
         <translation>Состояние</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="704"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="802"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="707"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="803"/>
         <source>TRACKER_NEXT_ANNOUNCE</source>
         <translation>Обновление через</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="721"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="806"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="724"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="807"/>
         <source>TAB_FILES</source>
         <translation>Файлы</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="908"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="727"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="911"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="728"/>
         <source>MENU_OPEN_TORRENT</source>
         <translation>Открыть торрент</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="911"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="728"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="914"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="729"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="922"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="729"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="925"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="730"/>
         <source>MENU_OPEN_MAGNET</source>
         <translation>Открыть magnet сслыку</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="925"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="730"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="928"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="731"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="930"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="933"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1360"/>
         <location filename="../../core/gui/Utils/ValueSetters.cpp" line="352"/>
         <location filename="../../core/gui/Utils/ValueSetters.cpp" line="355"/>
         <location filename="../../core/gui/Utils/ValueSetters.cpp" line="358"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="731"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="732"/>
         <source>MENU_CREATE_TORRENT</source>
         <translation>Создать  торрент</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="933"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="732"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="936"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="733"/>
         <source>Ctrl+N</source>
         <oldsource>Ctrl+C</oldsource>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="938"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="733"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="941"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="734"/>
         <source>MENU_EXIT</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="941"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="734"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="944"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="735"/>
         <source>Alt+X</source>
         <translation>Alt+X</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="949"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="952"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1363"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="735"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="736"/>
         <source>MENU_CONFIGURATION</source>
         <translation>Конфигурация</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="952"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="736"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="955"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="737"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="960"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="737"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="963"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="738"/>
         <source>STR_PAUSE</source>
         <translation>Пауза</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="963"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="738"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="966"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="739"/>
         <source>HINT_PAUSE</source>
         <translation>Пауза</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="968"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="739"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="971"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="740"/>
         <source>STR_DOWNLOAD</source>
         <translation>Скачать торрент</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="971"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="740"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="974"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="741"/>
         <source>HINT_DOWNLOAD</source>
         <translation>Скачать торрент</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="976"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="741"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="979"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="742"/>
         <source>STR_OPEN_URL</source>
         <translation>Открыть описание</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="979"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="742"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="982"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="743"/>
         <source>HINT_OPEN_URL</source>
         <translation>Открыть описание</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="984"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="743"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="987"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="744"/>
         <source>STR_START</source>
         <translation>Возобновить</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="987"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="744"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="990"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="745"/>
         <source>HINT_RESUME</source>
         <translation>Возобновить</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="992"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="998"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="745"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="748"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="995"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1001"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="746"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="749"/>
         <source>STR_REMOVE</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="995"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="746"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="998"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="747"/>
         <source>HINT_REMOVE</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1003"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="750"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1006"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="751"/>
         <source>MENU_ABAUT</source>
         <translation>O CuteTorrent</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1006"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="751"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1009"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="752"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1014"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="752"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1017"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="753"/>
         <source>MENU_CHECK_UPDATES</source>
         <translation>Проверить обновления</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1017"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="753"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1020"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="754"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1022"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="754"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1025"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="755"/>
         <source>STR_SETTINGS</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1027"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="755"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1030"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="756"/>
         <source>TOOLS_BACKUP</source>
         <translation>Резервное копирование</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1032"/>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1035"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="756"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="758"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1038"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="757"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="759"/>
         <source>ACTION_RSS_ADD</source>
         <translation>Добавить Rss-ленту</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1040"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="760"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1043"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="761"/>
         <source>ACTION_RSS_REMOVE</source>
         <translation>Удалить Rss-ленту</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1045"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="761"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1048"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="762"/>
         <source>ACTION_RSS_EDIT</source>
         <translation>Изменить Rss-ленту</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1050"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="762"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1053"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="763"/>
         <source>MENU_ABOUT_QT</source>
         <translation>О Qt</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1055"/>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1058"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="763"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="765"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1061"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="764"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="766"/>
         <source>QUEUE_UP</source>
         <translation>Поднять в очереди</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1063"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="767"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1066"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="768"/>
         <source>QUEUE_DOWN</source>
         <translation>Опустить в очереди</translation>
     </message>
@@ -2492,50 +2492,42 @@ Download: %3</source>
 <context>
     <name>PeerTableModel</name>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="11"/>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="51"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="44"/>
         <source>PEER_IP</source>
         <translation>IP</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="12"/>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="52"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="45"/>
         <source>PEER_CLIENT_NAME</source>
         <translation>Клиент</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="13"/>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="53"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="46"/>
         <source>PEER_%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="14"/>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="54"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="47"/>
         <source>PEER_DOWNLOAD_SPEED</source>
         <translation>Загрузка</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="15"/>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="55"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="48"/>
         <source>PEER_UPLOAD_SPEED</source>
         <translation>Отдача</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="16"/>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="56"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="49"/>
         <source>PEER_DOWNLOADED</source>
         <translation>Загружено</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="17"/>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="57"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="50"/>
         <source>PEER_UPLOADED</source>
         <translation>Отадно</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="18"/>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="58"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="51"/>
         <source>PEER_SPEED</source>
         <translation>Скорость пира</translation>
     </message>

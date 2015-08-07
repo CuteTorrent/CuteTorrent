@@ -2,7 +2,7 @@
 #include "QTorrentDisplayModel.h"
 #include <QtCore>
 #include <float.h>
-QTorrentFilterProxyModel::QTorrentFilterProxyModel(QObject* parent) 
+QTorrentFilterProxyModel::QTorrentFilterProxyModel(QObject* parent)
 	: QSortFilterProxyModel(parent)
 	, m_pUpdateLocker(new QMutex())
 	, m_currentFilterType(TORRENT)
@@ -22,6 +22,7 @@ bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex
 		if (pTorrent != NULL)
 		{
 			bool searchFilterAccept = m_torrentSearchFilter.indexIn(pTorrent->GetName()) > -1;
+
 			switch (m_currentFilterType)
 			{
 				case GROUP:
@@ -29,11 +30,11 @@ bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex
 					{
 						return searchFilterAccept;
 					}
+
 					return pTorrent->GetGroup().compare(m_groupFilter) == 0 && searchFilterAccept;
 
 				case TORRENT:
 				{
-					
 					switch (m_torrentFilter)
 					{
 						case ACTIVE:
@@ -49,7 +50,6 @@ bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex
 							return pTorrent->isDownloading() && searchFilterAccept;
 
 						case COMPLETED:
-							
 							return 100.0f - pTorrent->GetProgress() < FLT_EPSILON && searchFilterAccept;
 
 						case EMPTY:
@@ -64,8 +64,6 @@ bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex
 
 				default:
 					break;
-				
-
 			}
 		}
 	}
@@ -94,11 +92,12 @@ bool QTorrentFilterProxyModel::lessThan(const QModelIndex& left, const QModelInd
 			if (leftData == rightData)
 			{
 				return leftTorrent->GetName().compare(rightTorrent->GetName()) < 0;
-			} 
+			}
+
 			return QSortFilterProxyModel::lessThan(left, right);
 		}
-
 	}
+
 	return false;
 }
 

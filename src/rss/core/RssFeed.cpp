@@ -91,7 +91,7 @@ void RssFeed::resourceLoaded(QNetworkReply* pReply)
 
 	if (m_ttl == 0)
 	{
-		m_ttl = QApplicationSettings::getInstance()->valueInt("rss", "default_refresh_rate", 30*60);
+		m_ttl = QApplicationSettings::getInstance()->valueInt("rss", "default_refresh_rate", 30 * 60);
 	}
 
 	m_pUpdateTimer->setInterval(ttl() * 1000l);
@@ -157,7 +157,8 @@ QList<QNetworkCookie> RssFeed::buildCookies() const
 
 	if (m_coookies.size() > 0)
 	{
-        SimpleCrypt cryptor(0xA6C56E2CF17A50LL);
+		SimpleCrypt cryptor(0xA6C56E2CF17A50LL);
+
 		for (QHash<QString, QString>::const_iterator i = m_coookies.constBegin(); i != m_coookies.constEnd(); ++i)
 		{
 			res << QNetworkCookie(cryptor.decryptToString(i.key()).toUtf8(), cryptor.decryptToString(i.value()).toUtf8());

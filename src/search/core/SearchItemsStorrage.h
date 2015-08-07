@@ -8,9 +8,9 @@ class SearchItemsStorrage : public QObject, public Singleton<SearchItemsStorrage
 	Q_OBJECT
 protected:
 	SearchItemsStorrage();
-	
+
 private:
-	
+
 	QList<SearchResult*> m_items;
 public:
 	~SearchItemsStorrage();

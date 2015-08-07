@@ -198,7 +198,6 @@ int main(int argc, char* argv[])
 #else
 			QString torrentCreationSource = QString::fromUtf8(vm["create_torrent"].as<std::string>().c_str());
 #endif
-			
 			a.sendMessage(QString("create_torrent:%1").arg(torrentCreationSource));
 		}
 
@@ -280,7 +279,6 @@ int main(int argc, char* argv[])
 	{
 		fclose(fp);
 	}
-
 
 #ifdef Q_WS_WIN
 #ifdef _DEBUG

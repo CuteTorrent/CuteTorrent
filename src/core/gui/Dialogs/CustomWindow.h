@@ -120,9 +120,10 @@ template <class T>
 typename BaseWindow<T>::MoveType BaseWindow<T>::detectMoveType(const QPoint pos)
 {
 	QRect desktopGeometry = getMultyMonitorDesktopRect();
+
 	if (isMaximized())
 	{
-        QRect windowGeometry = T::geometry();
+		QRect windowGeometry = T::geometry();
 
 		if (abs(pos.y() - desktopGeometry.y()) <= PIXELS_TO_ACT)
 		{
@@ -166,7 +167,7 @@ typename BaseWindow<T>::MoveType BaseWindow<T>::detectMoveType(const QPoint pos)
 		}
 		else
 		{
-            QRect windowGeometry = T::geometry();
+			QRect windowGeometry = T::geometry();
 
 			if (abs(pos.x() - desktopGeometry.x()) <= PIXELS_TO_ACT)
 			{
@@ -209,10 +210,12 @@ QRect BaseWindow<T>::getMultyMonitorDesktopRect()
 	QRect desktopGeometry;
 	QDesktopWidget* desktopWidget = QApplication::desktop();
 	int screenCount = desktopWidget->numScreens();
+
 	for (int i = 0; i < screenCount; i++)
 	{
 		desktopGeometry = desktopGeometry.united(desktopWidget->availableGeometry(i));
 	}
+
 	//qDebug() << "Final desktop gemetry is:" << desktopGeometry;
 	return desktopGeometry;
 }
@@ -229,7 +232,7 @@ void BaseWindow<T>::setTitle(QString title)
 template <class T>
 void BaseWindow<T>::hide()
 {
-    preMaximizeGeomentry = T::geometry();
+	preMaximizeGeomentry = T::geometry();
 	T::hide();
 }
 
@@ -263,7 +266,7 @@ template <class T>
 void BaseWindow<T>::showMaximized()
 {
 	QDesktopWidget* desktop = QApplication::desktop();
-    preMaximizeGeomentry = T::geometry();
+	preMaximizeGeomentry = T::geometry();
 	m_bIsMaximized = true;
 	setGeometry(desktop->availableGeometry(this));
 	T::showNormal();
@@ -346,41 +349,44 @@ void BaseWindow<T>::setupWindowIcons()
 template <class T>
 void BaseWindow<T>::setupCustomWindow()
 {
-    T::setWindowFlags(Qt::FramelessWindowHint);
-    T::setMouseTracking(true);
+	T::setWindowFlags(Qt::FramelessWindowHint);
+	T::setMouseTracking(true);
 	getTitleBar()->setMouseTracking(true);
 	getTitleLabel()->setMouseTracking(true);
 	getTitleIcon()->setMouseTracking(true);
 	getCloseBtn()->setMouseTracking(true);
-
 #ifndef Q_WS_WIN
-    QWidget* titleBar = getTitleBar();
-    QHBoxLayout* layout = qobject_cast<QHBoxLayout*>(titleBar->layout());
-    if (layout != NULL)
-    {
-        QPushButton* closeBtn = getCloseBtn();
-        if (closeBtn != NULL)
-        {
-            layout->removeWidget(closeBtn);
-            layout->insertWidget(0, closeBtn);
-        }
+	QWidget* titleBar = getTitleBar();
+	QHBoxLayout* layout = qobject_cast<QHBoxLayout*>(titleBar->layout());
 
-        QPushButton* minBtn = getMinBtn();
-        if (minBtn != NULL)
-        {
-            layout->removeWidget(minBtn);
-            layout->insertWidget(1, minBtn);
-        }
+	if (layout != NULL)
+	{
+		QPushButton* closeBtn = getCloseBtn();
 
-        QPushButton* maxBtn = getMaxBtn();
-        if (maxBtn != NULL)
-        {
-            layout->removeWidget(maxBtn);
-            layout->insertWidget(2, maxBtn);
-        }
-    }
+		if (closeBtn != NULL)
+		{
+			layout->removeWidget(closeBtn);
+			layout->insertWidget(0, closeBtn);
+		}
+
+		QPushButton* minBtn = getMinBtn();
+
+		if (minBtn != NULL)
+		{
+			layout->removeWidget(minBtn);
+			layout->insertWidget(1, minBtn);
+		}
+
+		QPushButton* maxBtn = getMaxBtn();
+
+		if (maxBtn != NULL)
+		{
+			layout->removeWidget(maxBtn);
+			layout->insertWidget(2, maxBtn);
+		}
+	}
+
 #endif
-
 
 	if(centralWidget() == NULL)
 	{
@@ -429,7 +435,7 @@ void BaseWindow<T>::maximizeBtnClicked()
 
 	if (getMaxBtn() != NULL)
 	{
-        if (T::isFullScreen() || isMaximized())
+		if (T::isFullScreen() || isMaximized())
 		{
 			getMaxBtn()->setIcon(styleEngine->getIcon("app_max"));
 			showNormal();
@@ -445,13 +451,13 @@ void BaseWindow<T>::maximizeBtnClicked()
 template <class T>
 void BaseWindow<T>::minimizeBtnClicked()
 {
-    if(T::isMinimized())
+	if(T::isMinimized())
 	{
-        T::setWindowState(T::windowState() & ~Qt::WindowMinimized);
+		T::setWindowState(T::windowState() & ~Qt::WindowMinimized);
 	}
 	else
 	{
-        T::setWindowState(T::windowState() | Qt::WindowMinimized);
+		T::setWindowState(T::windowState() | Qt::WindowMinimized);
 	}
 }
 template <class T>
@@ -465,10 +471,10 @@ void BaseWindow<T>::moveWindow(QMouseEvent* e)
 		if (isMaximized())
 		{
 			maximizeBtnClicked();
-            dragPosition = QPoint(T::geometry().width() / 2, 0);
+			dragPosition = QPoint(T::geometry().width() / 2, 0);
 		}
 
-        T::move(pos - dragPosition);
+		T::move(pos - dragPosition);
 		e->accept();
 	}
 }
@@ -478,49 +484,52 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 {
 	if(allowToResize)
 	{
-        QRect windowGeoemtry = T::geometry();
-        int xMouse = e->globalPos().x();
-        int yMouse = e->globalPos().y();
-        int wWidth = windowGeoemtry.width();
+		QRect windowGeoemtry = T::geometry();
+		int xMouse = e->globalPos().x();
+		int yMouse = e->globalPos().y();
+		int wWidth = windowGeoemtry.width();
 		int wHeight = windowGeoemtry.height();
-        //qDebug()<< "resizeWindow" << "xMouse" << xMouse << "yMouse" << yMouse << "wWidth" << wWidth << "wHeight" << wHeight << T::cursor().shape() << windowGeoemtry << T::parentWidget();
-        if(T::cursor().shape() == Qt::SizeVerCursor)
+
+		//qDebug()<< "resizeWindow" << "xMouse" << xMouse << "yMouse" << yMouse << "wWidth" << wWidth << "wHeight" << wHeight << T::cursor().shape() << windowGeoemtry << T::parentWidget();
+		if(T::cursor().shape() == Qt::SizeVerCursor)
 		{
-            qDebug() << "resizeVerSup" << resizeVerSup;
+			qDebug() << "resizeVerSup" << resizeVerSup;
+
 			if(resizeVerSup)
 			{
-                int newY = yMouse;
-                int newHeight = wHeight - (yMouse - windowGeoemtry.y());
-                if(newHeight > T::minimumSizeHint().height())
+				int newY = yMouse;
+				int newHeight = wHeight - (yMouse - windowGeoemtry.y());
+
+				if(newHeight > T::minimumSizeHint().height())
 				{
-                    T::resize(wWidth, newHeight);
-                    T::move(windowGeoemtry.x(), newY);
+					T::resize(wWidth, newHeight);
+					T::move(windowGeoemtry.x(), newY);
 				}
 			}
 			else
 			{
-                T::resize(wWidth, yMouse + 1);
+				T::resize(wWidth, yMouse + 1);
 			}
 		}
-        else if(T::cursor().shape() == Qt::SizeHorCursor)
+		else if(T::cursor().shape() == Qt::SizeHorCursor)
 		{
 			if(resizeHorEsq)
 			{
-                int newX = xMouse;
+				int newX = xMouse;
 				int newWidth = wWidth - xMouse;
 
-                if(newWidth > T::minimumSizeHint().width())
+				if(newWidth > T::minimumSizeHint().width())
 				{
-                    T::resize(newWidth, wHeight);
-                    T::move(newX, windowGeoemtry.y());
+					T::resize(newWidth, wHeight);
+					T::move(newX, windowGeoemtry.y());
 				}
 			}
 			else
 			{
-                T::resize(xMouse, wHeight);
+				T::resize(xMouse, wHeight);
 			}
 		}
-        else if(T::cursor().shape() == Qt::SizeBDiagCursor)
+		else if(T::cursor().shape() == Qt::SizeBDiagCursor)
 		{
 			int newX = 0;
 			int newWidth = 0;
@@ -536,29 +545,29 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 			}
 			else
 			{
-                newX = xMouse;
+				newX = xMouse;
 				newWidth = wWidth - xMouse;
 				newY = windowGeoemtry.y();
 				newHeight = yMouse;
 			}
 
-            if(newWidth >= T::minimumSizeHint().width() && newHeight >= T::minimumSizeHint().height())
+			if(newWidth >= T::minimumSizeHint().width() && newHeight >= T::minimumSizeHint().height())
 			{
-                T::resize(newWidth, newHeight);
-                T::move(newX, newY);
+				T::resize(newWidth, newHeight);
+				T::move(newX, newY);
 			}
-            else if(newWidth >= T::minimumSizeHint().width())
+			else if(newWidth >= T::minimumSizeHint().width())
 			{
-                T::resize(newWidth, wHeight);
-                T::move(newX, windowGeoemtry.y());
+				T::resize(newWidth, wHeight);
+				T::move(newX, windowGeoemtry.y());
 			}
-            else if(newHeight >= T::minimumSizeHint().height())
+			else if(newHeight >= T::minimumSizeHint().height())
 			{
-                T::resize(wWidth, newHeight);
-                T::move(windowGeoemtry.x(), newY);
+				T::resize(wWidth, newHeight);
+				T::move(windowGeoemtry.x(), newY);
 			}
 		}
-        else if(T::cursor().shape() == Qt::SizeFDiagCursor)
+		else if(T::cursor().shape() == Qt::SizeFDiagCursor)
 		{
 			if(resizeDiagSupEsq)
 			{
@@ -567,25 +576,25 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 				int newY = windowGeoemtry.y() + yMouse;
 				int newHeight = wHeight - yMouse;
 
-                if(newWidth >= T::minimumSizeHint().width() && newHeight >= T::minimumSizeHint().height())
+				if(newWidth >= T::minimumSizeHint().width() && newHeight >= T::minimumSizeHint().height())
 				{
-                    T::resize(newWidth, newHeight);
-                    T::move(newX, newY);
+					T::resize(newWidth, newHeight);
+					T::move(newX, newY);
 				}
-                else if(newWidth >= T::minimumSizeHint().width())
+				else if(newWidth >= T::minimumSizeHint().width())
 				{
-                    T::resize(newWidth, wHeight);
-                    T::move(newX, windowGeoemtry.y());
+					T::resize(newWidth, wHeight);
+					T::move(newX, windowGeoemtry.y());
 				}
-                else if(newHeight >= T::minimumSizeHint().height())
+				else if(newHeight >= T::minimumSizeHint().height())
 				{
-                    T::resize(wWidth, newHeight);
-                    T::move(windowGeoemtry.x(), newY);
+					T::resize(wWidth, newHeight);
+					T::move(windowGeoemtry.x(), newY);
 				}
 			}
 			else
 			{
-                T::resize(xMouse + 1, yMouse + 1);
+				T::resize(xMouse + 1, yMouse + 1);
 			}
 		}
 
@@ -599,25 +608,24 @@ void BaseWindow<T>::paintEvent(QPaintEvent*)
 	QStyleOption opt;
 	opt.init(this);
 	QPainter p(this);
-    T::style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+	T::style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }
 
 template <class T>
 void BaseWindow<T>::mouseDoubleClickEvent(QMouseEvent* e)
 {
-    QPoint position = e->globalPos();
-    QRect titleGeometry = getTitleBar()->geometry();
-    titleGeometry.moveTopLeft(getTitleBar()->parentWidget()->mapToGlobal(titleGeometry.topLeft()));
+	QPoint position = e->globalPos();
+	QRect titleGeometry = getTitleBar()->geometry();
+	titleGeometry.moveTopLeft(getTitleBar()->parentWidget()->mapToGlobal(titleGeometry.topLeft()));
 
-
-    if(position.x() < titleGeometry.right() && position.y() < titleGeometry.bottom()
-            && position.x() >= titleGeometry.x() && position.y() >= titleGeometry.y()
+	if(position.x() < titleGeometry.right() && position.y() < titleGeometry.bottom()
+	        && position.x() >= titleGeometry.x() && position.y() >= titleGeometry.y()
 	        && getTitleIcon()->isVisible())
 	{
 		T::close();
 	}
-    else if(position.x() < titleGeometry.width()
-            && position.y() < titleGeometry.height()
+	else if(position.x() < titleGeometry.width()
+	        && position.y() < titleGeometry.height()
 	        && m_titleMode != FullScreenMode)
 	{
 		maximizeBtnClicked();
@@ -643,22 +651,23 @@ void BaseWindow<T>::mousePressEvent(QMouseEvent* e)
 {
 	if(e->button() == Qt::LeftButton)
 	{
-        QPoint pos = e->globalPos();
-        QRect windowGeoemtry = T::geometry();
-        QRect titleGeometry = getTitleBar()->geometry();
-        titleGeometry.moveTopLeft(getTitleBar()->parentWidget()->mapToGlobal(titleGeometry.topLeft()));
-        //qDebug() << "TitleBar geometry" << titleGeometry << "pressPos" << pos;
+		QPoint pos = e->globalPos();
+		QRect windowGeoemtry = T::geometry();
+		QRect titleGeometry = getTitleBar()->geometry();
+		titleGeometry.moveTopLeft(getTitleBar()->parentWidget()->mapToGlobal(titleGeometry.topLeft()));
+
+		//qDebug() << "TitleBar geometry" << titleGeometry << "pressPos" << pos;
 		if(inResizeZone && m_resizeMode == AllowResize)
 		{
 			allowToResize = true;
 
-            if(pos.y() <= PIXELS_TO_ACT + windowGeoemtry.y())
+			if(pos.y() <= PIXELS_TO_ACT + windowGeoemtry.y())
 			{
-                if(pos.x() <= PIXELS_TO_ACT + windowGeoemtry.x())
+				if(pos.x() <= PIXELS_TO_ACT + windowGeoemtry.x())
 				{
 					resizeDiagSupEsq = true;
 				}
-                else if(pos.x() >= windowGeoemtry.x() + windowGeoemtry.width() - PIXELS_TO_ACT)
+				else if(pos.x() >= windowGeoemtry.x() + windowGeoemtry.width() - PIXELS_TO_ACT)
 				{
 					resizeDiagSupDer = true;
 				}
@@ -667,15 +676,15 @@ void BaseWindow<T>::mousePressEvent(QMouseEvent* e)
 					resizeVerSup = true;
 				}
 			}
-            else if(pos.x() <= PIXELS_TO_ACT + windowGeoemtry.x())
+			else if(pos.x() <= PIXELS_TO_ACT + windowGeoemtry.x())
 			{
 				resizeHorEsq = true;
 			}
 		}
-        else if(titleGeometry.contains(pos))
+		else if(titleGeometry.contains(pos))
 		{
 			moveWidget = true;
-            dragPosition = e->globalPos() - T::frameGeometry().topLeft();
+			dragPosition = e->globalPos() - T::frameGeometry().topLeft();
 		}
 	}
 
@@ -688,13 +697,13 @@ void BaseWindow<T>::mouseMoveEvent(QMouseEvent* e)
 	QPoint pos = e->globalPos();
 	int xMouse = pos.x();
 	int yMouse = pos.y();
-    QRect windowGemetry = T::geometry();
+	QRect windowGemetry = T::geometry();
 	int wLeft = windowGemetry.left();
 	int wTop = windowGemetry.top();
 	int wWidth = windowGemetry.width();
 	int wHeight = windowGemetry.height();
 	bool isResizeEnabled = m_resizeMode == AllowResize;
-    //qDebug() << "mouseMoveEvent" << moveWidget << xMouse << yMouse << wWidth << wHeight << allowToResize << isResizeEnabled;
+	//qDebug() << "mouseMoveEvent" << moveWidget << xMouse << yMouse << wWidth << wHeight << allowToResize << isResizeEnabled;
 
 	if(moveWidget)
 	{
@@ -801,21 +810,22 @@ void BaseWindow<T>::mouseMoveEvent(QMouseEvent* e)
 	else if(isResizeEnabled && !m_bIsMaximized)
 	{
 #ifdef Q_WS_WIN
-        if ((xMouse >= wLeft + wWidth - PIXELS_TO_ACT && xMouse <= wLeft + wWidth + PIXELS_TO_ACT) || allowToResize)
+
+		if ((xMouse >= wLeft + wWidth - PIXELS_TO_ACT && xMouse <= wLeft + wWidth + PIXELS_TO_ACT) || allowToResize)
 		{
 			inResizeZone = true;
 
 			if (yMouse >= wTop + wHeight - PIXELS_TO_ACT && yMouse <= wTop + wHeight + PIXELS_TO_ACT)
 			{
-                T::setCursor(Qt::SizeFDiagCursor);
+				T::setCursor(Qt::SizeFDiagCursor);
 			}
 			else if (yMouse >= wTop - PIXELS_TO_ACT && yMouse <= wTop + PIXELS_TO_ACT)
 			{
-                T::setCursor(Qt::SizeBDiagCursor);
+				T::setCursor(Qt::SizeBDiagCursor);
 			}
 			else
 			{
-                T::setCursor(Qt::SizeHorCursor);
+				T::setCursor(Qt::SizeHorCursor);
 			}
 
 			resizeWindow(e);
@@ -827,38 +837,39 @@ void BaseWindow<T>::mouseMoveEvent(QMouseEvent* e)
 
 			if (yMouse >= wTop + wHeight - PIXELS_TO_ACT && yMouse <= wTop + wHeight + PIXELS_TO_ACT)
 			{
-                T::setCursor(Qt::SizeBDiagCursor);
+				T::setCursor(Qt::SizeBDiagCursor);
 			}
 			else if (yMouse >= wTop - PIXELS_TO_ACT && yMouse <= wTop + PIXELS_TO_ACT)
 			{
-                T::setCursor(Qt::SizeFDiagCursor);
+				T::setCursor(Qt::SizeFDiagCursor);
 			}
 			else
 			{
-                T::setCursor(Qt::SizeHorCursor);
+				T::setCursor(Qt::SizeHorCursor);
 			}
 
-            resizeWindow(e);
+			resizeWindow(e);
 		}
 		//Cursor part inferior
 		else if ((yMouse >= wTop + wHeight - PIXELS_TO_ACT && yMouse <= wTop + wHeight + PIXELS_TO_ACT) || allowToResize)
 		{
 			inResizeZone = true;
-            T::setCursor(Qt::SizeVerCursor);
+			T::setCursor(Qt::SizeVerCursor);
 			resizeWindow(e);
 		}
 		//Cursor part superior
 		else if ((yMouse >= wTop - PIXELS_TO_ACT && yMouse <= wTop + PIXELS_TO_ACT) || allowToResize)
 		{
 			inResizeZone = true;
-            T::setCursor(Qt::SizeVerCursor);
+			T::setCursor(Qt::SizeVerCursor);
 			resizeWindow(e);
 		}
 		else
 		{
 			inResizeZone = false;
-            T::setCursor(Qt::ArrowCursor);
-        }
+			T::setCursor(Qt::ArrowCursor);
+		}
+
 #endif
 	}
 

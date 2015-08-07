@@ -11,7 +11,7 @@ class FileSystemTorrentWatcher : public QObject, public Singleton<FileSystemTorr
 	Q_OBJECT
 	friend class Singleton<FileSystemTorrentWatcher>;
 public:
-	
+
 	void addPath(QString path);
 	void disable();
 private:

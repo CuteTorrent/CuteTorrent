@@ -26,7 +26,6 @@ HtmlView::~HtmlView()
 QVariant HtmlView::loadResource(int type, const QUrl& name)
 {
 	//qDebug() << Q_FUNC_INFO << "type=" << type;
-
 	if (type == QTextDocument::ImageResource)
 	{
 		QUrl url(name);

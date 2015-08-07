@@ -7,10 +7,12 @@ QString SpeedItemDelegate::displayText(const QVariant& value, const QLocale& loc
 	{
 		bool ok;
 		int speedValue = value.toInt(&ok);
+
 		if (ok && speedValue > KbInt)
 		{
 			return StaticHelpers::toKbMbGb(speedValue, true);
 		}
 	}
+
 	return "";
 }

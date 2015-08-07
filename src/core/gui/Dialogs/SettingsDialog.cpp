@@ -47,7 +47,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "torrentracker.h"
 #include "RconWebService.h"
 
-SettingsDialog::SettingsDialog(QWidget* parent, int flags) 
+SettingsDialog::SettingsDialog(QWidget* parent, int flags)
 	: BaseWindow(OnlyCloseButton, NoResize, parent)
 	, m_propertyMapper(new SettingsPropertyMapper(this))
 	, editRssRule(NULL)
@@ -72,12 +72,13 @@ SettingsDialog::SettingsDialog(QWidget* parent, int flags)
 	FillRssTab();
 	setupCustomWindow();
 	QPushButton* applyButton = buttonBox->button(QDialogButtonBox::Apply);
+
 	if (applyButton != NULL)
 	{
 		applyButton->setEnabled(false);
 	}
+
 	setupWindowIcons();
-	
 	StyleEngene* style = StyleEngene::getInstance();
 	connect(style, SIGNAL(styleChanged()), this, SLOT(setupWindowIcons()));
 	connect(m_propertyMapper.get(), SIGNAL(GotChanges()), SLOT(EnableApplyButton()));
@@ -135,7 +136,8 @@ void SettingsDialog::setupWindowIcons()
 void SettingsDialog::FillHDDTab()
 {
 	m_propertyMapper->AddMapping("Torrent", "lock_files", SettingsPropertyMapper::BOOL, lockFilesCheckBox, SettingsPropertyMapper::CHECKBOX);
-	m_propertyMapper->AddMapping("Torrent", "cache_size", SettingsPropertyMapper::INT, casheSizeLineEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::ChacheSizeSetter, UIPropertyGetters::CacheSizeGetter);
+	m_propertyMapper->AddMapping("Torrent", "cache_size", SettingsPropertyMapper::INT, casheSizeLineEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::ChacheSizeSetter,
+	                             UIPropertyGetters::CacheSizeGetter);
 	m_propertyMapper->AddMapping("Torrent", "disk_io_write_mode", SettingsPropertyMapper::INT, diskIOCasheModeComboBox, SettingsPropertyMapper::COMBOBOX);
 	m_propertyMapper->AddMapping("Torrent", "use_disk_read_ahead", SettingsPropertyMapper::BOOL, useDiskReadAheadCheckBox, SettingsPropertyMapper::CHECKBOX);
 	m_propertyMapper->AddMapping("Torrent", "allow_reordered_disk_operations", SettingsPropertyMapper::BOOL, alowReorderedOpsCheckBox, SettingsPropertyMapper::CHECKBOX);
@@ -148,32 +150,32 @@ void SettingsDialog::FillGeneralTab()
 {
 	m_propertyMapper->AddMapping("TorrentTracker", "enabled", SettingsPropertyMapper::BOOL, trackerGroupBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, false);
 	m_propertyMapper->AddMapping("TorrentTracker", "port", SettingsPropertyMapper::INT, trackerPortEdit, SettingsPropertyMapper::LINE_EDIT, 6996);
-	
 	StyleEngene* styleEngine = StyleEngene::getInstance();
 	QList<StyleInfo> styleInfos = styleEngine->getAvaliableStyles();
-	
 	styleComboBox->clear();
 
 	for(int i = 0; i < styleInfos.size(); i++)
 	{
 		styleComboBox->addItem(styleInfos[i].DisplayName, styleInfos[i].InternalName);
 	}
-	m_propertyMapper->AddMapping("System", "Style", SettingsPropertyMapper::INT, styleComboBox, SettingsPropertyMapper::COMBOBOX, "CuteTorrent", NULL, NULL, ValueSetters::StyleValueSetter ,ValueGetters::StyleValueGetter);
-	
+
+	m_propertyMapper->AddMapping("System", "Style", SettingsPropertyMapper::INT, styleComboBox, SettingsPropertyMapper::COMBOBOX, "CuteTorrent", NULL, NULL, ValueSetters::StyleValueSetter ,
+	                             ValueGetters::StyleValueGetter);
 	localeComboBox->clear();
 	QStringList availableLanguages = Application::availableLanguages();
+
 	for (int i = 0; i < availableLanguages.size(); i++)
 	{
 		QLocale language = QLocale(availableLanguages[i]);
 		localeComboBox->addItem(QLocale::languageToString(language.language()), availableLanguages[i]);
 	}
-	m_propertyMapper->AddMapping("System", "Lang", SettingsPropertyMapper::INT, localeComboBox, SettingsPropertyMapper::COMBOBOX, "en_US", NULL, NULL, ValueSetters::LanguageValueSetter, ValueGetters::LanguageValueGetter);
-	
+
+	m_propertyMapper->AddMapping("System", "Lang", SettingsPropertyMapper::INT, localeComboBox, SettingsPropertyMapper::COMBOBOX, "en_US", NULL, NULL, ValueSetters::LanguageValueSetter,
+	                             ValueGetters::LanguageValueGetter);
 	m_propertyMapper->AddMapping("Notifications", "use_notification_sys", SettingsPropertyMapper::BOOL, useNotificationsCheckBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, true);
 	m_propertyMapper->AddMapping("Notifications", "report_tracker_errors", SettingsPropertyMapper::BOOL, showTrackerErrorsCheckBox, SettingsPropertyMapper::CHECKBOX, false);
 	m_propertyMapper->AddMapping("Notifications", "report_disk_errors", SettingsPropertyMapper::BOOL, showDiskErrorsCheckBox, SettingsPropertyMapper::CHECKBOX);
 	m_propertyMapper->AddMapping("Notifications", "report_rss_errors", SettingsPropertyMapper::BOOL, showRssErrorsCheckBox, SettingsPropertyMapper::CHECKBOX);
-		
 	m_propertyMapper->AddMapping("WatchDir", "enabled", SettingsPropertyMapper::BOOL, watchDirEnabledCheckbox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, false);
 	m_propertyMapper->AddMapping("WatchDir", "dir_to_watch", SettingsPropertyMapper::STRING, watchDirPathEdit, SettingsPropertyMapper::LINE_EDIT, "");
 	m_propertyMapper->AddMapping("WatchDir", "show_doalog_on_new_torrent", SettingsPropertyMapper::BOOL, showDialogRadioButton, SettingsPropertyMapper::RADIOBUTTON, false);
@@ -181,14 +183,19 @@ void SettingsDialog::FillGeneralTab()
 	m_propertyMapper->AddMapping("WatchDir", "use_static_save_path", SettingsPropertyMapper::BOOL, useStaticPathRadioButton, SettingsPropertyMapper::RADIOBUTTON, false);
 	m_propertyMapper->AddMapping("WatchDir", "use_static_save_path", SettingsPropertyMapper::BOOL, useStaticPathRadioButton, SettingsPropertyMapper::RADIOBUTTON, false);
 	m_propertyMapper->AddMapping("WatchDir", "static_save_path", SettingsPropertyMapper::STRING, staticSavePathEdit, SettingsPropertyMapper::LINE_EDIT, "");
-	m_propertyMapper->AddMapping("System", "open_magent_links", SettingsPropertyMapper::BOOL, magnetAssociationCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL, ValueSetters::MagnetAssociationValueSetter, ValueGetters::MagnetAssociationValueGetter);
-	m_propertyMapper->AddMapping("System", "open_torrent_files", SettingsPropertyMapper::BOOL, asociationCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL, ValueSetters::TorrentAssociationValueSetter, ValueGetters::TorrentAssociationValueGetter);
-	m_propertyMapper->AddMapping("System", "run_on_boot", SettingsPropertyMapper::BOOL, runOnbootCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL, ValueSetters::RunOnBootValueSetter, ValueGetters::RunOnBootValueGetter);
+	m_propertyMapper->AddMapping("System", "open_magent_links", SettingsPropertyMapper::BOOL, magnetAssociationCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL,
+	                             ValueSetters::MagnetAssociationValueSetter, ValueGetters::MagnetAssociationValueGetter);
+	m_propertyMapper->AddMapping("System", "open_torrent_files", SettingsPropertyMapper::BOOL, asociationCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL,
+	                             ValueSetters::TorrentAssociationValueSetter, ValueGetters::TorrentAssociationValueGetter);
+	m_propertyMapper->AddMapping("System", "run_on_boot", SettingsPropertyMapper::BOOL, runOnbootCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL, ValueSetters::RunOnBootValueSetter,
+	                             ValueGetters::RunOnBootValueGetter);
 	m_propertyMapper->AddMapping("Search", "script_debuging_enabled", SettingsPropertyMapper::BOOL, scriptDebugingCheckBox, SettingsPropertyMapper::CHECKBOX, false);
 	//OS_SPECIFICK////
 #ifdef Q_WS_WIN
-	m_propertyMapper->AddMapping("System", "run_on_boot_minimaized", SettingsPropertyMapper::BOOL, startMinimizedCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL, ValueSetters::RunOnBootMinimizedValueSetter, ValueGetters::RunOnBootMinimizedValueGetter);
-	m_propertyMapper->AddMapping("System", "win_explorer_integration_enabled", SettingsPropertyMapper::BOOL, winShelItegrationCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL, ValueSetters::WindowsShellValueSetter, ValueGetters::WindowsShellValueGetter);
+	m_propertyMapper->AddMapping("System", "run_on_boot_minimaized", SettingsPropertyMapper::BOOL, startMinimizedCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL,
+	                             ValueSetters::RunOnBootMinimizedValueSetter, ValueGetters::RunOnBootMinimizedValueGetter);
+	m_propertyMapper->AddMapping("System", "win_explorer_integration_enabled", SettingsPropertyMapper::BOOL, winShelItegrationCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL,
+	                             ValueSetters::WindowsShellValueSetter, ValueGetters::WindowsShellValueGetter);
 #endif
 #ifdef Q_WS_X11
 	winShelItegrationCheckBox->setVisible(false);
@@ -231,7 +238,6 @@ void SettingsDialog::UpdateWebUILaunchButtons()
 
 void SettingsDialog::FillWebUITab()
 {
-	
 	m_propertyMapper->AddMapping("WebControl", "webui_enabled", SettingsPropertyMapper::BOOL, webUIGroupBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, false);
 	m_propertyMapper->AddMapping("WebControl", "webui_login", SettingsPropertyMapper::STRING, loginLineEdit, SettingsPropertyMapper::LINE_EDIT);
 	m_propertyMapper->AddMapping("WebControl", "webui_password", SettingsPropertyMapper::STRING, passwordLineEdit, SettingsPropertyMapper::LINE_EDIT);
@@ -241,7 +247,6 @@ void SettingsDialog::FillWebUITab()
 	m_propertyMapper->AddMapping("WebControl", "log_name", SettingsPropertyMapper::STRING, logLineEdit, SettingsPropertyMapper::LINE_EDIT);
 	m_propertyMapper->AddMapping("WebControl", "enable_ipfilter", SettingsPropertyMapper::BOOL, IPFilterGroupBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX, false);
 	m_propertyMapper->AddMapping("WebControl", "ipfilter", SettingsPropertyMapper::STRING, ipFilterTextEdit, SettingsPropertyMapper::TEXT_EDIT);
-
 	UpdateWebUILaunchButtons();
 }
 
@@ -272,18 +277,19 @@ void SettingsDialog::ApplySettings()
 	m_propertyMapper->ApplyChanges();
 	UpdateWebUILaunchButtons();
 	ApplySettingsToSession();
+
 	if (m_filterGroupsHaveChanges)
 	{
 		m_pSettings->SaveFilterGropups(m_filterGroups);
 	}
-	
+
 	NotificationSystem::getInstance()->UpdateNotificationSettings();
-	
+
 	if (m_rssDownloadRulesHaveChanges)
 	{
 		ApplyRssDownloadRulles();
 	}
-	
+
 	if (m_schedulerTasksHaveChanges)
 	{
 		m_pSettings->SaveSchedullerQueue(m_schedulerTasks);
@@ -408,12 +414,12 @@ void SettingsDialog::browseSavepathGroup()
 	                                  lastDir,
 	                                  QFileDialog::ShowDirsOnly
 	                                  | QFileDialog::DontResolveSymlinks);
+
 	if (!savaPathForCurrentGroup.isEmpty())
 	{
 		savaPathForCurrentGroup.append(QDir::separator());
 		groupSavePathEdit->setText(QDir::toNativeSeparators(savaPathForCurrentGroup));
 	}
-	
 }
 void SettingsDialog::browseDTPath()
 {
@@ -483,7 +489,6 @@ void SettingsDialog::AddTask()
 
 	SchedulerTask newTask(name, type, limitVal, beginDateTimeEdit->dateTime());
 	m_schedulerTasks.push_back(newTask);
-	
 	tasksComboBox->addItem(newTask.name(), qVariantFromValue(newTask));
 	emit tasksChanged();
 }
@@ -495,10 +500,12 @@ void SettingsDialog::FillSchedullerTab()
 	connect(tasksComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(UpdateSchedullerTab(int)));
 	m_schedulerTasks.append(m_pSettings->GetSchedullerQueue());
 	connect(&m_schedulerTasks, SIGNAL(CollectionChanged(CollectionChangedInfo)), SLOT(onSchedulerTaskChanged()));
+
 	for(int i = 0; i < m_schedulerTasks.count(); i++)
 	{
 		tasksComboBox->addItem(m_schedulerTasks.at(i).name(), qVariantFromValue(m_schedulerTasks.at(i)));
 	}
+
 	QString currentLanguage = Application::currentLocale();
 	calendarWidget->setLocale(QLocale(currentLanguage));
 	Scheduller* scheduller = Scheduller::getInstance();
@@ -519,19 +526,15 @@ void SettingsDialog::FillNetworkTab()
 	QRegExp portRegex("^" + portRange + "$");
 	QRegExpValidator* portValidator = new QRegExpValidator(portRegex, this);
 	portEdit->setValidator(portValidator);
-
 	m_propertyMapper->AddMapping("Torrent", "listen_port", SettingsPropertyMapper::INT, portEdit, SettingsPropertyMapper::LINE_EDIT);
 	m_propertyMapper->AddMapping("Torrent", "useProxy", SettingsPropertyMapper::BOOL, proxyGroupBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX);
-	
 	m_propertyMapper->AddMapping("Torrent", "proxy_hostname", SettingsPropertyMapper::STRING, proxyHostEdit, SettingsPropertyMapper::LINE_EDIT);
 	m_propertyMapper->AddMapping("Torrent", "proxy_port", SettingsPropertyMapper::STRING, proxyPortEdit, SettingsPropertyMapper::LINE_EDIT);
 	m_propertyMapper->AddMapping("Torrent", "proxy_username", SettingsPropertyMapper::STRING, proxyUsernameEdit, SettingsPropertyMapper::LINE_EDIT);
 	m_propertyMapper->AddMapping("Torrent", "proxy_password", SettingsPropertyMapper::STRING, proxyPwdEdit, SettingsPropertyMapper::LINE_EDIT);
-
 	m_propertyMapper->AddMapping("Torrent", "in_enc_policy", SettingsPropertyMapper::INT, inEncPolicyComboBox, SettingsPropertyMapper::COMBOBOX);
 	m_propertyMapper->AddMapping("Torrent", "out_enc_policy", SettingsPropertyMapper::INT, outEncPolicyComboBox, SettingsPropertyMapper::COMBOBOX);
 	m_propertyMapper->AddMapping("Torrent", "allowed_enc_level", SettingsPropertyMapper::INT, encLevelComboBox, SettingsPropertyMapper::COMBOBOX);
-	
 	m_propertyMapper->AddMapping("Torrent", "prefer_rc4", SettingsPropertyMapper::BOOL, preferFullEncCheckBox, SettingsPropertyMapper::CHECKBOX);
 	m_propertyMapper->AddMapping("Torrent", "use_port_forwarding", SettingsPropertyMapper::BOOL, portMappingsCheckBox, SettingsPropertyMapper::CHECKBOX);
 }
@@ -645,13 +648,11 @@ void SettingsDialog::UpdateSchedullerTab(int index)
 
 void SettingsDialog::StartRcon()
 {
-	
 	m_pRcon->Start();
 	bool isRunning = m_pRcon->isRunning();
 	RunningLabel->setEnabled(isRunning);
 	startRconButton->setEnabled(!isRunning);
 	stopRconButton->setEnabled(isRunning);
-	
 }
 
 void SettingsDialog::StopRcon()
@@ -672,10 +673,8 @@ void SettingsDialog::changeEvent(QEvent* event)
 		FillGeneralTab();
 		FillKeyMapTab();
 		m_propertyMapper->ResetToCurrentValues();
-
-		QString choosenLanguage = m_pSettings->valueString("System","Lang");
+		QString choosenLanguage = m_pSettings->valueString("System", "Lang");
 		calendarWidget->setLocale(QLocale(choosenLanguage));
-		
 		editRssRule->setText(tr("ACTION_SETTINGS_EDIT_RSS_RULE"));
 		deleteRssRule->setText(tr("ACTION_SETTINGS_DELETE_RSS_RULE"));
 	}
@@ -716,24 +715,26 @@ QLabel* SettingsDialog::getTitleIcon()
 
 void SettingsDialog::FillRestrictionTab()
 {
-	m_propertyMapper->AddMapping("Torrent", "upload_rate_limit", SettingsPropertyMapper::INT, uploadLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter, UIPropertyGetters::SpinboxKBGetter);
-	m_propertyMapper->AddMapping("Torrent", "download_rate_limit", SettingsPropertyMapper::INT, downloadLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter, UIPropertyGetters::SpinboxKBGetter);
-	m_propertyMapper->AddMapping("Torrent", "dht_upload_rate_limit", SettingsPropertyMapper::INT, dhtLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter, UIPropertyGetters::SpinboxKBGetter);
+	m_propertyMapper->AddMapping("Torrent", "upload_rate_limit", SettingsPropertyMapper::INT, uploadLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter,
+	                             UIPropertyGetters::SpinboxKBGetter);
+	m_propertyMapper->AddMapping("Torrent", "download_rate_limit", SettingsPropertyMapper::INT, downloadLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter,
+	                             UIPropertyGetters::SpinboxKBGetter);
+	m_propertyMapper->AddMapping("Torrent", "dht_upload_rate_limit", SettingsPropertyMapper::INT, dhtLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter,
+	                             UIPropertyGetters::SpinboxKBGetter);
 	m_propertyMapper->AddMapping("Torrent", "active_limit", SettingsPropertyMapper::INT, activeLimitEdit, SettingsPropertyMapper::SPINBOX);
 	m_propertyMapper->AddMapping("Torrent", "active_seeds", SettingsPropertyMapper::INT, activeSeedLimitEdit, SettingsPropertyMapper::SPINBOX);
 	m_propertyMapper->AddMapping("Torrent", "active_downloads", SettingsPropertyMapper::INT, activeDownloadLimitEdit, SettingsPropertyMapper::SPINBOX);
-	
 	m_propertyMapper->AddMapping("Torrent", "use_dht", SettingsPropertyMapper::BOOL, useDHTCheckBox, SettingsPropertyMapper::CHECKBOX);
 	m_propertyMapper->AddMapping("Torrent", "use_lsd", SettingsPropertyMapper::BOOL, useLSDCheckBox, SettingsPropertyMapper::CHECKBOX);
 	m_propertyMapper->AddMapping("Torrent", "use_pex", SettingsPropertyMapper::BOOL, usePExCheckBox, SettingsPropertyMapper::CHECKBOX);
-	
 	m_propertyMapper->AddMapping("Torrent", "ignore_limits_on_local_network", SettingsPropertyMapper::BOOL, limitLocalConnectionCheckBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX);
-	m_propertyMapper->AddMapping("Torrent", "local_upload_rate_limit", SettingsPropertyMapper::INT, localUploadLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter, UIPropertyGetters::SpinboxKBGetter);
-	m_propertyMapper->AddMapping("Torrent", "local_download_rate_limit", SettingsPropertyMapper::INT, localDownloadLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter, UIPropertyGetters::SpinboxKBGetter);
-	
+	m_propertyMapper->AddMapping("Torrent", "local_upload_rate_limit", SettingsPropertyMapper::INT, localUploadLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter,
+	                             UIPropertyGetters::SpinboxKBGetter);
+	m_propertyMapper->AddMapping("Torrent", "local_download_rate_limit", SettingsPropertyMapper::INT, localDownloadLimitEdit, SettingsPropertyMapper::SPINBOX, 0, UIPropertySetters::SpinboxKBSetter,
+	                             UIPropertyGetters::SpinboxKBGetter);
 	m_propertyMapper->AddMapping("Torrent", "rate_limit_utp", SettingsPropertyMapper::BOOL, limitUtpCheckBox, SettingsPropertyMapper::CHECKBOX);
-	m_propertyMapper->AddMapping("Torrent", "seed_time_limit", SettingsPropertyMapper::INT, seedTimeLimitEdit, SettingsPropertyMapper::TIME_EDIT, 0, UIPropertySetters::TimeFromIntSetter, UIPropertyGetters::IntFromTimeGetter);
-	
+	m_propertyMapper->AddMapping("Torrent", "seed_time_limit", SettingsPropertyMapper::INT, seedTimeLimitEdit, SettingsPropertyMapper::TIME_EDIT, 0, UIPropertySetters::TimeFromIntSetter,
+	                             UIPropertyGetters::IntFromTimeGetter);
 	m_propertyMapper->AddMapping("Torrent", "share_ratio_limit", SettingsPropertyMapper::DOUBLE, seedGlobalRatioEdit, SettingsPropertyMapper::DOUBLE_SPINBOX);
 	m_propertyMapper->AddMapping("Torrent", "max_connections_per_torrent", SettingsPropertyMapper::INT, maxConnectionsPerTorrentEdit, SettingsPropertyMapper::SPINBOX, 50);
 	m_propertyMapper->AddMapping("Torrent", "connections_limit", SettingsPropertyMapper::INT, maxConnectionsEdit, SettingsPropertyMapper::SPINBOX);
@@ -781,12 +782,12 @@ void SettingsDialog::FillRssTab()
 		connect(deleteRssRule, SIGNAL(triggered()), SLOT(onDeleteRssRule()));
 		rssRulesListWidget->addAction(deleteRssRule);
 	}
-	
-	m_propertyMapper->AddMapping("rss", "default_refresh_rate", SettingsPropertyMapper::INT, rssRefrashRateEdit, SettingsPropertyMapper::TIME_EDIT, 30 * 60, UIPropertySetters::TimeFromIntSetter, UIPropertyGetters::IntFromTimeGetter);
+
+	m_propertyMapper->AddMapping("rss", "default_refresh_rate", SettingsPropertyMapper::INT, rssRefrashRateEdit, SettingsPropertyMapper::TIME_EDIT, 30 * 60, UIPropertySetters::TimeFromIntSetter,
+	                             UIPropertyGetters::IntFromTimeGetter);
 	m_propertyMapper->AddMapping("rss", "auto_download_emeail_notify", SettingsPropertyMapper::BOOL, autosrtEmailNotificationCheckBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX);
 	m_propertyMapper->AddMapping("rss", "smtp_host", SettingsPropertyMapper::STRING, rssSmtpServerEdit, SettingsPropertyMapper::LINE_EDIT);
 	m_propertyMapper->AddMapping("rss", "smtp_port", SettingsPropertyMapper::STRING, rssSmtpPortEdit, SettingsPropertyMapper::LINE_EDIT);
-	
 	char const* smtpConnectionTypes[] =
 	{
 		QT_TR_NOOP("RSS_TCP_CONNECTION"),
@@ -798,7 +799,7 @@ void SettingsDialog::FillRssTab()
 	{
 		rssSmtpConnTypeCombobox->addItem(tr(smtpConnectionTypes[i]), i);
 	}
-	
+
 	m_propertyMapper->AddMapping("rss", "smtp_conn_type", SettingsPropertyMapper::INT, rssSmtpConnTypeCombobox, SettingsPropertyMapper::COMBOBOX);
 	char const* smtpAuthTypes[] =
 	{
@@ -810,11 +811,12 @@ void SettingsDialog::FillRssTab()
 	{
 		rssAuthTypeComboBox->addItem(tr(smtpAuthTypes[i]), i);
 	}
+
 	m_propertyMapper->AddMapping("rss", "smtp_auth_type", SettingsPropertyMapper::INT, rssAuthTypeComboBox, SettingsPropertyMapper::COMBOBOX);
 	m_propertyMapper->AddMapping("rss", "smtp_user", SettingsPropertyMapper::STRING, rssSmtpLoginEdit, SettingsPropertyMapper::LINE_EDIT);
-	m_propertyMapper->AddMapping("rss", "smtp_password", SettingsPropertyMapper::STRING, rssSmtpPasswordEdit, SettingsPropertyMapper::LINE_EDIT, QVariant(), NULL, NULL,ValueSetters::SettingsEncryptedValueSetter, ValueGetters::SettingsEncryptedValueGetter);
+	m_propertyMapper->AddMapping("rss", "smtp_password", SettingsPropertyMapper::STRING, rssSmtpPasswordEdit, SettingsPropertyMapper::LINE_EDIT, QVariant(), NULL, NULL,
+	                             ValueSetters::SettingsEncryptedValueSetter, ValueGetters::SettingsEncryptedValueGetter);
 	m_propertyMapper->AddMapping("rss", "rss_send_to", SettingsPropertyMapper::STRING, rssRecepientEmailEdit, SettingsPropertyMapper::LINE_EDIT);
-	
 	connect(&m_downloadRulesCopy, SIGNAL(CollectionChanged(CollectionChangedInfo)), SLOT(onRssDownloadRuleesChanged()));
 	connect(&m_deletedRules, SIGNAL(CollectionChanged(CollectionChangedInfo)), SLOT(onRssDownloadRuleesChanged()));
 }
@@ -928,13 +930,15 @@ void SettingsDialog::UpdateApplyButtonState()
 RssDownloadRule* SettingsDialog::findRule(QUuid uid)
 {
 	int len = m_downloadRulesCopy.size();
-	for (int i = 0; i < len;i++)
+
+	for (int i = 0; i < len; i++)
 	{
 		if (m_downloadRulesCopy[i]->Uid() == uid)
 		{
 			return m_downloadRulesCopy[i];
 		}
 	}
+
 	return NULL;
 }
 
@@ -1160,6 +1164,7 @@ void SettingsDialog::onImportRssRules()
 void SettingsDialog::EnableApplyButton()
 {
 	QPushButton* applyButton = buttonBox->button(QDialogButtonBox::Apply);
+
 	if (applyButton != NULL)
 	{
 		applyButton->setEnabled(true);
@@ -1169,6 +1174,7 @@ void SettingsDialog::EnableApplyButton()
 void SettingsDialog::DisableApplyButton()
 {
 	QPushButton* applyButton = buttonBox->button(QDialogButtonBox::Apply);
+
 	if (applyButton != NULL)
 	{
 		applyButton->setEnabled(false);
@@ -1178,9 +1184,10 @@ void SettingsDialog::DisableApplyButton()
 void SettingsDialog::onBrowseWatchDir()
 {
 	QString watchDir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
-		QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation),
-		QFileDialog::ShowDirsOnly
-		| QFileDialog::DontResolveSymlinks);
+	                   QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation),
+	                   QFileDialog::ShowDirsOnly
+	                   | QFileDialog::DontResolveSymlinks);
+
 	if (!watchDir.isEmpty())
 	{
 		watchDir.append("\\");
@@ -1191,9 +1198,10 @@ void SettingsDialog::onBrowseWatchDir()
 void SettingsDialog::onBrowseWatchStaticPath()
 {
 	QString watchDirStaticPath = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
-		QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation),
-		QFileDialog::ShowDirsOnly
-		| QFileDialog::DontResolveSymlinks);
+	                             QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation),
+	                             QFileDialog::ShowDirsOnly
+	                             | QFileDialog::DontResolveSymlinks);
+
 	if (!watchDirStaticPath.isEmpty())
 	{
 		watchDirStaticPath.append("\\");
@@ -1205,13 +1213,14 @@ void SettingsDialog::onFilteringGroupsChanged()
 {
 	m_filterGroupsHaveChanges = false;
 	QList<GroupForFileFiltering> originalGroups = m_pSettings->GetFileFilterGroups();
+
 	if (originalGroups.size() != m_filterGroups.size())
 	{
 		m_filterGroupsHaveChanges = true;
 	}
 	else
 	{
-		for (int i = 0; i < m_filterGroups.size();i++)
+		for (int i = 0; i < m_filterGroups.size(); i++)
 		{
 			if (originalGroups[i] != m_filterGroups[i])
 			{
@@ -1220,12 +1229,14 @@ void SettingsDialog::onFilteringGroupsChanged()
 			}
 		}
 	}
+
 	UpdateApplyButtonState();
 }
 
 void SettingsDialog::onRssDownloadRuleesChanged()
 {
 	m_rssDownloadRulesHaveChanges = false;
+
 	if (!m_deletedRules.isEmpty())
 	{
 		m_rssDownloadRulesHaveChanges = true;
@@ -1242,6 +1253,7 @@ void SettingsDialog::onRssDownloadRuleesChanged()
 		else
 		{
 			int size = originalRules.size();
+
 			for (int i = 0; i < size; i++)
 			{
 				if (*originalRules[i] != *m_downloadRulesCopy[i])
@@ -1252,6 +1264,7 @@ void SettingsDialog::onRssDownloadRuleesChanged()
 			}
 		}
 	}
+
 	UpdateApplyButtonState();
 }
 
@@ -1267,6 +1280,7 @@ void SettingsDialog::onSchedulerTaskChanged()
 	else
 	{
 		int size = originalSchedulerTasks.size();
+
 		for (int i = 0; i < size; i++)
 		{
 			if (originalSchedulerTasks[i] != m_schedulerTasks[i])
@@ -1276,5 +1290,6 @@ void SettingsDialog::onSchedulerTaskChanged()
 			}
 		}
 	}
+
 	UpdateApplyButtonState();
 }

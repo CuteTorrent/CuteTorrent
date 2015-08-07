@@ -8,14 +8,7 @@ PeerTableModel::PeerTableModel(QObject* parent)
 	, m_pUpdateMutex(new QMutex())
 	, m_peerItems()
 {
-	setHeaderData(IP, Qt::Horizontal, tr("PEER_IP"));
-	setHeaderData(CLIENT_NAME, Qt::Horizontal, tr("PEER_CLIENT_NAME"));
-	setHeaderData(PEER_PROGRESS, Qt::Horizontal, tr("PEER_%")); 
-	setHeaderData(DOWNLOAD_RATE, Qt::Horizontal, tr("PEER_DOWNLOAD_SPEED"));
-	setHeaderData(UPLOAD_RATE, Qt::Horizontal, tr("PEER_UPLOAD_SPEED"));
-	setHeaderData(DOWNLOADED, Qt::Horizontal, tr("PEER_DOWNLOADED"));
-	setHeaderData(UPLOADED, Qt::Horizontal, tr("PEER_UPLOADED"));
-	setHeaderData(PEER_SPEED, Qt::Horizontal, tr("PEER_SPEED"));
+	Retranslate();
 }
 
 
@@ -23,10 +16,12 @@ void PeerTableModel::UpdateData(std::vector<libtorrent::peer_info>& peersInfo)
 {
 	QMutexLocker locker(m_pUpdateMutex);
 	QSet<QString> oldPeers = m_peerItems.keys().toSet();
+
 	for (int i = 0; i < peersInfo.size(); i++)
 	{
 		libtorrent::peer_info peerInfo = peersInfo[i];
 		QString peerIp = QString::fromStdString(peerInfo.ip.address().to_string());
+
 		if (m_peerItems.contains(peerIp))
 		{
 			updatePeer(peerInfo);
@@ -37,7 +32,9 @@ void PeerTableModel::UpdateData(std::vector<libtorrent::peer_info>& peersInfo)
 			m_peerItems[peerIp] = addPeer(peerInfo);
 		}
 	}
+
 	QSetIterator<QString> it(oldPeers);
+
 	while (it.hasNext())
 	{
 		const QString& peerIp = it.next();
@@ -62,10 +59,12 @@ void PeerTableModel::Clear()
 {
 	QMutexLocker locker(m_pUpdateMutex);
 	int curentLen = m_peerItems.size();
+
 	if (curentLen != 0)
 	{
 		removeRows(0, rowCount());
 	}
+
 	m_peerItems.clear();
 }
 
@@ -77,13 +76,15 @@ void PeerTableModel::updatePeer(libtorrent::peer_info peerInfo)
 	QString flagFileName = QString(":/flags/%1.png").arg(QString(QByteArray(peerInfo.country, 2)));
 	QIcon flagIcon = QIcon(QPixmap(flagFileName));
 	setData(index(row, IP), flagIcon, Qt::DecorationRole);
-    setData(index(row, IP), QString::fromStdString(peerInfo.ip.address().to_string()), Qt::DisplayRole);
+	setData(index(row, IP), QString::fromStdString(peerInfo.ip.address().to_string()), Qt::DisplayRole);
 	QString client = QString::fromUtf8(peerInfo.client.c_str());
+
 	if ((peerInfo.flags & libtorrent::peer_info::rc4_encrypted) == libtorrent::peer_info::rc4_encrypted
-		|| (peerInfo.flags & libtorrent::peer_info::plaintext_encrypted) == libtorrent::peer_info::plaintext_encrypted)
+	        || (peerInfo.flags & libtorrent::peer_info::plaintext_encrypted) == libtorrent::peer_info::plaintext_encrypted)
 	{
 		client = client.append("*");
 	}
+
 	setData(index(row, CLIENT_NAME), client, Qt::DisplayRole);
 	setData(index(row, PEER_PROGRESS), peerInfo.progress * 100.f, Qt::DisplayRole);
 	setData(index(row, DOWNLOAD_RATE), peerInfo.down_speed, Qt::DisplayRole);
@@ -101,13 +102,15 @@ QStandardItem* PeerTableModel::addPeer(libtorrent::peer_info peerInfo)
 	QString flagFileName = QString(":/flags/%1.png").arg(QString(QByteArray(peerInfo.country, 2)));
 	QIcon flagIcon = QIcon(QPixmap(flagFileName));
 	setData(index(row, IP), flagIcon, Qt::DecorationRole);
-    setData(index(row, IP), QString::fromStdString(peerInfo.ip.address().to_string()), Qt::DisplayRole);
+	setData(index(row, IP), QString::fromStdString(peerInfo.ip.address().to_string()), Qt::DisplayRole);
 	QString client = QString::fromUtf8(peerInfo.client.c_str());
+
 	if ((peerInfo.flags & libtorrent::peer_info::rc4_encrypted) == libtorrent::peer_info::rc4_encrypted
-		|| (peerInfo.flags & libtorrent::peer_info::plaintext_encrypted) == libtorrent::peer_info::plaintext_encrypted)
+	        || (peerInfo.flags & libtorrent::peer_info::plaintext_encrypted) == libtorrent::peer_info::plaintext_encrypted)
 	{
 		client = client.append("*");
 	}
+
 	setData(index(row, CLIENT_NAME), client, Qt::DisplayRole);
 	setData(index(row, PEER_PROGRESS), peerInfo.progress * 100.f, Qt::DisplayRole);
 	setData(index(row, DOWNLOAD_RATE), peerInfo.down_speed, Qt::DisplayRole);

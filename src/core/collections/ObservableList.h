@@ -3,16 +3,16 @@
 template<typename T>
 class ObservableList : public ObservebaleCollectionBase, public QList<T>
 {
-	
+
 public:
-	void append(const T &t);
-	void append(const QList<T> &t);
-	void prepend(const T &t);
-	void insert(int i, const T &t);
-	void replace(int i, const T &t);
-	int removeAll(const T &t);
+	void append(const T& t);
+	void append(const QList<T>& t);
+	void prepend(const T& t);
+	void insert(int i, const T& t);
+	void replace(int i, const T& t);
+	int removeAll(const T& t);
 	void removeAt(int i);
-	bool removeOne(const T &t);
+	bool removeOne(const T& t);
 	void move(int from, int to);
 	void swap(int i, int j);
 };
@@ -22,6 +22,7 @@ int ObservableList<T>::removeAll(const T& t)
 {
 	int foundIndex = indexOf(t);
 	int removed = 0;
+
 	while (foundIndex > -1)
 	{
 		removeAt(foundIndex);
@@ -37,7 +38,7 @@ void ObservableList<T>::append(const T& t)
 {
 	int index = QList<T>::size();
 	QList<T>::append(t);
-	emit CollectionChanged({ Add , index, 1, -1,-1});
+	emit CollectionChanged({ Add , index, 1, -1, -1});
 }
 
 template <typename T>
@@ -51,7 +52,6 @@ void ObservableList<T>::append(const QList<T>& t)
 template <typename T>
 void ObservableList<T>::prepend(const T& t)
 {
-	
 	QList<T>::prepend(t);
 	emit CollectionChanged({ Add, 0, 1, -1, -1 });
 }
@@ -94,6 +94,6 @@ void ObservableList<T>::move(int from, int to)
 template <typename T>
 void ObservableList<T>::swap(int i, int j)
 {
-	QList<T>::swap(i,j);
+	QList<T>::swap(i, j);
 	emit CollectionChanged({ Move, i, 1, j, 1 });
 }

@@ -33,11 +33,12 @@ public:
 	typedef void(*UIValueSetter)(QWidget*, WidgetType, PropertyType, QVariant);
 	typedef QVariant (*UIValueGetter)(QWidget*, WidgetType, PropertyType);
 	typedef void(*ValueSetter)(QString group, QString propertyName, QVariant value);
-    typedef QVariant(*ValueGetter)(QString group, QString propertyName, QVariant defaultValue);
+	typedef QVariant(*ValueGetter)(QString group, QString propertyName, QVariant defaultValue);
 	SettingsPropertyMapper(QObject* parent = NULL);
 	~SettingsPropertyMapper();
 	bool HasChanges();
-	void AddMapping(QString group, QString propertyName, PropertyType propertyType, QWidget* editor, WidgetType editorType, QVariant defaultValue = QVariant(), UIValueSetter uiSetter = NULL, UIValueGetter uiGetter = NULL, ValueSetter valueSetter = NULL, ValueGetter valueGetter = NULL);
+	void AddMapping(QString group, QString propertyName, PropertyType propertyType, QWidget* editor, WidgetType editorType, QVariant defaultValue = QVariant(), UIValueSetter uiSetter = NULL,
+	                UIValueGetter uiGetter = NULL, ValueSetter valueSetter = NULL, ValueGetter valueGetter = NULL);
 	void ApplyChanges();
 	void ResetToCurrentValues();
 signals:
@@ -59,7 +60,7 @@ private:
 		QVariant defaultValue, newValue;
 		bool operator==(const PropertyInfo& other);
 	};
-	
+
 	QList<PropertyInfo> m_propertyInfos;
 	bool m_hasChanges;
 	void subscribeToChanges(QWidget* editor, WidgetType editorType);

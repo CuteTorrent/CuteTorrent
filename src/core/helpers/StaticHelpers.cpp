@@ -60,9 +60,11 @@ QString StaticHelpers::toKbMbGb(size_type size, bool isSpped)
 			dblSByte = val / KbFloat;
 		}
 	}
+
 	float fractpart, intpart;
 	fractpart = modff(dblSByte, &intpart);
 	QString str;
+
 	if (fractpart < FLT_EPSILON)
 	{
 		str = QString::number(int(dblSByte));
@@ -71,6 +73,7 @@ QString StaticHelpers::toKbMbGb(size_type size, bool isSpped)
 	{
 		str = QString::number(dblSByte, 'f', i == 0 ? 0 : 2);
 	}
+
 	if (isSpped)
 	{
 		str.append(qApp->translate("Torrent", SpeedSuffix[i]));
@@ -639,7 +642,7 @@ bool StaticHelpers::IsWow64()
 	//Use GetModuleHandle to get a handle to the DLL that contains the function
 	//and GetProcAddress to get a pointer to the function if available.
 	fnIsWow64Process = (LPFN_ISWOW64PROCESS)GetProcAddress(
-		GetModuleHandle(TEXT("kernel32")), "IsWow64Process");
+	                       GetModuleHandle(TEXT("kernel32")), "IsWow64Process");
 
 	if (NULL != fnIsWow64Process)
 	{

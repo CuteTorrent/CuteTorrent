@@ -651,6 +651,9 @@
                    <property name="sortingEnabled">
                     <bool>true</bool>
                    </property>
+                   <attribute name="verticalHeaderVisible">
+                    <bool>false</bool>
+                   </attribute>
                    <attribute name="verticalHeaderDefaultSectionSize">
                     <number>18</number>
                    </attribute>

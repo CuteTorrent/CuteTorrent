@@ -72,7 +72,7 @@ signals:
 	void OnFeedChanged();
 protected:
 	bool MoveFiles(QString oldStyleDirPath, QString newStyleDirPath);
-	void timerEvent(QTimerEvent *) override;
+	void timerEvent(QTimerEvent*) override;
 
 
 private:
@@ -136,7 +136,8 @@ public:
 	openmagnet_info* GetTorrentInfo(const torrent_handle& handle);
 
 	bool AddMagnet(torrent_handle h, QString& SavePath, QString group = "", QMap< QString, quint8> filepriorities = QMap<QString, quint8>(), AddTorrentFlags flags = 0);
-	Torrent* AddTorrent(QString& path, QString& save_path, error_code& ec, QString name = "", QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), QString group = "", AddTorrentFlags flags = 0);
+	Torrent* AddTorrent(QString& path, QString& save_path, error_code& ec, QString name = "", QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), QString group = "",
+	                    AddTorrentFlags flags = 0);
 	~TorrentManager();
 #if LIBTORRENT_VERSION_NUM >= 10000
 	void AddPortMapping(session::protocol_type type, ushort sourcePoert, ushort destPort);

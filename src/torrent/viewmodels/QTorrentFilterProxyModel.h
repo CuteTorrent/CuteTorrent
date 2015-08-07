@@ -27,7 +27,7 @@ private:
 		GROUP,
 		TORRENT
 	};
-	
+
 	QMutex* m_pUpdateLocker;
 	InternalFilterType m_currentFilterType;
 	QString m_groupFilter;

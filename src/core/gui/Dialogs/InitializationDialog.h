@@ -16,7 +16,7 @@ protected:
 	QLabel* getTitleIcon() override;
 public:
 	InitializationDialog(QWidget* parent = 0);
-public slots:	
+public slots:
 	int exec();
 	void onProgressChanged(int, QString);
 private:

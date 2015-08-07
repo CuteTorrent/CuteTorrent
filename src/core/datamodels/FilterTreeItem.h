@@ -49,13 +49,14 @@ public:
 	{
 		return m_parent;
 	}
-	
+
 	QString DisplayText()
 	{
 		if (m_itemsCount == -1)
 		{
 			return m_text;
 		}
+
 		return QString("%1 (%2)").arg(m_text, QString::number(m_itemsCount));
 	}
 

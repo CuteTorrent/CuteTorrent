@@ -26,6 +26,7 @@ QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent, bool
 	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadError(QUrl, QString)), SLOT(onTorrentDownloadError(QUrl, QString)));
 	connect(m_pUdpateTimer, SIGNAL(timeout()), this, SLOT(UpdateVisibleData()));
 	connect(this, SIGNAL(Notify(int, QString, QVariant)), m_pNotificationSystem.get(), SLOT(OnNewNotification(int, QString, QVariant)));;
+
 	if (autoUpdate)
 	{
 		m_pUdpateTimer->start(1000);

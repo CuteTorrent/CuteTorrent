@@ -40,18 +40,19 @@ QApplicationSettings::QApplicationSettings()
 	}
 
 	settings = new QSettings(newStylePath, QSettings::IniFormat);
-
 	//Prev version compability
 	settings->beginGroup("KeyMap");
+
 	if (settings->contains("ACTION_OTHER_DISCRIBTION"))
 	{
 		QVariant oldVal = settings->value("ACTION_OTHER_DISCRIBTION");
 		settings->remove("ACTION_OTHER_DISCRIBTION");
 		settings->setValue("ACTION_OTHER_COPY_DISCRIBTION", oldVal);
 	}
+
 	settings->endGroup();
 	locker = new QMutex();
-    m_pCryptor = new SimpleCrypt(0x1D5AE35A4BDD232LL);
+	m_pCryptor = new SimpleCrypt(0x1D5AE35A4BDD232LL);
 	ReedSettings();
 }
 
@@ -77,11 +78,13 @@ void QApplicationSettings::setValue(const QString& group, const QString& key, co
 
 	settings->beginGroup(group);
 	QVariant currentValue = settings->value(key);
+
 	if (currentValue != value)
 	{
 		settings->setValue(key, value);
 		emit PropertyChanged(group, key);
 	}
+
 	settings->endGroup();
 	WriteSettings();
 }

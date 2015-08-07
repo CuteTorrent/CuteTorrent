@@ -31,9 +31,10 @@ QModelIndex FiltersViewModel::index(int row, int column, const QModelIndex& pare
 
 	if (parent.isValid())
 	{
-		FilterTreeItem * parentItem = static_cast<FilterTreeItem*>(parent.internalPointer());
+		FilterTreeItem* parentItem = static_cast<FilterTreeItem*>(parent.internalPointer());
 		return createIndex(row, column, parentItem->Child(row));
 	}
+
 	return createIndex(row, column, m_rootItems[row]);
 }
 
@@ -44,11 +45,13 @@ QModelIndex FiltersViewModel::parent(const QModelIndex& child) const
 		return QModelIndex();
 	}
 
-	FilterTreeItem * childItem = static_cast<FilterTreeItem*>(child.internalPointer());
-	FilterTreeItem * parentItem = childItem->Parent();
+	FilterTreeItem* childItem = static_cast<FilterTreeItem*>(child.internalPointer());
+	FilterTreeItem* parentItem = childItem->Parent();
+
 	if (parentItem != NULL)
 	{
 		int row = 0;
+
 		if (parentItem->Parent() != NULL)
 		{
 			row = parentItem->Parent()->Children().indexOf(parentItem);
@@ -57,8 +60,10 @@ QModelIndex FiltersViewModel::parent(const QModelIndex& child) const
 		{
 			row = m_rootItems.indexOf(parentItem);
 		}
+
 		return createIndex(row, 0, parentItem);
 	}
+
 	return QModelIndex();
 }
 
@@ -68,7 +73,8 @@ int FiltersViewModel::rowCount(const QModelIndex& parent) const
 	{
 		return m_rootItems.size();
 	}
-	FilterTreeItem * parentItem = static_cast<FilterTreeItem*>(parent.internalPointer());
+
+	FilterTreeItem* parentItem = static_cast<FilterTreeItem*>(parent.internalPointer());
 	return parentItem->Children().size();
 }
 
@@ -79,26 +85,31 @@ int FiltersViewModel::columnCount(const QModelIndex& parent) const
 
 QVariant FiltersViewModel::data(const QModelIndex& index, int role) const
 {
-	FilterTreeItem * filterItem = static_cast<FilterTreeItem*>(index.internalPointer());
+	FilterTreeItem* filterItem = static_cast<FilterTreeItem*>(index.internalPointer());
+
 	switch (role)
 	{
 		case Qt::DisplayRole:
 		{
 			return filterItem->DisplayText();
 		}
+
 		case Qt::DecorationRole:
 		{
 			return filterItem->Icon();
 		}
+
 		case FilterTypeRole:
 		{
 			return filterItem->FilterType();
 		}
+
 		case FilterRole:
 		{
 			return filterItem->Filter();
 		}
 	}
+
 	return QVariant();
 }
 
@@ -107,6 +118,7 @@ void FiltersViewModel::Retranslate()
 	for (int i = 0; i < m_rootItems.size(); i++)
 	{
 		FilterTreeItem* rootItem = m_rootItems[i];
+
 		switch (rootItem->FilterType())
 		{
 			case GROUP_FILTER_TYPE:
@@ -114,46 +126,55 @@ void FiltersViewModel::Retranslate()
 				rootItem->setText(tr("TORRENT_GROUPS"));
 				break;
 			}
+
 			case SEARCH:
 			{
 				rootItem->setText(tr("TAB_SEARCH"));
 				break;
 			}
+
 			case RSS_FEED:
 			{
 				rootItem->setText(tr("RSS_CHANELS"));
 				break;
 			}
+
 			case TORRENT:
 			{
 				rootItem->setText(tr("TORRENTS_ACTIVITY"));
 				QList<FilterTreeItem*> children = rootItem->Children();
+
 				for (int j = 0; j < children.size(); j++)
 				{
 					FilterTreeItem* torrentItem = children[j];
 					TorrentFilterType torrentFilter = static_cast<TorrentFilterType>(torrentItem->Filter().toInt());
+
 					switch (torrentFilter)
 					{
-						case ACTIVE: 
+						case ACTIVE:
 						{
 							torrentItem->setText(tr("ACTIVE_FLTR"));
 							break;
 						}
+
 						case NOT_ACTIVE:
 						{
 							torrentItem->setText(tr("NOT_ACTIVE_FLTR"));
 							break;
 						}
+
 						case SEEDING:
 						{
 							torrentItem->setText(tr("SEEDING_FLTR"));
 							break;
 						}
-						case DOWNLOADING: 
+
+						case DOWNLOADING:
 						{
 							torrentItem->setText(tr("DOWNLOADING_FLTR"));
 							break;
 						}
+
 						case COMPLETED:
 						{
 							torrentItem->setText(tr("COMPLETED_FLTR"));
@@ -161,6 +182,7 @@ void FiltersViewModel::Retranslate()
 						}
 					}
 				}
+
 				break;
 			}
 		}
@@ -171,6 +193,7 @@ void FiltersViewModel::UpdateGroupItems()
 {
 	beginResetModel();
 	FilterTreeItem* groupsItem = NULL;
+
 	for (int i = 0; i < m_rootItems.size(); i++)
 	{
 		if (m_rootItems[i]->FilterType() == GROUP_FILTER_TYPE)
@@ -179,6 +202,7 @@ void FiltersViewModel::UpdateGroupItems()
 			break;
 		}
 	}
+
 	if (groupsItem != NULL)
 	{
 		groupsItem->ClearChildren();
@@ -193,72 +217,85 @@ void FiltersViewModel::UpdateGroupItems()
 			groupsItem->AddChlld(groupItem);
 		}
 	}
+
 	endResetModel();
 }
 
 void FiltersViewModel::UpdateIcons()
 {
 	StyleEngene* pStyleEngine = StyleEngene::getInstance();
+
 	for (int i = 0; i < m_rootItems.size(); i++)
 	{
 		FilterTreeItem* rootItem = m_rootItems[i];
+
 		switch (rootItem->FilterType())
 		{
-		case GROUP_FILTER_TYPE:
-		{
-			rootItem->setIcon(pStyleEngine->getIcon("groups"));
-			break;
-		}
-		case SEARCH:
-		{
-			rootItem->setIcon(pStyleEngine->getIcon("settings_search"));
-			break;
-		}
-		case RSS_FEED:
-		{
-			rootItem->setIcon(pStyleEngine->getIcon("rss"));
-			break;
-		}
-		case TORRENT:
-		{
-			rootItem->setIcon(pStyleEngine->getIcon("torrents"));
-			QList<FilterTreeItem*> children = rootItem->Children();
-			for (int j = 0; j < children.size(); j++)
+			case GROUP_FILTER_TYPE:
 			{
-				FilterTreeItem* torrentItem = children[j];
-				TorrentFilterType torrentFilter = static_cast<TorrentFilterType>(torrentItem->Filter().toInt());
-				switch (torrentFilter)
-				{
-				case ACTIVE:
-				{
-					torrentItem->setIcon(pStyleEngine->getIcon("active"));
-					break;
-				}
-				case NOT_ACTIVE:
-				{
-					QIcon activeIcon = pStyleEngine->getIcon("active");
-					torrentItem->setIcon(activeIcon.pixmap(QSize(16, 16), QIcon::Disabled, QIcon::On));
-					break;
-				}
-				case SEEDING:
-				{
-					torrentItem->setIcon(pStyleEngine->getIcon("uploading"));
-					break;
-				}
-				case DOWNLOADING:
-				{
-					torrentItem->setIcon(pStyleEngine->getIcon("downloading"));
-					break;
-				}
-				case COMPLETED:
-				{
-					torrentItem->setIcon(pStyleEngine->getIcon("completed"));
-					break;
-				}
-				}
+				rootItem->setIcon(pStyleEngine->getIcon("groups"));
+				break;
 			}
-			break;
-		}
+
+			case SEARCH:
+			{
+				rootItem->setIcon(pStyleEngine->getIcon("settings_search"));
+				break;
+			}
+
+			case RSS_FEED:
+			{
+				rootItem->setIcon(pStyleEngine->getIcon("rss"));
+				break;
+			}
+
+			case TORRENT:
+			{
+				rootItem->setIcon(pStyleEngine->getIcon("torrents"));
+				QList<FilterTreeItem*> children = rootItem->Children();
+
+				for (int j = 0; j < children.size(); j++)
+				{
+					FilterTreeItem* torrentItem = children[j];
+					TorrentFilterType torrentFilter = static_cast<TorrentFilterType>(torrentItem->Filter().toInt());
+
+					switch (torrentFilter)
+					{
+						case ACTIVE:
+						{
+							torrentItem->setIcon(pStyleEngine->getIcon("active"));
+							break;
+						}
+
+						case NOT_ACTIVE:
+						{
+							QIcon activeIcon = pStyleEngine->getIcon("active");
+							torrentItem->setIcon(activeIcon.pixmap(QSize(16, 16), QIcon::Disabled, QIcon::On));
+							break;
+						}
+
+						case SEEDING:
+						{
+							torrentItem->setIcon(pStyleEngine->getIcon("uploading"));
+							break;
+						}
+
+						case DOWNLOADING:
+						{
+							torrentItem->setIcon(pStyleEngine->getIcon("downloading"));
+							break;
+						}
+
+						case COMPLETED:
+						{
+							torrentItem->setIcon(pStyleEngine->getIcon("completed"));
+							break;
+						}
+					}
+				}
+
+				break;
+			}
 		}
 	}
 }
@@ -283,11 +320,9 @@ void FiltersViewModel::BuildTree()
 	QIcon inactiveIcon(activeIcon.pixmap(QSize(16, 16), QIcon::Disabled, QIcon::On));
 	QIcon rssIcon = pStyleEngine->getIcon("rss");
 	QIcon searchIcon = pStyleEngine->getIcon("settings_search");
-
 	FilterTreeItem* torrentsItem = new FilterTreeItem(tr("TORRENTS_ACTIVITY"), torrentsIcon, TORRENT, EMPTY);
 	torrentsItem->setItemsCount(-1);
 	m_rootItems.append(torrentsItem);
-
 	FilterTreeItem* downloadingItem = new FilterTreeItem(tr("DOWNLOADING_FLTR"), downloadingIcon, TORRENT, DOWNLOADING, torrentsItem);
 	torrentsItem->AddChlld(downloadingItem);
 	FilterTreeItem* seedingItem = new FilterTreeItem(tr("SEEDING_FLTR"), seedingIcon, TORRENT, SEEDING, torrentsItem);
@@ -298,13 +333,11 @@ void FiltersViewModel::BuildTree()
 	torrentsItem->AddChlld(activeItem);
 	FilterTreeItem* inactiveItem = new FilterTreeItem(tr("NOT_ACTIVE_FLTR"), inactiveIcon, TORRENT, NOT_ACTIVE, torrentsItem);
 	torrentsItem->AddChlld(inactiveItem);
-
 	FilterTreeItem* groupsItem = new FilterTreeItem(tr("TORRENT_GROUPS"), groupsIcon, GROUP_FILTER_TYPE, QString());
 	groupsItem->setItemsCount(-1);
 	m_rootItems.append(groupsItem);
-
 	QList<GroupForFileFiltering> groups = QApplicationSettings::getInstance()->GetFileFilterGroups();
-	
+
 	for (int i = 0; i < groups.count(); i++)
 	{
 		GroupForFileFiltering group = groups[i];
@@ -316,11 +349,9 @@ void FiltersViewModel::BuildTree()
 	FilterTreeItem* rssItem = new FilterTreeItem(tr("RSS_CHANELS"), rssIcon, RSS_FEED, QString());
 	rssItem->setItemsCount(-1);
 	m_rootItems.append(rssItem);
-
 	FilterTreeItem* searchRootItem = new FilterTreeItem(tr("TAB_SEARCH"), searchIcon, SEARCH, QString());
 	searchRootItem->setItemsCount(-1);
 	m_rootItems.append(searchRootItem);
-
 	QList<ISerachProvider*> searchProviders = SearchEngine::getInstance()->GetSearchProviders();
 	int nSearchProvidersCount = searchProviders.size();
 
@@ -331,7 +362,6 @@ void FiltersViewModel::BuildTree()
 		FilterTreeItem* searchItem = new FilterTreeItem(engineName, current->getIcon(), SEARCH, engineName, searchRootItem);
 		searchRootItem->AddChlld(searchItem);
 	}
-
 }
 
 void FiltersViewModel::UpdateCounters()
@@ -346,18 +376,22 @@ void FiltersViewModel::UpdateCounters()
 	QList<int> groupCounters;
 	QStringList groupNames;
 	groupCounters.reserve(groups.size());
+
 	for (int i = 0; i < groups.size(); i++)
 	{
 		groupNames << groups[i].Name();
 		groupCounters.append(0);
 	}
+
 	for (int j = 0; j < torrents->size(); j++)
 	{
 		Torrent* pTorrent = torrents->at(j);
+
 		if (100.f - pTorrent->GetProgress() < FLT_EPSILON)
 		{
 			completedCount++;
 		}
+
 		if (pTorrent->isActive())
 		{
 			activeCount++;
@@ -366,16 +400,18 @@ void FiltersViewModel::UpdateCounters()
 		{
 			inactiveCount++;
 		}
+
 		if (pTorrent->isSeeding())
 		{
-
 			seedCount++;
 		}
 		else if (pTorrent->isDownloading())
 		{
 			downloadingCount++;
 		}
+
 		QString group = pTorrent->GetGroup();
+
 		if (!group.isEmpty())
 		{
 			int groupIndex = groupNames.indexOf(group);
@@ -386,9 +422,11 @@ void FiltersViewModel::UpdateCounters()
 			}
 		}
 	}
+
 	FilterTreeItem* groupItem = NULL;
 	FilterTreeItem* torrentsItem = NULL;
 	int rootTorrentRow = -1, rootGroupRow = -1;
+
 	for (int i = 0; i < m_rootItems.size(); i++)
 	{
 		if (m_rootItems[i]->FilterType() == TORRENT)
@@ -402,16 +440,17 @@ void FiltersViewModel::UpdateCounters()
 			rootGroupRow = i;
 		}
 	}
+
 	if (torrentsItem != NULL)
 	{
 		QModelIndex rootIndex = index(rootTorrentRow, 0, QModelIndex());
 		QList<FilterTreeItem*> children = torrentsItem->Children();
-		
+
 		for (int i = 0; i < children.size(); i++)
 		{
 			FilterTreeItem* child = children[i];
 			TorrentFilterType filter = static_cast<TorrentFilterType>(child->Filter().toInt());
-			
+
 			switch (filter)
 			{
 				case ACTIVE:
@@ -422,8 +461,10 @@ void FiltersViewModel::UpdateCounters()
 						QModelIndex childIndex = index(i, 0, rootIndex);
 						emit dataChanged(childIndex, childIndex);
 					}
+
 					break;
 				}
+
 				case NOT_ACTIVE:
 				{
 					if (child->ItemsCount() != inactiveCount)
@@ -432,9 +473,11 @@ void FiltersViewModel::UpdateCounters()
 						QModelIndex childIndex = index(i, 0, rootIndex);
 						emit dataChanged(childIndex, childIndex);
 					}
+
 					break;
 				}
-				case SEEDING: 
+
+				case SEEDING:
 				{
 					if (child->ItemsCount() != seedCount)
 					{
@@ -442,9 +485,11 @@ void FiltersViewModel::UpdateCounters()
 						QModelIndex childIndex = index(i, 0, rootIndex);
 						emit dataChanged(childIndex, childIndex);
 					}
+
 					break;
 				}
-				case DOWNLOADING: 
+
+				case DOWNLOADING:
 				{
 					if (child->ItemsCount() != downloadingCount)
 					{
@@ -452,8 +497,10 @@ void FiltersViewModel::UpdateCounters()
 						QModelIndex childIndex = index(i, 0, rootIndex);
 						emit dataChanged(childIndex, childIndex);
 					}
+
 					break;
 				}
+
 				case COMPLETED:
 				{
 					if (child->ItemsCount() != completedCount)
@@ -462,23 +509,28 @@ void FiltersViewModel::UpdateCounters()
 						QModelIndex childIndex = index(i, 0, rootIndex);
 						emit dataChanged(childIndex, childIndex);
 					}
+
 					break;
 				}
 			}
 		}
 	}
+
 	if (groupItem != NULL)
 	{
 		QModelIndex rootIndex = index(rootGroupRow, 0, QModelIndex());
 		QList<FilterTreeItem*> children = groupItem->Children();
+
 		for (int i = 0; i < children.size(); i++)
 		{
 			FilterTreeItem* child = children[i];
 			QString currentGroup = child->Filter().toString();
 			int groupIndex = groupNames.indexOf(currentGroup);
+
 			if (groupIndex > -1)
 			{
 				int groupCounter = groupCounters[groupIndex];
+
 				if (child->ItemsCount() != groupCounter)
 				{
 					child->setItemsCount(groupCounter);

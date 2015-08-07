@@ -47,6 +47,7 @@ void FileTreeItem::setData(int index, QVariant value)
 	{
 		return;
 	}
+
 	if (index == 0)
 	{
 		itemData.first = value.toString();

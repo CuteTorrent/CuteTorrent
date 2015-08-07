@@ -86,7 +86,7 @@ void OpenTorrentDialog::FillData(opentorrent_info* info)
 	labelSizeData->setText(StaticHelpers::toKbMbGb(info->size));
 	m_pFileTreeModel = new FileTreeModel();
 	FileTreeSortProxyModel* sortModel = new FileTreeSortProxyModel(this);
-	
+
 	for (int i = 0; i < info->files.num_files(); i++)
 	{
 		m_pFileTreeModel->addPath(QString::fromUtf8(info->files.file_path(i).c_str()), info->files.file_size(i));
@@ -98,7 +98,7 @@ void OpenTorrentDialog::FillData(opentorrent_info* info)
 	torrentFilesTreeView->setColumnWidth(0, 300);
 	torrentFilesTreeView->setColumnWidth(1, 60);
 	torrentFilesTreeView->header()->setSortIndicator(0, Qt::AscendingOrder);
-			
+
 	if(!info->baseSuffix.isEmpty())
 	{
 		QApplicationSettingsPtr settings = QApplicationSettings::getInstance();
@@ -200,15 +200,17 @@ bool OpenTorrentDialog::AccepTorrent()
 	{
 		QMap<QString, quint8> filePriorities = m_pFileTreeModel->getFilePiorites();
 		QList<unsigned char> values = filePriorities.values();
+
 		if (values.count(0) == values.size())
 		{
 			CustomMessageBox::critical(this, "Adding torrent Error", tr("SELECT_AT_LEAST_ONE_FILE"));
 			return false;
 		}
+
 		error_code ec;
 		int groupIndex = GroupComboBox->currentIndex();
 		QString group = groupIndex >= 0 ? m_lFilters[groupIndex].Name() : "";
-        TorrentManager::AddTorrentFlags flags = static_cast<TorrentManager::AddTorrentFlags>(BuildFlags());
+		TorrentManager::AddTorrentFlags flags = static_cast<TorrentManager::AddTorrentFlags>(BuildFlags());
 		QString savePath = pathEdit->displayText();
 
 		if(!m_torrentFilename.startsWith("magnet"))
@@ -226,6 +228,7 @@ bool OpenTorrentDialog::AccepTorrent()
 			return false;
 		}
 	}
+
 	return true;
 }
 
@@ -244,7 +247,6 @@ void OpenTorrentDialog::DownloadMetadataCompleted(openmagnet_info info)
 	loaderGifLabel->hide();
 	loaderTextLabel->hide();
 	m_info = info;
-
 	FillData(&info);
 }
 
@@ -259,9 +261,11 @@ void OpenTorrentDialog::OnPathChanged(QString path)
 void OpenTorrentDialog::setCheckedValue(bool val)
 {
 	QAbstractItemModel* itemModel = torrentFilesTreeView->model();
+
 	if (itemModel != NULL)
 	{
 		int rowCount = itemModel->rowCount();
+
 		for (int i = 0; i < rowCount; i++)
 		{
 			itemModel->setData(itemModel->index(i, 0), val ? Qt::Checked : Qt::Unchecked, Qt::CheckStateRole);
@@ -311,22 +315,27 @@ QLabel* OpenTorrentDialog::getTitleIcon()
 int OpenTorrentDialog::BuildFlags()
 {
 	TorrentManager::AddTorrentFlags res = 0;
+
 	if (setSequntialCheckBox->isChecked())
 	{
 		res |= TorrentManager::SEQUENTIAL_MODE;
 	}
+
 	if (setSeedModeCheckBox->isChecked())
 	{
 		res |= TorrentManager::SEED_MODE;
 	}
+
 	if (setPausedCheckBox->isChecked())
 	{
 		res |= TorrentManager::PAUSED_MODE;
 	}
+
 	if (setSuperSeedCheckBox->isChecked())
 	{
 		res |= TorrentManager::SUPER_SEED_MODE;
 	}
+
 	return res;
 }
 

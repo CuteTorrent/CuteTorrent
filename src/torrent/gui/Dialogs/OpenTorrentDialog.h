@@ -60,7 +60,7 @@ private:
 	QWidget* centralWidget() override;
 	QLabel* getTitleLabel() override;
 	QLabel* getTitleIcon() override;
-    int BuildFlags();
+	int BuildFlags();
 	bool AccepTorrent();
 public slots:
 	void done(int) override;
@@ -68,12 +68,12 @@ private slots:
 	void reject() override;
 	void OnError(QString);
 	void BrowseButton();
-	
-	
+
+
 	void ChangeGroup();
 	void DownloadMetadataCompleted(openmagnet_info);
 	void OnPathChanged(QString path);
-	
+
 	void OnCheckAll();
 	void OnUncheckAll();
 

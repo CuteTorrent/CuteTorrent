@@ -45,7 +45,9 @@ void RssFeedSettingsDialog::accept()
 	{
 		m_pCoociesTabWidget->clearFocus();
 	}
-    SimpleCrypt cryptor(0xA6C56E2CF17A50LL);
+
+	SimpleCrypt cryptor(0xA6C56E2CF17A50LL);
+
 	for (int i = 0; i < m_pCoociesTabWidget->rowCount(); i++)
 	{
 		QTableWidgetItem* keyItem = m_pCoociesTabWidget->item(i, 0);
@@ -116,7 +118,7 @@ void RssFeedSettingsDialog::FillInData()
 	m_pRefreshRateSpinBox->setTime(StaticHelpers::SecsToQTime(m_pFeed->ttl()));
 	QList<QNetworkCookie> cookies = m_pFeed->coookies();
 	m_pCoociesTabWidget->setRowCount(cookies.size());
-	
+
 	for (int i = 0; i < cookies.size(); i++)
 	{
 		QNetworkCookie cookie = cookies[i];

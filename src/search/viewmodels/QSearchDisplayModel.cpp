@@ -4,7 +4,8 @@
 #include "filedownloader.h"
 #include <gui/Dialogs/OpenTorrentDialog.h>
 #include "SearchResult.h"
-QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QObject* parent) : QAbstractListModel(parent), m_pSearchEngine(SearchEngine::getInstance()), m_pTorrentDownloader(FileDownloader::getInstance())
+QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QObject* parent) : QAbstractListModel(parent), m_pSearchEngine(SearchEngine::getInstance()),
+	m_pTorrentDownloader(FileDownloader::getInstance())
 {
 	m_pTorrentListView = pTorrentListView;
 	connect(m_pSearchEngine.get(), SIGNAL(GotResults()), this, SLOT(OnNewSearchResults()));
@@ -42,30 +43,33 @@ QVariant QSearchDisplayModel::data(const QModelIndex& index, int role /*= Qt::Di
 		}
 
 		SearchResult* res = (*results) [row];
-	
+
 		switch(role)
 		{
 			case SearchItemRole:
 			{
 				return qVariantFromValue(res);
 			}
+
 			case SearchItemName:
 			{
 				return res->Name();
 			}
+
 			case SearchItemSize:
 			{
 				return res->Size();
 			}
+
 			case SearchItemSeeders:
 			{
 				return res->Seeders();
 			}
+
 			case SearchItemPeers:
 			{
 				return res->Leechers();
 			}
-
 		}
 	}
 

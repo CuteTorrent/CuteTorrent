@@ -2,7 +2,7 @@
 #include "FaviconDownloader.h"
 #include "StaticHelpers.h"
 #include "StyleEngene.h"
-FaviconDownloader::FaviconDownloader(QObject* parent) 
+FaviconDownloader::FaviconDownloader(QObject* parent)
 	: QObject(parent)
 	, m_pStyleEngine(StyleEngene::getInstance())
 	, m_domainNameMatcher("([a-z0-9][a-z0-9\\-]{1,63}\\.[a-z\\.]{2,6})$", Qt::CaseInsensitive, QRegExp::RegExp2)
@@ -23,8 +23,8 @@ FaviconDownloader::~FaviconDownloader()
 QPixmap FaviconDownloader::getFavicon(QString urlStr)
 {
 	QUrl url(urlStr);
-	
 	QString domainName;
+
 	if (m_domainNameMatcher.indexIn(url.host()) != -1)
 	{
 		domainName = m_domainNameMatcher.cap(1);
@@ -33,11 +33,13 @@ QPixmap FaviconDownloader::getFavicon(QString urlStr)
 	{
 		domainName = url.host();
 	}
+
 	//qDebug() << "Domain name:" << domainName;
 	if (!url.scheme().startsWith("http"))
 	{
 		url.setScheme("http");
 	}
+
 	QString faviconUrlStr = QString("%1://%2/favicon.ico").arg(url.scheme(), domainName);
 	QUrl faviconUrl(faviconUrlStr);
 	QIODevice* pData = m_pDiskCache->data(faviconUrl);
@@ -59,6 +61,7 @@ void FaviconDownloader::InsertWarningInCache(QUrl& url)
 	QNetworkCacheMetaData metaData;
 	QNetworkCacheMetaData::AttributesMap atts;
 	QString urlStr = url.toString();
+
 	while (redirectionMap.contains(urlStr))
 	{
 		QString oldUrl = urlStr;
@@ -102,7 +105,7 @@ void FaviconDownloader::replyReady(QNetworkReply* pReply)
 			QRegExp rx("<link[^>]+rel=\"shortcut icon\"[^>]+>",
 			           Qt::CaseInsensitive, QRegExp::RegExp2);
 			int pos = rx.indexIn(str);
-			
+
 			if (pos == -1)
 			{
 				rx = QRegExp("<link[^>]+rel=\"icon\"[^>]+>",
@@ -151,6 +154,7 @@ void FaviconDownloader::replyReady(QNetworkReply* pReply)
 				{
 					redirectionTarget.setUrl("http://" + url.host() + redirectionTarget.toString());
 				}
+
 				qDebug() << "redirecting to:" << redirectionTarget;
 				redirectionMap.insert(redirectionTarget.toString(), url.toString());
 				getFromWeb(redirectionTarget);
@@ -162,7 +166,9 @@ void FaviconDownloader::replyReady(QNetworkReply* pReply)
 					InsertWarningInCache(url);
 					return;
 				}
+
 				QString urlStr = url.toString();
+
 				if (redirectionMap.contains(urlStr))
 				{
 					while (redirectionMap.contains(urlStr))
@@ -171,7 +177,6 @@ void FaviconDownloader::replyReady(QNetworkReply* pReply)
 						urlStr = redirectionMap[urlStr];
 						redirectionMap.remove(oldUrl);
 					}
-
 
 					QNetworkCacheMetaData metaData;
 					QNetworkCacheMetaData::AttributesMap atts;

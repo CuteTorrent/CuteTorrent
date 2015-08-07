@@ -7,23 +7,21 @@ void EditableHeaderView::contextMenuEvent(QContextMenuEvent* e)
 {
 	QMenu menu;
 	QSignalMapper mapper;
+	QAbstractItemModel* m = model();
 
-	QAbstractItemModel *m = model();
-	for (int col = 0; col < model()->columnCount(); ++col) {
-		QAction *action = new QAction(&menu);
+	for (int col = 0; col < model()->columnCount(); ++col)
+	{
+		QAction* action = new QAction(&menu);
 		action->setText(model()->headerData(col, Qt::Horizontal).toString());
 		action->setCheckable(true);
 		action->setChecked(!isSectionHidden(col));
-
 		connect(action, SIGNAL(triggered()), &mapper, SLOT(map()));
 		mapper.setMapping(action, col);
-
 		menu.addAction(action);
-
 	}
 
 	connect(&mapper, SIGNAL(mapped(int)),
-		this, SLOT(toggleSectionVisibility(int)));
+	        this, SLOT(toggleSectionVisibility(int)));
 	menu.exec(e->globalPos());
 	e->accept();
 }

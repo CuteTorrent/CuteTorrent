@@ -40,51 +40,52 @@ void QRssItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opti
 {
 	/*try
 	{*/
-		QVariant data = index.data(QRssDisplayModel::RssFeedRole);
+	QVariant data = index.data(QRssDisplayModel::RssFeedRole);
+
+	if (data.isValid())
+	{
+		return drawFeed(painter, option, index, data.value<RssFeed*>());
+	}
+	else
+	{
+		data = index.data(QRssDisplayModel::RssItemRole);
 
 		if (data.isValid())
 		{
-			return drawFeed(painter, option, index, data.value<RssFeed*>());
+			return drawFeedItem(painter, option, index, data.value<RssItem*>());
 		}
-		else
-		{
-			data = index.data(QRssDisplayModel::RssItemRole);
+	}
 
-			if (data.isValid())
-			{
-				return drawFeedItem(painter, option, index, data.value<RssItem*>());
-			}
-		}
-/*	}
-	catch (...)
-	{
-	}*/
+	/*	}
+		catch (...)
+		{
+		}*/
 }
 
 QSize QRssItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-/*	try
-	{*/
-		QVariant data = index.data(QRssDisplayModel::RssFeedRole);
+	/*	try
+		{*/
+	QVariant data = index.data(QRssDisplayModel::RssFeedRole);
+
+	if (data.isValid())
+	{
+		return feedSizeHint(option, data.value<RssFeed*>());
+	}
+	else
+	{
+		data = index.data(QRssDisplayModel::RssItemRole);
 
 		if (data.isValid())
 		{
-			return feedSizeHint(option, data.value<RssFeed*>());
+			return feedItemSizeHint(option, data.value<RssItem*>());
 		}
-		else
-		{
-			data = index.data(QRssDisplayModel::RssItemRole);
+	}
 
-			if (data.isValid())
-			{
-				return feedItemSizeHint(option, data.value<RssItem*>());
-			}
-		}
 	/*}
 	catch (...)
 	{
 	}*/
-
 	return QSize();
 }
 

@@ -35,6 +35,7 @@ void SearchEngine::OnSettngsChnaged(QString group, QString key)
 	if (group == "Search" && key == "script_debuging_enabled")
 	{
 		QApplicationSettingsPtr pSettings = QApplicationSettings::getInstance();
+
 		if (pSettings->valueBool("Search", "script_debuging_enabled"))
 		{
 			if (!isEnabledScriptDebugging())
@@ -50,7 +51,6 @@ void SearchEngine::OnSettngsChnaged(QString group, QString key)
 			}
 		}
 	}
-	
 }
 
 QScriptValue SearchEngine::searchResultCtor(QScriptContext* context, QScriptEngine* engine)

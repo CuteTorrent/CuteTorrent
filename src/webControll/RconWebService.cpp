@@ -17,6 +17,7 @@ void RconWebService::OnSettngsChnaged(QString group, QString key)
 			{
 				parseIpFilter(m_pSettings->valueString("WebControl", "ipfilter"));
 			}
+
 			Start();
 		}
 		else

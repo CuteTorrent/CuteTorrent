@@ -52,7 +52,6 @@ bool SearchItemsStorrage::contains(SearchResult* item)
 		return false;
 	}
 
-
 	return false;
 }
 
@@ -66,7 +65,6 @@ void SearchItemsStorrage::clear()
 {
 	qDeleteAll(m_items);
 	m_items.clear();
-	
 }
 
 int SearchItemsStorrage::length()

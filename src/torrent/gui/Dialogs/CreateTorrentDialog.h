@@ -75,7 +75,7 @@ class CreateTorrentDialog : public BaseWindow<QDialog> , private Ui::CreateTorre
 	Q_OBJECT
 
 public:
-	
+
 	CreateTorrentDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 	~CreateTorrentDialog();
 	void setPath(QString val);

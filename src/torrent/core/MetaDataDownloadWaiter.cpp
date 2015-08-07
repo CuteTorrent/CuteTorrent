@@ -1,7 +1,7 @@
 ﻿#include "MetaDataDownloadWaiter.h"
 #include "StaticHelpers.h"
 
-MetaDataDownloadWaiter::MetaDataDownloadWaiter(QString metaLink, QObject* parrent/*=NULL*/) 
+MetaDataDownloadWaiter::MetaDataDownloadWaiter(QString metaLink, QObject* parrent/*=NULL*/)
 	: QThread(parrent)
 {
 	MetaLink = metaLink;
@@ -22,7 +22,6 @@ void MetaDataDownloadWaiter::run()
 		emit ErrorOccured(StaticHelpers::translateLibTorrentError(ec));
 		return;
 	}
-
 
 	boost::scoped_ptr<openmagnet_info> ti(m_pTorrentManager->GetTorrentInfo(h));
 

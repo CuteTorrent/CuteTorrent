@@ -6,10 +6,12 @@
 void CustomMessageBox::showEvent(QShowEvent* pEvent)
 {
 #ifndef QT_NO_ACCESSIBILITY
+
 	if (m_icon == QMessageBox::Critical || m_icon == QMessageBox::Warning)
 	{
 		QAccessible::updateAccessibility(this, 0, QAccessible::Alert);
 	}
+
 #endif
 	QDialog::showEvent(pEvent);
 }

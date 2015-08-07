@@ -23,7 +23,7 @@ public:
 	void UpdateGroupItems();
 	void UpdateIcons();
 protected:
-	
+
 	void timerEvent(QTimerEvent*) override;
 private:
 	int m_updateTimerID;

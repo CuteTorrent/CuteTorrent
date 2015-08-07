@@ -18,6 +18,7 @@ void UploadController::service(HttpRequest& request, HttpResponse& response)
 		//std::map<QByteArray,QByteArray> parametrs=request.getParameterMap().toStdMap();
 		QString save_path = request.getParameter("savePath");
 		QTemporaryFile* file = request.getUploadedFile("files[]");
+
 		if (file != NULL)
 		{
 			if (save_path.isEmpty() || !QDir(save_path).exists())
@@ -46,7 +47,6 @@ void UploadController::service(HttpRequest& request, HttpResponse& response)
 			response.write("<BODY><h3>400 Bad Request.</h3>");
 			response.write("<h3>File not specified</h3></BODY>");
 		}
-	
 	}
 	else
 	{

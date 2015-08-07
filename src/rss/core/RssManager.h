@@ -52,7 +52,7 @@ public slots:
 	void LoadDownloadRules();
 private slots:
 	void onFeedChanged(QUuid);
-	
+
 	void onTorrentDownloaded(QUrl url, QTemporaryFile* pFile);
 	void onTorrentDownloadError(QUrl url, QString error);
 	void onMagnetError(QString);

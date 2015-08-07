@@ -11,7 +11,7 @@ TorrentTracker::TorrentTracker(QObject* parent) :
 
 void TorrentTracker::OnSettngsChnaged(QString group, QString key)
 {
-	if (group == "TorrentTracker" && key=="enabled")
+	if (group == "TorrentTracker" && key == "enabled")
 	{
 		if (m_pSettings->valueBool("TorrentTracker", "enabled", false) && isRunning())
 		{
@@ -25,7 +25,6 @@ void TorrentTracker::OnSettngsChnaged(QString group, QString key)
 			}
 		}
 	}
-	
 }
 
 TorrentTracker::~TorrentTracker()

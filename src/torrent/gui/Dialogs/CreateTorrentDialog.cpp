@@ -101,14 +101,15 @@ void CreateTorrentDialog::setPath(QString val)
 quint64 CreateTorrentDialog::getPiceSize()
 {
 	int currentIndex = piceSizeComboBox->currentIndex();
+
 	if (currentIndex > -1)
 	{
 		quint64 pieceSize = piceSizeComboBox->itemData(currentIndex).toULongLong();
+
 		if (pieceSize == AUTODETECT_VAL)
 		{
 			QString file = pathEdit->text();
 			QFileInfo fi(file);
-			
 			quint64 needToSet;
 
 			if (fi.isFile())
@@ -123,19 +124,24 @@ quint64 CreateTorrentDialog::getPiceSize()
 			}
 
 			int powerOf2 = log(pieceSize) / log(2);
+
 			if (powerOf2 > 24)
 			{
 				powerOf2 = 24;
 			}
+
 			if (powerOf2 < 13)
 			{
 				powerOf2 = 13;
 			}
+
 			pieceSize = 1;
 			pieceSize = pieceSize << powerOf2;
 		}
+
 		return pieceSize;
 	}
+
 	return 4 * KbInt * KbInt;
 }
 
@@ -303,12 +309,12 @@ void CreateTorrentDialog::setupPieceComboBox()
 {
 	piceSizeComboBox->addItem(tr("PIECE_SIZE_AUTODETECT"), AUTODETECT_VAL);
 	quint64 startSize = 16 * KbInt * KbInt;
+
 	for (int i = 1; i < 13; i++)
 	{
 		piceSizeComboBox->addItem(StaticHelpers::toKbMbGb(startSize), startSize);
 		startSize /= 2;
 	}
-	
 }
 
 ////torrentCreatorThread\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

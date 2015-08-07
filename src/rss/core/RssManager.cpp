@@ -94,6 +94,7 @@ void RssManager::LoadFeeds()
 			QUuid uid = tempFeed->uid();
 			dataStream >> *tempFeed;
 			int index = -1;
+
 			foreach(RssFeed* pFeed, m_pFeeds)
 			{
 				if (pFeed->uid() == uid)
@@ -102,6 +103,7 @@ void RssManager::LoadFeeds()
 					break;
 				}
 			}
+
 			if (index > -1)
 			{
 				delete tempFeed;
@@ -112,7 +114,6 @@ void RssManager::LoadFeeds()
 				connect(tempFeed, SIGNAL(FeedChanged(QUuid)), SLOT(onFeedChanged(QUuid)));
 				tempFeed->Update();
 			}
-			
 		}
 
 		feedsDat.close();
@@ -305,6 +306,7 @@ void RssManager::downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRu
 	if (!rssItem->torrentUrl().isEmpty())
 	{
 		QString torrentUrl = rssItem->torrentUrl();
+
 		if (!m_activeTorrentDownloads.contains(torrentUrl))
 		{
 			TorrentDownloadInfo info;
@@ -315,11 +317,11 @@ void RssManager::downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRu
 			m_activeTorrentDownloads.insert(torrentUrl, info);
 			m_pTorrentDownloader->download(torrentUrl, pFeed->coookies());
 		}
-		
 	}
 	else if (!rssItem->magnetUrl().isEmpty())
 	{
 		QString magnetUrl = QUrl::fromPercentEncoding(rssItem->magnetUrl().toUtf8());
+
 		if (!m_activeTorrentDownloads.contains(magnetUrl))
 		{
 			MetaDataDownloadWaiter* magnetWaiter = new MetaDataDownloadWaiter(magnetUrl, this);

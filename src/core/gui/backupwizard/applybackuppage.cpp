@@ -59,19 +59,16 @@ void ApplyBackupPage::ApplyBackup() const
 {
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 	JlCompress::extractDir(backupPathLineEdit->text(), dataDir);
-
 	QString btSessionDirPath = StaticHelpers::CombinePathes(dataDir, "BtSessionData");
-
 	QDir btSessionDir(btSessionDirPath);
-
 	QStringList resumeFiles = btSessionDir.entryList(QStringList("*.resume"), QDir::Files | QDir::NoDotAndDotDot);
-
 	QMap<QString, QString> pathMap;
 
 	for (int i = 0; i < tableWidget->rowCount(); i++)
 	{
 		QTableWidgetItem* sourceItem = tableWidget->item(i, 0);
 		QTableWidgetItem* destItem = tableWidget->item(i, 1);
+
 		if (sourceItem != NULL && destItem != NULL)
 		{
 			pathMap.insert(sourceItem->text(), destItem->text());
@@ -90,6 +87,7 @@ void ApplyBackupPage::ApplyBackup() const
 			if (entry* i = e.find_key("save_path"))
 			{
 				QString savePath = QString::fromUtf8(i->string().c_str());
+
 				if (pathMap.contains(savePath))
 				{
 					QString newPath = pathMap[savePath];
@@ -99,12 +97,11 @@ void ApplyBackupPage::ApplyBackup() const
 					bencode(std::back_inserter(out), e);
 					file.write(out);
 				}
-
 			}
+
 			file.close();
 		}
 	}
-
 
 	QApplicationSettings::getInstance()->ReedSettings();
 	RssManagerPtr rssManager = RssManager::getInstance();
@@ -133,25 +130,30 @@ void ApplyBackupPage::browseButtonClicked()
 	{
 		return;
 	}
+
 	backupPathLineEdit->setText(fileName);
 	QuaZip backupFile(fileName);
 	QStringList savePathes;
+
 	if (backupFile.open(QuaZip::mdUnzip))
 	{
 		QList<QuaZipFileInfo64> fileInfos = backupFile.getFileInfoList64();
+
 		for (int i = 0; i < fileInfos.size(); i++)
 		{
 			QuaZipFileInfo64 fileInfo = fileInfos[i];
+
 			if (fileInfo.name.endsWith(".resume"))
 			{
 				backupFile.setCurrentFile(fileInfo.name);
 				QStringList parts = fileInfo.name.split('/');
 				QString resumeFileName = parts.last();
 				QuaZipFile file(&backupFile);
-				
+
 				if (file.open(QIODevice::ReadOnly))
 				{
 					QByteArray resumeData;
+
 					while (!file.atEnd())
 					{
 						char buf[4096];
@@ -162,27 +164,21 @@ void ApplyBackupPage::browseButtonClicked()
 							resumeData.append(QByteArray(buf, readLen));
 						}
 					}
-					
-					
-					
+
 					entry e = bdecode(resumeData.begin(), resumeData.end());
 					QString savePath;
+
 					if (entry* i = e.find_key("save_path"))
 					{
 						savePath = QString::fromUtf8(i->string().c_str());
 						savePathes.append(savePath);
 					}
-
 				}
 				else
 				{
 					//Show error
 				}
-				
-				
 			}
-			
-
 		}
 
 		QStringList uniquePathes = GetLongestCommonSubstr(savePathes);
@@ -197,6 +193,4 @@ void ApplyBackupPage::browseButtonClicked()
 	{
 		//int zipError = backupFile.getZipError();
 	}
-	
-
 }

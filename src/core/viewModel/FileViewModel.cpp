@@ -225,10 +225,12 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 	{
 		item = static_cast<FileViewTreeItem*>(index.internalPointer());
 	}
+
 	if (role == Qt::InitialSortOrderRole)
 	{
 		return Qt::DescendingOrder;
 	}
+
 	if(role == Qt::DisplayRole && dataSource.is_valid() && item != NULL)
 	{
 		file_entry file = item->GetFileEntery();
@@ -268,6 +270,7 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 					{
 						return 100.0f;
 					}
+
 					return m_Progresses[storrage_index] * 100.0f / file.size;
 				}
 				else
@@ -297,15 +300,15 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 		if (item->GetType() == FileViewTreeItem::FILE)
 		{
 			QPixmap pixmap;
-
 			QString savePath = dataSource.status(torrent_handle::query_save_path).save_path.c_str();
-			
 			QString suffix = filePathInfo.suffix();
+
 			if(!suffix.isEmpty() && !iconCache.find(suffix, &pixmap))
 			{
 				QString subPath = QDir::toNativeSeparators(QString::fromUtf8(item->GetFileEntery().path.c_str()));
 				QString realFilePath = StaticHelpers::CombinePathes(savePath, subPath);
 				qDebug() << "real file path" << realFilePath;
+
 				if (QFile::exists(realFilePath))
 				{
 					QFileInfo realFileInfo(realFilePath);
@@ -320,13 +323,12 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 					QFileInfo tempFileInfo(tmpfile.fileName());
 					icon = iPorv.icon(tempFileInfo);
 					tmpfile.remove();
+
 					if (suffix != "exe")
 					{
 						iconCache.insert(suffix, icon.pixmap(QSize(64, 64)));
 					}
-					
 				}
-				
 			}
 			else
 			{
@@ -350,6 +352,7 @@ QVariant FileViewModel::headerData(int section, Qt::Orientation orientation, int
 	{
 		return Qt::DescendingOrder;
 	}
+
 	if(orientation == Qt::Horizontal && role == Qt::DisplayRole)
 	{
 		return headerStringsData.at(section);

@@ -82,7 +82,7 @@ class QTorrentDisplayModel: public QAbstractListModel
 public:
 	QTorrentDisplayModel(QTreeView*, QTorrentFilterProxyModel*, QObject*);
 	~QTorrentDisplayModel();
-	enum action 
+	enum action
 	{
 		stop, pause, resume, remove, remove_all, move_storrage,
 		set_sequntial, set_superseed, generate_magmet, update_trackers,
@@ -106,7 +106,7 @@ public:
 		TorrentRemainingTime
 	};
 	Torrent* GetSelectedTorrent();
-	
+
 signals:
 	void initCompleted();
 public slots:
@@ -119,7 +119,7 @@ public slots:
 	void UpdateTrackers();
 	void DellAll();
 	void MountDT();
-	
+
 	void playInPlayer();
 	void setSequentualDL();
 	void moveStorrage();

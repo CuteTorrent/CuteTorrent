@@ -107,9 +107,9 @@ SchedulerTask& SchedulerTask::operator= (const SchedulerTask& other)
 bool SchedulerTask::operator==(const SchedulerTask& other)
 {
 	return m_taskType == other.m_taskType
-		&& m_beginDate == other.m_beginDate
-		&& m_speedLimit == other.m_speedLimit
-		&& m_ruleName == other.m_ruleName;
+	       && m_beginDate == other.m_beginDate
+	       && m_speedLimit == other.m_speedLimit
+	       && m_ruleName == other.m_ruleName;
 }
 
 bool SchedulerTask::operator!=(const SchedulerTask& other)

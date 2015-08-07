@@ -50,8 +50,8 @@ public:
 	static QString filePriorityToString(int priority);
 	static QString SchedulerTypeToString(SchedulerTask::TaskType type);
 	static QString GetBaseSuffix(const file_storage& storrage);
-	
-	template<typename T, typename... Args> static QString CombinePathes(T first, Args &... args);
+
+	template<typename T, typename... Args> static QString CombinePathes(T first, Args& ... args);
 	static NetworkDiskCache* GetGLobalWebCache();
 	static QByteArray gUncompress(QByteArray data);
 	template <typename T> static size_t HashVector(const std::vector<T>& vector);
@@ -68,7 +68,7 @@ T StaticHelpers::CombinePathes(T t)
 }
 
 template<typename T, typename... Args>
-QString StaticHelpers::CombinePathes(T first, Args &... args)
+QString StaticHelpers::CombinePathes(T first, Args& ... args)
 {
 	bool addSeparator = !QString(first).endsWith("/") || !QString(first).endsWith("\\");
 	return QDir::toNativeSeparators(QDir::cleanPath(QString(first) + (addSeparator ? QDir::separator() : QString("")) + CombinePathes(args...)));

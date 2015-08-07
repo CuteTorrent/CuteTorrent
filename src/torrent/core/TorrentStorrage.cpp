@@ -26,9 +26,8 @@ void TorrentStorrage::remove(Torrent* torrent)
 Torrent* TorrentStorrage::getTorrent(QString infoHash)
 {
 	QMutexLocker mutexLocker(m_pMapSynkMutex);
-	
 	QMap<QString, Torrent*>::Iterator it = m_torrentsMap.find(infoHash);
-	
+
 	if(it == m_torrentsMap.end())
 	{
 		return NULL;

@@ -145,7 +145,7 @@ private:
 	void createActions();
 	void setupTray();
 	void setupToolBar();
-	
+
 	void setupConnections();
 	void setupSearchHeaderModel();
 	void setupListView();

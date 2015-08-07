@@ -316,7 +316,7 @@ void RssParser::parseRssChannel(QXmlStreamReader& reader, RssFeed* pFeed, bool& 
 			}
 			else if (reader.name().compare("ttl", Qt::CaseInsensitive) == 0)
 			{
-				pFeed->m_ttl = reader.readElementText().toInt()*60;
+				pFeed->m_ttl = reader.readElementText().toInt() * 60;
 			}
 			else if (reader.name().compare("lastBuildDate", Qt::CaseInsensitive) == 0)
 			{
@@ -491,7 +491,6 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 			if (newItemDate > oldItemDate)
 			{
 				boost::scoped_ptr<RssItem> pOldItem(pFeed->m_rssItems[guid]);
-
 				pFeed->m_rssItems.remove(guid);
 				RssItem* pNewItem = pItem->clone();
 				QString infoHash = pOldItem->infoHash();
@@ -500,6 +499,7 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 				{
 					pNewItem->setInfoHash(infoHash);
 				}
+
 				pFeed->m_rssItems.remove(guid);
 				pFeed->m_rssItems.insert(guid, pNewItem);
 				return;

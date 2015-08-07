@@ -19,6 +19,7 @@ QVariant ValueGetters::StyleValueGetter(QString group, QString name, QVariant de
 	StyleEngene* styleEngine = StyleEngene::getInstance();
 	QList<StyleInfo> styleInfos = styleEngine->getAvaliableStyles();
 	QString currentStyle = QApplicationSettings::getInstance()->valueString(group, name, defaultValue.toString());
+
 	for (int i = 0; i < styleInfos.size(); i++)
 	{
 		if (styleInfos[i].InternalName == currentStyle)
@@ -26,6 +27,7 @@ QVariant ValueGetters::StyleValueGetter(QString group, QString name, QVariant de
 			return i;
 		}
 	}
+
 	return -1;
 }
 
@@ -60,12 +62,14 @@ QVariant ValueGetters::MagnetAssociationValueGetter(QString group, QString name,
 				return QVariant::fromValue(line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive) == true);
 			}
 		}
+
 		associtaionGnomeConfig.close();
 	}
 	else
 	{
 		qCritical() << "Unable to open gnome config file for reading" << associtaionGnomeConfig.errorString();
 	}
+
 	return false;
 #endif
 }
@@ -75,7 +79,6 @@ QVariant ValueGetters::TorrentAssociationValueGetter(QString group, QString name
 #ifdef Q_WS_WIN
 	QSettings assocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
 	QString torrentAssociation = assocSettings.value(".torrent/.").toString();
-
 	return torrentAssociation == "CuteTorrent.file";
 #else Q_WS_X11
 	QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() , ".config/mimeapps.list"));
@@ -94,19 +97,20 @@ QVariant ValueGetters::TorrentAssociationValueGetter(QString group, QString name
 				return QVariant::fromValue(line.endsWith("CuteTorrent.desktop;", Qt::CaseInsensitive) == true);
 			}
 		}
+
 		associtaionGnomeConfig.close();
 	}
 	else
 	{
 		qCritical() << "Unable to open gnome config file for reading" << associtaionGnomeConfig.errorString();
 	}
+
 	return false;
 #endif
 }
 
 QVariant ValueGetters::RunOnBootValueGetter(QString group, QString name, QVariant defaultValue)
 {
-
 #ifdef Q_WS_WIN
 	QSettings bootUpSettings(QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\") + (StaticHelpers::IsWow64() ? "Wow6432Node\\" : "") + "Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
 	QString bootStartCommand = bootUpSettings.value("CuteTorrent").toString();
@@ -123,7 +127,6 @@ QVariant ValueGetters::RunOnBootMinimizedValueGetter(QString group, QString name
 	QString bootStartCommand = bootUpSettings.value("CuteTorrent").toString();
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 	return QVariant::fromValue(bootStartCommand.contains(applicationFilePath, Qt::CaseInsensitive) == true && bootStartCommand.contains("-m") == true);
-
 }
 
 QVariant ValueGetters::WindowsShellValueGetter(QString group, QString name, QVariant defaultValue)
@@ -134,7 +137,6 @@ QVariant ValueGetters::WindowsShellValueGetter(QString group, QString name, QVar
 	bool starCommandMatch = assocSettings.value("*/shell/cutetorrent/command/.") == commandShouldBe;
 	bool folderCommandMatch = assocSettings.value("Folder/shell/cutetorrent/command/.") == commandShouldBe;
 	bool dirCommandMatch = assocSettings.value("Directory/shell/cutetorrent/command/.") == commandShouldBe;
-
 	return starCommandMatch && folderCommandMatch && dirCommandMatch;
 }
 #endif

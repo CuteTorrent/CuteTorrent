@@ -43,7 +43,6 @@ void CreateBackupPage::createBackup() const
 {
 	QString path = savePathEdit->text();
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-
 	JlCompress::compressDir(path, dataDir, true);
 }
 
