@@ -895,6 +895,26 @@ QString Torrent::GetType()
 	return type;
 }
 
+int Torrent::GetTorrentPriority()
+{
+	return m_hTorrent.priority;
+}
+
+void Torrent::SetTorrentPriority(int newValue)
+{
+	if (m_hTorrent.handle.is_valid())
+	{
+		if (newValue >= 0 && newValue < 256)
+		{
+			m_hTorrent.handle.set_priority(newValue);
+		}
+		else
+		{
+			qCritical() << "Invalid priority value" << newValue;
+		}
+	}
+}
+
 int Torrent::GetStatus()
 {
 	if(m_hTorrent.handle.is_valid())

@@ -1323,6 +1323,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>ACTION_TOOLBAR_QUEUE_DOWN</sender>
+   <signal>triggered()</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>queueTorrentsDown()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>273</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ACTION_TOOLBAR_QUEUE_UP</sender>
+   <signal>triggered()</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>queueTorrentsUp()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>273</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>FillTorrentDetails(Torrent*)</signal>
@@ -1342,5 +1374,7 @@
   <slot>addRssFeed()</slot>
   <slot>removeRssFeed()</slot>
   <slot>editRssFeed()</slot>
+  <slot>queueTorrentsUp()</slot>
+  <slot>queueTorrentsDown()</slot>
  </slots>
 </ui>

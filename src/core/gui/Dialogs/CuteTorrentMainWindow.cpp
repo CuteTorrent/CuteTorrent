@@ -1058,7 +1058,6 @@ void CuteTorrentMainWindow::loadHeaderState(QString prefix, EditableHeaderView* 
 {
 	QList<int> columnSizes = m_pSettings->value("Window", prefix % "_sizes", QVariant::fromValue(defaultColumnSizes)).value<QList<int> >();
 	header->setStretchLastSection(true);
-	header->setMovable(true);
 	int columnCount = columnSizes.count();
 	Q_ASSERT_X(defaultColumnSizes.size() == columnCount, "CuteTorrentMainWindow::loadHeaderState", "Inconsistent default sizes given");
 
@@ -1532,6 +1531,16 @@ QLabel* CuteTorrentMainWindow::getTitleLabel()
 QLabel* CuteTorrentMainWindow::getTitleIcon()
 {
 	return tbMenu;
+}
+
+void CuteTorrentMainWindow::queueTorrentsUp()
+{
+	m_pTorrentDisplayModel->ActionOnSelectedItem(QTorrentDisplayModel::queue_up);
+}
+
+void CuteTorrentMainWindow::queueTorrentsDown()
+{
+	m_pTorrentDisplayModel->ActionOnSelectedItem(QTorrentDisplayModel::queue_down);
 }
 
 void CuteTorrentMainWindow::updateSorting(int logincalIndex, Qt::SortOrder order)

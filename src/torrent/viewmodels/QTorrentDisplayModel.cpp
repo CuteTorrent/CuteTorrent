@@ -163,6 +163,26 @@ void QTorrentDisplayModel::checkPausedResumed(QModelIndexList indexes, bool& isA
 	}
 }
 
+int QTorrentDisplayModel::getCommonPriority(QModelIndexList& indexes)
+{
+	int commonPriority = -1;
+
+	for (int i = 0; i < indexes.size(); i++)
+	{
+		Torrent* pTorrent = indexes[i].data(TorrentRole).value<Torrent*>();
+		if (commonPriority == -1)
+		{
+			commonPriority = pTorrent->GetTorrentPriority();
+			continue;
+		}
+		if (commonPriority != pTorrent->GetTorrentPriority())
+		{
+			return -1;
+		}
+	}
+	return commonPriority;
+}
+
 void QTorrentDisplayModel::Rehash()
 {
 	ActionOnSelectedItem(rehash);
@@ -210,6 +230,17 @@ void QTorrentDisplayModel::MountDT()
 		}
 	}
 }
+
+void QTorrentDisplayModel::SetPriority(int prio)
+{
+	QModelIndexList indexes = m_pTorrentListView->selectionModel()->selectedIndexes();
+
+	foreach(QModelIndex index, indexes)
+	{
+		index.data(TorrentRole).value<Torrent*>()->SetTorrentPriority(prio);
+	}
+}
+
 void QTorrentDisplayModel::OpenDirSelected()
 {
 	if (m_pTorrentListView->model() != m_pProxyFilterModel)
@@ -283,7 +314,38 @@ void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 		playInMediaPlayer->setEnabled(isAllHasMedia);
 		setSequentual->setChecked(isAllSequential);
 		queueMenu->setEnabled(isAllQueueable);
-
+		int commonPriority = getCommonPriority(indexes);
+		if (commonPriority >= 0)
+		{
+			if (commonPriority >= 0 && commonPriority <= 51)
+			{
+				lowPriority->setChecked(true);
+			}
+			else if (commonPriority > 51 && commonPriority <= 102)
+			{
+				belowAvgPriority->setChecked(true);
+			}
+			else if (commonPriority > 102 && commonPriority <= 153)
+			{
+				mediumPriority->setChecked(true);
+			}
+			else if (commonPriority > 153 && commonPriority <= 204)
+			{
+				abowAvgPriority->setChecked(true);
+			}
+			else
+			{
+				highPriority->setChecked(true);
+			}
+		}
+		else
+		{
+			lowPriority->setChecked(false);
+			abowAvgPriority->setChecked(false);
+			mediumPriority->setChecked(false);
+			belowAvgPriority->setChecked(false);
+			highPriority->setChecked(false);
+		}
 		if (indexes.size() == 1)
 		{
 			Torrent* torrent = indexes[0].data(TorrentRole).value<Torrent*>();
@@ -899,6 +961,55 @@ void QTorrentDisplayModel::setupContextMenu()
 	queueMenu->addAction(queueBottom);
 	menu->addMenu(queueMenu);
 	menu->addSeparator();
+	m_pPriorityMapper = new QSignalMapper(this);
+	m_pPriorityActionGroup = new QActionGroup(this);
+	m_pPriorityActionGroup->setExclusive(true);
+	priorityMenu = new QMenu(tr("ACTION_PRIORITY"), menu);
+	priorityMenu->setIcon(pStyleEngene->getIcon("priority"));
+	highPriority = new QAction(tr("ACTION_HIGHT_PRIORITY"), priorityMenu);
+	highPriority->setCheckable(true);
+	highPriority->setObjectName("ACTION_TORRENTLIST_HIGH_PRIORITY");
+	connect(highPriority, SIGNAL(triggered()), m_pPriorityMapper, SLOT(map()));
+	m_pPriorityMapper->setMapping(highPriority, 255);
+	priorityMenu->addAction(highPriority);
+	m_pPriorityActionGroup->addAction(highPriority);
+
+	abowAvgPriority = new QAction(tr("ACTION_ABOVE_AVG_PRIORITY"), priorityMenu);
+	abowAvgPriority->setCheckable(true);
+	abowAvgPriority->setObjectName("ACTION_TORRENTLIST_ABOVE_AVG_PRIORITY");
+	connect(abowAvgPriority, SIGNAL(triggered()), m_pPriorityMapper, SLOT(map()));
+	m_pPriorityMapper->setMapping(abowAvgPriority, 204);
+	priorityMenu->addAction(abowAvgPriority);
+	m_pPriorityActionGroup->addAction(abowAvgPriority);
+
+	mediumPriority = new QAction(tr("ACTION_MEDIUM_PRIORITY"), priorityMenu);
+	mediumPriority->setCheckable(true);
+	mediumPriority->setObjectName("ACTION_TORRENTLIST_MEDIUM_PRIORITY");
+	connect(mediumPriority, SIGNAL(triggered()), m_pPriorityMapper, SLOT(map()));
+	m_pPriorityMapper->setMapping(mediumPriority, 153);
+	priorityMenu->addAction(mediumPriority);
+	m_pPriorityActionGroup->addAction(mediumPriority);
+
+	belowAvgPriority = new QAction(tr("ACTION_BELOW_AVG_PRIORITY"), priorityMenu);
+	belowAvgPriority->setCheckable(true);
+	belowAvgPriority->setObjectName("ACTION_TORRENTLIST_BELOW_AVG_PRIORITY");
+	connect(belowAvgPriority, SIGNAL(triggered()), m_pPriorityMapper, SLOT(map()));
+	m_pPriorityMapper->setMapping(belowAvgPriority, 102);
+	priorityMenu->addAction(belowAvgPriority);
+	m_pPriorityActionGroup->addAction(belowAvgPriority);
+
+	lowPriority = new QAction(tr("ACTION_LOW_PRIORITY"), priorityMenu);
+	lowPriority->setCheckable(true);
+	lowPriority->setObjectName("ACTION_TORRENTLIST_LOW_PRIORITY");
+	connect(lowPriority, SIGNAL(triggered()), m_pPriorityMapper, SLOT(map()));
+	m_pPriorityMapper->setMapping(lowPriority, 51);
+	priorityMenu->addAction(lowPriority);
+	m_pPriorityActionGroup->addAction(lowPriority);
+
+	connect(m_pPriorityMapper, SIGNAL(mapped(int)), SLOT(SetPriority(int)));
+
+	menu->addMenu(priorityMenu);
+	menu->addSeparator();
 	superSeed = new QAction(pStyleEngene->getIcon("super_seed"), tr("ACTION_SET_SUPERSEED"), this);
 	superSeed->setObjectName("ACTION_TORRENTLIST_SUPER_SEED");
 	superSeed->setCheckable(true);
@@ -935,16 +1046,20 @@ void QTorrentDisplayModel::setupContextMenu()
 	groupsMenu = new QMenu(tr("ACTION_CHANGE_GROUP"), menu);
 	groupsMenu->setIcon(pStyleEngene->getIcon("groups"));
 	QList<GroupForFileFiltering> filters = QApplicationSettings::getInstance()->GetFileFilterGroups();
-
+	m_pGroupMapper = new QSignalMapper(this);
+	m_pGroupsActionGroup = new QActionGroup(this);
+	m_pGroupsActionGroup->setExclusive(true);
 	for(int i = 0; i < filters.size(); i++)
 	{
 		QAction* changeGroupAction = new QAction(pStyleEngene->guessMimeIcon(filters[i].Extensions().split('|') [0]), filters[i].Name(), groupsMenu);
 		changeGroupAction->setObjectName(filters[i].Name());
-		connect(changeGroupAction, SIGNAL(triggered()), this, SLOT(changeGroup()));
+		connect(changeGroupAction, SIGNAL(triggered()), m_pGroupMapper, SLOT(map()));
+		m_pGroupMapper->setMapping(changeGroupAction, filters[i].Name());
 		changeGroupAction->setCheckable(true);
 		groupsMenu->addAction(changeGroupAction);
+		m_pGroupsActionGroup->addAction(changeGroupAction);
 	}
-
+	connect(m_pGroupMapper, SIGNAL(mapped(QString)), SLOT(changeGroup(QString)));
 	menu->addSeparator();
 	menu->addMenu(groupsMenu);
 }
@@ -972,29 +1087,13 @@ void QTorrentDisplayModel::generateMagnetLink()
 	ActionOnSelectedItem(generate_magmet);
 }
 
-void QTorrentDisplayModel::changeGroup()
+void QTorrentDisplayModel::changeGroup(const QString& group)
 {
-	try
+	QModelIndexList indexes = m_pTorrentListView->selectionModel()->selectedIndexes();
+
+	foreach(QModelIndex index, indexes)
 	{
-		QAction* senderAct = static_cast<QAction*>(sender());
-		QString group = senderAct->text();
-		QList<QAction*> actions = groupsMenu->actions();
-
-		for(int i = 0; i < actions.size(); i++)
-		{
-			actions[i]->setChecked(actions[i] == senderAct);
-		}
-
-		QModelIndexList indexes = m_pTorrentListView->selectionModel()->selectedIndexes();
-
-		foreach(QModelIndex index, indexes)
-		{
-			index.data(TorrentRole).value<Torrent*>()->setGroup(group);
-		}
-	}
-	catch(...)
-	{
-		qDebug() << "Exception in QTorrentDisplayModel::changeGroup";
+		index.data(TorrentRole).value<Torrent*>()->setGroup(group);
 	}
 }
 typedef QPair<QModelIndex, QModelIndex> IndexInterval;

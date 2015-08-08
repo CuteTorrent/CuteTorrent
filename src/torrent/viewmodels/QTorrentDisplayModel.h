@@ -49,6 +49,7 @@ class QTorrentDisplayModel: public QAbstractListModel
 	QMenu* menu;
 	QMenu* groupsMenu;
 	QMenu* queueMenu;
+	QMenu* priorityMenu;
 	QAction* queueUp;
 	QAction* queueDown;
 	QAction* queueTop;
@@ -67,10 +68,19 @@ class QTorrentDisplayModel: public QAbstractListModel
 	QAction* playInMediaPlayer;
 	QAction* generateMagnet;
 	QAction* pauseResumeSeparator;
+	QAction* lowPriority;
+	QAction* belowAvgPriority;
+	QAction* mediumPriority;
+	QAction* abowAvgPriority;
+	QAction* highPriority;
 	TorrentManagerPtr m_pTorrentManager;
 	Torrent* m_pCurrentTorrent;
 	QTimer* m_pUpdateTimer;
 	QMutex* locker;
+	QActionGroup* m_pGroupsActionGroup;
+	QActionGroup* m_pPriorityActionGroup;
+	QSignalMapper* m_pGroupMapper;
+	QSignalMapper* m_pPriorityMapper;
 	QTorrentFilterProxyModel* m_pProxyFilterModel;
 	QString getFirstAvailibleFile(files_info& filesInfo);
 	bool checkAllMountable(QModelIndexList& indexes);
@@ -79,6 +89,7 @@ class QTorrentDisplayModel: public QAbstractListModel
 	bool checkAllSequential(QModelIndexList& indexes);
 	bool checkAllQueueable(QModelIndexList& indexes);
 	void checkPausedResumed(QModelIndexList indexes, bool& isAllPaused, bool& isAllResumed, bool& hasPaused, bool& hasResumed);
+	int getCommonPriority(QModelIndexList& indexes);
 public:
 	QTorrentDisplayModel(QTreeView*, QTorrentFilterProxyModel*, QObject*);
 	~QTorrentDisplayModel();
@@ -119,14 +130,14 @@ public slots:
 	void UpdateTrackers();
 	void DellAll();
 	void MountDT();
-
+	void SetPriority(int prio);
 	void playInPlayer();
 	void setSequentualDL();
 	void moveStorrage();
 	void SetSuperSeed();
 	void initSessionFinished();
 	void generateMagnetLink();
-	void changeGroup();
+	void changeGroup(const QString& group);
 	void setupContextMenu();
 	void OnTorrentAdded();
 	void PauseSelected();

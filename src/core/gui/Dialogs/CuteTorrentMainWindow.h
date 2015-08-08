@@ -177,6 +177,8 @@ private:
 	virtual QLabel* getTitleLabel() override;
 	virtual QLabel* getTitleIcon() override;
 public slots:
+	void queueTorrentsUp();
+	void queueTorrentsDown();
 	void updateSorting(int logincalIndex, Qt::SortOrder order);
 	void HandleNewTorrent(const QString&);
 	void UpdateUL(int);

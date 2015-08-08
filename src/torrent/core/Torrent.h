@@ -74,6 +74,8 @@ public :
 	QString GetPeerString();
 	QString GetName() const;
 	QString GetType();
+	int GetTorrentPriority();
+	void SetTorrentPriority(int newValue);
 	QString GetDiscribtion();
 	quint64 GetTotalSize();
 	quint64 GetTotalDownloaded();
