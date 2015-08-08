@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <libtorrent/socks5_stream.hpp>
 #include "StyleEngene.h"
 #include <zlib.h>
+#include <float.h>
 QString StaticHelpers::toKbMbGb(size_type size, bool isSpped)
 {
 	float val = size;
