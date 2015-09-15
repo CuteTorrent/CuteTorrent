@@ -320,7 +320,7 @@ void TorrentManager::InitSession(boost::function<void(int proggres, QString item
 	{
 		error_code ec;
 		QString filePath = dir.filePath(*i);
-		torrent_info ti(filePath.toStdString(), ec);
+		torrent_info ti(filePath.toUtf8().data(), ec);
 		QString infoHash = QString::fromStdString(to_hex(ti.info_hash().to_string()));
 		QString savePath = "";
 		QString group = "";
@@ -1083,7 +1083,7 @@ void TorrentManager::SaveSession()
 			std::vector<char> out;
 			bencode(back_inserter(out), session_state);
 			QString path = StaticHelpers::CombinePathes(dataDir, "BtSessionData", "actual.state");
-			save_file(path.toStdString(), out);
+			save_file(path.toUtf8().data(), out);
 		}
 
 		m_pTorrentSession->abort();
@@ -1482,7 +1482,7 @@ bool TorrentManager::AddMagnet(torrent_handle h, QString& SavePath, QString grou
 
 	if (SavePath != QString::fromUtf8(save_path.c_str()))
 	{
-		h.move_storage(SavePath.toStdString());
+		h.move_storage(SavePath.toUtf8().data());
 	}
 
 	if (!flags.testFlag(PAUSED_MODE))
