@@ -254,7 +254,7 @@ QListView::item{
       <item row="0" column="1">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="torrentTab">
          <layout class="QGridLayout" name="gridLayout_22">
@@ -1305,79 +1305,21 @@ QListView::item{
          </layout>
         </widget>
         <widget class="QWidget" name="filteringTab">
-         <layout class="QGridLayout" name="gridLayout_24">
-          <item row="0" column="0" rowspan="3">
-           <widget class="QGroupBox" name="groupBox_3">
-            <property name="maximumSize">
-             <size>
-              <width>150</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="title">
-             <string>FILTERING_GROUP</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_5">
-             <item row="0" column="1">
-              <widget class="QListWidget" name="GroupsListWidget">
-               <property name="whatsThis">
-                <string>GROUP_LISTBOX_WIT</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QPushButton" name="removeGroupButton">
-               <property name="whatsThis">
-                <string>FILTERING_GROUP_DELETE_WIT</string>
-               </property>
-               <property name="text">
-                <string>FILTERING_GROUP_DELETE</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
+         <layout class="QGridLayout" name="gridLayout_5">
           <item row="0" column="1">
            <widget class="QGroupBox" name="groupBox_9">
             <property name="title">
              <string>ADD_CHANGE_GROUP</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_8">
-             <item row="0" column="0">
-              <widget class="QLineEdit" name="newGroupNameEdit">
-               <property name="whatsThis">
-                <string>newGroupNameEdit_WIT</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QPushButton" name="addNewGroupButton">
-               <property name="whatsThis">
-                <string>ADD_GROUP_BUTON_WIT</string>
-               </property>
-               <property name="text">
-                <string>ADD_GROUP_BUTON</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QGroupBox" name="groupBox_5">
-            <property name="title">
-             <string>GROUP_SAVE_PATH</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_7">
-             <item row="0" column="0">
+             <item row="3" column="1">
               <widget class="QLineEdit" name="groupSavePathEdit">
                <property name="whatsThis">
                 <string>groupSavePathEdit_WIT</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
+             <item row="3" column="2">
               <widget class="QPushButton" name="BrowseGroupSavePathButton">
                <property name="whatsThis">
                 <string>GROUP_SAVE_PATH_CHOISE_BUTTON_WIT</string>
@@ -1387,21 +1329,90 @@ QListView::item{
                </property>
               </widget>
              </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QGroupBox" name="groupBox_4">
-            <property name="title">
-             <string>FILE_EXTENSIONS(FORMAT: jpg|png|bmp)</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_6">
-             <item row="0" column="0">
+             <item row="1" column="0" rowspan="2">
+              <widget class="QLabel" name="label_47">
+               <property name="text">
+                <string>GROUP_EXTENTIONS</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_48">
+               <property name="text">
+                <string>GROUP_SAVE_PATH</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" rowspan="2" colspan="2">
               <widget class="QTextEdit" name="extensionsEdit">
                <property name="whatsThis">
                 <string>extensionsEdit_WIT</string>
                </property>
               </widget>
+             </item>
+             <item row="0" column="1" colspan="2">
+              <widget class="QLineEdit" name="newGroupNameEdit">
+               <property name="whatsThis">
+                <string>newGroupNameEdit_WIT</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_46">
+               <property name="text">
+                <string>GROUP_NAME</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0" colspan="3">
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="addNewGroupButton">
+                 <property name="whatsThis">
+                  <string>ADD_GROUP_BUTON_WIT</string>
+                 </property>
+                 <property name="text">
+                  <string>ADD_GROUP_BUTON</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="updateGroupButton">
+                 <property name="text">
+                  <string>UPDATE_GROUP</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="removeGroupButton">
+                 <property name="whatsThis">
+                  <string>FILTERING_GROUP_DELETE_WIT</string>
+                 </property>
+                 <property name="text">
+                  <string>FILTERING_GROUP_DELETE</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -1418,6 +1429,30 @@ QListView::item{
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="0" column="0">
+           <widget class="QTreeWidget" name="GroupsTreeWidget">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="whatsThis">
+             <string>GROUP_LISTBOX_WIT</string>
+            </property>
+            <property name="rootIsDecorated">
+             <bool>false</bool>
+            </property>
+            <attribute name="headerVisible">
+             <bool>false</bool>
+            </attribute>
+            <column>
+             <property name="text">
+              <string notr="true">1</string>
+             </property>
+            </column>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -2214,13 +2249,7 @@ QListView::item{
   <tabstop>lockFilesCheckBox</tabstop>
   <tabstop>alowReorderedOpsCheckBox</tabstop>
   <tabstop>useReadCasheCheckBox</tabstop>
-  <tabstop>GroupsListWidget</tabstop>
-  <tabstop>removeGroupButton</tabstop>
   <tabstop>newGroupNameEdit</tabstop>
-  <tabstop>addNewGroupButton</tabstop>
-  <tabstop>extensionsEdit</tabstop>
-  <tabstop>groupSavePathEdit</tabstop>
-  <tabstop>BrowseGroupSavePathButton</tabstop>
   <tabstop>DTPathEdit</tabstop>
   <tabstop>browseDTPathButton</tabstop>
   <tabstop>driveNumberComboBox</tabstop>
@@ -2272,22 +2301,6 @@ QListView::item{
   <include location="../../../Resources/ltorrent.qrc"/>
  </resources>
  <connections>
-  <connection>
-   <sender>GroupsListWidget</sender>
-   <signal>currentRowChanged(int)</signal>
-   <receiver>SettingsDialog</receiver>
-   <slot>showSelectedGroup(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>94</x>
-     <y>146</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>256</x>
-     <y>159</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>addTaskButton</sender>
    <signal>clicked()</signal>

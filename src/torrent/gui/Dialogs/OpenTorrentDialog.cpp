@@ -34,6 +34,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "MetaDataDownloadWaiter.h"
 #include "StaticHelpers.h"
 #include "defs.h"
+#include <TorrentGroupsManager.h>
+
 OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags)
 	: BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize, parent)
 	, m_size(0)
@@ -102,17 +104,17 @@ void OpenTorrentDialog::FillData(opentorrent_info* info)
 	if(!info->baseSuffix.isEmpty())
 	{
 		QApplicationSettingsPtr settings = QApplicationSettings::getInstance();
-		m_lFilters = settings->GetFileFilterGroups();
+		m_lFilters = TorrentGroupsManager::getInstance()->GetTorrentGroups();
 		int selected = -1;
 
 		for(int i = 0; i < m_lFilters.count(); i++)
 		{
-			GroupComboBox->addItem(m_lFilters[i].Name());
+			GroupComboBox->addItem(m_lFilters[i]->name());
 
-			if(m_lFilters.at(i).Contains(info->baseSuffix) && selected < 0)
+			if (m_lFilters.at(i)->extentions().contains(info->baseSuffix) && selected < 0)
 			{
 				selected = i;
-				QString path = m_lFilters.at(i).SavePath();
+				QString path = m_lFilters.at(i)->savePath();
 				m_compliterModel->setRootPath(path);
 				pathEdit->setText(path);
 			}
@@ -209,7 +211,7 @@ bool OpenTorrentDialog::AccepTorrent()
 
 		error_code ec;
 		int groupIndex = GroupComboBox->currentIndex();
-		QString group = groupIndex >= 0 ? m_lFilters[groupIndex].Name() : "";
+		TorrentGroup* group = groupIndex >= 0 ? m_lFilters[groupIndex] : NULL;
 		TorrentManager::AddTorrentFlags flags = static_cast<TorrentManager::AddTorrentFlags>(BuildFlags());
 		QString savePath = pathEdit->displayText();
 
@@ -236,7 +238,7 @@ void OpenTorrentDialog::ChangeGroup()
 {
 	if(GroupComboBox->currentIndex() >= 0 && GroupComboBox->currentIndex() < m_lFilters.length())
 	{
-		pathEdit->setText(m_lFilters[GroupComboBox->currentIndex()].SavePath());
+		pathEdit->setText(m_lFilters[GroupComboBox->currentIndex()]->savePath());
 		m_bUseGroup = true;
 	}
 }

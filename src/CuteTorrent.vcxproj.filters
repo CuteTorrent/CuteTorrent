@@ -841,6 +841,21 @@
     <ClCompile Include="search\viewmodels\QSearchFilterModel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\gui\Dialogs\SpeedLimitDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SpeedLimitDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\TorrentGroupsManager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\TorrentGroup.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TorrentGroupsManager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -1107,6 +1122,15 @@
     </CustomBuild>
     <CustomBuild Include="Resources\translations\cutetorrent_en_US.qm" />
     <CustomBuild Include="Resources\translations\cutetorrent_ru_RU.qm" />
+    <CustomBuild Include="core\gui\Dialogs\SpeedLimitDialog.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\FormFiles\SpeedLimitDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\TorrentGroupsManager.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\MagnetApiController.h">
@@ -1514,6 +1538,12 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="webControll\RconCommon.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_SpeedLimitDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\TorrentGroup.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -35,6 +35,7 @@
 #include <QtGui/QStackedWidget>
 #include <QtGui/QTextEdit>
 #include <QtGui/QTimeEdit>
+#include <QtGui/QTreeWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
@@ -171,23 +172,23 @@ public:
     QLabel *label_20;
     QSpacerItem *verticalSpacer_3;
     QWidget *filteringTab;
-    QGridLayout *gridLayout_24;
-    QGroupBox *groupBox_3;
     QGridLayout *gridLayout_5;
-    QListWidget *GroupsListWidget;
-    QPushButton *removeGroupButton;
     QGroupBox *groupBox_9;
     QGridLayout *gridLayout_8;
-    QLineEdit *newGroupNameEdit;
-    QPushButton *addNewGroupButton;
-    QGroupBox *groupBox_5;
-    QGridLayout *gridLayout_7;
     QLineEdit *groupSavePathEdit;
     QPushButton *BrowseGroupSavePathButton;
-    QGroupBox *groupBox_4;
-    QGridLayout *gridLayout_6;
+    QLabel *label_47;
+    QLabel *label_48;
     QTextEdit *extensionsEdit;
+    QLineEdit *newGroupNameEdit;
+    QLabel *label_46;
+    QHBoxLayout *horizontalLayout_4;
+    QSpacerItem *horizontalSpacer_3;
+    QPushButton *addNewGroupButton;
+    QPushButton *updateGroupButton;
+    QPushButton *removeGroupButton;
     QSpacerItem *horizontalSpacer_9;
+    QTreeWidget *GroupsTreeWidget;
     QWidget *dtTab;
     QGridLayout *gridLayout_25;
     QGroupBox *groupBox_6;
@@ -960,75 +961,90 @@ public:
         stackedWidget->addWidget(hddTab);
         filteringTab = new QWidget();
         filteringTab->setObjectName(QString::fromUtf8("filteringTab"));
-        gridLayout_24 = new QGridLayout(filteringTab);
-        gridLayout_24->setObjectName(QString::fromUtf8("gridLayout_24"));
-        groupBox_3 = new QGroupBox(filteringTab);
-        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        groupBox_3->setMaximumSize(QSize(150, 16777215));
-        gridLayout_5 = new QGridLayout(groupBox_3);
+        gridLayout_5 = new QGridLayout(filteringTab);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        GroupsListWidget = new QListWidget(groupBox_3);
-        GroupsListWidget->setObjectName(QString::fromUtf8("GroupsListWidget"));
-
-        gridLayout_5->addWidget(GroupsListWidget, 0, 1, 1, 1);
-
-        removeGroupButton = new QPushButton(groupBox_3);
-        removeGroupButton->setObjectName(QString::fromUtf8("removeGroupButton"));
-
-        gridLayout_5->addWidget(removeGroupButton, 1, 1, 1, 1);
-
-
-        gridLayout_24->addWidget(groupBox_3, 0, 0, 3, 1);
-
         groupBox_9 = new QGroupBox(filteringTab);
         groupBox_9->setObjectName(QString::fromUtf8("groupBox_9"));
         gridLayout_8 = new QGridLayout(groupBox_9);
         gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
+        groupSavePathEdit = new QLineEdit(groupBox_9);
+        groupSavePathEdit->setObjectName(QString::fromUtf8("groupSavePathEdit"));
+
+        gridLayout_8->addWidget(groupSavePathEdit, 3, 1, 1, 1);
+
+        BrowseGroupSavePathButton = new QPushButton(groupBox_9);
+        BrowseGroupSavePathButton->setObjectName(QString::fromUtf8("BrowseGroupSavePathButton"));
+
+        gridLayout_8->addWidget(BrowseGroupSavePathButton, 3, 2, 1, 1);
+
+        label_47 = new QLabel(groupBox_9);
+        label_47->setObjectName(QString::fromUtf8("label_47"));
+        label_47->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        label_47->setWordWrap(true);
+
+        gridLayout_8->addWidget(label_47, 1, 0, 2, 1);
+
+        label_48 = new QLabel(groupBox_9);
+        label_48->setObjectName(QString::fromUtf8("label_48"));
+
+        gridLayout_8->addWidget(label_48, 3, 0, 1, 1);
+
+        extensionsEdit = new QTextEdit(groupBox_9);
+        extensionsEdit->setObjectName(QString::fromUtf8("extensionsEdit"));
+
+        gridLayout_8->addWidget(extensionsEdit, 1, 1, 2, 2);
+
         newGroupNameEdit = new QLineEdit(groupBox_9);
         newGroupNameEdit->setObjectName(QString::fromUtf8("newGroupNameEdit"));
 
-        gridLayout_8->addWidget(newGroupNameEdit, 0, 0, 1, 1);
+        gridLayout_8->addWidget(newGroupNameEdit, 0, 1, 1, 2);
+
+        label_46 = new QLabel(groupBox_9);
+        label_46->setObjectName(QString::fromUtf8("label_46"));
+
+        gridLayout_8->addWidget(label_46, 0, 0, 1, 1);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_3);
 
         addNewGroupButton = new QPushButton(groupBox_9);
         addNewGroupButton->setObjectName(QString::fromUtf8("addNewGroupButton"));
 
-        gridLayout_8->addWidget(addNewGroupButton, 0, 1, 1, 1);
+        horizontalLayout_4->addWidget(addNewGroupButton);
+
+        updateGroupButton = new QPushButton(groupBox_9);
+        updateGroupButton->setObjectName(QString::fromUtf8("updateGroupButton"));
+
+        horizontalLayout_4->addWidget(updateGroupButton);
+
+        removeGroupButton = new QPushButton(groupBox_9);
+        removeGroupButton->setObjectName(QString::fromUtf8("removeGroupButton"));
+
+        horizontalLayout_4->addWidget(removeGroupButton);
 
 
-        gridLayout_24->addWidget(groupBox_9, 0, 1, 1, 1);
-
-        groupBox_5 = new QGroupBox(filteringTab);
-        groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
-        gridLayout_7 = new QGridLayout(groupBox_5);
-        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
-        groupSavePathEdit = new QLineEdit(groupBox_5);
-        groupSavePathEdit->setObjectName(QString::fromUtf8("groupSavePathEdit"));
-
-        gridLayout_7->addWidget(groupSavePathEdit, 0, 0, 1, 1);
-
-        BrowseGroupSavePathButton = new QPushButton(groupBox_5);
-        BrowseGroupSavePathButton->setObjectName(QString::fromUtf8("BrowseGroupSavePathButton"));
-
-        gridLayout_7->addWidget(BrowseGroupSavePathButton, 0, 1, 1, 1);
+        gridLayout_8->addLayout(horizontalLayout_4, 4, 0, 1, 3);
 
 
-        gridLayout_24->addWidget(groupBox_5, 2, 1, 1, 1);
-
-        groupBox_4 = new QGroupBox(filteringTab);
-        groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
-        gridLayout_6 = new QGridLayout(groupBox_4);
-        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
-        extensionsEdit = new QTextEdit(groupBox_4);
-        extensionsEdit->setObjectName(QString::fromUtf8("extensionsEdit"));
-
-        gridLayout_6->addWidget(extensionsEdit, 0, 0, 1, 1);
-
-
-        gridLayout_24->addWidget(groupBox_4, 1, 1, 1, 1);
+        gridLayout_5->addWidget(groupBox_9, 0, 1, 1, 1);
 
         horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_24->addItem(horizontalSpacer_9, 1, 2, 1, 1);
+        gridLayout_5->addItem(horizontalSpacer_9, 1, 2, 1, 1);
+
+        GroupsTreeWidget = new QTreeWidget(filteringTab);
+        QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
+        __qtreewidgetitem->setText(0, QString::fromUtf8("1"));
+        GroupsTreeWidget->setHeaderItem(__qtreewidgetitem);
+        GroupsTreeWidget->setObjectName(QString::fromUtf8("GroupsTreeWidget"));
+        GroupsTreeWidget->setMinimumSize(QSize(150, 0));
+        GroupsTreeWidget->setRootIsDecorated(false);
+        GroupsTreeWidget->header()->setVisible(false);
+
+        gridLayout_5->addWidget(GroupsTreeWidget, 0, 0, 1, 1);
 
         stackedWidget->addWidget(filteringTab);
         dtTab = new QWidget();
@@ -1557,14 +1573,8 @@ public:
         QWidget::setTabOrder(lowPrioDiskCheckBox, lockFilesCheckBox);
         QWidget::setTabOrder(lockFilesCheckBox, alowReorderedOpsCheckBox);
         QWidget::setTabOrder(alowReorderedOpsCheckBox, useReadCasheCheckBox);
-        QWidget::setTabOrder(useReadCasheCheckBox, GroupsListWidget);
-        QWidget::setTabOrder(GroupsListWidget, removeGroupButton);
-        QWidget::setTabOrder(removeGroupButton, newGroupNameEdit);
-        QWidget::setTabOrder(newGroupNameEdit, addNewGroupButton);
-        QWidget::setTabOrder(addNewGroupButton, extensionsEdit);
-        QWidget::setTabOrder(extensionsEdit, groupSavePathEdit);
-        QWidget::setTabOrder(groupSavePathEdit, BrowseGroupSavePathButton);
-        QWidget::setTabOrder(BrowseGroupSavePathButton, DTPathEdit);
+        QWidget::setTabOrder(useReadCasheCheckBox, newGroupNameEdit);
+        QWidget::setTabOrder(newGroupNameEdit, DTPathEdit);
         QWidget::setTabOrder(DTPathEdit, browseDTPathButton);
         QWidget::setTabOrder(browseDTPathButton, driveNumberComboBox);
         QWidget::setTabOrder(driveNumberComboBox, customMoutGroupBox);
@@ -1612,7 +1622,6 @@ public:
         QWidget::setTabOrder(listWidget, hotKeyScrollArea);
 
         retranslateUi(SettingsDialog);
-        QObject::connect(GroupsListWidget, SIGNAL(currentRowChanged(int)), SettingsDialog, SLOT(showSelectedGroup(int)));
         QObject::connect(addTaskButton, SIGNAL(clicked()), SettingsDialog, SLOT(AddTask()));
         QObject::connect(BrowseGroupSavePathButton, SIGNAL(clicked()), SettingsDialog, SLOT(browseSavepathGroup()));
         QObject::connect(deleteTaskButton, SIGNAL(clicked()), SettingsDialog, SLOT(DeleteTask()));
@@ -1635,7 +1644,7 @@ public:
         QObject::connect(browseWatchStaticPathButton, SIGNAL(clicked()), SettingsDialog, SLOT(onBrowseWatchStaticPath()));
 
         listWidget->setCurrentRow(-1);
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(4);
         inEncPolicyComboBox->setCurrentIndex(0);
         outEncPolicyComboBox->setCurrentIndex(0);
         encLevelComboBox->setCurrentIndex(2);
@@ -1875,23 +1884,7 @@ public:
         label_20->setWhatsThis(QApplication::translate("SettingsDialog", "CASH_SIZE_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         label_20->setText(QApplication::translate("SettingsDialog", "CASH_SIZE", 0, QApplication::UnicodeUTF8));
-        groupBox_3->setTitle(QApplication::translate("SettingsDialog", "FILTERING_GROUP", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        GroupsListWidget->setWhatsThis(QApplication::translate("SettingsDialog", "GROUP_LISTBOX_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-#ifndef QT_NO_WHATSTHIS
-        removeGroupButton->setWhatsThis(QApplication::translate("SettingsDialog", "FILTERING_GROUP_DELETE_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        removeGroupButton->setText(QApplication::translate("SettingsDialog", "FILTERING_GROUP_DELETE", 0, QApplication::UnicodeUTF8));
         groupBox_9->setTitle(QApplication::translate("SettingsDialog", "ADD_CHANGE_GROUP", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        newGroupNameEdit->setWhatsThis(QApplication::translate("SettingsDialog", "newGroupNameEdit_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-#ifndef QT_NO_WHATSTHIS
-        addNewGroupButton->setWhatsThis(QApplication::translate("SettingsDialog", "ADD_GROUP_BUTON_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        addNewGroupButton->setText(QApplication::translate("SettingsDialog", "ADD_GROUP_BUTON", 0, QApplication::UnicodeUTF8));
-        groupBox_5->setTitle(QApplication::translate("SettingsDialog", "GROUP_SAVE_PATH", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         groupSavePathEdit->setWhatsThis(QApplication::translate("SettingsDialog", "groupSavePathEdit_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
@@ -1899,9 +1892,26 @@ public:
         BrowseGroupSavePathButton->setWhatsThis(QApplication::translate("SettingsDialog", "GROUP_SAVE_PATH_CHOISE_BUTTON_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         BrowseGroupSavePathButton->setText(QApplication::translate("SettingsDialog", "GROUP_SAVE_PATH_CHOISE_BUTTON", 0, QApplication::UnicodeUTF8));
-        groupBox_4->setTitle(QApplication::translate("SettingsDialog", "FILE_EXTENSIONS(FORMAT: jpg|png|bmp)", 0, QApplication::UnicodeUTF8));
+        label_47->setText(QApplication::translate("SettingsDialog", "GROUP_EXTENTIONS", 0, QApplication::UnicodeUTF8));
+        label_48->setText(QApplication::translate("SettingsDialog", "GROUP_SAVE_PATH", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         extensionsEdit->setWhatsThis(QApplication::translate("SettingsDialog", "extensionsEdit_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+#ifndef QT_NO_WHATSTHIS
+        newGroupNameEdit->setWhatsThis(QApplication::translate("SettingsDialog", "newGroupNameEdit_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        label_46->setText(QApplication::translate("SettingsDialog", "GROUP_NAME", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        addNewGroupButton->setWhatsThis(QApplication::translate("SettingsDialog", "ADD_GROUP_BUTON_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        addNewGroupButton->setText(QApplication::translate("SettingsDialog", "ADD_GROUP_BUTON", 0, QApplication::UnicodeUTF8));
+        updateGroupButton->setText(QApplication::translate("SettingsDialog", "UPDATE_GROUP", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        removeGroupButton->setWhatsThis(QApplication::translate("SettingsDialog", "FILTERING_GROUP_DELETE_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        removeGroupButton->setText(QApplication::translate("SettingsDialog", "FILTERING_GROUP_DELETE", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        GroupsTreeWidget->setWhatsThis(QApplication::translate("SettingsDialog", "GROUP_LISTBOX_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         groupBox_6->setTitle(QApplication::translate("SettingsDialog", "DAEMONTOOLS_PATH", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS

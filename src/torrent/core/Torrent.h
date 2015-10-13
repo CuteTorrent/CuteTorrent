@@ -27,6 +27,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QStringList>
 #include <QVector>
 #include "defs.h"
+#include "boost/asio/ip/tcp.hpp"
+#include <QUuid>
+#include <TorrentGroup.h>
 using namespace libtorrent;
 
 class StaticHelpers;
@@ -35,6 +38,9 @@ class TorrentManager;
 class Torrent : public QObject
 {
 	Q_OBJECT
+
+	
+
 
 private:
 	QMap<QString, int> trackerPeerCountMap;
@@ -47,11 +53,12 @@ private:
 	bool mountable;
 	QString base_suffix;
 	QString type;
-	QString group;
+	QString m_groupName;
 	QStringList imageFiles;
 	bool isMovingFileStorrage;
+	QUuid m_torrentGroupUid;
 public :
-	Torrent(torrent_status torrentStatus, QString group);
+	Torrent(torrent_status torrentStatus, TorrentGroup* group);
 	~Torrent() {};
 	void UpdateStatus(torrent_status newVal);
 	void SetFilePriority(int index, int prioryty);
@@ -61,8 +68,9 @@ public :
 	QString GetSuffix();
 	void UpdateDiskImageFiles();
 	QString GetErrorMessage() const;
-
-	QString GetGroup();
+	QUuid GetGroupUid();
+	void SetGroupUid(QUuid& uid);
+	QString GetGroupName();
 	QString GetDwonloadSpeed();
 	QString GetUploadSpeed();
 	QString GetSavePath();
@@ -83,6 +91,8 @@ public :
 	float GetRemainingTime();
 	int GetActiveTime();
 	int GetQueuePosition() const;
+	void SetPeerDownloadLimit(boost::asio::ip::tcp::endpoint ip, int limit);
+	void SetPeerUploadLimit(boost::asio::ip::tcp::endpoint ip, int limit);
 	void GetPieceAvalibility(std::vector<int>& availibility);
 	float GetDistributedCopies();
 	int GetStatus();

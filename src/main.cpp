@@ -150,7 +150,7 @@ int main(int argc, char* argv[])
 		          options(desc).positional(p).run(), vm);
 		po::notify(vm);
 	}
-	catch (po::error ex)
+	catch (std::exception ex)
 	{
 		std::cout << "Error parsing cmd line: " << ex.what() << std::endl;
 #ifdef Q_WS_WIN
@@ -166,12 +166,15 @@ int main(int argc, char* argv[])
 
 	Application a(argc, argv);
 	a.setWindowIcon(QIcon(":/icons/app.ico"));
+	QString file2open;
+	if (!vm.empty())
+	{
 #ifdef Q_WS_WIN
-	QString file2open = QString::fromLocal8Bit(vm["input-file"].as<std::string>().c_str());
+		file2open = QString::fromLocal8Bit(vm["input-file"].as<std::string>().c_str());
 #else
-	QString file2open = QString::fromUtf8(vm["input-file"].as<std::string>().c_str());
+		file2open = QString::fromUtf8(vm["input-file"].as<std::string>().c_str());
 #endif
-
+	}
 	if(a.isRunning())
 	{
 		if (!file2open.isEmpty())

@@ -102,6 +102,7 @@ QStandardItem* PeerTableModel::addPeer(libtorrent::peer_info peerInfo)
 	insertRow(row);
 	QString flagFileName = QString(":/flags/%1.png").arg(QString(QByteArray(peerInfo.country, 2)));
 	QIcon flagIcon = QIcon(QPixmap(flagFileName));
+	setData(index(row, IP), QVariant::fromValue(peerInfo), Qt::UserRole);
 	setData(index(row, IP), flagIcon, Qt::DecorationRole);
 	setData(index(row, IP), QString::fromStdString(peerInfo.ip.address().to_string()), Qt::DisplayRole);
 	QString client = QString::fromUtf8(peerInfo.client.c_str());

@@ -4,11 +4,13 @@
 #include "SearchEngine.h"
 #include "ServiceCommon.h"
 #define SEARCH_RESULTS_COLUNS_COUNT 1
+#include "QSearchFilterModel.h"
+
 class QSearchDisplayModel: public QAbstractListModel
 {
 	Q_OBJECT
 public:
-	QSearchDisplayModel(QTreeView* pTorrentListView, QObject* parent = 0);
+	QSearchDisplayModel(QTreeView* pTorrentListView, QSearchFilterModel* pSearchFilterModel, QObject* parent = 0);
 	~QSearchDisplayModel();
 	enum Role
 	{
@@ -26,6 +28,7 @@ private:
 	SearchEnginePtr m_pSearchEngine;
 	QMenu* m_pContextMenu;
 	QTreeView* m_pTorrentListView;
+	QSearchFilterModel* m_pSearchFilterModel;
 private slots:
 	void downloadTorrent();
 	void OnNewSearchResults();

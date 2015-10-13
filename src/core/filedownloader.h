@@ -20,7 +20,7 @@ signals:
 public:
 	FileDownloader(QObject* parent = NULL);
 	void download(QUrl url, QList<QNetworkCookie> cookies = QList<QNetworkCookie>());
-	static FileDownloaderPtr getInstance();
+	static FileDownloaderPtr getNewInstance();
 	~FileDownloader();
 private slots:
 	void replyReady(QNetworkReply* pReply);

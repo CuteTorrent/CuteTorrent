@@ -1,5 +1,5 @@
 ﻿#include "FiltersViewModel.h"
-#include <FilterTreeItem.h>
+#include "FilterTreeItem.h"
 #include <StyleEngene.h>
 #include <viewmodels/QTorrentFilterProxyModel.h>
 #include <GroupForFileFiltering.h>
@@ -9,11 +9,19 @@
 #include "Torrent.h"
 #include <core/TorrentStorrage.h>
 #include "TorrentCommon.h"
+#include <TorrentManager.h>
 #include <float.h>
+#include <TorrentGroupsManager.h>
+#include <AddRssDwonloadRuleDialog.h>
 FiltersViewModel::FiltersViewModel(QObject* parent) : QAbstractItemModel(parent)
 {
 	BuildTree();
 	m_updateTimerID = startTimer(400);
+	TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
+	TorrentGroupsManagerPtr pGroupsManager = TorrentGroupsManager::getInstance();
+	connect(pGroupsManager.get(), SIGNAL(GroupsChanged()), SLOT(UpdateGroupItems()));
+	connect(pTorrentManager.get(), SIGNAL(TorrentAdded(Torrent*)), SLOT(UpdateGroupCounters()));
+	connect(pTorrentManager.get(), SIGNAL(TorrentRemoved(QString)), SLOT(UpdateGroupCounters()));
 }
 
 FiltersViewModel::~FiltersViewModel()
@@ -189,35 +197,53 @@ void FiltersViewModel::Retranslate()
 	}
 }
 
+void FiltersViewModel::UpdateGroupCounters()
+{
+	QList<QUuid> groupKeys = m_filtersToUid.keys();
+	for (int i = 0; i < m_filtersToUid.size(); i++)
+	{
+		m_filtersToUid[groupKeys[i]]->setItemsCount(-1);
+	}
+	TorrentStorragePtr torrents = TorrentStorrage::getInstance();
+
+	for (int j = 0; j < torrents->size(); j++)
+	{
+		Torrent* pTorrent = torrents->at(j);
+
+		QUuid groupUid = pTorrent->GetGroupUid();
+
+		if (!groupUid.isNull())
+		{
+			if (m_filtersToUid.contains(groupUid))
+			{
+				FilterTreeItem* filterItem = m_filtersToUid[groupUid];
+				uint itemsCount = filterItem->ItemsCount();
+				if (itemsCount == -1)
+				{
+					filterItem->setItemsCount(1);
+				}
+				else
+				{
+					itemsCount++;
+					filterItem->setItemsCount(itemsCount);
+				}
+			}
+
+		}
+	}
+}
+
 void FiltersViewModel::UpdateGroupItems()
 {
 	beginResetModel();
-	FilterTreeItem* groupsItem = NULL;
 
-	for (int i = 0; i < m_rootItems.size(); i++)
-	{
-		if (m_rootItems[i]->FilterType() == GROUP_FILTER_TYPE)
-		{
-			groupsItem = m_rootItems[i];
-			break;
-		}
-	}
+	m_pGroupsItem->ClearChildren();
+	QList<TorrentGroup*> groups = TorrentGroupsManager::getInstance()->GetTorrentGroups();
+	StyleEngene* pStyleEngine = StyleEngene::getInstance();
 
-	if (groupsItem != NULL)
-	{
-		groupsItem->ClearChildren();
-		QList<GroupForFileFiltering> groups = QApplicationSettings::getInstance()->GetFileFilterGroups();
-		StyleEngene* pStyleEngine = StyleEngene::getInstance();
+	AddGroups(pStyleEngine, m_pGroupsItem, groups);
 
-		for (int i = 0; i < groups.count(); i++)
-		{
-			GroupForFileFiltering group = groups[i];
-			QString extension = group.Extensions().split('|')[0];
-			FilterTreeItem* groupItem = new FilterTreeItem(group.Name(), pStyleEngine->guessMimeIcon(extension), GROUP_FILTER_TYPE, group.Name(), groupsItem);
-			groupsItem->AddChlld(groupItem);
-		}
-	}
-
+	UpdateCounters();
 	endResetModel();
 }
 
@@ -308,6 +334,22 @@ void FiltersViewModel::timerEvent(QTimerEvent* timerEvent)
 	}
 }
 
+void FiltersViewModel::AddGroups(StyleEngene* pStyleEngine, FilterTreeItem* groupsItem, QList<TorrentGroup*> groups)
+{
+	for (int i = 0; i < groups.count(); i++)
+	{
+		TorrentGroup* group = groups[i];
+		QString extension = group->extentions()[0];
+		FilterTreeItem* groupItem = new FilterTreeItem(group->name(), pStyleEngine->guessMimeIcon(extension), GROUP_FILTER_TYPE, QVariant::fromValue(group->uid()), groupsItem);
+		m_filtersToUid.insert(group->uid(), groupItem);
+		if (group->Children().size() > 0)
+		{
+			AddGroups(pStyleEngine, groupItem, group->Children());
+		}
+		groupsItem->AddChlld(groupItem);
+	}
+}
+
 void FiltersViewModel::BuildTree()
 {
 	StyleEngene* pStyleEngine = StyleEngene::getInstance();
@@ -333,18 +375,10 @@ void FiltersViewModel::BuildTree()
 	torrentsItem->AddChlld(activeItem);
 	FilterTreeItem* inactiveItem = new FilterTreeItem(tr("NOT_ACTIVE_FLTR"), inactiveIcon, TORRENT, NOT_ACTIVE, torrentsItem);
 	torrentsItem->AddChlld(inactiveItem);
-	FilterTreeItem* groupsItem = new FilterTreeItem(tr("TORRENT_GROUPS"), groupsIcon, GROUP_FILTER_TYPE, QString());
-	groupsItem->setItemsCount(-1);
-	m_rootItems.append(groupsItem);
-	QList<GroupForFileFiltering> groups = QApplicationSettings::getInstance()->GetFileFilterGroups();
-
-	for (int i = 0; i < groups.count(); i++)
-	{
-		GroupForFileFiltering group = groups[i];
-		QString extension = group.Extensions().split('|')[0];
-		FilterTreeItem* groupItem = new FilterTreeItem(group.Name(), pStyleEngine->guessMimeIcon(extension), GROUP_FILTER_TYPE, group.Name(), groupsItem);
-		groupsItem->AddChlld(groupItem);
-	}
+	m_pGroupsItem = new FilterTreeItem(tr("TORRENT_GROUPS"), groupsIcon, GROUP_FILTER_TYPE, QString());
+	m_pGroupsItem->setItemsCount(-1);
+	m_rootItems.append(m_pGroupsItem);
+	UpdateGroupItems();
 
 	FilterTreeItem* rssItem = new FilterTreeItem(tr("RSS_CHANELS"), rssIcon, RSS_FEED, QString());
 	rssItem->setItemsCount(-1);
@@ -372,15 +406,23 @@ void FiltersViewModel::UpdateCounters()
 	int seedCount = 0;
 	int downloadingCount = 0;
 	TorrentStorragePtr torrents = TorrentStorrage::getInstance();
-	QList<GroupForFileFiltering> groups = QApplicationSettings::getInstance()->GetFileFilterGroups();
-	QList<int> groupCounters;
-	QStringList groupNames;
-	groupCounters.reserve(groups.size());
+	
+	FilterTreeItem* groupItem = NULL;
+	FilterTreeItem* torrentsItem = NULL;
+	int rootTorrentRow = -1, rootGroupRow = -1;
 
-	for (int i = 0; i < groups.size(); i++)
+	for (int i = 0; i < m_rootItems.size(); i++)
 	{
-		groupNames << groups[i].Name();
-		groupCounters.append(0);
+		if (m_rootItems[i]->FilterType() == TORRENT)
+		{
+			torrentsItem = m_rootItems[i];
+			rootTorrentRow = i;
+		}
+		else if (m_rootItems[i]->FilterType() == GROUP_FILTER_TYPE)
+		{
+			groupItem = m_rootItems[i];
+			rootGroupRow = i;
+		}
 	}
 
 	for (int j = 0; j < torrents->size(); j++)
@@ -409,37 +451,9 @@ void FiltersViewModel::UpdateCounters()
 		{
 			downloadingCount++;
 		}
-
-		QString group = pTorrent->GetGroup();
-
-		if (!group.isEmpty())
-		{
-			int groupIndex = groupNames.indexOf(group);
-
-			if (groupIndex > -1)
-			{
-				groupCounters[groupIndex]++;
-			}
-		}
 	}
 
-	FilterTreeItem* groupItem = NULL;
-	FilterTreeItem* torrentsItem = NULL;
-	int rootTorrentRow = -1, rootGroupRow = -1;
 
-	for (int i = 0; i < m_rootItems.size(); i++)
-	{
-		if (m_rootItems[i]->FilterType() == TORRENT)
-		{
-			torrentsItem = m_rootItems[i];
-			rootTorrentRow = i;
-		}
-		else if (m_rootItems[i]->FilterType() == GROUP_FILTER_TYPE)
-		{
-			groupItem = m_rootItems[i];
-			rootGroupRow = i;
-		}
-	}
 
 	if (torrentsItem != NULL)
 	{
@@ -511,31 +525,6 @@ void FiltersViewModel::UpdateCounters()
 					}
 
 					break;
-				}
-			}
-		}
-	}
-
-	if (groupItem != NULL)
-	{
-		QModelIndex rootIndex = index(rootGroupRow, 0, QModelIndex());
-		QList<FilterTreeItem*> children = groupItem->Children();
-
-		for (int i = 0; i < children.size(); i++)
-		{
-			FilterTreeItem* child = children[i];
-			QString currentGroup = child->Filter().toString();
-			int groupIndex = groupNames.indexOf(currentGroup);
-
-			if (groupIndex > -1)
-			{
-				int groupCounter = groupCounters[groupIndex];
-
-				if (child->ItemsCount() != groupCounter)
-				{
-					child->setItemsCount(groupCounter);
-					QModelIndex childIndex = index(i, 0, rootIndex);
-					emit dataChanged(childIndex, childIndex);
 				}
 			}
 		}

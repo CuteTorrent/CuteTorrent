@@ -50,6 +50,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 SettingsDialog::SettingsDialog(QWidget* parent, int flags)
 	: BaseWindow(OnlyCloseButton, NoResize, parent)
 	, m_propertyMapper(new SettingsPropertyMapper(this))
+	, m_pTorrentGroupManager(TorrentGroupsManager::getInstance())
 	, editRssRule(NULL)
 	, deleteRssRule(NULL)
 	, m_filterGroupsHaveChanges(false)
@@ -204,19 +205,54 @@ void SettingsDialog::FillGeneralTab()
 	//OS_SPECIFICK////
 }
 
+void SettingsDialog::AppendChildren(QTreeWidgetItem* item, QList<TorrentGroup*>& children)
+{
+	StyleEngene* pStyleEngine = StyleEngene::getInstance();
+	for (int i = 0; i < children.length(); i++)
+	{
+		TorrentGroup* group = children[i];
+		m_torrentGroupsToUid.insert(group->uid(), group);
+		QTreeWidgetItem* subIitem = new QTreeWidgetItem(QStringList() << group->name());
+		subIitem->setIcon(0, pStyleEngine->guessMimeIcon(group->extentions()[0]));
+		subIitem->setData(0, Qt::UserRole, QVariant::fromValue(group->uid()));
+		item->addChild(subIitem);
+		QList<TorrentGroup*> subChildren = group->Children();
+		if (subChildren.length() > 0)
+		{
+			AppendChildren(subIitem, subChildren);
+		}
+	}
+}
+
 void SettingsDialog::FillFilteringGroups()
 {
 	m_filterGroups.clear();
-	m_filterGroups.append(m_pSettings->GetFileFilterGroups());
-	connect(&m_filterGroups, SIGNAL(CollectionChanged(CollectionChangedInfo)), SLOT(onFilteringGroupsChanged()));
-	GroupsListWidget->clear();
-
+	auto groups = m_pTorrentGroupManager->GetTorrentGroups();
+	for (int i = 0; i < groups.size(); i++)
+	{
+		m_filterGroups.append(new TorrentGroup(*groups[i]));
+	}
+	
+	m_torrentGroupsToUid.clear();
+	connect(&m_filterGroups, SIGNAL(CollectionChanged(CollectionChangedInfo)), SLOT(onFilteringGroupsChanged()), Qt::UniqueConnection);
+	GroupsTreeWidget->clear();
+	StyleEngene* pStyleEngine = StyleEngene::getInstance();
 	for(int i = 0; i < m_filterGroups.count(); i++)
 	{
-		GroupsListWidget->addItem(m_filterGroups.at(i).Name());
+		TorrentGroup* group = m_filterGroups.at(i);
+		QTreeWidgetItem* item = new QTreeWidgetItem(QStringList() << group->name());
+		item->setIcon(0,pStyleEngine->guessMimeIcon(group->extentions()[0]));
+		item->setData(0, Qt::UserRole, QVariant::fromValue(group->uid()));
+		GroupsTreeWidget->addTopLevelItem(item);
+		m_torrentGroupsToUid.insert(group->uid(), group);
+		QList<TorrentGroup*> children = group->Children();
+		if (children.length() > 0)
+		{
+			AppendChildren(item, children);
+		}
 	}
-
-	GroupsListWidget->setSelectionMode(QAbstractItemView::ContiguousSelection);
+	GroupsTreeWidget->expandToDepth(1);
+	GroupsTreeWidget->setSelectionMode(QAbstractItemView::ContiguousSelection);
 }
 
 void SettingsDialog::FillDTTab()
@@ -262,10 +298,10 @@ void SettingsDialog::showSelectedGroup(int row)
 		return;
 	}
 
-	GroupForFileFiltering currentGroup = m_filterGroups.at(row);
-	newGroupNameEdit->setText(currentGroup.Name());
-	extensionsEdit->setText(currentGroup.Extensions());
-	groupSavePathEdit->setText(currentGroup.SavePath());
+	TorrentGroup* currentGroup = m_filterGroups.at(row);
+	newGroupNameEdit->setText(currentGroup->name());
+	extensionsEdit->setText(currentGroup->extentions().join("|"));
+	groupSavePathEdit->setText(currentGroup->savePath());
 }
 SettingsDialog::~SettingsDialog()
 {
@@ -280,7 +316,7 @@ void SettingsDialog::ApplySettings()
 
 	if (m_filterGroupsHaveChanges)
 	{
-		m_pSettings->SaveFilterGropups(m_filterGroups);
+		m_pTorrentGroupManager->RefreshFilteringGroups(m_filterGroups);
 	}
 
 	NotificationSystem::getInstance()->UpdateNotificationSettings();
@@ -311,7 +347,6 @@ void SettingsDialog::ApplySettingsToSession()
 }
 void SettingsDialog::addGroup()
 {
-	int foundRow = -1;
 	QString name = newGroupNameEdit->text();
 
 	if(name.isEmpty())
@@ -321,9 +356,9 @@ void SettingsDialog::addGroup()
 		return;
 	}
 
-	QString extensions = extensionsEdit->toPlainText();
+	QStringList extentions = extensionsEdit->toPlainText().split('|');
 
-	if(extensions.isEmpty())
+	if(extentions.isEmpty())
 	{
 		CustomMessageBox::warning(this, tr("STR_SETTINGS"),
 		                          tr("ERROR_NO_EXTENSIONS"));
@@ -345,17 +380,43 @@ void SettingsDialog::addGroup()
 		                          tr("ERROR_PATH_NOT_EXISTS"));
 		return;
 	}
+	QTreeWidgetItem* currentItem = GroupsTreeWidget->currentItem();
+	TorrentGroup* newGroup = new TorrentGroup(name, extentions, dir);
+	QTreeWidgetItem* child = new QTreeWidgetItem(QStringList() << newGroup->name());
+	StyleEngene* pStyleEngine = StyleEngene::getInstance();
+	child->setIcon(0, pStyleEngine->guessMimeIcon(extentions[0]));
+	child->setData(0, Qt::UserRole, QVariant::fromValue(newGroup->uid()));
 
-	for(int i = 0; i < m_filterGroups.count(); i++)
+	if (currentItem != NULL)
 	{
-		if(m_filterGroups.at(i).Name() == name)
+
+		QUuid groupUid = currentItem->data(0, Qt::UserRole).value<QUuid>();
+		if (!groupUid.isNull())
 		{
-			foundRow = i;
-			break;
+			
+			if (m_torrentGroupsToUid.contains(groupUid))
+			{
+				TorrentGroup* group = m_torrentGroupsToUid[groupUid];
+				group->addChild(newGroup);
+				m_torrentGroupsToUid.insert(newGroup->uid(), newGroup);
+			}
+			else
+			{
+				return;
+			}
+
+			currentItem->addChild(child);
 		}
 	}
+	else
+	{
+		m_filterGroups.append(newGroup);
+		m_torrentGroupsToUid.insert(newGroup->uid(), newGroup);
+		GroupsTreeWidget->addTopLevelItem(child);
+	}
 
-	if(foundRow >= 0)
+	onFilteringGroupsChanged();
+	/*if(foundRow >= 0)
 	{
 		if(QMessageBox::No == CustomMessageBox::warning(this, tr("STR_SETTINGS"),
 		        tr("SHURE_IN_CHANGING_GROUP %1").arg(name),
@@ -363,29 +424,51 @@ void SettingsDialog::addGroup()
 		{
 			return;
 		}
-	}
-	else
-	{
-		GroupsListWidget->addItem(name);
-	}
-
-	GroupForFileFiltering newfilterGroup = GroupForFileFiltering(name, extensions, dir);
-	foundRow > 0 ? m_filterGroups.replace(foundRow, newfilterGroup) : m_filterGroups.append(newfilterGroup);
+	}*/
+	
 }
 void SettingsDialog::removeGroup()
 {
-	if(GroupsListWidget->selectedItems().length() > 0)
+	QList<QTreeWidgetItem*> selectedItems = GroupsTreeWidget->selectedItems();
+	if (selectedItems.length() > 0)
 	{
-		QListWidgetItem* index = GroupsListWidget->selectedItems().first();
+		for (int i = 0; i < selectedItems.length();i++)
+		{
+			QTreeWidgetItem* item = selectedItems[i];
+			QUuid groupUid = item->data(0, Qt::UserRole).value<QUuid>();
+			QTreeWidgetItem* parent = item->parent();
+			QUuid parentUid = parent->data(0, Qt::UserRole).value<QUuid>();
+			if (!groupUid.isNull())
+			{
+				if (parentUid.isNull())
+				{
+					if (m_torrentGroupsToUid.contains(groupUid))
+					{
+						TorrentGroup* topLevelGroup = m_torrentGroupsToUid[groupUid];
+						m_filterGroups.removeAll(topLevelGroup);
+					}
+				}
+				else
+				{
+					if (m_torrentGroupsToUid.contains(parentUid))
+					{
+						m_torrentGroupsToUid[parentUid]->removeChild(m_torrentGroupsToUid[groupUid]);
+					}
+				}
+				delete parent->takeChild(parent->indexOfChild(item));
+			}
+
+		}
+		/*	QTreeWidgetItem* index = .first();
 
 		if(index != NULL)
 		{
-			QString name = index->text();
+			QString name = index->text(0);
 			int foundRow = -1;
 
 			for(int i = 0; i < m_filterGroups.count(); i++)
 			{
-				if(m_filterGroups.at(i).Name() == name)
+				if(m_filterGroups.at(i).name() == name)
 				{
 					foundRow = i;
 					break;
@@ -404,9 +487,11 @@ void SettingsDialog::removeGroup()
 			{
 				CustomMessageBox::warning(this, "Error", QString(tr("Unable to find %1")).arg(name));
 			}
-		}
+		}*/
+		onFilteringGroupsChanged();
 	}
 }
+
 void SettingsDialog::browseSavepathGroup()
 {
 	QString lastDir = m_pSettings->valueString("System", "LastSaveTorrentDir");
@@ -1219,7 +1304,7 @@ void SettingsDialog::onBrowseWatchStaticPath()
 void SettingsDialog::onFilteringGroupsChanged()
 {
 	m_filterGroupsHaveChanges = false;
-	QList<GroupForFileFiltering> originalGroups = m_pSettings->GetFileFilterGroups();
+	QList<TorrentGroup*> originalGroups = m_pTorrentGroupManager->GetTorrentGroups();
 
 	if (originalGroups.size() != m_filterGroups.size())
 	{
@@ -1229,7 +1314,7 @@ void SettingsDialog::onFilteringGroupsChanged()
 	{
 		for (int i = 0; i < m_filterGroups.size(); i++)
 		{
-			if (originalGroups[i] != m_filterGroups[i])
+			if (*originalGroups[i] != *m_filterGroups[i])
 			{
 				m_filterGroupsHaveChanges = true;
 				break;

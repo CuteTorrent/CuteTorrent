@@ -39,7 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <viewModel/FiltersViewModel.h>
 #include <gui/Controls/EditableHeaderView.h>
 #include <viewmodels/QSearchFilterModel.h>
-
+#include "TorrentGroupsManager.h"
 class Application;
 class FileViewModel;
 class FileViewSortProxyModel;
@@ -132,6 +132,7 @@ private:
 	QSearchDisplayModel* m_pSearchDisplayModel;
 	QSearchItemDelegate* m_pSearchItemDelegate;
 	TorrentManagerPtr m_pTorrentManager;
+	TorrentGroupsManagerPtr m_pTorrentGroupsManager;
 	QLineEdit* m_pTorrentSearchEdit;
 	QLineEdit* m_pSearchEdit;
 	PeerTableModel* m_pPeerTableModel;

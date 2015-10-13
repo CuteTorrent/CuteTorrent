@@ -2,6 +2,7 @@
 #pragma once
 #include <QtGui>
 #include "defs.h"
+#include "TorrentGroupsManager.h"
 enum TorrentFilterType
 {
 	ACTIVE,
@@ -18,7 +19,7 @@ private:
 	Q_OBJECT
 public:
 	QTorrentFilterProxyModel(QObject* parent = 0);
-	void setGroupFilter(QString groupName);
+	void setGroupFilter(QUuid groupName);
 	void setTorrentFilter(TorrentFilterType activityFilter);
 	void setTorrentSearchFilter(QString filter);
 private:
@@ -27,10 +28,10 @@ private:
 		GROUP,
 		TORRENT
 	};
-
+	TorrentGroupsManagerPtr m_pTorrentGroupsManager;
 	QMutex* m_pUpdateLocker;
 	InternalFilterType m_currentFilterType;
-	QString m_groupFilter;
+	QUuid m_groupFilter;
 	QRegExp m_torrentSearchFilter;
 	TorrentFilterType m_torrentFilter;
 protected:

@@ -2,6 +2,8 @@
 #define _FILETERS_VIEW_MODEL_INCLUDED
 
 #include <QAbstractItemModel>
+#include <TorrentGroup.h>
+class StyleEngene;
 class FilterTreeItem;
 class FiltersViewModel : public QAbstractItemModel
 {
@@ -20,14 +22,20 @@ public:
 	int columnCount(const QModelIndex& parent) const override;
 	QVariant data(const QModelIndex& index, int role) const override;
 	void Retranslate();
-	void UpdateGroupItems();
+
 	void UpdateIcons();
+public slots:
+	void UpdateGroupCounters();
+	void UpdateGroupItems();
 protected:
 
 	void timerEvent(QTimerEvent*) override;
 private:
+	FilterTreeItem* m_pGroupsItem;
 	int m_updateTimerID;
+	QMap<QUuid, FilterTreeItem*> m_filtersToUid;
 	QList<FilterTreeItem*> m_rootItems;
+	void AddGroups(StyleEngene* pStyleEngine, FilterTreeItem* groupsItem, QList<TorrentGroup*> groups);
 	void BuildTree();
 	void UpdateCounters();
 };

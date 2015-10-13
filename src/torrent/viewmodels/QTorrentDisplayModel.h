@@ -39,6 +39,7 @@ class Torrent;
 class TorrentManager;
 class QTorrentFilterProxyModel;
 class QTreeView;
+class StyleEngene;
 class QTorrentDisplayModel: public QAbstractListModel
 {
 	Q_OBJECT
@@ -82,6 +83,7 @@ class QTorrentDisplayModel: public QAbstractListModel
 	QSignalMapper* m_pGroupMapper;
 	QSignalMapper* m_pPriorityMapper;
 	QTorrentFilterProxyModel* m_pProxyFilterModel;
+	QMap<QUuid, QAction*> m_groupsUidToActions;
 	QString getFirstAvailibleFile(files_info& filesInfo);
 	bool checkAllMountable(QModelIndexList& indexes);
 	bool checkAllSuperSeed(QModelIndexList& indexes);
@@ -90,6 +92,7 @@ class QTorrentDisplayModel: public QAbstractListModel
 	bool checkAllQueueable(QModelIndexList& indexes);
 	void checkPausedResumed(QModelIndexList indexes, bool& isAllPaused, bool& isAllResumed, bool& hasPaused, bool& hasResumed);
 	int getCommonPriority(QModelIndexList& indexes);
+	void AddGroupsLevel(StyleEngene*, QList<TorrentGroup*>&, QMenu*);
 public:
 	QTorrentDisplayModel(QTreeView*, QTorrentFilterProxyModel*, QObject*);
 	~QTorrentDisplayModel();
@@ -132,10 +135,10 @@ public slots:
 	void MountDT();
 	void SetPriority(int prio);
 	void playInPlayer();
+	
 	void setSequentualDL();
 	void moveStorrage();
 	void SetSuperSeed();
-	void initSessionFinished();
 	void generateMagnetLink();
 	void changeGroup(const QString& group);
 	void setupContextMenu();

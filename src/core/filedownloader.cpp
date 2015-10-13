@@ -70,7 +70,7 @@ void FileDownloader::download(QUrl url, QList<QNetworkCookie> cookies)
 	m_pNetManager->get(request);
 }
 
-FileDownloaderPtr FileDownloader::getInstance()
+FileDownloaderPtr FileDownloader::getNewInstance()
 {
 	boost::shared_ptr<FileDownloader> instance = boost::make_shared<FileDownloader>();
 	return instance;

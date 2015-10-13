@@ -4,10 +4,13 @@
 #include "filedownloader.h"
 #include <gui/Dialogs/OpenTorrentDialog.h>
 #include "SearchResult.h"
-QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QObject* parent) : QAbstractListModel(parent), m_pSearchEngine(SearchEngine::getInstance()),
-	m_pTorrentDownloader(FileDownloader::getInstance())
+QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QSearchFilterModel* pSearchFilterModel, QObject* parent) 
+	: QAbstractListModel(parent)
+	, m_pTorrentDownloader(FileDownloader::getNewInstance())
+	, m_pSearchEngine(SearchEngine::getInstance())
 {
 	m_pTorrentListView = pTorrentListView;
+	m_pSearchFilterModel = pSearchFilterModel;
 	connect(m_pSearchEngine.get(), SIGNAL(GotResults()), this, SLOT(OnNewSearchResults()));
 	SearchItemsStorragePtr pItems = m_pSearchEngine->GetResults();
 	connect(pItems.get(), SIGNAL(reset()), this, SLOT(OnNewSearchResults()));
@@ -78,7 +81,7 @@ QVariant QSearchDisplayModel::data(const QModelIndex& index, int role /*= Qt::Di
 
 void QSearchDisplayModel::downloadTorrent()
 {
-	if (m_pTorrentListView->model() != this)
+	if (m_pTorrentListView->model() != m_pSearchFilterModel)
 	{
 		return;
 	}

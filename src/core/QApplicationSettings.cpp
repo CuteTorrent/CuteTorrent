@@ -192,8 +192,7 @@ void QApplicationSettings::SaveFilterGropups(QList<GroupForFileFiltering>& filte
 {
 	locker->lock();
 	settings->beginGroup("FileFiltering");
-	settings->remove("");
-
+	
 	for(int i = 0; i < filters.count(); i++)
 	{
 		GroupForFileFiltering group = filters.at(i);

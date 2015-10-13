@@ -28,6 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "TorrentCommon.h"
 #include "ui_OpenTorrentDialog.h"
 #include "GroupForFileFiltering.h"
+#include "TorrentGroup.h"
 #include "defs.h"
 
 class FileTreeModel;
@@ -49,7 +50,7 @@ private:
 	int64_t m_size;
 	QFileSystemModel* m_compliterModel;
 	bool m_bUseGroup;
-	QList<GroupForFileFiltering> m_lFilters;
+	QList<TorrentGroup*> m_lFilters;
 	bool validTorrent;
 	TorrentManagerPtr m_pTorrentManager;
 	QString m_torrentFilename;

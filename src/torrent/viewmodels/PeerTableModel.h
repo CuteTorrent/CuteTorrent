@@ -31,4 +31,6 @@ private:
 	void updatePeer(libtorrent::peer_info peerInfo);
 	QStandardItem* addPeer(libtorrent::peer_info peerInfo);
 };
+
+Q_DECLARE_METATYPE(libtorrent::peer_info)
 #endif

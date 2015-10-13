@@ -252,6 +252,17 @@ void CustomScriptSearchProvider::OnReplyReady(QNetworkReply* pReply)
 {
 	if (pReply->error() == QNetworkReply::NoError)
 	{
+		QUrl redirectionTarget = pReply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+
+		if (redirectionTarget.isValid() && m_requestType == GET)
+		{
+			m_pNetworkManager->get(QNetworkRequest(redirectionTarget));
+			return;
+		}
+		else if (redirectionTarget.isValid() && m_requestType == POST)
+		{
+			qCritical() << "Post redirects not supported! Report if you see this message.";
+		}
 		switch (m_responseType)
 		{
 			case HTML:

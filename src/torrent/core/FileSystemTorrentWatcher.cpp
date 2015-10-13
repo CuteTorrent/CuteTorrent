@@ -8,11 +8,12 @@
 #include <NotificationSystem.h>
 #include <helpers/StaticHelpers.h>
 #include "TorrentManager.h"
-
+#include <TorrentGroupsManager.h>
 FileSystemTorrentWatcher::FileSystemTorrentWatcher(QObject* parent)
 	: QObject(parent)
 	, m_pFileSystemWatcher(new QFileSystemWatcher(this))
 	, m_pSettings(QApplicationSettings::getInstance())
+	, m_pTorrentGroupManager(TorrentGroupsManager::getInstance())
 {
 	NotificationSystemPtr pNotificationSystem = NotificationSystem::getInstance();
 	connect(this, SIGNAL(Notify(int, QString, QVariant)), pNotificationSystem.get(), SLOT(OnNewNotification(int, QString, QVariant)));
@@ -98,14 +99,11 @@ void FileSystemTorrentWatcher::OnDirectoryChanged(const QString& path)
 						emit Notify(NotificationSystem::TORRENT_ERROR, StaticHelpers::translateLibTorrentError(ec), QVariant());
 					}
 
-					QList<GroupForFileFiltering> filters = pSettings->GetFileFilterGroups();
+					TorrentGroup* group = m_pTorrentGroupManager->GetGroupByExtentions(pTorrentInfo->baseSuffix);
 
-					foreach(GroupForFileFiltering filter, filters)
+					if (group != NULL)
 					{
-						if (filter.Contains(pTorrentInfo->baseSuffix))
-						{
-							savePath = filter.SavePath();
-						}
+						savePath = group->savePath();
 					}
 
 					if (savePath.isEmpty())

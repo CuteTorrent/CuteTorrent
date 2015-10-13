@@ -1,5 +1,8 @@
 ﻿#include "SettingsAPiController.h"
 #include "json/json.h"
+#include <TorrentGroupsManager.h>
+#include <QVariant>
+
 SettingsAPiController::SettingsAPiController(QObject* parent) : HttpRequestHandler("WebControl", parent), settings(QApplicationSettings::getInstance())
 {
 }
@@ -34,14 +37,14 @@ void SettingsAPiController::service(HttpRequest& request, HttpResponse& response
 		jSettings["low_prio_disk"] = settings->valueBool("Torrent", "low_prio_disk");
 		jSettings["use_read_cache"] = settings->valueString("Torrent", "use_read_cache");
 		QtJson::JsonArray jFilteringGroups;
-		QList<GroupForFileFiltering> filteringGroups = settings->GetFileFilterGroups();
+		QList<TorrentGroup*> groups = TorrentGroupsManager::getInstance()->GetTorrentGroups();
 
-		for(int i = 0; i < filteringGroups.count(); i++)
+		for (int i = 0; i < groups.count(); i++)
 		{
 			QtJson::JsonObject group;
-			group["name"] = filteringGroups[i].Name();
-			group["extensions"] = filteringGroups[i].Extensions();
-			group["path"] = filteringGroups[i].SavePath();
+			group["name"] = groups[i]->name();
+			group["extensions"] = groups[i]->extentions();
+			group["path"] = groups[i]->savePath();
 			jFilteringGroups.append(group);
 		}
 
@@ -78,15 +81,15 @@ void SettingsAPiController::service(HttpRequest& request, HttpResponse& response
 			settings->setValue("Torrent", "lock_files", settingsVal["lock_files"]);
 			settings->setValue("Torrent", "low_prio_disk", settingsVal["low_prio_disk"]);
 			settings->setValue("Torrent", "use_read_cache", settingsVal["use_read_cache"]);
-			QList<GroupForFileFiltering> filteringGroups;
+			QList<TorrentGroup*> filteringGroups;
 
 			for(int i = 0; i < groups.size(); i++)
 			{
 				QMap<QString, QVariant> groupData = groups[i].toMap();
-				filteringGroups.append(GroupForFileFiltering(groupData["name"].toString(), groupData["extensions"].toString(), groupData["path"].toString()));
+				filteringGroups.append(new TorrentGroup(groupData["name"].toString(), groupData["extensions"].toStringList(), groupData["path"].toString()));
 			}
 
-			settings->SaveFilterGropups(filteringGroups);
+			TorrentGroupsManager::getInstance()->RefreshFilteringGroups(filteringGroups);
 		}
 		else
 		{

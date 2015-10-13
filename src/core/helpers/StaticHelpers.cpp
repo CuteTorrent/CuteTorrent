@@ -26,6 +26,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "StyleEngene.h"
 #include <zlib.h>
 #include <float.h>
+#include <QDesktopServices>
+#include <QTime>
 QString StaticHelpers::toKbMbGb(size_type size, bool isSpped)
 {
 	float val = size;

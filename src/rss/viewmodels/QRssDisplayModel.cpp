@@ -13,7 +13,7 @@
 #include <NotificationSystem.h>
 
 QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent, bool autoUpdate) : QAbstractItemModel(parrent), m_pRssManager(RssManager::getInstance()),
-	m_pTorrentDownloader(FileDownloader::getInstance())
+	m_pTorrentDownloader(FileDownloader::getNewInstance())
 {
 	m_pItemsView = pItemsView;
 	m_pUdpateTimer = new QTimer(this);

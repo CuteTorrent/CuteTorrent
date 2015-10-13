@@ -34,6 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "libtorrent/alert_types.hpp"
 #include "libtorrent/session.hpp"
+#include <TorrentGroup.h>
 
 class QTemporaryFile;
 using namespace libtorrent;
@@ -62,14 +63,9 @@ class TorrentManager : public QObject, public Singleton<TorrentManager>
 	friend class Singleton<TorrentManager>;
 	Q_OBJECT
 signals:
-	void AddTorrentGui(Torrent*);
+	void TorrentAdded(Torrent*);
 	void Notify(int, QString, QVariant);
-	void initCompleted();
-	void TorrentRemove(QString);
-	void OnNewFeed();
-	void OnFeedDeleted();
-	void OnNewFeedItem();
-	void OnFeedChanged();
+	void TorrentRemoved(QString);
 protected:
 	bool MoveFiles(QString oldStyleDirPath, QString newStyleDirPath);
 	void timerEvent(QTimerEvent*) override;
@@ -100,9 +96,6 @@ private:
 	NotificationSystemPtr m_pNotificationSys;
 	QMutex m_alertMutex;
 	QWaitCondition m_alertsWaitCondition;
-	QVector<alert*> m_alerts;
-	void collectAlerts(std::auto_ptr<alert> a);
-	void getPendingAlerts(QVector<alert*>& out);
 private slots:
 	void dispatchPendingAlerts();
 public slots:
@@ -135,8 +128,8 @@ public:
 	opentorrent_info* GetTorrentInfo(QString filename, error_code& ec);
 	openmagnet_info* GetTorrentInfo(const torrent_handle& handle);
 
-	bool AddMagnet(torrent_handle h, QString& SavePath, QString group = "", QMap< QString, quint8> filepriorities = QMap<QString, quint8>(), AddTorrentFlags flags = 0);
-	Torrent* AddTorrent(QString& path, QString& save_path, error_code& ec, QString name = "", QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), QString group = "",
+	bool AddMagnet(torrent_handle h, QString& SavePath, TorrentGroup* group = NULL, QMap< QString, quint8> filepriorities = QMap<QString, quint8>(), AddTorrentFlags flags = 0);
+	Torrent* AddTorrent(QString& path, QString& save_path, error_code& ec, QString name = "", QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), TorrentGroup* group = NULL,
 	                    AddTorrentFlags flags = 0);
 	~TorrentManager();
 #if LIBTORRENT_VERSION_NUM >= 10000

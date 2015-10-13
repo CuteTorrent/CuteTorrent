@@ -29,9 +29,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "QApplicationSettings.h"
 #include "StyleEngene.h"
 #include "StaticHelpers.h"
+#include <TorrentGroupsManager.h>
 
 
-Torrent::Torrent(torrent_status hTorrent, QString group)
+Torrent::Torrent(torrent_status hTorrent, TorrentGroup* group)
 	: QObject(NULL)
 	, m_hasMedia(false)
 	, m_isPrevSeed(false)
@@ -40,7 +41,7 @@ Torrent::Torrent(torrent_status hTorrent, QString group)
 	, isMovingFileStorrage(false)
 {
 	m_hTorrent = hTorrent;
-
+	
 	if (!m_hTorrent.handle.is_valid())
 	{
 		qCritical() << "Invalid Torrent recived...";
@@ -53,7 +54,7 @@ Torrent::Torrent(torrent_status hTorrent, QString group)
 #else
 	    m_hTorrent.handle.get_torrent_info().files();
 #endif
-	this->group = group;
+	
 	std::vector<size_type> progress;
 	m_hTorrent.handle.file_progress(progress);
 
@@ -90,6 +91,16 @@ Torrent::Torrent(torrent_status hTorrent, QString group)
 	}
 
 	base_suffix = StaticHelpers::GetBaseSuffix(storrgae);
+	if (group == NULL)
+	{
+		group = TorrentGroupsManager::getInstance()->GetGroupByExtentions(base_suffix);
+	}
+	if (group != NULL)
+	{
+		m_groupName = group->name();
+		m_torrentGroupUid = group->uid();
+	}
+	
 	type = StyleEngene::getInstance()->gessMimeIconType(base_suffix);
 }
 
@@ -165,6 +176,19 @@ QString Torrent::GetErrorMessage() const
 
 	return "";
 }
+
+QUuid Torrent::GetGroupUid()
+{
+	return m_torrentGroupUid;
+}
+
+void Torrent::SetGroupUid(QUuid& uid)
+{
+	m_torrentGroupUid = uid;
+	m_groupName = "";
+	m_hTorrent.handle.save_resume_data();
+}
+
 bool Torrent::hasMetadata() const
 {
 	if(m_hTorrent.handle.is_valid())
@@ -763,6 +787,16 @@ int Torrent::GetQueuePosition() const
 	return m_hTorrent.queue_position;
 }
 
+void Torrent::SetPeerDownloadLimit(boost::asio::ip::tcp::endpoint ip, int limit)
+{
+	m_hTorrent.handle.set_peer_download_limit(ip, limit);
+}
+
+void Torrent::SetPeerUploadLimit(boost::asio::ip::tcp::endpoint ip, int limit)
+{
+	m_hTorrent.handle.set_peer_upload_limit(ip, limit);
+}
+
 void Torrent::GetPieceAvalibility(std::vector<int>& availibility)
 {
 	if (m_hTorrent.handle.is_valid())
@@ -930,14 +964,14 @@ QString Torrent::generateMagnetLink()
 	return QString::fromStdString(libtorrent::make_magnet_uri(m_hTorrent.handle));
 }
 
-QString Torrent::GetGroup()
+QString Torrent::GetGroupName()
 {
-	return group;
+	return m_groupName;
 }
 
 void Torrent::setGroup(QString newGroup)
 {
-	group = newGroup;
+	m_groupName = newGroup;
 	m_hTorrent.handle.save_resume_data();
 }
 

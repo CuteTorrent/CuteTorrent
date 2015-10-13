@@ -7,6 +7,7 @@ QTorrentFilterProxyModel::QTorrentFilterProxyModel(QObject* parent)
 	, m_pUpdateLocker(new QMutex())
 	, m_currentFilterType(TORRENT)
 	, m_torrentFilter(EMPTY)
+	, m_pTorrentGroupsManager(TorrentGroupsManager::getInstance())
 {
 	setDynamicSortFilter(true);
 }
@@ -22,16 +23,22 @@ bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex
 		if (pTorrent != NULL)
 		{
 			bool searchFilterAccept = m_torrentSearchFilter.indexIn(pTorrent->GetName()) > -1;
-
+			TorrentGroup* torrentGroup;
+			QUuid torrentUid;
 			switch (m_currentFilterType)
 			{
 				case GROUP:
-					if (m_groupFilter.isEmpty())
+					if (m_groupFilter.isNull())
 					{
 						return searchFilterAccept;
 					}
-
-					return pTorrent->GetGroup().compare(m_groupFilter) == 0 && searchFilterAccept;
+					torrentGroup = m_pTorrentGroupsManager->GetGroup(m_groupFilter);
+					if (torrentGroup == NULL)
+					{
+						return searchFilterAccept;
+					}
+					torrentUid = pTorrent->GetGroupUid();
+					return  (torrentGroup->uid() == torrentUid || torrentGroup->contains(torrentUid)) && searchFilterAccept;
 
 				case TORRENT:
 				{
@@ -101,7 +108,7 @@ bool QTorrentFilterProxyModel::lessThan(const QModelIndex& left, const QModelInd
 	return false;
 }
 
-void QTorrentFilterProxyModel::setGroupFilter(QString groupName)
+void QTorrentFilterProxyModel::setGroupFilter(QUuid groupName)
 {
 	QMutexLocker lockMutex(m_pUpdateLocker);
 	m_currentFilterType = GROUP;

@@ -71,7 +71,7 @@ template<typename T, typename... Args>
 QString StaticHelpers::CombinePathes(T first, Args& ... args)
 {
 	bool addSeparator = !QString(first).endsWith("/") || !QString(first).endsWith("\\");
-	return QDir::toNativeSeparators(QDir::cleanPath(QString(first) + (addSeparator ? QDir::separator() : QString("")) + CombinePathes(args...)));
+	return QDir::toNativeSeparators(QDir::cleanPath(first + (addSeparator ? QDir::separator() : QString("")) + CombinePathes(args...)));
 }
 
 template <typename T>

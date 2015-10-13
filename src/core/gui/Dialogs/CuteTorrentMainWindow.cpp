@@ -77,6 +77,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <viewModel/itemDelegate/IpItemDelegate.h>
 #include "InitializationDialog.h"
 #include <FaviconDownloader.h>
+#include <AddRssDwonloadRuleDialog.h>
 class Application;
 class ISerachProvider;
 class SearchResult;
@@ -102,6 +103,7 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	Application::setLanguageQt(m_pSettings->valueString("System", "Lang", "en_US"));
 	m_pStyleEngine = StyleEngene::getInstance();
 	m_pStyleEngine->setStyle(m_pSettings->valueString("System", "Style", "CuteTorrent"));
+	m_pTorrentGroupsManager = TorrentGroupsManager::getInstance();
 	setWindowModality(Qt::NonModal);
 	setupCustomeWindow();
 	m_pUpdateTimer = new QTimer(this);
@@ -110,13 +112,14 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	m_pTorrentFilterProxyModel = new QTorrentFilterProxyModel(this);
 	m_pTorrentDisplayModel = new QTorrentDisplayModel(m_pTorrentListView, m_pTorrentFilterProxyModel, this);
 	m_pTorrentFilterProxyModel->setSourceModel(m_pTorrentDisplayModel);
-	m_pSearchDisplayModel = new QSearchDisplayModel(m_pTorrentListView, this);
 	m_pSearchFilterModel = new QSearchFilterModel();
+	m_pSearchDisplayModel = new QSearchDisplayModel(m_pTorrentListView, m_pSearchFilterModel, this);
 	m_pSearchFilterModel->setSourceModel(m_pSearchDisplayModel);
 	m_pSearchItemDelegate = new QSearchItemDelegate(this);
 	m_pRssDisplayModel = new QRssDisplayModel(m_pTorrentListView, this);
 	m_pRssItemDelegate = new QRssItemDelegate(this);
 	m_pUpdateNotifier = new UpdateNotifier(this);
+	m_pFiltersViewModel = new FiltersViewModel(this);
 	boost::scoped_ptr<InitializationDialog> pDlg(new InitializationDialog(this));
 	pDlg->exec();
 	setAcceptDrops(true);
@@ -451,7 +454,6 @@ void CuteTorrentMainWindow::setupConnections()
 	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(UpdateStatusbar()));
 	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(UpdateTabWidget()));
 	connect(fileTableView, SIGNAL(customContextMenuRequested(const QPoint&)), m_pFileViewModel, SLOT(FileTabContextMenu(const QPoint&)));
-	connect(m_pTorrentManager.get(), SIGNAL(initCompleted()), m_pTorrentDisplayModel, SLOT(initSessionFinished()));
 	connect(m_pGroupTreeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)), this, SLOT(ChnageTorrentFilter()));
 	connect(m_pStyleEngine, SIGNAL(styleChanged()), this, SLOT(initWindowIcons()));
 	connect(m_pStyleEngine, SIGNAL(styleChanged()), m_pTorrentDisplayModel, SLOT(setupContextMenu()));
@@ -964,7 +966,6 @@ void CuteTorrentMainWindow::OpenSettingsDialog()
 	boost::shared_ptr<SettingsDialog> dlg(new SettingsDialog(this));
 	connect(dlg.get(), SIGNAL(needRetranslate()), this, SLOT(Retranslate()));
 	dlg->exec();
-	m_pFiltersViewModel->UpdateGroupItems();
 	m_pGroupTreeView->expandToDepth(0);
 	setupKeyMappings();
 	UpdateTabWidget();
@@ -1127,7 +1128,14 @@ void CuteTorrentMainWindow::setupFileTabel()
 void CuteTorrentMainWindow::ProcessMagnet()
 {
 	bool ok;
-	QString magnetLink = QInputDialog::getText(this, tr("MAGNET_LINK_DLG"), tr("MAGNET_LINK:"), QLineEdit::Normal, "", &ok);
+	const QClipboard *clipboard = QApplication::clipboard();
+	const QMimeData *mimeData = clipboard->mimeData();
+	QString clipboardMagentLink;
+	if (mimeData->hasText())
+	{
+		clipboardMagentLink = mimeData->text();
+	}
+	QString magnetLink = QInputDialog::getText(this, tr("MAGNET_LINK_DLG"), tr("MAGNET_LINK:"), QLineEdit::Normal, clipboardMagentLink, &ok);
 
 	if (ok && !magnetLink.isEmpty())
 	{
@@ -1318,10 +1326,9 @@ void CuteTorrentMainWindow::StopSelected()
 
 void CuteTorrentMainWindow::setupGroupTreeWidget()
 {
-	m_pFiltersViewModel = new FiltersViewModel(this);
 	m_pGroupTreeView->setModel(m_pFiltersViewModel);
 	m_pGroupTreeView->resizeColumnToContents(0);
-	m_pGroupTreeView->expandAll();
+	m_pGroupTreeView->expandToDepth(0);
 }
 #ifdef Q_WS_WIN
 void CuteTorrentMainWindow::setupTasksCategory()
@@ -1354,7 +1361,7 @@ void CuteTorrentMainWindow::ChnageTorrentFilter()
 	{
 		case GROUP_FILTER_TYPE:
 		{
-			QString gropupFilter = current.data(FiltersViewModel::FilterRole).toString();
+			QUuid gropupFilter = current.data(FiltersViewModel::FilterRole).value<QUuid>();
 			m_pTorrentFilterProxyModel->setGroupFilter(gropupFilter);
 			switchToTorrentsModel();
 			break;
@@ -1858,7 +1865,7 @@ void CuteTorrentMainWindow::OnQuit()
 	{
 		m_pTorrentManager->SaveSession();
 	}
-
+	m_pTorrentGroupsManager->SaveGroups();
 	RssManagerPtr pRssManager = RssManager::getInstance();
 	pRssManager->SaveFeeds();
 	pRssManager->SaveDownloadRules();

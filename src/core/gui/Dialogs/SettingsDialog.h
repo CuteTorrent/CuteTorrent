@@ -31,6 +31,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "RconCommon.h"
 #include <collections/ObservableList.h>
 #include "SchedulerTask.h"
+#include <TorrentGroupsManager.h>
+#include <boost/smart_ptr/scoped_ptr.hpp>
 class SettingsPropertyMapper;
 class RconWebService;
 class TorrentTracker;
@@ -63,14 +65,17 @@ private:
 	ObservableList<RssDownloadRule*> m_downloadRulesCopy;
 	ObservableList<QUuid> m_deletedRules;
 	QApplicationSettingsPtr m_pSettings;
-	ObservableList<GroupForFileFiltering> m_filterGroups;
+	ObservableList<TorrentGroup*> m_filterGroups;
+	QMap<QUuid, TorrentGroup*> m_torrentGroupsToUid;
 	ObservableList<SchedulerTask> m_schedulerTasks;
 	TorrentTrackerPtr m_pTracker;
 	RconWebServicePtr m_pRcon;
+	TorrentGroupsManagerPtr m_pTorrentGroupManager;
 	QAction* editRssRule, *deleteRssRule;
 	bool m_filterGroupsHaveChanges;
 	bool m_schedulerTasksHaveChanges;
 	bool m_rssDownloadRulesHaveChanges;
+	void AppendChildren(QTreeWidgetItem* item, QList<TorrentGroup*>& children);
 	void FillFilteringGroups();
 	void FillGeneralTab();
 	void FillHDDTab();

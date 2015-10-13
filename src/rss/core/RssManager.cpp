@@ -11,9 +11,11 @@
 #include "MetaDataDownloadWaiter.h"
 #include "RssItem.h"
 #include "EmailNotifier.h"
+#include <TorrentGroupsManager.h>
+
 RssManager::RssManager(QObject* parent) : QObject(parent)
 {
-	m_pTorrentDownloader = FileDownloader::getInstance();
+	m_pTorrentDownloader = FileDownloader::getNewInstance();
 	m_pNotificationSystem = NotificationSystem::getInstance();
 	m_pSettings = QApplicationSettings::getInstance();
 	QTimer::singleShot(500, this, SLOT(LoadFeeds()));
@@ -434,14 +436,11 @@ QString RssManager::gessSavePath(RssDownloadRule* downloadRule, QString base_suf
 	}
 	else
 	{
-		QList<GroupForFileFiltering> filters = pSettings->GetFileFilterGroups();
+		TorrentGroup* group = TorrentGroupsManager::getInstance()->GetGroupByExtentions(base_suffix);
 
-		foreach(GroupForFileFiltering filter, filters)
+		if (group != NULL)
 		{
-			if (filter.Contains(base_suffix))
-			{
-				return filter.SavePath();
-			}
+			return group->savePath();
 		}
 	}
 
