@@ -3164,7 +3164,7 @@ Download: %3</source>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1312"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1887"/>
         <source>ADD_CHANGE_GROUP</source>
-        <translation>Добавить\Изменить имя группы</translation>
+        <translation>Добавить\Изменить группу</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1394"/>
@@ -3976,19 +3976,19 @@ Download: %3</source>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1335"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1895"/>
         <source>GROUP_EXTENTIONS</source>
-        <translation type="unfinished"></translation>
+        <translation>Расширения</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1369"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1903"/>
         <source>GROUP_NAME</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1401"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1908"/>
         <source>UPDATE_GROUP</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1493"/>
@@ -4625,25 +4625,25 @@ ERROR: %2</source>
         <location filename="../../GeneratedFiles/ui_SpeedLimitDialog.h" line="144"/>
         <location filename="../../GeneratedFiles/ui_SpeedLimitDialog.h" line="146"/>
         <source>SPEED_LIMIT_DIALOG</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничение скорости</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SpeedLimitDialog.ui" line="166"/>
         <location filename="../../GeneratedFiles/ui_SpeedLimitDialog.h" line="147"/>
         <source>LIMIT</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничение</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SpeedLimitDialog.cpp" line="15"/>
         <location filename="../../core/gui/Dialogs/SpeedLimitDialog.cpp" line="16"/>
         <source>UPLOAD_LIMIT</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничение отдачи</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SpeedLimitDialog.cpp" line="21"/>
         <location filename="../../core/gui/Dialogs/SpeedLimitDialog.cpp" line="22"/>
         <source>DOWNLOAD_LIMIT</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничение загрузки</translation>
     </message>
 </context>
 <context>

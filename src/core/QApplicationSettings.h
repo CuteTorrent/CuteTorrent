@@ -44,8 +44,8 @@ public:
 	~QApplicationSettings();
 	void ReedSettings();
 	QVariant value(const QString& group, const QString& key, const QVariant& defaultVal = QVariant(QVariant::Invalid));
-	void SaveFilterGropups(QList<GroupForFileFiltering>&);
-	QList<GroupForFileFiltering> GetFileFilterGroups();
+	Q_DECL_DEPRECATED void SaveFilterGropups(QList<GroupForFileFiltering>&);
+	Q_DECL_DEPRECATED QList<GroupForFileFiltering> GetFileFilterGroups();
 	QStringList GetGroupNames();
 	QList<SchedulerTask> GetSchedullerQueue();
 	void SaveSchedullerQueue(QList<SchedulerTask>&);

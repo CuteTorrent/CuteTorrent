@@ -775,7 +775,7 @@ Torrent* TorrentManager::AddTorrent(QString& path, QString& save_path, error_cod
 		for (int i = 0; i < filesCount; i++)
 		{
 			file_entry file = storrage.at(i);
-			QString filePath = QDir::toNativeSeparators(file.path.c_str());
+			QString filePath = QDir::toNativeSeparators(QString::fromUtf8(file.path.c_str()));
 
 			if (filePriorities.contains(filePath))
 			{
@@ -783,7 +783,7 @@ Torrent* TorrentManager::AddTorrent(QString& path, QString& save_path, error_cod
 			}
 			else
 			{
-				filepriorities.push_back(1);
+				filepriorities.push_back(4);
 			}
 		}
 
@@ -1487,18 +1487,20 @@ bool TorrentManager::AddMagnet(torrent_handle h, QString& SavePath, TorrentGroup
 
 		for (int i = 0; i < storrage.num_files(); i++)
 		{
-			if (filePriorities.contains(QDir::toNativeSeparators(storrage.file_path(i).c_str())))
+			file_entry file = storrage.at(i);
+			QString filePath = QDir::toNativeSeparators(QString::fromUtf8(file.path.c_str()));
+
+			if (filePriorities.contains(filePath))
 			{
-				filepriorities.push_back(filePriorities[storrage.file_path(i).c_str()]);
+				filepriorities.push_back(filePriorities[filePath]);
 			}
 			else
 			{
-				filepriorities.push_back(7);
+				filepriorities.push_back(4);
 			}
 		}
 
 		h.prioritize_files(filepriorities);
-		filePriorities.~QMap();
 	}
 
 	std::string save_path =

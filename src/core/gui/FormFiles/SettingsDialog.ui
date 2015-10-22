@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>811</width>
+    <width>799</width>
     <height>407</height>
    </rect>
   </property>
@@ -190,7 +190,7 @@ QListView::item{
          <enum>QListView::Adjust</enum>
         </property>
         <property name="currentRow">
-         <number>-1</number>
+         <number>0</number>
         </property>
         <item>
          <property name="text">
@@ -254,7 +254,7 @@ QListView::item{
       <item row="0" column="1">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>4</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="torrentTab">
          <layout class="QGridLayout" name="gridLayout_22">
@@ -1572,19 +1572,6 @@ QListView::item{
             </layout>
            </widget>
           </item>
-          <item row="0" column="2" rowspan="2">
-           <spacer name="horizontalSpacer_6">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
           <item row="2" column="0">
            <spacer name="verticalSpacer_2">
             <property name="orientation">
@@ -1602,43 +1589,6 @@ QListView::item{
         </widget>
         <widget class="QWidget" name="schedulingTab">
          <layout class="QGridLayout" name="gridLayout_26">
-          <item row="0" column="1">
-           <widget class="QComboBox" name="tasksComboBox">
-            <property name="maximumSize">
-             <size>
-              <width>150</width>
-              <height>16777215</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_14">
-            <property name="maximumSize">
-             <size>
-              <width>150</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>ACTIONS</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QPushButton" name="addTaskButton">
-            <property name="text">
-             <string>ADD_BUTTON</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QPushButton" name="deleteTaskButton">
-            <property name="text">
-             <string>DELETE_BUTTON</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0" colspan="4">
            <widget class="QGroupBox" name="groupBox_11">
             <property name="title">
@@ -1762,32 +1712,56 @@ QListView::item{
             <zorder>calendarWidget</zorder>
            </widget>
           </item>
-          <item row="0" column="4">
-           <spacer name="horizontalSpacer_8">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
+          <item row="0" column="1">
+           <widget class="QComboBox" name="tasksComboBox">
+            <property name="maximumSize">
              <size>
-              <width>40</width>
-              <height>20</height>
+              <width>150</width>
+              <height>16777215</height>
              </size>
             </property>
-           </spacer>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_14">
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>ACTIONS</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="addTaskButton">
+            <property name="text">
+             <string>ADD_BUTTON</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QPushButton" name="deleteTaskButton">
+            <property name="text">
+             <string>DELETE_BUTTON</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
         <widget class="QWidget" name="webControllTab">
          <layout class="QGridLayout" name="gridLayout_27">
-          <item row="0" column="1">
-           <spacer name="horizontalSpacer_7">
+          <item row="1" column="0">
+           <spacer name="verticalSpacer_8">
             <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+             <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
-              <height>20</height>
+              <width>20</width>
+              <height>40</height>
              </size>
             </property>
            </spacer>
@@ -1956,19 +1930,6 @@ QListView::item{
              </item>
             </layout>
            </widget>
-          </item>
-          <item row="1" column="0">
-           <spacer name="verticalSpacer_8">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </widget>
@@ -2185,8 +2146,8 @@ QListView::item{
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>98</width>
-               <height>28</height>
+               <width>694</width>
+               <height>342</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_19"/>
@@ -2621,6 +2582,38 @@ QListView::item{
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>GroupsTreeWidget</sender>
+   <signal>currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)</signal>
+   <receiver>SettingsDialog</receiver>
+   <slot>showSelectedGroup(QTreeWidgetItem*,QTreeWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>277</x>
+     <y>181</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>405</x>
+     <y>203</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>updateGroupButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SettingsDialog</receiver>
+   <slot>editGroup()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>583</x>
+     <y>307</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>405</x>
+     <y>203</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>proxySwitcher()</slot>
@@ -2633,7 +2626,7 @@ QListView::item{
   <slot>removeGroup()</slot>
   <slot>showCurrenttrackerSettings()</slot>
   <slot>showHint()</slot>
-  <slot>showSelectedGroup(int)</slot>
+  <slot>showSelectedGroup(QTreeWidgetItem*,QTreeWidgetItem*)</slot>
   <slot>SetDate()</slot>
   <slot>AddTask()</slot>
   <slot>DeleteTask()</slot>
@@ -2648,5 +2641,6 @@ QListView::item{
   <slot>onImportRssRules()</slot>
   <slot>onBrowseWatchDir()</slot>
   <slot>onBrowseWatchStaticPath()</slot>
+  <slot>editGroup()</slot>
  </slots>
 </ui>

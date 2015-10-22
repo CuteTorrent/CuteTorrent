@@ -71,6 +71,15 @@ void TorrentGroupsManager::LoadGroups()
 	}
 }
 
+void TorrentGroupsManager::customEvent(QEvent* event)
+{
+	if (event->type() == TorrentChangedGroupEvent::TORRENT_CHANGED_GROUP_EVENT)
+	{
+		emit TorrentChangedGroup();
+	}
+}
+
+
 QList<TorrentGroup*> TorrentGroupsManager::GetTorrentGroups()
 {
 	return m_torrentGroups;

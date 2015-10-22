@@ -35,7 +35,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "StaticHelpers.h"
 #include "defs.h"
 #include <TorrentGroupsManager.h>
-
+#include "FiltersViewModel.h"
+#include "AddRssDwonloadRuleDialog.h"
 OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags)
 	: BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize, parent)
 	, m_size(0)
@@ -45,6 +46,12 @@ OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags)
 	setupUi(this);
 	setupCustomWindow();
 	setupWindowIcons();
+	GroupComboBox = new TreeBox(this);
+	gridLayout->addWidget(GroupComboBox, 1, 0, 1, 1);
+	m_pGroupsModel = new FiltersViewModel(FiltersViewModel::Groups, this);
+	GroupComboBox->setModel(m_pGroupsModel);
+	GroupComboBox->setCurrentIndex(-1);
+	connect(GroupComboBox, SIGNAL(currentIndexChanged(int)), SLOT(ChangeGroup()));
 	m_pTorrentManager = TorrentManager::getInstance();
 	QCompleter* pathComplitter = new QCompleter(this);
 	m_compliterModel = new QFileSystemModel(pathComplitter);
@@ -103,33 +110,25 @@ void OpenTorrentDialog::FillData(opentorrent_info* info)
 
 	if(!info->baseSuffix.isEmpty())
 	{
-		QApplicationSettingsPtr settings = QApplicationSettings::getInstance();
-		m_lFilters = TorrentGroupsManager::getInstance()->GetTorrentGroups();
-		int selected = -1;
-
-		for(int i = 0; i < m_lFilters.count(); i++)
+		TorrentGroup* pTorrentGroup = TorrentGroupsManager::getInstance()->GetGroupByExtentions(info->baseSuffix);
+		if (pTorrentGroup != NULL)
 		{
-			GroupComboBox->addItem(m_lFilters[i]->name());
-
-			if (m_lFilters.at(i)->extentions().contains(info->baseSuffix) && selected < 0)
+			pathEdit->setText(pTorrentGroup->savePath());
+			QModelIndex groupIndex = m_pGroupsModel->index(pTorrentGroup->uid());
+			if (groupIndex.isValid())
 			{
-				selected = i;
-				QString path = m_lFilters.at(i)->savePath();
-				m_compliterModel->setRootPath(path);
-				pathEdit->setText(path);
+				GroupComboBox->setCurrentIndex(groupIndex);
 			}
-		}
-
-		if(selected >= 0)
-		{
-			GroupComboBox->setCurrentIndex(selected);
+			else
+			{
+				qDebug() << "Invalid QModelIndex recived for group" << pTorrentGroup->name() ;
+			}
 		}
 		else
 		{
-			QString lastDir = settings->valueString("System", "LastSaveTorrentDir", QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation));
-			pathEdit->setText(lastDir);
-			GroupComboBox->setCurrentIndex(-1);
+			qDebug() << "No group found for ext. " << info->baseSuffix;
 		}
+		
 	}
 }
 
@@ -201,8 +200,8 @@ bool OpenTorrentDialog::AccepTorrent()
 	if(validTorrent)
 	{
 		QMap<QString, quint8> filePriorities = m_pFileTreeModel->getFilePiorites();
-		QList<unsigned char> values = filePriorities.values();
-
+		QList<quint8> values = filePriorities.values();
+		qDebug() << filePriorities;
 		if (values.count(0) == values.size())
 		{
 			CustomMessageBox::critical(this, "Adding torrent Error", tr("SELECT_AT_LEAST_ONE_FILE"));
@@ -210,8 +209,9 @@ bool OpenTorrentDialog::AccepTorrent()
 		}
 
 		error_code ec;
-		int groupIndex = GroupComboBox->currentIndex();
-		TorrentGroup* group = groupIndex >= 0 ? m_lFilters[groupIndex] : NULL;
+		QModelIndex groupIndex = GroupComboBox->currentIndex();
+		QUuid groupUid = groupIndex.data(FiltersViewModel::FilterRole).value<QUuid>();
+		TorrentGroup* group = TorrentGroupsManager::getInstance()->GetGroup(groupUid);
 		TorrentManager::AddTorrentFlags flags = static_cast<TorrentManager::AddTorrentFlags>(BuildFlags());
 		QString savePath = pathEdit->displayText();
 
@@ -236,10 +236,20 @@ bool OpenTorrentDialog::AccepTorrent()
 
 void OpenTorrentDialog::ChangeGroup()
 {
-	if(GroupComboBox->currentIndex() >= 0 && GroupComboBox->currentIndex() < m_lFilters.length())
+	QModelIndex index = GroupComboBox->view()->currentIndex();
+
+	if (index.isValid())
 	{
-		pathEdit->setText(m_lFilters[GroupComboBox->currentIndex()]->savePath());
-		m_bUseGroup = true;
+		QUuid groupUid = index.data(FiltersViewModel::FilterRole).value<QUuid>();
+		if (!groupUid.isNull())
+		{
+			TorrentGroup* pGroup = TorrentGroupsManager::getInstance()->GetGroup(groupUid);
+			if (pGroup != NULL)
+			{
+				pathEdit->setText(pGroup->savePath());
+			}
+		}
+			
 	}
 }
 

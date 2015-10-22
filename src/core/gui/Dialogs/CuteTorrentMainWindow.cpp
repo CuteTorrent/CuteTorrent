@@ -119,7 +119,7 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	m_pRssDisplayModel = new QRssDisplayModel(m_pTorrentListView, this);
 	m_pRssItemDelegate = new QRssItemDelegate(this);
 	m_pUpdateNotifier = new UpdateNotifier(this);
-	m_pFiltersViewModel = new FiltersViewModel(this);
+	m_pFiltersViewModel = new FiltersViewModel(FiltersViewModel::All, this);
 	boost::scoped_ptr<InitializationDialog> pDlg(new InitializationDialog(this));
 	pDlg->exec();
 	setAcceptDrops(true);

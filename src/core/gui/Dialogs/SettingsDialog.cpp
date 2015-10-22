@@ -286,22 +286,22 @@ void SettingsDialog::FillWebUITab()
 	UpdateWebUILaunchButtons();
 }
 
-void SettingsDialog::showSelectedGroup(int row)
+void SettingsDialog::showSelectedGroup(QTreeWidgetItem* current, QTreeWidgetItem* previous)
 {
-	if(row > m_filterGroups.count())
+	if (current == NULL)
 	{
 		return;
 	}
-
-	if(row < 0)
+	QUuid groupUid = current->data(0, Qt::UserRole).value<QUuid>();
+	if (!groupUid.isNull() && m_torrentGroupsToUid.contains(groupUid))
 	{
-		return;
+		TorrentGroup* currentGroup = m_torrentGroupsToUid[groupUid];
+		newGroupNameEdit->setText(currentGroup->name());
+		extensionsEdit->setText(currentGroup->extentions().join("|"));
+		groupSavePathEdit->setText(currentGroup->savePath());
 	}
 
-	TorrentGroup* currentGroup = m_filterGroups.at(row);
-	newGroupNameEdit->setText(currentGroup->name());
-	extensionsEdit->setText(currentGroup->extentions().join("|"));
-	groupSavePathEdit->setText(currentGroup->savePath());
+	
 }
 SettingsDialog::~SettingsDialog()
 {
@@ -416,15 +416,7 @@ void SettingsDialog::addGroup()
 	}
 
 	onFilteringGroupsChanged();
-	/*if(foundRow >= 0)
-	{
-		if(QMessageBox::No == CustomMessageBox::warning(this, tr("STR_SETTINGS"),
-		        tr("SHURE_IN_CHANGING_GROUP %1").arg(name),
-		        QMessageBox::No | QMessageBox::Yes))
-		{
-			return;
-		}
-	}*/
+	
 	
 }
 void SettingsDialog::removeGroup()
@@ -459,35 +451,65 @@ void SettingsDialog::removeGroup()
 			}
 
 		}
-		/*	QTreeWidgetItem* index = .first();
+		onFilteringGroupsChanged();
+	}
+}
 
-		if(index != NULL)
+void SettingsDialog::editGroup()
+{
+	QString name = newGroupNameEdit->text();
+
+	if (name.isEmpty())
+	{
+		CustomMessageBox::warning(this, tr("STR_SETTINGS"),
+			tr("ERROR_GROUP_NAME_NOT_SET"));
+		return;
+	}
+
+	QStringList extentions = extensionsEdit->toPlainText().split('|');
+
+	if (extentions.isEmpty())
+	{
+		CustomMessageBox::warning(this, tr("STR_SETTINGS"),
+			tr("ERROR_NO_EXTENSIONS"));
+		return;
+	}
+
+	QString dir = groupSavePathEdit->text();
+
+	if (dir.isEmpty())
+	{
+		CustomMessageBox::warning(this, tr("STR_SETTINGS"),
+			tr("ERROR_NO_PATH"));
+		return;
+	}
+
+	if (!QDir(dir).exists())
+	{
+		CustomMessageBox::warning(this, tr("STR_SETTINGS"),
+			tr("ERROR_PATH_NOT_EXISTS"));
+		return;
+	}
+	QTreeWidgetItem* currentItem = GroupsTreeWidget->currentItem();
+
+	if (currentItem != NULL)
+	{
+
+		QUuid groupUid = currentItem->data(0, Qt::UserRole).value<QUuid>();
+		if (!groupUid.isNull())
 		{
-			QString name = index->text(0);
-			int foundRow = -1;
 
-			for(int i = 0; i < m_filterGroups.count(); i++)
+			if (m_torrentGroupsToUid.contains(groupUid))
 			{
-				if(m_filterGroups.at(i).name() == name)
-				{
-					foundRow = i;
-					break;
-				}
+				TorrentGroup* group = m_torrentGroupsToUid[groupUid];
+				group->setName(name);
+				group->setExtentions(extentions);
+				group->setSavePath(dir);
+				currentItem->setText(0,name);
+				StyleEngene* pStyleEngine = StyleEngene::getInstance();
+				currentItem->setIcon(0, pStyleEngine->guessMimeIcon(extentions[0]));
 			}
-
-			if(foundRow >= 0)
-			{
-				newGroupNameEdit->setText("");
-				extensionsEdit->setText("");
-				groupSavePathEdit->setText("");
-				m_filterGroups.removeAt(foundRow);
-				delete index;
-			}
-			else
-			{
-				CustomMessageBox::warning(this, "Error", QString(tr("Unable to find %1")).arg(name));
-			}
-		}*/
+		}
 		onFilteringGroupsChanged();
 	}
 }

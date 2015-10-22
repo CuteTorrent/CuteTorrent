@@ -856,6 +856,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_TorrentGroupsManager.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\gui\Controls\CheckableMenu.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -1087,12 +1090,6 @@
     <CustomBuild Include="core\zip\quaziodevice.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="Resources\translations\cutetorrent_en_US.ts">
-      <Filter>Translation Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Resources\translations\cutetorrent_ru_RU.ts">
-      <Filter>Translation Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="torrent\core\FileSystemTorrentWatcher.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
@@ -1184,6 +1181,12 @@
     <None Include="..\UpdateInfo\version" />
     <None Include="search\dataModels\SerachResult.h">
       <Filter>Generated Files</Filter>
+    </None>
+    <None Include="Resources\translations\cutetorrent_en_US.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="Resources\translations\cutetorrent_ru_RU.ts">
+      <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1544,6 +1547,12 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="core\TorrentGroup.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\gui\Controls\CheckableMenu.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\gui\Controls\TreeBox.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

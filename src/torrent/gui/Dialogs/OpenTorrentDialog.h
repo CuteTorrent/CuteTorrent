@@ -30,6 +30,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "GroupForFileFiltering.h"
 #include "TorrentGroup.h"
 #include "defs.h"
+#include <TreeBox.h>
+#include <viewModel/FiltersViewModel.h>
 
 class FileTreeModel;
 
@@ -47,10 +49,11 @@ public:
 	void setCheckedValue(bool val);
 	int exec();
 private:
+	TreeBox* GroupComboBox;
+	FiltersViewModel* m_pGroupsModel;
 	int64_t m_size;
 	QFileSystemModel* m_compliterModel;
 	bool m_bUseGroup;
-	QList<TorrentGroup*> m_lFilters;
 	bool validTorrent;
 	TorrentManagerPtr m_pTorrentManager;
 	QString m_torrentFilename;
@@ -77,6 +80,4 @@ private slots:
 
 	void OnCheckAll();
 	void OnUncheckAll();
-
 };
-

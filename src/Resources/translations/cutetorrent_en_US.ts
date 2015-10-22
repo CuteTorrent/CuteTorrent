@@ -3984,19 +3984,19 @@ Download: %3</translation>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1335"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1895"/>
         <source>GROUP_EXTENTIONS</source>
-        <translation type="unfinished"></translation>
+        <translation>Extentions</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1369"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1903"/>
         <source>GROUP_NAME</source>
-        <translation type="unfinished"></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1401"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1908"/>
         <source>UPDATE_GROUP</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1493"/>
@@ -4633,25 +4633,25 @@ Error: %2</translation>
         <location filename="../../GeneratedFiles/ui_SpeedLimitDialog.h" line="144"/>
         <location filename="../../GeneratedFiles/ui_SpeedLimitDialog.h" line="146"/>
         <source>SPEED_LIMIT_DIALOG</source>
-        <translation type="unfinished"></translation>
+        <translation>Speed Limit</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SpeedLimitDialog.ui" line="166"/>
         <location filename="../../GeneratedFiles/ui_SpeedLimitDialog.h" line="147"/>
         <source>LIMIT</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SpeedLimitDialog.cpp" line="15"/>
         <location filename="../../core/gui/Dialogs/SpeedLimitDialog.cpp" line="16"/>
         <source>UPLOAD_LIMIT</source>
-        <translation type="unfinished"></translation>
+        <translation>Upload Limit</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SpeedLimitDialog.cpp" line="21"/>
         <location filename="../../core/gui/Dialogs/SpeedLimitDialog.cpp" line="22"/>
         <source>DOWNLOAD_LIMIT</source>
-        <translation type="unfinished"></translation>
+        <translation>Download Limit</translation>
     </message>
 </context>
 <context>

@@ -9,14 +9,23 @@ class FiltersViewModel : public QAbstractItemModel
 {
 	Q_OBJECT
 public:
+	enum Mode
+	{
+		Torrents = 0x001,
+		Groups = 0x002,
+		Rss = 0x004,
+		Search = 0x008,
+		All = Torrents| Groups | Rss | Search
+	};
 	enum FilterRoles
 	{
 		FilterTypeRole = Qt::UserRole + 1,
 		FilterRole
 	};
-	explicit FiltersViewModel(QObject* parent = NULL);
+	explicit FiltersViewModel(Mode mode,QObject* parent = NULL);
 	~FiltersViewModel();
 	QModelIndex index(int row, int column, const QModelIndex& parent) const override;
+	QModelIndex index(QUuid groupUid);
 	QModelIndex parent(const QModelIndex& child) const override;
 	int rowCount(const QModelIndex& parent) const override;
 	int columnCount(const QModelIndex& parent) const override;
@@ -31,11 +40,13 @@ protected:
 
 	void timerEvent(QTimerEvent*) override;
 private:
+	Mode m_mode;
 	FilterTreeItem* m_pGroupsItem;
 	int m_updateTimerID;
-	QMap<QUuid, FilterTreeItem*> m_filtersToUid;
+	QMap<QUuid, FilterTreeItem*> m_groupFiltersToUid;
+	QMap<QUuid, QModelIndex> m_groupIndexToUid;
 	QList<FilterTreeItem*> m_rootItems;
-	void AddGroups(StyleEngene* pStyleEngine, FilterTreeItem* groupsItem, QList<TorrentGroup*> groups);
+	void AddGroups(StyleEngene* pStyleEngine, FilterTreeItem* groupsItem, QList<TorrentGroup*> groups, QModelIndex groupIndex);
 	void BuildTree();
 	void UpdateCounters();
 };

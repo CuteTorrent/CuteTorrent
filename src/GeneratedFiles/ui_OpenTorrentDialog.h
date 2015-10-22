@@ -14,7 +14,6 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
 #include <QtGui/QDialog>
 #include <QtGui/QGridLayout>
 #include <QtGui/QGroupBox>
@@ -43,7 +42,6 @@ public:
     QGridLayout *gridLayout_3;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
-    QComboBox *GroupComboBox;
     QLineEdit *pathEdit;
     QLabel *label;
     QPushButton *browseButton;
@@ -138,11 +136,6 @@ public:
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         gridLayout = new QGridLayout(groupBox);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        GroupComboBox = new QComboBox(groupBox);
-        GroupComboBox->setObjectName(QString::fromUtf8("GroupComboBox"));
-
-        gridLayout->addWidget(GroupComboBox, 1, 0, 1, 1);
-
         pathEdit = new QLineEdit(groupBox);
         pathEdit->setObjectName(QString::fromUtf8("pathEdit"));
 
@@ -309,7 +302,6 @@ public:
         QObject::connect(browseButton, SIGNAL(clicked()), OpenTorrentDialog, SLOT(BrowseButton()));
         QObject::connect(cancelButton, SIGNAL(clicked()), OpenTorrentDialog, SLOT(reject()));
         QObject::connect(yesButton, SIGNAL(clicked()), OpenTorrentDialog, SLOT(accept()));
-        QObject::connect(GroupComboBox, SIGNAL(currentIndexChanged(int)), OpenTorrentDialog, SLOT(ChangeGroup()));
         QObject::connect(pathEdit, SIGNAL(textChanged(QString)), OpenTorrentDialog, SLOT(OnPathChanged(QString)));
         QObject::connect(markAllButton, SIGNAL(clicked()), OpenTorrentDialog, SLOT(OnCheckAll()));
         QObject::connect(unmarkAllButton, SIGNAL(clicked()), OpenTorrentDialog, SLOT(OnUncheckAll()));

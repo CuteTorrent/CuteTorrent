@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>357</width>
-    <height>82</height>
+    <width>349</width>
+    <height>102</height>
    </rect>
   </property>
   <property name="windowIcon">
@@ -147,7 +147,7 @@
    <item>
     <widget class="QWidget" name="m_centralWidget" native="true">
      <layout class="QGridLayout" name="gridLayout">
-      <item row="1" column="0">
+      <item row="2" column="0">
        <widget class="QProgressBar" name="progressBar">
         <property name="value">
          <number>0</number>
@@ -157,10 +157,16 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
+      <item row="1" column="0">
        <widget class="QLabel" name="stateLabel">
         <property name="text">
          <string/>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::PlainText</enum>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

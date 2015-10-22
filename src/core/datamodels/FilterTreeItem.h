@@ -60,12 +60,12 @@ public:
 		return QString("%1 (%2)").arg(m_text, QString::number(m_itemsCount));
 	}
 
-	void setItemsCount(uint itemsCount)
+	void setItemsCount(int itemsCount)
 	{
 		m_itemsCount = itemsCount;
 	}
 
-	uint ItemsCount() const
+	int ItemsCount() const
 	{
 		return m_itemsCount;
 	}

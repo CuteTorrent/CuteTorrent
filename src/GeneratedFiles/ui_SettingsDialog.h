@@ -201,14 +201,9 @@ public:
     QGroupBox *customMoutGroupBox;
     QGridLayout *gridLayout_10;
     QLineEdit *customCommandEdit;
-    QSpacerItem *horizontalSpacer_6;
     QSpacerItem *verticalSpacer_2;
     QWidget *schedulingTab;
     QGridLayout *gridLayout_26;
-    QComboBox *tasksComboBox;
-    QLabel *label_14;
-    QPushButton *addTaskButton;
-    QPushButton *deleteTaskButton;
     QGroupBox *groupBox_11;
     QGridLayout *gridLayout_14;
     QGroupBox *groupBox;
@@ -227,10 +222,13 @@ public:
     QLabel *label_13;
     QCalendarWidget *calendarWidget;
     QSpacerItem *verticalSpacer;
-    QSpacerItem *horizontalSpacer_8;
+    QComboBox *tasksComboBox;
+    QLabel *label_14;
+    QPushButton *addTaskButton;
+    QPushButton *deleteTaskButton;
     QWidget *webControllTab;
     QGridLayout *gridLayout_27;
-    QSpacerItem *horizontalSpacer_7;
+    QSpacerItem *verticalSpacer_8;
     QGroupBox *webUIGroupBox;
     QGridLayout *gridLayout_18;
     QGroupBox *IPFilterGroupBox;
@@ -253,7 +251,6 @@ public:
     QPushButton *stopRconButton;
     QLabel *RunningLabel;
     QPushButton *openWebUiButton;
-    QSpacerItem *verticalSpacer_8;
     QWidget *page_2;
     QGridLayout *gridLayout_33;
     QGroupBox *autosrtEmailNotificationCheckBox;
@@ -291,7 +288,7 @@ public:
     {
         if (SettingsDialog->objectName().isEmpty())
             SettingsDialog->setObjectName(QString::fromUtf8("SettingsDialog"));
-        SettingsDialog->resize(811, 407);
+        SettingsDialog->resize(799, 407);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
         SettingsDialog->setWindowIcon(icon);
@@ -1107,10 +1104,6 @@ public:
 
         gridLayout_25->addWidget(customMoutGroupBox, 1, 0, 1, 2);
 
-        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_25->addItem(horizontalSpacer_6, 0, 2, 2, 1);
-
         verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         gridLayout_25->addItem(verticalSpacer_2, 2, 0, 1, 1);
@@ -1120,28 +1113,6 @@ public:
         schedulingTab->setObjectName(QString::fromUtf8("schedulingTab"));
         gridLayout_26 = new QGridLayout(schedulingTab);
         gridLayout_26->setObjectName(QString::fromUtf8("gridLayout_26"));
-        tasksComboBox = new QComboBox(schedulingTab);
-        tasksComboBox->setObjectName(QString::fromUtf8("tasksComboBox"));
-        tasksComboBox->setMaximumSize(QSize(150, 16777215));
-
-        gridLayout_26->addWidget(tasksComboBox, 0, 1, 1, 1);
-
-        label_14 = new QLabel(schedulingTab);
-        label_14->setObjectName(QString::fromUtf8("label_14"));
-        label_14->setMaximumSize(QSize(150, 16777215));
-
-        gridLayout_26->addWidget(label_14, 0, 0, 1, 1);
-
-        addTaskButton = new QPushButton(schedulingTab);
-        addTaskButton->setObjectName(QString::fromUtf8("addTaskButton"));
-
-        gridLayout_26->addWidget(addTaskButton, 0, 2, 1, 1);
-
-        deleteTaskButton = new QPushButton(schedulingTab);
-        deleteTaskButton->setObjectName(QString::fromUtf8("deleteTaskButton"));
-
-        gridLayout_26->addWidget(deleteTaskButton, 0, 3, 1, 1);
-
         groupBox_11 = new QGroupBox(schedulingTab);
         groupBox_11->setObjectName(QString::fromUtf8("groupBox_11"));
         gridLayout_14 = new QGridLayout(groupBox_11);
@@ -1234,18 +1205,36 @@ public:
 
         gridLayout_26->addWidget(groupBox_11, 1, 0, 1, 4);
 
-        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        tasksComboBox = new QComboBox(schedulingTab);
+        tasksComboBox->setObjectName(QString::fromUtf8("tasksComboBox"));
+        tasksComboBox->setMaximumSize(QSize(150, 16777215));
 
-        gridLayout_26->addItem(horizontalSpacer_8, 0, 4, 1, 1);
+        gridLayout_26->addWidget(tasksComboBox, 0, 1, 1, 1);
+
+        label_14 = new QLabel(schedulingTab);
+        label_14->setObjectName(QString::fromUtf8("label_14"));
+        label_14->setMaximumSize(QSize(150, 16777215));
+
+        gridLayout_26->addWidget(label_14, 0, 0, 1, 1);
+
+        addTaskButton = new QPushButton(schedulingTab);
+        addTaskButton->setObjectName(QString::fromUtf8("addTaskButton"));
+
+        gridLayout_26->addWidget(addTaskButton, 0, 2, 1, 1);
+
+        deleteTaskButton = new QPushButton(schedulingTab);
+        deleteTaskButton->setObjectName(QString::fromUtf8("deleteTaskButton"));
+
+        gridLayout_26->addWidget(deleteTaskButton, 0, 3, 1, 1);
 
         stackedWidget->addWidget(schedulingTab);
         webControllTab = new QWidget();
         webControllTab->setObjectName(QString::fromUtf8("webControllTab"));
         gridLayout_27 = new QGridLayout(webControllTab);
         gridLayout_27->setObjectName(QString::fromUtf8("gridLayout_27"));
-        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        verticalSpacer_8 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_27->addItem(horizontalSpacer_7, 0, 1, 1, 1);
+        gridLayout_27->addItem(verticalSpacer_8, 1, 0, 1, 1);
 
         webUIGroupBox = new QGroupBox(webControllTab);
         webUIGroupBox->setObjectName(QString::fromUtf8("webUIGroupBox"));
@@ -1361,10 +1350,6 @@ public:
 
 
         gridLayout_27->addWidget(webUIGroupBox, 0, 0, 1, 1);
-
-        verticalSpacer_8 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_27->addItem(verticalSpacer_8, 1, 0, 1, 1);
 
         stackedWidget->addWidget(webControllTab);
         page_2 = new QWidget();
@@ -1514,7 +1499,7 @@ public:
         hotKeyScrollArea->setWidgetResizable(true);
         keyMapContainer = new QWidget();
         keyMapContainer->setObjectName(QString::fromUtf8("keyMapContainer"));
-        keyMapContainer->setGeometry(QRect(0, 0, 98, 28));
+        keyMapContainer->setGeometry(QRect(0, 0, 694, 342));
         gridLayout_19 = new QGridLayout(keyMapContainer);
         gridLayout_19->setObjectName(QString::fromUtf8("gridLayout_19"));
         hotKeyScrollArea->setWidget(keyMapContainer);
@@ -1642,9 +1627,11 @@ public:
         QObject::connect(importRssRulesButton, SIGNAL(clicked()), SettingsDialog, SLOT(onImportRssRules()));
         QObject::connect(browseWatchDirButton, SIGNAL(clicked()), SettingsDialog, SLOT(onBrowseWatchDir()));
         QObject::connect(browseWatchStaticPathButton, SIGNAL(clicked()), SettingsDialog, SLOT(onBrowseWatchStaticPath()));
+        QObject::connect(GroupsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), SettingsDialog, SLOT(showSelectedGroup(QTreeWidgetItem*,QTreeWidgetItem*)));
+        QObject::connect(updateGroupButton, SIGNAL(clicked()), SettingsDialog, SLOT(editGroup()));
 
-        listWidget->setCurrentRow(-1);
-        stackedWidget->setCurrentIndex(4);
+        listWidget->setCurrentRow(0);
+        stackedWidget->setCurrentIndex(0);
         inEncPolicyComboBox->setCurrentIndex(0);
         outEncPolicyComboBox->setCurrentIndex(0);
         encLevelComboBox->setCurrentIndex(2);
@@ -1926,9 +1913,6 @@ public:
 #ifndef QT_NO_WHATSTHIS
         customCommandEdit->setWhatsThis(QApplication::translate("SettingsDialog", "DAEMONTOOLS_COMMAND_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
-        label_14->setText(QApplication::translate("SettingsDialog", "ACTIONS", 0, QApplication::UnicodeUTF8));
-        addTaskButton->setText(QApplication::translate("SettingsDialog", "ADD_BUTTON", 0, QApplication::UnicodeUTF8));
-        deleteTaskButton->setText(QApplication::translate("SettingsDialog", "DELETE_BUTTON", 0, QApplication::UnicodeUTF8));
         groupBox_11->setTitle(QApplication::translate("SettingsDialog", "GroupBox", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("SettingsDialog", "ACTIONS", 0, QApplication::UnicodeUTF8));
         label_11->setText(QApplication::translate("SettingsDialog", "LIMIT_DOWNLOAD", 0, QApplication::UnicodeUTF8));
@@ -1939,6 +1923,9 @@ public:
         pauseAllRadioButton->setText(QApplication::translate("SettingsDialog", "PUASE_ALL", 0, QApplication::UnicodeUTF8));
         label_9->setText(QApplication::translate("SettingsDialog", "ACTION_BEGIN", 0, QApplication::UnicodeUTF8));
         label_13->setText(QApplication::translate("SettingsDialog", "ACTION_NAME", 0, QApplication::UnicodeUTF8));
+        label_14->setText(QApplication::translate("SettingsDialog", "ACTIONS", 0, QApplication::UnicodeUTF8));
+        addTaskButton->setText(QApplication::translate("SettingsDialog", "ADD_BUTTON", 0, QApplication::UnicodeUTF8));
+        deleteTaskButton->setText(QApplication::translate("SettingsDialog", "DELETE_BUTTON", 0, QApplication::UnicodeUTF8));
         webUIGroupBox->setTitle(QApplication::translate("SettingsDialog", "WEB_CONTROLL_ENABLED", 0, QApplication::UnicodeUTF8));
         IPFilterGroupBox->setTitle(QApplication::translate("SettingsDialog", "WEB_UI_USE_IP_FILTER", 0, QApplication::UnicodeUTF8));
         webUILogginGroupBox->setTitle(QApplication::translate("SettingsDialog", "WEB_UI_LOGGING_ENABLED", 0, QApplication::UnicodeUTF8));

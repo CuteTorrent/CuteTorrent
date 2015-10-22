@@ -87,7 +87,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtNetwork;$(QT_DIR)\include\QtGui;$(QT_DIR)\include\phonon;$(QT_DIR)\src\3rdparty\zlib;$(QT_DIR)\include;qtsingleapplication\src;..\ThirdParties\boost;..\ThirdParties\libtorrent\include;GeneratedFiles;GeneratedFiles\Release;$(QT_DIR)\include\phonon_compat;$(QT_DIR)\mkspecs\win32-msvc2010;core;Resources;rss;scheduller;search;torrent;tracker;VideoPlayer;webControll;core\zip;core\gui;core\http;core\helpers;core\winextras;core\viewModel;core\datamodels;core\StorrageInfo;core\qtsingleapplication;core\datamodels\json;core\datamodels\SGML;core\gui\backupwizard;core\gui\Controls;core\gui\Dialogs;core\gui\FormFiles;core\qtsingleapplication\src;core\viewModel\itemDelegate;Resources\images;Resources\playerImages;Resources\translations;rss\core;rss\datamodels;rss\gui;rss\viewmodels;rss\gui\Dialogs;rss\gui\FormFiles;rss\viewmodels\ItemDelegate;search\core;search\dataModels;search\searchproviders;search\viewmodels;search\viewmodels\ItemDelegate;torrent\core;torrent\gui;torrent\viewmodels;torrent\gui\Controls;torrent\gui\Dialogs;torrent\gui\FormFiles;torrent\viewmodels\ItemDelegate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtNetwork;$(QT_DIR)\include\QtGui;$(QT_DIR)\include\phonon;$(QT_DIR)\src\3rdparty\zlib;$(QT_DIR)\include;qtsingleapplication\src;..\ThirdParties\boost;..\ThirdParties\libtorrent\include;GeneratedFiles;GeneratedFiles\Release;$(QT_DIR)\include\phonon_compat;$(QT_DIR)\mkspecs\win32-msvc2010;core;Resources;rss;scheduller;search;torrent;tracker;VideoPlayer;webControll;core\zip;core\gui;core\http;core\helpers;core\standartpaths;core\mimetypes;core\winextras;core\viewModel;core\datamodels;core\StorrageInfo;core\qtsingleapplication;core\datamodels\json;core\datamodels\SGML;core\gui\backupwizard;core\gui\Controls;core\gui\Dialogs;core\gui\FormFiles;core\qtsingleapplication\src;core\viewModel\itemDelegate;Resources\images;Resources\playerImages;Resources\translations;rss\core;rss\datamodels;rss\gui;rss\viewmodels;rss\gui\Dialogs;rss\gui\FormFiles;rss\viewmodels\ItemDelegate;search\core;search\dataModels;search\searchproviders;search\viewmodels;search\viewmodels\ItemDelegate;torrent\core;torrent\gui;torrent\viewmodels;torrent\gui\Controls;torrent\gui\Dialogs;torrent\gui\FormFiles;torrent\viewmodels\ItemDelegate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>Release\</AssemblerListingLocation>
       <ObjectFileName>Release\</ObjectFileName>
@@ -106,7 +106,6 @@
       <LinkIncremental>false</LinkIncremental>
       <OutputFile>$(OutDir)\CuteTorrent.exe</OutputFile>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Midl>
       <DefaultCharType>Unsigned</DefaultCharType>
@@ -127,7 +126,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtNetwork;$(QT_DIR)\include\QtGui;$(QT_DIR)\include\phonon;$(QT_DIR)\src\3rdparty\zlib;$(QT_DIR)\include;qtsingleapplication\src;..\ThirdParties\boost;..\ThirdParties\libtorrent\include;GeneratedFiles;GeneratedFiles\Release;$(QT_DIR)\include\phonon_compat;$(QT_DIR)\mkspecs\win32-msvc2010;core;Resources;rss;scheduller;search;torrent;tracker;VideoPlayer;webControll;core\zip;core\gui;core\http;core\helpers;core\winextras;core\viewModel;core\datamodels;core\StorrageInfo;core\qtsingleapplication;core\datamodels\json;core\datamodels\SGML;core\gui\backupwizard;core\gui\Controls;core\gui\Dialogs;core\gui\FormFiles;core\qtsingleapplication\src;core\viewModel\itemDelegate;Resources\images;Resources\playerImages;Resources\translations;rss\core;rss\datamodels;rss\gui;rss\viewmodels;rss\gui\Dialogs;rss\gui\FormFiles;rss\viewmodels\ItemDelegate;search\core;search\dataModels;search\searchproviders;search\viewmodels;search\viewmodels\ItemDelegate;torrent\core;torrent\gui;torrent\viewmodels;torrent\gui\Controls;torrent\gui\Dialogs;torrent\gui\FormFiles;torrent\viewmodels\ItemDelegate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtNetwork;$(QT_DIR)\include\QtGui;$(QT_DIR)\include\phonon;$(QT_DIR)\src\3rdparty\zlib;$(QT_DIR)\include;qtsingleapplication\src;..\ThirdParties\boost;..\ThirdParties\libtorrent\include;GeneratedFiles;GeneratedFiles\Release;$(QT_DIR)\include\phonon_compat;$(QT_DIR)\mkspecs\win32-msvc2010;core;Resources;rss;scheduller;search;torrent;tracker;VideoPlayer;webControll;core\zip;core\gui;core\http;core\helpers;core\standartpaths;core\mimetypes;core\winextras;core\viewModel;core\datamodels;core\StorrageInfo;core\qtsingleapplication;core\datamodels\json;core\datamodels\SGML;core\gui\backupwizard;core\gui\Controls;core\gui\Dialogs;core\gui\FormFiles;core\qtsingleapplication\src;core\viewModel\itemDelegate;Resources\images;Resources\playerImages;Resources\translations;rss\core;rss\datamodels;rss\gui;rss\viewmodels;rss\gui\Dialogs;rss\gui\FormFiles;rss\viewmodels\ItemDelegate;search\core;search\dataModels;search\searchproviders;search\viewmodels;search\viewmodels\ItemDelegate;torrent\core;torrent\gui;torrent\viewmodels;torrent\gui\Controls;torrent\gui\Dialogs;torrent\gui\FormFiles;torrent\viewmodels\ItemDelegate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>Debug\</AssemblerListingLocation>
       <ObjectFileName>Debug\</ObjectFileName>
@@ -147,7 +146,6 @@
       <LinkIncremental>false</LinkIncremental>
       <OutputFile>$(OutDir)\CuteTorrent.exe</OutputFile>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Midl>
       <DefaultCharType>Unsigned</DefaultCharType>
@@ -233,6 +231,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\gui\Controls\CheckableMenu.cpp" />
     <ClCompile Include="core\EmailNotifier.cpp" />
     <ClCompile Include="core\gui\Controls\EditableHeaderView.cpp" />
     <ClCompile Include="core\gui\Controls\StyledProgressBar.cpp" />
@@ -468,6 +467,7 @@
     <ClCompile Include="tracker\trackerrequestmapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\gui\Controls\CheckableMenu.h" />
     <ClInclude Include="core\datamodels\FilterTreeItem.h" />
     <ClInclude Include="core\EmailNotifier.h" />
     <CustomBuild Include="core\gui\Controls\EditableHeaderView.h">
@@ -501,6 +501,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QT_DIR)\bin\moc.exe;%(Filename).h;</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QT_DIR)\bin\moc.exe;%(Filename).h;</AdditionalInputs>
     </CustomBuild>
+    <ClInclude Include="core\gui\Controls\TreeBox.h" />
     <ClInclude Include="core\gui\Utils\UIPropertyGetters.h" />
     <ClInclude Include="core\gui\Utils\UIPropertySetters.h" />
     <CustomBuild Include="core\gui\Utils\SettingsPropertyMapper.h">
@@ -2299,6 +2300,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </AdditionalInputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Resources\images\loader.gif" />
     <None Include="Resources\playerImages\pattern.png" />
@@ -2318,6 +2320,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </AdditionalInputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <SubType>Designer</SubType>
     </None>
     <CustomBuild Include="Resources\ltorrent.qrc">
       <FileType>Document</FileType>

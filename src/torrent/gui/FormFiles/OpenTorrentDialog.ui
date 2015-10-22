@@ -165,9 +165,6 @@
          <string>OPEN_TORRENT_SAVE_PATH</string>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="1" column="0">
-          <widget class="QComboBox" name="GroupComboBox"/>
-         </item>
          <item row="0" column="0">
           <widget class="QLineEdit" name="pathEdit"/>
          </item>
@@ -480,22 +477,6 @@
     <hint type="destinationlabel">
      <x>224</x>
      <y>215</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>GroupComboBox</sender>
-   <signal>currentIndexChanged(int)</signal>
-   <receiver>OpenTorrentDialog</receiver>
-   <slot>ChangeGroup()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>130</x>
-     <y>70</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>224</x>
-     <y>260</y>
     </hint>
    </hints>
   </connection>

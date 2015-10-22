@@ -41,7 +41,7 @@ QVariant ValueGetters::LanguageValueGetter(QString group, QString name, QVariant
 QVariant ValueGetters::MagnetAssociationValueGetter(QString group, QString name, QVariant defaultValue)
 {
 #ifdef Q_WS_WIN
-	QSettings assocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
+	QSettings assocSettings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", QSettings::NativeFormat);
 	QString magnetCommand = QDir::toNativeSeparators(assocSettings.value("Magnet/shell/open/command/.").toString());
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 	return QVariant::fromValue(magnetCommand.contains(applicationFilePath, Qt::CaseInsensitive) == true);
@@ -77,7 +77,7 @@ QVariant ValueGetters::MagnetAssociationValueGetter(QString group, QString name,
 QVariant ValueGetters::TorrentAssociationValueGetter(QString group, QString name, QVariant defaultValue)
 {
 #ifdef Q_WS_WIN
-	QSettings assocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
+	QSettings assocSettings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", QSettings::NativeFormat);
 	QString torrentAssociation = assocSettings.value(".torrent/.").toString();
 	return torrentAssociation == "CuteTorrent.file";
 #else Q_WS_X11
@@ -112,7 +112,7 @@ QVariant ValueGetters::TorrentAssociationValueGetter(QString group, QString name
 QVariant ValueGetters::RunOnBootValueGetter(QString group, QString name, QVariant defaultValue)
 {
 #ifdef Q_WS_WIN
-	QSettings bootUpSettings(QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\") + (StaticHelpers::IsWow64() ? "Wow6432Node\\" : "") + "Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+	QSettings bootUpSettings(QString("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"), QSettings::NativeFormat);
 	QString bootStartCommand = bootUpSettings.value("CuteTorrent").toString();
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 	return QVariant::fromValue(bootStartCommand.contains(applicationFilePath, Qt::CaseInsensitive) == true);
@@ -123,7 +123,7 @@ QVariant ValueGetters::RunOnBootValueGetter(QString group, QString name, QVarian
 #ifdef Q_WS_WIN
 QVariant ValueGetters::RunOnBootMinimizedValueGetter(QString group, QString name, QVariant defaultValue)
 {
-	QSettings bootUpSettings(QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\") + (StaticHelpers::IsWow64() ? "Wow6432Node\\" : "") + "Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+	QSettings bootUpSettings(QString("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"), QSettings::NativeFormat);
 	QString bootStartCommand = bootUpSettings.value("CuteTorrent").toString();
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 	return QVariant::fromValue(bootStartCommand.contains(applicationFilePath, Qt::CaseInsensitive) == true && bootStartCommand.contains("-m") == true);
@@ -131,7 +131,7 @@ QVariant ValueGetters::RunOnBootMinimizedValueGetter(QString group, QString name
 
 QVariant ValueGetters::WindowsShellValueGetter(QString group, QString name, QVariant defaultValue)
 {
-	QSettings assocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
+	QSettings assocSettings("HKEY_CURRENT_USER\\Software\\Classes", QSettings::NativeFormat);
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 	QString commandShouldBe = QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1");
 	bool starCommandMatch = assocSettings.value("*/shell/cutetorrent/command/.") == commandShouldBe;

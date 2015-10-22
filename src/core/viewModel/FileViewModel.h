@@ -57,6 +57,7 @@ private:
 	QTreeView* m_pView;
 	FileViewSortProxyModel* m_pProxyModel;
 	std::vector<size_type> m_Progresses;
+	static QHash<QString, QPixmapCache::Key> extToKeys;
 	static QPixmapCache iconCache;
 	FileViewTreeItem* m_pRoot;
 };

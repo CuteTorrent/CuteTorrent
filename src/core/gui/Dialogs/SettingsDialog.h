@@ -107,9 +107,10 @@ private slots:
 	void ApplySettings();
 	void addGroup();
 	void removeGroup();
+	void editGroup();
 	void browseSavepathGroup();
 	void browseDTPath();
-	void showSelectedGroup(int);
+	void showSelectedGroup(QTreeWidgetItem* current, QTreeWidgetItem* previous);
 	void AddTask();
 	void DeleteTask();
 	void UpdateSchedullerTab(int index);

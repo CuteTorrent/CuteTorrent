@@ -303,12 +303,11 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 			QString savePath = dataSource.status(torrent_handle::query_save_path).save_path.c_str();
 			QString suffix = filePathInfo.suffix();
 
-			if(!suffix.isEmpty() && !iconCache.find(suffix, &pixmap))
+			if(!suffix.isEmpty() && !extToKeys.contains(suffix))
 			{
 				QString subPath = QDir::toNativeSeparators(QString::fromUtf8(item->GetFileEntery().path.c_str()));
 				QString realFilePath = StaticHelpers::CombinePathes(savePath, subPath);
-				qDebug() << "real file path" << realFilePath;
-
+				
 				if (QFile::exists(realFilePath))
 				{
 					QFileInfo realFileInfo(realFilePath);
@@ -319,19 +318,21 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 					QTemporaryFile tmpfile(StaticHelpers::CombinePathes(QDesktopServices::storageLocation(QDesktopServices::TempLocation), "tempFileXXXXXX." + suffix));
 					tmpfile.open();
 					tmpfile.close();
-					qDebug() << "Temp file for icon path" << tmpfile.fileName();
-					QFileInfo tempFileInfo(tmpfile.fileName());
+						QFileInfo tempFileInfo(tmpfile.fileName());
 					icon = iPorv.icon(tempFileInfo);
 					tmpfile.remove();
 
 					if (suffix != "exe")
 					{
-						iconCache.insert(suffix, icon.pixmap(QSize(64, 64)));
+						QPixmapCache::Key key = iconCache.insert(icon.pixmap(QSize(64, 64)));
+						extToKeys.insert(suffix, key);
 					}
 				}
 			}
 			else
 			{
+				QPixmapCache::Key key = extToKeys[suffix];
+				iconCache.find(key, &pixmap);
 				icon = QIcon(pixmap);
 			}
 		}
@@ -648,6 +649,6 @@ void FileViewModel::SetItemPriority(FileViewTreeItem* item, int priority, const 
 
 QPixmapCache FileViewModel::iconCache;
 
-
+QHash<QString, QPixmapCache::Key> FileViewModel::extToKeys;
 
 

@@ -58,7 +58,7 @@ void ValueSetters::MagnetAssociationValueSetter(QString group, QString name, QVa
 {
 	bool associate = value.toBool();
 #ifdef Q_WS_WIN
-	QSettings asocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
+	QSettings asocSettings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", QSettings::NativeFormat);
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 
 	if (associate)
@@ -170,7 +170,7 @@ void ValueSetters::TorrentAssociationValueSetter(QString group, QString name, QV
 {
 	bool associate = value.toBool();
 #ifdef Q_WS_WIN
-	QSettings asocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
+	QSettings asocSettings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", QSettings::NativeFormat);
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 
 	if (associate)
@@ -285,7 +285,7 @@ void ValueSetters::RunOnBootValueSetter(QString group, QString name, QVariant va
 {
 	bool runOnBoot = value.toBool();
 #ifdef Q_WS_WIN
-	QSettings bootUpSettings(QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\") + (StaticHelpers::IsWow64() ? "Wow6432Node\\" : "") + "Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+	QSettings bootUpSettings(QString("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"), QSettings::NativeFormat);
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 
 	if (runOnBoot)
@@ -333,7 +333,7 @@ void ValueSetters::RunOnBootValueSetter(QString group, QString name, QVariant va
 void ValueSetters::RunOnBootMinimizedValueSetter(QString group, QString name, QVariant value)
 {
 	bool runOnBoot = value.toBool();
-	QSettings bootUpSettings(QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\") + (StaticHelpers::IsWow64() ? "Wow6432Node\\" : "") + "Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+	QSettings bootUpSettings(QString("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"), QSettings::NativeFormat);
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 
 	if (runOnBoot)
@@ -349,7 +349,7 @@ void ValueSetters::RunOnBootMinimizedValueSetter(QString group, QString name, QV
 void ValueSetters::WindowsShellValueSetter(QString group, QString name, QVariant value)
 {
 	bool enabled = value.toBool();
-	QSettings asocSettings("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
+	QSettings asocSettings("HKEY_CURRENT_USER\\Software\\Classes", QSettings::NativeFormat);
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 
 	if (enabled)

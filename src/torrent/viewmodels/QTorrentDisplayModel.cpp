@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "StaticHelpers.h"
 #include <TorrentGroupsManager.h>
 #include "AddRssDwonloadRuleDialog.h"
+#include "CheckableMenu.h"
 
 QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterProxyModel* pProxyFilterModel, QObject* __parrent)
 	: QAbstractListModel(__parrent)
@@ -50,10 +51,26 @@ QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterPr
 	connect(m_pTorrentManager.get(), SIGNAL(TorrentAdded(Torrent*)), SLOT(OnTorrentAdded()));
 	m_pUpdateTimer = new QTimer(this);
 	m_pUpdateTimer->setInterval(400);
+	TorrentGroupsManagerPtr groupsManager = TorrentGroupsManager::getInstance();
+	connect(groupsManager.get(), SIGNAL(GroupsChanged()), SLOT(UpdateMenu()));
 	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(Update()));
 	m_pUpdateTimer->start();
 }
 
+
+void QTorrentDisplayModel::UpdateMenu()
+{
+	QList<TorrentGroup*> filters = TorrentGroupsManager::getInstance()->GetTorrentGroups();
+	StyleEngene* pStyleEngene = StyleEngene::getInstance();
+	QList<QAction*> actions = m_pGroupsActionGroup->actions();
+	for (int i = 0; i < actions.length();i++)
+	{
+		m_pGroupMapper->removeMappings(actions[i]);
+		m_pGroupsActionGroup->removeAction(actions[i]);
+	}
+	qDeleteAll(actions);
+	AddGroupsLevel(pStyleEngene, filters, groupsMenu);
+}
 QString QTorrentDisplayModel::getFirstAvailibleFile(files_info& filesInfo)
 {
 	int numFiles = filesInfo.storrage.num_files();
@@ -280,6 +297,15 @@ void QTorrentDisplayModel::OpenDirSelected()
 }
 
 
+void QTorrentDisplayModel::setGroupsUnchecked()
+{
+	QList<QAction*> actions = groupsMenu->actions();
+
+	for (int i = 0; i < actions.size(); i++)
+	{
+		actions[i]->setChecked(false);
+	}
+}
 
 void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 {
@@ -358,15 +384,14 @@ void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 			{
 				m_groupsUidToActions[group]->setChecked(true);
 			}
+			else
+			{
+				setGroupsUnchecked();
+			}
 		}
 		else
 		{
-			QList<QAction*> actions = groupsMenu->actions();
-
-			for (int i = 0; i < actions.size(); i++)
-			{
-				actions[i]->setChecked(false);
-			}
+			setGroupsUnchecked();
 		}
 
 		menu->exec(m_pTorrentListView->mapToGlobal(point));
@@ -917,10 +942,15 @@ void QTorrentDisplayModel::AddGroupsLevel(StyleEngene* pStyleEngene, QList<Torre
 		QList<TorrentGroup*> children = group->Children();
 		if (children.length() > 0)
 		{
-			QMenu* currentGroupMenu = new QMenu(group->name(), groupsContainer);
-			currentGroupMenu->menuAction()->setCheckable(true);
+			CheckableMenu* currentGroupMenu = new CheckableMenu(group->name(), groupsContainer);
+			QAction* changeGroupAction = currentGroupMenu->menuAction();
+			connect(changeGroupAction, SIGNAL(triggered()), m_pGroupMapper, SLOT(map()));
+			m_pGroupMapper->setMapping(changeGroupAction, group->uid());
+			changeGroupAction->setCheckable(true);
 			currentGroupMenu->setIcon(pStyleEngene->guessMimeIcon(group->extentions()[0]));
 			groupsContainer->addMenu(currentGroupMenu);
+			m_pGroupsActionGroup->addAction(changeGroupAction);
+			m_groupsUidToActions.insert(group->uid(), changeGroupAction);
 			AddGroupsLevel(pStyleEngene, children, currentGroupMenu);
 		}
 		else
@@ -1109,6 +1139,8 @@ void QTorrentDisplayModel::changeGroup(const QString& uidStr)
 	{
 		index.data(TorrentRole).value<Torrent*>()->SetGroupUid(uid);
 	}
+
+	QApplication::postEvent(TorrentGroupsManager::getInstance().get(), new TorrentChangedGroupEvent());
 }
 typedef QPair<QModelIndex, QModelIndex> IndexInterval;
 void QTorrentDisplayModel::Update()

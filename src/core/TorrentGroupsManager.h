@@ -3,6 +3,7 @@
 #include "TorrentGroup.h"
 #include "Singleton.h"
 #include <QMap>
+#include <QMouseEvent>
 class Torrent;
 
 class TorrentGroupsManager : public QObject, public Singleton<TorrentGroupsManager>
@@ -14,8 +15,11 @@ class TorrentGroupsManager : public QObject, public Singleton<TorrentGroupsManag
 	QMultiMap<QString, TorrentGroup*> m_torrenTgroupsToExtention;
 	QMultiMap<QString, TorrentGroup*> m_torrenTgroupsToName;
 	QMap<QUuid, TorrentGroup*> m_torrenTgroupsToUid;
+protected:
+	void customEvent(QEvent * event) override;
 signals:
 	void GroupsChanged();
+	void TorrentChangedGroup();
 public:
 	TorrentGroupsManager();
 	void FillMaps();
@@ -29,6 +33,16 @@ public:
 	TorrentGroup* GetTorrentGroupForTorrent(Torrent* pTorrent);
 	void SaveGroups();
 	TorrentGroup* GetGroupByName(QString groupName);
+};
+
+class TorrentChangedGroupEvent : public QEvent
+{
+public:
+	explicit TorrentChangedGroupEvent()
+		: QEvent(TORRENT_CHANGED_GROUP_EVENT)
+	{
+	}
+	const static Type  TORRENT_CHANGED_GROUP_EVENT = static_cast<Type>(User + 1);
 };
 
 DEFINE_PTR_CALSS(TorrentGroupsManager)

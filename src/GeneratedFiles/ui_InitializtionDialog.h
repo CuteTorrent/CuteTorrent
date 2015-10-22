@@ -42,7 +42,7 @@ public:
     {
         if (InitializationDialog->objectName().isEmpty())
             InitializationDialog->setObjectName(QString::fromUtf8("InitializationDialog"));
-        InitializationDialog->resize(357, 82);
+        InitializationDialog->resize(349, 102);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
         InitializationDialog->setWindowIcon(icon);
@@ -104,12 +104,14 @@ public:
         progressBar->setValue(0);
         progressBar->setTextVisible(false);
 
-        gridLayout->addWidget(progressBar, 1, 0, 1, 1);
+        gridLayout->addWidget(progressBar, 2, 0, 1, 1);
 
         stateLabel = new QLabel(m_centralWidget);
         stateLabel->setObjectName(QString::fromUtf8("stateLabel"));
+        stateLabel->setTextFormat(Qt::PlainText);
+        stateLabel->setWordWrap(true);
 
-        gridLayout->addWidget(stateLabel, 0, 0, 1, 1);
+        gridLayout->addWidget(stateLabel, 1, 0, 1, 1);
 
 
         verticalLayout->addWidget(m_centralWidget);

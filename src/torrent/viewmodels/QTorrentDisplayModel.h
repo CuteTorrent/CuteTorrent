@@ -93,6 +93,7 @@ class QTorrentDisplayModel: public QAbstractListModel
 	void checkPausedResumed(QModelIndexList indexes, bool& isAllPaused, bool& isAllResumed, bool& hasPaused, bool& hasResumed);
 	int getCommonPriority(QModelIndexList& indexes);
 	void AddGroupsLevel(StyleEngene*, QList<TorrentGroup*>&, QMenu*);
+	void setGroupsUnchecked();
 public:
 	QTorrentDisplayModel(QTreeView*, QTorrentFilterProxyModel*, QObject*);
 	~QTorrentDisplayModel();
@@ -124,6 +125,7 @@ public:
 signals:
 	void initCompleted();
 public slots:
+	void UpdateMenu();
 	void Update();
 	void UpdateSelectedIndex(const QItemSelection&);
 	void contextualMenu(const QPoint&);
