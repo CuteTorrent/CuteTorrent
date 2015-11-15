@@ -56,6 +56,13 @@ public:
     QAction *ACTION_MENU_ABOUT_QT;
     QAction *ACTION_TOOLBAR_QUEUE_UP;
     QAction *ACTION_TOOLBAR_QUEUE_DOWN;
+    QAction *ACTION_MENU_REPORT_PROBLEM;
+    QAction *ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY;
+    QAction *ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY;
+    QAction *ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY;
+    QAction *ACTION_MENU_TOGGLE_GROUPS_VISIBILITY;
+    QAction *actionTemp;
+    QAction *actionTemp_2;
     QVBoxLayout *verticalLayout;
     QWidget *titleBar;
     QHBoxLayout *horizontalLayout;
@@ -68,8 +75,8 @@ public:
     QGridLayout *gridLayout_3;
     QStatusBar *mystatusBar;
     QGridLayout *gridLayout_6;
-    QSplitter *spliiter;
-    QSplitter *spliiter1;
+    QSplitter *verticalSplitter;
+    QSplitter *horizontalSplitter;
     QTreeView *m_pGroupTreeView;
     QWidget *widget_4;
     QVBoxLayout *torrentViewLayout;
@@ -126,6 +133,9 @@ public:
     QMenu *menu_2;
     QMenu *menu_CuteTorrent;
     QMenu *menuMENU_TOOLS;
+    QMenu *menuMENU_VIEW;
+    QMenu *languageSubMenu;
+    QMenu *skinSubMenu;
     QStackedWidget *m_pToolBarsContainer;
     QToolBar *m_pTorrentToolBar;
     QToolBar *m_pSearchToolBar;
@@ -135,12 +145,11 @@ public:
     {
         if (CustomWindow->objectName().isEmpty())
             CustomWindow->setObjectName(QString::fromUtf8("CustomWindow"));
-        CustomWindow->resize(547, 681);
+        CustomWindow->resize(550, 681);
         CustomWindow->setMouseTracking(true);
         ACTION_MENU_OPEN_TORRENT = new QAction(CustomWindow);
         ACTION_MENU_OPEN_TORRENT->setObjectName(QString::fromUtf8("ACTION_MENU_OPEN_TORRENT"));
         ACTION_MENU_OPEN_TORRENT->setShortcutContext(Qt::WindowShortcut);
-        ACTION_MENU_OPEN_TORRENT->setSoftKeyRole(QAction::NoSoftKey);
         ACTION_MENU_OPEN_MAGNET = new QAction(CustomWindow);
         ACTION_MENU_OPEN_MAGNET->setObjectName(QString::fromUtf8("ACTION_MENU_OPEN_MAGNET"));
         ACTION_MENU_CREATE = new QAction(CustomWindow);
@@ -182,6 +191,24 @@ public:
         ACTION_TOOLBAR_QUEUE_UP->setObjectName(QString::fromUtf8("ACTION_TOOLBAR_QUEUE_UP"));
         ACTION_TOOLBAR_QUEUE_DOWN = new QAction(CustomWindow);
         ACTION_TOOLBAR_QUEUE_DOWN->setObjectName(QString::fromUtf8("ACTION_TOOLBAR_QUEUE_DOWN"));
+        ACTION_MENU_REPORT_PROBLEM = new QAction(CustomWindow);
+        ACTION_MENU_REPORT_PROBLEM->setObjectName(QString::fromUtf8("ACTION_MENU_REPORT_PROBLEM"));
+        ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY = new QAction(CustomWindow);
+        ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY->setObjectName(QString::fromUtf8("ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY"));
+        ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY->setCheckable(true);
+        ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY = new QAction(CustomWindow);
+        ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY->setObjectName(QString::fromUtf8("ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY"));
+        ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY->setCheckable(true);
+        ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY = new QAction(CustomWindow);
+        ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY->setObjectName(QString::fromUtf8("ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY"));
+        ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY->setCheckable(true);
+        ACTION_MENU_TOGGLE_GROUPS_VISIBILITY = new QAction(CustomWindow);
+        ACTION_MENU_TOGGLE_GROUPS_VISIBILITY->setObjectName(QString::fromUtf8("ACTION_MENU_TOGGLE_GROUPS_VISIBILITY"));
+        ACTION_MENU_TOGGLE_GROUPS_VISIBILITY->setCheckable(true);
+        actionTemp = new QAction(CustomWindow);
+        actionTemp->setObjectName(QString::fromUtf8("actionTemp"));
+        actionTemp_2 = new QAction(CustomWindow);
+        actionTemp_2->setObjectName(QString::fromUtf8("actionTemp_2"));
         verticalLayout = new QVBoxLayout(CustomWindow);
         verticalLayout->setSpacing(0);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -264,22 +291,22 @@ public:
         gridLayout_6->setSpacing(0);
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
         gridLayout_6->setContentsMargins(0, -1, 0, -1);
-        spliiter = new QSplitter(m_centralWidget);
-        spliiter->setObjectName(QString::fromUtf8("spliiter"));
+        verticalSplitter = new QSplitter(m_centralWidget);
+        verticalSplitter->setObjectName(QString::fromUtf8("verticalSplitter"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(spliiter->sizePolicy().hasHeightForWidth());
-        spliiter->setSizePolicy(sizePolicy);
-        spliiter->setMouseTracking(true);
-        spliiter->setFrameShape(QFrame::NoFrame);
-        spliiter->setOrientation(Qt::Vertical);
-        spliiter1 = new QSplitter(spliiter);
-        spliiter1->setObjectName(QString::fromUtf8("spliiter1"));
-        spliiter1->setMouseTracking(true);
-        spliiter1->setStyleSheet(QString::fromUtf8(""));
-        spliiter1->setOrientation(Qt::Horizontal);
-        m_pGroupTreeView = new QTreeView(spliiter1);
+        sizePolicy.setHeightForWidth(verticalSplitter->sizePolicy().hasHeightForWidth());
+        verticalSplitter->setSizePolicy(sizePolicy);
+        verticalSplitter->setMouseTracking(true);
+        verticalSplitter->setFrameShape(QFrame::NoFrame);
+        verticalSplitter->setOrientation(Qt::Vertical);
+        horizontalSplitter = new QSplitter(verticalSplitter);
+        horizontalSplitter->setObjectName(QString::fromUtf8("horizontalSplitter"));
+        horizontalSplitter->setMouseTracking(true);
+        horizontalSplitter->setStyleSheet(QString::fromUtf8(""));
+        horizontalSplitter->setOrientation(Qt::Horizontal);
+        m_pGroupTreeView = new QTreeView(horizontalSplitter);
         m_pGroupTreeView->setObjectName(QString::fromUtf8("m_pGroupTreeView"));
         m_pGroupTreeView->setMouseTracking(true);
         m_pGroupTreeView->setAcceptDrops(true);
@@ -288,8 +315,8 @@ public:
         m_pGroupTreeView->setRootIsDecorated(false);
         m_pGroupTreeView->setAnimated(true);
         m_pGroupTreeView->setHeaderHidden(true);
-        spliiter1->addWidget(m_pGroupTreeView);
-        widget_4 = new QWidget(spliiter1);
+        horizontalSplitter->addWidget(m_pGroupTreeView);
+        widget_4 = new QWidget(horizontalSplitter);
         widget_4->setObjectName(QString::fromUtf8("widget_4"));
         torrentViewLayout = new QVBoxLayout(widget_4);
         torrentViewLayout->setSpacing(0);
@@ -311,9 +338,9 @@ public:
 
         torrentViewLayout->addWidget(m_pTorrentListView);
 
-        spliiter1->addWidget(widget_4);
-        spliiter->addWidget(spliiter1);
-        m_pInfoPlaneContainer = new QStackedWidget(spliiter);
+        horizontalSplitter->addWidget(widget_4);
+        verticalSplitter->addWidget(horizontalSplitter);
+        m_pInfoPlaneContainer = new QStackedWidget(verticalSplitter);
         m_pInfoPlaneContainer->setObjectName(QString::fromUtf8("m_pInfoPlaneContainer"));
         torrentPage = new QWidget();
         torrentPage->setObjectName(QString::fromUtf8("torrentPage"));
@@ -592,9 +619,9 @@ public:
         m_pRssInfoLayout->addWidget(widget_3, 0, 0, 1, 1);
 
         m_pInfoPlaneContainer->addWidget(rssPage);
-        spliiter->addWidget(m_pInfoPlaneContainer);
+        verticalSplitter->addWidget(m_pInfoPlaneContainer);
 
-        gridLayout_6->addWidget(spliiter, 0, 1, 1, 1);
+        gridLayout_6->addWidget(verticalSplitter, 0, 1, 1, 1);
 
 
         gridLayout_3->addLayout(gridLayout_6, 5, 0, 1, 1);
@@ -606,13 +633,18 @@ public:
         mainMenuBar->setNativeMenuBar(false);
         menu = new QMenu(mainMenuBar);
         menu->setObjectName(QString::fromUtf8("menu"));
-        menu->setStyleSheet(QString::fromUtf8(""));
         menu_2 = new QMenu(mainMenuBar);
         menu_2->setObjectName(QString::fromUtf8("menu_2"));
         menu_CuteTorrent = new QMenu(mainMenuBar);
         menu_CuteTorrent->setObjectName(QString::fromUtf8("menu_CuteTorrent"));
         menuMENU_TOOLS = new QMenu(mainMenuBar);
         menuMENU_TOOLS->setObjectName(QString::fromUtf8("menuMENU_TOOLS"));
+        menuMENU_VIEW = new QMenu(mainMenuBar);
+        menuMENU_VIEW->setObjectName(QString::fromUtf8("menuMENU_VIEW"));
+        languageSubMenu = new QMenu(menuMENU_VIEW);
+        languageSubMenu->setObjectName(QString::fromUtf8("languageSubMenu"));
+        skinSubMenu = new QMenu(menuMENU_VIEW);
+        skinSubMenu->setObjectName(QString::fromUtf8("skinSubMenu"));
 
         gridLayout_3->addWidget(mainMenuBar, 1, 0, 1, 1);
 
@@ -623,32 +655,14 @@ public:
         m_pTorrentToolBar = new QToolBar();
         m_pTorrentToolBar->setObjectName(QString::fromUtf8("m_pTorrentToolBar"));
         m_pTorrentToolBar->setAcceptDrops(true);
-        m_pTorrentToolBar->setStyleSheet(QString::fromUtf8(" QToolBar {\n"
-"               border-bottom: none;\n"
-"               border-top: none;\n"
-"               spacing:3px;\n"
-"               padding-right:2px;\n"
-"               }"));
         m_pToolBarsContainer->addWidget(m_pTorrentToolBar);
         m_pSearchToolBar = new QToolBar();
         m_pSearchToolBar->setObjectName(QString::fromUtf8("m_pSearchToolBar"));
         m_pSearchToolBar->setAcceptDrops(true);
-        m_pSearchToolBar->setStyleSheet(QString::fromUtf8(" QToolBar {\n"
-"               border-bottom: none;\n"
-"               border-top: none;\n"
-"               spacing:3px;\n"
-"               padding-right:2px;\n"
-"               }"));
         m_pToolBarsContainer->addWidget(m_pSearchToolBar);
         m_pRssToolBar = new QToolBar();
         m_pRssToolBar->setObjectName(QString::fromUtf8("m_pRssToolBar"));
         m_pRssToolBar->setAcceptDrops(true);
-        m_pRssToolBar->setStyleSheet(QString::fromUtf8(" QToolBar {\n"
-"               border-bottom: none;\n"
-"               border-top: none;\n"
-"               spacing:3px;\n"
-"               padding-right:2px;\n"
-"               }"));
         m_pToolBarsContainer->addWidget(m_pRssToolBar);
 
         gridLayout_3->addWidget(m_pToolBarsContainer, 3, 0, 1, 1);
@@ -665,6 +679,7 @@ public:
         QWidget::setTabOrder(pbMax, pbClose);
 
         mainMenuBar->addAction(menu->menuAction());
+        mainMenuBar->addAction(menuMENU_VIEW->menuAction());
         mainMenuBar->addAction(menu_2->menuAction());
         mainMenuBar->addAction(menuMENU_TOOLS->menuAction());
         mainMenuBar->addAction(menu_CuteTorrent->menuAction());
@@ -679,7 +694,16 @@ public:
         menu_CuteTorrent->addAction(ACTION_MENU_ABOUT_QT);
         menu_CuteTorrent->addSeparator();
         menu_CuteTorrent->addAction(ACTION_MENU_CHECK_UPDATE);
+        menu_CuteTorrent->addAction(ACTION_MENU_REPORT_PROBLEM);
         menuMENU_TOOLS->addAction(ACTION_MENU_BACKUP);
+        menuMENU_VIEW->addAction(ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY);
+        menuMENU_VIEW->addAction(ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY);
+        menuMENU_VIEW->addAction(ACTION_MENU_TOGGLE_GROUPS_VISIBILITY);
+        menuMENU_VIEW->addAction(ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY);
+        menuMENU_VIEW->addSeparator();
+        menuMENU_VIEW->addAction(languageSubMenu->menuAction());
+        menuMENU_VIEW->addSeparator();
+        menuMENU_VIEW->addAction(skinSubMenu->menuAction());
         m_pTorrentToolBar->addAction(ACTION_TOOLBAR_START);
         m_pTorrentToolBar->addAction(ACTION_TOOLBAR_PAUSE);
         m_pTorrentToolBar->addAction(ACTION_TOOLBAR_REMOVE);
@@ -715,6 +739,10 @@ public:
         QObject::connect(ACTION_TOOLBAR_RSS_REMOVE, SIGNAL(triggered()), CustomWindow, SLOT(removeRssFeed()));
         QObject::connect(ACTION_TOOLBAR_QUEUE_DOWN, SIGNAL(triggered()), CustomWindow, SLOT(queueTorrentsDown()));
         QObject::connect(ACTION_TOOLBAR_QUEUE_UP, SIGNAL(triggered()), CustomWindow, SLOT(queueTorrentsUp()));
+        QObject::connect(ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY, SIGNAL(toggled(bool)), CustomWindow, SLOT(toggleInfoTabsVisibility(bool)));
+        QObject::connect(ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY, SIGNAL(toggled(bool)), CustomWindow, SLOT(toggleToolBarVisibility(bool)));
+        QObject::connect(ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY, SIGNAL(toggled(bool)), CustomWindow, SLOT(toggleStatusBarVisibility(bool)));
+        QObject::connect(ACTION_MENU_TOGGLE_GROUPS_VISIBILITY, SIGNAL(toggled(bool)), CustomWindow, SLOT(toggleGroupsVisibility(bool)));
 
         m_pInfoPlaneContainer->setCurrentIndex(0);
         m_pTabWidget->setCurrentIndex(0);
@@ -768,6 +796,13 @@ public:
         ACTION_TOOLBAR_QUEUE_UP->setToolTip(QApplication::translate("CustomWindow", "QUEUE_UP", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         ACTION_TOOLBAR_QUEUE_DOWN->setText(QApplication::translate("CustomWindow", "QUEUE_DOWN", 0, QApplication::UnicodeUTF8));
+        ACTION_MENU_REPORT_PROBLEM->setText(QApplication::translate("CustomWindow", "MENU_REPORT_PROBLEM", 0, QApplication::UnicodeUTF8));
+        ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_TOOLBAR_VISIBILITY", 0, QApplication::UnicodeUTF8));
+        ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_DETAIL_INFO_VISIBILITY", 0, QApplication::UnicodeUTF8));
+        ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_STATUSBAR_VISIBILITY", 0, QApplication::UnicodeUTF8));
+        ACTION_MENU_TOGGLE_GROUPS_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_GROUPS_VISIBILITY", 0, QApplication::UnicodeUTF8));
+        actionTemp->setText(QApplication::translate("CustomWindow", "temp", 0, QApplication::UnicodeUTF8));
+        actionTemp_2->setText(QApplication::translate("CustomWindow", "temp", 0, QApplication::UnicodeUTF8));
         tbMenu->setText(QString());
         LTitle->setText(QApplication::translate("CustomWindow", "CuteTorrent", 0, QApplication::UnicodeUTF8));
         progressLabel->setText(QString());
@@ -811,6 +846,9 @@ public:
         menu_2->setTitle(QApplication::translate("CustomWindow", "MENU_SETTINGS", 0, QApplication::UnicodeUTF8));
         menu_CuteTorrent->setTitle(QApplication::translate("CustomWindow", "MENU_HELP", 0, QApplication::UnicodeUTF8));
         menuMENU_TOOLS->setTitle(QApplication::translate("CustomWindow", "MENU_TOOLS", 0, QApplication::UnicodeUTF8));
+        menuMENU_VIEW->setTitle(QApplication::translate("CustomWindow", "MENU_VIEW", 0, QApplication::UnicodeUTF8));
+        languageSubMenu->setTitle(QApplication::translate("CustomWindow", "MENU_CHOSE_LANGUAGE", 0, QApplication::UnicodeUTF8));
+        skinSubMenu->setTitle(QApplication::translate("CustomWindow", "MENU_CHOSE_SKIN", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

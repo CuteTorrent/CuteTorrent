@@ -33,6 +33,7 @@ private slots:
 	void downloadTorrent();
 	void OnNewSearchResults();
 	void OnTorrentDownloaded(QUrl, QTemporaryFile*);
+	void OnTorrentDownloadError(QUrl, QString);
 public slots:
 };
 

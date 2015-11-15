@@ -1,6 +1,7 @@
 ﻿<RCC>
     <qresource prefix="/icons">
         <file alias="app.ico">app.ico</file>
+		<file alias="appOverlay.ico">iconOverlay.ico</file>
     </qresource>
     <qresource prefix="/translations">
         <file alias="cutetorrent_en_US.qm">translations/cutetorrent_en_US.qm</file>
@@ -25,7 +26,7 @@
         <file alias="loader.gif">images/loader.gif</file>
     </qresource>
     <qresource prefix="/translations_qt">
-        <file alias="qt_ru_Ru.qm">D:/qt/4.8.6/translations/qt_ru.qm</file>
+        <file alias="qt_ru_Ru.qm">Z:/qt/4.8.7/translations/qt_ru.qm</file>
     </qresource>
     <qresource prefix="/flags">
         <file alias="AE.png">flags/ae.png</file>

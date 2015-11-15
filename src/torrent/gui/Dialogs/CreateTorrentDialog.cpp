@@ -219,7 +219,7 @@ void CreateTorrentDialog::BeginCreate()
 	if(!save_path.isEmpty())
 	{
 #ifdef Q_WS_WIN
-		m_pTaskBarProggres->setVisible(true);
+		m_pTaskBarProggres->show();
 #endif
 		connect(creator, SIGNAL(updateProgress(int)), this, SLOT(UpdateProgressBar(int)));
 		connect(creator, SIGNAL(ShowCreationSucces(QString)), this, SLOT(ShowCreationSucces(QString)));
@@ -235,7 +235,7 @@ void CreateTorrentDialog::BeginCreate()
 void CreateTorrentDialog::Cancel()
 {
 #ifdef Q_WS_WIN
-	m_pTaskBarProggres->setVisible(false);
+	m_pTaskBarProggres->hide();
 #endif
 	emit AbortCreation();
 	close();
@@ -252,7 +252,7 @@ void CreateTorrentDialog::ShowCreationSucces(QString filename)
 	progressBar->setValue(100);
 	createButton->setEnabled(true);
 #ifdef Q_WS_WIN
-	m_pTaskBarProggres->setVisible(false);
+	m_pTaskBarProggres->hide();
 #endif
 	//delete creator;
 	//creator = NULL;
@@ -264,7 +264,7 @@ void CreateTorrentDialog::ShowCreationFailture(QString msg)
 	//progressBar->setValue(0);
 	createButton->setEnabled(true);
 #ifdef Q_WS_WIN
-	m_pTaskBarProggres->setVisible(false);
+	m_pTaskBarProggres->hide();
 #endif
 // 	delete creator;
 // 	creator = NULL;

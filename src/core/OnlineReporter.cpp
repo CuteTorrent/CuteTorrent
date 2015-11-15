@@ -1,0 +1,79 @@
+#include "OnlineReporter.h"
+#include <QNetworkInterface>
+#include <QNetworkRequest>
+#include <QCryptographicHash>
+#include <QNetworkReply>
+#if defined(Q_OS_WIN)
+
+#include "Windows.h"
+#include "Iptypes.h"
+#endif
+OnlineReporter::OnlineReporter(QObject* parent) : m_workerThread(new QThread(this)), m_pNetworAccessManager(new QNetworkAccessManager(this))
+{
+	moveToThread(m_workerThread);
+	m_pNetworAccessManager->moveToThread(m_workerThread);
+	connect(m_workerThread, SIGNAL(started()), SLOT(RunLoop()));
+	connect(m_workerThread, SIGNAL(finished()), m_workerThread, SLOT(deleteLater()));
+	connect(m_workerThread, SIGNAL(finished()), SLOT(deleteLater()));
+}
+
+void OnlineReporter::start()
+{
+	m_isRunning = true;
+	qDebug() << "OnlineReporter::start";
+	m_workerThread->start();
+}
+
+void OnlineReporter::stop()
+{
+	m_isRunning = false;
+}
+
+void OnlineReporter::RunLoop() const
+{
+	int sz = sizeof(IP_ADAPTER_INFO);
+	qDebug() << "OnlineReporter::RunLoop" << m_isRunning << sz;
+	ulong secondsCounter = 0;
+	int ms = 1000;
+	m_pNetworAccessManager->get(QNetworkRequest(buildUrl()));
+	while (m_isRunning)
+	{
+		if (secondsCounter == 1800)
+		{
+			secondsCounter = 0;
+			m_pNetworAccessManager->get(QNetworkRequest(buildUrl()));
+			
+		}
+
+#if defined(Q_OS_WIN)
+		Sleep(DWORD(ms));
+#else
+		struct timespec ts = { ms / 1000, (ms % 1000) * 1000 * 1000 };
+		nanosleep(&ts, NULL);
+#endif
+		secondsCounter++;
+		
+	}
+	qDebug() << "OnlineReporter::RunLoop exit" << m_isRunning;
+}
+
+QString OnlineReporter::getMacAddress()
+{
+	foreach(QNetworkInterface netInterface, QNetworkInterface::allInterfaces())
+	{
+		// Return only the first non-loopback MAC Address
+		if (!(netInterface.flags() & QNetworkInterface::IsLoopBack))
+			return netInterface.hardwareAddress();
+	}
+	return QString();
+}
+
+QString OnlineReporter::buildUrl() const
+{
+	QString mac = getMacAddress();
+	
+	QString macHash = QCryptographicHash::hash(mac.toUtf8(), QCryptographicHash::Md5).toHex();
+	qDebug() << "Mac:" << mac << "UserID" << macHash;
+
+	return QString("http://aztorrent.ru/tracking/online?uid=%1").arg(macHash);
+}

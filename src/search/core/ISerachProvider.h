@@ -18,10 +18,10 @@ public:
 		Anime = 64,
 		All = Music | TV | Porn | Software | Games | Anime | Books | Movie
 	};
-
 	virtual QString Name() = 0;
 	virtual QString Url() = 0;
 	virtual QIcon getIcon() = 0;
+	virtual bool isBusy() = 0;
 	virtual int SupportedCategories() = 0;
 	virtual void PeformSearch(QString token, SearchCategories category, int page) = 0;
 signals:

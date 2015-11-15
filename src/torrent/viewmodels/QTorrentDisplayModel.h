@@ -84,16 +84,17 @@ class QTorrentDisplayModel: public QAbstractListModel
 	QSignalMapper* m_pPriorityMapper;
 	QTorrentFilterProxyModel* m_pProxyFilterModel;
 	QMap<QUuid, QAction*> m_groupsUidToActions;
-	QString getFirstAvailibleFile(files_info& filesInfo);
-	bool checkAllMountable(QModelIndexList& indexes);
-	bool checkAllSuperSeed(QModelIndexList& indexes);
-	bool checkAllHasMedia(QModelIndexList& indexes);
-	bool checkAllSequential(QModelIndexList& indexes);
-	bool checkAllQueueable(QModelIndexList& indexes);
-	void checkPausedResumed(QModelIndexList indexes, bool& isAllPaused, bool& isAllResumed, bool& hasPaused, bool& hasResumed);
-	int getCommonPriority(QModelIndexList& indexes);
+	static QString getFirstAvailibleFile(files_info& filesInfo);
+	static bool checkAllMountable(QModelIndexList& indexes);
+	static bool checkAllSuperSeed(QModelIndexList& indexes);
+	static bool checkAllHasMedia(QModelIndexList& indexes);
+	static bool checkAllSequential(QModelIndexList& indexes);
+	static bool checkAllQueueable(QModelIndexList& indexes);
+	static void checkPausedResumed(QModelIndexList indexes, bool& isAllPaused, bool& isAllResumed, bool& hasPaused, bool& hasResumed);
+	static int getCommonPriority(QModelIndexList& indexes);
 	void AddGroupsLevel(StyleEngene*, QList<TorrentGroup*>&, QMenu*);
-	void setGroupsUnchecked();
+	void setGroupsUnchecked() const;
+	int columnCount(const QModelIndex& parent) const override;
 public:
 	QTorrentDisplayModel(QTreeView*, QTorrentFilterProxyModel*, QObject*);
 	~QTorrentDisplayModel();
@@ -104,7 +105,7 @@ public:
 		rehash, change_group, queue_up, queue_down, queue_top, queue_bottom
 	};
 	void ActionOnSelectedItem(action wtf);
-	void retranslate();
+	void retranslate() const;
 
 	int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 	QVariant data(const QModelIndex& index, int role =	Qt::DisplayRole) const override;
@@ -134,7 +135,7 @@ public slots:
 	void Rehash();
 	void UpdateTrackers();
 	void DellAll();
-	void MountDT();
+	void MountDT() const;
 	void SetPriority(int prio);
 	void playInPlayer();
 	
@@ -142,7 +143,7 @@ public slots:
 	void moveStorrage();
 	void SetSuperSeed();
 	void generateMagnetLink();
-	void changeGroup(const QString& group);
+	void changeGroup(const QString& group) const;
 	void setupContextMenu();
 	void OnTorrentAdded();
 	void PauseSelected();

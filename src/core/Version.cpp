@@ -96,6 +96,11 @@ float Version::versionToFloat(QString v)
 	return ver;
 }
 
+bool operator==(const Version& lhs, const Version& rhs)
+{
+	return lhs.m_floatVal == rhs.m_floatVal;
+}
+
 bool operator<(const Version& lhs, const Version& rhs)
 {
 	return lhs.m_floatVal < rhs.m_floatVal;

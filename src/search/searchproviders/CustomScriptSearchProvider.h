@@ -8,7 +8,6 @@
 class QString;
 class CustomScriptSearchProvider : public ISerachProvider
 {
-
 	Q_OBJECT
 	Q_PROPERTY(int responseType READ ResponseType WRITE setResponseType)
 	Q_PROPERTY(int requestType READ RequestType WRITE setRequestType)
@@ -54,6 +53,8 @@ public:
 	void setSupportedCategories(int val);
 	void setResponseType(int val);
 	void setRequestType(int val);
+	bool isBusy() override;
+	void setBusy(bool res);
 	QString BuildUrl(QString token, int category, int page);
 	QString BuildPostData(QString token, int category, int page);
 	void setScriptObject(QScriptValue val);
@@ -64,6 +65,7 @@ public:
 public slots:
 	void PeformSearch(QString token, int category, int page);
 signals:
+	void BusyChanged(bool prev, bool current, QString name);
 	void SearchReady(QList<SearchResult*> result) override;
 	void Error(QString error) override;
 	void JsonResultReady();
@@ -79,6 +81,7 @@ private:
 	QNetworkAccessManager* m_pNetworkManager;
 	QScriptEngine* m_pEngine;
 	QIcon m_icon;
+	bool m_busy;
 	void parseAsHtml(QNetworkReply* pReply);
 	void parseAsJson(QNetworkReply* pReply);
 	QString detectEncoding(QString contentType);

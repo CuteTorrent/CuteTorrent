@@ -859,6 +859,42 @@
     <ClCompile Include="core\gui\Controls\CheckableMenu.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CheckableMenu.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\TreeBox.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TreeBox.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\winextras\qwinthumbnailtoolbar.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\winextras\qwinevent.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\winextras\qwineventfilter.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_qwinthumbnailtoolbar.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_qwinthumbnailtoolbar_p.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\searchlineedit.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_searchlineedit.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\OnlineReporter.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_OnlineReporter.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -1126,6 +1162,24 @@
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="core\TorrentGroupsManager.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\CheckableMenu.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\TreeBox.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\winextras\qwinthumbnailtoolbar.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\winextras\qwinthumbnailtoolbar_p.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\searchlineedit.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\OnlineReporter.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -1549,10 +1603,10 @@
     <ClInclude Include="core\TorrentGroup.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\gui\Controls\CheckableMenu.h">
+    <ClInclude Include="core\winextras\qwinevent.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\gui\Controls\TreeBox.h">
+    <ClInclude Include="core\winextras\qwineventfilter_p.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

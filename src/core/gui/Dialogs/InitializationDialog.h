@@ -18,7 +18,7 @@ public:
 	InitializationDialog(QWidget* parent = 0);
 public slots:
 	int exec();
-	void onProgressChanged(int, QString);
+	void onProgressChanged(int, QString) const;
 private:
 	QThread* m_pInitThread;
 	InitializationWorker* m_pWorker;

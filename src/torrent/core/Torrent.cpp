@@ -787,16 +787,6 @@ int Torrent::GetQueuePosition() const
 	return m_hTorrent.queue_position;
 }
 
-void Torrent::SetPeerDownloadLimit(boost::asio::ip::tcp::endpoint ip, int limit)
-{
-	m_hTorrent.handle.set_peer_download_limit(ip, limit);
-}
-
-void Torrent::SetPeerUploadLimit(boost::asio::ip::tcp::endpoint ip, int limit)
-{
-	m_hTorrent.handle.set_peer_upload_limit(ip, limit);
-}
-
 void Torrent::GetPieceAvalibility(std::vector<int>& availibility)
 {
 	if (m_hTorrent.handle.is_valid())

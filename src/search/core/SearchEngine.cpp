@@ -138,6 +138,7 @@ void SearchEngine::loadSearchProvider(const QString path)
 {
 	if (QDir(path).exists())
 	{
+		qDebug() << "Loading Search Provider from:" << path;
 		QString configPath = StaticHelpers::CombinePathes(path, "search.ini");
 		QSettings searchSettings(configPath, QSettings::IniFormat);
 		SearchInfo info;
@@ -163,11 +164,19 @@ void SearchEngine::loadSearchProvider(const QString path)
 				{
 					m_pSearchProviders.append(provider);
 					provider->setIcon(QIcon(StaticHelpers::CombinePathes(path, info.IconName)));
-					connect(provider, SIGNAL(SearchReady(QList<SearchResult*>)), SLOT(OnSearchReady(QList<SearchResult*>)));
+					connect(provider, SIGNAL(SearchReady(QList<SearchResult*>)), SLOT(OnSearchReady(QList<SearchResult*>)), Qt::QueuedConnection);
+				}
+				else
+				{
+					qCritical() << "SearchProvider ctor has error";
 				}
 			}
 
 			scriptFile.close();
+		}
+		else
+		{
+			qCritical() << "Failed to open script file " << scriptFileName << scriptFile.errorString();
 		}
 	}
 }
@@ -237,10 +246,11 @@ SearchItemsStorragePtr SearchEngine::GetResults()
 	return m_result;
 }
 
-QList<ISerachProvider*> SearchEngine::GetSearchProviders()
+QList<CustomScriptSearchProvider*> SearchEngine::GetSearchProviders()
 {
 	return m_pSearchProviders;
 }
+
 
 void SearchEngine::enableScriptDebugging()
 {

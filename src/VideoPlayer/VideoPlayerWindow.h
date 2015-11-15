@@ -49,14 +49,17 @@ namespace Phonon
 class VideoWidget;
 }
 class MediaController;
-
+class QWinThumbnailToolBar;
+class QWinThumbnailToolButton;
+class QWinTaskbarButton;
 class VideoPlayerWindow : public QMainWindow
 {
 	Q_OBJECT
 public:
+	
 	explicit VideoPlayerWindow(QWidget* parent = 0);
 	~VideoPlayerWindow();
-	void SetupConnections();
+	void SetupConnections() const;
 	void openFile(QString path);
 signals:
 
@@ -65,16 +68,16 @@ public slots:
 	void OnAvailableSubtitlesChanged();
 	void OnAvailableAudioChannelsChanged();
 	void OnCustomContextMenuRequested(QPoint);
-	void OnSubtitleChosen(int);
-	void OnAudioChannelChosen(int);
-	void updateWindowActiveState();
+	void OnSubtitleChosen(int) const;
+	void OnAudioChannelChosen(int) const;
+	static void updateWindowActiveState();
 
 protected:
-	void mouseMoveEvent(QMouseEvent* event);
-	void timerEvent(QTimerEvent* event);
-	void resizeEvent(QResizeEvent* event);
-	bool eventFilter(QObject* src, QEvent* event);
-	void keyPressEvent(QKeyEvent* keyEvent);
+	void mouseMoveEvent(QMouseEvent* event) override;
+	void timerEvent(QTimerEvent* event) override;
+	void resizeEvent(QResizeEvent* event) override;
+	bool eventFilter(QObject* src, QEvent* event) override;
+	void keyPressEvent(QKeyEvent* keyEvent) override;
 	void BuildMenu();
 
 private:
@@ -93,7 +96,10 @@ private:
 	QMenu m_cSubtitleStreams;
 	QActionGroup* m_pSubtitlesActions;
 	Phonon::MediaController* m_pMediaController;
-
+	QWinTaskbarButton* m_pTaskBarButton;
+#ifdef Q_WS_WIN
+	void setupTaskBar();
+#endif
 };
 
 #endif // VideoPlayerWindow_H

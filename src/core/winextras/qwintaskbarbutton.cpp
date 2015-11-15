@@ -47,6 +47,7 @@
 #include <QDebug>
 #include <dwmapi.h>
 #include <shobjidl.h>
+#include "qwineventfilter_p.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -215,6 +216,7 @@ assigned as the taskbar button's \l window.
 QWinTaskbarButton::QWinTaskbarButton(QObject* parent) :
 	QObject(parent), d_ptr(new QWinTaskbarButtonPrivate)
 {
+	QWinEventFilter::setup();
 	setWindow(qobject_cast<QWidget*>(parent));
 }
 

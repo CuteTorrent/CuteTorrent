@@ -1499,7 +1499,7 @@ public:
         hotKeyScrollArea->setWidgetResizable(true);
         keyMapContainer = new QWidget();
         keyMapContainer->setObjectName(QString::fromUtf8("keyMapContainer"));
-        keyMapContainer->setGeometry(QRect(0, 0, 694, 342));
+        keyMapContainer->setGeometry(QRect(0, 0, 98, 28));
         gridLayout_19 = new QGridLayout(keyMapContainer);
         gridLayout_19->setObjectName(QString::fromUtf8("gridLayout_19"));
         hotKeyScrollArea->setWidget(keyMapContainer);

@@ -8,7 +8,7 @@ class Version
 	friend bool operator<=(const Version& lhs, const Version& rhs);
 	friend bool operator>(const Version& lhs, const Version& rhs);
 	friend bool operator>=(const Version& lhs, const Version& rhs);
-
+	friend bool operator==(const Version& lhs, const Version& rhs);
 public:
 	static char* getVersionStr();
 	static short Major();

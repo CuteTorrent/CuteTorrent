@@ -4,6 +4,8 @@
 #include "filedownloader.h"
 #include <gui/Dialogs/OpenTorrentDialog.h>
 #include "SearchResult.h"
+#include <NotificationSystem.h>
+
 QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QSearchFilterModel* pSearchFilterModel, QObject* parent) 
 	: QAbstractListModel(parent)
 	, m_pTorrentDownloader(FileDownloader::getNewInstance())
@@ -15,6 +17,7 @@ QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QSearchFil
 	SearchItemsStorragePtr pItems = m_pSearchEngine->GetResults();
 	connect(pItems.get(), SIGNAL(reset()), this, SLOT(OnNewSearchResults()));
 	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFile*)), SLOT(OnTorrentDownloaded(QUrl, QTemporaryFile*)));
+	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadError(QUrl, QString)), SLOT(OnTorrentDownloadError(QUrl, QString)));
 }
 
 
@@ -87,8 +90,20 @@ void QSearchDisplayModel::downloadTorrent()
 	}
 
 	QModelIndex index = m_pTorrentListView->currentIndex();
-	SearchResult* searchResult = index.data(SearchItemRole).value<SearchResult*>();
-	m_pTorrentDownloader->download(searchResult->TorrentFileUrl());
+	if (index.isValid())
+	{
+		SearchResult* searchResult = index.data(SearchItemRole).value<SearchResult*>();
+		QString url = searchResult->TorrentFileUrl();
+		qDebug() << "Trying to download" << url;
+		if (url.startsWith("magnet"))
+		{
+			boost::scoped_ptr<OpenTorrentDialog> pDialog(new OpenTorrentDialog());
+			pDialog->SetData(url);
+			pDialog->exec();
+		}
+		m_pTorrentDownloader->download(url);
+	}
+	
 }
 
 void QSearchDisplayModel::OnNewSearchResults()
@@ -104,5 +119,10 @@ void QSearchDisplayModel::OnTorrentDownloaded(QUrl url, QTemporaryFile* pFile)
 	pDialog->exec();
 }
 
+void QSearchDisplayModel::OnTorrentDownloadError(QUrl, QString error)
+{
+	NotificationSystemPtr notificationSystem = NotificationSystem::getInstance();
+	notificationSystem->OnNewNotification(NotificationSystem::SYSTEM_ERROR, error, QVariant());
+}
 
 

@@ -339,7 +339,7 @@ void SettingsPropertyMapper::OnEditorCommit()
 	}
 }
 
-bool SettingsPropertyMapper::PropertyInfo::operator==(const PropertyInfo& other)
+bool SettingsPropertyMapper::PropertyInfo::operator==(const PropertyInfo& other) const
 {
 	return group == other.group
 	       && propertyName == other.propertyName

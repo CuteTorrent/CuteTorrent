@@ -6,7 +6,7 @@
 #include <QNetworkReply>
 #include "QSgml.h"
 
-CustomScriptSearchProvider::CustomScriptSearchProvider() : m_supportedCategories(All), m_responseType(JSON), m_requestType(GET), m_pEngine(NULL)
+CustomScriptSearchProvider::CustomScriptSearchProvider() : m_supportedCategories(All), m_responseType(JSON), m_requestType(GET), m_pEngine(NULL), m_busy(false)
 {
 	setObjectName("CustomScriptSearchProvider");
 	m_pNetworkManager = new QNetworkAccessManager(this);
@@ -56,6 +56,22 @@ void CustomScriptSearchProvider::setResponseType(int val)
 void CustomScriptSearchProvider::setRequestType(int val)
 {
 	m_requestType = RequestType_t(val);
+}
+
+bool CustomScriptSearchProvider::isBusy()
+{
+	return m_busy;
+}
+
+void CustomScriptSearchProvider::setBusy(bool val)
+{
+	bool prevBusy = m_busy;
+	if (val != m_busy)
+	{
+		m_busy = val;
+		qDebug() << "BusyChanged" << m_busy << m_name;
+		emit BusyChanged(prevBusy, m_busy, m_name);
+	}
 }
 
 QString CustomScriptSearchProvider::BuildUrl(QString token, int category, int page)
@@ -115,6 +131,7 @@ void CustomScriptSearchProvider::setScriptObject(QScriptValue val)
 
 void CustomScriptSearchProvider::PeformSearch(QString token, int category, int page)
 {
+	setBusy(true);
 	QNetworkRequest request;
 	QString url = BuildUrl(token, category, page);
 	qDebug() << "Url:" << url;
@@ -213,6 +230,7 @@ void CustomScriptSearchProvider::parseAsHtml(QNetworkReply* pReply)
 		QScriptValue htmlResult = m_pEngine->newQObject(sgml);
 		QScriptValue thisObj = m_scriptVal;
 
+		qDebug() << "thisObj.isObject()" << thisObj.isObject() << "thisObj.isValid()" << thisObj.isValid();
 		if (thisObj.isObject() && thisObj.isValid())
 		{
 			thisObj.setProperty("htmlResult", htmlResult);
@@ -250,12 +268,14 @@ void CustomScriptSearchProvider::parseAsJson(QNetworkReply* pReply)
 
 void CustomScriptSearchProvider::OnReplyReady(QNetworkReply* pReply)
 {
+	qDebug() << "OnReplyReady" << pReply->url();
 	if (pReply->error() == QNetworkReply::NoError)
 	{
 		QUrl redirectionTarget = pReply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
 
 		if (redirectionTarget.isValid() && m_requestType == GET)
 		{
+			qDebug() << "Redirecting to" << redirectionTarget;
 			m_pNetworkManager->get(QNetworkRequest(redirectionTarget));
 			return;
 		}
@@ -285,9 +305,12 @@ void CustomScriptSearchProvider::OnReplyReady(QNetworkReply* pReply)
 	}
 	else
 	{
+		qDebug() << "Error" << pReply->errorString();
 		emit Error(pReply->errorString());
 	}
+	setBusy(false);
 }
+
 
 int CustomScriptSearchProvider::SupportedCategories()
 {

@@ -55,8 +55,8 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
 	SearchEnginePtr instance = SearchEngine::getInstance();
-	QList<ISerachProvider*> iSerachProviders = instance->GetSearchProviders();
-	ISerachProvider* pFoundProvider = NULL;
+	QList<CustomScriptSearchProvider*> iSerachProviders = instance->GetSearchProviders();
+	CustomScriptSearchProvider* pFoundProvider = NULL;
 	QString name = res->Engine();
 
 	for (int i = 0; i < iSerachProviders.length(); i++)
@@ -122,6 +122,9 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	painter->setPen(opt.palette.color(cg, cr));
 	mimeIcon.paint(painter, iconArea, Qt::AlignCenter, im, qs);
 	painter->setFont(nameFont);
+	QTextDocument td;
+	td.setHtml(nameStr);
+	nameStr = td.toPlainText();
 	nameStr = nameFM.elidedText(nameStr, Qt::ElideRight, nameArea.width());
 	style->drawItemText(painter, nameArea, Qt::AlignLeft, opt.palette, option.state & QStyle::State_Enabled, nameStr);
 	painter->setFont(statusFont);
@@ -139,7 +142,10 @@ QSize QSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
 	QFont nameFont(option.font);
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
-	const QString nameStr(res->Name());
+	QString nameStr(res->Name());
+	QTextDocument td;
+	td.setHtml(nameStr);
+	nameStr = td.toPlainText();
 	int nameWidth = nameFM.width(nameStr);
 
 	if (nameWidth + iconSize > option.rect.width())

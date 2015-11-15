@@ -2,7 +2,7 @@
 
 InitializationDialog::InitializationDialog(QWidget* parent)
 	: BaseWindow<QDialog>(MinimizeModeOff, NoResize, parent)
-	, Ui::InitializationDialog()
+	  , Ui::InitializationDialog()
 
 {
 	m_pInitThread = new QThread;
@@ -30,7 +30,7 @@ int InitializationDialog::exec()
 	return QDialog::exec();
 }
 
-void InitializationDialog::onProgressChanged(int val, QString item)
+void InitializationDialog::onProgressChanged(int val, QString item) const
 {
 	progressBar->setValue(val);
 	stateLabel->setText(tr("TORRENT %1 RESUMED").arg(item));
@@ -60,3 +60,4 @@ QLabel* InitializationDialog::getTitleIcon()
 {
 	return tbMenu;
 }
+

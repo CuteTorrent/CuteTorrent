@@ -27,18 +27,18 @@ public:
 	static QSet<QString> suffixes[TYPE_COUNT];
 	static QIcon fileIcons[TYPE_COUNT];
 	static StyleEngene* getInstance();
-	QList<StyleInfo> getAvaliableStyles();
+	QList<StyleInfo> getAvaliableStyles() const;
 	void setStyle(QString internalName);
 	QIcon guessMimeIcon(const QString& suffix);
 	QString gessMimeIconType(const QString& suffix);
-	StyleInfo getCuurentStyle();
+	StyleInfo getCuurentStyle() const;
 	QIcon getIcon(QString name);
 private:
 	void init();
-	void initFileSuffixes();
+	static void initFileSuffixes();
 	void initIcons();
 	void loadStyleInfo(QString path);
-	void loadStyleSheet(QString path);
+	void loadStyleSheet(QString path) const;
 	QCache<QString, QIcon> m_iconCache;
 	QMap<QString, QString> iconNamesMap;
 	QList<StyleInfo> _avaliableStyles;

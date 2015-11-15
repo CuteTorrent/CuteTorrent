@@ -27,7 +27,7 @@ StyleEngene* StyleEngene::getInstance()
 	return instance;
 }
 
-QList<StyleInfo> StyleEngene::getAvaliableStyles()
+QList<StyleInfo> StyleEngene::getAvaliableStyles() const
 {
 	return _avaliableStyles;
 }
@@ -96,7 +96,7 @@ QIcon StyleEngene::guessMimeIcon(const QString& suffix)
 	return fallback;
 }
 
-StyleInfo StyleEngene::getCuurentStyle()
+StyleInfo StyleEngene::getCuurentStyle() const
 {
 	return _currentStyle.styleInfo;
 }
@@ -251,7 +251,7 @@ void StyleEngene::initIcons()
 	fileIcons[APP] = QIcon::fromTheme("application-x-executable", fallback);
 }
 
-void StyleEngene::loadStyleSheet(QString path)
+void StyleEngene::loadStyleSheet(QString path) const
 {
 	QFile file(path);
 
@@ -259,7 +259,7 @@ void StyleEngene::loadStyleSheet(QString path)
 	{
 		QString relativePath = _currentStyle.imageDir;
 		QString styleSheet = QString(file.readAll()).replace("$[STYLE_DIR]", relativePath);
-		qDebug() << styleSheet;
+		//qDebug() << styleSheet;
 		static_cast<QApplication*>(QApplication::instance())->setStyleSheet(styleSheet);
 		file.close();
 	}

@@ -104,6 +104,7 @@ bool operator==(const TorrentGroup& lhs, const TorrentGroup& rhs)
 {
 	bool propertiesEquals = lhs.m_uid == rhs.m_uid
 		&& lhs.m_name == rhs.m_name
+		&& lhs.m_savePath == rhs.m_savePath
 		&& lhs.m_extentions == rhs.m_extentions;
 	bool listEqauls = true;
 	if (lhs.m_children.size() != rhs.m_children.size())

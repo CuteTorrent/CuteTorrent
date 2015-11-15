@@ -50,7 +50,9 @@ OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags)
 	gridLayout->addWidget(GroupComboBox, 1, 0, 1, 1);
 	m_pGroupsModel = new FiltersViewModel(FiltersViewModel::Groups, this);
 	GroupComboBox->setModel(m_pGroupsModel);
+	GroupComboBox->setRootModelIndex(m_pGroupsModel->index(0, 0, QModelIndex()));
 	GroupComboBox->setCurrentIndex(-1);
+	
 	connect(GroupComboBox, SIGNAL(currentIndexChanged(int)), SLOT(ChangeGroup()));
 	m_pTorrentManager = TorrentManager::getInstance();
 	QCompleter* pathComplitter = new QCompleter(this);
@@ -117,6 +119,7 @@ void OpenTorrentDialog::FillData(opentorrent_info* info)
 			QModelIndex groupIndex = m_pGroupsModel->index(pTorrentGroup->uid());
 			if (groupIndex.isValid())
 			{
+				GroupComboBox->treeView()->expand(groupIndex);
 				GroupComboBox->setCurrentIndex(groupIndex);
 			}
 			else
@@ -135,7 +138,10 @@ void OpenTorrentDialog::FillData(opentorrent_info* info)
 void OpenTorrentDialog::SetData(QString filename)
 {
 	m_torrentFilename = filename;
-
+	QApplicationSettingsPtr settings = QApplicationSettings::getInstance();
+	QString lastSaveDir = settings->valueString("System", "LastSaveTorrentDir", QDir::homePath());
+	pathEdit->setText(lastSaveDir);
+	qDebug() << "lastSaveDir" << lastSaveDir;
 	if(filename.startsWith("magnet"))
 	{
 		QMovie* movie = new QMovie(":/images/loader.gif");
@@ -215,13 +221,13 @@ bool OpenTorrentDialog::AccepTorrent()
 		TorrentManager::AddTorrentFlags flags = static_cast<TorrentManager::AddTorrentFlags>(BuildFlags());
 		QString savePath = pathEdit->displayText();
 
-		if(!m_torrentFilename.startsWith("magnet"))
+		if(m_torrentFilename.startsWith("magnet"))
 		{
-			m_pTorrentManager->AddTorrent(m_torrentFilename, savePath, ec, labelNameData->text(), filePriorities, group, flags);
+			m_pTorrentManager->AddMagnet(m_info.handle, savePath, group, filePriorities, flags);
 		}
 		else
 		{
-			m_pTorrentManager->AddMagnet(m_info.handle, savePath, group, filePriorities, flags);
+			m_pTorrentManager->AddTorrent(m_torrentFilename, savePath, ec, labelNameData->text(), filePriorities, group, flags);
 		}
 
 		if(ec)

@@ -15,8 +15,11 @@
 #include <AddRssDwonloadRuleDialog.h>
 FiltersViewModel::FiltersViewModel(Mode mode,QObject* parent) 
 	: QAbstractItemModel(parent)
+	, m_LoadingMovie(new QMovie(":/images/loader.gif"))
 	, m_mode(mode)
+	, m_downloadingCount(0)
 {
+	m_LoadingMovie->start();
 	BuildTree();
 	m_updateTimerID = startTimer(400);
 	TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
@@ -117,6 +120,26 @@ QVariant FiltersViewModel::data(const QModelIndex& index, int role) const
 
 		case Qt::DecorationRole:
 		{
+			if (filterItem->FilterType() == SEARCH)
+			{
+				QString searchProviderName = filterItem->Filter().toString();
+				QList<CustomScriptSearchProvider*> searchProviders = SearchEngine::getInstance()->GetSearchProviders();
+				int nSearchProvidersCount = searchProviders.size();
+
+				for (int i = 0; i < nSearchProvidersCount; i++)
+				{
+					ISerachProvider* current = searchProviders.at(i);
+					QString engineName = current->Name();
+					if (engineName == searchProviderName)
+					{
+						if (current->isBusy())
+						{
+							return QVariant::fromValue(m_LoadingMovie->currentPixmap());
+						}
+						break;
+					}
+				}
+			}
 			return filterItem->Icon();
 		}
 
@@ -210,8 +233,14 @@ void FiltersViewModel::Retranslate()
 	}
 }
 
+int FiltersViewModel::getDownloadingTorrentsCount()
+{
+	return m_downloadingCount;
+}
+
 void FiltersViewModel::UpdateGroupCounters()
 {
+	qDebug() << "FiltersViewModel::UpdateGroupCounters()";
 	QList<QUuid> groupKeys = m_groupFiltersToUid.keys();
 	for (int i = 0; i < m_groupFiltersToUid.size(); i++)
 	{
@@ -293,6 +322,59 @@ void FiltersViewModel::UpdateGroupItems()
 
 	UpdateGroupCounters();
 	endResetModel();
+}
+
+void FiltersViewModel::onBusyChanged(bool prevVal, bool curentVal, QString searchProviderName)
+{
+	qDebug() << "onBusyChanged" << prevVal << curentVal << searchProviderName;
+	if (m_searchProvidersIndexMap.contains(searchProviderName))
+	{
+		QModelIndex idx = m_searchProvidersIndexMap[searchProviderName];
+		emit dataChanged(idx, idx);
+		if (curentVal)
+		{
+			connect(m_LoadingMovie, SIGNAL(updated(QRect)),SLOT(onUpdateBusyIcons()), Qt::UniqueConnection);
+		}
+		else
+		{
+			QList<CustomScriptSearchProvider*> searchProviders = SearchEngine::getInstance()->GetSearchProviders();
+			int nSearchProvidersCount = searchProviders.size();
+
+			bool allFinished = true;
+
+			for (int i = 0; i < nSearchProvidersCount; i++)
+			{
+				CustomScriptSearchProvider* current = searchProviders.at(i);
+				if (current->isBusy())
+				{
+					allFinished = false;
+					break;
+				}
+			}
+
+			if (allFinished)
+			{
+				disconnect(m_LoadingMovie, SIGNAL(updated(QRect)),this, SLOT(onUpdateBusyIcons()));
+			}
+		}
+	}
+}
+
+void FiltersViewModel::onUpdateBusyIcons()
+{
+	qDebug() << "onUpdateBusyIcons";
+	QList<CustomScriptSearchProvider*> searchProviders = SearchEngine::getInstance()->GetSearchProviders();
+	int nSearchProvidersCount = searchProviders.size();
+
+	for (int i = 0; i < nSearchProvidersCount; i++)
+	{
+		CustomScriptSearchProvider* current = searchProviders.at(i);
+		if (current->isBusy())
+		{
+			QModelIndex idx = m_searchProvidersIndexMap[current->Name()];
+			emit dataChanged(idx, idx);
+		}
+	}
 }
 
 void FiltersViewModel::UpdateIcons()
@@ -449,13 +531,16 @@ void FiltersViewModel::BuildTree()
 		FilterTreeItem* searchRootItem = new FilterTreeItem(tr("TAB_SEARCH"), searchIcon, SEARCH, QString());
 		searchRootItem->setItemsCount(-1);
 		m_rootItems.append(searchRootItem);
-		QList<ISerachProvider*> searchProviders = SearchEngine::getInstance()->GetSearchProviders();
+		QModelIndex rootIndex = index(m_rootItems.indexOf(searchRootItem), 0, QModelIndex());
+		QList<CustomScriptSearchProvider*> searchProviders = SearchEngine::getInstance()->GetSearchProviders();
 		int nSearchProvidersCount = searchProviders.size();
 
 		for (int i = 0; i < nSearchProvidersCount; i++)
 		{
-			ISerachProvider* current = searchProviders.at(i);
+			CustomScriptSearchProvider* current = searchProviders.at(i);
 			QString engineName = current->Name();
+			m_searchProvidersIndexMap.insert(engineName, index(i, 0, rootIndex));
+			connect(current, SIGNAL(BusyChanged(bool, bool, QString)), SLOT(onBusyChanged(bool, bool, QString)));
 			FilterTreeItem* searchItem = new FilterTreeItem(engineName, current->getIcon(), SEARCH, engineName, searchRootItem);
 			searchRootItem->AddChlld(searchItem);
 		}
@@ -512,7 +597,7 @@ void FiltersViewModel::UpdateCounters()
 		}
 	}
 
-
+	m_downloadingCount = downloadingCount;
 
 	if (torrentsItem != NULL)
 	{

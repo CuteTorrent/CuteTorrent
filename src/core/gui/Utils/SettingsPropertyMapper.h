@@ -58,7 +58,7 @@ private:
 		UIValueSetter uiSetter;
 		UIValueGetter uiGetter;
 		QVariant defaultValue, newValue;
-		bool operator==(const PropertyInfo& other);
+		bool operator==(const PropertyInfo& other) const;
 	};
 
 	QList<PropertyInfo> m_propertyInfos;

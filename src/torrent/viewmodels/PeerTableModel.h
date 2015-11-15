@@ -4,7 +4,7 @@
 #include <QStringList>
 #include <QMutex>
 #include <QStandardItem>
-
+#include "StyleEngene.h"
 class PeerTableModel : public QStandardItemModel
 {
 	Q_OBJECT
@@ -26,6 +26,7 @@ public:
 	void Retranslate();
 	void Clear();
 private:
+	StyleEngene* m_pStyleEngene;
 	QMutex* m_pUpdateMutex;
 	QHash<QString, QStandardItem*> m_peerItems;
 	void updatePeer(libtorrent::peer_info peerInfo);

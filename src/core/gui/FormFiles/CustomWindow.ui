@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>547</width>
+    <width>550</width>
     <height>681</height>
    </rect>
   </property>
@@ -236,7 +236,7 @@
          <number>0</number>
         </property>
         <item row="0" column="1">
-         <widget class="QSplitter" name="spliiter">
+         <widget class="QSplitter" name="verticalSplitter">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -252,7 +252,7 @@
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
-          <widget class="QSplitter" name="spliiter1">
+          <widget class="QSplitter" name="horizontalSplitter">
            <property name="mouseTracking">
             <bool>true</bool>
            </property>
@@ -791,9 +791,6 @@
          <bool>false</bool>
         </property>
         <widget class="QMenu" name="menu">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
          <property name="title">
           <string>MENU_FILE</string>
          </property>
@@ -818,6 +815,7 @@
          <addaction name="ACTION_MENU_ABOUT_QT"/>
          <addaction name="separator"/>
          <addaction name="ACTION_MENU_CHECK_UPDATE"/>
+         <addaction name="ACTION_MENU_REPORT_PROBLEM"/>
         </widget>
         <widget class="QMenu" name="menuMENU_TOOLS">
          <property name="title">
@@ -825,7 +823,31 @@
          </property>
          <addaction name="ACTION_MENU_BACKUP"/>
         </widget>
+        <widget class="QMenu" name="menuMENU_VIEW">
+         <property name="title">
+          <string>MENU_VIEW</string>
+         </property>
+         <widget class="QMenu" name="languageSubMenu">
+          <property name="title">
+           <string>MENU_CHOSE_LANGUAGE</string>
+          </property>
+         </widget>
+         <widget class="QMenu" name="skinSubMenu">
+          <property name="title">
+           <string>MENU_CHOSE_SKIN</string>
+          </property>
+         </widget>
+         <addaction name="ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY"/>
+         <addaction name="ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY"/>
+         <addaction name="ACTION_MENU_TOGGLE_GROUPS_VISIBILITY"/>
+         <addaction name="ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY"/>
+         <addaction name="separator"/>
+         <addaction name="languageSubMenu"/>
+         <addaction name="separator"/>
+         <addaction name="skinSubMenu"/>
+        </widget>
         <addaction name="menu"/>
+        <addaction name="menuMENU_VIEW"/>
         <addaction name="menu_2"/>
         <addaction name="menuMENU_TOOLS"/>
         <addaction name="menu_CuteTorrent"/>
@@ -849,14 +871,6 @@
          <property name="acceptDrops">
           <bool>true</bool>
          </property>
-         <property name="styleSheet">
-          <string notr="true"> QToolBar {
-               border-bottom: none;
-               border-top: none;
-               spacing:3px;
-               padding-right:2px;
-               }</string>
-         </property>
          <addaction name="ACTION_TOOLBAR_START"/>
          <addaction name="ACTION_TOOLBAR_PAUSE"/>
          <addaction name="ACTION_TOOLBAR_REMOVE"/>
@@ -871,14 +885,6 @@
          <property name="acceptDrops">
           <bool>true</bool>
          </property>
-         <property name="styleSheet">
-          <string notr="true"> QToolBar {
-               border-bottom: none;
-               border-top: none;
-               spacing:3px;
-               padding-right:2px;
-               }</string>
-         </property>
          <addaction name="ACTION_TOOLBAR_DOWNLOAD"/>
          <addaction name="ACTION_TOOLBAR_OPEN_URL"/>
          <addaction name="ACTION_TOOLBAR_SETTINGS"/>
@@ -886,14 +892,6 @@
         <widget class="QToolBar" name="m_pRssToolBar">
          <property name="acceptDrops">
           <bool>true</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"> QToolBar {
-               border-bottom: none;
-               border-top: none;
-               spacing:3px;
-               padding-right:2px;
-               }</string>
          </property>
          <addaction name="ACTION_TOOLBAR_RSS_ADD"/>
          <addaction name="ACTION_TOOLBAR_RSS_REMOVE"/>
@@ -915,9 +913,6 @@
    </property>
    <property name="shortcutContext">
     <enum>Qt::WindowShortcut</enum>
-   </property>
-   <property name="softKeyRole">
-    <enum>QAction::NoSoftKey</enum>
    </property>
   </action>
   <action name="ACTION_MENU_OPEN_MAGNET">
@@ -1064,6 +1059,53 @@
   <action name="ACTION_TOOLBAR_QUEUE_DOWN">
    <property name="text">
     <string>QUEUE_DOWN</string>
+   </property>
+  </action>
+  <action name="ACTION_MENU_REPORT_PROBLEM">
+   <property name="text">
+    <string>MENU_REPORT_PROBLEM</string>
+   </property>
+  </action>
+  <action name="ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MENU_TOGGLE_TOOLBAR_VISIBILITY</string>
+   </property>
+  </action>
+  <action name="ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MENU_TOGGLE_DETAIL_INFO_VISIBILITY</string>
+   </property>
+  </action>
+  <action name="ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MENU_TOGGLE_STATUSBAR_VISIBILITY</string>
+   </property>
+  </action>
+  <action name="ACTION_MENU_TOGGLE_GROUPS_VISIBILITY">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MENU_TOGGLE_GROUPS_VISIBILITY</string>
+   </property>
+  </action>
+  <action name="actionTemp">
+   <property name="text">
+    <string>temp</string>
+   </property>
+  </action>
+  <action name="actionTemp_2">
+   <property name="text">
+    <string>temp</string>
    </property>
   </action>
  </widget>
@@ -1355,6 +1397,70 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>toggleInfoTabsVisibility(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>toggleToolBarVisibility(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>toggleStatusBarVisibility(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ACTION_MENU_TOGGLE_GROUPS_VISIBILITY</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>toggleGroupsVisibility(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>FillTorrentDetails(Torrent*)</signal>
@@ -1376,5 +1482,9 @@
   <slot>editRssFeed()</slot>
   <slot>queueTorrentsUp()</slot>
   <slot>queueTorrentsDown()</slot>
+  <slot>toggleInfoTabsVisibility(bool)</slot>
+  <slot>toggleToolBarVisibility(bool)</slot>
+  <slot>toggleStatusBarVisibility(bool)</slot>
+  <slot>toggleGroupsVisibility(bool)</slot>
  </slots>
 </ui>

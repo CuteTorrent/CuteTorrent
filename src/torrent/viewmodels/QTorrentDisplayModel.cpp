@@ -217,7 +217,7 @@ void QTorrentDisplayModel::DellAll()
 	ActionOnSelectedItem(remove_all);
 }
 
-void QTorrentDisplayModel::MountDT()
+void QTorrentDisplayModel::MountDT() const
 {
 	QModelIndexList indexes = m_pProxyFilterModel->mapSelectionToSource(m_pTorrentListView->selectionModel()->selection()).indexes();
 
@@ -297,7 +297,7 @@ void QTorrentDisplayModel::OpenDirSelected()
 }
 
 
-void QTorrentDisplayModel::setGroupsUnchecked()
+void QTorrentDisplayModel::setGroupsUnchecked() const
 {
 	QList<QAction*> actions = groupsMenu->actions();
 
@@ -305,6 +305,11 @@ void QTorrentDisplayModel::setGroupsUnchecked()
 	{
 		actions[i]->setChecked(false);
 	}
+}
+
+int QTorrentDisplayModel::columnCount(const QModelIndex& parent) const
+{
+	return 1;
 }
 
 void QTorrentDisplayModel::contextualMenu(const QPoint& point)
@@ -882,7 +887,7 @@ QTorrentDisplayModel::~QTorrentDisplayModel()
 {
 }
 
-void QTorrentDisplayModel::retranslate()
+void QTorrentDisplayModel::retranslate() const
 {
 	pauseTorrent->setText(tr("ACTION_TORRENTLIST_PAUSE"));
 	resumeTorrent->setText(tr("ACTION_TORRENTLIST_RESUME"));
@@ -925,7 +930,7 @@ void QTorrentDisplayModel::playInPlayer()
 {
 	if (m_pCurrentTorrent != NULL)
 	{
-		VideoPlayerWindow* vpw = new VideoPlayerWindow(m_pTorrentListView);
+		VideoPlayerWindow* vpw = new VideoPlayerWindow();
 		files_info filesInfo = m_pCurrentTorrent->GetFileDownloadInfo();
 		QString firstFileSubPath = getFirstAvailibleFile(filesInfo);
 		QString filePath = StaticHelpers::CombinePathes(m_pCurrentTorrent->GetSavePath(), firstFileSubPath);
@@ -1115,9 +1120,12 @@ void QTorrentDisplayModel::setupContextMenu()
 
 void QTorrentDisplayModel::OnTorrentAdded()
 {
+	qDebug() << "QTorrentDisplayModel::OnTorrentAdded()";
 	int rowCnt = rowCount();
+	
 	beginInsertRows(QModelIndex(), rowCnt, rowCnt);
 	endInsertRows();
+	
 }
 
 void QTorrentDisplayModel::SetSuperSeed()
@@ -1130,7 +1138,7 @@ void QTorrentDisplayModel::generateMagnetLink()
 	ActionOnSelectedItem(generate_magmet);
 }
 
-void QTorrentDisplayModel::changeGroup(const QString& uidStr)
+void QTorrentDisplayModel::changeGroup(const QString& uidStr) const
 {
 	QUuid uid = uidStr;
 	QModelIndexList indexes = m_pTorrentListView->selectionModel()->selectedIndexes();
@@ -1168,7 +1176,7 @@ void QTorrentDisplayModel::Update()
 
 				if (torrentIndex.isValid())
 				{
-					Torrent* pTorrent = torrentIndex.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>();
+					Torrent* pTorrent = torrentIndex.data(TorrentRole).value<Torrent*>();
 
 					if (pTorrent != NULL && changedTorrents.contains(pTorrent->GetInfoHash()))
 					{

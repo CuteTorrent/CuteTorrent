@@ -89,6 +89,23 @@ QString StaticHelpers::toKbMbGb(size_type size, bool isSpped)
 	return str;
 }
 
+QString StaticHelpers::GetCountryCode(QLocale::Language lang, QLocale::Country country)
+{
+	QList<QLocale> locales = QLocale::matchingLocales(lang, QLocale::AnyScript,	country);
+	for (int i = 0; i < locales.size(); i++)
+	{
+		QLocale locale = locales[i];
+
+		QString localeName = locale.name();
+		if (localeName.contains('_'))
+		{
+			return localeName.split('_').at(1).toUpper();
+		}
+	}
+	
+	return "UN";
+}
+
 QString StaticHelpers::filePriorityToString(int priority)
 {
 	static char* priority_str[] = { QT_TRANSLATE_NOOP("FileViewModel", "FILETAB_PRIORITY_ZERO"),

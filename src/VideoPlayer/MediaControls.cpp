@@ -75,6 +75,10 @@ void MediaControls::updateTime(qint64 time)
 {
 	QTime t(0, 0, 0);
 	t = t.addMSecs(reverseTime ? totalTime - time : time);
+	if (totalTime != 0)
+	{
+		emit timeChanged(time * 100ll / totalTime);
+	}
 	ui->currentTimeLabel->setText(t.toString("hh:mm:ss"));
 }
 void MediaControls::updateTotalTime(qint64 time)

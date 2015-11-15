@@ -1,11 +1,7 @@
 ﻿#include "PeerTableModel.h"
-#include <QIcon>
-#include <IpItemDelegate.h>
-#include <QDebug>
-#include <QMutexLocker>
-#include <QVariant>
 PeerTableModel::PeerTableModel(QObject* parent)
 	: QStandardItemModel(0, COLUMN_COUNT)
+	, m_pStyleEngene(StyleEngene::getInstance())
 	, m_pUpdateMutex(new QMutex())
 	, m_peerItems()
 {
@@ -21,7 +17,10 @@ void PeerTableModel::UpdateData(std::vector<libtorrent::peer_info>& peersInfo)
 	for (int i = 0; i < peersInfo.size(); i++)
 	{
 		libtorrent::peer_info peerInfo = peersInfo[i];
-		QString peerIp = QString::fromStdString(peerInfo.ip.address().to_string());
+
+		QString peerIp = QString::fromUtf8(peerInfo.ip.address().to_string().c_str());
+
+		if (peerIp.isEmpty() || peerIp.isNull()) continue;
 
 		if (m_peerItems.contains(peerIp))
 		{
@@ -83,7 +82,11 @@ void PeerTableModel::updatePeer(libtorrent::peer_info peerInfo)
 	if ((peerInfo.flags & libtorrent::peer_info::rc4_encrypted) == libtorrent::peer_info::rc4_encrypted
 	        || (peerInfo.flags & libtorrent::peer_info::plaintext_encrypted) == libtorrent::peer_info::plaintext_encrypted)
 	{
-		client = client.append("*");
+		setData(index(row, CLIENT_NAME), m_pStyleEngene->getIcon("encrypted"), Qt::DecorationRole);
+	}
+	else
+	{
+		setData(index(row, CLIENT_NAME), m_pStyleEngene->getIcon("not-encrypted"), Qt::DecorationRole);
 	}
 
 	setData(index(row, CLIENT_NAME), client, Qt::DisplayRole);

@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "SchedulerTask.h"
 #include "NetworkDiskCache.h"
 #include <QDir>
-
+#include <QLocale>
 class StaticHelpers
 {
 private:
@@ -50,7 +50,7 @@ public:
 	static QString filePriorityToString(int priority);
 	static QString SchedulerTypeToString(SchedulerTask::TaskType type);
 	static QString GetBaseSuffix(const file_storage& storrage);
-
+	static QString GetCountryCode(QLocale::Language lang,QLocale::Country country);
 	template<typename T, typename... Args> static QString CombinePathes(T first, Args& ... args);
 	static NetworkDiskCache* GetGLobalWebCache();
 	static QByteArray gUncompress(QByteArray data);

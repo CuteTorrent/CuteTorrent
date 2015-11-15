@@ -41,7 +41,7 @@ signals:
 	void openURL();
 	void pause();
 	void setVolume(int value);
-	void setPosition(int value);
+	void timeChanged(int value);
 	void toggleFullScreen();
 private:
 	qint64 totalTime;

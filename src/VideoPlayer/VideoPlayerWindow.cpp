@@ -31,48 +31,46 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QFileDialog>
 #include <QMenu>
 #include "StyleEngene.h"
+
 #ifdef Q_WS_WIN
+#include <qwintaskbarbutton.h>
+#include "qwintaskbarprogress.h"
 #include <Windows.h>
 #endif
-VideoPlayerWindow::VideoPlayerWindow(QWidget* parent) :	QMainWindow(parent),
-	m_bIsFullScr(false),
-	m_bMouseHideNeeded(false),
-	m_pSubtitlesMapper(new QSignalMapper(this)),
-	m_pAudioChannelsMapper(new QSignalMapper(this)),
-	m_pAudioActions(new QActionGroup(this)),
-	m_pSubtitlesActions(new QActionGroup(this))
+VideoPlayerWindow::VideoPlayerWindow(QWidget* parent) : QMainWindow(parent),
+                                                        m_bIsFullScr(false),
+                                                        m_bMouseHideNeeded(false),
+                                                        m_pSubtitlesMapper(new QSignalMapper(this)),
+                                                        m_pAudioChannelsMapper(new QSignalMapper(this)),
+                                                        m_pAudioActions(new QActionGroup(this)),
+                                                        m_pSubtitlesActions(new QActionGroup(this))
 {
-	try
-	{
-		m_pVideoWidget = new Phonon::VideoWidget(this);
-		setCentralWidget(m_pVideoWidget);
-		m_pVideoWidget->setContextMenuPolicy(Qt::CustomContextMenu);
-		m_mediaControl = new MediaController(m_pVideoWidget);
-		m_pMediaController = m_mediaControl->mediaController();
-		Phonon::createPath(m_mediaControl->mediaObject(), m_pVideoWidget);
-		controls = new MediaControls(m_mediaControl, m_pVideoWidget);
-		controls->installEventFilter(this);
-		setWindowIcon(QIcon(":/icons/app.ico"));
-		SetupConnections();
-		m_windowActiveTimer = new QTimer(this);
-		connect(m_windowActiveTimer, SIGNAL(timeout()), this, SLOT(updateWindowActiveState()));
-		m_windowActiveTimer->start(59000);
-		setAttribute(Qt::WA_DeleteOnClose);
-		setMouseTracking(true);
-		resize(600, 400);
-		m_pVideoWidget->installEventFilter(this);
-		m_pVideoWidget->setAspectRatio(Phonon::VideoWidget::AspectRatioAuto);
-		BuildMenu();
-		controls->move((m_pVideoWidget->width() - controls->width()) / 2, m_pVideoWidget->height() - controls->height());
-		m_pAudioActions->setExclusive(true);
-		m_pSubtitlesActions->setExclusive(true);
-	}
-	catch(...)
-	{
-		CustomMessageBox::warning(this, "Exception", "VideoPlayerWindow::VideoPlayerWindow()\n");
-	}
+	m_pVideoWidget = new Phonon::VideoWidget(this);
+	setCentralWidget(m_pVideoWidget);
+	m_pVideoWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+	m_mediaControl = new MediaController(m_pVideoWidget);
+	m_pMediaController = m_mediaControl->mediaController();
+	Phonon::createPath(m_mediaControl->mediaObject(), m_pVideoWidget);
+	controls = new MediaControls(m_mediaControl, m_pVideoWidget);
+	controls->installEventFilter(this);
+	setWindowIcon(QIcon(":/icons/app.ico"));
+#ifdef Q_WS_WIN
+	setupTaskBar();
+#endif
+	SetupConnections();
+	m_windowActiveTimer = new QTimer(this);
+	connect(m_windowActiveTimer, SIGNAL(timeout()), this, SLOT(updateWindowActiveState()));
+	m_windowActiveTimer->start(59000);
+	setAttribute(Qt::WA_DeleteOnClose);
+	setMouseTracking(true);
+	resize(600, 400);
+	m_pVideoWidget->installEventFilter(this);
+	m_pVideoWidget->setAspectRatio(Phonon::VideoWidget::AspectRatioAuto);
+	BuildMenu();
+	controls->move((m_pVideoWidget->width() - controls->width()) / 2, m_pVideoWidget->height() - controls->height());
+	m_pAudioActions->setExclusive(true);
+	m_pSubtitlesActions->setExclusive(true);
 }
-
 
 
 void VideoPlayerWindow::OnAvailableSubtitlesChanged()
@@ -83,15 +81,15 @@ void VideoPlayerWindow::OnAvailableSubtitlesChanged()
 	QList<QAction*> actions = m_cSubtitleStreams.actions();
 
 	foreach(QAction* action, actions)
-	{
-		m_pSubtitlesMapper->removeMappings(action);
-		m_pSubtitlesActions->removeAction(action);
-	}
+		{
+			m_pSubtitlesMapper->removeMappings(action);
+			m_pSubtitlesActions->removeAction(action);
+		}
 
 	qDeleteAll(actions);
 	m_cSubtitleStreams.setEnabled(subtitles.length() != 0);
 
-	for(int i = 0; i < subtitles.length(); i++)
+	for (int i = 0; i < subtitles.length(); i++)
 	{
 		QAction* menuAction = m_cSubtitleStreams.addAction(subtitles[i].name());
 		menuAction->setCheckable(true);
@@ -110,15 +108,15 @@ void VideoPlayerWindow::OnAvailableAudioChannelsChanged()
 	Phonon::AudioChannelDescription current = m_pMediaController->currentAudioChannel();
 
 	foreach(QAction* action, actions)
-	{
-		m_pAudioChannelsMapper->removeMappings(action);
-		m_pAudioActions->removeAction(action);
-	}
+		{
+			m_pAudioChannelsMapper->removeMappings(action);
+			m_pAudioActions->removeAction(action);
+		}
 
 	qDeleteAll(m_cAudioStreamsMenu.actions());
 	m_cAudioStreamsMenu.setEnabled(audioChannels.length() != 0);
 
-	for(int i = 0; i < audioChannels.length(); i++)
+	for (int i = 0; i < audioChannels.length(); i++)
 	{
 		QAction* menuAction = m_cAudioStreamsMenu.addAction(audioChannels[i].name());
 		menuAction->setCheckable(true);
@@ -137,7 +135,7 @@ void VideoPlayerWindow::resizeEvent(QResizeEvent* event)
 
 bool VideoPlayerWindow::eventFilter(QObject* src, QEvent* event)
 {
-	if(src == m_pVideoWidget && event->type() == QEvent::MouseButtonDblClick)
+	if (src == m_pVideoWidget && event->type() == QEvent::MouseButtonDblClick)
 	{
 		QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
 
@@ -161,9 +159,9 @@ void VideoPlayerWindow::goFullScreen()
 	m_bIsFullScr = !m_bIsFullScr;
 	Qt::WindowFlags flags = windowFlags();
 
-	if(m_bIsFullScr)
+	if (m_bIsFullScr)
 	{
-		if(!isFullScreen())
+		if (!isFullScreen())
 		{
 			//we only update that value if it is not already fullscreen
 #ifdef Q_WS_X11
@@ -173,14 +171,14 @@ void VideoPlayerWindow::goFullScreen()
 			raise();
 			setWindowState(windowState() | Qt::WindowFullScreen);    // set
 #else
-			setWindowState(windowState() | Qt::WindowFullScreen);    // set
+			setWindowState(windowState() | Qt::WindowFullScreen); // set
 			show();
 #endif
 		}
 	}
-	else if(isFullScreen())
+	else if (isFullScreen())
 	{
-		setWindowState(windowState()  ^ Qt::WindowFullScreen);    // reset
+		setWindowState(windowState() ^ Qt::WindowFullScreen); // reset
 		show();
 	}
 
@@ -193,7 +191,7 @@ void VideoPlayerWindow::openFile(QString path)
 	{
 		m_mediaControl->playFile(path);
 	}
-	catch(...)
+	catch (...)
 	{
 		CustomMessageBox::warning(this, "ERROR", "VideoPlayerWindow::openFile()");
 	}
@@ -209,7 +207,7 @@ void VideoPlayerWindow::mouseMoveEvent(QMouseEvent* event)
 
 void VideoPlayerWindow::timerEvent(QTimerEvent* event)
 {
-	if(event->timerId() == animationTimerID && !m_cMainMenu.isVisible())
+	if (event->timerId() == animationTimerID && !m_cMainMenu.isVisible())
 	{
 		killTimer(animationTimerID);
 		controls->hide();
@@ -219,9 +217,9 @@ void VideoPlayerWindow::timerEvent(QTimerEvent* event)
 
 void VideoPlayerWindow::keyPressEvent(QKeyEvent* keyEvent)
 {
-	if(keyEvent->key() == Qt::Key_Space)
+	if (keyEvent->key() == Qt::Key_Space)
 	{
-		if(m_mediaControl->isPlaying())
+		if (m_mediaControl->isPlaying())
 		{
 			m_mediaControl->pause();
 		}
@@ -237,22 +235,22 @@ void VideoPlayerWindow::OnCustomContextMenuRequested(QPoint point)
 	m_cMainMenu.exec(m_pVideoWidget->mapToGlobal(point));
 }
 
-void VideoPlayerWindow::SetupConnections()
+void VideoPlayerWindow::SetupConnections() const
 {
-	QObject::connect(controls, SIGNAL(play()), m_mediaControl, SLOT(play()));
-	QObject::connect(controls, SIGNAL(pause()), m_mediaControl, SLOT(pause()));
-	QObject::connect(controls, SIGNAL(openFile()), m_mediaControl, SLOT(openFile()));
-	QObject::connect(controls, SIGNAL(openURL()), m_mediaControl, SLOT(openURL()));
-	QObject::connect(controls, SIGNAL(forvard()), m_mediaControl, SLOT(forvard()));
-	QObject::connect(controls, SIGNAL(reverse()), m_mediaControl, SLOT(reverse()));
-	QObject::connect(controls, SIGNAL(toggleFullScreen()), this, SLOT(goFullScreen()));
-	QObject::connect(m_mediaControl, SIGNAL(newFile(QString)), this, SLOT(setWindowTitle(QString)));
-	QObject::connect(m_mediaControl, SIGNAL(updateMediaObject()), controls, SLOT(updateMedaiObject()));
-	QObject::connect(m_pMediaController, SIGNAL(availableSubtitlesChanged()), SLOT(OnAvailableSubtitlesChanged()));
-	QObject::connect(m_pMediaController, SIGNAL(availableAudioChannelsChanged()), SLOT(OnAvailableAudioChannelsChanged()));
-	QObject::connect(m_pVideoWidget, SIGNAL(customContextMenuRequested(QPoint)), SLOT(OnCustomContextMenuRequested(QPoint)));
-	QObject::connect(m_pSubtitlesMapper, SIGNAL(mapped(int)), SLOT(OnSubtitleChosen(int)));
-	QObject::connect(m_pAudioChannelsMapper, SIGNAL(mapped(int)), SLOT(OnAudioChannelChosen(int)));
+	connect(controls, SIGNAL(play()), m_mediaControl, SLOT(play()));
+	connect(controls, SIGNAL(pause()), m_mediaControl, SLOT(pause()));
+	connect(controls, SIGNAL(openFile()), m_mediaControl, SLOT(openFile()));
+	connect(controls, SIGNAL(openURL()), m_mediaControl, SLOT(openURL()));
+	connect(controls, SIGNAL(forvard()), m_mediaControl, SLOT(forvard()));
+	connect(controls, SIGNAL(reverse()), m_mediaControl, SLOT(reverse()));
+	connect(controls, SIGNAL(toggleFullScreen()), this, SLOT(goFullScreen()));
+	connect(m_mediaControl, SIGNAL(newFile(QString)), this, SLOT(setWindowTitle(QString)));
+	connect(m_mediaControl, SIGNAL(updateMediaObject()), controls, SLOT(updateMedaiObject()));
+	connect(m_pMediaController, SIGNAL(availableSubtitlesChanged()), SLOT(OnAvailableSubtitlesChanged()));
+	connect(m_pMediaController, SIGNAL(availableAudioChannelsChanged()), SLOT(OnAvailableAudioChannelsChanged()));
+	connect(m_pVideoWidget, SIGNAL(customContextMenuRequested(QPoint)), SLOT(OnCustomContextMenuRequested(QPoint)));
+	connect(m_pSubtitlesMapper, SIGNAL(mapped(int)), SLOT(OnSubtitleChosen(int)));
+	connect(m_pAudioChannelsMapper, SIGNAL(mapped(int)), SLOT(OnAudioChannelChosen(int)));
 }
 
 void VideoPlayerWindow::BuildMenu()
@@ -278,13 +276,24 @@ void VideoPlayerWindow::BuildMenu()
 	menuAction->setIcon(styleEngine->getIcon("VP_EXIT"));
 	QObject::connect(menuAction, SIGNAL(triggered()), this, SLOT(close()));
 }
-
-void VideoPlayerWindow::OnSubtitleChosen(int index)
+#ifdef Q_WS_WIN
+void VideoPlayerWindow::setupTaskBar()
+{
+	m_pTaskBarButton = new QWinTaskbarButton(this);
+	QWinTaskbarProgress* taskbarProgress = m_pTaskBarButton->progress();
+	taskbarProgress->show();
+	taskbarProgress->setRange(0, 100);
+	connect(controls, SIGNAL(timeChanged(int)), taskbarProgress, SLOT(setValue(int)));
+	connect(controls, SIGNAL(pause()), taskbarProgress, SLOT(pause()));
+	connect(controls, SIGNAL(play()), taskbarProgress, SLOT(resume()));
+}
+#endif
+void VideoPlayerWindow::OnSubtitleChosen(int index) const
 {
 	m_pMediaController->setCurrentSubtitle(m_pMediaController->availableSubtitles().at(index));
 }
 
-void VideoPlayerWindow::OnAudioChannelChosen(int index)
+void VideoPlayerWindow::OnAudioChannelChosen(int index) const
 {
 	m_pMediaController->setCurrentAudioChannel(m_pMediaController->availableAudioChannels().at(index));
 }
@@ -301,13 +310,4 @@ void VideoPlayerWindow::updateWindowActiveState()
 	SystemParametersInfo(SPI_SETSCREENSAVEACTIVE, 1, NULL, SPIF_SENDWININICHANGE);
 #endif
 }
-
-
-
-
-
-
-
-
-
 

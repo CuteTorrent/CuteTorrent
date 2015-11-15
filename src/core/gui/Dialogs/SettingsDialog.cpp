@@ -428,8 +428,12 @@ void SettingsDialog::removeGroup()
 		{
 			QTreeWidgetItem* item = selectedItems[i];
 			QUuid groupUid = item->data(0, Qt::UserRole).value<QUuid>();
+			QUuid parentUid;
 			QTreeWidgetItem* parent = item->parent();
-			QUuid parentUid = parent->data(0, Qt::UserRole).value<QUuid>();
+			if (parent != NULL)
+			{
+				parentUid = parent->data(0, Qt::UserRole).value<QUuid>();
+			}
 			if (!groupUid.isNull())
 			{
 				if (parentUid.isNull())
@@ -699,8 +703,6 @@ void SettingsDialog::FillKeyMapTab()
 		        i != keyMap.end(); ++i, ++index)
 		{
 			QKeyEdit* keyEdit = new QKeyEdit(keyMapContainer);
-			/*keyEdit->setText(i.value());
-			keyEdit->show();*/
 			QString propertyName = i.key();
 			keyEdit->setObjectName(propertyName);
 			m_propertyMapper->AddMapping("KeyMap", propertyName, SettingsPropertyMapper::STRING, keyEdit, SettingsPropertyMapper::LINE_EDIT);

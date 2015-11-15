@@ -62,6 +62,10 @@ void UpdateNotifier::replyFinished(QNetworkReply* pReply)
 	{
 		emit Notify(NotificationSystem::UDPATE_INFO, tr("NEW_VERSION_AVALIABLE %1").arg(str), QVariant());
 	}
+	else if (recived == current)
+	{
+		emit Notify(NotificationSystem::TORRENT_INFO, tr("NO_UPDATE_ACTUAL_VERSION_IS_USED").arg(str), QVariant());
+	}
 }
 
 UpdateNotifier::~UpdateNotifier()

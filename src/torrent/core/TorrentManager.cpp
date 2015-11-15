@@ -17,9 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include <boost/bind.hpp>
-#include <boost/filesystem/fstream.hpp>
-
-#include <boost/filesystem/path.hpp>
+#include <boost/filesystem.hpp>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -72,7 +70,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <TorrentGroup.h>
 #include <TorrentGroupsManager.h>
 using namespace libtorrent;
-
+namespace fs = boost::filesystem;
 #if LIBTORRENT_VERSION_NUM >= 10000
 int load_file(std::string const& filename, std::vector<char>& v, error_code& ec, int limit = 8000000)
 {
@@ -217,6 +215,8 @@ int load_file(std::wstring const& filename, std::vector<char>& v, error_code& ec
 	return 0;
 }
 #endif
+
+
 TorrentManager::TorrentManager()
 	: m_pFileDownloader(FileDownloader::getNewInstance())
 	, m_bIsSaveSessionInitiated(false)
@@ -236,9 +236,10 @@ TorrentManager::TorrentManager()
 	QString oldStyleDirPath = StaticHelpers::CombinePathes(QApplication::applicationDirPath(), "CT_DATA");
 	QDir oldStyleDir(oldStyleDirPath);
 
+	QString bstSessionDir = StaticHelpers::CombinePathes(dataDir, "BtSessionData");
 	if (oldStyleDir.exists())
 	{
-		QString newStyleDirPath = StaticHelpers::CombinePathes(dataDir, "BtSessionData");
+		QString newStyleDirPath = bstSessionDir;
 
 		if (!MoveFiles(oldStyleDirPath, newStyleDirPath))
 		{
@@ -295,14 +296,19 @@ TorrentManager::TorrentManager()
 	{
 		m_pTorrentSession->add_extension(&create_ut_pex_plugin);
 	}
-
-	create_directories(StaticHelpers::CombinePathes(dataDir, "BtSessionData").toUtf8().data(), ec);
-
-	if (ec)
+	std::string data_dir = bstSessionDir.toUtf8().data();
+	if (!QDir(bstSessionDir).exists())
 	{
-		CustomMessageBox::critical(NULL, "ERROR", StaticHelpers::translateLibTorrentError(ec));
-		return;
+		create_directories(data_dir, ec);
+		if (ec)
+		{
+			CustomMessageBox::critical(NULL, "ERROR", StaticHelpers::translateLibTorrentError(ec));
+			return;
+		}
 	}
+
+
+
 
 	RefreshExternalPeerSettings();
 	m_pTorrentSession->listen_on(std::make_pair(listen_port, listen_port + 20)
@@ -419,7 +425,7 @@ void TorrentManager::handle_alert(alert* a)
 
 				if (pTorrent != NULL)
 				{
-					emit Notify(NotificationSystem::TRACKER_ERROR, tr("TORRENT %1 HAS DISK ERROR %2").arg(pTorrent->GetName(), StaticHelpers::translateLibTorrentError(p->error)), QVariant());
+					emit Notify(NotificationSystem::SYSTEM_ERROR, tr("TORRENT %1 HAS DISK ERROR %2").arg(pTorrent->GetName(), StaticHelpers::translateLibTorrentError(p->error)), QVariant());
 				}
 
 				break;
@@ -853,6 +859,7 @@ Torrent* TorrentManager::AddTorrent(QString& path, QString& save_path, error_cod
 	Torrent* current = new Torrent(h.status(), group);
 	current->setIsPrevioslySeeded(isPreviousSeed);
 	m_pTorrentStorrage->append(current);
+	qDebug() << "emit TorrentAdded";
 	emit TorrentAdded(current);
 	h.set_max_connections(max_connections_per_torrent);
 	QFile::copy(path, StaticHelpers::CombinePathes(dataDir, "BtSessionData", qInfoHash + ".torrent"));
@@ -1279,20 +1286,6 @@ void TorrentManager::RemoveTorrent(QString infoHash, bool delFiles)
 {
 	m_pTorrentStorrage->remove(infoHash);
 	emit TorrentRemoved(infoHash);
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-	QString resume_path = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".resume");
-	QString magnet_path = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".torrent");
-
-	if (QFile::exists(magnet_path))
-	{
-		QFile::remove(magnet_path);
-	}
-
-	if (QFile::exists(resume_path))
-	{
-		QFile::remove(resume_path);
-	}
-
 	try
 	{
 		char out[20] = { 0 };
@@ -1312,6 +1305,28 @@ void TorrentManager::RemoveTorrent(QString infoHash, bool delFiles)
 	catch (...)
 	{
 		qCritical() << "Not a libtorrent exception caught";
+	}
+	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString resumePath = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".resume");
+	QString torrentPath = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".torrent");
+//	QFile resumeDataFile(resumePath);
+//	QFile torrentFile(torrentPath);
+	boost::filesystem::wpath resumeDataFile(resumePath.toStdWString());
+	boost::filesystem::wpath torrentFile(torrentPath.toStdWString());
+	error_code ec;
+	if (boost::filesystem::exists(resumeDataFile))
+		boost::filesystem::remove(resumeDataFile, ec);
+	if (ec)
+	{
+		CustomMessageBox::critical(NULL, "Error", QString("Failed deleting file %1.\nError: %2").arg(torrentPath, QString::fromLocal8Bit(ec.message().c_str())));
+	}
+
+
+	if (boost::filesystem::exists(torrentFile))
+		boost::filesystem::remove(torrentFile, ec);
+	if (ec)
+	{
+		CustomMessageBox::critical(NULL, "Error", QString("Failed deleting file %1.\nError: %2").arg(torrentPath, QString::fromLocal8Bit(ec.message().c_str())));
 	}
 }
 

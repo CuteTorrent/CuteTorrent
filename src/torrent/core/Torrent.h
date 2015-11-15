@@ -91,8 +91,6 @@ public :
 	float GetRemainingTime();
 	int GetActiveTime();
 	int GetQueuePosition() const;
-	void SetPeerDownloadLimit(boost::asio::ip::tcp::endpoint ip, int limit);
-	void SetPeerUploadLimit(boost::asio::ip::tcp::endpoint ip, int limit);
 	void GetPieceAvalibility(std::vector<int>& availibility);
 	float GetDistributedCopies();
 	int GetStatus();
