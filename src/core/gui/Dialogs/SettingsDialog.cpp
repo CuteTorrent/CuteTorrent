@@ -443,6 +443,7 @@ void SettingsDialog::removeGroup()
 						TorrentGroup* topLevelGroup = m_torrentGroupsToUid[groupUid];
 						m_filterGroups.removeAll(topLevelGroup);
 					}
+					
 				}
 				else
 				{
@@ -450,8 +451,9 @@ void SettingsDialog::removeGroup()
 					{
 						m_torrentGroupsToUid[parentUid]->removeChild(m_torrentGroupsToUid[groupUid]);
 					}
+					
 				}
-				delete parent->takeChild(parent->indexOfChild(item));
+				delete item;
 			}
 
 		}
@@ -637,6 +639,7 @@ void SettingsDialog::FillNetworkTab()
 	QRegExp portRegex("^" + portRange + "$");
 	QRegExpValidator* portValidator = new QRegExpValidator(portRegex, this);
 	portEdit->setValidator(portValidator);
+	m_propertyMapper->AddMapping("Torrent", "random_listen_port", SettingsPropertyMapper::BOOL, useRandomPortCheckBox, SettingsPropertyMapper::CHECKBOX);
 	m_propertyMapper->AddMapping("Torrent", "listen_port", SettingsPropertyMapper::INT, portEdit, SettingsPropertyMapper::LINE_EDIT);
 	m_propertyMapper->AddMapping("Torrent", "useProxy", SettingsPropertyMapper::BOOL, proxyGroupBox, SettingsPropertyMapper::CHECKABLE_GROUPBOX);
 	m_propertyMapper->AddMapping("Torrent", "proxy_hostname", SettingsPropertyMapper::STRING, proxyHostEdit, SettingsPropertyMapper::LINE_EDIT);
@@ -653,20 +656,49 @@ void SettingsDialog::FillNetworkTab()
 void SettingsDialog::FillKeyMapTab()
 {
 	QMap<QString, QVariant> keyMappings = m_pSettings->getGroupValues("KeyMap");
+	QWidget* mainWindow = NULL;
+	QWidgetList widgets = qApp->topLevelWidgets();
+	for (int i = 0; i < widgets.size(); i++)
+	{
+		if (widgets[i]->objectName() == "CustomWindow")
+		{
+			mainWindow = widgets[i];
+			break;
+		}
+	}
 	qDeleteAll(keyMapContainer->findChildren<QGroupBox*>());
 	QLayout* origLayout = keyMapContainer->layout();
-	QGridLayout* layout = origLayout ? (QGridLayout*) origLayout :  new QGridLayout(keyMapContainer);
+	if (origLayout != NULL)
+		qDeleteAll(origLayout->findChildren<QVBoxLayout*>());
+	QHBoxLayout* layout = origLayout ? static_cast<QHBoxLayout*>(origLayout) : new QHBoxLayout(keyMapContainer);
+	
+	QVBoxLayout* rightRow = new QVBoxLayout(keyMapContainer), * leftRow = new QVBoxLayout(keyMapContainer);
+	layout->addLayout(rightRow);
+	layout->addLayout(leftRow);
 	QMap<QString, QMap<QString, QString> > grouppedKeyMap;
 	int index = 0;
-
+	QStringList itemsToDelete;
 	for(QMap<QString, QVariant>::iterator i = keyMappings.begin();
 	        i != keyMappings.end(); ++i, index++)
 	{
-		QString groupName  = i.key().split('_') [1];
-		grouppedKeyMap[groupName][i.key()] = i.value().toString();
+		QString propertyName = i.key();
+		QAction* action = mainWindow->findChild<QAction*>(propertyName);
+		if (action != NULL)
+		{
+			QString groupName = i.key().split('_')[1];
+			grouppedKeyMap[groupName][i.key()] = i.value().toString();
+		}
+		else
+		{
+			itemsToDelete << propertyName;
+		}
 	}
 
-	int size = keyMappings.size();
+	for (int i = 0; i < itemsToDelete.size(); i++)
+	{
+		keyMappings.remove(itemsToDelete[i]);
+	}
+	int size = keyMappings.size() + grouppedKeyMap.size();
 	int rightColumns =  size / 2;
 
 	if(size & 1)
@@ -698,33 +730,42 @@ void SettingsDialog::FillKeyMapTab()
 		QGroupBox* _groupBox = new  QGroupBox(keyMapContainer);
 		_groupBox->setTitle(trUtf8(groupName.toUpper().toUtf8()));
 		QFormLayout* groupLayout = new QFormLayout(_groupBox);
-
+		
 		for(QMap<QString, QString>::iterator i = keyMap.begin();
 		        i != keyMap.end(); ++i, ++index)
 		{
-			QKeyEdit* keyEdit = new QKeyEdit(keyMapContainer);
 			QString propertyName = i.key();
-			keyEdit->setObjectName(propertyName);
-			m_propertyMapper->AddMapping("KeyMap", propertyName, SettingsPropertyMapper::STRING, keyEdit, SettingsPropertyMapper::LINE_EDIT);
-			groupLayout->addRow(trUtf8(propertyName.toUtf8()), keyEdit);
+			QAction* action = mainWindow->findChild<QAction*>(propertyName);
+			if (action != NULL)
+			{
+				QKeyEdit* keyEdit = new QKeyEdit(keyMapContainer);
+				keyEdit->setObjectName(propertyName);
+				m_propertyMapper->AddMapping("KeyMap", propertyName, SettingsPropertyMapper::STRING, keyEdit, SettingsPropertyMapper::LINE_EDIT);
+				groupLayout->addRow(action->text(), keyEdit);
+			}
+			
+			
 		}
 
+		
 		_groupBox->setLayout(groupLayout);
-		int keMapSize = keyMap.size();
-
+		int keMapSize = keyMap.size() + 1;
+		qDebug() << "Group:" <<groupName << "Row Count:" << groupLayout->rowCount() << "KeysSize" << keMapSize << "Left:" << leftColumns << "Right:" << rightColumns;
 		if(rightColumns - keMapSize >= 0)
 		{
 			rightColumns -= keMapSize;
-			layout->addWidget(_groupBox, rightIndex, 0, keMapSize , 1);
+			rightRow->addWidget(_groupBox/*, rightIndex, 0, keMapSize , 1*/);
 			rightIndex += keMapSize;
 		}
 		else
 		{
 			leftColumns -= keMapSize;
-			layout->addWidget(_groupBox, leftIndex, 1, keMapSize, 1);
+			leftRow->addWidget(_groupBox/*, leftIndex, 1, keMapSize, 1*/);
 			leftIndex += keMapSize;
 		}
 	}
+
+	keyMapContainer->setLayout(layout);
 }
 
 void SettingsDialog::UpdateSchedullerTab(int index)
@@ -950,84 +991,28 @@ void SettingsDialog::NeverCallMe()
 {
 	char const* msgs[] =
 	{
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_FILETAB_HIGH_PRIORITY"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_FILETAB_LOW_PRIORITY"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_FILETAB_MEDIUM_PRIORITY"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_FILETAB_OPEN_DIR"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_FILETAB_OPEN_FILE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_FILETAB_ZERO_PRIORITY"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_ABAUT_CT"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_ABOUT_QT"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_BACKUP"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_CHECK_UPDATE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_CREATE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_EXIT"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_OPEN_MAGNET"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_OPEN_TORRENT"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_MENU_SETTINGS"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_OTHER_COPY_DISCRIBTION"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_OTHER_COPY_INFOHASH"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_PEER_ADD"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_PEER_ADD_WEB_SEED"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_RSSLIST_DOWNLOAD"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_RSSLIST_OPEN_DESC"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_RSSLIST_REMOVE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_RSSLIST_RENAME"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_RSSLIST_MARK_ALL_READ"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_RSSLIST_MARK_ALL_UNREAD"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_RSSLIST_MARK_AS_READ"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_RSSLIST_MARK_UNREAD"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_RSSLIST_UPDATE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_DOWNLOAD"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_OPEN_URL"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_PAUSE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_REMOVE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_RSS_ADD"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_RSS_EDIT"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_RSS_REMOVE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_SETTINGS"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_START"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_QUEUE_UP"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TOOLBAR_QUEUE_DOWN"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_PAUSE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_RESUME"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_QUEUE_UP"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_QUEUE_DOWN"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_QUEUE_TOP"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_QUEUE_BOTTOM"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_DEL_ALL"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_DEL_TORRENT"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_DT_MOUNT"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_GENERATE_MAGNET"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_MOVE_STORRAGE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_OPEN_DIR"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_PLAY"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_RECHECK"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_SET_SEQUNTIAL"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_SUPER_SEED"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_UPDATE_TRACKERS"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_HIGH_PRIORITY"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_ABOVE_AVG_PRIORITY"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_MEDIUM_PRIORITY"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_BELOW_AVG_PRIORITY"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TORRENTLIST_LOW_PRIORITY"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRACKER_ADD"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRACKER_EDIT"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRACKER_REMOVE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRACKER_UPDATE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRAY_EXIT"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRAY_MAXIMIZE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRAY_MINIMIZE"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "ACTION_TRAY_RESTORE"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "TRAY"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "TRACKER"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "TORRENTLIST"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "TOOLBAR"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "TORRENTTOOLBAR"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "TORRENTQUEUE"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "TORRENTPRIORITY"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "RSSTOOLBAR"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "SEARCHTOOLBAR"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "SEARCHLIST"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "RSSLIST"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "PEER"),
 		QT_TRANSLATE_NOOP("SettingsDialog", "MENU"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "OTHER"),
-		QT_TRANSLATE_NOOP("SettingsDialog", "FILETAB")
+		QT_TRANSLATE_NOOP("SettingsDialog", "MENUFILE"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "MENUVIEW"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "MENUHELP"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "INFOHASH"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "TORRENTDESCRIPTION"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "FILETAB"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "FILEPRIORITY"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "TOOLS"),
+		QT_TRANSLATE_NOOP("SettingsDialog", "AUTOSHUTDOWN"),
 	};
 }
 

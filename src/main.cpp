@@ -20,22 +20,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define Q_WS_WIN
 #include <iostream>
 #include "CuteTorrentMainWindow.h"
-#include <QDir>
 #include <qtsingleapplication.h>
 #include <cstdio>
-#include <QStringList>
-#include <QDebug>
-#include <QDateTime>
 #include "application.h"
-#include <QTextCodec>
-#include  "StyleEngene.h"
 #include "StaticHelpers.h"
-#include <boost/program_options/options_description.hpp>
-#include <boost/program_options/positional_options.hpp>
-#include <boost/program_options/variables_map.hpp>
-#include <boost/program_options/parsers.hpp>
 
-namespace po = boost::program_options;
 void myMessageOutput(QtMsgType type, const char* msg)
 {
 	fflush(stdout);
@@ -62,72 +51,8 @@ void myMessageOutput(QtMsgType type, const char* msg)
 	fflush(stdout);
 }
 
-#ifdef Q_WS_WIN
-#include <windows.h>
-#include <io.h>
-#include <fcntl.h>
-#include <stdio.h>
-BOOL attachOutputToConsole(void)
-{
-	HANDLE consoleHandleOut, consoleHandleError;
-	int fdOut, fdError;
-	FILE* fpOut, *fpError;
-
-	if (AttachConsole(ATTACH_PARENT_PROCESS))
-	{
-		//redirect unbuffered STDOUT to the console
-		consoleHandleOut = GetStdHandle(STD_OUTPUT_HANDLE);
-		fdOut = _open_osfhandle((intptr_t)consoleHandleOut, _O_TEXT);
-		fpOut = _fdopen(fdOut, "w");
-		*stdout = *fpOut;
-		setvbuf(stdout, NULL, _IONBF, 0);
-		//redirect unbuffered STDERR to the console
-		consoleHandleError = GetStdHandle(STD_ERROR_HANDLE);
-		fdError = _open_osfhandle((intptr_t)consoleHandleError, _O_TEXT);
-		fpError = _fdopen(fdError, "w");
-		*stderr = *fpError;
-		setvbuf(stderr, NULL, _IONBF, 0);
-		CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
-		GetConsoleScreenBufferInfo(consoleHandleOut, &consoleInfo);
-		int preintedTextLen = consoleInfo.dwCursorPosition.X;
-		consoleInfo.dwCursorPosition.X = 0;
-		SetConsoleCursorPosition(consoleHandleOut, consoleInfo.dwCursorPosition);
-
-		for (int i = 0; i < preintedTextLen; i++)
-		{
-			printf(" ");
-		}
-
-		SetConsoleCursorPosition(consoleHandleOut, consoleInfo.dwCursorPosition);
-		return TRUE;
-	}
-
-	//Not a console application
-	return FALSE;
-}
-void sendEnterKey(void)
-{
-	INPUT ip;
-	// Set up a generic keyboard event.
-	ip.type = INPUT_KEYBOARD;
-	ip.ki.wScan = 0;
-	// hardware scan code for key
-	ip.ki.time = 0;
-	ip.ki.dwExtraInfo = 0;
-	//Send the "Enter" key
-	ip.ki.wVk = 0x0D;
-	// virtual-key code for the "Enter" key
-	ip.ki.dwFlags = 0;
-	// 0 for key press
-	SendInput(1, &ip, sizeof(INPUT));
-	// Release the "Enter" key
-	ip.ki.dwFlags = KEYEVENTF_KEYUP;
-	// KEYEVENTF_KEYUP for key release
-	SendInput(1, &ip, sizeof(INPUT));
-}
-#endif
 int main(int argc, char* argv[])
-{
+{/*
 #ifdef Q_WS_WIN
 	bool console = attachOutputToConsole();
 #endif
@@ -162,18 +87,76 @@ int main(int argc, char* argv[])
 
 #endif
 		return 0;
-	}
+	}*/
 
 	Application a(argc, argv);
+	QStringList arguments = Application::arguments();
+	
+	arguments.removeFirst();
+	QVariantMap vm;
+
+	vm["minimize"] = arguments.contains("-m") || arguments.contains("--minimize");
+	arguments.removeAll("-m"); arguments.removeAll("--minimize");
+	vm["debug"] = arguments.contains("-d") || arguments.contains("--debug");
+	arguments.removeAll("-d"); arguments.removeAll("--debug");
+	vm["settings"] = arguments.contains("-s") || arguments.contains("--settings");
+	arguments.removeAll("-s"); arguments.removeAll("--settings");
+	QString dataDir;
+#ifdef Q_WS_MAC
+	dataDir = "/Library/CuteTorrent/";
+#else
+	dataDir = QApplication::applicationDirPath() + QDir::separator();
+#endif
+	FILE* fp = NULL;
+
+	if (vm["debug"].toBool())
+	{
+		QString logFileName = dataDir + "CuteTorrent." + QString::number(QApplication::applicationPid()) + ".log";
+		fp = freopen(logFileName.toAscii().data(), "a+", stdout);
+		qInstallMsgHandler(myMessageOutput);
+	}
+	if (arguments.contains("-c") || arguments.contains("--create_torrent"))
+	{
+		int index = arguments.indexOf("-c");
+		if (index == -1)
+		{
+			index = arguments.indexOf("--create_torrent");
+		}
+		qDebug() << "--create_torrent index" << index;
+		if (index != -1)
+		{
+
+			index++;
+			if (arguments.size() > index)
+			{
+				QString path = arguments[index];
+				vm["create_torrent"] = path;
+				arguments.removeAll(path);
+			}
+			else
+			{
+				vm["create_torrent"] = "";
+			}
+			arguments.removeAll("-c"); arguments.removeAll("--create_torrent");
+		}
+	}
+
+	if (!arguments.empty())
+	{
+		vm["input-file"] = arguments.first();
+	}
+	qDebug() << "arguments" << QApplication::arguments();
+	qDebug() << "parsed values" << vm;
+	
 	a.setWindowIcon(QIcon(":/icons/app.ico"));
+	a.setDesktopSettingsAware(false);
+	a.setEffectEnabled(Qt::UI_FadeMenu, true);
+	a.setEffectEnabled(Qt::UI_AnimateCombo, true);
 	QString file2open;
 	if (!vm.empty())
 	{
-#ifdef Q_WS_WIN
-		file2open = QString::fromLocal8Bit(vm["input-file"].as<std::string>().c_str());
-#else
-		file2open = QString::fromUtf8(vm["input-file"].as<std::string>().c_str());
-#endif
+
+		file2open = vm["input-file"].toString();
 	}
 	if(a.isRunning())
 	{
@@ -182,17 +165,15 @@ int main(int argc, char* argv[])
 			a.sendMessage(QString("open:%1").arg(file2open));
 		}
 
-		if (vm.count("create_torrent"))
+		if (vm.contains("create_torrent"))
 		{
-#ifdef Q_WS_WIN
-			QString torrentCreationSource = QString::fromLocal8Bit(vm["create_torrent"].as<std::string>().c_str());
-#else
-			QString torrentCreationSource = QString::fromUtf8(vm["create_torrent"].as<std::string>().c_str());
-#endif
+
+			QString torrentCreationSource = vm["create_torrent"].toString();
+
 			a.sendMessage(QString("create_torrent:%1").arg(torrentCreationSource));
 		}
 
-		if (vm.count("settings"))
+		if (vm["settings"].toBool())
 		{
 			a.sendMessage(QString("settings:"));
 		}
@@ -203,34 +184,15 @@ int main(int argc, char* argv[])
 	{
 		if (vm.count("help"))
 		{
-			std::cout << desc << std::endl;
-#ifdef Q_WS_WIN
+			//std::cout << desc << std::endl;
 
-			if (console)
-			{
-				sendEnterKey();
-			}
-
-#endif
 			return 0;
 		}
 	}
 
-	QString dataDir;
-#ifdef Q_WS_MAC
-	dataDir = "/Library/CuteTorrent/";
-#else
-	dataDir = QApplication::applicationDirPath() + QDir::separator();
-#endif
-	FILE* fp = NULL;
-
-	if (vm.count("debug"))
-	{
-		QString logFileName = dataDir + "ct_debug.log";
-		fp = freopen(logFileName.toAscii().data(), "a+", stdout);
-		qInstallMsgHandler(myMessageOutput);
-	}
-
+	
+	
+	
 	a.loadTranslations(":/translations");
 	a.loadTranslationsQt(":/translations_qt");
 	a.addLibraryPath(StaticHelpers::CombinePathes(QCoreApplication::applicationDirPath(), "plugins"));
@@ -239,7 +201,7 @@ int main(int argc, char* argv[])
 	a.setActiveWindow(&w);
 	w.ConnectMessageReceved(&a);
 
-	if (vm.count("minimize"))
+	if (vm["minimize"].toBool())
 	{
 		w.showMinimized();
 	}
@@ -253,32 +215,23 @@ int main(int argc, char* argv[])
 		w.HandleNewTorrent(file2open);
 	}
 
-	if (vm.count("create_torrent"))
+	if (vm.contains("create_torrent"))
 	{
-		QString torrentCreationSource = QString::fromUtf8(vm["create_torrent"].as<std::string>().c_str());
+		QString torrentCreationSource = vm["create_torrent"].toString();
 		w.ShowCreateTorrentDialog(torrentCreationSource);
 	}
 
-	if (vm.count("settings"))
+	if (vm["settings"].toBool())
 	{
 		w.OpenSettingsDialog();
 	}
 
 	int res = a.exec();
 
-	if (vm.count("debug") && fp)
+	if (vm["debug"].toBool() && fp)
 	{
 		fclose(fp);
 	}
 
-#ifdef Q_WS_WIN
-	qDebug() << "Launch from console = " << console;
-
-	if (console)
-	{
-		sendEnterKey();
-	}
-
-#endif
 	return res;
 }

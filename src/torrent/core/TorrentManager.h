@@ -48,6 +48,7 @@ using namespace libtorrent;
 #include <QVector>
 #include <QMap>
 #include <QSet>
+#include <QTime>
 #include <QUrl>
 #include "defs.h"
 class QApplicationSettings;
@@ -67,13 +68,14 @@ signals:
 	void Notify(int, QString, QVariant);
 	void TorrentRemoved(QString);
 protected:
-	bool MoveFiles(QString oldStyleDirPath, QString newStyleDirPath);
+	bool MoveFiles(QString oldStyleDirPath, QString newStyleDirPath) const;
 	void timerEvent(QTimerEvent*) override;
-
-
-private:
 	TorrentManager();
 
+private:
+	bool m_shouldRate;
+	int m_lastActiveTime;
+	QTime m_elapsedTimer;
 #if LIBTORRENT_VERSION_NUM < 10000
 	upnp* m_pUpnp;
 #endif
@@ -96,13 +98,18 @@ private:
 	NotificationSystemPtr m_pNotificationSys;
 	QMutex m_alertMutex;
 	QWaitCondition m_alertsWaitCondition;
+	PowerManagementPtr m_powerManagement;
+	QHash<int, QHash<QString, qint64>> m_handeledAlerts;
 private slots:
 	void dispatchPendingAlerts();
 public slots:
 	void RemoveTorrent(QString InfoHash, bool delFiles = false);
 	void OnDownloadReady(QUrl, QTemporaryFile*);
 public:
+	bool shouldRate();
 	void getRecentUpdatedTorrents(QSet<QString>& infoHashes);
+	int GetSessionDwonloadRate();
+
 	enum AddTorrentFlag
 	{
 		SEQUENTIAL_MODE = 1,
@@ -120,6 +127,7 @@ public:
 	void updateSettings(const session_settings& settings);
 	void updateMaxConnectionsPerTorrent();
 	QString GetSessionDownloadSpeed();
+	int GetSessionUploadRate();
 	QString GetSessionUploadSpeed();
 	QString GetSessionDownloaded();
 	QString GetSessionUploaded();
@@ -127,7 +135,7 @@ public:
 	std::vector<torrent_status> GetTorrents();
 	opentorrent_info* GetTorrentInfo(QString filename, error_code& ec);
 	openmagnet_info* GetTorrentInfo(const torrent_handle& handle);
-
+	
 	bool AddMagnet(torrent_handle h, QString& SavePath, TorrentGroup* group = NULL, QMap< QString, quint8> filepriorities = QMap<QString, quint8>(), AddTorrentFlags flags = 0);
 	Torrent* AddTorrent(QString& path, QString& save_path, error_code& ec, QString name = "", QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), TorrentGroup* group = NULL,
 	                    AddTorrentFlags flags = 0);

@@ -40,8 +40,17 @@ class TorrentManager;
 class QTorrentFilterProxyModel;
 class QTreeView;
 class StyleEngene;
-class QTorrentDisplayModel: public QAbstractListModel
+#define EXTENDED_COLUMN_COUNT 11
+#define COMPACT_COLUMN_COUNT 1
+class QTorrentDisplayModel: public QAbstractItemModel
 {
+public:
+	enum ViewMode
+	{
+		Compact,
+		Extended
+	};
+private:
 	Q_OBJECT
 	TorrentStorragePtr m_pTorrentStorrage;
 	int auto_id;
@@ -84,6 +93,7 @@ class QTorrentDisplayModel: public QAbstractListModel
 	QSignalMapper* m_pPriorityMapper;
 	QTorrentFilterProxyModel* m_pProxyFilterModel;
 	QMap<QUuid, QAction*> m_groupsUidToActions;
+	ViewMode m_viewMode;
 	static QString getFirstAvailibleFile(files_info& filesInfo);
 	static bool checkAllMountable(QModelIndexList& indexes);
 	static bool checkAllSuperSeed(QModelIndexList& indexes);
@@ -96,18 +106,25 @@ class QTorrentDisplayModel: public QAbstractListModel
 	void setGroupsUnchecked() const;
 	int columnCount(const QModelIndex& parent) const override;
 public:
-	QTorrentDisplayModel(QTreeView*, QTorrentFilterProxyModel*, QObject*);
+	
+	QTorrentDisplayModel(ViewMode ,QTreeView*, QTorrentFilterProxyModel*, QObject*);
+	void setViewMode(ViewMode);
+	ViewMode viewMode();
 	~QTorrentDisplayModel();
 	enum action
 	{
-		stop, pause, resume, remove, remove_all, move_storrage,
-		set_sequntial, set_superseed, generate_magmet, update_trackers,
+		stop, pause, resume, remove, remove_all, move_storage,
+		set_sequential, set_superseed, generate_magmet, update_trackers,
 		rehash, change_group, queue_up, queue_down, queue_top, queue_bottom
 	};
+	
 	void ActionOnSelectedItem(action wtf);
 	void retranslate() const;
 
+	QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const override;
+	QModelIndex parent(const QModelIndex& child) const override;
 	int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+	QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 	QVariant data(const QModelIndex& index, int role =	Qt::DisplayRole) const override;
 	bool removeRow(const QModelIndex& index, bool delFiles);
 	enum Role
@@ -119,9 +136,25 @@ public:
 		TorrentTotalDownloaded,
 		TorrentTotalUploaded,
 		TorrentUptime,
-		TorrentRemainingTime
+		TorrentRemainingTime,
+		TorrentSeeds,
+		TorrentPeers
 	};
-	Torrent* GetSelectedTorrent();
+	enum Column
+	{
+		Name,
+		Progress,
+		Size,
+		TotalDownloaded,
+		TotalUploaded,
+		DownloadSpeed,
+		UploadSpeed,
+		Uptime,
+		RemainingTime,
+		Seeds,
+		Peers
+	};
+	Torrent* GetSelectedTorrent() const;
 
 signals:
 	void initCompleted();
@@ -130,14 +163,14 @@ public slots:
 	void Update();
 	void UpdateSelectedIndex(const QItemSelection&);
 	void contextualMenu(const QPoint&);
-	void OpenDirSelected();
+	void OpenDirSelected() const;
 	void DellTorrentOnly();
 	void Rehash();
 	void UpdateTrackers();
 	void DellAll();
 	void MountDT() const;
-	void SetPriority(int prio);
-	void playInPlayer();
+	void SetPriority(int prio) const;
+	void playInPlayer() const;
 	
 	void setSequentualDL();
 	void moveStorrage();

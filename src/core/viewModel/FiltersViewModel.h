@@ -10,7 +10,7 @@ class FiltersViewModel : public QAbstractItemModel
 {
 	Q_OBJECT
 public:
-	enum Mode
+	enum GroupMode
 	{
 		Torrents = 0x001,
 		Groups = 0x002,
@@ -24,7 +24,7 @@ public:
 		FilterRole
 	};
 
-	explicit FiltersViewModel(Mode mode,QObject* parent = NULL);
+	explicit FiltersViewModel(GroupMode mode,QObject* parent = NULL);
 	~FiltersViewModel();
 	QModelIndex index(int row, int column, const QModelIndex& parent) const override;
 	QModelIndex index(QUuid groupUid);
@@ -47,7 +47,7 @@ protected:
 private:
 	QMovie* m_LoadingMovie;
 	QMap<QString, QModelIndex> m_searchProvidersIndexMap;
-	Mode m_mode;
+	GroupMode m_mode;
 	FilterTreeItem* m_pGroupsItem;
 	int m_updateTimerID;
 	QMap<QUuid, FilterTreeItem*> m_groupFiltersToUid;

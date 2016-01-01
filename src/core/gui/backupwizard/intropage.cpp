@@ -13,6 +13,7 @@ IntroPage::IntroPage(QWidget* parent)
 	careateRadioButton->setChecked(true);
 	QVBoxLayout* layout = new QVBoxLayout;
 	layout->addWidget(label);
+
 	layout->addWidget(careateRadioButton);
 	layout->addWidget(applyRadioButton);
 	setLayout(layout);

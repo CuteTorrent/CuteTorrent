@@ -285,7 +285,7 @@
              <bool>true</bool>
             </property>
            </widget>
-           <widget class="QWidget" name="widget_4" native="true">
+           <widget class="QWidget" name="ItemListContainer" native="true">
             <layout class="QVBoxLayout" name="torrentViewLayout">
              <property name="spacing">
               <number>0</number>
@@ -293,6 +293,95 @@
              <property name="margin">
               <number>0</number>
              </property>
+             <item>
+              <widget class="QWidget" name="SortersContainer" native="true">
+               <layout class="QHBoxLayout" name="horizontalLayout_3">
+                <property name="spacing">
+                 <number>3</number>
+                </property>
+                <property name="margin">
+                 <number>4</number>
+                </property>
+                <item>
+                 <widget class="QWidget" name="TorentLimitsContainer" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_2">
+                   <property name="spacing">
+                    <number>3</number>
+                   </property>
+                   <property name="margin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="uploadLimitLabel">
+                     <property name="text">
+                      <string>LIMIT_UL</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QSpinBox" name="ul"/>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="downloadLimitLabel">
+                     <property name="text">
+                      <string>LIMIT_DL</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QSpinBox" name="dl"/>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>6</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_15">
+                  <property name="text">
+                   <string>SORT_BY</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="sortByComboBox"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="sortDirectionToggleButton">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>20</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                  <property name="checkable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="flat">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
              <item>
               <widget class="QTreeView" name="m_pTorrentListView">
                <property name="mouseTracking">
@@ -790,18 +879,18 @@
         <property name="nativeMenuBar">
          <bool>false</bool>
         </property>
-        <widget class="QMenu" name="menu">
+        <widget class="QMenu" name="fileMenu">
          <property name="title">
           <string>MENU_FILE</string>
          </property>
-         <addaction name="ACTION_MENU_OPEN_TORRENT"/>
-         <addaction name="ACTION_MENU_OPEN_MAGNET"/>
+         <addaction name="ACTION_MENUFILE_OPEN_TORRENT"/>
+         <addaction name="ACTION_MENUFILE_OPEN_MAGNET"/>
          <addaction name="separator"/>
-         <addaction name="ACTION_MENU_CREATE"/>
+         <addaction name="ACTION_MENUFILE_CREATE"/>
          <addaction name="separator"/>
-         <addaction name="ACTION_MENU_EXIT"/>
+         <addaction name="ACTION_MENUFILE_EXIT"/>
         </widget>
-        <widget class="QMenu" name="menu_2">
+        <widget class="QMenu" name="settingsMenu">
          <property name="title">
           <string>MENU_SETTINGS</string>
          </property>
@@ -811,19 +900,41 @@
          <property name="title">
           <string>MENU_HELP</string>
          </property>
-         <addaction name="ACTION_MENU_ABAUT_CT"/>
-         <addaction name="ACTION_MENU_ABOUT_QT"/>
+         <addaction name="ACTION_MENUHELP_ABAUT_CT"/>
+         <addaction name="ACTION_MENUHELP_ABOUT_QT"/>
          <addaction name="separator"/>
-         <addaction name="ACTION_MENU_CHECK_UPDATE"/>
-         <addaction name="ACTION_MENU_REPORT_PROBLEM"/>
+         <addaction name="ACTION_MENUHELP_CHECK_UPDATE"/>
+         <addaction name="ACTION_MENUHELP_REPORT_PROBLEM"/>
+         <addaction name="ACTION_MENUHELP_RATE"/>
         </widget>
-        <widget class="QMenu" name="menuMENU_TOOLS">
+        <widget class="QMenu" name="toolsMenu">
          <property name="title">
           <string>MENU_TOOLS</string>
          </property>
-         <addaction name="ACTION_MENU_BACKUP"/>
+         <widget class="QMenu" name="autoShutdownMenu">
+          <property name="title">
+           <string>TOOLS_AUTO_SHUTDOWN</string>
+          </property>
+          <addaction name="ACTION_AUTOSHUTDOWN_DISABLED"/>
+          <addaction name="separator"/>
+          <addaction name="ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE"/>
+          <addaction name="ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE"/>
+          <addaction name="separator"/>
+          <addaction name="ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE"/>
+          <addaction name="ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE"/>
+          <addaction name="separator"/>
+          <addaction name="ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE"/>
+          <addaction name="ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE"/>
+          <addaction name="separator"/>
+          <addaction name="ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE"/>
+          <addaction name="ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE"/>
+         </widget>
+         <addaction name="ACTION_TOOLS_BACKUP"/>
+         <addaction name="ACTION_TOOLS_IMPORT"/>
+         <addaction name="separator"/>
+         <addaction name="autoShutdownMenu"/>
         </widget>
-        <widget class="QMenu" name="menuMENU_VIEW">
+        <widget class="QMenu" name="viewMenu">
          <property name="title">
           <string>MENU_VIEW</string>
          </property>
@@ -837,19 +948,19 @@
            <string>MENU_CHOSE_SKIN</string>
           </property>
          </widget>
-         <addaction name="ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY"/>
-         <addaction name="ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY"/>
-         <addaction name="ACTION_MENU_TOGGLE_GROUPS_VISIBILITY"/>
-         <addaction name="ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY"/>
+         <addaction name="ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY"/>
+         <addaction name="ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY"/>
+         <addaction name="ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY"/>
+         <addaction name="ACTION_MENUVIEW_TOGGLE_STATUSBAR_VISIBILITY"/>
          <addaction name="separator"/>
          <addaction name="languageSubMenu"/>
          <addaction name="separator"/>
          <addaction name="skinSubMenu"/>
         </widget>
-        <addaction name="menu"/>
-        <addaction name="menuMENU_VIEW"/>
-        <addaction name="menu_2"/>
-        <addaction name="menuMENU_TOOLS"/>
+        <addaction name="fileMenu"/>
+        <addaction name="viewMenu"/>
+        <addaction name="settingsMenu"/>
+        <addaction name="toolsMenu"/>
         <addaction name="menu_CuteTorrent"/>
        </widget>
       </item>
@@ -871,31 +982,34 @@
          <property name="acceptDrops">
           <bool>true</bool>
          </property>
-         <addaction name="ACTION_TOOLBAR_START"/>
-         <addaction name="ACTION_TOOLBAR_PAUSE"/>
-         <addaction name="ACTION_TOOLBAR_REMOVE"/>
+         <addaction name="ACTION_TORRENTTOOLBAR_ADD_TORRENT"/>
+         <addaction name="ACTION_TORRENTTOOLBAR_OPEN_MAGNET"/>
+         <addaction name="ACTION_TORRENTTOOLBAR_REMOVE"/>
+         <addaction name="separator"/>
+         <addaction name="ACTION_TORRENTTOOLBAR_START"/>
+         <addaction name="ACTION_TORRENTTOOLBAR_PAUSE"/>
          <addaction name="separator"/>
          <addaction name="ACTION_TOOLBAR_SETTINGS"/>
          <addaction name="separator"/>
-         <addaction name="ACTION_TOOLBAR_QUEUE_UP"/>
-         <addaction name="ACTION_TOOLBAR_QUEUE_DOWN"/>
+         <addaction name="ACTION_TORRENTTOOLBAR_QUEUE_UP"/>
+         <addaction name="ACTION_TORRENTTOOLBAR_QUEUE_DOWN"/>
          <addaction name="separator"/>
         </widget>
         <widget class="QToolBar" name="m_pSearchToolBar">
          <property name="acceptDrops">
           <bool>true</bool>
          </property>
-         <addaction name="ACTION_TOOLBAR_DOWNLOAD"/>
-         <addaction name="ACTION_TOOLBAR_OPEN_URL"/>
+         <addaction name="ACTION_SEARCHTOOLBAR_DOWNLOAD"/>
+         <addaction name="ACTION_SEARCHTOOLBAR_OPEN_URL"/>
          <addaction name="ACTION_TOOLBAR_SETTINGS"/>
         </widget>
         <widget class="QToolBar" name="m_pRssToolBar">
          <property name="acceptDrops">
           <bool>true</bool>
          </property>
-         <addaction name="ACTION_TOOLBAR_RSS_ADD"/>
-         <addaction name="ACTION_TOOLBAR_RSS_REMOVE"/>
-         <addaction name="ACTION_TOOLBAR_RSS_EDIT"/>
+         <addaction name="ACTION_RSSTOOLBAR_RSS_ADD"/>
+         <addaction name="ACTION_RSSTOOLBAR_RSS_REMOVE"/>
+         <addaction name="ACTION_RSSTOOLBAR_RSS_EDIT"/>
          <addaction name="ACTION_TOOLBAR_SETTINGS"/>
         </widget>
        </widget>
@@ -904,7 +1018,7 @@
     </widget>
    </item>
   </layout>
-  <action name="ACTION_MENU_OPEN_TORRENT">
+  <action name="ACTION_MENUFILE_OPEN_TORRENT">
    <property name="text">
     <string>MENU_OPEN_TORRENT</string>
    </property>
@@ -915,7 +1029,7 @@
     <enum>Qt::WindowShortcut</enum>
    </property>
   </action>
-  <action name="ACTION_MENU_OPEN_MAGNET">
+  <action name="ACTION_MENUFILE_OPEN_MAGNET">
    <property name="text">
     <string>MENU_OPEN_MAGNET</string>
    </property>
@@ -923,7 +1037,7 @@
     <string>Ctrl+M</string>
    </property>
   </action>
-  <action name="ACTION_MENU_CREATE">
+  <action name="ACTION_MENUFILE_CREATE">
    <property name="text">
     <string>MENU_CREATE_TORRENT</string>
    </property>
@@ -931,7 +1045,7 @@
     <string>Ctrl+N</string>
    </property>
   </action>
-  <action name="ACTION_MENU_EXIT">
+  <action name="ACTION_MENUFILE_EXIT">
    <property name="text">
     <string>MENU_EXIT</string>
    </property>
@@ -953,7 +1067,7 @@
     <enum>QAction::PreferencesRole</enum>
    </property>
   </action>
-  <action name="ACTION_TOOLBAR_PAUSE">
+  <action name="ACTION_TORRENTTOOLBAR_PAUSE">
    <property name="text">
     <string>STR_PAUSE</string>
    </property>
@@ -961,7 +1075,7 @@
     <string>HINT_PAUSE</string>
    </property>
   </action>
-  <action name="ACTION_TOOLBAR_DOWNLOAD">
+  <action name="ACTION_SEARCHTOOLBAR_DOWNLOAD">
    <property name="text">
     <string>STR_DOWNLOAD</string>
    </property>
@@ -969,7 +1083,7 @@
     <string>HINT_DOWNLOAD</string>
    </property>
   </action>
-  <action name="ACTION_TOOLBAR_OPEN_URL">
+  <action name="ACTION_SEARCHTOOLBAR_OPEN_URL">
    <property name="text">
     <string>STR_OPEN_URL</string>
    </property>
@@ -977,7 +1091,7 @@
     <string>HINT_OPEN_URL</string>
    </property>
   </action>
-  <action name="ACTION_TOOLBAR_START">
+  <action name="ACTION_TORRENTTOOLBAR_START">
    <property name="text">
     <string>STR_START</string>
    </property>
@@ -985,7 +1099,7 @@
     <string>HINT_RESUME</string>
    </property>
   </action>
-  <action name="ACTION_TOOLBAR_REMOVE">
+  <action name="ACTION_TORRENTTOOLBAR_REMOVE">
    <property name="text">
     <string>STR_REMOVE</string>
    </property>
@@ -996,7 +1110,7 @@
     <string>STR_REMOVE</string>
    </property>
   </action>
-  <action name="ACTION_MENU_ABAUT_CT">
+  <action name="ACTION_MENUHELP_ABAUT_CT">
    <property name="text">
     <string>MENU_ABAUT</string>
    </property>
@@ -1007,7 +1121,7 @@
     <enum>QAction::AboutRole</enum>
    </property>
   </action>
-  <action name="ACTION_MENU_CHECK_UPDATE">
+  <action name="ACTION_MENUHELP_CHECK_UPDATE">
    <property name="text">
     <string>MENU_CHECK_UPDATES</string>
    </property>
@@ -1020,12 +1134,12 @@
     <string>STR_SETTINGS</string>
    </property>
   </action>
-  <action name="ACTION_MENU_BACKUP">
+  <action name="ACTION_TOOLS_BACKUP">
    <property name="text">
     <string>TOOLS_BACKUP</string>
    </property>
   </action>
-  <action name="ACTION_TOOLBAR_RSS_ADD">
+  <action name="ACTION_RSSTOOLBAR_RSS_ADD">
    <property name="text">
     <string>ACTION_RSS_ADD</string>
    </property>
@@ -1033,22 +1147,22 @@
     <string>ACTION_RSS_ADD</string>
    </property>
   </action>
-  <action name="ACTION_TOOLBAR_RSS_REMOVE">
+  <action name="ACTION_RSSTOOLBAR_RSS_REMOVE">
    <property name="text">
     <string>ACTION_RSS_REMOVE</string>
    </property>
   </action>
-  <action name="ACTION_TOOLBAR_RSS_EDIT">
+  <action name="ACTION_RSSTOOLBAR_RSS_EDIT">
    <property name="text">
     <string>ACTION_RSS_EDIT</string>
    </property>
   </action>
-  <action name="ACTION_MENU_ABOUT_QT">
+  <action name="ACTION_MENUHELP_ABOUT_QT">
    <property name="text">
     <string>MENU_ABOUT_QT</string>
    </property>
   </action>
-  <action name="ACTION_TOOLBAR_QUEUE_UP">
+  <action name="ACTION_TORRENTTOOLBAR_QUEUE_UP">
    <property name="text">
     <string>QUEUE_UP</string>
    </property>
@@ -1056,17 +1170,17 @@
     <string>QUEUE_UP</string>
    </property>
   </action>
-  <action name="ACTION_TOOLBAR_QUEUE_DOWN">
+  <action name="ACTION_TORRENTTOOLBAR_QUEUE_DOWN">
    <property name="text">
     <string>QUEUE_DOWN</string>
    </property>
   </action>
-  <action name="ACTION_MENU_REPORT_PROBLEM">
+  <action name="ACTION_MENUHELP_REPORT_PROBLEM">
    <property name="text">
     <string>MENU_REPORT_PROBLEM</string>
    </property>
   </action>
-  <action name="ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY">
+  <action name="ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1074,7 +1188,7 @@
     <string>MENU_TOGGLE_TOOLBAR_VISIBILITY</string>
    </property>
   </action>
-  <action name="ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY">
+  <action name="ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1082,7 +1196,7 @@
     <string>MENU_TOGGLE_DETAIL_INFO_VISIBILITY</string>
    </property>
   </action>
-  <action name="ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY">
+  <action name="ACTION_MENUVIEW_TOGGLE_STATUSBAR_VISIBILITY">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1090,7 +1204,7 @@
     <string>MENU_TOGGLE_STATUSBAR_VISIBILITY</string>
    </property>
   </action>
-  <action name="ACTION_MENU_TOGGLE_GROUPS_VISIBILITY">
+  <action name="ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1098,14 +1212,104 @@
     <string>MENU_TOGGLE_GROUPS_VISIBILITY</string>
    </property>
   </action>
-  <action name="actionTemp">
+  <action name="ACTION_TORRENTTOOLBAR_ADD_TORRENT">
    <property name="text">
-    <string>temp</string>
+    <string>MENU_OPEN_TORRENT</string>
+   </property>
+   <property name="toolTip">
+    <string>MENU_OPEN_TORRENT</string>
    </property>
   </action>
-  <action name="actionTemp_2">
+  <action name="ACTION_TORRENTTOOLBAR_OPEN_MAGNET">
    <property name="text">
-    <string>temp</string>
+    <string>MENU_OPEN_MAGNET</string>
+   </property>
+  </action>
+  <action name="ACTION_TOOLS_IMPORT">
+   <property name="text">
+    <string>TOOLS_IMPORT</string>
+   </property>
+  </action>
+  <action name="ACTION_AUTOSHUTDOWN_DISABLED">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TOOLS_SHUTDOWN_DISABLED</string>
+   </property>
+  </action>
+  <action name="ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLADS_COMPLETE">
+   <property name="text">
+    <string>TOOLS_SHUTDOWN_ON_DOWNLADS_COMPLETE</string>
+   </property>
+  </action>
+  <action name="ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TOOLS_HIBERNATE_ON_DOWNLOADS_COMPLETE</string>
+   </property>
+  </action>
+  <action name="ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TOOLS_SLEEP_ON_DOWNLOADS_COMPLETE</string>
+   </property>
+  </action>
+  <action name="ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TOOLS_SLEEP_ON_ALL_COMPLETE</string>
+   </property>
+  </action>
+  <action name="ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TOOLS_REBOOT_ON_DOWNLOADS_COMPLETE</string>
+   </property>
+  </action>
+  <action name="ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TOOLS_REBOOT_ON_ALL_COMPLETE</string>
+   </property>
+  </action>
+  <action name="ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TOOLS_SHUTDOWN_ON_DOWNLOADS_COMPLETE</string>
+   </property>
+  </action>
+  <action name="ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TOOLS_SHUTDOWN_ON_ALL_COMPLETE</string>
+   </property>
+  </action>
+  <action name="ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TOOLS_HIBERNATE_ON_ALL_COMPLETE</string>
+   </property>
+  </action>
+  <action name="ACTION_MENUHELP_RATE">
+   <property name="text">
+    <string>MENU_RATE</string>
    </property>
   </action>
  </widget>
@@ -1126,7 +1330,7 @@
  </resources>
  <connections>
   <connection>
-   <sender>ACTION_MENU_CREATE</sender>
+   <sender>ACTION_MENUFILE_CREATE</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>ShowCreateTorrentDialog()</slot>
@@ -1142,7 +1346,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_MENU_OPEN_TORRENT</sender>
+   <sender>ACTION_MENUFILE_OPEN_TORRENT</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>ShowOpenTorrentDialog()</slot>
@@ -1158,7 +1362,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_TOOLBAR_START</sender>
+   <sender>ACTION_TORRENTTOOLBAR_START</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>ResumeSelected()</slot>
@@ -1174,7 +1378,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_TOOLBAR_PAUSE</sender>
+   <sender>ACTION_TORRENTTOOLBAR_PAUSE</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>PauseSelected()</slot>
@@ -1190,7 +1394,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_TOOLBAR_REMOVE</sender>
+   <sender>ACTION_TORRENTTOOLBAR_REMOVE</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>DeleteSelected()</slot>
@@ -1222,7 +1426,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_MENU_CHECK_UPDATE</sender>
+   <sender>ACTION_MENUHELP_CHECK_UPDATE</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>CheckForUpdates()</slot>
@@ -1238,7 +1442,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_MENU_ABAUT_CT</sender>
+   <sender>ACTION_MENUHELP_ABAUT_CT</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>ShowAbout()</slot>
@@ -1254,7 +1458,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_MENU_OPEN_MAGNET</sender>
+   <sender>ACTION_MENUFILE_OPEN_MAGNET</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>ProcessMagnet()</slot>
@@ -1286,7 +1490,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_MENU_BACKUP</sender>
+   <sender>ACTION_TOOLS_BACKUP</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>startBackUpWizard()</slot>
@@ -1302,7 +1506,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_TOOLBAR_OPEN_URL</sender>
+   <sender>ACTION_SEARCHTOOLBAR_OPEN_URL</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>openSearchItemDescribtion()</slot>
@@ -1318,7 +1522,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_TOOLBAR_RSS_ADD</sender>
+   <sender>ACTION_RSSTOOLBAR_RSS_ADD</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>addRssFeed()</slot>
@@ -1334,7 +1538,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_TOOLBAR_RSS_EDIT</sender>
+   <sender>ACTION_RSSTOOLBAR_RSS_EDIT</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>editRssFeed()</slot>
@@ -1350,7 +1554,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_TOOLBAR_RSS_REMOVE</sender>
+   <sender>ACTION_RSSTOOLBAR_RSS_REMOVE</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>removeRssFeed()</slot>
@@ -1366,7 +1570,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_TOOLBAR_QUEUE_DOWN</sender>
+   <sender>ACTION_TORRENTTOOLBAR_QUEUE_DOWN</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>queueTorrentsDown()</slot>
@@ -1382,7 +1586,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_TOOLBAR_QUEUE_UP</sender>
+   <sender>ACTION_TORRENTTOOLBAR_QUEUE_UP</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>queueTorrentsUp()</slot>
@@ -1398,7 +1602,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_MENU_TOGGLE_DETAIL_INFO_VISIBILITY</sender>
+   <sender>ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY</sender>
    <signal>toggled(bool)</signal>
    <receiver>CustomWindow</receiver>
    <slot>toggleInfoTabsVisibility(bool)</slot>
@@ -1414,7 +1618,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_MENU_TOGGLE_TOOLBAR_VISIBILITY</sender>
+   <sender>ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY</sender>
    <signal>toggled(bool)</signal>
    <receiver>CustomWindow</receiver>
    <slot>toggleToolBarVisibility(bool)</slot>
@@ -1430,7 +1634,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_MENU_TOGGLE_STATUSBAR_VISIBILITY</sender>
+   <sender>ACTION_MENUVIEW_TOGGLE_STATUSBAR_VISIBILITY</sender>
    <signal>toggled(bool)</signal>
    <receiver>CustomWindow</receiver>
    <slot>toggleStatusBarVisibility(bool)</slot>
@@ -1446,10 +1650,90 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_MENU_TOGGLE_GROUPS_VISIBILITY</sender>
+   <sender>ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY</sender>
    <signal>toggled(bool)</signal>
    <receiver>CustomWindow</receiver>
    <slot>toggleGroupsVisibility(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ACTION_TORRENTTOOLBAR_ADD_TORRENT</sender>
+   <signal>triggered()</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>ShowOpenTorrentDialog()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ACTION_TORRENTTOOLBAR_OPEN_MAGNET</sender>
+   <signal>triggered()</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>ProcessMagnet()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ACTION_MENUHELP_REPORT_PROBLEM</sender>
+   <signal>triggered()</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>showReportDialog()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ACTION_TOOLS_IMPORT</sender>
+   <signal>triggered()</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>showImportWiazrd()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ACTION_MENUHELP_RATE</sender>
+   <signal>triggered()</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>showRaitingDialog()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -1486,5 +1770,10 @@
   <slot>toggleToolBarVisibility(bool)</slot>
   <slot>toggleStatusBarVisibility(bool)</slot>
   <slot>toggleGroupsVisibility(bool)</slot>
+  <slot>showReportDialog()</slot>
+  <slot>showImportWiazrd()</slot>
+  <slot>showRaitingDialog()</slot>
+  <slot>GoToExtendedMode()</slot>
+  <slot>GoToCompactMode()</slot>
  </slots>
 </ui>

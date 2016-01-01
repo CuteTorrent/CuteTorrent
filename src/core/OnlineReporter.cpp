@@ -3,6 +3,7 @@
 #include <QNetworkRequest>
 #include <QCryptographicHash>
 #include <QNetworkReply>
+#include <QEventLoop>
 #if defined(Q_OS_WIN)
 
 #include "Windows.h"
@@ -35,14 +36,20 @@ void OnlineReporter::RunLoop() const
 	qDebug() << "OnlineReporter::RunLoop" << m_isRunning << sz;
 	ulong secondsCounter = 0;
 	int ms = 1000;
-	m_pNetworAccessManager->get(QNetworkRequest(buildUrl()));
+	QNetworkReply* reply = m_pNetworAccessManager->get(QNetworkRequest(buildUrl()));
+	QEventLoop loop;
+	connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+	loop.exec();
+	qDebug() << reply->error() << reply->errorString() << reply->readAll();
 	while (m_isRunning)
 	{
 		if (secondsCounter == 1800)
 		{
 			secondsCounter = 0;
-			m_pNetworAccessManager->get(QNetworkRequest(buildUrl()));
-			
+			QNetworkReply* reply2 = m_pNetworAccessManager->get(QNetworkRequest(buildUrl()));
+			connect(reply2, SIGNAL(finished()), &loop, SLOT(quit()));
+			loop.exec();
+			qDebug() << reply2->error() << reply2->errorString() << reply2->readAll();
 		}
 
 #if defined(Q_OS_WIN)
@@ -75,5 +82,5 @@ QString OnlineReporter::buildUrl() const
 	QString macHash = QCryptographicHash::hash(mac.toUtf8(), QCryptographicHash::Md5).toHex();
 	qDebug() << "Mac:" << mac << "UserID" << macHash;
 
-	return QString("http://aztorrent.ru/tracking/online?uid=%1").arg(macHash);
+	return QString("http://integration.cutetorrent.info/tracking/online?uid=%1").arg(macHash);
 }

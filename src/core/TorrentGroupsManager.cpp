@@ -4,6 +4,7 @@
 #include "StaticHelpers.h"
 #include <QQueue>
 #include "QApplicationSettings.h"
+#include "StyleEngene.h"
 
 TorrentGroupsManager::TorrentGroupsManager() 
 {
@@ -65,10 +66,17 @@ void TorrentGroupsManager::LoadGroups()
 			m_torrentGroups.append(group);
 		}
 	}
-	if (m_torrentGroups.length() > 0)
+	if (m_torrentGroups.length() == 0)
 	{
-		FillMaps();
+		QString rootSavePath = QDir::homePath();
+		m_torrentGroups.append(new TorrentGroup(tr("Music"), StyleEngene::suffixes[StyleEngene::AUDIO].toList(), StaticHelpers::CombinePathes(rootSavePath,"Downloads", "Music")));
+		m_torrentGroups.append(new TorrentGroup(tr("Video"), StyleEngene::suffixes[StyleEngene::VIDEO].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Video")));
+		m_torrentGroups.append(new TorrentGroup(tr("Docs"), StyleEngene::suffixes[StyleEngene::DOCUMENT].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Documents")));
+		m_torrentGroups.append(new TorrentGroup(tr("Archives"), StyleEngene::suffixes[StyleEngene::ARCHIVE].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Archives")));
+		m_torrentGroups.append(new TorrentGroup(tr("Applications"), StyleEngene::suffixes[StyleEngene::APP].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Apps")));
+		m_torrentGroups.append(new TorrentGroup(tr("Virtual Disks"), StyleEngene::suffixes[StyleEngene::DISK].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Viertual Disks")));
 	}
+	FillMaps();
 }
 
 void TorrentGroupsManager::customEvent(QEvent* event)

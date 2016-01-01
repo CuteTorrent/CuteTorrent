@@ -37,11 +37,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <TorrentGroupsManager.h>
 #include "AddRssDwonloadRuleDialog.h"
 #include "CheckableMenu.h"
+#include <gui/Dialogs/VideoFileChooseDialog.h>
 
-QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterProxyModel* pProxyFilterModel, QObject* __parrent)
-	: QAbstractListModel(__parrent)
+QTorrentDisplayModel::QTorrentDisplayModel(ViewMode viewMode, QTreeView* itemView, QTorrentFilterProxyModel* pProxyFilterModel, QObject* parrent)
+	: QAbstractItemModel(parrent)
+	, m_viewMode(Compact)
 {
-	m_pTorrentListView = _parrent;
+	m_pTorrentListView = itemView;
 	m_pTorrentManager = TorrentManager::getInstance();
 	m_pTorrentStorrage = TorrentStorrage::getInstance();
 	m_pProxyFilterModel = pProxyFilterModel;
@@ -57,6 +59,26 @@ QTorrentDisplayModel::QTorrentDisplayModel(QTreeView* _parrent, QTorrentFilterPr
 	m_pUpdateTimer->start();
 }
 
+void QTorrentDisplayModel::setViewMode(ViewMode viewMode)
+{
+	m_viewMode = viewMode;
+	switch (m_viewMode)
+	{
+		case Compact: 
+			removeColumns(1, EXTENDED_COLUMN_COUNT);
+			break;
+		case Extended: 
+			insertColumns(1, EXTENDED_COLUMN_COUNT);
+			break;
+		default: break;
+	}
+	reset();
+}
+
+QTorrentDisplayModel::ViewMode QTorrentDisplayModel::viewMode()
+{
+	return m_viewMode;
+}
 
 void QTorrentDisplayModel::UpdateMenu()
 {
@@ -251,7 +273,7 @@ void QTorrentDisplayModel::MountDT() const
 	}
 }
 
-void QTorrentDisplayModel::SetPriority(int prio)
+void QTorrentDisplayModel::SetPriority(int prio) const
 {
 	QModelIndexList indexes = m_pTorrentListView->selectionModel()->selectedIndexes();
 
@@ -261,7 +283,7 @@ void QTorrentDisplayModel::SetPriority(int prio)
 	}
 }
 
-void QTorrentDisplayModel::OpenDirSelected()
+void QTorrentDisplayModel::OpenDirSelected() const
 {
 	if (m_pTorrentListView->model() != m_pProxyFilterModel)
 	{
@@ -275,6 +297,7 @@ void QTorrentDisplayModel::OpenDirSelected()
 		files_info fileDownloadInfo = tor->GetFileDownloadInfo();
 		QString pathPart = (tor->isSingleFile() ? getFirstAvailibleFile(fileDownloadInfo) : tor->GetName());
 		QString path = QFileInfo(StaticHelpers::CombinePathes(tor->GetSavePath(), pathPart)).absoluteFilePath();
+		qDebug() << "OpenDir Path" << path;
 #ifdef Q_WS_MAC
 		QStringList args;
 		args << "-e";
@@ -309,6 +332,12 @@ void QTorrentDisplayModel::setGroupsUnchecked() const
 
 int QTorrentDisplayModel::columnCount(const QModelIndex& parent) const
 {
+	switch (m_viewMode)
+	{
+		case Compact: return COMPACT_COLUMN_COUNT;
+		case Extended: return EXTENDED_COLUMN_COUNT;
+		default: break;
+	}
 	return 1;
 }
 
@@ -454,7 +483,34 @@ int QTorrentDisplayModel::rowCount(const QModelIndex& parent) const
 
 	return 0;
 }
-Torrent* QTorrentDisplayModel::GetSelectedTorrent()
+
+QVariant QTorrentDisplayModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+	if (orientation == Qt::Horizontal)
+	{
+		char* headers[] = { 
+			QT_TR_NOOP("HEADER_NAME"),
+			QT_TR_NOOP("HEADER_PROGRES"),
+			QT_TR_NOOP("HEADER_SIZE"),
+			QT_TR_NOOP("HEADER_TOTAL_DOWNLOADED"),
+			QT_TR_NOOP("HEADER_TOTAL_UPLOADED"),
+			QT_TR_NOOP("HEADER_DOWNLOAD_SPEED"),
+			QT_TR_NOOP("HEADER_UPLOAD_SPEED"),
+			QT_TR_NOOP("HEADER_TIME_ELAPSED"),
+			QT_TR_NOOP("HEADER_TIME_LEFT"),
+			QT_TR_NOOP("HEADER_SEED"),
+			QT_TR_NOOP("HEADER_PEER"),
+		};
+		if (role == Qt::DisplayRole)
+		{
+			return tr(headers[section]);
+		}
+		
+	}
+	return QVariant();
+}
+
+Torrent* QTorrentDisplayModel::GetSelectedTorrent() const
 {
 	try
 	{
@@ -491,7 +547,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 
 	try
 	{
-		QModelIndexList indexes = m_pTorrentListView->selectionModel()->selectedIndexes();
+		QModelIndexList indexes = m_pTorrentListView->selectionModel()->selectedRows();
 		qSort(indexes);
 
 		if(rowCount() == 0)
@@ -643,7 +699,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 				break;
 			}
 
-			case move_storrage:
+			case move_storage:
 			{
 				Torrent* firstTorrent = indexes.first().data(TorrentRole).value<Torrent*>();
 				QString path = QFileDialog::getExistingDirectory(m_pTorrentListView, tr("DIALOG_OPEN_FOLDER"),
@@ -664,7 +720,7 @@ void QTorrentDisplayModel::ActionOnSelectedItem(action wtf)
 				break;
 			}
 
-			case set_sequntial:
+			case set_sequential:
 			{
 				for (int i = indexes.count() - 1; i >= 0; i--)
 				{
@@ -801,15 +857,67 @@ QVariant QTorrentDisplayModel::data(const QModelIndex& index, int role) const
 	}
 
 	Torrent* t = m_pTorrentStorrage->at(row);
-
+	Column column = (Column)index.column();
 	switch(role)
 	{
+		case Qt::TextAlignmentRole:
+		{
+			if (m_viewMode == Extended && column != Name)
+			{
+				return Qt::AlignCenter;
+			}
+			return QVariant();
+			
+		}
 		case Qt::DisplayRole:
-			var = t->GetName() ;
+			
+			switch (column)
+			{
+				
+				case Name:
+					var = t->GetName();
+					break;
+				case Size: 
+					var = t->GetTotalSize();
+					break;
+				case TotalDownloaded:
+					var = t->GetTotalDownloaded();
+					break;
+				case TotalUploaded: 
+					var = t->GetTotalUploaded();
+					break;
+				case DownloadSpeed: 
+					var = t->GetDownloadSpeed();
+					break;
+				case UploadSpeed: 
+					var = t->GetUploadSpeed();
+					break;
+				case Uptime:
+					var = t->GetActiveTime();
+					break;
+				case RemainingTime: 
+					var = t->GetRemainingTime();
+					break;
+				case Seeds: 
+					var = t->GetSeedString(true);
+					break;
+				case Peers:
+					var = t->GetPeerString(true);
+					break;
+				case Progress: 
+					var = t->GetProgress();
+					break;
+				default: break;
+				
+
+			}
 			break;
 
 		case Qt::DecorationRole:
-			var = t->GetMimeTypeIcon();
+			if (column == Name)
+			{
+				var = t->GetMimeTypeIcon();
+			}
 			break;
 
 		case TorrentRole:
@@ -887,6 +995,16 @@ QTorrentDisplayModel::~QTorrentDisplayModel()
 {
 }
 
+QModelIndex QTorrentDisplayModel::index(int row, int column, const QModelIndex& parent) const
+{
+	return hasIndex(row, column, parent) ? createIndex(row, column, 0) : QModelIndex();
+}
+
+QModelIndex QTorrentDisplayModel::parent(const QModelIndex& child) const
+{
+	return QModelIndex();
+}
+
 void QTorrentDisplayModel::retranslate() const
 {
 	pauseTorrent->setText(tr("ACTION_TORRENTLIST_PAUSE"));
@@ -908,11 +1026,17 @@ void QTorrentDisplayModel::retranslate() const
 	queueTop->setText(tr("ACTION_QUEUE_TOP"));
 	queueUp->setText(tr("ACTION_QUEUE_UP"));
 	queueDown->setText(tr("ACTION_QUEUE_DOWN"));
+	priorityMenu->setTitle(tr("ACTION_PRIORITY"));
+	lowPriority->setText(tr("ACTION_LOW_PRIORITY"));
+	belowAvgPriority->setText(tr("ACTION_BELOW_AVG_PRIORITY"));
+	mediumPriority->setText(tr("ACTION_MEDIUM_PRIORITY"));
+	abowAvgPriority->setText(tr("ACTION_ABOVE_AVG_PRIORITY"));
+	highPriority->setText(tr("ACTION_HIGHT_PRIORITY"));
 }
 
 void QTorrentDisplayModel::setSequentualDL()
 {
-	ActionOnSelectedItem(set_sequntial);
+	ActionOnSelectedItem(set_sequential);
 }
 
 
@@ -923,19 +1047,43 @@ void QTorrentDisplayModel::UpdateTrackers()
 
 void QTorrentDisplayModel::moveStorrage()
 {
-	ActionOnSelectedItem(move_storrage);
+	ActionOnSelectedItem(move_storage);
 }
 
-void QTorrentDisplayModel::playInPlayer()
+void QTorrentDisplayModel::playInPlayer() const
 {
 	if (m_pCurrentTorrent != NULL)
 	{
 		VideoPlayerWindow* vpw = new VideoPlayerWindow();
 		files_info filesInfo = m_pCurrentTorrent->GetFileDownloadInfo();
-		QString firstFileSubPath = getFirstAvailibleFile(filesInfo);
-		QString filePath = StaticHelpers::CombinePathes(m_pCurrentTorrent->GetSavePath(), firstFileSubPath);
-		vpw->openFile(filePath);
-		vpw->show();
+		int numFiles = filesInfo.storrage.num_files();
+		if (numFiles > 1)
+		{
+			QStringList files;
+			for (int i = 0; i < numFiles; i++)
+			{
+				if (filesInfo.priorities[i] > 0)
+				{
+					files << StaticHelpers::CombinePathes(m_pCurrentTorrent->GetSavePath(), QString::fromUtf8(filesInfo.storrage.file_path(i).c_str()));
+				}
+			}
+			boost::scoped_ptr<VideoFileChooseDialog> pDlg(new VideoFileChooseDialog(files));
+			pDlg->exec();
+			QString choosenPath = pDlg->choosenPath();
+			if (!choosenPath.isEmpty())
+			{
+				vpw->openFile(choosenPath);
+				vpw->show();
+			}
+		}
+		else
+		{
+			QString firstFileSubPath = getFirstAvailibleFile(filesInfo);
+			QString filePath = StaticHelpers::CombinePathes(m_pCurrentTorrent->GetSavePath(), firstFileSubPath);
+			vpw->openFile(filePath);
+			vpw->show();
+		}
+		
 	}
 }
 
@@ -1006,20 +1154,20 @@ void QTorrentDisplayModel::setupContextMenu()
 	queueMenu = new QMenu(tr("ACTION_QUEUE_CONTROLL"), menu);
 	queueMenu->setIcon(pStyleEngene->getIcon("queue_menu"));
 	queueUp = new QAction(pStyleEngene->getIcon("queue_up"), tr("ACTION_QUEUE_UP"), queueMenu);
-	queueUp->setObjectName("ACTION_TORRENTLIST_QUEUE_UP");
+	queueUp->setObjectName("ACTION_TORRENTQUEUE_UP");
 	connect(queueUp, SIGNAL(triggered()), SLOT(MoveUpQueue()));
 	queueMenu->addAction(queueUp);
 	queueDown = new QAction(pStyleEngene->getIcon("queue_down"), tr("ACTION_QUEUE_DOWN"), queueMenu);
-	queueDown->setObjectName("ACTION_TORRENTLIST_QUEUE_DOWN");
+	queueDown->setObjectName("ACTION_TORRENTQUEUE_DOWN");
 	connect(queueDown, SIGNAL(triggered()), SLOT(MoveDownQueue()));
 	queueMenu->addAction(queueDown);
 	queueMenu->addSeparator();
 	queueTop = new QAction(pStyleEngene->getIcon("queue_top"), tr("ACTION_QUEUE_TOP"), queueMenu);
-	queueTop->setObjectName("ACTION_TORRENTLIST_QUEUE_TOP");
+	queueTop->setObjectName("ACTION_TORRENTQUEUE_TOP");
 	connect(queueTop, SIGNAL(triggered()), SLOT(MoveTopQueue()));
 	queueMenu->addAction(queueTop);
 	queueBottom = new QAction(pStyleEngene->getIcon("queue_bottom"), tr("ACTION_QUEUE_BOTTOM"), queueMenu);
-	queueBottom->setObjectName("ACTION_TORRENTLIST_QUEUE_BOTTOM");
+	queueBottom->setObjectName("ACTION_TORRENTQUEUE_BOTTOM");
 	connect(queueBottom, SIGNAL(triggered()), SLOT(MoveBottomQueue()));
 	queueMenu->addAction(queueBottom);
 	menu->addMenu(queueMenu);
@@ -1031,7 +1179,7 @@ void QTorrentDisplayModel::setupContextMenu()
 	priorityMenu->setIcon(pStyleEngene->getIcon("priority"));
 	highPriority = new QAction(tr("ACTION_HIGHT_PRIORITY"), priorityMenu);
 	highPriority->setCheckable(true);
-	highPriority->setObjectName("ACTION_TORRENTLIST_HIGH_PRIORITY");
+	highPriority->setObjectName("ACTION_TORRENTPRIORITY_HIGH");
 	connect(highPriority, SIGNAL(triggered()), m_pPriorityMapper, SLOT(map()));
 	m_pPriorityMapper->setMapping(highPriority, 255);
 	priorityMenu->addAction(highPriority);
@@ -1039,7 +1187,7 @@ void QTorrentDisplayModel::setupContextMenu()
 
 	abowAvgPriority = new QAction(tr("ACTION_ABOVE_AVG_PRIORITY"), priorityMenu);
 	abowAvgPriority->setCheckable(true);
-	abowAvgPriority->setObjectName("ACTION_TORRENTLIST_ABOVE_AVG_PRIORITY");
+	abowAvgPriority->setObjectName("ACTION_TORRENTPRIORITY_ABOVE_AVG");
 	connect(abowAvgPriority, SIGNAL(triggered()), m_pPriorityMapper, SLOT(map()));
 	m_pPriorityMapper->setMapping(abowAvgPriority, 204);
 	priorityMenu->addAction(abowAvgPriority);
@@ -1047,7 +1195,7 @@ void QTorrentDisplayModel::setupContextMenu()
 
 	mediumPriority = new QAction(tr("ACTION_MEDIUM_PRIORITY"), priorityMenu);
 	mediumPriority->setCheckable(true);
-	mediumPriority->setObjectName("ACTION_TORRENTLIST_MEDIUM_PRIORITY");
+	mediumPriority->setObjectName("ACTION_TORRENTPRIORITY_MEDIUM");
 	connect(mediumPriority, SIGNAL(triggered()), m_pPriorityMapper, SLOT(map()));
 	m_pPriorityMapper->setMapping(mediumPriority, 153);
 	priorityMenu->addAction(mediumPriority);
@@ -1055,7 +1203,7 @@ void QTorrentDisplayModel::setupContextMenu()
 
 	belowAvgPriority = new QAction(tr("ACTION_BELOW_AVG_PRIORITY"), priorityMenu);
 	belowAvgPriority->setCheckable(true);
-	belowAvgPriority->setObjectName("ACTION_TORRENTLIST_BELOW_AVG_PRIORITY");
+	belowAvgPriority->setObjectName("ACTION_TORRENTPRIORITY_BELOW_AVG");
 	connect(belowAvgPriority, SIGNAL(triggered()), m_pPriorityMapper, SLOT(map()));
 	m_pPriorityMapper->setMapping(belowAvgPriority, 102);
 	priorityMenu->addAction(belowAvgPriority);
@@ -1063,7 +1211,7 @@ void QTorrentDisplayModel::setupContextMenu()
 
 	lowPriority = new QAction(tr("ACTION_LOW_PRIORITY"), priorityMenu);
 	lowPriority->setCheckable(true);
-	lowPriority->setObjectName("ACTION_TORRENTLIST_LOW_PRIORITY");
+	lowPriority->setObjectName("ACTION_TORRENTPRIORITY_LOW");
 	connect(lowPriority, SIGNAL(triggered()), m_pPriorityMapper, SLOT(map()));
 	m_pPriorityMapper->setMapping(lowPriority, 51);
 	priorityMenu->addAction(lowPriority);
@@ -1162,9 +1310,10 @@ void QTorrentDisplayModel::Update()
 	{
 		int rowCnt = rowCount();
 
+		int columns = columnCount(QModelIndex());
 		if (rowCnt == changedTorrents.size())
 		{
-			emit dataChanged(index(0, 0), index(rowCnt - 1, 0));
+			emit dataChanged(index(0, 0), index(rowCnt - 1, columns - 1));
 		}
 		else
 		{
@@ -1173,6 +1322,7 @@ void QTorrentDisplayModel::Update()
 			for (int i = 0; i < rowCnt; i++)
 			{
 				QModelIndex torrentIndex = index(i, 0);
+				QModelIndex torrentIndexEnd = index(i, columns - 1);
 
 				if (torrentIndex.isValid())
 				{
@@ -1182,7 +1332,7 @@ void QTorrentDisplayModel::Update()
 					{
 						if (changedList.isEmpty())
 						{
-							changedList.append(qMakePair(torrentIndex, torrentIndex));
+							changedList.append(qMakePair(torrentIndex, torrentIndexEnd));
 						}
 						else
 						{
@@ -1190,19 +1340,19 @@ void QTorrentDisplayModel::Update()
 
 							if (last.second.row() + 1 == torrentIndex.row())
 							{
-								last.second = torrentIndex;
+								last.second = torrentIndexEnd;
 								changedList.replace(changedList.size() - 1, last);
 							}
 							else
 							{
-								changedList.append(qMakePair(torrentIndex, torrentIndex));
+								changedList.append(qMakePair(torrentIndex, torrentIndexEnd));
 							}
 						}
 					}
 				}
 			}
 
-			//	qDebug() << "Changed Intervals count " << changedList.size() << changedList;
+			qDebug() << "Changed Intervals count " << changedList.size() << changedList;
 			for (int i = 0; i < changedList.size(); i++)
 			{
 				IndexInterval chagedInterval = changedList[i];

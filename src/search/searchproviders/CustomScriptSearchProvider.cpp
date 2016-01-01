@@ -6,7 +6,7 @@
 #include <QNetworkReply>
 #include "QSgml.h"
 
-CustomScriptSearchProvider::CustomScriptSearchProvider() : m_supportedCategories(All), m_responseType(JSON), m_requestType(GET), m_pEngine(NULL), m_busy(false)
+CustomScriptSearchProvider::CustomScriptSearchProvider() : m_supportedCategories(All), m_responseType(JSON), m_requestType(GET), m_pRunningRequest(NULL), m_pEngine(NULL), m_busy(false)
 {
 	setObjectName("CustomScriptSearchProvider");
 	m_pNetworkManager = new QNetworkAccessManager(this);
@@ -131,6 +131,10 @@ void CustomScriptSearchProvider::setScriptObject(QScriptValue val)
 
 void CustomScriptSearchProvider::PeformSearch(QString token, int category, int page)
 {
+	if (m_busy && m_pRunningRequest != NULL)
+	{
+		m_pRunningRequest->abort();
+	}
 	setBusy(true);
 	QNetworkRequest request;
 	QString url = BuildUrl(token, category, page);
@@ -146,14 +150,14 @@ void CustomScriptSearchProvider::PeformSearch(QString token, int category, int p
 	{
 		case GET:
 		{
-			m_pNetworkManager->get(request);
+			m_pRunningRequest = m_pNetworkManager->get(request);
 			break;
 		}
 
 		case POST:
 		{
 			QByteArray postData = BuildPostData(token, category, page).toUtf8();
-			m_pNetworkManager->post(request, postData);
+			m_pRunningRequest = m_pNetworkManager->post(request, postData);
 			break;
 		}
 
@@ -226,6 +230,7 @@ void CustomScriptSearchProvider::parseAsHtml(QNetworkReply* pReply)
 		QString encoding = detectEncoding(contentType);
 		QTextCodec* codec = QTextCodec::codecForName(encoding.toLocal8Bit());
 		QString data = codec->makeDecoder()->toUnicode(pReply->readAll());
+		qDebug() << "Html recived:" << data;
 		QSgml* sgml = new QSgml(data);
 		QScriptValue htmlResult = m_pEngine->newQObject(sgml);
 		QScriptValue thisObj = m_scriptVal;

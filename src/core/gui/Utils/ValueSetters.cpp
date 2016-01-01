@@ -357,9 +357,6 @@ void ValueSetters::WindowsShellValueSetter(QString group, QString name, QVariant
 		asocSettings.setValue("*/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
 		asocSettings.setValue("*/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
 		asocSettings.setValue("*/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
-		asocSettings.setValue("Folder/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
-		asocSettings.setValue("Folder/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
-		asocSettings.setValue("Folder/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
 		asocSettings.setValue("Directory/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
 		asocSettings.setValue("Directory/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
 		asocSettings.setValue("Directory/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
@@ -371,11 +368,6 @@ void ValueSetters::WindowsShellValueSetter(QString group, QString name, QVariant
 		asocSettings.remove("*/shell/cutetorrent/command/.");
 		asocSettings.remove("*/shell/cutetorrent/command");
 		asocSettings.remove("*/shell/cutetorrent");
-		asocSettings.remove("Folder/shell/cutetorrent/.");
-		asocSettings.remove("Folder/shell/cutetorrent/Icon");
-		asocSettings.remove("Folder/shell/cutetorrent/command/.");
-		asocSettings.remove("Folder/shell/cutetorrent/command");
-		asocSettings.remove("Folder/shell/cutetorrent");
 		asocSettings.remove("Directory/shell/cutetorrent/.");
 		asocSettings.remove("Directory/shell/cutetorrent/Icon");
 		asocSettings.remove("Directory/shell/cutetorrent/command/.");

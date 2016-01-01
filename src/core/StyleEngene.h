@@ -6,7 +6,7 @@ struct StyleInfo
 {
 	QString DisplayName;
 	QString InternalName;
-	bool operator == (StyleInfo& other)
+	bool operator == (StyleInfo& other) const
 	{
 		return DisplayName == other.DisplayName && InternalName == other.InternalName;
 	}

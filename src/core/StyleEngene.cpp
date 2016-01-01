@@ -118,11 +118,8 @@ QIcon StyleEngene::getIcon(QString name)
 		m_iconCache.insert(name, icon);
 		return *icon;
 	}
-	else
-	{
-		qCritical() << "No icon found for " << name;
-		return QIcon();
-	}
+	qCritical() << "No icon found for " << name;
+	return QIcon();
 }
 
 void StyleEngene::init()
@@ -130,7 +127,7 @@ void StyleEngene::init()
 #ifdef Q_WS_WIN
 	QString rootPath = QApplication::applicationDirPath() + "/styles/";
 #endif
-#ifdef Q_OS_UNIX
+#ifdef Q_WS_UNIX
 	QString rootPath = "/usr/share/cutetorrent/styles/";
 #endif
 	QDir rootDir = QDir(rootPath);
@@ -248,7 +245,7 @@ void StyleEngene::initIcons()
 	fileIcons[VIDEO] = getIcon("movie");
 	fileIcons[ARCHIVE] = getIcon("archive");
 	fileIcons[AUDIO] = getIcon("audio");
-	fileIcons[APP] = QIcon::fromTheme("application-x-executable", fallback);
+	fileIcons[APP] = getIcon("application");
 }
 
 void StyleEngene::loadStyleSheet(QString path) const

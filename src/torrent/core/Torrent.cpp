@@ -57,10 +57,17 @@ Torrent::Torrent(torrent_status hTorrent, TorrentGroup* group)
 	
 	std::vector<size_type> progress;
 	m_hTorrent.handle.file_progress(progress);
-
+	std::string save_path =
+#if LIBTORRENT_VERSION_NUM >= 10000
+		m_hTorrent.save_path;
+#else
+		m_hTorrent.handle.save_path();
+#endif
+	QString savePath = QString::fromUtf8(save_path.c_str());
 	for (int i = 0; i < storrgae.num_files(); i++)
 	{
-		QFileInfo curfile(QString::fromUtf8(storrgae.file_path(i).c_str()));
+		QString filePath = QString::fromUtf8(storrgae.file_path(i).c_str());
+		QFileInfo curfile(filePath);
 		QString currentSuffix = curfile.suffix().toLower();
 		bool fileReady = storrgae.file_size(i) == progress[i];
 		QSet<QString> diskSufixes = StyleEngene::suffixes[StyleEngene::DISK];
@@ -68,13 +75,9 @@ Torrent::Torrent(torrent_status hTorrent, TorrentGroup* group)
 
 		if (mayMount)
 		{
-			std::string save_path =
-#if LIBTORRENT_VERSION_NUM >= 10000
-			    m_hTorrent.save_path;
-#else
-			    m_hTorrent.handle.save_path();
-#endif
-			imageFiles << QString::fromUtf8(save_path.c_str()) + QString::fromUtf8(storrgae.file_path(i).c_str());
+			
+			
+			imageFiles << StaticHelpers::CombinePathes(savePath, filePath);
 		}
 
 		if (fileReady || m_hTorrent.handle.file_priority(i) > 0)
@@ -111,7 +114,7 @@ bool Torrent::hasError() const
 //       QString errorString="";
 		bool hasErr = false;
 
-		if(m_hTorrent.error.length() > 0)
+		if (m_hTorrent.error.length() > 0 || !m_customError.isEmpty())
 		{
 			hasErr = true;
 		}
@@ -160,6 +163,10 @@ QString Torrent::GetErrorMessage() const
 		{
 			errorString.append(QString::fromUtf8(m_hTorrent.error.c_str()));
 			errorString.append("\n");
+		}
+		if (!m_customError.isEmpty())
+		{
+			errorString.append(m_customError);
 		}
 
 		/*     const std::vector<announce_entry> trackers=cur_torrent.trackers();
@@ -366,7 +373,7 @@ QString Torrent::GetName() const
 	return "";
 }
 
-QString Torrent::GetDwonloadSpeed()
+QString Torrent::GetDwonloadSpeedStr()
 {
 	if(m_hTorrent.handle.is_valid())
 	{
@@ -375,7 +382,7 @@ QString Torrent::GetDwonloadSpeed()
 
 	return "";
 }
-QString Torrent::GetDwonloadSpeed() const
+QString Torrent::GetDwonloadSpeedStr() const
 {
 	if(m_hTorrent.handle.is_valid())
 	{
@@ -384,7 +391,7 @@ QString Torrent::GetDwonloadSpeed() const
 
 	return "";
 }
-QString Torrent::GetUploadSpeed()
+QString Torrent::GetUploadSpeedStr()
 {
 	if(m_hTorrent.handle.is_valid())
 	{
@@ -394,7 +401,7 @@ QString Torrent::GetUploadSpeed()
 	return "";
 }
 
-QString Torrent::GetUploadSpeed() const
+QString Torrent::GetUploadSpeedStr() const
 {
 	if(m_hTorrent.handle.is_valid())
 	{
@@ -514,27 +521,35 @@ QString Torrent::GetTotalSizeStr() const
 {
 	return StaticHelpers::toKbMbGb(size);
 }
-QString Torrent::GetSeedString()
+QString Torrent::GetSeedString(bool shortMode)
 {
 	if(m_hTorrent.handle.is_valid())
 	{
+		if (shortMode)
+		{
+			return QString("%1|%2").arg(m_hTorrent.num_seeds).arg(m_hTorrent.list_seeds);
+		}
 		return qApp->translate("Torrent", "CT_CONNECTED %1 CT_FROM %2").arg(m_hTorrent.num_seeds).arg(m_hTorrent.list_seeds);
 	}
 
 	return "";
 }
-QString Torrent::GetPeerString()
+QString Torrent::GetPeerString(bool shortMode)
 {
 	if(m_hTorrent.handle.is_valid())
 	{
-		return  qApp->translate("Torrent", "CT_CONNECTED %1 CT_FROM %2").arg(m_hTorrent.num_peers).arg(m_hTorrent.list_peers);
+		if (shortMode)
+		{
+			return QString("%1|%2").arg(m_hTorrent.num_peers).arg(m_hTorrent.list_peers);
+		}
+		return qApp->translate("Torrent", "CT_CONNECTED %1 CT_FROM %2").arg(m_hTorrent.num_peers).arg(m_hTorrent.list_peers);
 	}
 
 	return "";
 }
 
 
-QString Torrent::GetRemainingTimeStr()
+QString Torrent::GetRemainingTimeStr() const
 {
 	QString res;
 
@@ -954,6 +969,16 @@ QString Torrent::generateMagnetLink()
 	return QString::fromStdString(libtorrent::make_magnet_uri(m_hTorrent.handle));
 }
 
+int Torrent::GetDownloadSpeed()
+{
+	return m_hTorrent.download_rate;
+}
+
+int Torrent::GetUploadSpeed()
+{
+	return m_hTorrent.upload_rate;
+}
+
 QString Torrent::GetGroupName()
 {
 	return m_groupName;
@@ -1017,11 +1042,11 @@ void Torrent::RemoveTrackers(QStringList trackers)
 			QString url = trackers[i];
 			std::string tracker2remove = url.toStdString();
 
-			for (std::vector<announce_entry>::iterator i = currenttTrackers.begin(); i != currenttTrackers.end(); i++)
+			for (std::vector<announce_entry>::iterator entry = currenttTrackers.begin(); entry != currenttTrackers.end(); entry++)
 			{
-				if (i->url.compare(tracker2remove) == 0)
+				if (entry->url.compare(tracker2remove) == 0)
 				{
-					currenttTrackers.erase(i);
+					currenttTrackers.erase(entry);
 					break;
 				}
 			}

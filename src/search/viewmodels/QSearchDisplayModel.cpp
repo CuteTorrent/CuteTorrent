@@ -11,8 +11,9 @@ QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QSearchFil
 	, m_pTorrentDownloader(FileDownloader::getNewInstance())
 	, m_pSearchEngine(SearchEngine::getInstance())
 {
-	m_pTorrentListView = pTorrentListView;
+	m_pItemsView = pTorrentListView;
 	m_pSearchFilterModel = pSearchFilterModel;
+	setupContextMenu();
 	connect(m_pSearchEngine.get(), SIGNAL(GotResults()), this, SLOT(OnNewSearchResults()));
 	SearchItemsStorragePtr pItems = m_pSearchEngine->GetResults();
 	connect(pItems.get(), SIGNAL(reset()), this, SLOT(OnNewSearchResults()));
@@ -82,14 +83,72 @@ QVariant QSearchDisplayModel::data(const QModelIndex& index, int role /*= Qt::Di
 	return QVariant();
 }
 
+void QSearchDisplayModel::retranslate()
+{
+	downloadTorrentAction->setText(tr("DOWNLOAD_TORRENT"));
+	openDescriptionAction->setText(tr("OPEN_TORRENT_DESCRIPTION"));
+}
+
+void QSearchDisplayModel::setupContextMenu()
+{
+	menu = new QMenu(m_pItemsView);
+	StyleEngene* pStyleEngine = StyleEngene::getInstance();
+	downloadTorrentAction = new QAction(pStyleEngine->getIcon("downloading"), tr("DOWNLOAD_TORRENT"), m_pItemsView);
+	downloadTorrentAction->setObjectName("ACTION_SEARCHLIST_DOWNLOAD");
+	connect(downloadTorrentAction, SIGNAL(triggered()), SLOT(downloadTorrent()));
+	menu->addAction(downloadTorrentAction);
+	openDescriptionAction = new QAction(pStyleEngine->getIcon("doc"), tr("OPEN_TORRENT_DESCRIPTION"), m_pItemsView);
+	openDescriptionAction->setObjectName("ACTION_SEARCHLIST_OPEN_TORRENT_DESCRIPTION");
+	connect(openDescriptionAction, SIGNAL(triggered()), SLOT(openDescription()));
+	menu->addAction(openDescriptionAction);
+}
+
+void QSearchDisplayModel::openDescription()
+{
+	if (m_pItemsView->model() != m_pSearchFilterModel)
+		return;
+
+	QModelIndex index = m_pItemsView->currentIndex();
+	if (index.isValid())
+	{
+		SearchResult* searchResult = index.data(SearchItemRole).value<SearchResult*>();
+		QDesktopServices::openUrl(searchResult->TorrentDescUrl());
+	}
+}
+
+void QSearchDisplayModel::contextualMenu(const QPoint& p)
+{
+	if (m_pItemsView->model() != m_pSearchFilterModel)
+		return;
+
+	QModelIndex index = m_pItemsView->indexAt(p);
+	if (index.isValid())
+	{
+		SearchResult* searchResult = index.data(SearchItemRole).value<SearchResult*>();
+
+		bool hasTorrentLink = !searchResult->TorrentFileUrl().isEmpty();
+		downloadTorrentAction->setEnabled(hasTorrentLink);
+		if (!hasTorrentLink)
+		{
+			downloadTorrentAction->setToolTip(tr("NO_LINK_AVALIABLE_IN_FEED"));
+		}
+		else
+		{
+			downloadTorrentAction->setToolTip("");
+		}
+
+		menu->exec(m_pItemsView->mapToGlobal(p));
+	}
+}
+
 void QSearchDisplayModel::downloadTorrent()
 {
-	if (m_pTorrentListView->model() != m_pSearchFilterModel)
+	if (m_pItemsView->model() != m_pSearchFilterModel)
 	{
 		return;
 	}
 
-	QModelIndex index = m_pTorrentListView->currentIndex();
+	QModelIndex index = m_pItemsView->currentIndex();
 	if (index.isValid())
 	{
 		SearchResult* searchResult = index.data(SearchItemRole).value<SearchResult*>();

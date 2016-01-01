@@ -63,11 +63,17 @@ class QWinJumpList;
 class PeerTableModel;
 class PieceAvailabilityWidget;
 class QWinTaskbarButton;
+class ProgressItemDelegate;
+class FileSizeItemDelegate;
+class SpeedItemDelegate;
+class IpItemDelegate;
+class PriorityItemDelegate;
 class CuteTorrentMainWindow : public BaseWindow<QWidget> , Ui::CustomWindow
 {
 	Q_OBJECT
 
 public:
+
 	
 	CuteTorrentMainWindow(QWidget* parent = 0);
 	void ConnectMessageReceved(Application* a) const;
@@ -83,28 +89,23 @@ protected:
 	void keyPressEvent(QKeyEvent* event) override;
 
 private:
-	enum SorterType
-	{
-		TORRENT,
-		SEARCH
-	};
-	SorterType m_lastSorter;
+	void setupItemDelegates();
 	void initToolbarIcons() const;
 	void initStatusBarIcons() const;
 	void initMainMenuIcons() const;
 	bool m_initFinished;
 	QWinTaskbarButton* m_pTaskBarBtn;
-	EditableHeaderView* m_pItemSorterView;
 	EditableHeaderView* m_pTrackersHeader;
 	EditableHeaderView* m_pPeersHeader;
 	EditableHeaderView* m_pFilesHeader;
-	QStandardItemModel* m_torrentHeaderModel;
-	QStandardItemModel* m_searchHeaderModel;
+	QStandardItemModel* m_torrentSortersModel;
+	QStandardItemModel* m_searchSorterModel;
 	QSearchFilterModel* m_pSearchFilterModel;
 	QRegExp m_httpLinkRegexp;
 	QTimer* m_pUpdateTimer;
 	StyleEngene* m_pStyleEngine;
 	QComboBox* m_pSearchCategory;
+	EditableHeaderView* m_pTorrentHeader;
 	TorrentStorragePtr m_pTorrents;
 	PeiceDisplayWidget* m_pPieceView;
 	FileViewSortProxyModel* m_pFileViewProxymodel;
@@ -116,17 +117,17 @@ private:
 	UpdateNotifier* m_pUpdateNotifier;
 	HtmlView* m_pFeedItemDescribtionEdit;
 	QSystemTrayIcon* m_pTrayIcon;
-	QSpinBox* ul, *dl;
 	PieceAvailabilityWidget* m_pieceAvalibilityWidget;
 	QMenu* trayIconMenu;
 	QAction* minimizeAction;
 	QAction* maximizeAction;
-	QAction* restoreAction;
+	QAction* restoreAction, *pauseAll, *restoreAll;
 	QAction* quitAction;
+	bool m_ignoreSortByIndexChange;
 	QAction* copyContext, * copyInfoHash;
 	QAction* addPeer, * addWebSeed, * addTracker, * removeTracker, * editTracker, * updateTracker;
 	QLabel* upLabelText, *upLabel, *title, *dhtNodesLabel;
-	QLabel* uploadLimit, *downloadLimit;
+//	QLabel* uploadLimit, *downloadLimit;
 	QLabel* downLabelText, *downLabel;
 	QRssDisplayModel* m_pRssDisplayModel;
 	QRssItemDelegate* m_pRssItemDelegate;
@@ -144,8 +145,17 @@ private:
 	SearchEnginePtr m_pSearchEngine;
 	FileSystemTorrentWatcherPtr m_pTorrentWatcher;
 	OnlineReporter* m_pOnlineReporter;
-	QActionGroup* m_pLanguageActionGroup, *m_pSkinActionGroup;
-	QSignalMapper* m_pLanguageSignalMapper, *m_pSkinSignalMapper;
+	QStateMachine* m_pSorterStateMachine;
+	QState* m_pSortAscendingSortState;
+	QState* m_pSortDescendingSortState;
+	ProgressItemDelegate* m_pProgressItemDelegate;
+	FileSizeItemDelegate* m_pFileSizeItemDelegateShowZero;
+	FileSizeItemDelegate* m_pFileSizeItemDelegateNotShowZero;
+	SpeedItemDelegate* m_pSpeedItemDelegate;
+	IpItemDelegate* m_pIpItemDelegate;
+	PriorityItemDelegate* m_pPriorityItemDelegate;
+	QActionGroup* m_pLanguageActionGroup, *m_pSkinActionGroup, *m_pAutoshutdownActionGroup;
+	QSignalMapper* m_pLanguageSignalMapper, *m_pSkinSignalMapper, *m_pAutoshutdownSignalMapper;
 #ifdef Q_WS_WIN
 	QWinJumpList* m_pJumpList;
 #endif
@@ -153,15 +163,16 @@ private:
 	void createActions();
 	void setupTray();
 	void setupToolBar();
+	void setupAutoShutdownMenu();
 	void setupViewMenuState() const;
 	void setupConnections() const;
 	void setupSearchHeaderModel();
 	void setupListView();
 	void setupTabelWidgets();
 	void setupStatusBar();
-	void updateTorrentSorterHeader();
+	void updateTorrentSorterHeader() const;
 	void setupTorrentHeaderModel();
-	void updateSearchSorterHeader();
+	void updateSearchSorterHeader() const;
 	void setupRssInfoTab();
 	void setupFileTabel();
 	void setupLanguageChoseMenu();
@@ -169,18 +180,19 @@ private:
 	void setupGroupTreeWidget() const;
 #ifdef Q_WS_WIN
 	void setupTasksCategory() const;
-	void setupJumpList();
+	void setupJumpList() const;
 #endif
 	void fillPieceDisplay(QSize) const;
 	void setupCustomeWindow();
 	void setupKeyMappings() const;
 	void switchToTorrentsModel();
 	void switchToSearchModel();
-	void switchToRssModel();
+	void switchToRssModel() const;
 	void resizeWindow(QMouseEvent* e) override;
 	void saveWindowState();
 	void loadHeaderState(QString prefix, EditableHeaderView* header, QList<int>& defaultColumnSizes) const;
 	void saveHeaderState(QString prefix, EditableHeaderView* header) const;
+	void UpdateModelSortOrder(QString modelPrefix, QSortFilterProxyModel* pModel) const;
 	virtual QPushButton* getMinBtn() override;
 	virtual QPushButton* getMaxBtn() override;
 	virtual QPushButton* getCloseBtn() override;
@@ -191,7 +203,8 @@ private:
 public slots:
 	void queueTorrentsUp() const;
 	void queueTorrentsDown() const;
-	void updateSorting(int logincalIndex, Qt::SortOrder order) const;
+	void updateSorting(int) const;
+	void updateSortDirection() const;
 	void HandleNewTorrent(const QString&);
 	void UpdateUL(int) const;
 	void UpdateDL(int) const;
@@ -204,7 +217,7 @@ public slots:
 	void StopSelected() const;
 	void ResumeSelected() const;
 	void DeleteSelected() const;
-	void UpdateInfoTab();
+	void UpdateInfoTab() const;
 	void UpdatePeerTab() const;
 	void UpdateFileTab() const;
 #ifdef Q_WS_WIN
@@ -213,7 +226,7 @@ public slots:
 	void UpadteTrackerTab() const;
 	void OpenSettingsDialog();
 	void IconActivated(QSystemTrayIcon::ActivationReason reason);
-	void UpdateTabWidget();
+	void UpdateTabWidget() const;
 	void UpdateStatusbar() const;
 	void UpdateLimits() const;
 	void ProcessMagnet();
@@ -226,7 +239,7 @@ public slots:
 	void AddTracker();
 	void RemoveTracker() const;
 	void EditTracker();
-	void UpdateTracker();
+	void UpdateTracker() const;
 	void AddPeer();
 	void AddWebSeed();
 	void ChnageTorrentFilter();
@@ -235,19 +248,27 @@ public slots:
 	void minimizeBtnClicked() override;
 	void openSearchItemDescribtion() const;
 	void addRssFeed();
-	void removeRssFeed();
+	void removeRssFeed() const;
 	void editRssFeed();
 	void OnQuit();
-	void UpdateRssInfo(const QItemSelection&);
+	void UpdateRssInfo(const QItemSelection&) const;
 	void OnMessageRecived(QString message);
-	void toggleInfoTabsVisibility(bool);
+	void toggleInfoTabsVisibility(bool) const;
 	void toggleToolBarVisibility(bool);
-	void toggleStatusBarVisibility(bool);
-	void toggleGroupsVisibility(bool);
+	void toggleStatusBarVisibility(bool) const;
+	void toggleGroupsVisibility(bool) const;
 	void updateGroupVisibilityMenu() const;
 	void updateInfoPlaneVsibilityMenu() const;
 	void setLanguage(QString) const;
 	void setSkin(QString) const;
+	void showReportDialog();
+	void showImportWiazrd();
+	void onAutoShutdownAction(int) const;
+	void onResetPowerMenu() const;
+	void pauseAllTorrents() const;
+	void restoreAllTorrents() const;
+	void showRaitingDialog();
+	void CheckForDefaultTorrentApp();
 };
 
 Q_DECLARE_METATYPE(QHostAddress)

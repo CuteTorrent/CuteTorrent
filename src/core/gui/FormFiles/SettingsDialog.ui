@@ -869,14 +869,7 @@ QListView::item{
             </property>
            </widget>
           </item>
-          <item row="0" column="2">
-           <widget class="QCheckBox" name="portMappingsCheckBox">
-            <property name="text">
-             <string>USE_PORT_MAPPINGS</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3" rowspan="2">
+          <item row="0" column="3" rowspan="3">
            <widget class="QGroupBox" name="groupBox_10">
             <property name="title">
              <string>NET_ENC</string>
@@ -991,7 +984,7 @@ QListView::item{
             </layout>
            </widget>
           </item>
-          <item row="1" column="0" rowspan="2" colspan="3">
+          <item row="2" column="0" rowspan="2" colspan="3">
            <widget class="QGroupBox" name="proxyGroupBox">
             <property name="enabled">
              <bool>true</bool>
@@ -1120,7 +1113,7 @@ QListView::item{
             </layout>
            </widget>
           </item>
-          <item row="2" column="3" rowspan="2">
+          <item row="3" column="3" rowspan="2">
            <spacer name="verticalSpacer_5">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -1133,7 +1126,7 @@ QListView::item{
             </property>
            </spacer>
           </item>
-          <item row="3" column="0" colspan="3">
+          <item row="4" column="0" colspan="3">
            <spacer name="verticalSpacer_4">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -1145,6 +1138,20 @@ QListView::item{
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="useRandomPortCheckBox">
+            <property name="text">
+             <string>USE_RANDOM_PORT</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="3">
+           <widget class="QCheckBox" name="portMappingsCheckBox">
+            <property name="text">
+             <string>USE_PORT_MAPPINGS</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -2150,7 +2157,7 @@ QListView::item{
                <height>28</height>
               </rect>
              </property>
-             <layout class="QGridLayout" name="gridLayout_19"/>
+             <layout class="QHBoxLayout" name="horizontalLayout_5"/>
             </widget>
            </widget>
           </item>
@@ -2193,7 +2200,6 @@ QListView::item{
   <tabstop>limitUtpCheckBox</tabstop>
   <tabstop>seedTimeLimitEdit</tabstop>
   <tabstop>portEdit</tabstop>
-  <tabstop>portMappingsCheckBox</tabstop>
   <tabstop>proxyGroupBox</tabstop>
   <tabstop>proxyHostEdit</tabstop>
   <tabstop>proxyUsernameEdit</tabstop>
@@ -2611,6 +2617,22 @@ QListView::item{
     <hint type="destinationlabel">
      <x>405</x>
      <y>203</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>useRandomPortCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>portEdit</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>447</x>
+     <y>42</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>315</x>
+     <y>42</y>
     </hint>
    </hints>
   </connection>

@@ -5,10 +5,7 @@
 class TorrentGroup
 {
 	QUuid m_uid;
-
-	
 	QString m_savePath;
-
 	QString m_name;
 	QStringList m_extentions;
 	QList<TorrentGroup*> m_children;
@@ -21,18 +18,7 @@ public:
 	friend QDataStream& operator >>(QDataStream& out, TorrentGroup& any);
 	TorrentGroup(QString name, QStringList extentions, QString savePath);
 
-	TorrentGroup(const TorrentGroup& other)
-		: m_uid(other.m_uid),
-		  m_savePath(other.m_savePath),
-		  m_name(other.m_name),
-		  m_extentions(other.m_extentions)
-		  
-	{
-		for (int i = 0; i < other.m_children.size(); i++)
-		{
-			addChild(new TorrentGroup(*other.m_children[i]));
-		}
-	}
+	TorrentGroup(const TorrentGroup& other);
 
 	TorrentGroup() {};
 	~TorrentGroup();

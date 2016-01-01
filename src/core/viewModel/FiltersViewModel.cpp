@@ -13,7 +13,7 @@
 #include <float.h>
 #include <TorrentGroupsManager.h>
 #include <AddRssDwonloadRuleDialog.h>
-FiltersViewModel::FiltersViewModel(Mode mode,QObject* parent) 
+FiltersViewModel::FiltersViewModel(GroupMode mode,QObject* parent) 
 	: QAbstractItemModel(parent)
 	, m_LoadingMovie(new QMovie(":/images/loader.gif"))
 	, m_mode(mode)
@@ -74,7 +74,7 @@ QModelIndex FiltersViewModel::parent(const QModelIndex& child) const
 
 	if (parentItem != NULL)
 	{
-		int row = 0;
+		int row;
 
 		if (parentItem->Parent() != NULL)
 		{
@@ -492,7 +492,7 @@ void FiltersViewModel::BuildTree()
 	QIcon completedIcon = pStyleEngine->getIcon("completed");
 	QIcon activeIcon = pStyleEngine->getIcon("active");
 	QIcon groupsIcon = pStyleEngine->getIcon("groups");
-	QIcon inactiveIcon(activeIcon.pixmap(QSize(16, 16), QIcon::Disabled, QIcon::On));
+	QIcon inactiveIcon = pStyleEngine->getIcon("inactive");
 	QIcon rssIcon = pStyleEngine->getIcon("rss");
 	QIcon searchIcon = pStyleEngine->getIcon("settings_search");
 	if ((m_mode & Torrents) == Torrents)

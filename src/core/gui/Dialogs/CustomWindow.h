@@ -232,7 +232,10 @@ void BaseWindow<T>::setTitle(QString title)
 template <class T>
 void BaseWindow<T>::hide()
 {
-	preMaximizeGeomentry = T::geometry();
+	if (!m_bIsMaximized)
+	{
+		preMaximizeGeomentry = T::geometry();
+	}
 	T::hide();
 }
 
@@ -618,14 +621,7 @@ void BaseWindow<T>::mouseDoubleClickEvent(QMouseEvent* e)
 	QRect titleGeometry = getTitleBar()->geometry();
 	titleGeometry.moveTopLeft(getTitleBar()->parentWidget()->mapToGlobal(titleGeometry.topLeft()));
 
-	if(position.x() < titleGeometry.right() && position.y() < titleGeometry.bottom()
-	        && position.x() >= titleGeometry.x() && position.y() >= titleGeometry.y()
-	        && getTitleIcon()->isVisible())
-	{
-		T::close();
-	}
-	else if(position.x() < titleGeometry.width()
-	        && position.y() < titleGeometry.height()
+	if (titleGeometry.contains(position, true)
 	        && m_titleMode != FullScreenMode)
 	{
 		maximizeBtnClicked();

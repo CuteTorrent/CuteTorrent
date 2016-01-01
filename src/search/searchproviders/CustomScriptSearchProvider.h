@@ -79,6 +79,7 @@ private:
 	ResponseType_t m_responseType;
 	RequestType_t m_requestType;
 	QNetworkAccessManager* m_pNetworkManager;
+	QNetworkReply* m_pRunningRequest;
 	QScriptEngine* m_pEngine;
 	QIcon m_icon;
 	bool m_busy;

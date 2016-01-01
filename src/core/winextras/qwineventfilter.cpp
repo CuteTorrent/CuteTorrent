@@ -119,10 +119,11 @@ void QWinEventFilter::setup()
 
 QWidget *QWinEventFilter::findWindow(HWND handle)
 {
-    const WId wid = reinterpret_cast<WId>(handle);
+	const WId wid = reinterpret_cast<WId>(handle);
 	foreach(QWidget *topLevel, QApplication::topLevelWidgets()) {
-        if (topLevel->winId() == wid)
-            return topLevel;
-    }
-    return NULL;
+		if (topLevel != NULL && topLevel->winId() == wid)
+			return topLevel;
+	}
+	
+	return NULL;
 }

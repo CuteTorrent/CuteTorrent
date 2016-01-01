@@ -13,6 +13,6 @@ BackupWizard::BackupWizard(QWidget* parent) :
 	setStartId(Page_Intro);
 	setWizardStyle(ClassicStyle);
 	setOption(NoBackButtonOnLastPage);
-	setOption(QWizard::NoCancelButton);
+	setOption(NoCancelButton);
 }
 

@@ -274,6 +274,13 @@ void OpenTorrentDialog::OnPathChanged(QString path)
 {
 	QStorageInfo storageInfo(path);
 	labelSizeData->setText(tr("%1 (AVAILABLE: %2)").arg(StaticHelpers::toKbMbGb(m_size), StaticHelpers::toKbMbGb(storageInfo.bytesAvailable())));
+	if (m_size + 20l * 1024l * 1024l >storageInfo.bytesAvailable())
+	{
+		if (CustomMessageBox::critical(this, tr("NOT_ENOUGH_SPACE"), tr("NOT_ENOGH_STORRAGE_SPACE_TO_STORE_TORRENT"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+		{
+			reject();
+		}
+	}
 }
 
 void OpenTorrentDialog::setCheckedValue(bool val)

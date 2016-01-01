@@ -31,7 +31,7 @@ public:
 	static QMessageBox::StandardButton information(QWidget* parent, const QString& title,
 	        const QString& text, QMessageBox::StandardButtons buttons = QMessageBox::Ok);
 	static QMessageBox::StandardButton question(QWidget* parent, const QString& title,
-	        const QString& text, QMessageBox::StandardButtons buttons = QMessageBox::Ok);
+		const QString& text, QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No);
 	static QMessageBox::StandardButton warning(QWidget* parent, const QString& title, const QString& text,
 	        QMessageBox::StandardButtons buttons = QMessageBox::Ok);
 	static void about(QWidget* parent, const QString& title, const QString& text);

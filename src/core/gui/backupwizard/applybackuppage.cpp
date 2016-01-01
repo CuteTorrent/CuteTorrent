@@ -17,12 +17,15 @@ ApplyBackupPage::ApplyBackupPage(QWidget* parent) :
 	gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
 	backupPathLineEdit = new QLineEdit(this);
 	backupPathLineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+	backupPathLabel = new QLabel(this);
+	backupPathLabel->setText(tr("PATH_TO_BACKUP_FILE"));
+	gridLayout->addWidget(backupPathLabel, 0, 0, 1, 1);
 	backupPathLineEdit->setEnabled(false);
-	gridLayout->addWidget(backupPathLineEdit, 0, 0, 1, 1);
+	gridLayout->addWidget(backupPathLineEdit, 0, 1, 1, 1);
 	browsePushButton = new QPushButton(this);
 	browsePushButton->setText(tr("BROWSE"));
-	QObject::connect(browsePushButton, SIGNAL(clicked()), this, SLOT(browseButtonClicked()));
-	gridLayout->addWidget(browsePushButton, 0, 1, 1, 1);
+	connect(browsePushButton, SIGNAL(clicked()), this, SLOT(browseButtonClicked()));
+	gridLayout->addWidget(browsePushButton, 0, 2, 1, 1);
 	changePathGroupBox = new QGroupBox(this);
 	changePathGroupBox->setObjectName(QString::fromUtf8("groupBox"));
 	changePathGroupBox->setCheckable(true);
@@ -57,64 +60,79 @@ ApplyBackupPage::ApplyBackupPage(QWidget* parent) :
 
 void ApplyBackupPage::ApplyBackup() const
 {
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-	JlCompress::extractDir(backupPathLineEdit->text(), dataDir);
-	QString btSessionDirPath = StaticHelpers::CombinePathes(dataDir, "BtSessionData");
-	QDir btSessionDir(btSessionDirPath);
-	QStringList resumeFiles = btSessionDir.entryList(QStringList("*.resume"), QDir::Files | QDir::NoDotAndDotDot);
-	QMap<QString, QString> pathMap;
-
-	for (int i = 0; i < tableWidget->rowCount(); i++)
+	if (!backupPathLineEdit->text().isEmpty())
 	{
-		QTableWidgetItem* sourceItem = tableWidget->item(i, 0);
-		QTableWidgetItem* destItem = tableWidget->item(i, 1);
+		QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+		JlCompress::extractDir(backupPathLineEdit->text(), dataDir);
+		QString btSessionDirPath = StaticHelpers::CombinePathes(dataDir, "BtSessionData");
+		QDir btSessionDir(btSessionDirPath);
+		QStringList resumeFiles = btSessionDir.entryList(QStringList("*.resume"), QDir::Files | QDir::NoDotAndDotDot);
+		QMap<QString, QString> pathMap;
 
-		if (sourceItem != NULL && destItem != NULL)
+		for (int i = 0; i < tableWidget->rowCount(); i++)
 		{
-			pathMap.insert(sourceItem->text(), destItem->text());
-		}
-	}
+			QTableWidgetItem* sourceItem = tableWidget->item(i, 0);
+			QTableWidgetItem* destItem = tableWidget->item(i, 1);
 
-	for (int i = 0; i < resumeFiles.size(); i++)
-	{
-		QFile file(btSessionDir.absoluteFilePath(resumeFiles[i]));
-
-		if (file.open(QIODevice::ReadWrite))
-		{
-			QByteArray resumeData = file.readAll();
-			entry e = bdecode(resumeData.begin(), resumeData.end());
-
-			if (entry* i = e.find_key("save_path"))
+			if (sourceItem != NULL && destItem != NULL)
 			{
-				QString savePath = QString::fromUtf8(i->string().c_str());
-
-				if (pathMap.contains(savePath))
-				{
-					QString newPath = pathMap[savePath];
-					e["save_path"] = newPath.toUtf8().data();
-					file.seek(0);
-					QByteArray out;
-					bencode(std::back_inserter(out), e);
-					file.write(out);
-				}
+				pathMap.insert(sourceItem->text(), destItem->text());
 			}
-
-			file.close();
 		}
-	}
 
-	QApplicationSettings::getInstance()->ReedSettings();
-	RssManagerPtr rssManager = RssManager::getInstance();
-	rssManager->LoadDownloadRules();
-	rssManager->LoadFeeds();
-	boost::scoped_ptr<InitializationDialog> pDlg(new InitializationDialog());
-	pDlg->exec();
+		for (int i = 0; i < resumeFiles.size(); i++)
+		{
+			QFile file(btSessionDir.absoluteFilePath(resumeFiles[i]));
+
+			if (file.open(QIODevice::ReadWrite))
+			{
+				QByteArray resumeData = file.readAll();
+				entry e = bdecode(resumeData.begin(), resumeData.end());
+
+				if (entry* savePathEntry = e.find_key("save_path"))
+				{
+					QString savePath = QString::fromUtf8(savePathEntry->string().c_str());
+
+					if (pathMap.contains(savePath))
+					{
+						QString newPath = pathMap[savePath];
+						e["save_path"] = newPath.toUtf8().data();
+						file.seek(0);
+						QByteArray out;
+						bencode(std::back_inserter(out), e);
+						file.write(out);
+					}
+				}
+
+				file.close();
+			}
+		}
+
+		QApplicationSettings::getInstance()->ReedSettings();
+		RssManagerPtr rssManager = RssManager::getInstance();
+		rssManager->LoadDownloadRules();
+		rssManager->LoadFeeds();
+		boost::scoped_ptr<InitializationDialog> pDlg(new InitializationDialog());
+		pDlg->exec();
+	}
+	
 }
 
 int ApplyBackupPage::nextId() const
 {
 	ApplyBackup();
 	return BackupWizard::Page_Finish;
+}
+
+bool ApplyBackupPage::isComplete() const
+{
+	return !backupPathLineEdit->text().isEmpty();
+}
+
+void ApplyBackupPage::initializePage()
+{
+	backupPathLineEdit->setText("");
+	tableWidget->clearContents();
 }
 
 QStringList ApplyBackupPage::GetLongestCommonSubstr(QStringList strings)
@@ -193,4 +211,5 @@ void ApplyBackupPage::browseButtonClicked()
 	{
 		//int zipError = backupFile.getZipError();
 	}
+	emit completeChanged();
 }

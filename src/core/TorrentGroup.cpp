@@ -8,6 +8,17 @@ TorrentGroup::TorrentGroup(QString name, QStringList extentions, QString savePat
 	setSavePath(savePath);
 }
 
+TorrentGroup::TorrentGroup(const TorrentGroup& other): m_uid(other.m_uid),
+                                                       m_savePath(other.m_savePath),
+                                                       m_name(other.m_name),
+                                                       m_extentions(other.m_extentions)
+{
+	for (int i = 0; i < other.m_children.size(); i++)
+	{
+		addChild(new TorrentGroup(*other.m_children[i]));
+	}
+}
+
 TorrentGroup::~TorrentGroup()
 {
 	qDeleteAll(m_children);

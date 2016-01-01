@@ -24,6 +24,8 @@
     </qresource>
     <qresource prefix="/images">
         <file alias="loader.gif">images/loader.gif</file>
+        <file alias="star-off.png">images/star-off.png</file>
+        <file alias="star-on.png">images/star-on.png</file>
     </qresource>
     <qresource prefix="/translations_qt">
         <file alias="qt_ru_Ru.qm">Z:/qt/4.8.7/translations/qt_ru.qm</file>

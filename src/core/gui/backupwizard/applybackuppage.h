@@ -9,9 +9,12 @@ class ApplyBackupPage : public QWizardPage
 	Q_OBJECT
 public:
 	explicit ApplyBackupPage(QWidget* parent = 0);
-	int	nextId() const;
+	int	nextId() const override;
+	bool isComplete() const override;
+	void initializePage() override;
 private:
 	QLabel* messageLabel;
+	QLabel* backupPathLabel;
 	QGridLayout* gridLayout;
 	QLineEdit* backupPathLineEdit;
 	QPushButton* browsePushButton;

@@ -48,8 +48,8 @@ void TorrentApiController::service(HttpRequest& request, HttpResponse& response)
 						torrent["progress"] = QString::number(curret->GetProgress()) ;
 						torrent["escapedTime"] = curret->GetActiveTimeStr() ;
 						torrent["remainingTime"] = curret->GetRemainingTimeStr() ;
-						torrent["dlSpeed"] = curret->GetDwonloadSpeed() ;
-						torrent["ulSpeed"] = curret->GetUploadSpeed() ;
+						torrent["dlSpeed"] = curret->GetDwonloadSpeedStr() ;
+						torrent["ulSpeed"] = curret->GetUploadSpeedStr() ;
 						torrent["dlSize"] = curret->GetTotalDownloadedStr() ;
 						torrent["ulSize"] = curret->GetTotalUploadedStr() ;
 						torrent["describtion"] = curret->GetDiscribtion() ;

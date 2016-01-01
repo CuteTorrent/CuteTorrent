@@ -132,7 +132,6 @@ public:
     QGridLayout *gridLayout_20;
     QLineEdit *portEdit;
     QLabel *label;
-    QCheckBox *portMappingsCheckBox;
     QGroupBox *groupBox_10;
     QGridLayout *gridLayout_28;
     QLabel *label_27;
@@ -156,6 +155,8 @@ public:
     QLineEdit *proxyPortEdit;
     QSpacerItem *verticalSpacer_5;
     QSpacerItem *verticalSpacer_4;
+    QCheckBox *useRandomPortCheckBox;
+    QCheckBox *portMappingsCheckBox;
     QWidget *hddTab;
     QGridLayout *gridLayout_12;
     QCheckBox *useDiskReadAheadCheckBox;
@@ -282,7 +283,7 @@ public:
     QGridLayout *gridLayout_17;
     QScrollArea *hotKeyScrollArea;
     QWidget *keyMapContainer;
-    QGridLayout *gridLayout_19;
+    QHBoxLayout *horizontalLayout_5;
 
     void setupUi(QDialog *SettingsDialog)
     {
@@ -766,11 +767,6 @@ public:
 
         gridLayout_20->addWidget(label, 0, 0, 1, 1);
 
-        portMappingsCheckBox = new QCheckBox(page);
-        portMappingsCheckBox->setObjectName(QString::fromUtf8("portMappingsCheckBox"));
-
-        gridLayout_20->addWidget(portMappingsCheckBox, 0, 2, 1, 1);
-
         groupBox_10 = new QGroupBox(page);
         groupBox_10->setObjectName(QString::fromUtf8("groupBox_10"));
         groupBox_10->setCheckable(false);
@@ -815,7 +811,7 @@ public:
         gridLayout_28->addWidget(preferFullEncCheckBox, 3, 0, 1, 2);
 
 
-        gridLayout_20->addWidget(groupBox_10, 0, 3, 2, 1);
+        gridLayout_20->addWidget(groupBox_10, 0, 3, 3, 1);
 
         proxyGroupBox = new QGroupBox(page);
         proxyGroupBox->setObjectName(QString::fromUtf8("proxyGroupBox"));
@@ -876,15 +872,25 @@ public:
         gridLayout->addWidget(proxyPortEdit, 1, 1, 1, 1);
 
 
-        gridLayout_20->addWidget(proxyGroupBox, 1, 0, 2, 3);
+        gridLayout_20->addWidget(proxyGroupBox, 2, 0, 2, 3);
 
         verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_20->addItem(verticalSpacer_5, 2, 3, 2, 1);
+        gridLayout_20->addItem(verticalSpacer_5, 3, 3, 2, 1);
 
         verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_20->addItem(verticalSpacer_4, 3, 0, 1, 3);
+        gridLayout_20->addItem(verticalSpacer_4, 4, 0, 1, 3);
+
+        useRandomPortCheckBox = new QCheckBox(page);
+        useRandomPortCheckBox->setObjectName(QString::fromUtf8("useRandomPortCheckBox"));
+
+        gridLayout_20->addWidget(useRandomPortCheckBox, 0, 2, 1, 1);
+
+        portMappingsCheckBox = new QCheckBox(page);
+        portMappingsCheckBox->setObjectName(QString::fromUtf8("portMappingsCheckBox"));
+
+        gridLayout_20->addWidget(portMappingsCheckBox, 1, 0, 1, 3);
 
         stackedWidget->addWidget(page);
         hddTab = new QWidget();
@@ -1500,8 +1506,8 @@ public:
         keyMapContainer = new QWidget();
         keyMapContainer->setObjectName(QString::fromUtf8("keyMapContainer"));
         keyMapContainer->setGeometry(QRect(0, 0, 98, 28));
-        gridLayout_19 = new QGridLayout(keyMapContainer);
-        gridLayout_19->setObjectName(QString::fromUtf8("gridLayout_19"));
+        horizontalLayout_5 = new QHBoxLayout(keyMapContainer);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         hotKeyScrollArea->setWidget(keyMapContainer);
 
         gridLayout_17->addWidget(hotKeyScrollArea, 0, 0, 1, 1);
@@ -1541,8 +1547,7 @@ public:
         QWidget::setTabOrder(localDownloadLimitEdit, limitUtpCheckBox);
         QWidget::setTabOrder(limitUtpCheckBox, seedTimeLimitEdit);
         QWidget::setTabOrder(seedTimeLimitEdit, portEdit);
-        QWidget::setTabOrder(portEdit, portMappingsCheckBox);
-        QWidget::setTabOrder(portMappingsCheckBox, proxyGroupBox);
+        QWidget::setTabOrder(portEdit, proxyGroupBox);
         QWidget::setTabOrder(proxyGroupBox, proxyHostEdit);
         QWidget::setTabOrder(proxyHostEdit, proxyUsernameEdit);
         QWidget::setTabOrder(proxyUsernameEdit, proxyPwdEdit);
@@ -1629,6 +1634,7 @@ public:
         QObject::connect(browseWatchStaticPathButton, SIGNAL(clicked()), SettingsDialog, SLOT(onBrowseWatchStaticPath()));
         QObject::connect(GroupsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), SettingsDialog, SLOT(showSelectedGroup(QTreeWidgetItem*,QTreeWidgetItem*)));
         QObject::connect(updateGroupButton, SIGNAL(clicked()), SettingsDialog, SLOT(editGroup()));
+        QObject::connect(useRandomPortCheckBox, SIGNAL(toggled(bool)), portEdit, SLOT(setDisabled(bool)));
 
         listWidget->setCurrentRow(0);
         stackedWidget->setCurrentIndex(0);
@@ -1765,7 +1771,6 @@ public:
         label_15->setText(QApplication::translate("SettingsDialog", "ACTIVE_TORRENTS_LIMIT", 0, QApplication::UnicodeUTF8));
         label_45->setText(QApplication::translate("SettingsDialog", "MAX_CONNECTIONS", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("SettingsDialog", "LISTEN_PORT", 0, QApplication::UnicodeUTF8));
-        portMappingsCheckBox->setText(QApplication::translate("SettingsDialog", "USE_PORT_MAPPINGS", 0, QApplication::UnicodeUTF8));
         groupBox_10->setTitle(QApplication::translate("SettingsDialog", "NET_ENC", 0, QApplication::UnicodeUTF8));
         label_27->setText(QApplication::translate("SettingsDialog", "IN_ENC_POLICITY", 0, QApplication::UnicodeUTF8));
         inEncPolicyComboBox->clear();
@@ -1828,6 +1833,8 @@ public:
         proxyTypeComboBox->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_TYPE", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         label_44->setText(QApplication::translate("SettingsDialog", "PROXY_PORT", 0, QApplication::UnicodeUTF8));
+        useRandomPortCheckBox->setText(QApplication::translate("SettingsDialog", "USE_RANDOM_PORT", 0, QApplication::UnicodeUTF8));
+        portMappingsCheckBox->setText(QApplication::translate("SettingsDialog", "USE_PORT_MAPPINGS", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
         useDiskReadAheadCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "USE_DISK_READ_AHEAD_WIT", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
