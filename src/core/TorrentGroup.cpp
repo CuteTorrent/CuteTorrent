@@ -1,5 +1,6 @@
 ﻿#include "TorrentGroup.h"
 #include <QDebug>
+
 TorrentGroup::TorrentGroup(QString name, QStringList extentions, QString savePath)
 {
 	m_uid = QUuid::createUuid();
@@ -172,3 +173,4 @@ QDataStream& operator>>(QDataStream& out, TorrentGroup& any)
 	}
 	return out;
 }
+

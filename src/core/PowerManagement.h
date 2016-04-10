@@ -1,5 +1,4 @@
-﻿
-#ifndef POWERMANAGEMENT_INCLUDED
+﻿#ifndef POWERMANAGEMENT_INCLUDED
 #define POWERMANAGEMENT_INCLUDED
 #include <Qt>
 #include "Singleton.h"
@@ -11,7 +10,7 @@ class PowerManagement : public QObject, public Singleton<PowerManagement>
 protected:
 	PowerManagement();
 public:
-	
+
 	enum ActionType
 	{
 		NONE,
@@ -20,12 +19,14 @@ public:
 		SLEEP,
 		HIBERNATE
 	};
+
 	enum IdleType
 	{
 		NOT_IDLE,
 		IDLE_DOWNLOAD,
 		IDLE_ALL
 	};
+
 	friend class Singleton<PowerManagement>;
 	void setIdleType(IdleType idleType);
 	void setIdleAction(ActionType idleAction);
@@ -41,8 +42,9 @@ private:
 	bool m_bInited;
 	void winInitPriveleges();
 #endif
-signals:
+	signals:
 	void resetPowerState();
 };
 
 #endif
+

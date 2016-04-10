@@ -240,3 +240,4 @@ void PieceAvailabilityWidget::UpdateImage()
 
 	m_img = image2;
 }
+

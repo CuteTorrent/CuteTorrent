@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright (c) 2011-2012 - Tőkés Attila
 
 This file is part of SmtpClient for Qt.
@@ -114,3 +114,5 @@ protected:
 };
 
 #endif // MIMEPART_H
+
+

@@ -20,7 +20,6 @@
 
 class HttpSession
 {
-
 public:
 
 	/**
@@ -40,7 +39,7 @@ public:
 	  Copy operator. Detaches from the current shared data and attaches to
 	  the data of the other object.
 	*/
-	HttpSession& operator= (const HttpSession& other);
+	HttpSession& operator=(const HttpSession& other);
 
 
 	/**
@@ -94,7 +93,6 @@ private:
 
 	struct HttpSessionData
 	{
-
 		/** Timestamp of last access, set by the HttpSessionStore */
 		qint64 lastAccess;
 
@@ -109,12 +107,12 @@ private:
 
 		/** Storage for the key/value pairs; */
 		QMap<QByteArray, QVariant> values;
-
 	};
 
 	/** Pointer to the shared data. */
 	HttpSessionData* dataPtr;
-
 };
 
 #endif // HTTPSESSION_H
+
+

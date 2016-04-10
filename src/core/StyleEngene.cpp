@@ -2,8 +2,10 @@
 #include <QSettings>
 #include <QApplication>
 #include "StaticHelpers.h"
+#include "quazip.h"
+#include "quazipfile.h"
 StyleEngene* StyleEngene::instance = NULL;
-const char* StyleEngene::EnumStrings[] = { "iso", "doc", "picture", "movie", "archive", "audio", "app" };
+const char* StyleEngene::EnumStrings[] = {"iso", "doc", "picture", "movie", "archive", "audio", "app"};
 QIcon StyleEngene::fallback = QIcon();
 QSet<QString> StyleEngene::suffixes[TYPE_COUNT];
 QIcon StyleEngene::fileIcons[TYPE_COUNT];
@@ -15,11 +17,19 @@ StyleEngene::StyleEngene(QObject* parent) : QObject(parent)
 
 StyleEngene::~StyleEngene()
 {
+	QList<InternalStyleInfo> internalStyleInfos = _styleMap.values();
+
+	for (int i = 0; i < internalStyleInfos.size(); i++)
+	{
+		InternalStyleInfo info = internalStyleInfos[i];
+		info.iconsPack->close();
+		delete info.iconsPack;
+	}
 }
 
 StyleEngene* StyleEngene::getInstance()
 {
-	if(instance == NULL)
+	if (instance == NULL)
 	{
 		instance = new StyleEngene();
 	}
@@ -34,7 +44,7 @@ QList<StyleInfo> StyleEngene::getAvaliableStyles() const
 
 void StyleEngene::setStyle(QString internalName)
 {
-	if(_styleMap.contains(internalName))
+	if (_styleMap.contains(internalName))
 	{
 		_currentStyle = _styleMap[internalName];
 		m_iconCache.clear();
@@ -77,16 +87,16 @@ QIcon StyleEngene::guessMimeIcon(const QString& suffix)
 {
 	QString lSuffix = suffix.toLower();
 
-	if(fileIcons[0].isNull())
+	if (fileIcons[0].isNull())
 	{
 		initIcons();
 	}
 
-	if(!suffix.isEmpty())
+	if (!suffix.isEmpty())
 	{
-		for(int i = 0; i < TYPE_COUNT; ++i)
+		for (int i = 0; i < TYPE_COUNT; ++i)
 		{
-			if(suffixes[i].contains(lSuffix))
+			if (suffixes[i].contains(lSuffix))
 			{
 				return fileIcons[i];
 			}
@@ -103,19 +113,36 @@ StyleInfo StyleEngene::getCuurentStyle() const
 
 QIcon StyleEngene::getIcon(QString name)
 {
-	if(m_iconCache.contains(name))
+	if (m_iconCache.contains(name))
 	{
 		return *m_iconCache[name];
 	}
 
-	QString iconsRoot = StaticHelpers::CombinePathes(_currentStyle.rootPath , "icons");
+	
 
-	if(iconNamesMap.contains(name))
+	if (iconNamesMap.contains(name))
 	{
-		QString iconPath = StaticHelpers::CombinePathes(iconsRoot, iconNamesMap[name]);
-		qDebug() << "Icon path is " << iconPath;
-		QIcon* icon = new QIcon(iconPath);
+		
+		m_mutex.lock();
+		QString iconPath = "icons/" + iconNamesMap[name];
+		QList<QuaZipFileInfo64> fileInfos = _currentStyle.iconsPack->getFileInfoList64();
+		if (!_currentStyle.iconsPack->setCurrentFile(iconPath))
+		{
+			qDebug() << "File" << iconPath << " not found";
+		}
+		QuaZipFile iconFile(_currentStyle.iconsPack);
+		iconFile.open(QIODevice::ReadOnly);
+		QByteArray iconData = iconFile.readAll();
+		QTemporaryFile file;
+		file.open();
+		file.write(iconData);
+		file.setAutoRemove(false);
+		file.close();
+		qDebug() << "Icon path is " << file.fileName();
+		QIcon* icon = new QIcon(file.fileName());
+		QFile::remove(file.fileName());
 		m_iconCache.insert(name, icon);
+		m_mutex.unlock();
 		return *icon;
 	}
 	qCritical() << "No icon found for " << name;
@@ -132,13 +159,14 @@ void StyleEngene::init()
 #endif
 	QDir rootDir = QDir(rootPath);
 
-	if(rootDir.exists())
+	if (rootDir.exists())
 	{
 		QStringList styleDirs = rootDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
 
-		foreach(QString styleDir, styleDirs)
+		for (int i = 0; i < styleDirs.size(); i++)
 		{
-			loadStyleInfo(rootPath + styleDir);
+			QString styleDir = styleDirs[i];
+			loadStyleInfo(StaticHelpers::CombinePathes(rootPath, styleDir));
 		}
 	}
 	else
@@ -152,10 +180,10 @@ void StyleEngene::init()
 void StyleEngene::initFileSuffixes()
 {
 	const char* disk_types[] =
-	{
-		"mdx", "mds", "mdf", "iso", "b5t", "b6t", "bwt", "ccd", "cdi",
-		"nrg", "pdi", "isz"
-	};
+		{
+			"mdx", "mds", "mdf", "iso", "b5t", "b6t", "bwt", "ccd", "cdi",
+			"nrg", "pdi", "isz"
+		};
 
 	for (int i = 0, n = sizeof(disk_types) / sizeof(disk_types[0]); i < n; ++i)
 	{
@@ -163,10 +191,10 @@ void StyleEngene::initFileSuffixes()
 	}
 
 	const char* doc_types[] =
-	{
-		"abw", "csv", "doc", "dvi", "htm", "html", "ini", "log", "odp",
-		"ods", "odt", "pdf", "ppt", "ps", "rtf", "tex", "txt", "xml"
-	};
+		{
+			"abw", "csv", "doc", "dvi", "htm", "html", "ini", "log", "odp",
+			"ods", "odt", "pdf", "ppt", "ps", "rtf", "tex", "txt", "xml"
+		};
 
 	for (int i = 0, n = sizeof(doc_types) / sizeof(doc_types[0]); i < n; ++i)
 	{
@@ -174,9 +202,9 @@ void StyleEngene::initFileSuffixes()
 	}
 
 	const char* pic_types[] =
-	{
-		"bmp", "gif", "jpg", "jpeg", "pcx", "png", "psd", "ras", "tga", "ico", "tiff"
-	};
+		{
+			"bmp", "gif", "jpg", "jpeg", "pcx", "png", "psd", "ras", "tga", "ico", "tiff"
+		};
 
 	for (int i = 0, n = sizeof(pic_types) / sizeof(pic_types[0]); i < n; ++i)
 	{
@@ -184,10 +212,10 @@ void StyleEngene::initFileSuffixes()
 	}
 
 	const char* vid_types[] =
-	{
-		"3gp", "asf", "avi", "mov", "mpeg", "mpg", "mp4", "mkv", "mov",
-		"ogm", "ogv", "qt", "rm", "wmv", "m2ts", "m4v"
-	};
+		{
+			"3gp", "asf", "avi", "mov", "mpeg", "mpg", "mp4", "mkv", "mov",
+			"ogm", "ogv", "qt", "rm", "wmv", "m2ts", "m4v"
+		};
 
 	for (int i = 0, n = sizeof(vid_types) / sizeof(vid_types[0]); i < n; ++i)
 	{
@@ -195,9 +223,9 @@ void StyleEngene::initFileSuffixes()
 	}
 
 	const char* arc_types[] =
-	{
-		"7z", "ace", "bz2", "cbz", "gz", "gzip", "lzma", "rar", "sft", "tar", "zip"
-	};
+		{
+			"7z", "ace", "bz2", "cbz", "gz", "gzip", "lzma", "rar", "sft", "tar", "zip"
+		};
 
 	for (int i = 0, n = sizeof(arc_types) / sizeof(arc_types[0]); i < n; ++i)
 	{
@@ -205,17 +233,17 @@ void StyleEngene::initFileSuffixes()
 	}
 
 	const char* aud_types[] =
-	{
-		"aac", "ac3", "aiff", "ape", "au", "flac", "m3u", "m4a", "mid", "midi", "mp2",
-		"mp3", "mpc", "nsf", "oga", "ogg", "ra", "ram", "shn", "voc", "wav", "wma"
-	};
+		{
+			"aac", "ac3", "aiff", "ape", "au", "flac", "m3u", "m4a", "mid", "midi", "mp2",
+			"mp3", "mpc", "nsf", "oga", "ogg", "ra", "ram", "shn", "voc", "wav", "wma"
+		};
 
 	for (int i = 0, n = sizeof(aud_types) / sizeof(aud_types[0]); i < n; ++i)
 	{
 		suffixes[AUDIO] << QString::fromLatin1(aud_types[i]);
 	}
 
-	const char* exe_types[] = { "bat", "cmd", "com", "exe" };
+	const char* exe_types[] = {"bat", "cmd", "com", "exe"};
 
 	for (int i = 0, n = sizeof(exe_types) / sizeof(exe_types[0]); i < n; ++i)
 	{
@@ -232,8 +260,9 @@ void StyleEngene::initIcons()
 	m_iconCache.clear();
 	QStringList keys = styleSettings.childKeys();
 
-	foreach(QString  key, keys)
+	for (int i = 0; i < keys.size(); i++)
 	{
+		QString key = keys[i];
 		iconNamesMap.insert(key, styleSettings.value(key).toString());
 	}
 
@@ -252,11 +281,11 @@ void StyleEngene::loadStyleSheet(QString path) const
 {
 	QFile file(path);
 
-	if(file.open(QFile::ReadOnly))
+	if (file.open(QFile::ReadOnly))
 	{
 		QString relativePath = _currentStyle.imageDir;
 		QString styleSheet = QString(file.readAll()).replace("$[STYLE_DIR]", relativePath);
-		//qDebug() << styleSheet;
+		qDebug() << styleSheet;
 		static_cast<QApplication*>(QApplication::instance())->setStyleSheet(styleSheet);
 		file.close();
 	}
@@ -264,21 +293,27 @@ void StyleEngene::loadStyleSheet(QString path) const
 
 void StyleEngene::loadStyleInfo(QString path)
 {
-	if(QDir(path).exists())
+	if (QDir(path).exists())
 	{
-		QString confPath = path + QDir::separator() + "style.ini";
-		StyleInfo* newStyleInfo = new StyleInfo;
-		QSettings* styleSettings = new QSettings(confPath, QSettings::IniFormat);
-		styleSettings->beginGroup("Style");
-		newStyleInfo->DisplayName = styleSettings->value("DisplayName").toString();
-		newStyleInfo->InternalName = styleSettings->value("InternalName").toString();
-		InternalStyleInfo* internalStyleInfo = new InternalStyleInfo;
-		internalStyleInfo->styleInfo = *newStyleInfo;
-		internalStyleInfo->imageDir = path + "/" + styleSettings->value("ImageDir").toString();
-		internalStyleInfo->rootPath = path;
-		styleSettings->endGroup();
-		delete styleSettings;
-		_avaliableStyles.append(*newStyleInfo);
-		_styleMap.insert(newStyleInfo->InternalName, *internalStyleInfo);
+		QString confPath = StaticHelpers::CombinePathes(path, "style.ini");
+		StyleInfo newStyleInfo;
+		QSettings styleSettings(confPath, QSettings::IniFormat);
+		styleSettings.beginGroup("Style");
+		newStyleInfo.DisplayName = styleSettings.value("DisplayName").toString();
+		newStyleInfo.InternalName = styleSettings.value("InternalName").toString();
+		InternalStyleInfo internalStyleInfo;
+		internalStyleInfo.styleInfo = newStyleInfo;
+		QString imageDirName = styleSettings.value("ImageDir").toString();
+		internalStyleInfo.imageDir = path + QDir::separator() +  imageDirName;
+		internalStyleInfo.imageDir = internalStyleInfo.imageDir.replace("\\", "/");
+		qDebug() << "imageDir:" << internalStyleInfo.imageDir;
+		internalStyleInfo.rootPath = path;
+		internalStyleInfo.iconsPack = new QuaZip(StaticHelpers::CombinePathes(path, "icons.pack"));
+		internalStyleInfo.iconsPack->open(QuaZip::mdUnzip);
+		styleSettings.endGroup();
+
+		_avaliableStyles.append(newStyleInfo);
+		_styleMap.insert(newStyleInfo.InternalName, internalStyleInfo);
 	}
 }
+

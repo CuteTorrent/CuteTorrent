@@ -2,6 +2,7 @@
 #include "TorrentCommon.h"
 #include "http/httprequesthandler.h"
 #include "TorrentStorrage.h"
+
 class TorrentApiController: public HttpRequestHandler
 {
 	Q_OBJECT
@@ -14,5 +15,5 @@ public:
 	TorrentApiController(QObject* parent = 0);
 	~TorrentApiController();
 	void service(HttpRequest& request, HttpResponse& response) override;
-
 };
+

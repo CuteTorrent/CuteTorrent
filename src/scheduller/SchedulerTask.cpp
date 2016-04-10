@@ -1,17 +1,18 @@
 ﻿#include "SchedulerTask.h"
 #include "TorrentManager.h"
 #include <QDebug>
+
 SchedulerTask::SchedulerTask(QString name, TaskType type, QVariant limit, QDateTime begin, QObject* parent /*= 0*/) : QThread(parent)
 {
 	m_ruleName = name;
 	m_taskType = type;
 	bool ok;
 
-	if(type == LIMIT_DOWNLOAD || type == LIMIT_UPLOAD)
+	if (type == LIMIT_DOWNLOAD || type == LIMIT_UPLOAD)
 	{
 		m_speedLimit = limit.toInt(&ok);
 
-		if(!ok)
+		if (!ok)
 		{
 		}
 	}
@@ -22,10 +23,11 @@ SchedulerTask::SchedulerTask(QString name, TaskType type, QVariant limit, QDateT
 SchedulerTask::SchedulerTask(const SchedulerTask& other)
 {
 	m_taskType = other.m_taskType;
-	m_ruleName  = other.m_ruleName;
+	m_ruleName = other.m_ruleName;
 	m_speedLimit = other.m_speedLimit;
 	m_beginDate = other.m_beginDate;
 }
+
 SchedulerTask::SchedulerTask()
 {
 	m_taskType = UNKNOWN;
@@ -45,36 +47,36 @@ void SchedulerTask::pefromTask()
 	TorrentManagerPtr tManager = TorrentManager::getInstance();
 	libtorrent::session_settings current = tManager->readSettings();
 
-	switch(m_taskType)
+	switch (m_taskType)
 	{
-		case START_ALL		:
+		case START_ALL:
 			tManager->StartAllTorrents();
 			break;
 
-		case PAUSE_ALL		:
+		case PAUSE_ALL:
 			tManager->PauseAllTorrents();
 			break;
 
-		case LIMIT_UPLOAD	:
+		case LIMIT_UPLOAD:
 		{
 			current.upload_rate_limit = m_speedLimit;
 			tManager->updateSettings(current);
 		}
-		break;
+			break;
 
-		case LIMIT_DOWNLOAD	:
+		case LIMIT_DOWNLOAD:
 		{
 			current.download_rate_limit = m_speedLimit;
 			tManager->updateSettings(current);
 		}
-		break;
+			break;
 
 		default:
 			break;
 	}
 }
 
-bool SchedulerTask::operator< (const SchedulerTask& other) const
+bool SchedulerTask::operator<(const SchedulerTask& other) const
 {
 	return m_beginDate < other.startTime();
 }
@@ -90,15 +92,15 @@ int SchedulerTask::limit()
 	return m_speedLimit;
 }
 
-SchedulerTask& SchedulerTask::operator= (const SchedulerTask& other)
+SchedulerTask& SchedulerTask::operator=(const SchedulerTask& other)
 {
-	if(this == &other)
+	if (this == &other)
 	{
 		return *this;
 	}
 
 	m_taskType = other.m_taskType;
-	m_ruleName  = other.m_ruleName;
+	m_ruleName = other.m_ruleName;
 	m_speedLimit = other.m_speedLimit;
 	m_beginDate = other.m_beginDate;
 	return *this;
@@ -107,9 +109,9 @@ SchedulerTask& SchedulerTask::operator= (const SchedulerTask& other)
 bool SchedulerTask::operator==(const SchedulerTask& other)
 {
 	return m_taskType == other.m_taskType
-	       && m_beginDate == other.m_beginDate
-	       && m_speedLimit == other.m_speedLimit
-	       && m_ruleName == other.m_ruleName;
+		&& m_beginDate == other.m_beginDate
+		&& m_speedLimit == other.m_speedLimit
+		&& m_ruleName == other.m_ruleName;
 }
 
 bool SchedulerTask::operator!=(const SchedulerTask& other)
@@ -121,3 +123,4 @@ QString SchedulerTask::name() const
 {
 	return m_ruleName;
 }
+

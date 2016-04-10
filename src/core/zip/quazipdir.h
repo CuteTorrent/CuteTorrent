@@ -68,6 +68,7 @@ public:
 	~QuaZipDir();
 	/// The assignment operator.
 	bool operator==(const QuaZipDir& that);
+
 	/// operator!=
 	/**
 	  \return \c true if either this and \a that use different QuaZip
@@ -77,6 +78,7 @@ public:
 	{
 		return !operator==(that);
 	}
+
 	/// operator==
 	/**
 	  \return \c true if both this and \a that use the same QuaZip
@@ -225,3 +227,5 @@ public:
 };
 
 #endif // QUAZIP_QUAZIPDIR_H
+
+

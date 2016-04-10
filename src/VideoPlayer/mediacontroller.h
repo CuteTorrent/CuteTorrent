@@ -26,11 +26,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <phonon/AudioOutput>
 #include <phonon/VideoWidget>
 #include <phonon/MediaController>
+
 namespace Phonon
 {
-class MediaObject;
-class MediaSource;
-
+	class MediaObject;
+	class MediaSource;
 }
 
 class MediaController : public QObject
@@ -53,14 +53,14 @@ public slots:
 	void forvard();
 	void updateStateStatus(Phonon::State, Phonon::State);
 
-signals:
+	signals:
 	void updateMediaObject();
 	void newFile(QString);
 private:
 	QStringList m_playList;
 	int m_playListPosition;
 	QString m_LastDir;
-	Phonon::MediaController*  m_pMediaController;
+	Phonon::MediaController* m_pMediaController;
 	Phonon::MediaObject* m_pMedia;
 	Phonon::AudioOutput* m_pAudioOutput;
 	bool m_playing;
@@ -68,3 +68,5 @@ private:
 };
 
 #endif // MEDIACONTROLLER_H
+
+

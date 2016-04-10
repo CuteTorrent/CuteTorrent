@@ -37,11 +37,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <TorrentGroupsManager.h>
 #include "FiltersViewModel.h"
 #include "AddRssDwonloadRuleDialog.h"
+
 OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags)
 	: BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize, parent)
-	, m_size(0)
-	, m_bUseGroup(false)
-	, m_pFileTreeModel(NULL)
+	  , m_size(0)
+	  , m_bUseGroup(false)
+	  , m_pFileTreeModel(NULL)
 {
 	setupUi(this);
 	setupCustomWindow();
@@ -52,7 +53,7 @@ OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags)
 	GroupComboBox->setModel(m_pGroupsModel);
 	GroupComboBox->setRootModelIndex(m_pGroupsModel->index(0, 0, QModelIndex()));
 	GroupComboBox->setCurrentIndex(-1);
-	
+
 	connect(GroupComboBox, SIGNAL(currentIndexChanged(int)), SLOT(ChangeGroup()));
 	m_pTorrentManager = TorrentManager::getInstance();
 	QCompleter* pathComplitter = new QCompleter(this);
@@ -74,10 +75,12 @@ void OpenTorrentDialog::reject()
 
 	QDialog::reject();
 }
+
 int OpenTorrentDialog::exec()
 {
 	return validTorrent ? QDialog::exec() : Rejected;
 }
+
 OpenTorrentDialog::~OpenTorrentDialog()
 {
 	if (m_pFileTreeModel != NULL)
@@ -110,7 +113,7 @@ void OpenTorrentDialog::FillData(opentorrent_info* info)
 	torrentFilesTreeView->setColumnWidth(1, 60);
 	torrentFilesTreeView->header()->setSortIndicator(0, Qt::AscendingOrder);
 
-	if(!info->baseSuffix.isEmpty())
+	if (!info->baseSuffix.isEmpty())
 	{
 		TorrentGroup* pTorrentGroup = TorrentGroupsManager::getInstance()->GetGroupByExtentions(info->baseSuffix);
 		if (pTorrentGroup != NULL)
@@ -131,7 +134,6 @@ void OpenTorrentDialog::FillData(opentorrent_info* info)
 		{
 			qDebug() << "No group found for ext. " << info->baseSuffix;
 		}
-		
 	}
 }
 
@@ -142,7 +144,7 @@ void OpenTorrentDialog::SetData(QString filename)
 	QString lastSaveDir = settings->valueString("System", "LastSaveTorrentDir", QDir::homePath());
 	pathEdit->setText(lastSaveDir);
 	qDebug() << "lastSaveDir" << lastSaveDir;
-	if(filename.startsWith("magnet"))
+	if (filename.startsWith("magnet"))
 	{
 		QMovie* movie = new QMovie(":/images/loader.gif");
 		loaderGifLabel->setMovie(movie);
@@ -162,20 +164,19 @@ void OpenTorrentDialog::SetData(QString filename)
 		loaderGifLabel->hide();
 		loaderTextLabel->hide();
 		error_code ec;
-		boost::scoped_ptr<opentorrent_info> info (m_pTorrentManager->GetTorrentInfo(m_torrentFilename, ec));
+		boost::scoped_ptr<opentorrent_info> info(m_pTorrentManager->GetTorrentInfo(m_torrentFilename, ec));
 
-		if(info != NULL && ec == 0)
+		if (info != NULL && ec == 0)
 		{
 			FillData(info.get());
 		}
 		else
 		{
 			validTorrent = false;
-			CustomMessageBox::critical(this, tr("OPEN_TORRENT_ERROR"), StaticHelpers::translateLibTorrentError(ec));
+			CustomMessageBox::critical(tr("OPEN_TORRENT_ERROR"), StaticHelpers::translateLibTorrentError(ec));
 		}
 	}
 }
-
 
 
 void OpenTorrentDialog::BrowseButton()
@@ -183,11 +184,11 @@ void OpenTorrentDialog::BrowseButton()
 	QApplicationSettingsPtr settings = QApplicationSettings::getInstance();
 	QString lastDir = pathEdit->text();
 	QString dir = QFileDialog::getExistingDirectory(this, tr("DIALOG_OPEN_DIR"),
-	              lastDir,
-	              QFileDialog::ShowDirsOnly
-	              | QFileDialog::DontResolveSymlinks);
+	                                                lastDir,
+	                                                QFileDialog::ShowDirsOnly
+	                                                | QFileDialog::DontResolveSymlinks);
 
-	if(!dir.isEmpty())
+	if (!dir.isEmpty())
 	{
 		dir.append(QDir::separator());
 		dir = QDir::toNativeSeparators(dir);
@@ -200,17 +201,16 @@ void OpenTorrentDialog::BrowseButton()
 }
 
 
-
 bool OpenTorrentDialog::AccepTorrent()
 {
-	if(validTorrent)
+	if (validTorrent)
 	{
 		QMap<QString, quint8> filePriorities = m_pFileTreeModel->getFilePiorites();
 		QList<quint8> values = filePriorities.values();
 		qDebug() << filePriorities;
 		if (values.count(0) == values.size())
 		{
-			CustomMessageBox::critical(this, "Adding torrent Error", tr("SELECT_AT_LEAST_ONE_FILE"));
+			CustomMessageBox::critical( "Adding torrent Error", tr("SELECT_AT_LEAST_ONE_FILE"));
 			return false;
 		}
 
@@ -221,7 +221,7 @@ bool OpenTorrentDialog::AccepTorrent()
 		TorrentManager::AddTorrentFlags flags = static_cast<TorrentManager::AddTorrentFlags>(BuildFlags());
 		QString savePath = pathEdit->displayText();
 
-		if(m_torrentFilename.startsWith("magnet"))
+		if (m_torrentFilename.startsWith("magnet"))
 		{
 			m_pTorrentManager->AddMagnet(m_info.handle, savePath, group, filePriorities, flags);
 		}
@@ -230,12 +230,13 @@ bool OpenTorrentDialog::AccepTorrent()
 			m_pTorrentManager->AddTorrent(m_torrentFilename, savePath, ec, labelNameData->text(), filePriorities, group, flags);
 		}
 
-		if(ec)
+		if (ec)
 		{
-			CustomMessageBox::critical(this, "Adding torrent Error", StaticHelpers::translateLibTorrentError(ec));
+			CustomMessageBox::critical( "Adding torrent Error", StaticHelpers::translateLibTorrentError(ec));
 			return false;
 		}
 	}
+
 
 	return true;
 }
@@ -255,7 +256,6 @@ void OpenTorrentDialog::ChangeGroup()
 				pathEdit->setText(pGroup->savePath());
 			}
 		}
-			
 	}
 }
 
@@ -269,14 +269,13 @@ void OpenTorrentDialog::DownloadMetadataCompleted(openmagnet_info info)
 }
 
 
-
 void OpenTorrentDialog::OnPathChanged(QString path)
 {
 	QStorageInfo storageInfo(path);
 	labelSizeData->setText(tr("%1 (AVAILABLE: %2)").arg(StaticHelpers::toKbMbGb(m_size), StaticHelpers::toKbMbGb(storageInfo.bytesAvailable())));
-	if (m_size + 20l * 1024l * 1024l >storageInfo.bytesAvailable())
+	if (m_size + 20l * 1024l * 1024l > storageInfo.bytesAvailable())
 	{
-		if (CustomMessageBox::critical(this, tr("NOT_ENOUGH_SPACE"), tr("NOT_ENOGH_STORRAGE_SPACE_TO_STORE_TORRENT"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+		if (CustomMessageBox::critical( tr("NOT_ENOUGH_SPACE"), tr("NOT_ENOGH_STORRAGE_SPACE_TO_STORE_TORRENT"), CustomMessageBox::YesNo) == CustomMessageBox::No)
 		{
 			reject();
 		}
@@ -310,7 +309,7 @@ void OpenTorrentDialog::OnUncheckAll()
 
 void OpenTorrentDialog::changeEvent(QEvent* event)
 {
-	if(event->type() == QEvent::LanguageChange)
+	if (event->type() == QEvent::LanguageChange)
 	{
 		retranslateUi(this);
 	}
@@ -386,6 +385,7 @@ QWidget* OpenTorrentDialog::centralWidget()
 
 void OpenTorrentDialog::OnError(QString error_msg)
 {
-	CustomMessageBox::critical(this, "Error", error_msg);
+	CustomMessageBox::critical( "Error", error_msg);
 	reject();
 }
+

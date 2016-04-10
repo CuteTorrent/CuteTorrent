@@ -23,6 +23,7 @@ class QNetworkReply;
 #include "ServiceCommon.h"
 #include <QObject>
 #include <QVariant>
+
 class UpdateNotifier : public QObject
 {
 	Q_OBJECT
@@ -31,7 +32,7 @@ public:
 	UpdateNotifier(QObject* parent = 0);
 	~UpdateNotifier();
 	void fetch();
-signals:
+	signals:
 	void Notify(int, QString, QVariant);
 public slots:
 
@@ -42,3 +43,4 @@ private:
 	QNetworkAccessManager* m_manager;
 };
 #endif
+

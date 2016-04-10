@@ -26,6 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class QMutex;
 class QSettings;
 class SimpleCrypt;
+
 class QApplicationSettings : public QObject, public Singleton<QApplicationSettings>
 {
 	Q_OBJECT
@@ -38,7 +39,7 @@ private:
 	SimpleCrypt* m_pCryptor;
 	QSettings* settings;
 	QMutex* locker;
-signals:
+	signals:
 	void PropertyChanged(QString group, QString key);
 public:
 	~QApplicationSettings();
@@ -62,5 +63,5 @@ public:
 };
 
 
-
 #endif
+

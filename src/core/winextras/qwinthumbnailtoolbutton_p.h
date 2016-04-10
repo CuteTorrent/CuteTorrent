@@ -44,7 +44,10 @@ class QWinThumbnailToolBar;
 class QWinThumbnailToolButtonPrivate
 {
 public:
-	QWinThumbnailToolButtonPrivate() : enabled(true), interactive(true), dismiss(false), visible(true), flat(false), toolbar(0) {}
+	QWinThumbnailToolButtonPrivate() : enabled(true), interactive(true), dismiss(false), visible(true), flat(false), toolbar(0)
+	{
+	}
+
 	QString toolTip;
 	QIcon icon;
 	bool enabled;
@@ -59,3 +62,5 @@ public:
 QT_END_NAMESPACE
 
 #endif // QWINTHUMBNAILTOOLBUTTON_P_H
+
+

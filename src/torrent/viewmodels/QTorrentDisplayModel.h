@@ -42,6 +42,7 @@ class QTreeView;
 class StyleEngene;
 #define EXTENDED_COLUMN_COUNT 11
 #define COMPACT_COLUMN_COUNT 1
+
 class QTorrentDisplayModel: public QAbstractItemModel
 {
 public:
@@ -50,6 +51,7 @@ public:
 		Compact,
 		Extended
 	};
+
 private:
 	Q_OBJECT
 	TorrentStorragePtr m_pTorrentStorrage;
@@ -106,18 +108,32 @@ private:
 	void setGroupsUnchecked() const;
 	int columnCount(const QModelIndex& parent) const override;
 public:
-	
-	QTorrentDisplayModel(ViewMode ,QTreeView*, QTorrentFilterProxyModel*, QObject*);
+
+	QTorrentDisplayModel(ViewMode, QTreeView*, QTorrentFilterProxyModel*, QObject*);
 	void setViewMode(ViewMode);
 	ViewMode viewMode();
 	~QTorrentDisplayModel();
+
 	enum action
 	{
-		stop, pause, resume, remove, remove_all, move_storage,
-		set_sequential, set_superseed, generate_magmet, update_trackers,
-		rehash, change_group, queue_up, queue_down, queue_top, queue_bottom
+		stop,
+		pause,
+		resume,
+		remove,
+		remove_all,
+		move_storage,
+		set_sequential,
+		set_superseed,
+		generate_magmet,
+		update_trackers,
+		rehash,
+		change_group,
+		queue_up,
+		queue_down,
+		queue_top,
+		queue_bottom
 	};
-	
+
 	void ActionOnSelectedItem(action wtf);
 	void retranslate() const;
 
@@ -125,8 +141,9 @@ public:
 	QModelIndex parent(const QModelIndex& child) const override;
 	int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 	QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
-	QVariant data(const QModelIndex& index, int role =	Qt::DisplayRole) const override;
+	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 	bool removeRow(const QModelIndex& index, bool delFiles);
+
 	enum Role
 	{
 		TorrentRole = Qt::UserRole,
@@ -140,6 +157,7 @@ public:
 		TorrentSeeds,
 		TorrentPeers
 	};
+
 	enum Column
 	{
 		Name,
@@ -154,9 +172,10 @@ public:
 		Seeds,
 		Peers
 	};
+
 	Torrent* GetSelectedTorrent() const;
 
-signals:
+	signals:
 	void initCompleted();
 public slots:
 	void UpdateMenu();
@@ -171,7 +190,7 @@ public slots:
 	void MountDT() const;
 	void SetPriority(int prio) const;
 	void playInPlayer() const;
-	
+
 	void setSequentualDL();
 	void moveStorrage();
 	void SetSuperSeed();
@@ -190,3 +209,4 @@ public slots:
 
 
 #endif
+

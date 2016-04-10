@@ -3,13 +3,14 @@
 
 #include <QWizardPage>
 #include <QtGui>
+
 class CreateBackupPage : public QWizardPage
 {
 	Q_OBJECT
 public:
 	explicit CreateBackupPage(QWidget* parent = 0);
-	int	nextId() const;
-signals:
+	int nextId() const;
+	signals:
 
 public slots:
 	void browseButtonClick();
@@ -27,3 +28,5 @@ private:
 };
 
 #endif // CREATEBACKUPPAGE_H
+
+

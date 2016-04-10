@@ -11,9 +11,9 @@ class EmailValidator : public QValidator
 {
 	Q_OBJECT
 public:
-	explicit EmailValidator(QObject *parent = 0);
-	State validate(QString &text, int &pos) const override;
-	void fixup(QString &text) const override;
+	explicit EmailValidator(QObject* parent = 0);
+	State validate(QString& text, int& pos) const override;
+	void fixup(QString& text) const override;
 
 private:
 	const QRegExp m_validMailRegExp;
@@ -21,3 +21,5 @@ private:
 };
 
 #endif // EMAILVALIDATOR_H
+
+

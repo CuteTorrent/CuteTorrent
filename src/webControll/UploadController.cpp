@@ -2,18 +2,19 @@
 #include <QDir>
 #include "StaticHelpers.h"
 #include "TorrentManager.h"
+
 UploadController::UploadController(QObject* parent) : HttpRequestHandler("WebControl", parent), m_pTorrentManager(TorrentManager::getInstance())
 {
 }
 
 void UploadController::service(HttpRequest& request, HttpResponse& response)
 {
-	if(!CheckCreditinals(request, response))
+	if (!CheckCreditinals(request, response))
 	{
 		return;
 	}
 
-	if(request.getMethod() == "POST")
+	if (request.getMethod() == "POST")
 	{
 		//std::map<QByteArray,QByteArray> parametrs=request.getParameterMap().toStdMap();
 		QString save_path = request.getParameter("savePath");
@@ -59,3 +60,4 @@ void UploadController::service(HttpRequest& request, HttpResponse& response)
 UploadController::~UploadController()
 {
 }
+

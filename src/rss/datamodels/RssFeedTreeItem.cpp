@@ -40,3 +40,4 @@ QList<RssFeedItemTreeItem*> RssFeedTreeItem::Children()
 {
 	return m_children;
 }
+

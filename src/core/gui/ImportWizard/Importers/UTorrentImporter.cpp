@@ -11,10 +11,9 @@
 UTorrentImporter::UTorrentImporter(QObject* parent) : m_pWorkerThread(new QThread(this))
 {
 	moveToThread(m_pWorkerThread);
-	
+
 	connect(m_pWorkerThread, SIGNAL(started()), SLOT(runImport()));
 	connect(m_pWorkerThread, SIGNAL(finished()), SLOT(onFinished()));
-	
 }
 
 UTorrentImporter::~UTorrentImporter()
@@ -71,7 +70,6 @@ void UTorrentImporter::runImport()
 	TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
 	if (file.open(QIODevice::ReadOnly))
 	{
-		
 		QByteArray utResumeData = file.readAll();
 		file.close();
 		entry allResumeFile;
@@ -79,14 +77,13 @@ void UTorrentImporter::runImport()
 		{
 			emit progress(tr("Reading resume file:") + m_resumeFilePath, 1);
 			allResumeFile = bdecode(utResumeData.begin(), utResumeData.end());
-
 		}
 		catch (...)
 		{
-			CustomMessageBox::critical(NULL, "Error", tr("FAILED_DECODE_UTORRENT_RESUME_FILE"));
+			CustomMessageBox::critical("Error", tr("FAILED_DECODE_UTORRENT_RESUME_FILE"));
 			return;
 		}
-		
+
 		std::map<std::string, entry> rootEnties = allResumeFile.dict();
 		size_t size = rootEnties.size();
 		if (rootEnties.count(".fileguard") > 0)
@@ -124,12 +121,9 @@ void UTorrentImporter::runImport()
 						savePath = savePath.remove(lastPathSeparator, savePath.length() - lastPathSeparator);
 					}
 				}
-
-				
 			}
 			catch (...)
 			{
-				
 			}
 			if (m_bIsRunning == false)
 			{
@@ -138,15 +132,16 @@ void UTorrentImporter::runImport()
 			qDebug() << savePath;
 			error_code ec;
 			QString infoMessage = tr("Adding torrent: ") + (captionStr.isEmpty() ? torrentFileName : captionStr);
-			int index = distance(begin,i);
+			int index = distance(begin, i);
 			qDebug() << "progress" << index << size;
 			emit progress(infoMessage, index * 100 / size);
 			pTorrentManager->AddTorrent(torrentFileName, savePath, ec);
 			if (ec)
 			{
 				emit error((captionStr.isEmpty() ? torrentFileName : captionStr), StaticHelpers::translateLibTorrentError(ec));
-//				CustomMessageBox::critical(NULL, "Error", StaticHelpers::translateLibTorrentError(ec));
+				//				CustomMessageBox::critical(NULL, "Error", StaticHelpers::translateLibTorrentError(ec));
 			}
 		}
 	}
 }
+

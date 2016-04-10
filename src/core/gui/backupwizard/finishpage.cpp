@@ -1,4 +1,5 @@
 ﻿#include "finishpage.h"
+
 FinishPage::FinishPage(QWidget* parent) :
 	QWizardPage(parent)
 {
@@ -14,5 +15,4 @@ int FinishPage::nextId() const
 {
 	return -1;
 }
-
 

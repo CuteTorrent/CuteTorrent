@@ -5,9 +5,11 @@ MimeByteArrayAttachment::MimeByteArrayAttachment(const QString& name, const QByt
 {
 	this->cType = "application/octet-stream";
 	this->cEncoding = Base64;
-	this->cName = name,
-	      this->baContent = content;
+	this->cName = name ,
+		this->baContent = content;
 }
 
-MimeByteArrayAttachment::~MimeByteArrayAttachment() {}
+MimeByteArrayAttachment::~MimeByteArrayAttachment()
+{
+}
 

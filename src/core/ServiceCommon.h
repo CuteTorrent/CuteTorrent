@@ -14,3 +14,4 @@ DEFINE_PTR_CALSS(QApplicationSettings);
 
 DEFINE_PTR_CALSS(PowerManagement)
 #endif
+

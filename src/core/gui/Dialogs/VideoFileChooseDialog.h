@@ -1,15 +1,15 @@
-﻿
-#ifndef VIDEOFILE_CHOOSE_DIALOG_INCLUDED
+﻿#ifndef VIDEOFILE_CHOOSE_DIALOG_INCLUDED
 #define VIDEOFILE_CHOOSE_DIALOG_INCLUDED
 
 #include "ui_VideoFileChoose.h"
 #include <CustomWindow.h>
 #include <QStandardItemModel>
+
 class VideoFileChooseDialog : public BaseWindow<QDialog>, public Ui::VideoFileChooseDialog
 {
 	Q_OBJECT
 public:
-	
+
 	VideoFileChooseDialog(QStringList files, QWidget* parent = 0);
 	QString choosenPath() const;
 protected:
@@ -28,3 +28,4 @@ private slots:
 };
 
 #endif
+

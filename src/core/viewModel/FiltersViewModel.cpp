@@ -13,11 +13,12 @@
 #include <float.h>
 #include <TorrentGroupsManager.h>
 #include <AddRssDwonloadRuleDialog.h>
-FiltersViewModel::FiltersViewModel(GroupMode mode,QObject* parent) 
+
+FiltersViewModel::FiltersViewModel(GroupMode mode, QObject* parent)
 	: QAbstractItemModel(parent)
-	, m_LoadingMovie(new QMovie(":/images/loader.gif"))
-	, m_mode(mode)
-	, m_downloadingCount(0)
+	  , m_LoadingMovie(new QMovie(":/images/loader.gif"))
+	  , m_mode(mode)
+	  , m_downloadingCount(0)
 {
 	m_LoadingMovie->start();
 	BuildTree();
@@ -271,14 +272,13 @@ void FiltersViewModel::UpdateGroupCounters()
 					filterItem->setItemsCount(itemsCount);
 				}
 			}
-
 		}
 	}
 	QList<FilterTreeItem*> treeItems = m_groupFiltersToUid.values();
 	int length = treeItems.length();
 	for (int i = 0; i < length; i++)
 	{
-		FilterTreeItem * current = treeItems[i];
+		FilterTreeItem* current = treeItems[i];
 		int itemsCount = current->ItemsCount();
 		if (itemsCount > 0)
 		{
@@ -302,10 +302,9 @@ void FiltersViewModel::UpdateGroupCounters()
 					break;
 				}
 				current = parent;
-			} while (current != NULL);
+			}
+			while (current != NULL);
 		}
-		
-		
 	}
 }
 
@@ -318,7 +317,7 @@ void FiltersViewModel::UpdateGroupItems()
 	StyleEngene* pStyleEngine = StyleEngene::getInstance();
 	m_groupFiltersToUid.clear();
 	m_groupIndexToUid.clear();
-	AddGroups(pStyleEngine, m_pGroupsItem, groups, index(m_rootItems.indexOf(m_pGroupsItem),0, QModelIndex()));
+	AddGroups(pStyleEngine, m_pGroupsItem, groups, index(m_rootItems.indexOf(m_pGroupsItem), 0, QModelIndex()));
 
 	UpdateGroupCounters();
 	endResetModel();
@@ -354,7 +353,7 @@ void FiltersViewModel::onBusyChanged(bool prevVal, bool curentVal, QString searc
 
 			if (allFinished)
 			{
-				disconnect(m_LoadingMovie, SIGNAL(updated(QRect)),this, SLOT(onUpdateBusyIcons()));
+				disconnect(m_LoadingMovie, SIGNAL(updated(QRect)), this, SLOT(onUpdateBusyIcons()));
 			}
 		}
 	}
@@ -476,10 +475,9 @@ void FiltersViewModel::AddGroups(StyleEngene* pStyleEngine, FilterTreeItem* grou
 		QModelIndex currentGroupIndex = index(i, 0, groupIndex);
 		m_groupIndexToUid.insert(group->uid(), currentGroupIndex);
 		if (group->Children().size() > 0)
-		{			
+		{
 			AddGroups(pStyleEngine, groupItem, group->Children(), currentGroupIndex);
 		}
-		
 	}
 }
 
@@ -555,7 +553,7 @@ void FiltersViewModel::UpdateCounters()
 	int seedCount = 0;
 	int downloadingCount = 0;
 	TorrentStorragePtr torrents = TorrentStorrage::getInstance();
-	
+
 	FilterTreeItem* torrentsItem = NULL;
 	int rootTorrentRow = -1;
 
@@ -675,3 +673,4 @@ void FiltersViewModel::UpdateCounters()
 		}
 	}
 }
+

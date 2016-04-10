@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "http/httprequesthandler.h"
 #include "QApplicationSettings.h"
+
 class SettingsAPiController :
 	public HttpRequestHandler
 {
@@ -13,3 +14,4 @@ public:
 	void service(HttpRequest& request, HttpResponse& response) override;
 	~SettingsAPiController(void);
 };
+

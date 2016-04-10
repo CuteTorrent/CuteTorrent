@@ -1,5 +1,4 @@
-﻿
-#ifndef CHOSE_DATAPAGE_INCLUDED
+﻿#ifndef CHOSE_DATAPAGE_INCLUDED
 #define CHOSE_DATAPAGE_INCLUDED
 #include <QWizard>
 class QSpacerItem;
@@ -10,11 +9,11 @@ class QLabel;
 class ChoseDataPage : public QWizardPage
 {
 	Q_OBJECT
-	QGridLayout *gridLayout;
-	QLabel *label;
-	QPushButton *pushButton;
-	QLineEdit *lineEdit;
-	QSpacerItem *verticalSpacer;
+	QGridLayout* gridLayout;
+	QLabel* label;
+	QPushButton* pushButton;
+	QLineEdit* lineEdit;
+	QSpacerItem* verticalSpacer;
 	Q_PROPERTY(QString CustomDataPath READ getCustomDataPath)
 	QString m_customDataPath;
 public:
@@ -27,3 +26,4 @@ private slots:
 };
 
 #endif
+

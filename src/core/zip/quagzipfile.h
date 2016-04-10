@@ -107,3 +107,5 @@ private:
 };
 
 #endif // QUAZIP_QUAGZIPFILE_H
+
+

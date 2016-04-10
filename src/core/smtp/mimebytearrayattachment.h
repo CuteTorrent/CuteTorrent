@@ -13,8 +13,8 @@ public:
 	~MimeByteArrayAttachment();
 
 	/* [1] --- */
-
-
 };
 
 #endif // MIMEBYTEARRAYATTACHMENT_H
+
+

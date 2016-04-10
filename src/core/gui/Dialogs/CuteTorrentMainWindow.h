@@ -40,6 +40,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <gui/Controls/EditableHeaderView.h>
 #include <viewmodels/QSearchFilterModel.h>
 #include "TorrentGroupsManager.h"
+class CommentsModel;
+class CommentItemDelegate;
+class RatingWidget;
 class OnlineReporter;
 class Application;
 class FileViewModel;
@@ -68,13 +71,14 @@ class FileSizeItemDelegate;
 class SpeedItemDelegate;
 class IpItemDelegate;
 class PriorityItemDelegate;
+
 class CuteTorrentMainWindow : public BaseWindow<QWidget> , Ui::CustomWindow
 {
 	Q_OBJECT
 
 public:
 
-	
+
 	CuteTorrentMainWindow(QWidget* parent = 0);
 	void ConnectMessageReceved(Application* a) const;
 	void RaiseWindow();
@@ -89,6 +93,7 @@ protected:
 	void keyPressEvent(QKeyEvent* event) override;
 
 private:
+	void setupRatingTab();
 	void setupItemDelegates();
 	void initToolbarIcons() const;
 	void initStatusBarIcons() const;
@@ -121,14 +126,16 @@ private:
 	QMenu* trayIconMenu;
 	QAction* minimizeAction;
 	QAction* maximizeAction;
-	QAction* restoreAction, *pauseAll, *restoreAll;
+	QAction *restoreAction, *pauseAll, *restoreAll;
 	QAction* quitAction;
 	bool m_ignoreSortByIndexChange;
-	QAction* copyContext, * copyInfoHash;
-	QAction* addPeer, * addWebSeed, * addTracker, * removeTracker, * editTracker, * updateTracker;
-	QLabel* upLabelText, *upLabel, *title, *dhtNodesLabel;
-//	QLabel* uploadLimit, *downloadLimit;
-	QLabel* downLabelText, *downLabel;
+	QAction *copyContext, *copyInfoHash;
+	QAction *addPeer, *addWebSeed, *addTracker, *removeTracker, *editTracker, *updateTracker;
+	QLabel *upLabelText, *upLabel, *title, *dhtNodesLabel;
+	//	QLabel* uploadLimit, *downloadLimit;
+	CommentsModel* m_pCommentsModel;
+	CommentItemDelegate* m_pCommentItemDelegate;
+	QLabel *downLabelText, *downLabel;
 	QRssDisplayModel* m_pRssDisplayModel;
 	QRssItemDelegate* m_pRssItemDelegate;
 	QTorrentFilterProxyModel* m_pTorrentFilterProxyModel;
@@ -143,6 +150,7 @@ private:
 	PeerTableModel* m_pPeerTableModel;
 	FiltersViewModel* m_pFiltersViewModel;
 	SearchEnginePtr m_pSearchEngine;
+	RatingWidget* m_pRatingWidget;
 	FileSystemTorrentWatcherPtr m_pTorrentWatcher;
 	OnlineReporter* m_pOnlineReporter;
 	QStateMachine* m_pSorterStateMachine;
@@ -154,8 +162,8 @@ private:
 	SpeedItemDelegate* m_pSpeedItemDelegate;
 	IpItemDelegate* m_pIpItemDelegate;
 	PriorityItemDelegate* m_pPriorityItemDelegate;
-	QActionGroup* m_pLanguageActionGroup, *m_pSkinActionGroup, *m_pAutoshutdownActionGroup;
-	QSignalMapper* m_pLanguageSignalMapper, *m_pSkinSignalMapper, *m_pAutoshutdownSignalMapper;
+	QActionGroup *m_pLanguageActionGroup, *m_pSkinActionGroup, *m_pAutoshutdownActionGroup;
+	QSignalMapper *m_pLanguageSignalMapper, *m_pSkinSignalMapper, *m_pAutoshutdownSignalMapper;
 #ifdef Q_WS_WIN
 	QWinJumpList* m_pJumpList;
 #endif
@@ -220,12 +228,14 @@ public slots:
 	void UpdateInfoTab() const;
 	void UpdatePeerTab() const;
 	void UpdateFileTab() const;
+	void UpadateCommentsTab() const;
 #ifdef Q_WS_WIN
 	void UpdateTrayIconOverlay() const;
 #endif
 	void UpadteTrackerTab() const;
 	void OpenSettingsDialog();
 	void IconActivated(QSystemTrayIcon::ActivationReason reason);
+
 	void UpdateTabWidget() const;
 	void UpdateStatusbar() const;
 	void UpdateLimits() const;
@@ -269,7 +279,13 @@ public slots:
 	void restoreAllTorrents() const;
 	void showRaitingDialog();
 	void CheckForDefaultTorrentApp();
+	void ShowAddCommentDialog();
+	void UpdateStyleMenu();
+	void OnCommentRemove(const QModelIndex& index);
+	void OnTorrentAction(QModelIndex index, QTorrentItemDelegat::Buttons button);
 };
 
 Q_DECLARE_METATYPE(QHostAddress)
 #endif // LTORRENT_H
+
+

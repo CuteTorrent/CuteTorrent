@@ -1,9 +1,9 @@
-
 #include <QtCore>
 #include <QtGui>
 #include "CustomWindow.h"
 #include "ui_RssFeedSettingsDialog.h"
 class RssFeed;
+
 class RssFeedSettingsDialog : public BaseWindow<QDialog>, private Ui::RssSettings
 {
 	Q_OBJECT
@@ -25,5 +25,5 @@ public:
 	void FillInData();
 private:
 	RssFeed* m_pFeed;
-
 };
+

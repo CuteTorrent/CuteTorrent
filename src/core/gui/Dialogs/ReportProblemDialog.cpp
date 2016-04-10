@@ -31,9 +31,9 @@ QLabel* ReportProblemDialog::getTitleIcon()
 	return tbMenu;
 }
 
-ReportProblemDialog::ReportProblemDialog(QWidget* parent) 
+ReportProblemDialog::ReportProblemDialog(QWidget* parent)
 	: BaseWindow<QDialog>(OnlyCloseButton, NoResize, parent)
-	, m_pNetManager(new QNetworkAccessManager(this))
+	  , m_pNetManager(new QNetworkAccessManager(this))
 {
 	setupUi(this);
 	setupCustomWindow();
@@ -50,7 +50,7 @@ void ReportProblemDialog::SendReport()
 		QtJson::JsonObject postData;
 		postData["name"] = nameEdit->text();
 		postData["email"] = emailEdit->text();
-		
+
 		if (sendOSInfoCheckBox->isChecked())
 		{
 			QProcess dxDiagProcess;
@@ -71,7 +71,7 @@ void ReportProblemDialog::SendReport()
 			else
 			{
 				QApplication::restoreOverrideCursor();
-				CustomMessageBox::critical(this, "Windows Info creation failed", "Failed to create DxDaig Report.\nError: " + reportFile.errorString());
+				CustomMessageBox::critical("Windows Info creation failed", "Failed to create DxDaig Report.\nError: " + reportFile.errorString());
 				return;
 			}
 		}
@@ -79,15 +79,13 @@ void ReportProblemDialog::SendReport()
 		{
 			postData["problem"] = problemDescriptionEdit->toPlainText();
 		}
-		
+
 
 		QByteArray data = QtJson::serialize(postData);
 		qDebug() << "Sending JSON:" << QString(data);
 		QNetworkRequest request(QUrl("http://integration.cutetorrent.info/report.php"));
 		request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 		m_pNetManager->post(request, data);
-		
-		
 	}
 }
 
@@ -97,13 +95,12 @@ void ReportProblemDialog::OnFinished(QNetworkReply* pReply)
 	if (pReply->error() == QNetworkReply::NoError)
 	{
 		qDebug() << "Server output:" << pReply->readAll();
-		CustomMessageBox::information(this, tr("SEND_SUCCES"), tr("REPORT_THNX_MSG"));
+		CustomMessageBox::information(tr("SEND_SUCCES"), tr("REPORT_THNX_MSG"));
 		accept();
-
 	}
 	else
 	{
-		CustomMessageBox::critical(this, tr("Error"), pReply->errorString() + pReply->readAll());
+		CustomMessageBox::critical(tr("Error"), pReply->errorString() + pReply->readAll());
 		reject();
 	}
 }
@@ -112,7 +109,7 @@ bool ReportProblemDialog::checkFields()
 {
 	if (nameEdit->text().isEmpty())
 	{
-		CustomMessageBox::warning(this, tr("INFVALID_FIELD"), tr("NAME_EMPTY_ERROR"));
+		CustomMessageBox::warning(tr("INFVALID_FIELD"), tr("NAME_EMPTY_ERROR"));
 		return false;
 	}
 
@@ -120,16 +117,17 @@ bool ReportProblemDialog::checkFields()
 	int pos = 0;
 	if (email.isEmpty() && emailEdit->validator()->validate(email, pos) == QValidator::Invalid)
 	{
-		CustomMessageBox::warning(this, tr("INFVALID_FIELD"), tr("EMAIL_EMPTY_OR_INVALID_ERROR"));
+		CustomMessageBox::warning(tr("INFVALID_FIELD"), tr("EMAIL_EMPTY_OR_INVALID_ERROR"));
 		return false;
 	}
 
 
 	if (problemDescriptionEdit->toHtml().isEmpty())
 	{
-		CustomMessageBox::warning(this, tr("INFVALID_FIELD"), tr("DESCRIPTION_EMPTY_ERROR"));
+		CustomMessageBox::warning(tr("INFVALID_FIELD"), tr("DESCRIPTION_EMPTY_ERROR"));
 		return false;
 	}
 
 	return true;
 }
+

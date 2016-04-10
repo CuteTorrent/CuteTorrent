@@ -15,10 +15,10 @@ public:
 	void CancelImport() override;
 	bool isRunning() override;
 private:
-	
+
 	QThread* m_pWorkerThread;
 	QString m_resumeFilePath;
-	
+
 	bool m_bIsRunning;
 private slots:
 	void runImport();
@@ -27,3 +27,4 @@ private slots:
 
 
 #endif
+

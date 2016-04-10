@@ -21,7 +21,7 @@ public:
 	SearchResult* operator [](int index);
 	void clear();
 	int length();
-signals:
+	signals:
 	void reset();
-
 };
+

@@ -140,3 +140,4 @@ QVariant ValueGetters::WindowsShellValueGetter(QString group, QString name, QVar
 	return starCommandMatch && folderCommandMatch && dirCommandMatch;
 }
 #endif
+

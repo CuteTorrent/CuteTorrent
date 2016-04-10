@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include "http/httprequesthandler.h"
+
 class FileSystemController : public HttpRequestHandler
 {
-
 public:
 	FileSystemController(QObject* parent)
 		: HttpRequestHandler("WebControl", parent)
@@ -13,3 +13,4 @@ public:
 	void service(HttpRequest& request, HttpResponse& response) override;
 public:
 };
+

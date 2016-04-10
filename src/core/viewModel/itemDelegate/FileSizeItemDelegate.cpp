@@ -27,3 +27,4 @@ QString FileSizeItemDelegate::displayText(const QVariant& value, const QLocale& 
 
 	return "";
 }
+

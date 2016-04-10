@@ -7,6 +7,7 @@ RconWebService::RconWebService(void) : m_pSettings(QApplicationSettings::getInst
 	listener = new HttpListener("WebControl", mapper, this);
 	connect(m_pSettings.get(), SIGNAL(PropertyChanged(QString, QString)), SLOT(OnSettngsChnaged(QString, QString)));
 }
+
 void RconWebService::OnSettngsChnaged(QString group, QString key)
 {
 	if (group == "WebControl" && key == "webui_enabled")
@@ -29,9 +30,10 @@ void RconWebService::OnSettngsChnaged(QString group, QString key)
 		}
 	}
 }
+
 RconWebService::~RconWebService(void)
 {
-	if(listener != NULL)
+	if (listener != NULL)
 	{
 		listener->close();
 	}
@@ -41,7 +43,7 @@ RconWebService::~RconWebService(void)
 
 void RconWebService::Start()
 {
-	if(listener != NULL)
+	if (listener != NULL)
 	{
 		listener->close();
 		listener->Start();
@@ -58,109 +60,109 @@ void RconWebService::parseIpFilter(QString ipFilterStr)
 	QStringList lines = ipFilterStr.split("\n");
 
 	foreach(QString line, lines)
-	{
-		if(line.trimmed().startsWith("#"))
 		{
-			continue;
-		}
-
-		QStringList parts = line.trimmed().split(' ');
-
-		if(parts[0] == "allow" || parts[0] == "deny")
-		{
-			if(parts[0] == "allow")
+			if (line.trimmed().startsWith("#"))
 			{
-				if(parts[1].contains('*') && !parts[1].contains('-'))
-				{
-					QString pattern = parts[1];
-					QString startIP = pattern.replace("*", "1").trimmed();
-					QString endIP = parts[1].replace("*", "255").trimmed();
-					QHostAddress start(startIP);
-					QHostAddress end(endIP);
+				continue;
+			}
 
-					if(start.toIPv4Address() > end.toIPv4Address())
+			QStringList parts = line.trimmed().split(' ');
+
+			if (parts[0] == "allow" || parts[0] == "deny")
+			{
+				if (parts[0] == "allow")
+				{
+					if (parts[1].contains('*') && !parts[1].contains('-'))
 					{
-						qSwap(start, end);
+						QString pattern = parts[1];
+						QString startIP = pattern.replace("*", "1").trimmed();
+						QString endIP = parts[1].replace("*", "255").trimmed();
+						QHostAddress start(startIP);
+						QHostAddress end(endIP);
+
+						if (start.toIPv4Address() > end.toIPv4Address())
+						{
+							qSwap(start, end);
+						}
+
+						allowedIP.append(QPair<uint, uint>(start.toIPv4Address(), end.toIPv4Address()));
+					}
+					else
+					{
 					}
 
-					allowedIP.append(QPair<uint, uint> (start.toIPv4Address(), end.toIPv4Address()));
+					if (parts[1].contains('-') && !parts[1].contains('*'))
+					{
+						QString pattern = parts[1];
+						QString startIP = pattern.replace("*", "1").trimmed();
+						QString endIP = pattern.replace("*", "255").trimmed();
+						QHostAddress start(startIP);
+						QHostAddress end(endIP);
+
+						if (start.toIPv4Address() > end.toIPv4Address())
+						{
+							qSwap(start, end);
+						}
+
+						allowedIP.append(QPair<uint, uint>(start.toIPv4Address(), end.toIPv4Address()));
+					}
+					else
+					{
+					}
 				}
 				else
 				{
-				}
-
-				if(parts[1].contains('-') && !parts[1].contains('*'))
-				{
-					QString pattern = parts[1];
-					QString startIP = pattern.replace("*", "1").trimmed();
-					QString endIP = pattern.replace("*", "255").trimmed();
-					QHostAddress start(startIP);
-					QHostAddress end(endIP);
-
-					if(start.toIPv4Address() > end.toIPv4Address())
+					if (parts[1] == "all")
 					{
-						qSwap(start, end);
+						if (listener != NULL)
+						{
+							listener->close();
+						}
 					}
 
-					allowedIP.append(QPair<uint, uint> (start.toIPv4Address(), end.toIPv4Address()));
-				}
-				else
-				{
+					if (parts[1].contains('*') && !parts[1].contains('-'))
+					{
+						QString pattern = parts[1];
+						QString startIP = pattern.replace("*", "1").trimmed();
+						QString endIP = parts[1].replace("*", "255").trimmed();
+						QHostAddress start(startIP);
+						QHostAddress end(endIP);
+
+						if (start.toIPv4Address() > end.toIPv4Address())
+						{
+							qSwap(start, end);
+						}
+
+						notAllowedIP.append(QPair<uint, uint>(start.toIPv4Address(), end.toIPv4Address()));
+					}
+					else
+					{
+					}
+
+					if (parts[1].contains('-') && !parts[1].contains('*'))
+					{
+						QString pattern = parts[1];
+						QString startIP = pattern.replace("*", "1").trimmed();
+						QString endIP = parts[1].replace("*", "255").trimmed();
+						QHostAddress start(startIP);
+						QHostAddress end(endIP);
+
+						if (start.toIPv4Address() > end.toIPv4Address())
+						{
+							qSwap(start, end);
+						}
+
+						notAllowedIP.append(QPair<uint, uint>(start.toIPv4Address(), end.toIPv4Address()));
+					}
+					else
+					{
+					}
 				}
 			}
 			else
 			{
-				if(parts[1] == "all")
-				{
-					if(listener != NULL)
-					{
-						listener->close();
-					}
-				}
-
-				if(parts[1].contains('*') && !parts[1].contains('-'))
-				{
-					QString pattern = parts[1];
-					QString startIP = pattern.replace("*", "1").trimmed();
-					QString endIP = parts[1].replace("*", "255").trimmed();
-					QHostAddress start(startIP);
-					QHostAddress end(endIP);
-
-					if(start.toIPv4Address() > end.toIPv4Address())
-					{
-						qSwap(start, end);
-					}
-
-					notAllowedIP.append(QPair<uint, uint> (start.toIPv4Address(), end.toIPv4Address()));
-				}
-				else
-				{
-				}
-
-				if(parts[1].contains('-') && !parts[1].contains('*'))
-				{
-					QString pattern = parts[1];
-					QString startIP = pattern.replace("*", "1").trimmed();
-					QString endIP = parts[1].replace("*", "255").trimmed();
-					QHostAddress start(startIP);
-					QHostAddress end(endIP);
-
-					if(start.toIPv4Address() > end.toIPv4Address())
-					{
-						qSwap(start, end);
-					}
-
-					notAllowedIP.append(QPair<uint, uint> (start.toIPv4Address(), end.toIPv4Address()));
-				}
-				else
-				{
-				}
 			}
 		}
-		else
-		{
-		}
-	}
 
 	HttpConnectionHandler::allowedIP = allowedIP;
 	HttpConnectionHandler::notAllowedIP = notAllowedIP;
@@ -168,7 +170,7 @@ void RconWebService::parseIpFilter(QString ipFilterStr)
 
 bool RconWebService::isRunning()
 {
-	if(listener != NULL)
+	if (listener != NULL)
 	{
 		return listener->isListening();
 	}
@@ -178,9 +180,9 @@ bool RconWebService::isRunning()
 
 void RconWebService::Stop()
 {
-	if(listener != NULL)
+	if (listener != NULL)
 	{
-		if(listener->isListening())
+		if (listener->isListening())
 		{
 			listener->close();
 		}

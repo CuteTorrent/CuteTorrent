@@ -92,6 +92,7 @@ public:
                                  \c UNZ_MAXFILENAMEINZIP constant in
                                  unzip.c. */
 	};
+
 	/// Open mode of the ZIP file.
 	enum Mode
 	{
@@ -108,6 +109,7 @@ public:
                   **/
 		mdAdd ///< ZIP file was opened for adding files in the archive.
 	};
+
 	/// Case sensitivity for the file names.
 	/** This is what you specify when accessing files in the archive.
 	 * Works perfectly fine with any characters thanks to Qt's great
@@ -120,6 +122,7 @@ public:
 		csSensitive = 1, ///< Case sensitive.
 		csInsensitive = 2 ///< Case insensitive.
 	};
+
 	/// Returns the actual case sensitivity for the specified QuaZIP one.
 	/**
 	  \param cs The value to convert.
@@ -128,7 +131,7 @@ public:
 	  returns the appropriate value from the Qt::CaseSensitivity enum.
 	  */
 	static Qt::CaseSensitivity convertCaseSensitivity(
-	    CaseSensitivity cs);
+		CaseSensitivity cs);
 private:
 	QuaZipPrivate* p;
 	// not (and will not be) implemented
@@ -376,7 +379,7 @@ public:
 	 * \sa getCurrentFileInfo(QuaZipFileInfo64* info)const
 	 * \sa QuaZipFileInfo64::toQuaZipFileInfo(QuaZipFileInfo&)const
 	 **/
-	bool getCurrentFileInfo(QuaZipFileInfo* info)const;
+	bool getCurrentFileInfo(QuaZipFileInfo* info) const;
 	/// Retrieves information about the current file.
 	/** \overload
 	 *
@@ -386,7 +389,7 @@ public:
 	 *
 	 * \sa
 	 **/
-	bool getCurrentFileInfo(QuaZipFileInfo64* info)const;
+	bool getCurrentFileInfo(QuaZipFileInfo64* info) const;
 	/// Returns the current file name.
 	/** Equivalent to calling getCurrentFileInfo() and then getting \c
 	 * name field of the QuaZipFileInfo structure, but faster and more
@@ -394,7 +397,7 @@ public:
 	 *
 	 * Should be used only in QuaZip::mdUnzip mode.
 	 **/
-	QString getCurrentFileName()const;
+	QString getCurrentFileName() const;
 	/// Returns \c unzFile handle.
 	/** You can use this handle to directly call UNZIP part of the
 	 * ZIP/UNZIP package functions (see unzip.h).
@@ -573,3 +576,4 @@ public:
 };
 
 #endif
+

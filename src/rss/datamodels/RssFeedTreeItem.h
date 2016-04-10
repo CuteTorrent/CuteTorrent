@@ -3,6 +3,7 @@
 #include "RssBaseTreeItem.h"
 class RssFeed;
 class RssFeedItemTreeItem;
+
 class RssFeedTreeItem : public RssBaseTreeItem
 {
 public:

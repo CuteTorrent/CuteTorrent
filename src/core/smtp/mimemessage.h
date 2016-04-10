@@ -1,4 +1,4 @@
-/*
+﻿/*
   Copyright (c) 2011-2012 - Tőkés Attila
 
   This file is part of SmtpClient for Qt.
@@ -33,9 +33,9 @@ public:
 
 	enum RecipientType
 	{
-		To,                 // primary
-		Cc,                 // carbon copy
-		Bcc                 // blind carbon copy
+		To, // primary
+		Cc, // carbon copy
+		Bcc // blind carbon copy
 	};
 
 	/* [1] Constructors and Destructors */
@@ -93,8 +93,8 @@ protected:
 	static QByteArray formatAddress(const EmailAddress& address, MimePart::Encoding encoding);
 
 	/* [4] --- */
-
-
 };
 
 #endif // MIMEMESSAGE_H
+
+

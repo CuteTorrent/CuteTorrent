@@ -42,7 +42,7 @@ QT_BEGIN_NAMESPACE
 
 class QWinTaskbarProgressPrivate;
 
-class  QWinTaskbarProgress : public QObject
+class QWinTaskbarProgress : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(int value READ value WRITE setValue NOTIFY valueChanged)
@@ -77,7 +77,7 @@ public Q_SLOTS:
 	void setPaused(bool paused);
 	void stop();
 
-Q_SIGNALS:
+	Q_SIGNALS:
 	void valueChanged(int value);
 	void minimumChanged(int minimum);
 	void maximumChanged(int maximum);
@@ -94,3 +94,5 @@ private:
 QT_END_NAMESPACE
 
 #endif // QWINTASKBARPROGRESS_H
+
+

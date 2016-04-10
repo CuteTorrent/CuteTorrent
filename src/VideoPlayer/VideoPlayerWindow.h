@@ -44,24 +44,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QSignalMapper>
 #include "MediaControls.h"
 #include <phonon/audiooutput.h>
+
 namespace Phonon
 {
-class VideoWidget;
+	class VideoWidget;
 }
+
 class MediaController;
 class QWinThumbnailToolBar;
 class QWinThumbnailToolButton;
 class QWinTaskbarButton;
+
 class VideoPlayerWindow : public QMainWindow
 {
 	Q_OBJECT
 public:
-	
+
 	explicit VideoPlayerWindow(QWidget* parent = 0);
 	~VideoPlayerWindow();
 	void SetupConnections() const;
 	void openFile(QString path);
-signals:
+	signals:
 
 public slots:
 	void goFullScreen();
@@ -103,3 +106,5 @@ private:
 };
 
 #endif // VideoPlayerWindow_H
+
+

@@ -97,3 +97,5 @@ private:
 	QuaZIODevicePrivate* d;
 };
 #endif // QUAZIP_QUAZIODEVICE_H
+
+

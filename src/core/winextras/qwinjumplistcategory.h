@@ -46,7 +46,7 @@ QT_BEGIN_NAMESPACE
 class QWinJumpListItem;
 class QWinJumpListCategoryPrivate;
 
-class  QWinJumpListCategory
+class QWinJumpListCategory
 {
 public:
 	enum Type
@@ -89,3 +89,5 @@ private:
 QT_END_NAMESPACE
 
 #endif // QWINJUMPLISTCATEGORY_H
+
+

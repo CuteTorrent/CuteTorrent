@@ -1,6 +1,7 @@
 ﻿#include "StyledProgressBar.h"
 #include <QStyle>
 #include <QStyleOption>
+
 void StyledProgressBar::setValue(int val)
 {
 	QProgressBar::setValue(val);
@@ -13,3 +14,4 @@ void StyledProgressBar::initilizeStyleOption(QStyleOptionProgressBarV2* option)
 {
 	initStyleOption(qstyleoption_cast<QStyleOptionProgressBar*>(option));
 }
+

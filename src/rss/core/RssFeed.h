@@ -14,6 +14,7 @@ class QTimer;
 class QDataStream;
 class RssItem;
 class RssParser;
+
 class RssFeed : public QObject
 {
 	Q_OBJECT
@@ -34,7 +35,7 @@ class RssFeed : public QObject
 	QHash<QString, QString> m_coookies;
 	int m_ttl, m_unreadCount, m_customTtl;
 	QList<QNetworkCookie> buildCookies() const;
-signals:
+	signals:
 	void FeedChanged(QUuid);
 public:
 	RssFeed(QUrl url, QUuid uid);
@@ -60,7 +61,8 @@ public slots:
 	void Update();
 private slots:
 	void resourceLoaded(QNetworkReply*);
-
 };
+
 Q_DECLARE_METATYPE(RssFeed*)
 #endif
+

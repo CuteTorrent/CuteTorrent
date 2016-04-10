@@ -10,9 +10,10 @@ class QSearchDisplayModel: public QAbstractListModel
 {
 	Q_OBJECT
 public:
-	
+
 	QSearchDisplayModel(QTreeView* pTorrentListView, QSearchFilterModel* pSearchFilterModel, QObject* parent = 0);
 	~QSearchDisplayModel();
+
 	enum Role
 	{
 		SearchItemRole = Qt::UserRole,
@@ -21,6 +22,7 @@ public:
 		SearchItemSeeders,
 		SearchItemPeers
 	};
+
 	int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 	int columnCount(const QModelIndex& parent = QModelIndex()) const override;
 	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
@@ -32,7 +34,7 @@ private:
 	QTreeView* m_pItemsView;
 	QSearchFilterModel* m_pSearchFilterModel;
 	QMenu* menu;
-	QAction* downloadTorrentAction, *openDescriptionAction;
+	QAction *downloadTorrentAction, *openDescriptionAction;
 	void setupContextMenu();
 public slots:
 	void contextualMenu(const QPoint&);
@@ -42,6 +44,5 @@ private slots:
 	void OnNewSearchResults();
 	void OnTorrentDownloaded(QUrl, QTemporaryFile*);
 	void OnTorrentDownloadError(QUrl, QString);
-
 };
 

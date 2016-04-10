@@ -1,5 +1,6 @@
 ﻿#include "VideoFileChooseDialog.h"
 #include "StyleEngene.h"
+
 QPushButton* VideoFileChooseDialog::getCloseBtn()
 {
 	return pbClose;
@@ -45,9 +46,9 @@ void VideoFileChooseDialog::rejected()
 	close();
 }
 
-VideoFileChooseDialog::VideoFileChooseDialog(QStringList files, QWidget* parent) 
+VideoFileChooseDialog::VideoFileChooseDialog(QStringList files, QWidget* parent)
 	: BaseWindow<QDialog>(FullTitle, NoResize, parent)
-	
+
 {
 	setupUi(this);
 	setupCustomWindow();
@@ -56,7 +57,7 @@ VideoFileChooseDialog::VideoFileChooseDialog(QStringList files, QWidget* parent)
 	m_videoItemsModel = new QStandardItemModel(files.count(), 1, this);
 	for (int i = 0; i < files.count(); i++)
 	{
-		QModelIndex index = m_videoItemsModel->index(i,0);
+		QModelIndex index = m_videoItemsModel->index(i, 0);
 		QFileInfo fileInfo(files[i]);
 		m_videoItemsModel->setData(index, StyleEngene::fileIcons[StyleEngene::VIDEO], Qt::DecorationRole);
 		m_videoItemsModel->setData(index, fileInfo.fileName(), Qt::DisplayRole);
@@ -69,3 +70,4 @@ QString VideoFileChooseDialog::choosenPath() const
 {
 	return m_choosenPath;
 }
+

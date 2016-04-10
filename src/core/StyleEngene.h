@@ -2,11 +2,13 @@
 #define STYLEENGENE_H
 #include <QtGui>
 #include <QCache>
+class QuaZip;
 struct StyleInfo
 {
 	QString DisplayName;
 	QString InternalName;
-	bool operator == (StyleInfo& other) const
+
+	bool operator ==(StyleInfo& other) const
 	{
 		return DisplayName == other.DisplayName && InternalName == other.InternalName;
 	}
@@ -23,7 +25,18 @@ protected:
 	static QIcon fallback;
 
 public:
-	enum { DISK = 0, DOCUMENT = 1, PICTURE = 2, VIDEO = 3, ARCHIVE = 4, AUDIO = 5, APP = 6, TYPE_COUNT = 7 };
+	enum
+	{
+		DISK = 0,
+		DOCUMENT = 1,
+		PICTURE = 2,
+		VIDEO = 3,
+		ARCHIVE = 4,
+		AUDIO = 5,
+		APP = 6,
+		TYPE_COUNT = 7
+	};
+
 	static QSet<QString> suffixes[TYPE_COUNT];
 	static QIcon fileIcons[TYPE_COUNT];
 	static StyleEngene* getInstance();
@@ -42,18 +55,21 @@ private:
 	QCache<QString, QIcon> m_iconCache;
 	QMap<QString, QString> iconNamesMap;
 	QList<StyleInfo> _avaliableStyles;
+	QMutex m_mutex;
 	struct InternalStyleInfo
 	{
 		StyleInfo styleInfo;
 		QString imageDir;
 		QString rootPath;
+		QuaZip* iconsPack;
 	};
 
 	InternalStyleInfo _currentStyle;
 	QMap<QString, InternalStyleInfo> _styleMap;
-signals:
+	signals:
 	void styleChanged();
-
 };
 
 #endif // STYLEENGENE_H
+
+

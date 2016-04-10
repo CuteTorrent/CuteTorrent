@@ -3,6 +3,7 @@
 #include "RssManager.h"
 #include "RssFeed.h"
 #include "RssItem.h"
+
 RssController::RssController(QObject* parent) : HttpRequestHandler("WebControl", parent), m_pRssManager(RssManager::getInstance())
 {
 }
@@ -111,3 +112,4 @@ void RssController::service(HttpRequest& request, HttpResponse& response)
 		response.write("</BODY>");
 	}
 }
+

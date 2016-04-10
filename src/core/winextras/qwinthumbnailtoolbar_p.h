@@ -62,62 +62,77 @@ class QWinThumbnailToolBarPrivate : public QObject
 {
 	Q_OBJECT
 public:
-    class IconicPixmapCache
-    {
-    public:
-        IconicPixmapCache() : m_bitmap(0) {}
-        ~IconicPixmapCache() { deleteBitmap(); }
+	class IconicPixmapCache
+	{
+	public:
+		IconicPixmapCache() : m_bitmap(0)
+		{
+		}
 
-        operator bool() const { return !m_pixmap.isNull(); }
+		~IconicPixmapCache()
+		{
+			deleteBitmap();
+		}
 
-        QPixmap pixmap() const { return m_pixmap; }
-        bool setPixmap(const QPixmap &p);
+		operator bool() const
+		{
+			return !m_pixmap.isNull();
+		}
 
-        HBITMAP bitmap(const QSize &maxSize);
+		QPixmap pixmap() const
+		{
+			return m_pixmap;
+		}
 
-    private:
-        void deleteBitmap();
+		bool setPixmap(const QPixmap& p);
 
-        QPixmap m_pixmap;
-        QSize m_size;
-        HBITMAP m_bitmap;
-    };
+		HBITMAP bitmap(const QSize& maxSize);
 
-    QWinThumbnailToolBarPrivate();
-    ~QWinThumbnailToolBarPrivate();
-    void initToolbar() const;
-    void clearToolbar() const;
+	private:
+		void deleteBitmap();
 
-    bool eventFilter(QObject *, QEvent *) override;
+		QPixmap m_pixmap;
+		QSize m_size;
+		HBITMAP m_bitmap;
+	};
 
-	static void initButtons(THUMBBUTTON *buttons);
-    static int makeNativeButtonFlags(const QWinThumbnailToolButton *button);
-    static int makeButtonMask(const QWinThumbnailToolButton *button);
-    static QString msgComFailed(const char *function, HRESULT hresult);
+	QWinThumbnailToolBarPrivate();
+	~QWinThumbnailToolBarPrivate();
+	void initToolbar() const;
+	void clearToolbar() const;
 
-    bool updateScheduled;
-    QList<QWinThumbnailToolButton *> buttonList;
-    QWidget *window;
-    ITaskbarList4 * const pTbList;
+	bool eventFilter(QObject*, QEvent*) override;
 
-    IconicPixmapCache iconicThumbnail;
-    IconicPixmapCache iconicLivePreview;
+	static void initButtons(THUMBBUTTON* buttons);
+	static int makeNativeButtonFlags(const QWinThumbnailToolButton* button);
+	static int makeButtonMask(const QWinThumbnailToolButton* button);
+	static QString msgComFailed(const char* function, HRESULT hresult);
+
+	bool updateScheduled;
+	QList<QWinThumbnailToolButton *> buttonList;
+	QWidget* window;
+	ITaskbarList4* const pTbList;
+
+	IconicPixmapCache iconicThumbnail;
+	IconicPixmapCache iconicLivePreview;
 public slots:
 	void _q_updateToolbar();
 	void _q_scheduleUpdate();
 private:
-    bool hasHandle() const;
-    HWND handle() const;
-    void updateIconicPixmapsEnabled(bool invalidate);
-	void updateIconicThumbnail(const QWinRequestThumbnailBitmap *message);
-	void updateIconicLivePreview(const QWinRequestLivePreviewBitmap *message);
+	bool hasHandle() const;
+	HWND handle() const;
+	void updateIconicPixmapsEnabled(bool invalidate);
+	void updateIconicThumbnail(const QWinRequestThumbnailBitmap* message);
+	void updateIconicLivePreview(const QWinRequestLivePreviewBitmap* message);
 
-    QWinThumbnailToolBar *q_ptr;
-    Q_DECLARE_PUBLIC(QWinThumbnailToolBar)
-    bool withinIconicThumbnailRequest;
-    bool withinIconicLivePreviewRequest;
+	QWinThumbnailToolBar* q_ptr;
+	Q_DECLARE_PUBLIC(QWinThumbnailToolBar)
+	bool withinIconicThumbnailRequest;
+	bool withinIconicLivePreviewRequest;
 };
 
 QT_END_NAMESPACE
 
 #endif // QWINTHUMBNAILTOOLBAR_P_H
+
+

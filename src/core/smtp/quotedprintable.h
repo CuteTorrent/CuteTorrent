@@ -1,4 +1,4 @@
-/*
+﻿/*
   Copyright (c) 2011-2012 - Tőkés Attila
 
   This file is part of SmtpClient for Qt.
@@ -25,8 +25,10 @@
 
 namespace QuotedPrintable
 {
-SMTP_MIME_EXPORT QString encode(const QByteArray& input);
-SMTP_MIME_EXPORT QByteArray decode(const QString& input);
+	SMTP_MIME_EXPORT QString encode(const QByteArray& input);
+	SMTP_MIME_EXPORT QByteArray decode(const QString& input);
 }
 
 #endif // QUOTEDPRINTABLE_H
+
+

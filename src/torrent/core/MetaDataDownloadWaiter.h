@@ -1,10 +1,11 @@
 ﻿#include <QThread>
 #include "TorrentCommon.h"
 #include "defs.h"
+
 class MetaDataDownloadWaiter : public QThread
 {
 	Q_OBJECT
-signals:
+	signals:
 	void DownloadCompleted(openmagnet_info ti);
 	void ErrorOccured(QString error);
 public:
@@ -16,5 +17,4 @@ private:
 protected:
 	void run() override;
 };
-
 

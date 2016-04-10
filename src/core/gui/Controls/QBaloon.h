@@ -4,9 +4,9 @@
 #include <QSystemTrayIcon>
 #include <QQueue>
 #include <QVariant>
+
 class QBalloonTip : public QWidget
 {
-
 public:
 	enum QBaloonType
 	{
@@ -15,8 +15,9 @@ public:
 		UpdateNotyfy,
 		Info
 	};
+
 	static QWidget* showBalloon(const QString& title,
-	                            const QString& msg, QBaloonType type, const QVariant& data, const QSystemTrayIcon::MessageIcon& icon = QSystemTrayIcon::Information ,
+	                            const QString& msg, QBaloonType type, const QVariant& data, const QSystemTrayIcon::MessageIcon& icon = QSystemTrayIcon::Information,
 	                            int timeout = 0, bool showArrow = true, QWidget* parrent = 0);
 
 private:
@@ -38,6 +39,6 @@ private:
 	QBaloonType currentType;
 	QVariant currentData;
 	int m_showTimerId, m_duration;
-
 };
 #endif
+

@@ -29,16 +29,16 @@ QByteArray HttpSessionStore::getSessionId(HttpRequest& request, HttpResponse& re
 	// Get the session ID from the response cookie
 	QByteArray sessionId = response.getCookies().value(cookieName).getValue();
 
-	if(sessionId.isEmpty())
+	if (sessionId.isEmpty())
 	{
 		// Get the session ID from the request cookie
 		sessionId = request.getCookie(cookieName);
 	}
 
 	// Clear the session ID if there is no such session in the storage.
-	if(!sessionId.isEmpty())
+	if (!sessionId.isEmpty())
 	{
-		if(!sessions.contains(sessionId))
+		if (!sessions.contains(sessionId))
 		{
 			sessionId.clear();
 		}
@@ -53,11 +53,11 @@ HttpSession HttpSessionStore::getSession(HttpRequest& request, HttpResponse& res
 	QByteArray sessionId = getSessionId(request, response);
 	mutex.lock();
 
-	if(!sessionId.isEmpty())
+	if (!sessionId.isEmpty())
 	{
 		HttpSession session = sessions.value(sessionId);
 
-		if(!session.isNull())
+		if (!session.isNull())
 		{
 			mutex.unlock();
 			session.setLastAccess();
@@ -66,7 +66,7 @@ HttpSession HttpSessionStore::getSession(HttpRequest& request, HttpResponse& res
 	}
 
 	// Need to create a new session
-	if(allowCreate)
+	if (allowCreate)
 	{
 		QByteArray _cookieName = settings->value("cookieName", "sessionid").toByteArray();
 		QByteArray cookiePath = settings->value("cookiePath").toByteArray();
@@ -100,14 +100,14 @@ void HttpSessionStore::timerEvent()
 	qint64 now = QDateTime::currentMSecsSinceEpoch();
 	QMap<QByteArray, HttpSession>::iterator i = sessions.begin();
 
-	while(i != sessions.end())
+	while (i != sessions.end())
 	{
 		QMap<QByteArray, HttpSession>::iterator prev = i;
 		++i;
 		HttpSession session = prev.value();
 		qint64 lastAccess = session.getLastAccess();
 
-		if(now - lastAccess > expirationTime)
+		if (now - lastAccess > expirationTime)
 		{
 			sessions.erase(prev);
 		}
@@ -124,3 +124,4 @@ void HttpSessionStore::removeSession(const HttpSession& session)
 	sessions.remove(session.getId());
 	mutex.unlock();
 }
+

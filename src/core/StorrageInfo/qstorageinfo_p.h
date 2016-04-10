@@ -53,9 +53,10 @@ class QStorageInfoPrivate : public QSharedData
 {
 public:
 	inline QStorageInfoPrivate() : QSharedData(),
-		bytesTotal(-1), bytesFree(-1), bytesAvailable(-1),
-		readOnly(false), ready(false), valid(false)
-	{}
+	                               bytesTotal(-1), bytesFree(-1), bytesAvailable(-1),
+	                               readOnly(false), ready(false), valid(false)
+	{
+	}
 
 	void initRootPath();
 	void doStat();
@@ -93,3 +94,5 @@ public:
 QT_END_NAMESPACE
 
 #endif // QSTORAGEINFO_P_H
+
+

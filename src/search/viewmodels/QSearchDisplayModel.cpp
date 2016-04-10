@@ -6,10 +6,10 @@
 #include "SearchResult.h"
 #include <NotificationSystem.h>
 
-QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QSearchFilterModel* pSearchFilterModel, QObject* parent) 
+QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QSearchFilterModel* pSearchFilterModel, QObject* parent)
 	: QAbstractListModel(parent)
-	, m_pTorrentDownloader(FileDownloader::getNewInstance())
-	, m_pSearchEngine(SearchEngine::getInstance())
+	  , m_pTorrentDownloader(FileDownloader::getNewInstance())
+	  , m_pSearchEngine(SearchEngine::getInstance())
 {
 	m_pItemsView = pTorrentListView;
 	m_pSearchFilterModel = pSearchFilterModel;
@@ -38,20 +38,20 @@ int QSearchDisplayModel::columnCount(const QModelIndex& parent /*= QModelIndex()
 
 QVariant QSearchDisplayModel::data(const QModelIndex& index, int role /*= Qt::DisplayRole*/) const
 {
-	if(index.isValid())
+	if (index.isValid())
 	{
 		int row = index.row();
 		int col = index.column();
 		SearchItemsStorragePtr results = m_pSearchEngine->GetResults();
 
-		if(row > results->length())
+		if (row > results->length())
 		{
 			return QVariant();
 		}
 
-		SearchResult* res = (*results) [row];
+		SearchResult* res = (*results)[row];
 
-		switch(role)
+		switch (role)
 		{
 			case SearchItemRole:
 			{
@@ -162,7 +162,6 @@ void QSearchDisplayModel::downloadTorrent()
 		}
 		m_pTorrentDownloader->download(url);
 	}
-	
 }
 
 void QSearchDisplayModel::OnNewSearchResults()
@@ -183,5 +182,4 @@ void QSearchDisplayModel::OnTorrentDownloadError(QUrl, QString error)
 	NotificationSystemPtr notificationSystem = NotificationSystem::getInstance();
 	notificationSystem->OnNewNotification(NotificationSystem::SYSTEM_ERROR, error, QVariant());
 }
-
 

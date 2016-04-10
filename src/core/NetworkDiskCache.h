@@ -1,6 +1,7 @@
 #include <QNetworkDiskCache>
 
 class QMutex;
+
 class NetworkDiskCache : public QNetworkDiskCache
 {
 	Q_OBJECT
@@ -20,3 +21,4 @@ public:
 
 	void updateMetaData(const QNetworkCacheMetaData& metaData) override;
 };
+

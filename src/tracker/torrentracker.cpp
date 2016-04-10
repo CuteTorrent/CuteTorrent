@@ -2,6 +2,7 @@
 #include "http/httplistener.h"
 #include "trackerrequestmapper.h"
 #include "QApplicationSettings.h"
+
 TorrentTracker::TorrentTracker(QObject* parent) :
 	QObject(parent)
 {
@@ -41,7 +42,7 @@ bool TorrentTracker::isRunning()
 
 void TorrentTracker::start()
 {
-	if(httpServer != NULL)
+	if (httpServer != NULL)
 	{
 		stop();
 	}
@@ -51,11 +52,12 @@ void TorrentTracker::start()
 
 void TorrentTracker::stop()
 {
-	if(httpServer != NULL)
+	if (httpServer != NULL)
 	{
-		if(httpServer->isListening())
+		if (httpServer->isListening())
 		{
 			httpServer->close();
 		}
 	}
 }
+

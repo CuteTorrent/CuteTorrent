@@ -3,12 +3,13 @@
 #include <QtGui>
 #include "Importers/BaseImporter.h"
 #include "messagebox.h"
+
 ChoseDataPage::ChoseDataPage(QWidget* parent): QWizardPage(parent)
 {
 	setTitle(tr("IMPORT_CHOSE_DATA_TITLE"));
-	
+
 	gridLayout = new QGridLayout(this);
-	
+
 	label = new QLabel(this);
 	label->setObjectName(QString::fromUtf8("label"));
 
@@ -20,7 +21,7 @@ ChoseDataPage::ChoseDataPage(QWidget* parent): QWizardPage(parent)
 	gridLayout->addWidget(pushButton, 1, 2, 1, 1);
 
 	lineEdit = new QLineEdit(this);
-	
+
 
 	gridLayout->addWidget(lineEdit, 1, 0, 1, 1);
 
@@ -55,3 +56,4 @@ void ChoseDataPage::ChooseFile()
 		emit completeChanged();
 	}
 }
+

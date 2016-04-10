@@ -21,6 +21,7 @@ public:
 		TIME_EDIT,
 		DATETIME_EDIT
 	};
+
 	enum PropertyType
 	{
 		INT,
@@ -30,10 +31,11 @@ public:
 		DATETIME,
 		STRING
 	};
-	typedef void(*UIValueSetter)(QWidget*, WidgetType, PropertyType, QVariant);
+
+	typedef void (*UIValueSetter)(QWidget*, WidgetType, PropertyType, QVariant);
 	typedef QVariant (*UIValueGetter)(QWidget*, WidgetType, PropertyType);
-	typedef void(*ValueSetter)(QString group, QString propertyName, QVariant value);
-	typedef QVariant(*ValueGetter)(QString group, QString propertyName, QVariant defaultValue);
+	typedef void (*ValueSetter)(QString group, QString propertyName, QVariant value);
+	typedef QVariant (*ValueGetter)(QString group, QString propertyName, QVariant defaultValue);
 	SettingsPropertyMapper(QObject* parent = NULL);
 	~SettingsPropertyMapper();
 	bool HasChanges();
@@ -41,7 +43,7 @@ public:
 	                UIValueGetter uiGetter = NULL, ValueSetter valueSetter = NULL, ValueGetter valueGetter = NULL);
 	void ApplyChanges();
 	void ResetToCurrentValues();
-signals:
+	signals:
 	void GotChanges();
 	void NoChanges();
 public slots:
@@ -70,3 +72,4 @@ private:
 };
 
 #endif
+

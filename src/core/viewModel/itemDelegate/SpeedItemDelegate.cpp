@@ -16,3 +16,4 @@ QString SpeedItemDelegate::displayText(const QVariant& value, const QLocale& loc
 
 	return "";
 }
+

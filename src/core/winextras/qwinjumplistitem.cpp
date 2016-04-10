@@ -273,3 +273,4 @@ QStringList QWinJumpListItem::arguments() const
 }
 
 QT_END_NAMESPACE
+

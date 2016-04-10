@@ -122,7 +122,7 @@ QtLockedFile::QtLockedFile(const QString& name)
 */
 bool QtLockedFile::open(OpenMode mode)
 {
-	if(mode & QIODevice::Truncate)
+	if (mode & QIODevice::Truncate)
 	{
 		qWarning("QtLockedFile::open(): Truncate mode not allowed.");
 		return false;
@@ -193,3 +193,4 @@ QtLockedFile::LockMode QtLockedFile::lockMode() const
     Destroys the \e QtLockedFile object. If any locks were held, they
     are released.
 */
+

@@ -3,31 +3,13 @@
 #ifdef Q_WS_WIN
 #include "Windows.h"
 #endif
-void CustomMessageBox::showEvent(QShowEvent* pEvent)
-{
-#ifndef QT_NO_ACCESSIBILITY
-
-	if (m_icon == QMessageBox::Critical || m_icon == QMessageBox::Warning)
-	{
-		QAccessible::updateAccessibility(this, 0, QAccessible::Alert);
-	}
-
-#endif
-	QDialog::showEvent(pEvent);
-}
-
-CustomMessageBox::CustomMessageBox(QWidget* /*parent*/) :
-	BaseWindow<QDialog> (OnlyCloseButton, NoResize),
-	ui(new Ui::CustomMessageBox)
-{
-	ui->setupUi(this);
-}
 
 CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title, const QString& text,
-                                   QMessageBox::StandardButtons buttons, QWidget* parent, Qt::WindowFlags /*flags*/) :
+                                   Buttons buttons, QWidget* parent, CustomButtonInfoList customButtonsText) :
 	BaseWindow<QDialog>(OnlyCloseButton, NoResize, parent),
-	ui(new Ui::CustomMessageBox),
-	m_icon(icon)
+	customButtonsInfo(customButtonsText),
+	m_icon(icon),
+	ui(new Ui::CustomMessageBox)
 {
 	ui->setupUi(this);
 	setupCustomWindow();
@@ -49,26 +31,27 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 		parent->activateWindow();
 	}
 
-	if(buttons == QMessageBox::NoButton)
+	if (buttons == NoButton)
 	{
-		buttons = QMessageBox::Ok | QMessageBox::Cancel;
+		buttons = Ok;
+		buttons |= Cancel;
 	}
 
 	clickedButton = NULL;
-	uint mask = QMessageBox::FirstButton;
+	uint mask = FirstButton;
 	bool isFirst = true;
 
-	while(mask <= QMessageBox::LastButton)
+	while (mask <= LastButton)
 	{
 		uint sb = buttons & mask;
 		mask <<= 1;
 
-		if(!sb)
+		if (!sb)
 		{
 			continue;
 		}
 
-		QPushButton* button = ui->buttonBox->addButton(static_cast<QDialogButtonBox::StandardButton>(sb));
+		QPushButton* button = CreateButton(sb, customButtonsText);
 
 		if (isFirst)
 		{
@@ -76,11 +59,11 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 			button->setFocus();
 		}
 
-		QMessageBox::ButtonRole  role = static_cast<QMessageBox::ButtonRole>(ui->buttonBox->buttonRole(button));
+		QMessageBox::ButtonRole role = static_cast<QMessageBox::ButtonRole>(ui->buttonBox->buttonRole(button));
 
-		if(role == QMessageBox::RejectRole || role == QMessageBox::NoRole)
+		if (role == QMessageBox::RejectRole || role == QMessageBox::NoRole)
 		{
-			cancelButton = static_cast<QMessageBox::StandardButton>(ui->buttonBox->standardButton(button));
+			cancelButton = static_cast<Button>(ui->buttonBox->standardButton(button));
 		}
 	}
 
@@ -88,17 +71,55 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 	connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
 }
 
+void CustomMessageBox::showEvent(QShowEvent* pEvent)
+{
+#ifndef QT_NO_ACCESSIBILITY
 
-QPixmap CustomMessageBox::standardIcon(QMessageBox::Icon icon)
+	if (m_icon == QMessageBox::Critical || m_icon == QMessageBox::Warning)
+	{
+		QAccessible::updateAccessibility(this, 0, QAccessible::Alert);
+	}
+
+#endif
+	QDialog::showEvent(pEvent);
+}
+
+CustomMessageBox::CustomMessageBox(QWidget* /*parent*/) :
+	BaseWindow<QDialog>(OnlyCloseButton, NoResize),
+	ui(new Ui::CustomMessageBox)
+{
+	ui->setupUi(this);
+}
+
+QPushButton* CustomMessageBox::CreateButton(uint sb, CustomButtonInfoList customButtonsText) const
+{
+	if (sb <= QDialogButtonBox::LastButton)
+	{
+		return ui->buttonBox->addButton(static_cast<QDialogButtonBox::StandardButton>(sb));
+	}
+	else
+	{
+		int buttonInfoIndex = (log(sb) - log(uint(CustomButton1))) / log(2);
+		if (buttonInfoIndex < 0 || buttonInfoIndex > customButtonsText.size())
+		{
+			qDebug() << "unable to create button for mask " << sb;
+			return nullptr;
+		}
+		CustomButonInfo info = customButtonsText[buttonInfoIndex];
+		return ui->buttonBox->addButton(info.text, info.role);
+	}
+}
+
+QPixmap CustomMessageBox::standardIcon(QMessageBox::Icon icon) const
 {
 	QStyle* style = this->style();
 	int iconSize = style->pixelMetric(QStyle::PM_MessageBoxIconSize, NULL, this);
 	QIcon tmpIcon;
 
-	switch(icon)
+	switch (icon)
 	{
 		case QMessageBox::Information:
-			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxInformation, NULL , this);
+			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxInformation, NULL, this);
 			break;
 
 		case QMessageBox::Warning:
@@ -120,7 +141,7 @@ QPixmap CustomMessageBox::standardIcon(QMessageBox::Icon icon)
 			break;
 	}
 
-	if(!tmpIcon.isNull())
+	if (!tmpIcon.isNull())
 	{
 		return tmpIcon.pixmap(iconSize);
 	}
@@ -128,9 +149,29 @@ QPixmap CustomMessageBox::standardIcon(QMessageBox::Icon icon)
 	return QPixmap();
 }
 
-QMessageBox::StandardButton CustomMessageBox::_clickedButton()
+CustomMessageBox::Button CustomMessageBox::_clickedButton() const
 {
-	return  clickedButton != NULL ? static_cast<QMessageBox::StandardButton>(ui->buttonBox->standardButton(clickedButton)) : cancelButton;
+	if (clickedButton != NULL)
+	{
+		Button button = static_cast<Button>(ui->buttonBox->standardButton(clickedButton));
+		if (button == NoButton)
+		{
+			QString text = clickedButton->text();
+			for (int i = 0; i < customButtonsInfo.size(); i++)
+			{
+				const CustomButonInfo customButonInfo = customButtonsInfo[i];
+				if (customButonInfo.text == text && ui->buttonBox->buttonRole(clickedButton) == customButonInfo.role)
+				{
+					return static_cast<Button>(CustomButton1 << i);
+				}
+			}
+		}
+		return button;
+	}
+	else
+	{
+		return cancelButton;
+	}
 }
 
 CustomMessageBox::~CustomMessageBox()
@@ -138,36 +179,61 @@ CustomMessageBox::~CustomMessageBox()
 	delete ui;
 }
 
-QMessageBox::StandardButton CustomMessageBox::critical(QWidget* parent, const QString& title, const QString& text, QMessageBox::StandardButtons buttons)
+CustomMessageBox::Button CustomMessageBox::critical(QWidget* parent, const QString& title, const QString& text, Buttons buttons, CustomButtonInfoList customButtonsText)
 {
-	return showNewMessageBox(parent, QMessageBox::Critical, title, text, buttons);
+	return showNewMessageBox(parent, QMessageBox::Critical, title, text, buttons, customButtonsText);
 }
 
-QMessageBox::StandardButton CustomMessageBox::information(QWidget* parent, const QString& title, const QString& text, QMessageBox::StandardButtons buttons)
+CustomMessageBox::Button CustomMessageBox::information(QWidget* parent, const QString& title, const QString& text, Buttons buttons, CustomButtonInfoList customButtonsText)
 {
-	return showNewMessageBox(parent, QMessageBox::Information, title, text, buttons);
+	return showNewMessageBox(parent, QMessageBox::Information, title, text, buttons, customButtonsText);
 }
 
-QMessageBox::StandardButton CustomMessageBox::question(QWidget* parent, const QString& title, const QString& text, QMessageBox::StandardButtons buttons)
+CustomMessageBox::Button CustomMessageBox::question(QWidget* parent, const QString& title, const QString& text, Buttons buttons, CustomButtonInfoList customButtonsText)
 {
-	return showNewMessageBox(parent, QMessageBox::Question, title, text, buttons);
+	return showNewMessageBox(parent, QMessageBox::Question, title, text, buttons, customButtonsText);
 }
 
-QMessageBox::StandardButton CustomMessageBox::warning(QWidget* parent, const QString& title, const QString& text, QMessageBox::StandardButtons buttons)
+CustomMessageBox::Button CustomMessageBox::warning(QWidget* parent, const QString& title, const QString& text, Buttons buttons, CustomButtonInfoList customButtonsText)
 {
-	return showNewMessageBox(parent, QMessageBox::Warning, title, text, buttons);
+	return showNewMessageBox(parent, QMessageBox::Warning, title, text, buttons, customButtonsText);
+}
+
+CustomMessageBox::Button CustomMessageBox::critical(const QString& title, const QString& text, Buttons buttons, CustomButtonInfoList customButtonsText)
+{
+	return showNewMessageBox(NULL, QMessageBox::Critical, title, text, buttons, customButtonsText);
+}
+
+CustomMessageBox::Button CustomMessageBox::information(const QString& title, const QString& text, Buttons buttons, CustomButtonInfoList customButtonsText)
+{
+	return showNewMessageBox(NULL, QMessageBox::Information, title, text, buttons, customButtonsText);
+}
+
+CustomMessageBox::Button CustomMessageBox::question(const QString& title, const QString& text, Buttons buttons, CustomButtonInfoList customButtonsText)
+{
+	return showNewMessageBox(NULL, QMessageBox::Question, title, text, buttons, customButtonsText);
+}
+
+CustomMessageBox::Button CustomMessageBox::warning(const QString& title, const QString& text, Buttons buttons, CustomButtonInfoList customButtonsText)
+{
+	return showNewMessageBox(NULL, QMessageBox::Warning, title, text, buttons, customButtonsText);
+}
+
+void CustomMessageBox::about(const QString& title, const QString& text)
+{
+	showNewMessageBox(NULL, QMessageBox::NoIcon, title, text, Ok, CustomButtonInfoList());
 }
 
 void CustomMessageBox::about(QWidget* parent, const QString& title, const QString& text)
 {
-	showNewMessageBox(parent, QMessageBox::NoIcon, title, text, QMessageBox::Ok);
+	showNewMessageBox(parent, QMessageBox::NoIcon, title, text, Ok, CustomButtonInfoList());
 }
 
-QMessageBox::StandardButton CustomMessageBox::showNewMessageBox(QWidget* parent, QMessageBox::Icon icon,
-        const QString& title, const QString& text,
-        QMessageBox::StandardButtons buttons)
+CustomMessageBox::Button CustomMessageBox::showNewMessageBox(QWidget* parent, QMessageBox::Icon icon,
+                                                             const QString& title, const QString& text,
+                                                             Buttons buttons, CustomButtonInfoList customButtonsText)
 {
-	CustomMessageBox msgBox = CustomMessageBox(icon, title, text, buttons, parent);
+	CustomMessageBox msgBox(icon, title, text, buttons, parent, customButtonsText);
 	msgBox.exec();
 	return msgBox._clickedButton();
 }
@@ -180,13 +246,13 @@ void CustomMessageBox::buttonClicked(QAbstractButton* button)
 void CustomMessageBox::accept()
 {
 	isClosed = true;
-	done(QDialog::Accepted);
+	done(Accepted);
 }
 
 void CustomMessageBox::reject()
 {
 	isClosed = true;
-	done(QDialog::Rejected);
+	done(Rejected);
 }
 
 QWidget* CustomMessageBox::getTitleBar()
@@ -213,3 +279,4 @@ QWidget* CustomMessageBox::centralWidget()
 {
 	return ui->m_centralWidget;
 }
+

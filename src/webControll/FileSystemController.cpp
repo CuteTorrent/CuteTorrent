@@ -4,6 +4,7 @@
 #include <json/json.h>
 #include "qstorageinfo.h"
 #include "StaticHelpers.h"
+
 FileSystemController::~FileSystemController()
 {
 }
@@ -72,3 +73,4 @@ void FileSystemController::service(HttpRequest& request, HttpResponse& response)
 		response.write("</BODY>");
 	}
 }
+

@@ -71,7 +71,7 @@ QtLocalPeer::QtLocalPeer(QObject* parent, const QString& appId)
 {
 	QString prefix = id;
 
-	if(id.isEmpty())
+	if (id.isEmpty())
 	{
 		id = QCoreApplication::applicationFilePath();
 #if defined(Q_OS_WIN)
@@ -85,16 +85,16 @@ QtLocalPeer::QtLocalPeer(QObject* parent, const QString& appId)
 	QByteArray idc = id.toUtf8();
 	quint16 idNum = qChecksum(idc.constData(), idc.size());
 	socketName = QLatin1String("qtsingleapp-") + prefix
-	             + QLatin1Char('-') + QString::number(idNum, 16);
+		+ QLatin1Char('-') + QString::number(idNum, 16);
 #if defined(Q_OS_WIN)
 
-	if(!pProcessIdToSessionId)
+	if (!pProcessIdToSessionId)
 	{
 		QLibrary lib("kernel32");
 		pProcessIdToSessionId = (PProcessIdToSessionId) lib.resolve("ProcessIdToSessionId");
 	}
 
-	if(pProcessIdToSessionId)
+	if (pProcessIdToSessionId)
 	{
 		DWORD sessionId = 0;
 		pProcessIdToSessionId(GetCurrentProcessId(), &sessionId);
@@ -106,22 +106,21 @@ QtLocalPeer::QtLocalPeer(QObject* parent, const QString& appId)
 #endif
 	server = new QLocalServer(this);
 	QString lockName = QDir(QDir::tempPath()).absolutePath()
-	                   + QLatin1Char('/') + socketName
-	                   + QLatin1String("-lockfile");
+		+ QLatin1Char('/') + socketName
+		+ QLatin1String("-lockfile");
 	lockFile.setFileName(lockName);
 	lockFile.open(QIODevice::ReadWrite);
 }
 
 
-
 bool QtLocalPeer::isClient()
 {
-	if(lockFile.isLocked())
+	if (lockFile.isLocked())
 	{
 		return false;
 	}
 
-	if(!lockFile.lock(QtLockedFile::WriteLock, false))
+	if (!lockFile.lock(QtLockedFile::WriteLock, false))
 	{
 		return true;
 	}
@@ -138,7 +137,7 @@ bool QtLocalPeer::isClient()
 
 #endif
 
-	if(!res)
+	if (!res)
 	{
 		qWarning("QtSingleCoreApplication: listen on local socket failed, %s", qPrintable(server->errorString()));
 	}
@@ -150,7 +149,7 @@ bool QtLocalPeer::isClient()
 
 bool QtLocalPeer::sendMessage(const QString& message, int timeout)
 {
-	if(!isClient())
+	if (!isClient())
 	{
 		return false;
 	}
@@ -158,27 +157,27 @@ bool QtLocalPeer::sendMessage(const QString& message, int timeout)
 	QLocalSocket socket;
 	bool connOk = false;
 
-	for(int i = 0; i < 2; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		// Try twice, in case the other instance is just starting up
 		socket.connectToServer(socketName);
 		connOk = socket.waitForConnected(timeout / 2);
 
-		if(connOk || i)
+		if (connOk || i)
 		{
 			break;
 		}
 
 		int ms = 250;
 #if defined(Q_OS_WIN)
-		Sleep(DWORD (ms));
+		Sleep(DWORD(ms));
 #else
 		struct timespec ts = { ms / 1000, (ms % 1000) * 1000 * 1000 };
 		nanosleep(&ts, NULL);
 #endif
 	}
 
-	if(!connOk)
+	if (!connOk)
 	{
 		return false;
 	}
@@ -188,11 +187,11 @@ bool QtLocalPeer::sendMessage(const QString& message, int timeout)
 	ds.writeBytes(uMsg.constData(), uMsg.size());
 	bool res = socket.waitForBytesWritten(timeout);
 
-	if(res)
+	if (res)
 	{
-		res &= socket.waitForReadyRead(timeout);   // wait for ack
+		res &= socket.waitForReadyRead(timeout); // wait for ack
 
-		if(res)
+		if (res)
 		{
 			res &= (socket.read(qstrlen(ack)) == ack);
 		}
@@ -206,12 +205,12 @@ void QtLocalPeer::receiveConnection()
 {
 	QLocalSocket* socket = server->nextPendingConnection();
 
-	if(!socket)
+	if (!socket)
 	{
 		return;
 	}
 
-	while(socket->bytesAvailable() < (int) sizeof(quint32))
+	while (socket->bytesAvailable() < (int) sizeof(quint32))
 	{
 		socket->waitForReadyRead();
 	}
@@ -230,9 +229,9 @@ void QtLocalPeer::receiveConnection()
 		remaining -= got;
 		uMsgBuf += got;
 	}
-	while(remaining && got >= 0 && socket->waitForReadyRead(2000));
+	while (remaining && got >= 0 && socket->waitForReadyRead(2000));
 
-	if(got < 0)
+	if (got < 0)
 	{
 		qWarning("QtLocalPeer: Message reception failed %s", socket->errorString().toLatin1().constData());
 		delete socket;
@@ -243,5 +242,6 @@ void QtLocalPeer::receiveConnection()
 	socket->write(ack, qstrlen(ack));
 	socket->waitForBytesWritten(1000);
 	delete socket;
-	emit messageReceived(message);  //### (might take a long time to return)
+	emit messageReceived(message); //### (might take a long time to return)
 }
+

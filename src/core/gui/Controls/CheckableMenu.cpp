@@ -1,7 +1,7 @@
 #include "CheckableMenu.h"
 
 
-CheckableMenu::CheckableMenu(QWidget* parent) :QMenu(parent)
+CheckableMenu::CheckableMenu(QWidget* parent) : QMenu(parent)
 {
 }
 
@@ -14,16 +14,20 @@ CheckableMenu::~CheckableMenu()
 {
 }
 
-void CheckableMenu::mouseReleaseEvent(QMouseEvent * event){
+void CheckableMenu::mouseReleaseEvent(QMouseEvent* event)
+{
 	QAction* act = menuAction();
-	if (act){
+	if (act)
+	{
 		QMenu* men = act->menu();
 		act->setMenu(0);
 
 		QMenu::mouseReleaseEvent(event);
 		act->setMenu(men);
 	}
-	else{
+	else
+	{
 		QMenu::mouseReleaseEvent(event);
 	}
 }
+

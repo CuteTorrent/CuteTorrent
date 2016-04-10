@@ -2,6 +2,7 @@
 #define PEICEDISPLAYWIDGET_H
 
 #include <QtGui>
+
 class PeiceDisplayWidget : public QWidget
 {
 	Q_OBJECT
@@ -32,8 +33,9 @@ private:
 	QColor m_cDwonloaded, m_cDownloading, m_cBorder, m_cBackground;
 	int m_iPiceCount;
 	QBitArray m_dowloadingParts;
-	QBitArray m_dowloadedParts;
-
+	QBitArray m_avaliableParts;
 };
 
 #endif // PEICEDISPLAYWIDGET_H
+
+

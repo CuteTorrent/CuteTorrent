@@ -9,7 +9,8 @@ MetaDataDownloadWaiter::MetaDataDownloadWaiter(QString metaLink, QObject* parren
 }
 
 MetaDataDownloadWaiter::~MetaDataDownloadWaiter()
-{}
+{
+}
 
 void MetaDataDownloadWaiter::run()
 {
@@ -31,3 +32,4 @@ void MetaDataDownloadWaiter::run()
 		emit DownloadCompleted(*ti);
 	}
 }
+

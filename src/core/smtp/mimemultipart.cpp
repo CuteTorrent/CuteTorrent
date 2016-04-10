@@ -1,4 +1,4 @@
-/*
+﻿/*
   Copyright (c) 2011-2012 - Tőkés Attila
 
   This file is part of SmtpClient for Qt.
@@ -23,13 +23,13 @@
 
 const QString MULTI_PART_NAMES[] =
 {
-	"multipart/mixed",         //    Mixed
-	"multipart/digest",        //    Digest
-	"multipart/alternative",   //    Alternative
-	"multipart/related",       //    Related
-	"multipart/report",        //    Report
-	"multipart/signed",        //    Signed
-	"multipart/encrypted"      //    Encrypted
+	"multipart/mixed", //    Mixed
+	"multipart/digest", //    Digest
+	"multipart/alternative", //    Alternative
+	"multipart/related", //    Related
+	"multipart/report", //    Report
+	"multipart/signed", //    Signed
+	"multipart/encrypted" //    Encrypted
 };
 
 MimeMultiPart::MimeMultiPart(MultiPartType type)
@@ -45,9 +45,9 @@ MimeMultiPart::MimeMultiPart(MultiPartType type)
 MimeMultiPart::~MimeMultiPart()
 {
 	foreach (MimePart* part, parts)
-	{
-		delete part;
-	}
+		{
+			delete part;
+		}
 }
 
 void MimeMultiPart::addPart(MimePart* part)
@@ -66,7 +66,7 @@ void MimeMultiPart::writeContent(QIODevice& device) const
 
 	for (it = parts.constBegin(); it != parts.constEnd(); it++)
 	{
-		device.write("--" );
+		device.write("--");
 		device.write(cBoundary.toLatin1());
 		device.write("\r\n");
 		(*it)->writeToDevice(device);
@@ -90,3 +90,4 @@ MimeMultiPart::MultiPartType MimeMultiPart::getMimeType() const
 {
 	return type;
 }
+

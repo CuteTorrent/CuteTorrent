@@ -81,3 +81,4 @@ private slots:
 	void OnCheckAll();
 	void OnUncheckAll();
 };
+

@@ -7,8 +7,22 @@ class ImportWizard :
 {
 	Q_OBJECT
 public:
-	enum ImportResult{ None, Success, Canceled, Failed };
-	enum Pages { Intro, ChoseData, Import, Finish };
+	enum ImportResult
+	{
+		None,
+		Success,
+		Canceled,
+		Failed
+	};
+
+	enum Pages
+	{
+		Intro,
+		ChoseData,
+		Import,
+		Finish
+	};
+
 	ImportWizard(QWidget* parent = 0);
 private slots:
 	void NavigateHelp();

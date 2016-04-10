@@ -16,8 +16,8 @@ class TorrentGroupsManager : public QObject, public Singleton<TorrentGroupsManag
 	QMultiMap<QString, TorrentGroup*> m_torrenTgroupsToName;
 	QMap<QUuid, TorrentGroup*> m_torrenTgroupsToUid;
 protected:
-	void customEvent(QEvent * event) override;
-signals:
+	void customEvent(QEvent* event) override;
+	signals:
 	void GroupsChanged();
 	void TorrentChangedGroup();
 public:
@@ -42,7 +42,9 @@ public:
 		: QEvent(TORRENT_CHANGED_GROUP_EVENT)
 	{
 	}
-	const static Type  TORRENT_CHANGED_GROUP_EVENT = static_cast<Type>(User + 1);
+
+	const static Type TORRENT_CHANGED_GROUP_EVENT = static_cast<Type>(User + 1);
 };
 
 DEFINE_PTR_CALSS(TorrentGroupsManager)
+

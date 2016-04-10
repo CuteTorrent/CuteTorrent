@@ -193,7 +193,7 @@ void VideoPlayerWindow::openFile(QString path)
 	}
 	catch (...)
 	{
-		CustomMessageBox::warning(this, "ERROR", "VideoPlayerWindow::openFile()");
+		CustomMessageBox::warning("ERROR", "VideoPlayerWindow::openFile()");
 	}
 }
 

@@ -3,6 +3,7 @@
 class QWidget;
 class QVariant;
 #include "SettingsPropertyMapper.h"
+
 class UIPropertySetters
 {
 public:
@@ -11,3 +12,4 @@ public:
 	static void TimeFromIntSetter(QWidget* editor, SettingsPropertyMapper::WidgetType editorType, SettingsPropertyMapper::PropertyType propertyType, QVariant propertyValue);
 	static void ChacheSizeSetter(QWidget* editor, SettingsPropertyMapper::WidgetType editorType, SettingsPropertyMapper::PropertyType propertyType, QVariant propertyValue);
 };
+

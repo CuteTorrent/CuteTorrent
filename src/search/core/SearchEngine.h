@@ -1,5 +1,4 @@
-﻿
-#pragma once
+﻿#pragma once
 #include <QtCore>
 #include "ISerachProvider.h"
 #include "SearchItemsStorrage.h"
@@ -10,6 +9,7 @@
 
 class QScriptEngineDebugger;
 class QMainWindow;
+
 class SearchEngine : public QObject
 {
 	Q_OBJECT
@@ -22,16 +22,18 @@ public:
 	void enableScriptDebugging();
 	void disableScriptDebugging();
 	bool isEnabledScriptDebugging();
-signals:
+	signals:
 	void GotResults();
 private:
 	void setBusy(bool val);
+
 	struct SearchInfo
 	{
 		QString ScriptName;
 		QString GlobalName;
 		QString IconName;
 	};
+
 	QScriptEngineDebugger* m_scriptDebugger;
 	QMainWindow* m_debuggerWindow;
 	bool m_scriptDebugingEnabled;
@@ -58,3 +60,4 @@ private slots:
 	void OnSettngsChnaged(QString, QString);
 	void OnSearchReady(QList<SearchResult*> result);
 };
+

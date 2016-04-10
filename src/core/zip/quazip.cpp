@@ -54,6 +54,7 @@ private:
 	QString comment;
 	/// The open mode.
 	QuaZip::Mode mode;
+
 	union
 	{
 		/// The internal handle for UNZIP modes.
@@ -61,6 +62,7 @@ private:
 		/// The internal handle for ZIP modes.
 		zipFile zipFile_f;
 	};
+
 	/// Whether a current file is set.
 	bool hasCurrentFile_f;
 	/// The last error.
@@ -71,6 +73,7 @@ private:
 	bool zip64;
 	/// The auto-close flag.
 	bool autoClose;
+
 	inline QTextCodec* getDefaultFileNameCodec()
 	{
 		if (defaultFileNameCodec == NULL)
@@ -82,6 +85,7 @@ private:
 			return defaultFileNameCodec;
 		}
 	}
+
 	/// The constructor for the corresponding QuaZip constructor.
 	inline QuaZipPrivate(QuaZip* q):
 		q(q),
@@ -98,6 +102,7 @@ private:
 		lastMappedDirectoryEntry.num_of_file = 0;
 		lastMappedDirectoryEntry.pos_in_zip_directory = 0;
 	}
+
 	/// The constructor for the corresponding QuaZip constructor.
 	inline QuaZipPrivate(QuaZip* q, const QString& zipName):
 		q(q),
@@ -115,6 +120,7 @@ private:
 		lastMappedDirectoryEntry.num_of_file = 0;
 		lastMappedDirectoryEntry.pos_in_zip_directory = 0;
 	}
+
 	/// The constructor for the corresponding QuaZip constructor.
 	inline QuaZipPrivate(QuaZip* q, QIODevice* ioDevice):
 		q(q),
@@ -131,8 +137,9 @@ private:
 		lastMappedDirectoryEntry.num_of_file = 0;
 		lastMappedDirectoryEntry.pos_in_zip_directory = 0;
 	}
+
 	/// Returns either a list of file names or a list of QuaZipFileInfo.
-	template<typename TFileInfo>
+	template <typename TFileInfo>
 	bool getFileInfoList(QList<TFileInfo>* result) const;
 
 	/// Stores map of filenames and file locations for unzipping
@@ -206,7 +213,7 @@ bool QuaZipPrivate::goToFirstUnmappedFile()
 
 	hasCurrentFile_f = zipError == UNZ_OK;
 
-	if(zipError == UNZ_END_OF_LIST_OF_FILE)
+	if (zipError == UNZ_END_OF_LIST_OF_FILE)
 	{
 		zipError = UNZ_OK;
 	}
@@ -231,7 +238,7 @@ QuaZip::QuaZip(QIODevice* ioDevice):
 
 QuaZip::~QuaZip()
 {
-	if(isOpen())
+	if (isOpen())
 	{
 		close();
 	}
@@ -243,7 +250,7 @@ bool QuaZip::open(Mode mode, zlib_filefunc_def* ioApi)
 {
 	p->zipError = UNZ_OK;
 
-	if(isOpen())
+	if (isOpen())
 	{
 		qWarning("QuaZip::open(): ZIP already opened");
 		return false;
@@ -266,7 +273,7 @@ bool QuaZip::open(Mode mode, zlib_filefunc_def* ioApi)
 
 	unsigned flags = 0;
 
-	switch(mode)
+	switch (mode)
 	{
 		case mdUnzip:
 			if (ioApi == NULL)
@@ -296,7 +303,7 @@ bool QuaZip::open(Mode mode, zlib_filefunc_def* ioApi)
 				}
 			}
 
-			if(p->unzFile_f != NULL)
+			if (p->unzFile_f != NULL)
 			{
 				if (ioDevice->isSequential())
 				{
@@ -308,8 +315,8 @@ bool QuaZip::open(Mode mode, zlib_filefunc_def* ioApi)
 					}
 
 					qWarning("QuaZip::open(): "
-					         "only mdCreate can be used with "
-					         "sequential devices");
+						"only mdCreate can be used with "
+						"sequential devices");
 					return false;
 				}
 
@@ -346,8 +353,8 @@ bool QuaZip::open(Mode mode, zlib_filefunc_def* ioApi)
 
 				p->zipFile_f = zipOpen3(ioDevice,
 				                        mode == mdCreate ? APPEND_STATUS_CREATE :
-				                        mode == mdAppend ? APPEND_STATUS_CREATEAFTER :
-				                        APPEND_STATUS_ADDINZIP,
+					                        mode == mdAppend ? APPEND_STATUS_CREATEAFTER :
+					                        APPEND_STATUS_ADDINZIP,
 				                        NULL, NULL, flags);
 			}
 			else
@@ -355,8 +362,8 @@ bool QuaZip::open(Mode mode, zlib_filefunc_def* ioApi)
 				// QuaZIP pre-zip64 compatibility mode
 				p->zipFile_f = zipOpen2(ioDevice,
 				                        mode == mdCreate ? APPEND_STATUS_CREATE :
-				                        mode == mdAppend ? APPEND_STATUS_CREATEAFTER :
-				                        APPEND_STATUS_ADDINZIP,
+					                        mode == mdAppend ? APPEND_STATUS_CREATEAFTER :
+					                        APPEND_STATUS_ADDINZIP,
 				                        NULL,
 				                        ioApi);
 
@@ -366,7 +373,7 @@ bool QuaZip::open(Mode mode, zlib_filefunc_def* ioApi)
 				}
 			}
 
-			if(p->zipFile_f != NULL)
+			if (p->zipFile_f != NULL)
 			{
 				if (ioDevice->isSequential())
 				{
@@ -374,8 +381,8 @@ bool QuaZip::open(Mode mode, zlib_filefunc_def* ioApi)
 					{
 						zipClose(p->zipFile_f, NULL);
 						qWarning("QuaZip::open(): "
-						         "only mdCreate can be used with "
-						         "sequential devices");
+							"only mdCreate can be used with "
+							"sequential devices");
 
 						if (!p->zipName.isEmpty())
 						{
@@ -421,7 +428,7 @@ void QuaZip::close()
 {
 	p->zipError = UNZ_OK;
 
-	switch(p->mode)
+	switch (p->mode)
 	{
 		case mdNotOpen:
 			qWarning("QuaZip::close(): ZIP is not open");
@@ -436,7 +443,7 @@ void QuaZip::close()
 		case mdAdd:
 			p->zipError = zipClose(p->zipFile_f,
 			                       p->comment.isNull() ? NULL
-			                       : p->commentCodec->fromUnicode(p->comment).constData());
+				                       : p->commentCodec->fromUnicode(p->comment).constData());
 			break;
 
 		default:
@@ -453,7 +460,7 @@ void QuaZip::close()
 
 	p->clearDirectoryMap();
 
-	if(p->zipError == UNZ_OK)
+	if (p->zipError == UNZ_OK)
 	{
 		p->mode = mdNotOpen;
 	}
@@ -461,7 +468,7 @@ void QuaZip::close()
 
 void QuaZip::setZipName(const QString& zipName)
 {
-	if(isOpen())
+	if (isOpen())
 	{
 		qWarning("QuaZip::setZipName(): ZIP is already open!");
 		return;
@@ -473,7 +480,7 @@ void QuaZip::setZipName(const QString& zipName)
 
 void QuaZip::setIoDevice(QIODevice* ioDevice)
 {
-	if(isOpen())
+	if (isOpen())
 	{
 		qWarning("QuaZip::setIoDevice(): ZIP is already open!");
 		return;
@@ -483,12 +490,12 @@ void QuaZip::setIoDevice(QIODevice* ioDevice)
 	p->zipName = QString();
 }
 
-int QuaZip::getEntriesCount()const
+int QuaZip::getEntriesCount() const
 {
 	QuaZip* fakeThis = (QuaZip*)this; // non-const
 	fakeThis->p->zipError = UNZ_OK;
 
-	if(p->mode != mdUnzip)
+	if (p->mode != mdUnzip)
 	{
 		qWarning("QuaZip::getEntriesCount(): ZIP is not open in mdUnzip mode");
 		return -1;
@@ -496,7 +503,7 @@ int QuaZip::getEntriesCount()const
 
 	unz_global_info64 globalInfo;
 
-	if((fakeThis->p->zipError = unzGetGlobalInfo64(p->unzFile_f, &globalInfo)) != UNZ_OK)
+	if ((fakeThis->p->zipError = unzGetGlobalInfo64(p->unzFile_f, &globalInfo)) != UNZ_OK)
 	{
 		return p->zipError;
 	}
@@ -504,12 +511,12 @@ int QuaZip::getEntriesCount()const
 	return (int)globalInfo.number_entry;
 }
 
-QString QuaZip::getComment()const
+QString QuaZip::getComment() const
 {
 	QuaZip* fakeThis = (QuaZip*)this; // non-const
 	fakeThis->p->zipError = UNZ_OK;
 
-	if(p->mode != mdUnzip)
+	if (p->mode != mdUnzip)
 	{
 		qWarning("QuaZip::getComment(): ZIP is not open in mdUnzip mode");
 		return QString();
@@ -518,14 +525,14 @@ QString QuaZip::getComment()const
 	unz_global_info64 globalInfo;
 	QByteArray comment;
 
-	if((fakeThis->p->zipError = unzGetGlobalInfo64(p->unzFile_f, &globalInfo)) != UNZ_OK)
+	if ((fakeThis->p->zipError = unzGetGlobalInfo64(p->unzFile_f, &globalInfo)) != UNZ_OK)
 	{
 		return QString();
 	}
 
 	comment.resize(globalInfo.size_comment);
 
-	if((fakeThis->p->zipError = unzGetGlobalComment(p->unzFile_f, comment.data(), comment.size())) < 0)
+	if ((fakeThis->p->zipError = unzGetGlobalComment(p->unzFile_f, comment.data(), comment.size())) < 0)
 	{
 		return QString();
 	}
@@ -538,26 +545,26 @@ bool QuaZip::setCurrentFile(const QString& fileName, CaseSensitivity cs)
 {
 	p->zipError = UNZ_OK;
 
-	if(p->mode != mdUnzip)
+	if (p->mode != mdUnzip)
 	{
 		qWarning("QuaZip::setCurrentFile(): ZIP is not open in mdUnzip mode");
 		return false;
 	}
 
-	if(fileName.isEmpty())
+	if (fileName.isEmpty())
 	{
 		p->hasCurrentFile_f = false;
 		return true;
 	}
 
 	// Unicode-aware reimplementation of the unzLocateFile function
-	if(p->unzFile_f == NULL)
+	if (p->unzFile_f == NULL)
 	{
 		p->zipError = UNZ_PARAMERROR;
 		return false;
 	}
 
-	if(fileName.length() > MAX_FILE_NAME_LENGTH)
+	if (fileName.length() > MAX_FILE_NAME_LENGTH)
 	{
 		p->zipError = UNZ_PARAMERROR;
 		return false;
@@ -567,7 +574,7 @@ bool QuaZip::setCurrentFile(const QString& fileName, CaseSensitivity cs)
 	bool sens = convertCaseSensitivity(cs) == Qt::CaseSensitive;
 	QString lower, current;
 
-	if(!sens)
+	if (!sens)
 	{
 		lower = fileName.toLower();
 	}
@@ -604,25 +611,25 @@ bool QuaZip::setCurrentFile(const QString& fileName, CaseSensitivity cs)
 	}
 
 	// Not mapped yet, start from where we have got to so far
-	for(bool more = p->goToFirstUnmappedFile(); more; more = goToNextFile())
+	for (bool more = p->goToFirstUnmappedFile(); more; more = goToNextFile())
 	{
 		current = getCurrentFileName();
 
-		if(current.isEmpty())
+		if (current.isEmpty())
 		{
 			return false;
 		}
 
-		if(sens)
+		if (sens)
 		{
-			if(current == fileName)
+			if (current == fileName)
 			{
 				break;
 			}
 		}
 		else
 		{
-			if(current.toLower() == lower)
+			if (current.toLower() == lower)
 			{
 				break;
 			}
@@ -636,7 +643,7 @@ bool QuaZip::goToFirstFile()
 {
 	p->zipError = UNZ_OK;
 
-	if(p->mode != mdUnzip)
+	if (p->mode != mdUnzip)
 	{
 		qWarning("QuaZip::goToFirstFile(): ZIP is not open in mdUnzip mode");
 		return false;
@@ -651,7 +658,7 @@ bool QuaZip::goToNextFile()
 {
 	p->zipError = UNZ_OK;
 
-	if(p->mode != mdUnzip)
+	if (p->mode != mdUnzip)
 	{
 		qWarning("QuaZip::goToFirstFile(): ZIP is not open in mdUnzip mode");
 		return false;
@@ -660,7 +667,7 @@ bool QuaZip::goToNextFile()
 	p->zipError = unzGoToNextFile(p->unzFile_f);
 	p->hasCurrentFile_f = p->zipError == UNZ_OK;
 
-	if(p->zipError == UNZ_END_OF_LIST_OF_FILE)
+	if (p->zipError == UNZ_END_OF_LIST_OF_FILE)
 	{
 		p->zipError = UNZ_OK;
 	}
@@ -668,11 +675,11 @@ bool QuaZip::goToNextFile()
 	return p->hasCurrentFile_f;
 }
 
-bool QuaZip::getCurrentFileInfo(QuaZipFileInfo* info)const
+bool QuaZip::getCurrentFileInfo(QuaZipFileInfo* info) const
 {
 	QuaZipFileInfo64 info64;
 
-	if (info == NULL)   // Very unlikely because of the overloads
+	if (info == NULL) // Very unlikely because of the overloads
 	{
 		return false;
 	}
@@ -688,12 +695,12 @@ bool QuaZip::getCurrentFileInfo(QuaZipFileInfo* info)const
 	}
 }
 
-bool QuaZip::getCurrentFileInfo(QuaZipFileInfo64* info)const
+bool QuaZip::getCurrentFileInfo(QuaZipFileInfo64* info) const
 {
 	QuaZip* fakeThis = (QuaZip*)this; // non-const
 	fakeThis->p->zipError = UNZ_OK;
 
-	if(p->mode != mdUnzip)
+	if (p->mode != mdUnzip)
 	{
 		qWarning("QuaZip::getCurrentFileInfo(): ZIP is not open in mdUnzip mode");
 		return false;
@@ -704,17 +711,17 @@ bool QuaZip::getCurrentFileInfo(QuaZipFileInfo64* info)const
 	QByteArray extra;
 	QByteArray comment;
 
-	if(info == NULL)
+	if (info == NULL)
 	{
 		return false;
 	}
 
-	if(!isOpen() || !hasCurrentFile())
+	if (!isOpen() || !hasCurrentFile())
 	{
 		return false;
 	}
 
-	if((fakeThis->p->zipError = unzGetCurrentFileInfo64(p->unzFile_f, &info_z, NULL, 0, NULL, 0, NULL, 0)) != UNZ_OK)
+	if ((fakeThis->p->zipError = unzGetCurrentFileInfo64(p->unzFile_f, &info_z, NULL, 0, NULL, 0, NULL, 0)) != UNZ_OK)
 	{
 		return false;
 	}
@@ -723,10 +730,10 @@ bool QuaZip::getCurrentFileInfo(QuaZipFileInfo64* info)const
 	extra.resize(info_z.size_file_extra);
 	comment.resize(info_z.size_file_comment);
 
-	if((fakeThis->p->zipError = unzGetCurrentFileInfo64(p->unzFile_f, NULL,
-	                            fileName.data(), fileName.size(),
-	                            extra.data(), extra.size(),
-	                            comment.data(), comment.size())) != UNZ_OK)
+	if ((fakeThis->p->zipError = unzGetCurrentFileInfo64(p->unzFile_f, NULL,
+	                                                     fileName.data(), fileName.size(),
+	                                                     extra.data(), extra.size(),
+	                                                     comment.data(), comment.size())) != UNZ_OK)
 	{
 		return false;
 	}
@@ -745,33 +752,33 @@ bool QuaZip::getCurrentFileInfo(QuaZipFileInfo64* info)const
 	info->comment = p->commentCodec->toUnicode(comment);
 	info->extra = extra;
 	info->dateTime = QDateTime(
-	                     QDate(info_z.tmu_date.tm_year, info_z.tmu_date.tm_mon + 1, info_z.tmu_date.tm_mday),
-	                     QTime(info_z.tmu_date.tm_hour, info_z.tmu_date.tm_min, info_z.tmu_date.tm_sec));
+		QDate(info_z.tmu_date.tm_year, info_z.tmu_date.tm_mon + 1, info_z.tmu_date.tm_mday),
+		QTime(info_z.tmu_date.tm_hour, info_z.tmu_date.tm_min, info_z.tmu_date.tm_sec));
 	// Add to directory map
 	p->addCurrentFileToDirectoryMap(info->name);
 	return true;
 }
 
-QString QuaZip::getCurrentFileName()const
+QString QuaZip::getCurrentFileName() const
 {
 	QuaZip* fakeThis = (QuaZip*)this; // non-const
 	fakeThis->p->zipError = UNZ_OK;
 
-	if(p->mode != mdUnzip)
+	if (p->mode != mdUnzip)
 	{
 		qWarning("QuaZip::getCurrentFileName(): ZIP is not open in mdUnzip mode");
 		return QString();
 	}
 
-	if(!isOpen() || !hasCurrentFile())
+	if (!isOpen() || !hasCurrentFile())
 	{
 		return QString();
 	}
 
 	QByteArray fileName(MAX_FILE_NAME_LENGTH, 0);
 
-	if((fakeThis->p->zipError = unzGetCurrentFileInfo64(p->unzFile_f, NULL, fileName.data(), fileName.size(),
-	                            NULL, 0, NULL, 0)) != UNZ_OK)
+	if ((fakeThis->p->zipError = unzGetCurrentFileInfo64(p->unzFile_f, NULL, fileName.data(), fileName.size(),
+	                                                     NULL, 0, NULL, 0)) != UNZ_OK)
 	{
 		return QString();
 	}
@@ -798,7 +805,7 @@ void QuaZip::setFileNameCodec(const char* fileNameCodecName)
 	p->fileNameCodec = QTextCodec::codecForName(fileNameCodecName);
 }
 
-QTextCodec* QuaZip::getFileNameCodec()const
+QTextCodec* QuaZip::getFileNameCodec() const
 {
 	return p->fileNameCodec;
 }
@@ -813,7 +820,7 @@ void QuaZip::setCommentCodec(const char* commentCodecName)
 	p->commentCodec = QTextCodec::codecForName(commentCodecName);
 }
 
-QTextCodec* QuaZip::getCommentCodec()const
+QTextCodec* QuaZip::getCommentCodec() const
 {
 	return p->commentCodec;
 }
@@ -833,12 +840,12 @@ QIODevice* QuaZip::getIoDevice() const
 	return p->ioDevice;
 }
 
-QuaZip::Mode QuaZip::getMode()const
+QuaZip::Mode QuaZip::getMode() const
 {
 	return p->mode;
 }
 
-bool QuaZip::isOpen()const
+bool QuaZip::isOpen() const
 {
 	return p->mode != mdNotOpen;
 }
@@ -853,7 +860,7 @@ void QuaZip::setComment(const QString& comment)
 	p->comment = comment;
 }
 
-bool QuaZip::hasCurrentFile()const
+bool QuaZip::hasCurrentFile() const
 {
 	return p->hasCurrentFile_f;
 }
@@ -878,10 +885,10 @@ bool QuaZip::isDataDescriptorWritingEnabled() const
 	return p->dataDescriptorWritingEnabled;
 }
 
-template<typename TFileInfo>
+template <typename TFileInfo>
 TFileInfo QuaZip_getFileInfo(QuaZip* zip, bool* ok);
 
-template<>
+template <>
 QuaZipFileInfo QuaZip_getFileInfo(QuaZip* zip, bool* ok)
 {
 	QuaZipFileInfo info;
@@ -889,7 +896,7 @@ QuaZipFileInfo QuaZip_getFileInfo(QuaZip* zip, bool* ok)
 	return info;
 }
 
-template<>
+template <>
 QuaZipFileInfo64 QuaZip_getFileInfo(QuaZip* zip, bool* ok)
 {
 	QuaZipFileInfo64 info;
@@ -897,7 +904,7 @@ QuaZipFileInfo64 QuaZip_getFileInfo(QuaZip* zip, bool* ok)
 	return info;
 }
 
-template<>
+template <>
 QString QuaZip_getFileInfo(QuaZip* zip, bool* ok)
 {
 	QString name = zip->getCurrentFileName();
@@ -905,7 +912,7 @@ QString QuaZip_getFileInfo(QuaZip* zip, bool* ok)
 	return name;
 }
 
-template<typename TFileInfo>
+template <typename TFileInfo>
 bool QuaZipPrivate::getFileInfoList(QList<TFileInfo>* result) const
 {
 	QuaZipPrivate* fakeThis = const_cast<QuaZipPrivate*>(this);
@@ -914,7 +921,7 @@ bool QuaZipPrivate::getFileInfoList(QList<TFileInfo>* result) const
 	if (mode != QuaZip::mdUnzip)
 	{
 		qWarning("QuaZip::getFileNameList/getFileInfoList(): "
-		         "ZIP is not open in mdUnzip mode");
+			"ZIP is not open in mdUnzip mode");
 		return false;
 	}
 
@@ -1050,3 +1057,4 @@ void QuaZip::setAutoClose(bool autoClose) const
 {
 	p->autoClose = autoClose;
 }
+

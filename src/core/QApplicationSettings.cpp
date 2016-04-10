@@ -71,7 +71,7 @@ QStringList QApplicationSettings::GetGroupNames()
 
 void QApplicationSettings::setValue(const QString& group, const QString& key, const QVariant& value)
 {
-	if(!settings->group().isEmpty())
+	if (!settings->group().isEmpty())
 	{
 		settings->endGroup();
 	}
@@ -93,7 +93,7 @@ QVariant QApplicationSettings::value(const QString& group, const QString& key, c
 {
 	locker->lock();
 
-	if(!settings->group().isEmpty())
+	if (!settings->group().isEmpty())
 	{
 		settings->endGroup();
 	}
@@ -101,7 +101,7 @@ QVariant QApplicationSettings::value(const QString& group, const QString& key, c
 	settings->beginGroup(group);
 	QVariant res = settings->value(key);
 
-	if(!res.isValid() &&  defaultVal.isValid())
+	if (!res.isValid() && defaultVal.isValid())
 	{
 		settings->setValue(key, defaultVal);
 		res = defaultVal;
@@ -111,6 +111,7 @@ QVariant QApplicationSettings::value(const QString& group, const QString& key, c
 	locker->unlock();
 	return res;
 }
+
 int QApplicationSettings::valueInt(const QString& group, const QString& key, const int& defalt)
 {
 	try
@@ -118,7 +119,7 @@ int QApplicationSettings::valueInt(const QString& group, const QString& key, con
 		QVariant val = value(group, key, defalt);
 		return val.toInt();
 	}
-	catch(...)
+	catch (...)
 	{
 		return defalt;
 	}
@@ -128,7 +129,7 @@ QMap<QString, QVariant> QApplicationSettings::getGroupValues(QString group)
 {
 	locker->lock();
 
-	if(!settings->group().isEmpty())
+	if (!settings->group().isEmpty())
 	{
 		settings->endGroup();
 	}
@@ -138,19 +139,20 @@ QMap<QString, QVariant> QApplicationSettings::getGroupValues(QString group)
 	QMap<QString, QVariant> result;
 
 	foreach(QString key, keys)
-	{
-		result.insert(key, settings->value(key));
-	}
+		{
+			result.insert(key, settings->value(key));
+		}
 
 	settings->endGroup();
 	locker->unlock();
 	return result;
 }
+
 void QApplicationSettings::setGroupValues(QString group, QMap<QString, QVariant> values)
 {
 	locker->lock();
 
-	if(!settings->group().isEmpty())
+	if (!settings->group().isEmpty())
 	{
 		settings->endGroup();
 	}
@@ -159,14 +161,15 @@ void QApplicationSettings::setGroupValues(QString group, QMap<QString, QVariant>
 	QStringList keys = values.keys();
 
 	foreach(QString key, keys)
-	{
-		settings->setValue(key, values[key]);
-	}
+		{
+			settings->setValue(key, values[key]);
+		}
 
 	settings->endGroup();
 	locker->unlock();
 }
-QString	QApplicationSettings::valueString(const QString& group, const QString& key, const QString& defalt)
+
+QString QApplicationSettings::valueString(const QString& group, const QString& key, const QString& defalt)
 {
 	QVariant val = value(group, key, defalt);
 	return val.toString();
@@ -184,16 +187,17 @@ float QApplicationSettings::valueFloat(const QString& group, const QString& key,
 	return val.toFloat();
 }
 
-void  QApplicationSettings::ReedSettings()
+void QApplicationSettings::ReedSettings()
 {
 	settings->sync();
 }
+
 void QApplicationSettings::SaveFilterGropups(QList<GroupForFileFiltering>& filters)
 {
 	locker->lock();
 	settings->beginGroup("FileFiltering");
-	
-	for(int i = 0; i < filters.count(); i++)
+
+	for (int i = 0; i < filters.count(); i++)
 	{
 		GroupForFileFiltering group = filters.at(i);
 		settings->setValue(group.Name(), QString("savepath;;%1;;extensions;;%2").arg(group.SavePath()).arg(group.Extensions()));
@@ -202,12 +206,13 @@ void QApplicationSettings::SaveFilterGropups(QList<GroupForFileFiltering>& filte
 	settings->endGroup();
 	locker->unlock();
 }
+
 QList<GroupForFileFiltering> QApplicationSettings::GetFileFilterGroups()
 {
 	QList<GroupForFileFiltering> res;
 	locker->lock();
 
-	if(!settings->group().isEmpty())
+	if (!settings->group().isEmpty())
 	{
 		settings->endGroup();
 	}
@@ -215,11 +220,11 @@ QList<GroupForFileFiltering> QApplicationSettings::GetFileFilterGroups()
 	settings->beginGroup("FileFiltering");
 	QStringList groupNames = settings->childKeys();
 
-	for(int i = 0; i < groupNames.count(); i++)
+	for (int i = 0; i < groupNames.count(); i++)
 	{
 		QStringList tmpVal = settings->value(groupNames.at(i)).toString().split(";;");
 
-		if(tmpVal.at(0) != "savepath" && tmpVal.count() < 4)
+		if (tmpVal.at(0) != "savepath" && tmpVal.count() < 4)
 		{
 			continue;
 		}
@@ -248,7 +253,7 @@ void QApplicationSettings::setSecuredValue(const QString& group, const QString& 
 	setValue(group, key, encryptedValue);
 }
 
-void  QApplicationSettings::WriteSettings()
+void QApplicationSettings::WriteSettings()
 {
 	settings->sync();
 }
@@ -260,28 +265,28 @@ QList<SchedulerTask> QApplicationSettings::GetSchedullerQueue()
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 	QFile file(StaticHelpers::CombinePathes(dataDir, "BtSessionData/schedulertasks.xml"));
 
-	if(!file.open(QFile::ReadOnly))
+	if (!file.open(QFile::ReadOnly))
 	{
 		return res;
 	}
 
 	QXmlStreamReader xml(&file);
 
-	while(!xml.atEnd())
+	while (!xml.atEnd())
 	{
 		QXmlStreamReader::TokenType tType = xml.readNext();
 
-		if(xml.name() == "tasks")
+		if (xml.name() == "tasks")
 		{
 			continue;
 		}
 
-		if(xml.name() != "task")
+		if (xml.name() != "task")
 		{
 			continue;
 		}
 
-		if(tType != QXmlStreamReader::StartElement)
+		if (tType != QXmlStreamReader::StartElement)
 		{
 			continue;
 		}
@@ -292,23 +297,23 @@ QList<SchedulerTask> QApplicationSettings::GetSchedullerQueue()
 		QDateTime begin, end;
 		QString name;
 
-		if(atribbutes.hasAttribute("TYPE"))
+		if (atribbutes.hasAttribute("TYPE"))
 		{
 			QString val = atribbutes.value("TYPE").toString();
 
-			if(val == "PAUSE_ALL")
+			if (val == "PAUSE_ALL")
 			{
 				type = SchedulerTask::PAUSE_ALL;
 			}
-			else if(val == "START_ALL")
+			else if (val == "START_ALL")
 			{
 				type = SchedulerTask::START_ALL;
 			}
-			else if(val == "LIMIT_DL")
+			else if (val == "LIMIT_DL")
 			{
 				type = SchedulerTask::LIMIT_DOWNLOAD;
 			}
-			else if(val == "LIMIT_UL")
+			else if (val == "LIMIT_UL")
 			{
 				type = SchedulerTask::LIMIT_UPLOAD;
 			}
@@ -317,24 +322,24 @@ QList<SchedulerTask> QApplicationSettings::GetSchedullerQueue()
 			}
 		}
 
-		if(atribbutes.hasAttribute("NAME"))
+		if (atribbutes.hasAttribute("NAME"))
 		{
 			name = atribbutes.value("NAME").toString();
 		}
 
-		if(atribbutes.hasAttribute("LIMIT"))
+		if (atribbutes.hasAttribute("LIMIT"))
 		{
 			QString val = atribbutes.value("LIMIT").toString();
 			limit = val.toInt();
 		}
 
-		if(atribbutes.hasAttribute("TBEGIN"))
+		if (atribbutes.hasAttribute("TBEGIN"))
 		{
 			QString val = atribbutes.value("TBEGIN").toString();
 			begin = QDateTime::fromString(val, "dd:MM:yyyy hh:mm:ss");
 		}
 
-		if(atribbutes.hasAttribute("TEND"))
+		if (atribbutes.hasAttribute("TEND"))
 		{
 			QString val = atribbutes.value("TEND").toString();
 			end = QDateTime::fromString(val, "dd:MM:yyyy hh:mm:ss");
@@ -344,7 +349,7 @@ QList<SchedulerTask> QApplicationSettings::GetSchedullerQueue()
 		res.push_back(task);
 	}
 
-	if(xml.hasError())
+	if (xml.hasError())
 	{
 	}
 
@@ -358,7 +363,7 @@ void QApplicationSettings::SaveSchedullerQueue(QList<SchedulerTask>& tasks)
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 	QFile file(StaticHelpers::CombinePathes(dataDir, "BtSessionData/schedulertasks.xml"));
 
-	if(!file.open(QFile::WriteOnly))
+	if (!file.open(QFile::WriteOnly))
 	{
 		CustomMessageBox::warning(NULL, "", "Error open for writing BtSessionData/schedulertasks.xml");
 		return;
@@ -370,7 +375,7 @@ void QApplicationSettings::SaveSchedullerQueue(QList<SchedulerTask>& tasks)
 	qSort(tasks);
 	xml.writeStartElement("tasks");
 
-	for(QQueue<SchedulerTask>::iterator i = tasks.begin(); i != tasks.end(); ++i)
+	for (QQueue<SchedulerTask>::iterator i = tasks.begin(); i != tasks.end(); ++i)
 	{
 		xml.writeStartElement("task");
 		xml.writeAttribute("TYPE", StaticHelpers::SchedulerTypeToString(i->type()));
@@ -384,3 +389,4 @@ void QApplicationSettings::SaveSchedullerQueue(QList<SchedulerTask>& tasks)
 	xml.writeEndDocument();
 	file.close();
 }
+

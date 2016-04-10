@@ -6,6 +6,7 @@
 #include <QtScript/QScriptValue>
 #include <QIcon>
 class QString;
+
 class CustomScriptSearchProvider : public ISerachProvider
 {
 	Q_OBJECT
@@ -27,6 +28,7 @@ public:
 		Anime = 64,
 		All = Music | TV | Porn | Software | Games | Anime | Books | Movie
 	};
+
 	Q_ENUMS(SearchCategories_t)
 
 	enum RequestType_t
@@ -34,12 +36,14 @@ public:
 		GET = 322,
 		POST = 323
 	};
+
 	Q_ENUMS(RequestType_t)
 	enum ResponseType_t
 	{
 		HTML = 522,
 		JSON = 523
 	};
+
 	Q_ENUMS(ResponseType_t)
 
 	CustomScriptSearchProvider();
@@ -64,7 +68,7 @@ public:
 	void fillAdditionalHeaders(QNetworkRequest& networkRequest, QScriptValue mScriptVal);
 public slots:
 	void PeformSearch(QString token, int category, int page);
-signals:
+	signals:
 	void BusyChanged(bool prev, bool current, QString name);
 	void SearchReady(QList<SearchResult*> result) override;
 	void Error(QString error) override;
@@ -89,7 +93,9 @@ private:
 private slots:
 	void OnReplyReady(QNetworkReply*);
 };
+
 Q_DECLARE_METATYPE(const CustomScriptSearchProvider*);
 Q_DECLARE_METATYPE(CustomScriptSearchProvider*);
 
 #endif
+

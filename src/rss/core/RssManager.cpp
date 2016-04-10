@@ -30,13 +30,13 @@ RssFeed* RssManager::addFeed(QUrl url, bool& isNew)
 	isNew = true;
 
 	foreach (RssFeed* pFeed, m_pFeeds)
-	{
-		if (pFeed->url() == url)
 		{
-			isNew = false;
-			return pFeed;
+			if (pFeed->url() == url)
+			{
+				isNew = false;
+				return pFeed;
+			}
 		}
-	}
 
 	RssFeed* pFeed = new RssFeed(url, QUuid::createUuid());
 	m_pFeeds.append(pFeed);
@@ -66,7 +66,7 @@ void RssManager::SaveFeeds()
 		dataStream.setVersion(QDataStream::Qt_4_8);
 		dataStream << m_pFeeds.size();
 
-		for(int i = 0; i < m_pFeeds.size(); i++)
+		for (int i = 0; i < m_pFeeds.size(); i++)
 		{
 			dataStream << *m_pFeeds[i];
 		}
@@ -98,13 +98,13 @@ void RssManager::LoadFeeds()
 			int index = -1;
 
 			foreach(RssFeed* pFeed, m_pFeeds)
-			{
-				if (pFeed->uid() == uid)
 				{
-					index = m_pFeeds.indexOf(pFeed);
-					break;
+					if (pFeed->uid() == uid)
+					{
+						index = m_pFeeds.indexOf(pFeed);
+						break;
+					}
 				}
-			}
 
 			if (index > -1)
 			{
@@ -127,14 +127,14 @@ void RssManager::removeFeed(const QUuid& uid)
 	int index = 0;
 
 	foreach(RssFeed* pFeed, m_pFeeds)
-	{
-		if (pFeed->uid() == uid)
 		{
-			break;
-		}
+			if (pFeed->uid() == uid)
+			{
+				break;
+			}
 
-		index++;
-	}
+			index++;
+		}
 
 	RssFeed* pFeed2Remove = m_pFeeds.at(index);
 	m_pFeeds.removeAt(index);
@@ -153,9 +153,9 @@ void RssManager::addDownloadRule(RssDownloadRule* rule)
 		m_downloadRules.insert(rule->Uid(), rule);
 
 		foreach(RssFeed* pFeed, m_pFeeds)
-		{
-			onFeedChanged(pFeed->uid());
-		}
+			{
+				onFeedChanged(pFeed->uid());
+			}
 	}
 }
 
@@ -168,12 +168,12 @@ void RssManager::removeDownloadRule(const QUuid& uid)
 RssDownloadRule* RssManager::findDownloadRule(const QUuid& uid)
 {
 	foreach(RssDownloadRule* rule, m_downloadRules.values())
-	{
-		if (rule->Uid() == uid)
 		{
-			return rule;
+			if (rule->Uid() == uid)
+			{
+				return rule;
+			}
 		}
-	}
 
 	return NULL;
 }
@@ -219,24 +219,24 @@ QMap<QString, quint8> RssManager::getFilePriorities(TorrentDownloadInfo download
 	QMap<QString, quint8> result;
 
 	foreach(RssDownloadRule* pRule, m_downloadRules)
-	{
-		if (pRule->RuleType() == RssDownloadRule::SELECT_FILE_RULE && pRule->MatchFeed(downloadInfo.rssFeedId))
 		{
-			for (int i = 0; i < fileStorage.num_files(); i++)
+			if (pRule->RuleType() == RssDownloadRule::SELECT_FILE_RULE && pRule->MatchFeed(downloadInfo.rssFeedId))
 			{
-				QString fileName = QString::fromUtf8(fileStorage.file_path(i).c_str());
+				for (int i = 0; i < fileStorage.num_files(); i++)
+				{
+					QString fileName = QString::fromUtf8(fileStorage.file_path(i).c_str());
 
-				if (pRule->MatchFile(fileName))
-				{
-					result.insert(fileName, 1);
-				}
-				else
-				{
-					result.insert(fileName, 0);
+					if (pRule->MatchFile(fileName))
+					{
+						result.insert(fileName, 1);
+					}
+					else
+					{
+						result.insert(fileName, 0);
+					}
 				}
 			}
 		}
-	}
 
 	return result;
 }
@@ -255,9 +255,9 @@ void RssManager::SaveDownloadRules()
 		dataStream << m_downloadRules.size();
 
 		foreach(RssDownloadRule* rule, m_downloadRules.values())
-		{
-			dataStream << *rule;
-		}
+			{
+				dataStream << *rule;
+			}
 
 		rssDownloadRulesDat.flush();
 		rssDownloadRulesDat.close();
@@ -269,36 +269,36 @@ void RssManager::onFeedChanged(QUuid uid)
 	emit FeedChanged(uid);
 
 	foreach(RssDownloadRule* rule, m_downloadRules.values())
-	{
-		if (rule->MatchFeed(uid))
 		{
-			RssFeed* pFeed = findFeed(uid);
-
-			if (pFeed != NULL)
+			if (rule->MatchFeed(uid))
 			{
-				QList<RssItem*> feedItems = pFeed->GetFeedItems();
+				RssFeed* pFeed = findFeed(uid);
 
-				foreach(RssItem* rssItem, feedItems)
+				if (pFeed != NULL)
 				{
-					if (rssItem->downloadingTorrent().isEmpty() && rule->Match(rssItem))
-					{
-						downloadRssItem(rssItem, pFeed, rule);
-					}
+					QList<RssItem*> feedItems = pFeed->GetFeedItems();
+
+					foreach(RssItem* rssItem, feedItems)
+						{
+							if (rssItem->downloadingTorrent().isEmpty() && rule->Match(rssItem))
+							{
+								downloadRssItem(rssItem, pFeed, rule);
+							}
+						}
 				}
 			}
 		}
-	}
 }
 
 RssFeed* RssManager::findFeed(const QUuid& uid)
 {
 	foreach(RssFeed* pFeed, m_pFeeds)
-	{
-		if (pFeed->uid() == uid)
 		{
-			return pFeed;
+			if (pFeed->uid() == uid)
+			{
+				return pFeed;
+			}
 		}
-	}
 
 	return NULL;
 }
@@ -389,7 +389,7 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 			EmailNotifierPtr emailNotifier(new EmailNotifier());
 			QString to = m_pSettings->valueString("rss", "rss_send_to");
 			emailNotifier->SendEmail(to, tr("STARTED_AUTOMETED_RSS_DOWNLOAD"), tr("%1 STARTED_DOWNLOADING.<br/> <a href=\"%3\">DESCRIBTION</a><br/> %2").arg(feedItem->title(), feedItem->description(),
-			                         feedItem->describtionLink()));
+			                                                                                                                                                 feedItem->describtionLink()));
 		}
 
 		RssFeed* rssFeed = findFeed(info.rssFeedId);

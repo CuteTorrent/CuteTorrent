@@ -1,7 +1,9 @@
 #include "mimeqpformatter.h"
 
 MimeQPFormatter::MimeQPFormatter(QIODevice* output) :
-	MimeContentFormatter(output) {}
+	MimeContentFormatter(output)
+{
+}
 
 qint64 MimeQPFormatter::writeData(const char* data, qint64 maxLength)
 {
@@ -37,3 +39,4 @@ qint64 MimeQPFormatter::writeData(const char* data, qint64 maxLength)
 	output->write(start, chars);
 	return maxLength;
 }
+

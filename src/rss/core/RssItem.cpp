@@ -1,27 +1,28 @@
 ﻿#include "RssItem.h"
 
 RssItem::RssItem(const RssItem& other): QObject(),
-	m_title(other.m_title),
-	m_description(other.m_description),
-	m_category(other.m_category),
-	m_descriptionLink(other.m_descriptionLink),
-	m_torrentUrl(other.m_torrentUrl),
-	m_magnetUrl(other.m_magnetUrl),
-	m_guid(other.m_guid),
-	m_infoHash(other.m_infoHash),
-	m_downloadingTorrent(other.m_downloadingTorrent),
-	m_author(other.m_author),
-	m_pubDate(other.m_pubDate),
-	m_pRssFeed(other.m_pRssFeed),
-	m_size(other.m_size),
-	m_peers(other.m_peers),
-	m_seeds(other.m_seeds),
-	m_unread(other.m_unread)
+                                        m_title(other.m_title),
+                                        m_description(other.m_description),
+                                        m_category(other.m_category),
+                                        m_descriptionLink(other.m_descriptionLink),
+                                        m_torrentUrl(other.m_torrentUrl),
+                                        m_magnetUrl(other.m_magnetUrl),
+                                        m_guid(other.m_guid),
+                                        m_infoHash(other.m_infoHash),
+                                        m_downloadingTorrent(other.m_downloadingTorrent),
+                                        m_author(other.m_author),
+                                        m_pubDate(other.m_pubDate),
+                                        m_pRssFeed(other.m_pRssFeed),
+                                        m_size(other.m_size),
+                                        m_peers(other.m_peers),
+                                        m_seeds(other.m_seeds),
+                                        m_unread(other.m_unread)
 {
 }
 
 RssItem::RssItem(RssFeed* parent) : QObject(), m_pRssFeed(parent), m_size(0), m_peers(0), m_seeds(0), m_unread(true)
-{}
+{
+}
 
 RssFeed* RssItem::rssFeed() const
 {
@@ -228,3 +229,4 @@ QDataStream& operator>>(QDataStream& out, RssItem* any)
 	out >> any->m_unread;
 	return out;
 }
+

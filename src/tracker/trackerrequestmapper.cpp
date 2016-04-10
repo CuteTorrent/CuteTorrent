@@ -18,14 +18,14 @@ TrackerRequestHandler::TrackerRequestHandler(QObject* parent) :
 
 void TrackerRequestHandler::service(HttpRequest& request, HttpResponse& response)
 {
-	if(request.getMethod() != "GET")
+	if (request.getMethod() != "GET")
 	{
 		response.setStatus(100, "Method Not Allowed");
 		response.write("<body><h1>100 Method Not Allowed</h1></body>");
 		return;
 	}
 
-	if(QString(request.getPath()).startsWith("/announce", Qt::CaseInsensitive))
+	if (QString(request.getPath()).startsWith("/announce", Qt::CaseInsensitive))
 	{
 		ProcessAnnounceRequest(request, response);
 		return;
@@ -41,13 +41,13 @@ void TrackerRequestHandler::ProcessAnnounceRequest(HttpRequest& request, HttpRes
 	announceRequest.ip = request.getSource();
 	announceRequest.info_hash = QString::fromStdString(to_hex(std::string(request.getParameter("info_hash").data())));
 
-	if(announceRequest.info_hash.length() == 0)
+	if (announceRequest.info_hash.length() == 0)
 	{
 		ReplyError(101, response);
 		return;
 	}
 
-	if(announceRequest.info_hash.length() != 40)
+	if (announceRequest.info_hash.length() != 40)
 	{
 		ReplyError(150, response);
 		return;
@@ -55,13 +55,13 @@ void TrackerRequestHandler::ProcessAnnounceRequest(HttpRequest& request, HttpRes
 
 	announceRequest.peer_id = request.getParameter("peer_id");
 
-	if(announceRequest.peer_id.length() == 0)
+	if (announceRequest.peer_id.length() == 0)
 	{
 		ReplyError(102, response);
 		return;
 	}
 
-	if(announceRequest.peer_id.length() != 20)
+	if (announceRequest.peer_id.length() != 20)
 	{
 		ReplyError(151, response);
 		return;
@@ -69,7 +69,7 @@ void TrackerRequestHandler::ProcessAnnounceRequest(HttpRequest& request, HttpRes
 
 	QString port = request.getParameter("port");
 
-	if(port.length() == 0)
+	if (port.length() == 0)
 	{
 		ReplyError(103, response);
 		return;
@@ -78,7 +78,7 @@ void TrackerRequestHandler::ProcessAnnounceRequest(HttpRequest& request, HttpRes
 	bool ok;
 	announceRequest.port = port.toInt(&ok);
 
-	if(!ok || announceRequest.port < 1 || announceRequest.port > 65535)
+	if (!ok || announceRequest.port < 1 || announceRequest.port > 65535)
 	{
 		ReplyError(103, response);
 		return;
@@ -87,7 +87,7 @@ void TrackerRequestHandler::ProcessAnnounceRequest(HttpRequest& request, HttpRes
 	announceRequest.numwant = 50;
 	int tmp = request.getParameter("numwant").toInt();
 
-	if(tmp > 0)
+	if (tmp > 0)
 	{
 		announceRequest.numwant = tmp;
 	}
@@ -97,9 +97,9 @@ void TrackerRequestHandler::ProcessAnnounceRequest(HttpRequest& request, HttpRes
 	announceRequest.no_peer_id = (request.getParameter("no_peer_id").length() > 0);
 	PeerInfo info = announceRequest.getPeerInfo();
 
-	if(torrents.contains(announceRequest.info_hash))
+	if (torrents.contains(announceRequest.info_hash))
 	{
-		if(announceRequest.event == "stopped")
+		if (announceRequest.event == "stopped")
 		{
 			qDebug("TrackerRequestMapper: Peer %s stopped downloading %s, deleting it from the list", qPrintable(announceRequest.peer_id), qPrintable(announceRequest.info_hash));
 			torrents[announceRequest.info_hash].remove(info.getID());
@@ -123,15 +123,15 @@ void TrackerRequestHandler::ReplyWithPeerList(HttpResponse& response, AnnounceRe
 	int count = 0;
 
 	foreach(PeerInfo p, peers)
-	{
-		peer_list.push_back(p.toEntry(announceRequest.no_peer_id, announceRequest.compact));
-		count++;
-
-		if(count == announceRequest.numwant)
 		{
-			break;
+			peer_list.push_back(p.toEntry(announceRequest.no_peer_id, announceRequest.compact));
+			count++;
+
+			if (count == announceRequest.numwant)
+			{
+				break;
+			}
 		}
-	}
 
 	reply_dict["peers"] = entry(peer_list);
 	entry reply_entry(reply_dict);
@@ -148,7 +148,7 @@ void TrackerRequestHandler::ReplyError(int code, HttpResponse& response)
 	entry::dictionary_type reply_dict;
 	reply_dict["failure code"] = code;
 
-	if(failtureText.contains(code))
+	if (failtureText.contains(code))
 	{
 		reply_dict["failure reason"] = failtureText[code];
 	}
@@ -161,3 +161,4 @@ void TrackerRequestHandler::ReplyError(int code, HttpResponse& response)
 	response.setStatus(200, "OK");
 	response.write(reply);
 }
+

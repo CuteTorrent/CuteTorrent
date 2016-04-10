@@ -3,6 +3,7 @@
 
 #include <QLineEdit>
 #include <QKeyEvent>
+
 class QKeyEdit : public QLineEdit
 {
 	Q_OBJECT
@@ -11,10 +12,11 @@ public:
 protected:
 	void keyPressEvent(QKeyEvent* event);
 	void changeEvent(QEvent*);
-signals:
+	signals:
 
 public slots:
-
 };
 
 #endif // QKEYEDIT_H
+
+

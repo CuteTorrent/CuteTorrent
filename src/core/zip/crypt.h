@@ -37,7 +37,7 @@
 static int decrypt_byte(unsigned long* pkeys, const z_crc_t FAR* pcrc_32_tab UNUSED)
 {
 	//(void) pcrc_32_tab; /* avoid "unused parameter" warning */
-	unsigned temp;  /* POTENTIAL BUG:  temp*(temp^1) may overflow in an
+	unsigned temp; /* POTENTIAL BUG:  temp*(temp^1) may overflow in an
                      * unpredictable manner on 16-bit systems; not a problem
                      * with any known compiler so far, though */
 	temp = ((unsigned)(*(pkeys + 2)) & 0xffff) | 2;
@@ -110,10 +110,10 @@ unsigned long crcForCrypting;
 		return 0;
 	}
 
-	/* First generate RAND_HEAD_LEN-2 random bytes. We encrypt the
-	 * output of rand() to get less predictability, since rand() is
-	 * often poorly implemented.
-	 */
+/* First generate RAND_HEAD_LEN-2 random bytes. We encrypt the
+ * output of rand() to get less predictability, since rand() is
+ * often poorly implemented.
+ */
 	if (++calls == 1)
 	{
 		srand((unsigned)(time(NULL) ^ ZCR_SEED2));
@@ -127,7 +127,7 @@ unsigned long crcForCrypting;
 		header[n] = (unsigned char)zencode(pkeys, pcrc_32_tab, c, t);
 	}
 
-	/* Encrypt random header (last two bytes is high word of crc) */
+/* Encrypt random header (last two bytes is high word of crc) */
 	init_keys(passwd, pkeys, pcrc_32_tab);
 
 	for (n = 0; n < RAND_HEAD_LEN - 2; n++)
@@ -141,3 +141,4 @@ unsigned long crcForCrypting;
 }
 
 #endif
+

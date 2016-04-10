@@ -24,7 +24,7 @@ protected:
 	TreeBox* const q_ptr;
 public:
 	TreeBoxPrivate(TreeBox& object);
-	int computeWidthHint()const;
+	int computeWidthHint() const;
 
 	bool SkipNextHide;
 	bool RootSet;
@@ -35,7 +35,7 @@ public:
 
 // -------------------------------------------------------------------------
 TreeBoxPrivate::TreeBoxPrivate(TreeBox& object)
-	:q_ptr(&object)
+	: q_ptr(&object)
 {
 	this->SkipNextHide = false;
 	this->RootSet = false;
@@ -44,15 +44,15 @@ TreeBoxPrivate::TreeBoxPrivate(TreeBox& object)
 }
 
 // -------------------------------------------------------------------------
-int TreeBoxPrivate::computeWidthHint()const
+int TreeBoxPrivate::computeWidthHint() const
 {
 	Q_Q(const TreeBox);
 	return q->view()->sizeHintForColumn(q->modelColumn());
 }
 
 // -------------------------------------------------------------------------
-TreeBox::TreeBox(QWidget* _parent) :Superclass(_parent)
-, d_ptr(new TreeBoxPrivate(*this))
+TreeBox::TreeBox(QWidget* _parent) : Superclass(_parent)
+                                     , d_ptr(new TreeBoxPrivate(*this))
 {
 	QTreeView* treeView = new QTreeView(this);
 	treeView->setHeaderHidden(true);
@@ -61,9 +61,9 @@ TreeBox::TreeBox(QWidget* _parent) :Superclass(_parent)
 	// so that our eventFilter will be called first
 	this->view()->viewport()->installEventFilter(this);
 	connect(treeView, SIGNAL(collapsed(QModelIndex)),
-		this, SLOT(resizePopup()));
+	        this, SLOT(resizePopup()));
 	connect(treeView, SIGNAL(expanded(QModelIndex)),
-		this, SLOT(resizePopup()));
+	        this, SLOT(resizePopup()));
 }
 
 // -------------------------------------------------------------------------
@@ -72,7 +72,7 @@ TreeBox::~TreeBox()
 }
 
 // -------------------------------------------------------------------------
-int TreeBox::visibleModelColumn()const
+int TreeBox::visibleModelColumn() const
 {
 	Q_D(const TreeBox);
 	return d->VisibleModelColumn;
@@ -117,54 +117,54 @@ bool TreeBox::eventFilter(QObject* object, QEvent* _event)
 	d->SendCurrentItem = false;
 	switch (_event->type())
 	{
-	default:
-		break;
-	case QEvent::ShortcutOverride:
-		switch (static_cast<QKeyEvent*>(_event)->key())
-		{
-		case Qt::Key_Enter:
-		case Qt::Key_Return:
-		case Qt::Key_Select:
-			d->SendCurrentItem = true;
-			break;
 		default:
 			break;
-		}
-		break;
-	case QEvent::MouseButtonRelease:
-		QMouseEvent* mouseEvent = dynamic_cast<QMouseEvent*>(_event);
-		QModelIndex index = this->view()->indexAt(mouseEvent->pos());
-		// do we click the branch (+ or -) or the item itself ?
-		if (this->view()->model()->hasChildren(index) &&
-			(index.flags() & Qt::ItemIsSelectable) &&
-			!this->view()->visualRect(index).contains(mouseEvent->pos()))
-		{//qDebug() << "Set skip on";
-			// if the branch is clicked, then we don't want to close the 
-			// popup. (we don't want to select the item, just expand it.)
-			// of course, all that doesn't apply with unselectable items, as
-			// they won't close the popup.
-			d->SkipNextHide = true;
-		}
-
-		// we want to get rid of an odd behavior. 
-		// If the user highlight a selectable item and then 
-		// click on the branch of an unselectable item while keeping the 
-		// previous selection. The popup would be normally closed in that
-		// case. We don't want that.
-		if (this->view()->model()->hasChildren(index) &&
-			!(index.flags() & Qt::ItemIsSelectable) &&
-			!this->view()->visualRect(index).contains(mouseEvent->pos()))
-		{//qDebug() << "eat";
-			// eat the event, don't go to the QComboBox event filters.
-			res = true;
+		case QEvent::ShortcutOverride:
+			switch (static_cast<QKeyEvent*>(_event)->key())
+			{
+				case Qt::Key_Enter:
+				case Qt::Key_Return:
+				case Qt::Key_Select:
+					d->SendCurrentItem = true;
+					break;
+				default:
+					break;
+			}
 			break;
-		}
+		case QEvent::MouseButtonRelease:
+			QMouseEvent* mouseEvent = dynamic_cast<QMouseEvent*>(_event);
+			QModelIndex index = this->view()->indexAt(mouseEvent->pos());
+			// do we click the branch (+ or -) or the item itself ?
+			if (this->view()->model()->hasChildren(index) &&
+				(index.flags() & Qt::ItemIsSelectable) &&
+				!this->view()->visualRect(index).contains(mouseEvent->pos()))
+			{//qDebug() << "Set skip on";
+				// if the branch is clicked, then we don't want to close the 
+				// popup. (we don't want to select the item, just expand it.)
+				// of course, all that doesn't apply with unselectable items, as
+				// they won't close the popup.
+				d->SkipNextHide = true;
+			}
 
-		d->SendCurrentItem = this->view()->rect().contains(mouseEvent->pos()) &&
-			this->view()->currentIndex().isValid() &&
-			(this->view()->currentIndex().flags() & Qt::ItemIsEnabled) &&
-			(this->view()->currentIndex().flags() & Qt::ItemIsSelectable);
-		break;
+			// we want to get rid of an odd behavior. 
+			// If the user highlight a selectable item and then 
+			// click on the branch of an unselectable item while keeping the 
+			// previous selection. The popup would be normally closed in that
+			// case. We don't want that.
+			if (this->view()->model()->hasChildren(index) &&
+				!(index.flags() & Qt::ItemIsSelectable) &&
+				!this->view()->visualRect(index).contains(mouseEvent->pos()))
+			{//qDebug() << "eat";
+				// eat the event, don't go to the QComboBox event filters.
+				res = true;
+				break;
+			}
+
+			d->SendCurrentItem = this->view()->rect().contains(mouseEvent->pos()) &&
+				this->view()->currentIndex().isValid() &&
+				(this->view()->currentIndex().flags() & Qt::ItemIsEnabled) &&
+				(this->view()->currentIndex().flags() & Qt::ItemIsSelectable);
+			break;
 	}
 	return res;
 }
@@ -177,7 +177,7 @@ void TreeBox::showPopup()
 	for (int i = 0; i < header->count(); ++i)
 	{
 		header->setSectionHidden(i, d->VisibleModelColumn != -1 &&
-			i != d->VisibleModelColumn);
+		                         i != d->VisibleModelColumn);
 	}
 	this->QComboBox::showPopup();
 	emit this->popupShow();
@@ -216,7 +216,7 @@ void TreeBox::hidePopup()
 }
 
 // -------------------------------------------------------------------------
-void TreeBox::paintEvent(QPaintEvent *p)
+void TreeBox::paintEvent(QPaintEvent* p)
 {
 	//qDebug() << __FUNCTION__ << " " << this->currentText() << " " << this->currentIndex() ;
 	//qDebug() << this->itemText(0) << this->itemText(1);
@@ -224,23 +224,24 @@ void TreeBox::paintEvent(QPaintEvent *p)
 }
 
 // -------------------------------------------------------------------------
-QTreeView* TreeBox::treeView()const
+QTreeView* TreeBox::treeView() const
 {
 	return qobject_cast<QTreeView*>(this->view());
 }
+
 // -------------------------------------------------------------------------
 void TreeBox::resizePopup()
 {
 	// copied from QComboBox.cpp
 	Q_D(TreeBox);
 
-	QStyle * const style = this->style();
+	QStyle* const style = this->style();
 	QWidget* container = qobject_cast<QWidget*>(this->view()->parent());
 
 	QStyleOptionComboBox opt;
 	this->initStyleOption(&opt);
 	QRect listRect(style->subControlRect(QStyle::CC_ComboBox, &opt,
-		QStyle::SC_ComboBoxListBoxPopup, this));
+	                                     QStyle::SC_ComboBoxListBoxPopup, this));
 	QRect screen = QApplication::desktop()->availableGeometry(
 		QApplication::desktop()->screenNumber(this));
 	QPoint below = this->mapToGlobal(listRect.bottomLeft());
@@ -256,7 +257,7 @@ void TreeBox::resizePopup()
 		QStack<QModelIndex> toCheck;
 		toCheck.push(this->view()->rootIndex());
 #ifndef QT_NO_TREEVIEW
-		QTreeView *treeView = qobject_cast<QTreeView*>(this->view());
+		QTreeView* treeView = qobject_cast<QTreeView*>(this->view());
 		if (treeView && treeView->header() && !treeView->header()->isHidden())
 			listHeight += treeView->header()->height();
 #endif
@@ -270,7 +271,8 @@ void TreeBox::resizePopup()
 				{
 					continue;
 				}
-				listHeight += this->view()->visualRect(idx).height(); /* + container->spacing() */;
+				listHeight += this->view()->visualRect(idx).height(); /* + container->spacing() */
+				;
 #ifndef QT_NO_TREEVIEW
 				if (this->model()->hasChildren(idx) && treeView && treeView->isExpanded(idx))
 				{
@@ -287,104 +289,104 @@ void TreeBox::resizePopup()
 		}
 		listRect.setHeight(listHeight);
 	}
-	  {
-		  // add the spacing for the grid on the top and the bottom;
-		  int heightMargin = 0;//2*container->spacing();
+	{
+		// add the spacing for the grid on the top and the bottom;
+		int heightMargin = 0;//2*container->spacing();
 
-		  // add the frame of the container
-		  int marginTop, marginBottom;
-		  container->getContentsMargins(0, &marginTop, 0, &marginBottom);
-		  heightMargin += marginTop + marginBottom;
+		// add the frame of the container
+		int marginTop, marginBottom;
+		container->getContentsMargins(0, &marginTop, 0, &marginBottom);
+		heightMargin += marginTop + marginBottom;
 
-		  //add the frame of the view
-		  this->view()->getContentsMargins(0, &marginTop, 0, &marginBottom);
-		  //marginTop += static_cast<QAbstractScrollAreaPrivate *>(QObjectPrivate::get(this->view()))->top;
-		  //marginBottom += static_cast<QAbstractScrollAreaPrivate *>(QObjectPrivate::get(this->view()))->bottom;
-		  heightMargin += marginTop + marginBottom;
+		//add the frame of the view
+		this->view()->getContentsMargins(0, &marginTop, 0, &marginBottom);
+		//marginTop += static_cast<QAbstractScrollAreaPrivate *>(QObjectPrivate::get(this->view()))->top;
+		//marginBottom += static_cast<QAbstractScrollAreaPrivate *>(QObjectPrivate::get(this->view()))->bottom;
+		heightMargin += marginTop + marginBottom;
 
-		  listRect.setHeight(listRect.height() + heightMargin);
-	  }
+		listRect.setHeight(listRect.height() + heightMargin);
+	}
 
-	  // Add space for margin at top and bottom if the style wants it.
-	  if (usePopup)
-	  {
-		  listRect.setHeight(listRect.height() + style->pixelMetric(QStyle::PM_MenuVMargin, &opt, this) * 2);
-	  }
+	// Add space for margin at top and bottom if the style wants it.
+	if (usePopup)
+	{
+		listRect.setHeight(listRect.height() + style->pixelMetric(QStyle::PM_MenuVMargin, &opt, this) * 2);
+	}
 
-	  // Make sure the popup is wide enough to display its contents.
-	  if (usePopup)
-	  {
-		  const int diff = d->computeWidthHint() - this->width();
-		  if (diff > 0)
-		  {
-			  listRect.setWidth(listRect.width() + diff);
-		  }
-	  }
+	// Make sure the popup is wide enough to display its contents.
+	if (usePopup)
+	{
+		const int diff = d->computeWidthHint() - this->width();
+		if (diff > 0)
+		{
+			listRect.setWidth(listRect.width() + diff);
+		}
+	}
 
-	  //we need to activate the layout to make sure the min/maximum size are set when the widget was not yet show
-	  container->layout()->activate();
-	  //takes account of the minimum/maximum size of the container
-	  listRect.setSize(listRect.size().expandedTo(container->minimumSize())
-		  .boundedTo(container->maximumSize()));
+	//we need to activate the layout to make sure the min/maximum size are set when the widget was not yet show
+	container->layout()->activate();
+	//takes account of the minimum/maximum size of the container
+	listRect.setSize(listRect.size().expandedTo(container->minimumSize())
+	                         .boundedTo(container->maximumSize()));
 
-	  // make sure the widget fits on screen
-	  if (boundToScreen)
-	  {
-		  if (listRect.width() > screen.width())
-		  {
-			  listRect.setWidth(screen.width());
-		  }
-		  if (this->mapToGlobal(listRect.bottomRight()).x() > screen.right())
-		  {
-			  below.setX(screen.x() + screen.width() - listRect.width());
-			  above.setX(screen.x() + screen.width() - listRect.width());
-		  }
-		  if (this->mapToGlobal(listRect.topLeft()).x() < screen.x())
-		  {
-			  below.setX(screen.x());
-			  above.setX(screen.x());
-		  }
-	  }
+	// make sure the widget fits on screen
+	if (boundToScreen)
+	{
+		if (listRect.width() > screen.width())
+		{
+			listRect.setWidth(screen.width());
+		}
+		if (this->mapToGlobal(listRect.bottomRight()).x() > screen.right())
+		{
+			below.setX(screen.x() + screen.width() - listRect.width());
+			above.setX(screen.x() + screen.width() - listRect.width());
+		}
+		if (this->mapToGlobal(listRect.topLeft()).x() < screen.x())
+		{
+			below.setX(screen.x());
+			above.setX(screen.x());
+		}
+	}
 
-	  if (usePopup)
-	  {
-		  // Position horizontally.
-		  listRect.moveLeft(above.x());
+	if (usePopup)
+	{
+		// Position horizontally.
+		listRect.moveLeft(above.x());
 
 #ifndef Q_WS_S60
-		  // Position vertically so the curently selected item lines up
-		  // with the combo box.
-		  const QRect currentItemRect = this->view()->visualRect(this->view()->currentIndex());
-		  const int offset = listRect.top() - currentItemRect.top();
-		  listRect.moveTop(above.y() + offset - listRect.top());
+		// Position vertically so the curently selected item lines up
+		// with the combo box.
+		const QRect currentItemRect = this->view()->visualRect(this->view()->currentIndex());
+		const int offset = listRect.top() - currentItemRect.top();
+		listRect.moveTop(above.y() + offset - listRect.top());
 #endif
 
-		  // Clamp the listRect height and vertical position so we don't expand outside the
-		  // available screen geometry.This may override the vertical position, but it is more
-		  // important to show as much as possible of the popup.
-		  const int height = !boundToScreen ? listRect.height() : qMin(listRect.height(), screen.height());
+		// Clamp the listRect height and vertical position so we don't expand outside the
+		// available screen geometry.This may override the vertical position, but it is more
+		// important to show as much as possible of the popup.
+		const int height = !boundToScreen ? listRect.height() : qMin(listRect.height(), screen.height());
 #ifdef Q_WS_S60
-		  //popup needs to be stretched with screen minimum dimension
+		//popup needs to be stretched with screen minimum dimension
 		  listRect.setHeight(qMin(screen.height(), screen.width()));
 #else
-		  listRect.setHeight(height);
+		listRect.setHeight(height);
 #endif
 
-		  if (boundToScreen)
-		  {
-			  if (listRect.top() < screen.top())
-			  {
-				  listRect.moveTop(screen.top());
-			  }
-			  if (listRect.bottom() > screen.bottom())
-			  {
-				  listRect.moveBottom(screen.bottom());
-			  }
-		  }
+		if (boundToScreen)
+		{
+			if (listRect.top() < screen.top())
+			{
+				listRect.moveTop(screen.top());
+			}
+			if (listRect.bottom() > screen.bottom())
+			{
+				listRect.moveBottom(screen.bottom());
+			}
+		}
 #ifdef Q_WS_S60
 		  if (screen.width() < screen.height())
 		  {
-			  // in portait, menu should be positioned above softkeys
+		// in portait, menu should be positioned above softkeys
 			  listRect.moveBottom(screen.bottom());
 		  }
 		  else
@@ -392,50 +394,51 @@ void TreeBox::resizePopup()
 			  TRect staConTopRect = TRect();
 			  AknLayoutUtils::LayoutMetricsRect(AknLayoutUtils::EStaconTop, staConTopRect);
 			  listRect.setWidth(listRect.height());
-			  //by default popup is centered on screen in landscape
+		//by default popup is centered on screen in landscape
 			  listRect.moveCenter(screen.center());
 			  if (staConTopRect.IsEmpty())
 			  {
-				  // landscape without stacon, menu should be at the right
+		// landscape without stacon, menu should be at the right
 				  (opt.direction == Qt::LeftToRight) ? listRect.setRight(screen.right()) :
 					  listRect.setLeft(screen.left());
 			  }
 		  }
 #endif
-	  }
-	  else if (!boundToScreen || listRect.height() <= belowHeight)
-	  {
-		  listRect.moveTopLeft(below);
-	  }
-	  else if (listRect.height() <= aboveHeight)
-	  {
-		  listRect.moveBottomLeft(above);
-	  }
-	  else if (belowHeight >= aboveHeight)
-	  {
-		  listRect.setHeight(belowHeight);
-		  listRect.moveTopLeft(below);
-	  }
-	  else
-	  {
-		  listRect.setHeight(aboveHeight);
-		  listRect.moveBottomLeft(above);
-	  }
+	}
+	else if (!boundToScreen || listRect.height() <= belowHeight)
+	{
+		listRect.moveTopLeft(below);
+	}
+	else if (listRect.height() <= aboveHeight)
+	{
+		listRect.moveBottomLeft(above);
+	}
+	else if (belowHeight >= aboveHeight)
+	{
+		listRect.setHeight(belowHeight);
+		listRect.moveTopLeft(below);
+	}
+	else
+	{
+		listRect.setHeight(aboveHeight);
+		listRect.moveBottomLeft(above);
+	}
 
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0) && !defined QT_NO_IM
-	  if (QInputContext *qic = this->inputContext())
-	  {
-		  qic->reset();
-	  }
+	if (QInputContext* qic = this->inputContext())
+	{
+		qic->reset();
+	}
 #endif
-	  QScrollBar *sb = this->view()->horizontalScrollBar();
-	  Qt::ScrollBarPolicy policy = this->view()->horizontalScrollBarPolicy();
-	  bool needHorizontalScrollBar =
-		  (policy == Qt::ScrollBarAsNeeded || policy == Qt::ScrollBarAlwaysOn)
-		  && sb->minimum() < sb->maximum();
-	  if (needHorizontalScrollBar)
-	  {
-		  listRect.adjust(0, 0, 0, sb->height());
-	  }
-	  container->setGeometry(listRect);
+	QScrollBar* sb = this->view()->horizontalScrollBar();
+	Qt::ScrollBarPolicy policy = this->view()->horizontalScrollBarPolicy();
+	bool needHorizontalScrollBar =
+		(policy == Qt::ScrollBarAsNeeded || policy == Qt::ScrollBarAlwaysOn)
+		&& sb->minimum() < sb->maximum();
+	if (needHorizontalScrollBar)
+	{
+		listRect.adjust(0, 0, 0, sb->height());
+	}
+	container->setGeometry(listRect);
 }
+

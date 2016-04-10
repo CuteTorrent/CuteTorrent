@@ -35,7 +35,7 @@ class QSgml : public QObject
 {
 	Q_OBJECT
 public:
-	typedef QList<QString>           QSgmlStringlist;
+	typedef QList<QString> QSgmlStringlist;
 
 	QSgmlTag* DocTag;
 	QSgmlTag* EndTag;
@@ -56,51 +56,63 @@ public:
 		{
 			pTag = NULL;
 		}
+
 		iterator(QSgmlTag* oTag)
 		{
 			pTag = oTag;
 		}
-		~iterator() {}
+
+		~iterator()
+		{
+		}
+
 		iterator& operator++()
 		{
 			pTag = &pTag->getNextElement();
 			return (*this);
 		}
-		iterator operator++ (int)
+
+		iterator operator++(int)
 		{
 			pTag = &pTag->getNextElement();
 			return (*this);
 		}
+
 		iterator& operator--()
 		{
 			pTag = &pTag->getPreviousElement();
 			return (*this);
 		}
-		iterator operator-- (int)
+
+		iterator operator--(int)
 		{
 			pTag = &pTag->getPreviousElement();
 			return (*this);
 		}
+
 		QSgmlTag& operator*() const
 		{
 			return (*pTag);
 		}
+
 		QSgmlTag* operator->() const
 		{
 			return (pTag);
 		}
-		bool operator== (iterator& x)
+
+		bool operator==(iterator& x)
 		{
-			if(x.pTag == this->pTag)
+			if (x.pTag == this->pTag)
 			{
 				return (true);
 			}
 
 			return (false);
 		}
-		bool operator!= (iterator& x)
+
+		bool operator!=(iterator& x)
 		{
-			if(x.pTag != this->pTag)
+			if (x.pTag != this->pTag)
 			{
 				return (true);
 			}
@@ -113,6 +125,7 @@ public:
 	{
 		return (* (new iterator(&DocTag->getNextElement())));
 	}
+
 	iterator& end(void)
 	{
 		return (* (new iterator(EndTag)));
@@ -147,3 +160,5 @@ protected:
 };
 
 #endif // QSGML_H
+
+

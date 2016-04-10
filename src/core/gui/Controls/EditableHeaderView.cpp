@@ -3,6 +3,7 @@
 #include <QMenu>
 #include <QContextMenuEvent>
 #include <QDebug>
+
 void EditableHeaderView::contextMenuEvent(QContextMenuEvent* e)
 {
 	QMenu menu;
@@ -38,3 +39,4 @@ void EditableHeaderView::toggleSectionVisibility(int section)
 {
 	setSectionHidden(section, !isSectionHidden(section));
 }
+

@@ -9,11 +9,12 @@
 #include <helpers/StaticHelpers.h>
 #include "TorrentManager.h"
 #include <TorrentGroupsManager.h>
+
 FileSystemTorrentWatcher::FileSystemTorrentWatcher(QObject* parent)
 	: QObject(parent)
-	, m_pFileSystemWatcher(new QFileSystemWatcher(this))
-	, m_pSettings(QApplicationSettings::getInstance())
-	, m_pTorrentGroupManager(TorrentGroupsManager::getInstance())
+	  , m_pFileSystemWatcher(new QFileSystemWatcher(this))
+	  , m_pSettings(QApplicationSettings::getInstance())
+	  , m_pTorrentGroupManager(TorrentGroupsManager::getInstance())
 {
 	NotificationSystemPtr pNotificationSystem = NotificationSystem::getInstance();
 	connect(this, SIGNAL(Notify(int, QString, QVariant)), pNotificationSystem.get(), SLOT(OnNewNotification(int, QString, QVariant)));
@@ -26,7 +27,7 @@ void FileSystemTorrentWatcher::addPath(QString path)
 	disable();
 	m_pFileSystemWatcher->addPath(path);
 	m_currentPath = path;
-	m_currentPathSnapshot = QDir(m_currentPath).entryList(QStringList() << "*.torrent" , QDir::AllEntries | QDir::NoDotAndDotDot);
+	m_currentPathSnapshot = QDir(m_currentPath).entryList(QStringList() << "*.torrent", QDir::AllEntries | QDir::NoDotAndDotDot);
 }
 
 void FileSystemTorrentWatcher::disable()
@@ -158,3 +159,4 @@ void FileSystemTorrentWatcher::OnSettngsChnaged(QString group, QString key)
 		}
 	}
 }
+

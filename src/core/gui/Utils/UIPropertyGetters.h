@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <QVariant>
 #include "SettingsPropertyMapper.h"
+
 class UIPropertyGetters
 {
 public:
@@ -9,3 +10,4 @@ public:
 	static QVariant IntFromTimeGetter(QWidget* editor, SettingsPropertyMapper::WidgetType editorType, SettingsPropertyMapper::PropertyType);
 	static QVariant CacheSizeGetter(QWidget* editor, SettingsPropertyMapper::WidgetType editorType, SettingsPropertyMapper::PropertyType);
 };
+

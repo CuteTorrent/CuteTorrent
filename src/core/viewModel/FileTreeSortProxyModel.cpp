@@ -37,3 +37,4 @@ bool FileTreeSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex
 		}
 	}
 }
+

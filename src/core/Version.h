@@ -26,3 +26,4 @@ private:
 	float versionToFloat(QString versionString);
 };
 #endif
+

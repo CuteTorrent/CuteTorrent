@@ -46,42 +46,52 @@ QT_BEGIN_NAMESPACE
 class QWinEvent : public QEvent
 {
 public:
-    static const int ColorizationChange;
-    static const int CompositionChange;
-    static const int TaskbarButtonCreated;
+	static const int ColorizationChange;
+	static const int CompositionChange;
+	static const int TaskbarButtonCreated;
 	static const int TaskbarButtonClicked;
 	static const int RequestThumbnailBitmap;
 	static const int RequestLivePreviewBitmap;
-    static const int ThemeChange;
+	static const int ThemeChange;
 
-    explicit QWinEvent(int type);
-    ~QWinEvent();
+	explicit QWinEvent(int type);
+	~QWinEvent();
 };
 
 class QWinColorizationChangeEvent : public QWinEvent
 {
 public:
-    QWinColorizationChangeEvent(QRgb color, bool opaque);
-    ~QWinColorizationChangeEvent();
+	QWinColorizationChangeEvent(QRgb color, bool opaque);
+	~QWinColorizationChangeEvent();
 
-    inline QRgb color() const { return rgb; }
-    inline bool opaqueBlend() const { return opaque; }
+	inline QRgb color() const
+	{
+		return rgb;
+	}
+
+	inline bool opaqueBlend() const
+	{
+		return opaque;
+	}
 
 private:
-    QRgb rgb;
-    bool opaque;
+	QRgb rgb;
+	bool opaque;
 };
 
 class QWinCompositionChangeEvent : public QWinEvent
 {
 public:
-    explicit QWinCompositionChangeEvent(bool enabled);
-    ~QWinCompositionChangeEvent();
+	explicit QWinCompositionChangeEvent(bool enabled);
+	~QWinCompositionChangeEvent();
 
-    inline bool isCompositionEnabled() const { return enabled; }
+	inline bool isCompositionEnabled() const
+	{
+		return enabled;
+	}
 
 private:
-    bool enabled;
+	bool enabled;
 };
 
 
@@ -113,12 +123,15 @@ class QWinRequestLivePreviewBitmap : public QWinEvent
 public:
 	explicit QWinRequestLivePreviewBitmap(HWND hwnd);
 
-	
+
 	HWND hwnd() const;
 
 private:
 	HWND m_hwnd;
 };
+
 QT_END_NAMESPACE
 
 #endif // QWINEVENT_H
+
+

@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QThread>
 #include <QNetworkAccessManager>
+
 class OnlineReporter : public QObject
 {
 	Q_OBJECT
@@ -11,7 +12,7 @@ public:
 	void start();
 	void stop();
 private slots:
-	
+
 	void RunLoop() const;
 private:
 	static QString getMacAddress();
@@ -21,3 +22,4 @@ private:
 	bool m_isRunning;
 };
 #endif
+

@@ -18,3 +18,4 @@ QList<BaseImporter*> ImportersManager::getImporters() const
 {
 	return m_importers;
 }
+

@@ -45,12 +45,15 @@
 #include <QVector>
 
 
-
-
 class QtLockedFile : public QFile
 {
 public:
-	enum LockMode { NoLock = 0, ReadLock, WriteLock };
+	enum LockMode
+	{
+		NoLock = 0,
+		ReadLock,
+		WriteLock
+	};
 
 	QtLockedFile();
 	QtLockedFile(const QString& name);
@@ -78,3 +81,4 @@ private:
 };
 
 #endif
+

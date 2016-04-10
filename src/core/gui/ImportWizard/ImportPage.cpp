@@ -7,8 +7,6 @@
 #include <boost/thread/mutex.hpp>
 
 
-
-
 ImportPage::ImportPage(QWidget* parent) : QWizardPage(parent)
 {
 	gridLayout = new QGridLayout(this);
@@ -57,13 +55,11 @@ void ImportPage::initializePage()
 	if (dataPath.isEmpty())
 	{
 		importer->TryDetectResumePath(dataPath);
-		
 	}
 	if (!dataPath.isEmpty())
 	{
 		importer->StartImport(dataPath);
 	}
-	
 }
 
 void ImportPage::cleanupPage()
@@ -79,8 +75,6 @@ void ImportPage::cleanupPage()
 		m_importResult = ImportWizard::Canceled;
 		importer->CancelImport();
 	}
-
-	
 }
 
 int ImportPage::nextId() const
@@ -99,7 +93,6 @@ void ImportPage::progressCallback(QString text, int progress)
 	progressBar->setValue(progress);
 	if (progress == 100)
 	{
-		
 		if (m_importErrors.isEmpty())
 		{
 			m_importResult = ImportWizard::Success;
@@ -110,10 +103,11 @@ void ImportPage::progressCallback(QString text, int progress)
 		}
 		emit completeChanged();
 	}
-//	boost::detail::win32::Sleep(500);
+	//	boost::detail::win32::Sleep(500);
 }
 
 void ImportPage::collectErrors(QString name, QString error)
 {
 	m_importErrors.append(tr("IMPORTING_TORRENT %1 FAILED.\nERROR: %2\n").arg(name, error));
 }
+

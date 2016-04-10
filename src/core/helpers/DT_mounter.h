@@ -20,9 +20,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _DT_MOUNTER_H
 
 #include <QString>
+
 class DT_mounter
 {
 public:
 	static void mountImage(QString path);
 };
 #endif
+

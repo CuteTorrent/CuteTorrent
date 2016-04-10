@@ -59,62 +59,62 @@ class QRegion;
 
 namespace QtWin
 {
-enum HBitmapFormat
-{
-	HBitmapNoAlpha,
-	HBitmapPremultipliedAlpha,
-	HBitmapAlpha
-};
+	enum HBitmapFormat
+	{
+		HBitmapNoAlpha,
+		HBitmapPremultipliedAlpha,
+		HBitmapAlpha
+	};
 
-enum WindowFlip3DPolicy
-{
-	FlipDefault,
-	FlipExcludeBelow,
-	FlipExcludeAbove
-};
+	enum WindowFlip3DPolicy
+	{
+		FlipDefault,
+		FlipExcludeBelow,
+		FlipExcludeAbove
+	};
 
-HBITMAP createMask(const QBitmap& bitmap);
-HBITMAP toHBITMAP(const QPixmap& p, HBitmapFormat format = HBitmapNoAlpha);
-QPixmap fromHBITMAP(HBITMAP bitmap, HBitmapFormat format = HBitmapNoAlpha);
-HICON toHICON(const QPixmap& p);
-QImage imageFromHBITMAP(HDC hdc, HBITMAP bitmap, int width, int height);
-QPixmap fromHICON(HICON icon);
-HRGN toHRGN(const QRegion& region);
-QRegion fromHRGN(HRGN hrgn);
+	HBITMAP createMask(const QBitmap& bitmap);
+	HBITMAP toHBITMAP(const QPixmap& p, HBitmapFormat format = HBitmapNoAlpha);
+	QPixmap fromHBITMAP(HBITMAP bitmap, HBitmapFormat format = HBitmapNoAlpha);
+	HICON toHICON(const QPixmap& p);
+	QImage imageFromHBITMAP(HDC hdc, HBITMAP bitmap, int width, int height);
+	QPixmap fromHICON(HICON icon);
+	HRGN toHRGN(const QRegion& region);
+	QRegion fromHRGN(HRGN hrgn);
 
-QString stringFromHresult(HRESULT hresult);
-QString errorStringFromHresult(HRESULT hresult);
+	QString stringFromHresult(HRESULT hresult);
+	QString errorStringFromHresult(HRESULT hresult);
 
-QColor colorizationColor(bool* opaqueBlend = 0);
-QColor realColorizationColor();
+	QColor colorizationColor(bool* opaqueBlend = 0);
+	QColor realColorizationColor();
 
-void setWindowExcludedFromPeek(QWidget* window, bool exclude);
-bool isWindowExcludedFromPeek(QWidget* window);
-void setWindowDisallowPeek(QWidget* window, bool disallow);
-bool isWindowPeekDisallowed(QWidget* window);
-void setWindowFlip3DPolicy(QWidget* window, WindowFlip3DPolicy policy);
-WindowFlip3DPolicy windowFlip3DPolicy(QWidget*);
+	void setWindowExcludedFromPeek(QWidget* window, bool exclude);
+	bool isWindowExcludedFromPeek(QWidget* window);
+	void setWindowDisallowPeek(QWidget* window, bool disallow);
+	bool isWindowPeekDisallowed(QWidget* window);
+	void setWindowFlip3DPolicy(QWidget* window, WindowFlip3DPolicy policy);
+	WindowFlip3DPolicy windowFlip3DPolicy(QWidget*);
 
-void extendFrameIntoClientArea(QWidget* window, int left, int top, int right, int bottom);
-void extendFrameIntoClientArea(QWidget* window, const QMargins& margins);
-void resetExtendedFrame(QWidget* window);
+	void extendFrameIntoClientArea(QWidget* window, int left, int top, int right, int bottom);
+	void extendFrameIntoClientArea(QWidget* window, const QMargins& margins);
+	void resetExtendedFrame(QWidget* window);
 
-void enableBlurBehindWindow(QWidget* window, const QRegion& region);
-void enableBlurBehindWindow(QWidget* window);
-void disableBlurBehindWindow(QWidget* window);
+	void enableBlurBehindWindow(QWidget* window, const QRegion& region);
+	void enableBlurBehindWindow(QWidget* window);
+	void disableBlurBehindWindow(QWidget* window);
 
-bool isCompositionEnabled();
-void setCompositionEnabled(bool enabled);
-bool isCompositionOpaque();
+	bool isCompositionEnabled();
+	void setCompositionEnabled(bool enabled);
+	bool isCompositionOpaque();
 
-void setCurrentProcessExplicitAppUserModelID(const QString& id);
+	void setCurrentProcessExplicitAppUserModelID(const QString& id);
 
-void markFullscreenWindow(QWidget*, bool fullscreen = true);
+	void markFullscreenWindow(QWidget*, bool fullscreen = true);
 
-void taskbarActivateTab(QWidget*);
-void taskbarActivateTabAlt(QWidget*);
-void taskbarAddTab(QWidget*);
-void taskbarDeleteTab(QWidget*);
+	void taskbarActivateTab(QWidget*);
+	void taskbarActivateTabAlt(QWidget*);
+	void taskbarAddTab(QWidget*);
+	void taskbarDeleteTab(QWidget*);
 
 #ifdef QT_WIDGETS_LIB
 inline void setWindowExcludedFromPeek(QWidget* window, bool exclude)
@@ -241,8 +241,11 @@ inline void taskbarDeleteTab(QWidget* window)
 	taskbarDeleteTab(window->windowHandle());
 }
 #endif // QT_WIDGETS_LIB
+
 }
 
 QT_END_NAMESPACE
 
 #endif // QWINFUNCTIONS_H
+
+

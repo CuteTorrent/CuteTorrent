@@ -16,3 +16,4 @@ public:
 	static QVariant WindowsShellValueGetter(QString group, QString name, QVariant defaultValue = QVariant());
 #endif
 };
+

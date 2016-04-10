@@ -19,7 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "MediaControls.h"
 #include <phonon/MediaObject>
-MediaControls::MediaControls(MediaController* m_mediaController, QWidget* parrent) : QWidget(parrent), hidingEnabled(false), reverseTime(false)  /*,m_opacity(0.5)*/
+
+MediaControls::MediaControls(MediaController* m_mediaController, QWidget* parrent) : QWidget(parrent), hidingEnabled(false), reverseTime(false) /*,m_opacity(0.5)*/
 {
 	ui = new Ui::MediaControls();
 	ui->setupUi(this);
@@ -38,7 +39,6 @@ MediaControls::~MediaControls(void)
 	delete ui;
 	delete bg;
 }
-
 
 
 void MediaControls::paintEvent(QPaintEvent* event)
@@ -81,6 +81,7 @@ void MediaControls::updateTime(qint64 time)
 	}
 	ui->currentTimeLabel->setText(t.toString("hh:mm:ss"));
 }
+
 void MediaControls::updateTotalTime(qint64 time)
 {
 	totalTime = time;
@@ -88,9 +89,10 @@ void MediaControls::updateTotalTime(qint64 time)
 	t = t.addMSecs(time);
 	ui->totalTimeLabel->setText(t.toString("hh:mm:ss"));
 }
+
 bool MediaControls::eventFilter(QObject* obj, QEvent* event)
 {
-	if(obj == ui->currentTimeLabel && event->type() == QEvent::MouseButtonPress)
+	if (obj == ui->currentTimeLabel && event->type() == QEvent::MouseButtonPress)
 	{
 		QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
 
@@ -104,6 +106,4 @@ bool MediaControls::eventFilter(QObject* obj, QEvent* event)
 
 	return QWidget::eventFilter(obj, event);
 }
-
-
 

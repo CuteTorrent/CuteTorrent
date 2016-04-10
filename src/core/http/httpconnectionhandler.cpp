@@ -8,8 +8,9 @@
 #include <QTimer>
 #include <QCoreApplication>
 #include <QHostAddress>
-QList<QPair<uint, uint> > HttpConnectionHandler::allowedIP;
-QList<QPair<uint, uint> > HttpConnectionHandler::notAllowedIP;
+QList<QPair<uint, uint>> HttpConnectionHandler::allowedIP;
+QList<QPair<uint, uint>> HttpConnectionHandler::notAllowedIP;
+
 HttpConnectionHandler::HttpConnectionHandler(HttpRequestHandler* requestHandler)
 	: QThread()
 {
@@ -43,7 +44,7 @@ void HttpConnectionHandler::run()
 	{
 		exec();
 	}
-	catch(...)
+	catch (...)
 	{
 		qCritical("HttpConnectionHandler (%p): an uncatched exception occured in the thread", this);
 	}
@@ -59,23 +60,23 @@ void HttpConnectionHandler::handleConnection(int socketDescriptor)
 	socket.connectToHost("", 0);
 	socket.abort();
 
-	if(!socket.setSocketDescriptor(socketDescriptor))
+	if (!socket.setSocketDescriptor(socketDescriptor))
 	{
 		qCritical("HttpConnectionHandler (%p): cannot initialize socket: %s", this, qPrintable(socket.errorString()));
 		return;
 	}
 
-	if(settings->valueBool("WebControl", "enable_ipfilter", false))
+	if (settings->valueBool("WebControl", "enable_ipfilter", false))
 	{
 		uint currentIP = socket.peerAddress().toIPv4Address();
 		blockClient = false;
 		bool allowed = false;
 
-		if(allowedIP.length() > 0)
+		if (allowedIP.length() > 0)
 		{
-			for(int i = 0; i < allowedIP.length(); i++)
+			for (int i = 0; i < allowedIP.length(); i++)
 			{
-				if(currentIP >= allowedIP[i].first && currentIP <= allowedIP[i].second)
+				if (currentIP >= allowedIP[i].first && currentIP <= allowedIP[i].second)
 				{
 					allowed = true;
 					break;
@@ -85,11 +86,11 @@ void HttpConnectionHandler::handleConnection(int socketDescriptor)
 			blockClient = !allowed;
 		}
 
-		if(!allowed && notAllowedIP.length() > 0)
+		if (!allowed && notAllowedIP.length() > 0)
 		{
-			for(int i = 0; i < notAllowedIP.length(); i++)
+			for (int i = 0; i < notAllowedIP.length(); i++)
 			{
-				if(currentIP <= notAllowedIP[i].first && currentIP >= notAllowedIP[i].second)
+				if (currentIP <= notAllowedIP[i].first && currentIP >= notAllowedIP[i].second)
 				{
 					allowed = true;
 					break;
@@ -143,17 +144,17 @@ void HttpConnectionHandler::read()
 #endif
 
 	// Create new HttpRequest object if necessary
-	if(!currentRequest)
+	if (!currentRequest)
 	{
 		currentRequest = new HttpRequest();
 	}
 
 	// Collect data for the request object
-	while(socket.bytesAvailable() && currentRequest->getStatus() != HttpRequest::complete && currentRequest->getStatus() != HttpRequest::abort)
+	while (socket.bytesAvailable() && currentRequest->getStatus() != HttpRequest::complete && currentRequest->getStatus() != HttpRequest::abort)
 	{
 		currentRequest->readFromSocket(socket);
 
-		if(currentRequest->getStatus() == HttpRequest::waitForBody)
+		if (currentRequest->getStatus() == HttpRequest::waitForBody)
 		{
 			// Restart timer for read timeout, otherwise it would
 			// expire during large file uploads.
@@ -163,7 +164,7 @@ void HttpConnectionHandler::read()
 	}
 
 	// If the request is aborted, return error message and close the connection
-	if(currentRequest->getStatus() == HttpRequest::abort)
+	if (currentRequest->getStatus() == HttpRequest::abort)
 	{
 		socket.write("HTTP/1.1 413 entity too large\r\nConnection: close\r\n\r\n413 Entity too large\r\n");
 		socket.disconnectFromHost();
@@ -173,12 +174,12 @@ void HttpConnectionHandler::read()
 	}
 
 	// If the request is complete, let the request mapper dispatch it
-	if(currentRequest->getStatus() == HttpRequest::complete)
+	if (currentRequest->getStatus() == HttpRequest::complete)
 	{
 		readTimer.stop();
 		HttpResponse response(&socket);
 
-		if(blockClient && settings->valueBool("WebControl", "enable_ipfilter", false))
+		if (blockClient && settings->valueBool("WebControl", "enable_ipfilter", false))
 		{
 			response.setStatus(403, "Forbidden");
 			response.write("<h1>403 Forbidden<h1>", true);
@@ -189,20 +190,20 @@ void HttpConnectionHandler::read()
 			{
 				requestHandler->service(*currentRequest, response);
 			}
-			catch(...)
+			catch (...)
 			{
 				qCritical("HttpConnectionHandler (%p): An uncatched exception occured in the request handler", this);
 			}
 		}
 
 		// Finalize sending the response if not already done
-		if(!response.hasSentLastPart())
+		if (!response.hasSentLastPart())
 		{
 			response.write(QByteArray(), true);
 		}
 
 		// Close the connection after delivering the response, if requested
-		if(QString::compare(currentRequest->getHeader("Connection"), "close", Qt::CaseInsensitive) == 0)
+		if (QString::compare(currentRequest->getHeader("Connection"), "close", Qt::CaseInsensitive) == 0)
 		{
 			socket.disconnectFromHost();
 		}
@@ -218,3 +219,4 @@ void HttpConnectionHandler::read()
 		currentRequest = 0;
 	}
 }
+

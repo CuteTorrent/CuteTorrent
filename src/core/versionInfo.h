@@ -23,7 +23,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "Build_Increment.h"
 
 
-
 #define STRINGIZE2(s) #s
 #define STRINGIZE(s) STRINGIZE2(s)
 
@@ -37,7 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VER_FILE_VERSION_STR     STRINGIZE(VERSION_MAJOR)     \
                                     "." STRINGIZE(VERSION_MINOR) \
                                     "." STRINGIZE(VERSION_REVISION) \
-                                    "." STRINGIZE(VERSION_BUILD)
+                                    "." STRINGIZE(VERSION_BUILD)"b"
 
 #define VER_PRODUCTNAME_STR      "CuteTorrent"
 #define VER_PRODUVER_FILE_VERSION_STR      VER_FILE_VERSION
@@ -57,3 +56,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VER_FILETYPE             VFT_APP
 
 #endif
+

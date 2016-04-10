@@ -10,6 +10,7 @@
 #include "FileSystemController.h"
 #include "RssController.h"
 #include "RssCommandsApiController.h"
+
 RequestMapper::RequestMapper(QObject* parent)
 	: HttpRequestHandler("WebControl", parent)
 {
@@ -60,3 +61,4 @@ RequestMapper::~RequestMapper()
 {
 	qDeleteAll(m_pRequestMap.values());
 }
+

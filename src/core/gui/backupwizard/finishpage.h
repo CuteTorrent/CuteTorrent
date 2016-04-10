@@ -8,8 +8,8 @@ class FinishPage : public QWizardPage
 	Q_OBJECT
 public:
 	explicit FinishPage(QWidget* parent = 0);
-	int	nextId() const;
-signals:
+	int nextId() const;
+	signals:
 
 public slots:
 private:
@@ -18,3 +18,5 @@ private:
 };
 
 #endif // FINISHPAGE_H
+
+

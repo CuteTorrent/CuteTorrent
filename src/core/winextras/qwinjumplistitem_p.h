@@ -64,3 +64,5 @@ public:
 QT_END_NAMESPACE
 
 #endif // QWINJUMPLISTITEM_P_H
+
+

@@ -1,5 +1,4 @@
-﻿
-#ifndef ImportersManager_INCLUDED
+﻿#ifndef ImportersManager_INCLUDED
 #define ImportersManager_INCLUDED
 #include <QList>
 class BaseImporter;
@@ -7,10 +6,8 @@ class BaseImporter;
 
 class ImportersManager : public Singleton<ImportersManager>
 {
-
-
 	friend class Singleton<ImportersManager>;
-	QList< BaseImporter* > m_importers;
+	QList<BaseImporter*> m_importers;
 public:
 	ImportersManager();
 	void RegisterImporter(BaseImporter* importer);
@@ -19,3 +16,4 @@ public:
 
 DEFINE_PTR_CALSS(ImportersManager)
 #endif
+

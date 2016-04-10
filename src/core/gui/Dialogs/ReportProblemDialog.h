@@ -5,6 +5,7 @@
 #include "ui_ReportProblemDialog.h"
 #include "CustomWindow.h"
 #include <QNetworkAccessManager>
+
 class ReportProblemDialog : public BaseWindow<QDialog>, Ui::ReportProblemDialog
 {
 	Q_OBJECT
@@ -24,3 +25,4 @@ private:
 	QNetworkAccessManager* m_pNetManager;
 };
 #endif
+

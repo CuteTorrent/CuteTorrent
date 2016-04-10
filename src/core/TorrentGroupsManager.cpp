@@ -6,7 +6,7 @@
 #include "QApplicationSettings.h"
 #include "StyleEngene.h"
 
-TorrentGroupsManager::TorrentGroupsManager() 
+TorrentGroupsManager::TorrentGroupsManager()
 {
 	LoadGroups();
 }
@@ -29,7 +29,7 @@ void TorrentGroupsManager::FillMaps()
 			m_torrenTgroupsToExtention.insertMulti(extentions[i], group);
 		}
 		QList<TorrentGroup*> children = group->Children();
-		for (int i = 0; i <children.length(); i++)
+		for (int i = 0; i < children.length(); i++)
 		{
 			traverseQueue.enqueue(children[i]);
 		}
@@ -69,7 +69,7 @@ void TorrentGroupsManager::LoadGroups()
 	if (m_torrentGroups.length() == 0)
 	{
 		QString rootSavePath = QDir::homePath();
-		m_torrentGroups.append(new TorrentGroup(tr("Music"), StyleEngene::suffixes[StyleEngene::AUDIO].toList(), StaticHelpers::CombinePathes(rootSavePath,"Downloads", "Music")));
+		m_torrentGroups.append(new TorrentGroup(tr("Music"), StyleEngene::suffixes[StyleEngene::AUDIO].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Music")));
 		m_torrentGroups.append(new TorrentGroup(tr("Video"), StyleEngene::suffixes[StyleEngene::VIDEO].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Video")));
 		m_torrentGroups.append(new TorrentGroup(tr("Docs"), StyleEngene::suffixes[StyleEngene::DOCUMENT].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Documents")));
 		m_torrentGroups.append(new TorrentGroup(tr("Archives"), StyleEngene::suffixes[StyleEngene::ARCHIVE].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Archives")));
@@ -114,8 +114,6 @@ void TorrentGroupsManager::AddGroup(TorrentGroup* group, QUuid parent)
 	}
 	emit GroupsChanged();
 }
-
-
 
 
 TorrentGroup* TorrentGroupsManager::GetGroup(QUuid uid)
@@ -167,7 +165,6 @@ void TorrentGroupsManager::RefreshFilteringGroups(QList<TorrentGroup*>& groups)
 		FillMaps();
 		emit GroupsChanged();
 	}
-	
 }
 
 TorrentGroup* TorrentGroupsManager::GetTorrentGroupForTorrent(Torrent* pTorrent)
@@ -211,3 +208,4 @@ TorrentGroup* TorrentGroupsManager::GetGroupByName(QString groupName)
 	}
 	return NULL;
 }
+

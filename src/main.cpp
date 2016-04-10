@@ -25,11 +25,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "application.h"
 #include "StaticHelpers.h"
 
+//#define VLD_FORCE_ENABLE
+//#include <vld.h> 
+
 void myMessageOutput(QtMsgType type, const char* msg)
 {
 	fflush(stdout);
 
-	switch(type)
+	switch (type)
 	{
 		case QtDebugMsg:
 			printf("Debug: %s\n", msg);
@@ -91,16 +94,19 @@ int main(int argc, char* argv[])
 
 	Application a(argc, argv);
 	QStringList arguments = Application::arguments();
-	
+
 	arguments.removeFirst();
 	QVariantMap vm;
 
 	vm["minimize"] = arguments.contains("-m") || arguments.contains("--minimize");
-	arguments.removeAll("-m"); arguments.removeAll("--minimize");
+	arguments.removeAll("-m");
+	arguments.removeAll("--minimize");
 	vm["debug"] = arguments.contains("-d") || arguments.contains("--debug");
-	arguments.removeAll("-d"); arguments.removeAll("--debug");
+	arguments.removeAll("-d");
+	arguments.removeAll("--debug");
 	vm["settings"] = arguments.contains("-s") || arguments.contains("--settings");
-	arguments.removeAll("-s"); arguments.removeAll("--settings");
+	arguments.removeAll("-s");
+	arguments.removeAll("--settings");
 	QString dataDir;
 #ifdef Q_WS_MAC
 	dataDir = "/Library/CuteTorrent/";
@@ -125,7 +131,6 @@ int main(int argc, char* argv[])
 		qDebug() << "--create_torrent index" << index;
 		if (index != -1)
 		{
-
 			index++;
 			if (arguments.size() > index)
 			{
@@ -137,7 +142,8 @@ int main(int argc, char* argv[])
 			{
 				vm["create_torrent"] = "";
 			}
-			arguments.removeAll("-c"); arguments.removeAll("--create_torrent");
+			arguments.removeAll("-c");
+			arguments.removeAll("--create_torrent");
 		}
 	}
 
@@ -147,7 +153,7 @@ int main(int argc, char* argv[])
 	}
 	qDebug() << "arguments" << QApplication::arguments();
 	qDebug() << "parsed values" << vm;
-	
+
 	a.setWindowIcon(QIcon(":/icons/app.ico"));
 	a.setDesktopSettingsAware(false);
 	a.setEffectEnabled(Qt::UI_FadeMenu, true);
@@ -155,10 +161,9 @@ int main(int argc, char* argv[])
 	QString file2open;
 	if (!vm.empty())
 	{
-
 		file2open = vm["input-file"].toString();
 	}
-	if(a.isRunning())
+	if (a.isRunning())
 	{
 		if (!file2open.isEmpty())
 		{
@@ -167,7 +172,6 @@ int main(int argc, char* argv[])
 
 		if (vm.contains("create_torrent"))
 		{
-
 			QString torrentCreationSource = vm["create_torrent"].toString();
 
 			a.sendMessage(QString("create_torrent:%1").arg(torrentCreationSource));
@@ -190,9 +194,7 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	
-	
-	
+
 	a.loadTranslations(":/translations");
 	a.loadTranslationsQt(":/translations_qt");
 	a.addLibraryPath(StaticHelpers::CombinePathes(QCoreApplication::applicationDirPath(), "plugins"));
@@ -235,3 +237,4 @@ int main(int argc, char* argv[])
 
 	return res;
 }
+

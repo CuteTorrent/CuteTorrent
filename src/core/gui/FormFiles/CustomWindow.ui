@@ -449,7 +449,7 @@
                 <bool>true</bool>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>4</number>
                </property>
                <widget class="QWidget" name="tab">
                 <property name="mouseTracking">
@@ -840,6 +840,43 @@
                  </item>
                 </layout>
                </widget>
+               <widget class="QWidget" name="tab_5">
+                <attribute name="title">
+                 <string>TAB_COMMENTS</string>
+                </attribute>
+                <layout class="QGridLayout" name="ratingTabLayout">
+                 <item row="0" column="2">
+                  <widget class="QPushButton" name="addCommentButton">
+                   <property name="text">
+                    <string>ADD_COMMENT</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0" colspan="3">
+                  <widget class="QListView" name="m_commentsView"/>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_13">
+                   <property name="text">
+                    <string>AVERAGE_RATING</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <spacer name="horizontalSpacer_2">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
               </widget>
              </item>
             </layout>
@@ -984,10 +1021,6 @@
          </property>
          <addaction name="ACTION_TORRENTTOOLBAR_ADD_TORRENT"/>
          <addaction name="ACTION_TORRENTTOOLBAR_OPEN_MAGNET"/>
-         <addaction name="ACTION_TORRENTTOOLBAR_REMOVE"/>
-         <addaction name="separator"/>
-         <addaction name="ACTION_TORRENTTOOLBAR_START"/>
-         <addaction name="ACTION_TORRENTTOOLBAR_PAUSE"/>
          <addaction name="separator"/>
          <addaction name="ACTION_TOOLBAR_SETTINGS"/>
          <addaction name="separator"/>
@@ -1067,14 +1100,6 @@
     <enum>QAction::PreferencesRole</enum>
    </property>
   </action>
-  <action name="ACTION_TORRENTTOOLBAR_PAUSE">
-   <property name="text">
-    <string>STR_PAUSE</string>
-   </property>
-   <property name="iconText">
-    <string>HINT_PAUSE</string>
-   </property>
-  </action>
   <action name="ACTION_SEARCHTOOLBAR_DOWNLOAD">
    <property name="text">
     <string>STR_DOWNLOAD</string>
@@ -1089,25 +1114,6 @@
    </property>
    <property name="iconText">
     <string>HINT_OPEN_URL</string>
-   </property>
-  </action>
-  <action name="ACTION_TORRENTTOOLBAR_START">
-   <property name="text">
-    <string>STR_START</string>
-   </property>
-   <property name="iconText">
-    <string>HINT_RESUME</string>
-   </property>
-  </action>
-  <action name="ACTION_TORRENTTOOLBAR_REMOVE">
-   <property name="text">
-    <string>STR_REMOVE</string>
-   </property>
-   <property name="iconText">
-    <string>HINT_REMOVE</string>
-   </property>
-   <property name="toolTip">
-    <string>STR_REMOVE</string>
    </property>
   </action>
   <action name="ACTION_MENUHELP_ABAUT_CT">
@@ -1350,54 +1356,6 @@
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>ShowOpenTorrentDialog()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>339</x>
-     <y>326</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ACTION_TORRENTTOOLBAR_START</sender>
-   <signal>triggered()</signal>
-   <receiver>CustomWindow</receiver>
-   <slot>ResumeSelected()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>339</x>
-     <y>326</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ACTION_TORRENTTOOLBAR_PAUSE</sender>
-   <signal>triggered()</signal>
-   <receiver>CustomWindow</receiver>
-   <slot>PauseSelected()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>339</x>
-     <y>326</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ACTION_TORRENTTOOLBAR_REMOVE</sender>
-   <signal>triggered()</signal>
-   <receiver>CustomWindow</receiver>
-   <slot>DeleteSelected()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -1745,6 +1703,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>addCommentButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CustomWindow</receiver>
+   <slot>ShowAddCommentDialog()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>483</x>
+     <y>383</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>FillTorrentDetails(Torrent*)</signal>
@@ -1775,5 +1749,6 @@
   <slot>showRaitingDialog()</slot>
   <slot>GoToExtendedMode()</slot>
   <slot>GoToCompactMode()</slot>
+  <slot>ShowAddCommentDialog()</slot>
  </slots>
 </ui>

@@ -14,6 +14,7 @@
 #include <QTemporaryFile>
 #include <QUuid>
 #include <QHostAddress>
+
 /**
   This object represents a single HTTP request. It reads the request
   from a TCP socket and provides getters for the individual parts
@@ -38,7 +39,14 @@ class HttpRequest
 public:
 
 	/** Values for getStatus() */
-	enum RequestStatus {waitForRequest, waitForHeader, waitForBody, complete, abort};
+	enum RequestStatus
+	{
+		waitForRequest,
+		waitForHeader,
+		waitForBody,
+		complete,
+		abort
+	};
 
 	/**
 	  Constructor.
@@ -210,7 +218,8 @@ private:
 
 	/** Sub-procedure of readFromSocket(), extract cookies from headers */
 	void extractCookies();
-
 };
 
 #endif // HTTPREQUEST_H
+
+

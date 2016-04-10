@@ -5,7 +5,8 @@
 #include <QDebug>
 #include "Importers/ImportersManager.h"
 #include "Importers/BaseImporter.h"
-ImportIntroPage::ImportIntroPage(QWidget* parent) :QWizardPage(parent), m_pCurrentImporter(NULL)
+
+ImportIntroPage::ImportIntroPage(QWidget* parent) : QWizardPage(parent), m_pCurrentImporter(NULL)
 {
 	setTitle(tr("IMPORT_INTRO_TITLE"));
 	m_ptorrentImportersMapper = new QSignalMapper(this);
@@ -26,15 +27,14 @@ ImportIntroPage::ImportIntroPage(QWidget* parent) :QWizardPage(parent), m_pCurre
 	}
 
 	connect(m_ptorrentImportersMapper, SIGNAL(mapped(QString)), SLOT(setImporter(QString)));
-	
-	
+
+
 	QVBoxLayout* layout = new QVBoxLayout;
 	layout->addWidget(label);
 	layout->addLayout(pClientGrid);
-	
+
 	setLayout(layout);
 	registerField("Importer", this, "CurrentImporter");
-	
 }
 
 void ImportIntroPage::initializePage()
@@ -97,6 +97,5 @@ void ImportIntroPage::setImporter(QString name)
 		m_pCurrentImporter = NULL;
 		emit completeChanged();
 	}
-	
-	
 }
+

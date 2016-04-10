@@ -7,6 +7,7 @@ NotificationSystem::NotificationSystem() : QObject(), m_pSettings(QApplicationSe
 {
 	UpdateNotificationSettings();
 }
+
 void NotificationSystem::UpdateNotificationSettings()
 {
 	m_notificationMask = ALL;
@@ -40,6 +41,7 @@ void NotificationSystem::UpdateNotificationSettings()
 
 	m_enabled = m_pSettings->valueBool("Notifications", "use_notification_sys", true);
 }
+
 NotificationSystem::~NotificationSystem()
 {
 }
@@ -107,10 +109,10 @@ QBalloonTip::QBaloonType NotificationSystem::gessBaloonType(int notificationType
 	}
 
 	if ((notificationType & TORRENT_ERROR) == TORRENT_ERROR ||
-	        (notificationType & RSS_ERROR) == TORRENT_ERROR ||
-	        (notificationType & TRACKER_ERROR) == TORRENT_ERROR ||
-	        (notificationType & SYSTEM_ERROR) == SYSTEM_ERROR ||
-	        (notificationType & UPDATE_ERROR) == UPDATE_ERROR)
+		(notificationType & RSS_ERROR) == TORRENT_ERROR ||
+		(notificationType & TRACKER_ERROR) == TORRENT_ERROR ||
+		(notificationType & SYSTEM_ERROR) == SYSTEM_ERROR ||
+		(notificationType & UPDATE_ERROR) == UPDATE_ERROR)
 	{
 		return QBalloonTip::Error;
 	}
@@ -121,17 +123,17 @@ QBalloonTip::QBaloonType NotificationSystem::gessBaloonType(int notificationType
 QSystemTrayIcon::MessageIcon NotificationSystem::gessIcon(int notificationType)
 {
 	if ((notificationType & TORRENT_INFO) == TORRENT_INFO ||
-	        (notificationType & TORRENT_COMPLETED) == TORRENT_COMPLETED ||
-	        (notificationType & UDPATE_INFO) == UDPATE_INFO	)
+		(notificationType & TORRENT_COMPLETED) == TORRENT_COMPLETED ||
+		(notificationType & UDPATE_INFO) == UDPATE_INFO)
 	{
 		return QSystemTrayIcon::Information;
 	}
 
 	if ((notificationType & TORRENT_ERROR) == TORRENT_ERROR ||
-	        (notificationType & RSS_ERROR) == TORRENT_ERROR ||
-	        (notificationType & TRACKER_ERROR) == TRACKER_ERROR ||
-	        (notificationType & SYSTEM_ERROR) == SYSTEM_ERROR ||
-	        (notificationType & UPDATE_ERROR) == UPDATE_ERROR)
+		(notificationType & RSS_ERROR) == TORRENT_ERROR ||
+		(notificationType & TRACKER_ERROR) == TRACKER_ERROR ||
+		(notificationType & SYSTEM_ERROR) == SYSTEM_ERROR ||
+		(notificationType & UPDATE_ERROR) == UPDATE_ERROR)
 	{
 		return QSystemTrayIcon::Critical;
 	}

@@ -31,15 +31,15 @@ void QSgmlTag::SetType(const QString& InnerTag)
 	// Prepareation
 	QString sDummy = InnerTag.trimmed();
 
-	if(sDummy.at(InnerTag.count() - 1) == '/')
+	if (sDummy.at(InnerTag.count() - 1) == '/')
 	{
 		Type = eEndTag;
 	}
-	else if(sDummy.at(0) == '!')
+	else if (sDummy.at(0) == '!')
 	{
 		Type = eDoctype;
 	}
-	else if(sDummy.at(0) == '/')
+	else if (sDummy.at(0) == '/')
 	{
 		Type = eStandalone;
 	}
@@ -67,7 +67,7 @@ void QSgmlTag::SetNameAttributes(const QString& InnerTag)
 	EndName = sDummy.indexOf(" ");
 	Name = sDummy.left(EndName).trimmed().toLower();
 
-	if((Name.at(0) == '!') || (Name.at(0) == '/'))
+	if ((Name.at(0) == '!') || (Name.at(0) == '/'))
 	{
 		Name = Name.mid(1);
 	}
@@ -80,21 +80,21 @@ void QSgmlTag::SetNameAttributes(const QString& InnerTag)
 	AllAtr = AllAtr.mid(EndName + 1).trimmed();
 
 	// if there is a atr-name get atr-value and next atr-name
-	while(EndName != -1)
+	while (EndName != -1)
 	{
 		EndName = AllAtr.indexOf("=");
 		PosQot = AllAtr.indexOf("\"");
 		// Save Name of Attribute
 		NameString = AttrName.toLower();
 
-		if(PosQot < EndName)
+		if (PosQot < EndName)
 		{
 			// find end of quote and "=" afterwards
 			int iDummy = AllAtr.indexOf("\"", PosQot + 1);
 			EndName = AllAtr.indexOf("=", iDummy + 1);
 		}
 
-		if(EndName == -1)
+		if (EndName == -1)
 		{
 			// no "=" -> all attributes
 			AtrString = AllAtr;
@@ -111,12 +111,12 @@ void QSgmlTag::SetNameAttributes(const QString& InnerTag)
 		// set attribute hash; ignore " if exist
 		AtrString = AtrString.trimmed();
 
-		if((AtrString.at(0) == '\"') || (AtrString.at(AtrString.count() - 1) == '\"'))
+		if ((AtrString.at(0) == '\"') || (AtrString.at(AtrString.count() - 1) == '\"'))
 		{
 			QString sDummy = AtrString.mid(1, AtrString.count() - 2);
 			Attributes[NameString] = sDummy;
 		}
-		else if((AtrString.at(0) == '\'') || (AtrString.at(AtrString.count() - 1) == '\''))
+		else if ((AtrString.at(0) == '\'') || (AtrString.at(AtrString.count() - 1) == '\''))
 		{
 			QString sDummy = AtrString.mid(1, AtrString.count() - 2);
 			Attributes[NameString] = sDummy;
@@ -151,17 +151,17 @@ bool QSgmlTag::checkAttribute(QString AtrName, QString AtrValue)
 // get the next tag on the same lefel
 QSgmlTag& QSgmlTag::getNextSibling(void)
 {
-	int  i;
+	int i;
 
-	for(i = 0 ; i < Parent->Children.count() ; i++)
+	for (i = 0; i < Parent->Children.count(); i++)
 	{
-		if((Parent->Children[i]) == this)
+		if ((Parent->Children[i]) == this)
 		{
 			break;
 		}
 	}
 
-	if(i == (Parent->Children.count() - 1))
+	if (i == (Parent->Children.count() - 1))
 	{
 		return (* ((QSgmlTag*) NULL));
 	}
@@ -174,17 +174,17 @@ QSgmlTag& QSgmlTag::getNextSibling(void)
 // get the previous tag on the same lefel
 QSgmlTag& QSgmlTag::getPreviousSibling(void)
 {
-	int  i;
+	int i;
 
-	for(i = 0 ; i < Parent->Children.count() ; i++)
+	for (i = 0; i < Parent->Children.count(); i++)
 	{
-		if((Parent->Children[i]) == this)
+		if ((Parent->Children[i]) == this)
 		{
 			break;
 		}
 	}
 
-	if(i == 0)
+	if (i == 0)
 	{
 		return (* ((QSgmlTag*) NULL));
 	}
@@ -200,7 +200,7 @@ QSgmlTag& QSgmlTag::getNextElement(void)
 	QSgmlTag* Return;
 
 	// are there children
-	if(this->Children.count() > 0)
+	if (this->Children.count() > 0)
 	{
 		Return = this->Children[0];
 	}
@@ -209,7 +209,7 @@ QSgmlTag& QSgmlTag::getNextElement(void)
 		// search the next parent with sibling
 		Return = this;
 
-		while(&(Return->getNextSibling()) == NULL)
+		while (&(Return->getNextSibling()) == NULL)
 		{
 			Return = Return->Parent;
 		}
@@ -227,14 +227,14 @@ QSgmlTag& QSgmlTag::getPreviousElement(void)
 	// Is there a previous tag on the same level
 	Return = & (this->getPreviousSibling());
 
-	if(&Return == NULL)
+	if (&Return == NULL)
 	{
 		Return = this->Parent;
 	}
 	else
 	{
 		// search the last child with no children
-		while(Return->Children.count() != 0)
+		while (Return->Children.count() != 0)
 		{
 			Return = Return->Children.last();
 		}
@@ -256,7 +256,7 @@ void QSgmlTag::resetLevel(void)
 	QList<QSgmlTag*>::const_iterator i;
 	Level = Parent->Level + 1;
 
-	for(i = Children.constBegin() ; i != Children.constEnd() ; i++)
+	for (i = Children.constBegin(); i != Children.constEnd(); i++)
 	{
 		QSgmlTag* t = *i;
 		t->resetLevel();
@@ -366,19 +366,19 @@ QSgmlTag* QSgmlTag::addChild(QString InnerTag, TagType eType)
 	QSgmlTag* tagRet = pnewTag;
 
 	// don't add childs to that eDoctype
-	if(this->Type == eDoctype)
+	if (this->Type == eDoctype)
 	{
 		tagRet = NULL;
 	}
 
 	// change type of this tag if it was eStandalone
-	if(Type == eStandalone)
+	if (Type == eStandalone)
 	{
 		Type = eStartTag;
 	}
 
 	// set name or value
-	switch(eType)
+	switch (eType)
 	{
 		case eVirtualBeginTag:
 		case eVirtualEndTag:
@@ -410,9 +410,9 @@ QSgmlTag* QSgmlTag::addChild(QString InnerTag, TagType eType)
 	pnewTag->Parent = this;
 
 	// add the new tag
-	if(tagRet != NULL)
+	if (tagRet != NULL)
 	{
-		if(Level == 0)
+		if (Level == 0)
 		{
 			this->Children.insert(Children.count() - 1, pnewTag);
 		}
@@ -444,7 +444,7 @@ QSgmlTag::QSgmlTag(const QString& InnerTag, TagType eType, QSgmlTag* tParent)
 	Type = eType;
 	Parent = tParent;
 
-	if(tParent == NULL)
+	if (tParent == NULL)
 	{
 		Level = 0;
 	}
@@ -453,7 +453,7 @@ QSgmlTag::QSgmlTag(const QString& InnerTag, TagType eType, QSgmlTag* tParent)
 		Level = tParent->Level + 1;
 	}
 
-	if((eType != eDoctype) && (eType != eCdata) && (eType != eComment))
+	if ((eType != eDoctype) && (eType != eCdata) && (eType != eComment))
 	{
 		SetNameAttributes(InnerTag);
 		Value = "";
@@ -470,9 +470,10 @@ QSgmlTag::~QSgmlTag(void)
 	int i;
 	int iCount = Children.count();
 
-	for(i = 0 ; i < iCount ; i++)
+	for (i = 0; i < iCount; i++)
 	{
 		delete Children[0];
 		Children.removeFirst();
 	}
 }
+

@@ -7,6 +7,7 @@
 #include <QApplicationSettings.h>
 #include <TorrentGroupsManager.h>
 class QFileSystemWatcher;
+
 class FileSystemTorrentWatcher : public QObject, public Singleton<FileSystemTorrentWatcher>
 {
 	Q_OBJECT
@@ -24,7 +25,7 @@ private:
 	QApplicationSettingsPtr m_pSettings;
 	QStringList getNewFiles(QString path);
 	TorrentGroupsManagerPtr m_pTorrentGroupManager;
-signals:
+	signals:
 	void Notify(int notificationType, QString message, QVariant data);
 private slots:
 	void OnDirectoryChanged(const QString& path);
@@ -32,3 +33,4 @@ private slots:
 };
 
 #endif
+

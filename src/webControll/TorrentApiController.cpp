@@ -4,8 +4,10 @@
 #include "TorrentManager.h"
 #include "StaticHelpers.h"
 #include "Torrent.h"
+#include <libtorrent/announce_entry.hpp>
+
 TorrentApiController::TorrentApiController(QObject* parent/*=0*/) : HttpRequestHandler("WebControl", parent), m_pTorrentManager(TorrentManager::getInstance()),
-	m_pTorrentStorrage(TorrentStorrage::getInstance())
+                                                                    m_pTorrentStorrage(TorrentStorrage::getInstance())
 {
 }
 
@@ -16,25 +18,25 @@ void TorrentApiController::service(HttpRequest& request, HttpResponse& response)
 		return;
 	}
 
-//	QMultiMap<QByteArray,QByteArray> parametrs=request.getParameterMap();
-	if(request.getMethod().toUpper() == "GET")
+	//	QMultiMap<QByteArray,QByteArray> parametrs=request.getParameterMap();
+	if (request.getMethod().toUpper() == "GET")
 	{
 		QtJson::JsonArray respJson;
 		QString page = request.getParameter("page");
 		QString pageSize = request.getParameter("pageSize");
 
-		if(page.length() > 0)
+		if (page.length() > 0)
 		{
 			bool ok;
 			int iPage = page.toInt(&ok);
 
-			if(ok)
+			if (ok)
 			{
 				int iPageSize = pageSize.toInt(&ok);
 
-				if(ok)
+				if (ok)
 				{
-					for(int i = (iPage - 1) * iPageSize; i < std::min(m_pTorrentStorrage->count(), iPage * iPageSize); i++)
+					for (int i = (iPage - 1) * iPageSize; i < std::min(m_pTorrentStorrage->count(), iPage * iPageSize); i++)
 					{
 						QtJson::JsonObject torrent;
 						Torrent* curret = m_pTorrentStorrage->at(i);
@@ -61,7 +63,7 @@ void TorrentApiController::service(HttpRequest& request, HttpResponse& response)
 						QtJson::JsonArray peers;
 						std::vector<peer_info> peerInfos = curret->GetPeerInfo();
 
-						for(int j = 0; j < peerInfos.size(); j++)
+						for (int j = 0; j < peerInfos.size(); j++)
 						{
 							QtJson::JsonObject peer;
 							peer["ip"] = QString::fromStdString(peerInfos[j].ip.address().to_string()) ;
@@ -78,7 +80,7 @@ void TorrentApiController::service(HttpRequest& request, HttpResponse& response)
 						QtJson::JsonArray trackers;
 						std::vector<announce_entry> trackerInfos = curret->GetTrackerInfo();
 
-						for(int j = 0; j < trackerInfos.size(); j++)
+						for (int j = 0; j < trackerInfos.size(); j++)
 						{
 							QtJson::JsonObject tracker;
 							tracker["url"] = QString::fromStdString(trackerInfos[j].url) ;
@@ -133,5 +135,4 @@ void TorrentApiController::service(HttpRequest& request, HttpResponse& response)
 TorrentApiController::~TorrentApiController()
 {
 }
-
 

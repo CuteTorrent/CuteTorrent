@@ -81,3 +81,5 @@ private slots:
 QT_END_NAMESPACE
 
 #endif // QWINTASKBARBUTTON_H
+
+

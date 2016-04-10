@@ -6,6 +6,7 @@
 #include <libtorrent/file_storage.hpp>
 #include <libtorrent/size_type.hpp>
 using namespace libtorrent;
+
 class FileViewModel : public QAbstractItemModel
 {
 	Q_OBJECT
@@ -61,3 +62,4 @@ private:
 	static QPixmapCache iconCache;
 	FileViewTreeItem* m_pRoot;
 };
+

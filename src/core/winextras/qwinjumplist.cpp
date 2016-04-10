@@ -150,12 +150,12 @@ void QWinJumpListPrivate::_q_rebuild()
 		}
 
 		foreach (QWinJumpListCategory* category, categories)
-		{
-			if (category->isVisible())
 			{
-				appendCustomCategory(category);
+				if (category->isVisible())
+				{
+					appendCustomCategory(category);
+				}
 			}
-		}
 
 		if (tasks && tasks->isVisible())
 		{
@@ -334,15 +334,15 @@ IObjectCollection* QWinJumpListPrivate::toComCollection(const QList<QWinJumpList
 	}
 
 	Q_FOREACH (QWinJumpListItem* item, list)
-	{
-		IUnknown* iitem = toICustomDestinationListItem(item);
-
-		if (iitem)
 		{
-			collection->AddObject(iitem);
-			iitem->Release();
+			IUnknown* iitem = toICustomDestinationListItem(item);
+
+			if (iitem)
+			{
+				collection->AddObject(iitem);
+				iitem->Release();
+			}
 		}
-	}
 
 	return collection;
 }
@@ -383,13 +383,13 @@ IUnknown* QWinJumpListPrivate::toICustomDestinationListItem(const QWinJumpListIt
 {
 	switch (item->type())
 	{
-		case QWinJumpListItem::Destination :
+		case QWinJumpListItem::Destination:
 			return toIShellItem(item);
 
-		case QWinJumpListItem::Link :
+		case QWinJumpListItem::Link:
 			return toIShellLink(item);
 
-		case QWinJumpListItem::Separator :
+		case QWinJumpListItem::Separator:
 			return makeSeparatorShellItem();
 
 		default:
@@ -667,9 +667,9 @@ QWinJumpListCategory* QWinJumpList::addCategory(const QString& title, const QLis
 	QWinJumpListCategory* category = new QWinJumpListCategory(title);
 
 	foreach (QWinJumpListItem* item, items)
-	{
-		category->addItem(item);
-	}
+		{
+			category->addItem(item);
+		}
 
 	addCategory(category);
 	return category;
@@ -692,9 +692,9 @@ void QWinJumpList::clear()
 	}
 
 	foreach (QWinJumpListCategory* category, d->categories)
-	{
-		category->clear();
-	}
+		{
+			category->clear();
+		}
 
 	d->destroy();
 }
@@ -705,5 +705,4 @@ void QWinJumpList::_q_rebuild()
 }
 
 QT_END_NAMESPACE
-
 

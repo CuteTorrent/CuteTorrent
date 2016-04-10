@@ -173,6 +173,7 @@ struct QUAZIP_EXPORT QuaZipFileInfo64
 	 * @return The NTFS creation time, UTC
 	 */
 	QDateTime getNTFScTime(int* fineTicks = NULL) const;
+
 	/// Checks whether the file is encrypted.
 	bool isEncrypted() const
 	{
@@ -181,3 +182,4 @@ struct QUAZIP_EXPORT QuaZipFileInfo64
 };
 
 #endif
+

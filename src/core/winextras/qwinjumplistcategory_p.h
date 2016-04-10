@@ -68,3 +68,5 @@ public:
 QT_END_NAMESPACE
 
 #endif // QWINJUMPLISTCATEGORY_P_H
+
+

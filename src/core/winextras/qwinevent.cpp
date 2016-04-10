@@ -51,7 +51,7 @@ QWinEvent::~QWinEvent()
 }
 
 QWinColorizationChangeEvent::QWinColorizationChangeEvent(QRgb color, bool opaque)
-    : QWinEvent(ColorizationChange), rgb(color), opaque(opaque)
+	: QWinEvent(ColorizationChange), rgb(color), opaque(opaque)
 {
 }
 
@@ -60,7 +60,7 @@ QWinColorizationChangeEvent::~QWinColorizationChangeEvent()
 }
 
 QWinCompositionChangeEvent::QWinCompositionChangeEvent(bool enabled)
-    : QWinEvent(CompositionChange), enabled(enabled)
+	: QWinEvent(CompositionChange), enabled(enabled)
 {
 }
 
@@ -101,3 +101,4 @@ HWND QWinRequestThumbnailBitmap::hwnd() const
 {
 	return m_hwnd;
 }
+

@@ -59,7 +59,6 @@ void OnlineReporter::RunLoop() const
 		nanosleep(&ts, NULL);
 #endif
 		secondsCounter++;
-		
 	}
 	qDebug() << "OnlineReporter::RunLoop exit" << m_isRunning;
 }
@@ -67,20 +66,21 @@ void OnlineReporter::RunLoop() const
 QString OnlineReporter::getMacAddress()
 {
 	foreach(QNetworkInterface netInterface, QNetworkInterface::allInterfaces())
-	{
-		// Return only the first non-loopback MAC Address
-		if (!(netInterface.flags() & QNetworkInterface::IsLoopBack))
-			return netInterface.hardwareAddress();
-	}
+		{
+			// Return only the first non-loopback MAC Address
+			if (!(netInterface.flags() & QNetworkInterface::IsLoopBack))
+				return netInterface.hardwareAddress();
+		}
 	return QString();
 }
 
 QString OnlineReporter::buildUrl() const
 {
 	QString mac = getMacAddress();
-	
+
 	QString macHash = QCryptographicHash::hash(mac.toUtf8(), QCryptographicHash::Md5).toHex();
 	qDebug() << "Mac:" << mac << "UserID" << macHash;
 
 	return QString("http://integration.cutetorrent.info/tracking/online?uid=%1").arg(macHash);
 }
+

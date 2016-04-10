@@ -12,11 +12,11 @@ enum
 
 namespace
 {
-int MAX3(int a, int b, int c)
-{
-	const int ab(a > b ? a : b);
-	return ab > c ? ab : c;
-}
+	int MAX3(int a, int b, int c)
+	{
+		const int ab(a > b ? a : b);
+		return ab > c ? ab : c;
+	}
 }
 
 QSearchItemDelegate::QSearchItemDelegate(QObject* parent) : QStyledItemDelegate(parent), m_pStyleEngine(StyleEngene::getInstance())
@@ -41,7 +41,7 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	initStyleOption(&opt, index);
 	QStyle* style;
 
-	if(opt.widget != NULL)
+	if (opt.widget != NULL)
 	{
 		style = opt.widget->style();
 	}
@@ -78,7 +78,7 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	QString nameStr(res->Name());
 	QSize nameSize(nameFM.size(0, nameStr));
 	QFont statusFont(option.font);
-	statusFont.setPointSize(int (option.font.pointSize() * 0.9));
+	statusFont.setPointSize(int(option.font.pointSize() * 0.9));
 	const QFontMetrics statusFM(statusFont);
 	const QString statusStr(StaticHelpers::toKbMbGb(res->Size()));
 	QFont progressFont(statusFont);
@@ -92,7 +92,7 @@ void QSearchItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	QPalette::ColorGroup cg = QPalette::Normal;
 	QPalette::ColorRole cr;
 
-	if(option.state & QStyle::State_Selected)
+	if (option.state & QStyle::State_Selected)
 	{
 		cr = QPalette::HighlightedText;
 	}
@@ -154,7 +154,7 @@ QSize QSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
 	}
 
 	QFont statusFont(option.font);
-	statusFont.setPointSize(int (option.font.pointSize() * 0.9));
+	statusFont.setPointSize(int(option.font.pointSize() * 0.9));
 	const QFontMetrics statusFM(statusFont);
 	const QString statusStr(GetPeersStr(res));
 	int statusWidth = statusFM.width(statusStr);
@@ -175,7 +175,7 @@ QSize QSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
 
 QString QSearchItemDelegate::GetPeersStr(const SearchResult* res) const
 {
-	if(res->Leechers() >= 0 && res->Seeders() >= 0)
+	if (res->Leechers() >= 0 && res->Seeders() >= 0)
 	{
 		return tr("Leechs: %1 Seeds: %2").arg(QString::number(res->Leechers()), QString::number(res->Seeders()));
 	}
@@ -184,3 +184,4 @@ QString QSearchItemDelegate::GetPeersStr(const SearchResult* res) const
 		return tr("Leechs: N/A Seeds: N/A");
 	}
 }
+

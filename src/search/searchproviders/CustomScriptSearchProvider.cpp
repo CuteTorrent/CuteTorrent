@@ -222,6 +222,7 @@ QString CustomScriptSearchProvider::detectEncoding(QString contentType)
 
 	return encoding;
 }
+
 void CustomScriptSearchProvider::parseAsHtml(QNetworkReply* pReply)
 {
 	if (m_pEngine)
@@ -321,3 +322,4 @@ int CustomScriptSearchProvider::SupportedCategories()
 {
 	return m_supportedCategories;
 }
+

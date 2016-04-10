@@ -1,7 +1,9 @@
 #include "mimebase64formatter.h"
 
 MimeBase64Formatter::MimeBase64Formatter(QIODevice* out) :
-	MimeContentFormatter(out) {}
+	MimeContentFormatter(out)
+{
+}
 
 qint64 MimeBase64Formatter::writeData(const char* data, qint64 maxLength)
 {
@@ -18,3 +20,4 @@ qint64 MimeBase64Formatter::writeData(const char* data, qint64 maxLength)
 	output->write("\r\n");
 	return maxLength;
 }
+

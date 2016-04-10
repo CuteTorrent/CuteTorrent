@@ -1,4 +1,4 @@
-/*
+﻿/*
   Copyright (c) 2011-2012 - Tőkés Attila
 
   This file is part of SmtpClient for Qt.
@@ -48,7 +48,9 @@ SmtpClient::SmtpClient(const QString& host, int port, ConnectionType connectionT
 	        this, SLOT(socketReadyRead()));
 }
 
-SmtpClient::~SmtpClient() {}
+SmtpClient::~SmtpClient()
+{
+}
 
 /* [1] --- */
 
@@ -332,7 +334,7 @@ void SmtpClient::changeState(SmtpClient::ClientState state)
 			emit readyConnected();
 			break;
 
-		/* --- TLS --- */
+			/* --- TLS --- */
 		case _TLS_State:
 			changeState(_TLS_0_STARTTLS);
 			break;
@@ -355,11 +357,11 @@ void SmtpClient::changeState(SmtpClient::ClientState state)
 			changeState(_READY_Connected);
 			break;
 
-		/* --- AUTH --- */
+			/* --- AUTH --- */
 		case _AUTH_PLAIN_0:
 			// Sending command: AUTH PLAIN base64('\0' + username + '\0' + password)
 			sendMessage("AUTH PLAIN " + QByteArray().append((char) 0).append(authInfo.username)
-			            .append((char) 0).append(authInfo.password).toBase64());
+			                                        .append((char) 0).append(authInfo.password).toBase64());
 			break;
 
 		case _AUTH_LOGIN_0:
@@ -383,7 +385,7 @@ void SmtpClient::changeState(SmtpClient::ClientState state)
 			emit authenticated();
 			break;
 
-		/* --- MAIL --- */
+			/* --- MAIL --- */
 		case _MAIL_0_FROM:
 			sendMessage("MAIL FROM: <" + email->getSender().getAddress() + ">");
 			break;
@@ -492,7 +494,7 @@ void SmtpClient::processResponse()
 			changeState((connectionType != TlsConnection) ? _READY_Connected : _TLS_State);
 			break;
 
-		/* --- TLS --- */
+			/* --- TLS --- */
 		case _TLS_0_STARTTLS:
 
 			// The response code needs to be 220.
@@ -517,7 +519,7 @@ void SmtpClient::processResponse()
 			changeState(_READY_Encrypted);
 			break;
 
-		/* --- AUTH --- */
+			/* --- AUTH --- */
 		case _AUTH_PLAIN_0:
 
 			// If the response is not 235 then the authentication was failed
@@ -560,7 +562,7 @@ void SmtpClient::processResponse()
 			changeState(_READY_Authenticated);
 			break;
 
-		/* --- MAIL --- */
+			/* --- MAIL --- */
 		case _MAIL_0_FROM:
 			if (responseCode != 250)
 			{
@@ -626,7 +628,7 @@ void SmtpClient::waitForEvent(int msec, const char* successSignal)
 	QObject::connect(this, successSignal, &loop, SLOT(quit()));
 	QObject::connect(this, SIGNAL(error(SmtpClient::SmtpError)), &loop, SLOT(quit()));
 
-	if(msec > 0)
+	if (msec > 0)
 	{
 		QTimer timer;
 		timer.setSingleShot(true);
@@ -720,7 +722,5 @@ void SmtpClient::socketEncrypted()
 }
 
 /* [5] --- */
-
-
 
 

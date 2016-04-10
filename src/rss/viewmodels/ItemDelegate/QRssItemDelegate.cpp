@@ -6,6 +6,7 @@
 #include "FaviconDownloader.h"
 #include "QRssDisplayModel.h"
 #include "RssItem.h"
+
 enum
 {
 	GUI_PAD = 6
@@ -13,11 +14,11 @@ enum
 
 namespace
 {
-int MAX3(int a, int b, int c)
-{
-	const int ab(a > b ? a : b);
-	return ab > c ? ab : c;
-}
+	int MAX3(int a, int b, int c)
+	{
+		const int ab(a > b ? a : b);
+		return ab > c ? ab : c;
+	}
 }
 
 QRssItemDelegate::QRssItemDelegate(QObject* parent) : QStyledItemDelegate(parent)
@@ -136,7 +137,7 @@ void QRssItemDelegate::drawFeed(QPainter* painter, const QStyleOptionViewItem& o
 
 	QFont updateTimeFont(statusFont);
 	const QFontMetrics updateTimeFM(updateTimeFont);
-	const QString updateTimeStr(StaticHelpers::toTimeString(pRssFeed->nextUpdate()));
+	const QString updateTimeStr = QString("%1: %2").arg(tr("NEXT_UPDATE_IN"), StaticHelpers::toTimeString(pRssFeed->nextUpdate()));
 	painter->save();
 	painter->setRenderHint(QPainter::Antialiasing);
 	style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
@@ -344,5 +345,4 @@ QSize QRssItemDelegate::feedItemSizeHint(const QStyleOptionViewItemV4& opt, RssI
 	categoryArea.moveTop(nameArea.y() + categoryFM.lineSpacing() + GUI_PAD / 2);
 	return QSize(m.width() + nameSize.width(), m.height() * 2 + nameSize.height() + categorySize.height());
 }
-
 

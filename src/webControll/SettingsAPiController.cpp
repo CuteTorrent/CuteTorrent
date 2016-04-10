@@ -13,7 +13,7 @@ SettingsAPiController::~SettingsAPiController(void)
 
 void SettingsAPiController::service(HttpRequest& request, HttpResponse& response)
 {
-	if(!CheckCreditinals(request, response))
+	if (!CheckCreditinals(request, response))
 	{
 		return;
 	}
@@ -58,11 +58,11 @@ void SettingsAPiController::service(HttpRequest& request, HttpResponse& response
 		bool ok;
 		QtJson::JsonObject settingsVal = QtJson::parse(jsonSettings, ok).toMap();
 
-		if(ok)
+		if (ok)
 		{
 			QVariantList groups = settingsVal["filteringGroups"].toList();
 
-			if(!ok)
+			if (!ok)
 			{
 				response.setStatus(500, "Internal Server Error");
 				return;
@@ -83,7 +83,7 @@ void SettingsAPiController::service(HttpRequest& request, HttpResponse& response
 			settings->setValue("Torrent", "use_read_cache", settingsVal["use_read_cache"]);
 			QList<TorrentGroup*> filteringGroups;
 
-			for(int i = 0; i < groups.size(); i++)
+			for (int i = 0; i < groups.size(); i++)
 			{
 				QMap<QString, QVariant> groupData = groups[i].toMap();
 				filteringGroups.append(new TorrentGroup(groupData["name"].toString(), groupData["extensions"].toStringList(), groupData["path"].toString()));
@@ -104,3 +104,4 @@ void SettingsAPiController::service(HttpRequest& request, HttpResponse& response
 		response.write("</BODY>");
 	}
 }
+

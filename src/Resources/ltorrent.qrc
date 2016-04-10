@@ -4,8 +4,8 @@
 		<file alias="appOverlay.ico">iconOverlay.ico</file>
     </qresource>
     <qresource prefix="/translations">
-        <file alias="cutetorrent_en_US.qm">translations/cutetorrent_en_US.qm</file>
-        <file alias="cutetorrent_ru_RU.qm">translations/cutetorrent_ru_RU.qm</file>
+        <file alias="cutetorrent_en_US.qm">translations/Language.en-US.qm</file>
+        <file alias="cutetorrent_ru_RU.qm">translations/Language.ru-RU.qm</file>
     </qresource>
     <qresource prefix="/qt-project.org/qmime">
         <file alias="freedesktop.org.xml">mime/packages/freedesktop.org.xml</file>

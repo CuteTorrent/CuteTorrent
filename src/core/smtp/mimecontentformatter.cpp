@@ -21,3 +21,4 @@ qint64 MimeContentFormatter::readData(char*, qint64)
 {
 	return -1;
 }
+

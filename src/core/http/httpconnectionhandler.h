@@ -13,6 +13,7 @@
 #include "httprequest.h"
 #include "httprequesthandler.h"
 #include "QApplicationSettings.h"
+
 /**
   The connection handler accepts incoming connections and dispatches incoming requests to to a
   request mapper. Since HTTP clients can send multiple requests before waiting for the response,
@@ -50,7 +51,7 @@ public:
 
 	/** Mark this handler as busy */
 	void setBusy();
-	static QList<QPair<uint, uint> > allowedIP, notAllowedIP;
+	static QList<QPair<uint, uint>> allowedIP, notAllowedIP;
 private:
 	bool blockClient;
 	/** Configuration settings */
@@ -92,7 +93,8 @@ private slots:
 
 	/** Received from the socket when a connection has been closed */
 	void disconnected();
-
 };
 
 #endif // HTTPCONNECTIONHANDLER_H
+
+

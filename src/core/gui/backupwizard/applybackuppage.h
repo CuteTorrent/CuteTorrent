@@ -4,12 +4,13 @@
 
 #include <QtGui>
 #include "quazipfile.h"
+
 class ApplyBackupPage : public QWizardPage
 {
 	Q_OBJECT
 public:
 	explicit ApplyBackupPage(QWidget* parent = 0);
-	int	nextId() const override;
+	int nextId() const override;
 	bool isComplete() const override;
 	void initializePage() override;
 private:
@@ -30,3 +31,5 @@ public slots:
 };
 
 #endif // APPLYBACKUPPAGE_H
+
+

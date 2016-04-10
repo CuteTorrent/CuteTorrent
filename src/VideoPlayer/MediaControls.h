@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QtGui>
 #include "ui_MediaControls.h"
 #include "mediacontroller.h"
+
 class MediaControls : public QWidget
 {
 	Q_OBJECT
@@ -33,7 +34,7 @@ public slots:
 	void updateTime(qint64 time);
 	void updateTotalTime(qint64 time);
 	void updateMedaiObject();
-signals:
+	signals:
 	void forvard();
 	void reverse();
 	void play();
@@ -55,7 +56,7 @@ private:
 protected:
 	void paintEvent(QPaintEvent* event) override;
 	bool eventFilter(QObject* obj, QEvent* event) override;
-
 };
 
 #endif
+

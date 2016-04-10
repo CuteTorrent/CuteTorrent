@@ -52,34 +52,34 @@ Phonon::MediaObject* MediaController::mediaObject() const
 void MediaController::openFile()
 {
 	QString file = QFileDialog::getOpenFileName(0, tr("Open a new file to play"), m_LastDir, "Suported Video Files (*.mkv *.avi *.mp4 *.m2ts *.mpg *.mpeg);;"
-	               "Suported Audio Files (*.mp3 *.aac *.ac3 *.aiff *.flac *.m4a *.mpc *.nsf *.oga *.ogg *.wav *.wma);;"
-	               "Matroska (*.mkv);;"
-	               "Audio Video Interleave (*.avi);;"
-	               "MPEG-4 Video (*.mp4);;"
-	               "MPEG-TS Video (*.m2ts);;"
-	               "MPEG-1 Video (*.mpg *.mpeg);;"
-	               "MPEG-1/2/2.5 Layer 3 (*.mp3);;"
-	               "Advanced Audio Coding (*.aac);;"
-	               "Dolby Digital (*.ac3);;"
-	               "Audio Interchange File Format (*.aiff);;"
-	               "Free Lossless Audio Codec (*.flac);;"
-	               "M4A (*.m4a);;"
-	               "MusePack (*.mpc);;"
-	               "NES Sound Format (*.nsf);;"
-	               "Vorbis Audio (*.oga *.ogg);;"
-	               "Windwos Audio (*.wav *.wma);;"
-	               "Any File (*.*)");
+	                                            "Suported Audio Files (*.mp3 *.aac *.ac3 *.aiff *.flac *.m4a *.mpc *.nsf *.oga *.ogg *.wav *.wma);;"
+	                                            "Matroska (*.mkv);;"
+	                                            "Audio Video Interleave (*.avi);;"
+	                                            "MPEG-4 Video (*.mp4);;"
+	                                            "MPEG-TS Video (*.m2ts);;"
+	                                            "MPEG-1 Video (*.mpg *.mpeg);;"
+	                                            "MPEG-1/2/2.5 Layer 3 (*.mp3);;"
+	                                            "Advanced Audio Coding (*.aac);;"
+	                                            "Dolby Digital (*.ac3);;"
+	                                            "Audio Interchange File Format (*.aiff);;"
+	                                            "Free Lossless Audio Codec (*.flac);;"
+	                                            "M4A (*.m4a);;"
+	                                            "MusePack (*.mpc);;"
+	                                            "NES Sound Format (*.nsf);;"
+	                                            "Vorbis Audio (*.oga *.ogg);;"
+	                                            "Windwos Audio (*.wav *.wma);;"
+	                                            "Any File (*.*)");
 
-	if(!file.isEmpty())
+	if (!file.isEmpty())
 	{
-		if(!QFile::exists(file))
+		if (!QFile::exists(file))
 		{
 			file = m_LastDir + QDir::separator() + file;
 		}
 
 		QDir dir = QFileInfo(file).absoluteDir();
 
-		if(m_LastDir != dir.absolutePath())
+		if (m_LastDir != dir.absolutePath())
 		{
 			m_LastDir = dir.absolutePath();
 			QStringList namefilters;
@@ -104,7 +104,7 @@ void MediaController::openFile()
 			m_playList = dir.entryList(namefilters);
 			m_playListPosition = m_playList.indexOf(QFileInfo(file).fileName());
 
-			if(m_playListPosition < 0)
+			if (m_playListPosition < 0)
 			{
 				m_playList = dir.entryList();
 				m_playListPosition = m_playList.indexOf(file);
@@ -121,10 +121,10 @@ void MediaController::openURL()
 {
 	bool ok;
 	QString url = QInputDialog::getText(NULL, tr("Type an url to play"),
-	                                    tr("Mediafile URL:"), QLineEdit::Normal,
-	                                    "", &ok);
+	                                        tr("Mediafile URL:"), QLineEdit::Normal,
+	                                        "", &ok);
 
-	if(ok && !url.isEmpty())
+	if (ok && !url.isEmpty())
 	{
 		Phonon::MediaSource s(QUrl::fromPercentEncoding(url.toUtf8().data()));
 		emit newFile(s.fileName());
@@ -157,7 +157,7 @@ void MediaController::updateStateStatus(Phonon::State newState, Phonon::State ol
 {
 	Q_UNUSED(oldState)
 
-	if(newState == Phonon::PlayingState)
+	if (newState == Phonon::PlayingState)
 	{
 		m_playing = true;
 	}
@@ -166,32 +166,32 @@ void MediaController::updateStateStatus(Phonon::State newState, Phonon::State ol
 		m_playing = false;
 	}
 
-	if(newState == Phonon::ErrorState)
-		if(m_pMedia->errorType() == Phonon::FatalError)
+	if (newState == Phonon::ErrorState)
+		if (m_pMedia->errorType() == Phonon::FatalError)
 		{
 			m_pMedia->play();
-			qobject_cast<Phonon::VideoWidget*> (parent())->setAspectRatio(Phonon::VideoWidget::AspectRatioAuto);
+			qobject_cast<Phonon::VideoWidget*>(parent())->setAspectRatio(Phonon::VideoWidget::AspectRatioAuto);
 			QTimer::singleShot(1000, this, SIGNAL(updateMediaObject()));
 		}
 }
 
 void MediaController::playFile(QString file)
 {
-	if(!file.isEmpty())
+	if (!file.isEmpty())
 	{
-		if(!QFile::exists(file))
+		if (!QFile::exists(file))
 		{
 			file = m_LastDir + QDir::separator() + file;
 		}
 
 		QDir dir = QFileInfo(file).absoluteDir();
 
-		if(m_LastDir != dir.absolutePath())
+		if (m_LastDir != dir.absolutePath())
 		{
 			m_LastDir = dir.absolutePath();
 			static QStringList namefilters;
 
-			if(namefilters.empty())
+			if (namefilters.empty())
 			{
 				namefilters << "*.mkv";
 				namefilters << "*.avi";
@@ -216,7 +216,7 @@ void MediaController::playFile(QString file)
 			m_playList = dir.entryList(namefilters);
 			m_playListPosition = m_playList.indexOf(QFileInfo(file).fileName());
 
-			if(m_playListPosition < 0)
+			if (m_playListPosition < 0)
 			{
 				m_playList = dir.entryList();
 				m_playListPosition = m_playList.indexOf(file);
@@ -231,7 +231,7 @@ void MediaController::playFile(QString file)
 
 void MediaController::forvard()
 {
-	if(m_playListPosition + 1 < m_playList.length())
+	if (m_playListPosition + 1 < m_playList.length())
 	{
 		m_playListPosition++;
 	}
@@ -245,7 +245,7 @@ void MediaController::forvard()
 
 void MediaController::reverse()
 {
-	if(m_playListPosition - 1 >= 0)
+	if (m_playListPosition - 1 >= 0)
 	{
 		m_playListPosition--;
 	}
@@ -263,11 +263,8 @@ bool MediaController::isPlaying()
 }
 
 
-
 Phonon::MediaController* MediaController::mediaController() const
 {
 	return m_pMediaController;
 }
-
-
 

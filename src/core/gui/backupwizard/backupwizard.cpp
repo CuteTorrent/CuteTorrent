@@ -3,6 +3,7 @@
 #include "createbackuppage.h"
 #include "applybackuppage.h"
 #include "finishpage.h"
+
 BackupWizard::BackupWizard(QWidget* parent) :
 	QWizard(parent)
 {

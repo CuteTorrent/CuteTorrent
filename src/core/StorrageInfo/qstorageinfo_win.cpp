@@ -68,7 +68,7 @@ void QStorageInfoPrivate::initRootPath()
 		path.remove(0, 4);
 	}
 
-	if (path.startsWith("\\\\"))   // network share
+	if (path.startsWith("\\\\")) // network share
 	{
 		rootPath = QDir::fromNativeSeparators(path);
 		return;
@@ -152,7 +152,7 @@ void QStorageInfoPrivate::doStat()
 		return;
 	}
 
-	if (rootPath.startsWith("//"))   // network share
+	if (rootPath.startsWith("//")) // network share
 	{
 		device = rootPath.toUtf8();
 	}
@@ -173,13 +173,13 @@ void QStorageInfoPrivate::retrieveVolumeInfo()
 	wchar_t fileSystemTypeBuffer[defaultBufferSize];
 	DWORD fileSystemFlags = 0;
 	const bool result = ::GetVolumeInformation(reinterpret_cast<const wchar_t*>(path.utf16()),
-	                    nameBuffer,
-	                    defaultBufferSize,
-	                    NULL,
-	                    NULL,
-	                    &fileSystemFlags,
-	                    fileSystemTypeBuffer,
-	                    defaultBufferSize);
+	                                           nameBuffer,
+	                                           defaultBufferSize,
+	                                           NULL,
+	                                           NULL,
+	                                           &fileSystemFlags,
+	                                           fileSystemTypeBuffer,
+	                                           defaultBufferSize);
 
 	if (result)
 	{
@@ -196,9 +196,9 @@ void QStorageInfoPrivate::retrieveDiskFreeSpace()
 	const UINT oldmode = ::SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
 	const QString path = QDir::toNativeSeparators(rootPath);
 	const bool result = ::GetDiskFreeSpaceEx(reinterpret_cast<const wchar_t*>(path.utf16()),
-	                    PULARGE_INTEGER(&bytesAvailable),
-	                    PULARGE_INTEGER(&bytesTotal),
-	                    PULARGE_INTEGER(&bytesFree));
+	                                         PULARGE_INTEGER(&bytesAvailable),
+	                                         PULARGE_INTEGER(&bytesTotal),
+	                                         PULARGE_INTEGER(&bytesFree));
 
 	if (!result)
 	{
@@ -247,3 +247,4 @@ QStorageInfo QStorageInfoPrivate::root()
 }
 
 QT_END_NAMESPACE
+

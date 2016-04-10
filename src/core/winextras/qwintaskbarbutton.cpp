@@ -325,3 +325,4 @@ QWinTaskbarProgress* QWinTaskbarButton::progress() const
 }
 
 QT_END_NAMESPACE
+

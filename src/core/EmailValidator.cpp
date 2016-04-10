@@ -1,17 +1,17 @@
 ﻿#include "Emailvalidator.h"
 
-EmailValidator::EmailValidator(QObject *parent) 
+EmailValidator::EmailValidator(QObject* parent)
 	: QValidator(parent)
-	, m_validMailRegExp("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}")
-	, m_intermediateMailRegExp("[a-z0-9._%+-]*@?[a-z0-9.-]*\\.?[a-z]*")
+	  , m_validMailRegExp("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}")
+	  , m_intermediateMailRegExp("[a-z0-9._%+-]*@?[a-z0-9.-]*\\.?[a-z]*")
 {
 }
 
-QValidator::State EmailValidator::validate(QString &text, int &pos) const
+QValidator::State EmailValidator::validate(QString& text, int& pos) const
 {
 	Q_UNUSED(pos)
 
-		fixup(text);
+	fixup(text);
 
 	if (m_validMailRegExp.exactMatch(text))
 		return Acceptable;
@@ -21,7 +21,8 @@ QValidator::State EmailValidator::validate(QString &text, int &pos) const
 	return Invalid;
 }
 
-void EmailValidator::fixup(QString &text) const
+void EmailValidator::fixup(QString& text) const
 {
 	text = text.trimmed().toLower();
 }
+

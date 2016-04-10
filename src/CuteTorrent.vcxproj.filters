@@ -979,6 +979,54 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ChoseDataPage.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CommentsWebClient.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CommentsModel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Comments\ViewModels\CommentItemDelegate.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Comments\ViewModels\CommentsModel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Comments\CommentsWebClient.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\MRichTextEdit\mrichtextedit.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\MRichTextEdit\mtextedit.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_mrichtextedit.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_mtextedit.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Comments\gui\Dialogs\AddCommentDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AddCommentDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Comments\gui\Dialogs\LoginDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Comments\gui\Dialogs\RegisterDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_LoginDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RegisterDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CommentItemDelegate.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\SettingsAPiController.h">
@@ -1237,8 +1285,6 @@
     <CustomBuild Include="core\gui\Controls\EditableHeaderView.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="Resources\translations\cutetorrent_en_US.qm" />
-    <CustomBuild Include="Resources\translations\cutetorrent_ru_RU.qm" />
     <CustomBuild Include="core\gui\Dialogs\SpeedLimitDialog.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
@@ -1308,6 +1354,50 @@
     <CustomBuild Include="core\gui\FormFiles\VideoFileChoose.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="core\gui\ImportWizard\ChoseDataPage.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\ImportWizard\ImportWizard.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Comments\ViewModels\CommentsModel.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Comments\CommentsWebClient.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\MRichTextEdit\mrichtextedit.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\MRichTextEdit\mtextedit.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\MRichTextEdit\mrichtextedit.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Comments\gui\Dialogs\AddCommentDialog.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Comments\gui\FormFiles\AddCommentDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Comments\gui\FormFiles\LoginDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Comments\gui\FormFiles\RegisterDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Comments\gui\Dialogs\LoginDialog.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Comments\gui\Dialogs\RegisterDialog.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\translations\Language.ru-RU.qm" />
+    <CustomBuild Include="Resources\translations\Language.en-US.qm" />
+    <CustomBuild Include="Comments\ViewModels\CommentItemDelegate.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="webControll\MagnetApiController.h">
@@ -1362,10 +1452,10 @@
     <None Include="search\dataModels\SerachResult.h">
       <Filter>Generated Files</Filter>
     </None>
-    <None Include="Resources\translations\cutetorrent_en_US.ts">
+    <None Include="Resources\translations\Language.ru-RU.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="Resources\translations\cutetorrent_ru_RU.ts">
+    <None Include="Resources\translations\Language.en-US.ts">
       <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>
@@ -1738,12 +1828,6 @@
     <ClInclude Include="GeneratedFiles\ui_ReportProblemDialog.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\gui\ImportWizard\ImportWizard.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\gui\ImportWizard\ChoseDataPage.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="core\gui\ImportWizard\Importers\ImportersManager.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -1760,6 +1844,24 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="core\viewModel\itemDelegate\TimeItemDelegate.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Comments\Comment.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_mrichtextedit.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_AddCommentDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_RegisterDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_LoginDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Comments\User.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

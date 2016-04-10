@@ -43,7 +43,7 @@ QT_BEGIN_NAMESPACE
 
 class QWinThumbnailToolButtonPrivate;
 
-class  QWinThumbnailToolButton : public QObject
+class QWinThumbnailToolButton : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QString toolTip READ toolTip WRITE setToolTip)
@@ -76,7 +76,7 @@ public:
 public Q_SLOTS:
 	void click();
 
-Q_SIGNALS:
+	Q_SIGNALS:
 	void clicked();
 	void changed();
 
@@ -90,3 +90,5 @@ private:
 QT_END_NAMESPACE
 
 #endif // QWINTHUMBNAILTOOLBUTTON_H
+
+

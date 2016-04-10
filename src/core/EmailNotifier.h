@@ -9,6 +9,6 @@ class EmailNotifier
 public:
 	explicit EmailNotifier(QObject* parent = NULL);
 	void SendEmail(QString to, QString subject, QString body);
-
 };
 #endif
+

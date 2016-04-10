@@ -73,15 +73,15 @@ enum qt_DWMFLIP3DWINDOWPOLICY
 struct qt_DWM_BLURBEHIND
 {
 	DWORD dwFlags;
-	BOOL  fEnable;
-	HRGN  hRgnBlur;
-	BOOL  fTransitionOnMaximized;
+	BOOL fEnable;
+	HRGN hRgnBlur;
+	BOOL fTransitionOnMaximized;
 };
 
 #include <poppack.h>
 
-const int qt_DWM_BB_ENABLE                = 0x00000001;
-const int qt_DWM_BB_BLURREGION            = 0x00000002;
+const int qt_DWM_BB_ENABLE = 0x00000001;
+const int qt_DWM_BB_BLURREGION = 0x00000002;
 const int qt_DWM_BB_TRANSITIONONMAXIMIZED = 0x00000004;
 
 struct QtDwmApiDll
@@ -99,10 +99,11 @@ struct QtDwmApiDll
 
 	QtDwmApiDll()
 		: dwmGetColorizationColor(0), dwmSetWindowAttribute(0), dwmGetWindowAttribute(0)
-		, dwmExtendFrameIntoClientArea(0), dwmEnableBlurBehindWindow(0)
-		, dwmIsCompositionEnabled(0), dwmEnableComposition(0)
-		, dwmSetIconicThumbnail(0), dwmSetIconicLivePreviewBitmap(0), dwmInvalidateIconicBitmaps(0)
-	{}
+		  , dwmExtendFrameIntoClientArea(0), dwmEnableBlurBehindWindow(0)
+		  , dwmIsCompositionEnabled(0), dwmEnableComposition(0)
+		  , dwmSetIconicThumbnail(0), dwmSetIconicLivePreviewBitmap(0), dwmInvalidateIconicBitmaps(0)
+	{
+	}
 
 	void init()
 	{
@@ -114,8 +115,10 @@ struct QtDwmApiDll
 
 	void resolve();
 
-	template <class T> static T windowAttribute(HWND hwnd, DWORD attribute, T defaultValue);
-	template <class T> static void setWindowAttribute(HWND hwnd, DWORD attribute, T value);
+	template <class T>
+	static T windowAttribute(HWND hwnd, DWORD attribute, T defaultValue);
+	template <class T>
+	static void setWindowAttribute(HWND hwnd, DWORD attribute, T value);
 
 	static bool booleanWindowAttribute(HWND hwnd, DWORD attribute)
 	{
@@ -145,7 +148,9 @@ struct QtShell32Dll
 	typedef HRESULT (STDAPICALLTYPE* SHCreateItemFromParsingName)(PCWSTR, IBindCtx*, REFIID, void**);
 	typedef HRESULT (STDAPICALLTYPE* SetCurrentProcessExplicitAppUserModelID)(PCWSTR);
 
-	QtShell32Dll() : sHCreateItemFromParsingName(0), setCurrentProcessExplicitAppUserModelID(0) {}
+	QtShell32Dll() : sHCreateItemFromParsingName(0), setCurrentProcessExplicitAppUserModelID(0)
+	{
+	}
 
 	void init()
 	{
@@ -204,3 +209,5 @@ void QtDwmApiDll::setWindowAttribute(HWND hwnd, DWORD attribute, T value)
 QT_END_NAMESPACE
 
 #endif // QWINFUNCTIONS_P_H
+
+

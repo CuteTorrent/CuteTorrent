@@ -63,7 +63,12 @@
 
 QT_BEGIN_NAMESPACE
 
-enum { dWM_SIT_DISPLAYFRAME = 1 , dWMWA_FORCE_ICONIC_REPRESENTATION = 7, dWMWA_HAS_ICONIC_BITMAP = 10 };
+enum
+{
+	dWM_SIT_DISPLAYFRAME = 1,
+	dWMWA_FORCE_ICONIC_REPRESENTATION = 7,
+	dWMWA_HAS_ICONIC_BITMAP = 10
+};
 
 static const int windowsLimitedThumbbarSize = 7;
 
@@ -95,13 +100,13 @@ static const int windowsLimitedThumbbarSize = 7;
     If \a parent is an instance of QWindow, it is automatically
     assigned as the thumbnail toolbar's \l window.
  */
-QWinThumbnailToolBar::QWinThumbnailToolBar(QObject *parent) :
-    QObject(parent), d_ptr(new QWinThumbnailToolBarPrivate)
+QWinThumbnailToolBar::QWinThumbnailToolBar(QObject* parent) :
+	QObject(parent), d_ptr(new QWinThumbnailToolBarPrivate)
 {
-    Q_D(QWinThumbnailToolBar);
-    d->q_ptr = this;
+	Q_D(QWinThumbnailToolBar);
+	d->q_ptr = this;
 	QWinEventFilter::setup();
-    setWindow(qobject_cast<QWidget *>(parent));
+	setWindow(qobject_cast<QWidget *>(parent));
 }
 
 /*!
@@ -115,32 +120,37 @@ QWinThumbnailToolBar::~QWinThumbnailToolBar()
     \property QWinThumbnailToolBar::window
     \brief the window whose thumbnail toolbar is manipulated
  */
-void QWinThumbnailToolBar::setWindow(QWidget *window)
+void QWinThumbnailToolBar::setWindow(QWidget* window)
 {
-    Q_D(QWinThumbnailToolBar);
-    if (d->window != window) {
-        if (d->window) {
-            d->window->removeEventFilter(d);
-            if (d->window->winId()) {
-                d->clearToolbar();
-                setIconicPixmapNotificationsEnabled(false);
-            }
-        }
-        d->window = window;
-        if (d->window) {
-            d->window->installEventFilter(d);
-            if (d->window->isVisible()) {
-                d->initToolbar();
-                d->_q_scheduleUpdate();
-            }
-        }
-    }
+	Q_D(QWinThumbnailToolBar);
+	if (d->window != window)
+	{
+		if (d->window)
+		{
+			d->window->removeEventFilter(d);
+			if (d->window->winId())
+			{
+				d->clearToolbar();
+				setIconicPixmapNotificationsEnabled(false);
+			}
+		}
+		d->window = window;
+		if (d->window)
+		{
+			d->window->installEventFilter(d);
+			if (d->window->isVisible())
+			{
+				d->initToolbar();
+				d->_q_scheduleUpdate();
+			}
+		}
+	}
 }
 
-QWidget *QWinThumbnailToolBar::window() const
+QWidget* QWinThumbnailToolBar::window() const
 {
-    Q_D(const QWinThumbnailToolBar);
-    return d->window;
+	Q_D(const QWinThumbnailToolBar);
+	return d->window;
 }
 
 /*!
@@ -148,40 +158,44 @@ QWidget *QWinThumbnailToolBar::window() const
 
     \note The number of buttons is limited to \c 7.
  */
-void QWinThumbnailToolBar::addButton(QWinThumbnailToolButton *button)
+void QWinThumbnailToolBar::addButton(QWinThumbnailToolButton* button)
 {
-    Q_D(QWinThumbnailToolBar);
-    if (d->buttonList.size() >= windowsLimitedThumbbarSize) {
-        qWarning() << "Cannot add " << button << " maximum number of buttons ("
-                   << windowsLimitedThumbbarSize << ") reached.";
-        return;
-    }
-    if (button && button->d_func()->toolbar != this) {
-        if (button->d_func()->toolbar) {
-            button->d_func()->toolbar->removeButton(button);
-        }
-        button->d_func()->toolbar = this;
-        connect(button, SIGNAL(changed()),
-                d, SLOT(_q_scheduleUpdate()));
-        d->buttonList.append(button);
-        d->_q_scheduleUpdate();
-    }
+	Q_D(QWinThumbnailToolBar);
+	if (d->buttonList.size() >= windowsLimitedThumbbarSize)
+	{
+		qWarning() << "Cannot add " << button << " maximum number of buttons ("
+			<< windowsLimitedThumbbarSize << ") reached.";
+		return;
+	}
+	if (button && button->d_func()->toolbar != this)
+	{
+		if (button->d_func()->toolbar)
+		{
+			button->d_func()->toolbar->removeButton(button);
+		}
+		button->d_func()->toolbar = this;
+		connect(button, SIGNAL(changed()),
+		        d, SLOT(_q_scheduleUpdate()));
+		d->buttonList.append(button);
+		d->_q_scheduleUpdate();
+	}
 }
 
 /*!
     Removes the \a button from the thumbnail toolbar.
  */
-void QWinThumbnailToolBar::removeButton(QWinThumbnailToolButton *button)
+void QWinThumbnailToolBar::removeButton(QWinThumbnailToolButton* button)
 {
-    Q_D(QWinThumbnailToolBar);
-    if (button && d->buttonList.contains(button)) {
-        button->d_func()->toolbar = 0;
+	Q_D(QWinThumbnailToolBar);
+	if (button && d->buttonList.contains(button))
+	{
+		button->d_func()->toolbar = 0;
 		disconnect(button, SIGNAL(changed()),
-			d, SLOT(_q_scheduleUpdate()));
+		           d, SLOT(_q_scheduleUpdate()));
 
-        d->buttonList.removeAll(button);
-        d->_q_scheduleUpdate();
-    }
+		d->buttonList.removeAll(button);
+		d->_q_scheduleUpdate();
+	}
 }
 
 /*!
@@ -189,13 +203,13 @@ void QWinThumbnailToolBar::removeButton(QWinThumbnailToolButton *button)
 
     \note Any existing buttons are replaced.
  */
-void QWinThumbnailToolBar::setButtons(const QList<QWinThumbnailToolButton *> &buttons)
+void QWinThumbnailToolBar::setButtons(const QList<QWinThumbnailToolButton *>& buttons)
 {
-    Q_D(QWinThumbnailToolBar);
-    d->buttonList.clear();
-    Q_FOREACH (QWinThumbnailToolButton *button, buttons)
-        addButton(button);
-    d->_q_updateToolbar();
+	Q_D(QWinThumbnailToolBar);
+	d->buttonList.clear();
+	Q_FOREACH (QWinThumbnailToolButton *button, buttons)
+		addButton(button);
+	d->_q_updateToolbar();
 }
 
 /*!
@@ -203,8 +217,8 @@ void QWinThumbnailToolBar::setButtons(const QList<QWinThumbnailToolButton *> &bu
  */
 QList<QWinThumbnailToolButton *> QWinThumbnailToolBar::buttons() const
 {
-    Q_D(const QWinThumbnailToolBar);
-    return d->buttonList;
+	Q_D(const QWinThumbnailToolBar);
+	return d->buttonList;
 }
 
 /*!
@@ -215,28 +229,30 @@ QList<QWinThumbnailToolButton *> QWinThumbnailToolBar::buttons() const
  */
 int QWinThumbnailToolBar::count() const
 {
-    Q_D(const QWinThumbnailToolBar);
-    return d->buttonList.size();
+	Q_D(const QWinThumbnailToolBar);
+	return d->buttonList.size();
 }
 
 void QWinThumbnailToolBarPrivate::updateIconicPixmapsEnabled(bool invalidate)
 {
-    Q_Q(QWinThumbnailToolBar);
-    qtDwmApiDll.init();
-    const HWND hwnd = handle();
-    if (!hwnd) {
-         qWarning() << Q_FUNC_INFO << "invoked with hwnd=0";
-         return;
-    }
-    if (!qtDwmApiDll.dwmInvalidateIconicBitmaps)
-        return;
-    const bool enabled = iconicThumbnail || iconicLivePreview;
-    q->setIconicPixmapNotificationsEnabled(enabled);
-    if (enabled && invalidate) {
-        const HRESULT hr = qtDwmApiDll.dwmInvalidateIconicBitmaps(hwnd);
-        if (FAILED(hr))
-            qWarning() << QWinThumbnailToolBarPrivate::msgComFailed("DwmInvalidateIconicBitmaps", hr);
-    }
+	Q_Q(QWinThumbnailToolBar);
+	qtDwmApiDll.init();
+	const HWND hwnd = handle();
+	if (!hwnd)
+	{
+		qWarning() << Q_FUNC_INFO << "invoked with hwnd=0";
+		return;
+	}
+	if (!qtDwmApiDll.dwmInvalidateIconicBitmaps)
+		return;
+	const bool enabled = iconicThumbnail || iconicLivePreview;
+	q->setIconicPixmapNotificationsEnabled(enabled);
+	if (enabled && invalidate)
+	{
+		const HRESULT hr = qtDwmApiDll.dwmInvalidateIconicBitmaps(hwnd);
+		if (FAILED(hr))
+			qWarning() << QWinThumbnailToolBarPrivate::msgComFailed("DwmInvalidateIconicBitmaps", hr);
+	}
 }
 
 /*
@@ -249,37 +265,39 @@ void QWinThumbnailToolBarPrivate::updateIconicPixmapsEnabled(bool invalidate)
 
 void QWinThumbnailToolBarPrivate::IconicPixmapCache::deleteBitmap()
 {
-    if (m_bitmap) {
-        DeleteObject(m_bitmap);
-        m_size = QSize();
-        m_bitmap = 0;
-    }
+	if (m_bitmap)
+	{
+		DeleteObject(m_bitmap);
+		m_size = QSize();
+		m_bitmap = 0;
+	}
 }
 
-bool QWinThumbnailToolBarPrivate::IconicPixmapCache::setPixmap(const QPixmap &pixmap)
+bool QWinThumbnailToolBarPrivate::IconicPixmapCache::setPixmap(const QPixmap& pixmap)
 {
-    if (pixmap.cacheKey() == m_pixmap.cacheKey())
-        return false;
-    deleteBitmap();
-    m_pixmap = pixmap;
-    return true;
+	if (pixmap.cacheKey() == m_pixmap.cacheKey())
+		return false;
+	deleteBitmap();
+	m_pixmap = pixmap;
+	return true;
 }
 
-HBITMAP QWinThumbnailToolBarPrivate::IconicPixmapCache::bitmap(const QSize &maxSize)
+HBITMAP QWinThumbnailToolBarPrivate::IconicPixmapCache::bitmap(const QSize& maxSize)
 {
-    if (m_pixmap.isNull())
-        return 0;
-    if (m_bitmap && m_size.width() <= maxSize.width() && m_size.height() <= maxSize.height())
-        return m_bitmap;
-    deleteBitmap();
-    QPixmap pixmap = m_pixmap;
-    if (pixmap.width() >= maxSize.width() || pixmap.height() >= maxSize.width())
-        pixmap = pixmap.scaled(maxSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    if (const HBITMAP bitmap = QtWin::toHBITMAP(pixmap, QtWin::HBitmapAlpha)) {
-        m_size = pixmap.size();
-        m_bitmap = bitmap;
-    }
-    return m_bitmap;
+	if (m_pixmap.isNull())
+		return 0;
+	if (m_bitmap && m_size.width() <= maxSize.width() && m_size.height() <= maxSize.height())
+		return m_bitmap;
+	deleteBitmap();
+	QPixmap pixmap = m_pixmap;
+	if (pixmap.width() >= maxSize.width() || pixmap.height() >= maxSize.width())
+		pixmap = pixmap.scaled(maxSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+	if (const HBITMAP bitmap = QtWin::toHBITMAP(pixmap, QtWin::HBitmapAlpha))
+	{
+		m_size = pixmap.size();
+		m_bitmap = bitmap;
+	}
+	return m_bitmap;
 }
 
 /*!
@@ -313,28 +331,29 @@ HBITMAP QWinThumbnailToolBarPrivate::IconicPixmapCache::bitmap(const QSize &maxS
 
 bool QWinThumbnailToolBar::iconicPixmapNotificationsEnabled() const
 {
-    Q_D(const QWinThumbnailToolBar);
-    const HWND hwnd = d->handle();
-    if (!hwnd || !qtDwmApiDll.dwmGetWindowAttribute)
-        return false;
-    qtDwmApiDll.init();
-    return qtDwmApiDll.dwmGetWindowAttribute && hwnd
-        && QtDwmApiDll::booleanWindowAttribute(hwnd, dWMWA_FORCE_ICONIC_REPRESENTATION);
+	Q_D(const QWinThumbnailToolBar);
+	const HWND hwnd = d->handle();
+	if (!hwnd || !qtDwmApiDll.dwmGetWindowAttribute)
+		return false;
+	qtDwmApiDll.init();
+	return qtDwmApiDll.dwmGetWindowAttribute && hwnd
+		&& QtDwmApiDll::booleanWindowAttribute(hwnd, dWMWA_FORCE_ICONIC_REPRESENTATION);
 }
 
 void QWinThumbnailToolBar::setIconicPixmapNotificationsEnabled(bool enabled)
 {
-    Q_D(const QWinThumbnailToolBar);
-    const HWND hwnd = d->handle();
-    if (!hwnd) {
-        qWarning() << Q_FUNC_INFO << "invoked with hwnd=0";
-        return;
-    }
-    qtDwmApiDll.init();
-    if (!qtDwmApiDll.dwmSetWindowAttribute || iconicPixmapNotificationsEnabled() == enabled)
-        return;
-    QtDwmApiDll::setBooleanWindowAttribute(hwnd, dWMWA_FORCE_ICONIC_REPRESENTATION, enabled);
-    QtDwmApiDll::setBooleanWindowAttribute(hwnd, dWMWA_HAS_ICONIC_BITMAP, enabled);
+	Q_D(const QWinThumbnailToolBar);
+	const HWND hwnd = d->handle();
+	if (!hwnd)
+	{
+		qWarning() << Q_FUNC_INFO << "invoked with hwnd=0";
+		return;
+	}
+	qtDwmApiDll.init();
+	if (!qtDwmApiDll.dwmSetWindowAttribute || iconicPixmapNotificationsEnabled() == enabled)
+		return;
+	QtDwmApiDll::setBooleanWindowAttribute(hwnd, dWMWA_FORCE_ICONIC_REPRESENTATION, enabled);
+	QtDwmApiDll::setBooleanWindowAttribute(hwnd, dWMWA_HAS_ICONIC_BITMAP, enabled);
 }
 
 /*!
@@ -345,18 +364,18 @@ void QWinThumbnailToolBar::setIconicPixmapNotificationsEnabled(bool enabled)
     \sa QWinThumbnailToolBar::iconicPixmapNotificationsEnabled
  */
 
-void QWinThumbnailToolBar::setIconicThumbnailPixmap(const QPixmap &pixmap)
+void QWinThumbnailToolBar::setIconicThumbnailPixmap(const QPixmap& pixmap)
 {
-    Q_D(QWinThumbnailToolBar);
-    const bool changed = d->iconicThumbnail.setPixmap(pixmap);
-    if (d->hasHandle()) // Potentially 0 when invoked from QML loading, see _q_updateToolbar()
-        d->updateIconicPixmapsEnabled(changed && !d->withinIconicThumbnailRequest);
+	Q_D(QWinThumbnailToolBar);
+	const bool changed = d->iconicThumbnail.setPixmap(pixmap);
+	if (d->hasHandle()) // Potentially 0 when invoked from QML loading, see _q_updateToolbar()
+		d->updateIconicPixmapsEnabled(changed && !d->withinIconicThumbnailRequest);
 }
 
 QPixmap QWinThumbnailToolBar::iconicThumbnailPixmap() const
 {
-    Q_D(const QWinThumbnailToolBar);
-    return d->iconicThumbnail.pixmap();
+	Q_D(const QWinThumbnailToolBar);
+	return d->iconicThumbnail.pixmap();
 }
 
 /*!
@@ -366,46 +385,48 @@ QPixmap QWinThumbnailToolBar::iconicThumbnailPixmap() const
     \since 5.4
  */
 
-void QWinThumbnailToolBar::setIconicLivePreviewPixmap(const QPixmap &pixmap)
+void QWinThumbnailToolBar::setIconicLivePreviewPixmap(const QPixmap& pixmap)
 {
-    Q_D(QWinThumbnailToolBar);
-    const bool changed = d->iconicLivePreview.setPixmap(pixmap);
-    if (d->hasHandle()) // Potentially 0 when invoked from QML loading, see _q_updateToolbar()
-        d->updateIconicPixmapsEnabled(changed && !d->withinIconicLivePreviewRequest);
+	Q_D(QWinThumbnailToolBar);
+	const bool changed = d->iconicLivePreview.setPixmap(pixmap);
+	if (d->hasHandle()) // Potentially 0 when invoked from QML loading, see _q_updateToolbar()
+		d->updateIconicPixmapsEnabled(changed && !d->withinIconicLivePreviewRequest);
 }
 
 QPixmap QWinThumbnailToolBar::iconicLivePreviewPixmap() const
 {
-    Q_D(const QWinThumbnailToolBar);
-    return d->iconicLivePreview.pixmap();
+	Q_D(const QWinThumbnailToolBar);
+	return d->iconicLivePreview.pixmap();
 }
 
-inline void QWinThumbnailToolBarPrivate::updateIconicThumbnail(const QWinRequestThumbnailBitmap *message)
+inline void QWinThumbnailToolBarPrivate::updateIconicThumbnail(const QWinRequestThumbnailBitmap* message)
 {
-    qtDwmApiDll.init();
-    if (!qtDwmApiDll.dwmSetIconicThumbnail || !iconicThumbnail)
-        return;
-    if (const HBITMAP bitmap = iconicThumbnail.bitmap(message->maxSize())) {
-        const HRESULT hr = qtDwmApiDll.dwmSetIconicThumbnail(message->hwnd(), bitmap, dWM_SIT_DISPLAYFRAME);
-        if (FAILED(hr))
-            qWarning() << QWinThumbnailToolBarPrivate::msgComFailed("DwmSetIconicThumbnail", hr);
-    }
+	qtDwmApiDll.init();
+	if (!qtDwmApiDll.dwmSetIconicThumbnail || !iconicThumbnail)
+		return;
+	if (const HBITMAP bitmap = iconicThumbnail.bitmap(message->maxSize()))
+	{
+		const HRESULT hr = qtDwmApiDll.dwmSetIconicThumbnail(message->hwnd(), bitmap, dWM_SIT_DISPLAYFRAME);
+		if (FAILED(hr))
+			qWarning() << QWinThumbnailToolBarPrivate::msgComFailed("DwmSetIconicThumbnail", hr);
+	}
 }
 
-inline void QWinThumbnailToolBarPrivate::updateIconicLivePreview(const QWinRequestLivePreviewBitmap *message)
+inline void QWinThumbnailToolBarPrivate::updateIconicLivePreview(const QWinRequestLivePreviewBitmap* message)
 {
-    qtDwmApiDll.init();
-    if (!qtDwmApiDll.dwmSetIconicLivePreviewBitmap || !iconicLivePreview)
-        return;
-    RECT rect;
-    GetClientRect(message->hwnd(), &rect);
-    const QSize maxSize(rect.right, rect.bottom);
-    POINT offset = {0, 0};
-    if (const HBITMAP bitmap = iconicLivePreview.bitmap(maxSize)) {
-        const HRESULT hr = qtDwmApiDll.dwmSetIconicLivePreviewBitmap(message->hwnd(), bitmap, &offset, dWM_SIT_DISPLAYFRAME);
-        if (FAILED(hr))
-            qWarning() << QWinThumbnailToolBarPrivate::msgComFailed("DwmSetIconicLivePreviewBitmap", hr);
-    }
+	qtDwmApiDll.init();
+	if (!qtDwmApiDll.dwmSetIconicLivePreviewBitmap || !iconicLivePreview)
+		return;
+	RECT rect;
+	GetClientRect(message->hwnd(), &rect);
+	const QSize maxSize(rect.right, rect.bottom);
+	POINT offset = {0, 0};
+	if (const HBITMAP bitmap = iconicLivePreview.bitmap(maxSize))
+	{
+		const HRESULT hr = qtDwmApiDll.dwmSetIconicLivePreviewBitmap(message->hwnd(), bitmap, &offset, dWM_SIT_DISPLAYFRAME);
+		if (FAILED(hr))
+			qWarning() << QWinThumbnailToolBarPrivate::msgComFailed("DwmSetIconicLivePreviewBitmap", hr);
+	}
 }
 
 /*!
@@ -413,133 +434,141 @@ inline void QWinThumbnailToolBarPrivate::updateIconicLivePreview(const QWinReque
  */
 void QWinThumbnailToolBar::clear()
 {
-    setButtons(QList<QWinThumbnailToolButton *>());
+	setButtons(QList<QWinThumbnailToolButton *>());
 }
 
-static inline ITaskbarList4 *createTaskbarList()
+static inline ITaskbarList4* createTaskbarList()
 {
-    ITaskbarList4 *result = 0;
-    HRESULT hresult = CoCreateInstance(CLSID_TaskbarList, 0, CLSCTX_INPROC_SERVER, qIID_ITaskbarList4, reinterpret_cast<void **>(&result));
-    if (FAILED(hresult)) {
-        const QString err = QtWin::errorStringFromHresult(hresult);
-        qWarning("QWinThumbnailToolBar: qIID_ITaskbarList4 was not created: %#010x, %s.",
-                 (unsigned)hresult, qPrintable(err));
-        return 0;
-    }
-    hresult = result->HrInit();
-    if (FAILED(hresult)) {
-        result->Release();
-        const QString err = QtWin::errorStringFromHresult(hresult);
-        qWarning("QWinThumbnailToolBar: qIID_ITaskbarList4 was not initialized: %#010x, %s.",
-                 (unsigned)hresult, qPrintable(err));
-        return 0;
-    }
-    return result;
+	ITaskbarList4* result = 0;
+	HRESULT hresult = CoCreateInstance(CLSID_TaskbarList, 0, CLSCTX_INPROC_SERVER, qIID_ITaskbarList4, reinterpret_cast<void **>(&result));
+	if (FAILED(hresult))
+	{
+		const QString err = QtWin::errorStringFromHresult(hresult);
+		qWarning("QWinThumbnailToolBar: qIID_ITaskbarList4 was not created: %#010x, %s.",
+		         (unsigned)hresult, qPrintable(err));
+		return 0;
+	}
+	hresult = result->HrInit();
+	if (FAILED(hresult))
+	{
+		result->Release();
+		const QString err = QtWin::errorStringFromHresult(hresult);
+		qWarning("QWinThumbnailToolBar: qIID_ITaskbarList4 was not initialized: %#010x, %s.",
+		         (unsigned)hresult, qPrintable(err));
+		return 0;
+	}
+	return result;
 }
 
 QWinThumbnailToolBarPrivate::QWinThumbnailToolBarPrivate() :
-    QObject(0), updateScheduled(false), window(0), pTbList(createTaskbarList()), q_ptr(0),
-    withinIconicThumbnailRequest(false), withinIconicLivePreviewRequest(false)
+	QObject(0), updateScheduled(false), window(0), pTbList(createTaskbarList()), q_ptr(0),
+	withinIconicThumbnailRequest(false), withinIconicLivePreviewRequest(false)
 {
-    buttonList.reserve(windowsLimitedThumbbarSize);
+	buttonList.reserve(windowsLimitedThumbbarSize);
 }
 
 QWinThumbnailToolBarPrivate::~QWinThumbnailToolBarPrivate()
 {
-    if (pTbList)
-        pTbList->Release();
-    QCoreApplication::instance()->removeEventFilter(this);
+	if (pTbList)
+		pTbList->Release();
+	QCoreApplication::instance()->removeEventFilter(this);
 }
 
 inline bool QWinThumbnailToolBarPrivate::hasHandle() const
 {
-    return window && window->winId();
+	return window && window->winId();
 }
 
 inline HWND QWinThumbnailToolBarPrivate::handle() const
 {
-    return hasHandle() ? reinterpret_cast<HWND>(window->winId()) : HWND(0);
+	return hasHandle() ? reinterpret_cast<HWND>(window->winId()) : HWND(0);
 }
 
 void QWinThumbnailToolBarPrivate::initToolbar() const
 {
 #if !defined(_MSC_VER) || _MSC_VER >= 1600
-    if (!pTbList || !window)
-        return;
-    THUMBBUTTON buttons[windowsLimitedThumbbarSize];
-    initButtons(buttons);
-    HRESULT hresult = pTbList->ThumbBarAddButtons(handle(), windowsLimitedThumbbarSize, buttons);
-    if (FAILED(hresult))
-        qWarning() << msgComFailed("ThumbBarAddButtons", hresult);
+	if (!pTbList || !window)
+		return;
+	THUMBBUTTON buttons[windowsLimitedThumbbarSize];
+	initButtons(buttons);
+	HRESULT hresult = pTbList->ThumbBarAddButtons(handle(), windowsLimitedThumbbarSize, buttons);
+	if (FAILED(hresult))
+		qWarning() << msgComFailed("ThumbBarAddButtons", hresult);
 #else
-    // ITaskbarList3::ThumbBarAddButtons() has a different signature in SDK 6.X
+	// ITaskbarList3::ThumbBarAddButtons() has a different signature in SDK 6.X
     Q_UNIMPLEMENTED();
 #endif
 }
 
 void QWinThumbnailToolBarPrivate::clearToolbar() const
 {
-    if (!pTbList || !window)
-        return;
-    THUMBBUTTON buttons[windowsLimitedThumbbarSize];
-    initButtons(buttons);
-    HRESULT hresult = pTbList->ThumbBarUpdateButtons(handle(), windowsLimitedThumbbarSize, buttons);
-    if (FAILED(hresult))
-        qWarning() << msgComFailed("ThumbBarUpdateButtons", hresult);
+	if (!pTbList || !window)
+		return;
+	THUMBBUTTON buttons[windowsLimitedThumbbarSize];
+	initButtons(buttons);
+	HRESULT hresult = pTbList->ThumbBarUpdateButtons(handle(), windowsLimitedThumbbarSize, buttons);
+	if (FAILED(hresult))
+		qWarning() << msgComFailed("ThumbBarUpdateButtons", hresult);
 }
 
 void QWinThumbnailToolBarPrivate::_q_updateToolbar()
 {
-    updateScheduled = false;
-    if (!pTbList || !window)
-        return;
-    THUMBBUTTON buttons[windowsLimitedThumbbarSize];
-    QList<HICON> createdIcons;
-    initButtons(buttons);
-    const int thumbbarSize = qMin(buttonList.size(), windowsLimitedThumbbarSize);
-    // filling from the right fixes some strange bug which makes last button bg look like first btn bg
-    for (int i = (windowsLimitedThumbbarSize - thumbbarSize); i < windowsLimitedThumbbarSize; i++) {
-        QWinThumbnailToolButton *button = buttonList.at(i - (windowsLimitedThumbbarSize - thumbbarSize));
-        buttons[i].dwFlags = static_cast<THUMBBUTTONFLAGS>(makeNativeButtonFlags(button));
-        buttons[i].dwMask  = static_cast<THUMBBUTTONMASK>(makeButtonMask(button));
-        if (!button->icon().isNull()) {;
-            buttons[i].hIcon = QtWin::toHICON(button->icon().pixmap(GetSystemMetrics(SM_CXSMICON)));
-            if (!buttons[i].hIcon)
-                buttons[i].hIcon = (HICON)LoadImage(0, IDI_APPLICATION, IMAGE_ICON, SM_CXSMICON, SM_CYSMICON, LR_SHARED);
-            else
-                createdIcons << buttons[i].hIcon;
-        }
-        if (!button->toolTip().isEmpty()) {
-            buttons[i].szTip[button->toolTip().left(sizeof(buttons[i].szTip)/sizeof(buttons[i].szTip[0]) - 1).toWCharArray(buttons[i].szTip)] = 0;
-        }
-    }
-    HRESULT hresult = pTbList->ThumbBarUpdateButtons(handle(), windowsLimitedThumbbarSize, buttons);
-    if (FAILED(hresult))
-        qWarning() << msgComFailed("ThumbBarUpdateButtons", hresult);
-    updateIconicPixmapsEnabled(false);
-    for (int i = 0; i < windowsLimitedThumbbarSize; i++) {
-        if (buttons[i].hIcon) {
-            if (createdIcons.contains(buttons[i].hIcon))
-                DestroyIcon(buttons[i].hIcon);
-            else
-                DeleteObject(buttons[i].hIcon);
-        }
-    }
+	updateScheduled = false;
+	if (!pTbList || !window)
+		return;
+	THUMBBUTTON buttons[windowsLimitedThumbbarSize];
+	QList<HICON> createdIcons;
+	initButtons(buttons);
+	const int thumbbarSize = qMin(buttonList.size(), windowsLimitedThumbbarSize);
+	// filling from the right fixes some strange bug which makes last button bg look like first btn bg
+	for (int i = (windowsLimitedThumbbarSize - thumbbarSize); i < windowsLimitedThumbbarSize; i++)
+	{
+		QWinThumbnailToolButton* button = buttonList.at(i - (windowsLimitedThumbbarSize - thumbbarSize));
+		buttons[i].dwFlags = static_cast<THUMBBUTTONFLAGS>(makeNativeButtonFlags(button));
+		buttons[i].dwMask = static_cast<THUMBBUTTONMASK>(makeButtonMask(button));
+		if (!button->icon().isNull())
+		{
+			;
+			buttons[i].hIcon = QtWin::toHICON(button->icon().pixmap(GetSystemMetrics(SM_CXSMICON)));
+			if (!buttons[i].hIcon)
+				buttons[i].hIcon = (HICON)LoadImage(0, IDI_APPLICATION, IMAGE_ICON, SM_CXSMICON, SM_CYSMICON, LR_SHARED);
+			else
+				createdIcons << buttons[i].hIcon;
+		}
+		if (!button->toolTip().isEmpty())
+		{
+			buttons[i].szTip[button->toolTip().left(sizeof(buttons[i].szTip) / sizeof(buttons[i].szTip[0]) - 1).toWCharArray(buttons[i].szTip)] = 0;
+		}
+	}
+	HRESULT hresult = pTbList->ThumbBarUpdateButtons(handle(), windowsLimitedThumbbarSize, buttons);
+	if (FAILED(hresult))
+		qWarning() << msgComFailed("ThumbBarUpdateButtons", hresult);
+	updateIconicPixmapsEnabled(false);
+	for (int i = 0; i < windowsLimitedThumbbarSize; i++)
+	{
+		if (buttons[i].hIcon)
+		{
+			if (createdIcons.contains(buttons[i].hIcon))
+				DestroyIcon(buttons[i].hIcon);
+			else
+				DeleteObject(buttons[i].hIcon);
+		}
+	}
 }
 
 void QWinThumbnailToolBarPrivate::_q_scheduleUpdate()
 {
-    if (updateScheduled)
-        return;
-    updateScheduled = true;
-    QTimer::singleShot(0, this, SLOT(_q_updateToolbar()));
+	if (updateScheduled)
+		return;
+	updateScheduled = true;
+	QTimer::singleShot(0, this, SLOT(_q_updateToolbar()));
 }
 
-bool QWinThumbnailToolBarPrivate::eventFilter(QObject *object, QEvent *event)
+bool QWinThumbnailToolBarPrivate::eventFilter(QObject* object, QEvent* event)
 {
-    if (object == window)
+	if (object == window)
 	{
-		if (event->type() == QWinEvent::TaskbarButtonCreated) 
+		if (event->type() == QWinEvent::TaskbarButtonCreated)
 		{
 			initToolbar();
 			_q_scheduleUpdate();
@@ -549,7 +578,7 @@ bool QWinThumbnailToolBarPrivate::eventFilter(QObject *object, QEvent *event)
 			QWinTaskBarButtonClicked* clickedEvent = static_cast<QWinTaskBarButtonClicked*>(event);
 			const int buttonId = clickedEvent->getClickedButtonId() - (windowsLimitedThumbbarSize - qMin(windowsLimitedThumbbarSize, buttonList.size()));
 			buttonList.at(buttonId)->click();
-			
+
 			return true;
 		}
 		else if (event->type() == QWinEvent::RequestThumbnailBitmap)
@@ -570,56 +599,58 @@ bool QWinThumbnailToolBarPrivate::eventFilter(QObject *object, QEvent *event)
 			updateIconicLivePreview(request);
 			return true;
 		}
-    }
+	}
 
-    return QObject::eventFilter(object, event);
+	return QObject::eventFilter(object, event);
 }
 
-void QWinThumbnailToolBarPrivate::initButtons(THUMBBUTTON *buttons)
+void QWinThumbnailToolBarPrivate::initButtons(THUMBBUTTON* buttons)
 {
-    for (int i = 0; i < windowsLimitedThumbbarSize; i++) {
-        memset(&buttons[i], 0, sizeof buttons[i]);
-        buttons[i].iId = i;
-        buttons[i].dwFlags = THBF_HIDDEN;
-        buttons[i].dwMask  = THB_FLAGS;
-    }
+	for (int i = 0; i < windowsLimitedThumbbarSize; i++)
+	{
+		memset(&buttons[i], 0, sizeof buttons[i]);
+		buttons[i].iId = i;
+		buttons[i].dwFlags = THBF_HIDDEN;
+		buttons[i].dwMask = THB_FLAGS;
+	}
 }
 
-int QWinThumbnailToolBarPrivate::makeNativeButtonFlags(const QWinThumbnailToolButton *button)
+int QWinThumbnailToolBarPrivate::makeNativeButtonFlags(const QWinThumbnailToolButton* button)
 {
-    int nativeFlags = 0;
-    if (button->isEnabled())
-        nativeFlags |= THBF_ENABLED;
-    else
-        nativeFlags |= THBF_DISABLED;
-    if (button->dismissOnClick())
-        nativeFlags |= THBF_DISMISSONCLICK;
-    if (button->isFlat())
-        nativeFlags |= THBF_NOBACKGROUND;
-    if (!button->isVisible())
-        nativeFlags |= THBF_HIDDEN;
-    if (!button->isInteractive())
-        nativeFlags |= THBF_NONINTERACTIVE;
-    return nativeFlags;
+	int nativeFlags = 0;
+	if (button->isEnabled())
+		nativeFlags |= THBF_ENABLED;
+	else
+		nativeFlags |= THBF_DISABLED;
+	if (button->dismissOnClick())
+		nativeFlags |= THBF_DISMISSONCLICK;
+	if (button->isFlat())
+		nativeFlags |= THBF_NOBACKGROUND;
+	if (!button->isVisible())
+		nativeFlags |= THBF_HIDDEN;
+	if (!button->isInteractive())
+		nativeFlags |= THBF_NONINTERACTIVE;
+	return nativeFlags;
 }
 
-int QWinThumbnailToolBarPrivate::makeButtonMask(const QWinThumbnailToolButton *button)
+int QWinThumbnailToolBarPrivate::makeButtonMask(const QWinThumbnailToolButton* button)
 {
-    int mask = 0;
-    mask |= THB_FLAGS;
-    if (!button->icon().isNull())
-        mask |= THB_ICON;
-    if (!button->toolTip().isEmpty())
-        mask |= THB_TOOLTIP;
-    return mask;
+	int mask = 0;
+	mask |= THB_FLAGS;
+	if (!button->icon().isNull())
+		mask |= THB_ICON;
+	if (!button->toolTip().isEmpty())
+		mask |= THB_TOOLTIP;
+	return mask;
 }
 
-QString QWinThumbnailToolBarPrivate::msgComFailed(const char *function, HRESULT hresult)
+QString QWinThumbnailToolBarPrivate::msgComFailed(const char* function, HRESULT hresult)
 {
-    return QString::fromLatin1("QWinThumbnailToolBar: %1() failed: #%2: %3")
-            .arg(QLatin1String(function))
-            .arg((unsigned)hresult, 10, 16, QLatin1Char('0'))
-            .arg(QtWin::errorStringFromHresult(hresult));
+	return QString::fromLatin1("QWinThumbnailToolBar: %1() failed: #%2: %3")
+		.arg(QLatin1String(function))
+		.arg((unsigned)hresult, 10, 16, QLatin1Char('0'))
+		.arg(QtWin::errorStringFromHresult(hresult));
 }
 
 QT_END_NAMESPACE
+

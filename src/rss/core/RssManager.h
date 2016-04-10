@@ -11,6 +11,7 @@
 class RssFeed;
 class QApplicationSettings;
 class RssItem;
+
 class RssManager : public QObject, public Singleton<RssManager>
 {
 	friend class Singleton<RssManager>;
@@ -35,6 +36,7 @@ private:
 		QUuid rssFeedId;
 		QString rssItemId;
 	};
+
 	RssManager(QObject* parent = NULL);
 	FileDownloaderPtr m_pTorrentDownloader;
 	NotificationSystemPtr m_pNotificationSystem;
@@ -57,11 +59,10 @@ private slots:
 	void onTorrentDownloadError(QUrl url, QString error);
 	void onMagnetError(QString);
 	void onDownloadMetadataCompleted(openmagnet_info);
-signals:
+	signals:
 	void Notify(int, QString, QVariant);
 	void FeedChanged(QUuid);
 	void FeedRemoved(QUuid);
-
 };
 #endif
 

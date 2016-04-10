@@ -1,8 +1,8 @@
-
 #pragma once
 #include <QtGui>
 #include "defs.h"
 #include "TorrentGroupsManager.h"
+
 enum TorrentFilterType
 {
 	ACTIVE,
@@ -28,6 +28,7 @@ private:
 		GROUP,
 		TORRENT
 	};
+
 	TorrentGroupsManagerPtr m_pTorrentGroupsManager;
 	QMutex* m_pUpdateLocker;
 	InternalFilterType m_currentFilterType;
@@ -38,3 +39,4 @@ protected:
 	bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 	bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
 };
+

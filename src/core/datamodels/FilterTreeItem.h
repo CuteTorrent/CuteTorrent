@@ -110,7 +110,7 @@ public:
 	{
 		return m_icon;
 	}
-
 };
 
 #endif
+

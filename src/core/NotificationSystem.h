@@ -10,6 +10,7 @@
 class QApplicationSettings;
 class QSystemTrayIcon;
 class QTimerEvent;
+
 class NotificationSystem : public QObject, public Singleton<NotificationSystem>
 {
 	friend class Singleton<NotificationSystem>;
@@ -45,6 +46,7 @@ private:
 		QString message;
 		QVariant data;
 	};
+
 	Notification getPendingNotification();
 	QQueue<Notification> m_notifications;
 	NotificationSystem();
@@ -61,3 +63,5 @@ protected:
 	bool eventFilter(QObject* obj, QEvent* event) override;
 };
 #endif //_NOTIFICATION_SYSTEM_INCLUDED_ 
+
+

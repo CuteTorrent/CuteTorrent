@@ -8,7 +8,7 @@
 
 RaitingDialog::RaitingDialog(QWidget* parent)
 	: BaseWindow<QDialog>(FullTitle, NoResize, parent)
-	, m_pNetworkAccessManager(new QNetworkAccessManager(this))
+	  , m_pNetworkAccessManager(new QNetworkAccessManager(this))
 {
 	setupUi(this);
 	setupCustomWindow();
@@ -29,42 +29,42 @@ void RaitingDialog::sendRaiting()
 
 	raitingObject["uid"] = macHash;
 	raitingObject["custom_msg"] = plainTextEdit->toPlainText();
-	raitingObject["speed"] = QString::number(m_raitingWidgets[SPEED]->rating(),103,2);
-	raitingObject["design"] = QString::number(m_raitingWidgets[DESIGN]->rating(), 103, 2);
-	raitingObject["usability"] = QString::number(m_raitingWidgets[USABILITY]->rating(), 103, 2);
-	raitingObject["possibilities"] = QString::number(m_raitingWidgets[POSSIBILITIES]->rating(), 103, 2);
+	raitingObject["speed"] = m_raitingWidgets[SPEED]->rating();
+	raitingObject["design"] = m_raitingWidgets[DESIGN]->rating();
+	raitingObject["usability"] = m_raitingWidgets[USABILITY]->rating();
+	raitingObject["possibilities"] = m_raitingWidgets[POSSIBILITIES]->rating();
 	QtJson::JsonObject postObject;
 	postObject["rating"] = raitingObject;
 	QByteArray data = QtJson::serialize(postObject);
 	qDebug() << "Sending Rating JSON:" << QString(data);
-	QNetworkRequest request(QUrl("http://integration.cutetorrent.info/rating"));
+	QNetworkRequest request(QUrl("http://api.cutetorrent.info/rating"));
 	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 	m_pNetworkAccessManager->post(request, data);
-
 }
+
 QString RaitingDialog::getMacAddress()
 {
 	foreach(QNetworkInterface netInterface, QNetworkInterface::allInterfaces())
 	{
-		// Return only the first non-loopback MAC Address
-		if (!(netInterface.flags() & QNetworkInterface::IsLoopBack))
-			return netInterface.hardwareAddress();
+			// Return only the first non-loopback MAC Address
+			if (!(netInterface.flags() & QNetworkInterface::IsLoopBack))
+				return netInterface.hardwareAddress();
 	}
 	return QString();
 }
+
 void RaitingDialog::OnRaitingSent(QNetworkReply* pReply)
 {
 	QApplication::restoreOverrideCursor();
 	if (pReply->error() == QNetworkReply::NoError)
 	{
 		qDebug() << "Server output:" << pReply->readAll();
-		CustomMessageBox::information(this, tr("SEND_SUCCES"), tr("RATING_THNX_MSG"));
+		CustomMessageBox::information(tr("SEND_SUCCES"), tr("RATING_THNX_MSG"));
 		accept();
-
 	}
 	else
 	{
-		CustomMessageBox::critical(this, tr("Error"), pReply->errorString() + pReply->readAll());
+		CustomMessageBox::critical(tr("Error"), pReply->errorString() + pReply->readAll());
 		reject();
 	}
 }
@@ -103,3 +103,4 @@ void RaitingDialog::setupRaitingControls()
 		m_raitingWidgets.append(ratingWidget);
 	}
 }
+

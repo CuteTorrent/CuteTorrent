@@ -5,10 +5,11 @@
 #include <QMutex>
 #include <QXmlStreamReader>
 #include <QHash>
-#include  <QDateTime>
+#include <QDateTime>
 #include "Singleton.h"
 class RssItem;
 class RssFeed;
+
 class RssParser : public Singleton<RssParser>
 {
 	friend class Singleton<RssParser>;
@@ -26,8 +27,8 @@ protected:
 public:
 	RssParser();
 	void fillFeed(QIODevice* pData, RssFeed* pFeed, bool& ok, QString& error);
-
 };
 
 
 #endif
+

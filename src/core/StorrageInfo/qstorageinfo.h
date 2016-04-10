@@ -44,6 +44,7 @@
 QT_BEGIN_NAMESPACE
 
 class QStorageInfoPrivate;
+
 class QStorageInfo
 {
 public:
@@ -121,3 +122,5 @@ QT_END_NAMESPACE
 Q_DECLARE_METATYPE(QStorageInfo)
 
 #endif // QSTORAGEINFO_H
+
+

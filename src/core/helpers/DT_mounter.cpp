@@ -9,23 +9,23 @@ void DT_mounter::mountImage(QString path)
 	QApplicationSettingsPtr settings = QApplicationSettings::getInstance();
 	QString exe = settings->valueString("DT", "Executable");
 
-	if(exe.isEmpty())
+	if (exe.isEmpty())
 	{
-		CustomMessageBox::warning(NULL, "DT Mounter", qApp->translate("QTorrentDisplayModel", "DT_PATH_NOT_SET"));
+		CustomMessageBox::warning("DT Mounter", qApp->translate("QTorrentDisplayModel", "DT_PATH_NOT_SET"));
 		return;
 	}
 
 	bool useCustomCmd = settings->valueBool("DT", "UseCustomCommand");
 	int driveNum = settings->valueInt("DT", "Drive");
-	QString command = useCustomCmd ?  settings->valueString("DT", "CustomtCommand") : settings->valueString("DT", "DefaultCommand");
+	QString command = useCustomCmd ? settings->valueString("DT", "CustomtCommand") : settings->valueString("DT", "DefaultCommand");
 	QProcess* dt = new QProcess;
 	QStringList args;
 	dt->setNativeArguments(command.arg(QString::number(driveNum)).arg(path));
 	dt->start(exe, args);
 
-	if(!dt->waitForStarted(5000))
+	if (!dt->waitForStarted(5000))
 	{
-		CustomMessageBox::warning(NULL, "DT Mounter", qApp->translate("QTorrentDisplayModel", "LAUNCH_ERROR") + exe);
+		CustomMessageBox::warning("DT Mounter", qApp->translate("QTorrentDisplayModel", "LAUNCH_ERROR") + exe);
 		return;
 	}
 
@@ -33,3 +33,4 @@ void DT_mounter::mountImage(QString path)
 	delete dt;
 #endif
 }
+

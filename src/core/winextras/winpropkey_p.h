@@ -57,3 +57,5 @@ extern const PROPERTYKEY qPKEY_Link_Arguments;
 QT_END_NAMESPACE
 
 #endif // WINPROPKEY_P_H
+
+

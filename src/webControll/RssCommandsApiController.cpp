@@ -1,5 +1,6 @@
 ﻿#include "RssCommandsApiController.h"
 #include "RssManager.h"
+
 RssCommandsApiController::RssCommandsApiController(QObject* parent) : HttpRequestHandler("WebControl", parent), m_pRssManager(RssManager::getInstance())
 {
 	qRegisterMetaType<QUuid>("QUuid");
@@ -54,3 +55,4 @@ void RssCommandsApiController::service(HttpRequest& request, HttpResponse& respo
 		response.write("</BODY>");
 	}
 }
+

@@ -54,16 +54,17 @@ using namespace libtorrent;
 class QApplicationSettings;
 class QTorrentDisplayModel;
 class Torrent;
+
 namespace libtorrent
 {
-class alert;
-}  // namespace libtorrent
+	class alert;
+} // namespace libtorrent
 
 class TorrentManager : public QObject, public Singleton<TorrentManager>
 {
 	friend class Singleton<TorrentManager>;
 	Q_OBJECT
-signals:
+	signals:
 	void TorrentAdded(Torrent*);
 	void Notify(int, QString, QVariant);
 	void TorrentRemoved(QString);
@@ -117,6 +118,7 @@ public:
 		PAUSED_MODE = 4,
 		SUPER_SEED_MODE = 8
 	};
+
 	Q_DECLARE_FLAGS(AddTorrentFlags, AddTorrentFlag)
 	void SaveSession();
 	void RefreshExternalPeerSettings();
@@ -135,8 +137,8 @@ public:
 	std::vector<torrent_status> GetTorrents();
 	opentorrent_info* GetTorrentInfo(QString filename, error_code& ec);
 	openmagnet_info* GetTorrentInfo(const torrent_handle& handle);
-	
-	bool AddMagnet(torrent_handle h, QString& SavePath, TorrentGroup* group = NULL, QMap< QString, quint8> filepriorities = QMap<QString, quint8>(), AddTorrentFlags flags = 0);
+
+	bool AddMagnet(torrent_handle h, QString& SavePath, TorrentGroup* group = NULL, QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), AddTorrentFlags flags = 0);
 	Torrent* AddTorrent(QString& path, QString& save_path, error_code& ec, QString name = "", QMap<QString, quint8> filepriorities = QMap<QString, quint8>(), TorrentGroup* group = NULL,
 	                    AddTorrentFlags flags = 0);
 	~TorrentManager();
@@ -157,6 +159,8 @@ public:
 	Torrent* GetTorrentByInfoHash(QString hash);
 	void RereshPortForwardingSettings();
 };
+
 Q_DECLARE_METATYPE(opentorrent_info)
 
 #endif
+

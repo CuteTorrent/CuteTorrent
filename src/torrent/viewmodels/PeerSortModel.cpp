@@ -11,8 +11,8 @@ bool PeerSortModel::lessThan(const QModelIndex& left, const QModelIndex& right) 
 
 		if (rightData.isValid() && leftData.isValid())
 		{
-			boost::asio::ip::address leftAddress = boost::asio::ip::address::from_string(leftData.toString().toStdString());
-			boost::asio::ip::address rightAddress = boost::asio::ip::address::from_string(rightData.toString().toStdString());
+			boost::asio::ip::address leftAddress = leftData.value<boost::asio::ip::address>();
+			boost::asio::ip::address rightAddress = rightData.value<boost::asio::ip::address>();
 			return leftAddress < rightAddress;
 		}
 	}
@@ -24,3 +24,4 @@ PeerSortModel::PeerSortModel(QObject* parent): QSortFilterProxyModel(parent)
 {
 	setDynamicSortFilter(true);
 }
+

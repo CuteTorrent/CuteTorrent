@@ -1,6 +1,7 @@
 #pragma once
 #include "http/httprequesthandler.h"
 #include "RssCommon.h"
+
 class RssController : public HttpRequestHandler
 {
 private:

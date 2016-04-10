@@ -1,5 +1,4 @@
-﻿
-/**
+﻿/**
   @file
   @author Stefan Frings
 */
@@ -33,7 +32,7 @@ void HttpListener::incomingConnection(int socketDescriptor)
 	HttpConnectionHandler* freeHandler = pool->getConnectionHandler();
 
 	// Let the handler process the new connection.
-	if(freeHandler)
+	if (freeHandler)
 	{
 		// The descriptor is passed via signal/slot because the handler lives in another
 		// thread and cannot open the socket when called by another thread.
@@ -59,7 +58,7 @@ void HttpListener::Start()
 	int port = settings->value(serverName, "port").toInt();
 	listen(QHostAddress::Any, port);
 
-	if(!isListening())
+	if (!isListening())
 	{
 		qCritical("HttpListener: Cannot bind on port %i: %s", port, qPrintable(errorString()));
 	}
@@ -68,3 +67,4 @@ void HttpListener::Start()
 			qDebug("HttpListener: %s Listening on port %i",qPrintable(serverName),port);
 		}*/
 }
+

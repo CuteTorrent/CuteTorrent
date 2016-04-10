@@ -88,3 +88,5 @@ public:
 QT_END_NAMESPACE
 
 #endif // QWINJUMPLIST_P_H
+
+

@@ -43,7 +43,7 @@ MultipleDTDialog::MultipleDTDialog(QStringList& _files, QWidget* parent/* =0 */,
 	listView->setSelectionMode(QAbstractItemView::SingleSelection);
 	QIcon iso = StyleEngene::getInstance()->guessMimeIcon("iso");
 
-	for(int i = 0; i < files.count(); i++)
+	for (int i = 0; i < files.count(); i++)
 	{
 		QStandardItem* item = new QStandardItem(iso, files.at(i));
 		model->setItem(i, item);
@@ -68,7 +68,7 @@ void MultipleDTDialog::Mount(QString filename)
 
 void MultipleDTDialog::changeEvent(QEvent* event)
 {
-	if(event->type() == QEvent::LanguageChange)
+	if (event->type() == QEvent::LanguageChange)
 	{
 		retranslateUi(this);
 	}
@@ -98,3 +98,4 @@ QLabel* MultipleDTDialog::getTitleIcon()
 {
 	return tbMenu;
 }
+

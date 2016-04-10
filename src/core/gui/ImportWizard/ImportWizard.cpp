@@ -5,6 +5,7 @@
 #include "ImportFinishPage.h"
 #include <QDesktopServices>
 #include <QUrl>
+
 ImportWizard::ImportWizard(QWidget* parent)
 {
 	setPage(Intro, new ImportIntroPage);
@@ -27,3 +28,4 @@ void ImportWizard::NavigateHelp()
 {
 	QDesktopServices::openUrl(QUrl("http://cutetorrent.info/importing/"));
 }
+

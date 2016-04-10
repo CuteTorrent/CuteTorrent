@@ -1,11 +1,11 @@
-
 #include "FaviconDownloader.h"
 #include "StaticHelpers.h"
 #include "StyleEngene.h"
+
 FaviconDownloader::FaviconDownloader(QObject* parent)
 	: QObject(parent)
-	, m_pStyleEngine(StyleEngene::getInstance())
-	, m_domainNameMatcher("([a-z0-9][a-z0-9\\-]{1,63}\\.[a-z\\.]{2,6})$", Qt::CaseInsensitive, QRegExp::RegExp2)
+	  , m_pStyleEngine(StyleEngene::getInstance())
+	  , m_domainNameMatcher("([a-z0-9][a-z0-9\\-]{1,63}\\.[a-z\\.]{2,6})$", Qt::CaseInsensitive, QRegExp::RegExp2)
 {
 	m_pNatworkManager = new QNetworkAccessManager(this);
 	m_pDiskCache = StaticHelpers::GetGLobalWebCache();
@@ -220,6 +220,4 @@ QPixmap FaviconDownloader::getFromWeb(QUrl url)
 
 	return m_pStyleEngine->getIcon("toolbar_download").pixmap(16);
 }
-
-
 

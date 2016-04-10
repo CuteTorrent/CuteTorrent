@@ -82,9 +82,6 @@ Root: HKCU; Subkey: "SOFTWARE\Classes\Magnet\shell\open\command"; ValueType: str
 Root: HKCU; Subkey: "SOFTWARE\Classes\*\shell\cutetorrent"; ValueType: string; ValueData: "{cm:CreateTorrent}"; Flags: uninsdeletekey; Tasks: WinExplorerIntegration
 Root: HKCU; Subkey: "SOFTWARE\Classes\*\shell\cutetorrent"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\CuteTorrent.exe,0"; Tasks: WinExplorerIntegration
 Root: HKCU; Subkey: "SOFTWARE\Classes\*\shell\cutetorrent\command"; ValueType: string; ValueData: """{app}\CuteTorrent.exe"" --create_torrent ""%1"""; Tasks: WinExplorerIntegration
-Root: HKCU; Subkey: "SOFTWARE\Classes\Folder\shell\cutetorrent"; ValueType: string; ValueData: "{cm:CreateTorrent}"; Flags: uninsdeletekey; Tasks: WinExplorerIntegration
-Root: HKCU; Subkey: "SOFTWARE\Classes\Folder\shell\cutetorrent"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\CuteTorrent.exe,0"; Tasks: WinExplorerIntegration
-Root: HKCU; Subkey: "SOFTWARE\Classes\Folder\shell\cutetorrent\command"; ValueType: string; ValueName: ""; ValueData: """{app}\CuteTorrent.exe"" --create_torrent ""%1"""; Flags: uninsdeletekey; Tasks: WinExplorerIntegration
 Root: HKCU; Subkey: "SOFTWARE\Classes\Directory\shell\cutetorrent"; ValueType: string; ValueData: "{cm:CreateTorrent}"; Tasks: WinExplorerIntegration
 Root: HKCU; Subkey: "SOFTWARE\Classes\Directory\shell\cutetorrent"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\CuteTorrent.exe,0"; Tasks: WinExplorerIntegration
 Root: HKCU; Subkey: "SOFTWARE\Classes\Directory\shell\cutetorrent\command"; ValueType: string; ValueData: """{app}\CuteTorrent.exe"" --create_torrent ""%1"""; Tasks: WinExplorerIntegration
@@ -114,57 +111,6 @@ WizardForm=FF0A005457495A415244464F524D0030105327000054504630F10B5457697A6172644
 #ENDIF
 const
   LEN_EXEFILE = 260;
-const
- MAX_ADAPTER_NAME_LENGTH        = 256;
- MAX_ADAPTER_DESCRIPTION_LENGTH = 128;
- MAX_ADAPTER_ADDRESS_LENGTH     = 8;
- IPHelper = 'iphlpapi.dll';
-
- // Типы адаптеров
- MIB_IF_TYPE_OTHER     = 1;
- MIB_IF_TYPE_ETHERNET  = 6;
- MIB_IF_TYPE_TOKENRING = 9;
- MIB_IF_TYPE_FDDI      = 15;
- MIB_IF_TYPE_PPP       = 23;
- MIB_IF_TYPE_LOOPBACK  = 24;
- MIB_IF_TYPE_SLIP      = 28;
-
-type
- IP_ADDRESS_STRING = record
-   S: array [0..15] of Char;
- end;
- IP_MASK_STRING = IP_ADDRESS_STRING;
-
-
- 
- IP_ADDR_STRING = record
-   Next: cardinal;
-   IpAddress: IP_ADDRESS_STRING;
-   IpMask: IP_MASK_STRING;
-   Context: DWORD;
- end;
- time_t = Longint;
-
-  IP_ADAPTER_INFO = record
-   Next: cardinal;
-   ComboIndex: DWORD;
-   AdapterName:array [0..MAX_ADAPTER_NAME_LENGTH + 3] of AnsiChar;
-   Description: array [0..MAX_ADAPTER_DESCRIPTION_LENGTH + 3] of AnsiChar;
-   AddressLength: UINT;
-   Address: array [0..MAX_ADAPTER_ADDRESS_LENGTH - 1] of BYTE;
-   Index: DWORD;
-   Type_: UINT;
-   DhcpEnabled: UINT;
-   CurrentIpAddress: IP_MASK_STRING;
-   IpAddressList: IP_ADDR_STRING;
-   GatewayList: IP_ADDR_STRING;
-   DhcpServer: IP_ADDR_STRING;
-   HaveWins: BOOL;
-   PrimaryWinsServer: IP_ADDR_STRING;
-   SecondaryWinsServer: IP_ADDR_STRING;
-   LeaseObtained: time_t;
-   LeaseExpires: time_t;
- end;
 type
   PROCESSENTRY32 = record
     dwSize: cardinal;
@@ -239,12 +185,8 @@ function MsiQueryProductState(szProduct: string): INSTALLSTATE;
 
 function VCVersionInstalled(const ProductID: string): Boolean;
 var
-   sTemp: string;
-   iRes: Integer;
-   BufLen,Status: cardinal;
-   pAdapterInfo: IP_ADAPTER_INFO;
+   sTemp: String;
 begin
-
   Result := MsiQueryProductState(ProductID) = INSTALLSTATE_DEFAULT;
 end;
 
@@ -343,7 +285,6 @@ var
 
 begin
   Result := True;
-
   nMsgBoxResult := IDOK;
 while ProcessRunning('CuteTorrent.exe') and
         (nMsgBoxResult <> IDCANCEL) do

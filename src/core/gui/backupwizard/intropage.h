@@ -3,12 +3,13 @@
 
 #include <QWizardPage>
 #include <QtGui>
+
 class IntroPage : public QWizardPage
 {
 	Q_OBJECT
 public:
 	IntroPage(QWidget* parent = 0);
-// bool validatePage();
+	// bool validatePage();
 	int nextId() const;
 
 private:
@@ -21,3 +22,5 @@ public:
 };
 
 #endif // INTROPAGE_H
+
+

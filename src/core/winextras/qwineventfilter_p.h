@@ -55,18 +55,20 @@ class QWidget;
 class QWinEventFilter
 {
 public:
-    QWinEventFilter();
-    ~QWinEventFilter();
-    static bool nativeEventFilter(void *message, long *result);
+	QWinEventFilter();
+	~QWinEventFilter();
+	static bool nativeEventFilter(void* message, long* result);
 
-    static void setup();
+	static void setup();
 
 private:
-    static QWinEventFilter *instance;
-	static QWidget *findWindow(HWND);
-    UINT tbButtonCreatedMsgId;
+	static QWinEventFilter* instance;
+	static QWidget* findWindow(HWND);
+	UINT tbButtonCreatedMsgId;
 };
 
 QT_END_NAMESPACE
 
 #endif // QWINEVENTFILTER_H
+
+

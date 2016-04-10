@@ -29,7 +29,7 @@ see quazip/(un)zip.h files for details. Basically it's the zlib license.
 #include <string.h>
 
 static void QuaZipNewInfo_setPermissions(QuaZipNewInfo* info,
-        QFile::Permissions perm, bool isDir)
+                                         QFile::Permissions perm, bool isDir)
 {
 	quint32 uPerm = isDir ? 0040000 : 0100000;
 
@@ -81,7 +81,7 @@ static void QuaZipNewInfo_setPermissions(QuaZipNewInfo* info,
 	info->externalAttr = (info->externalAttr & ~0xFFFF0000u) | (uPerm << 16);
 }
 
-template<typename FileInfo>
+template <typename FileInfo>
 void QuaZipNewInfo_init(QuaZipNewInfo& self, const FileInfo& existing)
 {
 	self.name = existing.name;
@@ -172,17 +172,17 @@ static void setNTFSTime(QByteArray& extra, const QDateTime& time, int position,
 	int ntfsPos = -1, timesPos = -1;
 	unsigned ntfsLength = 0, ntfsTimesLength = 0;
 
-	for (int i = 0; i <= extra.size() - 4; )
+	for (int i = 0; i <= extra.size() - 4;)
 	{
 		unsigned type = static_cast<unsigned>(static_cast<unsigned char>(
-		        extra.at(i)))
-		                | (static_cast<unsigned>(static_cast<unsigned char>(
-		                            extra.at(i + 1))) << 8);
+				extra.at(i)))
+			| (static_cast<unsigned>(static_cast<unsigned char>(
+				extra.at(i + 1))) << 8);
 		i += 2;
 		unsigned length = static_cast<unsigned>(static_cast<unsigned char>(
-		        extra.at(i)))
-		                  | (static_cast<unsigned>(static_cast<unsigned char>(
-		                              extra.at(i + 1))) << 8);
+				extra.at(i)))
+			| (static_cast<unsigned>(static_cast<unsigned char>(
+				extra.at(i + 1))) << 8);
 		i += 2;
 
 		if (type == QUAZIP_EXTRA_NTFS_MAGIC)
@@ -200,16 +200,16 @@ static void setNTFSTime(QByteArray& extra, const QDateTime& time, int position,
 			while (i <= extra.size() - 4)
 			{
 				unsigned tag = static_cast<unsigned>(
-				                   static_cast<unsigned char>(extra.at(i)))
-				               | (static_cast<unsigned>(
-				                      static_cast<unsigned char>(extra.at(i + 1)))
-				                  << 8);
+						static_cast<unsigned char>(extra.at(i)))
+					| (static_cast<unsigned>(
+							static_cast<unsigned char>(extra.at(i + 1)))
+						<< 8);
 				i += 2;
 				unsigned tagsize = static_cast<unsigned>(
-				                       static_cast<unsigned char>(extra.at(i)))
-				                   | (static_cast<unsigned>(
-				                          static_cast<unsigned char>(extra.at(i + 1)))
-				                      << 8);
+						static_cast<unsigned char>(extra.at(i)))
+					| (static_cast<unsigned>(
+							static_cast<unsigned char>(extra.at(i + 1)))
+						<< 8);
 				i += 2;
 
 				if (tag == QUAZIP_EXTRA_NTFS_TIME_MAGIC)
@@ -249,7 +249,7 @@ static void setNTFSTime(QByteArray& extra, const QDateTime& time, int position,
 		// now set the tag data
 		extra[timesPos] = static_cast<char>(QUAZIP_EXTRA_NTFS_TIME_MAGIC);
 		extra[timesPos + 1] = static_cast<char>(QUAZIP_EXTRA_NTFS_TIME_MAGIC
-		                                        >> 8);
+			>> 8);
 		// the size:
 		extra[timesPos + 2] = 24;
 		extra[timesPos + 3] = 0;
@@ -271,7 +271,7 @@ static void setNTFSTime(QByteArray& extra, const QDateTime& time, int position,
 		// now set the tag data
 		extra[timesPos] = static_cast<char>(QUAZIP_EXTRA_NTFS_TIME_MAGIC);
 		extra[timesPos + 1] = static_cast<char>(QUAZIP_EXTRA_NTFS_TIME_MAGIC
-		                                        >> 8);
+			>> 8);
 		// the size:
 		extra[timesPos + 2] = 24;
 		extra[timesPos + 3] = 0;
@@ -337,3 +337,4 @@ void QuaZipNewInfo::setFileNTFScTime(const QDateTime& cTime, int fineTicks)
 	setNTFSTime(extraLocal, cTime, 16, fineTicks);
 	setNTFSTime(extraGlobal, cTime, 16, fineTicks);
 }
+

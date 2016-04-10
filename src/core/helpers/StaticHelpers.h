@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "NetworkDiskCache.h"
 #include <QDir>
 #include <QLocale>
+
 class StaticHelpers
 {
 private:
@@ -35,7 +36,8 @@ private:
 	static QString translateSocksError(error_code const& ec);
 	static QString translateUpnpError(error_code const& ec);
 	static QString translateError(error_code const& ec, char* msgs[], int msgs_len);
-	template<typename T> static T CombinePathes(T t);
+	template <typename T>
+	static T CombinePathes(T t);
 public:
 #ifdef Q_WS_X11
 	static void OpenFolderNautilus(QString& file);
@@ -50,12 +52,15 @@ public:
 	static QString filePriorityToString(int priority);
 	static QString SchedulerTypeToString(SchedulerTask::TaskType type);
 	static QString GetBaseSuffix(const file_storage& storrage);
-	static QString GetCountryCode(QLocale::Language lang,QLocale::Country country);
-	template<typename T, typename... Args> static QString CombinePathes(T first, Args& ... args);
+	static QString GetCountryCode(QLocale::Language lang, QLocale::Country country);
+	template <typename T, typename... Args>
+	static QString CombinePathes(T first, Args& ... args);
 	static NetworkDiskCache* GetGLobalWebCache();
 	static QByteArray gUncompress(QByteArray data);
-	template <typename T> static size_t HashVector(const std::vector<T>& vector);
-	template <typename T> static QList<T> reversed(const QList<T>& in);
+	template <typename T>
+	static size_t HashVector(const std::vector<T>& vector);
+	template <typename T>
+	static QList<T> reversed(const QList<T>& in);
 	static QTime SecsToQTime(int secs);
 	static int QTimeToSecs(const QTime& time);
 };
@@ -67,7 +72,7 @@ T StaticHelpers::CombinePathes(T t)
 	return t;
 }
 
-template<typename T, typename... Args>
+template <typename T, typename... Args>
 QString StaticHelpers::CombinePathes(T first, Args& ... args)
 {
 	bool addSeparator = !QString(first).endsWith("/") || !QString(first).endsWith("\\");
@@ -82,7 +87,8 @@ size_t StaticHelpers::HashVector(const std::vector<T>& vector)
 	return result;
 }
 
-template <typename T> QList<T>
+template <typename T>
+QList<T>
 StaticHelpers::reversed(const QList<T>& in)
 {
 	QList<T> result;
@@ -92,3 +98,4 @@ StaticHelpers::reversed(const QList<T>& in)
 }
 
 #endif
+

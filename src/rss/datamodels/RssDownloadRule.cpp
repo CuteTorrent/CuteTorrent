@@ -1,6 +1,7 @@
 ﻿#include "RssDownloadRule.h"
 #include "RssFeed.h"
 #include "RssItem.h"
+
 RssDownloadRule::RssDownloadRule() : m_name(""), m_pattern(""), m_patternType(QRegExp::RegExp2), m_ruleType(EMPTY)
 {
 	m_uid = QUuid::createUuid();
@@ -125,14 +126,14 @@ void RssDownloadRule::removeFeed(QUuid feedUid)
 bool RssDownloadRule::operator==(const RssDownloadRule& other)
 {
 	return other.m_feedUids == m_feedUids
-	       && other.m_name == m_name
-	       && other.m_pattern == m_pattern
-	       && other.m_patternType == m_patternType
-	       && other.m_ruleType == m_ruleType
-	       && other.m_uid == m_uid
-	       && other.m_useGroupFilters == m_useGroupFilters
-	       && other.m_useStaticSavePath == m_useStaticSavePath
-	       && other.m_staticSavePath == m_staticSavePath;
+		&& other.m_name == m_name
+		&& other.m_pattern == m_pattern
+		&& other.m_patternType == m_patternType
+		&& other.m_ruleType == m_ruleType
+		&& other.m_uid == m_uid
+		&& other.m_useGroupFilters == m_useGroupFilters
+		&& other.m_useStaticSavePath == m_useStaticSavePath
+		&& other.m_staticSavePath == m_staticSavePath;
 }
 
 bool RssDownloadRule::operator!=(const RssDownloadRule& other)
@@ -254,6 +255,7 @@ QDataStream& operator <<(QDataStream& out, const RssDownloadRule& any)
 	out << any.m_feedUids;
 	return out;
 }
+
 QDataStream& operator >>(QDataStream& out, RssDownloadRule& any)
 {
 	out >> any.m_name;
@@ -272,3 +274,4 @@ QDataStream& operator >>(QDataStream& out, RssDownloadRule& any)
 	out >> any.m_feedUids;
 	return out;
 }
+

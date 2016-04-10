@@ -129,9 +129,8 @@ private:
 
 	/** Indicator whether the body has been sent completely */
 	bool sentLastPart;
-
-
-
 };
 
 #endif // HTTPRESPONSE_H
+
+

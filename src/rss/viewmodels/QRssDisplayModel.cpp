@@ -13,7 +13,7 @@
 #include <NotificationSystem.h>
 
 QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent, bool autoUpdate) : QAbstractItemModel(parrent), m_pRssManager(RssManager::getInstance()),
-	m_pTorrentDownloader(FileDownloader::getNewInstance())
+                                                                                               m_pTorrentDownloader(FileDownloader::getNewInstance())
 {
 	m_pItemsView = pItemsView;
 	m_pUdpateTimer = new QTimer(this);
@@ -82,8 +82,6 @@ int QRssDisplayModel::rowCount(const QModelIndex& parent /*= QModelIndex()*/) co
 }
 
 
-
-
 QModelIndex QRssDisplayModel::index(int row, int column, const QModelIndex& parent /*= QModelIndex()*/) const
 {
 	if (!hasIndex(row, column, parent))
@@ -150,7 +148,7 @@ void QRssDisplayModel::UpdateModel()
 	m_rootItems.clear();
 	QList<RssFeed*> feeds = m_pRssManager->feeds();
 
-	for (int i = 0 ; i < feeds.size(); i++)
+	for (int i = 0; i < feeds.size(); i++)
 	{
 		RssFeed* var = feeds[i];
 		m_rootItems.append(new RssFeedTreeItem(var));
@@ -170,7 +168,7 @@ QList<RssFeed*> QRssDisplayModel::SelectedFeeds()
 	QSet<RssFeed*> res;
 	QModelIndexList selectedIndexes = m_pItemsView->selectionModel()->selectedIndexes();
 
-	for (int i = 0 ; i < selectedIndexes.size(); i++)
+	for (int i = 0; i < selectedIndexes.size(); i++)
 	{
 		QModelIndex selectedIndex = selectedIndexes[i];
 
@@ -247,6 +245,7 @@ RssItem* QRssDisplayModel::SelectedRssItem()
 
 	return res;
 }
+
 RssFeed* QRssDisplayModel::SelectedFeed()
 {
 	RssFeed* res = NULL;
@@ -293,9 +292,9 @@ void QRssDisplayModel::setCurrentFeedUnread(bool val)
 		QList<RssItem*> rssItems = current->GetFeedItems();
 
 		foreach(RssItem* pItem, rssItems)
-		{
-			pItem->setUread(val);
-		}
+			{
+				pItem->setUread(val);
+			}
 
 		current->UpdateUnreadCount();
 	}
@@ -315,15 +314,15 @@ void QRssDisplayModel::setCurrentItemUnread(bool val)
 	QSet<RssFeed*> feeds2updateUnreadCount;
 
 	foreach(RssItem* pItem, rssItems)
-	{
-		pItem->setUread(val);
-		feeds2updateUnreadCount.insert(pItem->rssFeed());
-	}
+		{
+			pItem->setUread(val);
+			feeds2updateUnreadCount.insert(pItem->rssFeed());
+		}
 
 	foreach(RssFeed* pFeed, feeds2updateUnreadCount)
-	{
-		pFeed->UpdateUnreadCount();
-	}
+		{
+			pFeed->UpdateUnreadCount();
+		}
 }
 
 void QRssDisplayModel::onMarkRead()
@@ -451,40 +450,41 @@ void QRssDisplayModel::onFeedRemove()
 			bool yesToAll = false;
 
 			foreach(RssFeed* pFeed, selectedItems)
-			{
-				QMessageBox::StandardButton button;
-
-				if (!yesToAll)
 				{
-					QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No;
+					CustomMessageBox::Button button;
 
-					if (selectedItems.length() > 1)
+					if (!yesToAll)
 					{
-						buttons |= QMessageBox::YesToAll;
-						buttons |= QMessageBox::NoToAll;
+						CustomMessageBox::Buttons buttons = CustomMessageBox::Yes;
+						buttons |= CustomMessageBox::No;
+
+						if (selectedItems.length() > 1)
+						{
+							buttons |= CustomMessageBox::YesToAll;
+							buttons |= CustomMessageBox::NoToAll;
+						}
+
+						button = CustomMessageBox::warning(m_pItemsView, tr("RSS_FEED_DELETE"), tr("RSS_FEED_DELETE_MSG").arg(pFeed->displayName()), buttons);
+
+						if (button == CustomMessageBox::YesToAll)
+						{
+							yesToAll = true;
+						}
+						else if (button == CustomMessageBox::NoToAll)
+						{
+							break;
+						}
+					}
+					else
+					{
+						button = CustomMessageBox::YesToAll;
 					}
 
-					button = CustomMessageBox::warning(m_pItemsView, tr("RSS_FEED_DELETE"), tr("RSS_FEED_DELETE_MSG").arg(pFeed->displayName()), buttons);
-
-					if (button == QMessageBox::YesToAll)
+					if (CustomMessageBox::No != button || yesToAll)
 					{
-						yesToAll = true;
-					}
-					else if (button == QMessageBox::NoToAll)
-					{
-						break;
+						pRssManager->removeFeed(pFeed->uid());
 					}
 				}
-				else
-				{
-					button = QMessageBox::YesToAll;
-				}
-
-				if (QMessageBox::No != button || yesToAll)
-				{
-					pRssManager->removeFeed(pFeed->uid());
-				}
-			}
 
 			//endResetModel();
 		}
@@ -560,3 +560,4 @@ void QRssDisplayModel::onMarkAllRead()
 		setCurrentFeedUnread(false);
 	}
 }
+

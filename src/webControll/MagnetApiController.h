@@ -2,6 +2,7 @@
 #include "http/httprequesthandler.h"
 #include "TorrentCommon.h"
 #include "defs.h"
+
 class MagnetApiController :
 	public HttpRequestHandler
 {
@@ -17,3 +18,4 @@ public:
 public slots:
 	void DownloadMetadataCompleted(const openmagnet_info& info);
 };
+

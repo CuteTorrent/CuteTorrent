@@ -1,5 +1,4 @@
-﻿
-#ifndef RaitingDialog_INCLUDED
+﻿#ifndef RaitingDialog_INCLUDED
 #define RaitingDialog_INCLUDED
 #include "ui_RaitingDialog.h"
 #include <QDialog>
@@ -31,12 +30,12 @@ public:
 		POSSIBILITIES,
 		RATING_COUNT
 	};
-	
+
 	RaitingDialog(QWidget* parent);
 public slots:
 	void sendRaiting();
 	void OnRaitingSent(QNetworkReply*);
-
 };
 
 #endif
+

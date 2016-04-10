@@ -1,4 +1,4 @@
-#include  "NetworkDiskCache.h"
+#include "NetworkDiskCache.h"
 #include <QMutex>
 
 NetworkDiskCache::NetworkDiskCache(QObject* parent) : QNetworkDiskCache(parent)
@@ -41,3 +41,4 @@ void NetworkDiskCache::updateMetaData(const QNetworkCacheMetaData& metaData)
 	QMutexLocker lock(m_pInsertUpdateMutex);
 	return QNetworkDiskCache::updateMetaData(metaData);
 }
+

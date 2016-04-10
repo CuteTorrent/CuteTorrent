@@ -83,40 +83,41 @@ public:
 		m_size = val;
 	}
 
-	bool operator == (SearchResult other)
+	bool operator ==(SearchResult other)
 	{
-		if(m_name != other.m_name)
+		if (m_name != other.m_name)
 		{
 			return false;
 		}
 
-		if(m_torrentFileUrl != other.m_torrentFileUrl)
+		if (m_torrentFileUrl != other.m_torrentFileUrl)
 		{
 			return false;
 		}
 
-		if(m_engine != other.m_engine)
+		if (m_engine != other.m_engine)
 		{
 			return false;
 		}
 
-		if(m_leechers != other.m_leechers)
+		if (m_leechers != other.m_leechers)
 		{
 			return false;
 		}
 
-		if(m_seeders != other.m_seeders)
+		if (m_seeders != other.m_seeders)
 		{
 			return false;
 		}
 
-		if(m_size != other.m_size)
+		if (m_size != other.m_size)
 		{
 			return false;
 		}
 
 		return true;
 	}
+
 private:
 	QString m_name;
 	QString m_torrentFileUrl;
@@ -130,3 +131,4 @@ private:
 
 Q_DECLARE_METATYPE(SearchResult*)
 Q_DECLARE_METATYPE(QList<SearchResult*>);
+

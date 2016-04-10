@@ -20,7 +20,10 @@ public:
 
 	TorrentGroup(const TorrentGroup& other);
 
-	TorrentGroup() {};
+	TorrentGroup()
+	{
+	};
+
 	~TorrentGroup();
 	void setUid(const QUuid& m_uid);
 
@@ -49,3 +52,4 @@ public:
 	QList<TorrentGroup*> Children() const;
 	bool isNull();
 };
+

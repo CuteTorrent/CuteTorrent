@@ -1,11 +1,18 @@
 ﻿#pragma once
 #include "TorrentManager.h"
 #include <QVector>
+
 class FileViewTreeItem
 {
 	friend class FileViewModel;
 public:
-	enum ItemType { NONE, FOLDER, FILE};
+	enum ItemType
+	{
+		NONE,
+		FOLDER,
+		FILE
+	};
+
 	FileViewTreeItem();
 	FileViewTreeItem(const file_entry& fe, ItemType type, const QString& name, FileViewTreeItem* parrent = NULL);
 	~FileViewTreeItem();
@@ -22,6 +29,5 @@ private:
 	QString m_name;
 	QVector<FileViewTreeItem*> m_pChildren;
 	FileViewTreeItem* m_pParrent;
-
 };
 

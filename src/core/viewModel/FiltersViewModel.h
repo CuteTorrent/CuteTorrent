@@ -6,6 +6,7 @@
 #include <QMovie>
 class StyleEngene;
 class FilterTreeItem;
+
 class FiltersViewModel : public QAbstractItemModel
 {
 	Q_OBJECT
@@ -16,15 +17,16 @@ public:
 		Groups = 0x002,
 		Rss = 0x004,
 		Search = 0x008,
-		All = Torrents| Groups | Rss | Search
+		All = Torrents | Groups | Rss | Search
 	};
+
 	enum FilterRoles
 	{
 		FilterTypeRole = Qt::UserRole + 1,
 		FilterRole
 	};
 
-	explicit FiltersViewModel(GroupMode mode,QObject* parent = NULL);
+	explicit FiltersViewModel(GroupMode mode, QObject* parent = NULL);
 	~FiltersViewModel();
 	QModelIndex index(int row, int column, const QModelIndex& parent) const override;
 	QModelIndex index(QUuid groupUid);
@@ -59,3 +61,4 @@ private:
 	void UpdateCounters();
 };
 #endif
+

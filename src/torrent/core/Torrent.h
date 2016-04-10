@@ -30,6 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "boost/asio/ip/tcp.hpp"
 #include <QUuid>
 #include <TorrentGroup.h>
+#include <libtorrent/torrent_status.hpp>
 using namespace libtorrent;
 
 class StaticHelpers;
@@ -38,8 +39,6 @@ class TorrentManager;
 class Torrent : public QObject
 {
 	Q_OBJECT
-
-	
 
 
 private:
@@ -59,7 +58,11 @@ private:
 	QUuid m_torrentGroupUid;
 public :
 	Torrent(torrent_status torrentStatus, TorrentGroup* group);
-	~Torrent() {};
+
+	~Torrent()
+	{
+	};
+
 	void UpdateStatus(torrent_status newVal);
 	void SetFilePriority(int index, int prioryty);
 	void CompliteMoveStorrage();
@@ -104,14 +107,17 @@ public :
 	QIcon GetMimeTypeIcon() const;
 	files_info GetFileDownloadInfo();
 	bool isSingleFile();
+
 	bool isPrevioslySeeded() const
 	{
 		return m_isPrevSeed;
 	}
+
 	void setIsPrevioslySeeded(bool value)
 	{
 		m_isPrevSeed = value;
 	}
+
 	bool isPaused() const;
 	bool isSeeding() const;
 	bool isStoped() const;
@@ -149,8 +155,8 @@ public :
 	void setGroup(QString group);
 	int GetDownloadLimit();
 	int GetUploadLimit();
-	bool operator< (const Torrent&) const;
-	bool operator< (Torrent*);
+	bool operator<(const Torrent&) const;
+	bool operator<(Torrent*);
 	void SwitchSuperSeed();
 	bool isSuperSeed();
 	QString generateMagnetLink();
@@ -168,3 +174,4 @@ Q_DECLARE_METATYPE(Torrent*)
 
 
 #endif
+

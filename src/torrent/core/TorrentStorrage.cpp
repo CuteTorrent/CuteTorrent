@@ -1,14 +1,16 @@
 ﻿#include "TorrentStorrage.h"
 #include "Torrent.h"
+
 bool LessThan(Torrent* left, Torrent* right)
 {
 	return * (left) < * (right);
 }
+
 void TorrentStorrage::append(Torrent* torrent)
 {
 	QString infoHash = torrent->GetInfoHash();
 
-	if(hasTorrent(infoHash))
+	if (hasTorrent(infoHash))
 	{
 		return;
 	}
@@ -28,7 +30,7 @@ Torrent* TorrentStorrage::getTorrent(QString infoHash)
 	QMutexLocker mutexLocker(m_pMapSynkMutex);
 	QMap<QString, Torrent*>::Iterator it = m_torrentsMap.find(infoHash);
 
-	if(it == m_torrentsMap.end())
+	if (it == m_torrentsMap.end())
 	{
 		return NULL;
 	}
@@ -42,7 +44,7 @@ void TorrentStorrage::remove(QString infoHash)
 	QMap<QString, Torrent*>::Iterator it = m_torrentsMap.find(infoHash);
 	int index = indexOf(it.value());
 
-	if(index >= 0)
+	if (index >= 0)
 	{
 		QList<Torrent*>::removeAt(index);
 		m_torrentsMap.remove(infoHash);
@@ -71,8 +73,9 @@ void TorrentStorrage::clear()
 	QList::clear();
 }
 
-TorrentStorrage::TorrentStorrage(QObject* parrent/*=NULL*/) : QList<Torrent * >(), m_pMapSynkMutex(new QMutex())
-{}
+TorrentStorrage::TorrentStorrage(QObject* parrent/*=NULL*/) : QList<Torrent *>(), m_pMapSynkMutex(new QMutex())
+{
+}
 
 Torrent* TorrentStorrage::operator[](QString infoHash)
 {
@@ -83,3 +86,4 @@ void TorrentStorrage::sort()
 {
 	qSort(begin(), end(), LessThan);
 }
+

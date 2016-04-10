@@ -35,7 +35,7 @@ ApplyBackupPage::ApplyBackupPage(QWidget* parent) :
 	gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
 	tableWidget = new QTableWidget(changePathGroupBox);
 
-	if(tableWidget->columnCount() < 2)
+	if (tableWidget->columnCount() < 2)
 	{
 		tableWidget->setColumnCount(2);
 	}
@@ -115,7 +115,6 @@ void ApplyBackupPage::ApplyBackup() const
 		boost::scoped_ptr<InitializationDialog> pDlg(new InitializationDialog());
 		pDlg->exec();
 	}
-	
 }
 
 int ApplyBackupPage::nextId() const
@@ -198,7 +197,7 @@ void ApplyBackupPage::browseButtonClicked()
 				}
 			}
 		}
-
+		
 		QStringList uniquePathes = GetLongestCommonSubstr(savePathes);
 
 		for (int i = 0; i < uniquePathes.size(); i++)
@@ -213,3 +212,4 @@ void ApplyBackupPage::browseButtonClicked()
 	}
 	emit completeChanged();
 }
+

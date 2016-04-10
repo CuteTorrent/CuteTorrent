@@ -16,9 +16,9 @@ HttpConnectionHandlerPool::~HttpConnectionHandlerPool()
 {
 	// delete all connection handlers and wait until their threads are closed
 	foreach(HttpConnectionHandler* handler, pool)
-	{
-		delete handler;
-	}
+		{
+			delete handler;
+		}
 }
 
 
@@ -29,21 +29,21 @@ HttpConnectionHandler* HttpConnectionHandlerPool::getConnectionHandler()
 
 	// find a free handler in pool
 	foreach(HttpConnectionHandler* handler, pool)
-	{
-		if(!handler->isBusy())
 		{
-			freeHandler = handler;
-			freeHandler->setBusy();
-			break;
+			if (!handler->isBusy())
+			{
+				freeHandler = handler;
+				freeHandler->setBusy();
+				break;
+			}
 		}
-	}
 
 	// create a new handler, if necessary
-	if(!freeHandler)
+	if (!freeHandler)
 	{
 		int maxConnectionHandlers = settings->value(serverName, "maxThreads", 100).toInt();
 
-		if(pool.count() < maxConnectionHandlers)
+		if (pool.count() < maxConnectionHandlers)
 		{
 			freeHandler = new HttpConnectionHandler(requestHandler);
 			freeHandler->setBusy();
@@ -56,7 +56,6 @@ HttpConnectionHandler* HttpConnectionHandlerPool::getConnectionHandler()
 }
 
 
-
 void HttpConnectionHandlerPool::cleanup()
 {
 	int maxIdleHandlers = settings->value(serverName, "minThreads", 1).toInt();
@@ -64,17 +63,18 @@ void HttpConnectionHandlerPool::cleanup()
 	mutex.lock();
 
 	foreach(HttpConnectionHandler* handler, pool)
-	{
-		if(!handler->isBusy())
 		{
-			if(++idleCounter > maxIdleHandlers)
+			if (!handler->isBusy())
 			{
-				pool.removeOne(handler);
-				delete handler;
-				break; // remove only one handler in each interval
+				if (++idleCounter > maxIdleHandlers)
+				{
+					pool.removeOne(handler);
+					delete handler;
+					break; // remove only one handler in each interval
+				}
 			}
 		}
-	}
 
 	mutex.unlock();
 }
+

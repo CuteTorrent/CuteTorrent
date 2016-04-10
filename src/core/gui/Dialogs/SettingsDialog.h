@@ -61,6 +61,7 @@ private:
 		STATIC_SAVE_PATH,
 		NUMBER_OF_FEEDS
 	};
+
 	boost::scoped_ptr<SettingsPropertyMapper> m_propertyMapper;
 	ObservableList<RssDownloadRule*> m_downloadRulesCopy;
 	ObservableList<QUuid> m_deletedRules;
@@ -71,7 +72,7 @@ private:
 	TorrentTrackerPtr m_pTracker;
 	RconWebServicePtr m_pRcon;
 	TorrentGroupsManagerPtr m_pTorrentGroupManager;
-	QAction* editRssRule, *deleteRssRule;
+	QAction *editRssRule, *deleteRssRule;
 	bool m_filterGroupsHaveChanges;
 	bool m_schedulerTasksHaveChanges;
 	bool m_rssDownloadRulesHaveChanges;
@@ -97,7 +98,7 @@ public:
 	~SettingsDialog();
 	void ApplySettingsToSession();
 
-signals:
+	signals:
 	void needRetranslate();
 	void tasksChanged();
 private slots:
@@ -132,4 +133,5 @@ private slots:
 };
 
 #endif // !_SETTINGS_DLG_H
+
 

@@ -1,4 +1,4 @@
-/*
+﻿/*
   Copyright (c) 2011-2012 - Tőkés Attila
 
   This file is part of SmtpClient for Qt.
@@ -48,8 +48,8 @@ public:
 		ResponseTimeoutError = 1,
 		AuthenticationError = 2,
 		MailSendingError = 3,
-		ServerError = 4,    // 4xx smtp error
-		ClientError = 5,    // 5xx smtp error
+		ServerError = 4, // 4xx smtp error
+		ClientError = 5, // 5xx smtp error
 		SocketError = 6
 	};
 
@@ -57,7 +57,7 @@ public:
 	{
 		TcpConnection = 0,
 		SslConnection = 1,
-		TlsConnection = 2      // STARTTLS
+		TlsConnection = 2 // STARTTLS
 	};
 
 	enum ClientState
@@ -159,7 +159,9 @@ protected:
 		AuthMethod authMethod;
 
 		AuthInfo(const QString& username = "", const QString& password = "", AuthMethod authMethod = AuthPlain) :
-			username(username), password(password), authMethod(authMethod) {}
+			username(username), password(password), authMethod(authMethod)
+		{
+		}
 	};
 
 	QTcpSocket* socket;
@@ -185,7 +187,13 @@ protected:
 	const MimeMessage* email;
 
 	int rcptType;
-	enum _RcptType { _TO = 1, _CC = 2, _BCC = 3};
+
+	enum _RcptType
+	{
+		_TO = 1,
+		_CC = 2,
+		_BCC = 3
+	};
 
 	QList<EmailAddress>::const_iterator addressIt;
 	QList<EmailAddress>::const_iterator addressItEnd;
@@ -216,7 +224,7 @@ protected slots:
 	/* [6] --- */
 
 
-signals:
+	signals:
 
 	/* [7] Signals */
 
@@ -230,7 +238,8 @@ signals:
 	void disconnected();
 
 	/* [7] --- */
-
 };
 
 #endif // SMTPCLIENT_H
+
+

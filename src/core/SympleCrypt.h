@@ -63,10 +63,11 @@ public:
 	*/
 	enum CompressionMode
 	{
-		CompressionAuto,    /*!< Only apply compression if that results in a shorter plaintext. */
-		CompressionAlways,  /*!< Always apply compression. Note that for short inputs, a compression may result in longer data */
-		CompressionNever    /*!< Never apply compression. */
+		CompressionAuto, /*!< Only apply compression if that results in a shorter plaintext. */
+		CompressionAlways, /*!< Always apply compression. Note that for short inputs, a compression may result in longer data */
+		CompressionNever /*!< Never apply compression. */
 	};
+
 	/**
 	IntegrityProtectionMode describes measures taken to make it possible to detect problems with the data
 	or wrong decryption keys.
@@ -77,18 +78,19 @@ public:
 	*/
 	enum IntegrityProtectionMode
 	{
-		ProtectionNone,    /*!< The integerity of the encrypted data is not protected. It is not really possible to detect a wrong key, for instance. */
+		ProtectionNone, /*!< The integerity of the encrypted data is not protected. It is not really possible to detect a wrong key, for instance. */
 		ProtectionChecksum,/*!< A simple checksum is used to verify that the data is in order. If not, an empty string is returned. */
-		ProtectionHash     /*!< A cryptographic hash is used to verify the integrity of the data. This method produces a much stronger, but longer check */
+		ProtectionHash /*!< A cryptographic hash is used to verify the integrity of the data. This method produces a much stronger, but longer check */
 	};
+
 	/**
 	Error describes the type of error that occured.
 	*/
 	enum Error
 	{
-		ErrorNoError,         /*!< No error occurred. */
-		ErrorNoKeySet,        /*!< No key was set. You can not encrypt or decrypt without a valid key. */
-		ErrorUnknownVersion,  /*!< The version of this data is unknown, or the data is otherwise not valid. */
+		ErrorNoError, /*!< No error occurred. */
+		ErrorNoKeySet, /*!< No key was set. You can not encrypt or decrypt without a valid key. */
+		ErrorUnknownVersion, /*!< The version of this data is unknown, or the data is otherwise not valid. */
 		ErrorIntegrityFailed, /*!< The integrity check of the data failed. Perhaps the wrong key was used. */
 	};
 
@@ -109,6 +111,7 @@ public:
 	(Re-) initializes the key with the given @arg key.
 	*/
 	void setKey(quint64 key);
+
 	/**
 	Returns true if SimpleCrypt has been initialized with a key.
 	*/
@@ -127,6 +130,7 @@ public:
 	{
 		m_compressionMode = mode;
 	}
+
 	/**
 	Returns the CompressionMode that is currently in use.
 	*/
@@ -145,6 +149,7 @@ public:
 	{
 		m_protectionMode = mode;
 	}
+
 	/**
 	Returns the IntegrityProtectionMode that is currently in use.
 	*/
@@ -232,6 +237,7 @@ public:
 		CryptoFlagChecksum = 0x02,
 		CryptoFlagHash = 0x04
 	};
+
 	Q_DECLARE_FLAGS(CryptoFlags, CryptoFlag);
 private:
 
@@ -243,6 +249,9 @@ private:
 	IntegrityProtectionMode m_protectionMode;
 	Error m_lastError;
 };
+
 Q_DECLARE_OPERATORS_FOR_FLAGS(SimpleCrypt::CryptoFlags)
 
 #endif // SimpleCrypt_H
+
+

@@ -57,15 +57,28 @@ public:
     QStackedWidget *stackedWidget;
     QWidget *torrentTab;
     QGridLayout *gridLayout_22;
-    QGroupBox *trackerGroupBox;
-    QGridLayout *gridLayout_2;
-    QLabel *label_23;
-    QLineEdit *trackerPortEdit;
     QGroupBox *useNotificationsCheckBox;
     QGridLayout *gridLayout_13;
     QCheckBox *showTrackerErrorsCheckBox;
     QCheckBox *showDiskErrorsCheckBox;
     QCheckBox *showRssErrorsCheckBox;
+    QGroupBox *trackerGroupBox;
+    QGridLayout *gridLayout_2;
+    QLabel *label_23;
+    QLineEdit *trackerPortEdit;
+    QComboBox *styleComboBox;
+    QComboBox *localeComboBox;
+    QCheckBox *asociationCheckBox;
+    QCheckBox *winShelItegrationCheckBox;
+    QLabel *label_26;
+    QCheckBox *startMinimizedCheckBox;
+    QCheckBox *scriptDebugingCheckBox;
+    QCheckBox *magnetAssociationCheckBox;
+    QCheckBox *runOnbootCheckBox;
+    QLabel *label_8;
+    QSpacerItem *verticalSpacer_9;
+    QCheckBox *closeOnHideCheckBox;
+    QSpacerItem *horizontalSpacer_4;
     QGroupBox *watchDirEnabledCheckbox;
     QGridLayout *gridLayout_35;
     QGridLayout *gridLayout_23;
@@ -78,17 +91,6 @@ public:
     QLabel *label_43;
     QPushButton *browseWatchDirButton;
     QCheckBox *checkBox;
-    QComboBox *styleComboBox;
-    QCheckBox *asociationCheckBox;
-    QComboBox *localeComboBox;
-    QLabel *label_26;
-    QCheckBox *winShelItegrationCheckBox;
-    QCheckBox *scriptDebugingCheckBox;
-    QCheckBox *runOnbootCheckBox;
-    QCheckBox *magnetAssociationCheckBox;
-    QCheckBox *startMinimizedCheckBox;
-    QLabel *label_8;
-    QSpacerItem *verticalSpacer_9;
     QWidget *restrictionTab;
     QGridLayout *gridLayout_30;
     QGroupBox *groupBox_12;
@@ -289,7 +291,7 @@ public:
     {
         if (SettingsDialog->objectName().isEmpty())
             SettingsDialog->setObjectName(QString::fromUtf8("SettingsDialog"));
-        SettingsDialog->resize(799, 407);
+        SettingsDialog->resize(843, 407);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
         SettingsDialog->setWindowIcon(icon);
@@ -386,25 +388,6 @@ public:
         torrentTab->setObjectName(QString::fromUtf8("torrentTab"));
         gridLayout_22 = new QGridLayout(torrentTab);
         gridLayout_22->setObjectName(QString::fromUtf8("gridLayout_22"));
-        trackerGroupBox = new QGroupBox(torrentTab);
-        trackerGroupBox->setObjectName(QString::fromUtf8("trackerGroupBox"));
-        trackerGroupBox->setCheckable(true);
-        trackerGroupBox->setChecked(false);
-        gridLayout_2 = new QGridLayout(trackerGroupBox);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        label_23 = new QLabel(trackerGroupBox);
-        label_23->setObjectName(QString::fromUtf8("label_23"));
-
-        gridLayout_2->addWidget(label_23, 0, 0, 1, 1);
-
-        trackerPortEdit = new QLineEdit(trackerGroupBox);
-        trackerPortEdit->setObjectName(QString::fromUtf8("trackerPortEdit"));
-
-        gridLayout_2->addWidget(trackerPortEdit, 0, 1, 1, 1);
-
-
-        gridLayout_22->addWidget(trackerGroupBox, 0, 2, 2, 2);
-
         useNotificationsCheckBox = new QGroupBox(torrentTab);
         useNotificationsCheckBox->setObjectName(QString::fromUtf8("useNotificationsCheckBox"));
         useNotificationsCheckBox->setCheckable(true);
@@ -428,6 +411,88 @@ public:
 
 
         gridLayout_22->addWidget(useNotificationsCheckBox, 2, 2, 4, 2);
+
+        trackerGroupBox = new QGroupBox(torrentTab);
+        trackerGroupBox->setObjectName(QString::fromUtf8("trackerGroupBox"));
+        trackerGroupBox->setCheckable(true);
+        trackerGroupBox->setChecked(false);
+        gridLayout_2 = new QGridLayout(trackerGroupBox);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        label_23 = new QLabel(trackerGroupBox);
+        label_23->setObjectName(QString::fromUtf8("label_23"));
+
+        gridLayout_2->addWidget(label_23, 0, 0, 1, 1);
+
+        trackerPortEdit = new QLineEdit(trackerGroupBox);
+        trackerPortEdit->setObjectName(QString::fromUtf8("trackerPortEdit"));
+
+        gridLayout_2->addWidget(trackerPortEdit, 0, 1, 1, 1);
+
+
+        gridLayout_22->addWidget(trackerGroupBox, 0, 2, 2, 2);
+
+        styleComboBox = new QComboBox(torrentTab);
+        styleComboBox->setObjectName(QString::fromUtf8("styleComboBox"));
+
+        gridLayout_22->addWidget(styleComboBox, 1, 1, 1, 1);
+
+        localeComboBox = new QComboBox(torrentTab);
+        localeComboBox->setObjectName(QString::fromUtf8("localeComboBox"));
+
+        gridLayout_22->addWidget(localeComboBox, 0, 1, 1, 1);
+
+        asociationCheckBox = new QCheckBox(torrentTab);
+        asociationCheckBox->setObjectName(QString::fromUtf8("asociationCheckBox"));
+
+        gridLayout_22->addWidget(asociationCheckBox, 4, 0, 1, 2);
+
+        winShelItegrationCheckBox = new QCheckBox(torrentTab);
+        winShelItegrationCheckBox->setObjectName(QString::fromUtf8("winShelItegrationCheckBox"));
+
+        gridLayout_22->addWidget(winShelItegrationCheckBox, 6, 0, 1, 2);
+
+        label_26 = new QLabel(torrentTab);
+        label_26->setObjectName(QString::fromUtf8("label_26"));
+
+        gridLayout_22->addWidget(label_26, 1, 0, 1, 1);
+
+        startMinimizedCheckBox = new QCheckBox(torrentTab);
+        startMinimizedCheckBox->setObjectName(QString::fromUtf8("startMinimizedCheckBox"));
+
+        gridLayout_22->addWidget(startMinimizedCheckBox, 3, 0, 1, 2);
+
+        scriptDebugingCheckBox = new QCheckBox(torrentTab);
+        scriptDebugingCheckBox->setObjectName(QString::fromUtf8("scriptDebugingCheckBox"));
+
+        gridLayout_22->addWidget(scriptDebugingCheckBox, 6, 2, 1, 2);
+
+        magnetAssociationCheckBox = new QCheckBox(torrentTab);
+        magnetAssociationCheckBox->setObjectName(QString::fromUtf8("magnetAssociationCheckBox"));
+
+        gridLayout_22->addWidget(magnetAssociationCheckBox, 5, 0, 1, 2);
+
+        runOnbootCheckBox = new QCheckBox(torrentTab);
+        runOnbootCheckBox->setObjectName(QString::fromUtf8("runOnbootCheckBox"));
+
+        gridLayout_22->addWidget(runOnbootCheckBox, 2, 0, 1, 2);
+
+        label_8 = new QLabel(torrentTab);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        gridLayout_22->addWidget(label_8, 0, 0, 1, 1);
+
+        verticalSpacer_9 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_22->addItem(verticalSpacer_9, 9, 0, 1, 1);
+
+        closeOnHideCheckBox = new QCheckBox(torrentTab);
+        closeOnHideCheckBox->setObjectName(QString::fromUtf8("closeOnHideCheckBox"));
+
+        gridLayout_22->addWidget(closeOnHideCheckBox, 7, 2, 1, 1);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_22->addItem(horizontalSpacer_4, 8, 2, 1, 1);
 
         watchDirEnabledCheckbox = new QGroupBox(torrentTab);
         watchDirEnabledCheckbox->setObjectName(QString::fromUtf8("watchDirEnabledCheckbox"));
@@ -491,61 +556,7 @@ public:
         gridLayout_35->addWidget(checkBox, 3, 0, 1, 2);
 
 
-        gridLayout_22->addWidget(watchDirEnabledCheckbox, 7, 0, 1, 3);
-
-        styleComboBox = new QComboBox(torrentTab);
-        styleComboBox->setObjectName(QString::fromUtf8("styleComboBox"));
-
-        gridLayout_22->addWidget(styleComboBox, 1, 1, 1, 1);
-
-        asociationCheckBox = new QCheckBox(torrentTab);
-        asociationCheckBox->setObjectName(QString::fromUtf8("asociationCheckBox"));
-
-        gridLayout_22->addWidget(asociationCheckBox, 4, 0, 1, 2);
-
-        localeComboBox = new QComboBox(torrentTab);
-        localeComboBox->setObjectName(QString::fromUtf8("localeComboBox"));
-
-        gridLayout_22->addWidget(localeComboBox, 0, 1, 1, 1);
-
-        label_26 = new QLabel(torrentTab);
-        label_26->setObjectName(QString::fromUtf8("label_26"));
-
-        gridLayout_22->addWidget(label_26, 1, 0, 1, 1);
-
-        winShelItegrationCheckBox = new QCheckBox(torrentTab);
-        winShelItegrationCheckBox->setObjectName(QString::fromUtf8("winShelItegrationCheckBox"));
-
-        gridLayout_22->addWidget(winShelItegrationCheckBox, 6, 0, 1, 2);
-
-        scriptDebugingCheckBox = new QCheckBox(torrentTab);
-        scriptDebugingCheckBox->setObjectName(QString::fromUtf8("scriptDebugingCheckBox"));
-
-        gridLayout_22->addWidget(scriptDebugingCheckBox, 6, 2, 1, 2);
-
-        runOnbootCheckBox = new QCheckBox(torrentTab);
-        runOnbootCheckBox->setObjectName(QString::fromUtf8("runOnbootCheckBox"));
-
-        gridLayout_22->addWidget(runOnbootCheckBox, 2, 0, 1, 2);
-
-        magnetAssociationCheckBox = new QCheckBox(torrentTab);
-        magnetAssociationCheckBox->setObjectName(QString::fromUtf8("magnetAssociationCheckBox"));
-
-        gridLayout_22->addWidget(magnetAssociationCheckBox, 5, 0, 1, 2);
-
-        startMinimizedCheckBox = new QCheckBox(torrentTab);
-        startMinimizedCheckBox->setObjectName(QString::fromUtf8("startMinimizedCheckBox"));
-
-        gridLayout_22->addWidget(startMinimizedCheckBox, 3, 0, 1, 2);
-
-        label_8 = new QLabel(torrentTab);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
-
-        gridLayout_22->addWidget(label_8, 0, 0, 1, 1);
-
-        verticalSpacer_9 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_22->addItem(verticalSpacer_9, 8, 0, 1, 1);
+        gridLayout_22->addWidget(watchDirEnabledCheckbox, 7, 0, 2, 2);
 
         stackedWidget->addWidget(torrentTab);
         restrictionTab = new QWidget();
@@ -1676,12 +1687,33 @@ public:
         ___qlistwidgetitem9->setText(QApplication::translate("SettingsDialog", "TAB_KEY_MAPPINGS", 0, QApplication::UnicodeUTF8));
         listWidget->setSortingEnabled(__sortingEnabled);
 
-        trackerGroupBox->setTitle(QApplication::translate("SettingsDialog", "START_TRACKER", 0, QApplication::UnicodeUTF8));
-        label_23->setText(QApplication::translate("SettingsDialog", "TRACKER_PORT", 0, QApplication::UnicodeUTF8));
         useNotificationsCheckBox->setTitle(QApplication::translate("SettingsDialog", "ENABLE_NOTIFICATIONS", 0, QApplication::UnicodeUTF8));
         showTrackerErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_TRACKER_ERRORS", 0, QApplication::UnicodeUTF8));
         showDiskErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_IO_ERRORS", 0, QApplication::UnicodeUTF8));
         showRssErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_RSS_ERRORS", 0, QApplication::UnicodeUTF8));
+        trackerGroupBox->setTitle(QApplication::translate("SettingsDialog", "START_TRACKER", 0, QApplication::UnicodeUTF8));
+        label_23->setText(QApplication::translate("SettingsDialog", "TRACKER_PORT", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        asociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        asociationCheckBox->setText(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION", 0, QApplication::UnicodeUTF8));
+        winShelItegrationCheckBox->setText(QApplication::translate("SettingsDialog", "ENABLE_SHELL_INTEGRATION", 0, QApplication::UnicodeUTF8));
+        label_26->setText(QApplication::translate("SettingsDialog", "STYLE", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        startMinimizedCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_MINIMIZED_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        startMinimizedCheckBox->setText(QApplication::translate("SettingsDialog", "START_MINIMIZED", 0, QApplication::UnicodeUTF8));
+        scriptDebugingCheckBox->setText(QApplication::translate("SettingsDialog", "ENABLE_SEARCH_SCRIPT_DEBUGING", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        magnetAssociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        magnetAssociationCheckBox->setText(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        runOnbootCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_ON_BOOT_WIT", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        runOnbootCheckBox->setText(QApplication::translate("SettingsDialog", "START_ON_BOOT", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("SettingsDialog", "LANGUAGE", 0, QApplication::UnicodeUTF8));
+        closeOnHideCheckBox->setText(QApplication::translate("SettingsDialog", "HIDE_ON_CLOSE", 0, QApplication::UnicodeUTF8));
         watchDirEnabledCheckbox->setTitle(QApplication::translate("SettingsDialog", "WATCH_DIR_FOR_NEW_TORRENTS", 0, QApplication::UnicodeUTF8));
         useStaticPathRadioButton->setText(QApplication::translate("SettingsDialog", "AUTO_ADD_USING_STATIC_PATH", 0, QApplication::UnicodeUTF8));
         showDialogRadioButton->setText(QApplication::translate("SettingsDialog", "NOT_AUTO_ADD", 0, QApplication::UnicodeUTF8));
@@ -1690,26 +1722,6 @@ public:
         label_43->setText(QApplication::translate("SettingsDialog", "DIR_TO_WATCH", 0, QApplication::UnicodeUTF8));
         browseWatchDirButton->setText(QApplication::translate("SettingsDialog", "BROWSE", 0, QApplication::UnicodeUTF8));
         checkBox->setText(QApplication::translate("SettingsDialog", "DELETE_TORRENTS", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        asociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        asociationCheckBox->setText(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION", 0, QApplication::UnicodeUTF8));
-        label_26->setText(QApplication::translate("SettingsDialog", "STYLE", 0, QApplication::UnicodeUTF8));
-        winShelItegrationCheckBox->setText(QApplication::translate("SettingsDialog", "ENABLE_SHELL_INTEGRATION", 0, QApplication::UnicodeUTF8));
-        scriptDebugingCheckBox->setText(QApplication::translate("SettingsDialog", "ENABLE_SEARCH_SCRIPT_DEBUGING", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        runOnbootCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_ON_BOOT_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        runOnbootCheckBox->setText(QApplication::translate("SettingsDialog", "START_ON_BOOT", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        magnetAssociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        magnetAssociationCheckBox->setText(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        startMinimizedCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_MINIMIZED_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        startMinimizedCheckBox->setText(QApplication::translate("SettingsDialog", "START_MINIMIZED", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("SettingsDialog", "LANGUAGE", 0, QApplication::UnicodeUTF8));
         groupBox_12->setTitle(QApplication::translate("SettingsDialog", "ADDITINAL_PEER_SOUECES", 0, QApplication::UnicodeUTF8));
         usePExCheckBox->setText(QApplication::translate("SettingsDialog", "USE_PEX", 0, QApplication::UnicodeUTF8));
         useLSDCheckBox->setText(QApplication::translate("SettingsDialog", "USE_LSD", 0, QApplication::UnicodeUTF8));

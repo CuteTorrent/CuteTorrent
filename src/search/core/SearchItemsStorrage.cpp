@@ -15,7 +15,7 @@ SearchItemsStorrage::~SearchItemsStorrage()
 
 void SearchItemsStorrage::append(SearchResult* item)
 {
-	if(m_items.contains(item))
+	if (m_items.contains(item))
 	{
 		return;
 	}
@@ -27,7 +27,7 @@ void SearchItemsStorrage::append(QList<SearchResult*>& items)
 {
 	int nCount = items.length();
 
-	for(int i = 0; i < nCount; i++)
+	for (int i = 0; i < nCount; i++)
 	{
 		append(items.at(i));
 	}
@@ -37,7 +37,7 @@ void SearchItemsStorrage::remove(SearchResult* item)
 {
 	int itemIndex = m_items.indexOf(item);
 
-	if(itemIndex < 0)
+	if (itemIndex < 0)
 	{
 		return;
 	}
@@ -47,7 +47,7 @@ bool SearchItemsStorrage::contains(SearchResult* item)
 {
 	int itemIndex = m_items.indexOf(item);
 
-	if(itemIndex < 0)
+	if (itemIndex < 0)
 	{
 		return false;
 	}
@@ -71,3 +71,4 @@ int SearchItemsStorrage::length()
 {
 	return m_items.length();
 }
+

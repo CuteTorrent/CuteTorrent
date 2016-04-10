@@ -20,3 +20,4 @@ void SearchItem::setPattern(QString newPattern)
 {
 	pattern = newPattern;
 }
+

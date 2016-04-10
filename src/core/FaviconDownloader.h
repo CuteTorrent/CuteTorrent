@@ -4,9 +4,10 @@
 #include "Singleton.h"
 class StyleEngene;
 class NetworkDiskCache;
+
 class FaviconDownloader : public QObject, public Singleton<FaviconDownloader>
 {
-	friend class Singleton <FaviconDownloader>;
+	friend class Singleton<FaviconDownloader>;
 	Q_OBJECT
 public:
 	~FaviconDownloader();
@@ -25,5 +26,5 @@ protected:
 	FaviconDownloader(QObject* parent = NULL);
 private slots:
 	void replyReady(QNetworkReply*);
-
 };
+

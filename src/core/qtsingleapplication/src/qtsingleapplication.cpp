@@ -223,7 +223,9 @@ QtSingleApplication::QtSingleApplication(Display* dpy, const QString& appId, int
 	sysInit(appId);
 }
 #  endif // Q_WS_X11
+
 #endif // QT_VERSION < 0x050000
+
 
 
 /*!
@@ -288,7 +290,7 @@ void QtSingleApplication::setActivationWindow(QWidget* aw, bool activateOnMessag
 {
 	actWin = aw;
 
-	if(activateOnMessage)
+	if (activateOnMessage)
 	{
 		connect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
 	}
@@ -327,7 +329,7 @@ QWidget* QtSingleApplication::activationWindow() const
 */
 void QtSingleApplication::activateWindow()
 {
-	if(actWin)
+	if (actWin)
 	{
 		actWin->setWindowState(actWin->windowState() & ~Qt::WindowMinimized);
 		actWin->raise();
@@ -351,3 +353,4 @@ void QtSingleApplication::activateWindow()
 
     \obsolete
 */
+

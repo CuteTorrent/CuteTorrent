@@ -2,12 +2,13 @@
 #include "QTorrentDisplayModel.h"
 #include <QtCore>
 #include <float.h>
+
 QTorrentFilterProxyModel::QTorrentFilterProxyModel(QObject* parent)
 	: QSortFilterProxyModel(parent)
-	, m_pUpdateLocker(new QMutex())
-	, m_currentFilterType(TORRENT)
-	, m_torrentFilter(EMPTY)
-	, m_pTorrentGroupsManager(TorrentGroupsManager::getInstance())
+	  , m_pUpdateLocker(new QMutex())
+	  , m_currentFilterType(TORRENT)
+	  , m_torrentFilter(EMPTY)
+	  , m_pTorrentGroupsManager(TorrentGroupsManager::getInstance())
 {
 	setDynamicSortFilter(true);
 }
@@ -38,7 +39,7 @@ bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex
 						return searchFilterAccept;
 					}
 					torrentUid = pTorrent->GetGroupUid();
-					return  (torrentGroup->uid() == torrentUid || torrentGroup->contains(torrentUid)) && searchFilterAccept;
+					return (torrentGroup->uid() == torrentUid || torrentGroup->contains(torrentUid)) && searchFilterAccept;
 
 				case TORRENT:
 				{
@@ -77,12 +78,7 @@ bool QTorrentFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex
 
 	return false;
 }
-#define COMPARE_EQUALBY_NAME(x,y)  \
-	if (x == y)  \
-	{ \
-		return leftTorrent->GetName().compare(rightTorrent->GetName()) < 0;\
-	} \
-	return x < y;
+
 bool QTorrentFilterProxyModel::lessThan(const QModelIndex& left, const QModelIndex& right) const
 {
 	if (left.isValid() && right.isValid())
@@ -93,6 +89,7 @@ bool QTorrentFilterProxyModel::lessThan(const QModelIndex& left, const QModelInd
 		if (rightTorrent != NULL && leftTorrent != NULL)
 		{
 			QTorrentDisplayModel::Role torrentSortRole = QTorrentDisplayModel::Role(sortRole());
+			qDebug() << "Sort role while sorting " << torrentSortRole;
 			QVariant leftData = left.data(torrentSortRole);
 			QVariant rightData = right.data(torrentSortRole);
 
@@ -130,5 +127,4 @@ void QTorrentFilterProxyModel::setTorrentSearchFilter(QString filter)
 	m_torrentSearchFilter = QRegExp(filter, Qt::CaseInsensitive, QRegExp::Wildcard);
 	invalidateFilter();
 }
-
 

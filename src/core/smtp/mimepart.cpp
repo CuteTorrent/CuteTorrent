@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright (c) 2011-2012 - Tőkés Attila
 
 This file is part of SmtpClient for Qt.
@@ -205,7 +205,6 @@ void MimePart::writeToDevice(QIODevice& device) const
 }
 
 
-
 /* [3] --- */
 
 
@@ -238,3 +237,5 @@ void MimePart::writeContent(QIODevice& device, const QByteArray& content) const
 }
 
 /* [4] --- */
+
+

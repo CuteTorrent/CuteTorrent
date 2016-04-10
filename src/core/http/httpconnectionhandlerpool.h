@@ -7,6 +7,7 @@
 #include <QMutex>
 #include "httpconnectionhandler.h"
 #include "QApplicationSettings.h"
+
 /**
   Pool of http connection handlers. Connection handlers are created on demand and idle handlers are
   cleaned up in regular time intervals.
@@ -70,7 +71,8 @@ private slots:
 
 	/** Received from the clean-up timer.  */
 	void cleanup();
-
 };
 
 #endif // HTTPCONNECTIONHANDLERPOOL_H
+
+

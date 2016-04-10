@@ -6,11 +6,17 @@
 class RssItem;
 class RssFeed;
 class RssFeedTreeItem;
+
 class QRssDisplayModel : public QAbstractItemModel
 {
 	Q_OBJECT
 public:
-	enum Role { RssFeedRole = Qt::UserRole, RssItemRole = Qt::UserRole + 1 };
+	enum Role
+	{
+		RssFeedRole = Qt::UserRole,
+		RssItemRole = Qt::UserRole + 1
+	};
+
 	QRssDisplayModel(QTreeView* pItemsView, QObject* parrent = NULL, bool autoUpdate = true);
 	~QRssDisplayModel();
 	int columnCount(const QModelIndex& parent = QModelIndex()) const override;
@@ -39,13 +45,13 @@ public slots:
 	void onFeedUpdate();
 	void onFeedRename();
 	void onFeedRemove();
-signals:
+	signals:
 	void Notify(int, QString, QVariant);
 private:
-	QAction* updateAction, *renameAction, *removeAction, *markAllAsReeded, *markAllAsUnread;
-	QAction* downloadTorrent, *openLink, *markAsReeded, *markAsUnread;
+	QAction *updateAction, *renameAction, *removeAction, *markAllAsReeded, *markAllAsUnread;
+	QAction *downloadTorrent, *openLink, *markAsReeded, *markAsUnread;
 	FileDownloaderPtr m_pTorrentDownloader;
-	QMenu* m_pFeedMenu, *m_pItemMenu;
+	QMenu *m_pFeedMenu, *m_pItemMenu;
 	QTreeView* m_pItemsView;
 	QTimer* m_pUdpateTimer;
 	RssManagerPtr m_pRssManager;
@@ -56,5 +62,5 @@ private:
 
 	void setCurrentItemUnread(bool val);
 	void setCurrentFeedUnread(bool val);
-
 };
+

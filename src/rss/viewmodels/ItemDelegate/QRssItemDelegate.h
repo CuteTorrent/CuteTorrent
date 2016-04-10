@@ -7,6 +7,7 @@ class RssFeedTreeItem;
 class RssFeedItemTreeItem;
 class RssItem;
 class RssFeed;
+
 class QRssItemDelegate :
 	public QStyledItemDelegate
 {

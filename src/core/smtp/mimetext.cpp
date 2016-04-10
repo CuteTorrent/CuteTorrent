@@ -1,4 +1,4 @@
-/*
+﻿/*
   Copyright (c) 2011-2012 - Tőkés Attila
 
   This file is part of SmtpClient for Qt.
@@ -28,7 +28,9 @@ MimeText::MimeText(const QString& txt)
 	this->cEncoding = _8Bit;
 }
 
-MimeText::~MimeText() { }
+MimeText::~MimeText()
+{
+}
 
 /* [1] --- */
 
@@ -56,3 +58,5 @@ void MimeText::writeContent(QIODevice& device) const
 }
 
 /* [3] --- */
+
+

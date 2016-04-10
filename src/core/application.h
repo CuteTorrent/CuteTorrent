@@ -50,7 +50,7 @@ public slots:
 	static void setLanguage(QString locale);
 	static void setLanguageQt(QString locale);
 	static QString currentLocale();
-signals:
+	signals:
 	void OpenTorrent(QString);
 private:
 	static QString current_locale, current_locale_qt;
@@ -62,3 +62,5 @@ private:
 };
 
 #endif // APPLICATION_H
+
+

@@ -19,7 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _FILETREEMODEL_H
 #define _FILETREEMODEL_H
 #include "TreeItem.h"
-#include  <QAbstractItemModel>
+#include <QAbstractItemModel>
+
 class FileTreeModel : public QAbstractItemModel
 {
 	Q_OBJECT

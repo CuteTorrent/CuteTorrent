@@ -1,5 +1,6 @@
 ﻿#include "qkeyedit.h"
 #include <QDebug>
+
 QKeyEdit::QKeyEdit(QWidget* parent) :
 	QLineEdit(parent)
 {
@@ -13,16 +14,16 @@ void QKeyEdit::keyPressEvent(QKeyEvent* keyEvent)
 	Qt::KeyboardModifiers modifiers = keyEvent->modifiers();
 	Qt::Key key = static_cast<Qt::Key>(keyInt);
 
-	if(key == Qt::Key_unknown)
+	if (key == Qt::Key_unknown)
 	{
 		qDebug() << "Unknown key from a macro probably";
 		return;
 	}
 
-	if(key == Qt::Key_Control ||
-	        key == Qt::Key_Shift ||
-	        key == Qt::Key_Alt ||
-	        key == Qt::Key_Meta)
+	if (key == Qt::Key_Control ||
+		key == Qt::Key_Shift ||
+		key == Qt::Key_Alt ||
+		key == Qt::Key_Meta)
 	{
 		return;
 	}
@@ -36,7 +37,8 @@ void QKeyEdit::keyPressEvent(QKeyEvent* keyEvent)
 
 #endif // Q_WS_WIN32
 
-	if(key == Qt::Key_Escape)
+
+	if (key == Qt::Key_Escape)
 	{
 		setText("");
 		return;
@@ -53,3 +55,4 @@ void QKeyEdit::changeEvent(QEvent* event)
 		setToolTip(tr("KEY_EDIT_CLEAR_HINT"));
 	}
 }
+

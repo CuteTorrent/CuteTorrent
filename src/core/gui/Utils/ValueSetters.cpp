@@ -41,7 +41,7 @@ void ValueSetters::LanguageValueSetter(QString group, QString name, QVariant val
 	QStringList availableLanguages = Application::availableLanguages();
 	int languageIndex = value.toInt();
 
-	if ( languageIndex < availableLanguages.size() && languageIndex > -1)
+	if (languageIndex < availableLanguages.size() && languageIndex > -1)
 	{
 		QString languageCode = availableLanguages[languageIndex];
 		QApplicationSettings::getInstance()->setValue(group, name, languageCode);
@@ -376,3 +376,4 @@ void ValueSetters::WindowsShellValueSetter(QString group, QString name, QVariant
 	}
 }
 #endif
+

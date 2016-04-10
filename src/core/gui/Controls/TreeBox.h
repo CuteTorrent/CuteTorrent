@@ -1,4 +1,3 @@
-
 #ifndef __ctkTreeComboBox_h
 #define __ctkTreeComboBox_h
 
@@ -26,15 +25,15 @@ class QTreeView;
 class TreeBox : public QComboBox
 {
 	Q_OBJECT
-		/// Column index visible in the view. If \sa visibleModelColumn is -1
-		/// (default) then all columns are visible.
-		Q_PROPERTY(int visibleModelColumn READ visibleModelColumn WRITE setVisibleModelColumn)
+	/// Column index visible in the view. If \sa visibleModelColumn is -1
+	/// (default) then all columns are visible.
+	Q_PROPERTY(int visibleModelColumn READ visibleModelColumn WRITE setVisibleModelColumn)
 public:
 	typedef QComboBox Superclass;
 	explicit TreeBox(QWidget* parent = 0);
 	virtual ~TreeBox();
 
-	int visibleModelColumn()const;
+	int visibleModelColumn() const;
 	void setVisibleModelColumn(int index);
 
 	QModelIndex currentIndex() const;
@@ -48,15 +47,15 @@ public:
 	/// TreeBox uses a QTreeView for its model view. treeView() is a
 	/// utility function that cast QComboBox::view() into a QTreeView.
 	/// \sa view()
-	QTreeView* treeView()const;
+	QTreeView* treeView() const;
 
 protected:
 	virtual void paintEvent(QPaintEvent*) override;
 
-	protected Q_SLOTS:
+protected Q_SLOTS:
 	void resizePopup();
 
-signals:
+	signals:
 	void popupShow();
 	void popupHide();
 
@@ -69,3 +68,4 @@ private:
 };
 
 #endif
+

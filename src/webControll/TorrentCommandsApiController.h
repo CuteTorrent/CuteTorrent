@@ -2,6 +2,7 @@
 #include "http/httprequesthandler.h"
 #include "TorrentManager.h"
 class TorrentManager;
+
 class TorrentCommandsApiController: public HttpRequestHandler
 {
 	Q_OBJECT

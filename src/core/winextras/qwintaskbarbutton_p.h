@@ -69,3 +69,5 @@ public:
 QT_END_NAMESPACE
 
 #endif // QWINTASKBARBUTTON_P_H
+
+

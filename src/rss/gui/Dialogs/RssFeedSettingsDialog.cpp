@@ -127,5 +127,3 @@ void RssFeedSettingsDialog::FillInData()
 	}
 }
 
-
-

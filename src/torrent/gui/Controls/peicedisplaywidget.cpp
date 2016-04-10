@@ -1,6 +1,7 @@
 ﻿#include "peicedisplaywidget.h"
 #include <QPainter>
 #include <QDebug>
+
 PeiceDisplayWidget::PeiceDisplayWidget(QWidget* parent)
 	: QWidget(parent)
 {
@@ -21,7 +22,7 @@ void PeiceDisplayWidget::clear()
 	QImage img2(width() - 2, 1, QImage::Format_RGB32);
 	img2.fill(m_cBackground);
 	m_dowloadingParts.clear();
-	m_dowloadedParts.clear();
+	m_avaliableParts.clear();
 	m_iPiceCount = 0;
 	m_image = img2;
 }
@@ -29,8 +30,8 @@ void PeiceDisplayWidget::clear()
 void PeiceDisplayWidget::setProgress(const QBitArray& availibalePieces, const QBitArray& downloadingPieces)
 {
 	m_dowloadingParts = downloadingPieces;
-	m_dowloadedParts = availibalePieces;
-	m_iPiceCount = m_dowloadedParts.size();
+	m_avaliableParts = availibalePieces;
+	m_iPiceCount = m_avaliableParts.size();
 	UpdateImage();
 }
 
@@ -40,7 +41,7 @@ void PeiceDisplayWidget::paintEvent(QPaintEvent* paintEvent)
 	painter.fillRect(0, 0, width() - 1, height() - 1, m_cBackground);
 	QRect imageRect(1, 1, width() - 2, height() - 2);
 
-	if(!m_image.isNull())
+	if (!m_image.isNull())
 	{
 		if (m_image.width() != width() - 2)
 		{
@@ -166,7 +167,7 @@ void PeiceDisplayWidget::UpdateImage()
 {
 	QImage image2(width() - 2, 1, QImage::Format_RGB888);
 
-	if (m_dowloadedParts.isEmpty())
+	if (m_avaliableParts.isEmpty())
 	{
 		image2.fill(0xffffff);
 		m_image = image2;
@@ -174,7 +175,7 @@ void PeiceDisplayWidget::UpdateImage()
 		return;
 	}
 
-	QVector<float> scaled_pieces = bitfieldToFloatVector(m_dowloadedParts, image2.width());
+	QVector<float> scaled_pieces = bitfieldToFloatVector(m_avaliableParts, image2.width());
 	QVector<float> scaled_pieces_dl = bitfieldToFloatVector(m_dowloadingParts, image2.width());
 
 	// filling image
@@ -239,3 +240,4 @@ void PeiceDisplayWidget::setBackgroudColor(QColor value)
 {
 	m_cBackground = value;
 }
+

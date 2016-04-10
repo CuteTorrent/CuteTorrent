@@ -3,10 +3,11 @@
 
 QString PriorityItemDelegate::displayText(const QVariant& value, const QLocale& locale) const
 {
-	if(value.type() == QVariant::Int)
+	if (value.type() == QVariant::Int)
 	{
 		return StaticHelpers::filePriorityToString(value.toInt());
 	}
 
 	return "";
 }
+

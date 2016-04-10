@@ -33,6 +33,7 @@ QUuid RssFeed::uid()
 {
 	return m_uid;
 }
+
 bool rssItemLessThenByDate(const RssItem* right, const RssItem* left)
 {
 	QDateTime rightTime = right->pubDate();
@@ -45,7 +46,7 @@ void RssFeed::resourceLoaded(QNetworkReply* pReply)
 {
 	QVariant fromCache = pReply->attribute(QNetworkRequest::SourceIsFromCacheAttribute);
 
-	if (pReply->error() ==  QNetworkReply::NoError)
+	if (pReply->error() == QNetworkReply::NoError)
 	{
 		RssParserPtr parser = RssParser::getInstance();
 		bool ok;
@@ -77,9 +78,9 @@ void RssFeed::resourceLoaded(QNetworkReply* pReply)
 			m_rssItems.clear();
 
 			foreach(RssItem* rssItem, m_rssItemsByDate)
-			{
-				m_rssItems.insert(rssItem->guid(), rssItem);
-			}
+				{
+					m_rssItems.insert(rssItem->guid(), rssItem);
+				}
 		}
 
 		UpdateUnreadCount();
@@ -206,12 +207,12 @@ void RssFeed::UpdateUnreadCount()
 	m_unreadCount = 0;
 
 	foreach (RssItem* item, m_rssItemsByDate)
-	{
-		if (item->unread())
 		{
-			m_unreadCount++;
+			if (item->unread())
+			{
+				m_unreadCount++;
+			}
 		}
-	}
 }
 
 QString RssFeed::displayName(bool noUnreadCount)
@@ -319,3 +320,4 @@ QDataStream& operator>>(QDataStream& stream, RssFeed& any)
 	any.UpdateUnreadCount();
 	return stream;
 }
+

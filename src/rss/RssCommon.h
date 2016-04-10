@@ -7,3 +7,4 @@ DEFINE_PTR_CALSS(RssManager)
 DEFINE_PTR_CALSS(RssParser)
 
 #endif
+

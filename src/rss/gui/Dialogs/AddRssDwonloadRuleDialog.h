@@ -6,6 +6,7 @@
 #include <QUuid>
 #include "RssDownloadRule.h"
 class QRssFilterModel;
+
 class AddRssDwonloadRuleDialog : public BaseWindow<QDialog>, Ui::AddRssDownloadRuleDialog
 {
 	Q_OBJECT
@@ -15,6 +16,7 @@ public:
 		EDIT,
 		CREATE
 	};
+
 	AddRssDwonloadRuleDialog(QWidget* parent = NULL, DiaologMode mode = CREATE);
 	RssDownloadRule* getFinalRule();
 
@@ -47,3 +49,5 @@ private:
 Q_DECLARE_METATYPE(QUuid)
 Q_DECLARE_METATYPE(QRegExp::PatternSyntax)
 #endif//_ADD_RSS_DL_RULE_DLG_INCLUDED_
+
+

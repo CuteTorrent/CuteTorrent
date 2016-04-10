@@ -51,7 +51,6 @@ see quazip/(un)zip.h files for details. Basically it's the zlib license.
  */
 class QUAZIP_EXPORT QuaChecksum32
 {
-
 public:
 	///Calculates the checksum for data.
 	/** \a data source data
@@ -76,3 +75,5 @@ public:
 };
 
 #endif //QUACHECKSUM32_H
+
+

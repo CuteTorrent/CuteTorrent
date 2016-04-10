@@ -13,6 +13,7 @@
 #include "httpconnectionhandlerpool.h"
 #include "httprequesthandler.h"
 #include "QApplicationSettings.h"
+
 /**
   Listens for incoming TCP connections and and passes all incoming HTTP requests to your implementation of HttpRequestHandler,
   which processes the request and generates the response (usually a HTML document).
@@ -66,14 +67,15 @@ private:
 	/** Pool of connection handlers */
 	HttpConnectionHandlerPool* pool;
 
-signals:
+	signals:
 
 	/**
 	  Emitted when the connection handler shall process a new incoming onnection.
 	  @param socketDescriptor references the accepted connection.
 	*/
 	void handleConnection(int socketDescriptor);
-
 };
 
 #endif // LISTENER_H
+
+

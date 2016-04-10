@@ -2,11 +2,12 @@
 
 QString IpItemDelegate::displayText(const QVariant& value, const QLocale& locale) const
 {
-	if (value.canConvert<QString>())
+	if (value.type() == QVariant::UserType)
 	{
-		boost::asio::ip::address adr = boost::asio::ip::address::from_string(value.toString().toStdString());
+		boost::asio::ip::address adr = value.value<boost::asio::ip::address>();
 		return QString::fromStdString(adr.to_string());
 	}
 
 	return "";
 }
+

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <QtGui>
+
 class FileViewSortProxyModel : public QSortFilterProxyModel
 {
 public:
@@ -7,6 +8,5 @@ public:
 	~FileViewSortProxyModel();
 
 	bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
-
 };
 

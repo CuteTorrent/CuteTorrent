@@ -10,7 +10,7 @@
 
 HttpSession::HttpSession(bool canStore)
 {
-	if(canStore)
+	if (canStore)
 	{
 		dataPtr = new HttpSessionData();
 		dataPtr->refCount = 1;
@@ -29,7 +29,7 @@ HttpSession::HttpSession(const HttpSession& other)
 {
 	dataPtr = other.dataPtr;
 
-	if(dataPtr)
+	if (dataPtr)
 	{
 		dataPtr->lock.lockForWrite();
 		dataPtr->refCount++;
@@ -39,12 +39,12 @@ HttpSession::HttpSession(const HttpSession& other)
 	}
 }
 
-HttpSession& HttpSession::operator= (const HttpSession& other)
+HttpSession& HttpSession::operator=(const HttpSession& other)
 {
 	HttpSessionData* oldPtr = dataPtr;
 	dataPtr = other.dataPtr;
 
-	if(dataPtr)
+	if (dataPtr)
 	{
 		dataPtr->lock.lockForWrite();
 		dataPtr->refCount++;
@@ -54,7 +54,7 @@ HttpSession& HttpSession::operator= (const HttpSession& other)
 		dataPtr->lock.unlock();
 	}
 
-	if(oldPtr)
+	if (oldPtr)
 	{
 		int refCount;
 		oldPtr->lock.lockForRead();
@@ -63,7 +63,7 @@ HttpSession& HttpSession::operator= (const HttpSession& other)
 #endif
 		oldPtr->lock.unlock();
 
-		if(refCount == 0)
+		if (refCount == 0)
 		{
 			delete oldPtr;
 		}
@@ -74,7 +74,7 @@ HttpSession& HttpSession::operator= (const HttpSession& other)
 
 HttpSession::~HttpSession()
 {
-	if(dataPtr)
+	if (dataPtr)
 	{
 		int refCount;
 		dataPtr->lock.lockForRead();
@@ -83,7 +83,7 @@ HttpSession::~HttpSession()
 #endif
 		dataPtr->lock.unlock();
 
-		if(refCount == 0)
+		if (refCount == 0)
 		{
 			delete dataPtr;
 		}
@@ -93,7 +93,7 @@ HttpSession::~HttpSession()
 
 QByteArray HttpSession::getId() const
 {
-	if(dataPtr)
+	if (dataPtr)
 	{
 		return dataPtr->id;
 	}
@@ -110,7 +110,7 @@ bool HttpSession::isNull() const
 
 void HttpSession::set(const QByteArray& key, const QVariant& value)
 {
-	if(dataPtr)
+	if (dataPtr)
 	{
 		dataPtr->lock.lockForWrite();
 		dataPtr->values.insert(key, value);
@@ -120,7 +120,7 @@ void HttpSession::set(const QByteArray& key, const QVariant& value)
 
 void HttpSession::remove(const QByteArray& key)
 {
-	if(dataPtr)
+	if (dataPtr)
 	{
 		dataPtr->lock.lockForWrite();
 		dataPtr->values.remove(key);
@@ -132,7 +132,7 @@ QVariant HttpSession::get(const QByteArray& key) const
 {
 	QVariant value;
 
-	if(dataPtr)
+	if (dataPtr)
 	{
 		dataPtr->lock.lockForRead();
 		value = dataPtr->values.value(key);
@@ -146,7 +146,7 @@ bool HttpSession::contains(const QByteArray& key) const
 {
 	bool found = false;
 
-	if(dataPtr)
+	if (dataPtr)
 	{
 		dataPtr->lock.lockForRead();
 		found = dataPtr->values.contains(key);
@@ -160,7 +160,7 @@ QMap<QByteArray, QVariant> HttpSession::getAll() const
 {
 	QMap<QByteArray, QVariant> values;
 
-	if(dataPtr)
+	if (dataPtr)
 	{
 		dataPtr->lock.lockForRead();
 		values = dataPtr->values;
@@ -174,7 +174,7 @@ qint64 HttpSession::getLastAccess() const
 {
 	qint64 value = 0;
 
-	if(dataPtr)
+	if (dataPtr)
 	{
 		dataPtr->lock.lockForRead();
 		value = dataPtr->lastAccess;
@@ -187,10 +187,11 @@ qint64 HttpSession::getLastAccess() const
 
 void HttpSession::setLastAccess()
 {
-	if(dataPtr)
+	if (dataPtr)
 	{
 		dataPtr->lock.lockForRead();
 		dataPtr->lastAccess = QDateTime::currentMSecsSinceEpoch();
 		dataPtr->lock.unlock();
 	}
 }
+

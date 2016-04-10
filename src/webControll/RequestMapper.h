@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "http/httprequesthandler.h"
+
 class RequestMapper: public HttpRequestHandler
 {
 	Q_OBJECT
@@ -11,5 +12,5 @@ public:
 	void service(HttpRequest& request, HttpResponse& response) override;
 private:
 	QMap<QString, HttpRequestHandler*> m_pRequestMap;
-
 };
+

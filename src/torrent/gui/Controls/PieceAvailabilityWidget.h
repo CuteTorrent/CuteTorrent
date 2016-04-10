@@ -12,7 +12,7 @@ class PieceAvailabilityWidget : public QWidget
 
 protected:
 	void paintEvent(QPaintEvent*) override;
-//	QSize minimumSizeHint();
+	//	QSize minimumSizeHint();
 public:
 	explicit PieceAvailabilityWidget(QObject* parent = NULL);
 	QColor pieceColor();
@@ -38,3 +38,4 @@ private:
 };
 
 #endif
+

@@ -9,17 +9,20 @@
 #include "libtorrent/torrent_handle.hpp"
 #include <libtorrent/size_type.hpp>
 using namespace libtorrent;
+
 struct opentorrent_info
 {
 	QString name, describtion, baseSuffix, infoHash;
 	libtorrent::file_storage files;
 	libtorrent::size_type size;
 };
+
 struct openmagnet_info : opentorrent_info
 {
 	QString link;
 	libtorrent::torrent_handle handle;
 };
+
 Q_DECLARE_METATYPE(openmagnet_info)
 enum FilterType
 {
@@ -29,6 +32,7 @@ enum FilterType
 	TORRENT,
 	NONE
 };
+
 Q_DECLARE_METATYPE(FilterType)
 
 struct torrent_creation_info
@@ -38,8 +42,6 @@ struct torrent_creation_info
 	std::vector<std::string> trackers;
 	quint64 pice_size;
 	bool _private, startSeed, saveFileOrder;
-
-
 };
 
 struct files_info
@@ -53,3 +55,5 @@ struct files_info
 #define KbFloat 1024.0
 #define KbInt 1024
 #endif //_DEFS_H
+
+

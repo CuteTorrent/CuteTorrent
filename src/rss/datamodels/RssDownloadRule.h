@@ -6,6 +6,7 @@
 #include "RssCommon.h"
 class RssItem;
 class RssFeed;
+
 class RssDownloadRule
 {
 	friend QDataStream& operator <<(QDataStream& out, const RssDownloadRule& any);
@@ -17,6 +18,7 @@ public:
 		SELECT_FILE_RULE = 1,
 		DOWNLOAD_RULE = 2
 	};
+
 	RssDownloadRule();
 	bool UseStaticSavePath() const;
 
@@ -66,8 +68,8 @@ public:
 	bool MatchFeed(QUuid uid);
 	void addFeed(QUuid feedUid);
 	void removeFeed(QUuid feedUid);
-	bool operator == (const RssDownloadRule& other);
-	bool operator != (const RssDownloadRule& other);
+	bool operator ==(const RssDownloadRule& other);
+	bool operator !=(const RssDownloadRule& other);
 private:
 	bool m_useStaticSavePath;
 	bool m_useGroupFilters;
@@ -86,4 +88,5 @@ protected:
 Q_DECLARE_METATYPE(RssDownloadRule::DownloadRuleType)
 
 #endif//_RSS_DWONLOAD_RULE_INCLUDED_
+
 

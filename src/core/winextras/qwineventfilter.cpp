@@ -46,84 +46,92 @@
 #   define WM_DWMCOMPOSITIONCHANGED       0x031E
 #endif
 
-QWinEventFilter *QWinEventFilter::instance = 0;
+QWinEventFilter* QWinEventFilter::instance = 0;
 
 QWinEventFilter::QWinEventFilter() :
-    tbButtonCreatedMsgId(RegisterWindowMessageW(L"TaskbarButtonCreated"))
+	tbButtonCreatedMsgId(RegisterWindowMessageW(L"TaskbarButtonCreated"))
 {
 }
 
 QWinEventFilter::~QWinEventFilter()
 {
-    instance = 0;
+	instance = 0;
 }
 
-bool QWinEventFilter::nativeEventFilter(void *message, long *result)
+bool QWinEventFilter::nativeEventFilter(void* message, long* result)
 {
-    MSG *msg = static_cast<MSG *>(message);
-    bool filterOut = false;
+	MSG* msg = static_cast<MSG *>(message);
+	bool filterOut = false;
 
-    QEvent *event = 0;
-    QWidget *window = 0;
-    switch (msg->message) {
-	case WM_COMMAND:
-		if (HIWORD(msg->wParam) == THBN_CLICKED) {
-			event = new QWinTaskBarButtonClicked(LOWORD(msg->wParam));
-			if (result)
-				*result = 0;
+	QEvent* event = 0;
+	QWidget* window = 0;
+	switch (msg->message)
+	{
+		case WM_COMMAND:
+			if (HIWORD(msg->wParam) == THBN_CLICKED)
+			{
+				event = new QWinTaskBarButtonClicked(LOWORD(msg->wParam));
+				if (result)
+					*result = 0;
+				filterOut = true;
+			}
+			break;
+		case WM_DWMSENDICONICTHUMBNAIL:
+			event = new QWinRequestThumbnailBitmap(QSize(HIWORD(msg->lParam), LOWORD(msg->lParam)), msg->hwnd);
 			filterOut = true;
-		}
-		break;
-	case WM_DWMSENDICONICTHUMBNAIL:
-		event = new QWinRequestThumbnailBitmap(QSize(HIWORD(msg->lParam), LOWORD(msg->lParam)), msg->hwnd);
-		filterOut = true;
-		break;
-    case WM_DWMCOLORIZATIONCOLORCHANGED :
-        event = new QWinColorizationChangeEvent(msg->wParam, msg->lParam);
-        break;
-    case WM_DWMCOMPOSITIONCHANGED :
-        event = new QWinCompositionChangeEvent(QtWin::isCompositionEnabled());
-        break;
-    case WM_THEMECHANGED :
-        event = new QWinEvent(QWinEvent::ThemeChange);
-        break;
-    default :
-        if (instance->tbButtonCreatedMsgId == msg->message) {
-            event = new QWinEvent(QWinEvent::TaskbarButtonCreated);
-            filterOut = true;
-        }
-        break;
-    }
+			break;
+		case WM_DWMCOLORIZATIONCOLORCHANGED:
+			event = new QWinColorizationChangeEvent(msg->wParam, msg->lParam);
+			break;
+		case WM_DWMCOMPOSITIONCHANGED:
+			event = new QWinCompositionChangeEvent(QtWin::isCompositionEnabled());
+			break;
+		case WM_THEMECHANGED:
+			event = new QWinEvent(QWinEvent::ThemeChange);
+			break;
+		default:
+			if (instance->tbButtonCreatedMsgId == msg->message)
+			{
+				event = new QWinEvent(QWinEvent::TaskbarButtonCreated);
+				filterOut = true;
+			}
+			break;
+	}
 
-    if (event) {
-        window = findWindow(msg->hwnd);
-        if (window)
-            QCoreApplication::sendEvent(window, event);
-        delete event;
-    }
+	if (event)
+	{
+		window = findWindow(msg->hwnd);
+		if (window)
+			QCoreApplication::sendEvent(window, event);
+		delete event;
+	}
 
-    if (filterOut && result) {
-        *result = 0;
-    }
+	if (filterOut && result)
+	{
+		*result = 0;
+	}
 
-    return filterOut;
+	return filterOut;
 }
 
 void QWinEventFilter::setup()
 {
-    if (!instance) {
-        instance = new QWinEventFilter;
+	if (!instance)
+	{
+		instance = new QWinEventFilter;
 		qApp->setEventFilter(&QWinEventFilter::nativeEventFilter);
-    }
+	}
 }
 
-QWidget *QWinEventFilter::findWindow(HWND handle)
+QWidget* QWinEventFilter::findWindow(HWND handle)
 {
 	const WId wid = reinterpret_cast<WId>(handle);
-	foreach(QWidget *topLevel, QApplication::topLevelWidgets()) {
-		if (topLevel != NULL && topLevel->winId() == wid)
-			return topLevel;
-	}
-	
+	foreach(QWidget *topLevel, QApplication::topLevelWidgets())
+		{
+			if (topLevel != NULL && topLevel->winId() == wid)
+				return topLevel;
+		}
+
 	return NULL;
 }
+

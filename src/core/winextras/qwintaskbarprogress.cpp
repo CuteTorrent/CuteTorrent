@@ -357,3 +357,4 @@ void QWinTaskbarProgress::stop()
 }
 
 QT_END_NAMESPACE
+

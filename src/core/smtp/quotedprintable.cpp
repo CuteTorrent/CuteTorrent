@@ -1,4 +1,4 @@
-/*
+﻿/*
   Copyright (c) 2011-2012 - Tőkés Attila
 
   This file is part of SmtpClient for Qt.
@@ -23,7 +23,7 @@ QString QuotedPrintable::encode(const QByteArray& input)
 	static const char hex[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 	QString output;
 
-	for (int i = 0; i < input.length() ; ++i)
+	for (int i = 0; i < input.length(); ++i)
 	{
 		const char byte = input[i];
 
@@ -81,3 +81,4 @@ QByteArray QuotedPrintable::decode(const QString& input)
 
 	return output;
 }
+

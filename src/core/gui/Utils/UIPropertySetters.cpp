@@ -289,3 +289,4 @@ void UIPropertySetters::ChacheSizeSetter(QWidget* editor, SettingsPropertyMapper
 		qCritical() << "SpinboxKBSetter support only ChacheSizeSetter";
 	}
 }
+

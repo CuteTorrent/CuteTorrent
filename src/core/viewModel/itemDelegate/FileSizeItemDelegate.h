@@ -8,10 +8,11 @@ class FileSizeItemDelegate :
 public:
 	FileSizeItemDelegate(bool hideZeroSize = false, QObject* parent = NULL)
 		: QStyledItemDelegate(parent)
-		, m_hideZeroSize(hideZeroSize)
-	{};
+		  , m_hideZeroSize(hideZeroSize)
+	{
+	};
 
 
 	QString displayText(const QVariant& value, const QLocale& locale) const override;
-
 };
+

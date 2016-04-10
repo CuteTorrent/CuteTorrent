@@ -50,7 +50,7 @@ CreateTorrentDialog::CreateTorrentDialog(QWidget* parent, Qt::WindowFlags) : Bas
 	setupCustomWindow();
 	setupWindowIcons();
 	settings = QApplicationSettings::getInstance();
-	creator  = new torrentCreatorThread(this);
+	creator = new torrentCreatorThread(this);
 	m_pTorrentManager = TorrentManager::getInstance();
 	StyleEngene* style = StyleEngene::getInstance();
 	connect(style, SIGNAL(styleChanged()), this, SLOT(setupWindowIcons()));
@@ -72,16 +72,16 @@ quint64 CreateTorrentDialog::listFolder(QString pathToList)
 	QFileInfoList folderitems(currentFolder.entryInfoList(QDir::Files | QDir::Dirs | QDir::Hidden | QDir::NoSymLinks | QDir::NoDotAndDotDot));
 
 	foreach(QFileInfo i, folderitems)
-	{
-		if(i.isDir())
 		{
-			totalsize += listFolder(i.filePath());
+			if (i.isDir())
+			{
+				totalsize += listFolder(i.filePath());
+			}
+			else
+			{
+				totalsize += i.size();
+			}
 		}
-		else
-		{
-			totalsize += i.size();
-		}
-	}
 
 	return totalsize;
 }
@@ -148,24 +148,26 @@ quint64 CreateTorrentDialog::getPiceSize()
 void CreateTorrentDialog::BrowseDir()
 {
 	path = QFileDialog::getExistingDirectory(this, tr("DIALOG_OPEN_FOLDER"),
-	        settings->valueString("System", "LastSaveTorrentDir"),
-	        QFileDialog::ShowDirsOnly
-	        | QFileDialog::DontResolveSymlinks);
+	                                         settings->valueString("System", "LastSaveTorrentDir"),
+	                                         QFileDialog::ShowDirsOnly
+	                                         | QFileDialog::DontResolveSymlinks);
 	pathEdit->setText(path);
 }
+
 void CreateTorrentDialog::BrowseFile()
 {
-	path =  QFileDialog::getOpenFileName(this,
-	                                     tr("DIALOG_OPEN_FILE"), settings->valueString("System", "LastSaveTorrentDir") , tr("Any File (*.*)"));
+	path = QFileDialog::getOpenFileName(this,
+	                                    tr("DIALOG_OPEN_FILE"), settings->valueString("System", "LastSaveTorrentDir"), tr("Any File (*.*)"));
 	pathEdit->setText(path);
 }
+
 void CreateTorrentDialog::BeginCreate()
 {
 	path = pathEdit->text();
 
-	if((QFileInfo(path).isDir() && listFolder(path) == 0) || (!QFileInfo(path).isDir() && QFileInfo(path).size() == 0))
+	if ((QFileInfo(path).isDir() && listFolder(path) == 0) || (!QFileInfo(path).isDir() && QFileInfo(path).size() == 0))
 	{
-		CustomMessageBox::warning(this, tr("ERROR_STR"),
+		CustomMessageBox::warning(tr("ERROR_STR"),
 		                          tr("ERROR_EMPTY_DIR"));
 		return;
 	}
@@ -174,28 +176,29 @@ void CreateTorrentDialog::BeginCreate()
 	QStringList trackers = trackerEdit->toPlainText().split('\n');
 	QStringList webseeds = webSeedEdit->toPlainText().split('\n');
 
-	if(path.length() == 0)
+	if (path.length() == 0)
 	{
-		CustomMessageBox::information(this, tr("ERROR_STR"),
+		CustomMessageBox::information(tr("ERROR_STR"),
 		                              tr("ERROR_NO_FILE_OR_FOLDER_NAME"));
 		//delete creator;
 		createButton->setEnabled(true);
 		return;
 	}
 
-	for(QStringList::iterator i = trackers.begin(); i != trackers.end(); ++i)
+	for (QStringList::iterator i = trackers.begin(); i != trackers.end(); ++i)
 	{
-		if((*i).isEmpty())
+		if ((*i).isEmpty())
 		{
 			trackers.removeOne(*i);
 		}
 	}
 
-	if(trackers.count() == 0)
+	if (trackers.count() == 0)
 	{
-		if(QMessageBox::No == CustomMessageBox::information(this, tr("ERROR_STR"),
-		        tr("ERROR_NO_TRACKERS"),
-		        QMessageBox::Yes | QMessageBox::No))
+		CustomMessageBox::Buttons buttons = CustomMessageBox::Yes | CustomMessageBox::No;
+		if (CustomMessageBox::No == CustomMessageBox::information(this, tr("ERROR_STR"),
+		                                                          tr("ERROR_NO_TRACKERS"),
+		                                                          buttons))
 		{
 			//delete creator;
 			createButton->setEnabled(true);
@@ -203,9 +206,9 @@ void CreateTorrentDialog::BeginCreate()
 		}
 	}
 
-	for(QStringList::iterator i = webseeds.begin(); i != webseeds.end(); ++i)
+	for (QStringList::iterator i = webseeds.begin(); i != webseeds.end(); ++i)
 	{
-		if((*i).isEmpty())
+		if ((*i).isEmpty())
 		{
 			webseeds.removeOne(*i);
 		}
@@ -213,10 +216,10 @@ void CreateTorrentDialog::BeginCreate()
 
 	QFileInfo info(path);
 	QString save_path = QFileDialog::getSaveFileName(this,
-	                    tr("CREATE_TORRENT_DIALOG"), info.isDir() ? path + QDir::separator() + info.fileName() : path + ".torrent",
-	                    tr("TORRENT_FILE (*.torrent)"));
+	                                                 tr("CREATE_TORRENT_DIALOG"), info.isDir() ? path + QDir::separator() + info.fileName() : path + ".torrent",
+	                                                 tr("TORRENT_FILE (*.torrent)"));
 
-	if(!save_path.isEmpty())
+	if (!save_path.isEmpty())
 	{
 #ifdef Q_WS_WIN
 		m_pTaskBarProggres->show();
@@ -232,6 +235,7 @@ void CreateTorrentDialog::BeginCreate()
 		createButton->setEnabled(true);
 	}
 }
+
 void CreateTorrentDialog::Cancel()
 {
 #ifdef Q_WS_WIN
@@ -243,9 +247,9 @@ void CreateTorrentDialog::Cancel()
 
 void CreateTorrentDialog::ShowCreationSucces(QString filename)
 {
-	if(!filename.isNull())
+	if (!filename.isNull())
 	{
-		CustomMessageBox::information(this, tr("CREATE_TORRENT_DIALOG"),
+		CustomMessageBox::information(tr("CREATE_TORRENT_DIALOG"),
 		                              tr("CREATE_TORRENT_SUCCES_SAVED %1").arg(filename));
 	}
 
@@ -257,21 +261,23 @@ void CreateTorrentDialog::ShowCreationSucces(QString filename)
 	//delete creator;
 	//creator = NULL;
 }
+
 void CreateTorrentDialog::ShowCreationFailture(QString msg)
 {
-	CustomMessageBox::critical(this, tr("CREATE_TORRENT_DIALOG"),
+	CustomMessageBox::critical(tr("CREATE_TORRENT_DIALOG"),
 	                           tr("CREATE_TORRENT_FILE_ERROR\n %1").arg(msg));
 	//progressBar->setValue(0);
 	createButton->setEnabled(true);
 #ifdef Q_WS_WIN
 	m_pTaskBarProggres->hide();
 #endif
-// 	delete creator;
-// 	creator = NULL;
+	// 	delete creator;
+	// 	creator = NULL;
 }
+
 void CreateTorrentDialog::UpdateProgressBar(int val)
 {
-	if(val <= progressBar->maximum())
+	if (val <= progressBar->maximum())
 	{
 		progressBar->setValue(val);
 #ifdef Q_WS_WIN
@@ -351,29 +357,30 @@ void torrentCreatorThread::sendProgressSignal(int progress)
 {
 	emit updateProgress(progress);
 }
+
 class FileFilter
 {
-
 public:
 	static std::string filterString;
+
 	static bool file_filter(std::string const& f)
 	{
-		if(filename(f) [0] == '.')
+		if (filename(f)[0] == '.')
 		{
 			return false;
 		}
 
-		if(!filterString.empty() && filename(f).find(filterString) != std::string::npos)
+		if (!filterString.empty() && filename(f).find(filterString) != std::string::npos)
 		{
 			return false;
 		}
 
 		return true;
 	}
-
 };
 
 std::string FileFilter::filterString = "";
+
 void torrentCreatorThread::run()
 {
 	emit updateProgress(0);
@@ -387,7 +394,7 @@ void torrentCreatorThread::run()
 		FileFilter::filterString = filter.toStdString();
 		add_files(fs, full_path, FileFilter::file_filter);
 
-		if(abort)
+		if (abort)
 		{
 			return;
 		}
@@ -397,24 +404,24 @@ void torrentCreatorThread::run()
 		QString seed;
 
 		foreach(seed, url_seeds)
-		{
-			t.add_url_seed(seed.toStdString());
-		}
+			{
+				t.add_url_seed(seed.toStdString());
+			}
 
-		for(int i = 0; i < trackers.size(); ++i)
+		for (int i = 0; i < trackers.size(); ++i)
 		{
 			t.add_tracker(trackers.at(i).toStdString());
 		}
 
-		if(abort)
+		if (abort)
 		{
 			return;
 		}
 
 		set_piece_hashes(t, parent_path(full_path)
-		                 , boost::bind<void> (&sendProgressUpdateSignal, _1, t.num_pieces(), this));
+		                 , boost::bind<void>(&sendProgressUpdateSignal, _1, t.num_pieces(), this));
 
-		if(abort)
+		if (abort)
 		{
 			return;
 		}
@@ -423,7 +430,7 @@ void torrentCreatorThread::run()
 		t.set_comment(static_cast<const char*>(comment.toLocal8Bit()));
 		t.set_priv(is_private);
 
-		if(abort)
+		if (abort)
 		{
 			return;
 		}
@@ -439,14 +446,16 @@ void torrentCreatorThread::run()
 #else
 		std::ofstream outfile(save_path.toLocal8Bit().constData(), std::ios_base::out | std::ios_base::binary);
 #endif
-		bencode(std::ostream_iterator<char> (outfile), t.generate());
+		bencode(std::ostream_iterator<char>(outfile), t.generate());
 		emit updateProgress(100);
 		emit ShowCreationSucces(save_path);
 	}
-	catch(std::exception& e)
+	catch (std::exception& e)
 	{
 		emit ShowCreationFailture(QString::fromUtf8(e.what()));
 	}
 }
 
 //#include "moc_CreateTorrentDialog.cpp"
+
+

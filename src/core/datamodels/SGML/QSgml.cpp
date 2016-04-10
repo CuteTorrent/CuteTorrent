@@ -33,20 +33,20 @@ void QSgml::FindStart(const QString& HtmlString, int& iPos)
 // make sure the '>' is not in a quote
 void QSgml::FindEnd(const QString& HtmlString, int& iPos)
 {
-	for(; iPos < HtmlString.length() ; iPos++)
+	for (; iPos < HtmlString.length(); iPos++)
 	{
 		// Its a tag end
-		if(HtmlString.at(iPos) == '>')
+		if (HtmlString.at(iPos) == '>')
 		{
 			return;
 		}
 
-		if(HtmlString.at(iPos) == '\'')
+		if (HtmlString.at(iPos) == '\'')
 		{
 			iPos = HtmlString.indexOf("\'", iPos + 1);
 		}
 
-		if(HtmlString.at(iPos) == '\"')
+		if (HtmlString.at(iPos) == '\"')
 		{
 			iPos = HtmlString.indexOf("\"", iPos + 1);
 		}
@@ -82,13 +82,13 @@ void QSgml::ExportString(QString* HtmlString, char Optimze, int Tabsize)
 	QHash<QString, QString>::iterator i;
 
 	// set new-line and tab
-	if(Optimze > 0)
+	if (Optimze > 0)
 	{
 		int i;
 		sWrap = "\n";
 
 		// create the tab in spaces
-		for(i = 0 ; i < Tabsize ; i++)
+		for (i = 0; i < Tabsize; i++)
 		{
 			sTab += " ";
 		}
@@ -96,15 +96,15 @@ void QSgml::ExportString(QString* HtmlString, char Optimze, int Tabsize)
 
 	HtmlString->clear();
 
-	while(pTag->Type != QSgmlTag::eVirtualEndTag)
+	while (pTag->Type != QSgmlTag::eVirtualEndTag)
 	{
 		// create spaces in front
-		for(int j = 0 ; j < pTag->Level - 1 ; j++)
+		for (int j = 0; j < pTag->Level - 1; j++)
 		{
 			sSpc += sTab;
 		}
 
-		switch(pTag->Type)
+		switch (pTag->Type)
 		{
 			case QSgmlTag::eVirtualBeginTag:
 			case QSgmlTag::eVirtualEndTag:
@@ -130,7 +130,7 @@ void QSgml::ExportString(QString* HtmlString, char Optimze, int Tabsize)
 			case QSgmlTag::eStandalone:
 				sAtr = "";
 
-				for(i = pTag->Attributes.begin() ; i != pTag->Attributes.end() ; ++i)
+				for (i = pTag->Attributes.begin(); i != pTag->Attributes.end(); ++i)
 				{
 					QString sKey = i.key();
 					sAtr += " " + sKey + "=\"" + pTag->Attributes.value(sKey) + "\"";
@@ -142,7 +142,7 @@ void QSgml::ExportString(QString* HtmlString, char Optimze, int Tabsize)
 			case QSgmlTag::eStartTag:
 				sAtr = "";
 
-				for(i = pTag->Attributes.begin() ; i != pTag->Attributes.end() ; ++i)
+				for (i = pTag->Attributes.begin(); i != pTag->Attributes.end(); ++i)
 				{
 					QString sKey = i.key();
 					sAtr += " " + sKey + "=\"" + pTag->Attributes.value(sKey) + "\"";
@@ -155,7 +155,7 @@ void QSgml::ExportString(QString* HtmlString, char Optimze, int Tabsize)
 			case QSgmlTag::eStartEmpty:
 				sAtr = "";
 
-				for(i = pTag->Attributes.begin() ; i != pTag->Attributes.end() ; ++i)
+				for (i = pTag->Attributes.begin(); i != pTag->Attributes.end(); ++i)
 				{
 					QString sKey = i.key();
 					sAtr += " " + sKey + "=\"" + pTag->Attributes.value(sKey) + "\"";
@@ -173,21 +173,21 @@ void QSgml::ExportString(QString* HtmlString, char Optimze, int Tabsize)
 		pTag = &pTag->getNextElement();
 		iLevelDiff = iDummy - pTag->Level;
 
-		if(iLevelDiff > 0)
+		if (iLevelDiff > 0)
 		{
 			// with all end-tags
-			for(int j = 0 ; j < iLevelDiff ; j++)
+			for (int j = 0; j < iLevelDiff; j++)
 			{
 				// if there are any left
-				if(StartTags.count() > 0)
+				if (StartTags.count() > 0)
 				{
 					// create spaces in front
-					if((j != 0) || (eLastType != QSgmlTag::eCdata))
+					if ((j != 0) || (eLastType != QSgmlTag::eCdata))
 					{
 						// last tag was an endtag or not a CDATA-tag
 						sSpc = sWrap;
 
-						for(int i = 0 ; i < StartTags.last()->Level - 1 ; i++)
+						for (int i = 0; i < StartTags.last()->Level - 1; i++)
 						{
 							sSpc += sTab;
 						}
@@ -216,7 +216,7 @@ void QSgml::MoveChildren(QSgmlTag* Source, QSgmlTag* Dest)
 	int i;
 	int iCount = Source->Children.count();
 
-	for(i = 0 ; i < iCount ; i++)
+	for (i = 0; i < iCount; i++)
 	{
 		Source->Children[0]->Parent = Dest;
 		//Source->Children[0]->Level = Dest->Level+1;  // ToDo: Level von allen Kindern auch decrementieren!
@@ -237,7 +237,7 @@ void QSgml::HandleCdata(QString SgmlString, QSgmlTag*& pLastTag, int& iStart, in
 	sDummy = SgmlString.mid(iStart, iEnd - iStart).trimmed();
 
 	// set tag
-	if(sDummy.contains(qNoWhitSpace))
+	if (sDummy.contains(qNoWhitSpace))
 	{
 		pTag = new QSgmlTag(sDummy, QSgmlTag::eCdata, pLastTag);
 		pTag->StartTagPos = iStart;
@@ -299,17 +299,17 @@ void QSgml::HandleEndTag(QString SgmlString, QSgmlTag*& pLastTag, int& iStart, i
 	// find a fitting start-tag
 	pDummyTag = pLastTag;
 
-	while((pDummyTag->Name != pTag->Name) && (pDummyTag->Parent != NULL))
+	while ((pDummyTag->Name != pTag->Name) && (pDummyTag->Parent != NULL))
 	{
 		pDummyTag = pDummyTag->Parent;
 	}
 
 	delete pTag;
 
-	if(pDummyTag->Parent != NULL)
+	if (pDummyTag->Parent != NULL)
 	{
 		// start-tag found
-		while(pLastTag != pDummyTag)
+		while (pLastTag != pDummyTag)
 		{
 			// all tags in between are standalone tags
 			pLastTag->Type = QSgmlTag::eStandalone;
@@ -322,7 +322,7 @@ void QSgml::HandleEndTag(QString SgmlString, QSgmlTag*& pLastTag, int& iStart, i
 		pLastTag->EndTagLength = iEnd - iStart + 1;
 
 		// tags which have no children are special (script can't be a standalone-tag)
-		if(pLastTag->Children.count() == 0)
+		if (pLastTag->Children.count() == 0)
 		{
 			pLastTag->Type = QSgmlTag::eStartEmpty;
 		}
@@ -347,7 +347,7 @@ void QSgml::HandleStartTag(QString SgmlString, QSgmlTag*& pLastTag, int& iStart,
 	iEnd = iPos;
 	sDummy = SgmlString.mid(iStart + 1, iEnd - iStart - 1).trimmed();
 
-	if(SgmlString.at(iEnd - 1) == '/')
+	if (SgmlString.at(iEnd - 1) == '/')
 	{
 		// this is a standalone-tag
 		sDummy = sDummy.left(sDummy.count() - 1);
@@ -378,9 +378,9 @@ QList<QSgmlTag*> QSgml::getElementsByName(QString Name)
 	QSgmlTag* Tag = DocTag;
 	Elements.clear();
 
-	while(Tag->Type != QSgmlTag::eVirtualEndTag)
+	while (Tag->Type != QSgmlTag::eVirtualEndTag)
 	{
-		if(Tag->Name == Name.toLower())
+		if (Tag->Name == Name.toLower())
 		{
 			Elements.append(Tag);
 		}
@@ -398,9 +398,9 @@ QList<QSgmlTag*> QSgml::getElementsByName(QString Name, QString AtrName)
 	QSgmlTag* Tag = DocTag;
 	Elements.clear();
 
-	while(Tag->Type != QSgmlTag::eVirtualEndTag)
+	while (Tag->Type != QSgmlTag::eVirtualEndTag)
 	{
-		if((Tag->Name == Name) && (Tag->hasAttribute(AtrName) == true))
+		if ((Tag->Name == Name) && (Tag->hasAttribute(AtrName) == true))
 		{
 			Elements.append(Tag);
 		}
@@ -418,9 +418,9 @@ QList<QSgmlTag*> QSgml::getElementsByName(QString Name, QString AtrName, QString
 	QSgmlTag* Tag = DocTag;
 	Elements.clear();
 
-	while(Tag->Type != QSgmlTag::eVirtualEndTag)
+	while (Tag->Type != QSgmlTag::eVirtualEndTag)
 	{
-		if((Tag->Name == Name) && (Tag->hasAttribute(AtrName) == true) && (Tag->Attributes.value(AtrName) == AtrValue))
+		if ((Tag->Name == Name) && (Tag->hasAttribute(AtrName) == true) && (Tag->Attributes.value(AtrName) == AtrValue))
 		{
 			Elements.append(Tag);
 		}
@@ -438,9 +438,9 @@ QList<QSgmlTag*> QSgml::getElementsByAtribute(QString AtrName)
 	QSgmlTag* Tag = DocTag;
 	Elements.clear();
 
-	while(Tag->Type != QSgmlTag::eVirtualEndTag)
+	while (Tag->Type != QSgmlTag::eVirtualEndTag)
 	{
-		if(Tag->Attributes.find(AtrName) != Tag->Attributes.end())
+		if (Tag->Attributes.find(AtrName) != Tag->Attributes.end())
 		{
 			Elements.append(Tag);
 		}
@@ -458,11 +458,11 @@ QList<QSgmlTag*> QSgml::getElementsByAtribute(QString AtrName, QString AtrValue)
 	QSgmlTag* Tag = DocTag;
 	Elements.clear();
 
-	while(Tag->Type != QSgmlTag::eVirtualEndTag)
+	while (Tag->Type != QSgmlTag::eVirtualEndTag)
 	{
-		if(Tag->Attributes.find(AtrName) != Tag->Attributes.end())
+		if (Tag->Attributes.find(AtrName) != Tag->Attributes.end())
 		{
-			if(Tag->Attributes[AtrName] == AtrValue)
+			if (Tag->Attributes[AtrName] == AtrValue)
 			{
 				Elements.append(Tag);
 			}
@@ -489,7 +489,7 @@ bool QSgml::load(QString sFileName)
 	DocTag->Children.append(EndTag);
 
 	// read the file
-	if(qExists == true)
+	if (qExists == true)
 	{
 		fileText.open(QIODevice::ReadOnly);
 		sSgmlString = fileText.readAll();
@@ -508,13 +508,13 @@ bool QSgml::save(QString sFileName)
 	qint64 s64_Count = 0;
 
 	// write to file
-	if(fileText.open(QIODevice::WriteOnly) == true)
+	if (fileText.open(QIODevice::WriteOnly) == true)
 	{
 		s64_Count = fileText.write(sSgmlString.toLocal8Bit());
 		dirPath = QFileInfo(sFileName).absoluteDir();
 	}
 
-	if(s64_Count >= 0)
+	if (s64_Count >= 0)
 	{
 		return (true);
 	}
@@ -571,7 +571,7 @@ QSgml::QSgml(QFile& SgmlFile)
 	tagExeption.append("style");
 
 	// read the file
-	if(SgmlFile.exists() == true)
+	if (SgmlFile.exists() == true)
 	{
 		SgmlFile.open(QIODevice::ReadOnly);
 		sSgmlString = SgmlFile.readAll();
@@ -598,11 +598,11 @@ void QSgml::String2Sgml(const QString SgmlString)
 	do
 	{
 		// Handle exception-tags
-		for(i = tagExeption.begin() ; i != tagExeption.end() ; ++i)
+		for (i = tagExeption.begin(); i != tagExeption.end(); ++i)
 		{
 			QString sName = *i;
 
-			if(LastTag->Name.toLower() == sName)
+			if (LastTag->Name.toLower() == sName)
 			{
 				// its an exception-tag
 				iPos = SgmlString.toLower().indexOf("</" + sName, iPos);
@@ -613,34 +613,34 @@ void QSgml::String2Sgml(const QString SgmlString)
 		FindStart(SgmlString, iPos);
 
 		// no new start
-		if(iPos == -1)
+		if (iPos == -1)
 		{
 			LastTag->Children.append(EndTag);
 			break;
 		}
 		// there was CDATA
-		else if(iPos > iEnd + 1)
+		else if (iPos > iEnd + 1)
 		{
 			HandleCdata(SgmlString, LastTag, iStart, iEnd, iPos);
 		}
 
 		// this is a comment
-		if((SgmlString.at(iPos + 1) == '!') && (SgmlString.at(iPos + 2) == '-') && (SgmlString.at(iPos + 3) == '-'))
+		if ((SgmlString.at(iPos + 1) == '!') && (SgmlString.at(iPos + 2) == '-') && (SgmlString.at(iPos + 3) == '-'))
 		{
 			HandleComment(SgmlString, LastTag, iStart, iEnd, iPos);
 		}
 		// this is a PI
-//      else if( SgmlString.at(iPos+1)=='?' )
-//      {
-//         HandleDoctype(SgmlString,LastTag,iStart,iEnd,iPos);
-//      }
+		//      else if( SgmlString.at(iPos+1)=='?' )
+		//      {
+		//         HandleDoctype(SgmlString,LastTag,iStart,iEnd,iPos);
+		//      }
 		// this is a Doctype
-		else if(SgmlString.at(iPos + 1) == '!')
+		else if (SgmlString.at(iPos + 1) == '!')
 		{
 			HandleDoctype(SgmlString, LastTag, iStart, iEnd, iPos);
 		}
 		// this is an Endtag
-		else if(SgmlString.at(iPos + 1) == '/')
+		else if (SgmlString.at(iPos + 1) == '/')
 		{
 			HandleEndTag(SgmlString, LastTag, iStart, iEnd, iPos);
 		}
@@ -650,7 +650,7 @@ void QSgml::String2Sgml(const QString SgmlString)
 			HandleStartTag(SgmlString, LastTag, iStart, iEnd, iPos);
 		}
 	}
-	while(iPos != -1);
+	while (iPos != -1);
 }
 
 // destructor
@@ -661,17 +661,18 @@ QSgml::~QSgml(void)
 
 QString QSgml::getInnerText(QSgmlTag* ptag)
 {
-	if(ptag->Type == QSgmlTag::eStandalone)
+	if (ptag->Type == QSgmlTag::eStandalone)
 	{
 		return "";
 	}
 
-	if(ptag->StartTagPos > 0 && ptag->EndTagPos > 0)
+	if (ptag->StartTagPos > 0 && ptag->EndTagPos > 0)
 	{
-		return sSgmlString.mid(ptag->StartTagPos + ptag->StartTagLength, ptag->EndTagPos  - ptag->StartTagPos - ptag->StartTagLength);
+		return sSgmlString.mid(ptag->StartTagPos + ptag->StartTagLength, ptag->EndTagPos - ptag->StartTagPos - ptag->StartTagLength);
 	}
 	else
 	{
 		return "";
 	}
 }
+

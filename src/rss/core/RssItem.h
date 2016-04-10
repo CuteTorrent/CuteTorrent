@@ -4,6 +4,7 @@
 #include <QDateTime>
 #include <QMetaType>
 class RssFeed;
+
 class RssItem : public QObject
 {
 	friend QDataStream& operator <<(QDataStream& out, const RssItem* any);
@@ -62,8 +63,8 @@ public:
 	void setAuthor(const QString& value);
 	bool isValid();
 	RssItem* clone();
-
 };
 
 Q_DECLARE_METATYPE(RssItem*)
 #endif
+

@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "Version.h"
 #include <QStringList>
 #include "NotificationSystem.h"
+
 UpdateNotifier::UpdateNotifier(QObject* parent) : QObject(parent)
 {
 	m_manager = new QNetworkAccessManager(this);
@@ -43,7 +44,7 @@ void UpdateNotifier::replyFinished(QNetworkReply* pReply)
 	QStringList parts = str.split('.');
 
 	//pReply->ignoreSslErrors();
-	if(parts.count() != 4)
+	if (parts.count() != 4)
 	{
 		if (pReply->error() != QNetworkReply::NoError)
 		{
@@ -72,3 +73,4 @@ UpdateNotifier::~UpdateNotifier()
 {
 	delete m_manager;
 }
+

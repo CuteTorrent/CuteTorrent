@@ -1,9 +1,9 @@
 ﻿#include "SpeedLimitDialog.h"
 #include <QDialog>
 
-SpeedLimitDialog::SpeedLimitDialog(DialogMode dialogMode, QWidget* parent) 
+SpeedLimitDialog::SpeedLimitDialog(DialogMode dialogMode, QWidget* parent)
 	: BaseWindow<QDialog>(OnlyCloseButton, NoResize, parent)
-	, m_chengingSpeed(false)
+	  , m_chengingSpeed(false)
 {
 	setupUi(this);
 	setupCustomWindow();
@@ -46,3 +46,4 @@ void SpeedLimitDialog::OnSpeedChanged(int value)
 	}
 	m_chengingSpeed = false;
 }
+

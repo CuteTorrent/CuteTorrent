@@ -9,7 +9,7 @@ IntroPage::IntroPage(QWidget* parent)
 	QLabel* label = new QLabel(tr("BACKUP_INTRO_MESSAGE"));
 	label->setWordWrap(true);
 	careateRadioButton = new QRadioButton(tr("CREATE_BAKUP"));
-	applyRadioButton  = new QRadioButton(tr("APPLY_BAKUP"));
+	applyRadioButton = new QRadioButton(tr("APPLY_BAKUP"));
 	careateRadioButton->setChecked(true);
 	QVBoxLayout* layout = new QVBoxLayout;
 	layout->addWidget(label);
@@ -21,7 +21,7 @@ IntroPage::IntroPage(QWidget* parent)
 
 int IntroPage::nextId() const
 {
-	if(careateRadioButton->isChecked())
+	if (careateRadioButton->isChecked())
 	{
 		return BackupWizard::Page_CreateBakup;
 	}

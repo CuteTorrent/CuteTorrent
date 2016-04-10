@@ -3,13 +3,22 @@
 
 #include <QWizard>
 #include <QtGui>
+
 class BackupWizard : public QWizard
 {
 	Q_OBJECT
 public:
 	explicit BackupWizard(QWidget* parent = 0);
-	enum { Page_Intro , Page_CreateBakup , Page_ApplyBakup , Page_Finish };
-signals:
+
+	enum
+	{
+		Page_Intro,
+		Page_CreateBakup,
+		Page_ApplyBakup,
+		Page_Finish
+	};
+
+	signals:
 
 public slots:
 
@@ -19,3 +28,5 @@ private:
 };
 
 #endif // BACKUPWIZARD_H
+
+

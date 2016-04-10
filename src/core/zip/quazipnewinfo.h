@@ -206,3 +206,4 @@ struct QUAZIP_EXPORT QuaZipNewInfo
 };
 
 #endif
+

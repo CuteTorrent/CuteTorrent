@@ -25,3 +25,4 @@ protected:
 protected slots:
 	void resourceLoaded(QNetworkReply* reply);
 };
+

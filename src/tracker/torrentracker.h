@@ -6,6 +6,7 @@
 #include "ServiceCommon.h"
 class TrackerRequestHandler;
 class HttpListener;
+
 class TorrentTracker : public QObject, public Singleton<TorrentTracker>
 {
 	friend class Singleton<TorrentTracker>;
@@ -24,9 +25,10 @@ public:
 	void start();
 	void stop();
 	~TorrentTracker();
-signals:
+	signals:
 
 public slots:
-
 };
 #endif // TORRENTRACKER_H
+
+

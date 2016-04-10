@@ -4,9 +4,10 @@
 class Torrent;
 #include "defs.h"
 #include "Singleton.h"
+
 class TorrentStorrage : public QList<Torrent*>, public Singleton<TorrentStorrage>
 {
-//	Q_OBJECT
+	//	Q_OBJECT
 	friend class Singleton<TorrentStorrage>;
 public:
 	void append(Torrent*);
@@ -31,3 +32,5 @@ private:
 
 
 //Q_DECLARE_METATYPE(TorrentStorrage::TorrentFilterType)
+
+

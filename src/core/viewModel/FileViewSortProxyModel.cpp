@@ -2,18 +2,20 @@
 #include "FileViewTreeItem.h"
 
 FileViewSortProxyModel::FileViewSortProxyModel(QObject* parrent /* = NULL */) : QSortFilterProxyModel(parrent)
-{}
+{
+}
 
 
 FileViewSortProxyModel::~FileViewSortProxyModel()
-{}
+{
+}
 
 bool FileViewSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& right) const
 {
 	FileViewTreeItem* rightItem = static_cast<FileViewTreeItem*>(right.internalPointer());
 	FileViewTreeItem* lefttItem = static_cast<FileViewTreeItem*>(left.internalPointer());
 
-	if(rightItem->GetType() != lefttItem->GetType())
+	if (rightItem->GetType() != lefttItem->GetType())
 	{
 		return lefttItem->GetType() == FileViewTreeItem::FOLDER;
 	}
@@ -51,3 +53,4 @@ bool FileViewSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex
 
 	return true;
 }
+

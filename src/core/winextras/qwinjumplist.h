@@ -46,7 +46,7 @@ class QWinJumpListItem;
 class QWinJumpListPrivate;
 class QWinJumpListCategory;
 
-class  QWinJumpList : public QObject
+class QWinJumpList : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QString identifier READ identifier WRITE setIdentifier)
@@ -80,3 +80,5 @@ private slots:
 QT_END_NAMESPACE
 
 #endif // QWINJUMPLIST_H
+
+

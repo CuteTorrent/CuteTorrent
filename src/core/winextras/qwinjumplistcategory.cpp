@@ -146,7 +146,7 @@ void QWinJumpListCategoryPrivate::addRecent(QWinJumpListItem* item)
 
 	SHARDAPPIDINFOLINK info;
 	info.pszAppID = id;
-	info.psl =  QWinJumpListPrivate::toIShellLink(item);
+	info.psl = QWinJumpListPrivate::toIShellLink(item);
 
 	if (info.psl)
 	{
@@ -398,3 +398,4 @@ void QWinJumpListCategory::clear()
 }
 
 QT_END_NAMESPACE
+

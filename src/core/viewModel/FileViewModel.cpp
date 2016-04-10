@@ -1,5 +1,7 @@
 ﻿#include "FileViewModel.h"
 #include "StaticHelpers.h"
+#include <libtorrent/torrent_info.hpp>
+
 void FileViewModel::retranslateUI()
 {
 	headerStringsData.clear();
@@ -30,12 +32,12 @@ int FileViewModel::rowCount(const QModelIndex& parent /*= QModelIndex( ) */) con
 {
 	FileViewTreeItem* parentItem;
 
-	if(parent.column() > 0)
+	if (parent.column() > 0)
 	{
 		return 0;
 	}
 
-	if(!parent.isValid())
+	if (!parent.isValid())
 	{
 		parentItem = m_pRoot;
 	}
@@ -56,26 +58,30 @@ int FileViewModel::columnCount(const QModelIndex& parent /*= QModelIndex( ) */) 
 void FileViewModel::OpenFileSelected()
 {
 	FileViewTreeItem* pItem = static_cast<FileViewTreeItem*>(m_pProxyModel->mapToSource(m_pView->selectionModel()->currentIndex()).internalPointer());
-	std::string save_path =
+	QString save_path = QString::fromUtf8(
 #if LIBTORRENT_VERSION_NUM >= 10000
-	    dataSource.status(torrent_handle::query_save_path).save_path;
+		dataSource.status(torrent_handle::query_save_path).save_path.c_str()
 #else
-	    dataSource.save_path();
+		dataSource.save_path().c_str()
 #endif
-	QString path = QFileInfo(QDir::toNativeSeparators(QString::fromUtf8((save_path + pItem->GetFileEntery().path).c_str()))).absoluteFilePath();
+	);
+	QString filePath = QString::fromUtf8(pItem->GetFileEntery().path.c_str());
+	QString path = QFileInfo(QDir::toNativeSeparators(StaticHelpers::CombinePathes(save_path, filePath))).absoluteFilePath();
 	QDesktopServices::openUrl(QUrl("file:///" + path));
 }
 
 void FileViewModel::OpenDirSelected()
 {
 	FileViewTreeItem* pItem = static_cast<FileViewTreeItem*>(m_pProxyModel->mapToSource(m_pView->selectionModel()->currentIndex()).internalPointer());
-	std::string save_path =
+	QString save_path = QString::fromUtf8(
 #if LIBTORRENT_VERSION_NUM >= 10000
-	    dataSource.status(torrent_handle::query_save_path).save_path;
+		dataSource.status(torrent_handle::query_save_path).save_path.c_str()
 #else
-	    dataSource.save_path();
+		dataSource.save_path().c_str()
 #endif
-	QString path = QFileInfo(QDir::toNativeSeparators(QString::fromUtf8((save_path + pItem->GetFileEntery().path).c_str()))).absoluteFilePath();
+	);
+	QString filePath = QString::fromUtf8(pItem->GetFileEntery().path.c_str());
+	QString path = QFileInfo(QDir::toNativeSeparators(StaticHelpers::CombinePathes(save_path, filePath))).absoluteFilePath();
 #ifdef Q_WS_MAC
 	QStringList args;
 	args << "-e";
@@ -121,7 +127,7 @@ void FileViewModel::setFilePriority(int priorityToSet)
 {
 	QModelIndexList selection = m_pView->selectionModel()->selectedIndexes();
 
-	for (int i = 0 ; i < selection.size(); i++)
+	for (int i = 0; i < selection.size(); i++)
 	{
 		QModelIndex sourceIndex = m_pProxyModel->mapToSource(selection[i]);
 		FileViewTreeItem* item = static_cast<FileViewTreeItem*>(sourceIndex.internalPointer());
@@ -172,6 +178,7 @@ void FileViewModel::setupFileTabelContextMenu()
 	QObject::connect(dontDownload, SIGNAL(triggered()), this, SLOT(SetNotDownloadForCurrentFile()));
 	fileTabMenu->addAction(dontDownload);
 }
+
 void FileViewModel::FileTabContextMenu(const QPoint& point)
 {
 	QModelIndex qmi = m_pView->indexAt(point);
@@ -180,13 +187,13 @@ void FileViewModel::FileTabContextMenu(const QPoint& point)
 	priorityMenu->setEnabled(isPriorityItemsEnabled);
 	dontDownload->setEnabled(isPriorityItemsEnabled);
 
-	if(qmi.isValid())
+	if (qmi.isValid())
 	{
 		FileViewTreeItem* item = static_cast<FileViewTreeItem*>(qmi.internalPointer());
 		openFile->setEnabled(item->GetType() == FileViewTreeItem::FILE);
 		int currentPriority = data(index(qmi.row(), 3, qmi.parent())).toInt();
 
-		switch(currentPriority)
+		switch (currentPriority)
 		{
 			case 1:
 			case 2:
@@ -216,12 +223,13 @@ void FileViewModel::FileTabContextMenu(const QPoint& point)
 		m_pView->selectionModel()->reset();
 	}
 }
+
 QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayRole */) const
 {
 	int column = index.column();
 	FileViewTreeItem* item = NULL;
 
-	if(index.isValid())
+	if (index.isValid())
 	{
 		item = static_cast<FileViewTreeItem*>(index.internalPointer());
 	}
@@ -231,16 +239,16 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 		return Qt::DescendingOrder;
 	}
 
-	if(role == Qt::DisplayRole && dataSource.is_valid() && item != NULL)
+	if (role == Qt::DisplayRole && dataSource.is_valid() && item != NULL)
 	{
 		file_entry file = item->GetFileEntery();
 		int storrage_index = 0;
 
-		if(item->GetType() == FileViewTreeItem::FILE)
+		if (item->GetType() == FileViewTreeItem::FILE)
 		{
 			file_storage storrage =
 #if LIBTORRENT_VERSION_NUM >= 10000
-			    dataSource.torrent_file()->files();
+				dataSource.torrent_file()->files();
 			storrage_index = storrage.file_index_at_offset(file.offset);
 #else
 			    dataSource.get_torrent_info().files();
@@ -248,13 +256,13 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 #endif
 		}
 
-		switch(column)
+		switch (column)
 		{
 			case 0:
 				return item->GetName();
 
 			case 1:
-				if(item->GetType() == FileViewTreeItem::FILE)
+				if (item->GetType() == FileViewTreeItem::FILE)
 				{
 					return qVariantFromValue<qlonglong>(file.size);
 				}
@@ -264,7 +272,7 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 				}
 
 			case 2:
-				if(item->GetType() == FileViewTreeItem::FILE)
+				if (item->GetType() == FileViewTreeItem::FILE)
 				{
 					if (file.size == 0)
 					{
@@ -279,7 +287,7 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 				}
 
 			case 3:
-				if(item->GetType() == FileViewTreeItem::FILE && !dataSource.status().is_seeding)
+				if (item->GetType() == FileViewTreeItem::FILE && !dataSource.status().is_seeding)
 				{
 					return dataSource.file_priority(storrage_index);
 				}
@@ -290,7 +298,7 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 		}
 	}
 
-	if(role == Qt::DecorationRole && column == 0 && item != NULL)
+	if (role == Qt::DecorationRole && column == 0 && item != NULL)
 	{
 		QString pathCur = item->GetName();
 		QIcon icon;
@@ -303,11 +311,11 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 			QString savePath = dataSource.status(torrent_handle::query_save_path).save_path.c_str();
 			QString suffix = filePathInfo.suffix();
 
-			if(!suffix.isEmpty() && !extToKeys.contains(suffix))
+			if (!suffix.isEmpty() && !extToKeys.contains(suffix))
 			{
 				QString subPath = QDir::toNativeSeparators(QString::fromUtf8(item->GetFileEntery().path.c_str()));
 				QString realFilePath = StaticHelpers::CombinePathes(savePath, subPath);
-				
+
 				if (QFile::exists(realFilePath))
 				{
 					QFileInfo realFileInfo(realFilePath);
@@ -318,7 +326,7 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 					QTemporaryFile tmpfile(StaticHelpers::CombinePathes(QDesktopServices::storageLocation(QDesktopServices::TempLocation), "tempFileXXXXXX." + suffix));
 					tmpfile.open();
 					tmpfile.close();
-						QFileInfo tempFileInfo(tmpfile.fileName());
+					QFileInfo tempFileInfo(tmpfile.fileName());
 					icon = iPorv.icon(tempFileInfo);
 					tmpfile.remove();
 
@@ -354,7 +362,7 @@ QVariant FileViewModel::headerData(int section, Qt::Orientation orientation, int
 		return Qt::DescendingOrder;
 	}
 
-	if(orientation == Qt::Horizontal && role == Qt::DisplayRole)
+	if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
 	{
 		return headerStringsData.at(section);
 	}
@@ -371,9 +379,9 @@ bool FileViewModel::setHeaderData(int section, Qt::Orientation orientation, cons
 
 bool FileViewModel::setDataSource(const torrent_handle& hTorrent)
 {
-	if(hTorrent.is_valid())
+	if (hTorrent.is_valid())
 	{
-		if(dataSource.info_hash() != hTorrent.info_hash())
+		if (dataSource.info_hash() != hTorrent.info_hash())
 		{
 			delete m_pRoot;
 			m_pRoot = new FileViewTreeItem();
@@ -400,7 +408,6 @@ bool FileViewModel::setDataSource(const torrent_handle& hTorrent)
 }
 
 
-
 void FileViewModel::Update()
 {
 	m_Progresses.clear();
@@ -420,15 +427,15 @@ void FileViewModel::BuildTree()
 	dataSource.file_progress(m_Progresses, torrent_handle::piece_granularity);
 	file_storage storrage =
 #if LIBTORRENT_VERSION_NUM >= 10000
-	    dataSource.torrent_file()->files();
+		dataSource.torrent_file()->files();
 #else
 	    dataSource.get_torrent_info().files();
 #endif
 	int nFilesCount = storrage.num_files();
 
-	for(int i = 0; i < nFilesCount; i++)
+	for (int i = 0; i < nFilesCount; i++)
 	{
-		if(!storrage.at(i).pad_file)
+		if (!storrage.at(i).pad_file)
 		{
 			AddPath(storrage.file_path(i), storrage.at(i));
 		}
@@ -437,14 +444,14 @@ void FileViewModel::BuildTree()
 
 QModelIndex FileViewModel::index(int row, int column, const QModelIndex& parent /*= QModelIndex()*/) const
 {
-	if(!hasIndex(row, column, parent))
+	if (!hasIndex(row, column, parent))
 	{
 		return QModelIndex();
 	}
 
 	FileViewTreeItem* parentItem;
 
-	if(!parent.isValid())
+	if (!parent.isValid())
 	{
 		parentItem = m_pRoot;
 	}
@@ -455,7 +462,7 @@ QModelIndex FileViewModel::index(int row, int column, const QModelIndex& parent 
 
 	FileViewTreeItem* childItem = parentItem->GetNthChild(row);
 
-	if(childItem != NULL)
+	if (childItem != NULL)
 	{
 		return createIndex(row, column, childItem);
 	}
@@ -467,7 +474,7 @@ QModelIndex FileViewModel::index(int row, int column, const QModelIndex& parent 
 
 QModelIndex FileViewModel::parent(const QModelIndex& child) const
 {
-	if(!child.isValid())
+	if (!child.isValid())
 	{
 		return QModelIndex();
 	}
@@ -475,7 +482,7 @@ QModelIndex FileViewModel::parent(const QModelIndex& child) const
 	FileViewTreeItem* childItem = static_cast<FileViewTreeItem*>(child.internalPointer());
 	FileViewTreeItem* parentItem = childItem->GetParent();
 
-	if(parentItem == m_pRoot)
+	if (parentItem == m_pRoot)
 	{
 		return QModelIndex();
 	}
@@ -488,7 +495,7 @@ int FileViewModel::GetRow(FileViewTreeItem* item) const
 {
 	FileViewTreeItem* parent = item->GetParent();
 
-	if(parent != NULL)
+	if (parent != NULL)
 	{
 		return parent->m_pChildren.indexOf(item);
 	}
@@ -504,13 +511,13 @@ void FileViewModel::AddPath(std::string path, file_entry fe)
 	FileViewTreeItem* iterator = m_pRoot;
 	file_entry fake_entery;
 
-	if(m_pRoot->GetChildrenCount() == 0)
+	if (m_pRoot->GetChildrenCount() == 0)
 	{
 		FileViewTreeItem* curitem = m_pRoot;
 
-		for(int i = 0; i < nPartsCount; i++)
+		for (int i = 0; i < nPartsCount; i++)
 		{
-			if(i != nPartsCount - 1)
+			if (i != nPartsCount - 1)
 			{
 				fake_entery.path = (QString::fromUtf8(fake_entery.path.c_str()) + QDir::separator() + pathparts[i]).toStdString();
 				curitem->AddChild(new FileViewTreeItem(fake_entery, FileViewTreeItem::FOLDER, pathparts[i], curitem));
@@ -529,27 +536,27 @@ void FileViewModel::AddPath(std::string path, file_entry fe)
 		return;
 	}
 
-	for(int i = 0; i < pathparts.count(); i++)
+	for (int i = 0; i < pathparts.count(); i++)
 	{
 		int foundnum = -1;
 		int nChildrenCounmt = iterator->GetChildrenCount();
 
-		for(int j = 0; j < nChildrenCounmt; j++)
+		for (int j = 0; j < nChildrenCounmt; j++)
 		{
-			if(iterator->GetNthChild(j)->GetName().compare(pathparts.at(i)) == 0)
+			if (iterator->GetNthChild(j)->GetName().compare(pathparts.at(i)) == 0)
 			{
 				foundnum = j;
 				break;
 			}
 		}
 
-		if(foundnum >= 0)
+		if (foundnum >= 0)
 		{
 			iterator = iterator->GetNthChild(foundnum);
 		}
 		else
 		{
-			if(i != nPartsCount - 1)
+			if (i != nPartsCount - 1)
 			{
 				fake_entery.path = (QString::fromUtf8(iterator->GetFileEntery().path.c_str()) + QDir::separator() + pathparts[i]).toStdString();
 				iterator->AddChild(new FileViewTreeItem(fake_entery, FileViewTreeItem::FOLDER, pathparts[i], iterator));
@@ -564,16 +571,16 @@ void FileViewModel::AddPath(std::string path, file_entry fe)
 	}
 }
 
-long long  FileViewModel::CalculateFolderSize(FileViewTreeItem* item) const
+long long FileViewModel::CalculateFolderSize(FileViewTreeItem* item) const
 {
 	long long result = 0;
 	int nChildrenCount = item->GetChildrenCount();
 
-	for(int i = 0; i < nChildrenCount ; i++)
+	for (int i = 0; i < nChildrenCount; i++)
 	{
 		FileViewTreeItem* child = item->GetNthChild(i);
 
-		if(child->GetType() == FileViewTreeItem::FILE)
+		if (child->GetType() == FileViewTreeItem::FILE)
 		{
 			result += child->GetFileEntery().size;
 		}
@@ -592,16 +599,16 @@ float FileViewModel::CalculateFolderReady(FileViewTreeItem* item) const
 	int nChildrenCount = item->GetChildrenCount();
 	file_storage storrage =
 #if LIBTORRENT_VERSION_NUM >= 10000
-	    dataSource.torrent_file()->files();
+		dataSource.torrent_file()->files();
 #else
 	    dataSource.get_torrent_info().files();
 #endif
 
-	for(int i = 0; i < nChildrenCount; i++)
+	for (int i = 0; i < nChildrenCount; i++)
 	{
 		FileViewTreeItem* child = item->GetNthChild(i);
 
-		if(child->GetType() == FileViewTreeItem::FILE)
+		if (child->GetType() == FileViewTreeItem::FILE)
 		{
 			file_entry fe = child->GetFileEntery();
 #if LIBTORRENT_VERSION_NUM >= 10000
@@ -622,11 +629,11 @@ float FileViewModel::CalculateFolderReady(FileViewTreeItem* item) const
 
 void FileViewModel::SetItemPriority(FileViewTreeItem* item, int priority, const QModelIndex& sourceIndex)
 {
-	if(item->GetType() == FileViewTreeItem::FILE)
+	if (item->GetType() == FileViewTreeItem::FILE)
 	{
 		file_storage storrage =
 #if LIBTORRENT_VERSION_NUM >= 10000
-		    dataSource.torrent_file()->files();
+			dataSource.torrent_file()->files();
 		int file_index = storrage.file_index_at_offset(item->GetFileEntery().offset);
 #else
 		    dataSource.get_torrent_info().files();
@@ -639,7 +646,7 @@ void FileViewModel::SetItemPriority(FileViewTreeItem* item, int priority, const 
 	{
 		int nChildrenCount = item->GetChildrenCount();
 
-		for(int i = 0; i < nChildrenCount; i++)
+		for (int i = 0; i < nChildrenCount; i++)
 		{
 			FileViewTreeItem* child = item->GetNthChild(i);
 			SetItemPriority(child, priority, index(i, 0, sourceIndex));
@@ -650,5 +657,4 @@ void FileViewModel::SetItemPriority(FileViewTreeItem* item, int priority, const 
 QPixmapCache FileViewModel::iconCache;
 
 QHash<QString, QPixmapCache::Key> FileViewModel::extToKeys;
-
 

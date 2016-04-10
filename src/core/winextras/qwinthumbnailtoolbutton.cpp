@@ -265,3 +265,4 @@ void QWinThumbnailToolButton::click()
 }
 
 QT_END_NAMESPACE
+

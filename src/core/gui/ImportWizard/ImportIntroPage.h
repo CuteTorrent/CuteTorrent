@@ -3,9 +3,9 @@
 #include <QWizard>
 class BaseImporter;
 class QSignalMapper;
+
 class ImportIntroPage : public QWizardPage
 {
-
 private:
 	Q_OBJECT
 
@@ -21,8 +21,8 @@ public:
 	bool isComplete() const override;
 private slots:
 	void setImporter(QString name);
-
 };
 
 
 #endif
+

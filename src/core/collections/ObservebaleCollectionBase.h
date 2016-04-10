@@ -14,13 +14,16 @@ public:
 		Move,
 		Reset
 	};
+
 	struct CollectionChangedInfo
 	{
 		ChangeAction Action;
 		int newStartIndex, newCount;
 		int oldStartIndex, oldCount;
 	};
-signals:
+
+	signals:
 	void CollectionChanged(CollectionChangedInfo info);
 };
 #endif
+

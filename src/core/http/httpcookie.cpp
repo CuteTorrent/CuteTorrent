@@ -32,61 +32,61 @@ HttpCookie::HttpCookie(const QByteArray& source)
 	QList<QByteArray> list = splitCSV(source);
 
 	foreach(QByteArray part, list)
-	{
-		// Split the part into name and value
-		QByteArray _name;
-		QByteArray _value;
-		int posi = part.indexOf('=');
+		{
+			// Split the part into name and value
+			QByteArray _name;
+			QByteArray _value;
+			int posi = part.indexOf('=');
 
-		if(posi)
-		{
-			_name = part.left(posi).trimmed();
-			_value = part.mid(posi + 1).trimmed();
-		}
-		else
-		{
-			_name = part.trimmed();
-			_value = "";
-		}
-
-		// Set fields
-		if(_name == "Comment")
-		{
-			comment = _value;
-		}
-		else if(_name == "Domain")
-		{
-			domain = _value;
-		}
-		else if(_name == "Max-Age")
-		{
-			maxAge = _value.toInt();
-		}
-		else if(_name == "Path")
-		{
-			path = _value;
-		}
-		else if(_name == "Secure")
-		{
-			secure = true;
-		}
-		else if(_name == "Version")
-		{
-			version = _value.toInt();
-		}
-		else
-		{
-			if(this->name.isEmpty())
+			if (posi)
 			{
-				this->name = _name;
-				this->value = _value;
+				_name = part.left(posi).trimmed();
+				_value = part.mid(posi + 1).trimmed();
 			}
 			else
 			{
-				qWarning("HttpCookie: Ignoring unknown %s=%s", _name.data(), _value.data());
+				_name = part.trimmed();
+				_value = "";
+			}
+
+			// Set fields
+			if (_name == "Comment")
+			{
+				comment = _value;
+			}
+			else if (_name == "Domain")
+			{
+				domain = _value;
+			}
+			else if (_name == "Max-Age")
+			{
+				maxAge = _value.toInt();
+			}
+			else if (_name == "Path")
+			{
+				path = _value;
+			}
+			else if (_name == "Secure")
+			{
+				secure = true;
+			}
+			else if (_name == "Version")
+			{
+				version = _value.toInt();
+			}
+			else
+			{
+				if (this->name.isEmpty())
+				{
+					this->name = _name;
+					this->value = _value;
+				}
+				else
+				{
+					qWarning("HttpCookie: Ignoring unknown %s=%s", _name.data(), _value.data());
+				}
 			}
 		}
-	}
 }
 
 QByteArray HttpCookie::toByteArray() const
@@ -95,31 +95,31 @@ QByteArray HttpCookie::toByteArray() const
 	buffer.append('=');
 	buffer.append(value);
 
-	if(!comment.isEmpty())
+	if (!comment.isEmpty())
 	{
 		buffer.append("; Comment=");
 		buffer.append(comment);
 	}
 
-	if(!domain.isEmpty())
+	if (!domain.isEmpty())
 	{
 		buffer.append("; Domain=");
 		buffer.append(domain);
 	}
 
-	if(maxAge != 0)
+	if (maxAge != 0)
 	{
 		buffer.append("; Max-Age=");
 		buffer.append(QByteArray::number(maxAge));
 	}
 
-	if(!path.isEmpty())
+	if (!path.isEmpty())
 	{
 		buffer.append("; Path=");
 		buffer.append(path);
 	}
 
-	if(secure)
+	if (secure)
 	{
 		buffer.append("; Secure");
 	}
@@ -210,21 +210,21 @@ QList<QByteArray> HttpCookie::splitCSV(const QByteArray& source)
 	QList<QByteArray> list;
 	QByteArray buffer;
 
-	for(int i = 0; i < source.size(); ++i)
+	for (int i = 0; i < source.size(); ++i)
 	{
 		char c = source.at(i);
 
-		if(inString == false)
+		if (inString == false)
 		{
-			if(c == '\"')
+			if (c == '\"')
 			{
 				inString = true;
 			}
-			else if(c == ';')
+			else if (c == ';')
 			{
 				QByteArray trimmed = buffer.trimmed();
 
-				if(!trimmed.isEmpty())
+				if (!trimmed.isEmpty())
 				{
 					list.append(trimmed);
 				}
@@ -238,7 +238,7 @@ QList<QByteArray> HttpCookie::splitCSV(const QByteArray& source)
 		}
 		else
 		{
-			if(c == '\"')
+			if (c == '\"')
 			{
 				inString = false;
 			}
@@ -251,10 +251,11 @@ QList<QByteArray> HttpCookie::splitCSV(const QByteArray& source)
 
 	QByteArray trimmed = buffer.trimmed();
 
-	if(!trimmed.isEmpty())
+	if (!trimmed.isEmpty())
 	{
 		list.append(trimmed);
 	}
 
 	return list;
 }
+

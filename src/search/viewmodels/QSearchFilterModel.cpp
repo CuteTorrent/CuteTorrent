@@ -1,6 +1,7 @@
 ﻿#include "QSearchFilterModel.h"
 #include "QSearchDisplayModel.h"
 #include "SearchResult.h"
+
 void QSearchFilterModel::setSearchFilter(QString engine)
 {
 	qDebug() << "Search Filter" << engine;
@@ -24,3 +25,4 @@ bool QSearchFilterModel::filterAcceptsRow(int source_row, const QModelIndex& sou
 
 	return false;
 }
+

@@ -5,12 +5,12 @@
 class InitializationWorker : public QObject
 {
 	Q_OBJECT
-signals:
+	signals:
 	void progress(int p, QString item);
 	void finished();
 public slots:
 	void PeformInit();
-
 };
 
 #endif
+

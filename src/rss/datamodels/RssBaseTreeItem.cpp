@@ -15,3 +15,4 @@ RssBaseTreeItem::ItemType RssBaseTreeItem::GetType()
 {
 	return m_type;
 }
+

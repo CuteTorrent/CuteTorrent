@@ -7,16 +7,18 @@ class QToolButton;
 
 class SearchLineEdit : public QLineEdit
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit SearchLineEdit(QWidget *parent = NULL);
+	explicit SearchLineEdit(QWidget* parent = NULL);
 
 protected:
-    void resizeEvent(QResizeEvent *event) override;
+	void resizeEvent(QResizeEvent* event) override;
 
 private:
-    QToolButton *mSearchButton;
+	QToolButton* mSearchButton;
 };
 
 #endif // SEARCHLINEEDIT_H
+
+

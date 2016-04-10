@@ -186,12 +186,12 @@ public:
 	 *
 	 * \sa setZipName() getFileName()
 	 **/
-	QString getZipName()const;
+	QString getZipName() const;
 	/// Returns a pointer to the associated QuaZip object.
 	/** Returns \c NULL if there is no associated QuaZip or it is
 	 * internal (so you will not mess with it).
 	 **/
-	QuaZip* getZip()const;
+	QuaZip* getZip() const;
 	/// Returns file name.
 	/** This function returns file name you passed to this object either
 	 * by using
@@ -244,7 +244,7 @@ public:
 	 *
 	 * \sa getZipName(), getFileName(), QuaZip::CaseSensitivity
 	 **/
-	QString getActualFileName()const;
+	QString getActualFileName() const;
 	/// Sets the ZIP archive file name.
 	/** Automatically creates internal QuaZip object and destroys
 	 * previously created internal QuaZip object, if any.
@@ -291,6 +291,7 @@ public:
 	 * QIODevice::Unbuffered flag in \a mode, or open will fail.
 	 **/
 	virtual bool open(OpenMode mode);
+
 	/// Opens a file for reading.
 	/** \overload
 	 * Argument \a password specifies a password to decrypt the file. If
@@ -300,6 +301,7 @@ public:
 	{
 		return open(mode, NULL, NULL, false, password);
 	}
+
 	/// Opens a file for reading.
 	/** \overload
 	 * Argument \a password specifies a password to decrypt the file.
@@ -346,7 +348,7 @@ public:
 	          int method = Z_DEFLATED, int level = Z_DEFAULT_COMPRESSION, bool raw = false,
 	          int windowBits = -MAX_WBITS, int memLevel = DEF_MEM_LEVEL, int strategy = Z_DEFAULT_STRATEGY);
 	/// Returns \c true, but \ref quazipfile-sequential "beware"!
-	virtual bool isSequential()const;
+	virtual bool isSequential() const;
 	/// Returns current position in the file.
 	/** Implementation of the QIODevice::pos(). When reading, this
 	 * function is a wrapper to the ZIP/UNZIP unztell(), therefore it is
@@ -369,7 +371,7 @@ public:
 	 * Error code returned by getZipError() is not affected by this
 	 * function call.
 	 **/
-	virtual qint64 pos()const;
+	virtual qint64 pos() const;
 	/// Returns \c true if the end of file was reached.
 	/** This function returns \c false in the case of error. This means
 	 * that you called this function on either not open file, or a file
@@ -387,7 +389,7 @@ public:
 	 * Error code returned by getZipError() is not affected by this
 	 * function call.
 	 **/
-	virtual bool atEnd()const;
+	virtual bool atEnd() const;
 	/// Returns file size.
 	/** This function returns csize() if the file is open for reading in
 	 * raw mode, usize() if it is open for reading in normal mode and
@@ -401,7 +403,7 @@ public:
 	 * name would be very misguiding otherwise, so just keep in mind
 	 * this inconsistence.
 	 **/
-	virtual qint64 size()const;
+	virtual qint64 size() const;
 	/// Returns compressed file size.
 	/** Equivalent to calling getFileInfo() and then getting
 	 * compressedSize field, but more convenient and faster.
@@ -410,7 +412,7 @@ public:
 	 *
 	 * Returns -1 on error, call getZipError() to get error code.
 	 **/
-	qint64 csize()const;
+	qint64 csize() const;
 	/// Returns uncompressed file size.
 	/** Equivalent to calling getFileInfo() and then getting
 	 * uncompressedSize field, but more convenient and faster. See
@@ -420,7 +422,7 @@ public:
 	 *
 	 * Returns -1 on error, call getZipError() to get error code.
 	 **/
-	qint64 usize()const;
+	qint64 usize() const;
 	/// Gets information about current file.
 	/** This function does the same thing as calling
 	 * QuaZip::getCurrentFileInfo() on the associated QuaZip object,
@@ -457,3 +459,4 @@ public:
 };
 
 #endif
+

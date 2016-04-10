@@ -196,9 +196,9 @@ void SearchEngine::init()
 		QStringList engineDirs = rootDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
 
 		foreach(QString styleDir, engineDirs)
-		{
-			loadSearchProvider(StaticHelpers::CombinePathes(rootPath, styleDir));
-		}
+			{
+				loadSearchProvider(StaticHelpers::CombinePathes(rootPath, styleDir));
+			}
 	}
 	else
 	{
@@ -276,3 +276,4 @@ bool SearchEngine::isEnabledScriptDebugging()
 {
 	return m_scriptDebugingEnabled;
 }
+

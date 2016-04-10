@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QStyleOptionProgressBarV2>
 #include "QTorrentDisplayModel.h"
 #include <QDebug>
-
+#include "StyleEngene.h"
 
 enum
 {
@@ -43,31 +43,128 @@ enum
 };
 
 
-QTorrentItemDelegat::QTorrentItemDelegat(const QTorrentItemDelegat& dlg) : QStyledItemDelegate(0), myProgressBarStyle(new StyledProgressBar())
+QTorrentItemDelegat::QTorrentItemDelegat(const QTorrentItemDelegat& dlg) : QStyledItemDelegate(0), myProgressBarStyle(new StyledProgressBar()), button(new QPushButton())
 {
 	myProgressBarStyle->setMinimum(0);
 	myProgressBarStyle->setMaximum(100);
 	myProgressBarStyle->setTextVisible(false);
+	updateIcons();
+	m_pressedIndex.append(QModelIndex());
+	m_pressedIndex.append(QModelIndex());
+	m_buttonState.append(QStyle::State_Enabled);
+	m_buttonState.append(QStyle::State_Enabled);
 }
 
-QTorrentItemDelegat::QTorrentItemDelegat() : QStyledItemDelegate(0), myProgressBarStyle(new StyledProgressBar()) {}
+QTorrentItemDelegat::QTorrentItemDelegat() : QStyledItemDelegate(0), myProgressBarStyle(new StyledProgressBar()), button(new QPushButton())
+{
+	myProgressBarStyle->setMinimum(0);
+	myProgressBarStyle->setMaximum(100);
+	myProgressBarStyle->setTextVisible(false);
 
+	updateIcons();
+	m_pressedIndex.append(QModelIndex());
+	m_pressedIndex.append(QModelIndex());
+	m_buttonState.append(QStyle::State_Enabled);
+	m_buttonState.append(QStyle::State_Enabled);
+}
+
+
+void QTorrentItemDelegat::updateIcons()
+{
+	StyleEngene* styleEngene = StyleEngene::getInstance();
+	m_removeIcon = styleEngene->getIcon("toolbar_remove");
+	m_startIcon = styleEngene->getIcon("toolbar_start");
+	m_pauseIcon = styleEngene->getIcon("toolbar_pause");
+}
 
 QTorrentItemDelegat::QTorrentItemDelegat(QObject* parent) :
 	QStyledItemDelegate(parent),
-	myProgressBarStyle(new StyledProgressBar())
+	myProgressBarStyle(new StyledProgressBar()),
+	button(new QPushButton())
 {
 	myProgressBarStyle->setMinimum(0);
 	myProgressBarStyle->setMaximum(100);
 	myProgressBarStyle->setTextVisible(false);
+	StyleEngene* styleEngene = StyleEngene::getInstance();
+	connect(styleEngene, SIGNAL(styleChanged()), SLOT(updateIcons()));
+	updateIcons();
+	m_pressedIndex.append(QModelIndex());
+	m_pressedIndex.append(QModelIndex());
+	m_buttonState.append(QStyle::State_Enabled);
+	m_buttonState.append(QStyle::State_Enabled);
 }
 
 QTorrentItemDelegat::~QTorrentItemDelegat()
 {
-	delete myProgressBarStyle;
+	
 }
 
 
+bool QTorrentItemDelegat::editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index)
+{
+	qDebug() << "QTorrentItemDelegat::editorEvent" << event->type();
+	if (event->type() == QEvent::MouseButtonPress ||
+		event->type() == QEvent::MouseButtonRelease)
+	{
+		
+	}
+	else
+	{
+		//ignoring other mouse event and reseting button's state
+		m_buttonState[Remove] = QStyle::State_Raised;
+		m_buttonState[Pause] = QStyle::State_Raised;
+		m_pressedIndex[Remove] = QModelIndex();
+		m_pressedIndex[Pause] = QModelIndex();
+		return false;
+	}
+
+	QStyle* style;
+	QStyleOptionViewItemV4 opt = option;
+	initStyleOption(&opt, index);
+	if (opt.widget != NULL)
+	{
+		style = opt.widget->style();
+	}
+	else
+	{
+		style = QApplication::style();
+	}
+
+	
+	QSize m(4, 4);
+	
+	QRect fillArea(option.rect);
+	fillArea.adjust(m.width(), m.height(), -m.width(), -m.height());
+	const int iconSize(style->pixelMetric(QStyle::PM_MessageBoxIconSize));
+	QRect iconArea(fillArea.x(), fillArea.y() + (fillArea.height() - iconSize) / 2, iconSize, iconSize);
+	
+	QFont statusFont(option.font);
+	statusFont.setPointSize(int(option.font.pointSize() * 0.9));
+	const QFontMetrics statusFM(statusFont);
+	QRect nameArea(iconArea.x() + iconArea.width() + GUI_PAD, fillArea.y(),
+		fillArea.width() - GUI_PAD - iconArea.width(), statusFM.height());
+
+	if (nameArea.width() + nameArea.x() > opt.rect.width())
+	{
+		nameArea.setWidth(opt.rect.width() - nameArea.x());
+	}
+	const int buttonSize(style->pixelMetric(QStyle::PM_ListViewIconSize));
+	QRect barArea(nameArea.x(), nameArea.y() + statusFM.lineSpacing() + GUI_PAD / 2, nameArea.width() - 2 * (buttonSize + m.width()), BAR_HEIGHT);
+	QRect pauseButtonRect(barArea.x() + barArea.width() + m.width(), barArea.y(), buttonSize, buttonSize);
+	QRect removeButtonRect(pauseButtonRect.x() + pauseButtonRect.width() + m.width(), pauseButtonRect.y(), buttonSize, buttonSize);
+	qDebug() << index << "editorEvent" << pauseButtonRect << removeButtonRect;
+	QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+	if (pauseButtonRect.contains(mouseEvent->pos()))
+	{
+		HandleEvent(mouseEvent->type(), Pause, index);
+	}
+
+	if (removeButtonRect.contains(mouseEvent->pos()))
+	{
+		HandleEvent(mouseEvent->type(), Remove, index);
+	}
+	return QStyledItemDelegate::editorEvent(event, model, option, index);
+}
 
 QSize QTorrentItemDelegat::margin(const QStyle& style) const
 {
@@ -76,15 +173,13 @@ QSize QTorrentItemDelegat::margin(const QStyle& style) const
 }
 
 
-
-
 namespace
 {
-int MAX3(int a, int b, int c)
-{
-	const int ab(a > b ? a : b);
-	return ab > c ? ab : c;
-}
+	int MAX3(int a, int b, int c)
+	{
+		const int ab(a > b ? a : b);
+		return ab > c ? ab : c;
+	}
 }
 
 QSize
@@ -125,15 +220,15 @@ QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem& option, const Torrent&
 }
 
 QSize
-QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem&   option,
-                              const QModelIndex&            index) const
+QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem& option,
+                              const QModelIndex& index) const
 {
 	try
 	{
-		Torrent*  tor(index.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>());
+		Torrent* tor(index.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>());
 		initStyleOption(const_cast<QStyleOptionViewItem*>(&option), index);
 
-		if(tor != NULL)
+		if (tor != NULL)
 		{
 			return sizeHint(option, *tor);
 		}
@@ -142,7 +237,7 @@ QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem&   option,
 			return QSize(0, 0);
 		}
 	}
-	catch(...)
+	catch (...)
 	{
 		qDebug() << "Exception in QTorrentItemDelegat::sizeHint";
 	}
@@ -151,18 +246,18 @@ QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem&   option,
 }
 
 void
-QTorrentItemDelegat::paint(QPainter*                     painter,
-                           const QStyleOptionViewItem&   option,
-                           const QModelIndex&            index) const
+QTorrentItemDelegat::paint(QPainter* painter,
+                           const QStyleOptionViewItem& option,
+                           const QModelIndex& index) const
 {
 	try
 	{
-		Torrent*  tor(index.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>());
+		Torrent* tor(index.data(QTorrentDisplayModel::TorrentRole).value<Torrent*>());
 		painter->save();
 		painter->setClipRect(option.rect);
 		drawTorrent(painter, option, *tor, index);
 	}
-	catch(...)
+	catch (...)
 	{
 		qDebug() << "Excepion in QTorrentItemDelegat::paint";
 	}
@@ -172,18 +267,19 @@ QTorrentItemDelegat::paint(QPainter*                     painter,
 
 QString QTorrentItemDelegat::GetProgressString(const Torrent& tor) const
 {
-	if(tor.isDownloading())
+	if (tor.isDownloading())
 	{
 		return tr("%1 STR_DOWNLOADED %2 STR_FROM %3").arg(tor.GetProgresString()).arg(tor.GetTotalDownloadedStr()).arg(tor.GetTotalSizeStr());
 	}
 
-	if(tor.isSeeding())
+	if (tor.isSeeding())
 	{
 		return tr("%1 - %3 STR_UPLOADED %2").arg(tor.GetProgresString()).arg(tor.GetTotalUploadedStr()).arg(tor.GetTotalSizeStr());
 	}
 
 	return tor.GetProgresString();
 }
+
 QString QTorrentItemDelegat::GetStatusString(const Torrent& tor) const
 {
 	QString upSpeed(tor.GetUploadSpeedStr());
@@ -191,24 +287,24 @@ QString QTorrentItemDelegat::GetStatusString(const Torrent& tor) const
 	QString status(tor.GetStatusString());
 	bool hasError(tor.hasError());
 
-	if(hasError)
+	if (hasError)
 	{
 		return tor.GetErrorMessage();
 	}
 
-	if(tor.isPaused())
+	if (tor.isPaused())
 	{
 		return tr("STR_PAUSED");
 	}
 
-	if(tor.isDownloading())
+	if (tor.isDownloading())
 	{
 		return QString("%1: %2 %3 - %4 %5").arg(status).arg(QChar(0x2193)).arg(downSpeed).arg(QChar(0x2191)).arg(upSpeed);
 	}
 
-	if(tor.isSeeding())
+	if (tor.isSeeding())
 	{
-		if(!upSpeed.isEmpty())
+		if (!upSpeed.isEmpty())
 		{
 			return QString("%2 %3 - %1").arg(status).arg(QChar(0x2191)).arg(upSpeed);
 		}
@@ -216,13 +312,14 @@ QString QTorrentItemDelegat::GetStatusString(const Torrent& tor) const
 
 	return status;
 }
+
 void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewItem& option, const Torrent& tor, const QModelIndex& index) const
 {
 	QStyleOptionViewItemV4 opt = option;
 	initStyleOption(&opt, index);
 	QStyle* style;
 
-	if(opt.widget != NULL)
+	if (opt.widget != NULL)
 	{
 		style = opt.widget->style();
 	}
@@ -251,8 +348,8 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 
 	QSize nameSize(nameFM.size(0, nameStr));
 	QFont statusFont(option.font);
-	statusFont.setPointSize(int (option.font.pointSize() * 0.9));
-	
+	statusFont.setPointSize(int(option.font.pointSize() * 0.9));
+
 	const QFontMetrics statusFM(statusFont);
 	QSize timeSize(statusFM.size(0, timeStr));
 	QString statusStr(GetStatusString(tor));
@@ -276,11 +373,11 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	//style->drawControl(QStyle::CE_ItemViewItem,&option,painter);
 	QIcon::Mode im;
 
-	if(isPaused || !(option.state & QStyle::State_Enabled))
+	if (isPaused || !(option.state & QStyle::State_Enabled))
 	{
 		im = QIcon::Disabled;
 	}
-	else if(option.state & QStyle::State_Selected)
+	else if (option.state & QStyle::State_Selected)
 	{
 		im = QIcon::Selected;
 	}
@@ -291,7 +388,7 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 
 	QIcon::State qs;
 
-	if(isPaused)
+	if (isPaused)
 	{
 		qs = QIcon::Off;
 	}
@@ -302,19 +399,19 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 
 	QPalette::ColorGroup cg = QPalette::Normal;
 
-	if(isPaused || !(option.state & QStyle::State_Enabled))
+	if (isPaused || !(option.state & QStyle::State_Enabled))
 	{
 		cg = QPalette::Disabled;
 	}
 
-	if(cg == QPalette::Normal && !(option.state & QStyle::State_Active))
+	if (cg == QPalette::Normal && !(option.state & QStyle::State_Active))
 	{
 		cg = QPalette::Inactive;
 	}
 
 	QPalette::ColorRole cr;
 
-	if(option.state & QStyle::State_Selected)
+	if (option.state & QStyle::State_Selected)
 	{
 		cr = QPalette::HighlightedText;
 	}
@@ -333,18 +430,20 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 		timeArea.setWidth(0);
 	}
 	QRect nameArea(iconArea.x() + iconArea.width() + GUI_PAD, fillArea.y(),
-		fillArea.width() - GUI_PAD - iconArea.width() - timeArea.width(), nameSize.height());
+	               fillArea.width() - GUI_PAD - iconArea.width() - timeArea.width(), nameSize.height());
 
 	if (nameArea.width() + nameArea.x() > opt.rect.width())
 	{
 		nameArea.setWidth(opt.rect.width() - nameArea.x());
 	}
-
-	QRect barArea(nameArea.x(), nameArea.y() + statusFM.lineSpacing() + GUI_PAD / 2, nameArea.width() + timeArea.width(), BAR_HEIGHT);
-	QRect progArea(nameArea.x(), barArea.y() + barArea.height() + GUI_PAD / 2, barArea.width() - statusWidth, nameArea.height());
+	const int buttonSize(BAR_HEIGHT);
+	QRect barArea(nameArea.x(), nameArea.y() + statusFM.lineSpacing() + GUI_PAD / 2, nameArea.width() + timeArea.width() - 2 * (buttonSize + 2*m.width()), BAR_HEIGHT);
+	QRect pauseButtonRect(barArea.x() + barArea.width() + 2 * m.width(), barArea.y(), buttonSize, buttonSize);
+	QRect removeButtonRect(pauseButtonRect.x() + pauseButtonRect.width() + 2 * m.width(), pauseButtonRect.y(), buttonSize, buttonSize);
+	QRect progArea(nameArea.x(), barArea.y() + barArea.height() + GUI_PAD / 2, barArea.width() + 2 * (buttonSize + 2 * m.width()) - statusWidth, nameArea.height());
 	QRect statusArea(progArea.x() + progArea.width(), progArea.y(), statusWidth, progArea.height());
-
-	if(tor.hasError())
+	qDebug() << index << "drawTorrent" << pauseButtonRect << removeButtonRect;
+	if (tor.hasError())
 	{
 		painter->setPen(QColor("red"));
 	}
@@ -360,16 +459,54 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	painter->setFont(statusFont);
 	if (!isDownloaded)
 		style->drawItemText(painter, timeArea, Qt::AlignRight, opt.palette, option.state & QStyle::State_Enabled, timeStr);
-	style->drawItemText(painter,  statusArea, Qt::AlignRight, opt.palette, option.state & QStyle::State_Enabled, statusStr);
+	style->drawItemText(painter, statusArea, Qt::AlignRight, opt.palette, option.state & QStyle::State_Enabled, statusStr);
 	painter->setFont(progressFont);
 	progressStr = statusFM.elidedText(progressStr, Qt::ElideRight, progArea.width());
 	style->drawItemText(painter, progArea, Qt::AlignLeft, opt.palette, option.state & QStyle::State_Enabled, progressStr);
+	QStyleOptionButton styleOptionButton;
+
+	styleOptionButton.features = QStyleOptionButton::Flat;
+	styleOptionButton.rect = pauseButtonRect;
+	styleOptionButton.icon = isPaused ? m_startIcon : m_pauseIcon;
+	styleOptionButton.iconSize = QSize(iconSize, iconSize);
+	styleOptionButton.state = QStyle::State_Enabled;
+	if (m_buttonState[Pause] == QStyle::State_Sunken && m_pressedIndex[Pause].isValid() && m_pressedIndex[Pause] == index)
+
+	{
+		styleOptionButton.state |= m_buttonState[Pause];
+	}
+	style->drawControl(QStyle::CE_PushButton, &styleOptionButton, painter,
+		button.data());
 	
+	styleOptionButton.rect = removeButtonRect;
+	styleOptionButton.icon = m_removeIcon;
+	styleOptionButton.state = QStyle::State_Enabled;
+	if (m_buttonState[Remove] == QStyle::State_Sunken && m_pressedIndex[Remove].isValid() && m_pressedIndex[Remove] == index)
+
+	{
+		styleOptionButton.state |= m_buttonState[Remove];
+	}
+	style->drawControl(QStyle::CE_PushButton, &styleOptionButton, painter,
+		button.data());
+
 	myProgressBarStyle->resize(barArea.size());
 	myProgressBarStyle->setValue(progressPercentage);
 	QStyleOptionProgressBarV2 pbStyleOpt;
 	myProgressBarStyle->initilizeStyleOption(&pbStyleOpt);
 	pbStyleOpt.rect = barArea;
-	style->drawControl(QStyle::CE_ProgressBar, &pbStyleOpt, painter, myProgressBarStyle);
+	style->drawControl(QStyle::CE_ProgressBar, &pbStyleOpt, painter, myProgressBarStyle.data());
 	painter->restore();
+}
+
+void QTorrentItemDelegat::HandleEvent(QEvent::Type type, Buttons button, const QModelIndex& index)
+{
+	if (type == QEvent::MouseButtonPress) {
+		m_pressedIndex[button] = index;
+		m_buttonState[button] = QStyle::State_Sunken;
+	}
+	else if (type == QEvent::MouseButtonRelease) {
+		m_buttonState[button] = QStyle::State_Raised;
+		m_pressedIndex[button] = QModelIndex();
+		emit buttonClicked(index, button);
+	}
 }

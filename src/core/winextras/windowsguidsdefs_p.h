@@ -72,3 +72,5 @@ extern const GUID qGUID_NULL;
 QT_END_NAMESPACE
 
 #endif // WINDOWSGUIDSDEFS_P_H
+
+

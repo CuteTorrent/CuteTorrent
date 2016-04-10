@@ -1,4 +1,4 @@
-/*
+﻿/*
   Copyright (c) 2011-2012 - Tőkés Attila
 
   This file is part of SmtpClient for Qt.
@@ -251,10 +251,10 @@ void MimeMessage::writeToDevice(QIODevice& out) const
 	/* ---------------------------------- */
 
 	foreach (QString hdr, customHeaders)
-	{
-		header.append(hdr.toLocal8Bit());
-		header.append("\r\n");
-	}
+		{
+			header.append(hdr.toLocal8Bit());
+			header.append("\r\n");
+		}
 
 	header.append("MIME-Version: 1.0\r\n");
 	out.write(header);
@@ -262,3 +262,5 @@ void MimeMessage::writeToDevice(QIODevice& out) const
 }
 
 /* [3] --- */
+
+

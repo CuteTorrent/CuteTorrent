@@ -5,6 +5,7 @@
 #include <QMutex>
 #include <QStandardItem>
 #include "StyleEngene.h"
+
 class PeerTableModel : public QStandardItemModel
 {
 	Q_OBJECT
@@ -21,6 +22,7 @@ public:
 		PEER_SPEED,
 		COLUMN_COUNT
 	};
+
 	PeerTableModel(QObject* parent = NULL);
 	void UpdateData(std::vector<libtorrent::peer_info>& peersInfo);
 	void Retranslate();
@@ -35,3 +37,4 @@ private:
 
 Q_DECLARE_METATYPE(libtorrent::peer_info)
 #endif
+

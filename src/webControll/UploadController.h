@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "http/httprequesthandler.h"
 #include "TorrentCommon.h"
+
 class UploadController : public HttpRequestHandler
 {
 	Q_OBJECT
@@ -12,3 +13,4 @@ public:
 	void service(HttpRequest& request, HttpResponse& response) override;
 	~UploadController();
 };
+

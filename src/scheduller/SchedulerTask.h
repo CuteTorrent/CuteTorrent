@@ -2,7 +2,8 @@
 #include <QThread>
 #include <QDateTime>
 #include <QVariant>
-class SchedulerTask :	public QThread
+
+class SchedulerTask : public QThread
 {
 public:
 	enum TaskType
@@ -22,10 +23,10 @@ public:
 	QDateTime startTime() const;
 	int limit();
 	QString name() const;
-	bool operator < (const SchedulerTask& other) const;
-	SchedulerTask& operator= (const SchedulerTask& right);
-	bool operator == (const SchedulerTask& other);
-	bool operator != (const SchedulerTask& other);
+	bool operator <(const SchedulerTask& other) const;
+	SchedulerTask& operator=(const SchedulerTask& right);
+	bool operator ==(const SchedulerTask& other);
+	bool operator !=(const SchedulerTask& other);
 private:
 	TaskType m_taskType;
 	QDateTime m_beginDate;
@@ -33,7 +34,7 @@ private:
 	QString m_ruleName;
 protected:
 	void run();
-
 };
 
 Q_DECLARE_METATYPE(SchedulerTask);
+

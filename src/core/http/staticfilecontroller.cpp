@@ -10,6 +10,7 @@
 #include <QCryptographicHash>
 #include <QApplication>
 #include <StaticHelpers.h>
+
 StaticFileController::StaticFileController(QObject* parent)
 	: HttpRequestHandler("WebControl", parent)
 {
@@ -23,7 +24,7 @@ StaticFileController::StaticFileController(QObject* parent)
 	docroot = settings->valueString("WebControl", "path", "/usr/share/cutetorrent/webControll/");
 #endif
 
-	if(QDir::isRelativePath(docroot))
+	if (QDir::isRelativePath(docroot))
 	{
 		QString dataDir = QApplication::applicationDirPath() + QDir::separator();
 		docroot = QDir::cleanPath(dataDir + docroot);
@@ -36,7 +37,7 @@ StaticFileController::StaticFileController(QObject* parent)
 	{
 		cacheTimeout = settings->valueInt("WebControl", "cacheTime", 60000);
 	}
-	catch(...)
+	catch (...)
 	{
 		qDebug() << "Exception in StaticFileController::StaticFileController";
 	}
@@ -48,14 +49,14 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
 	QByteArray path = request.getPath();
 
 	// Forbid access to files outside the docroot directory
-	if(path.startsWith("/.."))
+	if (path.startsWith("/.."))
 	{
 		qWarning("StaticFileController: somebody attempted to access a file outside the docroot directory");
 		response.setStatus(403, "forbidden");
 		response.write("403 forbidden", true);
 	}
 
-	if(!CheckCreditinals(request, response))
+	if (!CheckCreditinals(request, response))
 	{
 		return;
 	}
@@ -66,7 +67,7 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
 	mutex.lock();
 	CacheEntry* entry = cache.object(path);
 
-	if(entry && (cacheTimeout == 0 || entry->created > now - cacheTimeout) && QFileInfo(docroot + path).lastModified().toMSecsSinceEpoch() <= entry->created)
+	if (entry && (cacheTimeout == 0 || entry->created > now - cacheTimeout) && QFileInfo(docroot + path).lastModified().toMSecsSinceEpoch() <= entry->created)
 	{
 		QByteArray document = entry->document; //copy the cached document, because other threads may destroy the cached entry immediately after mutex unlock.
 		mutex.unlock();
@@ -80,7 +81,7 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
 
 		// The file is not in cache.
 		// If the filename is a directory, append index.html.
-		if(QFileInfo(docroot + path).isDir())
+		if (QFileInfo(docroot + path).isDir())
 		{
 			path = StaticHelpers::CombinePathes(path, "index.html").toUtf8();
 		}
@@ -89,19 +90,19 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
 		QFile file(filePath);
 		qDebug() << "Tring open file" << filePath;
 
-		if(file.exists())
+		if (file.exists())
 		{
-			if(file.open(QIODevice::ReadOnly))
+			if (file.open(QIODevice::ReadOnly))
 			{
 				setContentType(path, response);
 				response.setHeader("Cache-Control", "max-age=" + QByteArray::number(maxAge / 1000));
 
-				if(file.size() <= maxCachedFileSize)
+				if (file.size() <= maxCachedFileSize)
 				{
 					// Return the file content and store it also in the cache
 					entry = new CacheEntry();
 
-					while(!file.atEnd() && !file.error())
+					while (!file.atEnd() && !file.error())
 					{
 						QByteArray buffer = file.read(65536);
 						response.write(buffer);
@@ -111,7 +112,7 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
 					entry->created = now;
 					mutex.lock();
 
-					if(!cache.contains(path))
+					if (!cache.contains(path))
 					{
 						cache.insert(request.getPath(), entry, entry->document.size());
 					}
@@ -126,7 +127,7 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
 				else
 				{
 					// Return the file content, do not store in cache
-					while(!file.atEnd() && !file.error())
+					while (!file.atEnd() && !file.error())
 					{
 						response.write(file.read(65536));
 					}
@@ -151,43 +152,43 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
 
 void StaticFileController::setContentType(QString fileName, HttpResponse& response) const
 {
-	if(fileName.endsWith(".png"))
+	if (fileName.endsWith(".png"))
 	{
 		response.setHeader("Content-Type", "image/png");
 	}
-	else if(fileName.endsWith(".jpg"))
+	else if (fileName.endsWith(".jpg"))
 	{
 		response.setHeader("Content-Type", "image/jpeg");
 	}
-	else if(fileName.endsWith(".gif"))
+	else if (fileName.endsWith(".gif"))
 	{
 		response.setHeader("Content-Type", "image/gif");
 	}
-	else if(fileName.endsWith(".pdf"))
+	else if (fileName.endsWith(".pdf"))
 	{
 		response.setHeader("Content-Type", "application/pdf");
 	}
-	else if(fileName.endsWith(".txt"))
+	else if (fileName.endsWith(".txt"))
 	{
 		response.setHeader("Content-Type", qPrintable("text/plain; charset=" + encoding));
 	}
-	else if(fileName.endsWith(".html") || fileName.endsWith(".htm"))
+	else if (fileName.endsWith(".html") || fileName.endsWith(".htm"))
 	{
 		response.setHeader("Content-Type", qPrintable("text/html; charset=" + encoding));
 	}
-	else if(fileName.endsWith(".css"))
+	else if (fileName.endsWith(".css"))
 	{
 		response.setHeader("Content-Type", "text/css");
 	}
-	else if(fileName.endsWith(".js"))
+	else if (fileName.endsWith(".js"))
 	{
 		response.setHeader("Content-Type", "text/javascript");
 	}
-	else if(fileName.endsWith(".woff"))
+	else if (fileName.endsWith(".woff"))
 	{
 		response.setHeader("Content-Type", "application/font-woff");
 	}
-	else if(fileName.endsWith(".ico"))
+	else if (fileName.endsWith(".ico"))
 	{
 		response.setHeader("Content-Type", "image/x-icon");
 	}
@@ -252,3 +253,4 @@ bool StaticFileController::CheckCreditinals( HttpRequest& request,HttpResponse& 
 	return true;
 
 }*/
+

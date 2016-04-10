@@ -38,6 +38,7 @@ FileTreeModel::FileTreeModel(QObject* parent)
 	QPair<QString, QVariant> rootData = qMakePair(tr("FILE"), QVariant::fromValue(tr("SIZE")));
 	rootItem = new FileTreeItem(rootData);
 }
+
 QMap<QString, quint8> FileTreeModel::getFilePiorites()
 {
 	QMap<QString, quint8> res;
@@ -48,12 +49,12 @@ QMap<QString, quint8> FileTreeModel::getFilePiorites()
 
 void FileTreeModel::GetFilePrioritiesInternal(FileTreeItem* current, QMap<QString, quint8>* priorities)
 {
-	for(int i = 0; i < current->childCount(); i++)
+	for (int i = 0; i < current->childCount(); i++)
 	{
 		FileTreeItem* curChild = current->child(i);
 		qint8 prioryty = 0;
 
-		if(curChild->Checked() == Qt::Checked)
+		if (curChild->Checked() == Qt::Checked)
 		{
 			prioryty = 1;
 		}
@@ -62,17 +63,18 @@ void FileTreeModel::GetFilePrioritiesInternal(FileTreeItem* current, QMap<QStrin
 		GetFilePrioritiesInternal(curChild, priorities);
 	}
 }
+
 QModelIndex FileTreeModel::index(int row, int column, const QModelIndex& parent)
 const
 {
-	if(!hasIndex(row, column, parent))
+	if (!hasIndex(row, column, parent))
 	{
 		return QModelIndex();
 	}
 
 	FileTreeItem* parentItem;
 
-	if(!parent.isValid())
+	if (!parent.isValid())
 	{
 		parentItem = rootItem;
 	}
@@ -83,7 +85,7 @@ const
 
 	FileTreeItem* childItem = parentItem->child(row);
 
-	if(childItem)
+	if (childItem)
 	{
 		return createIndex(row, column, childItem);
 	}
@@ -95,7 +97,7 @@ const
 
 QModelIndex FileTreeModel::parent(const QModelIndex& index) const
 {
-	if(!index.isValid())
+	if (!index.isValid())
 	{
 		return QModelIndex();
 	}
@@ -103,23 +105,24 @@ QModelIndex FileTreeModel::parent(const QModelIndex& index) const
 	FileTreeItem* childItem = static_cast<FileTreeItem*>(index.internalPointer());
 	FileTreeItem* parentItem = childItem->parent();
 
-	if(parentItem == rootItem)
+	if (parentItem == rootItem)
 	{
 		return QModelIndex();
 	}
 
 	return createIndex(parentItem->row(), 0, parentItem);
 }
+
 int FileTreeModel::rowCount(const QModelIndex& parent) const
 {
 	FileTreeItem* parentItem;
 
-	if(parent.column() > 0)
+	if (parent.column() > 0)
 	{
 		return 0;
 	}
 
-	if(!parent.isValid())
+	if (!parent.isValid())
 	{
 		parentItem = rootItem;
 	}
@@ -130,9 +133,10 @@ int FileTreeModel::rowCount(const QModelIndex& parent) const
 
 	return parentItem->childCount();
 }
+
 int FileTreeModel::columnCount(const QModelIndex& parent) const
 {
-	if(parent.isValid())
+	if (parent.isValid())
 	{
 		return static_cast<FileTreeItem*>(parent.internalPointer())->columnCount();
 	}
@@ -160,7 +164,7 @@ void FileTreeModel::UpdateChildren(const QModelIndex& modelIndex, FileTreeItem* 
 			}
 		}
 
-		emit dataChanged(index(0, 0, modelIndex), index(childCount - 1, 0 , modelIndex));
+		emit dataChanged(index(0, 0, modelIndex), index(childCount - 1, 0, modelIndex));
 	}
 }
 
@@ -175,7 +179,7 @@ void FileTreeModel::UpdateParents(const QModelIndex& modelIndex, FileTreeItem* i
 
 	bool allUnchecked = true, allChecked = true;
 
-	for(int i = 0; i < parent->childCount(); i++)
+	for (int i = 0; i < parent->childCount(); i++)
 	{
 		allUnchecked = allUnchecked && (parent->child(i)->Checked() == Qt::Unchecked);
 		allChecked = allChecked && (parent->child(i)->Checked() == Qt::Checked);
@@ -183,7 +187,7 @@ void FileTreeModel::UpdateParents(const QModelIndex& modelIndex, FileTreeItem* i
 
 	QModelIndex parentIndex = modelIndex.parent();
 
-	if(allUnchecked)
+	if (allUnchecked)
 	{
 		parent->setChecked(Qt::Unchecked);
 		emit dataChanged(parentIndex, parentIndex);
@@ -195,13 +199,13 @@ void FileTreeModel::UpdateParents(const QModelIndex& modelIndex, FileTreeItem* i
 			UpdateParents(parentIndex, parent);
 		}
 	}
-	else if(allChecked)
+	else if (allChecked)
 	{
 		parent->setChecked(Qt::Checked);
 		emit dataChanged(parentIndex, parentIndex);
 		parent = parent->parent();
 
-		if(parent != NULL)
+		if (parent != NULL)
 		{
 			parent->setChecked(Qt::Checked);
 			UpdateParents(parentIndex, parent);
@@ -221,14 +225,14 @@ void FileTreeModel::UpdateParents(const QModelIndex& modelIndex, FileTreeItem* i
 
 bool FileTreeModel::setData(const QModelIndex& modelIndex, const QVariant& value, int role)
 {
-	if(!modelIndex.isValid())
+	if (!modelIndex.isValid())
 	{
 		return false;
 	}
 
 	FileTreeItem* item = static_cast<FileTreeItem*>(modelIndex.internalPointer());
 
-	if(role == Qt::CheckStateRole && modelIndex.column() == 0)
+	if (role == Qt::CheckStateRole && modelIndex.column() == 0)
 	{
 		Qt::CheckState state = static_cast<Qt::CheckState>(value.toInt());
 		item->setChecked(state);
@@ -239,21 +243,22 @@ bool FileTreeModel::setData(const QModelIndex& modelIndex, const QVariant& value
 
 	return QAbstractItemModel::setData(modelIndex, value, role);
 }
+
 QVariant FileTreeModel::data(const QModelIndex& index, int role) const
 {
-	if(!index.isValid())
+	if (!index.isValid())
 	{
 		return QVariant();
 	}
 
 	FileTreeItem* item = static_cast<FileTreeItem*>(index.internalPointer());
 
-	if(role == Qt::CheckStateRole && index.column() == 0)
+	if (role == Qt::CheckStateRole && index.column() == 0)
 	{
 		return item->Checked();
 	}
 
-	if(role == Qt::DecorationRole && index.column() == 0)
+	if (role == Qt::DecorationRole && index.column() == 0)
 	{
 		QString pathCur = item->getPath();
 		QIcon icon;
@@ -261,7 +266,7 @@ QVariant FileTreeModel::data(const QModelIndex& index, int role) const
 		QFileIconProvider iPorv;
 		QString suffix = info.suffix();
 
-		if(!suffix.isEmpty() && item->childCount() == 0)
+		if (!suffix.isEmpty() && item->childCount() == 0)
 		{
 			QString fileTemplate = StaticHelpers::CombinePathes(QDesktopServices::storageLocation(QDesktopServices::TempLocation), "tempFileXXXXXX." + suffix);
 			QTemporaryFile tmpfile(fileTemplate);
@@ -279,7 +284,7 @@ QVariant FileTreeModel::data(const QModelIndex& index, int role) const
 		return icon;
 	}
 
-	if(role != Qt::DisplayRole)
+	if (role != Qt::DisplayRole)
 	{
 		return QVariant();
 	}
@@ -289,7 +294,7 @@ QVariant FileTreeModel::data(const QModelIndex& index, int role) const
 
 Qt::ItemFlags FileTreeModel::flags(const QModelIndex& index) const
 {
-	if(!index.isValid())
+	if (!index.isValid())
 	{
 		return 0;
 	}
@@ -305,7 +310,7 @@ QVariant FileTreeModel::headerData(int section, Qt::Orientation orientation,
 		return Qt::DescendingOrder;
 	}
 
-	if(orientation == Qt::Horizontal && role == Qt::DisplayRole)
+	if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
 	{
 		return rootItem->data(section);
 	}
@@ -317,13 +322,13 @@ void FileTreeModel::addPath(QString path, uint64_t size)
 {
 	path = QDir::toNativeSeparators(path);
 	QStringList pathparts = path.split(QDir::separator());
-	FileTreeItem* iterator = rootItem, *save = rootItem;
+	FileTreeItem *iterator = rootItem, *save = rootItem;
 
-	if(rootItem->childCount() == 0)
+	if (rootItem->childCount() == 0)
 	{
 		FileTreeItem* curitem = rootItem;
 
-		for(int i = 0; i < pathparts.count(); i++)
+		for (int i = 0; i < pathparts.count(); i++)
 		{
 			curitem->appendChild(new FileTreeItem(qMakePair(pathparts.at(i), QVariant::fromValue(size)), curitem));
 			curitem = curitem->child(0);
@@ -333,20 +338,20 @@ void FileTreeModel::addPath(QString path, uint64_t size)
 		return;
 	}
 
-	for(int i = 0; i < pathparts.count(); i++)
+	for (int i = 0; i < pathparts.count(); i++)
 	{
 		int foundnum = -1;
 
-		for(int j = 0; j < iterator->childCount(); j++)
+		for (int j = 0; j < iterator->childCount(); j++)
 		{
-			if(iterator->child(j)->data(0).toString().compare(pathparts.at(i)) == 0)
+			if (iterator->child(j)->data(0).toString().compare(pathparts.at(i)) == 0)
 			{
 				foundnum = j;
 				break;
 			}
 		}
 
-		if(foundnum >= 0)
+		if (foundnum >= 0)
 		{
 			iterator = iterator->child(foundnum);
 			iterator->setData(1, QVariant::fromValue(iterator->data(1).toULongLong() + size));
@@ -360,3 +365,4 @@ void FileTreeModel::addPath(QString path, uint64_t size)
 
 	rootItem = save;
 }
+

@@ -9,3 +9,5 @@ DEFINE_PTR_CALSS(SearchEngine)
 
 
 #endif // SEARCHCOMMON_H
+
+

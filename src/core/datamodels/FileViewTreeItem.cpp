@@ -25,6 +25,7 @@ const file_entry FileViewTreeItem::GetFileEntery()
 {
 	return m_fileEntery;
 }
+
 FileViewTreeItem::ItemType FileViewTreeItem::GetType()
 {
 	return m_type;
@@ -34,6 +35,7 @@ void FileViewTreeItem::AddChild(FileViewTreeItem* child)
 {
 	m_pChildren.append(child);
 }
+
 int FileViewTreeItem::GetChildrenCount()
 {
 	return m_pChildren.size();
@@ -41,12 +43,12 @@ int FileViewTreeItem::GetChildrenCount()
 
 FileViewTreeItem* FileViewTreeItem::GetNthChild(int n)
 {
-	if(m_pChildren.size() > n)
+	if (m_pChildren.size() > n)
 	{
 		return m_pChildren[n];
 	}
 
-	return  NULL;
+	return NULL;
 }
 
 FileViewTreeItem* FileViewTreeItem::GetParent()
@@ -58,6 +60,4 @@ FileViewTreeItem::~FileViewTreeItem()
 {
 	qDeleteAll(m_pChildren);
 }
-
-
 

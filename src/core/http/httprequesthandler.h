@@ -32,6 +32,7 @@ public:
 	{
 		QString username, password;
 	};
+
 	bool requireAuth;
 	Creditionals account;
 	/** Constructor */
@@ -54,8 +55,9 @@ private:
 	QString serverName;
 	void initSettings();
 	QString _generateNonce(const int len);
-	QString realm, authMethod , nonce;
+	QString realm, authMethod, nonce;
 };
 
 #endif // HTTPREQUESTHANDLER_H
+
 

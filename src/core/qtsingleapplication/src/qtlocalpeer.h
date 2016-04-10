@@ -55,12 +55,13 @@ public:
 	QtLocalPeer(QObject* parent = 0, const QString& appId = QString());
 	bool isClient();
 	bool sendMessage(const QString& message, int timeout);
+
 	QString applicationId() const
 	{
 		return id;
 	}
 
-Q_SIGNALS:
+	Q_SIGNALS:
 	void messageReceived(const QString& message);
 
 protected Q_SLOTS:
@@ -77,3 +78,5 @@ private:
 };
 
 #endif // QTLOCALPEER_H
+
+

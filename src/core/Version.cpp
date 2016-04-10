@@ -1,6 +1,7 @@
 ﻿#include "Version.h"
 #include "versionInfo.h"
 #include <QStringList>
+
 char* Version::getVersionStr()
 {
 	return VER_FILE_VERSION_STR;
@@ -56,13 +57,13 @@ QString Version::v2fhelper(QString v, QString stuff, float* version, float weigh
 float Version::versionToFloat(QString v)
 {
 	float version[] =
-	{
-		0, 0, 0, 0, // 4-part numerical revision
-		4, // alpha, beta, rc or (default) final
-		0, // alpha, beta or RC version revision
-		1 // Pre or (default) final
-	};
-	QStringList parts = v.split( "pre" , QString::SkipEmptyParts);
+		{
+			0, 0, 0, 0, // 4-part numerical revision
+			4, // alpha, beta, rc or (default) final
+			0, // alpha, beta or RC version revision
+			1 // Pre or (default) final
+		};
+	QStringList parts = v.split("pre", QString::SkipEmptyParts);
 
 	if (2 == parts.size())
 	{
@@ -120,3 +121,4 @@ bool operator>=(const Version& lhs, const Version& rhs)
 {
 	return !(lhs < rhs);
 }
+

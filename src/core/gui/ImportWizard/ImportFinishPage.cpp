@@ -8,25 +8,25 @@ void ImportFinishPage::initializePage()
 	errorDisplay->setVisible(false);
 	switch (res)
 	{
-	case ImportWizard::Success:
-	{
-		resultLabel->setText(tr("IMPORT_SUCCES"));
-		break;
-	}
-	case ImportWizard::Canceled:
-	{
-		resultLabel->setText(tr("IMPORT_CANCELED_BY_USER"));
-		break;
-	}
+		case ImportWizard::Success:
+		{
+			resultLabel->setText(tr("IMPORT_SUCCES"));
+			break;
+		}
+		case ImportWizard::Canceled:
+		{
+			resultLabel->setText(tr("IMPORT_CANCELED_BY_USER"));
+			break;
+		}
 
-	case ImportWizard::Failed:
-	{
-		QString error = field("ImportErrors").toString();
-		resultLabel->setText(tr("IMPORT_ERROR"));
-		errorDisplay->setVisible(true);
-		errorDisplay->setPlainText(error);
-		break;
-	}
+		case ImportWizard::Failed:
+		{
+			QString error = field("ImportErrors").toString();
+			resultLabel->setText(tr("IMPORT_ERROR"));
+			errorDisplay->setVisible(true);
+			errorDisplay->setPlainText(error);
+			break;
+		}
 	}
 }
 
@@ -44,6 +44,7 @@ ImportFinishPage::ImportFinishPage(QWidget* parent) : QWizardPage(parent)
 	errorDisplay->setObjectName(QString::fromUtf8("errorDisplay"));
 
 	gridLayout->addWidget(errorDisplay, 1, 0, 1, 1);
-	
+
 	setLayout(gridLayout);
 }
+

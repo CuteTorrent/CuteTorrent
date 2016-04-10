@@ -75,3 +75,4 @@ FileDownloaderPtr FileDownloader::getNewInstance()
 	boost::shared_ptr<FileDownloader> instance = boost::make_shared<FileDownloader>();
 	return instance;
 }
+

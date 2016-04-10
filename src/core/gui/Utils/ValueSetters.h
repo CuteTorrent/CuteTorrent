@@ -17,3 +17,4 @@ public:
 	static void WindowsShellValueSetter(QString group, QString name, QVariant value);
 #endif
 };
+

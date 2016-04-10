@@ -55,13 +55,13 @@ void AddRssDwonloadRuleDialog::FillRssFeedsList()
 	QList<RssFeed*> pFeeds = pManager->feeds();
 
 	foreach(RssFeed* pFeed, pFeeds)
-	{
-		QListWidgetItem* pItem = new QListWidgetItem(pFeed->displayName(true));
-		pItem->setCheckState(Qt::Unchecked);
-		pItem->setData(Qt::UserRole, qVariantFromValue(pFeed->uid()));
-		pItem->setIcon(pIconDownloader->getFavicon(pFeed->url().toString()));
-		m_pFeedsListWidget->addItem(pItem);
-	}
+		{
+			QListWidgetItem* pItem = new QListWidgetItem(pFeed->displayName(true));
+			pItem->setCheckState(Qt::Unchecked);
+			pItem->setData(Qt::UserRole, qVariantFromValue(pFeed->uid()));
+			pItem->setIcon(pIconDownloader->getFavicon(pFeed->url().toString()));
+			m_pFeedsListWidget->addItem(pItem);
+		}
 
 	connect(m_pFeedsListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(onFeedListItemChanged(QListWidgetItem*)));
 }
@@ -189,7 +189,6 @@ void AddRssDwonloadRuleDialog::FillDataFromDownloadRule()
 	m_pUseGroupsCheckBox->setChecked(useGroupFilters);
 	m_pRuleNameEdit->setText(m_currentRule->Name());
 	m_pSearchStringEdit->setText(m_currentRule->Pattern());
-
 	for (int i = 0; i < m_pRuleTypeCombobx->count(); i++)
 	{
 		if (static_cast<RssDownloadRule::DownloadRuleType>(m_pRuleTypeCombobx->itemData(i).toInt()) == m_currentRule->RuleType())
@@ -280,11 +279,11 @@ void AddRssDwonloadRuleDialog::onBrowseStaticPath()
 {
 	QString lastDir = QApplicationSettings::getInstance()->valueString("System", "LastSaveTorrentDir", QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation));
 	QString dir = QFileDialog::getExistingDirectory(this, tr("DIALOG_OPEN_DIR"),
-	              lastDir,
-	              QFileDialog::ShowDirsOnly
-	              | QFileDialog::DontResolveSymlinks);
+	                                                lastDir,
+	                                                QFileDialog::ShowDirsOnly
+	                                                | QFileDialog::DontResolveSymlinks);
 
-	if (dir.isEmpty())
+	if (!dir.isEmpty())
 	{
 		dir = QDir::toNativeSeparators(dir);
 
@@ -294,5 +293,7 @@ void AddRssDwonloadRuleDialog::onBrowseStaticPath()
 		}
 
 		m_pSavePathEdit->setText(dir);
+		m_currentRule->setStaticSavePath(dir);
 	}
 }
+

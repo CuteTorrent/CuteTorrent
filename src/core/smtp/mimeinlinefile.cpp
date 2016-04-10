@@ -1,4 +1,4 @@
-/*
+﻿/*
   Copyright (c) 2011-2012 - Tőkés Attila
 
   This file is part of SmtpClient for Qt.
@@ -32,7 +32,8 @@ MimeInlineFile::MimeInlineFile(QFile* f)
 }
 
 MimeInlineFile::~MimeInlineFile()
-{}
+{
+}
 
 /* [1] --- */
 
@@ -45,6 +46,5 @@ MimeInlineFile::~MimeInlineFile()
 /* [3] Protected methods */
 
 /* [3] --- */
-
 
 

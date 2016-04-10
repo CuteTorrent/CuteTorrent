@@ -7,31 +7,28 @@
 #define DEFINE_PTR_CALSS(T) class T;\
 	typedef boost::shared_ptr<T> T##Ptr;
 
-template<typename T>
+template <typename T>
 class Singleton
 {
-
 public:
 	static boost::shared_ptr<T> getInstance();
 private:
-	static boost::weak_ptr<T> m_pInstance;
+	static boost::shared_ptr<T> m_pInstance;
 };
 
 template <typename T>
-boost::weak_ptr<T>  Singleton<T>::m_pInstance;
+boost::shared_ptr<T> Singleton<T>::m_pInstance;
 
 template <typename T>
 boost::shared_ptr<T> Singleton<T>::getInstance()
 {
-	boost::shared_ptr<T> instance = m_pInstance.lock();
-
-	if (!instance)
+	if (!m_pInstance)
 	{
-		instance.reset(new T());
-		m_pInstance = instance;
+		m_pInstance.reset(new T());
 	}
 
-	return instance;
+	return m_pInstance;
 }
 
 #endif
+

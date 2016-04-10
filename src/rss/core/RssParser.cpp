@@ -44,13 +44,13 @@ QDateTime RssParser::parseDate(const QString& string)
 		return QDateTime::currentDateTime();
 	}
 
-	int nyear  = 6;   // indexes within string to values
+	int nyear = 6; // indexes within string to values
 	int nmonth = 4;
-	int nday   = 2;
-	int nwday  = 1;
-	int nhour  = 7;
-	int nmin   = 8;
-	int nsec   = 9;
+	int nday = 2;
+	int nwday = 1;
+	int nhour = 7;
+	int nmin = 8;
+	int nsec = 9;
 	// Also accept obsolete form "Weekday, DD-Mon-YY HH:MM:SS ±hhmm"
 	QRegExp rx("^(?:([A-Z][a-z]+),\\s*)?(\\d{1,2})(\\s+|-)([^-\\s]+)(\\s+|-)(\\d{2,4})\\s+(\\d\\d):(\\d\\d)(?::(\\d\\d))?\\s+(\\S+)$");
 	QStringList parts;
@@ -77,20 +77,20 @@ QDateTime RssParser::parseDate(const QString& string)
 			return QDateTime::currentDateTime();
 		}
 
-		nyear  = 7;
+		nyear = 7;
 		nmonth = 2;
-		nday   = 3;
-		nwday  = 1;
-		nhour  = 4;
-		nmin   = 5;
-		nsec   = 6;
+		nday = 3;
+		nwday = 1;
+		nhour = 4;
+		nmin = 5;
+		nsec = 6;
 		parts = rx.capturedTexts();
 	}
 
 	bool ok[4];
-	const int day    = parts[nday].toInt(&ok[0]);
-	int year   = parts[nyear].toInt(&ok[1]);
-	const int hour   = parts[nhour].toInt(&ok[2]);
+	const int day = parts[nday].toInt(&ok[0]);
+	int year = parts[nyear].toInt(&ok[1]);
+	const int hour = parts[nhour].toInt(&ok[2]);
 	const int minute = parts[nmin].toInt(&ok[3]);
 
 	if (!ok[0] || !ok[1] || !ok[2] || !ok[3])
@@ -114,22 +114,22 @@ QDateTime RssParser::parseDate(const QString& string)
 
 	if (leapSecond)
 	{
-		second = 59;    // apparently a leap second - validate below, once time zone is known
+		second = 59; // apparently a leap second - validate below, once time zone is known
 	}
 
 	int month = 0;
 
-	for ( ;  month < 12  &&  parts[nmonth] != shortMonth[month];  ++month) ;
+	for (; month < 12 && parts[nmonth] != shortMonth[month]; ++month);
 
 	int dayOfWeek = -1;
 
 	if (!parts[nwday].isEmpty())
 	{
 		// Look up the weekday name
-		while (++dayOfWeek < 7  &&  shortDay[dayOfWeek] != parts[nwday]) ;
+		while (++dayOfWeek < 7 && shortDay[dayOfWeek] != parts[nwday]);
 
 		if (dayOfWeek >= 7)
-			for (dayOfWeek = 0;  dayOfWeek < 7  &&  longDay[dayOfWeek] != parts[nwday];  ++dayOfWeek) ;
+			for (dayOfWeek = 0; dayOfWeek < 7 && longDay[dayOfWeek] != parts[nwday]; ++dayOfWeek);
 	}
 
 	//       if (month >= 12 || dayOfWeek >= 7
@@ -140,11 +140,11 @@ QDateTime RssParser::parseDate(const QString& string)
 	if (i < 4)
 	{
 		// It's an obsolete year specification with less than 4 digits
-		year += (i == 2  &&  year < 50) ? 2000 : 1900;
+		year += (i == 2 && year < 50) ? 2000 : 1900;
 	}
 
 	// Parse the UTC offset part
-	int offset = 0;           // set default to '-0000'
+	int offset = 0; // set default to '-0000'
 	bool negOffset = false;
 
 	if (parts.count() > 10)
@@ -176,25 +176,25 @@ QDateTime RssParser::parseDate(const QString& string)
 			// Check for an obsolete time zone name
 			QByteArray zone = parts[10].toLatin1();
 
-			if (zone.length() == 1  &&  isalpha(zone[0])  &&  toupper(zone[0]) != 'J')
+			if (zone.length() == 1 && isalpha(zone[0]) && toupper(zone[0]) != 'J')
 			{
-				negOffset = true;    // military zone: RFC 2822 treats as '-0000'
+				negOffset = true; // military zone: RFC 2822 treats as '-0000'
 			}
-			else if (zone != "UT" && zone != "GMT")      // treated as '+0000'
+			else if (zone != "UT" && zone != "GMT") // treated as '+0000'
 			{
-				offset = (zone == "EDT")                  ? -4 * 3600
-				         : (zone == "EST" || zone == "CDT") ? -5 * 3600
-				         : (zone == "CST" || zone == "MDT") ? -6 * 3600
-				         : (zone == "MST" || zone == "PDT") ? -7 * 3600
-				         : (zone == "PST")                  ? -8 * 3600
-				         : 0;
+				offset = (zone == "EDT") ? -4 * 3600
+					         : (zone == "EST" || zone == "CDT") ? -5 * 3600
+					         : (zone == "CST" || zone == "MDT") ? -6 * 3600
+					         : (zone == "MST" || zone == "PDT") ? -7 * 3600
+					         : (zone == "PST") ? -8 * 3600
+					         : 0;
 
 				if (!offset)
 				{
 					// Check for any other alphabetic time zone
 					bool nonalpha = false;
 
-					for (int i = 0, end = zone.size();  i < end && !nonalpha;  ++i)
+					for (int i = 0, end = zone.size(); i < end && !nonalpha; ++i)
 					{
 						nonalpha = !isalpha(zone[i]);
 					}
@@ -205,7 +205,7 @@ QDateTime RssParser::parseDate(const QString& string)
 					}
 
 					// TODO: Attempt to recognize the time zone abbreviation?
-					negOffset = true;    // unknown time zone: RFC 2822 treats as '-0000'
+					negOffset = true; // unknown time zone: RFC 2822 treats as '-0000'
 				}
 			}
 		}
@@ -228,7 +228,7 @@ QDateTime RssParser::parseDate(const QString& string)
 
 	if (!result.isValid())
 	{
-		return QDateTime::currentDateTime();    // invalid date/time
+		return QDateTime::currentDateTime(); // invalid date/time
 	}
 
 	if (leapSecond)
@@ -237,7 +237,7 @@ QDateTime RssParser::parseDate(const QString& string)
 		// Convert the time to UTC and check that it is 00:00:00.
 		if ((hour * 3600 + minute * 60 + 60 - offset + 86400 * 5) % 86400) // (max abs(offset) is 100 hours)
 		{
-			return QDateTime::currentDateTime();    // the time isn't the last second of the day
+			return QDateTime::currentDateTime(); // the time isn't the last second of the day
 		}
 	}
 
@@ -410,23 +410,23 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 				parseTorrentSection(reader, pItem.get(), ok, error);
 			}
 			else if (reader.name().compare("contentlength", Qt::CaseInsensitive) == 0 ||
-			         reader.name().compare("size", Qt::CaseInsensitive) == 0)
+				reader.name().compare("size", Qt::CaseInsensitive) == 0)
 			{
 				pItem->setSize(reader.readElementText().toULongLong());
 			}
 			else if (reader.name().compare("infohash", Qt::CaseInsensitive) == 0 ||
-			         reader.name().compare("info_hash", Qt::CaseInsensitive) == 0 ||
-			         reader.name().compare("hash", Qt::CaseInsensitive) == 0)
+				reader.name().compare("info_hash", Qt::CaseInsensitive) == 0 ||
+				reader.name().compare("hash", Qt::CaseInsensitive) == 0)
 			{
 				pItem->setInfoHash(reader.readElementText());
 			}
 			else if (reader.name().compare("seeds", Qt::CaseInsensitive) == 0 ||
-			         reader.name().compare("seeders", Qt::CaseInsensitive) == 0)
+				reader.name().compare("seeders", Qt::CaseInsensitive) == 0)
 			{
 				pItem->setSeeds(reader.readElementText().toLong());
 			}
 			else if (reader.name().compare("peers", Qt::CaseInsensitive) == 0 ||
-			         reader.name().compare("leechers", Qt::CaseInsensitive) == 0)
+				reader.name().compare("leechers", Qt::CaseInsensitive) == 0)
 			{
 				pItem->setPeers(reader.readElementText().toLong());
 			}
@@ -624,18 +624,18 @@ void RssParser::parseAtomArticle(QXmlStreamReader& reader, QString baseURL, RssF
 			else if (reader.name() == "link")
 			{
 				QString theLink = (reader.attributes().isEmpty() ?
-				                   reader.readElementText() :
-				                   reader.attributes().value("href").toString());
+					                   reader.readElementText() :
+					                   reader.attributes().value("href").toString());
 				// Atom feeds can have relative links, work around this and
 				// take the stress of figuring article full URI from UI
 				// Assemble full URI
-				pItem->setDescribtionLink (baseURL.isEmpty() ?
-				                           theLink :
-				                           baseURL + theLink);
+				pItem->setDescribtionLink(baseURL.isEmpty() ?
+					                          theLink :
+					                          baseURL + theLink);
 			}
 			else if (reader.name() == "summary" || reader.name() == "content")
 			{
-				if (double_content)   // Duplicate content -> ignore
+				if (double_content) // Duplicate content -> ignore
 				{
 					reader.readNext();
 
@@ -744,5 +744,4 @@ void RssParser::parseAtomArticle(QXmlStreamReader& reader, QString baseURL, RssF
 
 	pFeed->m_rssItems.insert(guid, pItem->clone());
 }
-
 

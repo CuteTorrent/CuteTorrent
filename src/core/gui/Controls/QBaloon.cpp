@@ -1,5 +1,4 @@
-﻿
-#include <QtGui>
+﻿#include <QtGui>
 #include "QBaloon.h"
 #include <QPropertyAnimation>
 #include "StyleEngene.h"
@@ -15,7 +14,6 @@ QWidget* QBalloonTip::showBalloon(const QString& title,
 	theSolitaryBalloonTip->balloon(timeout, showArrow);
 	return theSolitaryBalloonTip;
 }
-
 
 
 QBalloonTip::QBalloonTip(const QString& title, const QString& message, QBaloonType type, QVariant data,
@@ -55,7 +53,7 @@ QBalloonTip::QBalloonTip(const QString& title, const QString& message, QBaloonTy
 	msgLabel->setWordWrap(true);
 	QIcon si;
 
-	switch(icon)
+	switch (icon)
 	{
 		case QSystemTrayIcon::Warning:
 			si = style()->standardIcon(QStyle::SP_MessageBoxWarning);
@@ -76,7 +74,7 @@ QBalloonTip::QBalloonTip(const QString& title, const QString& message, QBaloonTy
 
 	QGridLayout* layout = new QGridLayout;
 
-	if(!si.isNull())
+	if (!si.isNull())
 	{
 		QLabel* iconLabel = new QLabel;
 		iconLabel->setPixmap(si.pixmap(15, 15));
@@ -105,6 +103,7 @@ QBalloonTip::~QBalloonTip()
 {
 	theSolitaryBalloonTip = NULL;
 }
+
 /*
 
 void QBalloonTip::paintEvent(QPaintEvent *)
@@ -138,7 +137,7 @@ void QBalloonTip::balloon(int msecs, bool showArrow)
 	int ml, mr, mt, mb;
 	QSize sz = sizeHint();
 
-	if(!arrowAtTop)
+	if (!arrowAtTop)
 	{
 		ml = mt = 0;
 		mr = sz.width() - 1;
@@ -155,9 +154,9 @@ void QBalloonTip::balloon(int msecs, bool showArrow)
 	QPainterPath path;
 	path.moveTo(ml + rc, mt);
 
-	if(arrowAtTop && arrowAtLeft)
+	if (arrowAtTop && arrowAtLeft)
 	{
-		if(showArrow)
+		if (showArrow)
 		{
 			path.lineTo(ml + ao, mt);
 			path.lineTo(ml + ao, mt - ah);
@@ -166,9 +165,9 @@ void QBalloonTip::balloon(int msecs, bool showArrow)
 
 		move(qMax(pos.x() - ao, scr.left() + 2), pos.y());
 	}
-	else if(arrowAtTop && !arrowAtLeft)
+	else if (arrowAtTop && !arrowAtLeft)
 	{
-		if(showArrow)
+		if (showArrow)
 		{
 			path.lineTo(mr - ao - aw, mt);
 			path.lineTo(mr - ao, mt - ah);
@@ -183,9 +182,9 @@ void QBalloonTip::balloon(int msecs, bool showArrow)
 	path.lineTo(mr, mb - rc);
 	path.arcTo(QRect(mr - rc * 2, mb - rc * 2, rc * 2, rc * 2), 0, -90);
 
-	if(!arrowAtTop && !arrowAtLeft)
+	if (!arrowAtTop && !arrowAtLeft)
 	{
-		if(showArrow)
+		if (showArrow)
 		{
 			path.lineTo(mr - ao, mb);
 			path.lineTo(mr - ao, mb + ah);
@@ -195,9 +194,9 @@ void QBalloonTip::balloon(int msecs, bool showArrow)
 		move(qMin(pos.x() - sh.width() + ao, scr.right() - sh.width() - 2),
 		     pos.y() - sh.height());
 	}
-	else if(!arrowAtTop && arrowAtLeft)
+	else if (!arrowAtTop && arrowAtLeft)
 	{
-		if(showArrow)
+		if (showArrow)
 		{
 			path.lineTo(ao + aw, mb);
 			path.lineTo(ao, mb + ah);
@@ -212,7 +211,7 @@ void QBalloonTip::balloon(int msecs, bool showArrow)
 	path.lineTo(ml, mt + rc);
 	path.arcTo(QRect(ml, mt, rc * 2, rc * 2), 180, -90);
 
-	if(msecs <= 0)
+	if (msecs <= 0)
 	{
 		msecs = 10000;
 	}
@@ -221,11 +220,11 @@ void QBalloonTip::balloon(int msecs, bool showArrow)
 	m_showTimerId = startTimer(msecs);
 	show();
 	QSequentialAnimationGroup* pAnimationGroup = new QSequentialAnimationGroup(this);
-	QPropertyAnimation*  pShowAnimation = new QPropertyAnimation(this, "windowOpacity");
+	QPropertyAnimation* pShowAnimation = new QPropertyAnimation(this, "windowOpacity");
 	pShowAnimation->setDuration(msecs / 4);
 	pShowAnimation->setStartValue(0.f);
 	pShowAnimation->setEndValue(1.f);
-	QPropertyAnimation*  pHideAnimation = new QPropertyAnimation(this, "windowOpacity");
+	QPropertyAnimation* pHideAnimation = new QPropertyAnimation(this, "windowOpacity");
 	pHideAnimation->setDuration(msecs / 4);
 	pHideAnimation->setStartValue(1.f);
 	pHideAnimation->setEndValue(0.f);
@@ -238,9 +237,9 @@ void QBalloonTip::balloon(int msecs, bool showArrow)
 
 void QBalloonTip::mousePressEvent(QMouseEvent* e)
 {
-	switch(currentType)
+	switch (currentType)
 	{
-		case TorrentCompleted :
+		case TorrentCompleted:
 		{
 			QString path = QFileInfo(QDir::toNativeSeparators(currentData.toString())).absoluteFilePath();
 #ifdef Q_WS_MAC
@@ -261,7 +260,7 @@ void QBalloonTip::mousePressEvent(QMouseEvent* e)
 			break;
 		}
 
-		case UpdateNotyfy :
+		case UpdateNotyfy:
 		{
 			QDesktopServices::openUrl(QUrl("http://cutetorrent.info/downloads/"));
 			break;
@@ -302,3 +301,4 @@ void QBalloonTip::timerEvent(QTimerEvent* e)
 	QPainter p(this);
 	style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }*/
+

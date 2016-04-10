@@ -1,4 +1,4 @@
-/*
+﻿/*
   Copyright (c) 2011-2012 - Tőkés Attila
 
   This file is part of SmtpClient for Qt.
@@ -25,7 +25,9 @@ MimeHtml::MimeHtml(const QString& html) : MimeText(html)
 	this->cType = "text/html";
 }
 
-MimeHtml::~MimeHtml() {}
+MimeHtml::~MimeHtml()
+{
+}
 
 /* [1] --- */
 
@@ -49,3 +51,5 @@ QString MimeHtml::getHtml() const
 /* [3] Protected methods */
 
 /* [3] --- */
+
+

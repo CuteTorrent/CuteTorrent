@@ -75,7 +75,9 @@ public:
 	QtSingleApplication(Display* dpy, int& argc, char** argv, Qt::HANDLE visual = 0, Qt::HANDLE cmap = 0);
 	QtSingleApplication(Display* dpy, const QString& appId, int argc, char** argv, Qt::HANDLE visual = 0, Qt::HANDLE colormap = 0);
 #  endif // Q_WS_X11
+
 #endif // QT_VERSION < 0x050000
+
 
 	bool isRunning();
 	QString id() const;
@@ -95,7 +97,7 @@ public Q_SLOTS:
 	void activateWindow();
 
 
-Q_SIGNALS:
+	Q_SIGNALS:
 	void messageReceived(const QString& message);
 
 
@@ -106,3 +108,5 @@ private:
 };
 
 #endif // QTSINGLEAPPLICATION_H
+
+

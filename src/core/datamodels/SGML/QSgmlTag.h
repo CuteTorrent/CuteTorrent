@@ -40,8 +40,8 @@ class QSgmlTag : public QObject
 	Q_PROPERTY(int EndTagPos READ GetEndTagPos WRITE SetEndTagPos)
 	Q_PROPERTY(int EndTagLength READ GetEndTagLength WRITE SetEndTagLength)
 public:
-	typedef QList<QSgmlTag*>         QSgmlTaglist;
-	typedef QHash<QString, QString>   QSgmlAtrHash;
+	typedef QList<QSgmlTag*> QSgmlTaglist;
+	typedef QHash<QString, QString> QSgmlAtrHash;
 
 	enum TagType
 	{
@@ -114,4 +114,5 @@ Q_DECLARE_METATYPE(QSgmlTag*)
 Q_DECLARE_METATYPE(QList<QSgmlTag*>)
 
 #endif // QSGMLTAG_CPP
+
 

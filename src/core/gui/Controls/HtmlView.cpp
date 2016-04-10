@@ -10,6 +10,7 @@
 #include <QDateTime>
 #include <QScrollBar>
 #include <QDesktopServices>
+
 HtmlView::HtmlView(QWidget* parent /*= 0*/) : QTextBrowser(parent)
 {
 	m_netManager = new QNetworkAccessManager(this);

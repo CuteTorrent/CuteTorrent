@@ -45,48 +45,50 @@ class QWinThumbnailToolBarPrivate;
 
 class QWinThumbnailToolBar : public QObject
 {
-    Q_OBJECT
-    Q_PROPERTY(int count READ count STORED false)
-    Q_PROPERTY(QWidget *window READ window WRITE setWindow)
-    Q_PROPERTY(bool iconicPixmapNotificationsEnabled READ iconicPixmapNotificationsEnabled WRITE setIconicPixmapNotificationsEnabled)
-    Q_PROPERTY(QPixmap iconicThumbnailPixmap READ iconicThumbnailPixmap WRITE setIconicThumbnailPixmap)
-    Q_PROPERTY(QPixmap iconicLivePreviewPixmap READ iconicLivePreviewPixmap WRITE setIconicLivePreviewPixmap)
+	Q_OBJECT
+	Q_PROPERTY(int count READ count STORED false)
+	Q_PROPERTY(QWidget *window READ window WRITE setWindow)
+	Q_PROPERTY(bool iconicPixmapNotificationsEnabled READ iconicPixmapNotificationsEnabled WRITE setIconicPixmapNotificationsEnabled)
+	Q_PROPERTY(QPixmap iconicThumbnailPixmap READ iconicThumbnailPixmap WRITE setIconicThumbnailPixmap)
+	Q_PROPERTY(QPixmap iconicLivePreviewPixmap READ iconicLivePreviewPixmap WRITE setIconicLivePreviewPixmap)
 
 public:
-    explicit QWinThumbnailToolBar(QObject *parent = 0);
-    ~QWinThumbnailToolBar();
+	explicit QWinThumbnailToolBar(QObject* parent = 0);
+	~QWinThumbnailToolBar();
 
-	void setWindow(QWidget *window);
-	QWidget *window() const;
+	void setWindow(QWidget* window);
+	QWidget* window() const;
 
-    void addButton(QWinThumbnailToolButton *button);
-    void removeButton(QWinThumbnailToolButton *button);
-    void setButtons(const QList<QWinThumbnailToolButton *> &buttons);
-    QList<QWinThumbnailToolButton *> buttons() const;
-    int count() const;
+	void addButton(QWinThumbnailToolButton* button);
+	void removeButton(QWinThumbnailToolButton* button);
+	void setButtons(const QList<QWinThumbnailToolButton *>& buttons);
+	QList<QWinThumbnailToolButton *> buttons() const;
+	int count() const;
 
-    bool iconicPixmapNotificationsEnabled() const;
-    void setIconicPixmapNotificationsEnabled(bool enabled);
+	bool iconicPixmapNotificationsEnabled() const;
+	void setIconicPixmapNotificationsEnabled(bool enabled);
 
-    QPixmap iconicThumbnailPixmap() const;
-    QPixmap iconicLivePreviewPixmap() const;
+	QPixmap iconicThumbnailPixmap() const;
+	QPixmap iconicLivePreviewPixmap() const;
 
 public Q_SLOTS:
-    void clear();
-    void setIconicThumbnailPixmap(const QPixmap &);
-    void setIconicLivePreviewPixmap(const QPixmap &);
+	void clear();
+	void setIconicThumbnailPixmap(const QPixmap&);
+	void setIconicLivePreviewPixmap(const QPixmap&);
 
-Q_SIGNALS:
-    void iconicThumbnailPixmapRequested();
-    void iconicLivePreviewPixmapRequested();
+	Q_SIGNALS:
+	void iconicThumbnailPixmapRequested();
+	void iconicLivePreviewPixmapRequested();
 
 private:
-    Q_DISABLE_COPY(QWinThumbnailToolBar)
-    Q_DECLARE_PRIVATE(QWinThumbnailToolBar)
-    QScopedPointer<QWinThumbnailToolBarPrivate> d_ptr;
-    friend class QWinThumbnailToolButton;
+	Q_DISABLE_COPY(QWinThumbnailToolBar)
+	Q_DECLARE_PRIVATE(QWinThumbnailToolBar)
+	QScopedPointer<QWinThumbnailToolBarPrivate> d_ptr;
+	friend class QWinThumbnailToolButton;
 };
 
 QT_END_NAMESPACE
 
 #endif // QWINTHUMBNAILTOOLBAR_H
+
+

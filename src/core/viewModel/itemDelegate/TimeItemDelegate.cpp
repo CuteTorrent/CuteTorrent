@@ -12,3 +12,4 @@ QString TimeItemDelegate::displayText(const QVariant& value, const QLocale& loca
 	}
 	return StaticHelpers::toTimeString(value.toInt());
 }
+

@@ -1,13 +1,14 @@
 ﻿#include "Scheduller.h"
 #include "QBaloon.h"
 #include <QDebug>
+
 Scheduller::Scheduller()
 {
 	settings = QApplicationSettings::getInstance();
 	tasks = settings->GetSchedullerQueue();
 	checkTasks();
 
-	if(!tasks.isEmpty())
+	if (!tasks.isEmpty())
 	{
 		QDateTime now = QDateTime::currentDateTime();
 		int toNextTask = tasks.first().startTime().toTime_t() - now.toTime_t();
@@ -17,9 +18,10 @@ Scheduller::Scheduller()
 
 Scheduller* Scheduller::_instance = NULL;
 int Scheduller::_instanceCount = 0;
+
 Scheduller* Scheduller::getInstance()
 {
-	if(_instance == NULL)
+	if (_instance == NULL)
 	{
 		_instance = new Scheduller();
 	}
@@ -27,11 +29,12 @@ Scheduller* Scheduller::getInstance()
 	_instanceCount++;
 	return _instance;
 }
+
 void Scheduller::freeInstance()
 {
 	_instanceCount--;
 
-	if(!_instanceCount)
+	if (!_instanceCount)
 	{
 		_instance->~Scheduller();
 		_instance = NULL;
@@ -56,9 +59,9 @@ void Scheduller::checkTasks()
 {
 	QDateTime now = QDateTime::currentDateTime();
 
-	for(QList<SchedulerTask>::iterator i = tasks.begin(); i != tasks.end(); ++i)
+	for (QList<SchedulerTask>::iterator i = tasks.begin(); i != tasks.end(); ++i)
 	{
-		if(i->startTime() < now)
+		if (i->startTime() < now)
 		{
 			tasks.erase(i);
 		}
@@ -69,7 +72,7 @@ void Scheduller::checkTasks()
 
 void Scheduller::timerEvent(QTimerEvent* event)
 {
-	if(event->timerId() == cuurentTimerID)
+	if (event->timerId() == cuurentTimerID)
 	{
 		QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::Information;
 		SchedulerTask first = tasks.first();
@@ -79,7 +82,7 @@ void Scheduller::timerEvent(QTimerEvent* event)
 		tasks.removeFirst();
 		killTimer(cuurentTimerID);
 
-		if(!tasks.isEmpty())
+		if (!tasks.isEmpty())
 		{
 			QDateTime now = QDateTime::currentDateTime();
 			uint toNextTask = first.startTime().toTime_t() - now.toTime_t();

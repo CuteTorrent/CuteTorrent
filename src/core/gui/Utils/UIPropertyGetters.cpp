@@ -213,3 +213,4 @@ QVariant UIPropertyGetters::CacheSizeGetter(QWidget* editor, SettingsPropertyMap
 	qCritical() << "SpinboxKBSetter support only CacheSizeGetter";
 	return QVariant();
 }
+

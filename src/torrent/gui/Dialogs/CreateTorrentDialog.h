@@ -32,6 +32,7 @@ class QWinTaskbarProgress;
 class QWinTaskbarButton;
 #endif
 #define AUTODETECT_VAL 123
+
 class torrentCreatorThread : public QThread
 {
 	Q_OBJECT
@@ -52,11 +53,13 @@ public:
 	{
 		parent = _parent;
 	}
+
 	~torrentCreatorThread()
 	{
 		abort = true;
 		wait();
 	}
+
 	void create(QString _input_path, QString _save_path, QString _filter, QStringList _trackers, QStringList _url_seeds, QString _comment, bool _is_private, qint64 _piece_size);
 	void sendProgressSignal(int progress);
 
@@ -64,7 +67,7 @@ public:
 protected:
 	void run();
 
-signals:
+	signals:
 	void ShowCreationFailture(QString msg);
 	void ShowCreationSucces(QString path);
 	void updateProgress(int progress);
@@ -100,7 +103,7 @@ private:
 	QApplicationSettingsPtr settings;
 	StyledProgressBar* progressBar;
 	quint64 getPiceSize();
-signals:
+	signals:
 	void AbortCreation();
 private slots:
 	void ShowCreationSucces(QString);
@@ -110,8 +113,6 @@ private slots:
 	void BrowseFile();
 	void BeginCreate();
 	void Cancel();
-
-
-
 };
 #endif
+

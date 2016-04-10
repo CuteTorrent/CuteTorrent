@@ -3,6 +3,7 @@
 #include <QTimerEvent>
 #include "SchedulerTask.h"
 #include "QApplicationSettings.h"
+
 class Scheduller : public QObject
 {
 	Q_OBJECT

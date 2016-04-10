@@ -37,7 +37,6 @@ see quazip/(un)zip.h files for details. Basically it's the zlib license.
  */
 class QUAZIP_EXPORT QuaAdler32 : public QuaChecksum32
 {
-
 public:
 	QuaAdler32();
 
@@ -52,3 +51,5 @@ private:
 };
 
 #endif //QUAADLER32_H
+
+

@@ -141,7 +141,7 @@ QByteArray SimpleCrypt::encryptToByteArray(QByteArray plaintext)
 	}
 
 	QByteArray resultArray;
-	resultArray.append(char(0x03));  //version for future updates to algorithm
+	resultArray.append(char(0x03)); //version for future updates to algorithm
 	resultArray.append(char(flags)); //encryption flags
 	resultArray.append(ba);
 	m_lastError = ErrorNoError;
@@ -203,7 +203,7 @@ QByteArray SimpleCrypt::decryptToByteArray(QByteArray cypher)
 
 	char version = ba.at(0);
 
-	if (version != 3)    //we only work with version 3
+	if (version != 3) //we only work with version 3
 	{
 		m_lastError = ErrorUnknownVersion;
 		qWarning() << "Invalid version or not a cyphertext.";
@@ -273,3 +273,4 @@ QByteArray SimpleCrypt::decryptToByteArray(QByteArray cypher)
 	m_lastError = ErrorNoError;
 	return ba;
 }
+

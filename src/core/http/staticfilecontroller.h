@@ -12,6 +12,7 @@
 #include <QCache>
 #include <QMutex>
 #include "QApplicationSettings.h"
+
 /**
   Delivers static files. It is usually called by the applications main request handler when
   the caller request a path that is mapped to static files.
@@ -68,10 +69,12 @@ private:
 		QByteArray document;
 		qint64 created;
 	};
+
 	struct Creditionals
 	{
 		QString username, password;
 	};
+
 	Creditionals account;
 	/** Timeout for each cached file */
 	int cacheTimeout;
@@ -87,7 +90,8 @@ private:
 
 	/** Set a baContent-type header in the response depending on the ending of the filename */
 	void setContentType(QString file, HttpResponse& response) const;
-
 };
 
 #endif // STATICFILECONTROLLER_H
+
+

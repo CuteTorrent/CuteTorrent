@@ -32,15 +32,18 @@ Translators Application::qt_translators;
 QString Application::current_locale = "";
 QString Application::current_locale_qt = "";
 QString Application::default_locale = "ru_RU";
+
 Application::Application(int& argc, char* argv[])
 	: QtSingleApplication(argc, argv)
-{}
+{
+}
 
 Application::~Application()
 {
 	qDeleteAll(translators.values());
 	qDeleteAll(qt_translators.values());
 }
+
 void Application::loadTranslations(const QString& dir)
 {
 	loadTranslations(QDir(dir));
@@ -55,21 +58,21 @@ void Application::loadTranslations(const QDir& dir)
 	QFileInfoList entries = dir.entryInfoList(QStringList() << filter, filters, sort);
 
 	foreach(QFileInfo file, entries)
-	{
-		// pick country and language out of the file name
-		QStringList parts = file.baseName().split("_");
-		QString language = parts.at(parts.count() - 2).toLower();
-		QString country  = parts.at(parts.count() - 1).toUpper();
-		// construct and load translator
-		QTranslator* translator = new QTranslator(instance());
-
-		if(translator->load(file.absoluteFilePath()))
 		{
-			QString locale = language + "_" + country;
-			qDebug() << "New Application langugae found" << locale;
-			translators.insert(locale, translator);
+			// pick country and language out of the file name
+			QStringList parts = file.baseName().split("_");
+			QString language = parts.at(parts.count() - 2).toLower();
+			QString country = parts.at(parts.count() - 1).toUpper();
+			// construct and load translator
+			QTranslator* translator = new QTranslator(instance());
+
+			if (translator->load(file.absoluteFilePath()))
+			{
+				QString locale = language + "_" + country;
+				qDebug() << "New Application langugae found" << locale;
+				translators.insert(locale, translator);
+			}
 		}
-	}
 }
 
 void Application::loadTranslationsQt(const QString& dir)
@@ -86,21 +89,21 @@ void Application::loadTranslationsQt(const QDir& dir)
 	QFileInfoList entries = dir.entryInfoList(QStringList() << filter, filters, sort);
 
 	foreach(QFileInfo file, entries)
-	{
-		// pick country and language out of the file name
-		QStringList parts = file.baseName().split("_");
-		QString language = parts.at(parts.count() - 2).toLower();
-		QString country  = parts.at(parts.count() - 1).toUpper();
-		// construct and load translator
-		QTranslator* translator = new QTranslator(instance());
-
-		if(translator->load(file.absoluteFilePath()))
 		{
-			QString locale = language + "_" + country;
-			qDebug() << "New Qt langugae found" << locale;
-			qt_translators.insert(locale, translator);
+			// pick country and language out of the file name
+			QStringList parts = file.baseName().split("_");
+			QString language = parts.at(parts.count() - 2).toLower();
+			QString country = parts.at(parts.count() - 1).toUpper();
+			// construct and load translator
+			QTranslator* translator = new QTranslator(instance());
+
+			if (translator->load(file.absoluteFilePath()))
+			{
+				QString locale = language + "_" + country;
+				qDebug() << "New Qt langugae found" << locale;
+				qt_translators.insert(locale, translator);
+			}
 		}
-	}
 }
 
 QString Application::currentLocale()
@@ -123,11 +126,11 @@ const QStringList Application::availableLanguages()
 
 bool Application::event(QEvent* event)
 {
-	if(event->type() == QEvent::FileOpen)
+	if (event->type() == QEvent::FileOpen)
 	{
 		QFileOpenEvent* fileOpenEvent = static_cast<QFileOpenEvent*>(event);
 
-		if(fileOpenEvent->file().endsWith(".torrent", Qt::CaseInsensitive))
+		if (fileOpenEvent->file().endsWith(".torrent", Qt::CaseInsensitive))
 		{
 			emit OpenTorrent(fileOpenEvent->file());
 		}
@@ -143,12 +146,12 @@ void Application::setLanguage(QString locale)
 	qDebug() << "Application::setLanguage" << locale;
 
 	// remove previous
-	if(current)
+	if (current)
 	{
 		removeTranslator(current);
 	}
 
-	if(!translators.contains(locale))
+	if (!translators.contains(locale))
 	{
 		locale = default_locale;
 	}
@@ -157,7 +160,7 @@ void Application::setLanguage(QString locale)
 	// install new
 	current = translators.value(locale);
 
-	if(current)
+	if (current)
 	{
 		installTranslator(current);
 	}
@@ -167,12 +170,12 @@ void Application::setLanguageQt(QString locale)
 {
 	qDebug() << "Application::setLanguageQt" << locale;
 
-	if(currentQt)
+	if (currentQt)
 	{
 		removeTranslator(currentQt);
 	}
 
-	if(!translators.contains(locale))
+	if (!translators.contains(locale))
 	{
 		locale = default_locale;
 	}
@@ -181,7 +184,7 @@ void Application::setLanguageQt(QString locale)
 	// install new
 	currentQt = qt_translators.value(locale);
 
-	if(currentQt)
+	if (currentQt)
 	{
 		installTranslator(currentQt);
 	}
@@ -191,7 +194,7 @@ bool Application::winEventFilter(MSG* message, long* result)
 {
 	UINT& msg = message->message;
 
-	if(msg == WM_QUERYENDSESSION || msg == WM_ENDSESSION)
+	if (msg == WM_QUERYENDSESSION || msg == WM_ENDSESSION)
 	{
 		*result = 1;
 		quit();
@@ -201,3 +204,4 @@ bool Application::winEventFilter(MSG* message, long* result)
 	return QApplication::winEventFilter(message, result);
 }
 #endif
+

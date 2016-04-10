@@ -12,10 +12,9 @@
 
 PowerManagement::PowerManagement()
 	: m_idleType(NOT_IDLE)
-	, m_idleAction(NONE)
-	, m_bInited(false)
+	  , m_idleAction(NONE)
+	  , m_bInited(false)
 {
-	
 }
 
 void PowerManagement::setIdleType(IdleType idleType)
@@ -34,19 +33,19 @@ void PowerManagement::pefromActionOnIdle(IdleType currentIdleType)
 	{
 		switch (m_idleAction)
 		{
-			case SHUTDOWN: 
+			case SHUTDOWN:
 				shutdown();
 				break;
-			case REBOOT: 
+			case REBOOT:
 				reboot();
 				break;
-			case SLEEP: 
+			case SLEEP:
 				sleep();
 				break;
 			case HIBERNATE:
 				hibernate();
 				break;
-			case NONE: 
+			case NONE:
 			default: break;
 		}
 		m_idleType = NOT_IDLE;
@@ -59,7 +58,7 @@ void PowerManagement::winInitPriveleges()
 {
 	if (!m_bInited)
 	{
-		HANDLE hToken; 
+		HANDLE hToken;
 		TOKEN_PRIVILEGES tkp;
 		if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
 		{
@@ -72,11 +71,9 @@ void PowerManagement::winInitPriveleges()
 
 		if (!AdjustTokenPrivileges(hToken, FALSE, &tkp, 0, static_cast<PTOKEN_PRIVILEGES>(NULL), 0))
 		{
-			
 		}
 		m_bInited = true;
 	}
-	
 }
 #endif
 
@@ -172,11 +169,11 @@ void PowerManagement::reboot()
 #ifdef Q_WS_WIN
 	winInitPriveleges();
 	bool successful = ExitWindowsEx(EWX_REBOOT | EWX_FORCE,
-		SHTDN_REASON_MAJOR_OPERATINGSYSTEM |
-		SHTDN_REASON_MINOR_UPGRADE |
-		SHTDN_REASON_FLAG_PLANNED);
+	                                          SHTDN_REASON_MAJOR_OPERATINGSYSTEM |
+	                                          SHTDN_REASON_MINOR_UPGRADE |
+	                                          SHTDN_REASON_FLAG_PLANNED);
 	qDebug() << "PowerManagement::reboot" << successful;
-	 
+
 #else
 	bool reboot_works = false;
 	bool gnome_power1 = false;
@@ -241,10 +238,10 @@ void PowerManagement::shutdown()
 {
 #ifdef Q_WS_WIN
 	winInitPriveleges();
-	bool successful = ExitWindowsEx(EWX_SHUTDOWN | EWX_FORCE, 
-		SHTDN_REASON_MAJOR_OPERATINGSYSTEM |
-		SHTDN_REASON_MINOR_UPGRADE |
-		SHTDN_REASON_FLAG_PLANNED);
+	bool successful = ExitWindowsEx(EWX_SHUTDOWN | EWX_FORCE,
+	                                            SHTDN_REASON_MAJOR_OPERATINGSYSTEM |
+	                                            SHTDN_REASON_MINOR_UPGRADE |
+	                                            SHTDN_REASON_FLAG_PLANNED);
 	qDebug() << "PowerManagement::shutdown" << successful;
 #else
 	bool shutdown_works = false;
@@ -306,3 +303,4 @@ void PowerManagement::shutdown()
 
 #endif
 }
+

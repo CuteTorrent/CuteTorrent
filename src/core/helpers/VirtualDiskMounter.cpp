@@ -6,7 +6,7 @@
 #define INITGUID
 #include <guiddef.h>
 #include <virtdisk.h>
-typedef bool(WINAPI* IsWindows8OrGreater_t)();
+typedef bool (WINAPI* IsWindows8OrGreater_t)();
 #else
 
 #endif
@@ -28,9 +28,9 @@ bool VirtualDiskMounter::IsWin8OrGreater()
 
 void VirtualDiskMounter::MountVirualDiskImageWin8OrAbove(QString path)
 {
-	VIRTUAL_STORAGE_TYPE storrageType = { VIRTUAL_STORAGE_TYPE_DEVICE_ISO, VIRTUAL_STORAGE_TYPE_VENDOR_MICROSOFT };
+	VIRTUAL_STORAGE_TYPE storrageType = {VIRTUAL_STORAGE_TYPE_DEVICE_ISO, VIRTUAL_STORAGE_TYPE_VENDOR_MICROSOFT};
 	wchar_t* pWStrPath = new wchar_t[path.length() + 1];
-	memset(pWStrPath, 0, (path.length() + 1)*sizeof(wchar_t));
+	memset(pWStrPath, 0, (path.length() + 1) * sizeof(wchar_t));
 	path.toWCharArray(pWStrPath);
 	HANDLE hVirtualDisk;
 	DWORD dwRes = OpenVirtualDisk(&storrageType, pWStrPath, VIRTUAL_DISK_ACCESS_ATTACH_RO |
@@ -66,3 +66,4 @@ bool VirtualDiskMounter::MountVirualDiskImage(QString path)
 #endif
 	return true;
 }
+

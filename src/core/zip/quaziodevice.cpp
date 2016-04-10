@@ -165,14 +165,14 @@ bool QuaZIODevice::open(QIODevice::OpenMode mode)
 	if ((mode & QIODevice::Append) != 0)
 	{
 		setErrorString(trUtf8("QIODevice::Append is not supported for"
-		                      " QuaZIODevice"));
+			" QuaZIODevice"));
 		return false;
 	}
 
 	if ((mode & QIODevice::ReadWrite) == QIODevice::ReadWrite)
 	{
 		setErrorString(trUtf8("QIODevice::ReadWrite is not supported for"
-		                      " QuaZIODevice"));
+			" QuaZIODevice"));
 		return false;
 	}
 
@@ -413,3 +413,4 @@ bool QuaZIODevice::isSequential() const
 {
 	return true;
 }
+

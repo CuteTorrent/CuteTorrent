@@ -6,6 +6,7 @@
 #include "QRssDisplayModel.h"
 #include "RssFeed.h"
 #include <QDebug>
+
 QRssFilterModel::QRssFilterModel(QObject* parent) : QSortFilterProxyModel(parent), m_filterRule(NULL)
 {
 	//setDynamicSortFilter(true);
