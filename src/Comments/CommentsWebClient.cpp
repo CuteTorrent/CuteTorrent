@@ -151,7 +151,15 @@ QList<Comment> CommentsWebClient::GetComments(QString infoHash, int page)
 		m_awgRating = -1;
 		return result;
 	}
-	QString requestUrl = QString("http://api.cutetorrent.info/v1/comments/%1/page/%2?userToken=%3").arg(infoHash, QString::number(page), m_authToken);
+	QString requestUrl;
+	if (isLoggedIn())
+	{
+		requestUrl = QString("http://api.cutetorrent.info/v1/comments/%1/page/%2?userToken=%3").arg(infoHash, QString::number(page), m_authToken);
+	}
+	else
+	{
+		requestUrl = QString("http://api.cutetorrent.info/v1/comments/%1/page/%2").arg(infoHash, QString::number(page));
+	}
 	QNetworkReply* networkReply = m_pNetworkAccessManager->get(QNetworkRequest(requestUrl));
 	QEventLoop loop;
 	connect(networkReply, SIGNAL(finished()), &loop, SLOT(quit()));

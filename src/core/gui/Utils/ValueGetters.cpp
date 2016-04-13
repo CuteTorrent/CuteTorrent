@@ -79,7 +79,13 @@ QVariant ValueGetters::TorrentAssociationValueGetter(QString group, QString name
 #ifdef Q_WS_WIN
 	QSettings assocSettings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", QSettings::NativeFormat);
 	QString torrentAssociation = assocSettings.value(".torrent/.").toString();
-	return torrentAssociation == "CuteTorrent.file";
+	if (torrentAssociation == "CuteTorrent.file")
+	{
+		QString torrentOpenCommand = assocSettings.value("CuteTorrent.file/shell/open/command/.").toString();
+		QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
+		return torrentOpenCommand.startsWith("\"" + applicationFilePath);
+	}
+	return false;
 #else Q_WS_X11
 	QFile associtaionGnomeConfig(StaticHelpers::CombinePathes(QDir::homePath() , ".config/mimeapps.list"));
 
@@ -135,9 +141,8 @@ QVariant ValueGetters::WindowsShellValueGetter(QString group, QString name, QVar
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 	QString commandShouldBe = QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1");
 	bool starCommandMatch = assocSettings.value("*/shell/cutetorrent/command/.") == commandShouldBe;
-	bool folderCommandMatch = assocSettings.value("Folder/shell/cutetorrent/command/.") == commandShouldBe;
 	bool dirCommandMatch = assocSettings.value("Directory/shell/cutetorrent/command/.") == commandShouldBe;
-	return starCommandMatch && folderCommandMatch && dirCommandMatch;
+	return starCommandMatch && dirCommandMatch;
 }
 #endif
 

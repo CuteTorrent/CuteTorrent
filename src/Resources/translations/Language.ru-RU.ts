@@ -269,18 +269,18 @@
     <message>
         <location filename="../../Comments/CommentsWebClient.cpp" line="90"/>
         <location filename="../../Comments/CommentsWebClient.cpp" line="138"/>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="218"/>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="257"/>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="296"/>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="333"/>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="364"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="226"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="265"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="304"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="341"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="372"/>
         <source>NETWORK_ERROR</source>
         <translation>Ошибка сети</translation>
     </message>
     <message>
         <location filename="../../Comments/CommentsWebClient.cpp" line="90"/>
         <location filename="../../Comments/CommentsWebClient.cpp" line="138"/>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="218"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="226"/>
         <source>NETWORK_ERROR %1
  %2</source>
         <translation>Ошибка сети: %1
@@ -297,54 +297,54 @@
         <translation>Ошибка регестрации %1</translation>
     </message>
     <message>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="214"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="222"/>
         <source>GET_COMMENTS_ERROR</source>
         <translation>Ошибка получения коментариев</translation>
     </message>
     <message>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="214"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="222"/>
         <source>GET_COMMENTS_ERROR %1</source>
         <translation>Ошибка получения коментариев %1</translation>
     </message>
     <message>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="252"/>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="291"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="260"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="299"/>
         <source>ADD_COMMENTS_ERROR</source>
         <translation>Ошибка добавления коментария</translation>
     </message>
     <message>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="252"/>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="291"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="260"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="299"/>
         <source>ADD_COMMENTS_ERROR %1</source>
         <translation>Ошибка добавления коментария %1</translation>
     </message>
     <message>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="257"/>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="296"/>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="333"/>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="364"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="265"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="304"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="341"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="372"/>
         <source>NETWORK_ERROR %1
 %2</source>
         <translation>Ошибка сети: %1
 %2</translation>
     </message>
     <message>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="328"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="336"/>
         <source>DELETE_COMMENTS_ERROR</source>
         <translation>Ошибка удаления коментария</translation>
     </message>
     <message>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="328"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="336"/>
         <source>DELETE_COMMENTS_ERROR %1</source>
         <translation>Ошибка удаления коментария %1</translation>
     </message>
     <message>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="360"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="368"/>
         <source>KEEP_ALIVE</source>
         <translation>Ошибка Keep Alive</translation>
     </message>
     <message>
-        <location filename="../../Comments/CommentsWebClient.cpp" line="360"/>
+        <location filename="../../Comments/CommentsWebClient.cpp" line="368"/>
         <source>KEEP_ALIVE %1</source>
         <translation>Ошибка Keep Alive %1</translation>
     </message>
