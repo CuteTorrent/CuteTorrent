@@ -17,7 +17,7 @@ void avaliable_space_verifier_plugin::verify_avaliable_space(torrent* t)
 			if (t->alerts().should_post<not_enough_space_alert>())
 			{
 				t->alerts().emplace_alert<not_enough_space_alert, torrent_handle>(t->get_handle());
-				libtorrent::error_code ec(ERROR_DISK_FULL, boost::system::get_system_category());
+				error_code ec(ERROR_DISK_FULL, boost::system::get_system_category());
 				t->set_error(ec, torrent_status::error_file_none);
 			}
 		}

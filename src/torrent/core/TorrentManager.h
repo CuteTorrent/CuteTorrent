@@ -64,10 +64,11 @@ class TorrentManager : public QObject, public Singleton<TorrentManager>
 {
 	friend class Singleton<TorrentManager>;
 	Q_OBJECT
-	signals:
+signals:
 	void TorrentAdded(Torrent*);
 	void Notify(int, QString, QVariant);
 	void TorrentRemoved(QString);
+	void TorrentsChanged(QSet<QString> infohashes);
 protected:
 	bool MoveFiles(QString oldStyleDirPath, QString newStyleDirPath) const;
 	void timerEvent(QTimerEvent*) override;
@@ -84,7 +85,6 @@ private:
 	int num_outstanding_resume_data;
 	bool m_bIsSaveSessionInitiated;
 	int m_updateTimerID;
-	QSet<QString> m_recentTorrentUpdates;
 	void handle_alert(alert*);
 	void writeSettings();
 	TorrentStorragePtr m_pTorrentStorrage;
@@ -108,7 +108,6 @@ public slots:
 	void OnDownloadReady(QUrl, QTemporaryFile*);
 public:
 	bool shouldRate();
-	void getRecentUpdatedTorrents(QSet<QString>& infoHashes);
 	int GetSessionDwonloadRate();
 
 	enum AddTorrentFlag
@@ -161,6 +160,6 @@ public:
 };
 
 Q_DECLARE_METATYPE(opentorrent_info)
-
+Q_DECLARE_METATYPE(QSet<QString>)
 #endif
 

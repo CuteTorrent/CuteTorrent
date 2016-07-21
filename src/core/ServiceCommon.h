@@ -13,5 +13,7 @@ DEFINE_PTR_CALSS(EmailNotifier);
 DEFINE_PTR_CALSS(QApplicationSettings);
 
 DEFINE_PTR_CALSS(PowerManagement)
+
+DEFINE_PTR_CALSS(IpToCountryResolver)
 #endif
 

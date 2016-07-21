@@ -5,7 +5,7 @@
 #include <QMutex>
 #include <QStandardItem>
 #include "StyleEngene.h"
-
+#include "ServiceCommon.h"
 class PeerTableModel : public QStandardItemModel
 {
 	Q_OBJECT
@@ -28,6 +28,7 @@ public:
 	void Retranslate();
 	void Clear();
 private:
+	IpToCountryResolverPtr m_pIpToCountryResolver;
 	StyleEngene* m_pStyleEngene;
 	QMutex* m_pUpdateMutex;
 	QHash<QString, QStandardItem*> m_peerItems;

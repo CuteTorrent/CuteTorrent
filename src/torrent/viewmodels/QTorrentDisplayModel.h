@@ -28,7 +28,6 @@ along with this program.  If not, see .
 #include <QSet>
 #include <QSignalMapper>
 #include <QThread>
-#include <QTimer>
 #include <QVector>
 
 #include "Torrent.h"
@@ -87,7 +86,7 @@ private:
 	QAction* highPriority;
 	TorrentManagerPtr m_pTorrentManager;
 	Torrent* m_pCurrentTorrent;
-	QTimer* m_pUpdateTimer;
+	//QTimer* m_pUpdateTimer;
 	QMutex* locker;
 	QActionGroup* m_pGroupsActionGroup;
 	QActionGroup* m_pPriorityActionGroup;
@@ -179,7 +178,7 @@ public:
 	void initCompleted();
 public slots:
 	void UpdateMenu();
-	void Update();
+	void Update(QSet<QString>);
 	void UpdateSelectedIndex(const QItemSelection&);
 	void contextualMenu(const QPoint&);
 	void OpenDirSelected() const;

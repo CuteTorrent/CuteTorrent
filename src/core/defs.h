@@ -7,14 +7,14 @@
 #include "libtorrent/config.hpp"
 #include "libtorrent/file_storage.hpp"
 #include "libtorrent/torrent_handle.hpp"
-#include <libtorrent/size_type.hpp>
 using namespace libtorrent;
 
 struct opentorrent_info
 {
 	QString name, describtion, baseSuffix, infoHash;
-	libtorrent::file_storage files;
-	libtorrent::size_type size;
+	boost::shared_ptr<libtorrent::torrent_info const> torrentInfo;
+	boost::int64_t size;
+
 };
 
 struct openmagnet_info : opentorrent_info

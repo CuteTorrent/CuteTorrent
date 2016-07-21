@@ -93,6 +93,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <CommentsWebClient.h>
 #include <gui/Dialogs/LoginDialog.h>
 #include <gui/Dialogs/RegisterDialog.h>
+#include <SortButton.h>
+#include <qwinjumplistitem.h>
 class Application;
 class ISerachProvider;
 class SearchResult;
@@ -110,6 +112,7 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	  , m_pieceAvalibilityWidget(NULL)
 	  , m_pPeerTableModel(NULL)
 	  , m_pSearchEngine(SearchEngine::getInstance())
+	  , m_ignoreSortByIndexChange(false)
 #ifdef Q_WS_WIN
 	  , m_pOnlineReporter(new OnlineReporter(this))
 	  , m_pJumpList(new QWinJumpList(this))
@@ -140,7 +143,7 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	m_pCommentItemDelegate = new CommentItemDelegate(this);
 	m_pFiltersViewModel = new FiltersViewModel(FiltersViewModel::All, this);
 	{
-		boost::scoped_ptr<InitializationDialog> pDlg(new InitializationDialog(this));
+		boost::scoped_ptr<InitializationDialog> pDlg(new InitializationDialog());
 		pDlg->exec();
 	}
 	setAcceptDrops(true);
@@ -348,7 +351,7 @@ void CuteTorrentMainWindow::setupListView()
 	m_pTorrentListView->setHeaderHidden(true);
 	setupTorrentHeaderModel();
 	setupSearchHeaderModel();
-	sortByComboBox->setModel(m_torrentSortersModel);
+	//sortByComboBox->setModel(m_torrentSortersModel);
 	m_commentsView->setItemDelegate(m_pCommentItemDelegate);
 	m_commentsView->setModel(m_pCommentsModel);
 	/*m_pItemSorterView->setObjectName("torrentSorterView");
@@ -366,14 +369,16 @@ void CuteTorrentMainWindow::setupListView()
 	m_pTorrentFilterProxyModel->setSortRole(sortRole);
 	m_pTorrentFilterProxyModel->sort(0, order);
 	torrentViewLayout->insertWidget(0, m_pItemSorterView);*/
-
+	m_pSortButton = new SortButton(this);
+	m_pSortButton->setModel(m_torrentSortersModel);
+	horizontalLayout_3->addWidget(m_pSortButton);
 	QTorrentDisplayModel::Role sortRole = QTorrentDisplayModel::Role(m_pSettings->valueInt("Window", "torrent_sorter_sort_role", QTorrentDisplayModel::TorrentName));
-	int columnIndex = sortRole - QTorrentDisplayModel::TorrentQueuePosition;
-	sortByComboBox->setCurrentIndex(columnIndex);
+	m_pSortButton->setSortRole(sortRole);
+	//sortByComboBox->setCurrentIndex(columnIndex);
 	Qt::SortOrder order = Qt::SortOrder(m_pSettings->valueInt("Window", "torrent_sorter_sort_order", Qt::AscendingOrder));
 	m_pTorrentFilterProxyModel->setSortRole(sortRole);
 	m_pTorrentFilterProxyModel->sort(0, order);
-	sortDirectionToggleButton->setIcon(m_pStyleEngine->getIcon(order == Qt::AscendingOrder ? "sorter-asc" : "sorter-desc"));
+	m_pSortButton->setSortOrder(order);
 }
 
 void CuteTorrentMainWindow::setupTabelWidgets()
@@ -482,7 +487,7 @@ void CuteTorrentMainWindow::setSkin(QString styleName) const
 
 void CuteTorrentMainWindow::showReportDialog()
 {
-	boost::scoped_ptr<ReportProblemDialog> pDlg(new ReportProblemDialog(this));
+	boost::scoped_ptr<ReportProblemDialog> pDlg(new ReportProblemDialog());
 	pDlg->exec();
 }
 
@@ -520,7 +525,7 @@ void CuteTorrentMainWindow::restoreAllTorrents() const
 
 void CuteTorrentMainWindow::showRaitingDialog()
 {
-	boost::shared_ptr<RaitingDialog> pDlg(new RaitingDialog(this));
+	boost::shared_ptr<RaitingDialog> pDlg(new RaitingDialog());
 	pDlg->exec();
 }
 
@@ -574,7 +579,7 @@ void CuteTorrentMainWindow::ShowAddCommentDialog()
 			}
 			case CustomMessageBox::CustomButton1:
 			{
-				boost::scoped_ptr<LoginDialog> pDlg(new LoginDialog(this));
+				boost::scoped_ptr<LoginDialog> pDlg(new LoginDialog());
 				if (pDlg->exec() == QDialog::Rejected)
 				{
 					return;
@@ -583,7 +588,7 @@ void CuteTorrentMainWindow::ShowAddCommentDialog()
 			}
 			case CustomMessageBox::CustomButton2:
 			{
-				boost::scoped_ptr<RegisterDialog> pDlg(new RegisterDialog(this));
+				boost::scoped_ptr<RegisterDialog> pDlg(new RegisterDialog());
 				if (pDlg->exec() == QDialog::Rejected)
 				{
 					return;
@@ -832,11 +837,12 @@ void CuteTorrentMainWindow::setupConnections() const
 	connect(ACTION_SEARCHTOOLBAR_DOWNLOAD, SIGNAL(triggered()), m_pSearchDisplayModel, SLOT(downloadTorrent()));
 	connect(ACTION_MENUHELP_ABOUT_QT, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 	connect(qApp, SIGNAL(aboutToQuit()), SLOT(OnQuit()));
-	//connect(m_pItemSorterView, SIGNAL(sortIndicatorChanged(int, Qt::SortOrder)), SLOT(updateSorting(int, Qt::SortOrder)));
 	connect(horizontalSplitter, SIGNAL(splitterMoved(int, int)), SLOT(updateGroupVisibilityMenu()));
 	connect(verticalSplitter, SIGNAL(splitterMoved(int, int)), SLOT(updateInfoPlaneVsibilityMenu()));
-	connect(sortDirectionToggleButton, SIGNAL(toggled(bool)), SLOT(updateSortDirection()));
-	connect(sortByComboBox, SIGNAL(currentIndexChanged(int)), SLOT(updateSorting(int)));
+	//connect(sortDirectionToggleButton, SIGNAL(toggled(bool)), SLOT(updateSortDirection()));
+	//connect(sortByComboBox, SIGNAL(currentIndexChanged(int)), SLOT(updateSorting(int)));
+	connect(m_pSortButton, SIGNAL(sortRoleChanged(int)), SLOT(updateSorting(int)));
+	connect(m_pSortButton, SIGNAL(sortOrderChanged(Qt::SortOrder)), SLOT(updateSortDirection()));
 	PowerManagementPtr powerManagement = PowerManagement::getInstance();
 	connect(powerManagement.get(), SIGNAL(resetPowerState()), SLOT(onResetPowerMenu()));
 	connect(m_pCommentItemDelegate, SIGNAL(buttonClicked(QModelIndex)), SLOT(OnCommentRemove(QModelIndex)));
@@ -1168,6 +1174,7 @@ void CuteTorrentMainWindow::ConnectMessageReceved(Application* a) const
 
 void CuteTorrentMainWindow::RaiseWindow()
 {
+	setUpdatesEnabled(true);
 	// This hack does not give the focus to the app but brings it to front so
 	// the user sees it.
 #ifdef Q_WS_WIN
@@ -1182,7 +1189,7 @@ void CuteTorrentMainWindow::RaiseWindow()
 void CuteTorrentMainWindow::HandleNewTorrent(const QString& path)
 {
 	RaiseWindow();
-	boost::scoped_ptr<OpenTorrentDialog> dlg(new OpenTorrentDialog);
+	boost::scoped_ptr<OpenTorrentDialog> dlg(new OpenTorrentDialog());
 	dlg->SetData(path);
 	QApplication::alert(dlg.get());
 
@@ -1190,7 +1197,9 @@ void CuteTorrentMainWindow::HandleNewTorrent(const QString& path)
 	{
 #ifdef Q_WS_WIN
 		QWinJumpListCategory* recent = m_pJumpList->recent();
-		recent->addDestination(path);
+		/*QWinJumpListItem* item = new QWinJumpListItem(QWinJumpListItem::Link);
+		item->setFilePath(path);
+		recent->addLink();*/
 		recent->setVisible(true);
 #endif
 	}
@@ -1348,7 +1357,7 @@ void CuteTorrentMainWindow::UpadteTrackerTab() const
 		trackerTableWidget->setItem(2, 3, new QTableWidgetItem((nb_lsd > 0 ? QString::number(nb_lsd) : "")));
 		FaviconDownloaderPtr pFaviconDownloader = FaviconDownloader::getInstance();
 
-		for (size_type i = 0; i < trackers.size(); i++)
+		for (std::vector<announce_entry>::size_type i = 0; i < trackers.size(); i++)
 		{
 			QString url = QString::fromUtf8(trackers[i].url.c_str());
 			QIcon favIcon = pFaviconDownloader->getFavicon(url);
@@ -1417,12 +1426,15 @@ void CuteTorrentMainWindow::OpenSettingsDialog()
 
 void CuteTorrentMainWindow::closeEvent(QCloseEvent* ce)
 {
-	if (m_pSettings->valueBool("Window", "close_on_hide", true))
+	bool valueBool = m_pSettings->valueBool("Window", "close_on_hide", true);
+	qDebug() << "String cast result" << valueBool;
+	if (valueBool)
 	{
 		ce->ignore();
 		hide();
 		m_pNotificationSystem->OnNewNotification(NotificationSystem::TORRENT_INFO, tr("CT_HIDE_MSG"), QVariant());
 		setUpdatesEnabled(false);
+		return;
 	}
 	QWidget::closeEvent(ce);
 }
@@ -1484,6 +1496,7 @@ void CuteTorrentMainWindow::saveWindowState()
 	m_pSettings->setValue("Window", "preMaximizeGeometry", preMaximizeGeomentry);
 	m_pSettings->setValue("Window", "maximized", isMaximized());
 	m_pSettings->setValue("Window", "selected_tab", m_pTabWidget->currentIndex());
+	qDebug() << "horizontal_sizes=" << horizontalSplitter->sizes();
 	m_pSettings->setValue("Window", "horizontal_sizes", QVariant::fromValue(horizontalSplitter->sizes()));
 	qDebug() << "vertical_sizes=" << verticalSplitter->sizes();
 	m_pSettings->setValue("Window", "vertical_sizes", QVariant::fromValue(verticalSplitter->sizes()));
@@ -1516,7 +1529,7 @@ void CuteTorrentMainWindow::loadHeaderState(QString prefix, EditableHeaderView* 
 
 		//header->setResizeMode(columnCount - 1, QHeaderView::Stretch);
 	}
-
+	
 	int sortColumn = m_pSettings->valueInt("Window", prefix % "_sort_column", 0);
 	Qt::SortOrder sortOrder = Qt::SortOrder(m_pSettings->valueInt("Window", prefix % "_sort_order", Qt::AscendingOrder));
 	header->setSortIndicator(sortColumn, sortOrder);
@@ -1945,7 +1958,7 @@ void CuteTorrentMainWindow::setupCustomeWindow()
 	}
 
 	QList<int> horizontal_sizes = m_pSettings->value("Window", "horizontal_sizes", qVariantFromValue(QList<int>() << 130 << 538)).value<QList<int>>();
-
+	m_splitterInitFinished = false;
 	if (horizontal_sizes.size() > 0)
 	{
 		horizontalSplitter->setSizes(horizontal_sizes);
@@ -1957,7 +1970,7 @@ void CuteTorrentMainWindow::setupCustomeWindow()
 	{
 		verticalSplitter->setSizes(vertical_sizes);
 	}
-
+	m_splitterInitFinished = true;
 	QList<QWidget*> children = findChildren<QWidget*>();
 
 	for (int i = 0; i < children.size(); i++)
@@ -2045,41 +2058,29 @@ void CuteTorrentMainWindow::queueTorrentsDown() const
 	m_pTorrentDisplayModel->ActionOnSelectedItem(QTorrentDisplayModel::queue_down);
 }
 
-void CuteTorrentMainWindow::updateSorting(int selectedIndex) const
+void CuteTorrentMainWindow::updateSorting(int sortRole) const
 {
 	if (m_ignoreSortByIndexChange)
 		return;
-	QAbstractItemModel* headerModel = sortByComboBox->model();
 	if (m_pTorrentListView->model() == m_pTorrentFilterProxyModel)
 	{
-		QTorrentDisplayModel::Role sorter = QTorrentDisplayModel::Role(headerModel->data(headerModel->index(selectedIndex, 0), Qt::UserRole).toInt());
-		qDebug() << "Torrent Sort Role " << sorter;
-		m_pTorrentFilterProxyModel->setSortRole(sorter);
-		m_pSettings->setValue("Window", "torrent_sorter_sort_role", sorter);
+		m_pTorrentFilterProxyModel->setSortRole(sortRole);
+		m_pSettings->setValue("Window", "torrent_sorter_sort_role", sortRole);
 	}
 	else if (m_pTorrentListView->model() == m_pSearchFilterModel)
 	{
-		QSearchDisplayModel::Role sorter = QSearchDisplayModel::Role(headerModel->data(headerModel->index(selectedIndex, 0), Qt::UserRole).toInt());
-		m_pSearchFilterModel->setSortRole(sorter);
-		m_pSettings->setValue("Window", "search_sorter_sort_role", sorter);
+		m_pSearchFilterModel->setSortRole(sortRole);
+		m_pSettings->setValue("Window", "search_sorter_sort_role", sortRole);
 	}
 }
 
 void CuteTorrentMainWindow::UpdateModelSortOrder(QString modelPrefix, QSortFilterProxyModel* pModel) const
 {
-	Qt::SortOrder sortOrder = pModel->sortOrder();
-	if (sortOrder == Qt::AscendingOrder)
-	{
-		sortDirectionToggleButton->setIcon(m_pStyleEngine->getIcon("sorter-desc"));
-		pModel->sort(0, Qt::DescendingOrder);
-		m_pSettings->setValue("Window", modelPrefix % "_sort_order", Qt::DescendingOrder);
-	}
-	else
-	{
-		sortDirectionToggleButton->setIcon(m_pStyleEngine->getIcon("sorter-asc"));
-		pModel->sort(0, Qt::AscendingOrder);
-		m_pSettings->setValue("Window", modelPrefix % "_sort_order", Qt::AscendingOrder);
-	}
+	Qt::SortOrder sortOrder = m_pSortButton->sortOrder();
+
+	pModel->sort(0, sortOrder);
+	m_pSettings->setValue("Window", modelPrefix % "_sort_order", sortOrder);
+
 }
 
 void CuteTorrentMainWindow::updateSortDirection() const
@@ -2162,7 +2163,7 @@ void CuteTorrentMainWindow::switchToTorrentsModel()
 		SortersContainer->setVisible(true);
 		TorentLimitsContainer->setVisible(true);
 		m_ignoreSortByIndexChange = true;
-		sortByComboBox->setModel(m_torrentSortersModel);
+		m_pSortButton->setModel(m_torrentSortersModel);
 		m_ignoreSortByIndexChange = false;
 		/*m_pItemSorterView->setVisible(true);
 		
@@ -2170,8 +2171,10 @@ void CuteTorrentMainWindow::switchToTorrentsModel()
 		//loadHeaderState("torrent_sorter", m_pItemSorterView, defaultSizes);*/
 		int role = m_pSettings->valueInt("Window", "torrent_sorter_sort_role");
 		m_pTorrentFilterProxyModel->setSortRole(role);
-		int index = m_pTorrentFilterProxyModel->sortRole() - QTorrentDisplayModel::TorrentQueuePosition;
-		sortByComboBox->setCurrentIndex(index);
+		int sortRole = m_pTorrentFilterProxyModel->sortRole();
+		m_pSortButton->setSortRole(sortRole);
+		Qt::SortOrder sortOrder = static_cast<Qt::SortOrder>(m_pSettings->valueInt("Window", "torrent_sorter_sort_order"));
+		m_pSortButton->setSortOrder(sortOrder);
 		updateSortDirection();
 	}
 
@@ -2204,7 +2207,7 @@ void CuteTorrentMainWindow::switchToSearchModel()
 		//saveHeaderState("torrent_sorter", m_pItemSorterView);
 		SortersContainer->setVisible(true);
 		m_ignoreSortByIndexChange = true;
-		sortByComboBox->setModel(m_searchSorterModel);
+		m_pSortButton->setModel(m_searchSorterModel);
 		m_ignoreSortByIndexChange = false;
 		/*m_pItemSorterView->setVisible(true);
 		m_pItemSorterView->setModel(m_searchSorterModel);
@@ -2212,8 +2215,10 @@ void CuteTorrentMainWindow::switchToSearchModel()
 		//loadHeaderState("search_sorter", m_pItemSorterView, defaultSearchSize);*/
 		int role = m_pSettings->valueInt("Window", "search_sorter_sort_role");
 		m_pSearchFilterModel->setSortRole(role);
-		int index = m_pSearchFilterModel->sortRole() - QSearchDisplayModel::SearchItemName;
-		sortByComboBox->setCurrentIndex(index);
+		int sortRole = m_pSearchFilterModel->sortRole();
+		m_pSortButton->setSortRole(sortRole);
+		Qt::SortOrder sortOrder = static_cast<Qt::SortOrder>(m_pSettings->valueInt("Window", "search_sorter_sort_order"));
+		m_pSortButton->setSortOrder(sortOrder);
 		updateSortDirection();
 	}
 }
@@ -2369,7 +2374,7 @@ void CuteTorrentMainWindow::editRssFeed()
 
 		if (selecteFeed != NULL)
 		{
-			boost::scoped_ptr<RssFeedSettingsDialog> pDialog(new RssFeedSettingsDialog(this));
+			boost::scoped_ptr<RssFeedSettingsDialog> pDialog(new RssFeedSettingsDialog);
 			pDialog->SetFeed(selecteFeed);
 			pDialog->exec();
 		}
@@ -2417,24 +2422,23 @@ void CuteTorrentMainWindow::UpdateRssInfo(const QItemSelection& /*selection*/) c
 
 void CuteTorrentMainWindow::toggleInfoTabsVisibility(bool visibility) const
 {
-	qDebug() << "toggleInfoTabsVisibility" << visibility;
 	int index = verticalSplitter->indexOf(m_pInfoPlaneContainer);
-	if (index > -1)
+	if (index > -1 && m_splitterInitFinished)
 	{
+		QList<int> currentSizes = verticalSplitter->sizes();
+		bool currentVisibility = currentSizes[index] != 0;
 		if (visibility)
 		{
+			if (currentVisibility)
+				return;
+
 			QList<int> sizes = m_pSettings->value("Window", "precollapsed_vertical_sizes", m_pSettings->value("Window", "vertical_sizes")).value<QList<int>>();
-			qDebug() << "precollapsed_vertical_sizes" << sizes;
-			if (sizes.contains(0))
-			{
-				sizes.clear();
-				sizes << 570 << 150;
-				m_pSettings->setValue("Window", "precollapsed_vertical_sizes", QVariant::fromValue(sizes));
-			}
 			verticalSplitter->setSizes(sizes);
 		}
 		else
 		{
+			if (!currentVisibility)
+				return;
 			int itemsCount = verticalSplitter->count();
 			QList<int> sizes = QList<int>::fromVector(QVector<int>(itemsCount, 1));
 			m_pSettings->setValue("Window", "precollapsed_vertical_sizes", QVariant::fromValue(verticalSplitter->sizes()));
@@ -2458,18 +2462,23 @@ void CuteTorrentMainWindow::toggleStatusBarVisibility(bool b) const
 
 void CuteTorrentMainWindow::toggleGroupsVisibility(bool visibility) const
 {
-	qDebug() << "toggleGroupsVisibility" << visibility;
 	int index = horizontalSplitter->indexOf(m_pGroupTreeView);
-	if (index > -1)
+	if (index > -1 && m_splitterInitFinished)
 	{
+		QList<int> currentSizes = horizontalSplitter->sizes();
+		bool currentVisibility = currentSizes[index] != 0;
 		if (visibility)
 		{
+			if (currentVisibility)
+				return;
+			
 			QList<int> sizes = m_pSettings->value("Window", "precollapsed_horizontal_sizes", m_pSettings->value("Window", "horizontal_sizes")).value<QList<int>>();
-			qDebug() << "precollapsed_horizontal_sizes" << sizes;
 			horizontalSplitter->setSizes(sizes);
 		}
 		else
 		{
+			if (!currentVisibility)
+				return;
 			int itemsCount = horizontalSplitter->count();
 			QList<int> sizes = QList<int>::fromVector(QVector<int>(itemsCount, 1));
 			m_pSettings->setValue("Window", "precollapsed_horizontal_sizes", QVariant::fromValue(horizontalSplitter->sizes()));

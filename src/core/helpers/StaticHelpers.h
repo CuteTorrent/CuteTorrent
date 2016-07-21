@@ -27,7 +27,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class StaticHelpers
 {
-private:
 	static NetworkDiskCache* m_pDiskCache;
 	static QString translateSessionError(error_code const& errorCode);
 	static QString translateBEncodeError(error_code const& ec);
@@ -46,9 +45,10 @@ public:
 	static void OpenFileInExplorer(QString& file);
 	static bool IsWow64();
 #endif
-	static QString toKbMbGb(size_type size, bool isSpped = false);
+	static QString toKbMbGb(int64_t size, bool isSpped = false);
 	static QString translateLibTorrentError(error_code const& ec);
 	static QString toTimeString(int seconds);
+	static bool LoadFile(QString path, std::vector<char>& out);
 	static QString filePriorityToString(int priority);
 	static QString SchedulerTypeToString(SchedulerTask::TaskType type);
 	static QString GetBaseSuffix(const file_storage& storrage);

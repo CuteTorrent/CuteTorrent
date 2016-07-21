@@ -4,7 +4,6 @@
 #include "FileViewSortProxyModel.h"
 #include "defs.h"
 #include <libtorrent/file_storage.hpp>
-#include <libtorrent/size_type.hpp>
 using namespace libtorrent;
 
 class FileViewModel : public QAbstractItemModel
@@ -57,7 +56,7 @@ private:
 	QAction* dontDownload;
 	QTreeView* m_pView;
 	FileViewSortProxyModel* m_pProxyModel;
-	std::vector<size_type> m_Progresses;
+	std::vector<int64_t> m_Progresses;
 	static QHash<QString, QPixmapCache::Key> extToKeys;
 	static QPixmapCache iconCache;
 	FileViewTreeItem* m_pRoot;

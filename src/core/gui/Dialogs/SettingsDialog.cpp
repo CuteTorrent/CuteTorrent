@@ -1039,7 +1039,7 @@ RssDownloadRule* SettingsDialog::findRule(QUuid uid)
 
 void SettingsDialog::addRssRule()
 {
-	boost::scoped_ptr<AddRssDwonloadRuleDialog> pDialog(new AddRssDwonloadRuleDialog(this));
+	boost::scoped_ptr<AddRssDwonloadRuleDialog> pDialog(new AddRssDwonloadRuleDialog);
 
 	if (pDialog->exec() == Accepted)
 	{

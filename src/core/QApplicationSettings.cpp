@@ -100,7 +100,7 @@ QVariant QApplicationSettings::value(const QString& group, const QString& key, c
 
 	settings->beginGroup(group);
 	QVariant res = settings->value(key);
-
+	qDebug() << "reading" << group << key << "result=" << res;
 	if (!res.isValid() && defaultVal.isValid())
 	{
 		settings->setValue(key, defaultVal);

@@ -46,7 +46,7 @@ private:
 	bool m_hasMedia;
 	bool m_isPrevSeed;
 	torrent_status m_hTorrent;
-	size_type size;
+	int64_t size;
 	QIcon icon;
 	QString m_customError;
 	bool mountable;

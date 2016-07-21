@@ -95,7 +95,7 @@ bool QTorrentFilterProxyModel::lessThan(const QModelIndex& left, const QModelInd
 
 			if (leftData == rightData)
 			{
-				return leftTorrent->GetName().compare(rightTorrent->GetName()) < 0;
+				return leftTorrent->GetName().compare(rightTorrent->GetName()) > 0;
 			}
 
 			return QSortFilterProxyModel::lessThan(left, right);

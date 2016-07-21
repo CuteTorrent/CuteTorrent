@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDesktopServices>
 #include <QTime>
 
-QString StaticHelpers::toKbMbGb(size_type size, bool isSpped)
+QString StaticHelpers::toKbMbGb(int64_t size, bool isSpeed)
 {
 	float val = size;
 	char* SizeSuffix[] =
@@ -59,7 +59,7 @@ QString StaticHelpers::toKbMbGb(size_type size, bool isSpped)
 
 	if (size > KbInt)
 	{
-		for (i; size_type(val / KbInt) > 0; i++ , val /= KbInt)
+		for (i; int64_t(val / KbInt) > 0; i++, val /= KbInt)
 		{
 			dblSByte = val / KbFloat;
 		}
@@ -78,7 +78,7 @@ QString StaticHelpers::toKbMbGb(size_type size, bool isSpped)
 		str = QString::number(dblSByte, 'f', i == 0 ? 0 : 2);
 	}
 
-	if (isSpped)
+	if (isSpeed)
 	{
 		str.append(qApp->translate("Torrent", SpeedSuffix[i]));
 	}
@@ -188,6 +188,19 @@ QString StaticHelpers::toTimeString(int seconds)
 
 	result.append(tmp.sprintf("%02d", seconds));
 	return result;
+}
+
+bool StaticHelpers::LoadFile(QString path, std::vector<char>& out)
+{
+	QFile file(path);
+	if (file.exists() && file.open(QIODevice::ReadOnly))
+	{
+		QByteArray data = file.readAll();
+		out.resize(data.size());
+		copy(data.begin(), data.end(), out.begin());
+		return true;
+	}
+	return false;
 }
 
 QString StaticHelpers::SchedulerTypeToString(SchedulerTask::TaskType type)

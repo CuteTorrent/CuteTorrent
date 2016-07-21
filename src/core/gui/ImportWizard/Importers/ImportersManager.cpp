@@ -1,9 +1,11 @@
 ﻿#include "ImportersManager.h"
 #include "UTorrentImporter.h"
+#include "qBittorrentImporter.h"
 
 ImportersManager::ImportersManager()
 {
 	RegisterImporter(new UTorrentImporter);
+	RegisterImporter(new qBittorrentImporter);
 }
 
 void ImportersManager::RegisterImporter(BaseImporter* importer)

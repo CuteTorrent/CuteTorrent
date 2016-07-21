@@ -71,7 +71,7 @@ class FileSizeItemDelegate;
 class SpeedItemDelegate;
 class IpItemDelegate;
 class PriorityItemDelegate;
-
+class SortButton;
 class CuteTorrentMainWindow : public BaseWindow<QWidget> , Ui::CustomWindow
 {
 	Q_OBJECT
@@ -164,6 +164,8 @@ private:
 	PriorityItemDelegate* m_pPriorityItemDelegate;
 	QActionGroup *m_pLanguageActionGroup, *m_pSkinActionGroup, *m_pAutoshutdownActionGroup;
 	QSignalMapper *m_pLanguageSignalMapper, *m_pSkinSignalMapper, *m_pAutoshutdownSignalMapper;
+	bool m_splitterInitFinished;
+	SortButton* m_pSortButton;
 #ifdef Q_WS_WIN
 	QWinJumpList* m_pJumpList;
 #endif

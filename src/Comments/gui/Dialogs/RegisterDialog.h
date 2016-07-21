@@ -15,7 +15,7 @@ protected:
 private:
 	Q_OBJECT
 public:
-	RegisterDialog(QWidget* parent);
+	RegisterDialog(QWidget* parent = NULL);
 private slots:
 	void OnAccepted();
 };

@@ -51,12 +51,13 @@ QTorrentDisplayModel::QTorrentDisplayModel(ViewMode viewMode, QTreeView* itemVie
 	setupContextMenu();
 	locker = new QMutex();
 	connect(m_pTorrentManager.get(), SIGNAL(TorrentAdded(Torrent*)), SLOT(OnTorrentAdded()));
-	m_pUpdateTimer = new QTimer(this);
-	m_pUpdateTimer->setInterval(400);
+	connect(m_pTorrentManager.get(), SIGNAL(TorrentsChanged(QSet<QString>)), SLOT(Update(QSet<QString>)));
+	/*m_pUpdateTimer = new QTimer(this);
+	m_pUpdateTimer->setInterval(400);*/
 	TorrentGroupsManagerPtr groupsManager = TorrentGroupsManager::getInstance();
 	connect(groupsManager.get(), SIGNAL(GroupsChanged()), SLOT(UpdateMenu()));
-	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(Update()));
-	m_pUpdateTimer->start();
+	//connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(Update()));
+	//m_pUpdateTimer->start();
 }
 
 void QTorrentDisplayModel::setViewMode(ViewMode viewMode)
@@ -1052,7 +1053,7 @@ void QTorrentDisplayModel::playInPlayer() const
 {
 	if (m_pCurrentTorrent != NULL)
 	{
-		VideoPlayerWindow* vpw = new VideoPlayerWindow();
+		boost::scoped_ptr<VideoPlayerWindow> vpw(new VideoPlayerWindow());
 		files_info filesInfo = m_pCurrentTorrent->GetFileDownloadInfo();
 		int numFiles = filesInfo.storrage.num_files();
 		if (numFiles > 1)
@@ -1065,6 +1066,7 @@ void QTorrentDisplayModel::playInPlayer() const
 					files << StaticHelpers::CombinePathes(m_pCurrentTorrent->GetSavePath(), QString::fromUtf8(filesInfo.storrage.file_path(i).c_str()));
 				}
 			}
+			qSort(files);
 			boost::scoped_ptr<VideoFileChooseDialog> pDlg(new VideoFileChooseDialog(files));
 			pDlg->exec();
 			QString choosenPath = pDlg->choosenPath();
@@ -1296,12 +1298,9 @@ void QTorrentDisplayModel::changeGroup(const QString& uidStr) const
 
 typedef QPair<QModelIndex, QModelIndex> IndexInterval;
 
-void QTorrentDisplayModel::Update()
+void QTorrentDisplayModel::Update(QSet<QString> changedTorrents)
 {
 	QMutexLocker lockMutex(locker);
-	TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
-	QSet<QString> changedTorrents;
-	pTorrentManager->getRecentUpdatedTorrents(changedTorrents);
 
 	if (changedTorrents.size() > 0)
 	{

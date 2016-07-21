@@ -356,10 +356,11 @@ void ValueSetters::WindowsShellValueSetter(QString group, QString name, QVariant
 	{
 		asocSettings.setValue("*/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
 		asocSettings.setValue("*/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
-		asocSettings.setValue("*/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
+		QString command = QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1");
+		asocSettings.setValue("*/shell/cutetorrent/command/.", command);
 		asocSettings.setValue("Directory/shell/cutetorrent/.", QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT"));
 		asocSettings.setValue("Directory/shell/cutetorrent/Icon", QString("\"%1\",0").arg(applicationFilePath));
-		asocSettings.setValue("Directory/shell/cutetorrent/command/.", QString("\"%1\" --create_torrent \"%2\"").arg(applicationFilePath, "%1"));
+		asocSettings.setValue("Directory/shell/cutetorrent/command/.", command);
 	}
 	else
 	{

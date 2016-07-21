@@ -61,7 +61,7 @@ VideoPlayerWindow::VideoPlayerWindow(QWidget* parent) : QMainWindow(parent),
 	m_windowActiveTimer = new QTimer(this);
 	connect(m_windowActiveTimer, SIGNAL(timeout()), this, SLOT(updateWindowActiveState()));
 	m_windowActiveTimer->start(59000);
-	setAttribute(Qt::WA_DeleteOnClose);
+	//setAttribute(Qt::WA_DeleteOnClose);
 	setMouseTracking(true);
 	resize(600, 400);
 	m_pVideoWidget->installEventFilter(this);

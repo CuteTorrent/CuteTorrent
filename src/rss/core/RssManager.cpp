@@ -12,7 +12,7 @@
 #include "RssItem.h"
 #include "EmailNotifier.h"
 #include <TorrentGroupsManager.h>
-
+#include <libtorrent/torrent_info.hpp>
 RssManager::RssManager(QObject* parent) : QObject(parent)
 {
 	m_pTorrentDownloader = FileDownloader::getNewInstance();
@@ -373,7 +373,7 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
 	}
 
 	QString savePath = gessSavePath(info.downloadRule, pTorrentInfo->baseSuffix);
-	QMap<QString, quint8> filePriorities = getFilePriorities(info, pTorrentInfo->files);
+	QMap<QString, quint8> filePriorities = getFilePriorities(info, pTorrentInfo->torrentInfo->files());
 	pTorrentManager->AddTorrent(torrentFilePath, savePath, ec, "", filePriorities);
 
 	if (ec)

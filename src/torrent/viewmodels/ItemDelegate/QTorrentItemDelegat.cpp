@@ -215,7 +215,7 @@ QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem& option, const Torrent&
 	const int progressWidth = progressFM.width(progressStr);
 	const QSize m(margin(*style));
 	int width = m.width() + iconSize + std::max(nameWidth + timeSize.width(), statusWidth + progressWidth);
-	int height = m.height() * 3 + nameFM.lineSpacing() + 2 * GUI_PAD + progressFM.lineSpacing();
+	int height =m.height() * 3 + nameFM.lineSpacing() + 2 * GUI_PAD + progressFM.lineSpacing();
 	return QSize(width, height);
 }
 

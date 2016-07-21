@@ -523,7 +523,7 @@ void QRssDisplayModel::onItemDownload()
 
 		if (torrentUrl.startsWith("magnet"))
 		{
-			boost::scoped_ptr<OpenTorrentDialog> pDlg(new OpenTorrentDialog(m_pItemsView));
+			boost::scoped_ptr<OpenTorrentDialog> pDlg(new OpenTorrentDialog);
 			pDlg->SetData(torrentUrl);
 			pDlg->exec();
 		}
@@ -547,7 +547,7 @@ void QRssDisplayModel::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile
 {
 	boost::scoped_ptr<QTemporaryFile> pSafeFile(pUnsafeFile);
 	QString fileName = pSafeFile->fileName();
-	boost::scoped_ptr<OpenTorrentDialog> pDlg(new OpenTorrentDialog(m_pItemsView));
+	boost::scoped_ptr<OpenTorrentDialog> pDlg(new OpenTorrentDialog);
 	pDlg->SetData(fileName);
 	pDlg->exec();
 	pSafeFile->setAutoRemove(true);

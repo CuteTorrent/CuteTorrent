@@ -547,485 +547,485 @@
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="17"/>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="105"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="928"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="984"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="906"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="962"/>
         <source>CuteTorrent</source>
         <translation>CuteTorrent</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="801"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1022"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="773"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1000"/>
         <source>TRACKER_PEERS</source>
         <translation>Пиры</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="921"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1028"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="893"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1006"/>
         <source>MENU_FILE</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="932"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1029"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="904"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1007"/>
         <source>MENU_SETTINGS</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="938"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1030"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="910"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1008"/>
         <source>MENU_HELP</source>
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="949"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1031"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="921"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1009"/>
         <source>MENU_TOOLS</source>
         <translation>Утилиты</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="459"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1013"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="431"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="991"/>
         <source>TAB_INFO</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="658"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1006"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="630"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="984"/>
         <source>INFO_PEER_COUNT</source>
         <translation>Пиров:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="546"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="990"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="518"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="968"/>
         <source>INFO_UPLOADED</source>
         <translation>Отданно</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="672"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1008"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="644"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="986"/>
         <source>INFO_SEED_COUNT</source>
         <translation>Сидов:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="679"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1009"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="651"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="987"/>
         <source>INFO_DESCRIBTION</source>
         <translation>Описание</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="539"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="989"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="511"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="967"/>
         <source>INFO_PATH</source>
         <translation>Путь</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="630"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1002"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="602"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="980"/>
         <source>INFO_REMAININF_TIME</source>
         <translation>Осталось</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="623"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1001"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="595"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="979"/>
         <source>INFO_DOWNLOADED</source>
         <translation>Загружено</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="616"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1000"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="588"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="978"/>
         <source>INFO_ACTIVE_TIME</source>
         <translation>Прошло</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="602"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="998"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="574"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="976"/>
         <source>INFO_DOWNLOAD_SPEED</source>
         <translation>Загрузка</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="581"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="995"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="553"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="973"/>
         <source>INFO_TOTAL_SIZE</source>
         <translation>Размер</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="567"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="993"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="539"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="971"/>
         <source>INFO_UPLOAD_SPEED</source>
         <translation>Отдача</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="317"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="985"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="314"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="963"/>
         <source>LIMIT_UL</source>
         <translation>Отдача</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="327"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="986"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="324"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="964"/>
         <source>LIMIT_DL</source>
         <translation>Загрузка</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="353"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="987"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="350"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="965"/>
         <source>SORT_BY</source>
         <translation>Сортировать по</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="702"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1011"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="674"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="989"/>
         <source>INFO_HASH</source>
         <translation>Хеш</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="723"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1014"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="695"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="992"/>
         <source>TAB_PEERS</source>
         <translation>Пиры</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="758"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1023"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="730"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1001"/>
         <source>TAB_TRACKERS</source>
         <translation>Трекеры</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="786"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1016"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="758"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="994"/>
         <source>TRACKER_URL</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="791"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1018"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="763"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="996"/>
         <source>TRACKER_STATUS</source>
         <translation>Состояние</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="796"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1020"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="768"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="998"/>
         <source>TRACKER_NEXT_ANNOUNCE</source>
         <translation>Обновление через</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="813"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1024"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="785"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1002"/>
         <source>TAB_FILES</source>
         <translation>Файлы</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="845"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1027"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="817"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1005"/>
         <source>TAB_COMMENTS</source>
         <translation>Коментарии</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="851"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1025"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="823"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1003"/>
         <source>ADD_COMMENT</source>
         <translation>Добавить коментарий</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="861"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1026"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="833"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1004"/>
         <source>AVERAGE_RATING</source>
         <translation>Рейтинг</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="953"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1032"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="925"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1010"/>
         <source>TOOLS_AUTO_SHUTDOWN</source>
         <translation>Автовыключение</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="976"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1033"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="948"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1011"/>
         <source>MENU_VIEW</source>
         <translation>Вид</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="980"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1034"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="952"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1012"/>
         <source>MENU_CHOSE_LANGUAGE</source>
         <translation>Язык</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="985"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1035"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="957"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1013"/>
         <source>MENU_CHOSE_SKIN</source>
         <translation>Стиль</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1056"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1223"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1226"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="929"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="966"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="968"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1028"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1195"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1198"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="907"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="944"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="946"/>
         <source>MENU_OPEN_TORRENT</source>
         <translation>Открыть торрент</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1059"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="930"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1031"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="908"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1067"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1231"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="931"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="970"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1039"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1203"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="909"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="948"/>
         <source>MENU_OPEN_MAGNET</source>
         <translation>Открыть magnet сслыку</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1070"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="932"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1042"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="910"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1075"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1830"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1047"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1843"/>
         <location filename="../../core/gui/Utils/ValueSetters.cpp" line="357"/>
-        <location filename="../../core/gui/Utils/ValueSetters.cpp" line="360"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="933"/>
+        <location filename="../../core/gui/Utils/ValueSetters.cpp" line="361"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="911"/>
         <source>MENU_CREATE_TORRENT</source>
         <translation>Создать  торрент</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1078"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="934"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1050"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="912"/>
         <source>Ctrl+N</source>
         <oldsource>Ctrl+C</oldsource>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1083"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="935"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1055"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="913"/>
         <source>MENU_EXIT</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1086"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="936"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1058"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="914"/>
         <source>Alt+X</source>
         <translation>Alt+X</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1094"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1833"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="937"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1066"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1846"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="915"/>
         <source>MENU_CONFIGURATION</source>
         <translation>Конфигурация</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1097"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="938"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1069"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="916"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1105"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="939"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1077"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="917"/>
         <source>STR_DOWNLOAD</source>
         <translation>Скачать торрент</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1108"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="940"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1080"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="918"/>
         <source>HINT_DOWNLOAD</source>
         <translation>Скачать торрент</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1113"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="941"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1085"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="919"/>
         <source>STR_OPEN_URL</source>
         <translation>Открыть описание</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1116"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="942"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1088"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="920"/>
         <source>HINT_OPEN_URL</source>
         <translation>Открыть описание</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1121"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="943"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1093"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="921"/>
         <source>MENU_ABAUT</source>
         <translation>O CuteTorrent</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1124"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="944"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1096"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="922"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1132"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="945"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1104"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="923"/>
         <source>MENU_CHECK_UPDATES</source>
         <translation>Проверить обновления</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1135"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="946"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1107"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="924"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1140"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="947"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1112"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="925"/>
         <source>STR_SETTINGS</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1145"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="948"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1117"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="926"/>
         <source>TOOLS_BACKUP</source>
         <translation>Резервное копирование</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1150"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1153"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="949"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="951"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1122"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1125"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="927"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="929"/>
         <source>ACTION_RSS_ADD</source>
         <translation>Добавить Rss-ленту</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1158"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="953"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1130"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="931"/>
         <source>ACTION_RSS_REMOVE</source>
         <translation>Удалить Rss-ленту</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1163"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="954"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1135"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="932"/>
         <source>ACTION_RSS_EDIT</source>
         <translation>Изменить Rss-ленту</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1168"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="955"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1140"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="933"/>
         <source>MENU_ABOUT_QT</source>
         <translation>О Qt</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1173"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1176"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="956"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="958"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1145"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1148"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="934"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="936"/>
         <source>QUEUE_UP</source>
         <translation>Поднять в очереди</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1181"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="960"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1153"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="938"/>
         <source>QUEUE_DOWN</source>
         <translation>Опустить в очереди</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1186"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="961"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1158"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="939"/>
         <source>MENU_REPORT_PROBLEM</source>
         <translation>Сообщить о проблеме</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1194"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="962"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1166"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="940"/>
         <source>MENU_TOGGLE_TOOLBAR_VISIBILITY</source>
         <translation>Панель инструментов</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1202"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="963"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1174"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="941"/>
         <source>MENU_TOGGLE_DETAIL_INFO_VISIBILITY</source>
         <translation>Детальная информация</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1210"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="964"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1182"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="942"/>
         <source>MENU_TOGGLE_STATUSBAR_VISIBILITY</source>
         <translation>Строка состояния</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1218"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="965"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1190"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="943"/>
         <source>MENU_TOGGLE_GROUPS_VISIBILITY</source>
         <translation>Боковой фильтр</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1236"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="971"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1208"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="949"/>
         <source>TOOLS_IMPORT</source>
         <translation>Импорт торрентов из других клиентов</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1244"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="972"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1216"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="950"/>
         <source>TOOLS_SHUTDOWN_DISABLED</source>
         <translation>Отключено</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1249"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="973"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1221"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="951"/>
         <source>TOOLS_SHUTDOWN_ON_DOWNLADS_COMPLETE</source>
         <translation>Выключить по окончании загрузок</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1305"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="980"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1277"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="958"/>
         <source>TOOLS_SHUTDOWN_ON_ALL_COMPLETE</source>
         <translation>Выключить по окончании загрузок и раздач</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1257"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="974"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1229"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="952"/>
         <source>TOOLS_HIBERNATE_ON_DOWNLOADS_COMPLETE</source>
         <translation>Спящий режим по окончании загрузок</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1313"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="981"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1285"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="959"/>
         <source>TOOLS_HIBERNATE_ON_ALL_COMPLETE</source>
         <translation>Спящий режим  по окончании загрузок и раздач</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1265"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="975"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1237"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="953"/>
         <source>TOOLS_SLEEP_ON_DOWNLOADS_COMPLETE</source>
         <translation>Режим ожидания по завершению загрузок</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1273"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="976"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1245"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="954"/>
         <source>TOOLS_SLEEP_ON_ALL_COMPLETE</source>
         <translation>Режим ожидания по завершению загрузок и раздач</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1281"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="977"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1253"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="955"/>
         <source>TOOLS_REBOOT_ON_DOWNLOADS_COMPLETE</source>
         <translation>Перезагрузка по завершению загрузок</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1289"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="978"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1261"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="956"/>
         <source>TOOLS_REBOOT_ON_ALL_COMPLETE</source>
         <translation>Перезагрузка по завершению загрузок и раздач</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1297"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="979"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1269"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="957"/>
         <source>TOOLS_SHUTDOWN_ON_DOWNLOADS_COMPLETE</source>
         <translation>Выключение по завершению загрузок</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1318"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="982"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1290"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="960"/>
         <source>MENU_RATE</source>
         <translation>Оценить клиент</translation>
     </message>
@@ -1033,245 +1033,245 @@
 <context>
     <name>CuteTorrentMainWindow</name>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="260"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="263"/>
         <source>ABAUT_TITLE</source>
         <translation>О CuteTorrent</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="260"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="263"/>
         <source>ABAUT_TEXT</source>
         <translation>CuteTorrent %1 -бесплатный торрент клиент с поддержкой DHT, возможностью монтировани образов в DaemonTools и встроенным Аудио/Видео плеером.
 
 Если вы заплатили деньги за это програмное обеспечение потребуйте возврата денег</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="277"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="278"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1043"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1044"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="280"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="281"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1049"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1050"/>
         <source>STATUS_DWONLOAD</source>
         <translation>Загруженно(Загрузка)</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="279"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="280"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1045"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1046"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="282"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="283"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1051"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1052"/>
         <source>STATUS_UPLOAD</source>
         <translation>Отдано(Отдача)</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="297"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="324"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="300"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="327"/>
         <source>SORTER_NAME</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="298"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="325"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="301"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="328"/>
         <source>SORTER_SIZE</source>
         <translation>Размер</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="299"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="302"/>
         <source>SORTER_DOWNLOADED</source>
         <translation>Загружено</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="300"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="303"/>
         <source>SORTER_UPLOADED</source>
         <translation>Отдано</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="301"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="304"/>
         <source>SORTER_UPTIME</source>
         <translation>Прошло</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="302"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="305"/>
         <source>SORTER_TIME_LEFT</source>
         <translation>Осталось</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="303"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="306"/>
         <source>SORTER_SEEDS</source>
         <translation>Сиды</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="304"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="307"/>
         <source>SORTER_PEERS</source>
         <translation>Пиры</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="326"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="329"/>
         <source>SORTER_LEECHERS</source>
         <translation>Личеры</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="327"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="330"/>
         <source>SORTER_SEEDERS</source>
         <translation>Сиды</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="386"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1049"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="391"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1055"/>
         <source>ADD_TRACKER</source>
         <translation>Добавить трекер</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="388"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1050"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="393"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1056"/>
         <source>REMOVE_TRACKER</source>
         <translation>Удалить трекер</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="390"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1051"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="395"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1057"/>
         <source>EDIT_TRACKER</source>
         <translation>Изменить трекер</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="392"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="397"/>
         <source>UPDATE_TRACKER</source>
         <translation>Обновить трекер</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="415"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1052"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="420"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1058"/>
         <source>ADD_PEER</source>
         <translation>Добавить пир</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="417"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="422"/>
         <source>ADD_WEB_SEED</source>
         <translation>Добавить WebSeed</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="534"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="539"/>
         <source>SET_DEFAULT_APP_FOR_TOR_AND_MAGNET_LINKS</source>
         <translation>Сделать стандартным приложением для торрентов и магнитных ссылок?</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="540"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="545"/>
         <source>SET_DEFAULT_APP_FOR_TOR</source>
         <translation>Сделать стандартным приложением для торрентов?</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="544"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="549"/>
         <source>SET_DEFAULT_APP_FOR_MAGNET_LINKS</source>
         <translation>Сделать стандартным приложением для магнитных ссылок?</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="549"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="554"/>
         <source>DEFAULT_APP</source>
         <translation>Выбор стандартного приложения</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="563"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="568"/>
         <source>REGISTER_BTN</source>
         <translation>Регестрация</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="564"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="569"/>
         <source>LOG_IN_BTN</source>
         <translation>Вход</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="567"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="572"/>
         <source>NOT_LOGGED_IN</source>
         <translation>Необходима авторизация</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="567"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="572"/>
         <source>COMMENTS_LOGIN_MESSAGE</source>
         <translation>Чтобы добавлять коментрии вам нужно войти или если отсуствует аккаунт создать его.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="620"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="625"/>
         <source>Delete comment</source>
         <translation>Удаление коментария</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="620"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="625"/>
         <source>Are you shure you want to delete selected comment?</source>
         <translation>Вы действительно хотите удалить коментарий?</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="682"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1064"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="687"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1070"/>
         <source>ANIME_CATEGORY</source>
         <translation>Анимэ</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="683"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1065"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="688"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1071"/>
         <source>MUSIC_CATEGORY</source>
         <translation>Музыка</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="684"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1066"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="689"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1072"/>
         <source>TV_CATEGORY</source>
         <translation>Сериалы и TV</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="685"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1067"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="690"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1073"/>
         <source>PORN_CATEGORY</source>
         <translation>Видео для взрослых</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="686"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1068"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="691"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1074"/>
         <source>APP_CATEGORY</source>
         <translation>Приложения</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="687"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1069"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="692"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1075"/>
         <source>GAMES_CATEGORY</source>
         <translation>Игры</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="688"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1070"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="693"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1076"/>
         <source>BOOKS_CATEGORY</source>
         <translation>Книги</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="689"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1071"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="694"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1077"/>
         <source>FILMS_CATEGORY</source>
         <translation>Кино</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="690"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1072"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="695"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1078"/>
         <source>ALL_CATEGORY</source>
         <translation>Все</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="699"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1074"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="704"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1080"/>
         <source>Search</source>
         <translation>Поиск</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="702"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1075"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="707"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1081"/>
         <source>TORENT_FILTER</source>
         <translation>Фильтровать торренты</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="706"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="713"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1053"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1054"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="711"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="718"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1059"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1060"/>
         <source>None</source>
         <translation>∞</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="848"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="854"/>
         <source>CuteTorrent %1
 Upload: %2
 Download: %3</source>
@@ -1280,152 +1280,152 @@ Download: %3</source>
 Скачано: %3</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="857"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="863"/>
         <source>DHT: %1 nodes</source>
         <translation>DHT: %1 узлов</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1006"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1012"/>
         <source>DOWNLOADING_TORRENTS_COUNT</source>
         <translation>Колличество загружаемых торрентов</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1038"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1136"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1044"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1142"/>
         <source>ACTION_HIDE</source>
         <translation>Спрятать</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1039"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1139"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1045"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1145"/>
         <source>ACTION_MAXIMIZE_FULLSCREEN</source>
         <translation>Развернуть на весь экран</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1040"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1142"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1046"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1148"/>
         <source>ACTION_MAXIMIZE</source>
         <translation>Развернуть</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1041"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1151"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1047"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1157"/>
         <source>ACTION_EXIT</source>
         <translation>Выйти</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1042"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1154"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1158"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1048"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1160"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1164"/>
         <source>ACTION_COPY</source>
         <translation>Копировать</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1055"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1145"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1061"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1151"/>
         <source>ACTION_PAUSE_ALL_TORRENTS</source>
         <translation>Приостановить все торренты</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1056"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1148"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1062"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1154"/>
         <source>ACTION_RESTORE_ALL_TORRENTS</source>
         <translation>Возобновить все торренты</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1211"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1220"/>
         <source>OPEN_TOORENT_DIALOG</source>
         <translation>Выберете торрент файл</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1212"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1221"/>
         <source>TORRENT_FILES (*.torrent);;Any File (*.*)</source>
         <translation>Торренты (*.torrent);;Any File (</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1369"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1378"/>
         <source>TRACKER_UPDATING</source>
         <translation>Обновляется...</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1424"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1435"/>
         <source>CT_HIDE_MSG</source>
         <translation>CuteTorrent продолжает работать. Для выхода используйте контекстное меню в области уведомлений.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1475"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1487"/>
         <source>UNABLE_TO_PROCESS_FILE</source>
         <translation>Не удалось обработать файл</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1475"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1487"/>
         <source>DROPPED_FILE %1 IS_NOT_TORRENT_OR_MAGNET_LINK</source>
         <translation>Элемент %1 не торрент файл или магнитная ссылка.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1621"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1634"/>
         <source>MAGNET_LINK_DLG</source>
         <translation>Magnet-сслыка</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1621"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1634"/>
         <source>MAGNET_LINK:</source>
         <translation>Magnet-сслыка:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1774"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1787"/>
         <source>ADD_PEER_DLG</source>
         <translation>Добавление пира</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1774"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1787"/>
         <source>PEER:</source>
         <translation>Пир:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1791"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1804"/>
         <source>PEER_ERR</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1791"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1804"/>
         <source>INVALID_IP_STRING</source>
         <translation>Введен неправельный ip адрес</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1803"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1816"/>
         <source>ADD_TRACKER_DLG</source>
         <translation>Добавление трекера</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1803"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2300"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1816"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2305"/>
         <source>TRACKER:</source>
         <translation>Трекер:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2300"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2331"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2305"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2336"/>
         <source>EDIT_TRACKER_DLG</source>
         <translation>Редактирование трекера</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2331"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2336"/>
         <source>HTTP_SEED_URL:</source>
         <translation>Web сид</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2345"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2350"/>
         <source>RSS_FEED_ADD</source>
         <translation>Добавление Rss-ленты</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2345"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2350"/>
         <source>RSS_FEED_URL:</source>
         <translation>Ссылка на Rss-ленту</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2518"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2527"/>
         <source>INVALID_COMMAND_RECIVED</source>
         <translation>Получена неизветсная IPC комманда.</translation>
     </message>
@@ -1469,990 +1469,990 @@ Download: %3</source>
 <context>
     <name>ErrorMsg</name>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="303"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="522"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="538"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="562"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="602"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="316"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="535"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="551"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="575"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="615"/>
         <source>no error</source>
         <translation>Нет ошибки</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="304"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="317"/>
         <source>torrent file collides with file from another torrent</source>
         <translation>Два торрента имеют файлы, которые в итоге перезаписывают друг друга</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="305"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="318"/>
         <source>hash check failed</source>
         <translation>Часть имеет неверный хеш</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="306"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="319"/>
         <source>torrent file is not a dictionary</source>
         <translation>Торрент файл не содержит bencoded словарь на верзнем уровне</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="307"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="320"/>
         <source>missing or invalid &apos;info&apos; section in torrent file</source>
         <translation>Отсутствует или некорректная секция &quot;info&quot; в торрент файле</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="308"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="321"/>
         <source>&apos;info&apos; entry is not a dictionary</source>
         <translation>Некорректная секция &quot;info&quot; в торрент файле</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="309"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="322"/>
         <source>invalid or missing &apos;piece length&apos; entry in torrent file</source>
         <translation>В торрент файле отсутсвует параметр &quot;piece length&quot;</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="310"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="323"/>
         <source>missing name in torrent file</source>
         <translation>В торрент файле отсуствует значение &quot;name&quot;</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="311"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="324"/>
         <source>invalid &apos;name&apos; of torrent (possible exploit attempt)</source>
         <translation>Неверное значение &quot;name&quot; в торрент файле</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="312"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="325"/>
         <source>invalid length of torrent</source>
         <translation>Размер файла или общий размер торрента неверны</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="313"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="326"/>
         <source>failed to parse files from torrent file</source>
         <translation>Не удалось разбрать секцию &quot;file&quot;</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="314"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="327"/>
         <source>invalid or missing &apos;pieces&apos; entry in torrent file</source>
         <translation>Значение &quot;pieces&quot; отсутсвует или неверно</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="315"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="328"/>
         <source>incorrect number of piece hashes in torrent file</source>
         <translation>Строка &quot;pieces&quot; имеет неправильную длину</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="316"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="329"/>
         <source>too many pieces in torrent</source>
         <translation>В .torrent больше частей чем поддерживается</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="317"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="330"/>
         <source>invalid metadata received from swarm</source>
         <translation>Метаданные (.torrent файл) которые были скачанны имеют верный info-hash, но не могут быть разобраны</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="318"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="331"/>
         <source>invalid bencoding</source>
         <translation>Файл или буфер неверно закодированны в bencoded</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="319"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="332"/>
         <source>no files in torrent</source>
         <translation>Торрент файл не сожержит файлов</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="320"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="333"/>
         <source>invalid escaped string</source>
         <translation>Строка неверно закодированна в URL-encode</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="321"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="399"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="334"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="412"/>
         <source>session is closing</source>
         <translation>Операция запрещена, так как приложение завершает работу</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="322"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="335"/>
         <source>torrent already exists in session</source>
         <translation>Торрент с такимже info-hash уже добавлен</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="323"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="336"/>
         <source>invalid torrent handle used</source>
         <translation>Использзуемый torrent_handle не ссылается на валидный торрент</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="324"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="337"/>
         <source>invalid type requested from entry</source>
         <translation>Тип элемента не совпадает с его реальным типом</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="325"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="338"/>
         <source>missing info-hash from URI</source>
         <translation>Указанная ссылка не содержит действительный инфо-хэш</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="326"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="339"/>
         <source>file too short</source>
         <translation>Один из файлов в торренте стал слишком мал. Это может быть вызванно его измением внешней программой</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="327"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="340"/>
         <source>unsupported URL protocol</source>
         <translation>Ссылка использует неизвестный простокол. Поддерживаются только &quot;http&quot; и &quot;https&quot;. Для трекеров дополнительно поддерживается &quot;udp&quot;</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="328"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="341"/>
         <source>failed to parse URL</source>
         <translation>Сыылка имеет неверный синтаксис и не может быть разобрана</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="329"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="342"/>
         <source>peer sent 0 length piece</source>
         <translation>Пир отправил &apos;piece&apos; сообщение размером в 0 байт</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="330"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="563"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="343"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="576"/>
         <source>parse failed</source>
         <translation>Структура bencoded была испорчена и не может быть разобрана</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="331"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="344"/>
         <source>invalid file format tag</source>
         <translation>Файл быстрого восстановления имеет неверную версию</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="332"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="345"/>
         <source>missing info-hash</source>
         <translation>В файл быстрого восстановления отсутсвует или неверный инфо-хеш</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="333"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="346"/>
         <source>mismatching info-hash</source>
         <translation>Инфо-хеш не совпадает с инфо-хешем торрента</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="334"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="347"/>
         <source>invalid hostname</source>
         <translation>Ссылка соержит неверное имя хоста</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="335"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="348"/>
         <source>invalid port</source>
         <translation>Ссылка сожержит неверный порт</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="336"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="349"/>
         <source>port blocked by port-filter</source>
         <translation>Соединение с портом было заблокированно фильтром</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="337"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="350"/>
         <source>expected closing ] for address</source>
         <translation>Ожидалось что IPv6 адрес завершится &apos;]&apos;</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="338"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="351"/>
         <source>destructing torrent</source>
         <translation>Торрент удаляется. Операция не может быть завершена успешно.</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="339"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="352"/>
         <source>timed out</source>
         <translation>Время соединения истекло</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="340"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="353"/>
         <source>upload to upload connection</source>
         <translation>Пир и клиент в режиме upload. Нет смысла поддерживать соединение</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="341"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="354"/>
         <source>uninteresting upload-only peer</source>
         <translation>Пир в режиме upload и клиент не заинтресован в нем. Нет смысла поддерживать соединение</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="342"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="355"/>
         <source>invalid info-hash</source>
         <translation>Пир отправил неверный инфо-хеш</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="343"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="356"/>
         <source>torrent paused</source>
         <translation>Торрент приостановлен. Операция не может быть завершена успещно</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="344"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="357"/>
         <source>&apos;have&apos;-message with higher index than the number of pieces</source>
         <translation>Пир отправил неверное сообщение об имеющейся части. Сообщение имеет неверный размер или ссылается на часть которой не существует в торренте</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="345"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="358"/>
         <source>bitfield of invalid size</source>
         <translation>Bitfield сообщение имеет неверный размер</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="346"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="359"/>
         <source>too many piece requests while choked</source>
         <translation>Пир продолжает запрашивать части после того как он был отклонен.</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="347"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="360"/>
         <source>invalid piece packet</source>
         <translation>Пир отправил сообщение которое не соотвествует запрошенной части</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="348"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="361"/>
         <source>out of memory</source>
         <translation>Недостаточно памяти</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="349"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="362"/>
         <source>torrent aborted</source>
         <translation>Торрент удаляется. Операция не может быть завершена успешно.</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="350"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="363"/>
         <source>connected to ourselves</source>
         <translation>Пир - соединение с самим собой. Нет смысла поддерживать соединение</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="351"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="364"/>
         <source>invalid piece size</source>
         <translation>Пир отправил часть с неверным размером, отрицательным или больше чем размер части</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="352"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="365"/>
         <source>timed out: no interest</source>
         <translation>Мы не интересовались пиром или он не интересовался нами слишком долго. Нет смысла поддерживать соединение.</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="353"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="366"/>
         <source>timed out: inactivity</source>
         <translation>Пир не присылал запросв слишком долго, возможно он отключен.</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="354"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="367"/>
         <source>timed out: no handshake</source>
         <translation>Пир не отправляет приветсвенное сообщение в течение разумного периода времени, скорее всего это не BitTorrent пир</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="355"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="368"/>
         <source>timed out: no request</source>
         <translation>После того как пиру было разрешено соединение он не запрашивал данные слишком долго.</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="356"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="369"/>
         <source>invalid choke message</source>
         <translation>Пир отправил неверный запрет на соединение</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="357"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="370"/>
         <source>invalid unchoke message</source>
         <translation>Пир отправил неверное разрешение на соединение</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="358"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="371"/>
         <source>invalid interested message</source>
         <translation>Пир отправил неверное уведомление об интересе</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="359"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="372"/>
         <source>invalid not-interested message</source>
         <translation>Пир отправил неверное уведомление об отсуствии интереса к нам</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="360"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="373"/>
         <source>invalid request message</source>
         <translation>Пир отправил неверный запрос части</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="361"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="374"/>
         <source>invalid hash list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="362"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="375"/>
         <source>invalid hash piece message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="363"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="376"/>
         <source>invalid cancel message</source>
         <translation>Пир отправил неверное сообщение об отмене</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="364"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="377"/>
         <source>invalid dht-port message</source>
         <translation>Пир отправил неверный запрос DHT порта</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="365"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="378"/>
         <source>invalid suggest piece message</source>
         <translation>Пир отправил неверное предложение части</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="366"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="379"/>
         <source>invalid have-all message</source>
         <translation>Пир отправил неверное уведомление о наличии всех частей</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="367"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="380"/>
         <source>invalid have-none message</source>
         <translation>Пир отправил неверное уведомление об отсуствии всех частей</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="368"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="381"/>
         <source>invalid reject message</source>
         <translation>Пир отправил неверный отказ</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="369"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="382"/>
         <source>invalid allow-fast message</source>
         <translation>Пир отправил неверное сообщение</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="370"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="383"/>
         <source>invalid extended message</source>
         <translation>Пир отправил неверный ID расширения</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="371"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="384"/>
         <source>invalid message</source>
         <translation>Пир отправил неверный ID сообщения</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="372"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="385"/>
         <source>sync hash not found</source>
         <translation>Хеш синхронизации не был найден в зашифрованном рукопожатии</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="373"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="386"/>
         <source>unable to verify encryption constant</source>
         <translation>Неверный ключ в рукопожатии</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="374"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="387"/>
         <source>plaintext mode not provided</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="375"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="388"/>
         <source>rc4 mode not provided</source>
         <translation>Пир не поддерживает выбранный режим rc4</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="376"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="389"/>
         <source>unsupported encryption mode</source>
         <translation>Пир не поддерживает ни один из типов шифрования, которые поддерживает клиент</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="377"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="390"/>
         <source>peer selected unsupported encryption mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="378"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="391"/>
         <source>invalid encryption pad size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="379"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="392"/>
         <source>invalid encryption handshake</source>
         <translation>Подтверждение шифрования является недействительным</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="380"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="393"/>
         <source>incoming encrypted connections disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="381"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="394"/>
         <source>incoming regular connections disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="382"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="395"/>
         <source>duplicate peer-id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="383"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="396"/>
         <source>torrent removed</source>
         <translation>Торрент был удалён</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="384"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="397"/>
         <source>packet too large</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="386"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="399"/>
         <source>HTTP error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="387"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="400"/>
         <source>missing location header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="388"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="401"/>
         <source>invalid redirection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="389"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="402"/>
         <source>redirecting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="390"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="403"/>
         <source>invalid HTTP range</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="391"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="404"/>
         <source>missing content-length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="392"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="405"/>
         <source>banned by IP filter</source>
         <translation>Данный IP заблокирован IP-фильтром</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="393"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="406"/>
         <source>too many connections</source>
         <translation>Слишком много соединений</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="394"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="407"/>
         <source>peer banned</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="395"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="408"/>
         <source>stopping torrent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="396"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="409"/>
         <source>too many corrupt pieces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="397"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="410"/>
         <source>torrent is not ready to accept peers</source>
         <translation>Торрент не готов к получению пиров</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="398"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="411"/>
         <source>peer is not properly constructed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="400"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="413"/>
         <source>optimistic disconnect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="401"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="414"/>
         <source>torrent finished</source>
         <translation>Загрузка торрента завершена</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="402"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="415"/>
         <source>no router found</source>
         <translation>Не найден роутер с UPnP</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="403"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="416"/>
         <source>metadata too large</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="404"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="417"/>
         <source>invalid metadata request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="405"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="418"/>
         <source>invalid metadata size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="406"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="419"/>
         <source>invalid metadata offset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="407"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="420"/>
         <source>invalid metadata message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="408"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="421"/>
         <source>pex message too large</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="409"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="422"/>
         <source>invalid pex message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="410"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="423"/>
         <source>invalid lt_tracker message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="411"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="424"/>
         <source>pex messages sent too frequent (possible attack)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="412"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="425"/>
         <source>torrent has no metadata</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="413"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="426"/>
         <source>invalid dont-have message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="414"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="427"/>
         <source>SSL connection required</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="415"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="428"/>
         <source>invalid SSL certificate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="416"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="429"/>
         <source>not an SSL torrent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="417"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="430"/>
         <source>banned by port filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="425"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="438"/>
         <source>unsupported protocol version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="426"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="439"/>
         <source>not authorized to create port map (enable NAT-PMP on your router)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="427"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="440"/>
         <source>network failure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="428"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="441"/>
         <source>out of resources</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="429"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="442"/>
         <source>unsupported opcode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="437"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="450"/>
         <source>missing or invalid &apos;file sizes&apos; entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="438"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="451"/>
         <source>no files in resume data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="439"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="452"/>
         <source>missing &apos;slots&apos; and &apos;pieces&apos; entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="440"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="453"/>
         <source>mismatching number of files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="441"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="454"/>
         <source>mismatching file size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="442"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="455"/>
         <source>mismatching file timestamp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="443"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="456"/>
         <source>not a dictionary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="444"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="457"/>
         <source>invalid &apos;blocks per piece&apos; entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="445"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="458"/>
         <source>missing slots list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="446"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="459"/>
         <source>file has more slots than torrent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="447"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="460"/>
         <source>invalid entry type in slot list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="448"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="461"/>
         <source>invalid piece index in slot list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="449"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="462"/>
         <source>pieces needs to be reordered</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="450"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="463"/>
         <source>fastresume not modified since last save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="459"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="472"/>
         <source>Invalid HTTP header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="460"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="473"/>
         <source>missing Location header in HTTP redirect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="461"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="474"/>
         <source>failed to decompress HTTP response</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="471"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="484"/>
         <source>no i2p router is set up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="483"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="496"/>
         <source>scrape not available on tracker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="484"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="497"/>
         <source>invalid tracker response</source>
         <translation>Недопустимый ответ трекера</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="485"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="498"/>
         <source>invalid peer dictionary entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="486"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="499"/>
         <source>tracker sent a failure message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="487"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="500"/>
         <source>missing or invalid &apos;files&apos; entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="488"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="501"/>
         <source>missing or invalid &apos;hash&apos; entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="489"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="502"/>
         <source>missing or invalid &apos;peers&apos; and &apos;peers6&apos; entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="490"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="503"/>
         <source>udp tracker response packet has invalid size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="491"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="504"/>
         <source>invalid transaction id in udp tracker response</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="492"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="505"/>
         <source>invalid action field in udp tracker response</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="506"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="523"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="519"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="536"/>
         <source>expected string in bencoded string</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="507"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="524"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="520"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="537"/>
         <source>expected colon in bencoded string</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="508"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="525"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="521"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="538"/>
         <source>unexpected end of file in bencoded string</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="509"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="526"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="522"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="539"/>
         <source>expected value (list, dict, int or string) in bencoded string</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="510"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="527"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="523"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="540"/>
         <source>bencoded nesting depth exceeded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="511"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="528"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="524"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="541"/>
         <source>bencoded item count limit exceeded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="512"/>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="529"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="525"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="542"/>
         <source>integer overflow</source>
         <translation>целочисленное переполнение</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="539"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="552"/>
         <source>invalid gzip header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="540"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="553"/>
         <source>inflated data too large</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="541"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="554"/>
         <source>available inflate data did not terminate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="542"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="555"/>
         <source>output space exhausted before completing inflate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="543"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="556"/>
         <source>invalid block type (type == 3)</source>
         <translation>неверный тип блока (тип == 3)</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="544"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="557"/>
         <source>stored block length did not match one&apos;s complement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="545"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="558"/>
         <source>dynamic block code description: too many length or distance codes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="546"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="559"/>
         <source>dynamic block code description: code lengths codes incomplete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="547"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="560"/>
         <source>dynamic block code description: repeat lengths with no first length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="548"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="561"/>
         <source>dynamic block code description: repeat more than specified lengths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="549"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="562"/>
         <source>dynamic block code description: invalid literal/length code lengths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="550"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="563"/>
         <source>dynamic block code description: invalid distance code lengths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="551"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="564"/>
         <source>invalid literal/length or distance code in fixed or dynamic block</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="552"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="565"/>
         <source>distance is too far back in fixed or dynamic block</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="553"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="566"/>
         <source>unknown gzip error</source>
         <translation>неизвестная ошибка gzip</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="564"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="577"/>
         <source>cannot reach peer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="565"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="578"/>
         <source>i2p error</source>
         <translation>ошибка i2p</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="566"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="579"/>
         <source>invalid key</source>
         <translation>неверный ключ</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="567"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="580"/>
         <source>invalid id</source>
         <translation>неверный идентификатор</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="568"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="581"/>
         <source>timeout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="569"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="582"/>
         <source>key not found</source>
         <translation>ключ не найден</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="570"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="583"/>
         <source>duplicated id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="579"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="592"/>
         <source>SOCKS no error</source>
         <translation>ошибка SOCKS</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="580"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="593"/>
         <source>SOCKS unsupported version</source>
         <translation>неподдерживаемая версия SOCKS</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="581"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="594"/>
         <source>SOCKS unsupported authentication method</source>
         <translation>неподдерживаемый метод аутентификации SOCKS</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="582"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="595"/>
         <source>SOCKS unsupported authentication version</source>
         <translation>неподдерживаемая версия аутентификации SOCKS</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="583"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="596"/>
         <source>SOCKS authentication error</source>
         <translation>ошибка аутентификации SOCKS</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="584"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="597"/>
         <source>SOCKS username required</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="585"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="598"/>
         <source>SOCKS general failure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="586"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="599"/>
         <source>SOCKS command not supported</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="587"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="600"/>
         <source>SOCKS no identd running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="588"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="601"/>
         <source>SOCKS identd could not identify username</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="603"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="616"/>
         <source>Invalid Arguments</source>
         <translation>Недопустимые аргументы</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="604"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="617"/>
         <source>Action Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="605"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="618"/>
         <source>The specified value does not exist in the array</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="606"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="619"/>
         <source>The source IP address cannot be wild-carded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="607"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="620"/>
         <source>The external port cannot be wild-carded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="609"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="622"/>
         <source>The port mapping entry specified conflicts with a mapping assigned previously to another client</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="612"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="625"/>
         <source>Internal and External port values must be the same</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="614"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="627"/>
         <source>The NAT implementation only supports permanent lease times on port mappings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="618"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="631"/>
         <source>RemoteHost must be a wildcard and cannot be a specific IP address or DNS name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="621"/>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="634"/>
         <source>ExternalPort must be a wildcard and cannot be a specific port </source>
         <translation type="unfinished"></translation>
     </message>
@@ -3197,42 +3197,42 @@ ERROR: %2
 <context>
     <name>PeerTableModel</name>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="50"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="51"/>
         <source>PEER_IP</source>
         <translation>IP</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="51"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="52"/>
         <source>PEER_CLIENT_NAME</source>
         <translation>Клиент</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="52"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="53"/>
         <source>PEER_%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="53"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="54"/>
         <source>PEER_DOWNLOAD_SPEED</source>
         <translation>Загрузка</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="54"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="55"/>
         <source>PEER_UPLOAD_SPEED</source>
         <translation>Отдача</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="55"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="56"/>
         <source>PEER_DOWNLOADED</source>
         <translation>Загружено</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="56"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="57"/>
         <source>PEER_UPLOADED</source>
         <translation>Отадно</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="57"/>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="58"/>
         <source>PEER_SPEED</source>
         <translation>Скорость пира</translation>
     </message>
@@ -3389,222 +3389,222 @@ ERROR: %2
 <context>
     <name>QTorrentDisplayModel</name>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="707"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="708"/>
         <source>DIALOG_OPEN_FOLDER</source>
         <translation>Выбирите папку</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1010"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1131"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1011"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1133"/>
         <source>ACTION_OPEN_FOLDER</source>
         <translation>Открыть папку</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1011"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1137"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1012"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1139"/>
         <source>ACTION_DT_MOUNT</source>
         <translation>Смонтировать в Daemon Tools</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1016"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1229"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1017"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1231"/>
         <source>ACTION_UPDATE_TRACKERS</source>
         <translation>Обновить трекеры</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1019"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1220"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1020"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1222"/>
         <source>ACTION_SET_SUPERSEED</source>
         <translation>Супер-сид</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1020"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1238"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1021"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1240"/>
         <source>ACTION_GENERATE_MAGNET</source>
         <translation>Сгенерировать магнет-ссылку</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1021"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1253"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1022"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1255"/>
         <source>ACTION_CHANGE_GROUP</source>
         <translation>Изменить группу</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1022"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1150"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1023"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1152"/>
         <source>ACTION_QUEUE_CONTROLL</source>
         <translation>Управление очередью</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1025"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1152"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1026"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1154"/>
         <source>ACTION_QUEUE_UP</source>
         <translation>Поднять</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1026"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1156"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1027"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1158"/>
         <source>ACTION_QUEUE_DOWN</source>
         <translation>Опустить</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1027"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1174"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1028"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1176"/>
         <source>ACTION_PRIORITY</source>
         <translation>Приортиет</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1032"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1176"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1033"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1178"/>
         <source>ACTION_HIGHT_PRIORITY</source>
         <translation>Высокий</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1031"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1184"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1032"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1186"/>
         <source>ACTION_ABOVE_AVG_PRIORITY</source>
         <translation>Выше среднего</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1030"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1192"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1031"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1194"/>
         <source>ACTION_MEDIUM_PRIORITY</source>
         <translation>Средний</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1029"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1200"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1030"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1202"/>
         <source>ACTION_BELOW_AVG_PRIORITY</source>
         <translation>Ниже среднего</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1028"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1208"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1029"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1210"/>
         <source>ACTION_LOW_PRIORITY</source>
         <translation>Низкий</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1024"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1161"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1025"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1163"/>
         <source>ACTION_QUEUE_TOP</source>
         <translation>В начало</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1023"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1165"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1024"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1167"/>
         <source>ACTION_QUEUE_BOTTOM</source>
         <translation>В конец</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1008"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1124"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1009"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1126"/>
         <source>ACTION_TORRENTLIST_PAUSE</source>
         <translation>Приостановить</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1009"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1127"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1010"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1129"/>
         <source>ACTION_TORRENTLIST_RESUME</source>
         <translation>Возобновить</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1015"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1233"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1016"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1235"/>
         <source>ACTION_SET_SEQUENTIAL</source>
         <translation>Последовательная загрузка</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1018"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1141"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1019"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1143"/>
         <source>ACTION_PLAY_IN_PLAYER</source>
         <translation>Открыть во встроенном плеере</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1017"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1145"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1018"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1147"/>
         <source>ACTION_MOVE_STORRAGE</source>
         <translation>Переместить в...</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="494"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="495"/>
         <source>HEADER_NAME</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="495"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="496"/>
         <source>HEADER_PROGRES</source>
         <translation>Прогрес</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="496"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="497"/>
         <source>HEADER_SIZE</source>
         <translation>Размер</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="499"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="500"/>
         <source>HEADER_DOWNLOAD_SPEED</source>
         <translation>Загрузка</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="500"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="501"/>
         <source>HEADER_UPLOAD_SPEED</source>
         <translation>Отдача</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="497"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="498"/>
         <source>HEADER_TOTAL_DOWNLOADED</source>
         <translation>Загружено</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="498"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="499"/>
         <source>HEADER_TOTAL_UPLOADED</source>
         <translation>Отдано</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="502"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="503"/>
         <source>HEADER_TIME_LEFT</source>
         <translation>Осталось</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="501"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="502"/>
         <source>HEADER_TIME_ELAPSED</source>
         <translation>Прошло</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="503"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="504"/>
         <source>HEADER_SEED</source>
         <translation>Сиды</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="504"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="505"/>
         <source>HEADER_PEER</source>
         <translation>Пиры</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="609"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="655"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="610"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="656"/>
         <source>TORRENT_DELITION</source>
         <translation>Удаление торрента</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="609"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="610"/>
         <source>TORRENT_DELITION_MSG</source>
         <translation>Вы согласны удалить торрент %1?</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="655"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="656"/>
         <source>TORRENT_ALL_DELITION_MSG</source>
         <translation>Вы согласны удалить торрент %1 и файлы?</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1012"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1243"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1013"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1245"/>
         <source>ACTION_DELETE_ALL</source>
         <translation>Удалить файлы и торрент</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1013"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1248"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1014"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1250"/>
         <source>ACTION_DELETE_TORRENT</source>
         <translation>Удалить торрент</translation>
     </message>
@@ -3619,8 +3619,8 @@ ERROR: %2
         <translation>Неудалось запустить.</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1014"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1225"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1015"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1227"/>
         <source>ACTION_REHASH</source>
         <translation>Перепроверить файлы</translation>
     </message>
@@ -5400,53 +5400,53 @@ ERROR: %2</source>
         <translation> Кб</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/Torrent.cpp" line="330"/>
+        <location filename="../../torrent/core/Torrent.cpp" line="326"/>
         <source>STATE_FILE_CHECKING (q)</source>
         <translation>Проверка файлов (q)</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/Torrent.cpp" line="331"/>
+        <location filename="../../torrent/core/Torrent.cpp" line="327"/>
         <source>STATE_FILE_CHECKING</source>
         <translation>Проверка файлов</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/Torrent.cpp" line="332"/>
+        <location filename="../../torrent/core/Torrent.cpp" line="328"/>
         <source>STATE_DOWNLOADING_METADATA</source>
         <translation>Загрузка метаданных</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/Torrent.cpp" line="333"/>
+        <location filename="../../torrent/core/Torrent.cpp" line="329"/>
         <source>STATE_DOWNLOADING</source>
         <translation>Загрузка</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/Torrent.cpp" line="334"/>
+        <location filename="../../torrent/core/Torrent.cpp" line="330"/>
         <source>STATE_FINISHED</source>
         <translation>Завершен</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/Torrent.cpp" line="335"/>
+        <location filename="../../torrent/core/Torrent.cpp" line="331"/>
         <source>STATE_SEEDING</source>
         <translation>Раздача</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/Torrent.cpp" line="336"/>
+        <location filename="../../torrent/core/Torrent.cpp" line="332"/>
         <source>STATE_ALLOCATING_SPACE</source>
         <translation>Выделение места</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/Torrent.cpp" line="337"/>
+        <location filename="../../torrent/core/Torrent.cpp" line="333"/>
         <source>STATE_RESUMING</source>
         <translation>Возобновление</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/Torrent.cpp" line="338"/>
+        <location filename="../../torrent/core/Torrent.cpp" line="334"/>
         <source>STATE_MOVING_FILE_STORRAGE</source>
         <translation>Перемещается</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/Torrent.cpp" line="555"/>
-        <location filename="../../torrent/core/Torrent.cpp" line="569"/>
+        <location filename="../../torrent/core/Torrent.cpp" line="551"/>
+        <location filename="../../torrent/core/Torrent.cpp" line="565"/>
         <source>CT_CONNECTED %1 CT_FROM %2</source>
         <translation>Подключено %1 из %2</translation>
     </message>
@@ -5557,32 +5557,32 @@ ERROR: %2</source>
 <context>
     <name>TorrentManager</name>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="223"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="177"/>
         <source>LISTENING ON PORT %1 FAILED</source>
         <translation>Невозможно использовать порт %1</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="350"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="304"/>
         <source>TORRENT_COMPLETED %1</source>
         <translation>Загрузка торрента %1 завершена</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="411"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="365"/>
         <source>TORRENT %1 HAS TRACKER ERROR %2</source>
         <translation>При загрузке торрента %1 произошла ошибка %2</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="432"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="386"/>
         <source>MOVE_STORRAGE_COMPLETED_TO:
 %1 %2</source>
         <translation>Торрент %1 успешно перемещен в:
 %2</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="453"/>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="459"/>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="479"/>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="528"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="407"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="413"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="433"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="482"/>
         <source>TORRENT %1 HAS ERROR %2</source>
         <translation>При загрузке торрента %1 произошла ошибка %2</translation>
     </message>

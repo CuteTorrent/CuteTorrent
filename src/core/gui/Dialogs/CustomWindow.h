@@ -2,7 +2,10 @@
 
 #define PIXELS_TO_ACT 3
 #include <QtGui>
+#include <WinSock2.h>
+#include <windows.h>
 #include "StyleEngene.h"
+
 
 template <class T>
 class BaseWindow : public T
@@ -297,7 +300,7 @@ void BaseWindow<T>::showMaximized()
 	QDesktopWidget* desktop = QApplication::desktop();
 	preMaximizeGeomentry = T::geometry();
 	m_bIsMaximized = true;
-	setGeometry(desktop->availableGeometry(this));
+	setGeometry(desktop->availableGeometry(this)/*.adjusted(0,0,-1,-1)*/);
 	T::showNormal();
 }
 
@@ -538,7 +541,8 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 			}
 			else
 			{
-				T::resize(wWidth, yMouse + 1);
+				int newHeight = yMouse - windowGeoemtry.y();
+				T::resize(wWidth, newHeight);
 			}
 		}
 		else if (T::cursor().shape() == Qt::SizeHorCursor)
@@ -546,7 +550,7 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 			if (resizeHorEsq)
 			{
 				int newX = xMouse;
-				int newWidth = wWidth - xMouse;
+				int newWidth = wWidth - (xMouse - windowGeoemtry.x());
 
 				if (newWidth > T::minimumSizeHint().width())
 				{
@@ -556,7 +560,8 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 			}
 			else
 			{
-				T::resize(xMouse, wHeight);
+				int newWidth = xMouse - windowGeoemtry.x();
+				T::resize(newWidth, wHeight);
 			}
 		}
 		else if (T::cursor().shape() == Qt::SizeBDiagCursor)
@@ -569,16 +574,16 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 			if (resizeDiagSupDer)
 			{
 				newX = windowGeoemtry.x();
-				newWidth = xMouse;
-				newY = windowGeoemtry.y() + yMouse;
-				newHeight = wHeight - yMouse;
+				newWidth = xMouse - windowGeoemtry.x();
+				newY = yMouse;
+				newHeight = wHeight - (yMouse - windowGeoemtry.y());
 			}
 			else
 			{
 				newX = xMouse;
-				newWidth = wWidth - xMouse;
+				newWidth = wWidth - (xMouse - windowGeoemtry.x());
 				newY = windowGeoemtry.y();
-				newHeight = yMouse;
+				newHeight = yMouse - windowGeoemtry.y();
 			}
 
 			if (newWidth >= T::minimumSizeHint().width() && newHeight >= T::minimumSizeHint().height())
@@ -601,10 +606,10 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 		{
 			if (resizeDiagSupEsq)
 			{
-				int newX = windowGeoemtry.x() + xMouse;
-				int newWidth = wWidth - xMouse;
-				int newY = windowGeoemtry.y() + yMouse;
-				int newHeight = wHeight - yMouse;
+				int newX = xMouse;
+				int newWidth = wWidth - (xMouse - windowGeoemtry.x());
+				int newY = yMouse;
+				int newHeight = wHeight - (yMouse - windowGeoemtry.y());
 
 				if (newWidth >= T::minimumSizeHint().width() && newHeight >= T::minimumSizeHint().height())
 				{
@@ -624,10 +629,11 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 			}
 			else
 			{
-				T::resize(xMouse + 1, yMouse + 1);
+				T::resize(xMouse - windowGeoemtry.x(), yMouse - windowGeoemtry.y());
 			}
 		}
-
+		MSG msg;
+		while (PeekMessage(&msg, T::winId(), WM_MOUSEMOVE, WM_MOUSEMOVE, PM_REMOVE));
 		e->accept();
 	}
 }

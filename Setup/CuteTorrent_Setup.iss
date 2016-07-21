@@ -4,6 +4,7 @@
 #define AppVersion      GetFileVersion(AddBackslash(SourcePath) + MainBinaryName)
 #include "idp.iss"
 [Setup]
+SignTool=signtool
 WizardSmallImageFile=bottom.bmp
 AppId=CuteTorrent
 AppName=CuteTorrent

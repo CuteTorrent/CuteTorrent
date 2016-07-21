@@ -20,8 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDebug>
 #include <QFileInfo>
 #include <QStringList>
-#include <QTimer>
-
 #include "Torrent.h"
 #include "TorrentManager.h"
 #include <libtorrent/magnet_uri.hpp>
@@ -41,69 +39,67 @@ Torrent::Torrent(torrent_status hTorrent, TorrentGroup* group)
 	  , size(0)
 	  , mountable(false)
 	  , isMovingFileStorrage(false)
+	  , m_hTorrent(hTorrent)
 {
-	m_hTorrent = hTorrent;
-
+	 
 	if (!m_hTorrent.handle.is_valid())
 	{
 		qCritical() << "Invalid Torrent recived...";
 		return;
 	}
 
-	file_storage storrgae =
-#if LIBTORRENT_VERSION_NUM >= 10000
-		m_hTorrent.handle.torrent_file()->files();
-#else
-	    m_hTorrent.handle.get_torrent_info().files();
-#endif
-
-	std::vector<size_type> progress;
-	m_hTorrent.handle.file_progress(progress);
-	std::string save_path =
-#if LIBTORRENT_VERSION_NUM >= 10000
-		m_hTorrent.save_path;
-#else
-		m_hTorrent.handle.save_path();
-#endif
-	QString savePath = QString::fromUtf8(save_path.c_str());
-	for (int i = 0; i < storrgae.num_files(); i++)
+	boost::shared_ptr<const torrent_info> info = hTorrent.handle.torrent_file();
+	if (info != nullptr)
 	{
-		QString filePath = QString::fromUtf8(storrgae.file_path(i).c_str());
-		QFileInfo curfile(filePath);
-		QString currentSuffix = curfile.suffix().toLower();
-		bool fileReady = storrgae.file_size(i) == progress[i];
-		QSet<QString> diskSufixes = StyleEngene::suffixes[StyleEngene::DISK];
-		bool mayMount = ((fileReady || m_hTorrent.handle.file_priority(i) > 0) && diskSufixes.contains(currentSuffix));
+		file_storage storrgae = info->files();
 
-		if (mayMount)
+		std::vector<int64_t> progress;
+		m_hTorrent.handle.file_progress(progress);
+		std::string save_path =
+#if LIBTORRENT_VERSION_NUM >= 10000
+			m_hTorrent.save_path;
+#else
+			m_hTorrent.handle.save_path();
+#endif
+		QString savePath = QString::fromUtf8(save_path.c_str());
+		for (int i = 0; i < storrgae.num_files(); i++)
 		{
-			imageFiles << StaticHelpers::CombinePathes(savePath, filePath);
-		}
+			QString filePath = QString::fromUtf8(storrgae.file_path(i).c_str());
+			QFileInfo curfile(filePath);
+			QString currentSuffix = curfile.suffix().toLower();
+			bool fileReady = storrgae.file_size(i) == progress[i];
+			QSet<QString> diskSufixes = StyleEngene::suffixes[StyleEngene::DISK];
+			bool mayMount = ((fileReady || m_hTorrent.handle.file_priority(i) > 0) && diskSufixes.contains(currentSuffix));
 
-		if (fileReady || m_hTorrent.handle.file_priority(i) > 0)
-		{
-			QSet<QString> videoSuffix = StyleEngene::suffixes[StyleEngene::VIDEO];
-
-			if (videoSuffix.contains(currentSuffix) || StyleEngene::suffixes[StyleEngene::AUDIO].contains(currentSuffix))
+			if (mayMount)
 			{
-				m_hasMedia = true;
+				imageFiles << StaticHelpers::CombinePathes(savePath, filePath);
 			}
 
-			size += storrgae.file_size(i);
+			if (fileReady || m_hTorrent.handle.file_priority(i) > 0)
+			{
+				QSet<QString> videoSuffix = StyleEngene::suffixes[StyleEngene::VIDEO];
+
+				if (videoSuffix.contains(currentSuffix) || StyleEngene::suffixes[StyleEngene::AUDIO].contains(currentSuffix))
+				{
+					m_hasMedia = true;
+				}
+
+				size += storrgae.file_size(i);
+			}
+		}
+
+		base_suffix = StaticHelpers::GetBaseSuffix(storrgae);
+		if (group == NULL)
+		{
+			group = TorrentGroupsManager::getInstance()->GetGroupByExtentions(base_suffix);
+		}
+		if (group != NULL)
+		{
+			m_groupName = group->name();
+			m_torrentGroupUid = group->uid();
 		}
 	}
-
-	base_suffix = StaticHelpers::GetBaseSuffix(storrgae);
-	if (group == NULL)
-	{
-		group = TorrentGroupsManager::getInstance()->GetGroupByExtentions(base_suffix);
-	}
-	if (group != NULL)
-	{
-		m_groupName = group->name();
-		m_torrentGroupUid = group->uid();
-	}
-
 	type = StyleEngene::getInstance()->gessMimeIconType(base_suffix);
 }
 
@@ -276,7 +272,7 @@ void Torrent::UpdateDiskImageFiles()
 #else
 		    m_hTorrent.handle.get_torrent_info().files();
 #endif
-		std::vector<size_type> progress;
+		std::vector<int64_t> progress;
 		m_hTorrent.handle.file_progress(progress);
 
 		for (int i = 0; i < storrgae.num_files(); ++i)
@@ -603,7 +599,7 @@ files_info Torrent::GetFileDownloadInfo()
 {
 	files_info filesInfo;
 	filesInfo.infoHash = GetInfoHash();
-
+	
 	if (m_hTorrent.handle.is_valid())
 	{
 		filesInfo.storrage =
@@ -612,7 +608,7 @@ files_info Torrent::GetFileDownloadInfo()
 #else
 		    m_hTorrent.handle.get_torrent_info().files();
 #endif
-		std::vector<libtorrent::size_type> downloadedSizes;
+		std::vector<int64_t> downloadedSizes;
 		m_hTorrent.handle.file_progress(downloadedSizes);
 		filesInfo.progresses.reserve(downloadedSizes.size());
 
@@ -698,7 +694,7 @@ void Torrent::MoveStorrage(QString path)
 {
 	if (m_hTorrent.handle.is_valid())
 	{
-		m_hTorrent.handle.move_storage(path.toStdString());
+		m_hTorrent.handle.move_storage(path.toUtf8().data());
 		isMovingFileStorrage = true;
 	}
 }
@@ -708,7 +704,12 @@ int Torrent::GetPieceCount()
 	if (m_hTorrent.handle.is_valid())
 	{
 #if LIBTORRENT_VERSION_NUM >= 10000
-		return m_hTorrent.handle.torrent_file()->files().num_pieces();
+		if (m_hTorrent.handle.has_metadata())
+		{
+			return m_hTorrent.handle.torrent_file()->files().num_pieces();
+		}
+
+		return 0;
 #else
 		return m_hTorrent.handle.get_torrent_info().files().num_pieces();
 #endif
@@ -760,7 +761,7 @@ QBitArray Torrent::GetDownloadingPieces()
 
 QString Torrent::GetDiscribtion()
 {
-	if (m_hTorrent.handle.is_valid())
+	if (m_hTorrent.handle.is_valid() && m_hTorrent.handle.has_metadata())
 	{
 		return QString::fromUtf8(
 #if LIBTORRENT_VERSION_NUM >= 10000

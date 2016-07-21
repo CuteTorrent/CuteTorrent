@@ -28,7 +28,7 @@
         <file alias="star-on.png">images/star-on.png</file>
     </qresource>
     <qresource prefix="/translations_qt">
-        <file alias="qt_ru_Ru.qm">Z:/qt/4.8.7/translations/qt_ru.qm</file>
+        <file alias="qt_ru_Ru.qm">D:/qt/4.8.7/translations/qt_ru.qm</file>
     </qresource>
     <qresource prefix="/flags">
         <file alias="AE.png">flags/ae.png</file>

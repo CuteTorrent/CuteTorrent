@@ -31,7 +31,7 @@ public:
 		RATING_COUNT
 	};
 
-	RaitingDialog(QWidget* parent);
+	RaitingDialog(QWidget* parent = NULL);
 public slots:
 	void sendRaiting();
 	void OnRaitingSent(QNetworkReply*);

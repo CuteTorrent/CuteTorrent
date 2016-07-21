@@ -19,9 +19,7 @@ public:
 	virtual bool StartImport(QString path) = 0;
 	virtual bool isRunning() = 0;
 	virtual void CancelImport() = 0;
-private:
-
-	signals:
+signals:
 	void progress(QString, int);
 	void error(QString, QString);
 };

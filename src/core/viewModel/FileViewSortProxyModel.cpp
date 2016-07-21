@@ -31,8 +31,8 @@ bool FileViewSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex
 
 		case 1:
 		{
-			libtorrent::size_type szLeft = sourceModel()->data(left).toLongLong();
-			libtorrent::size_type szRight = sourceModel()->data(right).toLongLong();
+			int64_t szLeft = sourceModel()->data(left).toLongLong();
+			int64_t szRight = sourceModel()->data(right).toLongLong();
 			return szLeft < szRight;
 		}
 

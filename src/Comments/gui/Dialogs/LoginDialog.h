@@ -15,7 +15,7 @@ protected:
 private:
 	Q_OBJECT
 public:
-	LoginDialog(QWidget* parent);
+	LoginDialog(QWidget* parent = NULL);
 public slots:
 	void OnAccepted();
 };

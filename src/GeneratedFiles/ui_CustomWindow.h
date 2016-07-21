@@ -13,7 +13,6 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
-#include <QtGui/QComboBox>
 #include <QtGui/QGridLayout>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
@@ -103,8 +102,6 @@ public:
     QSpinBox *dl;
     QSpacerItem *horizontalSpacer;
     QLabel *label_15;
-    QComboBox *sortByComboBox;
-    QPushButton *sortDirectionToggleButton;
     QTreeView *m_pTorrentListView;
     QStackedWidget *m_pInfoPlaneContainer;
     QWidget *torrentPage;
@@ -363,7 +360,6 @@ public:
         horizontalSplitter = new QSplitter(verticalSplitter);
         horizontalSplitter->setObjectName(QString::fromUtf8("horizontalSplitter"));
         horizontalSplitter->setMouseTracking(true);
-        horizontalSplitter->setStyleSheet(QString::fromUtf8(""));
         horizontalSplitter->setOrientation(Qt::Horizontal);
         m_pGroupTreeView = new QTreeView(horizontalSplitter);
         m_pGroupTreeView->setObjectName(QString::fromUtf8("m_pGroupTreeView"));
@@ -425,24 +421,6 @@ public:
 
         horizontalLayout_3->addWidget(label_15);
 
-        sortByComboBox = new QComboBox(SortersContainer);
-        sortByComboBox->setObjectName(QString::fromUtf8("sortByComboBox"));
-
-        horizontalLayout_3->addWidget(sortByComboBox);
-
-        sortDirectionToggleButton = new QPushButton(SortersContainer);
-        sortDirectionToggleButton->setObjectName(QString::fromUtf8("sortDirectionToggleButton"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Minimum);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(sortDirectionToggleButton->sizePolicy().hasHeightForWidth());
-        sortDirectionToggleButton->setSizePolicy(sizePolicy1);
-        sortDirectionToggleButton->setMaximumSize(QSize(20, 20));
-        sortDirectionToggleButton->setCheckable(true);
-        sortDirectionToggleButton->setFlat(true);
-
-        horizontalLayout_3->addWidget(sortDirectionToggleButton);
-
 
         torrentViewLayout->addWidget(SortersContainer);
 
@@ -489,41 +467,41 @@ public:
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
         availibilityLabel = new QLabel(tab);
         availibilityLabel->setObjectName(QString::fromUtf8("availibilityLabel"));
-        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(availibilityLabel->sizePolicy().hasHeightForWidth());
-        availibilityLabel->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(availibilityLabel->sizePolicy().hasHeightForWidth());
+        availibilityLabel->setSizePolicy(sizePolicy1);
         availibilityLabel->setMaximumSize(QSize(48, 16777215));
 
         gridLayout_4->addWidget(availibilityLabel, 1, 1, 1, 1);
 
         progressLabel = new QLabel(tab);
         progressLabel->setObjectName(QString::fromUtf8("progressLabel"));
-        QSizePolicy sizePolicy3(QSizePolicy::Maximum, QSizePolicy::Preferred);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(progressLabel->sizePolicy().hasHeightForWidth());
-        progressLabel->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy2(QSizePolicy::Maximum, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(progressLabel->sizePolicy().hasHeightForWidth());
+        progressLabel->setSizePolicy(sizePolicy2);
         progressLabel->setMaximumSize(QSize(48, 16777215));
 
         gridLayout_4->addWidget(progressLabel, 0, 1, 1, 1);
 
         widget_2 = new QWidget(tab);
         widget_2->setObjectName(QString::fromUtf8("widget_2"));
-        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(widget_2->sizePolicy().hasHeightForWidth());
-        widget_2->setSizePolicy(sizePolicy4);
+        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(widget_2->sizePolicy().hasHeightForWidth());
+        widget_2->setSizePolicy(sizePolicy3);
         widget_2->setMinimumSize(QSize(0, 15));
 
         gridLayout_4->addWidget(widget_2, 1, 0, 1, 1);
 
         widget = new QWidget(tab);
         widget->setObjectName(QString::fromUtf8("widget"));
-        sizePolicy4.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
-        widget->setSizePolicy(sizePolicy4);
+        sizePolicy3.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
+        widget->setSizePolicy(sizePolicy3);
         widget->setMinimumSize(QSize(0, 20));
         widget->setStyleSheet(QString::fromUtf8(""));
 

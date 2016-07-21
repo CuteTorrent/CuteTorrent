@@ -142,8 +142,11 @@ void CommentItemDelegate::drawComment(QPainter* painter, const QStyleOptionViewI
 	QRect commentDateArea(fillArea.x() + authorNameArea.width() + m.width(), fillArea.y(), commentDateSize.width(), commentDateSize.height());
 
 	QTextDocument doc;
+	QTextOption docOptions;
+	docOptions.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
+	doc.setDefaultTextOption(docOptions);
 	doc.setHtml(commentStr);
-
+	doc.setTextWidth(fillArea.width() - m.width()*2);
 	QRect commentArea(fillArea.x(), fillArea.y() + m.height() + authorNameArea.height(), doc.idealWidth(), doc.size().height());
 
 	QRect ratingArea(fillArea.x(), fillArea.y() + authorNameSize.height() + 2 * m.height() + commentArea.height(),
@@ -187,6 +190,7 @@ void CommentItemDelegate::drawComment(QPainter* painter, const QStyleOptionViewI
 	painter->save();
 	painter->translate(commentArea.topLeft());
 	painter->setClipRect(commentArea.translated(-commentArea.topLeft()));
+	//doc.setPageSize(commentArea.size());
 	doc.documentLayout()->draw(painter, ctx);
 	painter->restore();
 	qDebug() << "Rating Area" << ratingArea;
@@ -238,9 +242,12 @@ QSize CommentItemDelegate::sizeHint(const QStyleOptionViewItem& option, const Co
 		fillArea.width(), 8000, Qt::AlignJustify | Qt::TextWordWrap, commentStr);*/
 
 	QTextDocument doc;
+	QTextOption docOptions;
+	docOptions.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
+	doc.setDefaultTextOption(docOptions);
 	doc.setHtml(comment.message);
 	doc.setTextWidth(option.rect.width());
-
+	
 	QRect commentArea(0, 0, doc.idealWidth(), doc.size().height());
 
 	int minRatingHeight = 20;

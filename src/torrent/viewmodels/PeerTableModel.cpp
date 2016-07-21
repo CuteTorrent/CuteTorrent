@@ -1,8 +1,9 @@
 ﻿#include "PeerTableModel.h"
 #include "IpItemDelegate.h"
-
+#include "IpToCountryResolver.h"
 PeerTableModel::PeerTableModel(QObject* parent)
 	: QStandardItemModel(0, COLUMN_COUNT)
+	  , m_pIpToCountryResolver(IpToCountryResolver::getInstance())
 	  , m_pStyleEngene(StyleEngene::getInstance())
 	  , m_pUpdateMutex(new QMutex())
 	  , m_peerItems()
@@ -75,7 +76,7 @@ void PeerTableModel::updatePeer(libtorrent::peer_info peerInfo)
 	QString peerIp = QString::fromStdString(peerInfo.ip.address().to_string());
 	QStandardItem* pItem = m_peerItems[peerIp];
 	int row = pItem->row();
-	QString flagFileName = QString(":/flags/%1.png").arg(QString(QByteArray(peerInfo.country, 2)));
+	QString flagFileName = QString(":/flags/%1.png").arg(m_pIpToCountryResolver->GetCountryISOCode(peerIp));
 	QIcon flagIcon = QIcon(QPixmap(flagFileName));
 	setData(index(row, IP), flagIcon, Qt::DecorationRole);
 	setData(index(row, IP), QVariant::fromValue(peerInfo.ip.address()), Qt::DisplayRole);
@@ -105,7 +106,7 @@ QStandardItem* PeerTableModel::addPeer(libtorrent::peer_info peerInfo)
 	int row = rowCount();
 	QString peerIp = QString::fromStdString(peerInfo.ip.address().to_string());
 	insertRow(row);
-	QString flagFileName = QString(":/flags/%1.png").arg(QString(QByteArray(peerInfo.country, 2)));
+	QString flagFileName = QString(":/flags/%1.png").arg(m_pIpToCountryResolver->GetCountryISOCode(peerIp));
 	QIcon flagIcon = QIcon(QPixmap(flagFileName));
 	setData(index(row, IP), QVariant::fromValue(peerInfo), Qt::UserRole);
 	setData(index(row, IP), flagIcon, Qt::DecorationRole);

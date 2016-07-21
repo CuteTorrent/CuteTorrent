@@ -37,7 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <TorrentGroupsManager.h>
 #include "FiltersViewModel.h"
 #include "AddRssDwonloadRuleDialog.h"
-
+#include <libtorrent/torrent_info.hpp>
 OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags)
 	: BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize, parent)
 	  , m_size(0)
@@ -100,10 +100,10 @@ void OpenTorrentDialog::FillData(opentorrent_info* info)
 	labelSizeData->setText(StaticHelpers::toKbMbGb(info->size));
 	m_pFileTreeModel = new FileTreeModel();
 	FileTreeSortProxyModel* sortModel = new FileTreeSortProxyModel(this);
-
-	for (int i = 0; i < info->files.num_files(); i++)
+	file_storage files = info->torrentInfo->files();
+	for (int i = 0; i < files.num_files(); i++)
 	{
-		m_pFileTreeModel->addPath(QString::fromUtf8(info->files.file_path(i).c_str()), info->files.file_size(i));
+		m_pFileTreeModel->addPath(QString::fromUtf8(files.file_path(i).c_str()), files.file_size(i));
 	}
 
 	sortModel->setSourceModel(m_pFileTreeModel);
