@@ -1,4 +1,6 @@
 # CuteTorrent
+
+[![Join the chat at https://gitter.im/CuteTorrent/Lobby](https://badges.gitter.im/CuteTorrent/Lobby.svg)](https://gitter.im/CuteTorrent/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [Help to translate CuteTorrent to your favourite language](http://translate.cutetorrent.info/collaboration/project?id=35923)  
 CuteTorrent is a lightweight BitTorrent client with a simple, intuitive interface designed to quickly download and share torrent files. At the heart of it's core resides the powerful libtorrent BitTorrent library. CuteTorrent comes with some interesting features such as Proxy support, Global and per-torrent speed limits, IPv6 support, the ability to mount Disk Images to DaemonTools, and a convenient and easy-to-use web interface that lets you manage your downloads remotely.
 
