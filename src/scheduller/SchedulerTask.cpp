@@ -45,7 +45,7 @@ SchedulerTask::TaskType SchedulerTask::type() const
 void SchedulerTask::pefromTask()
 {
 	TorrentManagerPtr tManager = TorrentManager::getInstance();
-	libtorrent::session_settings current = tManager->readSettings();
+	settings_pack current = tManager->readSettings();
 
 	switch (m_taskType)
 	{
@@ -59,14 +59,14 @@ void SchedulerTask::pefromTask()
 
 		case LIMIT_UPLOAD:
 		{
-			current.upload_rate_limit = m_speedLimit;
+			current.set_int(settings_pack::upload_rate_limit, m_speedLimit);
 			tManager->updateSettings(current);
 		}
 			break;
 
 		case LIMIT_DOWNLOAD:
 		{
-			current.download_rate_limit = m_speedLimit;
+			current.set_int(settings_pack::download_rate_limit, m_speedLimit);
 			tManager->updateSettings(current);
 		}
 			break;

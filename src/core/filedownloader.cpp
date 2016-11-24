@@ -29,7 +29,7 @@ void FileDownloader::replyReady(QNetworkReply* pReply)
 			return;
 		}
 
-		QTemporaryFile* pFile = new QTemporaryFile(this);
+		QTemporaryFilePtr pFile(new QTemporaryFile(this));
 
 		if (pFile->open())
 		{

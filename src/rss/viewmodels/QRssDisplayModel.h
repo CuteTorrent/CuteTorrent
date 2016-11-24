@@ -33,7 +33,7 @@ private slots:
 	void UpdateVisibleData();
 	void onItemDownload();
 	void onItemOpenDesc();
-	void onTorrentDownloaded(QUrl url, QTemporaryFile* pfile);
+	void onTorrentDownloaded(QUrl url, QTemporaryFilePtr pfile);
 	void onMarkAllRead();
 	void onMarkAllUnread();
 	void onMarkRead();

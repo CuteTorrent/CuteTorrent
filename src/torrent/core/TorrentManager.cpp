@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QApplication>
 #include <QDebug>
 #include <QDir>
-
+#include <libtorrent/session_stats.hpp>
 #include <deque>
 #include <exception>
 #include <iosfwd>
@@ -72,8 +72,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using namespace libtorrent;
 namespace fs = boost::filesystem;
 TorrentManager::TorrentManager()
-	: m_pFileDownloader(FileDownloader::getNewInstance())
-	  , m_bIsSaveSessionInitiated(false)
+	: m_bIsSaveSessionInitiated(false)
 	  , m_pNotificationSys(NotificationSystem::getInstance())
 	  , m_powerManagement(PowerManagement::getInstance())
 	  , m_lastActiveTime(0)
@@ -84,9 +83,12 @@ TorrentManager::TorrentManager()
 {
 	m_pTorrentStorrage = TorrentStorrage::getInstance();
 	m_pTorrentSessionSettings = QApplicationSettings::getInstance();
-	m_pTorrentSession = new session(fingerprint("cT", Version::Major(), Version::Minor(), Version::Revision(), Version::Build())
+	settings_pack s_settings = readSettings();
+	// upnp
+	m_pTorrentSession = new session(s_settings);
+	/*m_pTorrentSession = new session(fingerprint("cT", Version::Major(), Version::Minor(), Version::Revision(), Version::Build())
 	                                , 0
-	                                , alert::error_notification | alert::storage_notification | alert::status_notification | alert::tracker_notification | alert::port_mapping_notification);
+	                                , alert::error_notification | alert::storage_notification | alert::status_notification | alert::tracker_notification | alert::port_mapping_notification);*/
 	error_code ec;
 	std::vector<char> in;
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
@@ -109,24 +111,28 @@ TorrentManager::TorrentManager()
 
 	if (StaticHelpers::LoadFile(stateFileName, in))
 	{
-		entry e = bdecode(&in[0], &in[0] + in.size());
-		if (entry* i = e.find_key("active_session_time"))
+		bdecode_node e;
+		if (bdecode(&in[0], &in[0] + in.size(), e, ec) == 0)
 		{
-			m_lastActiveTime = i->integer();
+			if (bdecode_node i = e.dict_find_int("active_session_time"))
+			{
+				m_lastActiveTime = i.int_value();
+			}
+			m_pTorrentSession->load_state(e, session::save_dht_state);
 		}
-		m_pTorrentSession->load_state(e);
+		
+		
 	}
 	m_shouldRate = (m_lastActiveTime > 360000);
 	m_elapsedTimer.start();
-	session_settings s_settings = readSettings();
-	// upnp
+	
 #if LIBTORRENT_VERSION_NUM >= 10000
-	m_pTorrentSession->start_upnp();
+	
 #else
 	m_pUpnp = m_pTorrentSession->start_upnp();
 #endif
-	connect(m_pFileDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFile*)), SLOT(OnDownloadReady(QUrl, QTemporaryFile*)));
-/*	QString geoIpPath = StaticHelpers::CombinePathes(dataDir, "GeoIP.dat");
+/*	connect(m_pFileDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFile*)), SLOT(OnDownloadReady(QUrl, QTemporaryFile*)));
+	QString geoIpPath = StaticHelpers::CombinePathes(dataDir, "GeoIP.dat");
 	QUrl geoIpUrl = QUrl("http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz");
 
 	if (QFile::exists(geoIpPath))
@@ -147,7 +153,6 @@ TorrentManager::TorrentManager()
 		m_pFileDownloader->download(geoIpUrl);
 	}
 	*/
-	m_pTorrentSession->start_natpmp();
 	m_pTorrentSession->add_extension(create_avaliable_space_verifier_plugin());
 	m_pTorrentSession->add_extension(&create_ut_metadata_plugin);
 	m_pTorrentSession->add_extension(&create_smart_ban_plugin);
@@ -169,8 +174,7 @@ TorrentManager::TorrentManager()
 
 
 	RefreshExternalPeerSettings();
-	m_pTorrentSession->listen_on(std::make_pair(listen_port, listen_port + 20)
-	                             , ec);
+	
 
 	if (ec)
 	{
@@ -178,7 +182,7 @@ TorrentManager::TorrentManager()
 		return;
 	}
 
-	m_pTorrentSession->set_settings(s_settings);
+	m_pTorrentSession->apply_settings(s_settings);
 	
 	connect(this, SIGNAL(Notify(int, QString, QVariant)), m_pNotificationSys.get(), SLOT(OnNewNotification(int, QString, QVariant)));
 	m_updateTimerID = startTimer(500);
@@ -207,6 +211,8 @@ void TorrentManager::timerEvent(QTimerEvent* timerEvent)
 	if (timerEvent->timerId() == m_updateTimerID)
 	{
 		m_pTorrentSession->post_torrent_updates();
+		m_pTorrentSession->post_session_stats();
+		m_pTorrentSession->post_dht_stats();
 		dispatchPendingAlerts();
 		if (GetSessionDwonloadRate() < 5 * KbInt)
 		{
@@ -267,8 +273,21 @@ void TorrentManager::handle_alert(alert* a)
 	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 	TORRENT_TRY
 	{
+		if (!(a->category() & (alert::error_notification | alert::storage_notification | alert::status_notification | alert::tracker_notification | alert::port_mapping_notification| alert::error_notification | alert::storage_notification | alert::status_notification | alert::tracker_notification | alert::port_mapping_notification | alert::stats_notification)))
+		return;
 		switch (a->type())
 		{
+			case session_stats_alert::alert_type:
+			{
+				session_stats_alert* p = alert_cast<session_stats_alert>(a);
+				memcpy(counters_values, p->values , sizeof(counters_values));
+				std::vector<stats_metric> statsMetrics = session_stats_metrics();
+		/*		for (int i = 0; i <statsMetrics.size(); i++)
+				{
+					qDebug() << qPrintable(statsMetrics[i].name) << " = " << counters_values[statsMetrics[i].value_index];
+				}*/
+				break;
+			}
 			case tracker_reply_alert::alert_type:
 			{
 				tracker_reply_alert* p = alert_cast<tracker_reply_alert>(a);
@@ -276,7 +295,7 @@ void TorrentManager::handle_alert(alert* a)
 
 				if (pTorrent != NULL)
 				{
-					pTorrent->SetTrackerPeersCnt(QString::fromStdString(p->url), p->num_peers);
+					pTorrent->SetTrackerPeersCnt(QString::fromStdString(p->tracker_url()), p->num_peers);
 				}
 
 				break;
@@ -533,6 +552,8 @@ void TorrentManager::handle_alert(alert* a)
 				emit TorrentsChanged(torrentUpdates);
 				break;
 			}
+			case stats_alert::alert_type:
+			case dht_stats_alert::alert_type:
 			case file_error_alert::alert_type:
 			case lsd_peer_alert::alert_type:
 			case incoming_connection_alert::alert_type:
@@ -561,6 +582,7 @@ void TorrentManager::handle_alert(alert* a)
 
 			default:
 			{
+				qDebug()<< "Default Alert Notification" << a->category() << a->type() << qPrintable(a->message().c_str());
 				QString information = QString::fromUtf8(a->message().c_str());
 
 				if ((a->category() & alert::error_notification) == alert::error_notification)
@@ -661,8 +683,7 @@ Torrent* TorrentManager::AddTorrent(QString& path, QString& save_path, error_cod
 
 		for (int i = 0; i < filesCount; i++)
 		{
-			file_entry file = storrage.at(i);
-			QString filePath = QDir::toNativeSeparators(QString::fromUtf8(file.path.c_str()));
+			QString filePath = QDir::toNativeSeparators(QString::fromUtf8(storrage.file_path(i).c_str()));
 
 			if (filePriorities.contains(filePath))
 			{
@@ -748,44 +769,42 @@ Torrent* TorrentManager::AddTorrent(QString& path, QString& save_path, error_cod
 	return current;
 }
 
-session_settings TorrentManager::readSettings()
+settings_pack TorrentManager::readSettings()
 {
-	session_settings s_settings = m_pTorrentSession->settings();
-	s_settings.smooth_connects = false;
-	s_settings.half_open_limit = m_pTorrentSessionSettings->valueInt("Torrent", "half_open_limit", 0x7fffffff);
-	s_settings.allow_multiple_connections_per_ip = m_pTorrentSessionSettings->valueBool("Torrent", "allow_multiple_connections_per_ip", true);
+	settings_pack s_settings;
+	s_settings.set_bool(settings_pack::smooth_connects, false);
+	s_settings.set_bool(settings_pack::allow_multiple_connections_per_ip, m_pTorrentSessionSettings->valueBool("Torrent", "allow_multiple_connections_per_ip", true));
 	if (m_pTorrentSessionSettings->valueBool("Torrent", "random_listen_port", false))
 	{
 		listen_port = rand() % 65535;
 		m_pTorrentSessionSettings->setValue("Torrent", "listen_port", listen_port);
+		char listenInterfaceStr[22];
+		sprintf_s(listenInterfaceStr, "0.0.0.0:%d", listen_port);
+		s_settings.set_str(settings_pack::listen_interfaces, listenInterfaceStr);
 	}
 	else
 	{
 		listen_port = m_pTorrentSessionSettings->valueInt("Torrent", "listen_port", 6103);
 	}
 
-	s_settings.use_disk_read_ahead = m_pTorrentSessionSettings->valueBool("Torrent", "use_disk_read_ahead", true);
-	s_settings.disable_hash_checks = m_pTorrentSessionSettings->valueBool("Torrent", "disable_hash_checks", false);
-	s_settings.peer_timeout = m_pTorrentSessionSettings->valueInt("Torrent", "peer_timeout", 120);
-	s_settings.announce_to_all_tiers = m_pTorrentSessionSettings->valueBool("Torrent", "announce_to_all_tiers", true);
-	s_settings.announce_to_all_trackers = m_pTorrentSessionSettings->valueBool("Torrent", "announce_to_all_trackers", true);
-	s_settings.download_rate_limit = m_pTorrentSessionSettings->valueInt("Torrent", "download_rate_limit", 0);
-	s_settings.upload_rate_limit = m_pTorrentSessionSettings->valueInt("Torrent", "upload_rate_limit", 0);
-	s_settings.dht_upload_rate_limit = m_pTorrentSessionSettings->valueInt("Torrent", "dht_upload_rate_limit", 0);
-	s_settings.ignore_limits_on_local_network = m_pTorrentSessionSettings->valueBool("Torrent", "ignore_limits_on_local_network", false);
-	s_settings.local_upload_rate_limit = m_pTorrentSessionSettings->valueInt("Torrent", "local_upload_rate_limit", 0);
-	s_settings.local_download_rate_limit = m_pTorrentSessionSettings->valueInt("Torrent", "local_download_rate_limit", 0);
-	s_settings.rate_limit_utp = m_pTorrentSessionSettings->valueBool("Torrent", "rate_limit_utp", true);
-	s_settings.torrent_connect_boost = 50;
-	s_settings.unchoke_slots_limit = m_pTorrentSessionSettings->valueInt("Torrent", "unchoke_slots_limit", 8);
-	s_settings.urlseed_wait_retry = m_pTorrentSessionSettings->valueInt("Torrent", "urlseed_wait_retry", 30);
-	s_settings.listen_queue_size = m_pTorrentSessionSettings->valueInt("Torrent", "listen_queue_size", 30);
-	s_settings.mixed_mode_algorithm = session_settings::peer_proportional;
-	s_settings.max_peerlist_size = m_pTorrentSessionSettings->valueInt("Torrent", "max_peerlist_size", 0);
-	s_settings.connections_limit = m_pTorrentSessionSettings->valueInt("Torrent", "connections_limit", 2000);
-	s_settings.max_paused_peerlist_size = m_pTorrentSessionSettings->valueInt("Torrent", "max_paused_peerlist_size", 400);
-	s_settings.seed_time_limit = m_pTorrentSessionSettings->valueInt("Torrent", "seed_time_limit", 0);
-	s_settings.share_ratio_limit = m_pTorrentSessionSettings->valueFloat("Torrent", "share_ratio_limit");
+	s_settings.set_bool(settings_pack::use_disk_read_ahead, m_pTorrentSessionSettings->valueBool("Torrent", "use_disk_read_ahead", true));
+	s_settings.set_bool(settings_pack::disable_hash_checks, m_pTorrentSessionSettings->valueBool("Torrent", "disable_hash_checks", false));
+	s_settings.set_int(settings_pack::peer_timeout, m_pTorrentSessionSettings->valueInt("Torrent", "peer_timeout", 120));
+	s_settings.set_bool(settings_pack::announce_to_all_tiers,  m_pTorrentSessionSettings->valueBool("Torrent", "announce_to_all_tiers", true));
+	s_settings.set_bool(settings_pack::announce_to_all_trackers,  m_pTorrentSessionSettings->valueBool("Torrent", "announce_to_all_trackers", true));
+	s_settings.set_int(settings_pack::download_rate_limit,  m_pTorrentSessionSettings->valueInt("Torrent", "download_rate_limit", 0));
+	s_settings.set_int(settings_pack::upload_rate_limit, m_pTorrentSessionSettings->valueInt("Torrent", "upload_rate_limit", 0));
+	s_settings.set_int(settings_pack::dht_upload_rate_limit, m_pTorrentSessionSettings->valueInt("Torrent", "dht_upload_rate_limit", 0));
+	s_settings.set_int(settings_pack::torrent_connect_boost, 50);
+	s_settings.set_int(settings_pack::unchoke_slots_limit, m_pTorrentSessionSettings->valueInt("Torrent", "unchoke_slots_limit", 8));
+	s_settings.set_int(settings_pack::urlseed_wait_retry, m_pTorrentSessionSettings->valueInt("Torrent", "urlseed_wait_retry", 30));
+	s_settings.set_int(settings_pack::listen_queue_size, m_pTorrentSessionSettings->valueInt("Torrent", "listen_queue_size", 30));
+	s_settings.set_int(settings_pack::mixed_mode_algorithm, settings_pack::bandwidth_mixed_algo_t::peer_proportional);
+	s_settings.set_int(settings_pack::max_peerlist_size, m_pTorrentSessionSettings->valueInt("Torrent", "max_peerlist_size", 0));
+	s_settings.set_int(settings_pack::connections_limit, m_pTorrentSessionSettings->valueInt("Torrent", "connections_limit", 2000));
+	s_settings.set_int(settings_pack::max_paused_peerlist_size, m_pTorrentSessionSettings->valueInt("Torrent", "max_paused_peerlist_size", 400));
+	s_settings.set_int(settings_pack::seed_time_limit, m_pTorrentSessionSettings->valueInt("Torrent", "seed_time_limit", 0));
+	s_settings.set_int(settings_pack::share_ratio_limit,  m_pTorrentSessionSettings->valueFloat("Torrent", "share_ratio_limit"));
 	m_pTorrentSessionSettings->valueInt("Torrent", "file_allocation_mode", storage_mode_sparse);
 	ipFilterFileName = m_pTorrentSessionSettings->valueString("Torrent", "ip_filter_filename", "");
 	FILE* filter = fopen(ipFilterFileName.toLatin1().data(), "r");
@@ -821,49 +840,43 @@ session_settings TorrentManager::readSettings()
 
 	if (useProxy)
 	{
-		ps.hostname = m_pTorrentSessionSettings->valueString("Torrent", "proxy_hostname").toUtf8().constData();
-		ps.port = m_pTorrentSessionSettings->valueInt("Torrent", "proxy_port");
-		ps.type = static_cast<proxy_settings::proxy_type>(m_pTorrentSessionSettings->valueInt("Torrent", "proxy_type"));
-		ps.username = m_pTorrentSessionSettings->valueString("Torrent", "proxy_username").toUtf8().constData();
-		ps.password = m_pTorrentSessionSettings->valueString("Torrent", "proxy_password").toUtf8().constData();
-		m_pTorrentSession->set_proxy(ps);
+		s_settings.set_str(settings_pack::proxy_hostname, m_pTorrentSessionSettings->valueString("Torrent", "proxy_hostname").toUtf8().constData());
+		s_settings.set_int(settings_pack::proxy_port, m_pTorrentSessionSettings->valueInt("Torrent", "proxy_port"));
+		s_settings.set_int(settings_pack::proxy_type, static_cast<settings_pack::proxy_type_t>(m_pTorrentSessionSettings->valueInt("Torrent", "proxy_type")));
+		s_settings.set_str(settings_pack::proxy_username, m_pTorrentSessionSettings->valueString("Torrent", "proxy_username").toUtf8().constData());
+		s_settings.set_str(settings_pack::proxy_password, m_pTorrentSessionSettings->valueString("Torrent", "proxy_password").toUtf8().constData());
 	}
 
-	s_settings.lock_files = m_pTorrentSessionSettings->valueBool("Torrent", "lock_files", false);
-	s_settings.disk_io_read_mode = m_pTorrentSessionSettings->valueInt("Torrent", "disk_io_write_mode", 0);
-	s_settings.disk_io_write_mode = m_pTorrentSessionSettings->valueInt("Torrent", "disk_io_write_mode", 0);
-	s_settings.low_prio_disk = m_pTorrentSessionSettings->valueBool("Torrent", "low_prio_disk", false);
-	s_settings.cache_size = m_pTorrentSessionSettings->valueInt("Torrent", "cache_size", 2048);
-	s_settings.use_read_cache = m_pTorrentSessionSettings->valueBool("Torrent", "use_read_cache", s_settings.cache_size > 0);
-	s_settings.cache_buffer_chunk_size = m_pTorrentSessionSettings->valueInt("Torrent", "cache_buffer_chunk_size", s_settings.cache_size / 100);
-	s_settings.allowed_fast_set_size = m_pTorrentSessionSettings->valueInt("Torrent", "allowed_fast_set_size", 10);
-	s_settings.read_cache_line_size = m_pTorrentSessionSettings->valueInt("Torrent", "read_cache_line_size", 40);
-	s_settings.allow_reordered_disk_operations = m_pTorrentSessionSettings->valueBool("Torrent", "allow_reordered_disk_operations", true);
-	s_settings.active_downloads = m_pTorrentSessionSettings->valueInt("Torrent", "active_downloads", -1);
-	s_settings.active_limit = m_pTorrentSessionSettings->valueInt("Torrent", "active_limit", -1);
-	s_settings.active_seeds = m_pTorrentSessionSettings->valueInt("Torrent", "active_seeds", -1);
-	s_settings.choking_algorithm = session_settings::auto_expand_choker;
-	s_settings.seed_choking_algorithm = session_settings::fastest_upload;
-	s_settings.disk_cache_algorithm = session_settings::avoid_readback;
-	s_settings.user_agent = "CuteTorrent ";
-	s_settings.user_agent.append(Version::getVersionStr());
-	s_settings.announce_double_nat = true;
+	s_settings.set_int(settings_pack::in_enc_policy, m_pTorrentSessionSettings->valueInt("Torrent", "out_enc_policy", static_cast<int>(settings_pack::enc_policy::pe_enabled)));
+	s_settings.set_int(settings_pack::out_enc_policy, m_pTorrentSessionSettings->valueInt("Torrent", "out_enc_policy", static_cast<int>(settings_pack::enc_policy::pe_enabled)));
+	s_settings.set_int(settings_pack::allowed_enc_level, m_pTorrentSessionSettings->valueInt("Torrent", "allowed_enc_level", static_cast<int>(settings_pack::enc_level::pe_both)) - 1);
+	s_settings.set_bool(settings_pack::prefer_rc4, m_pTorrentSessionSettings->valueBool("Torrent", "prefer_rc4", true));
+
+	s_settings.set_bool(settings_pack::lock_files,  m_pTorrentSessionSettings->valueBool("Torrent", "lock_files", false));
+	s_settings.set_int(settings_pack::disk_io_read_mode, m_pTorrentSessionSettings->valueInt("Torrent", "disk_io_write_mode", 0));
+	s_settings.set_int(settings_pack::disk_io_write_mode, m_pTorrentSessionSettings->valueInt("Torrent", "disk_io_write_mode", 0));
+	s_settings.set_bool(settings_pack::low_prio_disk,  m_pTorrentSessionSettings->valueBool("Torrent", "low_prio_disk", false));
+	s_settings.set_int(settings_pack::cache_size, m_pTorrentSessionSettings->valueInt("Torrent", "cache_size", 2048));
+	s_settings.set_bool(settings_pack::use_read_cache,  m_pTorrentSessionSettings->valueBool("Torrent", "use_read_cache", s_settings.cache_size > 0));
+	s_settings.set_int(settings_pack::cache_buffer_chunk_size, m_pTorrentSessionSettings->valueInt("Torrent", "cache_buffer_chunk_size", s_settings.cache_size / 100));
+	s_settings.set_int(settings_pack::allowed_fast_set_size, m_pTorrentSessionSettings->valueInt("Torrent", "allowed_fast_set_size", 10));
+	s_settings.set_int(settings_pack::read_cache_line_size, m_pTorrentSessionSettings->valueInt("Torrent", "read_cache_line_size", 40));
+	s_settings.set_int(settings_pack::active_downloads, m_pTorrentSessionSettings->valueInt("Torrent", "active_downloads", -1));
+	s_settings.set_int(settings_pack::active_limit, m_pTorrentSessionSettings->valueInt("Torrent", "active_limit", -1));
+	s_settings.set_int(settings_pack::active_seeds, m_pTorrentSessionSettings->valueInt("Torrent", "active_seeds", -1));
+	s_settings.set_int(settings_pack::choking_algorithm, settings_pack::choking_algorithm_t::rate_based_choker);
+	s_settings.set_bool(settings_pack::seed_choking_algorithm, settings_pack::seed_choking_algorithm_t::fastest_upload);
+	char userAgent[128]= "";
+	sprintf_s(userAgent, "CuteTorrent %s", Version::getVersionStr());
+	s_settings.set_str(settings_pack::user_agent, userAgent);
+	s_settings.set_bool(settings_pack::announce_double_nat,  true);
 	return s_settings;
 }
 
-pe_settings TorrentManager::readEncSettings()
-{
-	return m_pTorrentSession->get_pe_settings();
-}
 
-void TorrentManager::updateEncSettings(const pe_settings& settings)
+void TorrentManager::updateSettings(const settings_pack& settings)
 {
-	m_pTorrentSession->set_pe_settings(settings);
-}
-
-void TorrentManager::updateSettings(const session_settings& settings)
-{
-	m_pTorrentSession->set_settings(settings);
+	m_pTorrentSession->apply_settings(settings);
 }
 
 void TorrentManager::updateMaxConnectionsPerTorrent()
@@ -884,53 +897,47 @@ void TorrentManager::updateMaxConnectionsPerTorrent()
 
 void TorrentManager::writeSettings()
 {
-	session_settings s_settings = m_pTorrentSession->settings();
-	m_pTorrentSessionSettings->setValue("Torrent", "half_open_limit", s_settings.half_open_limit);
-	m_pTorrentSessionSettings->setValue("Torrent", "allow_multiple_connections_per_ip", s_settings.allow_multiple_connections_per_ip);
-	m_pTorrentSessionSettings->setValue("Torrent", "use_disk_read_ahead", s_settings.use_disk_read_ahead);
-	m_pTorrentSessionSettings->setValue("Torrent", "disable_hash_checks", s_settings.disable_hash_checks);;
-	m_pTorrentSessionSettings->setValue("Torrent", "peer_timeout", s_settings.peer_timeout);
-	m_pTorrentSessionSettings->setValue("Torrent", "announce_to_all_tiers", s_settings.announce_to_all_tiers);
-	m_pTorrentSessionSettings->setValue("Torrent", "download_rate_limit", s_settings.download_rate_limit);
-	m_pTorrentSessionSettings->setValue("Torrent", "dht_upload_rate_limit", s_settings.dht_upload_rate_limit);
-	m_pTorrentSessionSettings->setValue("Torrent", "ignore_limits_on_local_network", s_settings.ignore_limits_on_local_network);
-	m_pTorrentSessionSettings->setValue("Torrent", "local_upload_rate_limit", s_settings.local_upload_rate_limit);
-	m_pTorrentSessionSettings->setValue("Torrent", "local_download_rate_limit", s_settings.local_download_rate_limit);
-	m_pTorrentSessionSettings->setValue("Torrent", "rate_limit_utp", s_settings.rate_limit_utp);
-	m_pTorrentSessionSettings->setValue("Torrent", "seed_time_limit", s_settings.seed_time_limit);
-	m_pTorrentSessionSettings->setValue("Torrent", "share_ratio_limit", QString::number(s_settings.share_ratio_limit));
-	m_pTorrentSessionSettings->setValue("Torrent", "upload_rate_limit", s_settings.upload_rate_limit);
-	m_pTorrentSessionSettings->setValue("Torrent", "unchoke_slots_limit", s_settings.unchoke_slots_limit);
-	m_pTorrentSessionSettings->setValue("Torrent", "urlseed_wait_retry", s_settings.urlseed_wait_retry);
-	m_pTorrentSessionSettings->setValue("Torrent", "listen_queue_size", s_settings.listen_queue_size);
-	m_pTorrentSessionSettings->setValue("Torrent", "max_peerlist_size", s_settings.max_peerlist_size);
-	m_pTorrentSessionSettings->setValue("Torrent", "max_paused_peerlist_size", s_settings.max_paused_peerlist_size);
+	settings_pack s_settings = m_pTorrentSession->get_settings();
+	m_pTorrentSessionSettings->setValue("Torrent", "allow_multiple_connections_per_ip", s_settings.get_bool(settings_pack::allow_multiple_connections_per_ip));
+	m_pTorrentSessionSettings->setValue("Torrent", "use_disk_read_ahead", s_settings.get_bool(settings_pack::use_disk_read_ahead));
+	m_pTorrentSessionSettings->setValue("Torrent", "disable_hash_checks", s_settings.get_bool(settings_pack::disable_hash_checks));;
+	m_pTorrentSessionSettings->setValue("Torrent", "peer_timeout", s_settings.get_int(settings_pack::peer_timeout));
+	m_pTorrentSessionSettings->setValue("Torrent", "announce_to_all_tiers", s_settings.get_bool(settings_pack::announce_to_all_tiers));
+	m_pTorrentSessionSettings->setValue("Torrent", "download_rate_limit", s_settings.get_int(settings_pack::download_rate_limit));
+	m_pTorrentSessionSettings->setValue("Torrent", "dht_upload_rate_limit", s_settings.get_int(settings_pack::dht_upload_rate_limit));
+	m_pTorrentSessionSettings->setValue("Torrent", "seed_time_limit", s_settings.get_int(settings_pack::seed_time_limit));
+	m_pTorrentSessionSettings->setValue("Torrent", "share_ratio_limit", QString::number(s_settings.get_int(settings_pack::share_ratio_limit)));
+	m_pTorrentSessionSettings->setValue("Torrent", "upload_rate_limit", s_settings.get_int(settings_pack::upload_rate_limit));
+	m_pTorrentSessionSettings->setValue("Torrent", "unchoke_slots_limit", s_settings.get_int(settings_pack::unchoke_slots_limit));
+	m_pTorrentSessionSettings->setValue("Torrent", "urlseed_wait_retry", s_settings.get_int(settings_pack::urlseed_wait_retry));
+	m_pTorrentSessionSettings->setValue("Torrent", "listen_queue_size", s_settings.get_int(settings_pack::listen_queue_size));
+	m_pTorrentSessionSettings->setValue("Torrent", "max_peerlist_size", s_settings.get_int(settings_pack::max_peerlist_size));
+	m_pTorrentSessionSettings->setValue("Torrent", "max_paused_peerlist_size", s_settings.get_int(settings_pack::max_paused_peerlist_size));
 	m_pTorrentSessionSettings->setValue("Torrent", "max_connections_per_torrent", max_connections_per_torrent);
 	m_pTorrentSessionSettings->setValue("Torrent", "ip_filter_filename", ipFilterFileName);
 	m_pTorrentSessionSettings->setValue("Torrent", "useProxy", useProxy);
-	m_pTorrentSessionSettings->setValue("Torrent", "proxy_hostname", ps.hostname.c_str());
-	m_pTorrentSessionSettings->setValue("Torrent", "proxy_port", ps.port);
-	m_pTorrentSessionSettings->setValue("Torrent", "proxy_type", ps.type);
-	m_pTorrentSessionSettings->setValue("Torrent", "proxy_username", ps.username.c_str());
-	m_pTorrentSessionSettings->setValue("Torrent", "proxy_password", ps.password.c_str());
-	m_pTorrentSessionSettings->setValue("Torrent", "lock_files", s_settings.lock_files);
-	m_pTorrentSessionSettings->setValue("Torrent", "disk_io_read_mode", s_settings.disk_io_read_mode);
-	m_pTorrentSessionSettings->setValue("Torrent", "disk_io_write_mode", s_settings.disk_io_write_mode);
-	m_pTorrentSessionSettings->setValue("Torrent", "low_prio_disk", s_settings.low_prio_disk);
-	m_pTorrentSessionSettings->setValue("Torrent", "cache_size", s_settings.cache_size);
-	m_pTorrentSessionSettings->setValue("Torrent", "use_read_cache", s_settings.use_read_cache);
-	m_pTorrentSessionSettings->setValue("Torrent", "allow_reordered_disk_operations", s_settings.allow_reordered_disk_operations);
-	m_pTorrentSessionSettings->setValue("Torrent", "cache_buffer_chunk_size", s_settings.cache_buffer_chunk_size);
-	m_pTorrentSessionSettings->setValue("Torrent", "allowed_fast_set_size", s_settings.allowed_fast_set_size);
-	m_pTorrentSessionSettings->setValue("Torrent", "read_cache_line_size", s_settings.read_cache_line_size);
-	m_pTorrentSessionSettings->setValue("Torrent", "active_downloads", s_settings.active_downloads);
-	m_pTorrentSessionSettings->setValue("Torrent", "active_limit", s_settings.active_limit);
-	m_pTorrentSessionSettings->setValue("Torrent", "active_seeds", s_settings.active_seeds);
-	pe_settings enc_settings = m_pTorrentSession->get_pe_settings();
-	m_pTorrentSessionSettings->setValue("Torrent", "in_enc_policy", enc_settings.in_enc_policy);
-	m_pTorrentSessionSettings->setValue("Torrent", "out_enc_policy", enc_settings.out_enc_policy);
-	m_pTorrentSessionSettings->setValue("Torrent", "allowed_enc_level", enc_settings.allowed_enc_level - 1);
-	m_pTorrentSessionSettings->setValue("Torrent", "prefer_rc4", enc_settings.prefer_rc4);
+	m_pTorrentSessionSettings->setValue("Torrent", "proxy_hostname", QString::fromStdString(s_settings.get_str(settings_pack::proxy_hostname)));
+	m_pTorrentSessionSettings->setValue("Torrent", "proxy_port", s_settings.get_int(settings_pack::proxy_port));
+	m_pTorrentSessionSettings->setValue("Torrent", "proxy_type", s_settings.get_int(settings_pack::proxy_type));
+	m_pTorrentSessionSettings->setValue("Torrent", "proxy_username", QString::fromStdString(s_settings.get_str(settings_pack::proxy_username)));
+	m_pTorrentSessionSettings->setValue("Torrent", "proxy_password", QString::fromStdString(s_settings.get_str(settings_pack::proxy_password)));
+	m_pTorrentSessionSettings->setValue("Torrent", "lock_files", s_settings.get_bool(settings_pack::lock_files));
+	m_pTorrentSessionSettings->setValue("Torrent", "disk_io_read_mode", s_settings.get_int(settings_pack::disk_io_read_mode));
+	m_pTorrentSessionSettings->setValue("Torrent", "disk_io_write_mode", s_settings.get_int(settings_pack::disk_io_write_mode));
+	m_pTorrentSessionSettings->setValue("Torrent", "low_prio_disk", s_settings.get_bool(settings_pack::low_prio_disk));
+	m_pTorrentSessionSettings->setValue("Torrent", "cache_size", s_settings.get_int(settings_pack::cache_size));
+	m_pTorrentSessionSettings->setValue("Torrent", "use_read_cache", s_settings.get_bool(settings_pack::use_read_cache));
+	m_pTorrentSessionSettings->setValue("Torrent", "cache_buffer_chunk_size", s_settings.get_int(settings_pack::cache_buffer_chunk_size));
+	m_pTorrentSessionSettings->setValue("Torrent", "allowed_fast_set_size", s_settings.get_int(settings_pack::allowed_fast_set_size));
+	m_pTorrentSessionSettings->setValue("Torrent", "read_cache_line_size", s_settings.get_int(settings_pack::read_cache_line_size));
+	m_pTorrentSessionSettings->setValue("Torrent", "active_downloads", s_settings.get_int(settings_pack::active_downloads));
+	m_pTorrentSessionSettings->setValue("Torrent", "active_limit", s_settings.get_int(settings_pack::active_limit));
+	m_pTorrentSessionSettings->setValue("Torrent", "active_seeds", s_settings.get_int(settings_pack::active_seeds));
+	
+	m_pTorrentSessionSettings->setValue("Torrent", "in_enc_policy", s_settings.get_int(settings_pack::in_enc_policy));
+	m_pTorrentSessionSettings->setValue("Torrent", "out_enc_policy", s_settings.get_int(settings_pack::out_enc_policy));
+	m_pTorrentSessionSettings->setValue("Torrent", "allowed_enc_level", s_settings.get_int(settings_pack::allowed_enc_level) + 1);
+	m_pTorrentSessionSettings->setValue("Torrent", "prefer_rc4", s_settings.get_bool(settings_pack::prefer_rc4));
 }
 
 void TorrentManager::SaveSession()
@@ -973,15 +980,15 @@ void TorrentManager::SaveSession()
 
 		while (num_outstanding_resume_data > 0)
 		{
-			std::deque<alert*> alerts;
+			std::vector<alert*> alerts;
 			m_pTorrentSession->pop_alerts(&alerts);
 
-			for (std::deque<alert*>::iterator i = alerts.begin()
+			for (std::vector<alert*>::iterator i = alerts.begin()
 				     , end(alerts.end()); i != end; ++i)
 			{
-				boost::scoped_ptr<alert> a(*i);
+				
 
-				if (alert_cast<save_resume_data_failed_alert>(a.get()))
+				if (alert_cast<save_resume_data_failed_alert>(*i))
 				{
 					--num_outstanding_resume_data;
 					continue;
@@ -1233,37 +1240,6 @@ void TorrentManager::RemoveTorrent(QString infoHash, bool delFiles)
 	}
 }
 
-void TorrentManager::OnDownloadReady(QUrl url, QTemporaryFile* pUnsafeFile)
-{
-	boost::scoped_ptr<QTemporaryFile> pFile(pUnsafeFile);
-
-	if (!pFile->isOpen())
-	{
-		if (!pFile->open())
-		{
-			qCritical() << "Unable to open file" << pFile->fileName();
-			return;
-		}
-	}
-
-	QByteArray data = pFile->readAll();
-	QByteArray uncompresssed = StaticHelpers::gUncompress(data);
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-	QString geoIpPath = StaticHelpers::CombinePathes(dataDir, "GeoIP.dat");
-	QFile file(geoIpPath);
-
-	if (file.open(QFile::WriteOnly))
-	{
-		file.write(uncompresssed);
-		file.close();
-		m_pTorrentSession->load_country_db(geoIpPath.toUtf8().data());
-	}
-	else
-	{
-		qCritical() << "Unable to write GeoIP.dat" << geoIpPath;
-	}
-}
-
 bool TorrentManager::shouldRate()
 {
 	return m_shouldRate;
@@ -1274,7 +1250,13 @@ bool TorrentManager::shouldRate()
 
 int TorrentManager::GetSessionDwonloadRate()
 {
-	return m_pTorrentSession->status().download_rate;
+	int total_download_rate = 0;
+	std::vector<torrent_handle> torrentHandles = m_pTorrentSession->get_torrents();
+	for (int i = 0; i < torrentHandles.size(); i++)
+	{
+		total_download_rate += torrentHandles[i].status().download_rate;
+	}
+	return total_download_rate;
 }
 
 QString TorrentManager::GetSessionDownloadSpeed()
@@ -1291,7 +1273,13 @@ QString TorrentManager::GetSessionDownloadSpeed()
 
 int TorrentManager::GetSessionUploadRate()
 {
-	return m_pTorrentSession->status().upload_rate;
+	int total_download_rate = 0;
+	std::vector<torrent_handle> torrentHandles = m_pTorrentSession->get_torrents();
+	for (int i = 0; i < torrentHandles.size(); i++)
+	{
+		total_download_rate += torrentHandles[i].status().upload_rate;
+	}
+	return total_download_rate;
 }
 
 QString TorrentManager::GetSessionUploadSpeed()
@@ -1310,7 +1298,13 @@ QString TorrentManager::GetSessionDownloaded()
 {
 	try
 	{
-		return StaticHelpers::toKbMbGb(m_pTorrentSession->status().total_download);
+		std::vector<stats_metric> statsMetrics = session_stats_metrics();
+		int index = find_metric_idx("net.recv_bytes");
+		if (index > -1)
+		{
+			return StaticHelpers::toKbMbGb(counters_values[index]);
+		}
+		return "";
 	}
 	catch (...)
 	{
@@ -1322,7 +1316,13 @@ QString TorrentManager::GetSessionUploaded()
 {
 	try
 	{
-		return StaticHelpers::toKbMbGb(m_pTorrentSession->status().total_upload);
+		std::vector<stats_metric> statsMetrics = session_stats_metrics();
+		int index = find_metric_idx("net.sent_bytes");
+		if (index > -1)
+		{
+			return StaticHelpers::toKbMbGb(counters_values[index]);
+		}
+		return "";
 	}
 	catch (...)
 	{
@@ -1416,8 +1416,8 @@ bool TorrentManager::AddMagnet(torrent_handle h, QString& SavePath, TorrentGroup
 
 		for (int i = 0; i < storrage.num_files(); i++)
 		{
-			file_entry file = storrage.at(i);
-			QString filePath = QDir::toNativeSeparators(QString::fromUtf8(file.path.c_str()));
+			
+			QString filePath = QDir::toNativeSeparators(QString::fromUtf8(storrage.file_path(i).c_str()));
 
 			if (filePriorities.contains(filePath))
 			{
@@ -1503,11 +1503,14 @@ void TorrentManager::PauseAllTorrents()
 
 QString TorrentManager::GetSessionDHTstate()
 {
-	session_status ses_state = m_pTorrentSession->status();
+	
+		std::vector<stats_metric> statsMetrics = session_stats_metrics();
+	int index = find_metric_idx("dht.dht_nodes");
+	
 
-	if (m_pTorrentSession->is_dht_running())
+	if (m_pTorrentSession->is_dht_running() && index > -1)
 	{
-		return QString::number(ses_state.dht_nodes);
+		return QString::number(counters_values[index]);
 	}
 	else
 	{
@@ -1517,28 +1520,31 @@ QString TorrentManager::GetSessionDHTstate()
 
 void TorrentManager::SetUlLimit(int val)
 {
-	session_settings settings = m_pTorrentSession->settings();
-	settings.upload_rate_limit = val;
-	m_pTorrentSession->set_settings(settings);
+	settings_pack settings = m_pTorrentSession->get_settings();
+	settings.set_int(settings_pack::upload_rate_limit, val);
+	m_pTorrentSession->apply_settings(settings);
 }
 
 void TorrentManager::SetDlLimit(int val)
 {
-	session_settings settings = m_pTorrentSession->settings();
-	settings.download_rate_limit = val;
-	m_pTorrentSession->set_settings(settings);
+	settings_pack settings = m_pTorrentSession->get_settings();
+	settings.set_int(settings_pack::download_rate_limit, val);
+	m_pTorrentSession->apply_settings(settings);
 }
 
 int TorrentManager::GetDownloadLimit()
 {
-	session_settings settings = m_pTorrentSession->settings();
-	return settings.download_rate_limit;
+	settings_pack settings = m_pTorrentSession->get_settings();
+	
+	return settings.get_int(settings_pack::download_rate_limit);;
 }
 
 int TorrentManager::GetUploadLimit()
 {
-	session_settings settings = m_pTorrentSession->settings();
-	return settings.upload_rate_limit;
+
+	settings_pack settings = m_pTorrentSession->get_settings();
+
+	return settings.get_int(settings_pack::upload_rate_limit);
 }
 
 Torrent* TorrentManager::GetTorrentByInfoHash(const sha1_hash& hash)
@@ -1580,32 +1586,12 @@ void TorrentManager::AddPortMapping(upnp::protocol_type type, ushort external_po
 
 void TorrentManager::RereshPortForwardingSettings()
 {
-	if (m_pTorrentSessionSettings->valueBool("Torrent", "use_port_forwarding", true))
-	{
-#if LIBTORRENT_VERSION_NUM >= 10000
-		m_pTorrentSession->start_upnp();
-#else
-		m_pUpnp = m_pTorrentSession->start_upnp();
-#endif
-		m_pTorrentSession->start_natpmp();
-	}
-	else
-	{
-		m_pTorrentSession->stop_upnp();
-		m_pTorrentSession->stop_natpmp();
-	}
+	//ToDo: recreate session or request restart
 }
 
 void TorrentManager::RefreshExternalPeerSettings()
 {
-	if (m_pTorrentSessionSettings->valueBool("Torrent", "use_lsd", true))
-	{
-		m_pTorrentSession->start_lsd();
-	}
-	else
-	{
-		m_pTorrentSession->stop_lsd();
-	}
+	//ToDo: recreate session or request restart for lsd
 
 	if (m_pTorrentSessionSettings->valueBool("Torrent", "use_dht", true))
 	{
@@ -1625,11 +1611,11 @@ void TorrentManager::RefreshExternalPeerSettings()
 			defaultSettings.service_port = m_pTorrentSessionSettings->valueInt("Torrent", "special_dht_port", 6881);
 			m_pTorrentSession->set_dht_settings(defaultSettings);;
 		}*/
-		m_pTorrentSession->start_dht();
+		
 	}
 	else if (m_pTorrentSession->is_dht_running())
 	{
-		m_pTorrentSession->stop_dht();
+		//ToDo: recreate session or request restart for lsd	
 	}
 }
 

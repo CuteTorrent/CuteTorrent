@@ -12,8 +12,10 @@
 #include "RssItem.h"
 #include <NotificationSystem.h>
 
-QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent, bool autoUpdate) : QAbstractItemModel(parrent), m_pRssManager(RssManager::getInstance()),
-                                                                                               m_pTorrentDownloader(FileDownloader::getNewInstance())
+QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent, bool autoUpdate) 
+	: QAbstractItemModel(parrent)
+	, m_pTorrentDownloader(FileDownloader::getNewInstance())
+	, m_pRssManager(RssManager::getInstance())
 {
 	m_pItemsView = pItemsView;
 	m_pUdpateTimer = new QTimer(this);
@@ -22,7 +24,7 @@ QRssDisplayModel::QRssDisplayModel(QTreeView* pItemsView, QObject* parrent, bool
 	setupItemMenu();
 	UpdateModel();
 	connect(m_pRssManager.get(), SIGNAL(FeedChanged(QUuid)), this, SLOT(UpdateModel()));
-	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFile*)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFile*)));
+	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFilePtr)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFilePtr)));
 	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadError(QUrl, QString)), SLOT(onTorrentDownloadError(QUrl, QString)));
 	connect(m_pUdpateTimer, SIGNAL(timeout()), this, SLOT(UpdateVisibleData()));
 	connect(this, SIGNAL(Notify(int, QString, QVariant)), m_pNotificationSystem.get(), SLOT(OnNewNotification(int, QString, QVariant)));;
@@ -543,9 +545,8 @@ void QRssDisplayModel::onItemOpenDesc()
 	}
 }
 
-void QRssDisplayModel::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
+void QRssDisplayModel::onTorrentDownloaded(QUrl url, QTemporaryFilePtr pSafeFile)
 {
-	boost::scoped_ptr<QTemporaryFile> pSafeFile(pUnsafeFile);
 	QString fileName = pSafeFile->fileName();
 	boost::scoped_ptr<OpenTorrentDialog> pDlg(new OpenTorrentDialog);
 	pDlg->SetData(fileName);

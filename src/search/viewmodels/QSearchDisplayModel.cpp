@@ -17,7 +17,7 @@ QSearchDisplayModel::QSearchDisplayModel(QTreeView* pTorrentListView, QSearchFil
 	connect(m_pSearchEngine.get(), SIGNAL(GotResults()), this, SLOT(OnNewSearchResults()));
 	SearchItemsStorragePtr pItems = m_pSearchEngine->GetResults();
 	connect(pItems.get(), SIGNAL(reset()), this, SLOT(OnNewSearchResults()));
-	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFile*)), SLOT(OnTorrentDownloaded(QUrl, QTemporaryFile*)));
+	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFilePtr)), SLOT(OnTorrentDownloaded(QUrl, QTemporaryFilePtr)));
 	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadError(QUrl, QString)), SLOT(OnTorrentDownloadError(QUrl, QString)));
 }
 
@@ -169,9 +169,9 @@ void QSearchDisplayModel::OnNewSearchResults()
 	reset();
 }
 
-void QSearchDisplayModel::OnTorrentDownloaded(QUrl url, QTemporaryFile* pFile)
+void QSearchDisplayModel::OnTorrentDownloaded(QUrl url, QTemporaryFilePtr pSafeFile)
 {
-	boost::scoped_ptr<QTemporaryFile> pSafeFile(pFile);
+	
 	boost::scoped_ptr<OpenTorrentDialog> pDialog(new OpenTorrentDialog());
 	pDialog->SetData(pSafeFile->fileName());
 	pDialog->exec();

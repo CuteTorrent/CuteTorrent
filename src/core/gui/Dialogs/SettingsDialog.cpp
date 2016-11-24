@@ -336,16 +336,10 @@ void SettingsDialog::ApplySettings()
 void SettingsDialog::ApplySettingsToSession()
 {
 	TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
-	session_settings current = pTorrentManager->readSettings();
+	settings_pack current = pTorrentManager->readSettings();
 	pTorrentManager->updateSettings(current);
 	pTorrentManager->RefreshExternalPeerSettings();
 	pTorrentManager->updateMaxConnectionsPerTorrent();
-	pe_settings enc_settings = pTorrentManager->readEncSettings();
-	enc_settings.in_enc_policy = static_cast<pe_settings::enc_policy>(inEncPolicyComboBox->currentIndex());
-	enc_settings.out_enc_policy = static_cast<pe_settings::enc_policy>(outEncPolicyComboBox->currentIndex());
-	enc_settings.allowed_enc_level = static_cast<pe_settings::enc_level>(encLevelComboBox->currentIndex() + 1);
-	enc_settings.prefer_rc4 = preferFullEncCheckBox->isChecked();
-	pTorrentManager->updateEncSettings(enc_settings);
 }
 
 void SettingsDialog::addGroup()

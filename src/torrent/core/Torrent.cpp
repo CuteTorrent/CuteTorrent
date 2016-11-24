@@ -110,7 +110,7 @@ bool Torrent::hasError() const
 		//       QString errorString="";
 		bool hasErr = false;
 
-		if (m_hTorrent.error.length() > 0 || !m_customError.isEmpty())
+		if (m_hTorrent.errc || !m_customError.isEmpty())
 		{
 			hasErr = true;
 		}
@@ -158,9 +158,9 @@ QString Torrent::GetErrorMessage() const
 	{
 		QString errorString = "";
 
-		if (m_hTorrent.error.length() > 0)
+		if (m_hTorrent.errc)
 		{
-			errorString.append(QString::fromUtf8(m_hTorrent.error.c_str()));
+			errorString.append(QString::fromUtf8(m_hTorrent.errc.message().c_str()));
 			errorString.append("\n");
 		}
 		if (!m_customError.isEmpty())
@@ -656,13 +656,15 @@ void Torrent::SetFilePriority(int index, int priority)
 		{
 			m_hTorrent.handle.file_priority(index, priority);
 
+			int64_t fileSize = m_hTorrent.torrent_file.lock()->files().file_size(index);
+			
 			if (priority > 0)
 			{
-				size += m_hTorrent.torrent_file.lock()->file_at(index).size;
+				size += fileSize;
 			}
 			else
 			{
-				size -= m_hTorrent.torrent_file.lock()->file_at(index).size;
+				size -= fileSize;
 			}
 		}
 	}
@@ -704,7 +706,7 @@ int Torrent::GetPieceCount()
 	if (m_hTorrent.handle.is_valid())
 	{
 #if LIBTORRENT_VERSION_NUM >= 10000
-		if (m_hTorrent.handle.has_metadata())
+		if (m_hTorrent.has_metadata)
 		{
 			return m_hTorrent.handle.torrent_file()->files().num_pieces();
 		}
@@ -761,7 +763,7 @@ QBitArray Torrent::GetDownloadingPieces()
 
 QString Torrent::GetDiscribtion()
 {
-	if (m_hTorrent.handle.is_valid() && m_hTorrent.handle.has_metadata())
+	if (m_hTorrent.handle.is_valid() && m_hTorrent.has_metadata)
 	{
 		return QString::fromUtf8(
 #if LIBTORRENT_VERSION_NUM >= 10000

@@ -21,7 +21,7 @@ RssManager::RssManager(QObject* parent) : QObject(parent)
 	QTimer::singleShot(500, this, SLOT(LoadFeeds()));
 	QTimer::singleShot(500, this, SLOT(LoadDownloadRules()));
 	connect(this, SIGNAL(Notify(int, QString, QVariant)), m_pNotificationSystem.get(), SLOT(OnNewNotification(int, QString, QVariant)));;
-	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFile*)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFile*)));
+	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadReady(QUrl, QTemporaryFilePtr)), SLOT(onTorrentDownloaded(QUrl, QTemporaryFilePtr)));
 	connect(m_pTorrentDownloader.get(), SIGNAL(DownloadError(QUrl, QString)), SLOT(onTorrentDownloadError(QUrl, QString)));
 }
 
@@ -345,11 +345,10 @@ void RssManager::downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRu
 	}
 }
 
-void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFile* pUnsafeFile)
+void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFilePtr pFile)
 {
 	TorrentDownloadInfo info = m_activeTorrentDownloads[url];
 	m_activeTorrentDownloads.remove(url);
-	boost::scoped_ptr<QTemporaryFile> pFile(pUnsafeFile);
 	QString torrentFilePath = pFile->fileName();
 	TorrentManagerPtr pTorrentManager = TorrentManager::getInstance();
 	error_code ec;

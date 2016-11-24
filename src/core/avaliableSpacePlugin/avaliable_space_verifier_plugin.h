@@ -4,9 +4,6 @@
 
 struct not_enough_space_alert : libtorrent::torrent_alert
 {
-protected:
-	std::auto_ptr<alert> clone_impl() const override;
-
 public:
 	not_enough_space_alert(libtorrent::aux::stack_allocator& alloc, libtorrent::torrent_handle const& h)
 		: torrent_alert(alloc, h),

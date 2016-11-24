@@ -46,6 +46,7 @@ VideoPlayerWindow::VideoPlayerWindow(QWidget* parent) : QMainWindow(parent),
                                                         m_pSubtitlesActions(new QActionGroup(this))
 {
 	m_pVideoWidget = new Phonon::VideoWidget(this);
+	setAttribute(Qt::WA_DeleteOnClose);
 	setCentralWidget(m_pVideoWidget);
 	m_pVideoWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 	m_mediaControl = new MediaController(m_pVideoWidget);

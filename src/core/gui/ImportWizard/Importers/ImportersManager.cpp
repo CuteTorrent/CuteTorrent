@@ -1,11 +1,13 @@
 ﻿#include "ImportersManager.h"
 #include "UTorrentImporter.h"
-#include "qBittorrentImporter.h"
+#include <QList>
+
+//#include "qBittorrentImporter.h"
 
 ImportersManager::ImportersManager()
 {
 	RegisterImporter(new UTorrentImporter);
-	RegisterImporter(new qBittorrentImporter);
+	//RegisterImporter(new qBittorrentImporter);
 }
 
 void ImportersManager::RegisterImporter(BaseImporter* importer)

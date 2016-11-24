@@ -45,7 +45,7 @@ public:
 	static void OpenFileInExplorer(QString& file);
 	static bool IsWow64();
 #endif
-	static QString toKbMbGb(int64_t size, bool isSpped = false);
+	static QString toKbMbGb(uint64_t size, bool isSpped = false);
 	static QString translateLibTorrentError(error_code const& ec);
 	static QString toTimeString(int seconds);
 	static bool LoadFile(QString path, std::vector<char>& out);

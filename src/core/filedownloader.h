@@ -10,13 +10,12 @@
 class QNetworkAccessManager;
 class QNetworkReply;
 class QTemporaryFile;
-
 class FileDownloader : public QObject
 {
 	Q_OBJECT
 
-	signals:
-	void DownloadReady(QUrl, QTemporaryFile*);
+signals:
+	void DownloadReady(QUrl, QTemporaryFilePtr);
 	void DownloadError(QUrl, QString);
 public:
 	FileDownloader(QObject* parent = NULL);

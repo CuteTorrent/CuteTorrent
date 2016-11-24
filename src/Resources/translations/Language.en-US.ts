@@ -3253,82 +3253,82 @@ Error: %2
 <context>
     <name>QRssDisplayModel</name>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="275"/>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="382"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="277"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="384"/>
         <source>UPDATE_FEED_ITEM</source>
         <translation>Update</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="276"/>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="386"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="278"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="388"/>
         <source>RENAME_FEED_ITEM</source>
         <translation>Rename</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="277"/>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="390"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="279"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="392"/>
         <source>REMOVE_FEED_ITEM</source>
         <translation>Remove</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="282"/>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="394"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="284"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="396"/>
         <source>MARK_ALL_AS_READ</source>
         <translation>Mark all as read</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="281"/>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="507"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="283"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="509"/>
         <source>MARK_AS_UNREAD</source>
         <translation>Mark as unread</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="280"/>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="504"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="282"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="506"/>
         <source>MARK_AS_READ</source>
         <translation>Mark as read</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="283"/>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="397"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="285"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="399"/>
         <source>MARK_ALL_AS_UNREAD</source>
         <translation>Mark all as unread</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="346"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="348"/>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2</source>
         <translation>Error occured during automated download from RSS-feed:
 %1 %2</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="430"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="432"/>
         <source>RSS_FEED_RENAME</source>
         <translation>Renamin RSS feed</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="430"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="432"/>
         <source>RSS_FEED_NAME:</source>
         <translation>New Name</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="467"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="469"/>
         <source>RSS_FEED_DELETE</source>
         <translation>Remove RSS Feed</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="467"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="469"/>
         <source>RSS_FEED_DELETE_MSG</source>
         <translation>Are you shure you want to delete %1?</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="278"/>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="498"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="280"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="500"/>
         <source>DOWNLOAD_FEED_ITEM</source>
         <translation>Download torrent</translation>
     </message>
     <message>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="279"/>
-        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="501"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="281"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="503"/>
         <source>OPEN_DESC_FEED_ITEM</source>
         <translation>Open description</translation>
     </message>
@@ -3897,9 +3897,9 @@ Error: %2
 <context>
     <name>RssManager</name>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="371"/>
-        <location filename="../../rss/core/RssManager.cpp" line="381"/>
-        <location filename="../../rss/core/RssManager.cpp" line="407"/>
+        <location filename="../../rss/core/RssManager.cpp" line="370"/>
+        <location filename="../../rss/core/RssManager.cpp" line="380"/>
+        <location filename="../../rss/core/RssManager.cpp" line="406"/>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2</source>
         <translation>Error occured during automated download from RSS-feed:
 %1 %2</translation>
@@ -3910,27 +3910,27 @@ Error: %2
         <translation>RSS-article %1 doesn&apos;t contains url for torrent file or magnet-link</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="385"/>
+        <location filename="../../rss/core/RssManager.cpp" line="384"/>
         <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1 %2</source>
         <translation>Started downloading torrent %1 %2 from RSS-feed</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="391"/>
+        <location filename="../../rss/core/RssManager.cpp" line="390"/>
         <source>STARTED_AUTOMETED_RSS_DOWNLOAD</source>
         <translation>Auto download from rss feed started</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="391"/>
+        <location filename="../../rss/core/RssManager.cpp" line="390"/>
         <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="425"/>
+        <location filename="../../rss/core/RssManager.cpp" line="424"/>
         <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1</source>
         <translation>Started downloading torrent %1 from RSS-feed</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="412"/>
+        <location filename="../../rss/core/RssManager.cpp" line="411"/>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD_MAGNET: %1</source>
         <translation>Error occured during automated download from RSS-feed:
 %1 </translation>
@@ -4026,14 +4026,14 @@ Error: %2
         <translation>Browse</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="357"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="366"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="375"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="382"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="467"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="476"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="485"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="492"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="351"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="360"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="369"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="376"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="461"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="470"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="479"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="486"/>
         <source>STR_SETTINGS</source>
         <translation>Preferencies</translation>
     </message>
@@ -4829,14 +4829,14 @@ Error: %2
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="2109"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1139"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1133"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1971"/>
         <source>RSS_RULES_IMPORT</source>
         <translation>Import...</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="2139"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1099"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1093"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1972"/>
         <source>RSS_RULES_EXPORT</source>
         <translation>Export...</translation>
@@ -5089,188 +5089,188 @@ Error: %2
         <translation>Torrent file</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="358"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="468"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="352"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="462"/>
         <source>ERROR_GROUP_NAME_NOT_SET</source>
         <translation>Grooup name not set.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="367"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="477"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="361"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="471"/>
         <source>ERROR_NO_EXTENSIONS</source>
         <translation>No extensions entered</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="376"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="486"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="370"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="480"/>
         <source>ERROR_NO_PATH</source>
         <translation>No path choosen for saving.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="383"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="493"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="377"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="487"/>
         <source>ERROR_PATH_NOT_EXISTS</source>
         <translation>Chousen path not exists.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="521"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1281"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1295"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="515"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1275"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1289"/>
         <source>Open Directory</source>
         <translation>Chose Dirrectory</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="537"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="531"/>
         <source>WHERE_DT</source>
         <translation>Path to DaemonTools</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="537"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="531"/>
         <source>DaemonTools Lite (DTLite.exe);;DaemonTools PRO (DTAgent.exe);;Any File (*.*)</source>
         <translation>DaemonTools Lite (DTLite.exe);;DaemonTools PRO (DTAgent.exe);;Any File (*.*)</translation>
     </message>
     <message>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="583"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="589"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="595"/>
         <source>ERROR_SRT</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="589"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="583"/>
         <source>SCHEDULLER_UNKNOWN_TYPE</source>
         <translation>Please set action type.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="595"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="589"/>
         <source>SCHEDULLER_NO_NAME</source>
         <translation>Please enter name of the task.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="822"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="918"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="816"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="912"/>
         <source>ACTION_SETTINGS_EDIT_RSS_RULE</source>
         <translation>Edit rule</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="823"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="925"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="817"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="919"/>
         <source>ACTION_SETTINGS_DELETE_RSS_RULE</source>
         <translation>Delete rule</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="937"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="931"/>
         <source>RSS_TCP_CONNECTION</source>
         <translation>TCP</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="938"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="932"/>
         <source>RSS_SSL_CONNECTION</source>
         <translation>SSL</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="939"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="933"/>
         <source>RSS_TLS_CONNECTION</source>
         <translation>TLS</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="950"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="944"/>
         <source>RSS_PLAIN_AUTH</source>
         <translation>Plain authentification</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="951"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="945"/>
         <source>RSS_LOGIN_AUTH</source>
         <translation>Login authentification</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="992"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="986"/>
         <source>TORRENTTOOLBAR</source>
         <translation>Torrent toolbar</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="993"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="987"/>
         <source>TORRENTQUEUE</source>
         <translation>Torrent queue</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="994"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="988"/>
         <source>TORRENTPRIORITY</source>
         <translation>Torrent priority</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="995"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="989"/>
         <source>RSSTOOLBAR</source>
         <translation>RSS toolbar</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="996"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="990"/>
         <source>SEARCHTOOLBAR</source>
         <translation>Search toolbar</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="997"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="991"/>
         <source>SEARCHLIST</source>
         <translation>List of search results</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1001"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="995"/>
         <source>MENUFILE</source>
         <translation>Menu File</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1002"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="996"/>
         <source>MENUVIEW</source>
         <translation>Menu View</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1003"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="997"/>
         <source>MENUHELP</source>
         <translation>Menu Help</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1004"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="998"/>
         <source>INFOHASH</source>
         <translation>Hash</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1005"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="999"/>
         <source>TORRENTDESCRIPTION</source>
         <translation>Torrent description</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1007"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1001"/>
         <source>FILEPRIORITY</source>
         <translation>File priority</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1008"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1002"/>
         <source>TOOLS</source>
         <translation>Tools</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1009"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1003"/>
         <source>AUTOSHUTDOWN</source>
         <translation>Power management</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1099"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1139"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1093"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1133"/>
         <source>CT_RSS_RULE_LIST (*.cdrl)</source>
         <translation>CuteTorrent RSS download rules file (*.cdrl)</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1133"/>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1255"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1127"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1249"/>
         <source>ERROR</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1133"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1127"/>
         <source>ERROR_WRITING_RSS_RULE_LIST: %1</source>
         <translation>Error while writing RSS download rules file: %1</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1246"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1240"/>
         <source>PARSED_RULE_IS_NOT_VALID:
  %1
 ERROR: %2</source>
@@ -5279,47 +5279,47 @@ ERROR: %2</source>
 Error: %2</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1255"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1249"/>
         <source>ERROR_READING_RSS_RULE_LIST: %1</source>
         <translation>Error while reading RSS download rules file: %1</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="999"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="993"/>
         <source>PEER</source>
         <translation>Torrent peer list</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1006"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1000"/>
         <source>FILETAB</source>
         <translation>Torrent files list</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1000"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="994"/>
         <source>MENU</source>
         <translation>Menu</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="989"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="983"/>
         <source>TRACKER</source>
         <translation>Trackers</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="991"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="985"/>
         <source>TOOLBAR</source>
         <translation>Toolbar</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="990"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="984"/>
         <source>TORRENTLIST</source>
         <translation>Torrent list</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="988"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="982"/>
         <source>TRAY</source>
         <translation>Tray</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="998"/>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="992"/>
         <source>RSSLIST</source>
         <translation>RSS feeds list</translation>
     </message>
@@ -5565,31 +5565,31 @@ Error: %2</translation>
 <context>
     <name>TorrentManager</name>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="177"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="181"/>
         <source>LISTENING ON PORT %1 FAILED</source>
         <translation>Listening on port %1 failed.</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="304"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="323"/>
         <source>TORRENT_COMPLETED %1</source>
         <translation>Torreant %1 was successfully downloaded.</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="365"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="384"/>
         <source>TORRENT %1 HAS TRACKER ERROR %2</source>
         <translation>Torrent %1 has tracker error: %2</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="386"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="405"/>
         <source>MOVE_STORRAGE_COMPLETED_TO:
 %1 %2</source>
         <translation>Moving torrent %1 to %2 completed.</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="407"/>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="413"/>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="433"/>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="482"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="426"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="432"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="452"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="501"/>
         <source>TORRENT %1 HAS ERROR %2</source>
         <translation>Torrent %1 has error %2</translation>
     </message>
@@ -5649,37 +5649,37 @@ Error: %2</translation>
 <context>
     <name>VideoPlayerWindow</name>
     <message>
-        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="259"/>
+        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="260"/>
         <source>VP_PLAY</source>
         <translation>Play</translation>
     </message>
     <message>
-        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="262"/>
+        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="263"/>
         <source>VP_PAUSE</source>
         <translation>Pasue</translation>
     </message>
     <message>
-        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="265"/>
+        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="266"/>
         <source>VP_NEXT</source>
         <translation>Next</translation>
     </message>
     <message>
-        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="268"/>
+        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="269"/>
         <source>VP_PREV</source>
         <translation>Previous</translation>
     </message>
     <message>
-        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="271"/>
+        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="272"/>
         <source>VP_SUBTITLES</source>
         <translation>Subtitles</translation>
     </message>
     <message>
-        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="273"/>
+        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="274"/>
         <source>VP_AUDIO_CHANNELS</source>
         <translation>Audio Channels</translation>
     </message>
     <message>
-        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="275"/>
+        <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="276"/>
         <source>VP_EXIT</source>
         <translation>Close</translation>
     </message>

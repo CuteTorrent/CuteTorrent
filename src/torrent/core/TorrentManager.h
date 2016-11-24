@@ -75,13 +75,13 @@ protected:
 	TorrentManager();
 
 private:
+	uint64_t counters_values[counters::num_counters];
 	bool m_shouldRate;
 	int m_lastActiveTime;
 	QTime m_elapsedTimer;
 #if LIBTORRENT_VERSION_NUM < 10000
 	upnp* m_pUpnp;
 #endif
-	FileDownloaderPtr m_pFileDownloader;
 	int num_outstanding_resume_data;
 	bool m_bIsSaveSessionInitiated;
 	int m_updateTimerID;
@@ -95,7 +95,7 @@ private:
 	int listen_port;
 	QString ipFilterFileName;
 	bool useProxy;
-	proxy_settings ps;
+	aux::proxy_settings ps;
 	NotificationSystemPtr m_pNotificationSys;
 	QMutex m_alertMutex;
 	QWaitCondition m_alertsWaitCondition;
@@ -105,7 +105,6 @@ private slots:
 	void dispatchPendingAlerts();
 public slots:
 	void RemoveTorrent(QString InfoHash, bool delFiles = false);
-	void OnDownloadReady(QUrl, QTemporaryFile*);
 public:
 	bool shouldRate();
 	int GetSessionDwonloadRate();
@@ -122,10 +121,10 @@ public:
 	void SaveSession();
 	void RefreshExternalPeerSettings();
 	void InitSession(boost::function<void(int, QString)>);
-	session_settings readSettings();
-	pe_settings readEncSettings();
-	void updateEncSettings(const pe_settings& settings);
-	void updateSettings(const session_settings& settings);
+	settings_pack readSettings();
+	
+	
+	void updateSettings(const settings_pack& settings);
 	void updateMaxConnectionsPerTorrent();
 	QString GetSessionDownloadSpeed();
 	int GetSessionUploadRate();

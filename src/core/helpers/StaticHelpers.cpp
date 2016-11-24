@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDesktopServices>
 #include <QTime>
 
-QString StaticHelpers::toKbMbGb(int64_t size, bool isSpeed)
+QString StaticHelpers::toKbMbGb(uint64_t size, bool isSpeed)
 {
 	float val = size;
 	char* SizeSuffix[] =

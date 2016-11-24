@@ -3,13 +3,16 @@
 #include "FileViewTreeItem.h"
 #include "FileViewSortProxyModel.h"
 #include "defs.h"
+
 #include <libtorrent/file_storage.hpp>
 using namespace libtorrent;
-
+struct file_entry;
 class FileViewModel : public QAbstractItemModel
 {
+
 	Q_OBJECT
 public:
+	
 	FileViewModel(QTreeView* proxyModel, QObject* parrent = NULL);
 	~FileViewModel(void);
 	int rowCount(const QModelIndex& parent = QModelIndex()) const;

@@ -1,7 +1,7 @@
 ﻿#include "FileViewModel.h"
 #include "StaticHelpers.h"
 #include <libtorrent/torrent_info.hpp>
-
+#include <file_entry.h>
 void FileViewModel::retranslateUI()
 {
 	headerStringsData.clear();
@@ -242,19 +242,9 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 	if (role == Qt::DisplayRole && dataSource.is_valid() && item != NULL)
 	{
 		file_entry file = item->GetFileEntery();
-		int storrage_index = 0;
+		int storrage_index = file.index;
 
-		if (item->GetType() == FileViewTreeItem::FILE)
-		{
-			file_storage storrage =
-#if LIBTORRENT_VERSION_NUM >= 10000
-				dataSource.torrent_file()->files();
-			storrage_index = storrage.file_index_at_offset(file.offset);
-#else
-			    dataSource.get_torrent_info().files();
-			storrage_index = storrage.file_index(*storrage.file_at_offset(file.offset));
-#endif
-		}
+		
 
 		switch (column)
 		{
@@ -435,9 +425,9 @@ void FileViewModel::BuildTree()
 
 	for (int i = 0; i < nFilesCount; i++)
 	{
-		if (!storrage.at(i).pad_file)
+		if (!(storrage.file_flags(i) & file_storage::flag_pad_file))
 		{
-			AddPath(storrage.file_path(i), storrage.at(i));
+			AddPath(storrage.file_path(i), file_entry{ storrage.file_size(i), storrage.file_path(i), storrage.file_offset(i), i });
 		}
 	}
 }
@@ -631,14 +621,8 @@ void FileViewModel::SetItemPriority(FileViewTreeItem* item, int priority, const 
 {
 	if (item->GetType() == FileViewTreeItem::FILE)
 	{
-		file_storage storrage =
-#if LIBTORRENT_VERSION_NUM >= 10000
-			dataSource.torrent_file()->files();
-		int file_index = storrage.file_index_at_offset(item->GetFileEntery().offset);
-#else
-		    dataSource.get_torrent_info().files();
-		int file_index = storrage.file_index(*storrage.file_at_offset(item->GetFileEntery().offset));
-#endif
+		
+		int file_index = item->GetFileEntery().index;
 		dataSource.file_priority(file_index, priority);
 		emit dataChanged(sourceIndex, sourceIndex);
 	}

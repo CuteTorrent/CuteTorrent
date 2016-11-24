@@ -3,7 +3,7 @@
 #include <QObject>
 #include <Singleton.h>
 #include "Comment.h"
-#include "../../../Qt/4.8.7/src/corelib/kernel/qtimer.h"
+#include <QTimer>
 
 
 struct User;

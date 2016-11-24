@@ -1152,12 +1152,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SortButton.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
-    <ClCompile Include="core\gui\ImportWizard\Importers\qBittorrentImporter.cpp">
-      <Filter>core\gui\ImportWizard\Importers</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_qBittorrentImporter.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="rss\RssCommon.h">
@@ -1520,6 +1514,9 @@
     <ClInclude Include="core\versionInfo.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="core\file_entry.h">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="tracker\trackerrequestmapper.h">
@@ -1600,7 +1597,6 @@
     <CustomBuild Include="core\gui\Controls\SortButton.h">
       <Filter>core\gui\Controls</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\ImportWizard\Importers\qBittorrentImporter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\translations\Language.ru-RU.ts">

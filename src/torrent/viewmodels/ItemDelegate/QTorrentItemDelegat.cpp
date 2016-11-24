@@ -442,7 +442,6 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	QRect removeButtonRect(pauseButtonRect.x() + pauseButtonRect.width() + 2 * m.width(), pauseButtonRect.y(), buttonSize, buttonSize);
 	QRect progArea(nameArea.x(), barArea.y() + barArea.height() + GUI_PAD / 2, barArea.width() + 2 * (buttonSize + 2 * m.width()) - statusWidth, nameArea.height());
 	QRect statusArea(progArea.x() + progArea.width(), progArea.y(), statusWidth, progArea.height());
-	qDebug() << index << "drawTorrent" << pauseButtonRect << removeButtonRect;
 	if (tor.hasError())
 	{
 		painter->setPen(QColor("red"));

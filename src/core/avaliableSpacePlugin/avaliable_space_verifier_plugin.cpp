@@ -24,10 +24,6 @@ void avaliable_space_verifier_plugin::verify_avaliable_space(torrent* t)
 	}
 }
 
-std::auto_ptr<alert> not_enough_space_alert::clone_impl() const
-{
-	return std::auto_ptr<alert>(new not_enough_space_alert(*this));
-}
 
 boost::shared_ptr<torrent_plugin> avaliable_space_verifier_plugin::new_torrent(const torrent_handle& t, void* userData)
 {

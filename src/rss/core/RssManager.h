@@ -55,11 +55,11 @@ public slots:
 private slots:
 	void onFeedChanged(QUuid);
 
-	void onTorrentDownloaded(QUrl url, QTemporaryFile* pFile);
+	void onTorrentDownloaded(QUrl url, QTemporaryFilePtr pFile);
 	void onTorrentDownloadError(QUrl url, QString error);
 	void onMagnetError(QString);
 	void onDownloadMetadataCompleted(openmagnet_info);
-	signals:
+signals:
 	void Notify(int, QString, QVariant);
 	void FeedChanged(QUuid);
 	void FeedRemoved(QUuid);

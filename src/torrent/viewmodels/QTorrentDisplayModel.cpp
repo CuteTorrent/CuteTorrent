@@ -1053,7 +1053,7 @@ void QTorrentDisplayModel::playInPlayer() const
 {
 	if (m_pCurrentTorrent != NULL)
 	{
-		boost::scoped_ptr<VideoPlayerWindow> vpw(new VideoPlayerWindow());
+		VideoPlayerWindow* vpw = new VideoPlayerWindow();
 		files_info filesInfo = m_pCurrentTorrent->GetFileDownloadInfo();
 		int numFiles = filesInfo.storrage.num_files();
 		if (numFiles > 1)

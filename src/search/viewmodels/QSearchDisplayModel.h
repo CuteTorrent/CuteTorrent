@@ -5,6 +5,7 @@
 #include "ServiceCommon.h"
 #define SEARCH_RESULTS_COLUNS_COUNT 1
 #include "QSearchFilterModel.h"
+#include "QRssDisplayModel.h"
 
 class QSearchDisplayModel: public QAbstractListModel
 {
@@ -42,7 +43,7 @@ public slots:
 	void openDescription();
 private slots:
 	void OnNewSearchResults();
-	void OnTorrentDownloaded(QUrl, QTemporaryFile*);
+	void OnTorrentDownloaded(QUrl, QTemporaryFilePtr);
 	void OnTorrentDownloadError(QUrl, QString);
 };
 
