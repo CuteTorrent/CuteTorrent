@@ -297,17 +297,27 @@
          </item>
          <item row="4" column="0" colspan="4">
           <layout class="QGridLayout" name="gridLayout_2">
-           <item row="0" column="0">
-            <widget class="QCheckBox" name="setSequntialCheckBox">
+           <item row="2" column="0">
+            <widget class="QCheckBox" name="setPausedCheckBox">
              <property name="toolTip">
-              <string>START_SEQUENTIAL_TOOLTIP</string>
+              <string>START_PAUSED_TOOLTIP</string>
              </property>
              <property name="text">
-              <string>SET_SEQUNTIAL</string>
+              <string>START_PAUSED</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
+           <item row="2" column="1">
+            <widget class="QCheckBox" name="setSuperSeedCheckBox">
+             <property name="toolTip">
+              <string>START_WITH_SUPER_SEED</string>
+             </property>
+             <property name="text">
+              <string>START_WITH_SUPER_SEED</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
             <widget class="QCheckBox" name="setSeedModeCheckBox">
              <property name="toolTip">
               <string>START_SEEDING_TOOLTIP</string>
@@ -318,22 +328,19 @@
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QCheckBox" name="setPausedCheckBox">
+            <widget class="QCheckBox" name="setSequntialCheckBox">
              <property name="toolTip">
-              <string>START_PAUSED_TOOLTIP</string>
+              <string>START_SEQUENTIAL_TOOLTIP</string>
              </property>
              <property name="text">
-              <string>START_PAUSED</string>
+              <string>SET_SEQUNTIAL</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QCheckBox" name="setSuperSeedCheckBox">
-             <property name="toolTip">
-              <string>START_WITH_SUPER_SEED</string>
-             </property>
+           <item row="0" column="0" colspan="2">
+            <widget class="QCheckBox" name="skipNameInPathCheckBox">
              <property name="text">
-              <string>START_WITH_SUPER_SEED</string>
+              <string>DO_NOT_CREATE_SUBFOLDER_WITH_TORRENT_NAME</string>
              </property>
             </widget>
            </item>

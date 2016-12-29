@@ -552,6 +552,11 @@ void TorrentManager::handle_alert(alert* a)
 				emit TorrentsChanged(torrentUpdates);
 				break;
 			}
+			case file_renamed_alert::alert_type:
+			{
+				emit FileRenameCompleted();
+				break;
+			}
 			case stats_alert::alert_type:
 			case dht_stats_alert::alert_type:
 			case file_error_alert::alert_type:
@@ -715,7 +720,7 @@ Torrent* TorrentManager::AddTorrent(QString& path, QString& save_path, error_cod
 	p.storage_mode = storage_mode_t(m_pTorrentSessionSettings->valueInt("Torrent", "file_allocation_mode", storage_mode_sparse));
 	p.flags = add_torrent_params::flag_duplicate_is_error | add_torrent_params::flag_update_subscribe | add_torrent_params::flag_auto_managed;
 
-	if (flags.testFlag(PAUSED_MODE))
+	if (flags.testFlag(PAUSED_MODE) || flags.testFlag(SKIP_ROOT_DIR))
 	{
 		p.flags |= add_torrent_params::flag_paused;
 	}
@@ -747,6 +752,26 @@ Torrent* TorrentManager::AddTorrent(QString& path, QString& save_path, error_cod
 	{
 		//	QMessageBox::warning(0,"Error",ec.message().c_str());
 		return NULL;
+	}
+
+	if (flags.testFlag(SKIP_ROOT_DIR))
+	{
+		boost::shared_ptr<const torrent_info> torrentInfo = h.torrent_file();
+		if (torrentInfo->num_files() > 1)
+		{
+			std::string torrentName = h.status(torrent_handle::query_name).name;
+			const file_storage fileStorage = torrentInfo->files();
+			for (int i=0; i< fileStorage.num_files(); i++)
+			{
+				std::string filePath = fileStorage.file_path(i);
+				filePath = filePath.replace(filePath.begin(), filePath.begin() + torrentName.length(), "");
+				h.rename_file(i, filePath);
+			}
+			if (!flags.testFlag(PAUSED_MODE))
+			{
+				h.resume();
+			}
+		}
 	}
 
 #if LIBTORRENT_VERSION_NUM < 10000

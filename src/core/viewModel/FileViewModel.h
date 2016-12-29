@@ -40,6 +40,8 @@ public slots:
 	void SetMediumForCurrentFile();
 	void SetHighForCurrentFile();
 	void SetNotDownloadForCurrentFile();
+	void OnFileRenameCompleted();
+	void RenameSelectedFile();
 private:
 	long long CalculateFolderSize(FileViewTreeItem* item) const;
 	float CalculateFolderReady(FileViewTreeItem* item) const;
@@ -47,6 +49,7 @@ private:
 	const static int COLUMN_COUNT = 4;
 	QList<QString> headerStringsData;
 	torrent_handle dataSource;
+	QAction* renameFile;
 	void setFilePriority(int priorityToSet);
 	void SetItemPriority(FileViewTreeItem* item, int priority, const QModelIndex& sourceIndex);
 	QMenu* fileTabMenu;
@@ -63,5 +66,6 @@ private:
 	static QHash<QString, QPixmapCache::Key> extToKeys;
 	static QPixmapCache iconCache;
 	FileViewTreeItem* m_pRoot;
+	QString GetFullPath(FileViewTreeItem* pItem);
 };
 

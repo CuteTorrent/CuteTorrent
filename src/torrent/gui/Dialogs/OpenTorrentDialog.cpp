@@ -118,7 +118,7 @@ void OpenTorrentDialog::FillData(opentorrent_info* info)
 		TorrentGroup* pTorrentGroup = TorrentGroupsManager::getInstance()->GetGroupByExtentions(info->baseSuffix);
 		if (pTorrentGroup != NULL)
 		{
-			pathEdit->setText(pTorrentGroup->savePath());
+			InternalySetPath(pTorrentGroup->savePath());
 			QModelIndex groupIndex = m_pGroupsModel->index(pTorrentGroup->uid());
 			if (groupIndex.isValid())
 			{
@@ -137,12 +137,19 @@ void OpenTorrentDialog::FillData(opentorrent_info* info)
 	}
 }
 
+void OpenTorrentDialog::InternalySetPath(QString path)
+{
+	m_isInternalPathChange = true;
+	pathEdit->setText(path);
+	m_isInternalPathChange = false;
+}
+
 void OpenTorrentDialog::SetData(QString filename)
 {
 	m_torrentFilename = filename;
 	QApplicationSettingsPtr settings = QApplicationSettings::getInstance();
 	QString lastSaveDir = settings->valueString("System", "LastSaveTorrentDir", QDir::homePath());
-	pathEdit->setText(lastSaveDir);
+	InternalySetPath(lastSaveDir);
 	qDebug() << "lastSaveDir" << lastSaveDir;
 	if (filename.startsWith("magnet"))
 	{
@@ -271,6 +278,9 @@ void OpenTorrentDialog::DownloadMetadataCompleted(openmagnet_info info)
 
 void OpenTorrentDialog::OnPathChanged(QString path)
 {
+	if (m_isInternalPathChange)
+		return;
+
 	QStorageInfo storageInfo(path);
 	labelSizeData->setText(tr("%1 (AVAILABLE: %2)").arg(StaticHelpers::toKbMbGb(m_size), StaticHelpers::toKbMbGb(storageInfo.bytesAvailable())));
 	if (m_size + 20l * 1024l * 1024l > storageInfo.bytesAvailable())
@@ -360,6 +370,10 @@ int OpenTorrentDialog::BuildFlags()
 		res |= TorrentManager::SUPER_SEED_MODE;
 	}
 
+	if (skipNameInPathCheckBox->isChecked())
+	{
+		res |= TorrentManager::SKIP_ROOT_DIR;
+	}
 	return res;
 }
 

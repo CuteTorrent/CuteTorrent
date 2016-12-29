@@ -2,6 +2,8 @@
 #include "StaticHelpers.h"
 #include <libtorrent/torrent_info.hpp>
 #include <file_entry.h>
+#include "messagebox.h"
+
 void FileViewModel::retranslateUI()
 {
 	headerStringsData.clear();
@@ -13,6 +15,7 @@ void FileViewModel::retranslateUI()
 	mediumPriority->setText(tr("FILETAB_PRIORITY_MEDIUM"));
 	highPriority->setText(tr("FILETAB_PRIORITY_HIGH"));
 	dontDownload->setText(tr("FILETAB_PRIORITY_ZERO"));
+	renameFile->setText(tr("FILETAB_RENAME_FILE"));
 }
 
 FileViewModel::FileViewModel(QTreeView* view, QObject* parent /* = NULL */) : QAbstractItemModel(parent), m_pView(view)
@@ -122,6 +125,32 @@ void FileViewModel::SetNotDownloadForCurrentFile()
 	setFilePriority(0);
 }
 
+void FileViewModel::OnFileRenameCompleted()
+{
+	beginResetModel();
+	BuildTree();
+	endResetModel();
+	m_pView->expandToDepth(0);
+}
+
+void FileViewModel::RenameSelectedFile()
+{
+	FileViewTreeItem* pItem = static_cast<FileViewTreeItem*>(m_pProxyModel->mapToSource(m_pView->selectionModel()->currentIndex()).internalPointer());
+	if (pItem->GetType() != FileViewTreeItem::FILE)
+	{
+		CustomMessageBox::warning(tr("NOT_A_FILE_SELECTED"), tr("FILE_SHOULD_BE_SELECTED"));
+		return;
+	}
+
+	int fileIndex = pItem->GetFileEntery().index;
+	bool ok;
+	QString newFileName = QInputDialog::getText(NULL, tr("ENTER_NEW_FILE_NAME"), tr("FILE_NAME"), QLineEdit::Normal, GetFullPath(pItem), &ok);
+	if (ok)
+	{
+		dataSource.rename_file(fileIndex, newFileName.toUtf8().data());
+	}
+}
+
 
 void FileViewModel::setFilePriority(int priorityToSet)
 {
@@ -147,6 +176,11 @@ void FileViewModel::setupFileTabelContextMenu()
 	openDir->setObjectName("ACTION_FILETAB_OPEN_DIR");
 	QObject::connect(openDir, SIGNAL(triggered()), this, SLOT(OpenDirSelected()));
 	fileTabMenu->addAction(openDir);
+	fileTabMenu->addSeparator();
+	renameFile = new QAction(tr("FILETAB_RENAME_FILE"), fileTabMenu);
+	renameFile->setObjectName("ACTION_FILETAB_RENAME_FILE");
+	QObject::connect(renameFile, SIGNAL(triggered()), this, SLOT(RenameSelectedFile()));
+	fileTabMenu->addAction(renameFile);
 	fileTabMenu->addSeparator();
 	QActionGroup* priorityGroup = new QActionGroup(fileTabMenu);
 	priorityMenu = new QMenu(fileTabMenu);
@@ -414,6 +448,8 @@ Qt::ItemFlags FileViewModel::flags(const QModelIndex& index) const
 void FileViewModel::BuildTree()
 {
 	m_Progresses.clear();
+	if (!dataSource.is_valid())
+		return;
 	dataSource.file_progress(m_Progresses, torrent_handle::piece_granularity);
 	file_storage storrage =
 #if LIBTORRENT_VERSION_NUM >= 10000
@@ -636,6 +672,22 @@ void FileViewModel::SetItemPriority(FileViewTreeItem* item, int priority, const 
 			SetItemPriority(child, priority, index(i, 0, sourceIndex));
 		}
 	}
+}
+
+QString FileViewModel::GetFullPath(FileViewTreeItem* pItem)
+{
+	QString path = "";
+	QString separator = "";
+	FileViewTreeItem* iterator = pItem;
+	do
+	{
+		path.prepend(iterator->GetName() + separator);
+		separator = "\\";
+		iterator = iterator->GetParent();
+
+	} while (iterator->GetParent() != NULL);
+	
+	return path;
 }
 
 QPixmapCache FileViewModel::iconCache;

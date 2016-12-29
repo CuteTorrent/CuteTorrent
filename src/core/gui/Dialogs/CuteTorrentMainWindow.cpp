@@ -847,6 +847,7 @@ void CuteTorrentMainWindow::setupConnections() const
 	connect(powerManagement.get(), SIGNAL(resetPowerState()), SLOT(onResetPowerMenu()));
 	connect(m_pCommentItemDelegate, SIGNAL(buttonClicked(QModelIndex)), SLOT(OnCommentRemove(QModelIndex)));
 	connect(m_pTorrentItemDelegate, SIGNAL(buttonClicked(QModelIndex, QTorrentItemDelegat::Buttons)), SLOT(OnTorrentAction(QModelIndex, QTorrentItemDelegat::Buttons)));
+	connect(m_pTorrentManager.get(), SIGNAL(FileRenameCompleted()), m_pFileViewModel, SLOT(OnFileRenameCompleted()));
 }
 
 void CuteTorrentMainWindow::UpdateStatusbar() const
@@ -1188,6 +1189,7 @@ void CuteTorrentMainWindow::RaiseWindow()
 
 void CuteTorrentMainWindow::HandleNewTorrent(const QString& path)
 {
+	showNormal();
 	RaiseWindow();
 	boost::scoped_ptr<OpenTorrentDialog> dlg(new OpenTorrentDialog());
 	dlg->SetData(path);

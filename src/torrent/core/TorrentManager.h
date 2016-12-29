@@ -69,6 +69,7 @@ signals:
 	void Notify(int, QString, QVariant);
 	void TorrentRemoved(QString);
 	void TorrentsChanged(QSet<QString> infohashes);
+	void FileRenameCompleted();
 protected:
 	bool MoveFiles(QString oldStyleDirPath, QString newStyleDirPath) const;
 	void timerEvent(QTimerEvent*) override;
@@ -114,7 +115,8 @@ public:
 		SEQUENTIAL_MODE = 1,
 		SEED_MODE = 2,
 		PAUSED_MODE = 4,
-		SUPER_SEED_MODE = 8
+		SUPER_SEED_MODE = 8,
+		SKIP_ROOT_DIR = 16
 	};
 
 	Q_DECLARE_FLAGS(AddTorrentFlags, AddTorrentFlag)

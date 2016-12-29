@@ -45,6 +45,7 @@ public:
 	OpenTorrentDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 	~OpenTorrentDialog();
 	void FillData(opentorrent_info* info);
+	void InternalySetPath(QString lastSaveDir);
 	void SetData(QString filename);
 	void setCheckedValue(bool val);
 	int exec();
@@ -55,6 +56,7 @@ private:
 	QFileSystemModel* m_compliterModel;
 	bool m_bUseGroup;
 	bool validTorrent;
+	bool m_isInternalPathChange;
 	TorrentManagerPtr m_pTorrentManager;
 	QString m_torrentFilename;
 	openmagnet_info m_info;

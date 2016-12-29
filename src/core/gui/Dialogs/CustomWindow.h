@@ -353,6 +353,7 @@ BaseWindow<T>::BaseWindow(TitleMode titleMode, ResizeMode resizeMode, QWidget* p
 	m_resizeMode = resizeMode;
 }
 
+
 template <class T>
 void BaseWindow<T>::setupWindowIcons()
 {
@@ -381,7 +382,7 @@ void BaseWindow<T>::setupWindowIcons()
 template <class T>
 void BaseWindow<T>::setupCustomWindow()
 {
-	T::setWindowFlags(Qt::FramelessWindowHint);
+	T::setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMinimizeButtonHint);
 	T::setMouseTracking(true);
 	getTitleBar()->setMouseTracking(true);
 	getTitleLabel()->setMouseTracking(true);

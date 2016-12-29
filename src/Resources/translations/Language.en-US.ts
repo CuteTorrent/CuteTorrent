@@ -788,7 +788,7 @@ Are you shure?</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1047"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1843"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1845"/>
         <location filename="../../core/gui/Utils/ValueSetters.cpp" line="357"/>
         <location filename="../../core/gui/Utils/ValueSetters.cpp" line="361"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="911"/>
@@ -816,7 +816,7 @@ Are you shure?</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1066"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1846"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1848"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="915"/>
         <source>MENU_CONFIGURATION</source>
         <translation>Configuration</translation>
@@ -1049,16 +1049,16 @@ If you have paid money for this software demand a refund</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="280"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="281"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1049"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1050"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1051"/>
         <source>STATUS_DWONLOAD</source>
         <translation>Downloaded(Download speed)</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="282"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="283"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1051"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1052"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1053"/>
         <source>STATUS_UPLOAD</source>
         <translation>Uloaded(Upload speed)</translation>
     </message>
@@ -1116,19 +1116,19 @@ If you have paid money for this software demand a refund</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="391"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1055"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1056"/>
         <source>ADD_TRACKER</source>
         <translation>Add tracker</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="393"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1056"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1057"/>
         <source>REMOVE_TRACKER</source>
         <translation>Remove tracker</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="395"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1057"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1058"/>
         <source>EDIT_TRACKER</source>
         <translation>Edit tracker</translation>
     </message>
@@ -1139,7 +1139,7 @@ If you have paid money for this software demand a refund</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="420"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1058"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1059"/>
         <source>ADD_PEER</source>
         <translation>Add peer</translation>
     </message>
@@ -1200,80 +1200,80 @@ If you have paid money for this software demand a refund</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="687"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1070"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1071"/>
         <source>ANIME_CATEGORY</source>
         <translation>Anime</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="688"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1071"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1072"/>
         <source>MUSIC_CATEGORY</source>
         <translation>Music</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="689"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1072"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1073"/>
         <source>TV_CATEGORY</source>
         <translation>TV and Shows</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="690"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1073"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1074"/>
         <source>PORN_CATEGORY</source>
         <translation>XXX</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="691"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1074"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1075"/>
         <source>APP_CATEGORY</source>
         <translation>Applications</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="692"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1075"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1076"/>
         <source>GAMES_CATEGORY</source>
         <translation>Games</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="693"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1076"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1077"/>
         <source>BOOKS_CATEGORY</source>
         <translation>Books</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="694"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1077"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1078"/>
         <source>FILMS_CATEGORY</source>
         <translation>Films</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="695"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1078"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1079"/>
         <source>ALL_CATEGORY</source>
         <translation>All</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="704"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1080"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1081"/>
         <source>Search</source>
         <translation>Search</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="707"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1081"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1082"/>
         <source>TORENT_FILTER</source>
         <translation>Filter torrents</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="711"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="718"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1059"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1060"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1061"/>
         <source>None</source>
         <translation>∞</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="854"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="855"/>
         <source>CuteTorrent %1
 Upload: %2
 Download: %3</source>
@@ -1282,152 +1282,152 @@ Download: %3</source>
 Загружено: %3</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="863"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="864"/>
         <source>DHT: %1 nodes</source>
         <translation>DHT: %1 узлов</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1012"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1013"/>
         <source>DOWNLOADING_TORRENTS_COUNT</source>
         <translation>Downloading torrents count</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1044"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1142"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1045"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1143"/>
         <source>ACTION_HIDE</source>
         <translation>Hide</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1045"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1145"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1046"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1146"/>
         <source>ACTION_MAXIMIZE_FULLSCREEN</source>
         <translation>Maximize fullscreen</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1046"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1148"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1047"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1149"/>
         <source>ACTION_MAXIMIZE</source>
         <translation>Maximize</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1047"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1157"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1048"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1158"/>
         <source>ACTION_EXIT</source>
         <translation>Exit</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1048"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1160"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1164"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1049"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1161"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1165"/>
         <source>ACTION_COPY</source>
         <translation>Copy</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1061"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1151"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1062"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1152"/>
         <source>ACTION_PAUSE_ALL_TORRENTS</source>
         <translation>Pause all torrents</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1062"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1154"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1063"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1155"/>
         <source>ACTION_RESTORE_ALL_TORRENTS</source>
         <translation>Resume all torrents</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1220"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1222"/>
         <source>OPEN_TOORENT_DIALOG</source>
         <translation>Open torrent dialog</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1221"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1223"/>
         <source>TORRENT_FILES (*.torrent);;Any File (*.*)</source>
         <translation>Torrent files (*.torrent);;Any File (*.*)</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1378"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1380"/>
         <source>TRACKER_UPDATING</source>
         <translation>Updating...</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1435"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1437"/>
         <source>CT_HIDE_MSG</source>
         <translation>CuteTorrent is steel active. To exit use context menu in tray.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1487"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1489"/>
         <source>UNABLE_TO_PROCESS_FILE</source>
         <translation>Unable to process file</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1487"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1489"/>
         <source>DROPPED_FILE %1 IS_NOT_TORRENT_OR_MAGNET_LINK</source>
         <translation>Dropped element %1 is not a torrent or Magnet link.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1634"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1636"/>
         <source>MAGNET_LINK_DLG</source>
         <translation>Magnet-link</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1634"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1636"/>
         <source>MAGNET_LINK:</source>
         <translation>Magnet-link:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1787"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1789"/>
         <source>ADD_PEER_DLG</source>
         <translation>Adding a peer</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1787"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1789"/>
         <source>PEER:</source>
         <translation>Peer:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1804"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1806"/>
         <source>PEER_ERR</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1804"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1806"/>
         <source>INVALID_IP_STRING</source>
         <translation>Invalid ip string</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1816"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1818"/>
         <source>ADD_TRACKER_DLG</source>
         <translation>Adding a tracker</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1816"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2305"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1818"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2307"/>
         <source>TRACKER:</source>
         <translation>Tracker:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2305"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2336"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2307"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2338"/>
         <source>EDIT_TRACKER_DLG</source>
         <translation>Tracker editing</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2336"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2338"/>
         <source>HTTP_SEED_URL:</source>
         <translation>Web seed:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2350"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2352"/>
         <source>RSS_FEED_ADD</source>
         <translation>Adding Rss-feed</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2350"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2352"/>
         <source>RSS_FEED_URL:</source>
         <translation>Rss-feed URL:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2527"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2529"/>
         <source>INVALID_COMMAND_RECIVED</source>
         <translation>Invalid IPC command recived.</translation>
     </message>
@@ -2040,7 +2040,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="430"/>
         <source>banned by port filter</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="438"/>
@@ -2135,7 +2135,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="463"/>
         <source>fastresume not modified since last save</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="472"/>
@@ -2490,72 +2490,98 @@ Download: %3</source>
 <context>
     <name>FileViewModel</name>
     <message>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="8"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="20"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="10"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="23"/>
         <source>FILES_PATH</source>
         <translation>Path</translation>
     </message>
     <message>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="8"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="20"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="10"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="23"/>
         <source>FILES_SIZE</source>
         <translation>Size</translation>
     </message>
     <message>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="8"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="20"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="10"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="23"/>
         <source>FILES_READY</source>
         <translation>Ready</translation>
     </message>
     <message>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="8"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="20"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="10"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="23"/>
         <source>FILES_PRIORITY</source>
         <translation>Priority</translation>
     </message>
     <message>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="9"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="142"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="11"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="171"/>
         <source>FILETAB_OPEN_FILE</source>
         <translation>Open</translation>
     </message>
     <message>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="10"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="146"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="12"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="175"/>
         <source>FILETAB_OPEN_FOLDER</source>
         <translation>Open folder</translation>
     </message>
     <message>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="11"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="153"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="13"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="187"/>
         <source>FILETAB_PRIORITY</source>
         <translation>Priority</translation>
     </message>
     <message>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="141"/>
+        <source>NOT_A_FILE_SELECTED</source>
+        <translation>File should be seelcted</translation>
+    </message>
+    <message>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="141"/>
+        <source>FILE_SHOULD_BE_SELECTED</source>
+        <translation>Could not rename folder. Please select a file</translation>
+    </message>
+    <message>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="147"/>
+        <source>ENTER_NEW_FILE_NAME</source>
+        <translation>Enter new file path</translation>
+    </message>
+    <message>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="147"/>
+        <source>FILE_NAME</source>
+        <translation>File path</translation>
+    </message>
+    <message>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="18"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="180"/>
+        <source>FILETAB_RENAME_FILE</source>
+        <translation>Rename File</translation>
+    </message>
+    <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="113"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="12"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="154"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="14"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="188"/>
         <source>FILETAB_PRIORITY_LOW</source>
         <translation>Low</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="114"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="13"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="160"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="15"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="194"/>
         <source>FILETAB_PRIORITY_MEDIUM</source>
         <translation>Medium</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="115"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="14"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="166"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="16"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="200"/>
         <source>FILETAB_PRIORITY_HIGH</source>
         <translation>High</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="112"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="15"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="174"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="17"/>
+        <location filename="../../core/viewModel/FileViewModel.cpp" line="208"/>
         <source>FILETAB_PRIORITY_ZERO</source>
         <translation>Don&apos;t download</translation>
     </message>
@@ -3039,161 +3065,167 @@ Error: %2
 <context>
     <name>OpenTorrentDialog</name>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="186"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="193"/>
         <source>DIALOG_OPEN_DIR</source>
         <translation>Choose save dirrectory</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="280"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="329"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="335"/>
         <source>SIZE</source>
         <translation>Total Size</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="14"/>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="121"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="314"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="319"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="320"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="325"/>
         <source>DIALOG_OPEN_TORRENT</source>
         <translation>Open Torrent</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="165"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="320"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="326"/>
         <source>OPEN_TORRENT_SAVE_PATH</source>
         <translation>Save to...</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="181"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="322"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="328"/>
         <source>OPEN_TORRENT_BROWSE_BUTTON</source>
         <translation>Browse</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="174"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="321"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="327"/>
         <source>DISCRIBTION_LABEL</source>
         <translation>Group</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="191"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="323"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="329"/>
         <source>OPEN_TORRENT_INFO</source>
         <translation>Information</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="203"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="324"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="330"/>
         <source>OPEN_TORRENT_INFO_NAME</source>
         <translation>Name</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="229"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="326"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="332"/>
         <source>OPEN_TORRENT_INFO_DESCRIBTION</source>
         <translation>Description</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="294"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="331"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="337"/>
         <source>RECIVING_METADATA</source>
         <translation>Reciving metadata</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="303"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="333"/>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="333"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="351"/>
         <source>START_SEQUENTIAL_TOOLTIP</source>
         <translation>Pieces of file will be requested according to their order in torrent file.</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="306"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="335"/>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="336"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="353"/>
         <source>SET_SEQUNTIAL</source>
         <translation>Sequntial Download</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="313"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="337"/>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="323"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="347"/>
         <source>START_SEEDING_TOOLTIP</source>
         <translation>File will not be checked on torrent sturtup. In case of detecting mismatch in files file ckecking will be forsed.</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="316"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="339"/>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="326"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="349"/>
         <source>START_SEEDING</source>
         <translation>Seed without file ckecking</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="323"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="341"/>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="303"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="339"/>
         <source>START_PAUSED_TOOLTIP</source>
         <translation>Torrnt will be automaticaly paused.</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="326"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="343"/>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="306"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="341"/>
         <source>START_PAUSED</source>
         <translation>Paused</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="333"/>
-        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="336"/>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="313"/>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="316"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="343"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="345"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="347"/>
         <source>START_WITH_SUPER_SEED</source>
         <translation>Super-seed mode</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="408"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="350"/>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="343"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="354"/>
+        <source>DO_NOT_CREATE_SUBFOLDER_WITH_TORRENT_NAME</source>
+        <translation>Don&apos;t create subfolder with torrent name</translation>
+    </message>
+    <message>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="415"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="357"/>
         <source>OPEN_TORRENT_CANCEL_BUTTON</source>
         <translation>Cancel</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="360"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="348"/>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="367"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="355"/>
         <source>MARK_ALL</source>
         <translation>Select All</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="367"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="349"/>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="374"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="356"/>
         <source>UNMARK_ALL</source>
         <translation>Select None</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="421"/>
-        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="351"/>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="428"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="358"/>
         <source>OPEN_TORRENT_ADD_BUTTON</source>
         <translation>Add</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="160"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="167"/>
         <source>MAGNET_LINKS_DONT_SUPORT_SEED_MODE</source>
         <translation>Seeding without file checking is not suported for magnet links.</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="176"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="183"/>
         <source>OPEN_TORRENT_ERROR</source>
         <translation>Error while tring to open torrent</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="213"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="220"/>
         <source>SELECT_AT_LEAST_ONE_FILE</source>
         <translation>No files selected. Select at least one file.</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="275"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="285"/>
         <source>%1 (AVAILABLE: %2)</source>
         <translation>%1 (avaliable: %2)</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="278"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="288"/>
         <source>NOT_ENOUGH_SPACE</source>
         <translation>Not enough space</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="278"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="288"/>
         <source>NOT_ENOGH_STORRAGE_SPACE_TO_STORE_TORRENT</source>
         <translation>Not enough space to sotre torrent data. Do you want to continure?</translation>
     </message>
@@ -3922,7 +3954,7 @@ Error: %2
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="390"/>
         <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Started Downloading.&lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;Description&lt;/a&gt;&lt;br/&gt; %2</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="424"/>

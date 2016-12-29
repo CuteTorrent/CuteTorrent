@@ -56,10 +56,11 @@ public:
     QLabel *loaderGifLabel;
     QLabel *loaderTextLabel;
     QGridLayout *gridLayout_2;
-    QCheckBox *setSequntialCheckBox;
-    QCheckBox *setSeedModeCheckBox;
     QCheckBox *setPausedCheckBox;
     QCheckBox *setSuperSeedCheckBox;
+    QCheckBox *setSeedModeCheckBox;
+    QCheckBox *setSequntialCheckBox;
+    QCheckBox *skipNameInPathCheckBox;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer_2;
     QPushButton *markAllButton;
@@ -221,25 +222,30 @@ public:
 
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        setSequntialCheckBox = new QCheckBox(groupBox_2);
-        setSequntialCheckBox->setObjectName(QString::fromUtf8("setSequntialCheckBox"));
-
-        gridLayout_2->addWidget(setSequntialCheckBox, 0, 0, 1, 1);
-
-        setSeedModeCheckBox = new QCheckBox(groupBox_2);
-        setSeedModeCheckBox->setObjectName(QString::fromUtf8("setSeedModeCheckBox"));
-
-        gridLayout_2->addWidget(setSeedModeCheckBox, 0, 1, 1, 1);
-
         setPausedCheckBox = new QCheckBox(groupBox_2);
         setPausedCheckBox->setObjectName(QString::fromUtf8("setPausedCheckBox"));
 
-        gridLayout_2->addWidget(setPausedCheckBox, 1, 0, 1, 1);
+        gridLayout_2->addWidget(setPausedCheckBox, 2, 0, 1, 1);
 
         setSuperSeedCheckBox = new QCheckBox(groupBox_2);
         setSuperSeedCheckBox->setObjectName(QString::fromUtf8("setSuperSeedCheckBox"));
 
-        gridLayout_2->addWidget(setSuperSeedCheckBox, 1, 1, 1, 1);
+        gridLayout_2->addWidget(setSuperSeedCheckBox, 2, 1, 1, 1);
+
+        setSeedModeCheckBox = new QCheckBox(groupBox_2);
+        setSeedModeCheckBox->setObjectName(QString::fromUtf8("setSeedModeCheckBox"));
+
+        gridLayout_2->addWidget(setSeedModeCheckBox, 1, 1, 1, 1);
+
+        setSequntialCheckBox = new QCheckBox(groupBox_2);
+        setSequntialCheckBox->setObjectName(QString::fromUtf8("setSequntialCheckBox"));
+
+        gridLayout_2->addWidget(setSequntialCheckBox, 1, 0, 1, 1);
+
+        skipNameInPathCheckBox = new QCheckBox(groupBox_2);
+        skipNameInPathCheckBox->setObjectName(QString::fromUtf8("skipNameInPathCheckBox"));
+
+        gridLayout_2->addWidget(skipNameInPathCheckBox, 0, 0, 1, 2);
 
 
         gridLayout_4->addLayout(gridLayout_2, 4, 0, 1, 4);
@@ -330,14 +336,6 @@ public:
         loaderGifLabel->setText(QString());
         loaderTextLabel->setText(QApplication::translate("OpenTorrentDialog", "RECIVING_METADATA", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        setSequntialCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_SEQUENTIAL_TOOLTIP", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_TOOLTIP
-        setSequntialCheckBox->setText(QApplication::translate("OpenTorrentDialog", "SET_SEQUNTIAL", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_TOOLTIP
-        setSeedModeCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_SEEDING_TOOLTIP", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_TOOLTIP
-        setSeedModeCheckBox->setText(QApplication::translate("OpenTorrentDialog", "START_SEEDING", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_TOOLTIP
         setPausedCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_PAUSED_TOOLTIP", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         setPausedCheckBox->setText(QApplication::translate("OpenTorrentDialog", "START_PAUSED", 0, QApplication::UnicodeUTF8));
@@ -345,6 +343,15 @@ public:
         setSuperSeedCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_WITH_SUPER_SEED", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         setSuperSeedCheckBox->setText(QApplication::translate("OpenTorrentDialog", "START_WITH_SUPER_SEED", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        setSeedModeCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_SEEDING_TOOLTIP", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+        setSeedModeCheckBox->setText(QApplication::translate("OpenTorrentDialog", "START_SEEDING", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        setSequntialCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_SEQUENTIAL_TOOLTIP", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+        setSequntialCheckBox->setText(QApplication::translate("OpenTorrentDialog", "SET_SEQUNTIAL", 0, QApplication::UnicodeUTF8));
+        skipNameInPathCheckBox->setText(QApplication::translate("OpenTorrentDialog", "DO_NOT_CREATE_SUBFOLDER_WITH_TORRENT_NAME", 0, QApplication::UnicodeUTF8));
         markAllButton->setText(QApplication::translate("OpenTorrentDialog", "MARK_ALL", 0, QApplication::UnicodeUTF8));
         unmarkAllButton->setText(QApplication::translate("OpenTorrentDialog", "UNMARK_ALL", 0, QApplication::UnicodeUTF8));
         cancelButton->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_CANCEL_BUTTON", 0, QApplication::UnicodeUTF8));
