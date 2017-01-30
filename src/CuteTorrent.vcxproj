@@ -98,7 +98,7 @@
       <ErrorReporting>None</ErrorReporting>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libtorrent.lib;qtmain.lib;phonon4.lib;QtGui4.lib;QtNetwork4.lib;QtCore4.lib;QtScript4.lib;QtScriptTools4.lib;VirtDisk.lib;Shlwapi.lib;Iphlpapi.lib;libeay32MD.lib;ssleay32MD.lib;libboost_chrono-vc120-mt-1_55.lib;libboost_random-vc120-mt-1_55.lib;libboost_system-vc120-mt-1_55.lib;Gdi32.lib;Shell32.lib;Dbghelp.lib;libmaxminddb.lib</AdditionalDependencies>
+      <AdditionalDependencies>libtorrent.lib;qtmain.lib;phonon4.lib;QtGui4.lib;QtNetwork4.lib;QtCore4.lib;QtScript4.lib;QtScriptTools4.lib;VirtDisk.lib;Shlwapi.lib;Iphlpapi.lib;libeay32MD.lib;ssleay32MD.lib;libboost_chrono-vc120-mt-1_55.lib;libboost_random-vc120-mt-1_55.lib;libboost_system-vc120-mt-1_55.lib;Advapi32.lib;Gdi32.lib;Shell32.lib;Dbghelp.lib;libmaxminddb.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration)\;$(OPENSSL_DIR)/lib/VC/static;$(QT_DIR)\lib;../ThirdParties/boost/stage/lib;../ThirdParties/libtorrent/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <IgnoreImportLibrary>true</IgnoreImportLibrary>

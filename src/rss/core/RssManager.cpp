@@ -356,7 +356,7 @@ void RssManager::onTorrentDownloaded(QUrl url, QTemporaryFilePtr pFile)
 	RssItem* feedItem = pFeed->GetFeedItem(info.rssItemId);
 	boost::scoped_ptr<opentorrent_info> pTorrentInfo(pTorrentManager->GetTorrentInfo(torrentFilePath, ec));
 
-	if (ec.category() == get_libtorrent_category())
+	if (ec.category() == libtorrent_category())
 	{
 		if (ec.value() == errors::duplicate_torrent)
 		{

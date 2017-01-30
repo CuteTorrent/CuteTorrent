@@ -6,7 +6,7 @@
 #include <QFileIconProvider>
 
 struct file_entry{
-	ulong size;
+	qint64 size;
 	std::string path;
 	int offset;
 	int index;

@@ -275,7 +275,7 @@ QString StaticHelpers::translateLibTorrentError(error_code const& ec)
 {
 #if LIBTORRENT_VERSION_NUM >= 10000
 
-	if (ec.category() == get_libtorrent_category())
+	if (ec.category() == libtorrent_category())
 	{
 		return translateSessionError(ec);
 	}
@@ -285,22 +285,22 @@ QString StaticHelpers::translateLibTorrentError(error_code const& ec)
 		return translateBEncodeError(ec);
 	}
 
-	if (ec.category() == get_gzip_category())
+	if (ec.category() == gzip_category())
 	{
 		return translateGzipError(ec);
 	}
 
-	if (ec.category() == get_i2p_category())
+	if (ec.category() == i2p_category())
 	{
 		return translateI2PError(ec);
 	}
 
-	if (ec.category() == get_socks_category())
+	if (ec.category() == socks_category())
 	{
 		return translateSocksError(ec);
 	}
 
-	if (ec.category() == get_upnp_category())
+	if (ec.category() == upnp_category())
 	{
 		return translateUpnpError(ec);
 	}

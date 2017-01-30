@@ -5607,21 +5607,26 @@ Error: %2</translation>
         <translation>Torreant %1 was successfully downloaded.</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="384"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="337"/>
+        <source>SAVE_RESUME_DATA_FAILED %1, RETRING...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="388"/>
         <source>TORRENT %1 HAS TRACKER ERROR %2</source>
         <translation>Torrent %1 has tracker error: %2</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="405"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="409"/>
         <source>MOVE_STORRAGE_COMPLETED_TO:
 %1 %2</source>
         <translation>Moving torrent %1 to %2 completed.</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="426"/>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="432"/>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="452"/>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="501"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="430"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="436"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="456"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="505"/>
         <source>TORRENT %1 HAS ERROR %2</source>
         <translation>Torrent %1 has error %2</translation>
     </message>

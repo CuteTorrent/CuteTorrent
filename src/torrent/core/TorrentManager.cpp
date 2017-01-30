@@ -331,6 +331,10 @@ void TorrentManager::handle_alert(alert* a)
 			case save_resume_data_failed_alert::alert_type:
 			{
 				save_resume_data_failed_alert* p = alert_cast<save_resume_data_failed_alert>(a);
+				torrent_handle h = p->handle;
+				QString infoHash = QString::fromStdString(to_hex(h.info_hash().to_string()));
+				Torrent* pTorrent = m_pTorrentStorrage->getTorrent(infoHash);
+				emit Notify(NotificationSystem::ERRORS, tr("SAVE_RESUME_DATA_FAILED %1, RETRING...").arg(qPrintable(p->message().c_str())), QVariant());
 				p->handle.save_resume_data();
 				break;
 			}
@@ -1170,7 +1174,7 @@ opentorrent_info* TorrentManager::GetTorrentInfo(QString filename, error_code& e
 
 	if (foundTorrent.is_valid())
 	{
-		ec.assign(errors::duplicate_torrent, get_libtorrent_category());
+		ec.assign(errors::duplicate_torrent, libtorrent_category());
 	}
 
 	return info;
@@ -1620,15 +1624,15 @@ void TorrentManager::RefreshExternalPeerSettings()
 
 	if (m_pTorrentSessionSettings->valueBool("Torrent", "use_dht", true))
 	{
-		m_pTorrentSession->add_dht_router(make_pair(
+		m_pTorrentSession->add_dht_node(make_pair(
 			std::string("router.bittorrent.com"), 8991));
-		m_pTorrentSession->add_dht_router(make_pair(
+		m_pTorrentSession->add_dht_node(make_pair(
 			std::string("router.utorrent.com"), 6881));
-		m_pTorrentSession->add_dht_router(make_pair(
+		m_pTorrentSession->add_dht_node(make_pair(
 			std::string("dht.transmissionbt.com"), 6881));
-		m_pTorrentSession->add_dht_router(make_pair(
+		m_pTorrentSession->add_dht_node(make_pair(
 			std::string("dht.aelitis.com"), 6881));
-		m_pTorrentSession->add_dht_router(make_pair(
+		m_pTorrentSession->add_dht_node(make_pair(
 			std::string("dht.cutetorrent.info"), 6881));
 		/*if (m_pTorrentSessionSettings->valueBool("Torrent", "use_special_dht_port", false))
 		{
