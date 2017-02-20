@@ -74,7 +74,7 @@ void TorrentGroupsManager::LoadGroups()
 		m_torrentGroups.append(new TorrentGroup(tr("Docs"), StyleEngene::suffixes[StyleEngene::DOCUMENT].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Documents")));
 		m_torrentGroups.append(new TorrentGroup(tr("Archives"), StyleEngene::suffixes[StyleEngene::ARCHIVE].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Archives")));
 		m_torrentGroups.append(new TorrentGroup(tr("Applications"), StyleEngene::suffixes[StyleEngene::APP].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Apps")));
-		m_torrentGroups.append(new TorrentGroup(tr("Virtual Disks"), StyleEngene::suffixes[StyleEngene::DISK].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Viertual Disks")));
+		m_torrentGroups.append(new TorrentGroup(tr("Virtual Disks"), StyleEngene::suffixes[StyleEngene::DISK].toList(), StaticHelpers::CombinePathes(rootSavePath, "Downloads", "Virtual Disks")));
 	}
 	FillMaps();
 }
