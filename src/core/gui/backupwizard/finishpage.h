@@ -1,7 +1,6 @@
 ﻿#ifndef FINISHPAGE_H
 #define FINISHPAGE_H
-
-#include <QtGui>
+#include <QtWidgets>
 
 class FinishPage : public QWizardPage
 {

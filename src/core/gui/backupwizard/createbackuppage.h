@@ -1,8 +1,7 @@
 ﻿#ifndef CREATEBACKUPPAGE_H
 #define CREATEBACKUPPAGE_H
-
 #include <QWizardPage>
-#include <QtGui>
+#include <QtWidgets>
 
 class CreateBackupPage : public QWizardPage
 {

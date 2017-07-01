@@ -1,4 +1,6 @@
-﻿#include "applybackuppage.h"
+﻿#include <Winsock2.h>
+#include <windows.h>
+#include "applybackuppage.h"
 #include "backupwizard.h"
 #include "FileTreeModel.h"
 #include "QApplicationSettings.h"
@@ -8,6 +10,7 @@
 #include <helpers/StaticHelpers.h>
 #include <core/RssManager.h>
 #include <gui/Dialogs/InitializationDialog.h>
+#include <QWizardPage>
 
 ApplyBackupPage::ApplyBackupPage(QWidget* parent) :
 	QWizardPage(parent)
@@ -62,7 +65,7 @@ void ApplyBackupPage::ApplyBackup() const
 {
 	if (!backupPathLineEdit->text().isEmpty())
 	{
-		QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+		QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 		JlCompress::extractDir(backupPathLineEdit->text(), dataDir);
 		QString btSessionDirPath = StaticHelpers::CombinePathes(dataDir, "BtSessionData");
 		QDir btSessionDir(btSessionDirPath);

@@ -28,14 +28,14 @@ void QKeyEdit::keyPressEvent(QKeyEvent* keyEvent)
 		return;
 	}
 
-#ifdef Q_WS_WIN32
+#ifdef Q_OS_WIN 32
 
 	if (key == Qt::Key_Return)
 	{
 		key = Qt::Key_Enter;
 	}
 
-#endif // Q_WS_WIN32
+#endif // Q_OS_WIN 32
 
 
 	if (key == Qt::Key_Escape)

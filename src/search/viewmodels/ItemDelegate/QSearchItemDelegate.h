@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include <QtGui>
+#include <QtWidgets>
 #include "StyleEngene.h"
 class SearchResult;
 

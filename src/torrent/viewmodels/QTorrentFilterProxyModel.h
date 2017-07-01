@@ -1,7 +1,8 @@
 #pragma once
-#include <QtGui>
 #include "defs.h"
 #include "TorrentGroupsManager.h"
+#include <QSortFilterProxyModel>
+#include <QMutex>
 
 enum TorrentFilterType
 {

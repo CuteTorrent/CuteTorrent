@@ -1,4 +1,9 @@
-﻿#include "QRssDisplayModel.h"
+﻿#include <QObject>
+#ifdef Q_OS_WIN
+#include <WinSock2.h>
+#include <windows.h>
+#endif
+#include "QRssDisplayModel.h"
 #include "RssFeed.h"
 #include "RssFeedTreeItem.h"
 #include "RssFeedTreeItem.h"
@@ -146,6 +151,7 @@ QModelIndex QRssDisplayModel::parent(const QModelIndex& child) const
 
 void QRssDisplayModel::UpdateModel()
 {
+	emit beginResetModel();
 	qDeleteAll(m_rootItems);
 	m_rootItems.clear();
 	QList<RssFeed*> feeds = m_pRssManager->feeds();
@@ -156,7 +162,7 @@ void QRssDisplayModel::UpdateModel()
 		m_rootItems.append(new RssFeedTreeItem(var));
 	}
 
-	reset();
+	emit endResetModel();
 }
 
 void QRssDisplayModel::UpdateVisibleData()

@@ -38,7 +38,7 @@ void TorrentGroupsManager::FillMaps()
 
 void TorrentGroupsManager::LoadGroups()
 {
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QString groupsPath = StaticHelpers::CombinePathes(dataDir, "groups.dat");
 	QFile groupsDat(groupsPath);
 
@@ -182,7 +182,7 @@ TorrentGroup* TorrentGroupsManager::GetTorrentGroupForTorrent(Torrent* pTorrent)
 
 void TorrentGroupsManager::SaveGroups()
 {
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QString groupsPath = StaticHelpers::CombinePathes(dataDir, "groups.dat");
 	QFile groupsDat(groupsPath);
 

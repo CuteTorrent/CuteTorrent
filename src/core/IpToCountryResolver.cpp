@@ -4,14 +4,14 @@
 #include "StaticHelpers.h"
 #include <QDesktopServices>
 #include "filedownloader.h"
-
+#include <QTemporaryFile>
 
 
 IpToCountryResolver::IpToCountryResolver()
 	: m_pIpDb(new MMDB_s)
 	, m_pFileDownloader(new FileDownloader())
 {
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QUrl geoIpUrl = "http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.mmdb.gz";
 	QString geoIpPath = StaticHelpers::CombinePathes(dataDir, "GeoIP.dat");
 
@@ -26,11 +26,11 @@ IpToCountryResolver::IpToCountryResolver()
 		}
 		else
 		{
-			int status = MMDB_open(geoIpPath.toAscii().data(), MMDB_MODE_MMAP, m_pIpDb);
+			int status = MMDB_open(geoIpPath.toUtf8().data(), MMDB_MODE_MMAP, m_pIpDb);
 
 			if (MMDB_SUCCESS != status) {
 				qDebug("Can't open %s - %s",
-					filename, MMDB_strerror(status));
+					geoIpPath, MMDB_strerror(status));
 
 				if (MMDB_IO_ERROR == status) {
 					qDebug("IO error: %s\n", std::strerror(errno));
@@ -53,11 +53,11 @@ QString IpToCountryResolver::GetCountryISOCode(QString ip)
 {
 	int gai_error, mmdb_error;
 	MMDB_lookup_result_s result =
-		MMDB_lookup_string(m_pIpDb, ip.toAscii().data(), &gai_error, &mmdb_error);
+		MMDB_lookup_string(m_pIpDb, ip.toUtf8().data(), &gai_error, &mmdb_error);
 
 	if (0 != gai_error) {
 		qDebug("Error from getaddrinfo for %s - %s\n\n",
-			ip.toAscii().data(), gai_strerror(gai_error));
+			ip.toUtf8().data(), gai_strerror(gai_error));
 		exit(2);
 	}
 
@@ -103,7 +103,7 @@ QString IpToCountryResolver::GetCountryISOCode(QString ip)
 	else {
 		qDebug(
 			"No entry for this IP address (%s) was found",
-			ip.toAscii().data());
+			ip.toUtf8().data());
 		
 	}
 
@@ -119,7 +119,7 @@ void IpToCountryResolver::OnGeoIpDbDownloaded(QUrl, QTemporaryFilePtr pFile)
 	QByteArray compressed = pFile->readAll();
 	QByteArray unpacked = StaticHelpers::gUncompress(compressed);
 
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QString geoIpPath = StaticHelpers::CombinePathes(dataDir, "GeoIP.dat");
 	QFile file(geoIpPath);
 	if (file.open(QIODevice::WriteOnly))
@@ -127,11 +127,11 @@ void IpToCountryResolver::OnGeoIpDbDownloaded(QUrl, QTemporaryFilePtr pFile)
 		file.write(unpacked);
 		file.close();
 	}
-	int status = MMDB_open(geoIpPath.toAscii().data(), MMDB_MODE_MMAP, m_pIpDb);
+	int status = MMDB_open(geoIpPath.toUtf8().data(), MMDB_MODE_MMAP, m_pIpDb);
 
 	if (MMDB_SUCCESS != status) {
 		qDebug("Can't open %s - %s",
-			filename, MMDB_strerror(status));
+			geoIpPath, MMDB_strerror(status));
 
 		if (MMDB_IO_ERROR == status) {
 			qDebug("IO error: %s", std::strerror(errno));

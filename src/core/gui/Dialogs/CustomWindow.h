@@ -1,9 +1,5 @@
 ﻿#pragma once
-
 #define PIXELS_TO_ACT 3
-#include <QtGui>
-#include <WinSock2.h>
-#include <windows.h>
 #include "StyleEngene.h"
 
 
@@ -388,7 +384,7 @@ void BaseWindow<T>::setupCustomWindow()
 	getTitleLabel()->setMouseTracking(true);
 	getTitleIcon()->setMouseTracking(true);
 	getCloseBtn()->setMouseTracking(true);
-#ifndef Q_WS_WIN
+#ifndef Q_OS_WIN 
 	QWidget* titleBar = getTitleBar();
 	QHBoxLayout* layout = qobject_cast<QHBoxLayout*>(titleBar->layout());
 
@@ -634,7 +630,7 @@ void BaseWindow<T>::resizeWindow(QMouseEvent* e)
 			}
 		}
 		MSG msg;
-		while (PeekMessage(&msg, T::winId(), WM_MOUSEMOVE, WM_MOUSEMOVE, PM_REMOVE));
+		while (PeekMessage(&msg, (HWND)T::winId(), WM_MOUSEMOVE, WM_MOUSEMOVE, PM_REMOVE));
 		e->accept();
 	}
 }
@@ -839,7 +835,7 @@ void BaseWindow<T>::mouseMoveEvent(QMouseEvent* e)
 	}
 	else if (isResizeEnabled && !m_bIsMaximized)
 	{
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 
 		if ((xMouse >= wLeft + wWidth - PIXELS_TO_ACT && xMouse <= wLeft + wWidth + PIXELS_TO_ACT) || allowToResize)
 		{

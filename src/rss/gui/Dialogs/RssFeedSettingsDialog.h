@@ -1,5 +1,5 @@
 #include <QtCore>
-#include <QtGui>
+#include <QtWidgets>
 #include "CustomWindow.h"
 #include "ui_RssFeedSettingsDialog.h"
 class RssFeed;

@@ -126,7 +126,7 @@
     role as the new running instance.
 
     For console (non-GUI) applications, QtSingleCoreApplication may be
-    used instead of this class, to avoid the dependency on the QtGui
+    used instead of this class, to avoid the dependency on the QtWidgets
     library.
 
     \sa QtSingleCoreApplication

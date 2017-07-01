@@ -1,6 +1,7 @@
 #include "FaviconDownloader.h"
 #include "StaticHelpers.h"
 #include "StyleEngene.h"
+#include <NetworkDiskCache.h>
 
 FaviconDownloader::FaviconDownloader(QObject* parent)
 	: QObject(parent)

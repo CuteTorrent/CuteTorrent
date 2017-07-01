@@ -11,7 +11,7 @@ public:
 	static QVariant MagnetAssociationValueGetter(QString group, QString name, QVariant defaultValue = QVariant());
 	static QVariant TorrentAssociationValueGetter(QString group, QString name, QVariant defaultValue = QVariant());
 	static QVariant RunOnBootValueGetter(QString group, QString name, QVariant defaultValue = QVariant());
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	static QVariant RunOnBootMinimizedValueGetter(QString group, QString name, QVariant defaultValue = QVariant());
 	static QVariant WindowsShellValueGetter(QString group, QString name, QVariant defaultValue = QVariant());
 #endif

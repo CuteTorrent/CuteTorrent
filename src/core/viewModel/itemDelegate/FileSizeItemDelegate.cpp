@@ -1,5 +1,6 @@
 ﻿#include "FileSizeItemDelegate.h"
 #include "StaticHelpers.h"
+#include "defs.h"
 
 
 QString FileSizeItemDelegate::displayText(const QVariant& value, const QLocale& locale) const

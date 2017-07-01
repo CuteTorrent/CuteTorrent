@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <QProgressBar>
-class QStyleOptionProgressBarV2;
+#include <QStyleOption>
 
 class StyledProgressBar : public QProgressBar
 {

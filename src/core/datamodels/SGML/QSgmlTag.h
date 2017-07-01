@@ -26,6 +26,7 @@ under certain conditions.
 #include <QMetaType>
 #include <QHash>
 #include <QRegExp>
+#include <QObject>
 
 class QSgmlTag : public QObject
 {
@@ -110,8 +111,6 @@ private:
 };
 
 extern QSgmlTag NoTag;
-Q_DECLARE_METATYPE(QSgmlTag*)
-Q_DECLARE_METATYPE(QList<QSgmlTag*>)
 
 #endif // QSGMLTAG_CPP
 

@@ -10,24 +10,24 @@
 #define UI_ADDDOWNLOADRULEDIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QListWidget>
-#include <QtGui/QPushButton>
-#include <QtGui/QSplitter>
-#include <QtGui/QTreeView>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSplitter>
+#include <QtWidgets/QTreeView>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -290,20 +290,20 @@ public:
 
     void retranslateUi(QWidget *AddRssDownloadRuleDialog)
     {
-        AddRssDownloadRuleDialog->setWindowTitle(QApplication::translate("AddRssDownloadRuleDialog", "ADD_RSS_DWONLOAD_RULE_DIALOG", 0, QApplication::UnicodeUTF8));
+        AddRssDownloadRuleDialog->setWindowTitle(QApplication::translate("AddRssDownloadRuleDialog", "ADD_RSS_DWONLOAD_RULE_DIALOG", 0));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("AddRssDownloadRuleDialog", "ADD_RSS_DWONLOAD_RULE_DIALOG", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("AddRssDownloadRuleDialog", "RULE_NAME", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("AddRssDownloadRuleDialog", "RULE_TYPE", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("AddRssDownloadRuleDialog", "SEARCH_STRING", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("AddRssDownloadRuleDialog", "SEARCH_TYPE", 0, QApplication::UnicodeUTF8));
-        m_pUseSavePathGroupBox->setTitle(QApplication::translate("AddRssDownloadRuleDialog", "USE_SAVE_PATH", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("AddRssDownloadRuleDialog", "SAVE_PATH", 0, QApplication::UnicodeUTF8));
-        m_pBrowseButton->setText(QApplication::translate("AddRssDownloadRuleDialog", "BROWSE", 0, QApplication::UnicodeUTF8));
-        m_pUseGroupsCheckBox->setText(QApplication::translate("AddRssDownloadRuleDialog", "USE_GROUPS_FOR_FILTERING", 0, QApplication::UnicodeUTF8));
-        m_pRuleTypeHintLabel->setText(QApplication::translate("AddRssDownloadRuleDialog", "RULE_HINT", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("AddRssDownloadRuleDialog", "APPLY_TO_FEEDS:", 0, QApplication::UnicodeUTF8));
-        label_7->setText(QApplication::translate("AddRssDownloadRuleDialog", "FEED_ITEMS_MATCHED_BY_CURRENT_RULE:", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("AddRssDownloadRuleDialog", "ADD_RSS_DWONLOAD_RULE_DIALOG", 0));
+        label_5->setText(QApplication::translate("AddRssDownloadRuleDialog", "RULE_NAME", 0));
+        label->setText(QApplication::translate("AddRssDownloadRuleDialog", "RULE_TYPE", 0));
+        label_2->setText(QApplication::translate("AddRssDownloadRuleDialog", "SEARCH_STRING", 0));
+        label_3->setText(QApplication::translate("AddRssDownloadRuleDialog", "SEARCH_TYPE", 0));
+        m_pUseSavePathGroupBox->setTitle(QApplication::translate("AddRssDownloadRuleDialog", "USE_SAVE_PATH", 0));
+        label_6->setText(QApplication::translate("AddRssDownloadRuleDialog", "SAVE_PATH", 0));
+        m_pBrowseButton->setText(QApplication::translate("AddRssDownloadRuleDialog", "BROWSE", 0));
+        m_pUseGroupsCheckBox->setText(QApplication::translate("AddRssDownloadRuleDialog", "USE_GROUPS_FOR_FILTERING", 0));
+        m_pRuleTypeHintLabel->setText(QApplication::translate("AddRssDownloadRuleDialog", "RULE_HINT", 0));
+        label_4->setText(QApplication::translate("AddRssDownloadRuleDialog", "APPLY_TO_FEEDS:", 0));
+        label_7->setText(QApplication::translate("AddRssDownloadRuleDialog", "FEED_ITEMS_MATCHED_BY_CURRENT_RULE:", 0));
     } // retranslateUi
 
 };

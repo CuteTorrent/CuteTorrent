@@ -1,14 +1,13 @@
-﻿#include "CommentsWebClient.h"
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
+﻿
+#include "CommentsWebClient.h"
 #include <QNetworkReply>
-#include <QEventLoop>
 #include <QDebug>
 #include "json.h"
 #include <QCryptographicHash>
 #include "messagebox.h"
 #include "User.h"
 #include <QApplicationSettings.h>
+
 
 float CommentsWebClient::averageRating() const
 {

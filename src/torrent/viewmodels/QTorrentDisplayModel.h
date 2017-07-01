@@ -76,7 +76,6 @@ private:
 	QAction* setSequentual;
 	QAction* updateTrackers;
 	QAction* storrageMove;
-	QAction* playInMediaPlayer;
 	QAction* generateMagnet;
 	QAction* pauseResumeSeparator;
 	QAction* lowPriority;
@@ -135,6 +134,7 @@ public:
 
 	void ActionOnSelectedItem(action wtf);
 	void retranslate() const;
+	void setSequentualDL();
 
 	QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const override;
 	QModelIndex parent(const QModelIndex& child) const override;
@@ -188,9 +188,6 @@ public slots:
 	void DellAll();
 	void MountDT() const;
 	void SetPriority(int prio) const;
-	void playInPlayer() const;
-
-	void setSequentualDL();
 	void moveStorrage();
 	void SetSuperSeed();
 	void generateMagnetLink();

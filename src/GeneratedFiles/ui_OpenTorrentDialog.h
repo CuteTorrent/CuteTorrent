@@ -10,22 +10,22 @@
 #define UI_OPENTORRENTDIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCheckBox>
-#include <QtGui/QDialog>
-#include <QtGui/QGridLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QTreeView>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QTreeView>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -317,45 +317,45 @@ public:
 
     void retranslateUi(QDialog *OpenTorrentDialog)
     {
-        OpenTorrentDialog->setWindowTitle(QApplication::translate("OpenTorrentDialog", "DIALOG_OPEN_TORRENT", 0, QApplication::UnicodeUTF8));
+        OpenTorrentDialog->setWindowTitle(QApplication::translate("OpenTorrentDialog", "DIALOG_OPEN_TORRENT", 0));
 #ifndef QT_NO_STATUSTIP
         OpenTorrentDialog->setStatusTip(QString());
 #endif // QT_NO_STATUSTIP
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("OpenTorrentDialog", "DIALOG_OPEN_TORRENT", 0, QApplication::UnicodeUTF8));
-        groupBox->setTitle(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_SAVE_PATH", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("OpenTorrentDialog", "DISCRIBTION_LABEL", 0, QApplication::UnicodeUTF8));
-        browseButton->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_BROWSE_BUTTON", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_INFO", 0, QApplication::UnicodeUTF8));
-        labelNameTitile->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_INFO_NAME", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("OpenTorrentDialog", "DIALOG_OPEN_TORRENT", 0));
+        groupBox->setTitle(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_SAVE_PATH", 0));
+        label->setText(QApplication::translate("OpenTorrentDialog", "DISCRIBTION_LABEL", 0));
+        browseButton->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_BROWSE_BUTTON", 0));
+        groupBox_2->setTitle(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_INFO", 0));
+        labelNameTitile->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_INFO_NAME", 0));
         labelNameData->setText(QString());
-        labelCommentTitle->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_INFO_DESCRIBTION", 0, QApplication::UnicodeUTF8));
+        labelCommentTitle->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_INFO_DESCRIBTION", 0));
         labelComentData->setText(QString());
         labelSizeData->setText(QString());
-        labelSizeTitle->setText(QApplication::translate("OpenTorrentDialog", "SIZE", 0, QApplication::UnicodeUTF8));
+        labelSizeTitle->setText(QApplication::translate("OpenTorrentDialog", "SIZE", 0));
         loaderGifLabel->setText(QString());
-        loaderTextLabel->setText(QApplication::translate("OpenTorrentDialog", "RECIVING_METADATA", 0, QApplication::UnicodeUTF8));
+        loaderTextLabel->setText(QApplication::translate("OpenTorrentDialog", "RECIVING_METADATA", 0));
 #ifndef QT_NO_TOOLTIP
-        setPausedCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_PAUSED_TOOLTIP", 0, QApplication::UnicodeUTF8));
+        setPausedCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_PAUSED_TOOLTIP", 0));
 #endif // QT_NO_TOOLTIP
-        setPausedCheckBox->setText(QApplication::translate("OpenTorrentDialog", "START_PAUSED", 0, QApplication::UnicodeUTF8));
+        setPausedCheckBox->setText(QApplication::translate("OpenTorrentDialog", "START_PAUSED", 0));
 #ifndef QT_NO_TOOLTIP
-        setSuperSeedCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_WITH_SUPER_SEED", 0, QApplication::UnicodeUTF8));
+        setSuperSeedCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_WITH_SUPER_SEED", 0));
 #endif // QT_NO_TOOLTIP
-        setSuperSeedCheckBox->setText(QApplication::translate("OpenTorrentDialog", "START_WITH_SUPER_SEED", 0, QApplication::UnicodeUTF8));
+        setSuperSeedCheckBox->setText(QApplication::translate("OpenTorrentDialog", "START_WITH_SUPER_SEED", 0));
 #ifndef QT_NO_TOOLTIP
-        setSeedModeCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_SEEDING_TOOLTIP", 0, QApplication::UnicodeUTF8));
+        setSeedModeCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_SEEDING_TOOLTIP", 0));
 #endif // QT_NO_TOOLTIP
-        setSeedModeCheckBox->setText(QApplication::translate("OpenTorrentDialog", "START_SEEDING", 0, QApplication::UnicodeUTF8));
+        setSeedModeCheckBox->setText(QApplication::translate("OpenTorrentDialog", "START_SEEDING", 0));
 #ifndef QT_NO_TOOLTIP
-        setSequntialCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_SEQUENTIAL_TOOLTIP", 0, QApplication::UnicodeUTF8));
+        setSequntialCheckBox->setToolTip(QApplication::translate("OpenTorrentDialog", "START_SEQUENTIAL_TOOLTIP", 0));
 #endif // QT_NO_TOOLTIP
-        setSequntialCheckBox->setText(QApplication::translate("OpenTorrentDialog", "SET_SEQUNTIAL", 0, QApplication::UnicodeUTF8));
-        skipNameInPathCheckBox->setText(QApplication::translate("OpenTorrentDialog", "DO_NOT_CREATE_SUBFOLDER_WITH_TORRENT_NAME", 0, QApplication::UnicodeUTF8));
-        markAllButton->setText(QApplication::translate("OpenTorrentDialog", "MARK_ALL", 0, QApplication::UnicodeUTF8));
-        unmarkAllButton->setText(QApplication::translate("OpenTorrentDialog", "UNMARK_ALL", 0, QApplication::UnicodeUTF8));
-        cancelButton->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_CANCEL_BUTTON", 0, QApplication::UnicodeUTF8));
-        yesButton->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_ADD_BUTTON", 0, QApplication::UnicodeUTF8));
+        setSequntialCheckBox->setText(QApplication::translate("OpenTorrentDialog", "SET_SEQUNTIAL", 0));
+        skipNameInPathCheckBox->setText(QApplication::translate("OpenTorrentDialog", "DO_NOT_CREATE_SUBFOLDER_WITH_TORRENT_NAME", 0));
+        markAllButton->setText(QApplication::translate("OpenTorrentDialog", "MARK_ALL", 0));
+        unmarkAllButton->setText(QApplication::translate("OpenTorrentDialog", "UNMARK_ALL", 0));
+        cancelButton->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_CANCEL_BUTTON", 0));
+        yesButton->setText(QApplication::translate("OpenTorrentDialog", "OPEN_TORRENT_ADD_BUTTON", 0));
     } // retranslateUi
 
 };

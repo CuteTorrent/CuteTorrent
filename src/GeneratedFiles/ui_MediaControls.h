@@ -10,14 +10,14 @@
 #define UI_MEDIACONTROLS_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QPushButton>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QWidget>
 #include <phonon/seekslider.h>
 #include <phonon/volumeslider.h>
 
@@ -206,7 +206,7 @@ public:
 
     void retranslateUi(QWidget *MediaControls)
     {
-        currentTimeLabel->setText(QApplication::translate("MediaControls", "00:00:00", 0, QApplication::UnicodeUTF8));
+        currentTimeLabel->setText(QApplication::translate("MediaControls", "00:00:00", 0));
         openFileButton->setText(QString());
         openUrlButton->setText(QString());
         pauseButton->setText(QString());
@@ -214,7 +214,7 @@ public:
         forwardButton->setText(QString());
         playButton->setText(QString());
         fullScreenButton->setText(QString());
-        totalTimeLabel->setText(QApplication::translate("MediaControls", "00:00:00", 0, QApplication::UnicodeUTF8));
+        totalTimeLabel->setText(QApplication::translate("MediaControls", "00:00:00", 0));
         Q_UNUSED(MediaControls);
     } // retranslateUi
 

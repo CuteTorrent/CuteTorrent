@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #ifndef LTORRENT_H
 #define LTORRENT_H
-
+#include <file_entry.h>
+#include "defs.h"
 #include "CreateTorrentDialog.h"
 #include "CustomWindow.h"
 #include "FileViewModel.h"
@@ -43,7 +44,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class CommentsModel;
 class CommentItemDelegate;
 class RatingWidget;
-class OnlineReporter;
 class Application;
 class FileViewModel;
 class FileViewSortProxyModel;
@@ -152,7 +152,6 @@ private:
 	SearchEnginePtr m_pSearchEngine;
 	RatingWidget* m_pRatingWidget;
 	FileSystemTorrentWatcherPtr m_pTorrentWatcher;
-	OnlineReporter* m_pOnlineReporter;
 	QStateMachine* m_pSorterStateMachine;
 	QState* m_pSortAscendingSortState;
 	QState* m_pSortDescendingSortState;
@@ -166,7 +165,7 @@ private:
 	QSignalMapper *m_pLanguageSignalMapper, *m_pSkinSignalMapper, *m_pAutoshutdownSignalMapper;
 	bool m_splitterInitFinished;
 	SortButton* m_pSortButton;
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	QWinJumpList* m_pJumpList;
 #endif
 	void createTrayIcon();
@@ -188,7 +187,7 @@ private:
 	void setupLanguageChoseMenu();
 	void setupSkinChoseMenu();
 	void setupGroupTreeWidget() const;
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	void setupTasksCategory() const;
 	void setupJumpList() const;
 #endif
@@ -231,7 +230,7 @@ public slots:
 	void UpdatePeerTab() const;
 	void UpdateFileTab() const;
 	void UpadateCommentsTab() const;
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	void UpdateTrayIconOverlay() const;
 #endif
 	void UpadteTrackerTab() const;

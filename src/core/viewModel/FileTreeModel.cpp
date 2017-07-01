@@ -268,7 +268,7 @@ QVariant FileTreeModel::data(const QModelIndex& index, int role) const
 
 		if (!suffix.isEmpty() && item->childCount() == 0)
 		{
-			QString fileTemplate = StaticHelpers::CombinePathes(QDesktopServices::storageLocation(QDesktopServices::TempLocation), "tempFileXXXXXX." + suffix);
+			QString fileTemplate = StaticHelpers::CombinePathes(QStandardPaths::writableLocation(QStandardPaths::TempLocation), "tempFileXXXXXX." + suffix);
 			QTemporaryFile tmpfile(fileTemplate);
 			tmpfile.open();
 			tmpfile.close();

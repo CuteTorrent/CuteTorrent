@@ -3,6 +3,9 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QTemporaryFile>
+#include <boost/smart_ptr/shared_ptr.hpp>
+#include <boost/smart_ptr/make_shared.hpp>
+#include <QtNetwork>
 
 
 FileDownloader::FileDownloader(QObject* parent)

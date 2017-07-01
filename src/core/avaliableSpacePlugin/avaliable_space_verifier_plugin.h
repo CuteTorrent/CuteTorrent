@@ -35,8 +35,8 @@ struct avaliable_space_verifier_plugin : libtorrent::plugin
 
 inline boost::shared_ptr<libtorrent::plugin> create_avaliable_space_verifier_plugin()
 {
-	boost::shared_ptr<libtorrent::plugin> plugin_ptr(new avaliable_space_verifier_plugin());
+	
 
-	return plugin_ptr;
+	return boost::static_pointer_cast<libtorrent::plugin>(boost::make_shared<avaliable_space_verifier_plugin>());
 }
 

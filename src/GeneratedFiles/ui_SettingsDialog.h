@@ -10,34 +10,34 @@
 #define UI_SETTINGSDIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCalendarWidget>
-#include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
-#include <QtGui/QDateTimeEdit>
-#include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QDoubleSpinBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QListWidget>
-#include <QtGui/QPushButton>
-#include <QtGui/QRadioButton>
-#include <QtGui/QScrollArea>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QSpinBox>
-#include <QtGui/QStackedWidget>
-#include <QtGui/QTextEdit>
-#include <QtGui/QTimeEdit>
-#include <QtGui/QTreeWidget>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCalendarWidget>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QDateTimeEdit>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
+#include <QtWidgets/QStackedWidget>
+#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QTimeEdit>
+#include <QtWidgets/QTreeWidget>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -1659,317 +1659,317 @@ public:
 
     void retranslateUi(QDialog *SettingsDialog)
     {
-        SettingsDialog->setWindowTitle(QApplication::translate("SettingsDialog", "SETTINGS_DIALOG", 0, QApplication::UnicodeUTF8));
+        SettingsDialog->setWindowTitle(QApplication::translate("SettingsDialog", "SETTINGS_DIALOG", 0));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("SettingsDialog", "SETTINGS_DIALOG", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("SettingsDialog", "SETTINGS_DIALOG", 0));
 
         const bool __sortingEnabled = listWidget->isSortingEnabled();
         listWidget->setSortingEnabled(false);
         QListWidgetItem *___qlistwidgetitem = listWidget->item(0);
-        ___qlistwidgetitem->setText(QApplication::translate("SettingsDialog", "TAB_GENERAL", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem->setText(QApplication::translate("SettingsDialog", "TAB_GENERAL", 0));
         QListWidgetItem *___qlistwidgetitem1 = listWidget->item(1);
-        ___qlistwidgetitem1->setText(QApplication::translate("SettingsDialog", "TAB_RESTRICTIONS", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem1->setText(QApplication::translate("SettingsDialog", "TAB_RESTRICTIONS", 0));
         QListWidgetItem *___qlistwidgetitem2 = listWidget->item(2);
-        ___qlistwidgetitem2->setText(QApplication::translate("SettingsDialog", "TAB_NETWORK", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem2->setText(QApplication::translate("SettingsDialog", "TAB_NETWORK", 0));
         QListWidgetItem *___qlistwidgetitem3 = listWidget->item(3);
-        ___qlistwidgetitem3->setText(QApplication::translate("SettingsDialog", "TAB_HDD", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem3->setText(QApplication::translate("SettingsDialog", "TAB_HDD", 0));
         QListWidgetItem *___qlistwidgetitem4 = listWidget->item(4);
-        ___qlistwidgetitem4->setText(QApplication::translate("SettingsDialog", "TAB_TORRENT_FILTERING", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem4->setText(QApplication::translate("SettingsDialog", "TAB_TORRENT_FILTERING", 0));
         QListWidgetItem *___qlistwidgetitem5 = listWidget->item(5);
-        ___qlistwidgetitem5->setText(QApplication::translate("SettingsDialog", "TAB_DAEMONTOOLS", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem5->setText(QApplication::translate("SettingsDialog", "TAB_DAEMONTOOLS", 0));
         QListWidgetItem *___qlistwidgetitem6 = listWidget->item(6);
-        ___qlistwidgetitem6->setText(QApplication::translate("SettingsDialog", "TAB_SCEDULER", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem6->setText(QApplication::translate("SettingsDialog", "TAB_SCEDULER", 0));
         QListWidgetItem *___qlistwidgetitem7 = listWidget->item(7);
-        ___qlistwidgetitem7->setText(QApplication::translate("SettingsDialog", "TAB_WEB_CONTROL", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem7->setText(QApplication::translate("SettingsDialog", "TAB_WEB_CONTROL", 0));
         QListWidgetItem *___qlistwidgetitem8 = listWidget->item(8);
-        ___qlistwidgetitem8->setText(QApplication::translate("SettingsDialog", "TAB_RSS", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem8->setText(QApplication::translate("SettingsDialog", "TAB_RSS", 0));
         QListWidgetItem *___qlistwidgetitem9 = listWidget->item(9);
-        ___qlistwidgetitem9->setText(QApplication::translate("SettingsDialog", "TAB_KEY_MAPPINGS", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem9->setText(QApplication::translate("SettingsDialog", "TAB_KEY_MAPPINGS", 0));
         listWidget->setSortingEnabled(__sortingEnabled);
 
-        useNotificationsCheckBox->setTitle(QApplication::translate("SettingsDialog", "ENABLE_NOTIFICATIONS", 0, QApplication::UnicodeUTF8));
-        showTrackerErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_TRACKER_ERRORS", 0, QApplication::UnicodeUTF8));
-        showDiskErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_IO_ERRORS", 0, QApplication::UnicodeUTF8));
-        showRssErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_RSS_ERRORS", 0, QApplication::UnicodeUTF8));
-        trackerGroupBox->setTitle(QApplication::translate("SettingsDialog", "START_TRACKER", 0, QApplication::UnicodeUTF8));
-        label_23->setText(QApplication::translate("SettingsDialog", "TRACKER_PORT", 0, QApplication::UnicodeUTF8));
+        useNotificationsCheckBox->setTitle(QApplication::translate("SettingsDialog", "ENABLE_NOTIFICATIONS", 0));
+        showTrackerErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_TRACKER_ERRORS", 0));
+        showDiskErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_IO_ERRORS", 0));
+        showRssErrorsCheckBox->setText(QApplication::translate("SettingsDialog", "NOTIFY_RSS_ERRORS", 0));
+        trackerGroupBox->setTitle(QApplication::translate("SettingsDialog", "START_TRACKER", 0));
+        label_23->setText(QApplication::translate("SettingsDialog", "TRACKER_PORT", 0));
 #ifndef QT_NO_WHATSTHIS
-        asociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION_WIT", 0, QApplication::UnicodeUTF8));
+        asociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        asociationCheckBox->setText(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION", 0, QApplication::UnicodeUTF8));
-        winShelItegrationCheckBox->setText(QApplication::translate("SettingsDialog", "ENABLE_SHELL_INTEGRATION", 0, QApplication::UnicodeUTF8));
-        label_26->setText(QApplication::translate("SettingsDialog", "STYLE", 0, QApplication::UnicodeUTF8));
+        asociationCheckBox->setText(QApplication::translate("SettingsDialog", "TORRENT_FILES_ASSOCIATION", 0));
+        winShelItegrationCheckBox->setText(QApplication::translate("SettingsDialog", "ENABLE_SHELL_INTEGRATION", 0));
+        label_26->setText(QApplication::translate("SettingsDialog", "STYLE", 0));
 #ifndef QT_NO_WHATSTHIS
-        startMinimizedCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_MINIMIZED_WIT", 0, QApplication::UnicodeUTF8));
+        startMinimizedCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_MINIMIZED_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        startMinimizedCheckBox->setText(QApplication::translate("SettingsDialog", "START_MINIMIZED", 0, QApplication::UnicodeUTF8));
-        scriptDebugingCheckBox->setText(QApplication::translate("SettingsDialog", "ENABLE_SEARCH_SCRIPT_DEBUGING", 0, QApplication::UnicodeUTF8));
+        startMinimizedCheckBox->setText(QApplication::translate("SettingsDialog", "START_MINIMIZED", 0));
+        scriptDebugingCheckBox->setText(QApplication::translate("SettingsDialog", "ENABLE_SEARCH_SCRIPT_DEBUGING", 0));
 #ifndef QT_NO_WHATSTHIS
-        magnetAssociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION_WIT", 0, QApplication::UnicodeUTF8));
+        magnetAssociationCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        magnetAssociationCheckBox->setText(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION", 0, QApplication::UnicodeUTF8));
+        magnetAssociationCheckBox->setText(QApplication::translate("SettingsDialog", "MAGNET_ASSOCIATION", 0));
 #ifndef QT_NO_WHATSTHIS
-        runOnbootCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_ON_BOOT_WIT", 0, QApplication::UnicodeUTF8));
+        runOnbootCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "START_ON_BOOT_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        runOnbootCheckBox->setText(QApplication::translate("SettingsDialog", "START_ON_BOOT", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("SettingsDialog", "LANGUAGE", 0, QApplication::UnicodeUTF8));
-        closeOnHideCheckBox->setText(QApplication::translate("SettingsDialog", "HIDE_ON_CLOSE", 0, QApplication::UnicodeUTF8));
-        watchDirEnabledCheckbox->setTitle(QApplication::translate("SettingsDialog", "WATCH_DIR_FOR_NEW_TORRENTS", 0, QApplication::UnicodeUTF8));
-        useStaticPathRadioButton->setText(QApplication::translate("SettingsDialog", "AUTO_ADD_USING_STATIC_PATH", 0, QApplication::UnicodeUTF8));
-        showDialogRadioButton->setText(QApplication::translate("SettingsDialog", "NOT_AUTO_ADD", 0, QApplication::UnicodeUTF8));
-        usetTorrentFilteringRadioButton->setText(QApplication::translate("SettingsDialog", "AUTO_ADD_USING_TOR_FILTERING", 0, QApplication::UnicodeUTF8));
-        browseWatchStaticPathButton->setText(QApplication::translate("SettingsDialog", "BROWSE", 0, QApplication::UnicodeUTF8));
-        label_43->setText(QApplication::translate("SettingsDialog", "DIR_TO_WATCH", 0, QApplication::UnicodeUTF8));
-        browseWatchDirButton->setText(QApplication::translate("SettingsDialog", "BROWSE", 0, QApplication::UnicodeUTF8));
-        checkBox->setText(QApplication::translate("SettingsDialog", "DELETE_TORRENTS", 0, QApplication::UnicodeUTF8));
-        groupBox_12->setTitle(QApplication::translate("SettingsDialog", "ADDITINAL_PEER_SOUECES", 0, QApplication::UnicodeUTF8));
-        usePExCheckBox->setText(QApplication::translate("SettingsDialog", "USE_PEX", 0, QApplication::UnicodeUTF8));
-        useLSDCheckBox->setText(QApplication::translate("SettingsDialog", "USE_LSD", 0, QApplication::UnicodeUTF8));
-        useDHTCheckBox->setText(QApplication::translate("SettingsDialog", "USE_DHT", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("SettingsDialog", "SPEED_RESRICTIONS", 0, QApplication::UnicodeUTF8));
+        runOnbootCheckBox->setText(QApplication::translate("SettingsDialog", "START_ON_BOOT", 0));
+        label_8->setText(QApplication::translate("SettingsDialog", "LANGUAGE", 0));
+        closeOnHideCheckBox->setText(QApplication::translate("SettingsDialog", "HIDE_ON_CLOSE", 0));
+        watchDirEnabledCheckbox->setTitle(QApplication::translate("SettingsDialog", "WATCH_DIR_FOR_NEW_TORRENTS", 0));
+        useStaticPathRadioButton->setText(QApplication::translate("SettingsDialog", "AUTO_ADD_USING_STATIC_PATH", 0));
+        showDialogRadioButton->setText(QApplication::translate("SettingsDialog", "NOT_AUTO_ADD", 0));
+        usetTorrentFilteringRadioButton->setText(QApplication::translate("SettingsDialog", "AUTO_ADD_USING_TOR_FILTERING", 0));
+        browseWatchStaticPathButton->setText(QApplication::translate("SettingsDialog", "BROWSE", 0));
+        label_43->setText(QApplication::translate("SettingsDialog", "DIR_TO_WATCH", 0));
+        browseWatchDirButton->setText(QApplication::translate("SettingsDialog", "BROWSE", 0));
+        checkBox->setText(QApplication::translate("SettingsDialog", "DELETE_TORRENTS", 0));
+        groupBox_12->setTitle(QApplication::translate("SettingsDialog", "ADDITINAL_PEER_SOUECES", 0));
+        usePExCheckBox->setText(QApplication::translate("SettingsDialog", "USE_PEX", 0));
+        useLSDCheckBox->setText(QApplication::translate("SettingsDialog", "USE_LSD", 0));
+        useDHTCheckBox->setText(QApplication::translate("SettingsDialog", "USE_DHT", 0));
+        groupBox_2->setTitle(QApplication::translate("SettingsDialog", "SPEED_RESRICTIONS", 0));
 #ifndef QT_NO_WHATSTHIS
-        label_6->setWhatsThis(QApplication::translate("SettingsDialog", "UPLOAD_SPEED_LIMIT_WIT", 0, QApplication::UnicodeUTF8));
+        label_6->setWhatsThis(QApplication::translate("SettingsDialog", "UPLOAD_SPEED_LIMIT_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        label_6->setText(QApplication::translate("SettingsDialog", "UPLOAD_SPEED_LIMIT", 0, QApplication::UnicodeUTF8));
-        uploadLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0, QApplication::UnicodeUTF8));
-        uploadLimitEdit->setSuffix(QApplication::translate("SettingsDialog", " Kb\\s", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("SettingsDialog", "UPLOAD_SPEED_LIMIT", 0));
+        uploadLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0));
+        uploadLimitEdit->setSuffix(QApplication::translate("SettingsDialog", " Kb\\s", 0));
         uploadLimitEdit->setPrefix(QString());
 #ifndef QT_NO_WHATSTHIS
-        label_7->setWhatsThis(QApplication::translate("SettingsDialog", "DOWNLOAD_SPEED_LIMIT_WIT", 0, QApplication::UnicodeUTF8));
+        label_7->setWhatsThis(QApplication::translate("SettingsDialog", "DOWNLOAD_SPEED_LIMIT_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        label_7->setText(QApplication::translate("SettingsDialog", "DOWNLOAD_SPEED_LIMIT", 0, QApplication::UnicodeUTF8));
-        downloadLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0, QApplication::UnicodeUTF8));
-        downloadLimitEdit->setSuffix(QApplication::translate("SettingsDialog", " Kb\\s", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("SettingsDialog", "DOWNLOAD_SPEED_LIMIT", 0));
+        downloadLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0));
+        downloadLimitEdit->setSuffix(QApplication::translate("SettingsDialog", " Kb\\s", 0));
         downloadLimitEdit->setPrefix(QString());
-        label_33->setText(QApplication::translate("SettingsDialog", "DHT_RATE_LIMIT", 0, QApplication::UnicodeUTF8));
-        dhtLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0, QApplication::UnicodeUTF8));
-        dhtLimitEdit->setSuffix(QApplication::translate("SettingsDialog", " Kb\\s", 0, QApplication::UnicodeUTF8));
+        label_33->setText(QApplication::translate("SettingsDialog", "DHT_RATE_LIMIT", 0));
+        dhtLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0));
+        dhtLimitEdit->setSuffix(QApplication::translate("SettingsDialog", " Kb\\s", 0));
         dhtLimitEdit->setPrefix(QString());
-        limitLocalConnectionCheckBox->setTitle(QApplication::translate("SettingsDialog", "USE_LIMITS_IN_LOCAL_NETWORK", 0, QApplication::UnicodeUTF8));
-        label_31->setText(QApplication::translate("SettingsDialog", "LOCAL_UPLOAD_LIMIT", 0, QApplication::UnicodeUTF8));
-        localUploadLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0, QApplication::UnicodeUTF8));
-        localUploadLimitEdit->setSuffix(QApplication::translate("SettingsDialog", "Kb\\s", 0, QApplication::UnicodeUTF8));
-        label_32->setText(QApplication::translate("SettingsDialog", "LOCAL_DOWNLOAD_LIMIT", 0, QApplication::UnicodeUTF8));
-        localDownloadLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0, QApplication::UnicodeUTF8));
-        localDownloadLimitEdit->setSuffix(QApplication::translate("SettingsDialog", "Kb\\s", 0, QApplication::UnicodeUTF8));
-        limitUtpCheckBox->setText(QApplication::translate("SettingsDialog", "APPLY_LIMITS_TO_uTP", 0, QApplication::UnicodeUTF8));
-        label_30->setText(QApplication::translate("SettingsDialog", "SEED_TIME_LIMIT", 0, QApplication::UnicodeUTF8));
-        label_34->setText(QApplication::translate("SettingsDialog", "SEED_GLOBAL_RATIO_LIMIT", 0, QApplication::UnicodeUTF8));
-        label_41->setText(QApplication::translate("SettingsDialog", "MAX_CONNECTIONS_PER_TORRENT", 0, QApplication::UnicodeUTF8));
-        restrictionsGroupBox->setTitle(QApplication::translate("SettingsDialog", "ACTIVITY_RESTRICTIONS", 0, QApplication::UnicodeUTF8));
+        limitLocalConnectionCheckBox->setTitle(QApplication::translate("SettingsDialog", "USE_LIMITS_IN_LOCAL_NETWORK", 0));
+        label_31->setText(QApplication::translate("SettingsDialog", "LOCAL_UPLOAD_LIMIT", 0));
+        localUploadLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0));
+        localUploadLimitEdit->setSuffix(QApplication::translate("SettingsDialog", "Kb\\s", 0));
+        label_32->setText(QApplication::translate("SettingsDialog", "LOCAL_DOWNLOAD_LIMIT", 0));
+        localDownloadLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0));
+        localDownloadLimitEdit->setSuffix(QApplication::translate("SettingsDialog", "Kb\\s", 0));
+        limitUtpCheckBox->setText(QApplication::translate("SettingsDialog", "APPLY_LIMITS_TO_uTP", 0));
+        label_30->setText(QApplication::translate("SettingsDialog", "SEED_TIME_LIMIT", 0));
+        label_34->setText(QApplication::translate("SettingsDialog", "SEED_GLOBAL_RATIO_LIMIT", 0));
+        label_41->setText(QApplication::translate("SettingsDialog", "MAX_CONNECTIONS_PER_TORRENT", 0));
+        restrictionsGroupBox->setTitle(QApplication::translate("SettingsDialog", "ACTIVITY_RESTRICTIONS", 0));
 #ifndef QT_NO_WHATSTHIS
-        activeSeedLimitEdit->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_UPLOADS_LIMIT", 0, QApplication::UnicodeUTF8));
+        activeSeedLimitEdit->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_UPLOADS_LIMIT", 0));
 #endif // QT_NO_WHATSTHIS
-        activeSeedLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0, QApplication::UnicodeUTF8));
+        activeSeedLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0));
 #ifndef QT_NO_WHATSTHIS
-        activeLimitEdit->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_TORRENTS_LIMIT", 0, QApplication::UnicodeUTF8));
+        activeLimitEdit->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_TORRENTS_LIMIT", 0));
 #endif // QT_NO_WHATSTHIS
-        activeLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0, QApplication::UnicodeUTF8));
+        activeLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0));
 #ifndef QT_NO_WHATSTHIS
-        activeDownloadLimitEdit->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_DOWNLOADS_LIMIT", 0, QApplication::UnicodeUTF8));
+        activeDownloadLimitEdit->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_DOWNLOADS_LIMIT", 0));
 #endif // QT_NO_WHATSTHIS
-        activeDownloadLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0, QApplication::UnicodeUTF8));
+        activeDownloadLimitEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0));
 #ifndef QT_NO_WHATSTHIS
-        label_17->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_DOWNLOADS_LIMIT_WIT", 0, QApplication::UnicodeUTF8));
+        label_17->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_DOWNLOADS_LIMIT_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        label_17->setText(QApplication::translate("SettingsDialog", "ACTIVE_DOWNLOADS_LIMIT", 0, QApplication::UnicodeUTF8));
+        label_17->setText(QApplication::translate("SettingsDialog", "ACTIVE_DOWNLOADS_LIMIT", 0));
 #ifndef QT_NO_WHATSTHIS
-        label_16->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_SEEDS_LIMIT_WIT", 0, QApplication::UnicodeUTF8));
+        label_16->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_SEEDS_LIMIT_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        label_16->setText(QApplication::translate("SettingsDialog", "ACTIVE_SEEDS_LIMIT", 0, QApplication::UnicodeUTF8));
+        label_16->setText(QApplication::translate("SettingsDialog", "ACTIVE_SEEDS_LIMIT", 0));
 #ifndef QT_NO_WHATSTHIS
-        label_15->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_TORRENTS_LIMIT_WIT", 0, QApplication::UnicodeUTF8));
+        label_15->setWhatsThis(QApplication::translate("SettingsDialog", "ACTIVE_TORRENTS_LIMIT_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        label_15->setText(QApplication::translate("SettingsDialog", "ACTIVE_TORRENTS_LIMIT", 0, QApplication::UnicodeUTF8));
-        label_45->setText(QApplication::translate("SettingsDialog", "MAX_CONNECTIONS", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("SettingsDialog", "LISTEN_PORT", 0, QApplication::UnicodeUTF8));
-        groupBox_10->setTitle(QApplication::translate("SettingsDialog", "NET_ENC", 0, QApplication::UnicodeUTF8));
-        label_27->setText(QApplication::translate("SettingsDialog", "IN_ENC_POLICITY", 0, QApplication::UnicodeUTF8));
+        label_15->setText(QApplication::translate("SettingsDialog", "ACTIVE_TORRENTS_LIMIT", 0));
+        label_45->setText(QApplication::translate("SettingsDialog", "MAX_CONNECTIONS", 0));
+        label->setText(QApplication::translate("SettingsDialog", "LISTEN_PORT", 0));
+        groupBox_10->setTitle(QApplication::translate("SettingsDialog", "NET_ENC", 0));
+        label_27->setText(QApplication::translate("SettingsDialog", "IN_ENC_POLICITY", 0));
         inEncPolicyComboBox->clear();
         inEncPolicyComboBox->insertItems(0, QStringList()
-         << QApplication::translate("SettingsDialog", "FORCED", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "ENABLED", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "DISABLED", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SettingsDialog", "FORCED", 0)
+         << QApplication::translate("SettingsDialog", "ENABLED", 0)
+         << QApplication::translate("SettingsDialog", "DISABLED", 0)
         );
-        label_28->setText(QApplication::translate("SettingsDialog", "OUT_ENC_POLICITY", 0, QApplication::UnicodeUTF8));
+        label_28->setText(QApplication::translate("SettingsDialog", "OUT_ENC_POLICITY", 0));
         outEncPolicyComboBox->clear();
         outEncPolicyComboBox->insertItems(0, QStringList()
-         << QApplication::translate("SettingsDialog", "FORCED", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "ENABLED", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "DISABLED", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SettingsDialog", "FORCED", 0)
+         << QApplication::translate("SettingsDialog", "ENABLED", 0)
+         << QApplication::translate("SettingsDialog", "DISABLED", 0)
         );
-        label_29->setText(QApplication::translate("SettingsDialog", "ENCRYPTION_LEVEL", 0, QApplication::UnicodeUTF8));
+        label_29->setText(QApplication::translate("SettingsDialog", "ENCRYPTION_LEVEL", 0));
         encLevelComboBox->clear();
         encLevelComboBox->insertItems(0, QStringList()
-         << QApplication::translate("SettingsDialog", "PROTOCOL_ENC_ONLY", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "FULL_ENC", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "BOTH", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SettingsDialog", "PROTOCOL_ENC_ONLY", 0)
+         << QApplication::translate("SettingsDialog", "FULL_ENC", 0)
+         << QApplication::translate("SettingsDialog", "BOTH", 0)
         );
-        preferFullEncCheckBox->setText(QApplication::translate("SettingsDialog", "PREFER_FULL_ENCRYPTION", 0, QApplication::UnicodeUTF8));
-        proxyGroupBox->setTitle(QApplication::translate("SettingsDialog", "USE_PROXY", 0, QApplication::UnicodeUTF8));
+        preferFullEncCheckBox->setText(QApplication::translate("SettingsDialog", "PREFER_FULL_ENCRYPTION", 0));
+        proxyGroupBox->setTitle(QApplication::translate("SettingsDialog", "USE_PROXY", 0));
 #ifndef QT_NO_WHATSTHIS
-        label_3->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_USER_NAME_WIT", 0, QApplication::UnicodeUTF8));
+        label_3->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_USER_NAME_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        label_3->setText(QApplication::translate("SettingsDialog", "PROXY_USER_NAME", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("SettingsDialog", "PROXY_USER_NAME", 0));
 #ifndef QT_NO_WHATSTHIS
-        proxyHostEdit->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_HOST_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-#ifndef QT_NO_WHATSTHIS
-        proxyUsernameEdit->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_USER_NAME_WIT", 0, QApplication::UnicodeUTF8));
+        proxyHostEdit->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_HOST_WIT", 0));
 #endif // QT_NO_WHATSTHIS
 #ifndef QT_NO_WHATSTHIS
-        label_5->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_TYPE_WIT", 0, QApplication::UnicodeUTF8));
+        proxyUsernameEdit->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_USER_NAME_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        label_5->setText(QApplication::translate("SettingsDialog", "PROXY_TYPE", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
-        label_4->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_PASSWORD_WIT", 0, QApplication::UnicodeUTF8));
+        label_5->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_TYPE_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        label_4->setText(QApplication::translate("SettingsDialog", "PROXY_PASSWORD", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("SettingsDialog", "PROXY_TYPE", 0));
 #ifndef QT_NO_WHATSTHIS
-        label_2->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_HOST_WIT", 0, QApplication::UnicodeUTF8));
+        label_4->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_PASSWORD_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        label_2->setText(QApplication::translate("SettingsDialog", "PROXY_HOST", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("SettingsDialog", "PROXY_PASSWORD", 0));
 #ifndef QT_NO_WHATSTHIS
-        proxyPwdEdit->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_PASSWORD", 0, QApplication::UnicodeUTF8));
+        label_2->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_HOST_WIT", 0));
+#endif // QT_NO_WHATSTHIS
+        label_2->setText(QApplication::translate("SettingsDialog", "PROXY_HOST", 0));
+#ifndef QT_NO_WHATSTHIS
+        proxyPwdEdit->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_PASSWORD", 0));
 #endif // QT_NO_WHATSTHIS
         proxyTypeComboBox->clear();
         proxyTypeComboBox->insertItems(0, QStringList()
-         << QApplication::translate("SettingsDialog", "Socks4", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "Socks5", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "Socks5 \321\201 \320\277\320\260\321\200\320\276\320\273\320\265\320\274", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "http", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "http \321\201 \320\277\320\260\321\200\320\276\320\273\320\265\320\274", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "i2p", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SettingsDialog", "Socks4", 0)
+         << QApplication::translate("SettingsDialog", "Socks5", 0)
+         << QApplication::translate("SettingsDialog", "Socks5 \321\201 \320\277\320\260\321\200\320\276\320\273\320\265\320\274", 0)
+         << QApplication::translate("SettingsDialog", "http", 0)
+         << QApplication::translate("SettingsDialog", "http \321\201 \320\277\320\260\321\200\320\276\320\273\320\265\320\274", 0)
+         << QApplication::translate("SettingsDialog", "i2p", 0)
         );
 #ifndef QT_NO_WHATSTHIS
-        proxyTypeComboBox->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_TYPE", 0, QApplication::UnicodeUTF8));
+        proxyTypeComboBox->setWhatsThis(QApplication::translate("SettingsDialog", "PROXY_TYPE", 0));
 #endif // QT_NO_WHATSTHIS
-        label_44->setText(QApplication::translate("SettingsDialog", "PROXY_PORT", 0, QApplication::UnicodeUTF8));
-        useRandomPortCheckBox->setText(QApplication::translate("SettingsDialog", "USE_RANDOM_PORT", 0, QApplication::UnicodeUTF8));
-        portMappingsCheckBox->setText(QApplication::translate("SettingsDialog", "USE_PORT_MAPPINGS", 0, QApplication::UnicodeUTF8));
+        label_44->setText(QApplication::translate("SettingsDialog", "PROXY_PORT", 0));
+        useRandomPortCheckBox->setText(QApplication::translate("SettingsDialog", "USE_RANDOM_PORT", 0));
+        portMappingsCheckBox->setText(QApplication::translate("SettingsDialog", "USE_PORT_MAPPINGS", 0));
 #ifndef QT_NO_WHATSTHIS
-        useDiskReadAheadCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "USE_DISK_READ_AHEAD_WIT", 0, QApplication::UnicodeUTF8));
+        useDiskReadAheadCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "USE_DISK_READ_AHEAD_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        useDiskReadAheadCheckBox->setText(QApplication::translate("SettingsDialog", "USE_DISK_READ_AHEAD", 0, QApplication::UnicodeUTF8));
+        useDiskReadAheadCheckBox->setText(QApplication::translate("SettingsDialog", "USE_DISK_READ_AHEAD", 0));
 #ifndef QT_NO_WHATSTHIS
-        alowReorderedOpsCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "ALOW_REORDERED_OPERATIONS_WIT", 0, QApplication::UnicodeUTF8));
+        alowReorderedOpsCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "ALOW_REORDERED_OPERATIONS_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        alowReorderedOpsCheckBox->setText(QApplication::translate("SettingsDialog", "ALOW_REORDERED_OPERATIONS", 0, QApplication::UnicodeUTF8));
-        label_42->setText(QApplication::translate("SettingsDialog", "DISK_ALLOCATION_MODE", 0, QApplication::UnicodeUTF8));
-        casheSizeLineEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0, QApplication::UnicodeUTF8));
-        casheSizeLineEdit->setSuffix(QApplication::translate("SettingsDialog", " Kb", 0, QApplication::UnicodeUTF8));
+        alowReorderedOpsCheckBox->setText(QApplication::translate("SettingsDialog", "ALOW_REORDERED_OPERATIONS", 0));
+        label_42->setText(QApplication::translate("SettingsDialog", "DISK_ALLOCATION_MODE", 0));
+        casheSizeLineEdit->setSpecialValueText(QApplication::translate("SettingsDialog", "None", 0));
+        casheSizeLineEdit->setSuffix(QApplication::translate("SettingsDialog", " Kb", 0));
         casheSizeLineEdit->setPrefix(QString());
         diskAllocationComboBox->clear();
         diskAllocationComboBox->insertItems(0, QStringList()
-         << QApplication::translate("SettingsDialog", "FULL_ALLOCATION", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "PIECE_ALLOCATION", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SettingsDialog", "FULL_ALLOCATION", 0)
+         << QApplication::translate("SettingsDialog", "PIECE_ALLOCATION", 0)
         );
 #ifndef QT_NO_WHATSTHIS
-        lockFilesCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "LOCK_FILES_WIT", 0, QApplication::UnicodeUTF8));
+        lockFilesCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "LOCK_FILES_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        lockFilesCheckBox->setText(QApplication::translate("SettingsDialog", "LOCK_FILES", 0, QApplication::UnicodeUTF8));
+        lockFilesCheckBox->setText(QApplication::translate("SettingsDialog", "LOCK_FILES", 0));
 #ifndef QT_NO_WHATSTHIS
-        useReadCasheCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "USE_READ_CASHE_WIT", 0, QApplication::UnicodeUTF8));
+        useReadCasheCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "USE_READ_CASHE_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        useReadCasheCheckBox->setText(QApplication::translate("SettingsDialog", "USE_READ_CASHE", 0, QApplication::UnicodeUTF8));
+        useReadCasheCheckBox->setText(QApplication::translate("SettingsDialog", "USE_READ_CASHE", 0));
 #ifndef QT_NO_WHATSTHIS
-        lowPrioDiskCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "LOW_PORIO_DISK_WIT", 0, QApplication::UnicodeUTF8));
+        lowPrioDiskCheckBox->setWhatsThis(QApplication::translate("SettingsDialog", "LOW_PORIO_DISK_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        lowPrioDiskCheckBox->setText(QApplication::translate("SettingsDialog", "LOW_PORIO_DISK", 0, QApplication::UnicodeUTF8));
+        lowPrioDiskCheckBox->setText(QApplication::translate("SettingsDialog", "LOW_PORIO_DISK", 0));
 #ifndef QT_NO_WHATSTHIS
-        label_19->setWhatsThis(QApplication::translate("SettingsDialog", "DISK_IO_CASH_MODE_WIT", 0, QApplication::UnicodeUTF8));
+        label_19->setWhatsThis(QApplication::translate("SettingsDialog", "DISK_IO_CASH_MODE_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        label_19->setText(QApplication::translate("SettingsDialog", "DISK_IO_CASH_MODE", 0, QApplication::UnicodeUTF8));
+        label_19->setText(QApplication::translate("SettingsDialog", "DISK_IO_CASH_MODE", 0));
         diskIOCasheModeComboBox->clear();
         diskIOCasheModeComboBox->insertItems(0, QStringList()
-         << QApplication::translate("SettingsDialog", "ENABLE_OS_CACHE", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "DISABLE_OS_CACHE_FOR_ALIGNED_FILES", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SettingsDialog", "DISABLE_OS_CACHE", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SettingsDialog", "ENABLE_OS_CACHE", 0)
+         << QApplication::translate("SettingsDialog", "DISABLE_OS_CACHE_FOR_ALIGNED_FILES", 0)
+         << QApplication::translate("SettingsDialog", "DISABLE_OS_CACHE", 0)
         );
 #ifndef QT_NO_WHATSTHIS
-        label_20->setWhatsThis(QApplication::translate("SettingsDialog", "CASH_SIZE_WIT", 0, QApplication::UnicodeUTF8));
+        label_20->setWhatsThis(QApplication::translate("SettingsDialog", "CASH_SIZE_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        label_20->setText(QApplication::translate("SettingsDialog", "CASH_SIZE", 0, QApplication::UnicodeUTF8));
-        groupBox_9->setTitle(QApplication::translate("SettingsDialog", "ADD_CHANGE_GROUP", 0, QApplication::UnicodeUTF8));
+        label_20->setText(QApplication::translate("SettingsDialog", "CASH_SIZE", 0));
+        groupBox_9->setTitle(QApplication::translate("SettingsDialog", "ADD_CHANGE_GROUP", 0));
 #ifndef QT_NO_WHATSTHIS
-        groupSavePathEdit->setWhatsThis(QApplication::translate("SettingsDialog", "groupSavePathEdit_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-#ifndef QT_NO_WHATSTHIS
-        BrowseGroupSavePathButton->setWhatsThis(QApplication::translate("SettingsDialog", "GROUP_SAVE_PATH_CHOISE_BUTTON_WIT", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        BrowseGroupSavePathButton->setText(QApplication::translate("SettingsDialog", "GROUP_SAVE_PATH_CHOISE_BUTTON", 0, QApplication::UnicodeUTF8));
-        label_47->setText(QApplication::translate("SettingsDialog", "GROUP_EXTENTIONS", 0, QApplication::UnicodeUTF8));
-        label_48->setText(QApplication::translate("SettingsDialog", "GROUP_SAVE_PATH", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_WHATSTHIS
-        extensionsEdit->setWhatsThis(QApplication::translate("SettingsDialog", "extensionsEdit_WIT", 0, QApplication::UnicodeUTF8));
+        groupSavePathEdit->setWhatsThis(QApplication::translate("SettingsDialog", "groupSavePathEdit_WIT", 0));
 #endif // QT_NO_WHATSTHIS
 #ifndef QT_NO_WHATSTHIS
-        newGroupNameEdit->setWhatsThis(QApplication::translate("SettingsDialog", "newGroupNameEdit_WIT", 0, QApplication::UnicodeUTF8));
+        BrowseGroupSavePathButton->setWhatsThis(QApplication::translate("SettingsDialog", "GROUP_SAVE_PATH_CHOISE_BUTTON_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        label_46->setText(QApplication::translate("SettingsDialog", "GROUP_NAME", 0, QApplication::UnicodeUTF8));
+        BrowseGroupSavePathButton->setText(QApplication::translate("SettingsDialog", "GROUP_SAVE_PATH_CHOISE_BUTTON", 0));
+        label_47->setText(QApplication::translate("SettingsDialog", "GROUP_EXTENTIONS", 0));
+        label_48->setText(QApplication::translate("SettingsDialog", "GROUP_SAVE_PATH", 0));
 #ifndef QT_NO_WHATSTHIS
-        addNewGroupButton->setWhatsThis(QApplication::translate("SettingsDialog", "ADD_GROUP_BUTON_WIT", 0, QApplication::UnicodeUTF8));
+        extensionsEdit->setWhatsThis(QApplication::translate("SettingsDialog", "extensionsEdit_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        addNewGroupButton->setText(QApplication::translate("SettingsDialog", "ADD_GROUP_BUTON", 0, QApplication::UnicodeUTF8));
-        updateGroupButton->setText(QApplication::translate("SettingsDialog", "UPDATE_GROUP", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_WHATSTHIS
-        removeGroupButton->setWhatsThis(QApplication::translate("SettingsDialog", "FILTERING_GROUP_DELETE_WIT", 0, QApplication::UnicodeUTF8));
+        newGroupNameEdit->setWhatsThis(QApplication::translate("SettingsDialog", "newGroupNameEdit_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        removeGroupButton->setText(QApplication::translate("SettingsDialog", "FILTERING_GROUP_DELETE", 0, QApplication::UnicodeUTF8));
+        label_46->setText(QApplication::translate("SettingsDialog", "GROUP_NAME", 0));
 #ifndef QT_NO_WHATSTHIS
-        GroupsTreeWidget->setWhatsThis(QApplication::translate("SettingsDialog", "GROUP_LISTBOX_WIT", 0, QApplication::UnicodeUTF8));
+        addNewGroupButton->setWhatsThis(QApplication::translate("SettingsDialog", "ADD_GROUP_BUTON_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        groupBox_6->setTitle(QApplication::translate("SettingsDialog", "DAEMONTOOLS_PATH", 0, QApplication::UnicodeUTF8));
+        addNewGroupButton->setText(QApplication::translate("SettingsDialog", "ADD_GROUP_BUTON", 0));
+        updateGroupButton->setText(QApplication::translate("SettingsDialog", "UPDATE_GROUP", 0));
 #ifndef QT_NO_WHATSTHIS
-        DTPathEdit->setWhatsThis(QApplication::translate("SettingsDialog", "DTPathEdit_WIT", 0, QApplication::UnicodeUTF8));
+        removeGroupButton->setWhatsThis(QApplication::translate("SettingsDialog", "FILTERING_GROUP_DELETE_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        browseDTPathButton->setText(QApplication::translate("SettingsDialog", "DAEMONTOOLS_PATH_CHOISE_BUUTON", 0, QApplication::UnicodeUTF8));
-        groupBox_8->setTitle(QApplication::translate("SettingsDialog", "DRIVE_NUMBER", 0, QApplication::UnicodeUTF8));
+        removeGroupButton->setText(QApplication::translate("SettingsDialog", "FILTERING_GROUP_DELETE", 0));
 #ifndef QT_NO_WHATSTHIS
-        driveNumberComboBox->setWhatsThis(QApplication::translate("SettingsDialog", "driveNumberComboBox_WIT", 0, QApplication::UnicodeUTF8));
+        GroupsTreeWidget->setWhatsThis(QApplication::translate("SettingsDialog", "GROUP_LISTBOX_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        customMoutGroupBox->setTitle(QApplication::translate("SettingsDialog", "DAEMONTOOLS_CUSTOM_COMMAND", 0, QApplication::UnicodeUTF8));
+        groupBox_6->setTitle(QApplication::translate("SettingsDialog", "DAEMONTOOLS_PATH", 0));
 #ifndef QT_NO_WHATSTHIS
-        customCommandEdit->setWhatsThis(QApplication::translate("SettingsDialog", "DAEMONTOOLS_COMMAND_WIT", 0, QApplication::UnicodeUTF8));
+        DTPathEdit->setWhatsThis(QApplication::translate("SettingsDialog", "DTPathEdit_WIT", 0));
 #endif // QT_NO_WHATSTHIS
-        groupBox_11->setTitle(QApplication::translate("SettingsDialog", "GroupBox", 0, QApplication::UnicodeUTF8));
-        groupBox->setTitle(QApplication::translate("SettingsDialog", "ACTIONS", 0, QApplication::UnicodeUTF8));
-        label_11->setText(QApplication::translate("SettingsDialog", "LIMIT_DOWNLOAD", 0, QApplication::UnicodeUTF8));
-        label_12->setText(QApplication::translate("SettingsDialog", "LIMIT_UPLOAD", 0, QApplication::UnicodeUTF8));
-        startAllRadioButton->setText(QApplication::translate("SettingsDialog", "START_ALL", 0, QApplication::UnicodeUTF8));
-        limitUlRadioButton->setText(QApplication::translate("SettingsDialog", "LIMIT_UPLOAD", 0, QApplication::UnicodeUTF8));
-        limitDlRadioButton->setText(QApplication::translate("SettingsDialog", "LIMIT_DOWNLOAD", 0, QApplication::UnicodeUTF8));
-        pauseAllRadioButton->setText(QApplication::translate("SettingsDialog", "PUASE_ALL", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("SettingsDialog", "ACTION_BEGIN", 0, QApplication::UnicodeUTF8));
-        label_13->setText(QApplication::translate("SettingsDialog", "ACTION_NAME", 0, QApplication::UnicodeUTF8));
-        label_14->setText(QApplication::translate("SettingsDialog", "ACTIONS", 0, QApplication::UnicodeUTF8));
-        addTaskButton->setText(QApplication::translate("SettingsDialog", "ADD_BUTTON", 0, QApplication::UnicodeUTF8));
-        deleteTaskButton->setText(QApplication::translate("SettingsDialog", "DELETE_BUTTON", 0, QApplication::UnicodeUTF8));
-        webUIGroupBox->setTitle(QApplication::translate("SettingsDialog", "WEB_CONTROLL_ENABLED", 0, QApplication::UnicodeUTF8));
-        IPFilterGroupBox->setTitle(QApplication::translate("SettingsDialog", "WEB_UI_USE_IP_FILTER", 0, QApplication::UnicodeUTF8));
-        webUILogginGroupBox->setTitle(QApplication::translate("SettingsDialog", "WEB_UI_LOGGING_ENABLED", 0, QApplication::UnicodeUTF8));
-        label_22->setText(QApplication::translate("SettingsDialog", "WEB_UI_LOG_NAME", 0, QApplication::UnicodeUTF8));
-        label_10->setText(QApplication::translate("SettingsDialog", "WEB_UI_LOGIN", 0, QApplication::UnicodeUTF8));
-        label_18->setText(QApplication::translate("SettingsDialog", "WEB_UI_PASSWORD", 0, QApplication::UnicodeUTF8));
-        upnpCheckBox->setText(QApplication::translate("SettingsDialog", "WEB_UI_UPNP_ENABLED", 0, QApplication::UnicodeUTF8));
-        label_21->setText(QApplication::translate("SettingsDialog", "WEB_UI_PORT", 0, QApplication::UnicodeUTF8));
-        startRconButton->setText(QApplication::translate("SettingsDialog", "WEBUI_START", 0, QApplication::UnicodeUTF8));
-        stopRconButton->setText(QApplication::translate("SettingsDialog", "WEBUI_STOP", 0, QApplication::UnicodeUTF8));
+        browseDTPathButton->setText(QApplication::translate("SettingsDialog", "DAEMONTOOLS_PATH_CHOISE_BUUTON", 0));
+        groupBox_8->setTitle(QApplication::translate("SettingsDialog", "DRIVE_NUMBER", 0));
+#ifndef QT_NO_WHATSTHIS
+        driveNumberComboBox->setWhatsThis(QApplication::translate("SettingsDialog", "driveNumberComboBox_WIT", 0));
+#endif // QT_NO_WHATSTHIS
+        customMoutGroupBox->setTitle(QApplication::translate("SettingsDialog", "DAEMONTOOLS_CUSTOM_COMMAND", 0));
+#ifndef QT_NO_WHATSTHIS
+        customCommandEdit->setWhatsThis(QApplication::translate("SettingsDialog", "DAEMONTOOLS_COMMAND_WIT", 0));
+#endif // QT_NO_WHATSTHIS
+        groupBox_11->setTitle(QApplication::translate("SettingsDialog", "GroupBox", 0));
+        groupBox->setTitle(QApplication::translate("SettingsDialog", "ACTIONS", 0));
+        label_11->setText(QApplication::translate("SettingsDialog", "LIMIT_DOWNLOAD", 0));
+        label_12->setText(QApplication::translate("SettingsDialog", "LIMIT_UPLOAD", 0));
+        startAllRadioButton->setText(QApplication::translate("SettingsDialog", "START_ALL", 0));
+        limitUlRadioButton->setText(QApplication::translate("SettingsDialog", "LIMIT_UPLOAD", 0));
+        limitDlRadioButton->setText(QApplication::translate("SettingsDialog", "LIMIT_DOWNLOAD", 0));
+        pauseAllRadioButton->setText(QApplication::translate("SettingsDialog", "PUASE_ALL", 0));
+        label_9->setText(QApplication::translate("SettingsDialog", "ACTION_BEGIN", 0));
+        label_13->setText(QApplication::translate("SettingsDialog", "ACTION_NAME", 0));
+        label_14->setText(QApplication::translate("SettingsDialog", "ACTIONS", 0));
+        addTaskButton->setText(QApplication::translate("SettingsDialog", "ADD_BUTTON", 0));
+        deleteTaskButton->setText(QApplication::translate("SettingsDialog", "DELETE_BUTTON", 0));
+        webUIGroupBox->setTitle(QApplication::translate("SettingsDialog", "WEB_CONTROLL_ENABLED", 0));
+        IPFilterGroupBox->setTitle(QApplication::translate("SettingsDialog", "WEB_UI_USE_IP_FILTER", 0));
+        webUILogginGroupBox->setTitle(QApplication::translate("SettingsDialog", "WEB_UI_LOGGING_ENABLED", 0));
+        label_22->setText(QApplication::translate("SettingsDialog", "WEB_UI_LOG_NAME", 0));
+        label_10->setText(QApplication::translate("SettingsDialog", "WEB_UI_LOGIN", 0));
+        label_18->setText(QApplication::translate("SettingsDialog", "WEB_UI_PASSWORD", 0));
+        upnpCheckBox->setText(QApplication::translate("SettingsDialog", "WEB_UI_UPNP_ENABLED", 0));
+        label_21->setText(QApplication::translate("SettingsDialog", "WEB_UI_PORT", 0));
+        startRconButton->setText(QApplication::translate("SettingsDialog", "WEBUI_START", 0));
+        stopRconButton->setText(QApplication::translate("SettingsDialog", "WEBUI_STOP", 0));
         RunningLabel->setText(QString());
-        openWebUiButton->setText(QApplication::translate("SettingsDialog", "OPEN_WEBUI", 0, QApplication::UnicodeUTF8));
-        autosrtEmailNotificationCheckBox->setTitle(QApplication::translate("SettingsDialog", "RSS_AUTO_START_EMAIL_NOTIFICATION", 0, QApplication::UnicodeUTF8));
-        label_36->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_AUTH_TYPE", 0, QApplication::UnicodeUTF8));
-        label_38->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_PASSWORD", 0, QApplication::UnicodeUTF8));
-        label_25->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_SERVER", 0, QApplication::UnicodeUTF8));
-        label_35->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_PORT", 0, QApplication::UnicodeUTF8));
-        label_37->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_LOGIN", 0, QApplication::UnicodeUTF8));
-        label_39->setText(QApplication::translate("SettingsDialog", "RSS_NOTIFICATION_EMEAIL", 0, QApplication::UnicodeUTF8));
-        label_40->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_CONN_TYPE", 0, QApplication::UnicodeUTF8));
-        label_24->setText(QApplication::translate("SettingsDialog", "RSS_DEFAULT_REFRESH_RATE", 0, QApplication::UnicodeUTF8));
-        addRssDLRuleButton->setText(QApplication::translate("SettingsDialog", "+", 0, QApplication::UnicodeUTF8));
-        removeRssDLRuleButton->setText(QApplication::translate("SettingsDialog", "-", 0, QApplication::UnicodeUTF8));
-        importRssRulesButton->setText(QApplication::translate("SettingsDialog", "RSS_RULES_IMPORT", 0, QApplication::UnicodeUTF8));
-        exportRssRulesButton->setText(QApplication::translate("SettingsDialog", "RSS_RULES_EXPORT", 0, QApplication::UnicodeUTF8));
+        openWebUiButton->setText(QApplication::translate("SettingsDialog", "OPEN_WEBUI", 0));
+        autosrtEmailNotificationCheckBox->setTitle(QApplication::translate("SettingsDialog", "RSS_AUTO_START_EMAIL_NOTIFICATION", 0));
+        label_36->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_AUTH_TYPE", 0));
+        label_38->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_PASSWORD", 0));
+        label_25->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_SERVER", 0));
+        label_35->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_PORT", 0));
+        label_37->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_LOGIN", 0));
+        label_39->setText(QApplication::translate("SettingsDialog", "RSS_NOTIFICATION_EMEAIL", 0));
+        label_40->setText(QApplication::translate("SettingsDialog", "RSS_SMTP_CONN_TYPE", 0));
+        label_24->setText(QApplication::translate("SettingsDialog", "RSS_DEFAULT_REFRESH_RATE", 0));
+        addRssDLRuleButton->setText(QApplication::translate("SettingsDialog", "+", 0));
+        removeRssDLRuleButton->setText(QApplication::translate("SettingsDialog", "-", 0));
+        importRssRulesButton->setText(QApplication::translate("SettingsDialog", "RSS_RULES_IMPORT", 0));
+        exportRssRulesButton->setText(QApplication::translate("SettingsDialog", "RSS_RULES_EXPORT", 0));
     } // retranslateUi
 
 };

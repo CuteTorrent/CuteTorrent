@@ -1,298 +1,348 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
-      <Extensions>qrc;*</Extensions>
-      <ParseFiles>false</ParseFiles>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
-      <Extensions>qrc;*</Extensions>
-      <ParseFiles>false</ParseFiles>
-    </Filter>
-    <Filter Include="Translation Files">
-      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
-      <Extensions>ts;xlf</Extensions>
-      <ParseFiles>false</ParseFiles>
-    </Filter>
-    <Filter Include="Translation Files">
-      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
-      <Extensions>ts;xlf</Extensions>
-      <ParseFiles>false</ParseFiles>
-    </Filter>
-    <Filter Include="SearchEngine">
-      <UniqueIdentifier>{eaaad18b-8b99-4efd-9206-fbc94f04bdb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SearchEngine\SearchProviders">
-      <UniqueIdentifier>{c6e63b78-1adc-4512-bfbf-3734bcda48c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tracker">
-      <UniqueIdentifier>{489c26eb-d1cc-498b-ae5a-8d2493e0f82c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ViewModel">
-      <UniqueIdentifier>{be0808de-0fe1-4b64-965d-328d64c21c1b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ViewModel\ItemDelegat">
-      <UniqueIdentifier>{4f014c2d-552e-4864-a2f3-468e6e30c516}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="WebBasic">
-      <UniqueIdentifier>{f72fb115-f1f7-4281-a8e3-2e97829d3bb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="WebBasic\HTTP">
-      <UniqueIdentifier>{abcd15f1-1fb2-4a7d-b955-73b8413d6e21}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="WebBasic\JSON">
-      <UniqueIdentifier>{90bb3b1e-2f26-4815-bc6e-5fd14aef9c81}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VideoPlayer">
-      <UniqueIdentifier>{7fc09131-c01d-42cc-9d1e-bd8fbe3b2606}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rss">
-      <UniqueIdentifier>{26069f37-d7d5-42c8-bc39-7fccf4ea7bf8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core">
-      <UniqueIdentifier>{9b7f805e-658b-49c9-8ba6-e8de74312a6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\gui">
-      <UniqueIdentifier>{95c5c0d0-8991-407b-ac1a-7b34252fcbd0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\gui\Dialogs">
-      <UniqueIdentifier>{e4454d21-506a-409c-8d92-dc9e6a7928b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\http">
-      <UniqueIdentifier>{58b5ccf1-9353-4320-81f4-e91337bfadf1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\datamodels">
-      <UniqueIdentifier>{0e881901-8153-4f21-aadc-bca52911b2bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rss\datamodels">
-      <UniqueIdentifier>{e803f4dc-8c18-400f-97a3-d317d0fbd474}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="scheduller">
-      <UniqueIdentifier>{5bcb0af4-5f1c-4a84-a48d-b21893262f42}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="search">
-      <UniqueIdentifier>{0793bc3e-a6d0-4f40-ab84-9b0d9cd22886}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="search\dataModels">
-      <UniqueIdentifier>{b580f96e-8f3d-49e0-af2e-2e1a1ed3ce67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="torrent">
-      <UniqueIdentifier>{5365b2ab-3ed9-4ac4-a5c1-b892daefb30b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="torrent\core">
-      <UniqueIdentifier>{1f3ded9e-be44-4bdf-9844-a280d2f1c062}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rss\gui">
-      <UniqueIdentifier>{66ccac4e-411c-4508-839c-cb13509413d9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rss\gui\Dialogs">
-      <UniqueIdentifier>{cc6f30ab-013b-4666-830b-94271ee6552f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="torrent\gui">
-      <UniqueIdentifier>{dac70aa0-df34-44b0-9f97-20e44f5334bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="torrent\gui\Dialogs">
-      <UniqueIdentifier>{756cae52-eed4-41bf-b37a-d309d9a0b3a9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Comments">
-      <UniqueIdentifier>{ec138908-8be6-46fb-827d-de78e81ea5c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Comments\gui">
-      <UniqueIdentifier>{3b6a0d04-ab75-4330-8d1c-6d8011b48359}</UniqueIdentifier>
+      <UniqueIdentifier>{607dc21a-a96a-48c5-a6bc-27e14c5839cd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Comments\gui\Dialogs">
-      <UniqueIdentifier>{8e679eb9-837f-4438-b259-323aa663e5fe}</UniqueIdentifier>
+      <UniqueIdentifier>{3c5e0992-8adf-4947-9851-a3e08c20abce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="core\avaliableSpacePlugin">
-      <UniqueIdentifier>{65b442b3-857d-49fd-87da-4dee6a9a41a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\gui\ImportWizard">
-      <UniqueIdentifier>{5a86adbc-3da5-4ae7-b310-aae8ea87e328}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\gui\ImportWizard\Importers">
-      <UniqueIdentifier>{c35353f2-058d-4d78-892e-729b593ed276}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\gui\Controls">
-      <UniqueIdentifier>{dc7c3125-a153-4a15-8168-5a1ddc851f8f}</UniqueIdentifier>
+    <Filter Include="Comments\gui">
+      <UniqueIdentifier>{6a3a5999-940f-4a29-aa71-536eec72e684}</UniqueIdentifier>
     </Filter>
     <Filter Include="Comments\ViewModels">
-      <UniqueIdentifier>{953bc3d1-475d-4ec4-99b8-8ec6b98614c0}</UniqueIdentifier>
+      <UniqueIdentifier>{c5aa58c8-ecca-4045-beda-000dc5cf95f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="core\zip">
-      <UniqueIdentifier>{99551e6d-7071-4837-b96b-bc9a1e5769d1}</UniqueIdentifier>
+    <Filter Include="core">
+      <UniqueIdentifier>{cdb7accd-6c5f-45f3-bfee-aa74774619fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="search\searchproviders">
-      <UniqueIdentifier>{5af51ab5-2809-4720-bbef-7b64ba03986f}</UniqueIdentifier>
+    <Filter Include="core\avaliableSpacePlugin">
+      <UniqueIdentifier>{4f93b995-2f1f-4eb0-85cb-73c0a8ab89ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="core\smtp">
-      <UniqueIdentifier>{9ee758c1-7267-45a7-a307-55d7e4b3ae82}</UniqueIdentifier>
+    <Filter Include="core\datamodels">
+      <UniqueIdentifier>{e0c26cb3-afa8-4ad5-b3d0-086480dd29ff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="webControll">
-      <UniqueIdentifier>{54e302f0-528a-49e0-a815-01fb32af6b8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\viewModel">
-      <UniqueIdentifier>{5f8a959d-9088-4f1f-a261-4ee29138217a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\viewModel\itemDelegate">
-      <UniqueIdentifier>{1c5300de-a67b-44ef-a69b-e9e4b68de8e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GeneratedFiles">
-      <UniqueIdentifier>{f612a8c6-e7f7-4010-acbf-3ec9f994483e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GeneratedFiles\Release">
-      <UniqueIdentifier>{389de5bf-05dd-432c-b382-ec8835007835}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\gui\Controls\MRichTextEdit">
-      <UniqueIdentifier>{41144004-cdbe-44fa-a616-2b5ece5efd18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\collections">
-      <UniqueIdentifier>{2a6dff25-560d-4284-8efb-ff1d8448c3b4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="torrent\viewmodels">
-      <UniqueIdentifier>{f844373f-4bed-4126-9521-a5989cfd19ec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="torrent\gui\Controls">
-      <UniqueIdentifier>{4f0c9230-5891-4b9e-8ade-ea28e4aafafc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="search\viewmodels">
-      <UniqueIdentifier>{52c7d137-d86d-4987-aa1f-004470d3c93b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\StorrageInfo">
-      <UniqueIdentifier>{25362025-c199-43f8-a252-eed7dc9bb6a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\winextras">
-      <UniqueIdentifier>{20e2fe60-3bba-4a06-a175-8e57c8a95855}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="search\core">
-      <UniqueIdentifier>{58206d40-c13f-460f-a440-26cb74470bf7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\gui\Utils">
-      <UniqueIdentifier>{95bbec43-a941-41ed-a008-5837744b7289}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\gui\backupwizard">
-      <UniqueIdentifier>{0e5fdd54-000d-4353-8f5a-f3df457a15e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Comments\gui\FormFiles">
-      <UniqueIdentifier>{25081dd3-e354-497f-b5cd-70ff9366502c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rss\gui\FormFiles">
-      <UniqueIdentifier>{2bb313e6-9b6d-4743-95e7-1a7cfe3035f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="torrent\gui\FormFiles">
-      <UniqueIdentifier>{0c403645-fcf5-4650-9b16-8953c8e914d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\gui\FormFiles">
-      <UniqueIdentifier>{4e9be810-3b06-41ed-ac4f-692c8cb77910}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\helpers">
-      <UniqueIdentifier>{9fe5bb09-d31b-4241-9d40-60589fbfd39d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\qtsingleapplication">
-      <UniqueIdentifier>{01df986d-d1d7-4f97-8ef4-301ec1258911}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\qtsingleapplication\src">
-      <UniqueIdentifier>{0eac4197-441b-4367-bd01-6a4d1f646ca8}</UniqueIdentifier>
+    <Filter Include="core\datamodels\json">
+      <UniqueIdentifier>{a989ed63-0d25-40ca-b9ab-98509b111685}</UniqueIdentifier>
     </Filter>
     <Filter Include="core\datamodels\SGML">
-      <UniqueIdentifier>{bb2b592a-174e-47aa-a0dd-1ca89d2d4d9b}</UniqueIdentifier>
+      <UniqueIdentifier>{d0df9354-36b9-4bd9-a57e-73c931f77b7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\gui\backupwizard">
+      <UniqueIdentifier>{3979ae87-dfc0-41a8-9a7d-c87f14056ff3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\gui">
+      <UniqueIdentifier>{59bd70a4-d0af-468c-88e3-af12ad84af4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\gui\Controls">
+      <UniqueIdentifier>{360109b1-e076-4f86-af9a-a7342f45ac71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\gui\Controls\MRichTextEdit">
+      <UniqueIdentifier>{54f704a9-d1c9-42cd-8a78-b7399b37dfc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\gui\Dialogs">
+      <UniqueIdentifier>{488d9178-faf6-4759-8897-d723b32f3777}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\gui\ImportWizard">
+      <UniqueIdentifier>{9ccfefae-e8d1-49ff-ab78-0a7ed487d166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\gui\ImportWizard\Importers">
+      <UniqueIdentifier>{10b4662c-0e9a-4d42-b6d4-8ad5278083a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\gui\Utils">
+      <UniqueIdentifier>{cf8db544-f698-4ac9-8ee9-f5875f923eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\helpers">
+      <UniqueIdentifier>{6a469543-443b-421e-a236-de8f84cd6c02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\http">
+      <UniqueIdentifier>{b4a2de11-efb5-4a8e-b65b-e61c4678fc08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\qtsingleapplication\src">
+      <UniqueIdentifier>{46380bfb-5ade-4bb8-b3b8-5447964fd8b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\qtsingleapplication">
+      <UniqueIdentifier>{3d482deb-59eb-42bb-8b2d-36e9665fc5a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\smtp">
+      <UniqueIdentifier>{278e7360-a40a-434d-b932-3b496f5eaa7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\viewModel">
+      <UniqueIdentifier>{d3d720dd-1e99-4d46-bc07-c8e8d279a042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\viewModel\itemDelegate">
+      <UniqueIdentifier>{83c4d5af-f3a7-4fd0-bc72-05b1afacdc18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\zip">
+      <UniqueIdentifier>{d748fefb-8d18-4be4-97a6-cd1d9f203031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GeneratedFiles">
+      <UniqueIdentifier>{e548405c-9c95-4201-99e8-8d5b5da89131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GeneratedFiles\Release">
+      <UniqueIdentifier>{d7f9b110-d898-4446-bc28-9a1a91b5bfa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rss\core">
+      <UniqueIdentifier>{10982d46-abb1-417b-9888-85395e5300a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rss">
+      <UniqueIdentifier>{f5c8e3f1-883c-4e67-8b46-736a7c109cbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rss\datamodels">
+      <UniqueIdentifier>{e7a3f2e8-9a39-4588-8f36-384e49df2ad4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rss\gui\Dialogs">
+      <UniqueIdentifier>{c61f07d2-ad06-46cd-8011-4c9c50ed99be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rss\gui">
+      <UniqueIdentifier>{568463a9-043e-4aa2-a6c3-97770dd79fcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rss\viewmodels\ItemDelegate">
+      <UniqueIdentifier>{3b213368-ca80-48e2-92ad-4d14f801a35b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rss\viewmodels">
+      <UniqueIdentifier>{48733025-43f0-4688-b867-3af5c29efaba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scheduller">
+      <UniqueIdentifier>{fa279d65-6171-4ed6-884b-d8cf6ae397c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="search\core">
+      <UniqueIdentifier>{b940a607-1749-4b78-9b50-f749b3dabcf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="search">
+      <UniqueIdentifier>{e4edf6bc-7166-46b6-8749-2f6f32c92ee5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="search\dataModels">
+      <UniqueIdentifier>{a41462ed-5f53-44eb-8607-3db8e3f339d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="search\searchproviders">
+      <UniqueIdentifier>{75ae3a5a-5e80-4c68-9f28-100f82c376f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="search\viewmodels\ItemDelegate">
+      <UniqueIdentifier>{ab2e84b0-a060-48fd-bba0-906c2f8597c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="search\viewmodels">
+      <UniqueIdentifier>{d2d3ebf8-b399-4062-8962-86eddf9d1294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torrent\core">
+      <UniqueIdentifier>{6945882d-7cc0-41d6-9202-896b21205c5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torrent">
+      <UniqueIdentifier>{6e196ea6-01a2-4067-8040-39b444d70053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torrent\gui\Controls">
+      <UniqueIdentifier>{e6253f72-2caf-4dfa-944a-8f9186920fa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torrent\gui">
+      <UniqueIdentifier>{b581dffe-f403-43d4-b445-d87aa110eda0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torrent\gui\Dialogs">
+      <UniqueIdentifier>{78a97882-50a1-4273-9466-d15e9217afd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torrent\viewmodels\ItemDelegate">
+      <UniqueIdentifier>{0e662f87-8e11-4aef-b93f-363fd4792e48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torrent\viewmodels">
+      <UniqueIdentifier>{dfad592e-eae7-4505-83ba-85cc5a206673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tracker">
+      <UniqueIdentifier>{e82ebcb2-f0a8-4e62-87c8-39e5ef87a4b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="webControll">
+      <UniqueIdentifier>{917a78a7-374a-4099-98f9-41307e4380cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GeneratedFiles\Debug">
+      <UniqueIdentifier>{178f84f8-76f4-4ff9-addf-eab323141dfd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources">
-      <UniqueIdentifier>{442579b0-005f-4655-b16e-1c694bd7885d}</UniqueIdentifier>
+      <UniqueIdentifier>{7ae59ef2-201b-4777-88ed-a6c70d7c1116}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\translations">
-      <UniqueIdentifier>{447ab720-cf20-4ee6-8ec8-9922722c7347}</UniqueIdentifier>
+    <Filter Include="core\collections">
+      <UniqueIdentifier>{9d7a432d-aee1-416a-b80e-3038e2bbc1e9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..">
-      <UniqueIdentifier>{0ea980f3-8fe3-44cd-b55f-9870f8b10af9}</UniqueIdentifier>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
     </Filter>
-    <Filter Include="..\UpdateInfo">
-      <UniqueIdentifier>{30094a03-6b16-49ac-8603-d0ed3794fd0e}</UniqueIdentifier>
+    <Filter Include="Resources\Translations">
+      <UniqueIdentifier>{f1cc2887-390c-4653-b17a-2d2623248540}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="tracker\AnnounceRequest.cpp">
-      <Filter>Tracker</Filter>
+    <ClCompile Include="Comments\CommentsWebClient.cpp">
+      <Filter>Comments</Filter>
     </ClCompile>
-    <ClCompile Include="tracker\torrentracker.cpp">
-      <Filter>Tracker</Filter>
+    <ClCompile Include="Comments\gui\Dialogs\AddCommentDialog.cpp">
+      <Filter>Comments\gui\Dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="tracker\trackerrequestmapper.cpp">
-      <Filter>Tracker</Filter>
+    <ClCompile Include="Comments\gui\Dialogs\LoginDialog.cpp">
+      <Filter>Comments\gui\Dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="VideoPlayer\mediacontroller.cpp">
-      <Filter>VideoPlayer</Filter>
+    <ClCompile Include="Comments\gui\Dialogs\RegisterDialog.cpp">
+      <Filter>Comments\gui\Dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="VideoPlayer\MediaControls.cpp">
-      <Filter>VideoPlayer</Filter>
+    <ClCompile Include="Comments\ViewModels\CommentItemDelegate.cpp">
+      <Filter>Comments\ViewModels</Filter>
     </ClCompile>
-    <ClCompile Include="VideoPlayer\VideoPlayerWindow.cpp">
-      <Filter>VideoPlayer</Filter>
+    <ClCompile Include="Comments\ViewModels\CommentsModel.cpp">
+      <Filter>Comments\ViewModels</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="rss\viewmodels\QRssDisplayModel.cpp">
-      <Filter>ViewModel</Filter>
+    <ClCompile Include="core\application.cpp">
+      <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="rss\viewmodels\QRssFilterModel.cpp">
-      <Filter>ViewModel</Filter>
+    <ClCompile Include="core\avaliableSpacePlugin\avaliable_space_verifier_plugin.cpp">
+      <Filter>core\avaliableSpacePlugin</Filter>
     </ClCompile>
-    <ClCompile Include="rss\viewmodels\ItemDelegate\QRssItemDelegate.cpp">
-      <Filter>ViewModel\ItemDelegat</Filter>
-    </ClCompile>
-    <ClCompile Include="rss\core\RssFeed.cpp">
-      <Filter>Rss</Filter>
-    </ClCompile>
-    <ClCompile Include="rss\core\RssItem.cpp">
-      <Filter>Rss</Filter>
-    </ClCompile>
-    <ClCompile Include="rss\core\RssManager.cpp">
-      <Filter>Rss</Filter>
-    </ClCompile>
-    <ClCompile Include="rss\core\RssParser.cpp">
-      <Filter>Rss</Filter>
-    </ClCompile>
-    <ClCompile Include="search\core\SearchEngine.cpp">
-      <Filter>SearchEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="search\viewmodels\QSearchDisplayModel.cpp">
-      <Filter>ViewModel</Filter>
-    </ClCompile>
-    <ClCompile Include="search\viewmodels\ItemDelegate\QSearchItemDelegate.cpp">
-      <Filter>ViewModel\ItemDelegat</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\viewmodels\QTorrentDisplayModel.cpp">
-      <Filter>ViewModel</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\viewmodels\QTorrentFilterProxyModel.cpp">
-      <Filter>ViewModel</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\viewmodels\ItemDelegate\QTorrentItemDelegat.cpp">
-      <Filter>ViewModel\ItemDelegat</Filter>
+    <ClCompile Include="core\datamodels\FileViewTreeItem.cpp">
+      <Filter>core\datamodels</Filter>
     </ClCompile>
     <ClCompile Include="core\datamodels\json\json.cpp">
-      <Filter>WebBasic\JSON</Filter>
+      <Filter>core\datamodels\json</Filter>
     </ClCompile>
-    <ClCompile Include="core\viewModel\FileTreeModel.cpp">
-      <Filter>ViewModel</Filter>
+    <ClCompile Include="core\datamodels\SGML\QSgml.cpp">
+      <Filter>core\datamodels\SGML</Filter>
     </ClCompile>
-    <ClCompile Include="core\viewModel\FileViewModel.cpp">
-      <Filter>ViewModel</Filter>
+    <ClCompile Include="core\datamodels\SGML\QSgmlTag.cpp">
+      <Filter>core\datamodels\SGML</Filter>
     </ClCompile>
-    <ClCompile Include="core\viewModel\FileViewSortProxyModel.cpp">
-      <Filter>ViewModel</Filter>
+    <ClCompile Include="core\EmailNotifier.cpp">
+      <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="core\viewModel\itemDelegate\FileSizeItemDelegate.cpp">
-      <Filter>ViewModel\ItemDelegat</Filter>
+    <ClCompile Include="core\EmailValidator.cpp">
+      <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="core\viewModel\itemDelegate\PriorityItemDelegate.cpp">
-      <Filter>ViewModel\ItemDelegat</Filter>
+    <ClCompile Include="core\FaviconDownloader.cpp">
+      <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="core\viewModel\itemDelegate\ProgressItemDelegate.cpp">
-      <Filter>ViewModel\ItemDelegat</Filter>
+    <ClCompile Include="core\filedownloader.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\GroupForFileFiltering.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\backupwizard\applybackuppage.cpp">
+      <Filter>core\gui\backupwizard</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\backupwizard\backupwizard.cpp">
+      <Filter>core\gui\backupwizard</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\backupwizard\createbackuppage.cpp">
+      <Filter>core\gui\backupwizard</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\backupwizard\finishpage.cpp">
+      <Filter>core\gui\backupwizard</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\backupwizard\intropage.cpp">
+      <Filter>core\gui\backupwizard</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\CheckableMenu.cpp">
+      <Filter>core\gui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\EditableHeaderView.cpp">
+      <Filter>core\gui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\HtmlView.cpp">
+      <Filter>core\gui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\messagebox.cpp">
+      <Filter>core\gui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\MRichTextEdit\mrichtextedit.cpp">
+      <Filter>core\gui\Controls\MRichTextEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\MRichTextEdit\mtextedit.cpp">
+      <Filter>core\gui\Controls\MRichTextEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\QBaloon.cpp">
+      <Filter>core\gui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\qkeyedit.cpp">
+      <Filter>core\gui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\RaitingWidget.cpp">
+      <Filter>core\gui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\searchlineedit.cpp">
+      <Filter>core\gui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\SortButton.cpp">
+      <Filter>core\gui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\StyledProgressBar.cpp">
+      <Filter>core\gui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Controls\TreeBox.cpp">
+      <Filter>core\gui\Controls</Filter>
     </ClCompile>
     <ClCompile Include="core\gui\Dialogs\CuteTorrentMainWindow.cpp">
       <Filter>core\gui\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Dialogs\InitializationDialog.cpp">
+      <Filter>core\gui\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Dialogs\MultipleDTDialog.cpp">
+      <Filter>core\gui\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Dialogs\RaitingDialog.cpp">
+      <Filter>core\gui\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Dialogs\ReportProblemDialog.cpp">
+      <Filter>core\gui\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Dialogs\SettingsDialog.cpp">
+      <Filter>core\gui\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Dialogs\SpeedLimitDialog.cpp">
+      <Filter>core\gui\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Dialogs\VideoFileChooseDialog.cpp">
+      <Filter>core\gui\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\ImportWizard\ChoseDataPage.cpp">
+      <Filter>core\gui\ImportWizard</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\ImportWizard\Importers\ImportersManager.cpp">
+      <Filter>core\gui\ImportWizard\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\ImportWizard\Importers\UTorrentImporter.cpp">
+      <Filter>core\gui\ImportWizard\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\ImportWizard\ImportFinishPage.cpp">
+      <Filter>core\gui\ImportWizard</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\ImportWizard\ImportIntroPage.cpp">
+      <Filter>core\gui\ImportWizard</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\ImportWizard\ImportPage.cpp">
+      <Filter>core\gui\ImportWizard</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\ImportWizard\ImportWizard.cpp">
+      <Filter>core\gui\ImportWizard</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Utils\SettingsPropertyMapper.cpp">
+      <Filter>core\gui\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Utils\UIPropertyGetters.cpp">
+      <Filter>core\gui\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Utils\UIPropertySetters.cpp">
+      <Filter>core\gui\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Utils\ValueGetters.cpp">
+      <Filter>core\gui\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="core\gui\Utils\ValueSetters.cpp">
+      <Filter>core\gui\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="core\helpers\DT_mounter.cpp">
+      <Filter>core\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="core\helpers\StaticHelpers.cpp">
+      <Filter>core\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="core\helpers\VirtualDiskMounter.cpp">
+      <Filter>core\helpers</Filter>
     </ClCompile>
     <ClCompile Include="core\http\httpconnectionhandler.cpp">
       <Filter>core\http</Filter>
@@ -321,134 +371,47 @@
     <ClCompile Include="core\http\httpsessionstore.cpp">
       <Filter>core\http</Filter>
     </ClCompile>
-    <ClCompile Include="core\datamodels\FileViewTreeItem.cpp">
-      <Filter>core\datamodels</Filter>
-    </ClCompile>
-    <ClCompile Include="core\GroupForFileFiltering.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="rss\datamodels\RssBaseTreeItem.cpp">
-      <Filter>Rss\datamodels</Filter>
-    </ClCompile>
-    <ClCompile Include="rss\datamodels\RssDownloadRule.cpp">
-      <Filter>Rss\datamodels</Filter>
-    </ClCompile>
-    <ClCompile Include="rss\datamodels\RssFeedItemTreeItem.cpp">
-      <Filter>Rss\datamodels</Filter>
-    </ClCompile>
-    <ClCompile Include="rss\datamodels\RssFeedTreeItem.cpp">
-      <Filter>Rss\datamodels</Filter>
-    </ClCompile>
-    <ClCompile Include="scheduller\SchedulerTask.cpp">
-      <Filter>scheduller</Filter>
-    </ClCompile>
-    <ClCompile Include="search\dataModels\searchitem.cpp">
-      <Filter>search\dataModels</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\core\Torrent.cpp">
-      <Filter>torrent\core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\TreeItem.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="rss\gui\Dialogs\AddRssDwonloadRuleDialog.cpp">
-      <Filter>Rss\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\gui\Dialogs\CreateTorrentDialog.cpp">
-      <Filter>torrent\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Dialogs\MultipleDTDialog.cpp">
-      <Filter>core\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\gui\Dialogs\OpenTorrentDialog.cpp">
-      <Filter>torrent\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="rss\gui\Dialogs\RssFeedSettingsDialog.cpp">
-      <Filter>Rss\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Dialogs\SettingsDialog.cpp">
-      <Filter>core\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="Comments\gui\Dialogs\AddCommentDialog.cpp">
-      <Filter>Comments\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="core\avaliableSpacePlugin\avaliable_space_verifier_plugin.cpp">
-      <Filter>core\avaliableSpacePlugin</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Controls\CheckableMenu.cpp">
-      <Filter>core\gui\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\ImportWizard\ChoseDataPage.cpp">
-      <Filter>core\gui\ImportWizard</Filter>
-    </ClCompile>
-    <ClCompile Include="Comments\ViewModels\CommentItemDelegate.cpp">
-      <Filter>Comments\ViewModels</Filter>
-    </ClCompile>
-    <ClCompile Include="Comments\ViewModels\CommentsModel.cpp">
-      <Filter>Comments\ViewModels</Filter>
-    </ClCompile>
-    <ClCompile Include="Comments\CommentsWebClient.cpp">
-      <Filter>Comments</Filter>
-    </ClCompile>
-    <ClCompile Include="search\searchproviders\CustomScriptSearchProvider.cpp">
-      <Filter>search\searchproviders</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Controls\EditableHeaderView.cpp">
-      <Filter>core\gui\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="core\smtp\emailaddress.cpp">
-      <Filter>core\smtp</Filter>
-    </ClCompile>
-    <ClCompile Include="core\EmailNotifier.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\EmailValidator.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="webControll\FileSystemController.cpp">
-      <Filter>webControll</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\core\FileSystemTorrentWatcher.cpp">
-      <Filter>torrent\core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\viewModel\FileTreeSortProxyModel.cpp">
-      <Filter>core\viewModel</Filter>
-    </ClCompile>
-    <ClCompile Include="core\viewModel\FiltersViewModel.cpp">
-      <Filter>core\viewModel</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\ImportWizard\Importers\ImportersManager.cpp">
-      <Filter>core\gui\ImportWizard\Importers</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\ImportWizard\ImportFinishPage.cpp">
-      <Filter>core\gui\ImportWizard</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\ImportWizard\ImportIntroPage.cpp">
-      <Filter>core\gui\ImportWizard</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\ImportWizard\ImportPage.cpp">
-      <Filter>core\gui\ImportWizard</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\ImportWizard\ImportWizard.cpp">
-      <Filter>core\gui\ImportWizard</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Dialogs\InitializationDialog.cpp">
-      <Filter>core\gui\Dialogs</Filter>
+    <ClCompile Include="core\http\staticfilecontroller.cpp">
+      <Filter>core\http</Filter>
     </ClCompile>
     <ClCompile Include="core\InitializationWorker.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="core\viewModel\itemDelegate\IpItemDelegate.cpp">
-      <Filter>core\viewModel\itemDelegate</Filter>
-    </ClCompile>
     <ClCompile Include="core\IpToCountryResolver.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="core\zip\JlCompress.cpp">
-      <Filter>core\zip</Filter>
+    <ClCompile Include="core\NetworkDiskCache.cpp">
+      <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="Comments\gui\Dialogs\LoginDialog.cpp">
-      <Filter>Comments\gui\Dialogs</Filter>
+    <ClCompile Include="core\NotificationSystem.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\PowerManagement.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\QApplicationSettings.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\qtsingleapplication\src\qtlocalpeer.cpp">
+      <Filter>core\qtsingleapplication\src</Filter>
+    </ClCompile>
+    <ClCompile Include="core\qtsingleapplication\src\qtlockedfile.cpp">
+      <Filter>core\qtsingleapplication\src</Filter>
+    </ClCompile>
+    <ClCompile Include="core\qtsingleapplication\src\qtlockedfile_unix.cpp">
+      <Filter>core\qtsingleapplication\src</Filter>
+    </ClCompile>
+    <ClCompile Include="core\qtsingleapplication\src\qtlockedfile_win.cpp">
+      <Filter>core\qtsingleapplication\src</Filter>
+    </ClCompile>
+    <ClCompile Include="core\qtsingleapplication\src\qtsingleapplication.cpp">
+      <Filter>core\qtsingleapplication\src</Filter>
+    </ClCompile>
+    <ClCompile Include="core\qtsingleapplication\src\qtsinglecoreapplication.cpp">
+      <Filter>core\qtsingleapplication\src</Filter>
+    </ClCompile>
+    <ClCompile Include="core\smtp\emailaddress.cpp">
+      <Filter>core\smtp</Filter>
     </ClCompile>
     <ClCompile Include="core\smtp\mimeattachment.cpp">
       <Filter>core\smtp</Filter>
@@ -495,6 +458,256 @@
     <ClCompile Include="core\smtp\mimetext.cpp">
       <Filter>core\smtp</Filter>
     </ClCompile>
+    <ClCompile Include="core\smtp\quotedprintable.cpp">
+      <Filter>core\smtp</Filter>
+    </ClCompile>
+    <ClCompile Include="core\smtp\smtpclient.cpp">
+      <Filter>core\smtp</Filter>
+    </ClCompile>
+    <ClCompile Include="core\StyleEngene.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\SympleCrypt.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\TorrentGroup.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\TorrentGroupsManager.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\TreeItem.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\UpdateNotyfier.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Version.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\viewModel\FileTreeModel.cpp">
+      <Filter>core\viewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="core\viewModel\FileTreeSortProxyModel.cpp">
+      <Filter>core\viewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="core\viewModel\FileViewModel.cpp">
+      <Filter>core\viewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="core\viewModel\FileViewSortProxyModel.cpp">
+      <Filter>core\viewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="core\viewModel\FiltersViewModel.cpp">
+      <Filter>core\viewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="core\viewModel\itemDelegate\FileSizeItemDelegate.cpp">
+      <Filter>core\viewModel\itemDelegate</Filter>
+    </ClCompile>
+    <ClCompile Include="core\viewModel\itemDelegate\IpItemDelegate.cpp">
+      <Filter>core\viewModel\itemDelegate</Filter>
+    </ClCompile>
+    <ClCompile Include="core\viewModel\itemDelegate\PriorityItemDelegate.cpp">
+      <Filter>core\viewModel\itemDelegate</Filter>
+    </ClCompile>
+    <ClCompile Include="core\viewModel\itemDelegate\ProgressItemDelegate.cpp">
+      <Filter>core\viewModel\itemDelegate</Filter>
+    </ClCompile>
+    <ClCompile Include="core\viewModel\itemDelegate\SpeedItemDelegate.cpp">
+      <Filter>core\viewModel\itemDelegate</Filter>
+    </ClCompile>
+    <ClCompile Include="core\viewModel\itemDelegate\TimeItemDelegate.cpp">
+      <Filter>core\viewModel\itemDelegate</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\JlCompress.cpp">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\qioapi.cpp">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quaadler32.cpp">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quacrc32.cpp">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quagzipfile.cpp">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quaziodevice.cpp">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quazip.cpp">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quazipdir.cpp">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quazipfile.cpp">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quazipfileinfo.cpp">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\quazipnewinfo.cpp">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\unzip.c">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\zip.c">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_ltorrent.cpp">
+      <Filter>GeneratedFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="rss\core\RssFeed.cpp">
+      <Filter>rss\core</Filter>
+    </ClCompile>
+    <ClCompile Include="rss\core\RssItem.cpp">
+      <Filter>rss\core</Filter>
+    </ClCompile>
+    <ClCompile Include="rss\core\RssManager.cpp">
+      <Filter>rss\core</Filter>
+    </ClCompile>
+    <ClCompile Include="rss\core\RssParser.cpp">
+      <Filter>rss\core</Filter>
+    </ClCompile>
+    <ClCompile Include="rss\datamodels\RssBaseTreeItem.cpp">
+      <Filter>rss\datamodels</Filter>
+    </ClCompile>
+    <ClCompile Include="rss\datamodels\RssDownloadRule.cpp">
+      <Filter>rss\datamodels</Filter>
+    </ClCompile>
+    <ClCompile Include="rss\datamodels\RssFeedItemTreeItem.cpp">
+      <Filter>rss\datamodels</Filter>
+    </ClCompile>
+    <ClCompile Include="rss\datamodels\RssFeedTreeItem.cpp">
+      <Filter>rss\datamodels</Filter>
+    </ClCompile>
+    <ClCompile Include="rss\gui\Dialogs\AddRssDwonloadRuleDialog.cpp">
+      <Filter>rss\gui\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="rss\gui\Dialogs\RssFeedSettingsDialog.cpp">
+      <Filter>rss\gui\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="rss\viewmodels\ItemDelegate\QRssItemDelegate.cpp">
+      <Filter>rss\viewmodels\ItemDelegate</Filter>
+    </ClCompile>
+    <ClCompile Include="rss\viewmodels\QRssDisplayModel.cpp">
+      <Filter>rss\viewmodels</Filter>
+    </ClCompile>
+    <ClCompile Include="rss\viewmodels\QRssFilterModel.cpp">
+      <Filter>rss\viewmodels</Filter>
+    </ClCompile>
+    <ClCompile Include="scheduller\SchedulerTask.cpp">
+      <Filter>scheduller</Filter>
+    </ClCompile>
+    <ClCompile Include="scheduller\Scheduller.cpp">
+      <Filter>scheduller</Filter>
+    </ClCompile>
+    <ClCompile Include="search\core\SearchEngine.cpp">
+      <Filter>search\core</Filter>
+    </ClCompile>
+    <ClCompile Include="search\core\SearchItemsStorrage.cpp">
+      <Filter>search\core</Filter>
+    </ClCompile>
+    <ClCompile Include="search\dataModels\searchitem.cpp">
+      <Filter>search\dataModels</Filter>
+    </ClCompile>
+    <ClCompile Include="search\searchproviders\CustomScriptSearchProvider.cpp">
+      <Filter>search\searchproviders</Filter>
+    </ClCompile>
+    <ClCompile Include="search\viewmodels\ItemDelegate\QSearchItemDelegate.cpp">
+      <Filter>search\viewmodels\ItemDelegate</Filter>
+    </ClCompile>
+    <ClCompile Include="search\viewmodels\QSearchDisplayModel.cpp">
+      <Filter>search\viewmodels</Filter>
+    </ClCompile>
+    <ClCompile Include="search\viewmodels\QSearchFilterModel.cpp">
+      <Filter>search\viewmodels</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\core\FileSystemTorrentWatcher.cpp">
+      <Filter>torrent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\core\MetaDataDownloadWaiter.cpp">
+      <Filter>torrent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\core\Torrent.cpp">
+      <Filter>torrent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\core\TorrentManager.cpp">
+      <Filter>torrent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\core\TorrentStorrage.cpp">
+      <Filter>torrent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\gui\Controls\peicedisplaywidget.cpp">
+      <Filter>torrent\gui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\gui\Controls\PieceAvailabilityWidget.cpp">
+      <Filter>torrent\gui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\gui\Dialogs\CreateTorrentDialog.cpp">
+      <Filter>torrent\gui\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\gui\Dialogs\OpenTorrentDialog.cpp">
+      <Filter>torrent\gui\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\viewmodels\ItemDelegate\QTorrentItemDelegat.cpp">
+      <Filter>torrent\viewmodels\ItemDelegate</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\viewmodels\PeerSortModel.cpp">
+      <Filter>torrent\viewmodels</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\viewmodels\PeerTableModel.cpp">
+      <Filter>torrent\viewmodels</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\viewmodels\QTorrentDisplayModel.cpp">
+      <Filter>torrent\viewmodels</Filter>
+    </ClCompile>
+    <ClCompile Include="torrent\viewmodels\QTorrentFilterProxyModel.cpp">
+      <Filter>torrent\viewmodels</Filter>
+    </ClCompile>
+    <ClCompile Include="tracker\AnnounceRequest.cpp">
+      <Filter>tracker</Filter>
+    </ClCompile>
+    <ClCompile Include="tracker\torrentracker.cpp">
+      <Filter>tracker</Filter>
+    </ClCompile>
+    <ClCompile Include="tracker\trackerrequestmapper.cpp">
+      <Filter>tracker</Filter>
+    </ClCompile>
+    <ClCompile Include="webControll\FileSystemController.cpp">
+      <Filter>webControll</Filter>
+    </ClCompile>
+    <ClCompile Include="webControll\MagnetApiController.cpp">
+      <Filter>webControll</Filter>
+    </ClCompile>
+    <ClCompile Include="webControll\RconWebService.cpp">
+      <Filter>webControll</Filter>
+    </ClCompile>
+    <ClCompile Include="webControll\RequestMapper.cpp">
+      <Filter>webControll</Filter>
+    </ClCompile>
+    <ClCompile Include="webControll\RssCommandsApiController.cpp">
+      <Filter>webControll</Filter>
+    </ClCompile>
+    <ClCompile Include="webControll\RssController.cpp">
+      <Filter>webControll</Filter>
+    </ClCompile>
+    <ClCompile Include="webControll\SettingsAPiController.cpp">
+      <Filter>webControll</Filter>
+    </ClCompile>
+    <ClCompile Include="webControll\TorrentApiController.cpp">
+      <Filter>webControll</Filter>
+    </ClCompile>
+    <ClCompile Include="webControll\TorrentCommandsApiController.cpp">
+      <Filter>webControll</Filter>
+    </ClCompile>
+    <ClCompile Include="webControll\UploadController.cpp">
+      <Filter>webControll</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_AddCommentDialog.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
@@ -519,9 +732,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ChoseDataPage.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_CommandsApiController.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_CommentItemDelegate.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
@@ -540,7 +750,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CustomScriptSearchProvider.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_CuteTorrent.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_CuteTorrentMainWindow.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_EditableHeaderView.cpp">
@@ -621,12 +831,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_MagnetApiController.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_mediacontroller.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_MediaControls.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_messagebox.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
@@ -649,9 +853,6 @@
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_ObservebaleCollectionBase.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_OnlineReporter.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_OpenTorrentDialog.cpp">
@@ -723,24 +924,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_quazipfile.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_qwinjumplist.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_qwintaskbarbutton.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_qwintaskbarprogress.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_qwinthumbnailtoolbar.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_qwinthumbnailtoolbar_p.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_qwinthumbnailtoolbutton.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_RaitingDialog.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
@@ -798,6 +981,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_smtpclient.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SortButton.cpp">
+      <Filter>GeneratedFiles\Release</Filter>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_SpeedLimitDialog.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
@@ -811,6 +997,9 @@
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_TorrentApiController.cpp">
+      <Filter>GeneratedFiles\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TorrentCommandsApiController.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_TorrentGroupsManager.cpp">
@@ -840,418 +1029,16 @@
     <ClCompile Include="GeneratedFiles\Release\moc_VideoFileChooseDialog.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_VideoPlayerWindow.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Controls\MRichTextEdit\mrichtextedit.cpp">
-      <Filter>core\gui\Controls\MRichTextEdit</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Controls\MRichTextEdit\mtextedit.cpp">
-      <Filter>core\gui\Controls\MRichTextEdit</Filter>
-    </ClCompile>
-    <ClCompile Include="core\NetworkDiskCache.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\OnlineReporter.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\viewmodels\PeerSortModel.cpp">
-      <Filter>torrent\viewmodels</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\viewmodels\PeerTableModel.cpp">
-      <Filter>torrent\viewmodels</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\gui\Controls\PieceAvailabilityWidget.cpp">
-      <Filter>torrent\gui\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="core\PowerManagement.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\zip\qioapi.cpp">
-      <Filter>core\zip</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_ltorrent.cpp">
-      <Filter>GeneratedFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="search\viewmodels\QSearchFilterModel.cpp">
-      <Filter>search\viewmodels</Filter>
-    </ClCompile>
-    <ClCompile Include="core\StorrageInfo\qstorageinfo.cpp">
-      <Filter>core\StorrageInfo</Filter>
-    </ClCompile>
-    <ClCompile Include="core\StorrageInfo\qstorageinfo_win.cpp">
-      <Filter>core\StorrageInfo</Filter>
-    </ClCompile>
-    <ClCompile Include="core\zip\quaadler32.cpp">
-      <Filter>core\zip</Filter>
-    </ClCompile>
-    <ClCompile Include="core\zip\quacrc32.cpp">
-      <Filter>core\zip</Filter>
-    </ClCompile>
-    <ClCompile Include="core\zip\quagzipfile.cpp">
-      <Filter>core\zip</Filter>
-    </ClCompile>
-    <ClCompile Include="core\zip\quaziodevice.cpp">
-      <Filter>core\zip</Filter>
-    </ClCompile>
-    <ClCompile Include="core\zip\quazip.cpp">
-      <Filter>core\zip</Filter>
-    </ClCompile>
-    <ClCompile Include="core\zip\quazipdir.cpp">
-      <Filter>core\zip</Filter>
-    </ClCompile>
-    <ClCompile Include="core\zip\quazipfile.cpp">
-      <Filter>core\zip</Filter>
-    </ClCompile>
-    <ClCompile Include="core\zip\quazipfileinfo.cpp">
-      <Filter>core\zip</Filter>
-    </ClCompile>
-    <ClCompile Include="core\zip\quazipnewinfo.cpp">
-      <Filter>core\zip</Filter>
-    </ClCompile>
-    <ClCompile Include="core\smtp\quotedprintable.cpp">
-      <Filter>core\smtp</Filter>
-    </ClCompile>
-    <ClCompile Include="core\winextras\qwinevent.cpp">
-      <Filter>core\winextras</Filter>
-    </ClCompile>
-    <ClCompile Include="core\winextras\qwineventfilter.cpp">
-      <Filter>core\winextras</Filter>
-    </ClCompile>
-    <ClCompile Include="core\winextras\qwinfunctions.cpp">
-      <Filter>core\winextras</Filter>
-    </ClCompile>
-    <ClCompile Include="core\winextras\qwinfunctions_p.cpp">
-      <Filter>core\winextras</Filter>
-    </ClCompile>
-    <ClCompile Include="core\winextras\qwinjumplist.cpp">
-      <Filter>core\winextras</Filter>
-    </ClCompile>
-    <ClCompile Include="core\winextras\qwinjumplistcategory.cpp">
-      <Filter>core\winextras</Filter>
-    </ClCompile>
-    <ClCompile Include="core\winextras\qwinjumplistitem.cpp">
-      <Filter>core\winextras</Filter>
-    </ClCompile>
-    <ClCompile Include="core\winextras\qwintaskbarbutton.cpp">
-      <Filter>core\winextras</Filter>
-    </ClCompile>
-    <ClCompile Include="core\winextras\qwintaskbarprogress.cpp">
-      <Filter>core\winextras</Filter>
-    </ClCompile>
-    <ClCompile Include="core\winextras\qwinthumbnailtoolbar.cpp">
-      <Filter>core\winextras</Filter>
-    </ClCompile>
-    <ClCompile Include="core\winextras\qwinthumbnailtoolbutton.cpp">
-      <Filter>core\winextras</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Dialogs\RaitingDialog.cpp">
-      <Filter>core\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Controls\RaitingWidget.cpp">
-      <Filter>core\gui\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="Comments\gui\Dialogs\RegisterDialog.cpp">
-      <Filter>Comments\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Dialogs\ReportProblemDialog.cpp">
-      <Filter>core\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="webControll\RssCommandsApiController.cpp">
-      <Filter>webControll</Filter>
-    </ClCompile>
-    <ClCompile Include="webControll\RssController.cpp">
-      <Filter>webControll</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Controls\searchlineedit.cpp">
-      <Filter>core\gui\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Utils\SettingsPropertyMapper.cpp">
-      <Filter>core\gui\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="core\smtp\smtpclient.cpp">
-      <Filter>core\smtp</Filter>
-    </ClCompile>
-    <ClCompile Include="core\viewModel\itemDelegate\SpeedItemDelegate.cpp">
-      <Filter>core\viewModel\itemDelegate</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Dialogs\SpeedLimitDialog.cpp">
-      <Filter>core\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Controls\StyledProgressBar.cpp">
-      <Filter>core\gui\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="core\SympleCrypt.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\viewModel\itemDelegate\TimeItemDelegate.cpp">
-      <Filter>core\viewModel\itemDelegate</Filter>
-    </ClCompile>
-    <ClCompile Include="core\TorrentGroup.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\TorrentGroupsManager.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Controls\TreeBox.cpp">
-      <Filter>core\gui\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Utils\UIPropertyGetters.cpp">
-      <Filter>core\gui\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Utils\UIPropertySetters.cpp">
-      <Filter>core\gui\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="core\zip\unzip.c">
-      <Filter>core\zip</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\ImportWizard\Importers\UTorrentImporter.cpp">
-      <Filter>core\gui\ImportWizard\Importers</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Utils\ValueGetters.cpp">
-      <Filter>core\gui\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Utils\ValueSetters.cpp">
-      <Filter>core\gui\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Dialogs\VideoFileChooseDialog.cpp">
-      <Filter>core\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="core\winextras\windowsguidsdefs.cpp">
-      <Filter>core\winextras</Filter>
-    </ClCompile>
-    <ClCompile Include="core\zip\zip.c">
-      <Filter>core\zip</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\backupwizard\applybackuppage.cpp">
-      <Filter>core\gui\backupwizard</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\backupwizard\backupwizard.cpp">
-      <Filter>core\gui\backupwizard</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\backupwizard\createbackuppage.cpp">
-      <Filter>core\gui\backupwizard</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\backupwizard\finishpage.cpp">
-      <Filter>core\gui\backupwizard</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\backupwizard\intropage.cpp">
-      <Filter>core\gui\backupwizard</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Controls\HtmlView.cpp">
-      <Filter>core\gui\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Controls\messagebox.cpp">
-      <Filter>core\gui\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\gui\Controls\peicedisplaywidget.cpp">
-      <Filter>torrent\gui\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Controls\QBaloon.cpp">
-      <Filter>core\gui\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Controls\qkeyedit.cpp">
-      <Filter>core\gui\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="core\application.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\helpers\DT_mounter.cpp">
-      <Filter>core\helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="core\helpers\StaticHelpers.cpp">
-      <Filter>core\helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="core\helpers\VirtualDiskMounter.cpp">
-      <Filter>core\helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="webControll\MagnetApiController.cpp">
-      <Filter>webControll</Filter>
-    </ClCompile>
-    <ClCompile Include="webControll\RconWebService.cpp">
-      <Filter>webControll</Filter>
-    </ClCompile>
-    <ClCompile Include="webControll\RequestMapper.cpp">
-      <Filter>webControll</Filter>
-    </ClCompile>
-    <ClCompile Include="webControll\SettingsAPiController.cpp">
-      <Filter>webControll</Filter>
-    </ClCompile>
-    <ClCompile Include="core\http\staticfilecontroller.cpp">
-      <Filter>core\http</Filter>
-    </ClCompile>
-    <ClCompile Include="webControll\TorrentApiController.cpp">
-      <Filter>webControll</Filter>
-    </ClCompile>
-    <ClCompile Include="webControll\TorrentCommandsApiController.cpp">
-      <Filter>webControll</Filter>
-    </ClCompile>
-    <ClCompile Include="webControll\UploadController.cpp">
-      <Filter>webControll</Filter>
-    </ClCompile>
-    <ClCompile Include="core\FaviconDownloader.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\filedownloader.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\core\MetaDataDownloadWaiter.cpp">
-      <Filter>torrent\core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\NotificationSystem.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\QApplicationSettings.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="scheduller\Scheduller.cpp">
-      <Filter>scheduller</Filter>
-    </ClCompile>
-    <ClCompile Include="search\core\SearchItemsStorrage.cpp">
-      <Filter>search\core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\StyleEngene.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\core\TorrentManager.cpp">
-      <Filter>torrent\core</Filter>
-    </ClCompile>
-    <ClCompile Include="torrent\core\TorrentStorrage.cpp">
-      <Filter>torrent\core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\UpdateNotyfier.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\Version.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\qtsingleapplication\src\qtlocalpeer.cpp">
-      <Filter>core\qtsingleapplication\src</Filter>
-    </ClCompile>
-    <ClCompile Include="core\qtsingleapplication\src\qtlockedfile.cpp">
-      <Filter>core\qtsingleapplication\src</Filter>
-    </ClCompile>
-    <ClCompile Include="core\qtsingleapplication\src\qtlockedfile_win.cpp">
-      <Filter>core\qtsingleapplication\src</Filter>
-    </ClCompile>
-    <ClCompile Include="core\qtsingleapplication\src\qtsingleapplication.cpp">
-      <Filter>core\qtsingleapplication\src</Filter>
-    </ClCompile>
-    <ClCompile Include="core\qtsingleapplication\src\qtsinglecoreapplication.cpp">
-      <Filter>core\qtsingleapplication\src</Filter>
-    </ClCompile>
-    <ClCompile Include="core\datamodels\SGML\QSgml.cpp">
-      <Filter>core\datamodels\SGML</Filter>
-    </ClCompile>
-    <ClCompile Include="core\datamodels\SGML\QSgmlTag.cpp">
-      <Filter>core\datamodels\SGML</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Controls\SortButton.cpp">
-      <Filter>core\gui\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_SortButton.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="rss\RssCommon.h">
-      <Filter>Rss</Filter>
-    </ClInclude>
-    <CustomBuild Include="Resources\ltorrent.qrc">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="rss\viewmodels\QRssDisplayModel.h">
-      <Filter>ViewModel</Filter>
-    </CustomBuild>
-    <CustomBuild Include="rss\viewmodels\ItemDelegate\QRssItemDelegate.h">
-      <Filter>ViewModel\ItemDelegat</Filter>
-    </CustomBuild>
-    <CustomBuild Include="rss\core\RssFeed.h">
-      <Filter>Rss</Filter>
-    </CustomBuild>
-    <CustomBuild Include="rss\core\RssItem.h">
-      <Filter>Rss</Filter>
-    </CustomBuild>
-    <CustomBuild Include="rss\core\RssManager.h">
-      <Filter>Rss</Filter>
-    </CustomBuild>
-    <CustomBuild Include="search\core\ISerachProvider.h">
-      <Filter>SearchEngine</Filter>
-    </CustomBuild>
-    <CustomBuild Include="search\core\SearchEngine.h">
-      <Filter>SearchEngine</Filter>
-    </CustomBuild>
-    <CustomBuild Include="search\viewmodels\QSearchDisplayModel.h">
-      <Filter>ViewModel</Filter>
-    </CustomBuild>
-    <CustomBuild Include="search\viewmodels\ItemDelegate\QSearchItemDelegate.h">
-      <Filter>ViewModel\ItemDelegat</Filter>
-    </CustomBuild>
-    <CustomBuild Include="torrent\viewmodels\QTorrentDisplayModel.h">
-      <Filter>ViewModel</Filter>
-    </CustomBuild>
-    <CustomBuild Include="torrent\viewmodels\QTorrentFilterProxyModel.h">
-      <Filter>ViewModel</Filter>
-    </CustomBuild>
-    <CustomBuild Include="torrent\viewmodels\ItemDelegate\QTorrentItemDelegat.h">
-      <Filter>ViewModel\ItemDelegat</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\viewModel\FileTreeModel.h">
-      <Filter>ViewModel</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\viewModel\FileViewModel.h">
-      <Filter>ViewModel</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\viewModel\itemDelegate\PriorityItemDelegate.h">
-      <Filter>ViewModel\ItemDelegat</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\http\httpsessionstore.h">
-      <Filter>core\http</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\http\httpconnectionhandler.h">
-      <Filter>core\http</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\http\httpconnectionhandlerpool.h">
-      <Filter>core\http</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\http\httplistener.h">
-      <Filter>core\http</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\http\httprequesthandler.h">
-      <Filter>core\http</Filter>
-    </CustomBuild>
-    <CustomBuild Include="torrent\core\Torrent.h">
-      <Filter>torrent\core</Filter>
-    </CustomBuild>
-    <CustomBuild Include="rss\gui\Dialogs\AddRssDwonloadRuleDialog.h">
-      <Filter>Rss\gui\Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="torrent\gui\Dialogs\CreateTorrentDialog.h">
-      <Filter>torrent\gui\Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\Dialogs\MultipleDTDialog.h">
-      <Filter>core\gui\Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="torrent\gui\Dialogs\OpenTorrentDialog.h">
-      <Filter>torrent\gui\Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="rss\gui\Dialogs\RssFeedSettingsDialog.h">
-      <Filter>Rss\gui\Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\Dialogs\SettingsDialog.h">
-      <Filter>core\gui\Dialogs</Filter>
-    </CustomBuild>
     <CustomBuild Include="Comments\gui\Dialogs\AddCommentDialog.h">
       <Filter>Comments\gui\Dialogs</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\ImportWizard\Importers\BaseImporter.h">
-      <Filter>core\gui\ImportWizard\Importers</Filter>
+    <CustomBuild Include="Comments\gui\Dialogs\LoginDialog.h">
+      <Filter>Comments\gui\Dialogs</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Controls\CheckableMenu.h">
-      <Filter>core\gui\Controls</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\ImportWizard\ChoseDataPage.h">
-      <Filter>core\gui\ImportWizard</Filter>
+    <CustomBuild Include="Comments\gui\Dialogs\RegisterDialog.h">
+      <Filter>Comments\gui\Dialogs</Filter>
     </CustomBuild>
     <CustomBuild Include="Comments\ViewModels\CommentItemDelegate.h">
       <Filter>Comments\ViewModels</Filter>
@@ -1259,325 +1046,638 @@
     <CustomBuild Include="Comments\ViewModels\CommentsModel.h">
       <Filter>Comments\ViewModels</Filter>
     </CustomBuild>
-    <CustomBuild Include="Comments\CommentsWebClient.h">
+    <CustomBuild Include="Comments\Comment.h">
       <Filter>Comments</Filter>
     </CustomBuild>
-    <CustomBuild Include="search\searchproviders\CustomScriptSearchProvider.h">
-      <Filter>search\searchproviders</Filter>
+    <CustomBuild Include="Comments\User.h">
+      <Filter>Comments</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Controls\EditableHeaderView.h">
-      <Filter>core\gui\Controls</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\EmailValidator.h">
+    <CustomBuild Include="core\Build_Increment.h">
       <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="torrent\core\FileSystemTorrentWatcher.h">
-      <Filter>torrent\core</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\viewModel\FiltersViewModel.h">
-      <Filter>core\viewModel</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\ImportWizard\ImportFinishPage.h">
-      <Filter>core\gui\ImportWizard</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\ImportWizard\ImportIntroPage.h">
-      <Filter>core\gui\ImportWizard</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\ImportWizard\ImportPage.h">
-      <Filter>core\gui\ImportWizard</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\ImportWizard\ImportWizard.h">
-      <Filter>core\gui\ImportWizard</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\Dialogs\InitializationDialog.h">
-      <Filter>core\gui\Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\InitializationWorker.h">
+    <CustomBuild Include="core\defs.h">
       <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\IpToCountryResolver.h">
+    <CustomBuild Include="core\EmailNotifier.h">
       <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="Comments\gui\Dialogs\LoginDialog.h">
-      <Filter>Comments\gui\Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\Controls\MRichTextEdit\mrichtextedit.h">
-      <Filter>core\gui\Controls\MRichTextEdit</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\Controls\MRichTextEdit\mtextedit.h">
-      <Filter>core\gui\Controls\MRichTextEdit</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\collections\ObservebaleCollectionBase.h">
-      <Filter>core\collections</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\OnlineReporter.h">
+    <CustomBuild Include="core\GroupForFileFiltering.h">
       <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="torrent\viewmodels\PeerTableModel.h">
-      <Filter>torrent\viewmodels</Filter>
-    </CustomBuild>
-    <CustomBuild Include="torrent\gui\Controls\PieceAvailabilityWidget.h">
-      <Filter>torrent\gui\Controls</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\PowerManagement.h">
+    <CustomBuild Include="core\ServiceCommon.h">
       <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\zip\quagzipfile.h">
-      <Filter>core\zip</Filter>
+    <CustomBuild Include="core\Singleton.h">
+      <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\zip\quaziodevice.h">
-      <Filter>core\zip</Filter>
+    <CustomBuild Include="core\SympleCrypt.h">
+      <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\zip\quazipfile.h">
-      <Filter>core\zip</Filter>
+    <CustomBuild Include="core\TorrentGroup.h">
+      <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\winextras\qwinjumplist.h">
-      <Filter>core\winextras</Filter>
+    <CustomBuild Include="core\TreeItem.h">
+      <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\winextras\qwintaskbarbutton.h">
-      <Filter>core\winextras</Filter>
+    <CustomBuild Include="core\Version.h">
+      <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\winextras\qwintaskbarprogress.h">
-      <Filter>core\winextras</Filter>
+    <CustomBuild Include="core\versionInfo.h">
+      <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\winextras\qwinthumbnailtoolbar.h">
-      <Filter>core\winextras</Filter>
+    <CustomBuild Include="GeneratedFiles\ui_AddCommentDialog.h">
+      <Filter>GeneratedFiles</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\winextras\qwinthumbnailtoolbar_p.h">
-      <Filter>core\winextras</Filter>
+    <CustomBuild Include="GeneratedFiles\ui_AddDownloadRuleDialog.h">
+      <Filter>GeneratedFiles</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\winextras\qwinthumbnailtoolbutton.h">
-      <Filter>core\winextras</Filter>
+    <CustomBuild Include="GeneratedFiles\ui_CreateTorrentDialog.h">
+      <Filter>GeneratedFiles</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Dialogs\RaitingDialog.h">
-      <Filter>core\gui\Dialogs</Filter>
+    <CustomBuild Include="GeneratedFiles\ui_CustomWindow.h">
+      <Filter>GeneratedFiles</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Controls\RaitingWidget.h">
-      <Filter>core\gui\Controls</Filter>
+    <CustomBuild Include="GeneratedFiles\ui_InitializtionDialog.h">
+      <Filter>GeneratedFiles</Filter>
     </CustomBuild>
-    <CustomBuild Include="Comments\gui\Dialogs\RegisterDialog.h">
-      <Filter>Comments\gui\Dialogs</Filter>
+    <CustomBuild Include="GeneratedFiles\ui_LoginDialog.h">
+      <Filter>GeneratedFiles</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Dialogs\ReportProblemDialog.h">
-      <Filter>core\gui\Dialogs</Filter>
+    <CustomBuild Include="GeneratedFiles\ui_messagebox.h">
+      <Filter>GeneratedFiles</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Controls\searchlineedit.h">
-      <Filter>core\gui\Controls</Filter>
+    <CustomBuild Include="GeneratedFiles\ui_mrichtextedit.h">
+      <Filter>GeneratedFiles</Filter>
     </CustomBuild>
-    <CustomBuild Include="search\dataModels\SearchResult.h">
+    <CustomBuild Include="GeneratedFiles\ui_multipleDt.h">
+      <Filter>GeneratedFiles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GeneratedFiles\ui_OpenTorrentDialog.h">
+      <Filter>GeneratedFiles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GeneratedFiles\ui_RaitingDialog.h">
+      <Filter>GeneratedFiles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GeneratedFiles\ui_RegisterDialog.h">
+      <Filter>GeneratedFiles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GeneratedFiles\ui_ReportProblemDialog.h">
+      <Filter>GeneratedFiles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GeneratedFiles\ui_RssFeedSettingsDialog.h">
+      <Filter>GeneratedFiles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GeneratedFiles\ui_SettingsDialog.h">
+      <Filter>GeneratedFiles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GeneratedFiles\ui_SpeedLimitDialog.h">
+      <Filter>GeneratedFiles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GeneratedFiles\ui_VideoFileChoose.h">
+      <Filter>GeneratedFiles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\resource.h">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\core\RssParser.h">
+      <Filter>rss\core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\datamodels\RssBaseTreeItem.h">
+      <Filter>rss\datamodels</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\datamodels\RssDownloadRule.h">
+      <Filter>rss\datamodels</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\datamodels\RssFeedItemTreeItem.h">
+      <Filter>rss\datamodels</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\datamodels\RssFeedTreeItem.h">
+      <Filter>rss\datamodels</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\RssCommon.h">
+      <Filter>rss</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\viewmodels\QRssFilterModel.h">
+      <Filter>rss\viewmodels</Filter>
+    </CustomBuild>
+    <CustomBuild Include="scheduller\SchedulerTask.h">
+      <Filter>scheduller</Filter>
+    </CustomBuild>
+    <CustomBuild Include="search\core\SearchCommon.h">
+      <Filter>search\core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="search\dataModels\searchitem.h">
       <Filter>search\dataModels</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Utils\SettingsPropertyMapper.h">
-      <Filter>core\gui\Utils</Filter>
+    <CustomBuild Include="search\dataModels\SerachResult.h">
+      <Filter>search\dataModels</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\smtp\smtpclient.h">
-      <Filter>core\smtp</Filter>
+    <CustomBuild Include="search\viewmodels\QSearchFilterModel.h">
+      <Filter>search\viewmodels</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Dialogs\SpeedLimitDialog.h">
-      <Filter>core\gui\Dialogs</Filter>
+    <CustomBuild Include="torrent\core\TorrentCommon.h">
+      <Filter>torrent\core</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\TorrentGroupsManager.h">
-      <Filter>core</Filter>
+    <CustomBuild Include="torrent\core\TorrentStorrage.h">
+      <Filter>torrent\core</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Controls\TreeBox.h">
-      <Filter>core\gui\Controls</Filter>
+    <CustomBuild Include="torrent\viewmodels\PeerSortModel.h">
+      <Filter>torrent\viewmodels</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\ImportWizard\Importers\UTorrentImporter.h">
-      <Filter>core\gui\ImportWizard\Importers</Filter>
+    <CustomBuild Include="tracker\AnnounceRequest.h">
+      <Filter>tracker</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Dialogs\VideoFileChooseDialog.h">
-      <Filter>core\gui\Dialogs</Filter>
+    <CustomBuild Include="tracker\trackercommon.h">
+      <Filter>tracker</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\backupwizard\applybackuppage.h">
-      <Filter>core\gui\backupwizard</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\backupwizard\backupwizard.h">
-      <Filter>core\gui\backupwizard</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\backupwizard\createbackuppage.h">
-      <Filter>core\gui\backupwizard</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\backupwizard\finishpage.h">
-      <Filter>core\gui\backupwizard</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\backupwizard\intropage.h">
-      <Filter>core\gui\backupwizard</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\Controls\HtmlView.h">
-      <Filter>core\gui\Controls</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\Controls\messagebox.h">
-      <Filter>core\gui\Controls</Filter>
-    </CustomBuild>
-    <CustomBuild Include="torrent\gui\Controls\peicedisplaywidget.h">
-      <Filter>torrent\gui\Controls</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\Controls\qkeyedit.h">
-      <Filter>core\gui\Controls</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Comments\gui\FormFiles\AddCommentDialog.ui">
-      <Filter>Comments\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="rss\gui\FormFiles\AddDownloadRuleDialog.ui">
-      <Filter>Rss\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="torrent\gui\FormFiles\CreateTorrentDialog.ui">
-      <Filter>torrent\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\FormFiles\CustomWindow.ui">
-      <Filter>core\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\FormFiles\InitializtionDialog.ui">
-      <Filter>core\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Comments\gui\FormFiles\LoginDialog.ui">
-      <Filter>Comments\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="VideoPlayer\MediaControls.ui">
-      <Filter>VideoPlayer</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\FormFiles\messagebox.ui">
-      <Filter>core\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\Controls\MRichTextEdit\mrichtextedit.ui">
-      <Filter>core\gui\Controls\MRichTextEdit</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\FormFiles\multipleDt.ui">
-      <Filter>core\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="torrent\gui\FormFiles\OpenTorrentDialog.ui">
-      <Filter>torrent\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\FormFiles\RaitingDialog.ui">
-      <Filter>core\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Comments\gui\FormFiles\RegisterDialog.ui">
-      <Filter>Comments\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\FormFiles\ReportProblemDialog.ui">
-      <Filter>core\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="rss\gui\FormFiles\RssFeedSettingsDialog.ui">
-      <Filter>Rss\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\FormFiles\SettingsDialog.ui">
-      <Filter>core\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\FormFiles\SpeedLimitDialog.ui">
-      <Filter>core\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\FormFiles\VideoFileChoose.ui">
-      <Filter>core\gui\FormFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\application.h">
-      <Filter>core</Filter>
-    </CustomBuild>
-    <CustomBuild Include="webControll\MagnetApiController.h">
+    <CustomBuild Include="webControll\FileSystemController.h">
       <Filter>webControll</Filter>
     </CustomBuild>
-    <CustomBuild Include="webControll\RconWebService.h">
+    <CustomBuild Include="webControll\RconCommon.h">
       <Filter>webControll</Filter>
     </CustomBuild>
-    <CustomBuild Include="webControll\RequestMapper.h">
+    <CustomBuild Include="webControll\RssCommandsApiController.h">
       <Filter>webControll</Filter>
     </CustomBuild>
-    <CustomBuild Include="webControll\SettingsAPiController.h">
+    <CustomBuild Include="webControll\RssController.h">
       <Filter>webControll</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\http\staticfilecontroller.h">
-      <Filter>core\http</Filter>
-    </CustomBuild>
-    <CustomBuild Include="webControll\TorrentApiController.h">
+    <CustomBuild Include="webControll\UploadController.h">
       <Filter>webControll</Filter>
     </CustomBuild>
     <CustomBuild Include="webControll\TorrentCommandsApiController.h">
       <Filter>webControll</Filter>
     </CustomBuild>
-    <ClInclude Include="core\ServiceCommon.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="core\Version.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="core\qtsingleapplication\src\qtlockedfile.h">
-      <Filter>core\qtsingleapplication\src</Filter>
-    </ClInclude>
-    <ClInclude Include="core\Build_Increment.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="core\defs.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\resource.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="core\versionInfo.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="core\file_entry.h">
-      <Filter>core</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="tracker\trackerrequestmapper.h">
-      <Filter>Tracker</Filter>
-    </CustomBuild>
-    <CustomBuild Include="tracker\torrentracker.h">
-      <Filter>Tracker</Filter>
-    </CustomBuild>
-    <CustomBuild Include="VideoPlayer\VideoPlayerWindow.h">
-      <Filter>VideoPlayer</Filter>
-    </CustomBuild>
-    <CustomBuild Include="VideoPlayer\MediaControls.h">
-      <Filter>VideoPlayer</Filter>
-    </CustomBuild>
-    <CustomBuild Include="VideoPlayer\mediacontroller.h">
-      <Filter>VideoPlayer</Filter>
-    </CustomBuild>
-    <CustomBuild Include="webControll\UploadController.h">
+    <CustomBuild Include="webControll\TorrentApiController.h">
       <Filter>webControll</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\FaviconDownloader.h">
-      <Filter>core</Filter>
+    <CustomBuild Include="webControll\SettingsAPiController.h">
+      <Filter>webControll</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\filedownloader.h">
-      <Filter>core</Filter>
+    <CustomBuild Include="webControll\RequestMapper.h">
+      <Filter>webControll</Filter>
+    </CustomBuild>
+    <CustomBuild Include="webControll\RconWebService.h">
+      <Filter>webControll</Filter>
+    </CustomBuild>
+    <CustomBuild Include="webControll\MagnetApiController.h">
+      <Filter>webControll</Filter>
+    </CustomBuild>
+    <CustomBuild Include="tracker\trackerrequestmapper.h">
+      <Filter>tracker</Filter>
+    </CustomBuild>
+    <CustomBuild Include="tracker\torrentracker.h">
+      <Filter>tracker</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrent\viewmodels\QTorrentFilterProxyModel.h">
+      <Filter>torrent\viewmodels</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrent\viewmodels\QTorrentDisplayModel.h">
+      <Filter>torrent\viewmodels</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrent\viewmodels\PeerTableModel.h">
+      <Filter>torrent\viewmodels</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrent\viewmodels\ItemDelegate\QTorrentItemDelegat.h">
+      <Filter>torrent\viewmodels\ItemDelegate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrent\gui\Dialogs\OpenTorrentDialog.h">
+      <Filter>torrent\gui\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrent\gui\Dialogs\CreateTorrentDialog.h">
+      <Filter>torrent\gui\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrent\gui\Controls\PieceAvailabilityWidget.h">
+      <Filter>torrent\gui\Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrent\gui\Controls\peicedisplaywidget.h">
+      <Filter>torrent\gui\Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrent\core\TorrentManager.h">
+      <Filter>torrent\core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torrent\core\Torrent.h">
+      <Filter>torrent\core</Filter>
     </CustomBuild>
     <CustomBuild Include="torrent\core\MetaDataDownloadWaiter.h">
       <Filter>torrent\core</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\NetworkDiskCache.h">
+    <CustomBuild Include="torrent\core\FileSystemTorrentWatcher.h">
+      <Filter>torrent\core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="search\viewmodels\QSearchDisplayModel.h">
+      <Filter>search\viewmodels</Filter>
+    </CustomBuild>
+    <CustomBuild Include="search\viewmodels\ItemDelegate\QSearchItemDelegate.h">
+      <Filter>search\viewmodels\ItemDelegate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="search\searchproviders\CustomScriptSearchProvider.h">
+      <Filter>search\searchproviders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="search\dataModels\SearchResult.h">
+      <Filter>search\dataModels</Filter>
+    </CustomBuild>
+    <CustomBuild Include="search\core\SearchItemsStorrage.h">
+      <Filter>search\core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="search\core\SearchEngine.h">
+      <Filter>search\core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="search\core\ISerachProvider.h">
+      <Filter>search\core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="scheduller\Scheduller.h">
+      <Filter>scheduller</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\viewmodels\QRssDisplayModel.h">
+      <Filter>rss\viewmodels</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\viewmodels\ItemDelegate\QRssItemDelegate.h">
+      <Filter>rss\viewmodels\ItemDelegate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\gui\Dialogs\RssFeedSettingsDialog.h">
+      <Filter>rss\gui\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\gui\Dialogs\AddRssDwonloadRuleDialog.h">
+      <Filter>rss\gui\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\core\RssManager.h">
+      <Filter>rss\core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\core\RssItem.h">
+      <Filter>rss\core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rss\core\RssFeed.h">
+      <Filter>rss\core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\UpdateNotyfier.h">
       <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\NotificationSystem.h">
+    <CustomBuild Include="core\TorrentGroupsManager.h">
+      <Filter>core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\StyleEngene.h">
       <Filter>core</Filter>
     </CustomBuild>
     <CustomBuild Include="core\QApplicationSettings.h">
       <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="scheduller\Scheduller.h">
-      <Filter>scheduller</Filter>
-    </CustomBuild>
-    <CustomBuild Include="search\core\SearchItemsStorrage.h">
-      <Filter>search\core</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\StyleEngene.h">
+    <CustomBuild Include="core\PowerManagement.h">
       <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="torrent\core\TorrentManager.h">
-      <Filter>torrent\core</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\UpdateNotyfier.h">
+    <CustomBuild Include="core\NotificationSystem.h">
       <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\qtsingleapplication\src\qtlocalpeer.h">
+    <CustomBuild Include="core\NetworkDiskCache.h">
+      <Filter>core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\IpToCountryResolver.h">
+      <Filter>core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\InitializationWorker.h">
+      <Filter>core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\filedownloader.h">
+      <Filter>core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\file_entry.h">
+      <Filter>core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\FaviconDownloader.h">
+      <Filter>core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\EmailValidator.h">
+      <Filter>core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\application.h">
+      <Filter>core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\avaliableSpacePlugin\avaliable_space_verifier_plugin.h">
+      <Filter>core\avaliableSpacePlugin</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\collections\ObservableList.h">
+      <Filter>core\collections</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\datamodels\FileViewTreeItem.h">
+      <Filter>core\datamodels</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\datamodels\FilterTreeItem.h">
+      <Filter>core\datamodels</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\datamodels\json\json.h">
+      <Filter>core\datamodels\json</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\QBaloon.h">
+      <Filter>core\gui\Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\StyledProgressBar.h">
+      <Filter>core\gui\Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Dialogs\CustomWindow.h">
+      <Filter>core\gui\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Utils\UIPropertyGetters.h">
+      <Filter>core\gui\Utils</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Utils\UIPropertySetters.h">
+      <Filter>core\gui\Utils</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Utils\ValueGetters.h">
+      <Filter>core\gui\Utils</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Utils\ValueSetters.h">
+      <Filter>core\gui\Utils</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\helpers\DT_mounter.h">
+      <Filter>core\helpers</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\helpers\StaticHelpers.h">
+      <Filter>core\helpers</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\helpers\VirtualDiskMounter.h">
+      <Filter>core\helpers</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\http\httpcookie.h">
+      <Filter>core\http</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\http\httprequest.h">
+      <Filter>core\http</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\http\httpresponse.h">
+      <Filter>core\http</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\http\httpsession.h">
+      <Filter>core\http</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\qtsingleapplication\src\qtlockedfile.h">
+      <Filter>core\qtsingleapplication\src</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\emailaddress.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimeattachment.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimebase64encoder.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimebase64formatter.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimebytearrayattachment.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimecontentencoder.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimecontentformatter.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimefile.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimehtml.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimeinlinefile.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimemessage.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimemultipart.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimepart.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimeqpencoder.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimeqpformatter.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\mimetext.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\quotedprintable.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\smtpmime_global.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\viewModel\FileTreeSortProxyModel.h">
+      <Filter>core\viewModel</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\viewModel\FileViewSortProxyModel.h">
+      <Filter>core\viewModel</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\crypt.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\ioapi.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\JlCompress.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quaadler32.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quachecksum32.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quacrc32.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quazip.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quazipdir.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quazipfileinfo.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quazipnewinfo.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\unzip.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\zip.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quazipfile.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quazip_global.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quaziodevice.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\zip\quagzipfile.h">
+      <Filter>core\zip</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\viewModel\FiltersViewModel.h">
+      <Filter>core\viewModel</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\viewModel\FileViewModel.h">
+      <Filter>core\viewModel</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\viewModel\FileTreeModel.h">
+      <Filter>core\viewModel</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\viewModel\itemDelegate\FileSizeItemDelegate.h">
+      <Filter>core\viewModel\itemDelegate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\viewModel\itemDelegate\IpItemDelegate.h">
+      <Filter>core\viewModel\itemDelegate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\viewModel\itemDelegate\ProgressItemDelegate.h">
+      <Filter>core\viewModel\itemDelegate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\viewModel\itemDelegate\SpeedItemDelegate.h">
+      <Filter>core\viewModel\itemDelegate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\viewModel\itemDelegate\TimeItemDelegate.h">
+      <Filter>core\viewModel\itemDelegate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\viewModel\itemDelegate\PriorityItemDelegate.h">
+      <Filter>core\viewModel\itemDelegate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\smtp\smtpclient.h">
+      <Filter>core\smtp</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\qtsingleapplication\src\qtsinglecoreapplication.h">
       <Filter>core\qtsingleapplication\src</Filter>
     </CustomBuild>
     <CustomBuild Include="core\qtsingleapplication\src\qtsingleapplication.h">
       <Filter>core\qtsingleapplication\src</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\qtsingleapplication\src\qtsinglecoreapplication.h">
+    <CustomBuild Include="core\qtsingleapplication\src\qtlocalpeer.h">
       <Filter>core\qtsingleapplication\src</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\http\staticfilecontroller.h">
+      <Filter>core\http</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\http\httpsessionstore.h">
+      <Filter>core\http</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\http\httprequesthandler.h">
+      <Filter>core\http</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\http\httplistener.h">
+      <Filter>core\http</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\http\httpconnectionhandlerpool.h">
+      <Filter>core\http</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\http\httpconnectionhandler.h">
+      <Filter>core\http</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Utils\SettingsPropertyMapper.h">
+      <Filter>core\gui\Utils</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\ImportWizard\ImportWizard.h">
+      <Filter>core\gui\ImportWizard</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\ImportWizard\ImportPage.h">
+      <Filter>core\gui\ImportWizard</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\ImportWizard\ImportIntroPage.h">
+      <Filter>core\gui\ImportWizard</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\ImportWizard\ImportFinishPage.h">
+      <Filter>core\gui\ImportWizard</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\ImportWizard\ChoseDataPage.h">
+      <Filter>core\gui\ImportWizard</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\ImportWizard\Importers\ImporterRegistrar.h">
+      <Filter>core\gui\ImportWizard\Importers</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\ImportWizard\Importers\ImportersManager.h">
+      <Filter>core\gui\ImportWizard\Importers</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\ImportWizard\Importers\UTorrentImporter.h">
+      <Filter>core\gui\ImportWizard\Importers</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\ImportWizard\Importers\BaseImporter.h">
+      <Filter>core\gui\ImportWizard\Importers</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Dialogs\VideoFileChooseDialog.h">
+      <Filter>core\gui\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Dialogs\SpeedLimitDialog.h">
+      <Filter>core\gui\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Dialogs\SettingsDialog.h">
+      <Filter>core\gui\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Dialogs\ReportProblemDialog.h">
+      <Filter>core\gui\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Dialogs\RaitingDialog.h">
+      <Filter>core\gui\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Dialogs\MultipleDTDialog.h">
+      <Filter>core\gui\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Dialogs\InitializationDialog.h">
+      <Filter>core\gui\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Dialogs\CuteTorrentMainWindow.h">
+      <Filter>core\gui\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\TreeBox.h">
+      <Filter>core\gui\Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\SortButton.h">
+      <Filter>core\gui\Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\searchlineedit.h">
+      <Filter>core\gui\Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\RaitingWidget.h">
+      <Filter>core\gui\Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\qkeyedit.h">
+      <Filter>core\gui\Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\messagebox.h">
+      <Filter>core\gui\Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\HtmlView.h">
+      <Filter>core\gui\Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\EditableHeaderView.h">
+      <Filter>core\gui\Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\CheckableMenu.h">
+      <Filter>core\gui\Controls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\MRichTextEdit\mtextedit.h">
+      <Filter>core\gui\Controls\MRichTextEdit</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\Controls\MRichTextEdit\mrichtextedit.h">
+      <Filter>core\gui\Controls\MRichTextEdit</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\backupwizard\intropage.h">
+      <Filter>core\gui\backupwizard</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\backupwizard\finishpage.h">
+      <Filter>core\gui\backupwizard</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\backupwizard\createbackuppage.h">
+      <Filter>core\gui\backupwizard</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\backupwizard\backupwizard.h">
+      <Filter>core\gui\backupwizard</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\backupwizard\applybackuppage.h">
+      <Filter>core\gui\backupwizard</Filter>
     </CustomBuild>
     <CustomBuild Include="core\datamodels\SGML\QSgmlTag.h">
       <Filter>core\datamodels\SGML</Filter>
@@ -1585,439 +1685,82 @@
     <CustomBuild Include="core\datamodels\SGML\QSgml.h">
       <Filter>core\datamodels\SGML</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Dialogs\CuteTorrentMainWindow.h">
-      <Filter>core\gui\Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Resources\translations\Language.en-US.qm">
-      <Filter>Resources\translations</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Resources\translations\Language.ru-RU.qm">
-      <Filter>Resources\translations</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\Controls\SortButton.h">
-      <Filter>core\gui\Controls</Filter>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\translations\Language.ru-RU.ts">
-      <Filter>Translation Files</Filter>
-    </None>
-    <None Include="Resources\translations\Language.en-US.ts">
-      <Filter>Translation Files</Filter>
-    </None>
-    <None Include="search\dataModels\SerachResult.h">
-      <Filter>search\dataModels</Filter>
-    </None>
-    <None Include="Resources\torrentfile.ico">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="..\UpdateInfo\version">
-      <Filter>..\UpdateInfo</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\playerImages\ControlBar.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\playerImages\FileButton.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\playerImages\FullscreenButton.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\playerImages\PauseButton.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\playerImages\PlayButton.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\playerImages\RateButtonForward.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\playerImages\RateButtonReverse.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\playerImages\UrlButton.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\app.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\images\loader.gif">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\playerImages\pattern.png">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="tracker\AnnounceRequest.h">
-      <Filter>Tracker</Filter>
-    </ClInclude>
-    <ClInclude Include="rss\viewmodels\QRssFilterModel.h">
-      <Filter>ViewModel</Filter>
-    </ClInclude>
-    <ClInclude Include="rss\core\RssParser.h">
-      <Filter>Rss</Filter>
-    </ClInclude>
-    <ClInclude Include="core\datamodels\json\json.h">
-      <Filter>WebBasic\JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="core\viewModel\FileViewSortProxyModel.h">
-      <Filter>ViewModel</Filter>
-    </ClInclude>
-    <ClInclude Include="core\viewModel\itemDelegate\FileSizeItemDelegate.h">
-      <Filter>ViewModel\ItemDelegat</Filter>
-    </ClInclude>
-    <ClInclude Include="core\viewModel\itemDelegate\ProgressItemDelegate.h">
-      <Filter>ViewModel\ItemDelegat</Filter>
-    </ClInclude>
-    <ClInclude Include="core\http\httpcookie.h">
-      <Filter>core\http</Filter>
-    </ClInclude>
-    <ClInclude Include="core\http\httprequest.h">
-      <Filter>core\http</Filter>
-    </ClInclude>
-    <ClInclude Include="core\http\httpresponse.h">
-      <Filter>core\http</Filter>
-    </ClInclude>
-    <ClInclude Include="core\http\httpsession.h">
-      <Filter>core\http</Filter>
-    </ClInclude>
-    <ClInclude Include="core\datamodels\FileViewTreeItem.h">
-      <Filter>core\datamodels</Filter>
-    </ClInclude>
-    <ClInclude Include="core\GroupForFileFiltering.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="rss\datamodels\RssBaseTreeItem.h">
-      <Filter>Rss\datamodels</Filter>
-    </ClInclude>
-    <ClInclude Include="rss\datamodels\RssDownloadRule.h">
-      <Filter>Rss\datamodels</Filter>
-    </ClInclude>
-    <ClInclude Include="rss\datamodels\RssFeedItemTreeItem.h">
-      <Filter>Rss\datamodels</Filter>
-    </ClInclude>
-    <ClInclude Include="rss\datamodels\RssFeedTreeItem.h">
-      <Filter>Rss\datamodels</Filter>
-    </ClInclude>
-    <ClInclude Include="scheduller\SchedulerTask.h">
-      <Filter>scheduller</Filter>
-    </ClInclude>
-    <ClInclude Include="search\dataModels\searchitem.h">
-      <Filter>search\dataModels</Filter>
-    </ClInclude>
-    <ClInclude Include="core\TreeItem.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="core\avaliableSpacePlugin\avaliable_space_verifier_plugin.h">
-      <Filter>core\avaliableSpacePlugin</Filter>
-    </ClInclude>
-    <ClInclude Include="Comments\Comment.h">
-      <Filter>Comments</Filter>
-    </ClInclude>
-    <ClInclude Include="core\zip\crypt.h">
-      <Filter>core\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\emailaddress.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\EmailNotifier.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="webControll\FileSystemController.h">
-      <Filter>webControll</Filter>
-    </ClInclude>
-    <ClInclude Include="core\viewModel\FileTreeSortProxyModel.h">
-      <Filter>core\viewModel</Filter>
-    </ClInclude>
-    <ClInclude Include="core\datamodels\FilterTreeItem.h">
-      <Filter>core\datamodels</Filter>
-    </ClInclude>
-    <ClInclude Include="core\gui\ImportWizard\Importers\ImporterRegistrar.h">
-      <Filter>core\gui\ImportWizard\Importers</Filter>
-    </ClInclude>
-    <ClInclude Include="core\gui\ImportWizard\Importers\ImportersManager.h">
-      <Filter>core\gui\ImportWizard\Importers</Filter>
-    </ClInclude>
-    <ClInclude Include="core\zip\ioapi.h">
-      <Filter>core\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="core\viewModel\itemDelegate\IpItemDelegate.h">
-      <Filter>core\viewModel\itemDelegate</Filter>
-    </ClInclude>
-    <ClInclude Include="core\zip\JlCompress.h">
-      <Filter>core\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimeattachment.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimebase64encoder.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimebase64formatter.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimebytearrayattachment.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimecontentencoder.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimecontentformatter.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimefile.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimehtml.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimeinlinefile.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimemessage.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimemultipart.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimepart.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimeqpencoder.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimeqpformatter.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\mimetext.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\collections\ObservableList.h">
+    <CustomBuild Include="core\collections\ObservebaleCollectionBase.h">
       <Filter>core\collections</Filter>
-    </ClInclude>
-    <ClInclude Include="torrent\viewmodels\PeerSortModel.h">
-      <Filter>torrent\viewmodels</Filter>
-    </ClInclude>
-    <ClInclude Include="search\viewmodels\QSearchFilterModel.h">
-      <Filter>search\viewmodels</Filter>
-    </ClInclude>
-    <ClInclude Include="core\StorrageInfo\qstorageinfo.h">
-      <Filter>core\StorrageInfo</Filter>
-    </ClInclude>
-    <ClInclude Include="core\StorrageInfo\qstorageinfo_p.h">
-      <Filter>core\StorrageInfo</Filter>
-    </ClInclude>
-    <ClInclude Include="core\zip\quaadler32.h">
-      <Filter>core\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="core\zip\quachecksum32.h">
-      <Filter>core\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="core\zip\quacrc32.h">
-      <Filter>core\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="core\zip\quazip.h">
-      <Filter>core\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="core\zip\quazip_global.h">
-      <Filter>core\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="core\zip\quazipdir.h">
-      <Filter>core\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="core\zip\quazipfileinfo.h">
-      <Filter>core\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="core\zip\quazipnewinfo.h">
-      <Filter>core\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\quotedprintable.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\qwinevent.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\qwineventfilter_p.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\qwinextrasglobal.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\qwinfunctions.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\qwinfunctions_p.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\qwinjumplist_p.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\qwinjumplistcategory.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\qwinjumplistcategory_p.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\qwinjumplistitem.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\qwinjumplistitem_p.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\qwintaskbarbutton_p.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\qwinthumbnailtoolbutton_p.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="webControll\RconCommon.h">
-      <Filter>webControll</Filter>
-    </ClInclude>
-    <ClInclude Include="webControll\RssCommandsApiController.h">
-      <Filter>webControll</Filter>
-    </ClInclude>
-    <ClInclude Include="webControll\RssController.h">
-      <Filter>webControll</Filter>
-    </ClInclude>
-    <ClInclude Include="search\core\SearchCommon.h">
-      <Filter>search\core</Filter>
-    </ClInclude>
-    <ClInclude Include="core\Singleton.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="core\smtp\smtpmime_global.h">
-      <Filter>core\smtp</Filter>
-    </ClInclude>
-    <ClInclude Include="core\viewModel\itemDelegate\SpeedItemDelegate.h">
-      <Filter>core\viewModel\itemDelegate</Filter>
-    </ClInclude>
-    <ClInclude Include="core\gui\Controls\StyledProgressBar.h">
-      <Filter>core\gui\Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="core\SympleCrypt.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="core\viewModel\itemDelegate\TimeItemDelegate.h">
-      <Filter>core\viewModel\itemDelegate</Filter>
-    </ClInclude>
-    <ClInclude Include="torrent\core\TorrentCommon.h">
-      <Filter>torrent\core</Filter>
-    </ClInclude>
-    <ClInclude Include="core\TorrentGroup.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="torrent\core\TorrentStorrage.h">
-      <Filter>torrent\core</Filter>
-    </ClInclude>
-    <ClInclude Include="tracker\trackercommon.h">
-      <Filter>Tracker</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_AddCommentDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_AddDownloadRuleDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_CreateTorrentDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_CustomWindow.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_InitializtionDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_LoginDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_MediaControls.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_messagebox.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_mrichtextedit.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_multipleDt.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_OpenTorrentDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_RaitingDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_RegisterDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_ReportProblemDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_RssFeedSettingsDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_SettingsDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_SpeedLimitDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_VideoFileChoose.h">
-      <Filter>GeneratedFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="core\gui\Utils\UIPropertyGetters.h">
-      <Filter>core\gui\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="core\gui\Utils\UIPropertySetters.h">
-      <Filter>core\gui\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="core\zip\unzip.h">
-      <Filter>core\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="Comments\User.h">
+    </CustomBuild>
+    <CustomBuild Include="Comments\CommentsWebClient.h">
       <Filter>Comments</Filter>
-    </ClInclude>
-    <ClInclude Include="core\gui\Utils\ValueGetters.h">
-      <Filter>core\gui\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="core\gui\Utils\ValueSetters.h">
-      <Filter>core\gui\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\windowsguidsdefs_p.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\winpropkey_p.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\winextras\winshobjidl_p.h">
-      <Filter>core\winextras</Filter>
-    </ClInclude>
-    <ClInclude Include="core\zip\zip.h">
-      <Filter>core\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="core\gui\Dialogs\CustomWindow.h">
-      <Filter>core\gui\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="core\gui\Controls\QBaloon.h">
-      <Filter>core\gui\Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="core\helpers\DT_mounter.h">
-      <Filter>core\helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="core\helpers\StaticHelpers.h">
-      <Filter>core\helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="core\helpers\VirtualDiskMounter.h">
-      <Filter>core\helpers</Filter>
-    </ClInclude>
+    </CustomBuild>
+    <CustomBuild Include="Resources\ltorrent.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\CuteTorrentVS.rc">
       <Filter>Resources</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\app.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\iconOverlay.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\playerImages\ControlBar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\playerImages\FileButton.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\playerImages\FullscreenButton.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\playerImages\PauseButton.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\playerImages\PlayButton.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\playerImages\RateButtonForward.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\playerImages\RateButtonReverse.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\playerImages\UrlButton.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\playerImages\pattern.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\images\loader.gif">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\images\star-off.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\images\star-on.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\translations\Language.en-US.qm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\translations\Language.ru-RU.qm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\translations\Language.en-US.ts">
+      <Filter>Resources\Translations</Filter>
+    </None>
+    <None Include="Resources\translations\Language.ru-RU.ts">
+      <Filter>Resources\Translations</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resources\mime\packages\freedesktop.org.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

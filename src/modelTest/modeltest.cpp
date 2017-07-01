@@ -40,7 +40,7 @@
 ****************************************************************************/
 
 
-#include <QtGui/QtGui>
+#include <QtWidgets/QtWidgets>
 
 #include "modeltest.h"
 

@@ -2,7 +2,8 @@
 #include <gui/Controls/MRichTextEdit/mrichtextedit.h>
 #include <gui/Controls/RaitingWidget.h>
 #include <CommentsWebClient.h>
-
+#include <boost/smart_ptr/shared_ptr.hpp>
+#include <QDialog>
 
 AddCommentDialog::AddCommentDialog(Mode dialogMode, const QString& infohash, QWidget* parent)
 	: BaseWindow<QDialog>(FullTitle, NoResize, parent)
@@ -27,12 +28,12 @@ void AddCommentDialog::setEditComment(Comment comment)
 	m_pRichTextEdit->setHtml(comment.message);
 }
 
-void AddCommentDialog::exec()
+int AddCommentDialog::exec()
 {
 	show();
 	QEventLoop loop;
 	connect(this, SIGNAL(closed()), &loop, SLOT(quit()));
-	loop.exec();
+	return loop.exec();
 }
 
 void AddCommentDialog::OnAccepted()

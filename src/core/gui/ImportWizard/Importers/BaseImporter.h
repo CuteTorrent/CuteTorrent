@@ -5,6 +5,7 @@
 #include <boost/function.hpp>
 
 #include "ImporterRegistrar.h"
+#include <QObject>
 
 class BaseImporter : public QObject
 {

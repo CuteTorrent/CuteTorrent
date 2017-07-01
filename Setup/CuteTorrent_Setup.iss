@@ -4,7 +4,6 @@
 #define AppVersion      GetFileVersion(AddBackslash(SourcePath) + MainBinaryName)
 #include "idp.iss"
 [Setup]
-SignTool=signtool
 WizardSmallImageFile=bottom.bmp
 AppId=CuteTorrent
 AppName=CuteTorrent
@@ -45,10 +44,10 @@ en.Shortcuts=Shortcuts
 en.CreateDesktopIcon=Create desctop icon
 en.TorrentFileAssociation=Associate "torrent" extension
 en.MgnetLinkHandler=Open magnet links with CuteTorrent
-en.InstallVCRedist=Install Visual C++ Redistributable Packages for Visual Studio 2013
+en.InstallVCRedist=Install Visual C++ Redistributable Packages for Visual Studio 2015
 en.AddFirewallRule=Add rule to firewall
 en.WinExplorerIntegration=Integrate to Windows Explorer
-en.VCRedistInstalling=Installing Visual C++ Redistributable Packages for Visual Studio 2013...
+en.VCRedistInstalling=Installing Visual C++ Redistributable Packages for Visual Studio 2015...
 en.AddingFirewallRule=Adding firewall rule...
 en.CreateTorrent=Create torrent
 en.RemoveSettings=Do you want to remove settings and data created by CuteTorrernt?
@@ -58,10 +57,10 @@ ru.Shortcuts=Ярлыки
 ru.CreateDesktopIcon=Создать ярлык на рабочем столе
 ru.TorrentFileAssociation=Открывать torrent Файлы с помощью CuteTorrent
 ru.MgnetLinkHandler=Открывать магнитные ссылки с помощью CuteTorrent
-ru.InstallVCRedist=Установить Visual C++ Redistributable Packages for Visual Studio 2013
+ru.InstallVCRedist=Установить Visual C++ Redistributable Packages for Visual Studio 2015
 ru.AddFirewallRule=Добавить в исключения файерволла
 ru.WinExplorerIntegration=Интегрироваться в проводник Windows
-ru.VCRedistInstalling=Устанавливается Visual C++ Redistributable Packages for Visual Studio 2013...
+ru.VCRedistInstalling=Устанавливается Visual C++ Redistributable Packages for Visual Studio 2015...
 ru.AddingFirewallRule=Добавляется правило для файерволла...
 ru.CreateTorrent=Создать торрент
 ru.RemoveSettings=Удалить настройки и другие данные CuteTorrent?
@@ -180,7 +179,8 @@ const
   // Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.21005
   VC_2013_REDIST_ADD_UPD4_X86 = '{F8CFEB22-A2E7-3971-9EDA-4B11EDEFC185}';
 
-
+  VC_2015_REDIST_MIN = '{BBF2AC74-720C-3CB3-8291-5E34039232FA}';
+  VC_2015_REDIST_ADD = '{69BCE4AC-9572-3271-A2FB-9423BDA36A43}';
 function MsiQueryProductState(szProduct: string): INSTALLSTATE;
   external 'MsiQueryProductState{#AW}@msi.dll stdcall';
 
@@ -198,8 +198,8 @@ begin
   // this statement, the following won't install your VC redist only when
   // the Visual C++ 2010 Redist (x86) and Visual C++ 2010 SP1 Redist(x86)
   // are installed for the current user
-  Result := not (VCVersionInstalled(VC_2013_REDIST_MIN_UPD4_X86) and
-    VCVersionInstalled(VC_2013_REDIST_ADD_UPD4_X86));
+  Result := not (VCVersionInstalled(VC_2015_REDIST_MIN) and
+    VCVersionInstalled(VC_2015_REDIST_ADD));
 end;
 
 function Process32First(
@@ -308,7 +308,7 @@ procedure CurPageChanged(CurPageID: Integer);
 begin
   if  (CurPageID = wpReady) and (VcRedistCheck() = True) then
   begin
-    idpAddFile('http://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x86.exe', expandconstant('{tmp}\vcredist_x86.exe'));
+    idpAddFile('https://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x86.exe', expandconstant('{tmp}\vcredist_x86.exe'));
   end
   else if CurPageID = wpSelectTasks then
   begin

@@ -16,8 +16,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef MultipleDTDialog_DEFINED
+#define MultipleDTDialog_DEFINED
 #include <QDialog>
-#include <QMouseEvent>
 #include "CustomWindow.h"
 #include "ui_multipleDt.h"
 
@@ -43,3 +44,4 @@ public slots:
 	void MountSelectedFILE();
 };
 
+#endif

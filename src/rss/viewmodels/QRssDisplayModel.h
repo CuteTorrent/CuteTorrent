@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <QtCore>
-#include <QtGui>
+#include <QtWidgets>
 #include "RssCommon.h"
 #include "ServiceCommon.h"
 class RssItem;

@@ -1,6 +1,7 @@
 ﻿#include "createbackuppage.h"
 #include "backupwizard.h"
 #include "JlCompress.h"
+#include <qstandardpaths.h>
 
 CreateBackupPage::CreateBackupPage(QWidget* parent) :
 	QWizardPage(parent)
@@ -43,7 +44,7 @@ bool CreateBackupPage::validatePage()
 void CreateBackupPage::createBackup() const
 {
 	QString path = savePathEdit->text();
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	JlCompress::compressDir(path, dataDir, true);
 }
 

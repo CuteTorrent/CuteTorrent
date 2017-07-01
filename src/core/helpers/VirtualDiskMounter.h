@@ -11,12 +11,12 @@ DEFINE_PTR_CALSS(VirtualDiskMounter)
 class VirtualDiskMounter : public Singleton<VirtualDiskMounter>
 {
 	friend class Singleton<VirtualDiskMounter>;
-#ifdef Q_WS_WIN
-	bool IsWin8OrGreater();
-	void MountVirualDiskImageWin8OrAbove(QString path);
+#ifdef Q_OS_WIN 
+	static bool IsWin8OrGreater();
+	static void MountVirualDiskImageWin8OrAbove(QString path);
 #endif
 public:
-	bool MountVirualDiskImage(QString path);
+	static bool MountVirualDiskImage(QString path);
 };
 
 #endif

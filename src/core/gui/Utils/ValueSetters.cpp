@@ -57,7 +57,7 @@ void ValueSetters::LanguageValueSetter(QString group, QString name, QVariant val
 void ValueSetters::MagnetAssociationValueSetter(QString group, QString name, QVariant value)
 {
 	bool associate = value.toBool();
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	QSettings asocSettings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", QSettings::NativeFormat);
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 
@@ -169,7 +169,7 @@ void ValueSetters::MagnetAssociationValueSetter(QString group, QString name, QVa
 void ValueSetters::TorrentAssociationValueSetter(QString group, QString name, QVariant value)
 {
 	bool associate = value.toBool();
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	QSettings asocSettings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", QSettings::NativeFormat);
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 
@@ -284,7 +284,7 @@ void ValueSetters::TorrentAssociationValueSetter(QString group, QString name, QV
 void ValueSetters::RunOnBootValueSetter(QString group, QString name, QVariant value)
 {
 	bool runOnBoot = value.toBool();
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	QSettings bootUpSettings(QString("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"), QSettings::NativeFormat);
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
 
@@ -329,7 +329,7 @@ void ValueSetters::RunOnBootValueSetter(QString group, QString name, QVariant va
 
 #endif
 }
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 void ValueSetters::RunOnBootMinimizedValueSetter(QString group, QString name, QVariant value)
 {
 	bool runOnBoot = value.toBool();

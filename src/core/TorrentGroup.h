@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <QUuid>
+#include <QString>
 #include <QStringList>
 
 class TorrentGroup

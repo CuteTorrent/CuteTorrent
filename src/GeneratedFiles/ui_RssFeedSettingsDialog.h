@@ -10,23 +10,23 @@
 #define UI_RSSFEEDSETTINGSDIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QTableWidget>
-#include <QtGui/QTimeEdit>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QTimeEdit>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -219,22 +219,22 @@ public:
     void retranslateUi(QDialog *RssSettings)
     {
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("RssSettings", "RSS_SETTINGS", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("RssSettings", "RSS_URL", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("RssSettings", "RSS_REFRASH_RATE", 0, QApplication::UnicodeUTF8));
-        groupBox->setTitle(QApplication::translate("RssSettings", "COOKIES", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("RssSettings", "RSS_SETTINGS", 0));
+        label->setText(QApplication::translate("RssSettings", "RSS_URL", 0));
+        label_3->setText(QApplication::translate("RssSettings", "RSS_REFRASH_RATE", 0));
+        groupBox->setTitle(QApplication::translate("RssSettings", "COOKIES", 0));
         QTableWidgetItem *___qtablewidgetitem = m_pCoociesTabWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("RssSettings", "COOKIE_ATTRIBUTE", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem->setText(QApplication::translate("RssSettings", "COOKIE_ATTRIBUTE", 0));
         QTableWidgetItem *___qtablewidgetitem1 = m_pCoociesTabWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("RssSettings", "COOLIE_VALUE", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem1->setText(QApplication::translate("RssSettings", "COOLIE_VALUE", 0));
 
         const bool __sortingEnabled = m_pCoociesTabWidget->isSortingEnabled();
         m_pCoociesTabWidget->setSortingEnabled(false);
         m_pCoociesTabWidget->setSortingEnabled(__sortingEnabled);
 
-        addRowButton->setText(QApplication::translate("RssSettings", "ADD_ROW", 0, QApplication::UnicodeUTF8));
-        removeRowButton->setText(QApplication::translate("RssSettings", "REMOVE_ROW", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("RssSettings", "COOKIE_HINT", 0, QApplication::UnicodeUTF8));
+        addRowButton->setText(QApplication::translate("RssSettings", "ADD_ROW", 0));
+        removeRowButton->setText(QApplication::translate("RssSettings", "REMOVE_ROW", 0));
+        label_2->setText(QApplication::translate("RssSettings", "COOKIE_HINT", 0));
         Q_UNUSED(RssSettings);
     } // retranslateUi
 

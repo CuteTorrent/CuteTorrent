@@ -9,6 +9,7 @@
 #include "RssItem.h"
 #include "QApplicationSettings.h"
 #include <SympleCrypt.h>
+#include <QtNetwork>
 
 RssFeed::RssFeed(QUrl url, QUuid uid) : m_uid(uid), m_url(url), m_ttl(0), m_customTtl(0)
 {

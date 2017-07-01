@@ -1,8 +1,7 @@
 ﻿#ifndef BACKUPWIZARD_H
 #define BACKUPWIZARD_H
-
 #include <QWizard>
-#include <QtGui>
+#include <QtWidgets>
 
 class BackupWizard : public QWizard
 {

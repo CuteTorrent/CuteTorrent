@@ -1,4 +1,5 @@
 ﻿#include "RssItem.h"
+#include <QDataStream>
 
 RssItem::RssItem(const RssItem& other): QObject(),
                                         m_title(other.m_title),

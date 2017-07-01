@@ -38,7 +38,7 @@ public:
 private:
 	IdleType m_idleType;
 	ActionType m_idleAction;
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	bool m_bInited;
 	void winInitPriveleges();
 #endif

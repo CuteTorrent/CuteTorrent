@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include "TorrentManager.h"
-#include <QVector>
 #include <file_entry.h>
 class FileViewTreeItem
 {

@@ -10,19 +10,19 @@
 #define UI_SPEEDLIMITDIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QPushButton>
-#include <QtGui/QSlider>
-#include <QtGui/QSpinBox>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
+#include <QtWidgets/QSpinBox>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -141,10 +141,10 @@ public:
 
     void retranslateUi(QWidget *SpeedLimitDialog)
     {
-        SpeedLimitDialog->setWindowTitle(QApplication::translate("SpeedLimitDialog", "SPEED_LIMIT_DIALOG", 0, QApplication::UnicodeUTF8));
+        SpeedLimitDialog->setWindowTitle(QApplication::translate("SpeedLimitDialog", "SPEED_LIMIT_DIALOG", 0));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("SpeedLimitDialog", "SPEED_LIMIT_DIALOG", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("SpeedLimitDialog", "LIMIT", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("SpeedLimitDialog", "SPEED_LIMIT_DIALOG", 0));
+        label->setText(QApplication::translate("SpeedLimitDialog", "LIMIT", 0));
     } // retranslateUi
 
 };

@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 QApplicationSettings::QApplicationSettings()
 {
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QString oldStylePath = StaticHelpers::CombinePathes(QApplication::applicationDirPath(), "CuteTorrent.ini");
 	QString newStylePath = StaticHelpers::CombinePathes(dataDir, "settings.ini");
 	QFile oldFile(oldStylePath);
@@ -262,7 +262,7 @@ QList<SchedulerTask> QApplicationSettings::GetSchedullerQueue()
 {
 	QList<SchedulerTask> res;
 	res.clear();
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QFile file(StaticHelpers::CombinePathes(dataDir, "BtSessionData/schedulertasks.xml"));
 
 	if (!file.open(QFile::ReadOnly))
@@ -360,7 +360,7 @@ QList<SchedulerTask> QApplicationSettings::GetSchedullerQueue()
 
 void QApplicationSettings::SaveSchedullerQueue(QList<SchedulerTask>& tasks)
 {
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QFile file(StaticHelpers::CombinePathes(dataDir, "BtSessionData/schedulertasks.xml"));
 
 	if (!file.open(QFile::WriteOnly))

@@ -1,4 +1,9 @@
-﻿#include "FileSystemTorrentWatcher.h"
+﻿#include <QObject>
+#ifdef Q_OS_WIN
+#include <WinSock2.h>
+#include <windows.h>
+#endif
+#include "FileSystemTorrentWatcher.h"
 #include <QFileSystemWatcher>
 #include <QDir>
 #include <ServiceCommon.h>

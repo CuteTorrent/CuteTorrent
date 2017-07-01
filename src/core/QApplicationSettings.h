@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "SchedulerTask.h"
 #include "ServiceCommon.h"
 #include "Singleton.h"
+#include <QObject>
 class QMutex;
 class QSettings;
 class SimpleCrypt;

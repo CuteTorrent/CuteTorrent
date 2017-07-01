@@ -5,6 +5,7 @@
 #include <maxminddb.h>
 #include <QObject>
 #include "FileViewModel.h"
+#include "FaviconDownloader.h"
 
 
 class IpToCountryResolver : public QObject, public Singleton<IpToCountryResolver>

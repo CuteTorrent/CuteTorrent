@@ -1,6 +1,7 @@
 ﻿#ifndef STYLEENGENE_H
 #define STYLEENGENE_H
-#include <QtGui>
+#include <QObject>
+#include <QtWidgets>
 #include <QCache>
 class QuaZip;
 struct StyleInfo

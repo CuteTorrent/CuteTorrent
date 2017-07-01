@@ -20,14 +20,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDebug>
 #include <libtorrent/gzip.hpp>
 #include <QApplication>
+#include <NetworkDiskCache.h>
 #include <libtorrent/upnp.hpp>
 #include <libtorrent/i2p_stream.hpp>
 #include <libtorrent/socks5_stream.hpp>
 #include "StyleEngene.h"
-#include <zlib.h>
+#include <QtZlib/zlib.h>
 #include <float.h>
 #include <QDesktopServices>
 #include <QTime>
+#include "defs.h"
+#include <libtorrent/file_storage.hpp>
+#include <libtorrent/bdecode.hpp>
 
 QString StaticHelpers::toKbMbGb(uint64_t size, bool isSpeed)
 {
@@ -271,7 +275,7 @@ QString StaticHelpers::GetBaseSuffix(const file_storage& storrage)
 }
 
 
-QString StaticHelpers::translateLibTorrentError(error_code const& ec)
+QString StaticHelpers::translateLibTorrentError(boost::system::error_code const& ec)
 {
 #if LIBTORRENT_VERSION_NUM >= 10000
 
@@ -280,7 +284,7 @@ QString StaticHelpers::translateLibTorrentError(error_code const& ec)
 		return translateSessionError(ec);
 	}
 
-	if (ec.category() == get_bdecode_category())
+	if (ec.category() == bdecode_category())
 	{
 		return translateBEncodeError(ec);
 	}
@@ -309,7 +313,7 @@ QString StaticHelpers::translateLibTorrentError(error_code const& ec)
 	return QString::fromLocal8Bit(ec.message().c_str());
 }
 
-QString StaticHelpers::translateSessionError(error_code const& ec)
+QString StaticHelpers::translateSessionError(boost::system::error_code const& ec)
 {
 	static char const* msgs[] =
 		{
@@ -528,7 +532,7 @@ QString StaticHelpers::translateSessionError(error_code const& ec)
 	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
 }
 
-QString StaticHelpers::translateBEncodeError(error_code const& ec)
+QString StaticHelpers::translateBEncodeError(boost::system::error_code const& ec)
 {
 	static char const* msgs[] =
 		{
@@ -544,7 +548,7 @@ QString StaticHelpers::translateBEncodeError(error_code const& ec)
 	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
 }
 
-QString StaticHelpers::translateGzipError(error_code const& ec)
+QString StaticHelpers::translateGzipError(boost::system::error_code const& ec)
 {
 	static char const* msgs[] =
 		{
@@ -568,7 +572,7 @@ QString StaticHelpers::translateGzipError(error_code const& ec)
 	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
 }
 
-QString StaticHelpers::translateI2PError(error_code const& ec)
+QString StaticHelpers::translateI2PError(boost::system::error_code const& ec)
 {
 	static char const* msgs[] =
 		{
@@ -585,7 +589,7 @@ QString StaticHelpers::translateI2PError(error_code const& ec)
 	return translateError(ec, const_cast<char**>(msgs), sizeof(msgs) / sizeof(msgs[0]));
 }
 
-QString StaticHelpers::translateSocksError(error_code const& ec)
+QString StaticHelpers::translateSocksError(boost::system::error_code const& ec)
 {
 	static char const* msgs[] =
 		{
@@ -634,7 +638,7 @@ error_code_t error_codes[] =
 	,{727, QT_TRANSLATE_NOOP("ErrorMsg", "ExternalPort must be a wildcard and cannot be a specific port ")}
 };
 
-QString StaticHelpers::translateUpnpError(error_code const& ec)
+QString StaticHelpers::translateUpnpError(boost::system::error_code const& ec)
 {
 	int ev = ec.value();
 	int num_errors = sizeof(error_codes) / sizeof(error_codes[0]);
@@ -653,7 +657,7 @@ QString StaticHelpers::translateUpnpError(error_code const& ec)
 	return msg;
 }
 
-QString StaticHelpers::translateError(error_code const& ec, char* msgs[], int msgs_len)
+QString StaticHelpers::translateError(boost::system::error_code const& ec, char* msgs[], int msgs_len)
 {
 	int code = ec.value();
 
@@ -676,7 +680,7 @@ void StaticHelpers::OpenFolderNautilus(QString& file)
 }
 #endif
 
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 #include <Shlobj.h>
 
 void StaticHelpers::OpenFileInExplorer(QString& file)
@@ -719,7 +723,7 @@ NetworkDiskCache* StaticHelpers::GetGLobalWebCache()
 	if (m_pDiskCache == NULL)
 	{
 		m_pDiskCache = new NetworkDiskCache();
-		m_pDiskCache->setCacheDirectory(QDesktopServices::storageLocation(QDesktopServices::CacheLocation) + "/WebCache");
+		m_pDiskCache->setCacheDirectory(QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/WebCache");
 		m_pDiskCache->setMaximumCacheSize(50 * KbInt * KbInt);
 		qDebug() << "NetworkDiskCache  cache path:" << m_pDiskCache->cacheDirectory() << " max size:" << m_pDiskCache->maximumCacheSize() / KbInt / KbInt << "MB";
 	}

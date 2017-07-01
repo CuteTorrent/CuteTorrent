@@ -256,11 +256,11 @@ void RssParser::fillFeed(QIODevice* pData, RssFeed* pFeed, bool& ok, QString& er
 
 	while (reader.readNextStartElement())
 	{
-		if (reader.name().compare("rss", Qt::CaseInsensitive) == 0)
+		if (reader.name().compare(QString("rss"), Qt::CaseInsensitive) == 0)
 		{
 			while (reader.readNextStartElement())
 			{
-				if (reader.name().compare("channel", Qt::CaseInsensitive) == 0)
+				if (reader.name().compare(QString("channel"), Qt::CaseInsensitive) == 0)
 				{
 					channelFound = true;
 					parseRssChannel(reader, pFeed, ok, error);
@@ -272,7 +272,7 @@ void RssParser::fillFeed(QIODevice* pData, RssFeed* pFeed, bool& ok, QString& er
 				}
 			}
 		}
-		else if (reader.name().compare("feed", Qt::CaseInsensitive) == 0)
+		else if (reader.name().compare(QString("feed"), Qt::CaseInsensitive) == 0)
 		{
 			channelFound = true;
 			parseAtomChannel(reader, pFeed, ok, error);
@@ -302,23 +302,23 @@ void RssParser::parseRssChannel(QXmlStreamReader& reader, RssFeed* pFeed, bool& 
 
 		if (reader.isStartElement())
 		{
-			if (reader.name().compare("title", Qt::CaseInsensitive) == 0)
+			if (reader.name().compare(QString("title"), Qt::CaseInsensitive) == 0)
 			{
 				pFeed->m_title = reader.readElementText();
 			}
-			else if (reader.name().compare("link", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("link"), Qt::CaseInsensitive) == 0)
 			{
 				pFeed->m_link = reader.readElementText();
 			}
-			else if (reader.name().compare("description", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("description"), Qt::CaseInsensitive) == 0)
 			{
 				pFeed->m_description = reader.readElementText();
 			}
-			else if (reader.name().compare("ttl", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("ttl"), Qt::CaseInsensitive) == 0)
 			{
 				pFeed->m_ttl = reader.readElementText().toInt() * 60;
 			}
-			else if (reader.name().compare("lastBuildDate", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("lastBuildDate"), Qt::CaseInsensitive) == 0)
 			{
 				QString lastBuildDate = reader.readElementText();
 				QString feedUrl = pFeed->url().toString();
@@ -336,7 +336,7 @@ void RssParser::parseRssChannel(QXmlStreamReader& reader, RssFeed* pFeed, bool& 
 					m_lastUpdateDates[feedUrl] = lastBuildDate;
 				}
 			}
-			else if (reader.name().compare("item", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("item"), Qt::CaseInsensitive) == 0)
 			{
 				parseRssItem(reader, pFeed, ok, error);
 			}
@@ -352,14 +352,14 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 	{
 		reader.readNext();
 
-		if (reader.isEndElement() && reader.name().compare("item", Qt::CaseInsensitive) == 0)
+		if (reader.isEndElement() && reader.name().compare(QString("item"), Qt::CaseInsensitive) == 0)
 		{
 			break;
 		}
 
 		if (reader.isStartElement())
 		{
-			if (reader.name().compare("title", Qt::CaseInsensitive) == 0)
+			if (reader.name().compare(QString("title"), Qt::CaseInsensitive) == 0)
 			{
 				QString title = reader.readElementText();
 				QTextDocument doc;
@@ -367,66 +367,66 @@ void RssParser::parseRssItem(QXmlStreamReader& reader, RssFeed* pFeed, bool& ok,
 				title = doc.toPlainText();
 				pItem->setTitle(title);
 			}
-			else if (reader.name().compare("pubDate", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("pubDate"), Qt::CaseInsensitive) == 0)
 			{
 				pItem->setPubDate(parseDate(reader.readElementText()));
 			}
-			else if (reader.name().compare("guid", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("guid"), Qt::CaseInsensitive) == 0)
 			{
 				pItem->setGuid(reader.readElementText());
 			}
-			else if (reader.name().compare("category", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("category"), Qt::CaseInsensitive) == 0)
 			{
 				pItem->setCategory(reader.readElementText());
 			}
-			else if (reader.name().compare("link", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("link"), Qt::CaseInsensitive) == 0)
 			{
 				pItem->setDescribtionLink(reader.readElementText());
 			}
-			else if (reader.name().compare("description", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("description"), Qt::CaseInsensitive) == 0)
 			{
 				pItem->setDescription(reader.readElementText());
 			}
-			else if (reader.name().compare("enclosure", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("enclosure"), Qt::CaseInsensitive) == 0)
 			{
 				if (reader.attributes().value("type") == "application/x-bittorrent")
 				{
 					pItem->setTorrentUrl(reader.attributes().value("url").toString());
 				}
 			}
-			else if (reader.name().compare("content", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("content"), Qt::CaseInsensitive) == 0)
 			{
 				if (!reader.attributes().value("url").isEmpty())
 				{
 					pItem->setTorrentUrl(reader.attributes().value("url").toString());
 				}
 			}
-			else if (reader.name().compare("magneturi", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("magneturi"), Qt::CaseInsensitive) == 0)
 			{
 				pItem->setTorrentUrl(reader.readElementText());
 			}
-			else if (reader.name().compare("torrent", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("torrent"), Qt::CaseInsensitive) == 0)
 			{
 				parseTorrentSection(reader, pItem.get(), ok, error);
 			}
-			else if (reader.name().compare("contentlength", Qt::CaseInsensitive) == 0 ||
-				reader.name().compare("size", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("contentlength"), Qt::CaseInsensitive) == 0 ||
+				reader.name().compare(QString("size"), Qt::CaseInsensitive) == 0)
 			{
 				pItem->setSize(reader.readElementText().toULongLong());
 			}
-			else if (reader.name().compare("infohash", Qt::CaseInsensitive) == 0 ||
-				reader.name().compare("info_hash", Qt::CaseInsensitive) == 0 ||
-				reader.name().compare("hash", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("infohash"), Qt::CaseInsensitive) == 0 ||
+				reader.name().compare(QString("info_hash"), Qt::CaseInsensitive) == 0 ||
+				reader.name().compare(QString("hash"), Qt::CaseInsensitive) == 0)
 			{
 				pItem->setInfoHash(reader.readElementText());
 			}
-			else if (reader.name().compare("seeds", Qt::CaseInsensitive) == 0 ||
-				reader.name().compare("seeders", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("seeds"), Qt::CaseInsensitive) == 0 ||
+				reader.name().compare(QString("seeders"), Qt::CaseInsensitive) == 0)
 			{
 				pItem->setSeeds(reader.readElementText().toLong());
 			}
-			else if (reader.name().compare("peers", Qt::CaseInsensitive) == 0 ||
-				reader.name().compare("leechers", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("peers"), Qt::CaseInsensitive) == 0 ||
+				reader.name().compare(QString("leechers"), Qt::CaseInsensitive) == 0)
 			{
 				pItem->setPeers(reader.readElementText().toLong());
 			}
@@ -520,30 +520,30 @@ void RssParser::parseTorrentSection(QXmlStreamReader& reader, RssItem* item, boo
 	{
 		reader.readNext();
 
-		if (reader.isEndElement() && reader.name().compare("torrent", Qt::CaseInsensitive) == 0)
+		if (reader.isEndElement() && reader.name().compare(QString("torrent"), Qt::CaseInsensitive) == 0)
 		{
 			break;
 		}
 
 		if (reader.isStartElement())
 		{
-			if (reader.name().compare("contentlength", Qt::CaseInsensitive) == 0)
+			if (reader.name().compare(QString("contentlength"), Qt::CaseInsensitive) == 0)
 			{
 				item->setSize(reader.readElementText().toULongLong());
 			}
-			else if (reader.name().compare("magneturi", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("magneturi"), Qt::CaseInsensitive) == 0)
 			{
 				item->setMagnetUrl(reader.readElementText());
 			}
-			else if (reader.name().compare("infohash", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("infohash"), Qt::CaseInsensitive) == 0)
 			{
 				item->setInfoHash(reader.readElementText());
 			}
-			else if (reader.name().compare("seeds", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("seeds"), Qt::CaseInsensitive) == 0)
 			{
 				item->setSeeds(reader.readElementText().toLong());
 			}
-			else if (reader.name().compare("peers", Qt::CaseInsensitive) == 0)
+			else if (reader.name().compare(QString("peers"), Qt::CaseInsensitive) == 0)
 			{
 				item->setPeers(reader.readElementText().toLong());
 			}

@@ -19,39 +19,49 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _S_H_H
 #define _S_H_H
 
-#include "TorrentManager.h"
+
 #include "SchedulerTask.h"
-#include "NetworkDiskCache.h"
+class NetworkDiskCache;
 #include <QDir>
 #include <QLocale>
+#include <cstdint>
+
+namespace boost {namespace system {
+	class error_code;
+}
+}
+
+namespace libtorrent {
+	class file_storage;
+}
 
 class StaticHelpers
 {
 	static NetworkDiskCache* m_pDiskCache;
-	static QString translateSessionError(error_code const& errorCode);
-	static QString translateBEncodeError(error_code const& ec);
-	static QString translateGzipError(error_code const& ec);
-	static QString translateI2PError(error_code const& ec);
-	static QString translateSocksError(error_code const& ec);
-	static QString translateUpnpError(error_code const& ec);
-	static QString translateError(error_code const& ec, char* msgs[], int msgs_len);
+	static QString translateSessionError(boost::system::error_code const& errorCode);
+	static QString translateBEncodeError(boost::system::error_code const& ec);
+	static QString translateGzipError(boost::system::error_code const& ec);
+	static QString translateI2PError(boost::system::error_code const& ec);
+	static QString translateSocksError(boost::system::error_code const& ec);
+	static QString translateUpnpError(boost::system::error_code const& ec);
+	static QString translateError(boost::system::error_code const& ec, char* msgs[], int msgs_len);
 	template <typename T>
 	static T CombinePathes(T t);
 public:
 #ifdef Q_WS_X11
 	static void OpenFolderNautilus(QString& file);
 #endif
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	static void OpenFileInExplorer(QString& file);
 	static bool IsWow64();
 #endif
 	static QString toKbMbGb(uint64_t size, bool isSpped = false);
-	static QString translateLibTorrentError(error_code const& ec);
+	static QString translateLibTorrentError(boost::system::error_code const& ec);
 	static QString toTimeString(int seconds);
 	static bool LoadFile(QString path, std::vector<char>& out);
 	static QString filePriorityToString(int priority);
 	static QString SchedulerTypeToString(SchedulerTask::TaskType type);
-	static QString GetBaseSuffix(const file_storage& storrage);
+	static QString GetBaseSuffix(const libtorrent::file_storage& storrage);
 	static QString GetCountryCode(QLocale::Language lang, QLocale::Country country);
 	template <typename T, typename... Args>
 	static QString CombinePathes(T first, Args& ... args);

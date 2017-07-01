@@ -1,6 +1,6 @@
 ﻿#include "TorrentGroup.h"
 #include <QDebug>
-
+#include <QDataStream>
 TorrentGroup::TorrentGroup(QString name, QStringList extentions, QString savePath)
 {
 	m_uid = QUuid::createUuid();

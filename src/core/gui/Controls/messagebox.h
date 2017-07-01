@@ -1,6 +1,6 @@
 ﻿#pragma once
-
-#include <QtGui>
+#define WIN32_LEAN_AND_MEAN
+#include <QtWidgets>
 
 #include "CustomWindow.h"
 #include "ui_messagebox.h"

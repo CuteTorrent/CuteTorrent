@@ -3,6 +3,10 @@
 
 #include <QObject>
 #include <QString>
+#ifdef Q_OS_WIN
+#include <WinSock2.h>
+#include <windows.h>
+#endif
 #include <QMetaType>
 #include "libtorrent/config.hpp"
 #include "libtorrent/file_storage.hpp"

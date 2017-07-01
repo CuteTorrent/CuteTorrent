@@ -10,17 +10,18 @@
 #define UI_ADDCOMMENTDIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QPushButton>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
+#include <QLayout>
 
 QT_BEGIN_NAMESPACE
 
@@ -136,10 +137,10 @@ public:
 
     void retranslateUi(QWidget *AddCommentDialog)
     {
-        AddCommentDialog->setWindowTitle(QApplication::translate("AddCommentDialog", "ADD_COMMENT_DIALOG", 0, QApplication::UnicodeUTF8));
+        AddCommentDialog->setWindowTitle(QApplication::translate("AddCommentDialog", "ADD_COMMENT_DIALOG", 0));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("AddCommentDialog", "ADD_COMMENT_DIALOG", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("AddCommentDialog", "RATING:", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("AddCommentDialog", "ADD_COMMENT_DIALOG", 0));
+        label->setText(QApplication::translate("AddCommentDialog", "RATING:", 0));
     } // retranslateUi
 
 };

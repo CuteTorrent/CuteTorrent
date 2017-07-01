@@ -1016,7 +1016,7 @@ Qt::CaseSensitivity QuaZip::convertCaseSensitivity(QuaZip::CaseSensitivity cs)
 {
 	if (cs == csDefault)
 	{
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 		return Qt::CaseInsensitive;
 #else
 		return Qt::CaseSensitive;

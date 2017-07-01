@@ -183,7 +183,7 @@ void SearchEngine::loadSearchProvider(const QString path)
 
 void SearchEngine::init()
 {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	QString rootPath = StaticHelpers::CombinePathes(QApplication::applicationDirPath(), "searchEngines");
 #endif
 #ifdef Q_OS_UNIX

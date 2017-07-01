@@ -4,7 +4,7 @@
 #include <Singleton.h>
 #include "Comment.h"
 #include <QTimer>
-
+#include <boost/smart_ptr/scoped_ptr.hpp>
 
 struct User;
 class QNetworkAccessManager;

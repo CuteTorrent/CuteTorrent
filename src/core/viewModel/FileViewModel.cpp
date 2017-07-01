@@ -1,9 +1,14 @@
-﻿#include "FileViewModel.h"
+﻿
+#include <WinSock2.h>
+#include <windows.h>
+#include "FileViewModel.h"
 #include "StaticHelpers.h"
 #include <libtorrent/torrent_info.hpp>
 #include <file_entry.h>
 #include "messagebox.h"
-
+#include <libtorrent/torrent_handle.hpp>
+#include <libtorrent/torrent_status.hpp>
+#include <libtorrent/version.hpp>
 void FileViewModel::retranslateUI()
 {
 	headerStringsData.clear();
@@ -100,7 +105,7 @@ void FileViewModel::OpenDirSelected()
 #ifdef Q_WS_X11
 	StaticHelpers::OpenFolderNautilus(path);
 #endif
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	StaticHelpers::OpenFileInExplorer(path);
 #endif
 }
@@ -347,7 +352,7 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 				}
 				else
 				{
-					QTemporaryFile tmpfile(StaticHelpers::CombinePathes(QDesktopServices::storageLocation(QDesktopServices::TempLocation), "tempFileXXXXXX." + suffix));
+					QTemporaryFile tmpfile(StaticHelpers::CombinePathes(QStandardPaths::writableLocation(QStandardPaths::TempLocation), "tempFileXXXXXX." + suffix));
 					tmpfile.open();
 					tmpfile.close();
 					QFileInfo tempFileInfo(tmpfile.fileName());
@@ -410,8 +415,9 @@ bool FileViewModel::setDataSource(const torrent_handle& hTorrent)
 			delete m_pRoot;
 			m_pRoot = new FileViewTreeItem();
 			dataSource = hTorrent;
+			emit beginResetModel();
 			BuildTree();
-			reset();
+			emit endResetModel();
 			return true;
 		}
 		else
@@ -422,9 +428,10 @@ bool FileViewModel::setDataSource(const torrent_handle& hTorrent)
 	else
 	{
 		dataSource = torrent_handle();
+		emit beginResetModel();
 		delete m_pRoot;
 		m_pRoot = new FileViewTreeItem();
-		reset();
+		emit endResetModel();
 		return true;
 	}
 

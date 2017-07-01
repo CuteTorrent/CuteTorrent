@@ -56,7 +56,7 @@ QList<RssFeed*> RssManager::feeds()
 
 void RssManager::SaveFeeds()
 {
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QString feedsPath = StaticHelpers::CombinePathes(dataDir, "feeds.dat");
 	QFile feedsDat(feedsPath);
 
@@ -78,7 +78,7 @@ void RssManager::SaveFeeds()
 
 void RssManager::LoadFeeds()
 {
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QString feedsPath = StaticHelpers::CombinePathes(dataDir, "feeds.dat");
 	QFile feedsDat(feedsPath);
 
@@ -191,7 +191,7 @@ QList<RssDownloadRule*> RssManager::downloadRules()
 
 void RssManager::LoadDownloadRules()
 {
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QString rssDownloadRulesPath = StaticHelpers::CombinePathes(dataDir, "rssDownloadRules.dat");
 	QFile rssDownloadRulesDat(rssDownloadRulesPath);
 
@@ -244,7 +244,7 @@ QMap<QString, quint8> RssManager::getFilePriorities(TorrentDownloadInfo download
 
 void RssManager::SaveDownloadRules()
 {
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QString rssDownloadRulesPath = StaticHelpers::CombinePathes(dataDir, "rssDownloadRules.dat");
 	QFile rssDownloadRulesDat(rssDownloadRulesPath);
 

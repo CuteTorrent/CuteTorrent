@@ -1,10 +1,13 @@
 ﻿#pragma once
-#include <QtGui>
+
 #include "FileViewTreeItem.h"
 #include "FileViewSortProxyModel.h"
-#include "defs.h"
+#include <QAction>
+#include <QPixmapCache>
+#include <libtorrent/torrent_handle.hpp>
 
-#include <libtorrent/file_storage.hpp>
+
+class QTreeView;
 using namespace libtorrent;
 struct file_entry;
 class FileViewModel : public QAbstractItemModel
@@ -15,14 +18,14 @@ public:
 	
 	FileViewModel(QTreeView* proxyModel, QObject* parrent = NULL);
 	~FileViewModel(void);
-	int rowCount(const QModelIndex& parent = QModelIndex()) const;
-	int columnCount(const QModelIndex& parent = QModelIndex()) const;
-	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+	int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+	int columnCount(const QModelIndex& parent = QModelIndex()) const override;
+	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 	bool setDataSource(const torrent_handle& storage);
 	QVariant headerData(int section, Qt::Orientation orientation,
-	                    int role = Qt::DisplayRole) const;
+	                    int role = Qt::DisplayRole) const override;
 	bool setHeaderData(int section, Qt::Orientation orientation, const QVariant& value,
-	                   int role = Qt::EditRole);
+	                   int role = Qt::EditRole) override;
 	QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const override;
 	QModelIndex parent(const QModelIndex& child) const override;
 	void Update();

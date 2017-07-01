@@ -193,7 +193,7 @@ void SettingsDialog::FillGeneralTab()
 	                             ValueGetters::RunOnBootValueGetter);
 	m_propertyMapper->AddMapping("Search", "script_debuging_enabled", SettingsPropertyMapper::BOOL, scriptDebugingCheckBox, SettingsPropertyMapper::CHECKBOX, false);
 	//OS_SPECIFICK////
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	m_propertyMapper->AddMapping("System", "run_on_boot_minimaized", SettingsPropertyMapper::BOOL, startMinimizedCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL,
 	                             ValueSetters::RunOnBootMinimizedValueSetter, ValueGetters::RunOnBootMinimizedValueGetter);
 	m_propertyMapper->AddMapping("System", "win_explorer_integration_enabled", SettingsPropertyMapper::BOOL, winShelItegrationCheckBox, SettingsPropertyMapper::CHECKBOX, QVariant(), NULL, NULL,
@@ -1090,7 +1090,7 @@ void SettingsDialog::onDeleteRssRule()
 
 void SettingsDialog::onExportRssRules()
 {
-	QString savePath = QFileDialog::getSaveFileName(this, tr("RSS_RULES_EXPORT"), QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation), tr("CT_RSS_RULE_LIST (*.cdrl)"));
+	QString savePath = QFileDialog::getSaveFileName(this, tr("RSS_RULES_EXPORT"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), tr("CT_RSS_RULE_LIST (*.cdrl)"));
 
 	if (savePath.isEmpty())
 	{
@@ -1130,7 +1130,7 @@ void SettingsDialog::onExportRssRules()
 
 void SettingsDialog::onImportRssRules()
 {
-	QString openPath = QFileDialog::getOpenFileName(this, tr("RSS_RULES_IMPORT"), QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation), tr("CT_RSS_RULE_LIST (*.cdrl)"));
+	QString openPath = QFileDialog::getOpenFileName(this, tr("RSS_RULES_IMPORT"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), tr("CT_RSS_RULE_LIST (*.cdrl)"));
 
 	if (openPath.isEmpty())
 	{
@@ -1273,7 +1273,7 @@ void SettingsDialog::DisableApplyButton()
 void SettingsDialog::onBrowseWatchDir()
 {
 	QString watchDir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
-	                                                     QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation),
+	                                                     QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
 	                                                     QFileDialog::ShowDirsOnly
 	                                                     | QFileDialog::DontResolveSymlinks);
 
@@ -1287,7 +1287,7 @@ void SettingsDialog::onBrowseWatchDir()
 void SettingsDialog::onBrowseWatchStaticPath()
 {
 	QString watchDirStaticPath = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
-	                                                               QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation),
+	                                                               QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
 	                                                               QFileDialog::ShowDirsOnly
 	                                                               | QFileDialog::DontResolveSymlinks);
 

@@ -1,7 +1,8 @@
 ﻿#include "PowerManagement.h"
 #include <QDebug>
 
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
+#include <winsock2.h>
 #include <windows.h>
 #else
 #include <QtDBus/QDBusMessage>
@@ -53,7 +54,7 @@ void PowerManagement::pefromActionOnIdle(IdleType currentIdleType)
 		emit resetPowerState();
 	}
 }
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 void PowerManagement::winInitPriveleges()
 {
 	if (!m_bInited)
@@ -79,7 +80,7 @@ void PowerManagement::winInitPriveleges()
 
 void PowerManagement::hibernate()
 {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	winInitPriveleges();
 	bool successful = SetSystemPowerState(FALSE, FALSE);
 	qDebug() << "PowerManagement::hibernate" << successful;
@@ -122,7 +123,7 @@ void PowerManagement::hibernate()
 
 void PowerManagement::sleep()
 {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	winInitPriveleges();
 	bool successful = SetSystemPowerState(TRUE, FALSE);
 	qDebug() << "PowerManagement::sleep" << successful;
@@ -166,7 +167,7 @@ void PowerManagement::sleep()
 
 void PowerManagement::reboot()
 {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	winInitPriveleges();
 	bool successful = ExitWindowsEx(EWX_REBOOT | EWX_FORCE,
 	                                          SHTDN_REASON_MAJOR_OPERATINGSYSTEM |
@@ -236,7 +237,7 @@ void PowerManagement::reboot()
 
 void PowerManagement::shutdown()
 {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	winInitPriveleges();
 	bool successful = ExitWindowsEx(EWX_SHUTDOWN | EWX_FORCE,
 	                                            SHTDN_REASON_MAJOR_OPERATINGSYSTEM |

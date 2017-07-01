@@ -4,6 +4,8 @@
 #include "StaticHelpers.h"
 #include "quazip.h"
 #include "quazipfile.h"
+#include <QIcon>
+#include <QSet>
 StyleEngene* StyleEngene::instance = NULL;
 const char* StyleEngene::EnumStrings[] = {"iso", "doc", "picture", "movie", "archive", "audio", "app"};
 QIcon StyleEngene::fallback = QIcon();
@@ -151,7 +153,7 @@ QIcon StyleEngene::getIcon(QString name)
 
 void StyleEngene::init()
 {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	QString rootPath = QApplication::applicationDirPath() + "/styles/";
 #endif
 #ifdef Q_WS_UNIX

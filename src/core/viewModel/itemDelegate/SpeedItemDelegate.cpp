@@ -1,5 +1,6 @@
 ﻿#include "SpeedItemDelegate.h"
 #include <helpers/StaticHelpers.h>
+#include "defs.h"
 
 QString SpeedItemDelegate::displayText(const QVariant& value, const QLocale& locale) const
 {

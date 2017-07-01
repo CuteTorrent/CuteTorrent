@@ -10,23 +10,23 @@
 #define UI_CREATETORRENTDIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
-#include <QtGui/QDialog>
-#include <QtGui/QGridLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QTextEdit>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -310,24 +310,24 @@ public:
 
     void retranslateUi(QDialog *CreateTorrentDialog)
     {
-        CreateTorrentDialog->setWindowTitle(QApplication::translate("CreateTorrentDialog", "DIALOG_TORRENT_CREATION", 0, QApplication::UnicodeUTF8));
+        CreateTorrentDialog->setWindowTitle(QApplication::translate("CreateTorrentDialog", "DIALOG_TORRENT_CREATION", 0));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("CreateTorrentDialog", "DIALOG_TORRENT_CREATION", 0, QApplication::UnicodeUTF8));
-        groupBox_3->setTitle(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_ADV_SETTINGS", 0, QApplication::UnicodeUTF8));
-        startSeedCheckBox->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_START_SEEDING", 0, QApplication::UnicodeUTF8));
-        privateCheckBox->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_PIVATE_TORRENT", 0, QApplication::UnicodeUTF8));
-        saveOrderCheckBox->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_SAVE_FILE_ORDER", 0, QApplication::UnicodeUTF8));
-        createButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_CREATE", 0, QApplication::UnicodeUTF8));
-        cancelButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_CANCEL", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_SETTINGS", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_PIECE_SIZE", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_TRACKERS", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_WEBSEEDS", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_DESCRIBTION", 0, QApplication::UnicodeUTF8));
-        groupBox->setTitle(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_SOURCE", 0, QApplication::UnicodeUTF8));
-        browseFileButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_FILE", 0, QApplication::UnicodeUTF8));
-        browseDirButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_FOLDER", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_EXCLUDE", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("CreateTorrentDialog", "DIALOG_TORRENT_CREATION", 0));
+        groupBox_3->setTitle(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_ADV_SETTINGS", 0));
+        startSeedCheckBox->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_START_SEEDING", 0));
+        privateCheckBox->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_PIVATE_TORRENT", 0));
+        saveOrderCheckBox->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_SAVE_FILE_ORDER", 0));
+        createButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_CREATE", 0));
+        cancelButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_CANCEL", 0));
+        groupBox_2->setTitle(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_SETTINGS", 0));
+        label_4->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_PIECE_SIZE", 0));
+        label->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_TRACKERS", 0));
+        label_2->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_WEBSEEDS", 0));
+        label_3->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_DESCRIBTION", 0));
+        groupBox->setTitle(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_SOURCE", 0));
+        browseFileButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_FILE", 0));
+        browseDirButton->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_FOLDER", 0));
+        label_5->setText(QApplication::translate("CreateTorrentDialog", "CREATE_TORRENT_EXCLUDE", 0));
     } // retranslateUi
 
 };

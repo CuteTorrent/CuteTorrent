@@ -49,7 +49,7 @@
     This class is a variant of QtSingleApplication suited for use in
     console (non-GUI) applications. It is an extension of
     QCoreApplication (instead of QApplication). It does not require
-    the QtGui library.
+    the QtWidgets library.
 
     The API and usage is identical to QtSingleApplication, except that
     functions relating to the "activation window" are not present, for

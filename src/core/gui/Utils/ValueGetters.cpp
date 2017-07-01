@@ -40,7 +40,7 @@ QVariant ValueGetters::LanguageValueGetter(QString group, QString name, QVariant
 
 QVariant ValueGetters::MagnetAssociationValueGetter(QString group, QString name, QVariant defaultValue)
 {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	QSettings assocSettings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", QSettings::NativeFormat);
 	QString magnetCommand = QDir::toNativeSeparators(assocSettings.value("Magnet/shell/open/command/.").toString());
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
@@ -76,7 +76,7 @@ QVariant ValueGetters::MagnetAssociationValueGetter(QString group, QString name,
 
 QVariant ValueGetters::TorrentAssociationValueGetter(QString group, QString name, QVariant defaultValue)
 {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	QSettings assocSettings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", QSettings::NativeFormat);
 	QString torrentAssociation = assocSettings.value(".torrent/.").toString();
 	if (torrentAssociation == "CuteTorrent.file")
@@ -117,7 +117,7 @@ QVariant ValueGetters::TorrentAssociationValueGetter(QString group, QString name
 
 QVariant ValueGetters::RunOnBootValueGetter(QString group, QString name, QVariant defaultValue)
 {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	QSettings bootUpSettings(QString("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"), QSettings::NativeFormat);
 	QString bootStartCommand = bootUpSettings.value("CuteTorrent").toString();
 	QString applicationFilePath = QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).absoluteFilePath());
@@ -126,7 +126,7 @@ QVariant ValueGetters::RunOnBootValueGetter(QString group, QString name, QVarian
 	return QFile::exists(StaticHelpers::CombinePathes(QDir::homePath(), ".config/autostart/CuteTorrent.desktop"));
 #endif
 }
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 QVariant ValueGetters::RunOnBootMinimizedValueGetter(QString group, QString name, QVariant defaultValue)
 {
 	QSettings bootUpSettings(QString("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"), QSettings::NativeFormat);

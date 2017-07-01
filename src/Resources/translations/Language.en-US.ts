@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="en_US">
+<TS version="2.1" language="en_US">
 <context>
     <name>AddCommentDialog</name>
     <message>
@@ -1284,7 +1284,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="864"/>
         <source>DHT: %1 nodes</source>
-        <translation>DHT: %1 узлов</translation>
+        <translation>DHT: %1 nodes</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1013"/>
@@ -4103,7 +4103,7 @@ Error: %2
         <source>Socks5</source>
         <translation>Socks5</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1103"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1839"/>
         <source>Socks5 с паролем</source>
@@ -4115,7 +4115,7 @@ Error: %2
         <source>http</source>
         <translation>http</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1113"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1841"/>
         <source>http с паролем</source>
@@ -5609,7 +5609,7 @@ Error: %2</translation>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="337"/>
         <source>SAVE_RESUME_DATA_FAILED %1, RETRING...</source>
-        <translation type="unfinished"></translation>
+        <translation>Save torrent rusme file failed %1.</translation>
     </message>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="388"/>

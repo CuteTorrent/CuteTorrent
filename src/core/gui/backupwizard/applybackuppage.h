@@ -2,8 +2,14 @@
 #define APPLYBACKUPPAGE_H
 
 
-#include <QtGui>
 #include "quazipfile.h"
+#include <QWizardPage>
+#include <QLabel>
+#include <QGridLayout>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QGroupBox>
+#include <QTableWidget>
 
 class ApplyBackupPage : public QWizardPage
 {

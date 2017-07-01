@@ -10,7 +10,8 @@
 #include <QDateTime>
 #include <QScrollBar>
 #include <QDesktopServices>
-
+#include <NetworkDiskCache.h>
+#include <boost/smart_ptr.hpp>
 HtmlView::HtmlView(QWidget* parent /*= 0*/) : QTextBrowser(parent)
 {
 	m_netManager = new QNetworkAccessManager(this);

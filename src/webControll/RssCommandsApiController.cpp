@@ -18,7 +18,7 @@ void RssCommandsApiController::service(HttpRequest& request, HttpResponse& respo
 	if (method.compare("post", Qt::CaseInsensitive) == 0)
 	{
 		QString feedId = request.getParameter("feedId");
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 		feedId = QString("{%1}").arg(feedId);
 #endif
 		QUuid uid(feedId);

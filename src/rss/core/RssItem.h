@@ -2,7 +2,7 @@
 #define _RSS_ITEM_INCLUDED_
 #include <QString>
 #include <QDateTime>
-#include <QMetaType>
+#include <QObject>
 class RssFeed;
 
 class RssItem : public QObject
@@ -26,7 +26,8 @@ class RssItem : public QObject
 	quint32 m_peers;
 	quint32 m_seeds;
 	bool m_unread;
-	Q_DISABLE_COPY(RssItem)
+//	Q_DISABLE_COPY(RssItem)
+	RssItem(const RssItem& other);
 public:
 
 	RssItem(RssFeed* parent);

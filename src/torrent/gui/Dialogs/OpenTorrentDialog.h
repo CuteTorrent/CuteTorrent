@@ -17,19 +17,14 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #pragma once
-
+#include "defs.h"
 #include <QDialog>
-#include <QFile>
-#include <QFileDialog>
 #include <QString>
-#include <QTreeWidgetItem>
 
 #include "CustomWindow.h"
 #include "TorrentCommon.h"
 #include "ui_OpenTorrentDialog.h"
-#include "GroupForFileFiltering.h"
-#include "TorrentGroup.h"
-#include "defs.h"
+
 #include <TreeBox.h>
 #include <viewModel/FiltersViewModel.h>
 

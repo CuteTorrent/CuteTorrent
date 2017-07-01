@@ -10,20 +10,20 @@
 #define UI_REPORTPROBLEMDIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCheckBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QTextEdit>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -177,15 +177,15 @@ public:
 
     void retranslateUi(QWidget *ReportProblemDialog)
     {
-        ReportProblemDialog->setWindowTitle(QApplication::translate("ReportProblemDialog", "DT_MOUNT_DILAOG", 0, QApplication::UnicodeUTF8));
+        ReportProblemDialog->setWindowTitle(QApplication::translate("ReportProblemDialog", "DT_MOUNT_DILAOG", 0));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("ReportProblemDialog", "REPORT_PROBLEM", 0, QApplication::UnicodeUTF8));
-        sendReportButton->setText(QApplication::translate("ReportProblemDialog", "SEND_REPORT", 0, QApplication::UnicodeUTF8));
-        cancelButton->setText(QApplication::translate("ReportProblemDialog", "CANCEL", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("ReportProblemDialog", "NAME", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("ReportProblemDialog", "PROBLEM DESCRIBTION", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("ReportProblemDialog", "EMAIL", 0, QApplication::UnicodeUTF8));
-        sendOSInfoCheckBox->setText(QApplication::translate("ReportProblemDialog", "SEND_OS_INFORMATION", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("ReportProblemDialog", "REPORT_PROBLEM", 0));
+        sendReportButton->setText(QApplication::translate("ReportProblemDialog", "SEND_REPORT", 0));
+        cancelButton->setText(QApplication::translate("ReportProblemDialog", "CANCEL", 0));
+        label->setText(QApplication::translate("ReportProblemDialog", "NAME", 0));
+        label_3->setText(QApplication::translate("ReportProblemDialog", "PROBLEM DESCRIBTION", 0));
+        label_2->setText(QApplication::translate("ReportProblemDialog", "EMAIL", 0));
+        sendOSInfoCheckBox->setText(QApplication::translate("ReportProblemDialog", "SEND_OS_INFORMATION", 0));
     } // retranslateUi
 
 };

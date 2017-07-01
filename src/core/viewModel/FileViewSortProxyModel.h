@@ -1,5 +1,6 @@
 ﻿#pragma once
-#include <QtGui>
+#include <QSortFilterProxyModel>
+
 
 class FileViewSortProxyModel : public QSortFilterProxyModel
 {

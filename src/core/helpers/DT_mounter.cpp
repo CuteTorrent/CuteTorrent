@@ -5,7 +5,7 @@
 
 void DT_mounter::mountImage(QString path)
 {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	QApplicationSettingsPtr settings = QApplicationSettings::getInstance();
 	QString exe = settings->valueString("DT", "Executable");
 

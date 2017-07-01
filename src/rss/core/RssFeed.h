@@ -3,9 +3,7 @@
 #include <QUuid>
 #include <QUrl>
 #include <QTime>
-#include <QMetaType>
-#include "qnetworkcookie.h"
-#include <helpers/DT_mounter.h>
+#include <Qnetworkcookie>
 class RssParser;
 class QNetworkAccessManager;
 class NetworkDiskCache;

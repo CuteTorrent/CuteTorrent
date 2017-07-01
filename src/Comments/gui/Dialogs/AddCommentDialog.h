@@ -1,8 +1,7 @@
 #pragma once
-#include <QDialog>
-#include "ui_AddCommentDialog.h"
-#include <CustomWindow.h>
 
+#include <CustomWindow.h>
+#include "ui_AddCommentDialog.h"
 class Comment;
 class MRichTextEdit;
 class RatingWidget;
@@ -17,7 +16,7 @@ public:
 	};
 	AddCommentDialog(Mode dialogMode, const QString& infohash, QWidget* parent = 0);
 	void setEditComment(Comment comment);
-	void exec();
+	int exec() override;
 	virtual ~AddCommentDialog();
 protected:
 	void showEvent(QShowEvent *) override;

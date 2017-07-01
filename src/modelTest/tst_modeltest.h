@@ -1,5 +1,5 @@
 #include <QtTest/QtTest>
-#include <QtGui/QtGui>
+#include <QtWidgets/QtWidgets>
 
 #include "modeltest.h"
 #include "dynamictreemodel.h"

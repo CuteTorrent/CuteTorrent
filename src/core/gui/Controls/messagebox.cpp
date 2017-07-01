@@ -1,7 +1,8 @@
 ﻿#include <QDebug>
 #include "messagebox.h"
-#ifdef Q_WS_WIN
-#include "Windows.h"
+#ifdef Q_OS_WIN 
+#include <winsock2.h>
+#include <windows.h>
 #endif
 
 CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title, const QString& text,
@@ -20,9 +21,9 @@ CustomMessageBox::CustomMessageBox(QMessageBox::Icon icon, const QString& title,
 
 	if (parent != NULL)
 	{
-#ifdef Q_WS_WIN
-		SetWindowPos(effectiveWinId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
-		SetWindowPos(effectiveWinId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+#ifdef Q_OS_WIN 
+		SetWindowPos((HWND)effectiveWinId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+		SetWindowPos((HWND)effectiveWinId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
 #endif
 		// HACK END
 		parent->showNormal();
@@ -77,7 +78,7 @@ void CustomMessageBox::showEvent(QShowEvent* pEvent)
 
 	if (m_icon == QMessageBox::Critical || m_icon == QMessageBox::Warning)
 	{
-		QAccessible::updateAccessibility(this, 0, QAccessible::Alert);
+		QAccessible::updateAccessibility(new QAccessibleEvent(this, QAccessible::Alert));
 	}
 
 #endif

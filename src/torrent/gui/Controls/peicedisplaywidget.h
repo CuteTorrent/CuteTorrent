@@ -1,7 +1,7 @@
 ﻿#ifndef PEICEDISPLAYWIDGET_H
 #define PEICEDISPLAYWIDGET_H
 
-#include <QtGui>
+#include <QtWidgets>
 
 class PeiceDisplayWidget : public QWidget
 {

@@ -1,6 +1,6 @@
 ﻿#include "ChoseDataPage.h"
 #include "ImportWizard.h"
-#include <QtGui>
+#include <QtWidgets>
 #include "Importers/BaseImporter.h"
 #include "messagebox.h"
 

@@ -186,7 +186,8 @@ QSize
 QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem& option, const Torrent& tor) const
 {
 	const QStyle* style(QApplication::style());
-	const int iconSize(style->pixelMetric(QStyle::PM_MessageBoxIconSize));
+	const int mainIconSize(style->pixelMetric(QStyle::PM_MessageBoxIconSize));
+	const int smallIconSize(style->pixelMetric(QStyle::PM_SmallIconSize));
 	QFont nameFont(option.font);
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
@@ -214,7 +215,7 @@ QTorrentItemDelegat::sizeHint(const QStyleOptionViewItem& option, const Torrent&
 	const QString progressStr(GetProgressString(tor));
 	const int progressWidth = progressFM.width(progressStr);
 	const QSize m(margin(*style));
-	int width = m.width() + iconSize + std::max(nameWidth + timeSize.width(), statusWidth + progressWidth);
+	int width = m.width() + mainIconSize + std::max(nameWidth + timeSize.width(), statusWidth + progressWidth);
 	int height =m.height() * 3 + nameFM.lineSpacing() + 2 * GUI_PAD + progressFM.lineSpacing();
 	return QSize(width, height);
 }
@@ -328,7 +329,8 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 		style = QApplication::style();
 	}
 
-	const int iconSize(style->pixelMetric(QStyle::PM_LargeIconSize));
+	const int mainIconSize(style->pixelMetric(QStyle::PM_MessageBoxIconSize));
+	const int smallIconSize(style->pixelMetric(QStyle::PM_SmallIconSize));
 	QFont nameFont(option.font);
 	nameFont.setWeight(QFont::Bold);
 	const QFontMetrics nameFM(nameFont);
@@ -421,7 +423,7 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	const QSize m(margin(*style));
 	QRect fillArea(option.rect);
 	fillArea.adjust(m.width(), m.height(), -m.width(), -m.height());
-	QRect iconArea(fillArea.x(), fillArea.y() + (fillArea.height() - iconSize) / 2, iconSize, iconSize);
+	QRect iconArea(fillArea.x(), fillArea.y() + (fillArea.height() - mainIconSize) / 2, mainIconSize, mainIconSize);
 	QRect timeArea(fillArea.x() + (fillArea.width() - timeSize.width()), fillArea.y(), timeSize.width(), timeSize.height());
 	int progressPercentage = tor.GetProgress();
 	bool isDownloaded = (progressPercentage == 100);
@@ -467,7 +469,7 @@ void QTorrentItemDelegat::drawTorrent(QPainter* painter, const QStyleOptionViewI
 	styleOptionButton.features = QStyleOptionButton::Flat;
 	styleOptionButton.rect = pauseButtonRect;
 	styleOptionButton.icon = isPaused ? m_startIcon : m_pauseIcon;
-	styleOptionButton.iconSize = QSize(iconSize, iconSize);
+	styleOptionButton.iconSize = QSize(buttonSize, buttonSize);
 	styleOptionButton.state = QStyle::State_Enabled;
 	if (m_buttonState[Pause] == QStyle::State_Sunken && m_pressedIndex[Pause].isValid() && m_pressedIndex[Pause] == index)
 

@@ -56,7 +56,7 @@ void ReportProblemDialog::SendReport()
 			QProcess dxDiagProcess;
 			QStringList arguments;
 			QString reportFileName = QString("dxdiagReport.%1.txt").arg(QApplication::applicationPid());
-			QString dxDiagReportFilePath = StaticHelpers::CombinePathes(QDesktopServices::storageLocation(QDesktopServices::TempLocation), reportFileName);
+			QString dxDiagReportFilePath = StaticHelpers::CombinePathes(QStandardPaths::writableLocation(QStandardPaths::TempLocation), reportFileName);
 			arguments << "/whql:on" << QString("/t%1").arg(dxDiagReportFilePath);
 			dxDiagProcess.start("dxdiag.exe", arguments);
 			dxDiagProcess.waitForFinished();

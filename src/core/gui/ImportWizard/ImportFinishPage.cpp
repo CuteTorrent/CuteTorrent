@@ -1,6 +1,6 @@
 ﻿#include "ImportFinishPage.h"
 #include "ImportWizard.h"
-#include <QtGui>
+#include <QtWidgets>
 
 void ImportFinishPage::initializePage()
 {

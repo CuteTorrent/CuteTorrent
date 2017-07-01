@@ -10,18 +10,18 @@
 #define UI_VIDEOFILECHOOSE_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QListView>
-#include <QtGui/QPushButton>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QListView>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -116,9 +116,9 @@ public:
 
     void retranslateUi(QWidget *VideoFileChooseDialog)
     {
-        VideoFileChooseDialog->setWindowTitle(QApplication::translate("VideoFileChooseDialog", "CHOOSE_VIDEO_FILE", 0, QApplication::UnicodeUTF8));
+        VideoFileChooseDialog->setWindowTitle(QApplication::translate("VideoFileChooseDialog", "CHOOSE_VIDEO_FILE", 0));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("VideoFileChooseDialog", "CHOOSE_VIDEO_FILE", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("VideoFileChooseDialog", "CHOOSE_VIDEO_FILE", 0));
     } // retranslateUi
 
 };

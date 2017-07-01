@@ -1,8 +1,7 @@
 ﻿#ifndef INTROPAGE_H
 #define INTROPAGE_H
-
 #include <QWizardPage>
-#include <QtGui>
+#include <QtWidgets>
 
 class IntroPage : public QWizardPage
 {

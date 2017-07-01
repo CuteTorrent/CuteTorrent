@@ -1,12 +1,9 @@
 ﻿#include "CommentItemDelegate.h"
 #include <Comment.h>
 #include "CommentsModel.h"
-#include <QPainter>
-#include <QDebug>
-#include <QApplication>
 #include <gui/Controls/RaitingWidget.h>
-#include <QPlainTextEdit>
 #include <gui/Dialogs/AddCommentDialog.h>
+#include <QPushButton>
 
 bool CommentItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index)
 {

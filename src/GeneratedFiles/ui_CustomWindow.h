@@ -10,29 +10,29 @@
 #define UI_CUSTOMWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QListView>
-#include <QtGui/QMenu>
-#include <QtGui/QMenuBar>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QSpinBox>
-#include <QtGui/QSplitter>
-#include <QtGui/QStackedWidget>
-#include <QtGui/QStatusBar>
-#include <QtGui/QTabWidget>
-#include <QtGui/QTableView>
-#include <QtGui/QTableWidget>
-#include <QtGui/QToolBar>
-#include <QtGui/QTreeView>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QListView>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
+#include <QtWidgets/QSplitter>
+#include <QtWidgets/QStackedWidget>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableView>
+#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QToolBar>
+#include <QtWidgets/QTreeView>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -903,114 +903,114 @@ public:
 
     void retranslateUi(QWidget *CustomWindow)
     {
-        CustomWindow->setWindowTitle(QApplication::translate("CustomWindow", "CuteTorrent", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUFILE_OPEN_TORRENT->setText(QApplication::translate("CustomWindow", "MENU_OPEN_TORRENT", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUFILE_OPEN_TORRENT->setShortcut(QApplication::translate("CustomWindow", "Ctrl+O", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUFILE_OPEN_MAGNET->setText(QApplication::translate("CustomWindow", "MENU_OPEN_MAGNET", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUFILE_OPEN_MAGNET->setShortcut(QApplication::translate("CustomWindow", "Ctrl+M", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUFILE_CREATE->setText(QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUFILE_CREATE->setShortcut(QApplication::translate("CustomWindow", "Ctrl+N", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUFILE_EXIT->setText(QApplication::translate("CustomWindow", "MENU_EXIT", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUFILE_EXIT->setShortcut(QApplication::translate("CustomWindow", "Alt+X", 0, QApplication::UnicodeUTF8));
-        ACTION_MENU_SETTINGS->setText(QApplication::translate("CustomWindow", "MENU_CONFIGURATION", 0, QApplication::UnicodeUTF8));
-        ACTION_MENU_SETTINGS->setShortcut(QApplication::translate("CustomWindow", "Ctrl+S", 0, QApplication::UnicodeUTF8));
-        ACTION_SEARCHTOOLBAR_DOWNLOAD->setText(QApplication::translate("CustomWindow", "STR_DOWNLOAD", 0, QApplication::UnicodeUTF8));
-        ACTION_SEARCHTOOLBAR_DOWNLOAD->setIconText(QApplication::translate("CustomWindow", "HINT_DOWNLOAD", 0, QApplication::UnicodeUTF8));
-        ACTION_SEARCHTOOLBAR_OPEN_URL->setText(QApplication::translate("CustomWindow", "STR_OPEN_URL", 0, QApplication::UnicodeUTF8));
-        ACTION_SEARCHTOOLBAR_OPEN_URL->setIconText(QApplication::translate("CustomWindow", "HINT_OPEN_URL", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUHELP_ABAUT_CT->setText(QApplication::translate("CustomWindow", "MENU_ABAUT", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUHELP_ABAUT_CT->setShortcut(QApplication::translate("CustomWindow", "F1", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUHELP_CHECK_UPDATE->setText(QApplication::translate("CustomWindow", "MENU_CHECK_UPDATES", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUHELP_CHECK_UPDATE->setShortcut(QApplication::translate("CustomWindow", "Ctrl+U", 0, QApplication::UnicodeUTF8));
-        ACTION_TOOLBAR_SETTINGS->setText(QApplication::translate("CustomWindow", "STR_SETTINGS", 0, QApplication::UnicodeUTF8));
-        ACTION_TOOLS_BACKUP->setText(QApplication::translate("CustomWindow", "TOOLS_BACKUP", 0, QApplication::UnicodeUTF8));
-        ACTION_RSSTOOLBAR_RSS_ADD->setText(QApplication::translate("CustomWindow", "ACTION_RSS_ADD", 0, QApplication::UnicodeUTF8));
+        CustomWindow->setWindowTitle(QApplication::translate("CustomWindow", "CuteTorrent", 0));
+        ACTION_MENUFILE_OPEN_TORRENT->setText(QApplication::translate("CustomWindow", "MENU_OPEN_TORRENT", 0));
+        ACTION_MENUFILE_OPEN_TORRENT->setShortcut(QApplication::translate("CustomWindow", "Ctrl+O", 0));
+        ACTION_MENUFILE_OPEN_MAGNET->setText(QApplication::translate("CustomWindow", "MENU_OPEN_MAGNET", 0));
+        ACTION_MENUFILE_OPEN_MAGNET->setShortcut(QApplication::translate("CustomWindow", "Ctrl+M", 0));
+        ACTION_MENUFILE_CREATE->setText(QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT", 0));
+        ACTION_MENUFILE_CREATE->setShortcut(QApplication::translate("CustomWindow", "Ctrl+N", 0));
+        ACTION_MENUFILE_EXIT->setText(QApplication::translate("CustomWindow", "MENU_EXIT", 0));
+        ACTION_MENUFILE_EXIT->setShortcut(QApplication::translate("CustomWindow", "Alt+X", 0));
+        ACTION_MENU_SETTINGS->setText(QApplication::translate("CustomWindow", "MENU_CONFIGURATION", 0));
+        ACTION_MENU_SETTINGS->setShortcut(QApplication::translate("CustomWindow", "Ctrl+S", 0));
+        ACTION_SEARCHTOOLBAR_DOWNLOAD->setText(QApplication::translate("CustomWindow", "STR_DOWNLOAD", 0));
+        ACTION_SEARCHTOOLBAR_DOWNLOAD->setIconText(QApplication::translate("CustomWindow", "HINT_DOWNLOAD", 0));
+        ACTION_SEARCHTOOLBAR_OPEN_URL->setText(QApplication::translate("CustomWindow", "STR_OPEN_URL", 0));
+        ACTION_SEARCHTOOLBAR_OPEN_URL->setIconText(QApplication::translate("CustomWindow", "HINT_OPEN_URL", 0));
+        ACTION_MENUHELP_ABAUT_CT->setText(QApplication::translate("CustomWindow", "MENU_ABAUT", 0));
+        ACTION_MENUHELP_ABAUT_CT->setShortcut(QApplication::translate("CustomWindow", "F1", 0));
+        ACTION_MENUHELP_CHECK_UPDATE->setText(QApplication::translate("CustomWindow", "MENU_CHECK_UPDATES", 0));
+        ACTION_MENUHELP_CHECK_UPDATE->setShortcut(QApplication::translate("CustomWindow", "Ctrl+U", 0));
+        ACTION_TOOLBAR_SETTINGS->setText(QApplication::translate("CustomWindow", "STR_SETTINGS", 0));
+        ACTION_TOOLS_BACKUP->setText(QApplication::translate("CustomWindow", "TOOLS_BACKUP", 0));
+        ACTION_RSSTOOLBAR_RSS_ADD->setText(QApplication::translate("CustomWindow", "ACTION_RSS_ADD", 0));
 #ifndef QT_NO_TOOLTIP
-        ACTION_RSSTOOLBAR_RSS_ADD->setToolTip(QApplication::translate("CustomWindow", "ACTION_RSS_ADD", 0, QApplication::UnicodeUTF8));
+        ACTION_RSSTOOLBAR_RSS_ADD->setToolTip(QApplication::translate("CustomWindow", "ACTION_RSS_ADD", 0));
 #endif // QT_NO_TOOLTIP
-        ACTION_RSSTOOLBAR_RSS_REMOVE->setText(QApplication::translate("CustomWindow", "ACTION_RSS_REMOVE", 0, QApplication::UnicodeUTF8));
-        ACTION_RSSTOOLBAR_RSS_EDIT->setText(QApplication::translate("CustomWindow", "ACTION_RSS_EDIT", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUHELP_ABOUT_QT->setText(QApplication::translate("CustomWindow", "MENU_ABOUT_QT", 0, QApplication::UnicodeUTF8));
-        ACTION_TORRENTTOOLBAR_QUEUE_UP->setText(QApplication::translate("CustomWindow", "QUEUE_UP", 0, QApplication::UnicodeUTF8));
+        ACTION_RSSTOOLBAR_RSS_REMOVE->setText(QApplication::translate("CustomWindow", "ACTION_RSS_REMOVE", 0));
+        ACTION_RSSTOOLBAR_RSS_EDIT->setText(QApplication::translate("CustomWindow", "ACTION_RSS_EDIT", 0));
+        ACTION_MENUHELP_ABOUT_QT->setText(QApplication::translate("CustomWindow", "MENU_ABOUT_QT", 0));
+        ACTION_TORRENTTOOLBAR_QUEUE_UP->setText(QApplication::translate("CustomWindow", "QUEUE_UP", 0));
 #ifndef QT_NO_TOOLTIP
-        ACTION_TORRENTTOOLBAR_QUEUE_UP->setToolTip(QApplication::translate("CustomWindow", "QUEUE_UP", 0, QApplication::UnicodeUTF8));
+        ACTION_TORRENTTOOLBAR_QUEUE_UP->setToolTip(QApplication::translate("CustomWindow", "QUEUE_UP", 0));
 #endif // QT_NO_TOOLTIP
-        ACTION_TORRENTTOOLBAR_QUEUE_DOWN->setText(QApplication::translate("CustomWindow", "QUEUE_DOWN", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUHELP_REPORT_PROBLEM->setText(QApplication::translate("CustomWindow", "MENU_REPORT_PROBLEM", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_TOOLBAR_VISIBILITY", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_DETAIL_INFO_VISIBILITY", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUVIEW_TOGGLE_STATUSBAR_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_STATUSBAR_VISIBILITY", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_GROUPS_VISIBILITY", 0, QApplication::UnicodeUTF8));
-        ACTION_TORRENTTOOLBAR_ADD_TORRENT->setText(QApplication::translate("CustomWindow", "MENU_OPEN_TORRENT", 0, QApplication::UnicodeUTF8));
+        ACTION_TORRENTTOOLBAR_QUEUE_DOWN->setText(QApplication::translate("CustomWindow", "QUEUE_DOWN", 0));
+        ACTION_MENUHELP_REPORT_PROBLEM->setText(QApplication::translate("CustomWindow", "MENU_REPORT_PROBLEM", 0));
+        ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_TOOLBAR_VISIBILITY", 0));
+        ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_DETAIL_INFO_VISIBILITY", 0));
+        ACTION_MENUVIEW_TOGGLE_STATUSBAR_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_STATUSBAR_VISIBILITY", 0));
+        ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_GROUPS_VISIBILITY", 0));
+        ACTION_TORRENTTOOLBAR_ADD_TORRENT->setText(QApplication::translate("CustomWindow", "MENU_OPEN_TORRENT", 0));
 #ifndef QT_NO_TOOLTIP
-        ACTION_TORRENTTOOLBAR_ADD_TORRENT->setToolTip(QApplication::translate("CustomWindow", "MENU_OPEN_TORRENT", 0, QApplication::UnicodeUTF8));
+        ACTION_TORRENTTOOLBAR_ADD_TORRENT->setToolTip(QApplication::translate("CustomWindow", "MENU_OPEN_TORRENT", 0));
 #endif // QT_NO_TOOLTIP
-        ACTION_TORRENTTOOLBAR_OPEN_MAGNET->setText(QApplication::translate("CustomWindow", "MENU_OPEN_MAGNET", 0, QApplication::UnicodeUTF8));
-        ACTION_TOOLS_IMPORT->setText(QApplication::translate("CustomWindow", "TOOLS_IMPORT", 0, QApplication::UnicodeUTF8));
-        ACTION_AUTOSHUTDOWN_DISABLED->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_DISABLED", 0, QApplication::UnicodeUTF8));
-        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_DOWNLADS_COMPLETE", 0, QApplication::UnicodeUTF8));
-        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_HIBERNATE_ON_DOWNLOADS_COMPLETE", 0, QApplication::UnicodeUTF8));
-        ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SLEEP_ON_DOWNLOADS_COMPLETE", 0, QApplication::UnicodeUTF8));
-        ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SLEEP_ON_ALL_COMPLETE", 0, QApplication::UnicodeUTF8));
-        ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_REBOOT_ON_DOWNLOADS_COMPLETE", 0, QApplication::UnicodeUTF8));
-        ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_REBOOT_ON_ALL_COMPLETE", 0, QApplication::UnicodeUTF8));
-        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_DOWNLOADS_COMPLETE", 0, QApplication::UnicodeUTF8));
-        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_ALL_COMPLETE", 0, QApplication::UnicodeUTF8));
-        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_HIBERNATE_ON_ALL_COMPLETE", 0, QApplication::UnicodeUTF8));
-        ACTION_MENUHELP_RATE->setText(QApplication::translate("CustomWindow", "MENU_RATE", 0, QApplication::UnicodeUTF8));
+        ACTION_TORRENTTOOLBAR_OPEN_MAGNET->setText(QApplication::translate("CustomWindow", "MENU_OPEN_MAGNET", 0));
+        ACTION_TOOLS_IMPORT->setText(QApplication::translate("CustomWindow", "TOOLS_IMPORT", 0));
+        ACTION_AUTOSHUTDOWN_DISABLED->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_DISABLED", 0));
+        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_DOWNLADS_COMPLETE", 0));
+        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_HIBERNATE_ON_DOWNLOADS_COMPLETE", 0));
+        ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SLEEP_ON_DOWNLOADS_COMPLETE", 0));
+        ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SLEEP_ON_ALL_COMPLETE", 0));
+        ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_REBOOT_ON_DOWNLOADS_COMPLETE", 0));
+        ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_REBOOT_ON_ALL_COMPLETE", 0));
+        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_DOWNLOADS_COMPLETE", 0));
+        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_ALL_COMPLETE", 0));
+        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_HIBERNATE_ON_ALL_COMPLETE", 0));
+        ACTION_MENUHELP_RATE->setText(QApplication::translate("CustomWindow", "MENU_RATE", 0));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("CustomWindow", "CuteTorrent", 0, QApplication::UnicodeUTF8));
-        uploadLimitLabel->setText(QApplication::translate("CustomWindow", "LIMIT_UL", 0, QApplication::UnicodeUTF8));
-        downloadLimitLabel->setText(QApplication::translate("CustomWindow", "LIMIT_DL", 0, QApplication::UnicodeUTF8));
-        label_15->setText(QApplication::translate("CustomWindow", "SORT_BY", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("CustomWindow", "CuteTorrent", 0));
+        uploadLimitLabel->setText(QApplication::translate("CustomWindow", "LIMIT_UL", 0));
+        downloadLimitLabel->setText(QApplication::translate("CustomWindow", "LIMIT_DL", 0));
+        label_15->setText(QApplication::translate("CustomWindow", "SORT_BY", 0));
         progressLabel->setText(QString());
-        label_4->setText(QApplication::translate("CustomWindow", "INFO_PATH", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("CustomWindow", "INFO_UPLOADED", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("CustomWindow", "INFO_PATH", 0));
+        label_8->setText(QApplication::translate("CustomWindow", "INFO_UPLOADED", 0));
         pathLabel->setText(QString());
         uploadedBytesLabel->setText(QString());
-        label_9->setText(QApplication::translate("CustomWindow", "INFO_UPLOAD_SPEED", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("CustomWindow", "INFO_UPLOAD_SPEED", 0));
         downloadedBytesLabel->setText(QString());
-        label_5->setText(QApplication::translate("CustomWindow", "INFO_TOTAL_SIZE", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("CustomWindow", "INFO_TOTAL_SIZE", 0));
         uploadSpeedLabel->setText(QString());
         activetimeLabel->setText(QString());
-        label_3->setText(QApplication::translate("CustomWindow", "INFO_DOWNLOAD_SPEED", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("CustomWindow", "INFO_DOWNLOAD_SPEED", 0));
         timeleftLabel->setText(QString());
-        label->setText(QApplication::translate("CustomWindow", "INFO_ACTIVE_TIME", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("CustomWindow", "INFO_DOWNLOADED", 0, QApplication::UnicodeUTF8));
-        label_7->setText(QApplication::translate("CustomWindow", "INFO_REMAININF_TIME", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("CustomWindow", "INFO_ACTIVE_TIME", 0));
+        label_2->setText(QApplication::translate("CustomWindow", "INFO_DOWNLOADED", 0));
+        label_7->setText(QApplication::translate("CustomWindow", "INFO_REMAININF_TIME", 0));
         downloadSpeedLabel->setText(QString());
         totalSizeLabel->setText(QString());
         peerCoutLabel->setText(QString());
-        label_11->setText(QApplication::translate("CustomWindow", "INFO_PEER_COUNT", 0, QApplication::UnicodeUTF8));
+        label_11->setText(QApplication::translate("CustomWindow", "INFO_PEER_COUNT", 0));
         seedCoutLabel->setText(QString());
-        label_10->setText(QApplication::translate("CustomWindow", "INFO_SEED_COUNT", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("CustomWindow", "INFO_DESCRIBTION", 0, QApplication::UnicodeUTF8));
+        label_10->setText(QApplication::translate("CustomWindow", "INFO_SEED_COUNT", 0));
+        label_6->setText(QApplication::translate("CustomWindow", "INFO_DESCRIBTION", 0));
         describtionLabel->setText(QString());
-        label_12->setText(QApplication::translate("CustomWindow", "INFO_HASH", 0, QApplication::UnicodeUTF8));
+        label_12->setText(QApplication::translate("CustomWindow", "INFO_HASH", 0));
         infoHashLabel->setText(QString());
-        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab), QApplication::translate("CustomWindow", "TAB_INFO", 0, QApplication::UnicodeUTF8));
-        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_3), QApplication::translate("CustomWindow", "TAB_PEERS", 0, QApplication::UnicodeUTF8));
+        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab), QApplication::translate("CustomWindow", "TAB_INFO", 0));
+        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_3), QApplication::translate("CustomWindow", "TAB_PEERS", 0));
         QTableWidgetItem *___qtablewidgetitem = trackerTableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("CustomWindow", "TRACKER_URL", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem->setText(QApplication::translate("CustomWindow", "TRACKER_URL", 0));
         QTableWidgetItem *___qtablewidgetitem1 = trackerTableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("CustomWindow", "TRACKER_STATUS", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem1->setText(QApplication::translate("CustomWindow", "TRACKER_STATUS", 0));
         QTableWidgetItem *___qtablewidgetitem2 = trackerTableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("CustomWindow", "TRACKER_NEXT_ANNOUNCE", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem2->setText(QApplication::translate("CustomWindow", "TRACKER_NEXT_ANNOUNCE", 0));
         QTableWidgetItem *___qtablewidgetitem3 = trackerTableWidget->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("CustomWindow", "TRACKER_PEERS", 0, QApplication::UnicodeUTF8));
-        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_2), QApplication::translate("CustomWindow", "TAB_TRACKERS", 0, QApplication::UnicodeUTF8));
-        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_4), QApplication::translate("CustomWindow", "TAB_FILES", 0, QApplication::UnicodeUTF8));
-        addCommentButton->setText(QApplication::translate("CustomWindow", "ADD_COMMENT", 0, QApplication::UnicodeUTF8));
-        label_13->setText(QApplication::translate("CustomWindow", "AVERAGE_RATING", 0, QApplication::UnicodeUTF8));
-        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_5), QApplication::translate("CustomWindow", "TAB_COMMENTS", 0, QApplication::UnicodeUTF8));
-        fileMenu->setTitle(QApplication::translate("CustomWindow", "MENU_FILE", 0, QApplication::UnicodeUTF8));
-        settingsMenu->setTitle(QApplication::translate("CustomWindow", "MENU_SETTINGS", 0, QApplication::UnicodeUTF8));
-        menu_CuteTorrent->setTitle(QApplication::translate("CustomWindow", "MENU_HELP", 0, QApplication::UnicodeUTF8));
-        toolsMenu->setTitle(QApplication::translate("CustomWindow", "MENU_TOOLS", 0, QApplication::UnicodeUTF8));
-        autoShutdownMenu->setTitle(QApplication::translate("CustomWindow", "TOOLS_AUTO_SHUTDOWN", 0, QApplication::UnicodeUTF8));
-        viewMenu->setTitle(QApplication::translate("CustomWindow", "MENU_VIEW", 0, QApplication::UnicodeUTF8));
-        languageSubMenu->setTitle(QApplication::translate("CustomWindow", "MENU_CHOSE_LANGUAGE", 0, QApplication::UnicodeUTF8));
-        skinSubMenu->setTitle(QApplication::translate("CustomWindow", "MENU_CHOSE_SKIN", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem3->setText(QApplication::translate("CustomWindow", "TRACKER_PEERS", 0));
+        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_2), QApplication::translate("CustomWindow", "TAB_TRACKERS", 0));
+        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_4), QApplication::translate("CustomWindow", "TAB_FILES", 0));
+        addCommentButton->setText(QApplication::translate("CustomWindow", "ADD_COMMENT", 0));
+        label_13->setText(QApplication::translate("CustomWindow", "AVERAGE_RATING", 0));
+        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_5), QApplication::translate("CustomWindow", "TAB_COMMENTS", 0));
+        fileMenu->setTitle(QApplication::translate("CustomWindow", "MENU_FILE", 0));
+        settingsMenu->setTitle(QApplication::translate("CustomWindow", "MENU_SETTINGS", 0));
+        menu_CuteTorrent->setTitle(QApplication::translate("CustomWindow", "MENU_HELP", 0));
+        toolsMenu->setTitle(QApplication::translate("CustomWindow", "MENU_TOOLS", 0));
+        autoShutdownMenu->setTitle(QApplication::translate("CustomWindow", "TOOLS_AUTO_SHUTDOWN", 0));
+        viewMenu->setTitle(QApplication::translate("CustomWindow", "MENU_VIEW", 0));
+        languageSubMenu->setTitle(QApplication::translate("CustomWindow", "MENU_CHOSE_LANGUAGE", 0));
+        skinSubMenu->setTitle(QApplication::translate("CustomWindow", "MENU_CHOSE_SKIN", 0));
     } // retranslateUi
 
 };

@@ -1,4 +1,4 @@
-﻿#include <QtGui>
+﻿#include <QtWidgets>
 #include "QBaloon.h"
 #include <QPropertyAnimation>
 #include "StyleEngene.h"
@@ -254,7 +254,7 @@ void QBalloonTip::mousePressEvent(QMouseEvent* e)
 			args << "end tell";
 			QProcess::startDetached("osascript", args);
 #endif
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 			StaticHelpers::OpenFileInExplorer(path);
 #endif
 			break;

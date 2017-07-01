@@ -1,5 +1,5 @@
 ﻿#include "ImportPage.h"
-#include <QtGui>
+#include <QtWidgets>
 #include "ImportWizard.h"
 #include "messagebox.h"
 #include "Importers/BaseImporter.h"

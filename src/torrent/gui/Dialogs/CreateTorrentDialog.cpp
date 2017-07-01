@@ -16,6 +16,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include <QObject>
+#ifdef Q_OS_WIN
+#include <WinSock2.h>
+#include <windows.h>
+#endif
 #include <QDebug>
 #include <QPainter>
 #include <exception>
@@ -27,18 +32,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "Version.h"
 #include "messagebox.h"
 #include "StyledProgressBar.h"
-#ifdef Q_WS_WIN
-#include "qwintaskbarprogress.h"
-#include "qwintaskbarbutton.h"
+#ifdef Q_OS_WIN 
+#include "QtWinExtras/qwintaskbarprogress.h"
+#include "QtWinExtras/qwintaskbarbutton.h"
 #endif
 #include <helpers/StaticHelpers.h>
 
 CreateTorrentDialog::CreateTorrentDialog(QWidget* parent, Qt::WindowFlags) : BaseWindow(OnlyCloseButton, NoResize, parent)
 {
 	setupUi(this);
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	m_pTaskBarBtn = new QWinTaskbarButton(this);
-	m_pTaskBarBtn->setWindow(this);
 	m_pTaskBarProggres = m_pTaskBarBtn->progress();
 	m_pTaskBarProggres->setRange(0, 100);
 #endif
@@ -221,7 +225,7 @@ void CreateTorrentDialog::BeginCreate()
 
 	if (!save_path.isEmpty())
 	{
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 		m_pTaskBarProggres->show();
 #endif
 		connect(creator, SIGNAL(updateProgress(int)), this, SLOT(UpdateProgressBar(int)));
@@ -238,7 +242,7 @@ void CreateTorrentDialog::BeginCreate()
 
 void CreateTorrentDialog::Cancel()
 {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	m_pTaskBarProggres->hide();
 #endif
 	emit AbortCreation();
@@ -255,7 +259,7 @@ void CreateTorrentDialog::ShowCreationSucces(QString filename)
 
 	progressBar->setValue(100);
 	createButton->setEnabled(true);
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	m_pTaskBarProggres->hide();
 #endif
 	//delete creator;
@@ -268,7 +272,7 @@ void CreateTorrentDialog::ShowCreationFailture(QString msg)
 	                           tr("CREATE_TORRENT_FILE_ERROR\n %1").arg(msg));
 	//progressBar->setValue(0);
 	createButton->setEnabled(true);
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	m_pTaskBarProggres->hide();
 #endif
 	// 	delete creator;
@@ -280,7 +284,7 @@ void CreateTorrentDialog::UpdateProgressBar(int val)
 	if (val <= progressBar->maximum())
 	{
 		progressBar->setValue(val);
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 		m_pTaskBarProggres->setValue(val);
 #endif
 	}

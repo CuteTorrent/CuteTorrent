@@ -1,8 +1,9 @@
 ﻿#include "VirtualDiskMounter.h"
 #include "DT_mounter.h"
 #include <boost/smart_ptr/weak_ptr.hpp>
-#ifdef Q_WS_WIN
-#include <Windows.h>
+#ifdef Q_OS_WIN 
+#include <winsock2.h>
+#include <windows.h>
 #define INITGUID
 #include <guiddef.h>
 #include <virtdisk.h>
@@ -10,7 +11,7 @@ typedef bool (WINAPI* IsWindows8OrGreater_t)();
 #else
 
 #endif
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 bool VirtualDiskMounter::IsWin8OrGreater()
 {
 	HMODULE hKernel32 = LoadLibrary(L"kernel32.dll");
@@ -51,7 +52,7 @@ void VirtualDiskMounter::MountVirualDiskImageWin8OrAbove(QString path)
 
 bool VirtualDiskMounter::MountVirualDiskImage(QString path)
 {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 
 	if (IsWin8OrGreater() && path.endsWith(".iso"))
 	{

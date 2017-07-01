@@ -1,5 +1,6 @@
 ﻿#include "MetaDataDownloadWaiter.h"
 #include "StaticHelpers.h"
+#include "TorrentManager.h"
 
 MetaDataDownloadWaiter::MetaDataDownloadWaiter(QString metaLink, QObject* parrent/*=NULL*/)
 	: QThread(parrent)

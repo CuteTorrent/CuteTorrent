@@ -1,3 +1,8 @@
+#include <QObject>
+#ifdef Q_OS_WIN
+#include <WinSock2.h>
+#include <windows.h>
+#endif
 #include "AddRssDwonloadRuleDialog.h"
 #include "RssManager.h"
 #include "RssFeed.h"
@@ -277,7 +282,7 @@ void AddRssDwonloadRuleDialog::onUpdateRuleTypeHint()
 
 void AddRssDwonloadRuleDialog::onBrowseStaticPath()
 {
-	QString lastDir = QApplicationSettings::getInstance()->valueString("System", "LastSaveTorrentDir", QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation));
+	QString lastDir = QApplicationSettings::getInstance()->valueString("System", "LastSaveTorrentDir", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
 	QString dir = QFileDialog::getExistingDirectory(this, tr("DIALOG_OPEN_DIR"),
 	                                                lastDir,
 	                                                QFileDialog::ShowDirsOnly

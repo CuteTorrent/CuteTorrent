@@ -16,7 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <boost/bind.hpp>
 #include <boost/filesystem.hpp>
 #include <stdio.h>
 #include <stdlib.h>
@@ -60,7 +59,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <libtorrent/extensions/smart_ban.hpp>
 #include <libtorrent/magnet_uri.hpp>
 #include <boost/function.hpp>
-#include <boost/bind.hpp>
 #include "Version.h"
 #include "messagebox.h"
 #include "NotificationSystem.h"
@@ -91,7 +89,7 @@ TorrentManager::TorrentManager()
 	                                , alert::error_notification | alert::storage_notification | alert::status_notification | alert::tracker_notification | alert::port_mapping_notification);*/
 	error_code ec;
 	std::vector<char> in;
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QString oldStyleDirPath = StaticHelpers::CombinePathes(QApplication::applicationDirPath(), "CT_DATA");
 	QDir oldStyleDir(oldStyleDirPath);
 
@@ -227,7 +225,7 @@ void TorrentManager::timerEvent(QTimerEvent* timerEvent)
 
 void TorrentManager::InitSession(boost::function<void(int proggres, QString item)> progressCallback)
 {
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QDir dir(StaticHelpers::CombinePathes(dataDir, "BtSessionData"));
 	QStringList filter;
 	filter << "*.torrent";
@@ -270,7 +268,7 @@ std::vector<torrent_status> TorrentManager::GetTorrents()
 
 void TorrentManager::handle_alert(alert* a)
 {
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	TORRENT_TRY
 	{
 		if (!(a->category() & (alert::error_notification | alert::storage_notification | alert::status_notification | alert::tracker_notification | alert::port_mapping_notification| alert::error_notification | alert::storage_notification | alert::status_notification | alert::tracker_notification | alert::port_mapping_notification | alert::stats_notification)))
@@ -626,7 +624,7 @@ Torrent* TorrentManager::AddTorrent(QString& path, QString& save_path, error_cod
 	}
 
 	add_torrent_params p;
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	std::string infoHash = to_hex(t->info_hash().to_string());
 	QString qInfoHash = QString::fromStdString(infoHash);
 	qDebug() << "Data dir: " << dataDir;
@@ -801,6 +799,7 @@ Torrent* TorrentManager::AddTorrent(QString& path, QString& save_path, error_cod
 settings_pack TorrentManager::readSettings()
 {
 	settings_pack s_settings;
+	s_settings.set_int(settings_pack::alert_mask, alert::category_t::stats_notification | alert::category_t::ip_block_notification | alert::category_t::status_notification | alert::category_t::tracker_notification | alert::category_t::storage_notification | alert::category_t::peer_notification | alert::category_t::error_notification);
 	s_settings.set_bool(settings_pack::smooth_connects, false);
 	s_settings.set_bool(settings_pack::allow_multiple_connections_per_ip, m_pTorrentSessionSettings->valueBool("Torrent", "allow_multiple_connections_per_ip", true));
 	if (m_pTorrentSessionSettings->valueBool("Torrent", "random_listen_port", false))
@@ -894,7 +893,7 @@ settings_pack TorrentManager::readSettings()
 	s_settings.set_int(settings_pack::active_limit, m_pTorrentSessionSettings->valueInt("Torrent", "active_limit", -1));
 	s_settings.set_int(settings_pack::active_seeds, m_pTorrentSessionSettings->valueInt("Torrent", "active_seeds", -1));
 	s_settings.set_int(settings_pack::choking_algorithm, settings_pack::choking_algorithm_t::rate_based_choker);
-	s_settings.set_bool(settings_pack::seed_choking_algorithm, settings_pack::seed_choking_algorithm_t::fastest_upload);
+	s_settings.set_int(settings_pack::seed_choking_algorithm, settings_pack::seed_choking_algorithm_t::fastest_upload);
 	char userAgent[128]= "";
 	sprintf_s(userAgent, "CuteTorrent %s", Version::getVersionStr());
 	s_settings.set_str(settings_pack::user_agent, userAgent);
@@ -1005,7 +1004,7 @@ void TorrentManager::SaveSession()
 			++num_outstanding_resume_data;
 		}
 
-		QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+		QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 
 		while (num_outstanding_resume_data > 0)
 		{
@@ -1243,7 +1242,7 @@ void TorrentManager::RemoveTorrent(QString infoHash, bool delFiles)
 	{
 		qCritical() << "Not a libtorrent exception caught";
 	}
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QString resumePath = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".resume");
 	QString torrentPath = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".torrent");
 	QFile resumeDataFile(resumePath);
@@ -1371,7 +1370,7 @@ torrent_handle TorrentManager::ProcessMagnetLink(QString link, error_code& ec)
 		return h;
 	}
 
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QString infoHash = QString::fromStdString(to_hex(add_info.info_hash.to_string()));
 	QString filename = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".resume");
 	std::vector<char> buf;
@@ -1416,7 +1415,7 @@ void TorrentManager::CancelMagnetLink(QString link)
 	}
 
 	torrent_handle h = m_pTorrentSession->find_torrent(add_info.info_hash);
-	QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	QString infoHash = QString::fromStdString(to_hex(add_info.info_hash.to_string()));
 	QString magnet_path = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".torrent");
 

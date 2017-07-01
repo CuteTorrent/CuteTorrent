@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class CreateTorrentDialog;
 class StyledProgressBar;
 
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 class QWinTaskbarProgress;
 class QWinTaskbarButton;
 #endif
@@ -91,7 +91,7 @@ protected:
 	QLabel* getTitleIcon() override;
 private:
 	void setupPieceComboBox();
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	QWinTaskbarProgress* m_pTaskBarProggres;
 	QWinTaskbarButton* m_pTaskBarBtn;
 #endif

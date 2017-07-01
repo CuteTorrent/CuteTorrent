@@ -37,13 +37,14 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
+#ifdef Q_OS_UNIX 
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
 #include <fcntl.h>
 
 #include "qtlockedfile.h"
+#include <qlogging.h>
 
 bool QtLockedFile::lock(LockMode mode, bool block)
 {
@@ -140,3 +141,4 @@ QtLockedFile::~QtLockedFile()
 	}
 }
 
+#endif

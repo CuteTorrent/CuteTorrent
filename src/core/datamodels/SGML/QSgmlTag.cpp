@@ -22,7 +22,8 @@ under certain conditions.
 ------------------------------------------------------------------------------------------*/
 
 #include "QSgmlTag.h"
-
+Q_DECLARE_METATYPE(QSgmlTag*)
+Q_DECLARE_METATYPE(QList<QSgmlTag*>)
 //QSgmlTag Notag( "NoTag",QSgmlTag::eNoTag,(QSgmlTag&)NULL );
 
 // set the type of the tag

@@ -1,4 +1,9 @@
-﻿#include <stddef.h>
+﻿#include <QObject>
+#ifdef Q_OS_WIN
+#include <WinSock2.h>
+#include <windows.h>
+#endif
+#include <stddef.h>
 #include "QSearchDisplayModel.h"
 #include "StaticHelpers.h"
 #include "filedownloader.h"
@@ -166,7 +171,8 @@ void QSearchDisplayModel::downloadTorrent()
 
 void QSearchDisplayModel::OnNewSearchResults()
 {
-	reset();
+	beginResetModel();
+	endResetModel();
 }
 
 void QSearchDisplayModel::OnTorrentDownloaded(QUrl url, QTemporaryFilePtr pSafeFile)

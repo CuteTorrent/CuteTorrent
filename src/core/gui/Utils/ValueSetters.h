@@ -12,7 +12,7 @@ public:
 	static void MagnetAssociationValueSetter(QString group, QString name, QVariant value);
 	static void TorrentAssociationValueSetter(QString group, QString name, QVariant value);
 	static void RunOnBootValueSetter(QString group, QString name, QVariant value);
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	static void RunOnBootMinimizedValueSetter(QString group, QString name, QVariant value);
 	static void WindowsShellValueSetter(QString group, QString name, QVariant value);
 #endif

@@ -10,18 +10,18 @@
 #define UI_REGISTERDIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QPushButton>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -157,15 +157,15 @@ public:
 
     void retranslateUi(QWidget *RegisterDialog)
     {
-        RegisterDialog->setWindowTitle(QApplication::translate("RegisterDialog", "REGISTER_DLG", 0, QApplication::UnicodeUTF8));
+        RegisterDialog->setWindowTitle(QApplication::translate("RegisterDialog", "REGISTER_DLG", 0));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("RegisterDialog", "REGISTER_DLG", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("RegisterDialog", "LOGIN", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("RegisterDialog", "PASSWORD", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("RegisterDialog", "EMAIL", 0, QApplication::UnicodeUTF8));
-        mailEdit->setPlaceholderText(QApplication::translate("RegisterDialog", "ENTER MAIL", 0, QApplication::UnicodeUTF8));
-        passwordEdit->setPlaceholderText(QApplication::translate("RegisterDialog", "ENTER PASSWORD", 0, QApplication::UnicodeUTF8));
-        loginEdit->setPlaceholderText(QApplication::translate("RegisterDialog", "ENTER LOGIN", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("RegisterDialog", "REGISTER_DLG", 0));
+        label->setText(QApplication::translate("RegisterDialog", "LOGIN", 0));
+        label_2->setText(QApplication::translate("RegisterDialog", "PASSWORD", 0));
+        label_3->setText(QApplication::translate("RegisterDialog", "EMAIL", 0));
+        mailEdit->setPlaceholderText(QApplication::translate("RegisterDialog", "ENTER MAIL", 0));
+        passwordEdit->setPlaceholderText(QApplication::translate("RegisterDialog", "ENTER PASSWORD", 0));
+        loginEdit->setPlaceholderText(QApplication::translate("RegisterDialog", "ENTER LOGIN", 0));
     } // retranslateUi
 
 };

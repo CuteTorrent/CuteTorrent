@@ -17,46 +17,43 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-//#define Q_WS_WIN
+#include <WinSock2.h>
+#include <windows.h>
 #include <iostream>
 #include "CuteTorrentMainWindow.h"
 #include <qtsingleapplication.h>
 #include <cstdio>
 #include "application.h"
 #include "StaticHelpers.h"
-
 //#define VLD_FORCE_ENABLE
 //#include <vld.h> 
 
-void myMessageOutput(QtMsgType type, const char* msg)
+void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-	fflush(stdout);
-
-	switch (type)
-	{
-		case QtDebugMsg:
-			printf("Debug: %s\n", msg);
-			break;
-
-		case QtWarningMsg:
-			printf("Warning: %s\n", msg);
-			break;
-
-		case QtCriticalMsg:
-			printf("Critical: %s\n", msg);
-			break;
-
-		case QtFatalMsg:
-			printf("Fatal: %s\n", msg);
-			abort();
+	QByteArray localMsg = msg.toLocal8Bit();
+	switch (type) {
+	case QtDebugMsg:
+		fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+		break;
+	case QtInfoMsg:
+		fprintf(stderr, "Info: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+		break;
+	case QtWarningMsg:
+		fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+		break;
+	case QtCriticalMsg:
+		fprintf(stderr, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+		break;
+	case QtFatalMsg:
+		fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+		abort();
 	}
-
-	fflush(stdout);
 }
+
 
 int main(int argc, char* argv[])
 {/*
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	bool console = attachOutputToConsole();
 #endif
 	qsrand(time(NULL));
@@ -81,7 +78,7 @@ int main(int argc, char* argv[])
 	catch (std::exception ex)
 	{
 		std::cout << "Error parsing cmd line: " << ex.what() << std::endl;
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 
 		if (console)
 		{
@@ -118,8 +115,8 @@ int main(int argc, char* argv[])
 	if (vm["debug"].toBool())
 	{
 		QString logFileName = dataDir + "CuteTorrent." + QString::number(QApplication::applicationPid()) + ".log";
-		fp = freopen(logFileName.toAscii().data(), "a+", stdout);
-		qInstallMsgHandler(myMessageOutput);
+		fp = freopen(logFileName.toUtf8().data(), "a+", stdout);
+		qInstallMessageHandler(myMessageOutput);
 	}
 	if (arguments.contains("-c") || arguments.contains("--create_torrent"))
 	{

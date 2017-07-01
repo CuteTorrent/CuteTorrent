@@ -54,7 +54,7 @@ char const* not_enough_space_alert::what() const
 
 void avaliable_space_verifier_plugin::on_alert(alert const* a)
 {
-	if (a->type() == metadata_received_alert::alert_type)
+	if (a != nullptr && a->category() == metadata_received_alert::static_category && a->type() == metadata_received_alert::alert_type)
 	{
 		const metadata_received_alert* p = alert_cast<metadata_received_alert>(a);
 		const boost::shared_ptr<torrent> torrent = p->handle.native_handle();

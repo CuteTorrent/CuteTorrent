@@ -6,9 +6,9 @@
 #include <QFileIconProvider>
 
 struct file_entry{
-	qint64 size;
+	int64_t size;
 	std::string path;
-	int offset;
+	int64_t offset;
 	int index;
 };
 

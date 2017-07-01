@@ -16,6 +16,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include <QObject>
+#ifdef Q_OS_WIN
+#include <WinSock2.h>
+#include <windows.h>
+#endif
 #include <QClipboard>
 #include <QDebug>
 #include <QDir>
@@ -30,7 +35,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "Torrent.h"
 #include "TorrentManager.h"
 #include "TorrentStorrage.h"
-#include "VideoPlayerWindow.h"
 #include "messagebox.h"
 #include "QTorrentFilterProxyModel.h"
 #include "StaticHelpers.h"
@@ -62,6 +66,7 @@ QTorrentDisplayModel::QTorrentDisplayModel(ViewMode viewMode, QTreeView* itemVie
 
 void QTorrentDisplayModel::setViewMode(ViewMode viewMode)
 {
+	beginResetModel();
 	m_viewMode = viewMode;
 	switch (m_viewMode)
 	{
@@ -73,7 +78,7 @@ void QTorrentDisplayModel::setViewMode(ViewMode viewMode)
 			break;
 		default: break;
 	}
-	reset();
+	endResetModel();
 }
 
 QTorrentDisplayModel::ViewMode QTorrentDisplayModel::viewMode()
@@ -316,7 +321,7 @@ void QTorrentDisplayModel::OpenDirSelected() const
 #ifdef Q_WS_X11
 		StaticHelpers::OpenFolderNautilus(path);
 #endif
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 		StaticHelpers::OpenFileInExplorer(path);
 #endif
 	}
@@ -377,7 +382,6 @@ void QTorrentDisplayModel::contextualMenu(const QPoint& point)
 
 		mountDiskImage->setEnabled(isAllMountable);
 		superSeed->setChecked(isAllSuperSeed);
-		playInMediaPlayer->setEnabled(isAllHasMedia);
 		setSequentual->setChecked(isAllSequential);
 		queueMenu->setEnabled(isAllQueueable);
 		int commonPriority = getCommonPriority(indexes);
@@ -996,7 +1000,7 @@ QTorrentDisplayModel::~QTorrentDisplayModel()
 
 QModelIndex QTorrentDisplayModel::index(int row, int column, const QModelIndex& parent) const
 {
-	return hasIndex(row, column, parent) ? createIndex(row, column, 0) : QModelIndex();
+	return hasIndex(row, column, parent) ? createIndex(row, column, nullptr) : QModelIndex();
 }
 
 QModelIndex QTorrentDisplayModel::parent(const QModelIndex& child) const
@@ -1016,7 +1020,6 @@ void QTorrentDisplayModel::retranslate() const
 	setSequentual->setText(tr("ACTION_SET_SEQUENTIAL"));
 	updateTrackers->setText(tr("ACTION_UPDATE_TRACKERS"));
 	storrageMove->setText(tr("ACTION_MOVE_STORRAGE"));
-	playInMediaPlayer->setText(tr("ACTION_PLAY_IN_PLAYER"));
 	superSeed->setText(tr("ACTION_SET_SUPERSEED"));
 	generateMagnet->setText(tr("ACTION_GENERATE_MAGNET"));
 	groupsMenu->setTitle(tr("ACTION_CHANGE_GROUP"));
@@ -1049,43 +1052,6 @@ void QTorrentDisplayModel::moveStorrage()
 	ActionOnSelectedItem(move_storage);
 }
 
-void QTorrentDisplayModel::playInPlayer() const
-{
-	if (m_pCurrentTorrent != NULL)
-	{
-		VideoPlayerWindow* vpw = new VideoPlayerWindow();
-		files_info filesInfo = m_pCurrentTorrent->GetFileDownloadInfo();
-		int numFiles = filesInfo.storrage.num_files();
-		if (numFiles > 1)
-		{
-			QStringList files;
-			for (int i = 0; i < numFiles; i++)
-			{
-				if (filesInfo.priorities[i] > 0)
-				{
-					files << StaticHelpers::CombinePathes(m_pCurrentTorrent->GetSavePath(), QString::fromUtf8(filesInfo.storrage.file_path(i).c_str()));
-				}
-			}
-			qSort(files);
-			boost::scoped_ptr<VideoFileChooseDialog> pDlg(new VideoFileChooseDialog(files));
-			pDlg->exec();
-			QString choosenPath = pDlg->choosenPath();
-			if (!choosenPath.isEmpty())
-			{
-				vpw->openFile(choosenPath);
-				vpw->show();
-			}
-		}
-		else
-		{
-			QString firstFileSubPath = getFirstAvailibleFile(filesInfo);
-			QString filePath = StaticHelpers::CombinePathes(m_pCurrentTorrent->GetSavePath(), firstFileSubPath);
-			vpw->openFile(filePath);
-			vpw->show();
-		}
-	}
-}
-
 void QTorrentDisplayModel::AddGroupsLevel(StyleEngene* pStyleEngene, QList<TorrentGroup*>& groups, QMenu* groupsContainer)
 {
 	for (int i = 0; i < groups.size(); i++)
@@ -1097,7 +1063,7 @@ void QTorrentDisplayModel::AddGroupsLevel(StyleEngene* pStyleEngene, QList<Torre
 			CheckableMenu* currentGroupMenu = new CheckableMenu(group->name(), groupsContainer);
 			QAction* changeGroupAction = currentGroupMenu->menuAction();
 			connect(changeGroupAction, SIGNAL(triggered()), m_pGroupMapper, SLOT(map()));
-			m_pGroupMapper->setMapping(changeGroupAction, group->uid());
+			m_pGroupMapper->setMapping(changeGroupAction, group->uid().toString());
 			changeGroupAction->setCheckable(true);
 			currentGroupMenu->setIcon(pStyleEngene->guessMimeIcon(group->extentions()[0]));
 			groupsContainer->addMenu(currentGroupMenu);
@@ -1110,7 +1076,7 @@ void QTorrentDisplayModel::AddGroupsLevel(StyleEngene* pStyleEngene, QList<Torre
 			QAction* changeGroupAction = new QAction(pStyleEngene->guessMimeIcon(group->extentions()[0]), group->name(), groupsContainer);
 			changeGroupAction->setObjectName(group->name());
 			connect(changeGroupAction, SIGNAL(triggered()), m_pGroupMapper, SLOT(map()));
-			m_pGroupMapper->setMapping(changeGroupAction, group->uid());
+			m_pGroupMapper->setMapping(changeGroupAction, group->uid().toString());
 			changeGroupAction->setCheckable(true);
 			groupsContainer->addAction(changeGroupAction);
 			m_pGroupsActionGroup->addAction(changeGroupAction);
@@ -1140,10 +1106,6 @@ void QTorrentDisplayModel::setupContextMenu()
 	mountDiskImage->setObjectName("ACTION_TORRENTLIST_DT_MOUNT");
 	connect(mountDiskImage, SIGNAL(triggered()), this, SLOT(MountDT()));
 	menu->addAction(mountDiskImage);
-	playInMediaPlayer = new QAction(pStyleEngene->getIcon("play"), tr("ACTION_PLAY_IN_PLAYER"), this);
-	playInMediaPlayer->setObjectName("ACTION_TORRENTLIST_PLAY");
-	connect(playInMediaPlayer, SIGNAL(triggered()), this, SLOT(playInPlayer()));
-	menu->addAction(playInMediaPlayer);
 	storrageMove = new QAction(pStyleEngene->getIcon("move_folder"), tr("ACTION_MOVE_STORRAGE"), this);
 	storrageMove->setObjectName("ACTION_TORRENTLIST_MOVE_STORRAGE");
 	connect(storrageMove, SIGNAL(triggered()), this, SLOT(moveStorrage()));

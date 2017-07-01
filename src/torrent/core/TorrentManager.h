@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "libtorrent/torrent_handle.hpp"
 #include "libtorrent/version.hpp"
 #include "libtorrent/upnp.hpp"
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 #pragma warning (disable: 4005)
 #pragma warning (disable: 4100)
 #pragma warning (disable: 4267)

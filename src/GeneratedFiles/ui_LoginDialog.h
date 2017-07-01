@@ -10,19 +10,19 @@
 #define UI_LOGINDIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCheckBox>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QPushButton>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -155,12 +155,12 @@ public:
 
     void retranslateUi(QWidget *LoginDialog)
     {
-        LoginDialog->setWindowTitle(QApplication::translate("LoginDialog", "LOGIN_DLG", 0, QApplication::UnicodeUTF8));
+        LoginDialog->setWindowTitle(QApplication::translate("LoginDialog", "LOGIN_DLG", 0));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("LoginDialog", "LOGIN_DLG", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("LoginDialog", "LOGIN", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("LoginDialog", "PASSWORD", 0, QApplication::UnicodeUTF8));
-        saveCredentialsCheckBox->setText(QApplication::translate("LoginDialog", "SAVE_CRENTIALS", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("LoginDialog", "LOGIN_DLG", 0));
+        label->setText(QApplication::translate("LoginDialog", "LOGIN", 0));
+        label_2->setText(QApplication::translate("LoginDialog", "PASSWORD", 0));
+        saveCredentialsCheckBox->setText(QApplication::translate("LoginDialog", "SAVE_CRENTIALS", 0));
     } // retranslateUi
 
 };

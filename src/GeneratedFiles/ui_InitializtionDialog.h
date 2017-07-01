@@ -10,17 +10,17 @@
 #define UI_INITIALIZTIONDIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QProgressBar>
-#include <QtGui/QPushButton>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QProgressBar>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -125,7 +125,7 @@ public:
     void retranslateUi(QWidget *InitializationDialog)
     {
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("InitializationDialog", "INITIALIZATION_DIALOG", 0, QApplication::UnicodeUTF8));
+        LTitle->setText(QApplication::translate("InitializationDialog", "INITIALIZATION_DIALOG", 0));
         stateLabel->setText(QString());
         Q_UNUSED(InitializationDialog);
     } // retranslateUi

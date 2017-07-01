@@ -1,3 +1,8 @@
+#include <QObject>
+#ifdef Q_OS_WIN
+#include <WinSock2.h>
+#include <windows.h>
+#endif
 #include "QTorrentFilterProxyModel.h"
 #include "QTorrentDisplayModel.h"
 #include <QtCore>
@@ -5,10 +10,10 @@
 
 QTorrentFilterProxyModel::QTorrentFilterProxyModel(QObject* parent)
 	: QSortFilterProxyModel(parent)
+	  , m_pTorrentGroupsManager(TorrentGroupsManager::getInstance())
 	  , m_pUpdateLocker(new QMutex())
 	  , m_currentFilterType(TORRENT)
 	  , m_torrentFilter(EMPTY)
-	  , m_pTorrentGroupsManager(TorrentGroupsManager::getInstance())
 {
 	setDynamicSortFilter(true);
 }

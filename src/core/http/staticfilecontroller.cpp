@@ -17,7 +17,7 @@ StaticFileController::StaticFileController(QObject* parent)
 	settings = QApplicationSettings::getInstance();
 	maxAge = settings->valueInt("WebControl", "maxAge", 60000);
 	encoding = settings->valueString("WebControl", "encoding", "UTF-8");
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN 
 	docroot = settings->valueString("WebControl", "path", "./webControll/");
 #endif
 #ifdef Q_OS_UNIX
