@@ -1,0 +1,1 @@
+for /r %file in (*.ts) do C:\Qt\5.9.1\msvc2015\bin\lupdate -recursive ..\..\ -ts %file
