@@ -547,482 +547,491 @@ Are you shure?</translation>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="17"/>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="105"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="906"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="962"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="914"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="985"/>
         <source>CuteTorrent</source>
         <translation>CuteTorrent</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="773"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1000"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="800"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1023"/>
         <source>TRACKER_PEERS</source>
         <translation>Peers</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="893"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1006"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="860"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1027"/>
+        <source>AVERAGE_RATING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="920"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1029"/>
         <source>MENU_FILE</source>
         <translation>File</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="904"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1007"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="931"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1030"/>
         <source>MENU_SETTINGS</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="910"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1008"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="937"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1031"/>
         <source>MENU_HELP</source>
         <translation>Help</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="921"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1009"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="948"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1032"/>
         <source>MENU_TOOLS</source>
         <translation>Tools</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="431"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="991"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="458"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1014"/>
         <source>TAB_INFO</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="630"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="984"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="657"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1007"/>
         <source>INFO_PEER_COUNT</source>
         <translation>Peers</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="518"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="968"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="545"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="991"/>
         <source>INFO_UPLOADED</source>
         <translation>Uploaded</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="644"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="986"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="671"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1009"/>
         <source>INFO_SEED_COUNT</source>
         <translation>Seeds</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="651"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="987"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="678"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1010"/>
         <source>INFO_DESCRIBTION</source>
         <translation>Description</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="511"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="967"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="538"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="990"/>
         <source>INFO_PATH</source>
         <translation>Save Path</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="602"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="980"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="629"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1003"/>
         <source>INFO_REMAININF_TIME</source>
         <translation>Time Left</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="595"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="979"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="622"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1002"/>
         <source>INFO_DOWNLOADED</source>
         <translation>Downloaded</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="588"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="978"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="615"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1001"/>
         <source>INFO_ACTIVE_TIME</source>
         <translation>Active Time</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="574"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="976"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="601"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="999"/>
         <source>INFO_DOWNLOAD_SPEED</source>
         <translation>Download Speed</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="553"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="973"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="580"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="996"/>
         <source>INFO_TOTAL_SIZE</source>
         <translation>Total Size</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="539"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="971"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="566"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="994"/>
         <source>INFO_UPLOAD_SPEED</source>
         <translation>Upload Speed</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="314"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="963"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="341"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="986"/>
         <source>LIMIT_UL</source>
         <translation>Upload Limit</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="324"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="964"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="351"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="987"/>
         <source>LIMIT_DL</source>
         <translation>Download Limit</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="350"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="965"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="377"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="988"/>
         <source>SORT_BY</source>
         <translation>Sort by</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="674"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="989"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="701"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1012"/>
         <source>INFO_HASH</source>
         <translation>Hash</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="695"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="992"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="722"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1015"/>
         <source>TAB_PEERS</source>
         <translation>Peers</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="730"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1001"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="757"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1024"/>
         <source>TAB_TRACKERS</source>
         <translation>Trackers</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="758"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="994"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="785"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1017"/>
         <source>TRACKER_URL</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="763"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="996"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="790"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1019"/>
         <source>TRACKER_STATUS</source>
         <translation>State</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="768"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="998"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="795"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1021"/>
         <source>TRACKER_NEXT_ANNOUNCE</source>
         <translation>Next Announce in</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="785"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1002"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="812"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1025"/>
         <source>TAB_FILES</source>
         <translation>Files </translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="817"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1005"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="844"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1028"/>
         <source>TAB_COMMENTS</source>
         <translation>Comments</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="823"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1003"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="850"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1026"/>
         <source>ADD_COMMENT</source>
         <translation>Add Comment</translation>
     </message>
     <message>
-	<location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1193"/>
-        <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1855"/>
-        <source>ALOW_REORDERED_OPERATIONS_WIT</source>
-        <translation>Disk read operations may be re-ordered based on their physical disk read offset. This greatly improves throughput when uploading to many peers. If your storage medium is a solid state drive, this optimization doesn't give you an benefits.</translation>
-    </message>
-    <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="925"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1010"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="952"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1033"/>
         <source>TOOLS_AUTO_SHUTDOWN</source>
         <translation>Auto Shutdown</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="948"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1011"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="975"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1034"/>
         <source>MENU_VIEW</source>
         <translation>View</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="952"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1012"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="979"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1035"/>
         <source>MENU_CHOSE_LANGUAGE</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="957"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1013"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="984"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1036"/>
         <source>MENU_CHOSE_SKIN</source>
         <translation>Skin</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1028"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1195"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1198"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="907"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="944"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="946"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1056"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1223"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1226"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="915"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="966"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="968"/>
         <source>MENU_OPEN_TORRENT</source>
         <translation>Open torrent</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1031"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="908"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1059"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="917"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1039"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1203"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="909"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="948"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1067"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1231"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="919"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="970"/>
         <source>MENU_OPEN_MAGNET</source>
         <translation>Open magnet link</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1042"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="910"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1070"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="921"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1183"/>
-        <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1851"/>
-        <source>USE_DISK_READ_AHEAD_WIT</source>
-        <translation>When executing a read from the disk, the disk arm moves the read/write head to (or near) the correct track, and after some settling time the read head begins to pick up bits. Usually, the first sectors to be read are not the ones that have been requested by the operating system. The disk's embedded computer typically saves these unrequested sectors in the disk buffer, in case the operating system requests them later.</translation>
-    </message>
-    <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1050"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="912"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1078"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="925"/>
         <source>Ctrl+N</source>
         <oldsource>Ctrl+C</oldsource>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1055"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="913"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1083"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="927"/>
         <source>MENU_EXIT</source>
         <translation>Exit</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1058"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="914"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1086"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="929"/>
         <source>Alt+X</source>
         <translation>Alt+X</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1066"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1844"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="915"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1094"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1858"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="931"/>
         <source>MENU_CONFIGURATION</source>
         <translation>Configuration</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1069"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="916"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1097"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="933"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1077"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="917"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1105"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="935"/>
         <source>STR_DOWNLOAD</source>
         <translation>Download torrent file</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1080"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="918"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1108"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="936"/>
         <source>HINT_DOWNLOAD</source>
         <translation>Download torrent file</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1085"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="919"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1113"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="937"/>
         <source>STR_OPEN_URL</source>
         <translation>Open description</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1088"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="920"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1116"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="938"/>
         <source>HINT_OPEN_URL</source>
         <translation>Open description</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1093"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="921"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1121"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="939"/>
         <source>MENU_ABAUT</source>
         <translation>About CuteTorrent</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1096"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="922"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1124"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="941"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1104"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="923"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1132"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="943"/>
         <source>MENU_CHECK_UPDATES</source>
         <translation>Check for updates</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1107"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="924"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1135"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="945"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1112"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="925"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1140"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="947"/>
         <source>STR_SETTINGS</source>
         <translation>Preferencies</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1117"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="926"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1145"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="948"/>
         <source>TOOLS_BACKUP</source>
         <translation>Backup untility</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1122"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1125"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="927"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="929"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1150"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1153"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="949"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="951"/>
         <source>ACTION_RSS_ADD</source>
         <translation>Add Rss-feed</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1130"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="931"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1158"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="953"/>
         <source>ACTION_RSS_REMOVE</source>
         <translation>Remove</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1135"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="932"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1163"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="954"/>
         <source>ACTION_RSS_EDIT</source>
         <translation>Edit Rss-feed</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1140"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="933"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1168"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="955"/>
         <source>MENU_ABOUT_QT</source>
         <translation>About Qt</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1145"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1148"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="934"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="936"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1173"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1176"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="956"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="958"/>
         <source>QUEUE_UP</source>
         <translation>Queue Up</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1153"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="938"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1181"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="960"/>
         <source>QUEUE_DOWN</source>
         <translation>Queue Down</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1158"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="939"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1186"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="961"/>
         <source>MENU_REPORT_PROBLEM</source>
         <translation>Report problem</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1166"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="940"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1194"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="962"/>
         <source>MENU_TOGGLE_TOOLBAR_VISIBILITY</source>
         <translation>Toolbar</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1174"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="941"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1202"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="963"/>
         <source>MENU_TOGGLE_DETAIL_INFO_VISIBILITY</source>
         <translation>Details Info</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1182"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="942"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1210"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="964"/>
         <source>MENU_TOGGLE_STATUSBAR_VISIBILITY</source>
         <translation>Statusbar</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1190"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="943"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1218"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="965"/>
         <source>MENU_TOGGLE_GROUPS_VISIBILITY</source>
         <translation>Side Filter</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1208"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="949"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1236"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="971"/>
         <source>TOOLS_IMPORT</source>
         <translation>Import torrents from other clients</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1216"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="950"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1244"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="972"/>
         <source>TOOLS_SHUTDOWN_DISABLED</source>
         <translation>Disabled</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1221"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="951"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1249"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="973"/>
         <source>TOOLS_SHUTDOWN_ON_DOWNLADS_COMPLETE</source>
         <translation>Shutdown when downloads complete</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1277"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="958"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1305"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="980"/>
         <source>TOOLS_SHUTDOWN_ON_ALL_COMPLETE</source>
         <translation>Shutdown when ewerything comples</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1229"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="952"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1323"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="983"/>
+        <source>SWITCH_VIEW</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1257"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="974"/>
         <source>TOOLS_HIBERNATE_ON_DOWNLOADS_COMPLETE</source>
         <translation>Hibernate when download comple</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1285"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="959"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1313"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="981"/>
         <source>TOOLS_HIBERNATE_ON_ALL_COMPLETE</source>
         <translation>Hibernate when ewerything comples</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1237"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="953"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1265"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="975"/>
         <source>TOOLS_SLEEP_ON_DOWNLOADS_COMPLETE</source>
         <translation>Sleep when download comple</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1245"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="954"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1075"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1855"/>
+        <location filename="../../core/gui/Utils/ValueSetters.cpp" line="357"/>
+        <location filename="../../core/gui/Utils/ValueSetters.cpp" line="361"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="923"/>
+        <source>MENU_CREATE_TORRENT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1273"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="976"/>
         <source>TOOLS_SLEEP_ON_ALL_COMPLETE</source>
         <translation>Sleep when ewerything comples</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1253"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="955"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1281"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="977"/>
         <source>TOOLS_REBOOT_ON_DOWNLOADS_COMPLETE</source>
         <translation>Reboot when download comples</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1261"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="956"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1289"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="978"/>
         <source>TOOLS_REBOOT_ON_ALL_COMPLETE</source>
         <translation>Reboot when ewerything comples</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1269"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="957"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1297"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="979"/>
         <source>TOOLS_SHUTDOWN_ON_DOWNLOADS_COMPLETE</source>
         <translation>Shutdown when downoad comple</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1290"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="960"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1318"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="982"/>
         <source>MENU_RATE</source>
         <translation>Rate client</translation>
     </message>
@@ -1046,16 +1055,16 @@ If you have paid money for this software demand a refund</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="281"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="282"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1047"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1048"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1061"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1062"/>
         <source>STATUS_DWONLOAD</source>
         <translation>Downloaded(Download speed)</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="283"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="284"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1049"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1050"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1063"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1064"/>
         <source>STATUS_UPLOAD</source>
         <translation>Uloaded(Upload speed)</translation>
     </message>
@@ -1112,165 +1121,165 @@ If you have paid money for this software demand a refund</translation>
         <translation>Seeders</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="392"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1053"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="406"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1067"/>
         <source>ADD_TRACKER</source>
         <translation>Add tracker</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="394"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1054"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="408"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1068"/>
         <source>REMOVE_TRACKER</source>
         <translation>Remove tracker</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="396"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1055"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="410"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1069"/>
         <source>EDIT_TRACKER</source>
         <translation>Edit tracker</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="398"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="412"/>
         <source>UPDATE_TRACKER</source>
         <translation>Update tracker</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="420"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1056"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="434"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1070"/>
         <source>ADD_PEER</source>
         <translation>Add peer</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="422"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="436"/>
         <source>ADD_WEB_SEED</source>
         <translation>Add WebSeed</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="539"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="553"/>
         <source>SET_DEFAULT_APP_FOR_TOR_AND_MAGNET_LINKS</source>
         <translation>Set CuteTorrent as default application for torrents and magnet links?</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="545"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="559"/>
         <source>SET_DEFAULT_APP_FOR_TOR</source>
         <translation>Set CuteTorrent as default application for torrents?</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="549"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="563"/>
         <source>SET_DEFAULT_APP_FOR_MAGNET_LINKS</source>
         <translation>Set CuteTorrent as default application for magnet links?</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="554"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="568"/>
         <source>DEFAULT_APP</source>
         <translation>Default application</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="568"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="582"/>
         <source>REGISTER_BTN</source>
         <translation>Register</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="569"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="583"/>
         <source>LOG_IN_BTN</source>
         <translation>Log In</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="572"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="586"/>
         <source>NOT_LOGGED_IN</source>
         <translation>Not Logged In</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="572"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="586"/>
         <source>COMMENTS_LOGIN_MESSAGE</source>
         <translation>To add comments you should Log In or If you dont have an account create it.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="625"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="639"/>
         <source>Delete comment</source>
         <translation>Delete comment</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="625"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="639"/>
         <source>Are you shure you want to delete selected comment?</source>
         <translation>Are you shure you want to delete selected comment?</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="684"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1068"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="698"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1082"/>
         <source>ANIME_CATEGORY</source>
         <translation>Anime</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="685"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1069"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="699"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1083"/>
         <source>MUSIC_CATEGORY</source>
         <translation>Music</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="686"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1070"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="700"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1084"/>
         <source>TV_CATEGORY</source>
         <translation>TV and Shows</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="687"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1071"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="701"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1085"/>
         <source>PORN_CATEGORY</source>
         <translation>XXX</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="688"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1072"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="702"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1086"/>
         <source>APP_CATEGORY</source>
         <translation>Applications</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="689"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1073"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="703"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1087"/>
         <source>GAMES_CATEGORY</source>
         <translation>Games</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="690"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1074"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="704"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1088"/>
         <source>BOOKS_CATEGORY</source>
         <translation>Books</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="691"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1075"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="705"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1089"/>
         <source>FILMS_CATEGORY</source>
         <translation>Films</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="692"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1076"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="706"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1090"/>
         <source>ALL_CATEGORY</source>
         <translation>All</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="701"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1078"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="715"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1092"/>
         <source>Search</source>
         <translation>Search</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="704"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1079"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="718"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1093"/>
         <source>TORENT_FILTER</source>
         <translation>Filter torrents</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="708"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="715"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1057"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1058"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="722"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="729"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1071"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1072"/>
         <source>None</source>
         <translation>∞</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="852"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="866"/>
         <source>CuteTorrent %1
 Upload: %2
 Download: %3</source>
@@ -1279,152 +1288,152 @@ Download: %3</source>
 Загружено: %3</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="861"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="875"/>
         <source>DHT: %1 nodes</source>
         <translation>DHT: %1 узлов</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1010"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1024"/>
         <source>DOWNLOADING_TORRENTS_COUNT</source>
         <translation>Downloading torrents count</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1042"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1140"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1056"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1154"/>
         <source>ACTION_HIDE</source>
         <translation>Hide</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1043"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1143"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1057"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1157"/>
         <source>ACTION_MAXIMIZE_FULLSCREEN</source>
         <translation>Maximize fullscreen</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1044"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1146"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1058"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1160"/>
         <source>ACTION_MAXIMIZE</source>
         <translation>Maximize</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1045"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1155"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1059"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1169"/>
         <source>ACTION_EXIT</source>
         <translation>Exit</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1046"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1158"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1162"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1060"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1172"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1176"/>
         <source>ACTION_COPY</source>
         <translation>Copy</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1059"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1149"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1073"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1163"/>
         <source>ACTION_PAUSE_ALL_TORRENTS</source>
         <translation>Pause all torrents</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1060"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1152"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1074"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1166"/>
         <source>ACTION_RESTORE_ALL_TORRENTS</source>
         <translation>Resume all torrents</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1219"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1233"/>
         <source>OPEN_TOORENT_DIALOG</source>
         <translation>Open torrent dialog</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1220"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1234"/>
         <source>TORRENT_FILES (*.torrent);;Any File (*.*)</source>
         <translation>Torrent files (*.torrent);;Any File (*.*)</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1377"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1391"/>
         <source>TRACKER_UPDATING</source>
         <translation>Updating...</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1434"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1448"/>
         <source>CT_HIDE_MSG</source>
         <translation>CuteTorrent is steel active. To exit use context menu in tray.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1486"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1500"/>
         <source>UNABLE_TO_PROCESS_FILE</source>
         <translation>Unable to process file</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1486"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1500"/>
         <source>DROPPED_FILE %1 IS_NOT_TORRENT_OR_MAGNET_LINK</source>
         <translation>Dropped element %1 is not a torrent or Magnet link.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1632"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1646"/>
         <source>MAGNET_LINK_DLG</source>
         <translation>Magnet-link</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1632"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1646"/>
         <source>MAGNET_LINK:</source>
         <translation>Magnet-link:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1785"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1799"/>
         <source>ADD_PEER_DLG</source>
         <translation>Adding a peer</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1785"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1799"/>
         <source>PEER:</source>
         <translation>Peer:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1802"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1816"/>
         <source>PEER_ERR</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1802"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1816"/>
         <source>INVALID_IP_STRING</source>
         <translation>Invalid ip string</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1814"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1828"/>
         <source>ADD_TRACKER_DLG</source>
         <translation>Adding a tracker</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1814"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2302"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1828"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2343"/>
         <source>TRACKER:</source>
         <translation>Tracker:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2302"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2333"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2343"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2374"/>
         <source>EDIT_TRACKER_DLG</source>
         <translation>Tracker editing</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2333"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2374"/>
         <source>HTTP_SEED_URL:</source>
         <translation>Web seed:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2347"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2388"/>
         <source>RSS_FEED_ADD</source>
         <translation>Adding Rss-feed</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2347"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2388"/>
         <source>RSS_FEED_URL:</source>
         <translation>Rss-feed URL:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2518"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2559"/>
         <source>INVALID_COMMAND_RECIVED</source>
         <translation>Invalid IPC command recived.</translation>
     </message>
@@ -1924,11 +1933,9 @@ Download: %3</source>
         <translation>Too many connections</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/CreateTorrentDialog.cpp" line="268"/>
-        <source>CREATE_TORRENT_FILE_ERROR
- %1</source>
-        <translation>Torrent couldn't be created
-%1</translation>
+        <location filename="../../core/helpers/StaticHelpers.cpp" line="411"/>
+        <source>peer banned</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="412"/>
@@ -3137,6 +3144,12 @@ Error: %2
         <translation>Sequntial Download</translation>
     </message>
     <message>
+        <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="428"/>
+        <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="358"/>
+        <source>OPEN_TORRENT_ADD_BUTTON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="323"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="347"/>
         <source>START_SEEDING_TOOLTIP</source>
@@ -3193,29 +3206,24 @@ Error: %2
         <translation>Select None</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="307"/>
-        <source>missing or invalid 'info' section in torrent file</source>
-        <translation>The .torrent file does not have an "info" dictionary</translation>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="167"/>
+        <source>MAGNET_LINKS_DONT_SUPORT_SEED_MODE</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="308"/>
-        <source>'info' entry is not a dictionary</source>
-        <translation>The .torrent file's "info" entry is not a dictionary</translation>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="183"/>
+        <source>OPEN_TORRENT_ERROR</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="309"/>
-        <source>invalid or missing 'piece length' entry in torrent file</source>
-        <translation>The .torrent file does not have a "piece length" entry</translation>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="220"/>
+        <source>SELECT_AT_LEAST_ONE_FILE</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="310"/>
-        <source>missing name in torrent file</source>
-        <translation>The .torrent file does not have a "name" entry</translation>
-    </message>
-    <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="311"/>
-        <source>invalid 'name' of torrent (possible exploit attempt)</source>
-        <translation>The .torrent file's name entry is invalid</translation>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="285"/>
+        <source>%1 (AVAILABLE: %2)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="288"/>
@@ -3231,15 +3239,14 @@ Error: %2
 <context>
     <name>PeerTableModel</name>
     <message>
-
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="314"/>
-        <source>invalid or missing 'pieces' entry in torrent file</source>
-        <translation>The "pieces" field is missing or invalid in the .torrent file</translation>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="51"/>
+        <source>PEER_IP</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="315"/>
-        <source>incorrect number of piece hashes in torrent file</source>
-        <translation>The "pieces" string has incorrect length</translation>
+        <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="52"/>
+        <source>PEER_CLIENT_NAME</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="53"/>
@@ -3275,9 +3282,10 @@ Error: %2
 <context>
     <name>QKeyEdit</name>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="322"/>
-        <source>torrent already exists in session</source>
-        <translation>There's already a torrent with that info-hash added to the session</translation>
+        <location filename="../../core/gui/Controls/qkeyedit.cpp" line="8"/>
+        <location filename="../../core/gui/Controls/qkeyedit.cpp" line="55"/>
+        <source>KEY_EDIT_CLEAR_HINT</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3301,26 +3309,28 @@ Error: %2
         <translation>Remove</translation>
     </message>
     <message>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="289"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="515"/>
+        <source>MARK_AS_UNREAD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="290"/>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="402"/>
         <source>MARK_ALL_AS_READ</source>
         <translation>Mark all as read</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="327"/>
-        <source>unsupported URL protocol</source>
-        <translation>The URL used an unknown protocol. Currently "http" and "https" (if built with openssl support) are recognized. For trackers "udp" is recognized as well.</translation>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="291"/>
+        <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="405"/>
+        <source>MARK_ALL_AS_UNREAD</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="288"/>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="512"/>
         <source>MARK_AS_READ</source>
         <translation>Mark as read</translation>
-    </message>
-    <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="329"/>
-        <source>peer sent 0 length piece</source>
-        <translation>The peer sent a 'piece' message of length 0</translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="354"/>
@@ -3364,9 +3374,10 @@ Error: %2
 <context>
     <name>QRssItemDelegate</name>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="337"/>
-        <source>expected closing ] for address</source>
-        <translation>The IPv6 address was expected to end with ']'</translation>
+        <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="126"/>
+        <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="287"/>
+        <source>STATUS_UPDATING</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="130"/>
@@ -3380,17 +3391,18 @@ Error: %2
         <translation>Refreshed in:</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="340"/>
-        <source>upload to upload connection</source>
-        <translation>The peer is upload only, and we are upload only. There's no point in keeping the connection</translation>
+        <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="225"/>
+        <source>- Mb</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QSearchDisplayModel</name>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="341"/>
-        <source>uninteresting upload-only peer</source>
-        <translation>The peer is upload only, and we're not interested in it. There's no point in keeping the connection</translation>
+        <location filename="../../search/viewmodels/QSearchDisplayModel.cpp" line="93"/>
+        <location filename="../../search/viewmodels/QSearchDisplayModel.cpp" line="101"/>
+        <source>DOWNLOAD_TORRENT</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../search/viewmodels/QSearchDisplayModel.cpp" line="94"/>
@@ -3407,9 +3419,9 @@ Error: %2
 <context>
     <name>QSearchItemDelegate</name>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="344"/>
-        <source>'have'-message with higher index than the number of pieces</source>
-        <translation>The peer sent an invalid have message, either wrong size or referring to a piece that doesn't exist in the torrent</translation>
+        <location filename="../../search/viewmodels/ItemDelegate/QSearchItemDelegate.cpp" line="180"/>
+        <source>Leechs: %1 Seeds: %2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../search/viewmodels/ItemDelegate/QSearchItemDelegate.cpp" line="184"/>
@@ -3420,220 +3432,216 @@ Error: %2
 <context>
     <name>QTorrentDisplayModel</name>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="712"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="724"/>
         <source>DIALOG_OPEN_FOLDER</source>
         <translation>Select a folder</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1015"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1099"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1027"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1111"/>
         <source>ACTION_OPEN_FOLDER</source>
         <translation>Open folder</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1016"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1105"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1028"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1117"/>
         <source>ACTION_DT_MOUNT</source>
         <translation>Mount to Daemon Tools</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1021"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1193"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1033"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1205"/>
         <source>ACTION_UPDATE_TRACKERS</source>
         <translation>Update Trackers</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1023"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1184"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1035"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1196"/>
         <source>ACTION_SET_SUPERSEED</source>
         <translation>Super-seeding</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1024"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1202"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1036"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1214"/>
         <source>ACTION_GENERATE_MAGNET</source>
         <translation>Generate Magnet Link</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1025"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1217"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1037"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1229"/>
         <source>ACTION_CHANGE_GROUP</source>
         <translation>Change group</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1026"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1114"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1038"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1126"/>
         <source>ACTION_QUEUE_CONTROLL</source>
         <translation>Queue management</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1029"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1116"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1041"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1128"/>
         <source>ACTION_QUEUE_UP</source>
         <translation>Move Up Queue</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1030"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1120"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1042"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1132"/>
         <source>ACTION_QUEUE_DOWN</source>
         <translation>Move Down Queue</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1031"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1138"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1043"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1150"/>
         <source>ACTION_PRIORITY</source>
         <translation>Priority</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1036"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1140"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1048"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1152"/>
         <source>ACTION_HIGHT_PRIORITY</source>
         <translation>High</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1035"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1148"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1047"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1160"/>
         <source>ACTION_ABOVE_AVG_PRIORITY</source>
         <translation>Above average</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1034"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1156"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1046"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1168"/>
         <source>ACTION_MEDIUM_PRIORITY</source>
         <translation>Medium</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1033"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1164"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1045"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1176"/>
         <source>ACTION_BELOW_AVG_PRIORITY</source>
         <translation>Below average</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1032"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1172"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1044"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1184"/>
         <source>ACTION_LOW_PRIORITY</source>
         <translation>Low</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1028"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1125"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1040"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1137"/>
         <source>ACTION_QUEUE_TOP</source>
         <translation>Move Top Queue</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1027"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1129"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1039"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1141"/>
         <source>ACTION_QUEUE_BOTTOM</source>
         <translation>Move Bottom Queue</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1013"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1092"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1025"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1104"/>
         <source>ACTION_TORRENTLIST_PAUSE</source>
         <translation>Pause</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1014"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1095"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1026"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1107"/>
         <source>ACTION_TORRENTLIST_RESUME</source>
         <translation>Resume</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1020"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1197"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1032"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1209"/>
         <source>ACTION_SET_SEQUENTIAL</source>
         <translation>Sequential download</translation>
     </message>
     <message>
-        <source>ACTION_PLAY_IN_PLAYER</source>
-        <translation type="vanished">Play in embedded VideoPlayer</translation>
-    </message>
-    <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1022"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1109"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1034"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1121"/>
         <source>ACTION_MOVE_STORRAGE</source>
         <translation>Move to...</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="499"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="511"/>
         <source>HEADER_NAME</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="500"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="512"/>
         <source>HEADER_PROGRES</source>
         <translation>Progress</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="501"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="513"/>
         <source>HEADER_SIZE</source>
         <translation>Size</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="504"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="516"/>
         <source>HEADER_DOWNLOAD_SPEED</source>
         <translation>Download speed</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="505"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="517"/>
         <source>HEADER_UPLOAD_SPEED</source>
         <translation>Upload speed</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="502"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="514"/>
         <source>HEADER_TOTAL_DOWNLOADED</source>
         <translation>Downloaded</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="503"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="515"/>
         <source>HEADER_TOTAL_UPLOADED</source>
         <translation>Uploaded</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="507"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="519"/>
         <source>HEADER_TIME_LEFT</source>
         <translation>Time Left</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="506"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="518"/>
         <source>HEADER_TIME_ELAPSED</source>
         <translation>ETA</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="508"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="520"/>
         <source>HEADER_SEED</source>
         <translation>Seeds</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="509"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="521"/>
         <source>HEADER_PEER</source>
         <translation>Peers</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="614"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="660"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="626"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="672"/>
         <source>TORRENT_DELITION</source>
         <translation>Deleting torrent</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="614"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="626"/>
         <source>TORRENT_DELITION_MSG</source>
         <translation>Are you shure  to remove torrent?</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="660"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="672"/>
         <source>TORRENT_ALL_DELITION_MSG</source>
         <translation>Are you shure  to remove torrent and files?</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1017"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1207"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1029"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1219"/>
         <source>ACTION_DELETE_ALL</source>
         <translation>Delete torrent and files</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1018"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1212"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1030"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1224"/>
         <source>ACTION_DELETE_TORRENT</source>
         <translation>Delete torrent</translation>
     </message>
@@ -3648,8 +3656,8 @@ Error: %2
         <translation>Unable to launch </translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1019"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1189"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1031"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1201"/>
         <source>ACTION_REHASH</source>
         <translation>Recheck files</translation>
     </message>
@@ -3786,23 +3794,24 @@ Error: %2
         <translation>Register</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="412"/>
-        <source>torrent has no metadata</source>
-        <translation>The operation failed because it requires the torrent to have the metadata (.torrent file) and it doesn't have it yet. This happens for magnet links before they have downloaded the
-			// metadata, and also torrents added by URL.</translation>
-    </message>
-    <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="413"/>
-        <source>invalid dont-have message</source>
-        <translation>The peer sent an invalid "dont_have" message. The dont have message is an extension to allow peers to advertise that the no longer has a piece they previously had.   </translation>
-    </message>
-    <message>
         <location filename="../../Comments/gui/FormFiles/RegisterDialog.ui" line="14"/>
         <location filename="../../Comments/gui/FormFiles/RegisterDialog.ui" line="115"/>
         <location filename="../../GeneratedFiles/ui_RegisterDialog.h" line="160"/>
         <location filename="../../GeneratedFiles/ui_RegisterDialog.h" line="162"/>
         <source>REGISTER_DLG</source>
         <translation>Registration</translation>
+    </message>
+    <message>
+        <location filename="../../Comments/gui/FormFiles/RegisterDialog.ui" line="156"/>
+        <location filename="../../GeneratedFiles/ui_RegisterDialog.h" line="163"/>
+        <source>LOGIN</source>
+        <translation type="unfinished">Login</translation>
+    </message>
+    <message>
+        <location filename="../../Comments/gui/FormFiles/RegisterDialog.ui" line="163"/>
+        <location filename="../../GeneratedFiles/ui_RegisterDialog.h" line="164"/>
+        <source>PASSWORD</source>
+        <translation type="unfinished">Password</translation>
     </message>
     <message>
         <location filename="../../Comments/gui/FormFiles/RegisterDialog.ui" line="170"/>
@@ -3848,25 +3857,27 @@ Error: %2
         <translation>Error</translation>
     </message>
     <message>
+        <location filename="../../core/gui/Dialogs/ReportProblemDialog.cpp" line="112"/>
+        <location filename="../../core/gui/Dialogs/ReportProblemDialog.cpp" line="120"/>
+        <location filename="../../core/gui/Dialogs/ReportProblemDialog.cpp" line="127"/>
+        <source>INFVALID_FIELD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../core/gui/Dialogs/ReportProblemDialog.cpp" line="112"/>
+        <source>NAME_EMPTY_ERROR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../core/gui/Dialogs/ReportProblemDialog.cpp" line="127"/>
+        <source>DESCRIPTION_EMPTY_ERROR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../core/gui/FormFiles/ReportProblemDialog.ui" line="198"/>
         <location filename="../../GeneratedFiles/ui_ReportProblemDialog.h" line="187"/>
         <source>EMAIL</source>
         <translation>E-mail:</translation>
-    </message>
-    <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="437"/>
-        <source>missing or invalid 'file sizes' entry</source>
-        <translation>The resume data file is missing the 'file sizes' entry</translation>
-    </message>
-    <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="438"/>
-        <source>no files in resume data</source>
-        <translation>The resume data file 'file sizes' entry is empty</translation>
-    </message>
-    <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="439"/>
-        <source>missing 'slots' and 'pieces' entry</source>
-        <translation>The resume data file is missing the 'pieces' and 'slots' entry</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/ReportProblemDialog.ui" line="188"/>
@@ -3881,10 +3892,28 @@ Error: %2
         <translation>Send Report</translation>
     </message>
     <message>
+        <location filename="../../core/gui/FormFiles/ReportProblemDialog.ui" line="106"/>
+        <location filename="../../GeneratedFiles/ui_ReportProblemDialog.h" line="182"/>
+        <source>REPORT_PROBLEM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../core/gui/FormFiles/ReportProblemDialog.ui" line="169"/>
         <location filename="../../GeneratedFiles/ui_ReportProblemDialog.h" line="184"/>
         <source>CANCEL</source>
         <translation>Cancel</translation>
+    </message>
+    <message>
+        <location filename="../../core/gui/FormFiles/ReportProblemDialog.ui" line="178"/>
+        <location filename="../../GeneratedFiles/ui_ReportProblemDialog.h" line="185"/>
+        <source>NAME</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../core/gui/FormFiles/ReportProblemDialog.ui" line="211"/>
+        <location filename="../../GeneratedFiles/ui_ReportProblemDialog.h" line="188"/>
+        <source>SEND_OS_INFORMATION</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/ReportProblemDialog.cpp" line="98"/>
@@ -3892,37 +3921,25 @@ Error: %2
         <translation>You report was recived and will be processed as soon as possible.</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="444"/>
-        <source>invalid 'blocks per piece' entry</source>
-        <translation>The 'blocks per piece' entry is invalid in the resume data file</translation>
-    </message>
-    <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="445"/>
-        <source>missing slots list</source>
-        <translation>The resume file is missing the 'slots' entry, which is required for torrents with compact allocation</translation>
-    </message>
-    <message>
         <location filename="../../core/gui/Dialogs/ReportProblemDialog.cpp" line="120"/>
         <source>EMAIL_EMPTY_OR_INVALID_ERROR</source>
         <translation>E-mail is empty or invalid</translation>
-    </message>
-    <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="447"/>
-        <source>invalid entry type in slot list</source>
-        <translation>The 'slot' entry is invalid in the resume data</translation>
     </message>
 </context>
 <context>
     <name>RssManager</name>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="448"/>
-        <source>invalid piece index in slot list</source>
-        <translation>One index in the 'slot' list is invalid</translation>
-    </message>
-    <message>
         <location filename="../../rss/core/RssManager.cpp" line="344"/>
         <source>RSS_ITEM_UNABLE_TO_DOWNLOAD %1 NO_URL</source>
         <translation>RSS-article %1 doesn&apos;t contains url for torrent file or magnet-link</translation>
+    </message>
+    <message>
+        <location filename="../../rss/core/RssManager.cpp" line="370"/>
+        <location filename="../../rss/core/RssManager.cpp" line="380"/>
+        <location filename="../../rss/core/RssManager.cpp" line="406"/>
+        <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2</source>
+        <translation type="unfinished">Error occured during automated download from RSS-feed:
+%1 %2</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="384"/>
@@ -3940,13 +3957,9 @@ Error: %2
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;DESCRIPTION&lt;/a&gt;&lt;br/&gt; %2</source>
-        <translation type="vanished">%1 is downloading.&lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;Description&lt;/a&gt;&lt;br/&gt; %2</translation>
-    </message>
-    <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="483"/>
-        <source>scrape not available on tracker</source>
-        <translation>The tracker URL doesn't support transforming it into a scrape URL. i.e. it doesn't contain "announce.</translation>
+        <location filename="../../rss/core/RssManager.cpp" line="424"/>
+        <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1</source>
+        <translation type="unfinished">Started downloading torrent %1 from RSS-feed</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="411"/>
@@ -3972,21 +3985,6 @@ Error: %2
 <context>
     <name>RssSettings</name>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="487"/>
-        <source>missing or invalid 'files' entry</source>
-        <translation>Missing or invalid 'files' entry</translation>
-    </message>
-    <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="488"/>
-        <source>missing or invalid 'hash' entry</source>
-        <translation>Missing or invalid 'hash' entry</translation>
-    </message>
-    <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="489"/>
-        <source>missing or invalid 'peers' and 'peers6' entry</source>
-        <translation>Missing or invalid 'peers' and 'peers6' entry</translation>
-    </message>
-    <message>
         <location filename="../../rss/gui/FormFiles/RssFeedSettingsDialog.ui" line="247"/>
         <location filename="../../GeneratedFiles/ui_RssFeedSettingsDialog.h" line="235"/>
         <source>ADD_ROW</source>
@@ -3999,10 +3997,28 @@ Error: %2
         <translation>Attribute</translation>
     </message>
     <message>
+        <location filename="../../rss/gui/FormFiles/RssFeedSettingsDialog.ui" line="112"/>
+        <location filename="../../GeneratedFiles/ui_RssFeedSettingsDialog.h" line="222"/>
+        <source>RSS_SETTINGS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../rss/gui/FormFiles/RssFeedSettingsDialog.ui" line="194"/>
+        <location filename="../../GeneratedFiles/ui_RssFeedSettingsDialog.h" line="225"/>
+        <source>COOKIES</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../rss/gui/FormFiles/RssFeedSettingsDialog.ui" line="229"/>
         <location filename="../../GeneratedFiles/ui_RssFeedSettingsDialog.h" line="229"/>
         <source>COOLIE_VALUE</source>
         <translation>Value</translation>
+    </message>
+    <message>
+        <location filename="../../rss/gui/FormFiles/RssFeedSettingsDialog.ui" line="254"/>
+        <location filename="../../GeneratedFiles/ui_RssFeedSettingsDialog.h" line="236"/>
+        <source>REMOVE_ROW</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../rss/gui/FormFiles/RssFeedSettingsDialog.ui" line="274"/>
@@ -4106,11 +4122,6 @@ Error: %2
         <translation>https</translation>
     </message>
     <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="544"/>
-        <source>stored block length did not match one's complement</source>
-        <translation>stored block length did not match one's complement</translation>
-    </message>
-    <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="207"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1673"/>
         <source>TAB_NETWORK</source>
@@ -4132,6 +4143,7 @@ Error: %2
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="14"/>
+        <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="109"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1662"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1664"/>
         <source>SETTINGS_DIALOG</source>
@@ -4429,13 +4441,6 @@ Error: %2
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1952"/>
         <source>WEB_UI_LOGIN</source>
         <translation>Login</translation>
-    </message>
-    <message>
-        <location filename="../../core/helpers/StaticHelpers.cpp" line="112"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="15"/>
-        <location filename="../../core/viewModel/FileViewModel.cpp" line="174"/>
-        <source>FILETAB_PRIORITY_ZERO</source>
-        <translation>Don't download</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1904"/>
@@ -4991,6 +4996,12 @@ Error: %2
         <translation>Hostname</translation>
     </message>
     <message>
+        <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1118"/>
+        <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1842"/>
+        <source>i2p</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1126"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1847"/>
         <source>PROXY_PORT</source>
@@ -5043,6 +5054,12 @@ Error: %2
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1929"/>
         <source>driveNumberComboBox_WIT</source>
         <translation>A number of Daemontools drive which will be used for mounting an image.</translation>
+    </message>
+    <message>
+        <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1884"/>
+        <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1954"/>
+        <source>WEB_UI_UPNP_ENABLED</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1968"/>
@@ -5156,11 +5173,6 @@ Error: %2
         <translation>Please set action type.</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="344"/>
-        <source>RSS_ITEM_UNABLE_TO_DOWNLOAD %1 NO_URL</source>
-        <translation>RSS-article %1 doesn't contains url for torrent file or magnet-link</translation>
-    </message>
-    <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="816"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="912"/>
         <source>ACTION_SETTINGS_EDIT_RSS_RULE</source>
@@ -5171,11 +5183,6 @@ Error: %2
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="919"/>
         <source>ACTION_SETTINGS_DELETE_RSS_RULE</source>
         <translation>Delete rule</translation>
-    </message>
-    <message>
-        <location filename="../../rss/core/RssManager.cpp" line="391"/>
-        <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href="%3"&gt;DESCRIPTION&lt;/a&gt;&lt;br/&gt; %2</source>
-        <translation>%1 is downloading.&lt;br/&gt; &lt;a href="%3"&gt;Description&lt;/a&gt;&lt;br/&gt; %2</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="932"/>
@@ -5312,6 +5319,16 @@ Error: %2</translation>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="994"/>
         <source>MENU</source>
         <translation>Menu</translation>
+    </message>
+    <message>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="589"/>
+        <source>SCHEDULLER_NO_NAME</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="931"/>
+        <source>RSS_TCP_CONNECTION</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="983"/>
