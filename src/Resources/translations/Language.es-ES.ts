@@ -1504,27 +1504,27 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="324"/>
-        <source>missing or invalid &apos;info&apos; section in torrent file</source>
-        <translation>El archivo .torrent no tiene un diccionario &quot;info&quot;</translation>
+        <source>missing or invalid 'info' section in torrent file</source>
+        <translation>El archivo .torrent no tiene un diccionario "info"</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="325"/>
-        <source>&apos;info&apos; entry is not a dictionary</source>
-        <translation>La entrada &quot;info&quot; del arhivo .torrent no es un diccionario</translation>
+        <source>'info' entry is not a dictionary</source>
+        <translation>La entrada "info" del arhivo .torrent no es un diccionario</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="326"/>
-        <source>invalid or missing &apos;piece length&apos; entry in torrent file</source>
-        <translation>El archivo .torrent no tiene una entrada de &quot;longitud de pieza&quot;</translation>
+        <source>invalid or missing 'piece length' entry in torrent file</source>
+        <translation>El archivo .torrent no tiene una entrada de "longitud de pieza"</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="327"/>
         <source>missing name in torrent file</source>
-        <translation>El archivo .torrent no tiene una entrada &quot;nombre&quot;</translation>
+        <translation>El archivo .torrent no tiene una entrada "nombre"</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="328"/>
-        <source>invalid &apos;name&apos; of torrent (possible exploit attempt)</source>
+        <source>invalid 'name' of torrent (possible exploit attempt)</source>
         <translation>El nombre de entrada del archivo .torrent es inválido</translation>
     </message>
     <message>
@@ -1539,13 +1539,13 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="331"/>
-        <source>invalid or missing &apos;pieces&apos; entry in torrent file</source>
-        <translation>El campo &quot;piezas&quot; no se encuentra o es invalido en el archivo .torrent</translation>
+        <source>invalid or missing 'pieces' entry in torrent file</source>
+        <translation>El campo "piezas" no se encuentra o es invalido en el archivo .torrent</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="332"/>
         <source>incorrect number of piece hashes in torrent file</source>
-        <translation>Las cadena &quot;piezas&quot; tiene una longitud incorrecta</translation>
+        <translation>Las cadena "piezas" tiene una longitud incorrecta</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="333"/>
@@ -1606,7 +1606,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="344"/>
         <source>unsupported URL protocol</source>
-        <translation>El enlace usó un protocolo desconocido. Normalmente &quot;http&quot; y &quot;https&quot; (si está hecho con soporte openssl) son reconocidos. Para los trackers &quot;udp&quot; es reconocido también</translation>
+        <translation>El enlace usó un protocolo desconocido. Normalmente "http" y "https" (si está hecho con soporte openssl) son reconocidos. Para los trackers "udp" es reconocido también</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="345"/>
@@ -1616,7 +1616,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="346"/>
         <source>peer sent 0 length piece</source>
-        <translation>El par envió un mensaje &quot;pieza&quot; de longitud 0</translation>
+        <translation>El par envió un mensaje "pieza" de longitud 0</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="347"/>
@@ -1657,7 +1657,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="354"/>
         <source>expected closing ] for address</source>
-        <translation>La dirección IPv6 era esperada al final con &apos;]&apos;</translation>
+        <translation>La dirección IPv6 era esperada al final con ']'</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="355"/>
@@ -1691,7 +1691,7 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="361"/>
-        <source>&apos;have&apos;-message with higher index than the number of pieces</source>
+        <source>'have'-message with higher index than the number of pieces</source>
         <translation>El par envió un mensaje equivodado sobre las piezas disponibles, tanto en el tamaño incorrecto como lo referente a la pieza que no existe en el torrent.</translation>
     </message>
     <message>
@@ -2028,7 +2028,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="430"/>
         <source>invalid dont-have message</source>
-        <translation>El par envió un mensaje inválido &quot;no tener&quot;. El mensaje no tener es una extensión para permitir a los pares anunciar que ya no tienen una pieza que antes tenían.</translation>
+        <translation>El par envió un mensaje inválido "no tener". El mensaje no tener es una extensión para permitir a los pares anunciar que ya no tienen una pieza que antes tenían.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="431"/>
@@ -2077,18 +2077,18 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="454"/>
-        <source>missing or invalid &apos;file sizes&apos; entry</source>
-        <translation>El archivo de datos de reanudación está perdiendo la entrada de los &apos;tamaños de archivo&apos;</translation>
+        <source>missing or invalid 'file sizes' entry</source>
+        <translation>El archivo de datos de reanudación está perdiendo la entrada de los 'tamaños de archivo'</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="455"/>
         <source>no files in resume data</source>
-        <translation>La entrada de &apos;tamaños de archivo&apos; del archivo de datos de reanudación está vacía.</translation>
+        <translation>La entrada de 'tamaños de archivo' del archivo de datos de reanudación está vacía.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="456"/>
-        <source>missing &apos;slots&apos; and &apos;pieces&apos; entry</source>
-        <translation>El archivo de datos de reanudación está perdiendo las entradas &apos;piezas&apos; y &apos;espacios&apos;</translation>
+        <source>missing 'slots' and 'pieces' entry</source>
+        <translation>El archivo de datos de reanudación está perdiendo las entradas 'piezas' y 'espacios'</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="457"/>
@@ -2112,13 +2112,13 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="461"/>
-        <source>invalid &apos;blocks per piece&apos; entry</source>
-        <translation>La entrada &apos;bloques por pieza&apos; es inválida en el archivo de datos de reanudación</translation>
+        <source>invalid 'blocks per piece' entry</source>
+        <translation>La entrada 'bloques por pieza' es inválida en el archivo de datos de reanudación</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="462"/>
         <source>missing slots list</source>
-        <translation>El archivo ha perdido la entrada de &quot;ranuras&quot;, que se requiere para los torrentes con asignación compacta</translation>
+        <translation>El archivo ha perdido la entrada de "ranuras", que se requiere para los torrentes con asignación compacta</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="463"/>
@@ -2128,12 +2128,12 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="464"/>
         <source>invalid entry type in slot list</source>
-        <translation>La entrada &apos;slot&apos; no es válida en los datos de reanudación</translation>
+        <translation>La entrada 'slot' no es válida en los datos de reanudación</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="465"/>
         <source>invalid piece index in slot list</source>
-        <translation>Un índice de la lista &apos;slot&apos; no es válido</translation>
+        <translation>Un índice de la lista 'slot' no es válido</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="466"/>
@@ -2168,7 +2168,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="500"/>
         <source>scrape not available on tracker</source>
-        <translation>La URL del rastreador no admite su transformación en una URL de raspado. Es decir, no contiene &quot;anuncio&quot;.</translation>
+        <translation>La URL del rastreador no admite su transformación en una URL de raspado. Es decir, no contiene "anuncio".</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="501"/>
@@ -2187,18 +2187,18 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="504"/>
-        <source>missing or invalid &apos;files&apos; entry</source>
-        <translation>Entrada de &quot;archivos&quot; ausente o no válida</translation>
+        <source>missing or invalid 'files' entry</source>
+        <translation>Entrada de "archivos" ausente o no válida</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="505"/>
-        <source>missing or invalid &apos;hash&apos; entry</source>
+        <source>missing or invalid 'hash' entry</source>
         <translation>Entrada de hash faltante o inválida</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="506"/>
-        <source>missing or invalid &apos;peers&apos; and &apos;peers6&apos; entry</source>
-        <translation>entrada de &apos;peers&apos; y &apos;peers6&apos; ausente o inválida</translation>
+        <source>missing or invalid 'peers' and 'peers6' entry</source>
+        <translation>entrada de 'peers' y 'peers6' ausente o inválida</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="507"/>
@@ -2284,7 +2284,7 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="561"/>
-        <source>stored block length did not match one&apos;s complement</source>
+        <source>stored block length did not match one's complement</source>
         <translation>La longitud del bloque almacenado no coincide con el complemento</translation>
     </message>
     <message>
@@ -2425,7 +2425,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="621"/>
         <source>Action Failed</source>
-        <translation>acción fallida</translation>
+        <translation>Acción fallida</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="622"/>
@@ -3951,7 +3951,7 @@ Error: %2</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="390"/>
-        <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
+        <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href="%3"&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
