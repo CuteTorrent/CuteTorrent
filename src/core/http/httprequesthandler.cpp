@@ -21,9 +21,9 @@ HttpRequestHandler::~HttpRequestHandler()
 void HttpRequestHandler::initSettings()
 {
 	QApplicationSettingsPtr settings = QApplicationSettings::getInstance();
-	requireAuth = settings->valueBool(serverName, "requireAuth", false);
 	account.username = settings->valueString(serverName, "webui_login", "admin");
 	account.password = settings->valueString(serverName, "webui_password", "admin");
+	requireAuth = account.password.length() > 0;
 }
 
 void HttpRequestHandler::service(HttpRequest& request, HttpResponse& response)

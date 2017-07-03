@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'InitializtionDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 5.9.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -41,26 +41,26 @@ public:
     void setupUi(QWidget *InitializationDialog)
     {
         if (InitializationDialog->objectName().isEmpty())
-            InitializationDialog->setObjectName(QString::fromUtf8("InitializationDialog"));
+            InitializationDialog->setObjectName(QStringLiteral("InitializationDialog"));
         InitializationDialog->resize(349, 102);
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
         InitializationDialog->setWindowIcon(icon);
         verticalLayout = new QVBoxLayout(InitializationDialog);
         verticalLayout->setSpacing(0);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(1, 1, 1, 0);
         titleBar = new QWidget(InitializationDialog);
-        titleBar->setObjectName(QString::fromUtf8("titleBar"));
+        titleBar->setObjectName(QStringLiteral("titleBar"));
         titleBar->setMinimumSize(QSize(0, 23));
         titleBar->setMaximumSize(QSize(16777215, 23));
-        titleBar->setStyleSheet(QString::fromUtf8(""));
+        titleBar->setStyleSheet(QStringLiteral(""));
         horizontalLayout = new QHBoxLayout(titleBar);
         horizontalLayout->setSpacing(4);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(5, 0, 1, 0);
         tbMenu = new QLabel(titleBar);
-        tbMenu->setObjectName(QString::fromUtf8("tbMenu"));
+        tbMenu->setObjectName(QStringLiteral("tbMenu"));
         tbMenu->setMaximumSize(QSize(15, 15));
         tbMenu->setPixmap(QPixmap(QString::fromUtf8(":/icons/app.ico")));
         tbMenu->setScaledContents(true);
@@ -68,23 +68,23 @@ public:
         horizontalLayout->addWidget(tbMenu);
 
         LTitle = new QLabel(titleBar);
-        LTitle->setObjectName(QString::fromUtf8("LTitle"));
+        LTitle->setObjectName(QStringLiteral("LTitle"));
         LTitle->setMinimumSize(QSize(100, 22));
         LTitle->setMaximumSize(QSize(16777215, 22));
         QFont font;
-        font.setFamily(QString::fromUtf8("Arial"));
+        font.setFamily(QStringLiteral("Arial"));
         font.setPointSize(8);
         font.setBold(false);
         font.setWeight(50);
         font.setStyleStrategy(QFont::PreferDefault);
         LTitle->setFont(font);
-        LTitle->setStyleSheet(QString::fromUtf8(""));
+        LTitle->setStyleSheet(QStringLiteral(""));
         LTitle->setTextFormat(Qt::AutoText);
 
         horizontalLayout->addWidget(LTitle);
 
         pbClose = new QPushButton(titleBar);
-        pbClose->setObjectName(QString::fromUtf8("pbClose"));
+        pbClose->setObjectName(QStringLiteral("pbClose"));
         pbClose->setMinimumSize(QSize(22, 22));
         pbClose->setMaximumSize(QSize(22, 22));
         pbClose->setIconSize(QSize(22, 22));
@@ -96,18 +96,18 @@ public:
         verticalLayout->addWidget(titleBar);
 
         m_centralWidget = new QWidget(InitializationDialog);
-        m_centralWidget->setObjectName(QString::fromUtf8("m_centralWidget"));
+        m_centralWidget->setObjectName(QStringLiteral("m_centralWidget"));
         gridLayout = new QGridLayout(m_centralWidget);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         progressBar = new QProgressBar(m_centralWidget);
-        progressBar->setObjectName(QString::fromUtf8("progressBar"));
+        progressBar->setObjectName(QStringLiteral("progressBar"));
         progressBar->setValue(0);
         progressBar->setTextVisible(false);
 
         gridLayout->addWidget(progressBar, 2, 0, 1, 1);
 
         stateLabel = new QLabel(m_centralWidget);
-        stateLabel->setObjectName(QString::fromUtf8("stateLabel"));
+        stateLabel->setObjectName(QStringLiteral("stateLabel"));
         stateLabel->setTextFormat(Qt::PlainText);
         stateLabel->setWordWrap(true);
 
@@ -125,7 +125,7 @@ public:
     void retranslateUi(QWidget *InitializationDialog)
     {
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("InitializationDialog", "INITIALIZATION_DIALOG", 0));
+        LTitle->setText(QApplication::translate("InitializationDialog", "INITIALIZATION_DIALOG", Q_NULLPTR));
         stateLabel->setText(QString());
         Q_UNUSED(InitializationDialog);
     } // retranslateUi
