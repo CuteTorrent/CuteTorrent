@@ -56,6 +56,8 @@ QTorrentDisplayModel::QTorrentDisplayModel(ViewMode viewMode, QTreeView* itemVie
 	locker = new QMutex();
 	connect(m_pTorrentManager.get(), SIGNAL(TorrentAdded(Torrent*)), SLOT(OnTorrentAdded()));
 	connect(m_pTorrentManager.get(), SIGNAL(TorrentsChanged(QSet<QString>)), SLOT(Update(QSet<QString>)));
+	connect(m_pTorrentManager.get(), SIGNAL(BeforTorrentRemoved(QString)), SLOT(OnBeforTorrentRemovedExternaly(QString)));
+	connect(m_pTorrentManager.get(), SIGNAL(TorrentRemoved(QString)), SLOT(OnTorrentRemovedExternaly(QString)));
 	/*m_pUpdateTimer = new QTimer(this);
 	m_pUpdateTimer->setInterval(400);*/
 	TorrentGroupsManagerPtr groupsManager = TorrentGroupsManager::getInstance();
@@ -84,6 +86,28 @@ void QTorrentDisplayModel::setViewMode(ViewMode viewMode)
 QTorrentDisplayModel::ViewMode QTorrentDisplayModel::viewMode()
 {
 	return m_viewMode;
+}
+
+void QTorrentDisplayModel::OnBeforTorrentRemovedExternaly(QString infoHash)
+{
+	Torrent* torrent = m_pTorrentStorrage->getTorrent(infoHash);
+	if (torrent != nullptr)
+	{
+		int rowCnt = rowCount();
+		for (int i=0; i< rowCnt;i++)
+		{
+			
+			if (torrent == index(i, 0).data(TorrentRole).value<Torrent*>())
+			{
+				beginRemoveRows(QModelIndex(), i, i);
+			}
+		}
+	}
+}
+
+void QTorrentDisplayModel::OnTorrentRemovedExternaly(QString infoHash)
+{
+	endRemoveRows();
 }
 
 void QTorrentDisplayModel::UpdateMenu()

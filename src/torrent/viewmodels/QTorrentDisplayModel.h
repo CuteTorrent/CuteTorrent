@@ -177,6 +177,8 @@ public:
 	signals:
 	void initCompleted();
 public slots:
+void OnBeforTorrentRemovedExternaly(QString);
+	void OnTorrentRemovedExternaly(QString);
 	void UpdateMenu();
 	void Update(QSet<QString>);
 	void UpdateSelectedIndex(const QItemSelection&);

@@ -343,8 +343,22 @@ void CuteTorrentMainWindow::setupSearchHeaderModel()
 
 void CuteTorrentMainWindow::setupListView()
 {
+	m_pTimeItemDelegate = new TimeItemDelegate(this);
 	m_pTorrentItemDelegate = new QTorrentItemDelegat(this);
+	m_pSimpleTorrentItemDelegate = new QStyledItemDelegate(this);
+	m_pTorrentListView->header()->setSectionsMovable(true);
 	m_pTorrentListView->setItemDelegate(m_pTorrentItemDelegate);
+	m_pTorrentListView->setItemDelegateForColumn(QTorrentDisplayModel::Column::DownloadSpeed, m_pSpeedItemDelegate);
+	m_pTorrentListView->setItemDelegateForColumn(QTorrentDisplayModel::Column::Peers, m_pSimpleTorrentItemDelegate);
+	m_pTorrentListView->setItemDelegateForColumn(QTorrentDisplayModel::Column::Progress, m_pProgressItemDelegate);
+	m_pTorrentListView->setItemDelegateForColumn(QTorrentDisplayModel::Column::RemainingTime, m_pTimeItemDelegate);
+	m_pTorrentListView->setItemDelegateForColumn(QTorrentDisplayModel::Column::Seeds, m_pSimpleTorrentItemDelegate);
+	m_pTorrentListView->setItemDelegateForColumn(QTorrentDisplayModel::Column::Size, m_pFileSizeItemDelegateShowZero);
+	m_pTorrentListView->setItemDelegateForColumn(QTorrentDisplayModel::Column::DownloadSpeed, m_pSpeedItemDelegate);
+	m_pTorrentListView->setItemDelegateForColumn(QTorrentDisplayModel::Column::UploadSpeed, m_pSpeedItemDelegate);
+	m_pTorrentListView->setItemDelegateForColumn(QTorrentDisplayModel::Column::TotalDownloaded, m_pFileSizeItemDelegateNotShowZero);
+	m_pTorrentListView->setItemDelegateForColumn(QTorrentDisplayModel::Column::TotalUploaded, m_pFileSizeItemDelegateNotShowZero);
+	m_pTorrentListView->setItemDelegateForColumn(QTorrentDisplayModel::Column::Uptime, m_pTimeItemDelegate);
 	m_pTorrentListView->setModel(m_pTorrentFilterProxyModel);
 	m_pTorrentHeader = new EditableHeaderView(Qt::Horizontal, m_pTorrentListView);
 	m_pTorrentListView->setHeader(m_pTorrentHeader);
@@ -1905,6 +1919,7 @@ void CuteTorrentMainWindow::startBackUpWizard()
 
 void CuteTorrentMainWindow::initMainMenuIcons() const
 {
+	ACTION_TORRENTTOOLBAR_SWITCH_VIEW->setIcon(m_pStyleEngine->getIcon("grid-view"));
 	ACTION_MENUHELP_ABAUT_CT->setIcon(m_pStyleEngine->getIcon("about"));
 	ACTION_MENUHELP_CHECK_UPDATE->setIcon(m_pStyleEngine->getIcon("check_update"));
 	ACTION_MENUFILE_CREATE->setIcon(m_pStyleEngine->getIcon("create_torrent"));
@@ -2044,6 +2059,32 @@ QLabel* CuteTorrentMainWindow::getTitleLabel()
 QLabel* CuteTorrentMainWindow::getTitleIcon()
 {
 	return tbMenu;
+}
+
+
+
+void CuteTorrentMainWindow::switchTorrentViewMode()
+{
+	int currentTorrentViewMode = m_pTorrentDisplayModel->viewMode();
+	switch(currentTorrentViewMode)
+	{
+		case QTorrentDisplayModel::Compact: 
+			m_pTorrentDisplayModel->setViewMode(QTorrentDisplayModel::Extended);
+			m_pTorrentListView->setItemDelegateForColumn(QTorrentDisplayModel::Name, m_pSimpleTorrentItemDelegate);
+			m_pTorrentListView->setHeaderHidden(false);
+			ACTION_TORRENTTOOLBAR_SWITCH_VIEW->setIcon(m_pStyleEngine->getIcon("list-view"));
+			break;
+		case QTorrentDisplayModel::Extended: 
+			m_pTorrentDisplayModel->setViewMode(QTorrentDisplayModel::Compact);
+			m_pTorrentListView->setItemDelegateForColumn(QTorrentDisplayModel::Name, m_pTorrentItemDelegate);
+			m_pTorrentListView->setHeaderHidden(true);
+			ACTION_TORRENTTOOLBAR_SWITCH_VIEW->setIcon(m_pStyleEngine->getIcon("grid-view"));
+
+			break;
+		default: ;
+	}
+
+	
 }
 
 void CuteTorrentMainWindow::queueTorrentsUp() const

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ReportProblemDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 5.9.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -54,26 +54,26 @@ public:
     void setupUi(QWidget *ReportProblemDialog)
     {
         if (ReportProblemDialog->objectName().isEmpty())
-            ReportProblemDialog->setObjectName(QString::fromUtf8("ReportProblemDialog"));
+            ReportProblemDialog->setObjectName(QStringLiteral("ReportProblemDialog"));
         ReportProblemDialog->resize(389, 302);
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/icons/app.ico"), QSize(), QIcon::Normal, QIcon::Off);
         ReportProblemDialog->setWindowIcon(icon);
         verticalLayout = new QVBoxLayout(ReportProblemDialog);
         verticalLayout->setSpacing(0);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(1, 1, 1, 0);
         titleBar = new QWidget(ReportProblemDialog);
-        titleBar->setObjectName(QString::fromUtf8("titleBar"));
+        titleBar->setObjectName(QStringLiteral("titleBar"));
         titleBar->setMinimumSize(QSize(0, 23));
         titleBar->setMaximumSize(QSize(16777215, 23));
-        titleBar->setStyleSheet(QString::fromUtf8(""));
+        titleBar->setStyleSheet(QStringLiteral(""));
         horizontalLayout = new QHBoxLayout(titleBar);
         horizontalLayout->setSpacing(4);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(5, 0, 1, 0);
         tbMenu = new QLabel(titleBar);
-        tbMenu->setObjectName(QString::fromUtf8("tbMenu"));
+        tbMenu->setObjectName(QStringLiteral("tbMenu"));
         tbMenu->setMaximumSize(QSize(15, 15));
         tbMenu->setPixmap(QPixmap(QString::fromUtf8(":/icons/app.ico")));
         tbMenu->setScaledContents(true);
@@ -81,16 +81,16 @@ public:
         horizontalLayout->addWidget(tbMenu);
 
         LTitle = new QLabel(titleBar);
-        LTitle->setObjectName(QString::fromUtf8("LTitle"));
+        LTitle->setObjectName(QStringLiteral("LTitle"));
         LTitle->setMinimumSize(QSize(100, 22));
         LTitle->setMaximumSize(QSize(16777215, 22));
-        LTitle->setStyleSheet(QString::fromUtf8(""));
+        LTitle->setStyleSheet(QStringLiteral(""));
         LTitle->setTextFormat(Qt::AutoText);
 
         horizontalLayout->addWidget(LTitle);
 
         pbClose = new QPushButton(titleBar);
-        pbClose->setObjectName(QString::fromUtf8("pbClose"));
+        pbClose->setObjectName(QStringLiteral("pbClose"));
         pbClose->setMinimumSize(QSize(22, 22));
         pbClose->setMaximumSize(QSize(22, 22));
         pbClose->setIconSize(QSize(22, 22));
@@ -102,22 +102,22 @@ public:
         verticalLayout->addWidget(titleBar);
 
         m_centralWidget = new QWidget(ReportProblemDialog);
-        m_centralWidget->setObjectName(QString::fromUtf8("m_centralWidget"));
+        m_centralWidget->setObjectName(QStringLiteral("m_centralWidget"));
         gridLayout = new QGridLayout(m_centralWidget);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer);
 
         sendReportButton = new QPushButton(m_centralWidget);
-        sendReportButton->setObjectName(QString::fromUtf8("sendReportButton"));
+        sendReportButton->setObjectName(QStringLiteral("sendReportButton"));
 
         horizontalLayout_2->addWidget(sendReportButton);
 
         cancelButton = new QPushButton(m_centralWidget);
-        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
+        cancelButton->setObjectName(QStringLiteral("cancelButton"));
 
         horizontalLayout_2->addWidget(cancelButton);
 
@@ -125,38 +125,38 @@ public:
         gridLayout->addLayout(horizontalLayout_2, 6, 0, 1, 2);
 
         label = new QLabel(m_centralWidget);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         gridLayout->addWidget(label, 0, 0, 1, 1);
 
         nameEdit = new QLineEdit(m_centralWidget);
-        nameEdit->setObjectName(QString::fromUtf8("nameEdit"));
+        nameEdit->setObjectName(QStringLiteral("nameEdit"));
 
         gridLayout->addWidget(nameEdit, 0, 1, 1, 1);
 
         label_3 = new QLabel(m_centralWidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setWordWrap(true);
 
         gridLayout->addWidget(label_3, 2, 0, 1, 1);
 
         label_2 = new QLabel(m_centralWidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout->addWidget(label_2, 1, 0, 1, 1);
 
         emailEdit = new QLineEdit(m_centralWidget);
-        emailEdit->setObjectName(QString::fromUtf8("emailEdit"));
+        emailEdit->setObjectName(QStringLiteral("emailEdit"));
 
         gridLayout->addWidget(emailEdit, 1, 1, 1, 1);
 
         problemDescriptionEdit = new QTextEdit(m_centralWidget);
-        problemDescriptionEdit->setObjectName(QString::fromUtf8("problemDescriptionEdit"));
+        problemDescriptionEdit->setObjectName(QStringLiteral("problemDescriptionEdit"));
 
         gridLayout->addWidget(problemDescriptionEdit, 2, 1, 2, 1);
 
         sendOSInfoCheckBox = new QCheckBox(m_centralWidget);
-        sendOSInfoCheckBox->setObjectName(QString::fromUtf8("sendOSInfoCheckBox"));
+        sendOSInfoCheckBox->setObjectName(QStringLiteral("sendOSInfoCheckBox"));
 
         gridLayout->addWidget(sendOSInfoCheckBox, 5, 1, 1, 1);
 
@@ -177,15 +177,15 @@ public:
 
     void retranslateUi(QWidget *ReportProblemDialog)
     {
-        ReportProblemDialog->setWindowTitle(QApplication::translate("ReportProblemDialog", "DT_MOUNT_DILAOG", 0));
+        ReportProblemDialog->setWindowTitle(QApplication::translate("ReportProblemDialog", "DT_MOUNT_DILAOG", Q_NULLPTR));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("ReportProblemDialog", "REPORT_PROBLEM", 0));
-        sendReportButton->setText(QApplication::translate("ReportProblemDialog", "SEND_REPORT", 0));
-        cancelButton->setText(QApplication::translate("ReportProblemDialog", "CANCEL", 0));
-        label->setText(QApplication::translate("ReportProblemDialog", "NAME", 0));
-        label_3->setText(QApplication::translate("ReportProblemDialog", "PROBLEM DESCRIBTION", 0));
-        label_2->setText(QApplication::translate("ReportProblemDialog", "EMAIL", 0));
-        sendOSInfoCheckBox->setText(QApplication::translate("ReportProblemDialog", "SEND_OS_INFORMATION", 0));
+        LTitle->setText(QApplication::translate("ReportProblemDialog", "REPORT_PROBLEM", Q_NULLPTR));
+        sendReportButton->setText(QApplication::translate("ReportProblemDialog", "SEND_REPORT", Q_NULLPTR));
+        cancelButton->setText(QApplication::translate("ReportProblemDialog", "CANCEL", Q_NULLPTR));
+        label->setText(QApplication::translate("ReportProblemDialog", "NAME", Q_NULLPTR));
+        label_3->setText(QApplication::translate("ReportProblemDialog", "PROBLEM DESCRIBTION", Q_NULLPTR));
+        label_2->setText(QApplication::translate("ReportProblemDialog", "EMAIL", Q_NULLPTR));
+        sendOSInfoCheckBox->setText(QApplication::translate("ReportProblemDialog", "SEND_OS_INFORMATION", Q_NULLPTR));
     } // retranslateUi
 
 };

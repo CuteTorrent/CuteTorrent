@@ -1504,27 +1504,27 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="324"/>
-        <source>missing or invalid 'info' section in torrent file</source>
-        <translation>El archivo .torrent no tiene un diccionario "info"</translation>
+        <source>missing or invalid &apos;info&apos; section in torrent file</source>
+        <translation>El archivo .torrent no tiene un diccionario &quot;info&quot;</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="325"/>
-        <source>'info' entry is not a dictionary</source>
-        <translation>La entrada "info" del arhivo .torrent no es un diccionario</translation>
+        <source>&apos;info&apos; entry is not a dictionary</source>
+        <translation>La entrada &quot;info&quot; del arhivo .torrent no es un diccionario</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="326"/>
-        <source>invalid or missing 'piece length' entry in torrent file</source>
-        <translation>El archivo .torrent no tiene una entrada de "longitud de pieza"</translation>
+        <source>invalid or missing &apos;piece length&apos; entry in torrent file</source>
+        <translation>El archivo .torrent no tiene una entrada de &quot;longitud de pieza&quot;</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="327"/>
         <source>missing name in torrent file</source>
-        <translation>El archivo .torrent no tiene una entrada "nombre"</translation>
+        <translation>El archivo .torrent no tiene una entrada &quot;nombre&quot;</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="328"/>
-        <source>invalid 'name' of torrent (possible exploit attempt)</source>
+        <source>invalid &apos;name&apos; of torrent (possible exploit attempt)</source>
         <translation>El nombre de entrada del archivo .torrent es inválido</translation>
     </message>
     <message>
@@ -1539,13 +1539,13 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="331"/>
-        <source>invalid or missing 'pieces' entry in torrent file</source>
-        <translation>El campo "piezas" no se encuentra o es invalido en el archivo .torrent</translation>
+        <source>invalid or missing &apos;pieces&apos; entry in torrent file</source>
+        <translation>El campo &quot;piezas&quot; no se encuentra o es invalido en el archivo .torrent</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="332"/>
         <source>incorrect number of piece hashes in torrent file</source>
-        <translation>Las cadena "piezas" tiene una longitud incorrecta</translation>
+        <translation>Las cadena &quot;piezas&quot; tiene una longitud incorrecta</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="333"/>
@@ -1606,7 +1606,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="344"/>
         <source>unsupported URL protocol</source>
-        <translation>El enlace usó un protocolo desconocido. Normalmente "http" y "https" (si está hecho con soporte openssl) son reconocidos. Para los trackers "udp" es reconocido también</translation>
+        <translation>El enlace usó un protocolo desconocido. Normalmente &quot;http&quot; y &quot;https&quot; (si está hecho con soporte openssl) son reconocidos. Para los trackers &quot;udp&quot; es reconocido también</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="345"/>
@@ -1616,7 +1616,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="346"/>
         <source>peer sent 0 length piece</source>
-        <translation>El par envió un mensaje "pieza" de longitud 0</translation>
+        <translation>El par envió un mensaje &quot;pieza&quot; de longitud 0</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="347"/>
@@ -1657,7 +1657,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="354"/>
         <source>expected closing ] for address</source>
-        <translation>La dirección IPv6 era esperada al final con ']'</translation>
+        <translation>La dirección IPv6 era esperada al final con &apos;]&apos;</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="355"/>
@@ -1691,7 +1691,7 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="361"/>
-        <source>'have'-message with higher index than the number of pieces</source>
+        <source>&apos;have&apos;-message with higher index than the number of pieces</source>
         <translation>El par envió un mensaje equivodado sobre las piezas disponibles, tanto en el tamaño incorrecto como lo referente a la pieza que no existe en el torrent.</translation>
     </message>
     <message>
@@ -2028,7 +2028,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="430"/>
         <source>invalid dont-have message</source>
-        <translation>El par envió un mensaje inválido "no tener". El mensaje no tener es una extensión para permitir a los pares anunciar que ya no tienen una pieza que antes tenían.</translation>
+        <translation>El par envió un mensaje inválido &quot;no tener&quot;. El mensaje no tener es una extensión para permitir a los pares anunciar que ya no tienen una pieza que antes tenían.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="431"/>
@@ -2077,18 +2077,18 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="454"/>
-        <source>missing or invalid 'file sizes' entry</source>
-        <translation>El archivo de datos de reanudación está perdiendo la entrada de los 'tamaños de archivo'</translation>
+        <source>missing or invalid &apos;file sizes&apos; entry</source>
+        <translation>El archivo de datos de reanudación está perdiendo la entrada de los &apos;tamaños de archivo&apos;</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="455"/>
         <source>no files in resume data</source>
-        <translation>La entrada de 'tamaños de archivo' del archivo de datos de reanudación está vacía.</translation>
+        <translation>La entrada de &apos;tamaños de archivo&apos; del archivo de datos de reanudación está vacía.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="456"/>
-        <source>missing 'slots' and 'pieces' entry</source>
-        <translation>El archivo de datos de reanudación está perdiendo las entradas 'piezas' y 'espacios'</translation>
+        <source>missing &apos;slots&apos; and &apos;pieces&apos; entry</source>
+        <translation>El archivo de datos de reanudación está perdiendo las entradas &apos;piezas&apos; y &apos;espacios&apos;</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="457"/>
@@ -2112,13 +2112,13 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="461"/>
-        <source>invalid 'blocks per piece' entry</source>
-        <translation>La entrada 'bloques por pieza' es inválida en el archivo de datos de reanudación</translation>
+        <source>invalid &apos;blocks per piece&apos; entry</source>
+        <translation>La entrada &apos;bloques por pieza&apos; es inválida en el archivo de datos de reanudación</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="462"/>
         <source>missing slots list</source>
-        <translation>El archivo ha perdido la entrada de "ranuras", que se requiere para los torrentes con asignación compacta</translation>
+        <translation>El archivo ha perdido la entrada de &quot;ranuras&quot;, que se requiere para los torrentes con asignación compacta</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="463"/>
@@ -2128,12 +2128,12 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="464"/>
         <source>invalid entry type in slot list</source>
-        <translation>La entrada 'slot' no es válida en los datos de reanudación</translation>
+        <translation>La entrada &apos;slot&apos; no es válida en los datos de reanudación</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="465"/>
         <source>invalid piece index in slot list</source>
-        <translation>Un índice de la lista 'slot' no es válido</translation>
+        <translation>Un índice de la lista &apos;slot&apos; no es válido</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="466"/>
@@ -2168,7 +2168,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="500"/>
         <source>scrape not available on tracker</source>
-        <translation>La URL del rastreador no admite su transformación en una URL de raspado. Es decir, no contiene "anuncio".</translation>
+        <translation>La URL del rastreador no admite su transformación en una URL de raspado. Es decir, no contiene &quot;anuncio&quot;.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="501"/>
@@ -2187,18 +2187,18 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="504"/>
-        <source>missing or invalid 'files' entry</source>
-        <translation>Entrada de "archivos" ausente o no válida</translation>
+        <source>missing or invalid &apos;files&apos; entry</source>
+        <translation>Entrada de &quot;archivos&quot; ausente o no válida</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="505"/>
-        <source>missing or invalid 'hash' entry</source>
+        <source>missing or invalid &apos;hash&apos; entry</source>
         <translation>Entrada de hash faltante o inválida</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="506"/>
-        <source>missing or invalid 'peers' and 'peers6' entry</source>
-        <translation>entrada de 'peers' y 'peers6' ausente o inválida</translation>
+        <source>missing or invalid &apos;peers&apos; and &apos;peers6&apos; entry</source>
+        <translation>entrada de &apos;peers&apos; y &apos;peers6&apos; ausente o inválida</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="507"/>
@@ -2284,7 +2284,7 @@ Bajada: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="561"/>
-        <source>stored block length did not match one's complement</source>
+        <source>stored block length did not match one&apos;s complement</source>
         <translation>La longitud del bloque almacenado no coincide con el complemento</translation>
     </message>
     <message>
@@ -3441,222 +3441,222 @@ Error: %2</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="511"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="523"/>
         <source>HEADER_NAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="512"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="524"/>
         <source>HEADER_PROGRES</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="513"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="525"/>
         <source>HEADER_SIZE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="514"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="526"/>
         <source>HEADER_TOTAL_DOWNLOADED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="515"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="527"/>
         <source>HEADER_TOTAL_UPLOADED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="516"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="528"/>
         <source>HEADER_DOWNLOAD_SPEED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="517"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="529"/>
         <source>HEADER_UPLOAD_SPEED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="518"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="530"/>
         <source>HEADER_TIME_ELAPSED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="519"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="531"/>
         <source>HEADER_TIME_LEFT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="520"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="532"/>
         <source>HEADER_SEED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="521"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="533"/>
         <source>HEADER_PEER</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="626"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="672"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="638"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="684"/>
         <source>TORRENT_DELITION</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="626"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="638"/>
         <source>TORRENT_DELITION_MSG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="672"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="684"/>
         <source>TORRENT_ALL_DELITION_MSG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="724"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="736"/>
         <source>DIALOG_OPEN_FOLDER</source>
         <translation type="unfinished">Seleccionar una carpeta</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1025"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1104"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1037"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1116"/>
         <source>ACTION_TORRENTLIST_PAUSE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1026"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1107"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1038"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1119"/>
         <source>ACTION_TORRENTLIST_RESUME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1027"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1111"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1039"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1123"/>
         <source>ACTION_OPEN_FOLDER</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1028"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1117"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1040"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1129"/>
         <source>ACTION_DT_MOUNT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1029"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1219"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1041"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1231"/>
         <source>ACTION_DELETE_ALL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1030"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1224"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1042"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1236"/>
         <source>ACTION_DELETE_TORRENT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1031"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1201"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1043"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1213"/>
         <source>ACTION_REHASH</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1032"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1209"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1044"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1221"/>
         <source>ACTION_SET_SEQUENTIAL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1033"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1205"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1045"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1217"/>
         <source>ACTION_UPDATE_TRACKERS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1034"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1121"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1046"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1133"/>
         <source>ACTION_MOVE_STORRAGE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1035"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1196"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1047"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1208"/>
         <source>ACTION_SET_SUPERSEED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1036"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1214"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1048"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1226"/>
         <source>ACTION_GENERATE_MAGNET</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1037"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1229"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1049"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1241"/>
         <source>ACTION_CHANGE_GROUP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1038"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1126"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1050"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1138"/>
         <source>ACTION_QUEUE_CONTROLL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1039"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1141"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1051"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1153"/>
         <source>ACTION_QUEUE_BOTTOM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1040"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1137"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1052"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1149"/>
         <source>ACTION_QUEUE_TOP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1041"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1128"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1053"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1140"/>
         <source>ACTION_QUEUE_UP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1042"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1132"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1054"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1144"/>
         <source>ACTION_QUEUE_DOWN</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1043"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1150"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1055"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1162"/>
         <source>ACTION_PRIORITY</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1044"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1184"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1056"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1196"/>
         <source>ACTION_LOW_PRIORITY</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1045"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1176"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1057"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1188"/>
         <source>ACTION_BELOW_AVG_PRIORITY</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1046"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1168"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1058"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1180"/>
         <source>ACTION_MEDIUM_PRIORITY</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1047"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1160"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1059"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1172"/>
         <source>ACTION_ABOVE_AVG_PRIORITY</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1048"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1152"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1060"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1164"/>
         <source>ACTION_HIGHT_PRIORITY</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3951,7 +3951,7 @@ Error: %2</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="390"/>
-        <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href="%3"&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
+        <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

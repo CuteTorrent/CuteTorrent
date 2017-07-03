@@ -41,6 +41,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <gui/Controls/EditableHeaderView.h>
 #include <viewmodels/QSearchFilterModel.h>
 #include "TorrentGroupsManager.h"
+#include "TimeItemDelegate.h"
 class CommentsModel;
 class CommentItemDelegate;
 class RatingWidget;
@@ -140,6 +141,7 @@ private:
 	QRssItemDelegate* m_pRssItemDelegate;
 	QTorrentFilterProxyModel* m_pTorrentFilterProxyModel;
 	QTorrentDisplayModel* m_pTorrentDisplayModel;
+	QStyledItemDelegate* m_pSimpleTorrentItemDelegate;
 	QTorrentItemDelegat* m_pTorrentItemDelegate;
 	QSearchDisplayModel* m_pSearchDisplayModel;
 	QSearchItemDelegate* m_pSearchItemDelegate;
@@ -155,6 +157,7 @@ private:
 	QStateMachine* m_pSorterStateMachine;
 	QState* m_pSortAscendingSortState;
 	QState* m_pSortDescendingSortState;
+	TimeItemDelegate* m_pTimeItemDelegate;
 	ProgressItemDelegate* m_pProgressItemDelegate;
 	FileSizeItemDelegate* m_pFileSizeItemDelegateShowZero;
 	FileSizeItemDelegate* m_pFileSizeItemDelegateNotShowZero;
@@ -210,6 +213,7 @@ private:
 	virtual QLabel* getTitleLabel() override;
 	virtual QLabel* getTitleIcon() override;
 public slots:
+	void switchTorrentViewMode();
 	void queueTorrentsUp() const;
 	void queueTorrentsDown() const;
 	void updateSorting(int) const;

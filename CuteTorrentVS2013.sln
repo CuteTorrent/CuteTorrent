@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CuteTorrent", "src\CuteTorrent.vcxproj", "{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CuteTorrent", "src\CuteTorrent.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{82953BDA-2960-4ADA-A6D5-92E65CCB4A3D} = {82953BDA-2960-4ADA-A6D5-92E65CCB4A3D}
 	EndProjectSection
@@ -18,14 +18,12 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}.Debug|Win32.ActiveCfg = Debug|Win32
-		{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}.Debug|Win32.Build.0 = Debug|Win32
-		{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}.Debug|x64.ActiveCfg = Debug|x64
-		{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}.Debug|x64.Build.0 = Debug|x64
-		{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}.Release|Win32.ActiveCfg = Release|Win32
-		{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}.Release|Win32.Build.0 = Release|Win32
-		{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}.Release|x64.ActiveCfg = Release|x64
-		{70F5A0DA-CA59-3F5B-AE7B-2417C8B535AC}.Release|x64.Build.0 = Release|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.Build.0 = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.ActiveCfg = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.Build.0 = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.ActiveCfg = Release|Win32
 		{82953BDA-2960-4ADA-A6D5-92E65CCB4A3D}.Debug|Win32.ActiveCfg = Debug|Win32
 		{82953BDA-2960-4ADA-A6D5-92E65CCB4A3D}.Debug|Win32.Build.0 = Debug|Win32
 		{82953BDA-2960-4ADA-A6D5-92E65CCB4A3D}.Debug|x64.ActiveCfg = Debug|x64

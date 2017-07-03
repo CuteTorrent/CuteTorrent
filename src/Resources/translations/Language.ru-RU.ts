@@ -3427,216 +3427,216 @@ ERROR: %2
 <context>
     <name>QTorrentDisplayModel</name>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="724"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="736"/>
         <source>DIALOG_OPEN_FOLDER</source>
         <translation>Выбирите папку</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1027"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1111"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1039"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1123"/>
         <source>ACTION_OPEN_FOLDER</source>
         <translation>Открыть папку</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1028"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1117"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1040"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1129"/>
         <source>ACTION_DT_MOUNT</source>
         <translation>Смонтировать в Daemon Tools</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1033"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1205"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1045"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1217"/>
         <source>ACTION_UPDATE_TRACKERS</source>
         <translation>Обновить трекеры</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1035"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1196"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1047"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1208"/>
         <source>ACTION_SET_SUPERSEED</source>
         <translation>Супер-сид</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1036"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1214"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1048"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1226"/>
         <source>ACTION_GENERATE_MAGNET</source>
         <translation>Сгенерировать магнет-ссылку</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1037"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1229"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1049"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1241"/>
         <source>ACTION_CHANGE_GROUP</source>
         <translation>Изменить группу</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1038"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1126"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1050"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1138"/>
         <source>ACTION_QUEUE_CONTROLL</source>
         <translation>Управление очередью</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1041"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1128"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1053"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1140"/>
         <source>ACTION_QUEUE_UP</source>
         <translation>Поднять</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1042"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1132"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1054"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1144"/>
         <source>ACTION_QUEUE_DOWN</source>
         <translation>Опустить</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1043"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1150"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1055"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1162"/>
         <source>ACTION_PRIORITY</source>
         <translation>Приортиет</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1048"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1152"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1060"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1164"/>
         <source>ACTION_HIGHT_PRIORITY</source>
         <translation>Высокий</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1047"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1160"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1059"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1172"/>
         <source>ACTION_ABOVE_AVG_PRIORITY</source>
         <translation>Выше среднего</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1046"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1168"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1058"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1180"/>
         <source>ACTION_MEDIUM_PRIORITY</source>
         <translation>Средний</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1045"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1176"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1057"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1188"/>
         <source>ACTION_BELOW_AVG_PRIORITY</source>
         <translation>Ниже среднего</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1044"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1184"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1056"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1196"/>
         <source>ACTION_LOW_PRIORITY</source>
         <translation>Низкий</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1040"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1137"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1052"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1149"/>
         <source>ACTION_QUEUE_TOP</source>
         <translation>В начало</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1039"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1141"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1051"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1153"/>
         <source>ACTION_QUEUE_BOTTOM</source>
         <translation>В конец</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1025"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1104"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1037"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1116"/>
         <source>ACTION_TORRENTLIST_PAUSE</source>
         <translation>Приостановить</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1026"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1107"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1038"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1119"/>
         <source>ACTION_TORRENTLIST_RESUME</source>
         <translation>Возобновить</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1032"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1209"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1044"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1221"/>
         <source>ACTION_SET_SEQUENTIAL</source>
         <translation>Последовательная загрузка</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1034"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1121"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1046"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1133"/>
         <source>ACTION_MOVE_STORRAGE</source>
         <translation>Переместить в...</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="511"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="523"/>
         <source>HEADER_NAME</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="512"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="524"/>
         <source>HEADER_PROGRES</source>
         <translation>Прогрес</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="513"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="525"/>
         <source>HEADER_SIZE</source>
         <translation>Размер</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="516"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="528"/>
         <source>HEADER_DOWNLOAD_SPEED</source>
         <translation>Загрузка</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="517"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="529"/>
         <source>HEADER_UPLOAD_SPEED</source>
         <translation>Отдача</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="514"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="526"/>
         <source>HEADER_TOTAL_DOWNLOADED</source>
         <translation>Загружено</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="515"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="527"/>
         <source>HEADER_TOTAL_UPLOADED</source>
         <translation>Отдано</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="519"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="531"/>
         <source>HEADER_TIME_LEFT</source>
         <translation>Осталось</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="518"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="530"/>
         <source>HEADER_TIME_ELAPSED</source>
         <translation>Прошло</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="520"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="532"/>
         <source>HEADER_SEED</source>
         <translation>Сиды</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="521"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="533"/>
         <source>HEADER_PEER</source>
         <translation>Пиры</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="626"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="672"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="638"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="684"/>
         <source>TORRENT_DELITION</source>
         <translation>Удаление торрента</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="626"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="638"/>
         <source>TORRENT_DELITION_MSG</source>
         <translation>Вы согласны удалить торрент %1?</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="672"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="684"/>
         <source>TORRENT_ALL_DELITION_MSG</source>
         <translation>Вы согласны удалить торрент %1 и файлы?</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1029"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1219"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1041"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1231"/>
         <source>ACTION_DELETE_ALL</source>
         <translation>Удалить файлы и торрент</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1030"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1224"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1042"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1236"/>
         <source>ACTION_DELETE_TORRENT</source>
         <translation>Удалить торрент</translation>
     </message>
@@ -3651,8 +3651,8 @@ ERROR: %2
         <translation>Неудалось запустить.</translation>
     </message>
     <message>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1031"/>
-        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1201"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1043"/>
+        <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1213"/>
         <source>ACTION_REHASH</source>
         <translation>Перепроверить файлы</translation>
     </message>

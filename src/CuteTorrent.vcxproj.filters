@@ -168,6 +168,11 @@
     <Filter Include="Resources\Translations">
       <UniqueIdentifier>{f1cc2887-390c-4653-b17a-2d2623248540}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Comments\CommentsWebClient.cpp">
@@ -1693,6 +1698,33 @@
     </CustomBuild>
     <CustomBuild Include="Resources\ltorrent.qrc">
       <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\FormFiles\CustomWindow.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\FormFiles\InitializtionDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\FormFiles\messagebox.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\FormFiles\multipleDt.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\FormFiles\RaitingDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\FormFiles\ReportProblemDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\FormFiles\SettingsDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\FormFiles\SpeedLimitDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\gui\FormFiles\VideoFileChoose.ui">
+      <Filter>Form Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

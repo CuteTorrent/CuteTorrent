@@ -70,6 +70,7 @@ signals:
 	void TorrentRemoved(QString);
 	void TorrentsChanged(QSet<QString> infohashes);
 	void FileRenameCompleted();
+	void BeforTorrentRemoved(QString infoHash);
 protected:
 	bool MoveFiles(QString oldStyleDirPath, QString newStyleDirPath) const;
 	void timerEvent(QTimerEvent*) override;

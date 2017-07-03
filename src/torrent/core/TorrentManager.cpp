@@ -1220,6 +1220,7 @@ void TorrentManager::dispatchPendingAlerts()
 
 void TorrentManager::RemoveTorrent(QString infoHash, bool delFiles)
 {
+	emit BeforTorrentRemoved(infoHash);
 	m_pTorrentStorrage->remove(infoHash);
 	emit TorrentRemoved(infoHash);
 	try

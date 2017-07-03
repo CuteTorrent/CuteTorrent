@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'CustomWindow.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 5.9.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -75,6 +75,7 @@ public:
     QAction *ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE;
     QAction *ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE;
     QAction *ACTION_MENUHELP_RATE;
+    QAction *ACTION_TORRENTTOOLBAR_SWITCH_VIEW;
     QVBoxLayout *verticalLayout;
     QWidget *titleBar;
     QHBoxLayout *horizontalLayout;
@@ -173,115 +174,117 @@ public:
     void setupUi(QWidget *CustomWindow)
     {
         if (CustomWindow->objectName().isEmpty())
-            CustomWindow->setObjectName(QString::fromUtf8("CustomWindow"));
+            CustomWindow->setObjectName(QStringLiteral("CustomWindow"));
         CustomWindow->resize(550, 681);
         CustomWindow->setMouseTracking(true);
         ACTION_MENUFILE_OPEN_TORRENT = new QAction(CustomWindow);
-        ACTION_MENUFILE_OPEN_TORRENT->setObjectName(QString::fromUtf8("ACTION_MENUFILE_OPEN_TORRENT"));
+        ACTION_MENUFILE_OPEN_TORRENT->setObjectName(QStringLiteral("ACTION_MENUFILE_OPEN_TORRENT"));
         ACTION_MENUFILE_OPEN_TORRENT->setShortcutContext(Qt::WindowShortcut);
         ACTION_MENUFILE_OPEN_MAGNET = new QAction(CustomWindow);
-        ACTION_MENUFILE_OPEN_MAGNET->setObjectName(QString::fromUtf8("ACTION_MENUFILE_OPEN_MAGNET"));
+        ACTION_MENUFILE_OPEN_MAGNET->setObjectName(QStringLiteral("ACTION_MENUFILE_OPEN_MAGNET"));
         ACTION_MENUFILE_CREATE = new QAction(CustomWindow);
-        ACTION_MENUFILE_CREATE->setObjectName(QString::fromUtf8("ACTION_MENUFILE_CREATE"));
+        ACTION_MENUFILE_CREATE->setObjectName(QStringLiteral("ACTION_MENUFILE_CREATE"));
         ACTION_MENUFILE_EXIT = new QAction(CustomWindow);
-        ACTION_MENUFILE_EXIT->setObjectName(QString::fromUtf8("ACTION_MENUFILE_EXIT"));
+        ACTION_MENUFILE_EXIT->setObjectName(QStringLiteral("ACTION_MENUFILE_EXIT"));
         ACTION_MENUFILE_EXIT->setMenuRole(QAction::QuitRole);
         ACTION_MENU_SETTINGS = new QAction(CustomWindow);
-        ACTION_MENU_SETTINGS->setObjectName(QString::fromUtf8("ACTION_MENU_SETTINGS"));
+        ACTION_MENU_SETTINGS->setObjectName(QStringLiteral("ACTION_MENU_SETTINGS"));
         ACTION_MENU_SETTINGS->setMenuRole(QAction::PreferencesRole);
         ACTION_SEARCHTOOLBAR_DOWNLOAD = new QAction(CustomWindow);
-        ACTION_SEARCHTOOLBAR_DOWNLOAD->setObjectName(QString::fromUtf8("ACTION_SEARCHTOOLBAR_DOWNLOAD"));
+        ACTION_SEARCHTOOLBAR_DOWNLOAD->setObjectName(QStringLiteral("ACTION_SEARCHTOOLBAR_DOWNLOAD"));
         ACTION_SEARCHTOOLBAR_OPEN_URL = new QAction(CustomWindow);
-        ACTION_SEARCHTOOLBAR_OPEN_URL->setObjectName(QString::fromUtf8("ACTION_SEARCHTOOLBAR_OPEN_URL"));
+        ACTION_SEARCHTOOLBAR_OPEN_URL->setObjectName(QStringLiteral("ACTION_SEARCHTOOLBAR_OPEN_URL"));
         ACTION_MENUHELP_ABAUT_CT = new QAction(CustomWindow);
-        ACTION_MENUHELP_ABAUT_CT->setObjectName(QString::fromUtf8("ACTION_MENUHELP_ABAUT_CT"));
+        ACTION_MENUHELP_ABAUT_CT->setObjectName(QStringLiteral("ACTION_MENUHELP_ABAUT_CT"));
         ACTION_MENUHELP_ABAUT_CT->setMenuRole(QAction::AboutRole);
         ACTION_MENUHELP_CHECK_UPDATE = new QAction(CustomWindow);
-        ACTION_MENUHELP_CHECK_UPDATE->setObjectName(QString::fromUtf8("ACTION_MENUHELP_CHECK_UPDATE"));
+        ACTION_MENUHELP_CHECK_UPDATE->setObjectName(QStringLiteral("ACTION_MENUHELP_CHECK_UPDATE"));
         ACTION_TOOLBAR_SETTINGS = new QAction(CustomWindow);
-        ACTION_TOOLBAR_SETTINGS->setObjectName(QString::fromUtf8("ACTION_TOOLBAR_SETTINGS"));
+        ACTION_TOOLBAR_SETTINGS->setObjectName(QStringLiteral("ACTION_TOOLBAR_SETTINGS"));
         ACTION_TOOLS_BACKUP = new QAction(CustomWindow);
-        ACTION_TOOLS_BACKUP->setObjectName(QString::fromUtf8("ACTION_TOOLS_BACKUP"));
+        ACTION_TOOLS_BACKUP->setObjectName(QStringLiteral("ACTION_TOOLS_BACKUP"));
         ACTION_RSSTOOLBAR_RSS_ADD = new QAction(CustomWindow);
-        ACTION_RSSTOOLBAR_RSS_ADD->setObjectName(QString::fromUtf8("ACTION_RSSTOOLBAR_RSS_ADD"));
+        ACTION_RSSTOOLBAR_RSS_ADD->setObjectName(QStringLiteral("ACTION_RSSTOOLBAR_RSS_ADD"));
         ACTION_RSSTOOLBAR_RSS_REMOVE = new QAction(CustomWindow);
-        ACTION_RSSTOOLBAR_RSS_REMOVE->setObjectName(QString::fromUtf8("ACTION_RSSTOOLBAR_RSS_REMOVE"));
+        ACTION_RSSTOOLBAR_RSS_REMOVE->setObjectName(QStringLiteral("ACTION_RSSTOOLBAR_RSS_REMOVE"));
         ACTION_RSSTOOLBAR_RSS_EDIT = new QAction(CustomWindow);
-        ACTION_RSSTOOLBAR_RSS_EDIT->setObjectName(QString::fromUtf8("ACTION_RSSTOOLBAR_RSS_EDIT"));
+        ACTION_RSSTOOLBAR_RSS_EDIT->setObjectName(QStringLiteral("ACTION_RSSTOOLBAR_RSS_EDIT"));
         ACTION_MENUHELP_ABOUT_QT = new QAction(CustomWindow);
-        ACTION_MENUHELP_ABOUT_QT->setObjectName(QString::fromUtf8("ACTION_MENUHELP_ABOUT_QT"));
+        ACTION_MENUHELP_ABOUT_QT->setObjectName(QStringLiteral("ACTION_MENUHELP_ABOUT_QT"));
         ACTION_TORRENTTOOLBAR_QUEUE_UP = new QAction(CustomWindow);
-        ACTION_TORRENTTOOLBAR_QUEUE_UP->setObjectName(QString::fromUtf8("ACTION_TORRENTTOOLBAR_QUEUE_UP"));
+        ACTION_TORRENTTOOLBAR_QUEUE_UP->setObjectName(QStringLiteral("ACTION_TORRENTTOOLBAR_QUEUE_UP"));
         ACTION_TORRENTTOOLBAR_QUEUE_DOWN = new QAction(CustomWindow);
-        ACTION_TORRENTTOOLBAR_QUEUE_DOWN->setObjectName(QString::fromUtf8("ACTION_TORRENTTOOLBAR_QUEUE_DOWN"));
+        ACTION_TORRENTTOOLBAR_QUEUE_DOWN->setObjectName(QStringLiteral("ACTION_TORRENTTOOLBAR_QUEUE_DOWN"));
         ACTION_MENUHELP_REPORT_PROBLEM = new QAction(CustomWindow);
-        ACTION_MENUHELP_REPORT_PROBLEM->setObjectName(QString::fromUtf8("ACTION_MENUHELP_REPORT_PROBLEM"));
+        ACTION_MENUHELP_REPORT_PROBLEM->setObjectName(QStringLiteral("ACTION_MENUHELP_REPORT_PROBLEM"));
         ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY = new QAction(CustomWindow);
-        ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY->setObjectName(QString::fromUtf8("ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY"));
+        ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY->setObjectName(QStringLiteral("ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY"));
         ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY->setCheckable(true);
         ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY = new QAction(CustomWindow);
-        ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY->setObjectName(QString::fromUtf8("ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY"));
+        ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY->setObjectName(QStringLiteral("ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY"));
         ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY->setCheckable(true);
         ACTION_MENUVIEW_TOGGLE_STATUSBAR_VISIBILITY = new QAction(CustomWindow);
-        ACTION_MENUVIEW_TOGGLE_STATUSBAR_VISIBILITY->setObjectName(QString::fromUtf8("ACTION_MENUVIEW_TOGGLE_STATUSBAR_VISIBILITY"));
+        ACTION_MENUVIEW_TOGGLE_STATUSBAR_VISIBILITY->setObjectName(QStringLiteral("ACTION_MENUVIEW_TOGGLE_STATUSBAR_VISIBILITY"));
         ACTION_MENUVIEW_TOGGLE_STATUSBAR_VISIBILITY->setCheckable(true);
         ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY = new QAction(CustomWindow);
-        ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY->setObjectName(QString::fromUtf8("ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY"));
+        ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY->setObjectName(QStringLiteral("ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY"));
         ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY->setCheckable(true);
         ACTION_TORRENTTOOLBAR_ADD_TORRENT = new QAction(CustomWindow);
-        ACTION_TORRENTTOOLBAR_ADD_TORRENT->setObjectName(QString::fromUtf8("ACTION_TORRENTTOOLBAR_ADD_TORRENT"));
+        ACTION_TORRENTTOOLBAR_ADD_TORRENT->setObjectName(QStringLiteral("ACTION_TORRENTTOOLBAR_ADD_TORRENT"));
         ACTION_TORRENTTOOLBAR_OPEN_MAGNET = new QAction(CustomWindow);
-        ACTION_TORRENTTOOLBAR_OPEN_MAGNET->setObjectName(QString::fromUtf8("ACTION_TORRENTTOOLBAR_OPEN_MAGNET"));
+        ACTION_TORRENTTOOLBAR_OPEN_MAGNET->setObjectName(QStringLiteral("ACTION_TORRENTTOOLBAR_OPEN_MAGNET"));
         ACTION_TOOLS_IMPORT = new QAction(CustomWindow);
-        ACTION_TOOLS_IMPORT->setObjectName(QString::fromUtf8("ACTION_TOOLS_IMPORT"));
+        ACTION_TOOLS_IMPORT->setObjectName(QStringLiteral("ACTION_TOOLS_IMPORT"));
         ACTION_AUTOSHUTDOWN_DISABLED = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_DISABLED->setObjectName(QString::fromUtf8("ACTION_AUTOSHUTDOWN_DISABLED"));
+        ACTION_AUTOSHUTDOWN_DISABLED->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_DISABLED"));
         ACTION_AUTOSHUTDOWN_DISABLED->setCheckable(true);
         ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLADS_COMPLETE = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLADS_COMPLETE->setObjectName(QString::fromUtf8("ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLADS_COMPLETE"));
+        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLADS_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLADS_COMPLETE"));
         ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE->setObjectName(QString::fromUtf8("ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE"));
+        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE"));
         ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE->setCheckable(true);
         ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE->setObjectName(QString::fromUtf8("ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE"));
+        ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE"));
         ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE->setCheckable(true);
         ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE->setObjectName(QString::fromUtf8("ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE"));
+        ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE"));
         ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE->setCheckable(true);
         ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE->setObjectName(QString::fromUtf8("ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE"));
+        ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE"));
         ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE->setCheckable(true);
         ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE->setObjectName(QString::fromUtf8("ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE"));
+        ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE"));
         ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE->setCheckable(true);
         ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE->setObjectName(QString::fromUtf8("ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE"));
+        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE"));
         ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE->setCheckable(true);
         ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE->setObjectName(QString::fromUtf8("ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE"));
+        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE"));
         ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE->setCheckable(true);
         ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE->setObjectName(QString::fromUtf8("ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE"));
+        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE"));
         ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE->setCheckable(true);
         ACTION_MENUHELP_RATE = new QAction(CustomWindow);
-        ACTION_MENUHELP_RATE->setObjectName(QString::fromUtf8("ACTION_MENUHELP_RATE"));
+        ACTION_MENUHELP_RATE->setObjectName(QStringLiteral("ACTION_MENUHELP_RATE"));
+        ACTION_TORRENTTOOLBAR_SWITCH_VIEW = new QAction(CustomWindow);
+        ACTION_TORRENTTOOLBAR_SWITCH_VIEW->setObjectName(QStringLiteral("ACTION_TORRENTTOOLBAR_SWITCH_VIEW"));
         verticalLayout = new QVBoxLayout(CustomWindow);
         verticalLayout->setSpacing(0);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(2, 1, 2, 2);
         titleBar = new QWidget(CustomWindow);
-        titleBar->setObjectName(QString::fromUtf8("titleBar"));
+        titleBar->setObjectName(QStringLiteral("titleBar"));
         titleBar->setMinimumSize(QSize(0, 23));
         titleBar->setMaximumSize(QSize(16777215, 23));
-        titleBar->setStyleSheet(QString::fromUtf8(""));
+        titleBar->setStyleSheet(QStringLiteral(""));
         horizontalLayout = new QHBoxLayout(titleBar);
         horizontalLayout->setSpacing(4);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(5, 0, 1, 0);
         tbMenu = new QLabel(titleBar);
-        tbMenu->setObjectName(QString::fromUtf8("tbMenu"));
+        tbMenu->setObjectName(QStringLiteral("tbMenu"));
         tbMenu->setMaximumSize(QSize(15, 15));
         tbMenu->setPixmap(QPixmap(QString::fromUtf8(":/icons/app.ico")));
         tbMenu->setScaledContents(true);
@@ -289,16 +292,16 @@ public:
         horizontalLayout->addWidget(tbMenu);
 
         LTitle = new QLabel(titleBar);
-        LTitle->setObjectName(QString::fromUtf8("LTitle"));
+        LTitle->setObjectName(QStringLiteral("LTitle"));
         LTitle->setMinimumSize(QSize(100, 22));
         LTitle->setMaximumSize(QSize(16777215, 22));
-        LTitle->setStyleSheet(QString::fromUtf8(""));
+        LTitle->setStyleSheet(QStringLiteral(""));
         LTitle->setTextFormat(Qt::AutoText);
 
         horizontalLayout->addWidget(LTitle);
 
         pbMin = new QPushButton(titleBar);
-        pbMin->setObjectName(QString::fromUtf8("pbMin"));
+        pbMin->setObjectName(QStringLiteral("pbMin"));
         pbMin->setMinimumSize(QSize(3, 22));
         pbMin->setMaximumSize(QSize(22, 22));
         pbMin->setIconSize(QSize(22, 22));
@@ -307,7 +310,7 @@ public:
         horizontalLayout->addWidget(pbMin);
 
         pbMax = new QPushButton(titleBar);
-        pbMax->setObjectName(QString::fromUtf8("pbMax"));
+        pbMax->setObjectName(QStringLiteral("pbMax"));
         pbMax->setMinimumSize(QSize(3, 22));
         pbMax->setMaximumSize(QSize(22, 22));
         pbMax->setIconSize(QSize(22, 22));
@@ -316,7 +319,7 @@ public:
         horizontalLayout->addWidget(pbMax);
 
         pbClose = new QPushButton(titleBar);
-        pbClose->setObjectName(QString::fromUtf8("pbClose"));
+        pbClose->setObjectName(QStringLiteral("pbClose"));
         pbClose->setMinimumSize(QSize(3, 22));
         pbClose->setMaximumSize(QSize(22, 22));
         pbClose->setIconSize(QSize(22, 22));
@@ -328,27 +331,27 @@ public:
         verticalLayout->addWidget(titleBar);
 
         m_centralWidget = new QWidget(CustomWindow);
-        m_centralWidget->setObjectName(QString::fromUtf8("m_centralWidget"));
+        m_centralWidget->setObjectName(QStringLiteral("m_centralWidget"));
         m_centralWidget->setMouseTracking(true);
-        m_centralWidget->setStyleSheet(QString::fromUtf8(""));
+        m_centralWidget->setStyleSheet(QStringLiteral(""));
         gridLayout_3 = new QGridLayout(m_centralWidget);
         gridLayout_3->setSpacing(0);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         gridLayout_3->setContentsMargins(6, 1, 6, 6);
         mystatusBar = new QStatusBar(m_centralWidget);
-        mystatusBar->setObjectName(QString::fromUtf8("mystatusBar"));
+        mystatusBar->setObjectName(QStringLiteral("mystatusBar"));
         mystatusBar->setMaximumSize(QSize(16777215, 19));
-        mystatusBar->setStyleSheet(QString::fromUtf8(""));
+        mystatusBar->setStyleSheet(QStringLiteral(""));
 
         gridLayout_3->addWidget(mystatusBar, 6, 0, 1, 1);
 
         gridLayout_6 = new QGridLayout();
         gridLayout_6->setSpacing(0);
-        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+        gridLayout_6->setObjectName(QStringLiteral("gridLayout_6"));
         gridLayout_6->setContentsMargins(0, -1, 0, -1);
         verticalSplitter = new QSplitter(m_centralWidget);
-        verticalSplitter->setObjectName(QString::fromUtf8("verticalSplitter"));
+        verticalSplitter->setObjectName(QStringLiteral("verticalSplitter"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -358,11 +361,11 @@ public:
         verticalSplitter->setFrameShape(QFrame::NoFrame);
         verticalSplitter->setOrientation(Qt::Vertical);
         horizontalSplitter = new QSplitter(verticalSplitter);
-        horizontalSplitter->setObjectName(QString::fromUtf8("horizontalSplitter"));
+        horizontalSplitter->setObjectName(QStringLiteral("horizontalSplitter"));
         horizontalSplitter->setMouseTracking(true);
         horizontalSplitter->setOrientation(Qt::Horizontal);
         m_pGroupTreeView = new QTreeView(horizontalSplitter);
-        m_pGroupTreeView->setObjectName(QString::fromUtf8("m_pGroupTreeView"));
+        m_pGroupTreeView->setObjectName(QStringLiteral("m_pGroupTreeView"));
         m_pGroupTreeView->setMouseTracking(true);
         m_pGroupTreeView->setAcceptDrops(true);
         m_pGroupTreeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -372,40 +375,43 @@ public:
         m_pGroupTreeView->setHeaderHidden(true);
         horizontalSplitter->addWidget(m_pGroupTreeView);
         ItemListContainer = new QWidget(horizontalSplitter);
-        ItemListContainer->setObjectName(QString::fromUtf8("ItemListContainer"));
+        ItemListContainer->setObjectName(QStringLiteral("ItemListContainer"));
         torrentViewLayout = new QVBoxLayout(ItemListContainer);
         torrentViewLayout->setSpacing(0);
+        torrentViewLayout->setContentsMargins(11, 11, 11, 11);
+        torrentViewLayout->setObjectName(QStringLiteral("torrentViewLayout"));
         torrentViewLayout->setContentsMargins(0, 0, 0, 0);
-        torrentViewLayout->setObjectName(QString::fromUtf8("torrentViewLayout"));
         SortersContainer = new QWidget(ItemListContainer);
-        SortersContainer->setObjectName(QString::fromUtf8("SortersContainer"));
+        SortersContainer->setObjectName(QStringLiteral("SortersContainer"));
         horizontalLayout_3 = new QHBoxLayout(SortersContainer);
         horizontalLayout_3->setSpacing(3);
+        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(4, 4, 4, 4);
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         TorentLimitsContainer = new QWidget(SortersContainer);
-        TorentLimitsContainer->setObjectName(QString::fromUtf8("TorentLimitsContainer"));
+        TorentLimitsContainer->setObjectName(QStringLiteral("TorentLimitsContainer"));
         horizontalLayout_2 = new QHBoxLayout(TorentLimitsContainer);
         horizontalLayout_2->setSpacing(3);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         uploadLimitLabel = new QLabel(TorentLimitsContainer);
-        uploadLimitLabel->setObjectName(QString::fromUtf8("uploadLimitLabel"));
+        uploadLimitLabel->setObjectName(QStringLiteral("uploadLimitLabel"));
 
         horizontalLayout_2->addWidget(uploadLimitLabel);
 
         ul = new QSpinBox(TorentLimitsContainer);
-        ul->setObjectName(QString::fromUtf8("ul"));
+        ul->setObjectName(QStringLiteral("ul"));
 
         horizontalLayout_2->addWidget(ul);
 
         downloadLimitLabel = new QLabel(TorentLimitsContainer);
-        downloadLimitLabel->setObjectName(QString::fromUtf8("downloadLimitLabel"));
+        downloadLimitLabel->setObjectName(QStringLiteral("downloadLimitLabel"));
 
         horizontalLayout_2->addWidget(downloadLimitLabel);
 
         dl = new QSpinBox(TorentLimitsContainer);
-        dl->setObjectName(QString::fromUtf8("dl"));
+        dl->setObjectName(QStringLiteral("dl"));
 
         horizontalLayout_2->addWidget(dl);
 
@@ -417,7 +423,7 @@ public:
         horizontalLayout_3->addItem(horizontalSpacer);
 
         label_15 = new QLabel(SortersContainer);
-        label_15->setObjectName(QString::fromUtf8("label_15"));
+        label_15->setObjectName(QStringLiteral("label_15"));
 
         horizontalLayout_3->addWidget(label_15);
 
@@ -425,7 +431,7 @@ public:
         torrentViewLayout->addWidget(SortersContainer);
 
         m_pTorrentListView = new QTreeView(ItemListContainer);
-        m_pTorrentListView->setObjectName(QString::fromUtf8("m_pTorrentListView"));
+        m_pTorrentListView->setObjectName(QStringLiteral("m_pTorrentListView"));
         m_pTorrentListView->setMouseTracking(true);
         m_pTorrentListView->setContextMenuPolicy(Qt::CustomContextMenu);
         m_pTorrentListView->setAcceptDrops(true);
@@ -443,30 +449,30 @@ public:
         horizontalSplitter->addWidget(ItemListContainer);
         verticalSplitter->addWidget(horizontalSplitter);
         m_pInfoPlaneContainer = new QStackedWidget(verticalSplitter);
-        m_pInfoPlaneContainer->setObjectName(QString::fromUtf8("m_pInfoPlaneContainer"));
+        m_pInfoPlaneContainer->setObjectName(QStringLiteral("m_pInfoPlaneContainer"));
         torrentPage = new QWidget();
-        torrentPage->setObjectName(QString::fromUtf8("torrentPage"));
+        torrentPage->setObjectName(QStringLiteral("torrentPage"));
         gridLayout_11 = new QGridLayout(torrentPage);
         gridLayout_11->setSpacing(6);
         gridLayout_11->setContentsMargins(11, 11, 11, 11);
-        gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
+        gridLayout_11->setObjectName(QStringLiteral("gridLayout_11"));
         gridLayout_11->setContentsMargins(2, 0, 2, 0);
         m_pTabWidget = new QTabWidget(torrentPage);
-        m_pTabWidget->setObjectName(QString::fromUtf8("m_pTabWidget"));
+        m_pTabWidget->setObjectName(QStringLiteral("m_pTabWidget"));
         m_pTabWidget->setMouseTracking(true);
         m_pTabWidget->setAcceptDrops(true);
         tab = new QWidget();
-        tab->setObjectName(QString::fromUtf8("tab"));
+        tab->setObjectName(QStringLiteral("tab"));
         tab->setMouseTracking(true);
         gridLayout_7 = new QGridLayout(tab);
         gridLayout_7->setSpacing(6);
         gridLayout_7->setContentsMargins(11, 11, 11, 11);
-        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
+        gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
         gridLayout_4 = new QGridLayout();
         gridLayout_4->setSpacing(6);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         availibilityLabel = new QLabel(tab);
-        availibilityLabel->setObjectName(QString::fromUtf8("availibilityLabel"));
+        availibilityLabel->setObjectName(QStringLiteral("availibilityLabel"));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -477,7 +483,7 @@ public:
         gridLayout_4->addWidget(availibilityLabel, 1, 1, 1, 1);
 
         progressLabel = new QLabel(tab);
-        progressLabel->setObjectName(QString::fromUtf8("progressLabel"));
+        progressLabel->setObjectName(QStringLiteral("progressLabel"));
         QSizePolicy sizePolicy2(QSizePolicy::Maximum, QSizePolicy::Preferred);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -488,7 +494,7 @@ public:
         gridLayout_4->addWidget(progressLabel, 0, 1, 1, 1);
 
         widget_2 = new QWidget(tab);
-        widget_2->setObjectName(QString::fromUtf8("widget_2"));
+        widget_2->setObjectName(QStringLiteral("widget_2"));
         QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Preferred);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
@@ -499,11 +505,11 @@ public:
         gridLayout_4->addWidget(widget_2, 1, 0, 1, 1);
 
         widget = new QWidget(tab);
-        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setObjectName(QStringLiteral("widget"));
         sizePolicy3.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
         widget->setSizePolicy(sizePolicy3);
         widget->setMinimumSize(QSize(0, 20));
-        widget->setStyleSheet(QString::fromUtf8(""));
+        widget->setStyleSheet(QStringLiteral(""));
 
         gridLayout_4->addWidget(widget, 0, 0, 1, 1);
 
@@ -511,112 +517,112 @@ public:
         gridLayout_7->addLayout(gridLayout_4, 0, 0, 1, 5);
 
         label_4 = new QLabel(tab);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setObjectName(QStringLiteral("label_4"));
 
         gridLayout_7->addWidget(label_4, 6, 3, 1, 1);
 
         label_8 = new QLabel(tab);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setObjectName(QStringLiteral("label_8"));
 
         gridLayout_7->addWidget(label_8, 2, 3, 1, 1);
 
         pathLabel = new QLabel(tab);
-        pathLabel->setObjectName(QString::fromUtf8("pathLabel"));
+        pathLabel->setObjectName(QStringLiteral("pathLabel"));
 
         gridLayout_7->addWidget(pathLabel, 6, 4, 1, 1);
 
         uploadedBytesLabel = new QLabel(tab);
-        uploadedBytesLabel->setObjectName(QString::fromUtf8("uploadedBytesLabel"));
+        uploadedBytesLabel->setObjectName(QStringLiteral("uploadedBytesLabel"));
 
         gridLayout_7->addWidget(uploadedBytesLabel, 2, 4, 1, 1);
 
         label_9 = new QLabel(tab);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
+        label_9->setObjectName(QStringLiteral("label_9"));
 
         gridLayout_7->addWidget(label_9, 3, 3, 1, 1);
 
         downloadedBytesLabel = new QLabel(tab);
-        downloadedBytesLabel->setObjectName(QString::fromUtf8("downloadedBytesLabel"));
+        downloadedBytesLabel->setObjectName(QStringLiteral("downloadedBytesLabel"));
 
         gridLayout_7->addWidget(downloadedBytesLabel, 2, 1, 1, 2);
 
         label_5 = new QLabel(tab);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setObjectName(QStringLiteral("label_5"));
 
         gridLayout_7->addWidget(label_5, 6, 0, 1, 1);
 
         uploadSpeedLabel = new QLabel(tab);
-        uploadSpeedLabel->setObjectName(QString::fromUtf8("uploadSpeedLabel"));
+        uploadSpeedLabel->setObjectName(QStringLiteral("uploadSpeedLabel"));
 
         gridLayout_7->addWidget(uploadSpeedLabel, 3, 4, 1, 1);
 
         activetimeLabel = new QLabel(tab);
-        activetimeLabel->setObjectName(QString::fromUtf8("activetimeLabel"));
+        activetimeLabel->setObjectName(QStringLiteral("activetimeLabel"));
 
         gridLayout_7->addWidget(activetimeLabel, 1, 1, 1, 2);
 
         label_3 = new QLabel(tab);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         gridLayout_7->addWidget(label_3, 3, 0, 1, 1);
 
         timeleftLabel = new QLabel(tab);
-        timeleftLabel->setObjectName(QString::fromUtf8("timeleftLabel"));
+        timeleftLabel->setObjectName(QStringLiteral("timeleftLabel"));
 
         gridLayout_7->addWidget(timeleftLabel, 1, 4, 1, 1);
 
         label = new QLabel(tab);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         gridLayout_7->addWidget(label, 1, 0, 1, 1);
 
         label_2 = new QLabel(tab);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout_7->addWidget(label_2, 2, 0, 1, 1);
 
         label_7 = new QLabel(tab);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_7->setObjectName(QStringLiteral("label_7"));
 
         gridLayout_7->addWidget(label_7, 1, 3, 1, 1);
 
         downloadSpeedLabel = new QLabel(tab);
-        downloadSpeedLabel->setObjectName(QString::fromUtf8("downloadSpeedLabel"));
+        downloadSpeedLabel->setObjectName(QStringLiteral("downloadSpeedLabel"));
 
         gridLayout_7->addWidget(downloadSpeedLabel, 3, 1, 1, 2);
 
         totalSizeLabel = new QLabel(tab);
-        totalSizeLabel->setObjectName(QString::fromUtf8("totalSizeLabel"));
+        totalSizeLabel->setObjectName(QStringLiteral("totalSizeLabel"));
 
         gridLayout_7->addWidget(totalSizeLabel, 6, 1, 1, 2);
 
         peerCoutLabel = new QLabel(tab);
-        peerCoutLabel->setObjectName(QString::fromUtf8("peerCoutLabel"));
+        peerCoutLabel->setObjectName(QStringLiteral("peerCoutLabel"));
 
         gridLayout_7->addWidget(peerCoutLabel, 8, 4, 1, 1);
 
         label_11 = new QLabel(tab);
-        label_11->setObjectName(QString::fromUtf8("label_11"));
+        label_11->setObjectName(QStringLiteral("label_11"));
 
         gridLayout_7->addWidget(label_11, 8, 3, 1, 1);
 
         seedCoutLabel = new QLabel(tab);
-        seedCoutLabel->setObjectName(QString::fromUtf8("seedCoutLabel"));
+        seedCoutLabel->setObjectName(QStringLiteral("seedCoutLabel"));
 
         gridLayout_7->addWidget(seedCoutLabel, 8, 1, 1, 2);
 
         label_10 = new QLabel(tab);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
+        label_10->setObjectName(QStringLiteral("label_10"));
 
         gridLayout_7->addWidget(label_10, 8, 0, 1, 1);
 
         label_6 = new QLabel(tab);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setObjectName(QStringLiteral("label_6"));
 
         gridLayout_7->addWidget(label_6, 9, 0, 1, 1);
 
         describtionLabel = new QLabel(tab);
-        describtionLabel->setObjectName(QString::fromUtf8("describtionLabel"));
+        describtionLabel->setObjectName(QStringLiteral("describtionLabel"));
         describtionLabel->setContextMenuPolicy(Qt::ActionsContextMenu);
         describtionLabel->setWordWrap(true);
         describtionLabel->setOpenExternalLinks(true);
@@ -624,26 +630,26 @@ public:
         gridLayout_7->addWidget(describtionLabel, 9, 1, 1, 4);
 
         label_12 = new QLabel(tab);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
+        label_12->setObjectName(QStringLiteral("label_12"));
 
         gridLayout_7->addWidget(label_12, 10, 0, 1, 1);
 
         infoHashLabel = new QLabel(tab);
-        infoHashLabel->setObjectName(QString::fromUtf8("infoHashLabel"));
+        infoHashLabel->setObjectName(QStringLiteral("infoHashLabel"));
         infoHashLabel->setContextMenuPolicy(Qt::ActionsContextMenu);
 
         gridLayout_7->addWidget(infoHashLabel, 10, 1, 1, 4);
 
         m_pTabWidget->addTab(tab, QString());
         tab_3 = new QWidget();
-        tab_3->setObjectName(QString::fromUtf8("tab_3"));
+        tab_3->setObjectName(QStringLiteral("tab_3"));
         tab_3->setMouseTracking(true);
         gridLayout_2 = new QGridLayout(tab_3);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         peerTableView = new QTableView(tab_3);
-        peerTableView->setObjectName(QString::fromUtf8("peerTableView"));
+        peerTableView->setObjectName(QStringLiteral("peerTableView"));
         peerTableView->setMouseTracking(true);
         peerTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         peerTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -656,12 +662,12 @@ public:
 
         m_pTabWidget->addTab(tab_3, QString());
         tab_2 = new QWidget();
-        tab_2->setObjectName(QString::fromUtf8("tab_2"));
+        tab_2->setObjectName(QStringLiteral("tab_2"));
         tab_2->setMouseTracking(true);
         gridLayout = new QGridLayout(tab_2);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         trackerTableWidget = new QTableWidget(tab_2);
         if (trackerTableWidget->columnCount() < 4)
             trackerTableWidget->setColumnCount(4);
@@ -673,7 +679,7 @@ public:
         trackerTableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
         trackerTableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem3);
-        trackerTableWidget->setObjectName(QString::fromUtf8("trackerTableWidget"));
+        trackerTableWidget->setObjectName(QStringLiteral("trackerTableWidget"));
         trackerTableWidget->setMouseTracking(true);
         trackerTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
         trackerTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -686,14 +692,14 @@ public:
 
         m_pTabWidget->addTab(tab_2, QString());
         tab_4 = new QWidget();
-        tab_4->setObjectName(QString::fromUtf8("tab_4"));
+        tab_4->setObjectName(QStringLiteral("tab_4"));
         tab_4->setMouseTracking(true);
         gridLayout_5 = new QGridLayout(tab_4);
         gridLayout_5->setSpacing(6);
         gridLayout_5->setContentsMargins(11, 11, 11, 11);
-        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
         fileTableView = new QTreeView(tab_4);
-        fileTableView->setObjectName(QString::fromUtf8("fileTableView"));
+        fileTableView->setObjectName(QStringLiteral("fileTableView"));
         fileTableView->setMaximumSize(QSize(16777215, 16777215));
         fileTableView->setMouseTracking(true);
         fileTableView->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -705,23 +711,23 @@ public:
 
         m_pTabWidget->addTab(tab_4, QString());
         tab_5 = new QWidget();
-        tab_5->setObjectName(QString::fromUtf8("tab_5"));
+        tab_5->setObjectName(QStringLiteral("tab_5"));
         ratingTabLayout = new QGridLayout(tab_5);
         ratingTabLayout->setSpacing(6);
         ratingTabLayout->setContentsMargins(11, 11, 11, 11);
-        ratingTabLayout->setObjectName(QString::fromUtf8("ratingTabLayout"));
+        ratingTabLayout->setObjectName(QStringLiteral("ratingTabLayout"));
         addCommentButton = new QPushButton(tab_5);
-        addCommentButton->setObjectName(QString::fromUtf8("addCommentButton"));
+        addCommentButton->setObjectName(QStringLiteral("addCommentButton"));
 
         ratingTabLayout->addWidget(addCommentButton, 0, 2, 1, 1);
 
         m_commentsView = new QListView(tab_5);
-        m_commentsView->setObjectName(QString::fromUtf8("m_commentsView"));
+        m_commentsView->setObjectName(QStringLiteral("m_commentsView"));
 
         ratingTabLayout->addWidget(m_commentsView, 1, 0, 1, 3);
 
         label_13 = new QLabel(tab_5);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
+        label_13->setObjectName(QStringLiteral("label_13"));
 
         ratingTabLayout->addWidget(label_13, 0, 0, 1, 1);
 
@@ -735,14 +741,14 @@ public:
 
         m_pInfoPlaneContainer->addWidget(torrentPage);
         rssPage = new QWidget();
-        rssPage->setObjectName(QString::fromUtf8("rssPage"));
+        rssPage->setObjectName(QStringLiteral("rssPage"));
         m_pRssInfoLayout = new QGridLayout(rssPage);
         m_pRssInfoLayout->setSpacing(6);
         m_pRssInfoLayout->setContentsMargins(11, 11, 11, 11);
-        m_pRssInfoLayout->setObjectName(QString::fromUtf8("m_pRssInfoLayout"));
+        m_pRssInfoLayout->setObjectName(QStringLiteral("m_pRssInfoLayout"));
         m_pRssInfoLayout->setContentsMargins(0, 2, 0, 2);
         widget_3 = new QWidget(rssPage);
-        widget_3->setObjectName(QString::fromUtf8("widget_3"));
+        widget_3->setObjectName(QStringLiteral("widget_3"));
 
         m_pRssInfoLayout->addWidget(widget_3, 0, 0, 1, 1);
 
@@ -755,43 +761,43 @@ public:
         gridLayout_3->addLayout(gridLayout_6, 5, 0, 1, 1);
 
         mainMenuBar = new QMenuBar(m_centralWidget);
-        mainMenuBar->setObjectName(QString::fromUtf8("mainMenuBar"));
+        mainMenuBar->setObjectName(QStringLiteral("mainMenuBar"));
         mainMenuBar->setEnabled(true);
         mainMenuBar->setDefaultUp(false);
         mainMenuBar->setNativeMenuBar(false);
         fileMenu = new QMenu(mainMenuBar);
-        fileMenu->setObjectName(QString::fromUtf8("fileMenu"));
+        fileMenu->setObjectName(QStringLiteral("fileMenu"));
         settingsMenu = new QMenu(mainMenuBar);
-        settingsMenu->setObjectName(QString::fromUtf8("settingsMenu"));
+        settingsMenu->setObjectName(QStringLiteral("settingsMenu"));
         menu_CuteTorrent = new QMenu(mainMenuBar);
-        menu_CuteTorrent->setObjectName(QString::fromUtf8("menu_CuteTorrent"));
+        menu_CuteTorrent->setObjectName(QStringLiteral("menu_CuteTorrent"));
         toolsMenu = new QMenu(mainMenuBar);
-        toolsMenu->setObjectName(QString::fromUtf8("toolsMenu"));
+        toolsMenu->setObjectName(QStringLiteral("toolsMenu"));
         autoShutdownMenu = new QMenu(toolsMenu);
-        autoShutdownMenu->setObjectName(QString::fromUtf8("autoShutdownMenu"));
+        autoShutdownMenu->setObjectName(QStringLiteral("autoShutdownMenu"));
         viewMenu = new QMenu(mainMenuBar);
-        viewMenu->setObjectName(QString::fromUtf8("viewMenu"));
+        viewMenu->setObjectName(QStringLiteral("viewMenu"));
         languageSubMenu = new QMenu(viewMenu);
-        languageSubMenu->setObjectName(QString::fromUtf8("languageSubMenu"));
+        languageSubMenu->setObjectName(QStringLiteral("languageSubMenu"));
         skinSubMenu = new QMenu(viewMenu);
-        skinSubMenu->setObjectName(QString::fromUtf8("skinSubMenu"));
+        skinSubMenu->setObjectName(QStringLiteral("skinSubMenu"));
 
         gridLayout_3->addWidget(mainMenuBar, 1, 0, 1, 1);
 
         m_pToolBarsContainer = new QStackedWidget(m_centralWidget);
-        m_pToolBarsContainer->setObjectName(QString::fromUtf8("m_pToolBarsContainer"));
+        m_pToolBarsContainer->setObjectName(QStringLiteral("m_pToolBarsContainer"));
         m_pToolBarsContainer->setMaximumSize(QSize(16777215, 32));
         m_pToolBarsContainer->setMouseTracking(true);
         m_pTorrentToolBar = new QToolBar();
-        m_pTorrentToolBar->setObjectName(QString::fromUtf8("m_pTorrentToolBar"));
+        m_pTorrentToolBar->setObjectName(QStringLiteral("m_pTorrentToolBar"));
         m_pTorrentToolBar->setAcceptDrops(true);
         m_pToolBarsContainer->addWidget(m_pTorrentToolBar);
         m_pSearchToolBar = new QToolBar();
-        m_pSearchToolBar->setObjectName(QString::fromUtf8("m_pSearchToolBar"));
+        m_pSearchToolBar->setObjectName(QStringLiteral("m_pSearchToolBar"));
         m_pSearchToolBar->setAcceptDrops(true);
         m_pToolBarsContainer->addWidget(m_pSearchToolBar);
         m_pRssToolBar = new QToolBar();
-        m_pRssToolBar->setObjectName(QString::fromUtf8("m_pRssToolBar"));
+        m_pRssToolBar->setObjectName(QStringLiteral("m_pRssToolBar"));
         m_pRssToolBar->setAcceptDrops(true);
         m_pToolBarsContainer->addWidget(m_pRssToolBar);
 
@@ -859,6 +865,7 @@ public:
         m_pTorrentToolBar->addAction(ACTION_TORRENTTOOLBAR_QUEUE_UP);
         m_pTorrentToolBar->addAction(ACTION_TORRENTTOOLBAR_QUEUE_DOWN);
         m_pTorrentToolBar->addSeparator();
+        m_pTorrentToolBar->addAction(ACTION_TORRENTTOOLBAR_SWITCH_VIEW);
         m_pSearchToolBar->addAction(ACTION_SEARCHTOOLBAR_DOWNLOAD);
         m_pSearchToolBar->addAction(ACTION_SEARCHTOOLBAR_OPEN_URL);
         m_pSearchToolBar->addAction(ACTION_TOOLBAR_SETTINGS);
@@ -892,6 +899,7 @@ public:
         QObject::connect(ACTION_TOOLS_IMPORT, SIGNAL(triggered()), CustomWindow, SLOT(showImportWiazrd()));
         QObject::connect(ACTION_MENUHELP_RATE, SIGNAL(triggered()), CustomWindow, SLOT(showRaitingDialog()));
         QObject::connect(addCommentButton, SIGNAL(clicked()), CustomWindow, SLOT(ShowAddCommentDialog()));
+        QObject::connect(ACTION_TORRENTTOOLBAR_SWITCH_VIEW, SIGNAL(triggered()), CustomWindow, SLOT(switchTorrentViewMode()));
 
         m_pInfoPlaneContainer->setCurrentIndex(0);
         m_pTabWidget->setCurrentIndex(4);
@@ -903,114 +911,129 @@ public:
 
     void retranslateUi(QWidget *CustomWindow)
     {
-        CustomWindow->setWindowTitle(QApplication::translate("CustomWindow", "CuteTorrent", 0));
-        ACTION_MENUFILE_OPEN_TORRENT->setText(QApplication::translate("CustomWindow", "MENU_OPEN_TORRENT", 0));
-        ACTION_MENUFILE_OPEN_TORRENT->setShortcut(QApplication::translate("CustomWindow", "Ctrl+O", 0));
-        ACTION_MENUFILE_OPEN_MAGNET->setText(QApplication::translate("CustomWindow", "MENU_OPEN_MAGNET", 0));
-        ACTION_MENUFILE_OPEN_MAGNET->setShortcut(QApplication::translate("CustomWindow", "Ctrl+M", 0));
-        ACTION_MENUFILE_CREATE->setText(QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT", 0));
-        ACTION_MENUFILE_CREATE->setShortcut(QApplication::translate("CustomWindow", "Ctrl+N", 0));
-        ACTION_MENUFILE_EXIT->setText(QApplication::translate("CustomWindow", "MENU_EXIT", 0));
-        ACTION_MENUFILE_EXIT->setShortcut(QApplication::translate("CustomWindow", "Alt+X", 0));
-        ACTION_MENU_SETTINGS->setText(QApplication::translate("CustomWindow", "MENU_CONFIGURATION", 0));
-        ACTION_MENU_SETTINGS->setShortcut(QApplication::translate("CustomWindow", "Ctrl+S", 0));
-        ACTION_SEARCHTOOLBAR_DOWNLOAD->setText(QApplication::translate("CustomWindow", "STR_DOWNLOAD", 0));
-        ACTION_SEARCHTOOLBAR_DOWNLOAD->setIconText(QApplication::translate("CustomWindow", "HINT_DOWNLOAD", 0));
-        ACTION_SEARCHTOOLBAR_OPEN_URL->setText(QApplication::translate("CustomWindow", "STR_OPEN_URL", 0));
-        ACTION_SEARCHTOOLBAR_OPEN_URL->setIconText(QApplication::translate("CustomWindow", "HINT_OPEN_URL", 0));
-        ACTION_MENUHELP_ABAUT_CT->setText(QApplication::translate("CustomWindow", "MENU_ABAUT", 0));
-        ACTION_MENUHELP_ABAUT_CT->setShortcut(QApplication::translate("CustomWindow", "F1", 0));
-        ACTION_MENUHELP_CHECK_UPDATE->setText(QApplication::translate("CustomWindow", "MENU_CHECK_UPDATES", 0));
-        ACTION_MENUHELP_CHECK_UPDATE->setShortcut(QApplication::translate("CustomWindow", "Ctrl+U", 0));
-        ACTION_TOOLBAR_SETTINGS->setText(QApplication::translate("CustomWindow", "STR_SETTINGS", 0));
-        ACTION_TOOLS_BACKUP->setText(QApplication::translate("CustomWindow", "TOOLS_BACKUP", 0));
-        ACTION_RSSTOOLBAR_RSS_ADD->setText(QApplication::translate("CustomWindow", "ACTION_RSS_ADD", 0));
+        CustomWindow->setWindowTitle(QApplication::translate("CustomWindow", "CuteTorrent", Q_NULLPTR));
+        ACTION_MENUFILE_OPEN_TORRENT->setText(QApplication::translate("CustomWindow", "MENU_OPEN_TORRENT", Q_NULLPTR));
+#ifndef QT_NO_SHORTCUT
+        ACTION_MENUFILE_OPEN_TORRENT->setShortcut(QApplication::translate("CustomWindow", "Ctrl+O", Q_NULLPTR));
+#endif // QT_NO_SHORTCUT
+        ACTION_MENUFILE_OPEN_MAGNET->setText(QApplication::translate("CustomWindow", "MENU_OPEN_MAGNET", Q_NULLPTR));
+#ifndef QT_NO_SHORTCUT
+        ACTION_MENUFILE_OPEN_MAGNET->setShortcut(QApplication::translate("CustomWindow", "Ctrl+M", Q_NULLPTR));
+#endif // QT_NO_SHORTCUT
+        ACTION_MENUFILE_CREATE->setText(QApplication::translate("CustomWindow", "MENU_CREATE_TORRENT", Q_NULLPTR));
+#ifndef QT_NO_SHORTCUT
+        ACTION_MENUFILE_CREATE->setShortcut(QApplication::translate("CustomWindow", "Ctrl+N", Q_NULLPTR));
+#endif // QT_NO_SHORTCUT
+        ACTION_MENUFILE_EXIT->setText(QApplication::translate("CustomWindow", "MENU_EXIT", Q_NULLPTR));
+#ifndef QT_NO_SHORTCUT
+        ACTION_MENUFILE_EXIT->setShortcut(QApplication::translate("CustomWindow", "Alt+X", Q_NULLPTR));
+#endif // QT_NO_SHORTCUT
+        ACTION_MENU_SETTINGS->setText(QApplication::translate("CustomWindow", "MENU_CONFIGURATION", Q_NULLPTR));
+#ifndef QT_NO_SHORTCUT
+        ACTION_MENU_SETTINGS->setShortcut(QApplication::translate("CustomWindow", "Ctrl+S", Q_NULLPTR));
+#endif // QT_NO_SHORTCUT
+        ACTION_SEARCHTOOLBAR_DOWNLOAD->setText(QApplication::translate("CustomWindow", "STR_DOWNLOAD", Q_NULLPTR));
+        ACTION_SEARCHTOOLBAR_DOWNLOAD->setIconText(QApplication::translate("CustomWindow", "HINT_DOWNLOAD", Q_NULLPTR));
+        ACTION_SEARCHTOOLBAR_OPEN_URL->setText(QApplication::translate("CustomWindow", "STR_OPEN_URL", Q_NULLPTR));
+        ACTION_SEARCHTOOLBAR_OPEN_URL->setIconText(QApplication::translate("CustomWindow", "HINT_OPEN_URL", Q_NULLPTR));
+        ACTION_MENUHELP_ABAUT_CT->setText(QApplication::translate("CustomWindow", "MENU_ABAUT", Q_NULLPTR));
+#ifndef QT_NO_SHORTCUT
+        ACTION_MENUHELP_ABAUT_CT->setShortcut(QApplication::translate("CustomWindow", "F1", Q_NULLPTR));
+#endif // QT_NO_SHORTCUT
+        ACTION_MENUHELP_CHECK_UPDATE->setText(QApplication::translate("CustomWindow", "MENU_CHECK_UPDATES", Q_NULLPTR));
+#ifndef QT_NO_SHORTCUT
+        ACTION_MENUHELP_CHECK_UPDATE->setShortcut(QApplication::translate("CustomWindow", "Ctrl+U", Q_NULLPTR));
+#endif // QT_NO_SHORTCUT
+        ACTION_TOOLBAR_SETTINGS->setText(QApplication::translate("CustomWindow", "STR_SETTINGS", Q_NULLPTR));
+        ACTION_TOOLS_BACKUP->setText(QApplication::translate("CustomWindow", "TOOLS_BACKUP", Q_NULLPTR));
+        ACTION_RSSTOOLBAR_RSS_ADD->setText(QApplication::translate("CustomWindow", "ACTION_RSS_ADD", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        ACTION_RSSTOOLBAR_RSS_ADD->setToolTip(QApplication::translate("CustomWindow", "ACTION_RSS_ADD", 0));
+        ACTION_RSSTOOLBAR_RSS_ADD->setToolTip(QApplication::translate("CustomWindow", "ACTION_RSS_ADD", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        ACTION_RSSTOOLBAR_RSS_REMOVE->setText(QApplication::translate("CustomWindow", "ACTION_RSS_REMOVE", 0));
-        ACTION_RSSTOOLBAR_RSS_EDIT->setText(QApplication::translate("CustomWindow", "ACTION_RSS_EDIT", 0));
-        ACTION_MENUHELP_ABOUT_QT->setText(QApplication::translate("CustomWindow", "MENU_ABOUT_QT", 0));
-        ACTION_TORRENTTOOLBAR_QUEUE_UP->setText(QApplication::translate("CustomWindow", "QUEUE_UP", 0));
+        ACTION_RSSTOOLBAR_RSS_REMOVE->setText(QApplication::translate("CustomWindow", "ACTION_RSS_REMOVE", Q_NULLPTR));
+        ACTION_RSSTOOLBAR_RSS_EDIT->setText(QApplication::translate("CustomWindow", "ACTION_RSS_EDIT", Q_NULLPTR));
+        ACTION_MENUHELP_ABOUT_QT->setText(QApplication::translate("CustomWindow", "MENU_ABOUT_QT", Q_NULLPTR));
+        ACTION_TORRENTTOOLBAR_QUEUE_UP->setText(QApplication::translate("CustomWindow", "QUEUE_UP", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        ACTION_TORRENTTOOLBAR_QUEUE_UP->setToolTip(QApplication::translate("CustomWindow", "QUEUE_UP", 0));
+        ACTION_TORRENTTOOLBAR_QUEUE_UP->setToolTip(QApplication::translate("CustomWindow", "QUEUE_UP", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        ACTION_TORRENTTOOLBAR_QUEUE_DOWN->setText(QApplication::translate("CustomWindow", "QUEUE_DOWN", 0));
-        ACTION_MENUHELP_REPORT_PROBLEM->setText(QApplication::translate("CustomWindow", "MENU_REPORT_PROBLEM", 0));
-        ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_TOOLBAR_VISIBILITY", 0));
-        ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_DETAIL_INFO_VISIBILITY", 0));
-        ACTION_MENUVIEW_TOGGLE_STATUSBAR_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_STATUSBAR_VISIBILITY", 0));
-        ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_GROUPS_VISIBILITY", 0));
-        ACTION_TORRENTTOOLBAR_ADD_TORRENT->setText(QApplication::translate("CustomWindow", "MENU_OPEN_TORRENT", 0));
+        ACTION_TORRENTTOOLBAR_QUEUE_DOWN->setText(QApplication::translate("CustomWindow", "QUEUE_DOWN", Q_NULLPTR));
+        ACTION_MENUHELP_REPORT_PROBLEM->setText(QApplication::translate("CustomWindow", "MENU_REPORT_PROBLEM", Q_NULLPTR));
+        ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_TOOLBAR_VISIBILITY", Q_NULLPTR));
+        ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_DETAIL_INFO_VISIBILITY", Q_NULLPTR));
+        ACTION_MENUVIEW_TOGGLE_STATUSBAR_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_STATUSBAR_VISIBILITY", Q_NULLPTR));
+        ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY->setText(QApplication::translate("CustomWindow", "MENU_TOGGLE_GROUPS_VISIBILITY", Q_NULLPTR));
+        ACTION_TORRENTTOOLBAR_ADD_TORRENT->setText(QApplication::translate("CustomWindow", "MENU_OPEN_TORRENT", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        ACTION_TORRENTTOOLBAR_ADD_TORRENT->setToolTip(QApplication::translate("CustomWindow", "MENU_OPEN_TORRENT", 0));
+        ACTION_TORRENTTOOLBAR_ADD_TORRENT->setToolTip(QApplication::translate("CustomWindow", "MENU_OPEN_TORRENT", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        ACTION_TORRENTTOOLBAR_OPEN_MAGNET->setText(QApplication::translate("CustomWindow", "MENU_OPEN_MAGNET", 0));
-        ACTION_TOOLS_IMPORT->setText(QApplication::translate("CustomWindow", "TOOLS_IMPORT", 0));
-        ACTION_AUTOSHUTDOWN_DISABLED->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_DISABLED", 0));
-        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_DOWNLADS_COMPLETE", 0));
-        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_HIBERNATE_ON_DOWNLOADS_COMPLETE", 0));
-        ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SLEEP_ON_DOWNLOADS_COMPLETE", 0));
-        ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SLEEP_ON_ALL_COMPLETE", 0));
-        ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_REBOOT_ON_DOWNLOADS_COMPLETE", 0));
-        ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_REBOOT_ON_ALL_COMPLETE", 0));
-        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_DOWNLOADS_COMPLETE", 0));
-        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_ALL_COMPLETE", 0));
-        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_HIBERNATE_ON_ALL_COMPLETE", 0));
-        ACTION_MENUHELP_RATE->setText(QApplication::translate("CustomWindow", "MENU_RATE", 0));
+        ACTION_TORRENTTOOLBAR_OPEN_MAGNET->setText(QApplication::translate("CustomWindow", "MENU_OPEN_MAGNET", Q_NULLPTR));
+        ACTION_TOOLS_IMPORT->setText(QApplication::translate("CustomWindow", "TOOLS_IMPORT", Q_NULLPTR));
+        ACTION_AUTOSHUTDOWN_DISABLED->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_DISABLED", Q_NULLPTR));
+        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_DOWNLADS_COMPLETE", Q_NULLPTR));
+        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_HIBERNATE_ON_DOWNLOADS_COMPLETE", Q_NULLPTR));
+        ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SLEEP_ON_DOWNLOADS_COMPLETE", Q_NULLPTR));
+        ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SLEEP_ON_ALL_COMPLETE", Q_NULLPTR));
+        ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_REBOOT_ON_DOWNLOADS_COMPLETE", Q_NULLPTR));
+        ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_REBOOT_ON_ALL_COMPLETE", Q_NULLPTR));
+        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_DOWNLOADS_COMPLETE", Q_NULLPTR));
+        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_ALL_COMPLETE", Q_NULLPTR));
+        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_HIBERNATE_ON_ALL_COMPLETE", Q_NULLPTR));
+        ACTION_MENUHELP_RATE->setText(QApplication::translate("CustomWindow", "MENU_RATE", Q_NULLPTR));
+        ACTION_TORRENTTOOLBAR_SWITCH_VIEW->setText(QApplication::translate("CustomWindow", "SWITCH_VIEW", Q_NULLPTR));
         tbMenu->setText(QString());
-        LTitle->setText(QApplication::translate("CustomWindow", "CuteTorrent", 0));
-        uploadLimitLabel->setText(QApplication::translate("CustomWindow", "LIMIT_UL", 0));
-        downloadLimitLabel->setText(QApplication::translate("CustomWindow", "LIMIT_DL", 0));
-        label_15->setText(QApplication::translate("CustomWindow", "SORT_BY", 0));
+        LTitle->setText(QApplication::translate("CustomWindow", "CuteTorrent", Q_NULLPTR));
+        uploadLimitLabel->setText(QApplication::translate("CustomWindow", "LIMIT_UL", Q_NULLPTR));
+        downloadLimitLabel->setText(QApplication::translate("CustomWindow", "LIMIT_DL", Q_NULLPTR));
+        label_15->setText(QApplication::translate("CustomWindow", "SORT_BY", Q_NULLPTR));
         progressLabel->setText(QString());
-        label_4->setText(QApplication::translate("CustomWindow", "INFO_PATH", 0));
-        label_8->setText(QApplication::translate("CustomWindow", "INFO_UPLOADED", 0));
+        label_4->setText(QApplication::translate("CustomWindow", "INFO_PATH", Q_NULLPTR));
+        label_8->setText(QApplication::translate("CustomWindow", "INFO_UPLOADED", Q_NULLPTR));
         pathLabel->setText(QString());
         uploadedBytesLabel->setText(QString());
-        label_9->setText(QApplication::translate("CustomWindow", "INFO_UPLOAD_SPEED", 0));
+        label_9->setText(QApplication::translate("CustomWindow", "INFO_UPLOAD_SPEED", Q_NULLPTR));
         downloadedBytesLabel->setText(QString());
-        label_5->setText(QApplication::translate("CustomWindow", "INFO_TOTAL_SIZE", 0));
+        label_5->setText(QApplication::translate("CustomWindow", "INFO_TOTAL_SIZE", Q_NULLPTR));
         uploadSpeedLabel->setText(QString());
         activetimeLabel->setText(QString());
-        label_3->setText(QApplication::translate("CustomWindow", "INFO_DOWNLOAD_SPEED", 0));
+        label_3->setText(QApplication::translate("CustomWindow", "INFO_DOWNLOAD_SPEED", Q_NULLPTR));
         timeleftLabel->setText(QString());
-        label->setText(QApplication::translate("CustomWindow", "INFO_ACTIVE_TIME", 0));
-        label_2->setText(QApplication::translate("CustomWindow", "INFO_DOWNLOADED", 0));
-        label_7->setText(QApplication::translate("CustomWindow", "INFO_REMAININF_TIME", 0));
+        label->setText(QApplication::translate("CustomWindow", "INFO_ACTIVE_TIME", Q_NULLPTR));
+        label_2->setText(QApplication::translate("CustomWindow", "INFO_DOWNLOADED", Q_NULLPTR));
+        label_7->setText(QApplication::translate("CustomWindow", "INFO_REMAININF_TIME", Q_NULLPTR));
         downloadSpeedLabel->setText(QString());
         totalSizeLabel->setText(QString());
         peerCoutLabel->setText(QString());
-        label_11->setText(QApplication::translate("CustomWindow", "INFO_PEER_COUNT", 0));
+        label_11->setText(QApplication::translate("CustomWindow", "INFO_PEER_COUNT", Q_NULLPTR));
         seedCoutLabel->setText(QString());
-        label_10->setText(QApplication::translate("CustomWindow", "INFO_SEED_COUNT", 0));
-        label_6->setText(QApplication::translate("CustomWindow", "INFO_DESCRIBTION", 0));
+        label_10->setText(QApplication::translate("CustomWindow", "INFO_SEED_COUNT", Q_NULLPTR));
+        label_6->setText(QApplication::translate("CustomWindow", "INFO_DESCRIBTION", Q_NULLPTR));
         describtionLabel->setText(QString());
-        label_12->setText(QApplication::translate("CustomWindow", "INFO_HASH", 0));
+        label_12->setText(QApplication::translate("CustomWindow", "INFO_HASH", Q_NULLPTR));
         infoHashLabel->setText(QString());
-        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab), QApplication::translate("CustomWindow", "TAB_INFO", 0));
-        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_3), QApplication::translate("CustomWindow", "TAB_PEERS", 0));
+        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab), QApplication::translate("CustomWindow", "TAB_INFO", Q_NULLPTR));
+        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_3), QApplication::translate("CustomWindow", "TAB_PEERS", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem = trackerTableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("CustomWindow", "TRACKER_URL", 0));
+        ___qtablewidgetitem->setText(QApplication::translate("CustomWindow", "TRACKER_URL", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem1 = trackerTableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("CustomWindow", "TRACKER_STATUS", 0));
+        ___qtablewidgetitem1->setText(QApplication::translate("CustomWindow", "TRACKER_STATUS", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem2 = trackerTableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("CustomWindow", "TRACKER_NEXT_ANNOUNCE", 0));
+        ___qtablewidgetitem2->setText(QApplication::translate("CustomWindow", "TRACKER_NEXT_ANNOUNCE", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem3 = trackerTableWidget->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("CustomWindow", "TRACKER_PEERS", 0));
-        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_2), QApplication::translate("CustomWindow", "TAB_TRACKERS", 0));
-        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_4), QApplication::translate("CustomWindow", "TAB_FILES", 0));
-        addCommentButton->setText(QApplication::translate("CustomWindow", "ADD_COMMENT", 0));
-        label_13->setText(QApplication::translate("CustomWindow", "AVERAGE_RATING", 0));
-        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_5), QApplication::translate("CustomWindow", "TAB_COMMENTS", 0));
-        fileMenu->setTitle(QApplication::translate("CustomWindow", "MENU_FILE", 0));
-        settingsMenu->setTitle(QApplication::translate("CustomWindow", "MENU_SETTINGS", 0));
-        menu_CuteTorrent->setTitle(QApplication::translate("CustomWindow", "MENU_HELP", 0));
-        toolsMenu->setTitle(QApplication::translate("CustomWindow", "MENU_TOOLS", 0));
-        autoShutdownMenu->setTitle(QApplication::translate("CustomWindow", "TOOLS_AUTO_SHUTDOWN", 0));
-        viewMenu->setTitle(QApplication::translate("CustomWindow", "MENU_VIEW", 0));
-        languageSubMenu->setTitle(QApplication::translate("CustomWindow", "MENU_CHOSE_LANGUAGE", 0));
-        skinSubMenu->setTitle(QApplication::translate("CustomWindow", "MENU_CHOSE_SKIN", 0));
+        ___qtablewidgetitem3->setText(QApplication::translate("CustomWindow", "TRACKER_PEERS", Q_NULLPTR));
+        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_2), QApplication::translate("CustomWindow", "TAB_TRACKERS", Q_NULLPTR));
+        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_4), QApplication::translate("CustomWindow", "TAB_FILES", Q_NULLPTR));
+        addCommentButton->setText(QApplication::translate("CustomWindow", "ADD_COMMENT", Q_NULLPTR));
+        label_13->setText(QApplication::translate("CustomWindow", "AVERAGE_RATING", Q_NULLPTR));
+        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_5), QApplication::translate("CustomWindow", "TAB_COMMENTS", Q_NULLPTR));
+        fileMenu->setTitle(QApplication::translate("CustomWindow", "MENU_FILE", Q_NULLPTR));
+        settingsMenu->setTitle(QApplication::translate("CustomWindow", "MENU_SETTINGS", Q_NULLPTR));
+        menu_CuteTorrent->setTitle(QApplication::translate("CustomWindow", "MENU_HELP", Q_NULLPTR));
+        toolsMenu->setTitle(QApplication::translate("CustomWindow", "MENU_TOOLS", Q_NULLPTR));
+        autoShutdownMenu->setTitle(QApplication::translate("CustomWindow", "TOOLS_AUTO_SHUTDOWN", Q_NULLPTR));
+        viewMenu->setTitle(QApplication::translate("CustomWindow", "MENU_VIEW", Q_NULLPTR));
+        languageSubMenu->setTitle(QApplication::translate("CustomWindow", "MENU_CHOSE_LANGUAGE", Q_NULLPTR));
+        skinSubMenu->setTitle(QApplication::translate("CustomWindow", "MENU_CHOSE_SKIN", Q_NULLPTR));
     } // retranslateUi
 
 };
