@@ -1903,7 +1903,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="405"/>
         <source>invalid redirection</source>
-        <translation> The web seed redirected to a path that no longer matches the .torrent directory structure</translation>
+        <translation>The Webseed redirected to a path that no longer matches the .torrent directory structure.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="406"/>
@@ -2089,7 +2089,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="457"/>
         <source>mismatching number of files</source>
-        <translation> The number of files in the resume data does not match the number of files in the torrent</translation>
+        <translation>The number of files in the resume data does not match the number of files in the torrent.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="458"/>
