@@ -3805,13 +3805,13 @@ Error: %2
         <location filename="../../Comments/gui/FormFiles/RegisterDialog.ui" line="156"/>
         <location filename="../../GeneratedFiles/ui_RegisterDialog.h" line="163"/>
         <source>LOGIN</source>
-        <translation type="unfinished">Login</translation>
+        <translation>Login</translation>
     </message>
     <message>
         <location filename="../../Comments/gui/FormFiles/RegisterDialog.ui" line="163"/>
         <location filename="../../GeneratedFiles/ui_RegisterDialog.h" line="164"/>
         <source>PASSWORD</source>
-        <translation type="unfinished">Password</translation>
+        <translation>Password</translation>
     </message>
     <message>
         <location filename="../../Comments/gui/FormFiles/RegisterDialog.ui" line="170"/>
@@ -3938,7 +3938,7 @@ Error: %2
         <location filename="../../rss/core/RssManager.cpp" line="380"/>
         <location filename="../../rss/core/RssManager.cpp" line="406"/>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2</source>
-        <translation type="unfinished">Error occured during automated download from RSS-feed:
+        <translation>Error occured during automated download from RSS-feed:
 %1 %2</translation>
     </message>
     <message>
@@ -3959,7 +3959,7 @@ Error: %2
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="424"/>
         <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1</source>
-        <translation type="unfinished">Started downloading torrent %1 from RSS-feed</translation>
+        <translation>Started downloading torrent %1 from RSS-feed</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="411"/>
