@@ -4000,13 +4000,13 @@ Error: %2
         <location filename="../../rss/gui/FormFiles/RssFeedSettingsDialog.ui" line="112"/>
         <location filename="../../GeneratedFiles/ui_RssFeedSettingsDialog.h" line="222"/>
         <source>RSS_SETTINGS</source>
-        <translation type="unfinished"></translation>
+        <translation>RSS settings</translation>
     </message>
     <message>
         <location filename="../../rss/gui/FormFiles/RssFeedSettingsDialog.ui" line="194"/>
         <location filename="../../GeneratedFiles/ui_RssFeedSettingsDialog.h" line="225"/>
         <source>COOKIES</source>
-        <translation type="unfinished"></translation>
+        <translation>Cookies</translation>
     </message>
     <message>
         <location filename="../../rss/gui/FormFiles/RssFeedSettingsDialog.ui" line="229"/>
@@ -4018,7 +4018,7 @@ Error: %2
         <location filename="../../rss/gui/FormFiles/RssFeedSettingsDialog.ui" line="254"/>
         <location filename="../../GeneratedFiles/ui_RssFeedSettingsDialog.h" line="236"/>
         <source>REMOVE_ROW</source>
-        <translation type="unfinished"></translation>
+        <translation>Remove row</translation>
     </message>
     <message>
         <location filename="../../rss/gui/FormFiles/RssFeedSettingsDialog.ui" line="274"/>
@@ -4999,7 +4999,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1118"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1842"/>
         <source>i2p</source>
-        <translation type="unfinished"></translation>
+        <translation>I2P</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1126"/>
@@ -5059,7 +5059,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1884"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1954"/>
         <source>WEB_UI_UPNP_ENABLED</source>
-        <translation type="unfinished"></translation>
+        <translation>Enable UPnP</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1968"/>
@@ -5323,12 +5323,12 @@ Error: %2</translation>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="589"/>
         <source>SCHEDULLER_NO_NAME</source>
-        <translation type="unfinished"></translation>
+        <translation>Sheduler name should not be empty</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="931"/>
         <source>RSS_TCP_CONNECTION</source>
-        <translation type="unfinished"></translation>
+        <translation>TCP</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="983"/>
@@ -5609,7 +5609,7 @@ Error: %2</translation>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="335"/>
         <source>SAVE_RESUME_DATA_FAILED %1, RETRING...</source>
-        <translation type="unfinished"></translation>
+        <translation>Saving of torrent resume data have failed %1, retring...</translation>
     </message>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="386"/>
@@ -5646,7 +5646,7 @@ Error: %2</translation>
     <message>
         <location filename="../../core/gui/ImportWizard/Importers/UTorrentImporter.cpp" line="134"/>
         <source>Adding torrent: </source>
-        <translation>Adding torrent</translation>
+        <translation>Adding torrent </translation>
     </message>
 </context>
 <context>
