@@ -410,7 +410,7 @@
         <location filename="../../torrent/gui/FormFiles/CreateTorrentDialog.ui" line="307"/>
         <location filename="../../GeneratedFiles/ui_CreateTorrentDialog.h" line="323"/>
         <source>CREATE_TORRENT_PIECE_SIZE</source>
-        <translation>Piece size</translation>
+        <translation>Piece Size</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/CreateTorrentDialog.cpp" line="320"/>
@@ -1145,7 +1145,7 @@ A lightweight &amp; FREE BitTorrent client based on libtorrent-rasterbar with us
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="434"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1070"/>
         <source>ADD_PEER</source>
-        <translation>Add peer</translation>
+        <translation>Add Peer</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="436"/>
@@ -1341,7 +1341,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1233"/>
         <source>OPEN_TOORENT_DIALOG</source>
-        <translation>Open Torrent Files</translation>
+        <translation>Open Torrent</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1234"/>
@@ -2286,7 +2286,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="562"/>
         <source>dynamic block code description: too many length or distance codes</source>
-        <translation>dynamic block code description: too many length or distance codes</translation>
+        <translation>Dynamic block code description: Too many length or distance codes</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="563"/>
@@ -4657,7 +4657,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="348"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1701"/>
         <source>STYLE</source>
-        <translation>Skin</translation>
+        <translation>Skins</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="516"/>
@@ -4917,7 +4917,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="581"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1740"/>
         <source>DOWNLOAD_SPEED_LIMIT</source>
-        <translation>Download speed limit</translation>
+        <translation>Download Speed Limit</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="604"/>
@@ -4979,7 +4979,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="729"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1758"/>
         <source>MAX_CONNECTIONS_PER_TORRENT</source>
-        <translation>Max connections per torrent</translation>
+        <translation>Max Connections Per Torrent</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="854"/>
@@ -5116,7 +5116,7 @@ Error: %2
     <message>
         <location filename="../../core/gui/Utils/ValueSetters.cpp" line="179"/>
         <source>Torrent file</source>
-        <translation>Torrent file</translation>
+        <translation>Torrent File</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="352"/>
