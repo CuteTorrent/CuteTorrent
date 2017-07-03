@@ -175,7 +175,7 @@
     <message>
         <location filename="../../rss/datamodels/RssDownloadRule.cpp" line="49"/>
         <source>DONT_KNOW_WHERE_TO_SAVE</source>
-        <translation>You should specify how to chose save path</translation>
+        <translation>You should specify how to Select save path</translation>
     </message>
     <message>
         <location filename="../../rss/datamodels/RssDownloadRule.cpp" line="54"/>
