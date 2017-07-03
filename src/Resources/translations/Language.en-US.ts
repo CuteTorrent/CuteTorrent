@@ -56,13 +56,13 @@
         <location filename="../../rss/gui/FormFiles/AddDownloadRuleDialog.ui" line="203"/>
         <location filename="../../GeneratedFiles/ui_AddDownloadRuleDialog.h" line="300"/>
         <source>USE_SAVE_PATH</source>
-        <translation>Use save path</translation>
+        <translation>Use Save Path</translation>
     </message>
     <message>
         <location filename="../../rss/gui/FormFiles/AddDownloadRuleDialog.ui" line="215"/>
         <location filename="../../GeneratedFiles/ui_AddDownloadRuleDialog.h" line="301"/>
         <source>SAVE_PATH</source>
-        <translation>Save path</translation>
+        <translation>Save Path</translation>
     </message>
     <message>
         <location filename="../../rss/gui/FormFiles/AddDownloadRuleDialog.ui" line="225"/>
@@ -74,7 +74,7 @@
         <location filename="../../rss/gui/FormFiles/AddDownloadRuleDialog.ui" line="235"/>
         <location filename="../../GeneratedFiles/ui_AddDownloadRuleDialog.h" line="303"/>
         <source>USE_GROUPS_FOR_FILTERING</source>
-        <translation>Use groups for filtering</translation>
+        <translation type="unfinished">Use Groups for Filtering</translation>
     </message>
     <message>
         <location filename="../../rss/gui/FormFiles/AddDownloadRuleDialog.ui" line="242"/>
@@ -115,7 +115,7 @@
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="147"/>
         <source>SIMPLE_STRING</source>
-        <translation>Fixed string</translation>
+        <translation type="unfinished">Fixed String</translation>
     </message>
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="148"/>
@@ -130,12 +130,12 @@
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="158"/>
         <source>EDIT_RSS_DWONLOAD_RULE_DIALOG</source>
-        <translation>Edit rule for automated downloads from RSS-feeds</translation>
+        <translation type="unfinished">Edit Rule for Automated Downloads from RSS-Feeds</translation>
     </message>
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="268"/>
         <source>SELECT_FILE_RULE_TYPE_HINT</source>
-        <translation>This rule will be applied for selecting files in torrent.</translation>
+        <translation type="unfinished">This rule will be applied for selecting files in torrent.</translation>
     </message>
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="274"/>
@@ -180,7 +180,7 @@
     <message>
         <location filename="../../rss/datamodels/RssDownloadRule.cpp" line="54"/>
         <source>CHOSE_ONE_STATICK_SAVE_PATH_OR_GROUPS_FILTERING</source>
-        <translation>You can chose only Save pat or only Usage of Filtering Groups</translation>
+        <translation>You can Select only Save pat or only Usage of Filtering Groups</translation>
     </message>
     <message>
         <location filename="../../rss/datamodels/RssDownloadRule.cpp" line="61"/>
@@ -706,7 +706,7 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="790"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1019"/>
         <source>TRACKER_STATUS</source>
-        <translation>State</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="795"/>
@@ -754,7 +754,7 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="984"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="1036"/>
         <source>MENU_CHOSE_SKIN</source>
-        <translation>Skin</translation>
+        <translation>Skins</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1056"/>
@@ -764,7 +764,7 @@ Are you shure?</translation>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="966"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="968"/>
         <source>MENU_OPEN_TORRENT</source>
-        <translation>Open torrent</translation>
+        <translation>Open Torrent</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1059"/>
@@ -778,7 +778,7 @@ Are you shure?</translation>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="919"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="970"/>
         <source>MENU_OPEN_MAGNET</source>
-        <translation>Open magnet link</translation>
+        <translation>Open Magnet URL</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1070"/>
@@ -858,7 +858,7 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1132"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="943"/>
         <source>MENU_CHECK_UPDATES</source>
-        <translation>Check for updates</translation>
+        <translation>Check for Updates</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1135"/>
@@ -870,13 +870,13 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1140"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="947"/>
         <source>STR_SETTINGS</source>
-        <translation>Preferencies</translation>
+        <translation>Preferences</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1145"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="948"/>
         <source>TOOLS_BACKUP</source>
-        <translation>Backup untility</translation>
+        <translation>Backup Utility</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1150"/>
@@ -922,7 +922,7 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1186"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="961"/>
         <source>MENU_REPORT_PROBLEM</source>
-        <translation>Report problem</translation>
+        <translation type="unfinished">Report Problem(s)</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1194"/>
@@ -934,7 +934,7 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1202"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="963"/>
         <source>MENU_TOGGLE_DETAIL_INFO_VISIBILITY</source>
-        <translation>Details Info</translation>
+        <translation>Details Panel</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1210"/>
@@ -970,7 +970,7 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1305"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="980"/>
         <source>TOOLS_SHUTDOWN_ON_ALL_COMPLETE</source>
-        <translation>Shutdown when ewerything comples</translation>
+        <translation>Shutdown when everything completes</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1323"/>
@@ -988,13 +988,13 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1313"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="981"/>
         <source>TOOLS_HIBERNATE_ON_ALL_COMPLETE</source>
-        <translation>Hibernate when ewerything comples</translation>
+        <translation>Hibernate when everything completes</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1265"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="975"/>
         <source>TOOLS_SLEEP_ON_DOWNLOADS_COMPLETE</source>
-        <translation>Sleep when download comple</translation>
+        <translation>Sleep when download complete</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1075"/>
@@ -1009,25 +1009,25 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1273"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="976"/>
         <source>TOOLS_SLEEP_ON_ALL_COMPLETE</source>
-        <translation>Sleep when ewerything comples</translation>
+        <translation>Sleep when everything completes</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1281"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="977"/>
         <source>TOOLS_REBOOT_ON_DOWNLOADS_COMPLETE</source>
-        <translation>Reboot when download comples</translation>
+        <translation>Reboot when download completes</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1289"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="978"/>
         <source>TOOLS_REBOOT_ON_ALL_COMPLETE</source>
-        <translation>Reboot when ewerything comples</translation>
+        <translation>Reboot when ewerything completes</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1297"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="979"/>
         <source>TOOLS_SHUTDOWN_ON_DOWNLOADS_COMPLETE</source>
-        <translation>Shutdown when downoad comple</translation>
+        <translation>Shutdown when download complete</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1318"/>
@@ -1046,11 +1046,9 @@ Are you shure?</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="264"/>
         <source>ABAUT_TEXT</source>
-        <translation>CuteTorrent %1
+        <translation type="unfinished">CuteTorrent %1
 
-CuteTorrent - free BitTorrent clent with DHT,  torrent filtering, opportunity of mounting Daemon Tools images and embeded Video/Audio Player
-
-If you have paid money for this software demand a refund</translation>
+A lightweight &amp; FREE BitTorrent client based on libtorrent-rasterbar with user-friendly interface</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="281"/>
@@ -1157,7 +1155,7 @@ If you have paid money for this software demand a refund</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="553"/>
         <source>SET_DEFAULT_APP_FOR_TOR_AND_MAGNET_LINKS</source>
-        <translation>Set CuteTorrent as default application for torrents and magnet links?</translation>
+        <translation>Set CuteTorrent as default application for Torrents and Magnet links?</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="559"/>
@@ -1167,7 +1165,7 @@ If you have paid money for this software demand a refund</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="563"/>
         <source>SET_DEFAULT_APP_FOR_MAGNET_LINKS</source>
-        <translation>Set CuteTorrent as default application for magnet links?</translation>
+        <translation>Set CuteTorrent as default application for Magnet links?</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="568"/>
@@ -1283,14 +1281,14 @@ If you have paid money for this software demand a refund</translation>
         <source>CuteTorrent %1
 Upload: %2
 Download: %3</source>
-        <translation>CuteTorrent %1
-Отдано: %2
-Загружено: %3</translation>
+        <translation type="unfinished">CuteTorrent %1
+Upload: %2
+Download: %3</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="875"/>
         <source>DHT: %1 nodes</source>
-        <translation>DHT: %1 узлов</translation>
+        <translation>DHT: %1 Nodes</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1024"/>
@@ -1343,7 +1341,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1233"/>
         <source>OPEN_TOORENT_DIALOG</source>
-        <translation>Open torrent dialog</translation>
+        <translation>Open Torrent Files</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1234"/>
@@ -1358,7 +1356,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1448"/>
         <source>CT_HIDE_MSG</source>
-        <translation>CuteTorrent is steel active. To exit use context menu in tray.</translation>
+        <translation>CuteTorrent is still active. To exit use context menu in tray.</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1500"/>
@@ -3213,7 +3211,7 @@ Error: %2
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="183"/>
         <source>OPEN_TORRENT_ERROR</source>
-        <translation>Failed to open torrent</translation>
+        <translation>Failed to open Torrent</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="220"/>
@@ -3408,7 +3406,7 @@ Error: %2
         <location filename="../../search/viewmodels/QSearchDisplayModel.cpp" line="94"/>
         <location filename="../../search/viewmodels/QSearchDisplayModel.cpp" line="105"/>
         <source>OPEN_TORRENT_DESCRIPTION</source>
-        <translation>Open decription</translation>
+        <translation>Open Description</translation>
     </message>
     <message>
         <location filename="../../search/viewmodels/QSearchDisplayModel.cpp" line="138"/>
@@ -3476,7 +3474,7 @@ Error: %2
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1038"/>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1126"/>
         <source>ACTION_QUEUE_CONTROLL</source>
-        <translation>Queue management</translation>
+        <translation>Queue Management</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1041"/>
@@ -3506,7 +3504,7 @@ Error: %2
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1047"/>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1160"/>
         <source>ACTION_ABOVE_AVG_PRIORITY</source>
-        <translation>Above average</translation>
+        <translation>Above Average</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1046"/>
@@ -3518,7 +3516,7 @@ Error: %2
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1045"/>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1176"/>
         <source>ACTION_BELOW_AVG_PRIORITY</source>
-        <translation>Below average</translation>
+        <translation>Below Average</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1044"/>
@@ -4067,7 +4065,7 @@ Error: %2
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="479"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="486"/>
         <source>STR_SETTINGS</source>
-        <translation>Preferencies</translation>
+        <translation>Preferences</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="562"/>
@@ -4139,7 +4137,7 @@ Error: %2
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1922"/>
         <source>DAEMONTOOLS_PATH</source>
         <oldsource>Путь к DaemonTools</oldsource>
-        <translation>Daemon Tools install path</translation>
+        <translation>Daemon Tools Installation Path</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="14"/>
@@ -4270,13 +4268,13 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1514"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1927"/>
         <source>DRIVE_NUMBER</source>
-        <translation>№ of drive</translation>
+        <translation>No of Drive(s)</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="552"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1731"/>
         <source>UPLOAD_SPEED_LIMIT_WIT</source>
-        <translation>Lmit the uploadspeed to the chosen value.</translation>
+        <translation>Lmit the uploadspeed to the Selectn value.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="828"/>
@@ -4404,25 +4402,25 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="232"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1683"/>
         <source>TAB_WEB_CONTROL</source>
-        <translation>Web Controll</translation>
+        <translation>Web UI</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1805"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1948"/>
         <source>WEB_CONTROLL_ENABLED</source>
-        <translation>Web Controll Enabled</translation>
+        <translation>Enable Remote Web UI</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1817"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1949"/>
         <source>WEB_UI_USE_IP_FILTER</source>
-        <translation>Use ip filter</translation>
+        <translation>Use IP Filter</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1841"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1950"/>
         <source>WEB_UI_LOGGING_ENABLED</source>
-        <translation>Loggin</translation>
+        <translation>Login</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1855"/>
@@ -4517,7 +4515,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1622"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1935"/>
         <source>GroupBox</source>
-        <translation>Task Detailes</translation>
+        <translation>Task Details</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1713"/>
