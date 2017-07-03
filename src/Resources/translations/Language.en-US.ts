@@ -74,7 +74,7 @@
         <location filename="../../rss/gui/FormFiles/AddDownloadRuleDialog.ui" line="235"/>
         <location filename="../../GeneratedFiles/ui_AddDownloadRuleDialog.h" line="303"/>
         <source>USE_GROUPS_FOR_FILTERING</source>
-        <translation type="unfinished">Use Groups for Filtering</translation>
+        <translation>Use Groups for Filtering</translation>
     </message>
     <message>
         <location filename="../../rss/gui/FormFiles/AddDownloadRuleDialog.ui" line="242"/>
@@ -115,7 +115,7 @@
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="147"/>
         <source>SIMPLE_STRING</source>
-        <translation type="unfinished">Fixed String</translation>
+        <translation>Fixed String</translation>
     </message>
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="148"/>
@@ -130,12 +130,12 @@
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="158"/>
         <source>EDIT_RSS_DWONLOAD_RULE_DIALOG</source>
-        <translation type="unfinished">Edit Rule for Automated Downloads from RSS-Feeds</translation>
+        <translation>Edit Rule for Automated Downloads from RSS-Feeds</translation>
     </message>
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="268"/>
         <source>SELECT_FILE_RULE_TYPE_HINT</source>
-        <translation type="unfinished">This rule will be applied for selecting files in torrent.</translation>
+        <translation>This rule will be applied for selecting files in torrent.</translation>
     </message>
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="274"/>
@@ -922,7 +922,7 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1186"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="961"/>
         <source>MENU_REPORT_PROBLEM</source>
-        <translation type="unfinished">Report Problem(s)</translation>
+        <translation>Report Problem(s)</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1194"/>
@@ -1046,7 +1046,7 @@ Are you shure?</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="264"/>
         <source>ABAUT_TEXT</source>
-        <translation type="unfinished">CuteTorrent %1
+        <translation>CuteTorrent %1
 
 A lightweight &amp; FREE BitTorrent client based on libtorrent-rasterbar with user-friendly interface</translation>
     </message>
@@ -1281,7 +1281,7 @@ A lightweight &amp; FREE BitTorrent client based on libtorrent-rasterbar with us
         <source>CuteTorrent %1
 Upload: %2
 Download: %3</source>
-        <translation type="unfinished">CuteTorrent %1
+        <translation>CuteTorrent %1
 Upload: %2
 Download: %3</translation>
     </message>
