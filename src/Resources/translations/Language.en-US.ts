@@ -538,7 +538,7 @@ Are you shure?</translation>
         <location filename="../../torrent/gui/Dialogs/CreateTorrentDialog.cpp" line="272"/>
         <source>CREATE_TORRENT_FILE_ERROR
  %1</source>
-        <translation>Torrent couldn&apos;t be created
+        <translation>Torrent couldn't be created
 %1</translation>
     </message>
 </context>
@@ -1041,7 +1041,7 @@ Are you shure?</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="264"/>
         <source>ABAUT_TITLE</source>
-        <translation>Abaut CuteTorrent</translation>
+        <translation>About CuteTorrent</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="264"/>
@@ -1500,28 +1500,28 @@ Download: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="324"/>
-        <source>missing or invalid &apos;info&apos; section in torrent file</source>
-        <translation>The .torrent file does not have an &quot;info&quot; dictionary</translation>
+        <source>missing or invalid 'info' section in torrent file</source>
+        <translation>The .torrent file does not have an "info" dictionary</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="325"/>
-        <source>&apos;info&apos; entry is not a dictionary</source>
-        <translation>The .torrent file&apos;s &quot;info&quot; entry is not a dictionary</translation>
+        <source>'info' entry is not a dictionary</source>
+        <translation>The .torrent file's "info" entry is not a dictionary</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="326"/>
-        <source>invalid or missing &apos;piece length&apos; entry in torrent file</source>
-        <translation>The .torrent file does not have a &quot;piece length&quot; entry</translation>
+        <source>invalid or missing 'piece length' entry in torrent file</source>
+        <translation>The .torrent file does not have a "piece length" entry</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="327"/>
         <source>missing name in torrent file</source>
-        <translation>The .torrent file does not have a &quot;name&quot; entry</translation>
+        <translation>The .torrent file does not have a "name" entry</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="328"/>
-        <source>invalid &apos;name&apos; of torrent (possible exploit attempt)</source>
-        <translation>The .torrent file&apos;s name entry is invalid</translation>
+        <source>invalid 'name' of torrent (possible exploit attempt)</source>
+        <translation>The .torrent file's name entry is invalid</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="329"/>
@@ -1535,13 +1535,13 @@ Download: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="331"/>
-        <source>invalid or missing &apos;pieces&apos; entry in torrent file</source>
-        <translation>The &quot;pieces&quot; field is missing or invalid in the .torrent file</translation>
+        <source>invalid or missing 'pieces' entry in torrent file</source>
+        <translation>The "pieces" field is missing or invalid in the .torrent file</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="332"/>
         <source>incorrect number of piece hashes in torrent file</source>
-        <translation>The &quot;pieces&quot; string has incorrect length</translation>
+        <translation>The "pieces" string has incorrect length</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="333"/>
@@ -1577,7 +1577,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="339"/>
         <source>torrent already exists in session</source>
-        <translation>There&apos;s already a torrent with that info-hash added to the session</translation>
+        <translation>There's already a torrent with that info-hash added to the session</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="340"/>
@@ -1602,7 +1602,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="344"/>
         <source>unsupported URL protocol</source>
-        <translation>The URL used an unknown protocol. Currently &quot;http&quot; and &quot;https&quot; (if built with openssl support) are recognized. For trackers &quot;udp&quot; is recognized as well.</translation>
+        <translation>The URL used an unknown protocol. Currently "http" and "https" (if built with openssl support) are recognized. For trackers "udp" is recognized as well.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="345"/>
@@ -1612,7 +1612,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="346"/>
         <source>peer sent 0 length piece</source>
-        <translation>The peer sent a &apos;piece&apos; message of length 0</translation>
+        <translation>The peer sent a 'piece' message of length 0</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="347"/>
@@ -1653,7 +1653,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="354"/>
         <source>expected closing ] for address</source>
-        <translation>The IPv6 address was expected to end with &apos;]&apos;</translation>
+        <translation>The IPv6 address was expected to end with ']'</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="355"/>
@@ -1668,12 +1668,12 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="357"/>
         <source>upload to upload connection</source>
-        <translation>The peer is upload only, and we are upload only. There&apos;s no point in keeping the connection</translation>
+        <translation>The peer is upload only, and we are upload only. There's no point in keeping the connection</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="358"/>
         <source>uninteresting upload-only peer</source>
-        <translation>The peer is upload only, and we&apos;re not interested in it. There&apos;s no point in keeping the connection</translation>
+        <translation>The peer is upload only, and we're not interested in it. There's no point in keeping the connection</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="359"/>
@@ -1687,8 +1687,8 @@ Download: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="361"/>
-        <source>&apos;have&apos;-message with higher index than the number of pieces</source>
-        <translation>The peer sent an invalid have message, either wrong size or referring to a piece that doesn&apos;t exist in the torrent</translation>
+        <source>'have'-message with higher index than the number of pieces</source>
+        <translation>The peer sent an invalid have message, either wrong size or referring to a piece that doesn't exist in the torrent</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="362"/>
@@ -2018,13 +2018,13 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="429"/>
         <source>torrent has no metadata</source>
-        <translation>The operation failed because it requires the torrent to have the metadata (.torrent file) and it doesn&apos;t have it yet. This happens for magnet links before they have downloaded the
+        <translation>The operation failed because it requires the torrent to have the metadata (.torrent file) and it doesn't have it yet. This happens for magnet links before they have downloaded the
 			// metadata, and also torrents added by URL.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="430"/>
         <source>invalid dont-have message</source>
-        <translation>The peer sent an invalid &quot;dont_have&quot; message. The dont have message is an extension to allow peers to advertise that the no longer has a piece they previously had.   </translation>
+        <translation>The peer sent an invalid "dont_have" message. The dont have message is an extension to allow peers to advertise that the no longer has a piece they previously had.   </translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="431"/>
@@ -2073,18 +2073,18 @@ Download: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="454"/>
-        <source>missing or invalid &apos;file sizes&apos; entry</source>
-        <translation>The resume data file is missing the &apos;file sizes&apos; entry</translation>
+        <source>missing or invalid 'file sizes' entry</source>
+        <translation>The resume data file is missing the 'file sizes' entry</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="455"/>
         <source>no files in resume data</source>
-        <translation>The resume data file &apos;file sizes&apos; entry is empty</translation>
+        <translation>The resume data file 'file sizes' entry is empty</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="456"/>
-        <source>missing &apos;slots&apos; and &apos;pieces&apos; entry</source>
-        <translation>The resume data file is missing the &apos;pieces&apos; and &apos;slots&apos; entry</translation>
+        <source>missing 'slots' and 'pieces' entry</source>
+        <translation>The resume data file is missing the 'pieces' and 'slots' entry</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="457"/>
@@ -2108,13 +2108,13 @@ Download: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="461"/>
-        <source>invalid &apos;blocks per piece&apos; entry</source>
-        <translation>The &apos;blocks per piece&apos; entry is invalid in the resume data file</translation>
+        <source>invalid 'blocks per piece' entry</source>
+        <translation>The 'blocks per piece' entry is invalid in the resume data file</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="462"/>
         <source>missing slots list</source>
-        <translation>The resume file is missing the &apos;slots&apos; entry, which is required for torrents with compact allocation</translation>
+        <translation>The resume file is missing the 'slots' entry, which is required for torrents with compact allocation</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="463"/>
@@ -2124,12 +2124,12 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="464"/>
         <source>invalid entry type in slot list</source>
-        <translation>The &apos;slot&apos; entry is invalid in the resume data</translation>
+        <translation>The 'slot' entry is invalid in the resume data</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="465"/>
         <source>invalid piece index in slot list</source>
-        <translation>One index in the &apos;slot&apos; list is invalid</translation>
+        <translation>One index in the 'slot' list is invalid</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="466"/>
@@ -2164,7 +2164,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="500"/>
         <source>scrape not available on tracker</source>
-        <translation>The tracker URL doesn&apos;t support transforming it into a scrape URL. i.e. it doesn&apos;t contain &quot;announce.</translation>
+        <translation>The tracker URL doesn't support transforming it into a scrape URL. i.e. it doesn't contain "announce.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="501"/>
@@ -2183,18 +2183,18 @@ Download: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="504"/>
-        <source>missing or invalid &apos;files&apos; entry</source>
-        <translation>Missing or invalid &apos;files&apos; entry</translation>
+        <source>missing or invalid 'files' entry</source>
+        <translation>Missing or invalid 'files' entry</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="505"/>
-        <source>missing or invalid &apos;hash&apos; entry</source>
-        <translation>Missing or invalid &apos;hash&apos; entry</translation>
+        <source>missing or invalid 'hash' entry</source>
+        <translation>Missing or invalid 'hash' entry</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="506"/>
-        <source>missing or invalid &apos;peers&apos; and &apos;peers6&apos; entry</source>
-        <translation>Missing or invalid &apos;peers&apos; and &apos;peers6&apos; entry</translation>
+        <source>missing or invalid 'peers' and 'peers6' entry</source>
+        <translation>Missing or invalid 'peers' and 'peers6' entry</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="507"/>
@@ -2280,8 +2280,8 @@ Download: %3</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="561"/>
-        <source>stored block length did not match one&apos;s complement</source>
-        <translation>stored block length did not match one&apos;s complement</translation>
+        <source>stored block length did not match one's complement</source>
+        <translation>stored block length did not match one's complement</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="562"/>
@@ -2587,7 +2587,7 @@ Download: %3</translation>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="22"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="213"/>
         <source>FILETAB_PRIORITY_ZERO</source>
-        <translation>Don&apos;t download</translation>
+        <translation>Don't download</translation>
     </message>
 </context>
 <context>
@@ -3183,7 +3183,7 @@ Error: %2
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="343"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="354"/>
         <source>DO_NOT_CREATE_SUBFOLDER_WITH_TORRENT_NAME</source>
-        <translation>Don&apos;t create subfolder with torrent name</translation>
+        <translation>Don't create subfolder with torrent name</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="415"/>
@@ -3929,7 +3929,7 @@ Error: %2
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="344"/>
         <source>RSS_ITEM_UNABLE_TO_DOWNLOAD %1 NO_URL</source>
-        <translation>RSS-article %1 doesn&apos;t contains url for torrent file or magnet-link</translation>
+        <translation>RSS-article %1 doesn't contains url for torrent file or magnet-link</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="370"/>
@@ -3951,8 +3951,8 @@ Error: %2
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="390"/>
-        <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
-        <translation>%1 Started downloading.&lt;br/&gt;&lt;a href=&quot;%3&quot;&gt; Description&lt;/a&gt;&lt;br/&gt; %2</translation>
+        <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href="%3"&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
+        <translation>%1 Started downloading.&lt;br/&gt;&lt;a href="%3"&gt; Description&lt;/a&gt;&lt;br/&gt; %2</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="424"/>
@@ -4561,7 +4561,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1193"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1855"/>
         <source>ALOW_REORDERED_OPERATIONS_WIT</source>
-        <translation>Disk read operations may be re-ordered based on their physical disk read offset. This greatly improves throughput when uploading to many peers. If your storage medium is a solid state drive, this optimization doesn&apos;t give you an benefits.</translation>
+        <translation>Disk read operations may be re-ordered based on their physical disk read offset. This greatly improves throughput when uploading to many peers. If your storage medium is a solid state drive, this optimization doesn't give you an benefits.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1294"/>
@@ -4615,7 +4615,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1183"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1851"/>
         <source>USE_DISK_READ_AHEAD_WIT</source>
-        <translation>When executing a read from the disk, the disk arm moves the read/write head to (or near) the correct track, and after some settling time the read head begins to pick up bits. Usually, the first sectors to be read are not the ones that have been requested by the operating system. The disk&apos;s embedded computer typically saves these unrequested sectors in the disk buffer, in case the operating system requests them later.</translation>
+        <translation>When executing a read from the disk, the disk arm moves the read/write head to (or near) the correct track, and after some settling time the read head begins to pick up bits. Usually, the first sectors to be read are not the ones that have been requested by the operating system. The disk's embedded computer typically saves these unrequested sectors in the disk buffer, in case the operating system requests them later.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1186"/>
