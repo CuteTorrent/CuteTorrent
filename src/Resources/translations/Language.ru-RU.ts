@@ -15,7 +15,7 @@
         <location filename="../../Comments/gui/FormFiles/AddCommentDialog.ui" line="172"/>
         <location filename="../../GeneratedFiles/ui_AddCommentDialog.h" line="143"/>
         <source>RATING:</source>
-        <translation>Рейтинг</translation>
+        <translation>Рейтинг:</translation>
     </message>
 </context>
 <context>
@@ -135,7 +135,7 @@
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="268"/>
         <source>SELECT_FILE_RULE_TYPE_HINT</source>
-        <translation>Это тип правила для выбора файлов из торрента или магнитной ссылки.</translation>
+        <translation>Это тип правила для выбора файлов из торрента или магнитной ссылки</translation>
     </message>
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="274"/>
@@ -251,7 +251,7 @@
     <message>
         <location filename="../../core/gui/ImportWizard/ChoseDataPage.cpp" line="52"/>
         <source>uTorrent resume file (resume.dat);;All files (*.*)</source>
-        <translation>uTorrent resume file (resume.dat);;All files (*.*)</translation>
+        <translation>Файл возобновления uTorrent (resume.dat);;All files (*.*)</translation>
     </message>
 </context>
 <context>
@@ -1418,7 +1418,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2374"/>
         <source>HTTP_SEED_URL:</source>
-        <translation>Web сид</translation>
+        <translation>Web сид:</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2388"/>
@@ -1428,12 +1428,12 @@ Download: %3</source>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2388"/>
         <source>RSS_FEED_URL:</source>
-        <translation>Ссылка на Rss-ленту</translation>
+        <translation>Ссылка на Rss-ленту:</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2559"/>
         <source>INVALID_COMMAND_RECIVED</source>
-        <translation>Получена неизветсная IPC комманда.</translation>
+        <translation>Получена неизвестная IPC команда.</translation>
     </message>
 </context>
 <context>
@@ -1733,7 +1733,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="370"/>
         <source>timed out: inactivity</source>
-        <translation>Пир не присылал запросв слишком долго, возможно он отключен.</translation>
+        <translation>Пир не присылал запросjв слишком долго, возможно он отключен.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="371"/>
