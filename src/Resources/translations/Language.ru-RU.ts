@@ -985,7 +985,7 @@
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1323"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="983"/>
         <source>SWITCH_VIEW</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключить вид</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1257"/>
@@ -1500,28 +1500,28 @@ Download: %3</source>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="324"/>
-        <source>missing or invalid &apos;info&apos; section in torrent file</source>
-        <translation>Отсутствует или некорректная секция &quot;info&quot; в торрент файле</translation>
+        <source>missing or invalid 'info' section in torrent file</source>
+        <translation>Отсутствует или некорректная секция "info" в торрент файле</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="325"/>
-        <source>&apos;info&apos; entry is not a dictionary</source>
-        <translation>Некорректная секция &quot;info&quot; в торрент файле</translation>
+        <source>'info' entry is not a dictionary</source>
+        <translation>Некорректная секция "info" в торрент файле</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="326"/>
-        <source>invalid or missing &apos;piece length&apos; entry in torrent file</source>
-        <translation>В торрент файле отсутсвует параметр &quot;piece length&quot;</translation>
+        <source>invalid or missing 'piece length' entry in torrent file</source>
+        <translation>В торрент файле отсутсвует параметр "piece length"</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="327"/>
         <source>missing name in torrent file</source>
-        <translation>В торрент файле отсуствует значение &quot;name&quot;</translation>
+        <translation>В торрент файле отсуствует значение "name"</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="328"/>
-        <source>invalid &apos;name&apos; of torrent (possible exploit attempt)</source>
-        <translation>Неверное значение &quot;name&quot; в торрент файле</translation>
+        <source>invalid 'name' of torrent (possible exploit attempt)</source>
+        <translation>Неверное значение "name" в торрент файле</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="329"/>
@@ -1531,17 +1531,17 @@ Download: %3</source>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="330"/>
         <source>failed to parse files from torrent file</source>
-        <translation>Не удалось разбрать секцию &quot;file&quot;</translation>
+        <translation>Не удалось разбрать секцию "file"</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="331"/>
-        <source>invalid or missing &apos;pieces&apos; entry in torrent file</source>
-        <translation>Значение &quot;pieces&quot; отсутсвует или неверно</translation>
+        <source>invalid or missing 'pieces' entry in torrent file</source>
+        <translation>Значение "pieces" отсутсвует или неверно</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="332"/>
         <source>incorrect number of piece hashes in torrent file</source>
-        <translation>Строка &quot;pieces&quot; имеет неправильную длину</translation>
+        <translation>Строка "pieces" имеет неправильную длину</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="333"/>
@@ -1602,7 +1602,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="344"/>
         <source>unsupported URL protocol</source>
-        <translation>Ссылка использует неизвестный простокол. Поддерживаются только &quot;http&quot; и &quot;https&quot;. Для трекеров дополнительно поддерживается &quot;udp&quot;</translation>
+        <translation>Ссылка использует неизвестный простокол. Поддерживаются только "http" и "https". Для трекеров дополнительно поддерживается "udp"</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="345"/>
@@ -1612,7 +1612,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="346"/>
         <source>peer sent 0 length piece</source>
-        <translation>Пир отправил &apos;piece&apos; сообщение размером в 0 байт</translation>
+        <translation>Пир отправил 'piece' сообщение размером в 0 байт</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="347"/>
@@ -1653,7 +1653,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="354"/>
         <source>expected closing ] for address</source>
-        <translation>Ожидалось что IPv6 адрес завершится &apos;]&apos;</translation>
+        <translation>Ожидалось что IPv6 адрес завершится ']'</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="355"/>
@@ -1687,7 +1687,7 @@ Download: %3</source>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="361"/>
-        <source>&apos;have&apos;-message with higher index than the number of pieces</source>
+        <source>'have'-message with higher index than the number of pieces</source>
         <translation>Пир отправил неверное сообщение об имеющейся части. Сообщение имеет неверный размер или ссылается на часть которой не существует в торренте</translation>
     </message>
     <message>
@@ -2023,7 +2023,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="430"/>
         <source>invalid dont-have message</source>
-        <translation type="unfinished"></translation>
+        <translation>Пир отправил неверное сообщение об отсуствующей части. Сообщения такого типа расширение протокола позволяющее сообщить другим пирам что данный пир более не владеет запрошенной частью</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="431"/>
@@ -2038,132 +2038,132 @@ Download: %3</source>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="433"/>
         <source>not an SSL torrent</source>
-        <translation type="unfinished"></translation>
+        <translation>Для указанной операции требуется SSL-торрент</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="434"/>
         <source>banned by port filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Пир забанен фильтром портов</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="442"/>
         <source>unsupported protocol version</source>
-        <translation type="unfinished"></translation>
+        <translation>Не поддерживается версия протокола указанная в ответе NAT-PMP маршрутизатора</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="443"/>
         <source>not authorized to create port map (enable NAT-PMP on your router)</source>
-        <translation type="unfinished"></translation>
+        <translation>У вас нет прав для проброса портов(Возможно NAT-PMP выключен)</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="444"/>
         <source>network failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Произошла ошибка сети при общении с NAT-PMP роутером</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="445"/>
         <source>out of resources</source>
-        <translation type="unfinished"></translation>
+        <translation>Произошла ошибка с NAT-PMP из-за недостатка ресурсов</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="446"/>
         <source>unsupported opcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Произошла ошибка с NAT-PMP из-за неверного кода операции</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="454"/>
-        <source>missing or invalid &apos;file sizes&apos; entry</source>
-        <translation type="unfinished"></translation>
+        <source>missing or invalid 'file sizes' entry</source>
+        <translation>В файле быстрого возобновления отсутствует секция 'file sizes'</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="455"/>
         <source>no files in resume data</source>
-        <translation type="unfinished"></translation>
+        <translation>В файле быстрого возобновления секция 'file sizes' пуста</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="456"/>
-        <source>missing &apos;slots&apos; and &apos;pieces&apos; entry</source>
-        <translation type="unfinished"></translation>
+        <source>missing 'slots' and 'pieces' entry</source>
+        <translation>В файле быстрого возобновления отсутствует секция 'pieces' и 'slots'</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="457"/>
         <source>mismatching number of files</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество файлов в торенте и файле быстрого восстановления торрента отличаются</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="458"/>
         <source>mismatching file size</source>
-        <translation type="unfinished"></translation>
+        <translation>Один из файлов на диске имеет размер отличный от значения в файле быстрого восстановления</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="459"/>
         <source>mismatching file timestamp</source>
-        <translation type="unfinished"></translation>
+        <translation>Один из файлов на диске имеет дату изменения отличную от значения в файле быстрого восстановления</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="460"/>
         <source>not a dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный формат файла восстановления</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="461"/>
-        <source>invalid &apos;blocks per piece&apos; entry</source>
-        <translation type="unfinished"></translation>
+        <source>invalid 'blocks per piece' entry</source>
+        <translation>В файле быстрого возобновления неверная секция 'blocks per piece'</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="462"/>
         <source>missing slots list</source>
-        <translation type="unfinished"></translation>
+        <translation>В файле быстрого возобновления отсутствует секция 'slots' которая необходима для торрента с копактным режимом аллокации</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="463"/>
         <source>file has more slots than torrent</source>
-        <translation type="unfinished"></translation>
+        <translation>В файле быстрого возобновления слотов больше чем в торренте</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="464"/>
         <source>invalid entry type in slot list</source>
-        <translation type="unfinished"></translation>
+        <translation>В файле быстрого возобновления неверная секция 'slot'</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="465"/>
         <source>invalid piece index in slot list</source>
-        <translation type="unfinished"></translation>
+        <translation>Один из индексов в секции 'slot' неверен</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="466"/>
         <source>pieces needs to be reordered</source>
-        <translation type="unfinished"></translation>
+        <translation>Для использования выбранного режима выделения места на части на диске необходимо переупорядочить. Такое происходит только если выбран режим разреженного распределения а файлы на диске используют компактное хранилище. Части должны быть перемещены в правильное положение</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="467"/>
         <source>fastresume not modified since last save</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл быстрого возобновления не изменялся с момента последнего сохранения</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="476"/>
         <source>Invalid HTTP header</source>
-        <translation type="unfinished"></translation>
+        <translation>HTTP заголовок отформатирован неверно</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="477"/>
         <source>missing Location header in HTTP redirect</source>
-        <translation type="unfinished"></translation>
+        <translation>Код HTTP ответа находится в диапазоне 300-399 но при этом отсутствует заголовок 'location'</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="478"/>
         <source>failed to decompress HTTP response</source>
-        <translation type="unfinished"></translation>
+        <translation>Ответ HTTP запроса сжат но декомпрессия завершилась с ошибкой</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="488"/>
         <source>no i2p router is set up</source>
-        <translation type="unfinished"></translation>
+        <translation>Ссылка является i2p адресом, но i2p роутер не скофигурирован</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="500"/>
         <source>scrape not available on tracker</source>
-        <translation type="unfinished"></translation>
+        <translation>URL-адрес трекера не поддерживает преобразование его в URL-адрес scrape. То есть он не содержит "announce".</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="501"/>
@@ -2173,244 +2173,244 @@ Download: %3</source>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="502"/>
         <source>invalid peer dictionary entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное значение секции пира</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="503"/>
         <source>tracker sent a failure message</source>
-        <translation type="unfinished"></translation>
+        <translation>Трекер отправил сообщение об ошибке</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="504"/>
-        <source>missing or invalid &apos;files&apos; entry</source>
-        <translation type="unfinished"></translation>
+        <source>missing or invalid 'files' entry</source>
+        <translation>Секция 'files' отсутствует или неверна</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="505"/>
-        <source>missing or invalid &apos;hash&apos; entry</source>
-        <translation type="unfinished"></translation>
+        <source>missing or invalid 'hash' entry</source>
+        <translation>Секция 'hash' отсутствует или неверна</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="506"/>
-        <source>missing or invalid &apos;peers&apos; and &apos;peers6&apos; entry</source>
-        <translation type="unfinished"></translation>
+        <source>missing or invalid 'peers' and 'peers6' entry</source>
+        <translation>Секция 'peers' и 'peers6' отсутствует или неверна</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="507"/>
         <source>udp tracker response packet has invalid size</source>
-        <translation type="unfinished"></translation>
+        <translation>Ответ UDP трекера имеет неверный размер</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="508"/>
         <source>invalid transaction id in udp tracker response</source>
-        <translation type="unfinished"></translation>
+        <translation>В ответе UDP трекера неверный ID транзакции</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="509"/>
         <source>invalid action field in udp tracker response</source>
-        <translation type="unfinished"></translation>
+        <translation>В ответе UDP трекера неверное значение поля 'action'</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="523"/>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="540"/>
         <source>expected string in bencoded string</source>
-        <translation type="unfinished"></translation>
+        <translation>Ожидалась строка в кодированной строке</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="524"/>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="541"/>
         <source>expected colon in bencoded string</source>
-        <translation type="unfinished"></translation>
+        <translation>Ожидалось двоеточие в кодированной строке</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="525"/>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="542"/>
         <source>unexpected end of file in bencoded string</source>
-        <translation type="unfinished"></translation>
+        <translation>Неожиданный конец файла в кодированной строке</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="526"/>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="543"/>
         <source>expected value (list, dict, int or string) in bencoded string</source>
-        <translation type="unfinished"></translation>
+        <translation>Ожидалось значение (список, словарь, число или строка) в кодированной строке</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="527"/>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="544"/>
         <source>bencoded nesting depth exceeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Превышена глубина вложенности в кодированной строке</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="528"/>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="545"/>
         <source>bencoded item count limit exceeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Превышено ограничение на количество элементов в кодированной строке</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="529"/>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="546"/>
         <source>integer overflow</source>
-        <translation>целочисленное переполнение</translation>
+        <translation>Целочисленное переполнение</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="556"/>
         <source>invalid gzip header</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный заголовок gzip</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="557"/>
         <source>inflated data too large</source>
-        <translation type="unfinished"></translation>
+        <translation>Слишком много данных для декомпресии</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="558"/>
         <source>available inflate data did not terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Полученные сжатые данные неполные</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="559"/>
         <source>output space exhausted before completing inflate</source>
-        <translation type="unfinished"></translation>
+        <translation>Недостаточно места для завершения декомпресии</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="560"/>
         <source>invalid block type (type == 3)</source>
-        <translation>неверный тип блока (тип == 3)</translation>
+        <translation>Неверный тип блока (type == 3)</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="561"/>
-        <source>stored block length did not match one&apos;s complement</source>
-        <translation type="unfinished"></translation>
+        <source>stored block length did not match one's complement</source>
+        <translation>Длина сохраненного блока не соответствовала дополнению</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="562"/>
         <source>dynamic block code description: too many length or distance codes</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание кода динамического блока: слишком много кодов длины или расстояния</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="563"/>
         <source>dynamic block code description: code lengths codes incomplete</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание кода динамического блока: коды длин кода неполные</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="564"/>
         <source>dynamic block code description: repeat lengths with no first length</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание кода динамического блока: длина повтора без первой длины</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="565"/>
         <source>dynamic block code description: repeat more than specified lengths</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание кода динамического блока: повторяется больше чем указанно в длине</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="566"/>
         <source>dynamic block code description: invalid literal/length code lengths</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание кода динамического блока: недопустимые длины кода литерала / длины</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="567"/>
         <source>dynamic block code description: invalid distance code lengths</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание кода динамического блока: недопустимые длины кода расстояния</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="568"/>
         <source>invalid literal/length or distance code in fixed or dynamic block</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный код литерала / длины или расстояния в фиксированном или динамическом блоке</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="569"/>
         <source>distance is too far back in fixed or dynamic block</source>
-        <translation type="unfinished"></translation>
+        <translation>Расстояние за пределами фиксированного или динамического блока</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="570"/>
         <source>unknown gzip error</source>
-        <translation>неизвестная ошибка gzip</translation>
+        <translation>Неизвестная ошибка gzip</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="581"/>
         <source>cannot reach peer</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить соединение с пиром</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="582"/>
         <source>i2p error</source>
-        <translation>ошибка i2p</translation>
+        <translation>Ошибка i2p</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="583"/>
         <source>invalid key</source>
-        <translation>неверный ключ</translation>
+        <translation>Неверный ключ</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="584"/>
         <source>invalid id</source>
-        <translation>неверный идентификатор</translation>
+        <translation>Неверный идентификатор</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="585"/>
         <source>timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Истекло время ожидания</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="586"/>
         <source>key not found</source>
-        <translation>ключ не найден</translation>
+        <translation>Ключ не найден</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="587"/>
         <source>duplicated id</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторяющийся идентификатор</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="596"/>
         <source>SOCKS no error</source>
-        <translation>ошибка SOCKS</translation>
+        <translation>Ошибка SOCKS</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="597"/>
         <source>SOCKS unsupported version</source>
-        <translation>неподдерживаемая версия SOCKS</translation>
+        <translation>Неподдерживаемая версия SOCKS</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="598"/>
         <source>SOCKS unsupported authentication method</source>
-        <translation>неподдерживаемый метод аутентификации SOCKS</translation>
+        <translation>Неподдерживаемый метод аутентификации SOCKS</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="599"/>
         <source>SOCKS unsupported authentication version</source>
-        <translation>неподдерживаемая версия аутентификации SOCKS</translation>
+        <translation>Неподдерживаемая версия аутентификации SOCKS</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="600"/>
         <source>SOCKS authentication error</source>
-        <translation>ошибка аутентификации SOCKS</translation>
+        <translation>Ошибка аутентификации SOCKS</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="601"/>
         <source>SOCKS username required</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо имя пользователя SOCKS</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="602"/>
         <source>SOCKS general failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Общий сбой SOCKS</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="603"/>
         <source>SOCKS command not supported</source>
-        <translation type="unfinished"></translation>
+        <translation>SOCKS-команда неподдерживается</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="604"/>
         <source>SOCKS no identd running</source>
-        <translation type="unfinished"></translation>
+        <translation>Запрос не выполнен, потому что у клиента не работает identd</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="605"/>
         <source>SOCKS identd could not identify username</source>
-        <translation type="unfinished"></translation>
+        <translation>Запрос не удался, потому что запущенный у клиента identd не смог подтвердить строку идентификатора пользователя в запросе</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="620"/>
@@ -2420,47 +2420,47 @@ Download: %3</source>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="621"/>
         <source>Action Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось выполнить действие</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="622"/>
         <source>The specified value does not exist in the array</source>
-        <translation type="unfinished"></translation>
+        <translation>Указанное значение не существует в массиве</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="623"/>
         <source>The source IP address cannot be wild-carded</source>
-        <translation type="unfinished"></translation>
+        <translation>Исходный IP-адрес не может быть отфильтрован</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="624"/>
         <source>The external port cannot be wild-carded</source>
-        <translation type="unfinished"></translation>
+        <translation>Внешний порт не может быть отфильтрован</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="626"/>
         <source>The port mapping entry specified conflicts with a mapping assigned previously to another client</source>
-        <translation type="unfinished"></translation>
+        <translation>Указанная запись сопоставления портов конфликтует с сопоставлением, назначенным ранее другому клиенту</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="629"/>
         <source>Internal and External port values must be the same</source>
-        <translation type="unfinished"></translation>
+        <translation>Значения внутреннего и внешнего портов должны быть одинаковыми</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="631"/>
         <source>The NAT implementation only supports permanent lease times on port mappings</source>
-        <translation type="unfinished"></translation>
+        <translation>Реализация NAT поддерживает только постоянные сроки аренды портов</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="635"/>
         <source>RemoteHost must be a wildcard and cannot be a specific IP address or DNS name</source>
-        <translation type="unfinished"></translation>
+        <translation>RemoteHost должен быть фильтром и не может быть конкретным IP-адресом или DNS-именем</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="638"/>
         <source>ExternalPort must be a wildcard and cannot be a specific port </source>
-        <translation type="unfinished"></translation>
+        <translation>ExternalPort должен быть с подстановочным знаком и не может быть конкретным портом </translation>
     </message>
 </context>
 <context>
@@ -2468,7 +2468,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/filedownloader.cpp" line="54"/>
         <source>UNABLE_TO_SAVE_DOWNLOADED_FILE</source>
-        <translation>Неудалось сохранить скачанный файл</translation>
+        <translation>Не удалось сохранить скачанный файл</translation>
     </message>
     <message>
         <location filename="../../core/filedownloader.cpp" line="59"/>
@@ -2537,27 +2537,27 @@ Download: %3</source>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="23"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="185"/>
         <source>FILETAB_RENAME_FILE</source>
-        <translation type="unfinished"></translation>
+        <translation>Переименовать файл</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="146"/>
         <source>NOT_A_FILE_SELECTED</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбран не файл</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="146"/>
         <source>FILE_SHOULD_BE_SELECTED</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл не выбран</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="152"/>
         <source>ENTER_NEW_FILE_NAME</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя не должно быть пустым</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="152"/>
         <source>FILE_NAME</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя файла</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="117"/>
@@ -3175,7 +3175,7 @@ ERROR: %2
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="343"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="354"/>
         <source>DO_NOT_CREATE_SUBFOLDER_WITH_TORRENT_NAME</source>
-        <translation type="unfinished"></translation>
+        <translation>Не создавать папку с именем торрента</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="415"/>
@@ -3947,8 +3947,8 @@ ERROR: %2
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="390"/>
-        <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
-        <translation type="unfinished"></translation>
+        <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href="%3"&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
+        <translation>%1 Началась загрузка.&lt;br/&gt;&lt;a href="%3"&gt; Описание&lt;/a&gt;&lt;br/&gt; %2</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="424"/>
@@ -4619,7 +4619,7 @@ ERROR: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1183"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1851"/>
         <source>USE_DISK_READ_AHEAD_WIT</source>
-        <translation>При выполнении чтения с диска, шпиндель перемещает головки чтения / записи на (или вблизи) определлнный трек, и через некоторое время считывающая головка начинает подобрать биты. Как правило, первые сектора, которые будут считанны не те, что были запрошены операционной системой. Чаще всего эти &quot;непрошенные&quot; соктора можно кешировать для будущих операций.</translation>
+        <translation>При выполнении чтения с диска, шпиндель перемещает головки чтения / записи на (или вблизи) определлнный трек, и через некоторое время считывающая головка начинает подобрать биты. Как правило, первые сектора, которые будут считанны не те, что были запрошены операционной системой. Чаще всего эти "непрошенные" соктора можно кешировать для будущих операций.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1186"/>
@@ -4679,7 +4679,7 @@ ERROR: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="522"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1726"/>
         <source>USE_PEX</source>
-        <translation>Использовать &quot;обмен пирами&quot; (PeX) чтобы найти больше пиров</translation>
+        <translation>Использовать "обмен пирами" (PeX) чтобы найти больше пиров</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="341"/>
@@ -4697,7 +4697,7 @@ ERROR: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="529"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1727"/>
         <source>USE_LSD</source>
-        <translation>Использовать &quot;Поиск локальных приов&quot; (LSD) чтобы найти больше пиров</translation>
+        <translation>Использовать "Поиск локальных приов" (LSD) чтобы найти больше пиров</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="895"/>
@@ -5601,7 +5601,7 @@ ERROR: %2</source>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="335"/>
         <source>SAVE_RESUME_DATA_FAILED %1, RETRING...</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранение файла быстрого возобновления торрента произошло с ошибкой %1, пытаюсь сохранить еще раз...</translation>
     </message>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="386"/>
