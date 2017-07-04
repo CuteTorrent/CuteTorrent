@@ -1,1 +1,1 @@
-for /r %file in (*.ts) do C:\Qt\5.9.1\msvc2015\bin\lupdate -recursive ..\..\ -ts %file
+forfiles /s /m *.ts /c "cmd /c C:\Qt\5.9.1\msvc2015\bin\lupdate -no-obsolete -recursive ..\..\ -ts @path"

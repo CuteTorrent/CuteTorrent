@@ -191,7 +191,6 @@ int main(int argc, char* argv[])
 		}
 	}
 
-
 	a.loadTranslations(":/translations");
 	a.loadTranslationsQt(":/translations_qt");
 	a.addLibraryPath(StaticHelpers::CombinePathes(QCoreApplication::applicationDirPath(), "plugins"));

@@ -10,6 +10,7 @@
 class QTreeView;
 using namespace libtorrent;
 struct file_entry;
+class FileIconProvider;
 class FileViewModel : public QAbstractItemModel
 {
 
@@ -46,6 +47,7 @@ public slots:
 	void OnFileRenameCompleted();
 	void RenameSelectedFile();
 private:
+	FileIconProvider* m_pFileIconProvider;
 	long long CalculateFolderSize(FileViewTreeItem* item) const;
 	float CalculateFolderReady(FileViewTreeItem* item) const;
 	void setupFileTabelContextMenu();
@@ -66,8 +68,8 @@ private:
 	QTreeView* m_pView;
 	FileViewSortProxyModel* m_pProxyModel;
 	std::vector<int64_t> m_Progresses;
-	static QHash<QString, QPixmapCache::Key> extToKeys;
-	static QPixmapCache iconCache;
+	//static QHash<QString, QPixmapCache::Key> extToKeys;
+	static QCache<QString,QIcon> iconCache;
 	FileViewTreeItem* m_pRoot;
 	QString GetFullPath(FileViewTreeItem* pItem);
 };

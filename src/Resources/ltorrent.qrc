@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/icons">
         <file alias="app.ico">app.ico</file>
-		<file alias="appOverlay.ico">iconOverlay.ico</file>
+        <file alias="appOverlay.ico">iconOverlay.ico</file>
     </qresource>
     <qresource prefix="/translations">
         <file alias="cutetorrent_en_US.qm">translations/Language.en-US.qm</file>
@@ -9,18 +9,6 @@
     </qresource>
     <qresource prefix="/qt-project.org/qmime">
         <file alias="freedesktop.org.xml">mime/packages/freedesktop.org.xml</file>
-    </qresource>
-
-    <qresource prefix="/PlayerControlImages">
-        <file alias="ControlBar.png">playerImages/ControlBar.png</file>
-        <file alias="FileButton.png">playerImages/FileButton.png</file>
-        <file alias="FullscreenButton.png">playerImages/FullscreenButton.png</file>
-        <file alias="PauseButton.png">playerImages/PauseButton.png</file>
-        <file alias="PlayButton.png">playerImages/PlayButton.png</file>
-        <file alias="RateButtonForward.png">playerImages/RateButtonForward.png</file>
-        <file alias="RateButtonReverse.png">playerImages/RateButtonReverse.png</file>
-        <file alias="UrlButton.png">playerImages/UrlButton.png</file>
-        <file alias="bg.png">playerImages/pattern.png</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="loader.gif">images/loader.gif</file>

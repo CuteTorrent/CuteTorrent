@@ -173,26 +173,33 @@
       <Extensions>ui</Extensions>
       <ParseFiles>true</ParseFiles>
     </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files\Debug">
+      <UniqueIdentifier>{82371732-3fdb-42d8-b336-f2ab3fa7ea61}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{fcb106ec-34a1-46a6-a0ec-83729a2ae04a}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;cxx;c;def</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Comments\CommentsWebClient.cpp">
-      <Filter>Comments</Filter>
-    </ClCompile>
-    <ClCompile Include="Comments\gui\Dialogs\AddCommentDialog.cpp">
-      <Filter>Comments\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="Comments\gui\Dialogs\LoginDialog.cpp">
-      <Filter>Comments\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="Comments\gui\Dialogs\RegisterDialog.cpp">
-      <Filter>Comments\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="Comments\ViewModels\CommentItemDelegate.cpp">
-      <Filter>Comments\ViewModels</Filter>
-    </ClCompile>
-    <ClCompile Include="Comments\ViewModels\CommentsModel.cpp">
-      <Filter>Comments\ViewModels</Filter>
-    </ClCompile>
     <ClCompile Include="core\application.cpp">
       <Filter>core</Filter>
     </ClCompile>
@@ -290,9 +297,6 @@
       <Filter>core\gui\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="core\gui\Dialogs\RaitingDialog.cpp">
-      <Filter>core\gui\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="core\gui\Dialogs\ReportProblemDialog.cpp">
       <Filter>core\gui\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="core\gui\Dialogs\SettingsDialog.cpp">
@@ -713,9 +717,6 @@
       <Filter>webControll</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="GeneratedFiles\Release\moc_AddCommentDialog.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_AddRssDwonloadRuleDialog.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
@@ -735,15 +736,6 @@
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_ChoseDataPage.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_CommentItemDelegate.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_CommentsModel.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_CommentsWebClient.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_createbackuppage.cpp">
@@ -828,9 +820,6 @@
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_ISerachProvider.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_LoginDialog.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_MagnetApiController.cpp">
@@ -938,12 +927,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_RconWebService.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_RegisterDialog.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ReportProblemDialog.cpp">
-      <Filter>GeneratedFiles\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_RequestMapper.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
@@ -1034,29 +1017,17 @@
     <ClCompile Include="GeneratedFiles\Release\moc_VideoFileChooseDialog.cpp">
       <Filter>GeneratedFiles\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_FileIconProvider.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_FileIconProvider.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="core\FileIconProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="Comments\gui\Dialogs\AddCommentDialog.h">
-      <Filter>Comments\gui\Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Comments\gui\Dialogs\LoginDialog.h">
-      <Filter>Comments\gui\Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Comments\gui\Dialogs\RegisterDialog.h">
-      <Filter>Comments\gui\Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Comments\ViewModels\CommentItemDelegate.h">
-      <Filter>Comments\ViewModels</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Comments\ViewModels\CommentsModel.h">
-      <Filter>Comments\ViewModels</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Comments\Comment.h">
-      <Filter>Comments</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Comments\User.h">
-      <Filter>Comments</Filter>
-    </CustomBuild>
     <CustomBuild Include="core\Build_Increment.h">
       <Filter>core</Filter>
     </CustomBuild>
@@ -1090,9 +1061,6 @@
     <CustomBuild Include="core\versionInfo.h">
       <Filter>core</Filter>
     </CustomBuild>
-    <CustomBuild Include="GeneratedFiles\ui_AddCommentDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </CustomBuild>
     <CustomBuild Include="GeneratedFiles\ui_AddDownloadRuleDialog.h">
       <Filter>GeneratedFiles</Filter>
     </CustomBuild>
@@ -1103,9 +1071,6 @@
       <Filter>GeneratedFiles</Filter>
     </CustomBuild>
     <CustomBuild Include="GeneratedFiles\ui_InitializtionDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="GeneratedFiles\ui_LoginDialog.h">
       <Filter>GeneratedFiles</Filter>
     </CustomBuild>
     <CustomBuild Include="GeneratedFiles\ui_messagebox.h">
@@ -1121,12 +1086,6 @@
       <Filter>GeneratedFiles</Filter>
     </CustomBuild>
     <CustomBuild Include="GeneratedFiles\ui_RaitingDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="GeneratedFiles\ui_RegisterDialog.h">
-      <Filter>GeneratedFiles</Filter>
-    </CustomBuild>
-    <CustomBuild Include="GeneratedFiles\ui_ReportProblemDialog.h">
       <Filter>GeneratedFiles</Filter>
     </CustomBuild>
     <CustomBuild Include="GeneratedFiles\ui_RssFeedSettingsDialog.h">
@@ -1621,9 +1580,6 @@
     <CustomBuild Include="core\gui\Dialogs\SettingsDialog.h">
       <Filter>core\gui\Dialogs</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Dialogs\ReportProblemDialog.h">
-      <Filter>core\gui\Dialogs</Filter>
-    </CustomBuild>
     <CustomBuild Include="core\gui\Dialogs\RaitingDialog.h">
       <Filter>core\gui\Dialogs</Filter>
     </CustomBuild>
@@ -1693,12 +1649,6 @@
     <CustomBuild Include="core\collections\ObservebaleCollectionBase.h">
       <Filter>core\collections</Filter>
     </CustomBuild>
-    <CustomBuild Include="Comments\CommentsWebClient.h">
-      <Filter>Comments</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Resources\ltorrent.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="core\gui\FormFiles\CustomWindow.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
@@ -1714,9 +1664,6 @@
     <CustomBuild Include="core\gui\FormFiles\RaitingDialog.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\FormFiles\ReportProblemDialog.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="core\gui\FormFiles\SettingsDialog.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
@@ -1725,6 +1672,12 @@
     </CustomBuild>
     <CustomBuild Include="core\gui\FormFiles\VideoFileChoose.ui">
       <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\ltorrent.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core\FileIconProvider.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

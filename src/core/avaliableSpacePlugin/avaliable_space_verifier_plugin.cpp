@@ -5,32 +5,26 @@
 #include <libtorrent/alert_manager.hpp>
 
 
-void avaliable_space_verifier_plugin::verify_avaliable_space(torrent* t)
+void avaliable_space_verifier_plugin::verify_avaliable_space()
 {
-	if (t != NULL && t->valid_metadata())
+	
+	if (m_torrent.valid_metadata())
 	{
-		int64_t totalSize = t->torrent_file().files().total_size();
-		QString savePath = QString::fromUtf8(t->save_path().c_str());
+		int64_t totalSize = m_torrent.torrent_file().files().total_size();
+		QString savePath = QString::fromUtf8(m_torrent.save_path().c_str());
 		QStorageInfo info(savePath);
 		if (totalSize > info.bytesAvailable())
 		{
-			if (t->alerts().should_post<not_enough_space_alert>())
+			if (m_torrent.alerts().should_post<not_enough_space_alert>())
 			{
-				t->alerts().emplace_alert<not_enough_space_alert, torrent_handle>(t->get_handle());
+				m_torrent.alerts().emplace_alert<not_enough_space_alert, torrent_handle>(m_torrent.get_handle());
 				error_code ec(ERROR_DISK_FULL, boost::system::get_system_category());
-				t->set_error(ec, torrent_status::error_file_none);
+				m_torrent.set_error(ec, torrent_status::error_file_none);
 			}
 		}
 	}
 }
 
-
-boost::shared_ptr<torrent_plugin> avaliable_space_verifier_plugin::new_torrent(const torrent_handle& t, void* userData)
-{
-	verify_avaliable_space(t.native_handle().get());
-
-	return plugin::new_torrent(t, userData);
-}
 
 int not_enough_space_alert::type() const
 {
@@ -49,16 +43,21 @@ int not_enough_space_alert::category() const
 
 char const* not_enough_space_alert::what() const
 {
-	return "There is not enough disk space to save torrent files.";
+	return QT_TRANSLATE_NOOP3("Torrent","There is not enough disk space to save torrent files.");
 }
 
-void avaliable_space_verifier_plugin::on_alert(alert const* a)
+avaliable_space_verifier_plugin::avaliable_space_verifier_plugin(libtorrent::torrent& tor)
+: m_torrent(tor)
 {
-	if (a != nullptr && a->category() == metadata_received_alert::static_category && a->type() == metadata_received_alert::alert_type)
+	
+}
+
+void avaliable_space_verifier_plugin::on_state(int state)
+{
+	
+	if (state == torrent_status::downloading)
 	{
-		const metadata_received_alert* p = alert_cast<metadata_received_alert>(a);
-		const boost::shared_ptr<torrent> torrent = p->handle.native_handle();
-		verify_avaliable_space(torrent.get());
+		verify_avaliable_space();
 	}
 }
 

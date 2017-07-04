@@ -151,7 +151,7 @@ TorrentManager::TorrentManager()
 		m_pFileDownloader->download(geoIpUrl);
 	}
 	*/
-	m_pTorrentSession->add_extension(create_avaliable_space_verifier_plugin());
+	m_pTorrentSession->add_extension(&create_avaliable_space_verifier_plugin);
 	m_pTorrentSession->add_extension(&create_ut_metadata_plugin);
 	m_pTorrentSession->add_extension(&create_smart_ban_plugin);
 
@@ -574,7 +574,7 @@ void TorrentManager::handle_alert(alert* a)
 			case add_torrent_alert::alert_type:
 			case listen_succeeded_alert::alert_type:
 			case state_changed_alert::alert_type:
-			case torrent_added_alert::alert_type:
+//			case torrent_added_alert::alert_type:
 			case torrent_checked_alert::alert_type:
 			case torrent_resumed_alert::alert_type:
 			case torrent_paused_alert::alert_type:
@@ -1218,15 +1218,21 @@ void TorrentManager::dispatchPendingAlerts()
 	}
 }
 
-void TorrentManager::RemoveTorrent(QString infoHash, bool delFiles)
+void TorrentManager::RemoveTorrent(QString InfoHash, bool delFiles, bool emitEvents)
 {
-	emit BeforTorrentRemoved(infoHash);
-	m_pTorrentStorrage->remove(infoHash);
-	emit TorrentRemoved(infoHash);
+	if (emitEvents)
+	{
+		emit BeforTorrentRemoved(InfoHash);
+	}
+	m_pTorrentStorrage->remove(InfoHash);
+	if (emitEvents)
+	{
+		emit TorrentRemoved(InfoHash);
+	}
 	try
 	{
 		char out[20] = {0};
-		from_hex(infoHash.toUtf8().data(), infoHash.length(), out);
+		from_hex(InfoHash.toUtf8().data(), InfoHash.length(), out);
 		sha1_hash hash(out);
 		torrent_handle h = m_pTorrentSession->find_torrent(hash);
 
@@ -1244,8 +1250,8 @@ void TorrentManager::RemoveTorrent(QString infoHash, bool delFiles)
 		qCritical() << "Not a libtorrent exception caught";
 	}
 	QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
-	QString resumePath = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".resume");
-	QString torrentPath = StaticHelpers::CombinePathes(dataDir, "BtSessionData", infoHash + ".torrent");
+	QString resumePath = StaticHelpers::CombinePathes(dataDir, "BtSessionData", InfoHash + ".resume");
+	QString torrentPath = StaticHelpers::CombinePathes(dataDir, "BtSessionData", InfoHash + ".torrent");
 	QFile resumeDataFile(resumePath);
 	QFile torrentFile(torrentPath);
 
