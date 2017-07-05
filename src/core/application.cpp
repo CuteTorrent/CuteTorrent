@@ -81,7 +81,7 @@ void Application::loadTranslationsQt(const QString& dir)
 void Application::loadTranslationsQt(const QDir& dir)
 {
 	// <language>_<country>.qm
-	QString filter = "*_*.qm";
+	/*QString filter = "*_*.qm";
 	QDir::Filters filters = QDir::Files | QDir::Readable;
 	QDir::SortFlags sort = QDir::Name;
 	QFileInfoList entries = dir.entryInfoList(QStringList() << filter, filters, sort);
@@ -94,14 +94,26 @@ void Application::loadTranslationsQt(const QDir& dir)
 			QString country = parts.at(parts.count() - 1).toUpper();
 			// construct and load translator
 			QTranslator* translator = new QTranslator(instance());
-
-			if (translator->load(file.absoluteFilePath()))
+			QByteArray ba;
+			
+			QString filename = file.absoluteFilePath();
+			QFile translation(filename;
+			if (translation.exists() && translation.open(QIODevice::ReadOnly))
 			{
+				QByteArray data = translation.readAll();
 				QString locale = language + "_" + country;
-				qDebug() << "New Qt langugae found" << locale;
-				qt_translators.insert(locale, translator);
+				if (translator->load(QLocale(locale), filename))
+				{
+
+					qDebug() << "New Qt langugae found" << locale;
+					qt_translators.insert(locale, translator);
+				}
 			}
-		}
+			 else
+			{
+				
+			}
+		}*/
 }
 
 QString Application::currentLocale()

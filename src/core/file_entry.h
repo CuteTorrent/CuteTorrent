@@ -3,7 +3,6 @@
 #define FILEENTRY_H
 
 #include <string>
-#include <QFileIconProvider>
 
 struct file_entry{
 	int64_t size;

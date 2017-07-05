@@ -25,18 +25,19 @@ public:
 	libtorrent::torrent_handle handle;
 };
 
-struct avaliable_space_verifier_plugin : libtorrent::plugin
+struct avaliable_space_verifier_plugin : libtorrent::torrent_plugin
 {
-	void on_alert(libtorrent::alert const*) override;
-	void verify_avaliable_space(libtorrent::torrent* t);
-
-	boost::shared_ptr<libtorrent::torrent_plugin> new_torrent(libtorrent::torrent_handle const&, void*) override;
+	avaliable_space_verifier_plugin(libtorrent::torrent& tor);
+	void on_state(int) override;
+	void verify_avaliable_space();
+	libtorrent::torrent& m_torrent;
+	//boost::shared_ptr<libtorrent::torrent_plugin> new_torrent(libtorrent::torrent_handle const&, void*) override;
 };
 
-inline boost::shared_ptr<libtorrent::plugin> create_avaliable_space_verifier_plugin()
+inline boost::shared_ptr<libtorrent::torrent_plugin> create_avaliable_space_verifier_plugin(libtorrent::torrent_handle const& torrent, void*)
 {
 	
 
-	return boost::static_pointer_cast<libtorrent::plugin>(boost::make_shared<avaliable_space_verifier_plugin>());
+	return boost::static_pointer_cast<libtorrent::torrent_plugin>(boost::make_shared<avaliable_space_verifier_plugin>(*torrent.native_handle().get()));
 }
 

@@ -1013,7 +1013,7 @@ bool QTorrentDisplayModel::removeRow(const QModelIndex& index, bool delFiles)
 		m_pCurrentTorrent = NULL;
 	}
 
-	m_pTorrentManager->RemoveTorrent(tor2del->GetInfoHash(), delFiles);
+	m_pTorrentManager->RemoveTorrent(tor2del->GetInfoHash(), delFiles, false);
 	endRemoveRows();
 	return true;
 }

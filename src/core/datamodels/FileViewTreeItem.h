@@ -1,5 +1,8 @@
 ﻿#pragma once
 #include <file_entry.h>
+#include <QVector>
+class QString;
+
 class FileViewTreeItem
 {
 	friend class FileViewModel;

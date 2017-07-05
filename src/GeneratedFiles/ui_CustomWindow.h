@@ -17,7 +17,6 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -68,12 +67,8 @@ public:
     QAction *ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLADS_COMPLETE;
     QAction *ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE;
     QAction *ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE;
-    QAction *ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE;
     QAction *ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE;
-    QAction *ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE;
     QAction *ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE;
-    QAction *ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE;
-    QAction *ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE;
     QAction *ACTION_MENUHELP_RATE;
     QAction *ACTION_TORRENTTOOLBAR_SWITCH_VIEW;
     QVBoxLayout *verticalLayout;
@@ -148,18 +143,11 @@ public:
     QWidget *tab_4;
     QGridLayout *gridLayout_5;
     QTreeView *fileTableView;
-    QWidget *tab_5;
-    QGridLayout *ratingTabLayout;
-    QPushButton *addCommentButton;
-    QListView *m_commentsView;
-    QLabel *label_13;
-    QSpacerItem *horizontalSpacer_2;
     QWidget *rssPage;
     QGridLayout *m_pRssInfoLayout;
     QWidget *widget_3;
     QMenuBar *mainMenuBar;
     QMenu *fileMenu;
-    QMenu *settingsMenu;
     QMenu *menu_CuteTorrent;
     QMenu *toolsMenu;
     QMenu *autoShutdownMenu;
@@ -246,24 +234,12 @@ public:
         ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE = new QAction(CustomWindow);
         ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE"));
         ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE->setCheckable(true);
-        ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE"));
-        ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE->setCheckable(true);
         ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE = new QAction(CustomWindow);
         ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE"));
         ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE->setCheckable(true);
-        ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE"));
-        ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE->setCheckable(true);
         ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE = new QAction(CustomWindow);
         ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE"));
         ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE->setCheckable(true);
-        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE"));
-        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE->setCheckable(true);
-        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE = new QAction(CustomWindow);
-        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE->setObjectName(QStringLiteral("ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE"));
-        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE->setCheckable(true);
         ACTION_MENUHELP_RATE = new QAction(CustomWindow);
         ACTION_MENUHELP_RATE->setObjectName(QStringLiteral("ACTION_MENUHELP_RATE"));
         ACTION_TORRENTTOOLBAR_SWITCH_VIEW = new QAction(CustomWindow);
@@ -710,32 +686,6 @@ public:
         gridLayout_5->addWidget(fileTableView, 0, 0, 1, 1);
 
         m_pTabWidget->addTab(tab_4, QString());
-        tab_5 = new QWidget();
-        tab_5->setObjectName(QStringLiteral("tab_5"));
-        ratingTabLayout = new QGridLayout(tab_5);
-        ratingTabLayout->setSpacing(6);
-        ratingTabLayout->setContentsMargins(11, 11, 11, 11);
-        ratingTabLayout->setObjectName(QStringLiteral("ratingTabLayout"));
-        addCommentButton = new QPushButton(tab_5);
-        addCommentButton->setObjectName(QStringLiteral("addCommentButton"));
-
-        ratingTabLayout->addWidget(addCommentButton, 0, 2, 1, 1);
-
-        m_commentsView = new QListView(tab_5);
-        m_commentsView->setObjectName(QStringLiteral("m_commentsView"));
-
-        ratingTabLayout->addWidget(m_commentsView, 1, 0, 1, 3);
-
-        label_13 = new QLabel(tab_5);
-        label_13->setObjectName(QStringLiteral("label_13"));
-
-        ratingTabLayout->addWidget(label_13, 0, 0, 1, 1);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        ratingTabLayout->addItem(horizontalSpacer_2, 0, 1, 1, 1);
-
-        m_pTabWidget->addTab(tab_5, QString());
 
         gridLayout_11->addWidget(m_pTabWidget, 0, 0, 1, 1);
 
@@ -767,8 +717,6 @@ public:
         mainMenuBar->setNativeMenuBar(false);
         fileMenu = new QMenu(mainMenuBar);
         fileMenu->setObjectName(QStringLiteral("fileMenu"));
-        settingsMenu = new QMenu(mainMenuBar);
-        settingsMenu->setObjectName(QStringLiteral("settingsMenu"));
         menu_CuteTorrent = new QMenu(mainMenuBar);
         menu_CuteTorrent->setObjectName(QStringLiteral("menu_CuteTorrent"));
         toolsMenu = new QMenu(mainMenuBar);
@@ -816,7 +764,6 @@ public:
 
         mainMenuBar->addAction(fileMenu->menuAction());
         mainMenuBar->addAction(viewMenu->menuAction());
-        mainMenuBar->addAction(settingsMenu->menuAction());
         mainMenuBar->addAction(toolsMenu->menuAction());
         mainMenuBar->addAction(menu_CuteTorrent->menuAction());
         fileMenu->addAction(ACTION_MENUFILE_OPEN_TORRENT);
@@ -825,13 +772,14 @@ public:
         fileMenu->addAction(ACTION_MENUFILE_CREATE);
         fileMenu->addSeparator();
         fileMenu->addAction(ACTION_MENUFILE_EXIT);
-        settingsMenu->addAction(ACTION_MENU_SETTINGS);
         menu_CuteTorrent->addAction(ACTION_MENUHELP_ABAUT_CT);
         menu_CuteTorrent->addAction(ACTION_MENUHELP_ABOUT_QT);
         menu_CuteTorrent->addSeparator();
         menu_CuteTorrent->addAction(ACTION_MENUHELP_CHECK_UPDATE);
         menu_CuteTorrent->addAction(ACTION_MENUHELP_REPORT_PROBLEM);
         menu_CuteTorrent->addAction(ACTION_MENUHELP_RATE);
+        toolsMenu->addAction(ACTION_MENU_SETTINGS);
+        toolsMenu->addSeparator();
         toolsMenu->addAction(ACTION_TOOLS_BACKUP);
         toolsMenu->addAction(ACTION_TOOLS_IMPORT);
         toolsMenu->addSeparator();
@@ -839,16 +787,12 @@ public:
         autoShutdownMenu->addAction(ACTION_AUTOSHUTDOWN_DISABLED);
         autoShutdownMenu->addSeparator();
         autoShutdownMenu->addAction(ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE);
-        autoShutdownMenu->addAction(ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE);
         autoShutdownMenu->addSeparator();
         autoShutdownMenu->addAction(ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE);
-        autoShutdownMenu->addAction(ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE);
         autoShutdownMenu->addSeparator();
         autoShutdownMenu->addAction(ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE);
-        autoShutdownMenu->addAction(ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE);
         autoShutdownMenu->addSeparator();
         autoShutdownMenu->addAction(ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE);
-        autoShutdownMenu->addAction(ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE);
         viewMenu->addAction(ACTION_MENUVIEW_TOGGLE_TOOLBAR_VISIBILITY);
         viewMenu->addAction(ACTION_MENUVIEW_TOGGLE_DETAIL_INFO_VISIBILITY);
         viewMenu->addAction(ACTION_MENUVIEW_TOGGLE_GROUPS_VISIBILITY);
@@ -898,11 +842,10 @@ public:
         QObject::connect(ACTION_MENUHELP_REPORT_PROBLEM, SIGNAL(triggered()), CustomWindow, SLOT(showReportDialog()));
         QObject::connect(ACTION_TOOLS_IMPORT, SIGNAL(triggered()), CustomWindow, SLOT(showImportWiazrd()));
         QObject::connect(ACTION_MENUHELP_RATE, SIGNAL(triggered()), CustomWindow, SLOT(showRaitingDialog()));
-        QObject::connect(addCommentButton, SIGNAL(clicked()), CustomWindow, SLOT(ShowAddCommentDialog()));
         QObject::connect(ACTION_TORRENTTOOLBAR_SWITCH_VIEW, SIGNAL(triggered()), CustomWindow, SLOT(switchTorrentViewMode()));
 
         m_pInfoPlaneContainer->setCurrentIndex(0);
-        m_pTabWidget->setCurrentIndex(4);
+        m_pTabWidget->setCurrentIndex(3);
         m_pToolBarsContainer->setCurrentIndex(0);
 
 
@@ -973,12 +916,8 @@ public:
         ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_DOWNLADS_COMPLETE", Q_NULLPTR));
         ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_HIBERNATE_ON_DOWNLOADS_COMPLETE", Q_NULLPTR));
         ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SLEEP_ON_DOWNLOADS_COMPLETE", Q_NULLPTR));
-        ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SLEEP_ON_ALL_COMPLETE", Q_NULLPTR));
         ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_REBOOT_ON_DOWNLOADS_COMPLETE", Q_NULLPTR));
-        ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_REBOOT_ON_ALL_COMPLETE", Q_NULLPTR));
         ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_DOWNLOADS_COMPLETE", Q_NULLPTR));
-        ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_SHUTDOWN_ON_ALL_COMPLETE", Q_NULLPTR));
-        ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE->setText(QApplication::translate("CustomWindow", "TOOLS_HIBERNATE_ON_ALL_COMPLETE", Q_NULLPTR));
         ACTION_MENUHELP_RATE->setText(QApplication::translate("CustomWindow", "MENU_RATE", Q_NULLPTR));
         ACTION_TORRENTTOOLBAR_SWITCH_VIEW->setText(QApplication::translate("CustomWindow", "SWITCH_VIEW", Q_NULLPTR));
         tbMenu->setText(QString());
@@ -1023,11 +962,7 @@ public:
         ___qtablewidgetitem3->setText(QApplication::translate("CustomWindow", "TRACKER_PEERS", Q_NULLPTR));
         m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_2), QApplication::translate("CustomWindow", "TAB_TRACKERS", Q_NULLPTR));
         m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_4), QApplication::translate("CustomWindow", "TAB_FILES", Q_NULLPTR));
-        addCommentButton->setText(QApplication::translate("CustomWindow", "ADD_COMMENT", Q_NULLPTR));
-        label_13->setText(QApplication::translate("CustomWindow", "AVERAGE_RATING", Q_NULLPTR));
-        m_pTabWidget->setTabText(m_pTabWidget->indexOf(tab_5), QApplication::translate("CustomWindow", "TAB_COMMENTS", Q_NULLPTR));
         fileMenu->setTitle(QApplication::translate("CustomWindow", "MENU_FILE", Q_NULLPTR));
-        settingsMenu->setTitle(QApplication::translate("CustomWindow", "MENU_SETTINGS", Q_NULLPTR));
         menu_CuteTorrent->setTitle(QApplication::translate("CustomWindow", "MENU_HELP", Q_NULLPTR));
         toolsMenu->setTitle(QApplication::translate("CustomWindow", "MENU_TOOLS", Q_NULLPTR));
         autoShutdownMenu->setTitle(QApplication::translate("CustomWindow", "TOOLS_AUTO_SHUTDOWN", Q_NULLPTR));

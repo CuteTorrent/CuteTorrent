@@ -68,7 +68,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "StaticHelpers.h"
 #include "SearchResult.h"
 #include "SearchLineEdit.h"
-#include "ReportProblemDialog.h"
 #ifdef Q_OS_WIN 
 #include "QtWinExtras/qwinjumplist.h"
 #include "QtWinExtras/qwinjumplistcategory.h"
@@ -87,13 +86,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <RaitingDialog.h>
 #include "Utils/ValueGetters.h"
 #include "Utils/ValueSetters.h"
-#include <CommentsModel.h>
-#include <CommentItemDelegate.h>
 #include <gui/Controls/RaitingWidget.h>
-#include <gui/Dialogs/AddCommentDialog.h>
-#include <CommentsWebClient.h>
-#include <gui/Dialogs/LoginDialog.h>
-#include <gui/Dialogs/RegisterDialog.h>
 #include <SortButton.h>
 #include <QtWinExtras/QtWinExtras>
 #include <QList>
@@ -141,8 +134,7 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	m_pRssDisplayModel = new QRssDisplayModel(m_pTorrentListView, this);
 	m_pRssItemDelegate = new QRssItemDelegate(this);
 	m_pUpdateNotifier = new UpdateNotifier(this);
-	m_pCommentsModel = new CommentsModel(this);
-	m_pCommentItemDelegate = new CommentItemDelegate(this);
+	
 	m_pFiltersViewModel = new FiltersViewModel(FiltersViewModel::All, this);
 	{
 		boost::scoped_ptr<InitializationDialog> pDlg(new InitializationDialog());
@@ -153,7 +145,6 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	setupStatusBar();
 	setupTray();
 	setupFileTabel();
-	setupRatingTab();
 	setupRssInfoTab();
 	setupToolBar();
 	setupListView();
@@ -367,8 +358,7 @@ void CuteTorrentMainWindow::setupListView()
 	setupTorrentHeaderModel();
 	setupSearchHeaderModel();
 	//sortByComboBox->setModel(m_torrentSortersModel);
-	m_commentsView->setItemDelegate(m_pCommentItemDelegate);
-	m_commentsView->setModel(m_pCommentsModel);
+	
 	/*m_pItemSorterView->setObjectName("torrentSorterView");
 	m_pItemSorterView->setModel(m_torrentSortersModel);
 	m_pItemSorterView->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
@@ -501,8 +491,7 @@ void CuteTorrentMainWindow::setSkin(QString styleName) const
 
 void CuteTorrentMainWindow::showReportDialog()
 {
-	boost::scoped_ptr<ReportProblemDialog> pDlg(new ReportProblemDialog());
-	pDlg->exec();
+	QDesktopServices::openUrl(QUrl("http://github.com/CuteTorrent/CuteTorrent/issues/new"));
 }
 
 void CuteTorrentMainWindow::showImportWiazrd()
@@ -573,49 +562,6 @@ void CuteTorrentMainWindow::CheckForDefaultTorrentApp()
 	}
 }
 
-void CuteTorrentMainWindow::ShowAddCommentDialog()
-{
-	shared_ptr<CommentsWebClient> commentsWebClient = CommentsWebClient::getInstance();
-	if (!commentsWebClient->isLoggedIn())
-	{
-		CustomMessageBox::CustomButtonInfoList buttonsInfo;
-		CustomMessageBox::CustomButonInfo regButtonInfo = {tr("REGISTER_BTN"), QDialogButtonBox::AcceptRole};
-		CustomMessageBox::CustomButonInfo loginButtonInfo = {tr("LOG_IN_BTN"), QDialogButtonBox::AcceptRole};
-		buttonsInfo << loginButtonInfo << regButtonInfo;
-		CustomMessageBox::Buttons buttons = CustomMessageBox::Cancel | CustomMessageBox::CustomButton1 | CustomMessageBox::CustomButton2;
-		CustomMessageBox::Button button = CustomMessageBox::warning(NULL, tr("NOT_LOGGED_IN"), tr("COMMENTS_LOGIN_MESSAGE"), buttons, buttonsInfo);
-		qDebug() << "Not logged in dlg button pressed" << button;
-		switch (button)
-		{
-			case CustomMessageBox::Cancel:
-				{
-					return;
-				}
-			case CustomMessageBox::CustomButton1:
-				{
-					boost::scoped_ptr<LoginDialog> pDlg(new LoginDialog());
-					if (pDlg->exec() == QDialog::Rejected)
-					{
-						return;
-					}
-					break;
-				}
-			case CustomMessageBox::CustomButton2:
-				{
-					boost::scoped_ptr<RegisterDialog> pDlg(new RegisterDialog());
-					if (pDlg->exec() == QDialog::Rejected)
-					{
-						return;
-					}
-					break;
-				}
-
-			default: break;
-		}
-	}
-	boost::scoped_ptr<AddCommentDialog> pAddCommentDlg(new AddCommentDialog(AddCommentDialog::Add, m_pTorrentDisplayModel->GetSelectedTorrent()->GetInfoHash()));
-	pAddCommentDlg->exec();
-}
 
 void CuteTorrentMainWindow::UpdateStyleMenu()
 {
@@ -632,19 +578,6 @@ void CuteTorrentMainWindow::UpdateStyleMenu()
 	}
 }
 
-void CuteTorrentMainWindow::OnCommentRemove(const QModelIndex& index)
-{
-	if (index.isValid())
-	{
-		if (CustomMessageBox::question(tr("Delete comment"), tr("Are you shure you want to delete selected comment?")) == CustomMessageBox::Yes)
-		{
-			Comment comment = index.data(CommentsModel::CommentRole).value<Comment>();
-
-			shared_ptr<CommentsWebClient> commentsWebClient = CommentsWebClient::getInstance();
-			commentsWebClient->DeleteComment(comment);
-		}
-	}
-}
 
 void CuteTorrentMainWindow::OnTorrentAction(QModelIndex index, QTorrentItemDelegat::Buttons button)
 {
@@ -834,7 +767,7 @@ void CuteTorrentMainWindow::setupConnections() const
 	connect(m_pTorrentListView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
 	        this, SLOT(UpdateLimits()));
 	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(UpdateStatusbar()));
-	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(UpdateTabWidget()));
+	connect(m_pTorrentManager.get(), SIGNAL(TorrentsChanged(QSet<QString>)), SLOT(UpdateTabWidget(QSet<QString>)));
 #ifdef Q_OS_WIN 
 	connect(m_pUpdateTimer, SIGNAL(timeout()), SLOT(UpdateTrayIconOverlay()));
 #endif
@@ -856,7 +789,6 @@ void CuteTorrentMainWindow::setupConnections() const
 	connect(m_pSortButton, SIGNAL(sortOrderChanged(Qt::SortOrder)), SLOT(updateSortDirection()));
 	PowerManagementPtr powerManagement = PowerManagement::getInstance();
 	connect(powerManagement.get(), SIGNAL(resetPowerState()), SLOT(onResetPowerMenu()));
-	connect(m_pCommentItemDelegate, SIGNAL(buttonClicked(QModelIndex)), SLOT(OnCommentRemove(QModelIndex)));
 	connect(m_pTorrentItemDelegate, SIGNAL(buttonClicked(QModelIndex, QTorrentItemDelegat::Buttons)), SLOT(OnTorrentAction(QModelIndex, QTorrentItemDelegat::Buttons)));
 	connect(m_pTorrentManager.get(), SIGNAL(FileRenameCompleted()), m_pFileViewModel, SLOT(OnFileRenameCompleted()));
 }
@@ -917,6 +849,18 @@ void CuteTorrentMainWindow::UpdateLimits() const
 
 void CuteTorrentMainWindow::UpdateTabWidget() const
 {
+	Torrent* tor = m_pTorrentDisplayModel->GetSelectedTorrent();
+
+	if (tor != nullptr)
+	{
+		QSet<QString> fakeChangeList;
+		fakeChangeList << tor->GetInfoHash();
+		UpdateTabWidget(fakeChangeList);
+	}
+}
+
+void CuteTorrentMainWindow::UpdateTabWidget(QSet<QString> chengedTorrents) const
+{
 	if (this->isMinimized())
 	{
 		return;
@@ -949,11 +893,7 @@ void CuteTorrentMainWindow::UpdateTabWidget() const
 				UpdateFileTab();
 				break;
 			}
-		case 4:
-			{
-				UpadateCommentsTab();
-				break;
-			}
+		
 		default:
 			break;
 	}
@@ -976,23 +916,6 @@ void CuteTorrentMainWindow::UpdateFileTab() const
 	}
 }
 
-void CuteTorrentMainWindow::UpadateCommentsTab() const
-{
-	Torrent* tor = m_pTorrentDisplayModel->GetSelectedTorrent();
-
-	if (tor != NULL)
-	{
-		m_pCommentsModel->setTorrentHash(tor->GetInfoHash());
-		m_pRatingWidget->setRating(m_pCommentsModel->AverageRating());
-		addCommentButton->setEnabled(true);
-	}
-	else
-	{
-		m_pCommentsModel->Clear();
-		m_pRatingWidget->setRating(-1);
-		addCommentButton->setEnabled(false);
-	}
-}
 
 static int cnt = 0;
 
@@ -1132,6 +1055,8 @@ void CuteTorrentMainWindow::IconActivated(QSystemTrayIcon::ActivationReason reas
 			break;
 	}
 }
+
+
 
 void CuteTorrentMainWindow::createTrayIcon()
 {
@@ -1710,13 +1635,6 @@ void CuteTorrentMainWindow::keyPressEvent(QKeyEvent* event)
 	QWidget::keyPressEvent(event);
 }
 
-void CuteTorrentMainWindow::setupRatingTab()
-{
-	m_pRatingWidget = new RatingWidget(this);
-	m_pRatingWidget->setIsReadonly(true);
-	m_pRatingWidget->setFixedHeight(20);
-	ratingTabLayout->addWidget(m_pRatingWidget, 0, 1);
-}
 
 void CuteTorrentMainWindow::fillPieceDisplay(QSize size) const
 {

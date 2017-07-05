@@ -9,6 +9,8 @@
 #include <libtorrent/torrent_handle.hpp>
 #include <libtorrent/torrent_status.hpp>
 #include <libtorrent/version.hpp>
+#include "FileIconProvider.h"
+
 void FileViewModel::retranslateUI()
 {
 	headerStringsData.clear();
@@ -23,7 +25,7 @@ void FileViewModel::retranslateUI()
 	renameFile->setText(tr("FILETAB_RENAME_FILE"));
 }
 
-FileViewModel::FileViewModel(QTreeView* view, QObject* parent /* = NULL */) : QAbstractItemModel(parent), m_pView(view)
+FileViewModel::FileViewModel(QTreeView* view, QObject* parent /* = NULL */) : QAbstractItemModel(parent), m_pView(view) , m_pFileIconProvider(new FileIconProvider(this))
 {
 	headerStringsData << trUtf8("FILES_PATH") << trUtf8("FILES_SIZE") << trUtf8("FILES_READY") << trUtf8("FILES_PRIORITY");
 	m_pRoot = new FileViewTreeItem();
@@ -307,8 +309,8 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 					{
 						return 100.0f;
 					}
-
-					return m_Progresses[storrage_index] * 100.0f / file.size;
+					double mult = 100;
+					return m_Progresses[storrage_index] * mult / file.size;
 				}
 				else
 				{
@@ -329,56 +331,17 @@ QVariant FileViewModel::data(const QModelIndex& index, int role /*= Qt::DisplayR
 
 	if (role == Qt::DecorationRole && column == 0 && item != NULL)
 	{
-		QString pathCur = item->GetName();
-		QIcon icon;
-		QFileInfo filePathInfo(pathCur);
-		QFileIconProvider iPorv;
-
+		QString subPath = QDir::toNativeSeparators(QString::fromUtf8(item->GetFileEntery().path.c_str()));
+		QString savePath = dataSource.status(torrent_handle::query_save_path).save_path.c_str();
+		QString realFilePath = StaticHelpers::CombinePathes(savePath, subPath);
+		QFileInfo filePathInfo(realFilePath);
 		if (item->GetType() == FileViewTreeItem::FILE)
-		{
-			QPixmap pixmap;
-			QString savePath = dataSource.status(torrent_handle::query_save_path).save_path.c_str();
-			QString suffix = filePathInfo.suffix();
-
-			if (!suffix.isEmpty() && !extToKeys.contains(suffix))
-			{
-				QString subPath = QDir::toNativeSeparators(QString::fromUtf8(item->GetFileEntery().path.c_str()));
-				QString realFilePath = StaticHelpers::CombinePathes(savePath, subPath);
-
-				if (QFile::exists(realFilePath))
-				{
-					QFileInfo realFileInfo(realFilePath);
-					icon = iPorv.icon(realFileInfo);
-				}
-				else
-				{
-					QTemporaryFile tmpfile(StaticHelpers::CombinePathes(QStandardPaths::writableLocation(QStandardPaths::TempLocation), "tempFileXXXXXX." + suffix));
-					tmpfile.open();
-					tmpfile.close();
-					QFileInfo tempFileInfo(tmpfile.fileName());
-					icon = iPorv.icon(tempFileInfo);
-					tmpfile.remove();
-
-					if (suffix != "exe")
-					{
-						QPixmapCache::Key key = iconCache.insert(icon.pixmap(QSize(64, 64)));
-						extToKeys.insert(suffix, key);
-					}
-				}
-			}
-			else
-			{
-				QPixmapCache::Key key = extToKeys[suffix];
-				iconCache.find(key, &pixmap);
-				icon = QIcon(pixmap);
-			}
-		}
+			return m_pFileIconProvider->getIcon(filePathInfo);
 		else
 		{
-			icon = iPorv.icon(QFileIconProvider::Folder);
+			QFileIconProvider iconProvider;
+			return iconProvider.icon(QFileIconProvider::Folder);
 		}
-
-		return icon;
 	}
 
 	return QVariant();
@@ -412,10 +375,10 @@ bool FileViewModel::setDataSource(const torrent_handle& hTorrent)
 	{
 		if (dataSource.info_hash() != hTorrent.info_hash())
 		{
+			emit beginResetModel();
 			delete m_pRoot;
 			m_pRoot = new FileViewTreeItem();
 			dataSource = hTorrent;
-			emit beginResetModel();
 			BuildTree();
 			emit endResetModel();
 			return true;
@@ -443,7 +406,7 @@ void FileViewModel::Update()
 {
 	m_Progresses.clear();
 	dataSource.file_progress(m_Progresses, torrent_handle::piece_granularity);
-	QModelIndex topleft = index(0, 0), botright = index(rowCount() - 1, columnCount() - 1);
+	QModelIndex topleft = index(0, 1), botright = index(rowCount() - 1, columnCount() -1);
 	emit dataChanged(topleft, botright);
 }
 
@@ -697,7 +660,7 @@ QString FileViewModel::GetFullPath(FileViewTreeItem* pItem)
 	return path;
 }
 
-QPixmapCache FileViewModel::iconCache;
+QCache<QString, QIcon> FileViewModel::iconCache;
 
-QHash<QString, QPixmapCache::Key> FileViewModel::extToKeys;
+//QHash<QString, QPixmapCache::Key> FileViewModel::extToKeys;
 

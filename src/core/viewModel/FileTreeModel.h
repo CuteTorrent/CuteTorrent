@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _FILETREEMODEL_H
 #include "TreeItem.h"
 #include <QAbstractItemModel>
-
+class FileIconProvider;
 class FileTreeModel : public QAbstractItemModel
 {
 	Q_OBJECT
@@ -44,7 +44,7 @@ public:
 	QMap<QString, quint8> getFilePiorites();
 private:
 	void GetFilePrioritiesInternal(FileTreeItem* current, QMap<QString, quint8>* priorities);
-
+	FileIconProvider* m_pFileIconProvider;
 	FileTreeItem* rootItem;
 };
 #endif

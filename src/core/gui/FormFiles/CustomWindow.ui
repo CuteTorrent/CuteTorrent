@@ -448,7 +448,7 @@
                 <bool>true</bool>
                </property>
                <property name="currentIndex">
-                <number>4</number>
+                <number>3</number>
                </property>
                <widget class="QWidget" name="tab">
                 <property name="mouseTracking">
@@ -839,43 +839,6 @@
                  </item>
                 </layout>
                </widget>
-               <widget class="QWidget" name="tab_5">
-                <attribute name="title">
-                 <string>TAB_COMMENTS</string>
-                </attribute>
-                <layout class="QGridLayout" name="ratingTabLayout">
-                 <item row="0" column="2">
-                  <widget class="QPushButton" name="addCommentButton">
-                   <property name="text">
-                    <string>ADD_COMMENT</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0" colspan="3">
-                  <widget class="QListView" name="m_commentsView"/>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_13">
-                   <property name="text">
-                    <string>AVERAGE_RATING</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <spacer name="horizontalSpacer_2">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                </layout>
-               </widget>
               </widget>
              </item>
             </layout>
@@ -926,12 +889,6 @@
          <addaction name="separator"/>
          <addaction name="ACTION_MENUFILE_EXIT"/>
         </widget>
-        <widget class="QMenu" name="settingsMenu">
-         <property name="title">
-          <string>MENU_SETTINGS</string>
-         </property>
-         <addaction name="ACTION_MENU_SETTINGS"/>
-        </widget>
         <widget class="QMenu" name="menu_CuteTorrent">
          <property name="title">
           <string>MENU_HELP</string>
@@ -954,17 +911,15 @@
           <addaction name="ACTION_AUTOSHUTDOWN_DISABLED"/>
           <addaction name="separator"/>
           <addaction name="ACTION_AUTOSHUTDOWN_HIBERNATE_ON_DOWNLOADS_COMPLETE"/>
-          <addaction name="ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE"/>
           <addaction name="separator"/>
           <addaction name="ACTION_AUTOSHUTDOWN_SLEEP_ON_DOWNLOADS_COMPLETE"/>
-          <addaction name="ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE"/>
           <addaction name="separator"/>
           <addaction name="ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE"/>
-          <addaction name="ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE"/>
           <addaction name="separator"/>
           <addaction name="ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE"/>
-          <addaction name="ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE"/>
          </widget>
+         <addaction name="ACTION_MENU_SETTINGS"/>
+         <addaction name="separator"/>
          <addaction name="ACTION_TOOLS_BACKUP"/>
          <addaction name="ACTION_TOOLS_IMPORT"/>
          <addaction name="separator"/>
@@ -995,7 +950,6 @@
         </widget>
         <addaction name="fileMenu"/>
         <addaction name="viewMenu"/>
-        <addaction name="settingsMenu"/>
         <addaction name="toolsMenu"/>
         <addaction name="menu_CuteTorrent"/>
        </widget>
@@ -1265,14 +1219,6 @@
     <string>TOOLS_SLEEP_ON_DOWNLOADS_COMPLETE</string>
    </property>
   </action>
-  <action name="ACTION_AUTOSHUTDOWN_SLEEP_ON_ALL_COMPLETE">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>TOOLS_SLEEP_ON_ALL_COMPLETE</string>
-   </property>
-  </action>
   <action name="ACTION_AUTOSHUTDOWN_REBOOT_ON_DOWNLOADS_COMPLETE">
    <property name="checkable">
     <bool>true</bool>
@@ -1281,36 +1227,12 @@
     <string>TOOLS_REBOOT_ON_DOWNLOADS_COMPLETE</string>
    </property>
   </action>
-  <action name="ACTION_AUTOSHUTDOWN_REBOOT_ON_ALL_COMPLETE">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>TOOLS_REBOOT_ON_ALL_COMPLETE</string>
-   </property>
-  </action>
   <action name="ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
     <string>TOOLS_SHUTDOWN_ON_DOWNLOADS_COMPLETE</string>
-   </property>
-  </action>
-  <action name="ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_ALL_COMPLETE">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>TOOLS_SHUTDOWN_ON_ALL_COMPLETE</string>
-   </property>
-  </action>
-  <action name="ACTION_AUTOSHUTDOWN_HIBERNATE_ON_ALL_COMPLETE">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>TOOLS_HIBERNATE_ON_ALL_COMPLETE</string>
    </property>
   </action>
   <action name="ACTION_MENUHELP_RATE">
@@ -1709,22 +1631,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>addCommentButton</sender>
-   <signal>clicked()</signal>
-   <receiver>CustomWindow</receiver>
-   <slot>ShowAddCommentDialog()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>483</x>
-     <y>383</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>274</x>
-     <y>340</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>ACTION_TORRENTTOOLBAR_SWITCH_VIEW</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
@@ -1770,7 +1676,6 @@
   <slot>showRaitingDialog()</slot>
   <slot>GoToExtendedMode()</slot>
   <slot>GoToCompactMode()</slot>
-  <slot>ShowAddCommentDialog()</slot>
   <slot>switchTorrentViewMode()</slot>
  </slots>
 </ui>

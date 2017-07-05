@@ -26,6 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QQueue>
 #include <QDesktopServices>
 #include <helpers/StaticHelpers.h>
+#include "FileIconProvider.h"
 
 FileTreeModel::~FileTreeModel()
 {
@@ -34,6 +35,7 @@ FileTreeModel::~FileTreeModel()
 
 FileTreeModel::FileTreeModel(QObject* parent)
 	: QAbstractItemModel(parent)
+	, m_pFileIconProvider(new FileIconProvider(this))
 {
 	QPair<QString, QVariant> rootData = qMakePair(tr("FILE"), QVariant::fromValue(tr("SIZE")));
 	rootItem = new FileTreeItem(rootData);
@@ -261,27 +263,17 @@ QVariant FileTreeModel::data(const QModelIndex& index, int role) const
 	if (role == Qt::DecorationRole && index.column() == 0)
 	{
 		QString pathCur = item->getPath();
-		QIcon icon;
+		
 		QFileInfo info(pathCur);
-		QFileIconProvider iPorv;
-		QString suffix = info.suffix();
+		
 
-		if (!suffix.isEmpty() && item->childCount() == 0)
-		{
-			QString fileTemplate = StaticHelpers::CombinePathes(QStandardPaths::writableLocation(QStandardPaths::TempLocation), "tempFileXXXXXX." + suffix);
-			QTemporaryFile tmpfile(fileTemplate);
-			tmpfile.open();
-			tmpfile.close();
-			QFileInfo info2(tmpfile.fileName());
-			icon = iPorv.icon(info2);
-			tmpfile.remove();
-		}
+		if (item->childCount() == 0)
+			return m_pFileIconProvider->getIcon(info);
 		else
 		{
-			icon = iPorv.icon(QFileIconProvider::Folder);
+			QFileIconProvider iconProvider;
+			return iconProvider.icon(QFileIconProvider::Folder);
 		}
-
-		return icon;
 	}
 
 	if (role != Qt::DisplayRole)

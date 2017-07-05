@@ -42,8 +42,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <viewmodels/QSearchFilterModel.h>
 #include "TorrentGroupsManager.h"
 #include "TimeItemDelegate.h"
-class CommentsModel;
-class CommentItemDelegate;
 class RatingWidget;
 class Application;
 class FileViewModel;
@@ -94,7 +92,6 @@ protected:
 	void keyPressEvent(QKeyEvent* event) override;
 
 private:
-	void setupRatingTab();
 	void setupItemDelegates();
 	void initToolbarIcons() const;
 	void initStatusBarIcons() const;
@@ -133,9 +130,6 @@ private:
 	QAction *copyContext, *copyInfoHash;
 	QAction *addPeer, *addWebSeed, *addTracker, *removeTracker, *editTracker, *updateTracker;
 	QLabel *upLabelText, *upLabel, *title, *dhtNodesLabel;
-	//	QLabel* uploadLimit, *downloadLimit;
-	CommentsModel* m_pCommentsModel;
-	CommentItemDelegate* m_pCommentItemDelegate;
 	QLabel *downLabelText, *downLabel;
 	QRssDisplayModel* m_pRssDisplayModel;
 	QRssItemDelegate* m_pRssItemDelegate;
@@ -152,7 +146,6 @@ private:
 	PeerTableModel* m_pPeerTableModel;
 	FiltersViewModel* m_pFiltersViewModel;
 	SearchEnginePtr m_pSearchEngine;
-	RatingWidget* m_pRatingWidget;
 	FileSystemTorrentWatcherPtr m_pTorrentWatcher;
 	QStateMachine* m_pSorterStateMachine;
 	QState* m_pSortAscendingSortState;
@@ -233,15 +226,15 @@ public slots:
 	void UpdateInfoTab() const;
 	void UpdatePeerTab() const;
 	void UpdateFileTab() const;
-	void UpadateCommentsTab() const;
+	
 #ifdef Q_OS_WIN 
 	void UpdateTrayIconOverlay() const;
 #endif
 	void UpadteTrackerTab() const;
 	void OpenSettingsDialog();
 	void IconActivated(QSystemTrayIcon::ActivationReason reason);
-
 	void UpdateTabWidget() const;
+	void UpdateTabWidget(QSet<QString> chengedTorrents) const;
 	void UpdateStatusbar() const;
 	void UpdateLimits() const;
 	void ProcessMagnet();
@@ -284,9 +277,7 @@ public slots:
 	void restoreAllTorrents() const;
 	void showRaitingDialog();
 	void CheckForDefaultTorrentApp();
-	void ShowAddCommentDialog();
 	void UpdateStyleMenu();
-	void OnCommentRemove(const QModelIndex& index);
 	void OnTorrentAction(QModelIndex index, QTorrentItemDelegat::Buttons button);
 };
 

@@ -106,7 +106,7 @@ private:
 private slots:
 	void dispatchPendingAlerts();
 public slots:
-	void RemoveTorrent(QString InfoHash, bool delFiles = false);
+	void RemoveTorrent(QString InfoHash, bool delFiles = false, bool emitEvents = true);
 public:
 	bool shouldRate();
 	int GetSessionDwonloadRate();
