@@ -33,7 +33,8 @@ void MagnetApiController::service(HttpRequest& request, HttpResponse& response)
 
 		savePathMap.insert(magnetLink, savePath);
 		qRegisterMetaType<openmagnet_info>("openmagnet_info");
-		MetaDataDownloadWaiter* magnetWaiter = new MetaDataDownloadWaiter(magnetLink);
+		TerminationToken* token = new TerminationToken;
+		MetaDataDownloadWaiter* magnetWaiter = new MetaDataDownloadWaiter(magnetLink, token);
 		QObject::connect(magnetWaiter, SIGNAL(DownloadCompleted(openmagnet_info)), this, SLOT(DownloadMetadataCompleted(openmagnet_info)));
 		//	QMessageBox::critical(NULL,"ERROR","NOT_CONNECTID");
 		magnetWaiter->start(QThread::HighPriority);

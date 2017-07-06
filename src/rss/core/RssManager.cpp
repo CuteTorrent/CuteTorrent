@@ -15,6 +15,7 @@
 #include <libtorrent/torrent_info.hpp>
 RssManager::RssManager(QObject* parent) : QObject(parent)
 {
+	m_pMagnetTerminationToken = new TerminationToken;
 	m_pTorrentDownloader = FileDownloader::getNewInstance();
 	m_pNotificationSystem = NotificationSystem::getInstance();
 	m_pSettings = QApplicationSettings::getInstance();
@@ -326,7 +327,7 @@ void RssManager::downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRu
 
 		if (!m_activeTorrentDownloads.contains(magnetUrl))
 		{
-			MetaDataDownloadWaiter* magnetWaiter = new MetaDataDownloadWaiter(magnetUrl, this);
+			MetaDataDownloadWaiter* magnetWaiter = new MetaDataDownloadWaiter(magnetUrl, m_pMagnetTerminationToken, this);
 			connect(magnetWaiter, SIGNAL(DownloadCompleted(openmagnet_info)), this, SLOT(onDownloadMetadataCompleted(openmagnet_info)));
 			connect(magnetWaiter, SIGNAL(ErrorOccured(QString)), this, SLOT(onMagnetError(QString)));
 			connect(magnetWaiter, SIGNAL(finished()), magnetWaiter, SLOT(deleteLater()));

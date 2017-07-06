@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "libtorrent/session.hpp"
 #include <TorrentGroup.h>
 
+struct TerminationToken;
 class QTemporaryFile;
 using namespace libtorrent;
 
@@ -148,7 +149,7 @@ public:
 #else
 	void AddPortMapping(upnp::protocol_type type, ushort sourcePoert, ushort destPort);
 #endif
-	torrent_handle ProcessMagnetLink(QString link, error_code& ec);
+	torrent_handle ProcessMagnetLink(QString link, TerminationToken* terminationToken, error_code& ec);
 	void CancelMagnetLink(QString link);
 	void StartAllTorrents();
 	void PauseAllTorrents();

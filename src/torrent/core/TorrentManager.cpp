@@ -67,6 +67,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <TorrentGroupsManager.h>
 #include <avaliableSpacePlugin/avaliable_space_verifier_plugin.h>
 #include <PowerManagement.h>
+#include "MetaDataDownloadWaiter.h"
 using namespace libtorrent;
 namespace fs = boost::filesystem;
 TorrentManager::TorrentManager()
@@ -1365,7 +1366,7 @@ QString TorrentManager::GetSessionUploaded()
 	}
 }
 
-torrent_handle TorrentManager::ProcessMagnetLink(QString link, error_code& ec)
+torrent_handle TorrentManager::ProcessMagnetLink(QString link, TerminationToken* terminationToken, error_code& ec)
 {
 	add_torrent_params add_info;
 	torrent_handle h;
@@ -1401,6 +1402,8 @@ torrent_handle TorrentManager::ProcessMagnetLink(QString link, error_code& ec)
 	h.set_priority(255);
 	while (!h.status().has_metadata)
 	{
+		if (terminationToken->IsTerminationRequested)
+			return h;
 		sleep(100);
 	}
 

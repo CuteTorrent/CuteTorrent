@@ -28,6 +28,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <TreeBox.h>
 #include <viewModel/FiltersViewModel.h>
 
+class MetaDataDownloadWaiter;
+class TerminationToken;
 class FileTreeModel;
 
 class OpenTorrentDialog : public BaseWindow<QDialog> , private Ui::OpenTorrentDialog
@@ -45,6 +47,8 @@ public:
 	void setCheckedValue(bool val);
 	int exec();
 private:
+	TerminationToken* m_pTerminationToken;
+	MetaDataDownloadWaiter* m_pMetaDataWaiter;
 	TreeBox* GroupComboBox;
 	FiltersViewModel* m_pGroupsModel;
 	int64_t m_size;

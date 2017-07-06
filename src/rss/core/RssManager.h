@@ -11,6 +11,7 @@
 class RssFeed;
 class QApplicationSettings;
 class RssItem;
+class TerminationToken;
 
 class RssManager : public QObject, public Singleton<RssManager>
 {
@@ -41,6 +42,7 @@ private:
 	FileDownloaderPtr m_pTorrentDownloader;
 	NotificationSystemPtr m_pNotificationSystem;
 	QList<RssFeed*> m_pFeeds;
+	TerminationToken* m_pMagnetTerminationToken;
 	QHash<QUrl, TorrentDownloadInfo> m_activeTorrentDownloads;
 	QHash<QUuid, RssDownloadRule*> m_downloadRules;
 	QApplicationSettingsPtr m_pSettings;

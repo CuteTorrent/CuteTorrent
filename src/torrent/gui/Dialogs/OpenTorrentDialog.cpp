@@ -43,10 +43,12 @@ OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags)
 	  , m_size(0)
 	  , m_bUseGroup(false)
 	  , m_pFileTreeModel(NULL)
+	  , m_pTerminationToken(new TerminationToken)
 {
 	setupUi(this);
 	setupCustomWindow();
 	setupWindowIcons();
+	setAttribute(Qt::WA_DeleteOnClose, false);
 	GroupComboBox = new TreeBox(this);
 	gridLayout->addWidget(GroupComboBox, 1, 0, 1, 1);
 	m_pGroupsModel = new FiltersViewModel(FiltersViewModel::Groups, this);
@@ -71,6 +73,12 @@ void OpenTorrentDialog::reject()
 	if (m_torrentFilename.startsWith("magnet"))
 	{
 		m_pTorrentManager->CancelMagnetLink(m_torrentFilename);
+
+		if (m_pMetaDataWaiter != nullptr && m_pMetaDataWaiter->isRunning())
+		{
+			m_pTerminationToken->IsTerminationRequested = true;
+			m_pMetaDataWaiter->wait();
+		}
 	}
 
 	QDialog::reject();
@@ -157,11 +165,11 @@ void OpenTorrentDialog::SetData(QString filename)
 		loaderGifLabel->setMovie(movie);
 		movie->start();
 		qRegisterMetaType<openmagnet_info>("openmagnet_info");
-		MetaDataDownloadWaiter* magnetWaiter = new MetaDataDownloadWaiter(filename, this);
-		connect(magnetWaiter, SIGNAL(DownloadCompleted(openmagnet_info)), this, SLOT(DownloadMetadataCompleted(openmagnet_info)));
-		connect(magnetWaiter, SIGNAL(ErrorOccured(QString)), this, SLOT(OnError(QString)));
-		connect(magnetWaiter, SIGNAL(finished()), magnetWaiter, SLOT(deleteLater()));
-		magnetWaiter->start(QThread::HighPriority);
+		m_pMetaDataWaiter = new MetaDataDownloadWaiter(filename, m_pTerminationToken, this);
+		connect(m_pMetaDataWaiter, SIGNAL(DownloadCompleted(openmagnet_info)), this, SLOT(DownloadMetadataCompleted(openmagnet_info)));
+		connect(m_pMetaDataWaiter, SIGNAL(ErrorOccured(QString)), this, SLOT(OnError(QString)));
+		connect(m_pMetaDataWaiter, SIGNAL(finished()), m_pMetaDataWaiter, SLOT(deleteLater()));
+		m_pMetaDataWaiter->start(QThread::HighPriority);
 		yesButton->setEnabled(false);
 		setSeedModeCheckBox->setEnabled(false);
 		setSeedModeCheckBox->setToolTip(tr("MAGNET_LINKS_DONT_SUPORT_SEED_MODE"));
