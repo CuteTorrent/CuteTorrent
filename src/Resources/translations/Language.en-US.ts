@@ -268,7 +268,7 @@
         <location filename="../../GeneratedFiles/ui_CreateTorrentDialog.h" line="313"/>
         <location filename="../../GeneratedFiles/ui_CreateTorrentDialog.h" line="315"/>
         <source>DIALOG_TORRENT_CREATION</source>
-        <translation>Torrent Creation </translation>
+        <translation>Create New Torrent</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/CreateTorrentDialog.ui" line="281"/>
@@ -292,7 +292,7 @@
         <location filename="../../torrent/gui/FormFiles/CreateTorrentDialog.ui" line="377"/>
         <location filename="../../GeneratedFiles/ui_CreateTorrentDialog.h" line="326"/>
         <source>CREATE_TORRENT_DESCRIBTION</source>
-        <translation>Discripbtion</translation>
+        <translation>Description</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/CreateTorrentDialog.ui" line="307"/>
@@ -321,7 +321,7 @@
         <location filename="../../torrent/gui/FormFiles/CreateTorrentDialog.ui" line="221"/>
         <location filename="../../GeneratedFiles/ui_CreateTorrentDialog.h" line="318"/>
         <source>CREATE_TORRENT_PIVATE_TORRENT</source>
-        <translation>Is private</translation>
+        <translation>Private</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/CreateTorrentDialog.ui" line="244"/>
@@ -401,7 +401,7 @@
         <location filename="../../torrent/gui/Dialogs/CreateTorrentDialog.cpp" line="204"/>
         <source>ERROR_NO_TRACKERS</source>
         <translation>No trackers found!
-Are you shure?</translation>
+Are you sure?</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/CreateTorrentDialog.cpp" line="223"/>
@@ -642,7 +642,7 @@ Are you shure?</translation>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="862"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="913"/>
         <source>MENU_OPEN_MAGNET</source>
-        <translation>Open Magnet URL</translation>
+        <translation>Open Magnet URI</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1024"/>
@@ -810,7 +810,7 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1172"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="908"/>
         <source>MENU_TOGGLE_GROUPS_VISIBILITY</source>
-        <translation>Side Filter</translation>
+        <translation>Sidebar</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1190"/>
@@ -828,7 +828,7 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1203"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="916"/>
         <source>TOOLS_SHUTDOWN_ON_DOWNLADS_COMPLETE</source>
-        <translation>Shutdown when downloads complete</translation>
+        <translation>Shutdown when download is complete</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1245"/>
@@ -840,13 +840,13 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1211"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="917"/>
         <source>TOOLS_HIBERNATE_ON_DOWNLOADS_COMPLETE</source>
-        <translation>Hibernate when download comple</translation>
+        <translation>Hibernate when download is complete</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1219"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="918"/>
         <source>TOOLS_SLEEP_ON_DOWNLOADS_COMPLETE</source>
-        <translation>Sleep when download complete</translation>
+        <translation>Sleep when download is complete</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1029"/>
@@ -861,13 +861,13 @@ Are you shure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1227"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="919"/>
         <source>TOOLS_REBOOT_ON_DOWNLOADS_COMPLETE</source>
-        <translation>Reboot when download completes</translation>
+        <translation>Reboot when download is complete</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1235"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="920"/>
         <source>TOOLS_SHUTDOWN_ON_DOWNLOADS_COMPLETE</source>
-        <translation>Shutdown when download complete</translation>
+        <translation>Shutdown when download is complete</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1240"/>
@@ -1181,12 +1181,12 @@ Download: %3</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1571"/>
         <source>MAGNET_LINK_DLG</source>
-        <translation>Magnet-link</translation>
+        <translation>Open Magnet URI</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1571"/>
         <source>MAGNET_LINK:</source>
-        <translation>Magnet-link:</translation>
+        <translation>Magnet link</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1717"/>
@@ -2101,7 +2101,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="563"/>
         <source>dynamic block code description: code lengths codes incomplete</source>
-        <translation>dynamic block code description: code lengths codes incomplete</translation>
+        <translation type="unfinished">Dynamic block code description: Code lengths codes incomplete</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="564"/>
@@ -2319,7 +2319,7 @@ Download: %3</translation>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="17"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="30"/>
         <source>FILES_READY</source>
-        <translation>Ready</translation>
+        <translation>Completed</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="17"/>
@@ -3000,12 +3000,12 @@ Error: %2
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="288"/>
         <source>NOT_ENOUGH_SPACE</source>
-        <translation>Not enough space</translation>
+        <translation>Not Enough Space</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="288"/>
         <source>NOT_ENOGH_STORRAGE_SPACE_TO_STORE_TORRENT</source>
-        <translation>Not enough space to sotre torrent data. Do you want to continure?</translation>
+        <translation>There is not enough space to store torrent data. Do you want to continue?</translation>
     </message>
 </context>
 <context>
@@ -3128,7 +3128,7 @@ Error: %2
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="475"/>
         <source>RSS_FEED_DELETE_MSG</source>
-        <translation>Are you shure you want to delete %1?</translation>
+        <translation>Are you sure you want to delete %1?</translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="286"/>
@@ -3398,24 +3398,24 @@ Error: %2
     <message>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="638"/>
         <source>TORRENT_DELITION_MSG</source>
-        <translation>Are you shure  to remove torrent?</translation>
+        <translation>Are you sure you want to remove the torrent?</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="684"/>
         <source>TORRENT_ALL_DELITION_MSG</source>
-        <translation>Are you shure  to remove torrent and files?</translation>
+        <translation>Are you sure you want to remove the torrent and files?</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1041"/>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1231"/>
         <source>ACTION_DELETE_ALL</source>
-        <translation>Delete torrent and files</translation>
+        <translation>Remove torrent and files</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1042"/>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1236"/>
         <source>ACTION_DELETE_TORRENT</source>
-        <translation>Delete torrent</translation>
+        <translation>Remove torrent</translation>
     </message>
     <message>
         <location filename="../../core/helpers/DT_mounter.cpp" line="14"/>
@@ -3563,7 +3563,7 @@ Error: %2
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="344"/>
         <source>RSS_ITEM_UNABLE_TO_DOWNLOAD %1 NO_URL</source>
-        <translation>RSS-article %1 doesn&apos;t contains url for torrent file or magnet-link</translation>
+        <translation>RSS-article %1 doesn&apos;t contains url for torrent file or magnet link</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="370"/>
@@ -3988,7 +3988,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="375"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1710"/>
         <source>MAGNET_ASSOCIATION</source>
-        <translation>Associate Magnet-links with CuteTorrent</translation>
+        <translation>Associate Magnet links with CuteTorrent</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="355"/>
@@ -4143,7 +4143,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1775"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1947"/>
         <source>DELETE_BUTTON</source>
-        <translation>Delete Task</translation>
+        <translation>Remove Task</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1622"/>
@@ -4411,7 +4411,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1435"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1916"/>
         <source>FILTERING_GROUP_DELETE_WIT</source>
-        <translation>Delete selected Group</translation>
+        <translation>Remove selected Group</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1389"/>
@@ -4533,7 +4533,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="502"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1724"/>
         <source>DELETE_TORRENTS</source>
-        <translation>Delete found torrents</translation>
+        <translation>Remove found torrents</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="546"/>
@@ -5241,7 +5241,7 @@ Error: %2</translation>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="321"/>
         <source>TORRENT_COMPLETED %1</source>
-        <translation>Torreant %1 was successfully downloaded.</translation>
+        <translation>Torrent %1 was successfully downloaded.</translation>
     </message>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="335"/>
