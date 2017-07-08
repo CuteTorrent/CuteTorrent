@@ -2462,7 +2462,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/gui/backupwizard/finishpage.cpp" line="6"/>
         <source>BAKUP_FINISH_TITLE</source>
-        <translation>AL is done.</translation>
+        <translation>All is done.</translation>
     </message>
     <message>
         <location filename="../../core/gui/backupwizard/finishpage.cpp" line="8"/>
@@ -2493,7 +2493,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/gui/ImportWizard/ImportIntroPage.cpp" line="11"/>
         <source>IMPORT_INTRO_TITLE</source>
-        <translation>Import torrents from other clients</translation>
+        <translation>Torrent Import Wizard</translation>
     </message>
     <message>
         <location filename="../../core/gui/ImportWizard/ImportIntroPage.cpp" line="13"/>
