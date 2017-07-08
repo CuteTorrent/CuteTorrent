@@ -1155,14 +1155,17 @@ void CuteTorrentMainWindow::ShowCreateTorrentDialog(QString path)
 void CuteTorrentMainWindow::ShowOpenTorrentDialog()
 {
 	QString lastDir = m_pSettings->valueString("System", "LastOpenTorrentDir", "");
-	QString filename = QFileDialog::getOpenFileName(this, tr("OPEN_TOORENT_DIALOG"),
+	QStringList filenames = QFileDialog::getOpenFileNames(this, tr("OPEN_TOORENT_DIALOG"),
 	                                                lastDir, tr("TORRENT_FILES (*.torrent);;Any File (*.*)"));
-
-	if (!filename.isEmpty())
+	foreach(QString filename, filenames)
 	{
-		m_pSettings->setValue("System", "LastOpenTorrentDir", filename);
-		HandleNewTorrent(filename);
+		if (!filename.isEmpty())
+		{
+			m_pSettings->setValue("System", "LastOpenTorrentDir", filename);
+			HandleNewTorrent(filename);
+		}
 	}
+	
 }
 
 void CuteTorrentMainWindow::UpdateInfoTab() const
@@ -2105,7 +2108,13 @@ void CuteTorrentMainWindow::switchToTorrentsModel()
 	if (m_pTorrentListView->model() != m_pTorrentFilterProxyModel)
 	{
 		m_pTorrentListView->setModel(m_pTorrentFilterProxyModel);
-		m_pTorrentListView->setItemDelegate(m_pTorrentItemDelegate);
+		if (m_pTorrentDisplayModel->viewMode() == QTorrentDisplayModel::Compact)
+			m_pTorrentListView->setItemDelegateForColumn(0, m_pTorrentItemDelegate);
+		else
+		{
+			m_pTorrentListView->setItemDelegateForColumn(0, m_pSimpleTorrentItemDelegate);
+			m_pTorrentListView->setHeaderHidden(false);
+		}
 		m_pToolBarsContainer->setCurrentIndex(0);
 		m_pInfoPlaneContainer->setCurrentIndex(0);
 		connect(m_pTorrentListView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),

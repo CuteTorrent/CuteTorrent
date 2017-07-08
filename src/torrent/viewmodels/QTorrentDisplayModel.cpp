@@ -1004,7 +1004,7 @@ bool QTorrentDisplayModel::removeRow(const QModelIndex& index, bool delFiles)
 
 	QModelIndex realIndex = m_pProxyFilterModel->mapToSource(index);
 	int row = realIndex.row();
-	beginRemoveRows(QModelIndex(), row, row);
+	//beginRemoveRows(QModelIndex(), row, row);
 	Torrent* tor2del = realIndex.data(TorrentRole).value<Torrent*>();
 	qDebug() << "Removing torrent" << tor2del->GetName();
 
@@ -1013,8 +1013,8 @@ bool QTorrentDisplayModel::removeRow(const QModelIndex& index, bool delFiles)
 		m_pCurrentTorrent = NULL;
 	}
 
-	m_pTorrentManager->RemoveTorrent(tor2del->GetInfoHash(), delFiles, false);
-	endRemoveRows();
+	m_pTorrentManager->RemoveTorrent(tor2del->GetInfoHash(), delFiles);
+	//endRemoveRows();
 	return true;
 }
 

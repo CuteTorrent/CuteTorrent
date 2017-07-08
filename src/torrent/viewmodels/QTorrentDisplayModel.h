@@ -134,7 +134,7 @@ public:
 
 	void ActionOnSelectedItem(action wtf);
 	void retranslate() const;
-	void setSequentualDL();
+	
 
 	QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const override;
 	QModelIndex parent(const QModelIndex& child) const override;
@@ -177,7 +177,8 @@ public:
 	signals:
 	void initCompleted();
 public slots:
-void OnBeforTorrentRemovedExternaly(QString);
+	void setSequentualDL();
+	void OnBeforTorrentRemovedExternaly(QString);
 	void OnTorrentRemovedExternaly(QString);
 	void UpdateMenu();
 	void Update(QSet<QString>);
