@@ -3863,13 +3863,13 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="552"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1731"/>
         <source>UPLOAD_SPEED_LIMIT_WIT</source>
-        <translation>Lmit the uploadspeed to the Selected value.</translation>
+        <translation>Limit the upload speed to the Selected value.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="828"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1781"/>
         <source>ACTIVE_TORRENTS_LIMIT_WIT</source>
-        <translation>The maximum namber of one in time active torrrents.</translation>
+        <translation>The maximum number of one in time active torrents.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="578"/>
@@ -3881,13 +3881,13 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="818"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1777"/>
         <source>ACTIVE_SEEDS_LIMIT_WIT</source>
-        <translation>The maximum namber of one in time active seeding torrents.</translation>
+        <translation>The maximum number of one in time active seeding torrents.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="808"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1773"/>
         <source>ACTIVE_DOWNLOADS_LIMIT_WIT</source>
-        <translation>The maximum namber of one in time active downloading torrents.</translation>
+        <translation>The maximum number of one in time active downloading torrents.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="565"/>
@@ -3911,7 +3911,7 @@ Error: %2
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1811"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1818"/>
         <source>PROXY_USER_NAME_WIT</source>
-        <translation>Username which is used for auntefication on proxy server</translation>
+        <translation>Username which is used for authentication on proxy server</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1035"/>
@@ -3919,7 +3919,7 @@ Error: %2
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1815"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1829"/>
         <source>PROXY_HOST_WIT</source>
-        <translation>The IP addres and port of proxy server</translation>
+        <translation>The IP address and port of proxy server</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1062"/>
