@@ -71,7 +71,7 @@ public slots:
 	void done(int) override;
 private slots:
 	void reject() override;
-	void OnError(QString);
+	void OnError(error_code);
 	void BrowseButton();
 
 

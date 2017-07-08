@@ -42,7 +42,7 @@ public:
     QAction *ACTION_MENUFILE_OPEN_MAGNET;
     QAction *ACTION_MENUFILE_CREATE;
     QAction *ACTION_MENUFILE_EXIT;
-    QAction *ACTION_MENU_SETTINGS;
+    QAction *ACTION_TOOLS_SETTINGS;
     QAction *ACTION_SEARCHTOOLBAR_DOWNLOAD;
     QAction *ACTION_SEARCHTOOLBAR_OPEN_URL;
     QAction *ACTION_MENUHELP_ABAUT_CT;
@@ -175,9 +175,9 @@ public:
         ACTION_MENUFILE_EXIT = new QAction(CustomWindow);
         ACTION_MENUFILE_EXIT->setObjectName(QStringLiteral("ACTION_MENUFILE_EXIT"));
         ACTION_MENUFILE_EXIT->setMenuRole(QAction::QuitRole);
-        ACTION_MENU_SETTINGS = new QAction(CustomWindow);
-        ACTION_MENU_SETTINGS->setObjectName(QStringLiteral("ACTION_MENU_SETTINGS"));
-        ACTION_MENU_SETTINGS->setMenuRole(QAction::PreferencesRole);
+        ACTION_TOOLS_SETTINGS = new QAction(CustomWindow);
+        ACTION_TOOLS_SETTINGS->setObjectName(QStringLiteral("ACTION_TOOLS_SETTINGS"));
+        ACTION_TOOLS_SETTINGS->setMenuRole(QAction::PreferencesRole);
         ACTION_SEARCHTOOLBAR_DOWNLOAD = new QAction(CustomWindow);
         ACTION_SEARCHTOOLBAR_DOWNLOAD->setObjectName(QStringLiteral("ACTION_SEARCHTOOLBAR_DOWNLOAD"));
         ACTION_SEARCHTOOLBAR_OPEN_URL = new QAction(CustomWindow);
@@ -777,8 +777,7 @@ public:
         menu_CuteTorrent->addSeparator();
         menu_CuteTorrent->addAction(ACTION_MENUHELP_CHECK_UPDATE);
         menu_CuteTorrent->addAction(ACTION_MENUHELP_REPORT_PROBLEM);
-        menu_CuteTorrent->addAction(ACTION_MENUHELP_RATE);
-        toolsMenu->addAction(ACTION_MENU_SETTINGS);
+        toolsMenu->addAction(ACTION_TOOLS_SETTINGS);
         toolsMenu->addSeparator();
         toolsMenu->addAction(ACTION_TOOLS_BACKUP);
         toolsMenu->addAction(ACTION_TOOLS_IMPORT);
@@ -821,7 +820,7 @@ public:
         retranslateUi(CustomWindow);
         QObject::connect(ACTION_MENUFILE_CREATE, SIGNAL(triggered()), CustomWindow, SLOT(ShowCreateTorrentDialog()));
         QObject::connect(ACTION_MENUFILE_OPEN_TORRENT, SIGNAL(triggered()), CustomWindow, SLOT(ShowOpenTorrentDialog()));
-        QObject::connect(ACTION_MENU_SETTINGS, SIGNAL(triggered()), CustomWindow, SLOT(OpenSettingsDialog()));
+        QObject::connect(ACTION_TOOLS_SETTINGS, SIGNAL(triggered()), CustomWindow, SLOT(OpenSettingsDialog()));
         QObject::connect(ACTION_MENUHELP_CHECK_UPDATE, SIGNAL(triggered()), CustomWindow, SLOT(CheckForUpdates()));
         QObject::connect(ACTION_MENUHELP_ABAUT_CT, SIGNAL(triggered()), CustomWindow, SLOT(ShowAbout()));
         QObject::connect(ACTION_MENUFILE_OPEN_MAGNET, SIGNAL(triggered()), CustomWindow, SLOT(ProcessMagnet()));
@@ -871,9 +870,9 @@ public:
 #ifndef QT_NO_SHORTCUT
         ACTION_MENUFILE_EXIT->setShortcut(QApplication::translate("CustomWindow", "Alt+X", Q_NULLPTR));
 #endif // QT_NO_SHORTCUT
-        ACTION_MENU_SETTINGS->setText(QApplication::translate("CustomWindow", "MENU_CONFIGURATION", Q_NULLPTR));
+        ACTION_TOOLS_SETTINGS->setText(QApplication::translate("CustomWindow", "MENU_CONFIGURATION", Q_NULLPTR));
 #ifndef QT_NO_SHORTCUT
-        ACTION_MENU_SETTINGS->setShortcut(QApplication::translate("CustomWindow", "Ctrl+S", Q_NULLPTR));
+        ACTION_TOOLS_SETTINGS->setShortcut(QApplication::translate("CustomWindow", "Ctrl+S", Q_NULLPTR));
 #endif // QT_NO_SHORTCUT
         ACTION_SEARCHTOOLBAR_DOWNLOAD->setText(QApplication::translate("CustomWindow", "STR_DOWNLOAD", Q_NULLPTR));
         ACTION_SEARCHTOOLBAR_DOWNLOAD->setIconText(QApplication::translate("CustomWindow", "HINT_DOWNLOAD", Q_NULLPTR));

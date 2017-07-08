@@ -38,6 +38,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "FiltersViewModel.h"
 #include "AddRssDwonloadRuleDialog.h"
 #include <libtorrent/torrent_info.hpp>
+#include "TorrentStorrage.h"
+#include "Torrent.h"
+#include <libtorrent/announce_entry.hpp>
+#include <libtorrent/link.hpp>
+#include <libtorrent/magnet_uri.hpp>
+
 OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags)
 	: BaseWindow(BaseWindow::OnlyCloseButton, BaseWindow::NoResize, parent)
 	  , m_size(0)
@@ -55,7 +61,7 @@ OpenTorrentDialog::OpenTorrentDialog(QWidget* parent, Qt::WindowFlags flags)
 	GroupComboBox->setModel(m_pGroupsModel);
 	GroupComboBox->setRootModelIndex(m_pGroupsModel->index(0, 0, QModelIndex()));
 	GroupComboBox->setCurrentIndex(-1);
-
+	qRegisterMetaType<error_code>("errro_code");
 	connect(GroupComboBox, SIGNAL(currentIndexChanged(int)), SLOT(ChangeGroup()));
 	m_pTorrentManager = TorrentManager::getInstance();
 	QCompleter* pathComplitter = new QCompleter(this);
@@ -135,7 +141,7 @@ void OpenTorrentDialog::FillData(opentorrent_info* info)
 			}
 			else
 			{
-				qDebug() << "Invalid QModelIndex recived for group" << pTorrentGroup->name() ;
+				qDebug() << "Invalid QModelIndex recived for group" << pTorrentGroup->name();
 			}
 		}
 		else
@@ -168,7 +174,7 @@ void OpenTorrentDialog::SetData(QString filename)
 		m_pTerminationToken->IsTerminationRequested = false;
 		m_pMetaDataWaiter = new MetaDataDownloadWaiter(filename, m_pTerminationToken, this);
 		connect(m_pMetaDataWaiter, SIGNAL(DownloadCompleted(openmagnet_info)), this, SLOT(DownloadMetadataCompleted(openmagnet_info)));
-		connect(m_pMetaDataWaiter, SIGNAL(ErrorOccured(QString)), this, SLOT(OnError(QString)));
+		connect(m_pMetaDataWaiter, SIGNAL(ErrorOccured(error_code)), this, SLOT(OnError(error_code)));
 		connect(m_pMetaDataWaiter, SIGNAL(finished()), m_pMetaDataWaiter, SLOT(deleteLater()));
 		m_pMetaDataWaiter->start(QThread::HighPriority);
 		yesButton->setEnabled(false);
@@ -188,8 +194,7 @@ void OpenTorrentDialog::SetData(QString filename)
 		}
 		else
 		{
-			validTorrent = false;
-			CustomMessageBox::critical(tr("OPEN_TORRENT_ERROR"), StaticHelpers::translateLibTorrentError(ec));
+			OnError(ec);
 		}
 	}
 }
@@ -226,7 +231,7 @@ bool OpenTorrentDialog::AccepTorrent()
 		qDebug() << filePriorities;
 		if (values.count(0) == values.size())
 		{
-			CustomMessageBox::critical( "Adding torrent Error", tr("SELECT_AT_LEAST_ONE_FILE"));
+			CustomMessageBox::critical("Adding torrent Error", tr("SELECT_AT_LEAST_ONE_FILE"));
 			return false;
 		}
 
@@ -248,7 +253,7 @@ bool OpenTorrentDialog::AccepTorrent()
 
 		if (ec)
 		{
-			CustomMessageBox::critical( "Adding torrent Error", StaticHelpers::translateLibTorrentError(ec));
+			CustomMessageBox::critical("Adding torrent Error", StaticHelpers::translateLibTorrentError(ec));
 			return false;
 		}
 	}
@@ -294,7 +299,7 @@ void OpenTorrentDialog::OnPathChanged(QString path)
 	labelSizeData->setText(tr("%1 (AVAILABLE: %2)").arg(StaticHelpers::toKbMbGb(m_size), StaticHelpers::toKbMbGb(storageInfo.bytesAvailable())));
 	if (m_size + 20l * 1024l * 1024l > storageInfo.bytesAvailable())
 	{
-		if (CustomMessageBox::critical( tr("NOT_ENOUGH_SPACE"), tr("NOT_ENOGH_STORRAGE_SPACE_TO_STORE_TORRENT"), CustomMessageBox::YesNo) == CustomMessageBox::No)
+		if (CustomMessageBox::critical(tr("NOT_ENOUGH_SPACE"), tr("NOT_ENOGH_STORRAGE_SPACE_TO_STORE_TORRENT"), CustomMessageBox::YesNo) == CustomMessageBox::No)
 		{
 			reject();
 		}
@@ -406,9 +411,101 @@ QWidget* OpenTorrentDialog::centralWidget()
 	return m_centralWidget;
 }
 
-void OpenTorrentDialog::OnError(QString error_msg)
+void OpenTorrentDialog::OnError(error_code ec)
 {
-	CustomMessageBox::critical( "Error", error_msg);
+	validTorrent = false;
+	QString error_msg = StaticHelpers::translateLibTorrentError(ec);
+	if (ec == errors::duplicate_torrent)
+	{
+		if (CustomMessageBox::question(tr("Confirm merge trackers"), error_msg + tr(" Add new Trackers from this torrent?")) == CustomMessageBox::Yes)
+		{
+			TorrentStorragePtr torrentStorrage = TorrentStorrage::getInstance();
+			if (m_torrentFilename.startsWith("magnet"))
+			{
+				add_torrent_params add_info;
+				parse_magnet_uri(m_torrentFilename.toStdString(), add_info, ec);
+				Torrent* torrent = torrentStorrage->getTorrent(QString::fromStdString(add_info.info_hash.to_string()));
+				if (torrent != nullptr)
+				{
+					std::vector<announce_entry> torrentTrackers = torrent->GetTrackerInfo();
+					
+					for (int i = 0; i < torrentTrackers.size(); i++)
+					{
+						int trackerToRemove = -1;
+						for (int j = 0; j < add_info.trackers.size(); j++)
+						{
+							if (torrentTrackers[i].url == add_info.trackers[j])
+							{
+								trackerToRemove = j;
+								break;
+							}
+
+						}
+						if (trackerToRemove > -1)
+						{
+							add_info.trackers.erase(add_info.trackers.begin() + trackerToRemove);
+						}
+					}
+
+					for (int j = 0; j < add_info.trackers.size(); j++)
+					{
+						torrent->AddTracker(QString::fromUtf8(add_info.trackers[j].c_str()));
+					}
+					if (add_info.trackers.size() > 0)
+					{
+						CustomMessageBox::information("Trackers added", tr("Added %1 trackers").arg(QString::number(add_info.trackers.size())));
+					}
+					else
+					{
+						CustomMessageBox::information("No trackers added", tr("No trackers added"));
+					}
+				}
+			}
+			else
+			{
+				
+				boost::scoped_ptr<opentorrent_info> info(m_pTorrentManager->GetTorrentInfo(m_torrentFilename, ec));
+				std::vector<announce_entry> trackers = info->torrentInfo->trackers();
+				Torrent* torrent = torrentStorrage->getTorrent(info->infoHash);
+				if (torrent != nullptr)
+				{
+					std::vector<announce_entry> torrentTrackers = torrent->GetTrackerInfo();
+					//Remove Duplicates
+					for (int i = 0; i < torrentTrackers.size(); i++)
+					{
+						int trackerToRemove = -1;
+						for(int j=0; j < trackers.size(); j++)
+						{
+							if (torrentTrackers[i].url == trackers[j].url)
+							{
+								trackerToRemove = j;
+								break;
+							}
+						}
+
+						if (trackerToRemove > -1)
+						{
+							trackers.erase(trackers.begin() + trackerToRemove);
+						}
+					}
+					for (int j = 0; j < trackers.size(); j++)
+					{
+						torrent->AddTracker(QString::fromUtf8(trackers[j].url.c_str()));
+					}
+					if (trackers.size() > 0)
+					{
+						CustomMessageBox::information("Trackers added", tr("Added %1 trackers").arg(QString::number(trackers.size())));
+					}
+					else
+					{
+						CustomMessageBox::information("No trackers added", tr("No trackers added"));
+					}
+				}
+			}
+
+			return;
+		}
+	}
+	CustomMessageBox::critical("Error", error_msg);
 	reject();
 }
-

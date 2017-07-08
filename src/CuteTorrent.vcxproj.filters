@@ -296,9 +296,6 @@
     <ClCompile Include="core\gui\Dialogs\MultipleDTDialog.cpp">
       <Filter>core\gui\Dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="core\gui\Dialogs\RaitingDialog.cpp">
-      <Filter>core\gui\Dialogs</Filter>
-    </ClCompile>
     <ClCompile Include="core\gui\Dialogs\SettingsDialog.cpp">
       <Filter>core\gui\Dialogs</Filter>
     </ClCompile>
@@ -1580,9 +1577,6 @@
     <CustomBuild Include="core\gui\Dialogs\SettingsDialog.h">
       <Filter>core\gui\Dialogs</Filter>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Dialogs\RaitingDialog.h">
-      <Filter>core\gui\Dialogs</Filter>
-    </CustomBuild>
     <CustomBuild Include="core\gui\Dialogs\MultipleDTDialog.h">
       <Filter>core\gui\Dialogs</Filter>
     </CustomBuild>
@@ -1659,9 +1653,6 @@
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="core\gui\FormFiles\multipleDt.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\FormFiles\RaitingDialog.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="core\gui\FormFiles\SettingsDialog.ui">

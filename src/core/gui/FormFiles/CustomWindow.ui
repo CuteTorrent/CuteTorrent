@@ -898,7 +898,6 @@
          <addaction name="separator"/>
          <addaction name="ACTION_MENUHELP_CHECK_UPDATE"/>
          <addaction name="ACTION_MENUHELP_REPORT_PROBLEM"/>
-         <addaction name="ACTION_MENUHELP_RATE"/>
         </widget>
         <widget class="QMenu" name="toolsMenu">
          <property name="title">
@@ -918,7 +917,7 @@
           <addaction name="separator"/>
           <addaction name="ACTION_AUTOSHUTDOWN_SHUTDOWN_ON_DOWNLOADS_COMPLETE"/>
          </widget>
-         <addaction name="ACTION_MENU_SETTINGS"/>
+         <addaction name="ACTION_TOOLS_SETTINGS"/>
          <addaction name="separator"/>
          <addaction name="ACTION_TOOLS_BACKUP"/>
          <addaction name="ACTION_TOOLS_IMPORT"/>
@@ -1043,7 +1042,7 @@
     <enum>QAction::QuitRole</enum>
    </property>
   </action>
-  <action name="ACTION_MENU_SETTINGS">
+  <action name="ACTION_TOOLS_SETTINGS">
    <property name="text">
     <string>MENU_CONFIGURATION</string>
    </property>
@@ -1295,7 +1294,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>ACTION_MENU_SETTINGS</sender>
+   <sender>ACTION_TOOLS_SETTINGS</sender>
    <signal>triggered()</signal>
    <receiver>CustomWindow</receiver>
    <slot>OpenSettingsDialog()</slot>
@@ -1673,7 +1672,6 @@
   <slot>toggleGroupsVisibility(bool)</slot>
   <slot>showReportDialog()</slot>
   <slot>showImportWiazrd()</slot>
-  <slot>showRaitingDialog()</slot>
   <slot>GoToExtendedMode()</slot>
   <slot>GoToCompactMode()</slot>
   <slot>switchTorrentViewMode()</slot>

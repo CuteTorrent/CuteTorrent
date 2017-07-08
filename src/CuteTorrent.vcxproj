@@ -43,7 +43,6 @@
     <ClCompile Include="core\gui\Dialogs\CuteTorrentMainWindow.cpp" />
     <ClCompile Include="core\gui\Dialogs\InitializationDialog.cpp" />
     <ClCompile Include="core\gui\Dialogs\MultipleDTDialog.cpp" />
-    <ClCompile Include="core\gui\Dialogs\RaitingDialog.cpp" />
     <ClCompile Include="core\gui\Dialogs\SettingsDialog.cpp" />
     <ClCompile Include="core\gui\Dialogs\SpeedLimitDialog.cpp" />
     <ClCompile Include="core\gui\Dialogs\VideoFileChooseDialog.cpp" />
@@ -213,7 +212,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_quagzipfile.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_quaziodevice.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_quazipfile.cpp" />
-    <ClCompile Include="GeneratedFiles\Release\moc_RaitingDialog.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_RaitingWidget.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_RconWebService.cpp" />
     <ClCompile Include="GeneratedFiles\Release\moc_RequestMapper.cpp" />
@@ -587,22 +585,6 @@
       </AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="GeneratedFiles\ui_OpenTorrentDialog.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </AdditionalInputs>
-    </CustomBuild>
-    <CustomBuild Include="GeneratedFiles\ui_RaitingDialog.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
@@ -2780,16 +2762,6 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_WIDGETS_LIB -DTORRENT_NO_DEPRECATE  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtScript" "-I$(QTDIR)\include\QtScriptTools" "-I$(QTDIR)\include\QtWidgets" "-I.\Comments\gui\Dialogs" "-I.\qtsingleapplication\src" "-I.\..\ThirdParties\boost" "-I.\..\ThirdParties\libmaxminddb\include" "-I.\..\ThirdParties\libtorrent\include" "-I.\GeneratedFiles" "-I.\GeneratedFiles\Release" "-I$(QT_DIR)\include\phonon_compat" "-I$(QT_DIR)\mkspecs\win32-msvc2010" "-I.\core" "-I.\Resources" "-I.\rss" "-I.\scheduller" "-I.\search" "-I.\torrent" "-I.\tracker" "-I.\VideoPlayer" "-I.\webControll" "-I.\core\zip" "-I.\core\gui" "-I.\core\http" "-I.\core\helpers" "-I.\core\standartpaths" "-I.\core\mimetypes" "-I.\core\winextras" "-I.\core\viewModel" "-I.\core\datamodels" "-I.\core\StorrageInfo" "-I.\core\qtsingleapplication" "-I.\core\datamodels\json" "-I.\core\datamodels\SGML" "-I.\core\gui\ImportWiazrd\Importers" "-I.\core\gui\ImportWiazrd" "-I.\core\gui\backupwizard" "-I.\core\gui\Controls" "-I.\core\gui\Dialogs" "-I.\core\gui\FormFiles" "-I.\core\qtsingleapplication\src" "-I.\core\viewModel\itemDelegate" "-I.\Resources\images" "-I.\Resources\playerImages" "-I.\Resources\translations" "-I.\rss\core" "-I.\rss\datamodels" "-I.\rss\gui" "-I.\rss\viewmodels" "-I.\rss\gui\Dialogs" "-I.\rss\gui\FormFiles" "-I.\rss\viewmodels\ItemDelegate" "-I.\search\core" "-I.\search\dataModels" "-I.\search\searchproviders" "-I.\search\viewmodels" "-I.\search\viewmodels\ItemDelegate" "-I.\torrent\core" "-I.\torrent\gui" "-I.\torrent\viewmodels" "-I.\torrent\gui\Controls" "-I.\torrent\gui\Dialogs" "-I.\torrent\gui\FormFiles" "-I.\torrent\viewmodels\ItemDelegate" "-I.\Comments\ViewModels" "-I.\Comments"</Command>
     </CustomBuild>
-    <CustomBuild Include="core\gui\Dialogs\RaitingDialog.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing RaitingDialog.h...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_WIDGETS_LIB -DNDEBUG -DTORRENT_NO_DEPRECATE  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtScript" "-I$(QTDIR)\include\QtScriptTools" "-I$(QTDIR)\include\QtWidgets" "-I.\Comments\gui\Dialogs" "-I.\qtsingleapplication\src" "-I.\..\ThirdParties\boost" "-I.\..\ThirdParties\libmaxminddb\include" "-I.\..\ThirdParties\libtorrent\include" "-I.\core" "-I.\Resources" "-I.\rss" "-I.\scheduller" "-I.\search" "-I.\torrent" "-I.\tracker" "-I.\VideoPlayer" "-I.\webControll" "-I.\core\zip" "-I.\core\gui" "-I.\core\http" "-I.\core\helpers" "-I.\core\standartpaths" "-I.\core\mimetypes" "-I.\core\winextras" "-I.\core\viewModel" "-I.\core\datamodels" "-I.\core\StorrageInfo" "-I.\core\qtsingleapplication" "-I.\core\datamodels\json" "-I.\core\datamodels\SGML" "-I.\core\gui\ImportWiazrd\Importers" "-I.\core\gui\ImportWiazrd" "-I.\core\gui\backupwizard" "-I.\core\gui\Controls" "-I.\core\gui\Dialogs" "-I.\core\gui\FormFiles" "-I.\core\qtsingleapplication\src" "-I.\core\viewModel\itemDelegate" "-I.\Resources\images" "-I.\Resources\playerImages" "-I.\Resources\translations" "-I.\rss\core" "-I.\rss\datamodels" "-I.\rss\gui" "-I.\rss\viewmodels" "-I.\rss\gui\Dialogs" "-I.\rss\gui\FormFiles" "-I.\rss\viewmodels\ItemDelegate" "-I.\search\core" "-I.\search\dataModels" "-I.\search\searchproviders" "-I.\search\viewmodels" "-I.\search\viewmodels\ItemDelegate" "-I.\torrent\core" "-I.\torrent\gui" "-I.\torrent\viewmodels" "-I.\torrent\gui\Controls" "-I.\torrent\gui\Dialogs" "-I.\torrent\gui\FormFiles" "-I.\torrent\viewmodels\ItemDelegate" "-I.\Comments\ViewModels" "-I.\Comments"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing RaitingDialog.h...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_WIDGETS_LIB -DTORRENT_NO_DEPRECATE  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtScript" "-I$(QTDIR)\include\QtScriptTools" "-I$(QTDIR)\include\QtWidgets" "-I.\Comments\gui\Dialogs" "-I.\qtsingleapplication\src" "-I.\..\ThirdParties\boost" "-I.\..\ThirdParties\libmaxminddb\include" "-I.\..\ThirdParties\libtorrent\include" "-I.\GeneratedFiles" "-I.\GeneratedFiles\Release" "-I$(QT_DIR)\include\phonon_compat" "-I$(QT_DIR)\mkspecs\win32-msvc2010" "-I.\core" "-I.\Resources" "-I.\rss" "-I.\scheduller" "-I.\search" "-I.\torrent" "-I.\tracker" "-I.\VideoPlayer" "-I.\webControll" "-I.\core\zip" "-I.\core\gui" "-I.\core\http" "-I.\core\helpers" "-I.\core\standartpaths" "-I.\core\mimetypes" "-I.\core\winextras" "-I.\core\viewModel" "-I.\core\datamodels" "-I.\core\StorrageInfo" "-I.\core\qtsingleapplication" "-I.\core\datamodels\json" "-I.\core\datamodels\SGML" "-I.\core\gui\ImportWiazrd\Importers" "-I.\core\gui\ImportWiazrd" "-I.\core\gui\backupwizard" "-I.\core\gui\Controls" "-I.\core\gui\Dialogs" "-I.\core\gui\FormFiles" "-I.\core\qtsingleapplication\src" "-I.\core\viewModel\itemDelegate" "-I.\Resources\images" "-I.\Resources\playerImages" "-I.\Resources\translations" "-I.\rss\core" "-I.\rss\datamodels" "-I.\rss\gui" "-I.\rss\viewmodels" "-I.\rss\gui\Dialogs" "-I.\rss\gui\FormFiles" "-I.\rss\viewmodels\ItemDelegate" "-I.\search\core" "-I.\search\dataModels" "-I.\search\searchproviders" "-I.\search\viewmodels" "-I.\search\viewmodels\ItemDelegate" "-I.\torrent\core" "-I.\torrent\gui" "-I.\torrent\viewmodels" "-I.\torrent\gui\Controls" "-I.\torrent\gui\Dialogs" "-I.\torrent\gui\FormFiles" "-I.\torrent\viewmodels\ItemDelegate" "-I.\Comments\ViewModels" "-I.\Comments"</Command>
-    </CustomBuild>
     <CustomBuild Include="core\gui\Dialogs\MultipleDTDialog.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing MultipleDTDialog.h...</Message>
@@ -3104,16 +3076,6 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
     </CustomBuild>
     <CustomBuild Include="core\gui\FormFiles\multipleDt.ui">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Uic%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Uic%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
-    </CustomBuild>
-    <CustomBuild Include="core\gui\FormFiles\RaitingDialog.ui">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Uic%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
