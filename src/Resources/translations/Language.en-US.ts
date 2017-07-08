@@ -671,7 +671,7 @@ Are you shure?</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1048"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1776"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1777"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="874"/>
         <source>MENU_CONFIGURATION</source>
         <translation>Configuration</translation>
@@ -850,7 +850,7 @@ Are you shure?</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1029"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1773"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1774"/>
         <location filename="../../core/gui/Utils/ValueSetters.cpp" line="357"/>
         <location filename="../../core/gui/Utils/ValueSetters.cpp" line="361"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="866"/>
@@ -1189,59 +1189,59 @@ Download: %3</translation>
         <translation>Magnet-link:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1717"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1718"/>
         <source>ADD_PEER_DLG</source>
         <translation>Adding a peer</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1717"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1718"/>
         <source>PEER:</source>
         <translation>Peer:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1734"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1735"/>
         <source>PEER_ERR</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1734"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1735"/>
         <source>INVALID_IP_STRING</source>
         <translation>Invalid ip string</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1746"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1747"/>
         <source>ADD_TRACKER_DLG</source>
         <translation>Adding a tracker</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1746"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2261"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1747"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2262"/>
         <source>TRACKER:</source>
         <translation>Tracker:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2261"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2292"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2262"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2293"/>
         <source>EDIT_TRACKER_DLG</source>
         <translation>Tracker editing</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2292"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2293"/>
         <source>HTTP_SEED_URL:</source>
         <translation>Web seed:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2306"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2307"/>
         <source>RSS_FEED_ADD</source>
         <translation>Adding Rss-feed</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2306"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2307"/>
         <source>RSS_FEED_URL:</source>
         <translation>Rss-feed URL:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2477"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2478"/>
         <source>INVALID_COMMAND_RECIVED</source>
         <translation>Invalid IPC command recived.</translation>
     </message>
@@ -2843,7 +2843,7 @@ Error: %2
 <context>
     <name>OpenTorrentDialog</name>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="193"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="201"/>
         <source>DIALOG_OPEN_DIR</source>
         <translation>Choose save dirrectory</translation>
     </message>
@@ -2978,32 +2978,32 @@ Error: %2
         <translation>Select None</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="167"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="175"/>
         <source>MAGNET_LINKS_DONT_SUPORT_SEED_MODE</source>
         <translation>Seeding with no checks is not supported</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="183"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="191"/>
         <source>OPEN_TORRENT_ERROR</source>
         <translation>Failed to open Torrent</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="220"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="228"/>
         <source>SELECT_AT_LEAST_ONE_FILE</source>
         <translation>Select at least one file</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="285"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="293"/>
         <source>%1 (AVAILABLE: %2)</source>
         <translation>%1 (Avaliable: %2)</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="288"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="296"/>
         <source>NOT_ENOUGH_SPACE</source>
         <translation>Not enough space</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="288"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="296"/>
         <source>NOT_ENOGH_STORRAGE_SPACE_TO_STORE_TORRENT</source>
         <translation>Not enough space to sotre torrent data. Do you want to continure?</translation>
     </message>
@@ -3561,40 +3561,40 @@ Error: %2
 <context>
     <name>RssManager</name>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="344"/>
+        <location filename="../../rss/core/RssManager.cpp" line="345"/>
         <source>RSS_ITEM_UNABLE_TO_DOWNLOAD %1 NO_URL</source>
         <translation>RSS-article %1 doesn&apos;t contains url for torrent file or magnet-link</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="370"/>
-        <location filename="../../rss/core/RssManager.cpp" line="380"/>
-        <location filename="../../rss/core/RssManager.cpp" line="406"/>
+        <location filename="../../rss/core/RssManager.cpp" line="371"/>
+        <location filename="../../rss/core/RssManager.cpp" line="381"/>
+        <location filename="../../rss/core/RssManager.cpp" line="407"/>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2</source>
         <translation>Error occured during automated download from RSS-feed:
 %1 %2</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="384"/>
+        <location filename="../../rss/core/RssManager.cpp" line="385"/>
         <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1 %2</source>
         <translation>Started downloading torrent %1 %2 from RSS-feed</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="390"/>
+        <location filename="../../rss/core/RssManager.cpp" line="391"/>
         <source>STARTED_AUTOMETED_RSS_DOWNLOAD</source>
         <translation>Auto download from rss feed started</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="390"/>
+        <location filename="../../rss/core/RssManager.cpp" line="391"/>
         <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
         <translation>%1 Started downloading.&lt;br/&gt;&lt;a href=&quot;%3&quot;&gt; Description&lt;/a&gt;&lt;br/&gt; %2</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="424"/>
+        <location filename="../../rss/core/RssManager.cpp" line="425"/>
         <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1</source>
         <translation>Started downloading torrent %1 from RSS-feed</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="411"/>
+        <location filename="../../rss/core/RssManager.cpp" line="412"/>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD_MAGNET: %1</source>
         <translation>Error occured during automated download from RSS-feed:
 %1 </translation>
@@ -5234,36 +5234,36 @@ Error: %2</translation>
 <context>
     <name>TorrentManager</name>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="179"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="180"/>
         <source>LISTENING ON PORT %1 FAILED</source>
         <translation>Listening on port %1 failed.</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="321"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="322"/>
         <source>TORRENT_COMPLETED %1</source>
         <translation>Torreant %1 was successfully downloaded.</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="335"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="336"/>
         <source>SAVE_RESUME_DATA_FAILED %1, RETRING...</source>
         <translation>Saving of torrent resume data have failed %1, retring...</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="386"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="387"/>
         <source>TORRENT %1 HAS TRACKER ERROR %2</source>
         <translation>Torrent %1 has tracker error: %2</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="407"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="408"/>
         <source>MOVE_STORRAGE_COMPLETED_TO:
 %1 %2</source>
         <translation>Moving torrent %1 to %2 completed.</translation>
     </message>
     <message>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="428"/>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="434"/>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="454"/>
-        <location filename="../../torrent/core/TorrentManager.cpp" line="503"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="429"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="435"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="455"/>
+        <location filename="../../torrent/core/TorrentManager.cpp" line="504"/>
         <source>TORRENT %1 HAS ERROR %2</source>
         <translation>Torrent %1 has error %2</translation>
     </message>

@@ -165,6 +165,7 @@ void OpenTorrentDialog::SetData(QString filename)
 		loaderGifLabel->setMovie(movie);
 		movie->start();
 		qRegisterMetaType<openmagnet_info>("openmagnet_info");
+		m_pTerminationToken->IsTerminationRequested = false;
 		m_pMetaDataWaiter = new MetaDataDownloadWaiter(filename, m_pTerminationToken, this);
 		connect(m_pMetaDataWaiter, SIGNAL(DownloadCompleted(openmagnet_info)), this, SLOT(DownloadMetadataCompleted(openmagnet_info)));
 		connect(m_pMetaDataWaiter, SIGNAL(ErrorOccured(QString)), this, SLOT(OnError(QString)));

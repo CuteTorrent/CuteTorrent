@@ -1226,7 +1226,7 @@ void TorrentManager::RemoveTorrent(QString InfoHash, bool delFiles, bool emitEve
 		emit BeforTorrentRemoved(InfoHash);
 	}
 	m_pTorrentStorrage->remove(InfoHash);
-	if (emitEvents)
+	//if (emitEvents)
 	{
 		emit TorrentRemoved(InfoHash);
 	}
