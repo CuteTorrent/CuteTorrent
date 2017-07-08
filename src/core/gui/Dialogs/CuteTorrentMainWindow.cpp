@@ -1572,9 +1572,10 @@ void CuteTorrentMainWindow::ProcessMagnet()
 
 	if (ok && !magnetLink.isEmpty())
 	{
-		boost::scoped_ptr<OpenTorrentDialog> dialog(new OpenTorrentDialog);
+		OpenTorrentDialog* dialog = new OpenTorrentDialog;
 		dialog->SetData(magnetLink);
 		dialog->exec();
+		dialog->deleteLater();
 	}
 }
 
