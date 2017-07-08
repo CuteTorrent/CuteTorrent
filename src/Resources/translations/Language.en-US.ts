@@ -3863,7 +3863,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="552"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1731"/>
         <source>UPLOAD_SPEED_LIMIT_WIT</source>
-        <translation>Lmit the uploadspeed to the Selectn value.</translation>
+        <translation>Lmit the uploadspeed to the Selected value.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="828"/>
