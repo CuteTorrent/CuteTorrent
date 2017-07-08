@@ -5189,7 +5189,7 @@ ERROR: %2</source>
     <message>
         <location filename="../../core/avaliableSpacePlugin/avaliable_space_verifier_plugin.cpp" line="46"/>
         <source>There is not enough disk space to save torrent files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не хватает места на диске для сохранения торрента</translation>
     </message>
 </context>
 <context>
