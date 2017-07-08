@@ -9,7 +9,7 @@
         <location filename="../../GeneratedFiles/ui_AddDownloadRuleDialog.h" line="293"/>
         <location filename="../../GeneratedFiles/ui_AddDownloadRuleDialog.h" line="295"/>
         <source>ADD_RSS_DWONLOAD_RULE_DIALOG</source>
-        <translation>Creation of autodownload rule from RSS-feeds</translation>
+        <translation>Creation of auto-download rule from RSS feeds</translation>
     </message>
     <message>
         <location filename="../../rss/gui/FormFiles/AddDownloadRuleDialog.ui" line="163"/>
@@ -69,7 +69,7 @@
         <location filename="../../rss/gui/FormFiles/AddDownloadRuleDialog.ui" line="259"/>
         <location filename="../../GeneratedFiles/ui_AddDownloadRuleDialog.h" line="305"/>
         <source>APPLY_TO_FEEDS:</source>
-        <translation>Apply to RSS-feeds:</translation>
+        <translation>Apply to RSS feeds:</translation>
     </message>
     <message>
         <location filename="../../rss/gui/FormFiles/AddDownloadRuleDialog.ui" line="270"/>
@@ -83,7 +83,7 @@
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="162"/>
         <source>ADD_RSS_DWONLOAD_RULE_DIALOG</source>
-        <translation>Create rule for automated downloads from RSS-feeds</translation>
+        <translation>Create rule for automated downloads from RSS feeds</translation>
     </message>
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="144"/>
@@ -113,7 +113,7 @@
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="158"/>
         <source>EDIT_RSS_DWONLOAD_RULE_DIALOG</source>
-        <translation>Edit Rule for Automated Downloads from RSS-Feeds</translation>
+        <translation>Edit Rule for Automated Downloads from RSS Feeds</translation>
     </message>
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="268"/>
@@ -143,7 +143,7 @@
     <message>
         <location filename="../../rss/datamodels/RssDownloadRule.cpp" line="67"/>
         <source>YOU_SHOULD_SELECT_ATLEAST_ONE_FEED</source>
-        <translation>You should select at least one RSS-feed</translation>
+        <translation>You should select at least one RSS feed</translation>
     </message>
     <message>
         <location filename="../../rss/datamodels/RssDownloadRule.cpp" line="27"/>
@@ -748,7 +748,7 @@ Are you sure?</translation>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="891"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="893"/>
         <source>ACTION_RSS_ADD</source>
-        <translation>Add RSS-feed</translation>
+        <translation>Add RSS feed</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1111"/>
@@ -1233,12 +1233,12 @@ Download: %3</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2310"/>
         <source>RSS_FEED_ADD</source>
-        <translation>Adding RSS-feed</translation>
+        <translation>Adding RSS feed</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2310"/>
         <source>RSS_FEED_URL:</source>
-        <translation>RSS-feed URL:</translation>
+        <translation>RSS feed URL:</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2481"/>
@@ -2448,7 +2448,7 @@ Download: %3</translation>
         <location filename="../../core/viewModel/FiltersViewModel.cpp" line="183"/>
         <location filename="../../core/viewModel/FiltersViewModel.cpp" line="522"/>
         <source>RSS_CHANELS</source>
-        <translation>RSS-channels</translation>
+        <translation>RSS Channels</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FiltersViewModel.cpp" line="177"/>
@@ -3124,7 +3124,7 @@ Error: %2
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="354"/>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2</source>
-        <translation>Error occurred during automated download from RSS-feed:
+        <translation>Error occurred during automated download from RSS feed:
 %1 %2</translation>
     </message>
     <message>
@@ -3518,25 +3518,25 @@ Error: %2
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="346"/>
         <source>RSS_ITEM_UNABLE_TO_DOWNLOAD %1 NO_URL</source>
-        <translation>RSS-article %1 doesn&apos;t contains url for torrent file or magnet link</translation>
+        <translation>RSS-article %1 doesn&apos;t contains URL for torrent file or magnet link</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="372"/>
         <location filename="../../rss/core/RssManager.cpp" line="382"/>
         <location filename="../../rss/core/RssManager.cpp" line="408"/>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2</source>
-        <translation>Error occured during automated download from RSS-feed:
+        <translation>Error occurred during automated download from RSS feed:
 %1 %2</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="386"/>
         <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1 %2</source>
-        <translation>Started downloading torrent %1 %2 from RSS-feed</translation>
+        <translation>Started downloading torrent %1 %2 from RSS feed</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="392"/>
         <source>STARTED_AUTOMETED_RSS_DOWNLOAD</source>
-        <translation>Auto download from rss feed started</translation>
+        <translation>Auto download from RSS feed started</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="392"/>
@@ -3546,13 +3546,13 @@ Error: %2
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="426"/>
         <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1</source>
-        <translation>Started downloading torrent %1 from RSS-feed</translation>
+        <translation>Started downloading torrent %1 from RSS feed</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="413"/>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD_MAGNET: %1</source>
-        <translation>Error occured during automated download from RSS-feed:
-%1 </translation>
+        <translation>Error occurred during automated download from RSS feed:
+%1</translation>
     </message>
 </context>
 <context>
@@ -3566,7 +3566,7 @@ Error: %2
         <location filename="../../rss/core/RssParser.cpp" line="446"/>
         <location filename="../../rss/core/RssParser.cpp" line="698"/>
         <source>No valid rss fields found.</source>
-        <translation>No valid rss fields found.</translation>
+        <translation>No valid RSS fields found.</translation>
     </message>
 </context>
 <context>
@@ -3617,7 +3617,7 @@ Error: %2
         <location filename="../../rss/gui/FormFiles/RssFeedSettingsDialog.ui" line="153"/>
         <location filename="../../GeneratedFiles/ui_RssFeedSettingsDialog.h" line="223"/>
         <source>RSS_URL</source>
-        <translation>RSS Url</translation>
+        <translation>RSS URL</translation>
     </message>
     <message>
         <location filename="../../rss/gui/FormFiles/RssFeedSettingsDialog.ui" line="167"/>
@@ -4420,7 +4420,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="2057"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1968"/>
         <source>RSS_DEFAULT_REFRESH_RATE</source>
-        <translation>Default feed refresh rate </translation>
+        <translation>Default feed refresh rate</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="2089"/>
@@ -4658,7 +4658,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1980"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1961"/>
         <source>RSS_SMTP_AUTH_TYPE</source>
-        <translation>SMTP authentification type</translation>
+        <translation>SMTP authentication type</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1987"/>
@@ -4688,7 +4688,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="2034"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1966"/>
         <source>RSS_NOTIFICATION_EMEAIL</source>
-        <translation>Notify to emeail</translation>
+        <translation>Notify to Email</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="2044"/>
@@ -4784,12 +4784,12 @@ Error: %2
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="944"/>
         <source>RSS_PLAIN_AUTH</source>
-        <translation>Plain authentification</translation>
+        <translation>Plain authentication</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="945"/>
         <source>RSS_LOGIN_AUTH</source>
-        <translation>Login authentification</translation>
+        <translation>Login authentication</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="986"/>
@@ -4964,7 +4964,7 @@ Error: %2</translation>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="290"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1693"/>
         <source>NOTIFY_RSS_ERRORS</source>
-        <translation>Notify rss errors</translation>
+        <translation>Notify RSS errors</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="722"/>
