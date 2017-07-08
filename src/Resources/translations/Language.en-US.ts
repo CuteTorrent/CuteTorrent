@@ -3113,7 +3113,7 @@ Error: %2
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="438"/>
         <source>RSS_FEED_RENAME</source>
-        <translation>Renamin RSS feed</translation>
+        <translation>Rename RSS feed</translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="438"/>
