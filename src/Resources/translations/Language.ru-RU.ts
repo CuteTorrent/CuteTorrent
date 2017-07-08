@@ -435,443 +435,443 @@
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="17"/>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="105"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="857"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="924"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="856"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="923"/>
         <source>CuteTorrent</source>
         <translation>CuteTorrent</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="800"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="962"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="961"/>
         <source>TRACKER_PEERS</source>
         <translation>Пиры</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="883"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="965"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="964"/>
         <source>MENU_FILE</source>
         <translation>Файл</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="894"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="966"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="965"/>
         <source>MENU_HELP</source>
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="905"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="967"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="904"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="966"/>
         <source>MENU_TOOLS</source>
         <translation>Утилиты</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="458"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="953"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="952"/>
         <source>TAB_INFO</source>
         <translation>Информация</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="657"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="946"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="945"/>
         <source>INFO_PEER_COUNT</source>
         <translation>Пиров:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="545"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="930"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="929"/>
         <source>INFO_UPLOADED</source>
         <translation>Отданно</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="671"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="948"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="947"/>
         <source>INFO_SEED_COUNT</source>
         <translation>Сидов:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="678"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="949"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="948"/>
         <source>INFO_DESCRIBTION</source>
         <translation>Описание</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="538"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="929"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="928"/>
         <source>INFO_PATH</source>
         <translation>Путь</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="629"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="942"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="941"/>
         <source>INFO_REMAININF_TIME</source>
         <translation>Осталось</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="622"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="941"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="940"/>
         <source>INFO_DOWNLOADED</source>
         <translation>Загружено</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="615"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="940"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="939"/>
         <source>INFO_ACTIVE_TIME</source>
         <translation>Прошло</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="601"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="938"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="937"/>
         <source>INFO_DOWNLOAD_SPEED</source>
         <translation>Загрузка</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="580"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="935"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="934"/>
         <source>INFO_TOTAL_SIZE</source>
         <translation>Размер</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="566"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="933"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="932"/>
         <source>INFO_UPLOAD_SPEED</source>
         <translation>Отдача</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="341"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="925"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="924"/>
         <source>LIMIT_UL</source>
         <translation>Отдача</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="351"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="926"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="925"/>
         <source>LIMIT_DL</source>
         <translation>Загрузка</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="377"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="927"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="926"/>
         <source>SORT_BY</source>
         <translation>Сортировать по</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="701"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="951"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="950"/>
         <source>INFO_HASH</source>
         <translation>Хеш</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="722"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="954"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="953"/>
         <source>TAB_PEERS</source>
         <translation>Пиры</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="757"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="963"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="962"/>
         <source>TAB_TRACKERS</source>
         <translation>Трекеры</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="785"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="956"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="955"/>
         <source>TRACKER_URL</source>
         <translation>URL</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="790"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="958"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="957"/>
         <source>TRACKER_STATUS</source>
         <translation>Состояние</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="795"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="960"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="959"/>
         <source>TRACKER_NEXT_ANNOUNCE</source>
         <translation>Обновление через</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="812"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="964"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="963"/>
         <source>TAB_FILES</source>
         <translation>Файлы</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="909"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="968"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="908"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="967"/>
         <source>TOOLS_AUTO_SHUTDOWN</source>
         <translation>Автовыключение</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="930"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="969"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="929"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="968"/>
         <source>MENU_VIEW</source>
         <translation>Вид</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="934"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="970"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="933"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="969"/>
         <source>MENU_CHOSE_LANGUAGE</source>
         <translation>Язык</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="939"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="971"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="938"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="970"/>
         <source>MENU_CHOSE_SKIN</source>
         <translation>Стиль</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1010"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1177"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1180"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="858"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="909"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="911"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1009"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1176"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1179"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="857"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="908"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="910"/>
         <source>MENU_OPEN_TORRENT</source>
         <translation>Открыть торрент</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1013"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="860"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1012"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="859"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1021"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1185"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="862"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="913"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1020"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1184"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="861"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="912"/>
         <source>MENU_OPEN_MAGNET</source>
         <translation>Открыть magnet сслыку</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1024"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="864"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1023"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="863"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1029"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1774"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1028"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1770"/>
         <location filename="../../core/gui/Utils/ValueSetters.cpp" line="357"/>
         <location filename="../../core/gui/Utils/ValueSetters.cpp" line="361"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="866"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="865"/>
         <source>MENU_CREATE_TORRENT</source>
         <translation>Создать  торрент</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1032"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="868"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1031"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="867"/>
         <source>Ctrl+N</source>
         <oldsource>Ctrl+C</oldsource>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1037"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="870"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1036"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="869"/>
         <source>MENU_EXIT</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1040"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="872"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1039"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="871"/>
         <source>Alt+X</source>
         <translation>Alt+X</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1048"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1777"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="874"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1047"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1773"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="873"/>
         <source>MENU_CONFIGURATION</source>
         <translation>Конфигурация</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1051"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="876"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1050"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="875"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1059"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="878"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1058"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="877"/>
         <source>STR_DOWNLOAD</source>
         <translation>Скачать торрент</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1062"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="879"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1061"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="878"/>
         <source>HINT_DOWNLOAD</source>
         <translation>Скачать торрент</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1067"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="880"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1066"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="879"/>
         <source>STR_OPEN_URL</source>
         <translation>Открыть описание</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1070"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="881"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1069"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="880"/>
         <source>HINT_OPEN_URL</source>
         <translation>Открыть описание</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1075"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="882"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1074"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="881"/>
         <source>MENU_ABAUT</source>
         <translation>O CuteTorrent</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1078"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="884"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1077"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="883"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1086"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="886"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1085"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="885"/>
         <source>MENU_CHECK_UPDATES</source>
         <translation>Проверить обновления</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1089"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="888"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1088"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="887"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1094"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="890"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1093"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="889"/>
         <source>STR_SETTINGS</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1099"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="891"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1098"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="890"/>
         <source>TOOLS_BACKUP</source>
         <translation>Резервное копирование</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1104"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1107"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="892"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="894"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1103"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1106"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="891"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="893"/>
         <source>ACTION_RSS_ADD</source>
         <translation>Добавить Rss-ленту</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1112"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="896"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1111"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="895"/>
         <source>ACTION_RSS_REMOVE</source>
         <translation>Удалить Rss-ленту</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1117"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="897"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1116"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="896"/>
         <source>ACTION_RSS_EDIT</source>
         <translation>Изменить Rss-ленту</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1122"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="898"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1121"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="897"/>
         <source>MENU_ABOUT_QT</source>
         <translation>О Qt</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1127"/>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1130"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="899"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="901"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1126"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1129"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="898"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="900"/>
         <source>QUEUE_UP</source>
         <translation>Поднять в очереди</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1135"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="903"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1134"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="902"/>
         <source>QUEUE_DOWN</source>
         <translation>Опустить в очереди</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1140"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="904"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1139"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="903"/>
         <source>MENU_REPORT_PROBLEM</source>
         <translation>Сообщить о проблеме</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1148"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="905"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1147"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="904"/>
         <source>MENU_TOGGLE_TOOLBAR_VISIBILITY</source>
         <translation>Панель инструментов</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1156"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="906"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1155"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="905"/>
         <source>MENU_TOGGLE_DETAIL_INFO_VISIBILITY</source>
         <translation>Детальная информация</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1164"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="907"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1163"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="906"/>
         <source>MENU_TOGGLE_STATUSBAR_VISIBILITY</source>
         <translation>Строка состояния</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1172"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="908"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1171"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="907"/>
         <source>MENU_TOGGLE_GROUPS_VISIBILITY</source>
         <translation>Боковой фильтр</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1190"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="914"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1189"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="913"/>
         <source>TOOLS_IMPORT</source>
         <translation>Импорт торрентов из других клиентов</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1198"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="915"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1197"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="914"/>
         <source>TOOLS_SHUTDOWN_DISABLED</source>
         <translation>Отключено</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1203"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="916"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1202"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="915"/>
         <source>TOOLS_SHUTDOWN_ON_DOWNLADS_COMPLETE</source>
         <translation>Выключить по окончании загрузок</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1245"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="922"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1244"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="921"/>
         <source>SWITCH_VIEW</source>
         <translation>Переключить вид</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1211"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="917"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1210"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="916"/>
         <source>TOOLS_HIBERNATE_ON_DOWNLOADS_COMPLETE</source>
         <translation>Спящий режим по окончании загрузок</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1219"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="918"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1218"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="917"/>
         <source>TOOLS_SLEEP_ON_DOWNLOADS_COMPLETE</source>
         <translation>Режим ожидания по завершению загрузок</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1227"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="919"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1226"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="918"/>
         <source>TOOLS_REBOOT_ON_DOWNLOADS_COMPLETE</source>
         <translation>Перезагрузка по завершению загрузок</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1235"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="920"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1234"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="919"/>
         <source>TOOLS_SHUTDOWN_ON_DOWNLOADS_COMPLETE</source>
         <translation>Выключение по завершению загрузок</translation>
     </message>
     <message>
-        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1240"/>
-        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="921"/>
+        <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1239"/>
+        <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="920"/>
         <source>MENU_RATE</source>
         <translation>Оценить клиент</translation>
     </message>
@@ -879,215 +879,215 @@
 <context>
     <name>CuteTorrentMainWindow</name>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="255"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="254"/>
         <source>ABAUT_TITLE</source>
         <translation>О CuteTorrent</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="255"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="254"/>
         <source>ABAUT_TEXT</source>
         <translation>CuteTorrent %1 -бесплатный торрент клиент с поддержкой DHT, возможностью монтировани образов в DaemonTools и встроенным Аудио/Видео плеером.
 
 Если вы заплатили деньги за это програмное обеспечение потребуйте возврата денег</translation>
     </message>
     <message>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="271"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="272"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="273"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="984"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="985"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="979"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="980"/>
         <source>STATUS_DWONLOAD</source>
         <translation>Загруженно(Загрузка)</translation>
     </message>
     <message>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="273"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="274"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="275"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="986"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="987"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="981"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="982"/>
         <source>STATUS_UPLOAD</source>
         <translation>Отдано(Отдача)</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="292"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="319"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="291"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="318"/>
         <source>SORTER_NAME</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="293"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="320"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="292"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="319"/>
         <source>SORTER_SIZE</source>
         <translation>Размер</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="294"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="293"/>
         <source>SORTER_DOWNLOADED</source>
         <translation>Загружено</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="295"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="294"/>
         <source>SORTER_UPLOADED</source>
         <translation>Отдано</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="296"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="295"/>
         <source>SORTER_UPTIME</source>
         <translation>Прошло</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="297"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="296"/>
         <source>SORTER_TIME_LEFT</source>
         <translation>Осталось</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="298"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="297"/>
         <source>SORTER_SEEDS</source>
         <translation>Сиды</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="299"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="298"/>
         <source>SORTER_PEERS</source>
         <translation>Пиры</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="321"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="320"/>
         <source>SORTER_LEECHERS</source>
         <translation>Личеры</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="322"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="321"/>
         <source>SORTER_SEEDERS</source>
         <translation>Сиды</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="396"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="990"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="395"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="985"/>
         <source>ADD_TRACKER</source>
         <translation>Добавить трекер</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="398"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="991"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="397"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="986"/>
         <source>REMOVE_TRACKER</source>
         <translation>Удалить трекер</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="400"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="992"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="399"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="987"/>
         <source>EDIT_TRACKER</source>
         <translation>Изменить трекер</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="402"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="401"/>
         <source>UPDATE_TRACKER</source>
         <translation>Обновить трекер</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="424"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="993"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="423"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="988"/>
         <source>ADD_PEER</source>
         <translation>Добавить пир</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="426"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="425"/>
         <source>ADD_WEB_SEED</source>
         <translation>Добавить WebSeed</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="542"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="537"/>
         <source>SET_DEFAULT_APP_FOR_TOR_AND_MAGNET_LINKS</source>
         <translation>Сделать стандартным приложением для торрентов и магнитных ссылок?</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="548"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="543"/>
         <source>SET_DEFAULT_APP_FOR_TOR</source>
         <translation>Сделать стандартным приложением для торрентов?</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="552"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="547"/>
         <source>SET_DEFAULT_APP_FOR_MAGNET_LINKS</source>
         <translation>Сделать стандартным приложением для магнитных ссылок?</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="557"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="552"/>
         <source>DEFAULT_APP</source>
         <translation>Выбор стандартного приложения</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="631"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1005"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="626"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1000"/>
         <source>ANIME_CATEGORY</source>
         <translation>Анимэ</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="632"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1006"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="627"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1001"/>
         <source>MUSIC_CATEGORY</source>
         <translation>Музыка</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="633"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1007"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="628"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1002"/>
         <source>TV_CATEGORY</source>
         <translation>Сериалы и TV</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="634"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1008"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="629"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1003"/>
         <source>PORN_CATEGORY</source>
         <translation>Видео для взрослых</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="635"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1009"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="630"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1004"/>
         <source>APP_CATEGORY</source>
         <translation>Приложения</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="636"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1010"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="631"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1005"/>
         <source>GAMES_CATEGORY</source>
         <translation>Игры</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="637"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1011"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="632"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1006"/>
         <source>BOOKS_CATEGORY</source>
         <translation>Книги</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="638"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1012"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="633"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1007"/>
         <source>FILMS_CATEGORY</source>
         <translation>Кино</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="639"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1013"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="634"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1008"/>
         <source>ALL_CATEGORY</source>
         <translation>Все</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="648"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1015"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="643"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1010"/>
         <source>Search</source>
         <translation>Поиск</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="651"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1016"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="646"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1011"/>
         <source>TORENT_FILTER</source>
         <translation>Фильтровать торренты</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="655"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="662"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="994"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="995"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="650"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="657"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="989"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="990"/>
         <source>None</source>
         <translation>∞</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="798"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="793"/>
         <source>CuteTorrent %1
 Upload: %2
 Download: %3</source>
@@ -1096,152 +1096,152 @@ Download: %3</source>
 Скачано: %3</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="807"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="802"/>
         <source>DHT: %1 nodes</source>
         <translation>DHT: %1 узлов</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="947"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="942"/>
         <source>DOWNLOADING_TORRENTS_COUNT</source>
         <translation>Колличество загружаемых торрентов</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="979"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1079"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="974"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1074"/>
         <source>ACTION_HIDE</source>
         <translation>Спрятать</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="980"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1082"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="975"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1077"/>
         <source>ACTION_MAXIMIZE_FULLSCREEN</source>
         <translation>Развернуть на весь экран</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="981"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1085"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="976"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1080"/>
         <source>ACTION_MAXIMIZE</source>
         <translation>Развернуть</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="982"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1094"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="977"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1089"/>
         <source>ACTION_EXIT</source>
         <translation>Выйти</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="983"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1097"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1101"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="978"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1092"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1096"/>
         <source>ACTION_COPY</source>
         <translation>Копировать</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="996"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1088"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="991"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1083"/>
         <source>ACTION_PAUSE_ALL_TORRENTS</source>
         <translation>Приостановить все торренты</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="997"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1091"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="992"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1086"/>
         <source>ACTION_RESTORE_ALL_TORRENTS</source>
         <translation>Возобновить все торренты</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1158"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1154"/>
         <source>OPEN_TOORENT_DIALOG</source>
         <translation>Выберете торрент файл</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1159"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1155"/>
         <source>TORRENT_FILES (*.torrent);;Any File (*.*)</source>
         <translation>Торренты (*.torrent);;Any File (</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1316"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1311"/>
         <source>TRACKER_UPDATING</source>
         <translation>Обновляется...</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1373"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1368"/>
         <source>CT_HIDE_MSG</source>
         <translation>CuteTorrent продолжает работать. Для выхода используйте контекстное меню в области уведомлений.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1425"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1420"/>
         <source>UNABLE_TO_PROCESS_FILE</source>
         <translation>Не удалось обработать файл</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1425"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1420"/>
         <source>DROPPED_FILE %1 IS_NOT_TORRENT_OR_MAGNET_LINK</source>
         <translation>Элемент %1 не торрент файл или магнитная ссылка.</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1571"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1566"/>
         <source>MAGNET_LINK_DLG</source>
         <translation>Magnet-сслыка</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1571"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1566"/>
         <source>MAGNET_LINK:</source>
         <translation>Magnet-сслыка:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1718"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1714"/>
         <source>ADD_PEER_DLG</source>
         <translation>Добавление пира</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1718"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1714"/>
         <source>PEER:</source>
         <translation>Пир:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1735"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1731"/>
         <source>PEER_ERR</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1735"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1731"/>
         <source>INVALID_IP_STRING</source>
         <translation>Введен неправельный ip адрес</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1747"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1743"/>
         <source>ADD_TRACKER_DLG</source>
         <translation>Добавление трекера</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1747"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2262"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1743"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2265"/>
         <source>TRACKER:</source>
         <translation>Трекер:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2262"/>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2293"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2265"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2296"/>
         <source>EDIT_TRACKER_DLG</source>
         <translation>Редактирование трекера</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2293"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2296"/>
         <source>HTTP_SEED_URL:</source>
         <translation>Web сид:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2307"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2310"/>
         <source>RSS_FEED_ADD</source>
         <translation>Добавление Rss-ленты</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2307"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2310"/>
         <source>RSS_FEED_URL:</source>
         <translation>Ссылка на Rss-ленту:</translation>
     </message>
     <message>
-        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2478"/>
+        <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2481"/>
         <source>INVALID_COMMAND_RECIVED</source>
         <translation>Получена неизвестная IPC команда.</translation>
     </message>
@@ -2841,7 +2841,7 @@ ERROR: %2
 <context>
     <name>OpenTorrentDialog</name>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="201"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="207"/>
         <source>DIALOG_OPEN_DIR</source>
         <translation>Выбирите папку</translation>
     </message>
@@ -2976,34 +2976,51 @@ ERROR: %2
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="175"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="182"/>
         <source>MAGNET_LINKS_DONT_SUPORT_SEED_MODE</source>
         <translation>Раздача без проверки файлов не поддерживается для магнитных ссылок.</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="191"/>
-        <source>OPEN_TORRENT_ERROR</source>
-        <translation>Ошибка открытия торрента</translation>
-    </message>
-    <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="228"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="234"/>
         <source>SELECT_AT_LEAST_ONE_FILE</source>
         <translation>Не выбран ни один файл.</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="293"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="299"/>
         <source>%1 (AVAILABLE: %2)</source>
         <translation>%1 (Доступно: %2)</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="296"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="302"/>
         <source>NOT_ENOUGH_SPACE</source>
         <translation>Недостаточно метса на диске</translation>
     </message>
     <message>
-        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="296"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="302"/>
         <source>NOT_ENOGH_STORRAGE_SPACE_TO_STORE_TORRENT</source>
         <translation>Недостаточно места на диске для сохранения торрента. Хотите продолжить?</translation>
+    </message>
+    <message>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="420"/>
+        <source>Confirm merge trackers</source>
+        <translation>Подвердите слияние трекреов</translation>
+    </message>
+    <message>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="420"/>
+        <source> Add new Trackers from this torrent?</source>
+        <translation> Добавить трекеры из этого торрента?</translation>
+    </message>
+    <message>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="456"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="497"/>
+        <source>Added %1 trackers</source>
+        <translation>Добавлено %1 трекеров</translation>
+    </message>
+    <message>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="460"/>
+        <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="501"/>
+        <source>No trackers added</source>
+        <translation>Не добавлено ни одного трекера</translation>
     </message>
 </context>
 <context>
@@ -3494,103 +3511,41 @@ ERROR: %2
     </message>
 </context>
 <context>
-    <name>RaitingDialog</name>
-    <message>
-        <location filename="../../core/gui/FormFiles/RaitingDialog.ui" line="14"/>
-        <location filename="../../core/gui/FormFiles/RaitingDialog.ui" line="106"/>
-        <location filename="../../GeneratedFiles/ui_RaitingDialog.h" line="159"/>
-        <location filename="../../GeneratedFiles/ui_RaitingDialog.h" line="161"/>
-        <source>RAITE_CLIENT</source>
-        <translation>Оценить клиент</translation>
-    </message>
-    <message>
-        <location filename="../../core/gui/FormFiles/RaitingDialog.ui" line="168"/>
-        <location filename="../../GeneratedFiles/ui_RaitingDialog.h" line="164"/>
-        <source>SPEED</source>
-        <translation>Скорость:</translation>
-    </message>
-    <message>
-        <location filename="../../core/gui/FormFiles/RaitingDialog.ui" line="154"/>
-        <location filename="../../GeneratedFiles/ui_RaitingDialog.h" line="162"/>
-        <source>DESIGN</source>
-        <translation>Дизайн:</translation>
-    </message>
-    <message>
-        <location filename="../../core/gui/FormFiles/RaitingDialog.ui" line="161"/>
-        <location filename="../../GeneratedFiles/ui_RaitingDialog.h" line="163"/>
-        <source>USABLILITY</source>
-        <translation>Удобство:</translation>
-    </message>
-    <message>
-        <location filename="../../core/gui/FormFiles/RaitingDialog.ui" line="182"/>
-        <location filename="../../GeneratedFiles/ui_RaitingDialog.h" line="166"/>
-        <source>POSIBILITIES</source>
-        <translation>Возможности:</translation>
-    </message>
-    <message>
-        <location filename="../../core/gui/FormFiles/RaitingDialog.ui" line="175"/>
-        <location filename="../../GeneratedFiles/ui_RaitingDialog.h" line="165"/>
-        <source>YOUR_OPINION</source>
-        <translation>Ваше мнение:</translation>
-    </message>
-    <message>
-        <location filename="../../core/gui/FormFiles/RaitingDialog.ui" line="189"/>
-        <location filename="../../GeneratedFiles/ui_RaitingDialog.h" line="167"/>
-        <source>DO_NOT_DISTURB_ME</source>
-        <translation>Не спрашивать меня более</translation>
-    </message>
-    <message>
-        <location filename="../../core/gui/Dialogs/RaitingDialog.cpp" line="62"/>
-        <source>SEND_SUCCES</source>
-        <translation>Оценка отправленна</translation>
-    </message>
-    <message>
-        <location filename="../../core/gui/Dialogs/RaitingDialog.cpp" line="62"/>
-        <source>RATING_THNX_MSG</source>
-        <translation>Спасибо за вашу оценку!</translation>
-    </message>
-    <message>
-        <location filename="../../core/gui/Dialogs/RaitingDialog.cpp" line="67"/>
-        <source>Error</source>
-        <translation>Ошибка</translation>
-    </message>
-</context>
-<context>
     <name>RssManager</name>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="371"/>
-        <location filename="../../rss/core/RssManager.cpp" line="381"/>
-        <location filename="../../rss/core/RssManager.cpp" line="407"/>
+        <location filename="../../rss/core/RssManager.cpp" line="372"/>
+        <location filename="../../rss/core/RssManager.cpp" line="382"/>
+        <location filename="../../rss/core/RssManager.cpp" line="408"/>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2</source>
         <translation>Ошибка во время автоматической загрузки торрента:  %1 %2</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="345"/>
+        <location filename="../../rss/core/RssManager.cpp" line="346"/>
         <source>RSS_ITEM_UNABLE_TO_DOWNLOAD %1 NO_URL</source>
         <translation>Невозможно загрузить торрент из статьи %1 так как отсуствует ссылка на торренты или магнитная ссылка</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="385"/>
+        <location filename="../../rss/core/RssManager.cpp" line="386"/>
         <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1 %2</source>
         <translation>Началась загрузка торрента %1 %2 полученного из RSS-ленты</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="391"/>
+        <location filename="../../rss/core/RssManager.cpp" line="392"/>
         <source>STARTED_AUTOMETED_RSS_DOWNLOAD</source>
         <translation>Началась автоматическая загрузка из RSS-ленты</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="391"/>
+        <location filename="../../rss/core/RssManager.cpp" line="392"/>
         <source>%1 STARTED_DOWNLOADING.&lt;br/&gt; &lt;a href=&quot;%3&quot;&gt;DESCRIBTION&lt;/a&gt;&lt;br/&gt; %2</source>
         <translation>%1 Началась загрузка.&lt;br/&gt;&lt;a href=&quot;%3&quot;&gt; Описание&lt;/a&gt;&lt;br/&gt; %2</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="425"/>
+        <location filename="../../rss/core/RssManager.cpp" line="426"/>
         <source>AUTOMATED_RSS_DOWNLOAD_START_DOWNLOAD: %1</source>
         <translation>Началась загрузка торрента %1 полученного из RSS-ленты</translation>
     </message>
     <message>
-        <location filename="../../rss/core/RssManager.cpp" line="412"/>
+        <location filename="../../rss/core/RssManager.cpp" line="413"/>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD_MAGNET: %1</source>
         <translation>Ошибка во время автоматической загрузки торрента:  %1</translation>
     </message>
