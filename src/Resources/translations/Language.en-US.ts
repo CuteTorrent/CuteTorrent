@@ -748,7 +748,7 @@ Are you sure?</translation>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="892"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="894"/>
         <source>ACTION_RSS_ADD</source>
-        <translation>Add Rss-feed</translation>
+        <translation>Add RSS-feed</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1112"/>
@@ -760,7 +760,7 @@ Are you sure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1117"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="897"/>
         <source>ACTION_RSS_EDIT</source>
-        <translation>Edit Rss-feed</translation>
+        <translation>Edit RSS-feed</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1122"/>
@@ -1233,12 +1233,12 @@ Download: %3</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2306"/>
         <source>RSS_FEED_ADD</source>
-        <translation>Adding Rss-feed</translation>
+        <translation>Adding RSS-feed</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2306"/>
         <source>RSS_FEED_URL:</source>
-        <translation>Rss-feed URL:</translation>
+        <translation>RSS-feed URL:</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2477"/>
@@ -2448,7 +2448,7 @@ Download: %3</translation>
         <location filename="../../core/viewModel/FiltersViewModel.cpp" line="183"/>
         <location filename="../../core/viewModel/FiltersViewModel.cpp" line="522"/>
         <source>RSS_CHANELS</source>
-        <translation>RSS-chanels</translation>
+        <translation>RSS-channels</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FiltersViewModel.cpp" line="177"/>
@@ -2931,7 +2931,7 @@ Error: %2
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="326"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="349"/>
         <source>START_SEEDING</source>
-        <translation>Seed without file ckecking</translation>
+        <translation>Skip hash check</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="303"/>
@@ -3107,7 +3107,7 @@ Error: %2
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="354"/>
         <source>ERROR_DURING_AUTOMATED_RSS_DOWNLOAD: %1 %2</source>
-        <translation>Error occured during automated download from RSS-feed:
+        <translation>Error occurred during automated download from RSS-feed:
 %1 %2</translation>
     </message>
     <message>
