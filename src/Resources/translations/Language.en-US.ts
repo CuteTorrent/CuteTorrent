@@ -224,7 +224,7 @@
     <message>
         <location filename="../../core/gui/ImportWizard/ChoseDataPage.cpp" line="9"/>
         <source>IMPORT_CHOSE_DATA_TITLE</source>
-        <translation>Chose data to import</translation>
+        <translation>Select data to import</translation>
     </message>
     <message>
         <location filename="../../core/gui/ImportWizard/ChoseDataPage.cpp" line="52"/>
@@ -816,7 +816,7 @@ Are you sure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1189"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="913"/>
         <source>TOOLS_IMPORT</source>
-        <translation>Import torrents from other clients</translation>
+        <translation>Torrent Import Wizard</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1197"/>
@@ -2485,7 +2485,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/gui/ImportWizard/ImportFinishPage.cpp" line="25"/>
         <source>IMPORT_ERROR</source>
-        <translation>Failed to import some torrents due to errors</translation>
+        <translation>Failed to import torrent(s) due to errors</translation>
     </message>
 </context>
 <context>
@@ -2493,12 +2493,12 @@ Download: %3</translation>
     <message>
         <location filename="../../core/gui/ImportWizard/ImportIntroPage.cpp" line="11"/>
         <source>IMPORT_INTRO_TITLE</source>
-        <translation>Import torrents wizard</translation>
+        <translation>Import torrents from other clients</translation>
     </message>
     <message>
         <location filename="../../core/gui/ImportWizard/ImportIntroPage.cpp" line="13"/>
         <source>IMPORT_INTRO_MESSAGE</source>
-        <translation>Wellcome to Torrent import wizard</translation>
+        <translation>Welcome to Torrent Import Wizard</translation>
     </message>
 </context>
 <context>
@@ -2537,7 +2537,7 @@ Error: %2
     <message>
         <location filename="../../core/gui/backupwizard/intropage.cpp" line="9"/>
         <source>BACKUP_INTRO_MESSAGE</source>
-        <translation>Wellcome to CuteTorrent Backup Wizard</translation>
+        <translation>Welcome to CuteTorrent Backup Wizard</translation>
     </message>
     <message>
         <location filename="../../core/gui/backupwizard/intropage.cpp" line="11"/>
@@ -3937,7 +3937,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="372"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1708"/>
         <source>MAGNET_ASSOCIATION_WIT</source>
-        <translation>Magnetlinks will be opened with CuteTorrent.</translation>
+        <translation>Magnet links will be opened with CuteTorrent.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="375"/>
@@ -5256,7 +5256,7 @@ Error: %2</translation>
     <message>
         <location filename="../../core/UpdateNotyfier.cpp" line="64"/>
         <source>NEW_VERSION_AVALIABLE %1</source>
-        <translation>New version avaliable: CuteTorrent: %1</translation>
+        <translation>New version available: CuteTorrent: %1</translation>
     </message>
     <message>
         <location filename="../../core/UpdateNotyfier.cpp" line="68"/>
