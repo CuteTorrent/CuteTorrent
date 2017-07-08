@@ -49,6 +49,13 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 		abort();
 	}
 }
+//VS2015 Hack
+FILE _iob[] = { *stdin, *stdout, *stderr };
+
+extern "C" FILE * __cdecl __iob_func(void)
+{
+	return _iob;
+}
 
 
 int main(int argc, char* argv[])

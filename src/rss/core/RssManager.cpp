@@ -327,6 +327,7 @@ void RssManager::downloadRssItem(RssItem* rssItem, RssFeed* pFeed, RssDownloadRu
 
 		if (!m_activeTorrentDownloads.contains(magnetUrl))
 		{
+			m_pMagnetTerminationToken->IsTerminationRequested = false;
 			MetaDataDownloadWaiter* magnetWaiter = new MetaDataDownloadWaiter(magnetUrl, m_pMagnetTerminationToken, this);
 			connect(magnetWaiter, SIGNAL(DownloadCompleted(openmagnet_info)), this, SLOT(onDownloadMetadataCompleted(openmagnet_info)));
 			connect(magnetWaiter, SIGNAL(ErrorOccured(QString)), this, SLOT(onMagnetError(QString)));
