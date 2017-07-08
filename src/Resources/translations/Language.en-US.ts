@@ -3010,19 +3010,19 @@ Error: %2
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="420"/>
         <source> Add new Trackers from this torrent?</source>
-        <translation type="unfinished"> Add new Trackers from this torrent?</translation>
+        <translation> Add new Trackers from this torrent?</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="456"/>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="497"/>
         <source>Added %1 trackers</source>
-        <translation type="unfinished">Added %1 trackers</translation>
+        <translation>Added %1 trackers</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="460"/>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="501"/>
         <source>No trackers added</source>
-        <translation type="unfinished">No trackers added</translation>
+        <translation>No trackers added</translation>
     </message>
 </context>
 <context>
