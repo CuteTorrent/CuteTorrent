@@ -275,7 +275,6 @@ public slots:
 	void onResetPowerMenu() const;
 	void pauseAllTorrents() const;
 	void restoreAllTorrents() const;
-	void showRaitingDialog();
 	void CheckForDefaultTorrentApp();
 	void UpdateStyleMenu();
 	void OnTorrentAction(QModelIndex index, QTorrentItemDelegat::Buttons button);

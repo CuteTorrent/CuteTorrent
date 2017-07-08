@@ -83,7 +83,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <AddRssDwonloadRuleDialog.h>
 #include <PowerManagement.h>
 #include <gui/ImportWizard/ImportWizard.h>
-#include <RaitingDialog.h>
 #include "Utils/ValueGetters.h"
 #include "Utils/ValueSetters.h"
 #include <gui/Controls/RaitingWidget.h>
@@ -227,8 +226,8 @@ CuteTorrentMainWindow::CuteTorrentMainWindow(QWidget* parent)
 	m_pTorrents = TorrentStorrage::getInstance();
 	QTimer::singleShot(10000, this, SLOT(CheckForUpdates()));
 	QTimer::singleShot(2000, this, SLOT(CheckForDefaultTorrentApp()));
-	if (m_pTorrentManager->shouldRate())
-		QTimer::singleShot(5000, this, SLOT(showRaitingDialog()));
+	/*if (m_pTorrentManager->shouldRate())
+		QTimer::singleShot(5000, this, SLOT(showRaitingDialog()));*/
 
 	Scheduller::getInstance();
 	m_pUpdateTimer->start();
@@ -526,11 +525,7 @@ void CuteTorrentMainWindow::restoreAllTorrents() const
 	m_pTorrentManager->StartAllTorrents();
 }
 
-void CuteTorrentMainWindow::showRaitingDialog()
-{
-	shared_ptr<RaitingDialog> pDlg(new RaitingDialog());
-	pDlg->exec();
-}
+
 
 void CuteTorrentMainWindow::CheckForDefaultTorrentApp()
 {
@@ -1133,11 +1128,12 @@ void CuteTorrentMainWindow::HandleNewTorrent(const QString& path)
 
 	if (dlg->exec() == QDialog::Accepted)
 	{
+		m_pSettings->setValue("System", "LastOpenTorrentDir", path);
 #ifdef Q_OS_WIN 
 		QWinJumpListCategory* recent = m_pJumpList->recent();
-		/*QWinJumpListItem* item = new QWinJumpListItem(QWinJumpListItem::Link);
+		QWinJumpListItem* item = new QWinJumpListItem(QWinJumpListItem::Link);
 		item->setFilePath(path);
-		recent->addLink();*/
+		recent->addItem(item);
 		recent->setVisible(true);
 #endif
 	}
@@ -1159,11 +1155,7 @@ void CuteTorrentMainWindow::ShowOpenTorrentDialog()
 	                                                lastDir, tr("TORRENT_FILES (*.torrent);;Any File (*.*)"));
 	foreach(QString filename, filenames)
 	{
-		if (!filename.isEmpty())
-		{
-			m_pSettings->setValue("System", "LastOpenTorrentDir", filename);
-			HandleNewTorrent(filename);
-		}
+		HandleNewTorrent(filename);
 	}
 	
 }
@@ -1615,19 +1607,20 @@ void CuteTorrentMainWindow::keyPressEvent(QKeyEvent* event)
 		QWidget::keyPressEvent(event);
 		return;
 	}
-
+	
 	QKeySequence pressedKey = QKeySequence((event->key() == Qt::Key_Return ? Qt::Key_Enter : event->key()) | event->modifiers());
 	QVariantMap keyMap = m_pSettings->getGroupValues("KeyMap");
 	QStringList keys = keyMap.keys();
 
-	/* qDebug() << pressedKey;
-	 qDebug() << keyMap;*/
+	
 	foreach(QString key, keys)
 	{
 		if (QKeySequence(keyMap[key].toString()) == pressedKey)
 		{
-			QAction* action = this->findChild<QAction*>(key);
-
+			QWidget* focusWidget = QApplication::focusWidget();
+			QAction* action = focusWidget->findChild<QAction*>(key);
+			if (action == NULL)
+				action = this->findChild<QAction*>(key);
 			if (action != NULL)
 			{
 				//qDebug() << "Matched action:" << pressedKey << action->objectName();
@@ -1635,7 +1628,7 @@ void CuteTorrentMainWindow::keyPressEvent(QKeyEvent* event)
 			}
 		}
 	}
-
+	
 	QWidget::keyPressEvent(event);
 }
 
@@ -1848,7 +1841,7 @@ void CuteTorrentMainWindow::initMainMenuIcons() const
 	ACTION_MENUFILE_EXIT->setIcon(m_pStyleEngine->getIcon("menu_exit"));
 	ACTION_MENUFILE_OPEN_MAGNET->setIcon(m_pStyleEngine->getIcon("magnet"));
 	ACTION_MENUFILE_OPEN_TORRENT->setIcon(m_pStyleEngine->getIcon("add_torrent"));
-	ACTION_MENU_SETTINGS->setIcon(m_pStyleEngine->getIcon("menu_settings"));
+	ACTION_TOOLS_SETTINGS->setIcon(m_pStyleEngine->getIcon("menu_settings"));
 	ACTION_TOOLS_BACKUP->setIcon(m_pStyleEngine->getIcon("menu_backup"));
 	ACTION_TOOLS_IMPORT->setIcon(m_pStyleEngine->getIcon("import"));
 	ACTION_MENUHELP_ABOUT_QT->setIcon(m_pStyleEngine->getIcon("qt"));
@@ -1933,6 +1926,7 @@ void CuteTorrentMainWindow::setupKeyMappings() const
 			if (objName.startsWith("ACTION_") && keyMap.contains(objName))
 			{
 				action->setShortcut(QKeySequence(keyMap[objName].toString()));
+				action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 			}
 		}
 	}

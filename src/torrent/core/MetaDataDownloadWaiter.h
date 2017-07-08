@@ -12,7 +12,7 @@ class MetaDataDownloadWaiter : public QThread
 	Q_OBJECT
 	signals:
 	void DownloadCompleted(openmagnet_info ti);
-	void ErrorOccured(QString error);
+	void ErrorOccured(error_code ec);
 public:
 	MetaDataDownloadWaiter(QString metaLink, TerminationToken* terminationToken, QObject* parrent = NULL);
 	~MetaDataDownloadWaiter();

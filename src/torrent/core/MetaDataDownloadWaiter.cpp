@@ -21,8 +21,11 @@ void MetaDataDownloadWaiter::run()
 
 	if (ec)
 	{
-		m_pTorrentManager->CancelMagnetLink(MetaLink);
-		emit ErrorOccured(StaticHelpers::translateLibTorrentError(ec));
+		if (ec != errors::duplicate_torrent)
+		{
+			m_pTorrentManager->CancelMagnetLink(MetaLink);
+		} 
+		emit ErrorOccured(ec);
 		return;
 	}
 
