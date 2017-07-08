@@ -2951,7 +2951,7 @@ Error: %2
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="343"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="345"/>
         <source>START_WITH_SUPER_SEED</source>
-        <translation>Super-seed mode</translation>
+        <translation>Super seeding</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="343"/>
