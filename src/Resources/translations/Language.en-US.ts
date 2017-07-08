@@ -2101,7 +2101,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="563"/>
         <source>dynamic block code description: code lengths codes incomplete</source>
-        <translation type="unfinished">Dynamic block code description: Code lengths codes incomplete</translation>
+        <translation>Dynamic block code description: Code lengths codes incomplete</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="564"/>
