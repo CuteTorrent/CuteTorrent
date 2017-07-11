@@ -843,7 +843,7 @@ Sei sicuro?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1244"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="921"/>
         <source>SWITCH_VIEW</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambia vista</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1210"/>
@@ -1328,7 +1328,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="327"/>
         <source>missing name in torrent file</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome mancante nel file torrent</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="328"/>
