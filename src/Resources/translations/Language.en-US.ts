@@ -108,7 +108,7 @@
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="149"/>
         <source>REGEXP</source>
-        <translation>Regular Expressions</translation>
+        <translation>Regular Expression</translation>
     </message>
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="158"/>
@@ -123,12 +123,12 @@
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="274"/>
         <source>DOWNLOAD_RULE_TYPE_HINT</source>
-        <translation>This rule will select article witch will be downloaded.</translation>
+        <translation>This rule will select article which will be downloaded.</translation>
     </message>
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="286"/>
         <source>DIALOG_OPEN_DIR</source>
-        <translation>Choe folder</translation>
+        <translation>Choose folder</translation>
     </message>
     <message>
         <location filename="../../rss/datamodels/RssDownloadRule.cpp" line="22"/>
@@ -163,7 +163,7 @@
     <message>
         <location filename="../../rss/datamodels/RssDownloadRule.cpp" line="54"/>
         <source>CHOSE_ONE_STATICK_SAVE_PATH_OR_GROUPS_FILTERING</source>
-        <translation>You can Select only Save pat or only Usage of Filtering Groups</translation>
+        <translation>You can Select only Save path or only Usage of Filtering Groups</translation>
     </message>
     <message>
         <location filename="../../rss/datamodels/RssDownloadRule.cpp" line="61"/>
@@ -247,7 +247,7 @@
     <message>
         <location filename="../../core/gui/backupwizard/createbackuppage.cpp" line="11"/>
         <source>BACKUP_CREATE_BAKUP_MESSAGE</source>
-        <translation>Chose path where to save backup image.</translation>
+        <translation>Choose path where to save backup image.</translation>
     </message>
     <message>
         <location filename="../../core/gui/backupwizard/createbackuppage.cpp" line="21"/>
@@ -474,67 +474,67 @@ Are you sure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="657"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="945"/>
         <source>INFO_PEER_COUNT</source>
-        <translation>Peers</translation>
+        <translation>Peers:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="545"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="929"/>
         <source>INFO_UPLOADED</source>
-        <translation>Uploaded</translation>
+        <translation>Uploaded:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="671"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="947"/>
         <source>INFO_SEED_COUNT</source>
-        <translation>Seeds</translation>
+        <translation>Seeds:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="678"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="948"/>
         <source>INFO_DESCRIBTION</source>
-        <translation>Description</translation>
+        <translation>Description:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="538"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="928"/>
         <source>INFO_PATH</source>
-        <translation>Save Path</translation>
+        <translation>Save Path:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="629"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="941"/>
         <source>INFO_REMAININF_TIME</source>
-        <translation>Time Left</translation>
+        <translation>Time Left:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="622"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="940"/>
         <source>INFO_DOWNLOADED</source>
-        <translation>Downloaded</translation>
+        <translation>Downloaded:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="615"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="939"/>
         <source>INFO_ACTIVE_TIME</source>
-        <translation>Active Time</translation>
+        <translation>Active Time:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="601"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="937"/>
         <source>INFO_DOWNLOAD_SPEED</source>
-        <translation>Download Speed</translation>
+        <translation>Download Speed:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="580"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="934"/>
         <source>INFO_TOTAL_SIZE</source>
-        <translation>Total Size</translation>
+        <translation>Total Size:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="566"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="932"/>
         <source>INFO_UPLOAD_SPEED</source>
-        <translation>Upload Speed</translation>
+        <translation>Upload Speed:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="341"/>
@@ -558,7 +558,7 @@ Are you sure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="701"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="950"/>
         <source>INFO_HASH</source>
-        <translation>Hash</translation>
+        <translation>Hash:</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="722"/>
@@ -594,7 +594,7 @@ Are you sure?</translation>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="812"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="963"/>
         <source>TAB_FILES</source>
-        <translation>Files </translation>
+        <translation>Files</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="908"/>
@@ -888,7 +888,9 @@ Are you sure?</translation>
         <source>ABAUT_TEXT</source>
         <translation>CuteTorrent %1
 
-A lightweight &amp; FREE BitTorrent client based on libtorrent-rasterbar with user-friendly interface</translation>
+A lightweight &amp; FREE BitTorrent client based on libtorrent-rasterbar with user-friendly interface
+
+Home page: https://cutetorrent.info/</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="271"/>
@@ -904,7 +906,7 @@ A lightweight &amp; FREE BitTorrent client based on libtorrent-rasterbar with us
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="981"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="982"/>
         <source>STATUS_UPLOAD</source>
-        <translation>Uloaded(Upload speed)</translation>
+        <translation>Uploaded(Upload speed)</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="291"/>
@@ -951,12 +953,12 @@ A lightweight &amp; FREE BitTorrent client based on libtorrent-rasterbar with us
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="320"/>
         <source>SORTER_LEECHERS</source>
-        <translation>Leechers</translation>
+        <translation>Leeches</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="321"/>
         <source>SORTER_SEEDERS</source>
-        <translation>Seeders</translation>
+        <translation>Seeds</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="395"/>
@@ -990,7 +992,7 @@ A lightweight &amp; FREE BitTorrent client based on libtorrent-rasterbar with us
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="425"/>
         <source>ADD_WEB_SEED</source>
-        <translation>Add WebSeed</translation>
+        <translation>Add Web Seed</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="537"/>
@@ -1243,7 +1245,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2481"/>
         <source>INVALID_COMMAND_RECIVED</source>
-        <translation>Invalid IPC command recived.</translation>
+        <translation>Invalid IPC command received.</translation>
     </message>
 </context>
 <context>
@@ -1407,7 +1409,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="343"/>
         <source>file too short</source>
-        <translation>One of the files in the torrent was unexpectadly small. This might be caused by files being changed by an external process</translation>
+        <translation>One of the files in the torrent was unexpectedly small. This might be caused by files being changed by an external process</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="344"/>
@@ -1428,7 +1430,7 @@ Download: %3</translation>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="347"/>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="580"/>
         <source>parse failed</source>
-        <translation>A bencoded structure was currupt and failed to be parsed</translation>
+        <translation>A bencoded structure was corrupted and failed to be parsed</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="348"/>
@@ -1628,7 +1630,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="387"/>
         <source>invalid extended message</source>
-        <translation>The peer sent an invalid extesion message ID</translation>
+        <translation>The peer sent an invalid extension message ID</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="388"/>
@@ -1713,12 +1715,12 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="405"/>
         <source>invalid redirection</source>
-        <translation>The Webseed redirected to a path that no longer matches the .torrent directory structure.</translation>
+        <translation>The Web seed redirected to a path that no longer matches the .torrent directory structure.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="406"/>
         <source>redirecting</source>
-        <translation>The connection was closed becaused it redirected to a different URL</translation>
+        <translation>The connection was closed because it redirected to a different URL</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="407"/>
@@ -1834,7 +1836,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="430"/>
         <source>invalid dont-have message</source>
-        <translation>The peer sent an invalid &quot;dont_have&quot; message. The dont have message is an extension to allow peers to advertise that the no longer has a piece they previously had.   </translation>
+        <translation>The peer sent an invalid &quot;dont_have&quot; message. The &apos;&quot;dont_have&quot; message is an extension to allow peers to advertise that the no longer has a piece they previously had.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="431"/>
@@ -1949,7 +1951,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="467"/>
         <source>fastresume not modified since last save</source>
-        <translation>fastresume not modified since last save</translation>
+        <translation>Fastresume wasn&apos;t modified since the last saving</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="476"/>
@@ -1974,7 +1976,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="500"/>
         <source>scrape not available on tracker</source>
-        <translation>The tracker URL doesn&apos;t support transforming it into a scrape URL. i.e. it doesn&apos;t contain &quot;announce.</translation>
+        <translation>The tracker URL doesn&apos;t support transforming it into a scrape URL. i.e. it doesn&apos;t contain &quot;announce&quot;.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="501"/>
@@ -2009,17 +2011,17 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="507"/>
         <source>udp tracker response packet has invalid size</source>
-        <translation>Udp tracker response packet has invalid size</translation>
+        <translation>UDP tracker response packet has invalid size</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="508"/>
         <source>invalid transaction id in udp tracker response</source>
-        <translation>Invalid transaction id in udp tracker response</translation>
+        <translation>Invalid transaction id in UDP tracker response</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="509"/>
         <source>invalid action field in udp tracker response</source>
-        <translation>Invalid action field in udp tracker response</translation>
+        <translation>Invalid action field in UDP tracker response</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="523"/>
@@ -2061,7 +2063,7 @@ Download: %3</translation>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="529"/>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="546"/>
         <source>integer overflow</source>
-        <translation>integer overflow</translation>
+        <translation>Integer overflow</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="556"/>
@@ -2284,7 +2286,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/filedownloader.cpp" line="59"/>
         <source>NETWORK_ERROR: %1</source>
-        <translation>Network error occured:
+        <translation>Network error occurred:
 %1</translation>
     </message>
 </context>
@@ -2331,7 +2333,7 @@ Download: %3</translation>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="18"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="178"/>
         <source>FILETAB_OPEN_FILE</source>
-        <translation>Open</translation>
+        <translation>Open file</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="19"/>
@@ -2354,7 +2356,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="148"/>
         <source>NOT_A_FILE_SELECTED</source>
-        <translation>Not a file selelcted. Select a file</translation>
+        <translation>Not a file selected. Select a file</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="148"/>
@@ -2364,7 +2366,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="154"/>
         <source>ENTER_NEW_FILE_NAME</source>
-        <translation>Name shoud not be empty</translation>
+        <translation>Name should not be empty</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="154"/>
@@ -2823,7 +2825,7 @@ Error: %2
     <message>
         <location filename="../../VideoPlayer/mediacontroller.cpp" line="123"/>
         <source>Type an url to play</source>
-        <translation>Type an url to play</translation>
+        <translation>Type an URL to play</translation>
     </message>
     <message>
         <location filename="../../VideoPlayer/mediacontroller.cpp" line="124"/>
@@ -2845,7 +2847,7 @@ Error: %2
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="207"/>
         <source>DIALOG_OPEN_DIR</source>
-        <translation>Choose save dirrectory</translation>
+        <translation>Choose save directory</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="280"/>
@@ -2901,7 +2903,7 @@ Error: %2
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="294"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="337"/>
         <source>RECIVING_METADATA</source>
-        <translation>Reciving metadata</translation>
+        <translation>Receiving torrent metadata</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="333"/>
@@ -2913,7 +2915,7 @@ Error: %2
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="336"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="353"/>
         <source>SET_SEQUNTIAL</source>
-        <translation>Sequntial Download</translation>
+        <translation>Sequential Download</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="428"/>
@@ -2925,7 +2927,7 @@ Error: %2
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="323"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="347"/>
         <source>START_SEEDING_TOOLTIP</source>
-        <translation>File will not be checked on torrent sturtup. In case of detecting mismatch in files file ckecking will be forsed.</translation>
+        <translation>File will not be checked on torrent startup. In case of detecting mismatch in files file checking will be forced.</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="326"/>
@@ -2937,7 +2939,7 @@ Error: %2
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="303"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="339"/>
         <source>START_PAUSED_TOOLTIP</source>
-        <translation>Torrnt will be automaticaly paused.</translation>
+        <translation>Torrent will be paused automatically.</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="306"/>
@@ -2957,7 +2959,7 @@ Error: %2
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="343"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="354"/>
         <source>DO_NOT_CREATE_SUBFOLDER_WITH_TORRENT_NAME</source>
-        <translation>Don&apos;t create subfolder with torrent name</translation>
+        <translation>Don&apos;t create sub-folder with torrent name</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="415"/>
@@ -2980,7 +2982,7 @@ Error: %2
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="182"/>
         <source>MAGNET_LINKS_DONT_SUPORT_SEED_MODE</source>
-        <translation>Seeding with no checks is not supported</translation>
+        <translation>Seeding with no check is not supported</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="234"/>
@@ -2990,7 +2992,7 @@ Error: %2
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="299"/>
         <source>%1 (AVAILABLE: %2)</source>
-        <translation>%1 (Avaliable: %2)</translation>
+        <translation>%1 (Available: %2)</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="302"/>
@@ -3050,7 +3052,7 @@ Error: %2
     <message>
         <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="55"/>
         <source>PEER_UPLOAD_SPEED</source>
-        <translation>UL speed</translation>
+        <translation>UP speed</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="56"/>
@@ -3177,12 +3179,12 @@ Error: %2
     <message>
         <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="140"/>
         <source>NEXT_UPDATE_IN</source>
-        <translation>Refreshed in:</translation>
+        <translation>Next refresh in:</translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/ItemDelegate/QRssItemDelegate.cpp" line="225"/>
         <source>- Mb</source>
-        <translation>MB</translation>
+        <translation>- Mb</translation>
     </message>
 </context>
 <context>
@@ -3210,12 +3212,12 @@ Error: %2
     <message>
         <location filename="../../search/viewmodels/ItemDelegate/QSearchItemDelegate.cpp" line="180"/>
         <source>Leechs: %1 Seeds: %2</source>
-        <translation>Leechs: %1 Seeds: %2</translation>
+        <translation>Leeches: %1 Seeds: %2</translation>
     </message>
     <message>
         <location filename="../../search/viewmodels/ItemDelegate/QSearchItemDelegate.cpp" line="184"/>
         <source>Leechs: N/A Seeds: N/A</source>
-        <translation>Leechs: N/A Seeds: N/A</translation>
+        <translation>Leeches: N/A Seeds: N/A</translation>
     </message>
 </context>
 <context>
@@ -3437,7 +3439,7 @@ Error: %2
     <message>
         <location filename="../../core/helpers/DT_mounter.cpp" line="14"/>
         <source>DT_PATH_NOT_SET</source>
-        <translation>Path to DaemonTools not set.</translation>
+        <translation>Path to Daemon Tools not set.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/DT_mounter.cpp" line="28"/>
@@ -3518,7 +3520,7 @@ Error: %2
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="346"/>
         <source>RSS_ITEM_UNABLE_TO_DOWNLOAD %1 NO_URL</source>
-        <translation>RSS-article %1 doesn&apos;t contains URL for torrent file or magnet link</translation>
+        <translation>RSS-article %1 doesn&apos;t contain URL for torrent file or magnet link</translation>
     </message>
     <message>
         <location filename="../../rss/core/RssManager.cpp" line="372"/>
@@ -3857,7 +3859,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1514"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1927"/>
         <source>DRIVE_NUMBER</source>
-        <translation>No of Drive(s)</translation>
+        <translation>Number of Drive(s)</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="552"/>
@@ -3897,7 +3899,7 @@ Error: %2
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1742"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1746"/>
         <source> Kb\s</source>
-        <translation> Kb\s</translation>
+        <translation> Kb/s</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1052"/>
@@ -4009,7 +4011,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1841"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1950"/>
         <source>WEB_UI_LOGGING_ENABLED</source>
-        <translation>Login</translation>
+        <translation>Logging</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1855"/>
@@ -4051,28 +4053,28 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1283"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1880"/>
         <source>DISK_IO_CASH_MODE_WIT</source>
-        <translation>Allow using of OS cashe
+        <translation>Allow using of OS caсhe
 0 - Enable OS cache.
-1 - Enable OS cache for alligned files only.
+1 - Enable OS cache for aligned files only.
 2 - Disable OS cache</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1286"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1882"/>
         <source>DISK_IO_CASH_MODE</source>
-        <translation>Chash Mode</translation>
+        <translation>Cache Mode</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1312"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1890"/>
         <source>CASH_SIZE_WIT</source>
-        <translation>The disk write cache size.-1 means automatic, which adjusts the cache size depending on the amount of physical RAM in the machine.</translation>
+        <translation>The disk write cache size. -1 means automatic, which adjusts the cache size depending on the amount of physical RAM in the machine.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1315"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1892"/>
         <source>CASH_SIZE</source>
-        <translation>Cash size</translation>
+        <translation>Cache size</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="227"/>
@@ -4162,7 +4164,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1299"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1886"/>
         <source>DISABLE_OS_CACHE_FOR_ALIGNED_FILES</source>
-        <translation>Disable OS Cache for alligned files</translation>
+        <translation>Disable OS Cache for aligned files</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1304"/>
@@ -4264,7 +4266,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="522"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1726"/>
         <source>USE_PEX</source>
-        <translation>Use Peer Exchange(PEx) to find more peers</translation>
+        <translation>Use Peer Exchange (PEX) to find more peers</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="341"/>
@@ -4276,13 +4278,13 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="412"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1716"/>
         <source>HIDE_ON_CLOSE</source>
-        <translation>Hide instad of closing</translation>
+        <translation>Hide instead of closing</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="529"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1727"/>
         <source>USE_LSD</source>
-        <translation>Use Local Peer Discovery(LSD) to find more peers</translation>
+        <translation>Use Local Peer Discovery (LSD) to find more peers</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="895"/>
@@ -4294,7 +4296,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="904"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1787"/>
         <source>IN_ENC_POLICITY</source>
-        <translation>Inbound encription policy</translation>
+        <translation>Inbound encryption policy</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="918"/>
@@ -4324,7 +4326,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="936"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1794"/>
         <source>OUT_ENC_POLICITY</source>
-        <translation>Outbound encription policy</translation>
+        <translation>Outbound encryption policy</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="968"/>
@@ -4378,7 +4380,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1418"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1911"/>
         <source>ADD_GROUP_BUTON_WIT</source>
-        <translation>Add a group with Enterd name, file extensions and save path.</translation>
+        <translation>Add a group with Entered name, file extensions and save path.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1382"/>
@@ -4390,7 +4392,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1345"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1895"/>
         <source>groupSavePathEdit_WIT</source>
-        <translation>Default path which will be automaticly choosen for saving torrent associated with this group.</translation>
+        <translation>Default path which will be automatically chosen for saving torrent associated with this group.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1352"/>
@@ -4402,13 +4404,13 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1583"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1931"/>
         <source>DAEMONTOOLS_CUSTOM_COMMAND</source>
-        <translation>Use custom command for mouting</translation>
+        <translation>Use custom command for mounting</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1595"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1933"/>
         <source>DAEMONTOOLS_COMMAND_WIT</source>
-        <translation>Custom connd which will be used for mounting an image into Daemon Tools Drive.</translation>
+        <translation>Custom command which will be used for mounting an image into Daemon Tools Drive.</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1954"/>
@@ -4470,7 +4472,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="466"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1720"/>
         <source>AUTO_ADD_USING_TOR_FILTERING</source>
-        <translation>Chose path using torrent filtering</translation>
+        <translation>Choose path using torrent filtering</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="452"/>
@@ -4532,7 +4534,7 @@ Error: %2
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1751"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1754"/>
         <source>Kb\s</source>
-        <translation>Kb\s</translation>
+        <translation>Kb/s</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="659"/>
@@ -4622,7 +4624,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1362"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1901"/>
         <source>GROUP_EXTENTIONS</source>
-        <translation>Extentions</translation>
+        <translation>Extensions</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1396"/>
@@ -4700,7 +4702,7 @@ Error: %2
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1497"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1924"/>
         <source>DTPathEdit_WIT</source>
-        <translation>Pathe to Daemon Tools Lite or Pro executable.</translation>
+        <translation>Path to Daemon Tools Lite or Pro executable.</translation>
     </message>
     <message>
         <location filename="../../core/gui/Utils/ValueSetters.cpp" line="179"/>
@@ -4711,7 +4713,7 @@ Error: %2
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="352"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="462"/>
         <source>ERROR_GROUP_NAME_NOT_SET</source>
-        <translation>Grooup name not set.</translation>
+        <translation>Group name is not set.</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="361"/>
@@ -4723,25 +4725,25 @@ Error: %2
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="370"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="480"/>
         <source>ERROR_NO_PATH</source>
-        <translation>No path choosen for saving.</translation>
+        <translation>No path chosen for saving.</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="377"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="487"/>
         <source>ERROR_PATH_NOT_EXISTS</source>
-        <translation>Chousen path not exists.</translation>
+        <translation>Chosen path doesn&apos;t exist.</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="515"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1275"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1289"/>
         <source>Open Directory</source>
-        <translation>Chose Dirrectory</translation>
+        <translation>Choose Directory</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="531"/>
         <source>WHERE_DT</source>
-        <translation>Path to DaemonTools</translation>
+        <translation>Path to Daemon Tools</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="531"/>
@@ -4757,7 +4759,7 @@ Error: %2
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="583"/>
         <source>SCHEDULLER_UNKNOWN_TYPE</source>
-        <translation>Please set action type.</translation>
+        <translation>Please set an action type.</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="816"/>
@@ -4910,7 +4912,7 @@ Error: %2</translation>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="589"/>
         <source>SCHEDULLER_NO_NAME</source>
-        <translation>Sheduler name should not be empty</translation>
+        <translation>Scheduler name should not be empty</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="931"/>
@@ -4976,7 +4978,7 @@ Error: %2</translation>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1172"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1849"/>
         <source>USE_PORT_MAPPINGS</source>
-        <translation>Use UPnP and NAT-PMP for port maaping</translation>
+        <translation>Use UPnP and NAT-PMP for port mapping</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="197"/>
@@ -5019,7 +5021,7 @@ Error: %2</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="53"/>
         <source> Kb\s</source>
-        <translation> Kb\s</translation>
+        <translation> Kb/s</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="42"/>
@@ -5059,7 +5061,7 @@ Error: %2</translation>
     <message>
         <location filename="../../torrent/core/Torrent.cpp" line="332"/>
         <source>STATE_ALLOCATING_SPACE</source>
-        <translation>Allocationg</translation>
+        <translation>Allocation</translation>
     </message>
     <message>
         <location filename="../../torrent/core/Torrent.cpp" line="333"/>
@@ -5115,37 +5117,37 @@ Error: %2</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="52"/>
         <source> B\s</source>
-        <translation> B\s</translation>
+        <translation> B/s</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="54"/>
         <source> Mb\s</source>
-        <translation> Mb\s</translation>
+        <translation> Mb/s</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="55"/>
         <source> Gb\s</source>
-        <translation> Gb\s</translation>
+        <translation> Gb/s</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="56"/>
         <source> Tb\s</source>
-        <translation> Tb\s</translation>
+        <translation> Tb/s</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="57"/>
         <source> Pb\s</source>
-        <translation> Pb\s</translation>
+        <translation> Pb/s</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="58"/>
         <source> Eb\s</source>
-        <translation> Eb\s</translation>
+        <translation> Eb/s</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="59"/>
         <source> Zb\s</source>
-        <translation> Zb\s</translation>
+        <translation> Zb/s</translation>
     </message>
     <message>
         <location filename="../../core/avaliableSpacePlugin/avaliable_space_verifier_plugin.cpp" line="46"/>
@@ -5201,7 +5203,7 @@ Error: %2</translation>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="336"/>
         <source>SAVE_RESUME_DATA_FAILED %1, RETRING...</source>
-        <translation>Saving of torrent resume data have failed %1, retring...</translation>
+        <translation>Saving of torrent resume data have failed %1, retrying...</translation>
     </message>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="387"/>
@@ -5233,12 +5235,12 @@ Error: %2</translation>
     <message>
         <location filename="../../core/gui/ImportWizard/Importers/UTorrentImporter.cpp" line="83"/>
         <source>FAILED_DECODE_UTORRENT_RESUME_FILE</source>
-        <translation>Failed to decode utorrent resume file</translation>
+        <translation>Failed to decode uTorrent resume file</translation>
     </message>
     <message>
         <location filename="../../core/gui/ImportWizard/Importers/UTorrentImporter.cpp" line="134"/>
         <source>Adding torrent: </source>
-        <translation>Adding torrent </translation>
+        <translation>Adding torrent: </translation>
     </message>
 </context>
 <context>
@@ -5251,17 +5253,17 @@ Error: %2</translation>
     <message>
         <location filename="../../core/UpdateNotyfier.cpp" line="51"/>
         <source>ERROR_GETTING_VERSION_STR %1</source>
-        <translation>Error getting actual version information.%1</translation>
+        <translation>Error getting actual version information. %1</translation>
     </message>
     <message>
         <location filename="../../core/UpdateNotyfier.cpp" line="64"/>
         <source>NEW_VERSION_AVALIABLE %1</source>
-        <translation>New version available: CuteTorrent: %1</translation>
+        <translation>New version available: CuteTorrent %1</translation>
     </message>
     <message>
         <location filename="../../core/UpdateNotyfier.cpp" line="68"/>
         <source>NO_UPDATE_ACTUAL_VERSION_IS_USED</source>
-        <translation>Current verion is latest.</translation>
+        <translation>Current version is the latest.</translation>
     </message>
 </context>
 <context>
@@ -5285,7 +5287,7 @@ Error: %2</translation>
     <message>
         <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="263"/>
         <source>VP_PAUSE</source>
-        <translation>Pasue</translation>
+        <translation>Pause</translation>
     </message>
     <message>
         <location filename="../../VideoPlayer/VideoPlayerWindow.cpp" line="266"/>
