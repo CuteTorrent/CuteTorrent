@@ -247,7 +247,7 @@
     <message>
         <location filename="../../core/gui/backupwizard/createbackuppage.cpp" line="11"/>
         <source>BACKUP_CREATE_BAKUP_MESSAGE</source>
-        <translation>Выберите путь куда сохранить резервный образ.</translation>
+        <translation>Выберите путь куда сохранить резервный образ настроек и состояния торрентов.</translation>
     </message>
     <message>
         <location filename="../../core/gui/backupwizard/createbackuppage.cpp" line="21"/>
@@ -886,7 +886,7 @@
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="254"/>
         <source>ABAUT_TEXT</source>
-        <translation>CuteTorrent %1 — бесплатный торрент клиент с поддержкой DHT, возможностью монтирования образов в Daemon Tools и встроенным медиаплеером.
+        <translation>CuteTorrent %1 — бесплатный торрент клиент с поддержкой DHT, возможностью монтирования образов в Daemon Tools.
 
 Если вы заплатили деньги за это программное обеспечение, требуйте возврата денег.
 
@@ -1945,7 +1945,7 @@ Download: %3</source>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="466"/>
         <source>pieces needs to be reordered</source>
-        <translation>Для использования выбранного режима выделения места на части на диске необходимо переупорядочить. Такое происходит только если выбран режим разреженного распределения, а файлы на диске используют компактное хранилище. Части должны быть перемещены в правильное положение</translation>
+        <translation>Для использования выбранного режима выделения места части на диске необходимо переупорядочить. Такое происходит только если выбран режим разреженного распределения, а файлы на диске используют компактное хранилище. Части должны быть перемещены в правильное положение</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="467"/>
