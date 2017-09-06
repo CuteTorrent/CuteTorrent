@@ -191,7 +191,7 @@
     <message>
         <location filename="../../core/gui/backupwizard/applybackuppage.cpp" line="24"/>
         <source>PATH_TO_BACKUP_FILE</source>
-        <translation>Ruta al archivo de copia de seguridad:</translation>
+        <translation>Ruta al archivo de copia de seguridad</translation>
     </message>
     <message>
         <location filename="../../core/gui/backupwizard/applybackuppage.cpp" line="35"/>
@@ -234,7 +234,7 @@
     <message>
         <location filename="../../core/gui/ImportWizard/ChoseDataPage.cpp" line="52"/>
         <source>uTorrent resume file (resume.dat);;All files (*.*)</source>
-        <translation>Archivo de reanudación Utorrent (resume.dat);;Todos los archivos (*.*)</translation>
+        <translation>Archivo de reanudación utorrent (resume.dat);;Todos los archivos (*.*)</translation>
     </message>
 </context>
 <context>
@@ -268,7 +268,7 @@
         <location filename="../../GeneratedFiles/ui_CreateTorrentDialog.h" line="313"/>
         <location filename="../../GeneratedFiles/ui_CreateTorrentDialog.h" line="315"/>
         <source>DIALOG_TORRENT_CREATION</source>
-        <translation>Creación de Torrent </translation>
+        <translation>Creación de Torrent</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/CreateTorrentDialog.ui" line="281"/>
@@ -400,8 +400,7 @@
     <message>
         <location filename="../../torrent/gui/Dialogs/CreateTorrentDialog.cpp" line="204"/>
         <source>ERROR_NO_TRACKERS</source>
-        <translation>¡Trackers no encontrados!
-¿Estas seguro?</translation>
+        <translation>Trackers no encontrados</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/CreateTorrentDialog.cpp" line="223"/>
@@ -594,7 +593,7 @@
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="812"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="963"/>
         <source>TAB_FILES</source>
-        <translation>Archivos </translation>
+        <translation>Archivos</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="908"/>
@@ -843,7 +842,7 @@
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1244"/>
         <location filename="../../GeneratedFiles/ui_CustomWindow.h" line="921"/>
         <source>SWITCH_VIEW</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar Vista</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/CustomWindow.ui" line="1210"/>
@@ -997,17 +996,17 @@ Si has pagado dinero por este software solicita un reembolso</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="537"/>
         <source>SET_DEFAULT_APP_FOR_TOR_AND_MAGNET_LINKS</source>
-        <translation>Establecer CuteTorrent como la aplicación por defecto para torrents y enlaces magnet?</translation>
+        <translation>Establecer CuteTorrent como la aplicación por defecto para torrents y enlaces magnet</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="543"/>
         <source>SET_DEFAULT_APP_FOR_TOR</source>
-        <translation>Establecer CuteTorrent como la aplicación por defecto para torrents?</translation>
+        <translation>Establecer CuteTorrent como la aplicación por defecto para torrents</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="547"/>
         <source>SET_DEFAULT_APP_FOR_MAGNET_LINKS</source>
-        <translation>Establecer CuteTorrent como la aplicación por defecto para enlaces magnet?</translation>
+        <translation>Establecer CuteTorrent como la aplicación por defecto para enlaces magnet</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="552"/>
@@ -1163,7 +1162,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1311"/>
         <source>TRACKER_UPDATING</source>
-        <translation>Actualizando...</translation>
+        <translation>Actualizando</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1368"/>
@@ -1188,7 +1187,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1566"/>
         <source>MAGNET_LINK:</source>
-        <translation>Enlace Magnet</translation>
+        <translation>Enlace Magnet:</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1714"/>
@@ -1198,7 +1197,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1714"/>
         <source>PEER:</source>
-        <translation>Par</translation>
+        <translation>Pares:</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1731"/>
@@ -1219,7 +1218,7 @@ Bajada: %3</translation>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="1743"/>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2265"/>
         <source>TRACKER:</source>
-        <translation>Tracker</translation>
+        <translation>Tracker:</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2265"/>
@@ -1235,7 +1234,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2310"/>
         <source>RSS_FEED_ADD</source>
-        <translation>Añadiendo fuente RSS</translation>
+        <translation>Añadir fuente RSS</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/CuteTorrentMainWindow.cpp" line="2310"/>
@@ -1338,7 +1337,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="329"/>
         <source>invalid length of torrent</source>
-        <translation>La longitud de un archivo, o de todo el archivo .torrent es inválida.</translation>
+        <translation>Longitud inválida del archivo torrent</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="330"/>
@@ -1495,12 +1494,12 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="360"/>
         <source>torrent paused</source>
-        <translation>Torrent pausado, la operación no puede ser completada con éxito.</translation>
+        <translation>Torrent pausado</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="361"/>
         <source>&apos;have&apos;-message with higher index than the number of pieces</source>
-        <translation>El par envió un mensaje equivodado sobre las piezas disponibles, tanto en el tamaño incorrecto como lo referente a la pieza que no existe en el torrent.</translation>
+        <translation>Se envió un mensaje de error con mayor índice que el número de piezas disponibles</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="362"/>
@@ -1530,7 +1529,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="367"/>
         <source>connected to ourselves</source>
-        <translation>El par es una conexión con nosotros mismos, no tiene sentido mantenerla.</translation>
+        <translation>El par es una conexión con nosotros mismos, no tiene sentido mantenerla</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="368"/>
@@ -1830,18 +1829,17 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="429"/>
         <source>torrent has no metadata</source>
-        <translation>La operación falló porque ésta requiere que el torrent posea los metadatos (archivo .torrent) y que aún no posee. Esto ocurre para enlaces magnet antes de que hayan descargado los 
-// metadatos, y también con torrents añadidos por URL.</translation>
+        <translation>El torrent no posee metadatos</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="430"/>
         <source>invalid dont-have message</source>
-        <translation>El par envió un mensaje inválido &quot;no tener&quot;. El mensaje no tener es una extensión para permitir a los pares anunciar que ya no tienen una pieza que antes tenían.</translation>
+        <translation>El par envió un mensaje inválido &quot;dont-have&quot;</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="431"/>
         <source>SSL connection required</source>
-        <translation>El par intentó conectar con un torrent SSL sin conectar sobre SSL.</translation>
+        <translation>Conexión SSL requerida</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="432"/>
@@ -1891,7 +1889,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="455"/>
         <source>no files in resume data</source>
-        <translation>La entrada de &apos;tamaños de archivo&apos; del archivo de datos de reanudación está vacía.</translation>
+        <translation>No existen archivos en el contenido reanudado</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="456"/>
@@ -1976,7 +1974,7 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="500"/>
         <source>scrape not available on tracker</source>
-        <translation>La URL del rastreador no admite su transformación en una URL de raspado. Es decir, no contiene &quot;anuncio&quot;.</translation>
+        <translation>scrape no está disponible en el rastreador</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="501"/>
@@ -2238,42 +2236,42 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="622"/>
         <source>The specified value does not exist in the array</source>
-        <translation type="unfinished"></translation>
+        <translation>El valor especificado no existe en el conjunto</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="623"/>
         <source>The source IP address cannot be wild-carded</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La dirección IP de origen no puede ser comodín</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="624"/>
         <source>The external port cannot be wild-carded</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El puerto externo no puede ser comodín</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="626"/>
         <source>The port mapping entry specified conflicts with a mapping assigned previously to another client</source>
-        <translation type="unfinished"></translation>
+        <translation>La entrada de asignación de puertos especificó conflictos con una asignación atribuida previamente a otro cliente</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="629"/>
         <source>Internal and External port values must be the same</source>
-        <translation type="unfinished"></translation>
+        <translation>Los valores del puerto interno y externo deben ser los mismos</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="631"/>
         <source>The NAT implementation only supports permanent lease times on port mappings</source>
-        <translation type="unfinished"></translation>
+        <translation>La implementación NAT sólo soporta tiempos de arrendamiento permanentes en los mapas de puerto</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="635"/>
         <source>RemoteHost must be a wildcard and cannot be a specific IP address or DNS name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">RemoteHost debe ser un comodín y no puede ser una dirección IP específica o un nombre DNS</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="638"/>
         <source>ExternalPort must be a wildcard and cannot be a specific port </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ExternalPort debe ser un comodín y no puede ser un puerto específico. </translation>
     </message>
 </context>
 <context>
@@ -2281,12 +2279,12 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/filedownloader.cpp" line="54"/>
         <source>UNABLE_TO_SAVE_DOWNLOADED_FILE</source>
-        <translation type="unfinished"></translation>
+        <translation>no puede guardar el archivo descargado</translation>
     </message>
     <message>
         <location filename="../../core/filedownloader.cpp" line="59"/>
         <source>NETWORK_ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de red: %1</translation>
     </message>
 </context>
 <context>
@@ -2320,19 +2318,19 @@ Bajada: %3</translation>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="17"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="30"/>
         <source>FILES_PATH</source>
-        <translation type="unfinished"></translation>
+        <translation>ruta de archivos</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="17"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="30"/>
         <source>FILES_READY</source>
-        <translation type="unfinished"></translation>
+        <translation>archivos preparados</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="18"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="178"/>
         <source>FILETAB_OPEN_FILE</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir archivo</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="19"/>
@@ -2350,27 +2348,27 @@ Bajada: %3</translation>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="25"/>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="187"/>
         <source>FILETAB_RENAME_FILE</source>
-        <translation type="unfinished"></translation>
+        <translation>Renombrar archivo</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="148"/>
         <source>NOT_A_FILE_SELECTED</source>
-        <translation type="unfinished"></translation>
+        <translation>Ningún archivo seleccionado</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="148"/>
         <source>FILE_SHOULD_BE_SELECTED</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo debe ser seleccionado</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="154"/>
         <source>ENTER_NEW_FILE_NAME</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduce nuevo nombre de archivo</translation>
     </message>
     <message>
         <location filename="../../core/viewModel/FileViewModel.cpp" line="154"/>
         <source>FILE_NAME</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de archivo</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="117"/>
@@ -2476,17 +2474,17 @@ Bajada: %3</translation>
     <message>
         <location filename="../../core/gui/ImportWizard/ImportFinishPage.cpp" line="13"/>
         <source>IMPORT_SUCCES</source>
-        <translation type="unfinished"></translation>
+        <translation>Importación exitosa</translation>
     </message>
     <message>
         <location filename="../../core/gui/ImportWizard/ImportFinishPage.cpp" line="18"/>
         <source>IMPORT_CANCELED_BY_USER</source>
-        <translation type="unfinished"></translation>
+        <translation>Importación cancelada por el usuario</translation>
     </message>
     <message>
         <location filename="../../core/gui/ImportWizard/ImportFinishPage.cpp" line="25"/>
         <source>IMPORT_ERROR</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de importación</translation>
     </message>
 </context>
 <context>
@@ -2509,8 +2507,9 @@ Bajada: %3</translation>
         <source>IMPORTING_TORRENT %1 FAILED.
 ERROR: %2
 </source>
-        <translation>Importar torrent %1 ha fallado.
-Error: %2</translation>
+        <translation>Importar torrent %1 ha fallado.b&apos;↵&apos;
+Error: %2b&apos;↵&apos;
+</translation>
     </message>
 </context>
 <context>
@@ -2636,25 +2635,25 @@ Error: %2</translation>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.ui" line="248"/>
         <location filename="../../GeneratedFiles/ui_mrichtextedit.h" line="425"/>
         <source>Italic (CTRL+I)</source>
-        <translation>Italic (CTRL+I)</translation>
+        <translation>Cursiva (CTRL+I)</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.ui" line="251"/>
         <location filename="../../GeneratedFiles/ui_mrichtextedit.h" line="427"/>
         <source>Italic</source>
-        <translation>Italic</translation>
+        <translation>Cursiva</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.ui" line="275"/>
         <location filename="../../GeneratedFiles/ui_mrichtextedit.h" line="429"/>
         <source>Underline (CTRL+U)</source>
-        <translation type="unfinished"></translation>
+        <translation>Subrayar (CTRL+U)</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.ui" line="278"/>
         <location filename="../../GeneratedFiles/ui_mrichtextedit.h" line="431"/>
         <source>Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Subrayado</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.ui" line="299"/>
@@ -2702,19 +2701,19 @@ Error: %2</translation>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.ui" line="387"/>
         <location filename="../../GeneratedFiles/ui_mrichtextedit.h" line="446"/>
         <source>Increase indentation (CTRL+.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumentar sangrado (CTRL+.)</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.ui" line="390"/>
         <location filename="../../GeneratedFiles/ui_mrichtextedit.h" line="448"/>
         <source>Increase indentation</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumentar sangrado</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.ui" line="430"/>
         <location filename="../../GeneratedFiles/ui_mrichtextedit.h" line="450"/>
         <source>Text foreground color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color principal del texto</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.ui" line="433"/>
@@ -2728,7 +2727,7 @@ Error: %2</translation>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.ui" line="461"/>
         <location filename="../../GeneratedFiles/ui_mrichtextedit.h" line="454"/>
         <source>Text background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color de fondo del texto</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.ui" line="480"/>
@@ -2775,32 +2774,32 @@ Error: %2</translation>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.cpp" line="128"/>
         <source>Remove character formatting</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar formato de caracteres</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.cpp" line="133"/>
         <source>Remove all formatting</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar todos los formatos</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.cpp" line="137"/>
         <source>Edit document source</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar documento de origen</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.cpp" line="205"/>
         <source>Document source</source>
-        <translation type="unfinished"></translation>
+        <translation>Documento de origen</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.cpp" line="327"/>
         <source>Create a link</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear un enlace</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.cpp" line="328"/>
         <source>Link URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>Enlace URL:</translation>
     </message>
     <message>
         <location filename="../../core/gui/Controls/MRichTextEdit/mrichtextedit.cpp" line="705"/>
@@ -2823,12 +2822,12 @@ Error: %2</translation>
     <message>
         <location filename="../../VideoPlayer/mediacontroller.cpp" line="123"/>
         <source>Type an url to play</source>
-        <translation type="unfinished"></translation>
+        <translation>Escriba una url para reproducir</translation>
     </message>
     <message>
         <location filename="../../VideoPlayer/mediacontroller.cpp" line="124"/>
         <source>Mediafile URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo multimedia URL:</translation>
     </message>
 </context>
 <context>
@@ -2872,7 +2871,7 @@ Error: %2</translation>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="165"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="326"/>
         <source>OPEN_TORRENT_SAVE_PATH</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir carpeta contenedora</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="191"/>
@@ -2902,25 +2901,25 @@ Error: %2</translation>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="303"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="339"/>
         <source>START_PAUSED_TOOLTIP</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar pausado</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="323"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="347"/>
         <source>START_SEEDING_TOOLTIP</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar sembrando</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="326"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="349"/>
         <source>START_SEEDING</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar siembra</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="333"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="351"/>
         <source>START_SEQUENTIAL_TOOLTIP</source>
-        <translation type="unfinished"></translation>
+        <translation>Descarga secuencial</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="336"/>
@@ -2946,7 +2945,7 @@ Error: %2</translation>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="343"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="354"/>
         <source>DO_NOT_CREATE_SUBFOLDER_WITH_TORRENT_NAME</source>
-        <translation type="unfinished"></translation>
+        <translation>No crear subcarpeta con el nombre del torrent</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="415"/>
@@ -2975,17 +2974,17 @@ Error: %2</translation>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="182"/>
         <source>MAGNET_LINKS_DONT_SUPORT_SEED_MODE</source>
-        <translation type="unfinished"></translation>
+        <translation>Magnets no soportan modo de sembrado</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="207"/>
         <source>DIALOG_OPEN_DIR</source>
-        <translation type="unfinished">Elegir carpeta</translation>
+        <translation>Elegir carpeta</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="234"/>
         <source>SELECT_AT_LEAST_ONE_FILE</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecciona al menos un archivo</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="299"/>
@@ -2995,34 +2994,34 @@ Error: %2</translation>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="302"/>
         <source>NOT_ENOUGH_SPACE</source>
-        <translation type="unfinished"></translation>
+        <translation>Espacio insuficiente</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="302"/>
         <source>NOT_ENOGH_STORRAGE_SPACE_TO_STORE_TORRENT</source>
-        <translation type="unfinished"></translation>
+        <translation>Espacio insuficiente para almacenar el torrent</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="420"/>
         <source>Confirm merge trackers</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirma la agrupación de rastreadores</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="420"/>
         <source> Add new Trackers from this torrent?</source>
-        <translation type="unfinished"></translation>
+        <translation> Cargar nuevos rastreadores desde éste torrent?</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="456"/>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="497"/>
         <source>Added %1 trackers</source>
-        <translation type="unfinished"></translation>
+        <translation>Rastreadores %1 añadidos</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="460"/>
         <location filename="../../torrent/gui/Dialogs/OpenTorrentDialog.cpp" line="501"/>
         <source>No trackers added</source>
-        <translation type="unfinished"></translation>
+        <translation>Rastreadores no añadidos</translation>
     </message>
 </context>
 <context>
@@ -3030,42 +3029,42 @@ Error: %2</translation>
     <message>
         <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="51"/>
         <source>PEER_IP</source>
-        <translation type="unfinished"></translation>
+        <translation>IP</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="52"/>
         <source>PEER_CLIENT_NAME</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del Cliente</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="53"/>
         <source>PEER_%</source>
-        <translation type="unfinished"></translation>
+        <translation>Pares %</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="54"/>
         <source>PEER_DOWNLOAD_SPEED</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad de descarga</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="55"/>
         <source>PEER_UPLOAD_SPEED</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad de subida</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="56"/>
         <source>PEER_DOWNLOADED</source>
-        <translation type="unfinished"></translation>
+        <translation>Descargado</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="57"/>
         <source>PEER_UPLOADED</source>
-        <translation type="unfinished"></translation>
+        <translation>Subido</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/PeerTableModel.cpp" line="58"/>
         <source>PEER_SPEED</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad</translation>
     </message>
 </context>
 <context>
@@ -3083,25 +3082,25 @@ Error: %2</translation>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="283"/>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="390"/>
         <source>UPDATE_FEED_ITEM</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar Feed</translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="284"/>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="394"/>
         <source>RENAME_FEED_ITEM</source>
-        <translation type="unfinished"></translation>
+        <translation>Renombrar Feed</translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="285"/>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="398"/>
         <source>REMOVE_FEED_ITEM</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar Feed</translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="286"/>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="506"/>
         <source>DOWNLOAD_FEED_ITEM</source>
-        <translation type="unfinished"></translation>
+        <translation>Descargar Feed</translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="287"/>
@@ -3113,25 +3112,25 @@ Error: %2</translation>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="288"/>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="512"/>
         <source>MARK_AS_READ</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcar como leído</translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="289"/>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="515"/>
         <source>MARK_AS_UNREAD</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcar como no leído</translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="290"/>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="402"/>
         <source>MARK_ALL_AS_READ</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcar todo como leído</translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="291"/>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="405"/>
         <source>MARK_ALL_AS_UNREAD</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcar todo como no leído</translation>
     </message>
     <message>
         <location filename="../../rss/viewmodels/QRssDisplayModel.cpp" line="354"/>
@@ -3303,7 +3302,7 @@ Error: %2</translation>
     <message>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="736"/>
         <source>DIALOG_OPEN_FOLDER</source>
-        <translation type="unfinished">Seleccionar una carpeta</translation>
+        <translation>Seleccionar una carpeta</translation>
     </message>
     <message>
         <location filename="../../torrent/viewmodels/QTorrentDisplayModel.cpp" line="1037"/>
@@ -3628,7 +3627,7 @@ Error: %2</translation>
     <message>
         <location filename="../../core/gui/Controls/searchlineedit.cpp" line="18"/>
         <source>Search</source>
-        <translation type="unfinished">Buscar</translation>
+        <translation>Buscar</translation>
     </message>
 </context>
 <context>
@@ -3649,7 +3648,7 @@ Error: %2</translation>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1253"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1868"/>
         <source>LOCK_FILES_WIT</source>
-        <translation>Archivos que serán bloqueados cuando CuteTorrent se abra para evitar que otros procesos los modifiquen.</translation>
+        <translation>Archivos que serán bloqueados cuando CuteTorrent se abra para evitar que otros procesos los modifiquen</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1256"/>
@@ -3742,7 +3741,7 @@ Error: %2</translation>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1312"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1890"/>
         <source>CASH_SIZE_WIT</source>
-        <translation>El tamaño del caché de escritura del disco.-1 significa automático, que ajusta el tamaño del caché dependiendo del la cantidad de RAM física en la máquina.</translation>
+        <translation>El tamaño del caché de escritura del disco.-1 significa automático, que ajusta el tamaño del caché dependiendo del la cantidad de RAM física en la máquina</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1315"/>
@@ -3916,7 +3915,7 @@ Error: %2</translation>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1469"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1920"/>
         <source>GROUP_LISTBOX_WIT</source>
-        <translation>Grupos de filtrado torrent.</translation>
+        <translation>Grupos de filtrado torrent</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1435"/>
@@ -3928,25 +3927,25 @@ Error: %2</translation>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1389"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1907"/>
         <source>newGroupNameEdit_WIT</source>
-        <translation>Nombre de un nuevo grupo.</translation>
+        <translation>Editar nombre del nuevo grupo</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1418"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1911"/>
         <source>ADD_GROUP_BUTON_WIT</source>
-        <translation>Añadir un grupo con el nombre introducido, extensiones de archivo y guardar ruta.</translation>
+        <translation>Añadir un grupo con el nombre introducido, extensiones de archivo y guardar ruta</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1382"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1904"/>
         <source>extensionsEdit_WIT</source>
-        <translation>Las extensiones de archivos que se usarán para decidir el tiltrado de grupo torrent.</translation>
+        <translation>Las extensiones de archivos que se usarán para decidir el filtrado de grupo torrent</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1345"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1895"/>
         <source>groupSavePathEdit_WIT</source>
-        <translation>Ruta por defecto que será automáticamente elegida para guardar torrent asociado con este grupo.</translation>
+        <translation>Ruta por defecto que será automáticamente elegida para guardar torrent asociado con este grupo</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1583"/>
@@ -3958,7 +3957,7 @@ Error: %2</translation>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1595"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1933"/>
         <source>DAEMONTOOLS_COMMAND_WIT</source>
-        <translation>Comando por defecto que será usado para montar una imagen en la Unidad de Daemon Tools.</translation>
+        <translation>Comando por defecto que será usado para montar una imagen en la Unidad de Daemon Tools</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1954"/>
@@ -3989,14 +3988,14 @@ Error: %2</translation>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1133"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1971"/>
         <source>RSS_RULES_IMPORT</source>
-        <translation>Importar...</translation>
+        <translation>Importar</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="2139"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="1093"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1972"/>
         <source>RSS_RULES_EXPORT</source>
-        <translation>Exportar...</translation>
+        <translation>Exportar</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="202"/>
@@ -4286,7 +4285,7 @@ Error: %2</translation>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1742"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1746"/>
         <source> Kb\s</source>
-        <translation type="unfinished"> Kb\s</translation>
+        <translation> Kb\s</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="578"/>
@@ -4496,7 +4495,7 @@ Error: %2</translation>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1226"/>
         <location filename="../../GeneratedFiles/ui_SettingsDialog.h" line="1860"/>
         <source> Kb</source>
-        <translation type="unfinished"> Kb</translation>
+        <translation> Kb</translation>
     </message>
     <message>
         <location filename="../../core/gui/FormFiles/SettingsDialog.ui" line="1240"/>
@@ -4693,7 +4692,7 @@ Error: %2</translation>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="352"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="462"/>
         <source>ERROR_GROUP_NAME_NOT_SET</source>
-        <translation>Nombre de grupo no establecido.</translation>
+        <translation>Nombre de grupo no establecido</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="361"/>
@@ -4705,13 +4704,13 @@ Error: %2</translation>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="370"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="480"/>
         <source>ERROR_NO_PATH</source>
-        <translation>No hay ruta elegida para guardado.</translation>
+        <translation>No hay ruta elegida para guardado</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="377"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="487"/>
         <source>ERROR_PATH_NOT_EXISTS</source>
-        <translation>La ruta elegida no existe.</translation>
+        <translation>La ruta elegida no existe</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="515"/>
@@ -4739,12 +4738,12 @@ Error: %2</translation>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="583"/>
         <source>SCHEDULLER_UNKNOWN_TYPE</source>
-        <translation>Por favor establece el tipo de acción.</translation>
+        <translation>Por favor establece el tipo de acción</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="589"/>
         <source>SCHEDULLER_NO_NAME</source>
-        <translation>Por favor introduce el nombre de la tarea.</translation>
+        <translation>Por favor introduce el nombre de la tarea</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="816"/>
@@ -4909,7 +4908,7 @@ Error: %2</translation>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="479"/>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="486"/>
         <source>STR_SETTINGS</source>
-        <translation type="unfinished">Ajustes</translation>
+        <translation>Ajustes</translation>
     </message>
     <message>
         <location filename="../../core/gui/Dialogs/SettingsDialog.cpp" line="983"/>
@@ -5185,12 +5184,12 @@ Error: %2</translation>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="180"/>
         <source>LISTENING ON PORT %1 FAILED</source>
-        <translation>Falló la escucha del puerto %1.</translation>
+        <translation>Falló la escucha del puerto %1</translation>
     </message>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="322"/>
         <source>TORRENT_COMPLETED %1</source>
-        <translation>Torrent %1 fue descaragado con éxito.</translation>
+        <translation>Torrent %1 fue descargado con éxito</translation>
     </message>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="336"/>
@@ -5206,7 +5205,8 @@ Error: %2</translation>
         <location filename="../../torrent/core/TorrentManager.cpp" line="408"/>
         <source>MOVE_STORRAGE_COMPLETED_TO:
 %1 %2</source>
-        <translation>Moviendo torrent %1 a %2 completado.</translation>
+        <translation>Moviendo torrent completado a:b&apos;↵&apos;
+%1 %2</translation>
     </message>
     <message>
         <location filename="../../torrent/core/TorrentManager.cpp" line="429"/>
@@ -5232,7 +5232,7 @@ Error: %2</translation>
     <message>
         <location filename="../../core/gui/ImportWizard/Importers/UTorrentImporter.cpp" line="134"/>
         <source>Adding torrent: </source>
-        <translation>Añadiendo torrent</translation>
+        <translation>Añadiendo torrent: </translation>
     </message>
 </context>
 <context>
@@ -5240,7 +5240,7 @@ Error: %2</translation>
     <message>
         <location filename="../../core/UpdateNotyfier.cpp" line="55"/>
         <source>ERROR_GETTING_VERSION_STR</source>
-        <translation>Error obteniendo información de la versión actual.</translation>
+        <translation>Error obteniendo información de la versión actual</translation>
     </message>
     <message>
         <location filename="../../core/UpdateNotyfier.cpp" line="51"/>
