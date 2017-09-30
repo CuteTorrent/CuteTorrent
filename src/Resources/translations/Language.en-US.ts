@@ -118,12 +118,12 @@
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="268"/>
         <source>SELECT_FILE_RULE_TYPE_HINT</source>
-        <translation>This rule will be applied for selecting files in torrent.</translation>
+        <translation>This rule will be applied for selecting files in torrent</translation>
     </message>
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="274"/>
         <source>DOWNLOAD_RULE_TYPE_HINT</source>
-        <translation>This rule will select article which will be downloaded.</translation>
+        <translation>This rule will select article which will be downloaded</translation>
     </message>
     <message>
         <location filename="../../rss/gui/Dialogs/AddRssDwonloadRuleDialog.cpp" line="286"/>
@@ -247,7 +247,7 @@
     <message>
         <location filename="../../core/gui/backupwizard/createbackuppage.cpp" line="11"/>
         <source>BACKUP_CREATE_BAKUP_MESSAGE</source>
-        <translation>Choose path where to save backup image.</translation>
+        <translation>Choose path where to save backup image</translation>
     </message>
     <message>
         <location filename="../../core/gui/backupwizard/createbackuppage.cpp" line="21"/>
@@ -1830,8 +1830,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="429"/>
         <source>torrent has no metadata</source>
-        <translation>The operation failed because it requires the torrent to have the metadata (.torrent file) and it doesn&apos;t have it yet. This happens for magnet links before they have downloaded the
-			// metadata, and also torrents added by URL.</translation>
+        <translation>The operation failed because it requires the torrent to have the metadata (.torrent file) and it doesn&apos;t have it yet. This happens for magnet links before they have downloaded the metadata, and also torrents added by URL.</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="430"/>
@@ -1841,12 +1840,12 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="431"/>
         <source>SSL connection required</source>
-        <translation>The peer tried to connect to an SSL torrent without connecting over SSL.</translation>
+        <translation>The peer tried to connect to an SSL torrent without connecting over SSL</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="432"/>
         <source>invalid SSL certificate</source>
-        <translation>The peer tried to connect to a torrent with a certificate for a different torrent.</translation>
+        <translation>The peer tried to connect to a torrent with a certificate for a different torrent</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="433"/>
@@ -1976,7 +1975,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="500"/>
         <source>scrape not available on tracker</source>
-        <translation>The tracker URL doesn&apos;t support transforming it into a scrape URL. i.e. it doesn&apos;t contain &quot;announce&quot;.</translation>
+        <translation>The tracker URL doesn&apos;t support transforming it into a scrape URL. i.e. it doesn&apos;t contain &quot;announce&quot;</translation>
     </message>
     <message>
         <location filename="../../core/helpers/StaticHelpers.cpp" line="501"/>
@@ -2464,7 +2463,7 @@ Download: %3</translation>
     <message>
         <location filename="../../core/gui/backupwizard/finishpage.cpp" line="6"/>
         <source>BAKUP_FINISH_TITLE</source>
-        <translation>All is done.</translation>
+        <translation>All is done</translation>
     </message>
     <message>
         <location filename="../../core/gui/backupwizard/finishpage.cpp" line="8"/>
@@ -2909,7 +2908,7 @@ Error: %2
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="333"/>
         <location filename="../../GeneratedFiles/ui_OpenTorrentDialog.h" line="351"/>
         <source>START_SEQUENTIAL_TOOLTIP</source>
-        <translation>Pieces of file will be requested according to their order in torrent file.</translation>
+        <translation>Pieces of file will be requested according to their order in torrent file</translation>
     </message>
     <message>
         <location filename="../../torrent/gui/FormFiles/OpenTorrentDialog.ui" line="336"/>
